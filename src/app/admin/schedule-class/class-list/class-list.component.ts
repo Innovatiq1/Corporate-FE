@@ -200,6 +200,7 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
     this.dataSource = this.dataSource?.filter((item: any) =>
     // console.log(item.courseId?.title)
     item.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+
     );
     } else {
        this.getClassList();

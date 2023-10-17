@@ -18,7 +18,7 @@
                   <li class="tbl-search-box">
                     <label for="search-input"><i class="material-icons search-icon">search</i></label>
                     <input placeholder="Search" type="text" #filter class="browser-default search-field"
-                      aria-label="Search box">
+                      aria-label="Search box" [(ngModel)]="searchTerm" class="browser-default search-field"  (keyup)="performSearch()">
                   </li>
                 </ul>
               </div>
@@ -77,7 +77,7 @@
                       </mat-checkbox>
                     </mat-cell>
                   </ng-container>
-                 
+
                    <!-- Course Name -->
                   <ng-container matColumnDef="Name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
@@ -110,7 +110,7 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Status
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" class="mt-4" [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
-                      <span class="mobile-label">Status:</span> 
+                      <span class="mobile-label">Status:</span>
                        {{row.Active ?  'Active': 'Inactive' }}</mat-cell>
                   </ng-container>
                   <!-- actions -->
@@ -124,9 +124,9 @@
                           <path
                             d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                         </svg>
-    
+
                         </button>
-                        
+
                                 <mat-menu #menu="matMenu" xPosition="before">
                                   <button mat-menu-item [routerLink]="['/admin/users/edit-all-users',row.id]" >
                                     <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
@@ -146,11 +146,11 @@
                   <mat-progress-spinner *ngIf="isLoading" color="primary" [diameter]="40" mode="indeterminate">
                   </mat-progress-spinner>
                 </div>
-               
+
                 <mat-paginator #paginator [length]="totalItems" (page)="pageSizeChange($event)"
                 [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">
             </mat-paginator>
-  
+
               </div>
             </div>
           </div>
