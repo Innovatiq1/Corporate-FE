@@ -13,24 +13,24 @@
               <div class="left">
                 <ul class="header-buttons-left ms-0">
                   <li class="tbl-title">
-                    <h2>Categories</h2>
+                    <h2>All User</h2>
                   </li>
-                  <li class="tbl-search-box">
+                  <!-- <li class="tbl-search-box">
                     <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                    <input placeholder="Search" type="text" #filter class="browser-default search-field" [(ngModel)]="searchTerm" (input)="performSearch()"
+                    <input placeholder="Search" type="text" #filter class="browser-default search-field"
                       aria-label="Search box">
-                  </li>
+                  </li> -->
                 </ul>
               </div>
               <div class="right">
                 <ul class="tbl-export-btn">
-                  <li class="tbl-header-btn">
-                    <div class="m-l-10" matTooltip="ADD">
-                      <button mat-mini-fab color="primary"  [routerLink]="['/admin/courses/create-categories']">
-                        <mat-icon class="col-white">add</mat-icon>
-                      </button>
-                    </div>
-                  </li>
+                    <!-- <li class="tbl-header-btn">
+                        <div class="m-l-10" matTooltip="ADD">
+                          <button mat-mini-fab color="primary"  [routerLink]="['/admin/users/create-all-users']">
+                            <mat-icon class="col-white">add</mat-icon>
+                          </button>
+                        </div>
+                      </li> -->
                   <li class="tbl-header-btn">
                     <div class="m-l-10" matTooltip="REFRESH">
                       <button mat-mini-fab color="primary" >
@@ -47,7 +47,7 @@
                     </div>
                   </li>
                   <li>
-                    <div class="export-button m-l-10" matTooltip="XLSX"  (click)="exportExcel()">
+                    <div class="export-button m-l-10" matTooltip="XLSX" (click)="exportExcel()">
                       <img src="assets/excel.svg" alt="" />
                     </div>
                   </li>
@@ -78,46 +78,43 @@
                     </mat-cell>
                   </ng-container>
                  
-                   <!-- Main Category -->
-                  <ng-container matColumnDef="Main Category">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Main Category</mat-header-cell>
+                   <!-- Course Name -->
+                  <ng-container matColumnDef="Screen Name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Screen Name</mat-header-cell>
                     <mat-cell *matCellDef="let row" >
-                      <span class="mobile-label">Main Category:</span> {{row.category_name}}</mat-cell>
+                      <span class="mobile-label">Screen Name:</span>{{row.collectionName | capitalizeFirstLetter}}</mat-cell>
                   </ng-container>
-                  <!-- Sub Category -->
-                  <ng-container matColumnDef="Sub Category" >
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Sub Category
+                  <!-- Course Code -->
+                  <ng-container matColumnDef="Action">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Action
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" >
+                      <span class="mobile-label">Action:</span>{{row?.auditData?.courseKit?.name | capitalizeFirstLetter}}</mat-cell>
+                  </ng-container>
+                  <!-- Main Category -->
+                  <ng-container matColumnDef="Status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" >
+                      <span class="mobile-label">Status:</span>{{row.operation | capitalizeFirstLetter}}</mat-cell>
+                  </ng-container>
+                   <!-- Sub Category -->
+                  <ng-container matColumnDef="Modified By">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Modified By
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" >
+                      <span class="mobile-label">Modified By:</span>{{row?.modifiedBy?.name | capitalizeFirstLetter}}</mat-cell>
+                  </ng-container>
+                   <!--Fees -->
+                  <ng-container matColumnDef="Modified On">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Modified On
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                      <span class="mobile-label">Sub Category:</span>
-                      {{row.subCategories[0].category_name}}
-                     </mat-cell>
+                      <span class="mobile-label">Modified On:</span> 
+                       {{row.updatedAt | date}}</mat-cell>
                   </ng-container>
                   <!-- actions -->
-                  <ng-container matColumnDef="status">
-                    <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="pr-0">
-                      <button mat-button [matMenuTriggerFor]="menu">
-                        <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-                        xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                        class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
-                        <path
-                          d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                      </svg>
-  
-                      </button>
-                              <mat-menu #menu="matMenu" xPosition="before">
-                                <button mat-menu-item (click)="edit(row.id)">
-                                  <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                                  <span class="menu-text">Edit</span>
-                                </button>
-                                <button mat-menu-item (click)="deleteItem(row)">
-                                  <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                                  <span class="menu-text">Delete</span>
-                                </button>
-                              </mat-menu>
-                    </mat-cell>
-                  </ng-container>
+                  
                   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                   <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
                   <mat-row *matRowDef="let row; columns: displayedColumns;"

@@ -53,6 +53,11 @@ const routes: Routes = [
       import('./banners/banner.module').then((m) => m.BannerModule),
   },
   {
+    path: 'audit',
+    loadChildren: () =>
+      import('./audit/audit.module').then((m) => m.AuditModule),
+  },
+  {
     path: 'announcement',
     loadChildren: () =>
       import('./announcement/announcement.module').then((m) => m.AnnouncementModule),

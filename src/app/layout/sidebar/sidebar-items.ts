@@ -357,7 +357,7 @@ export const ROUTES: RouteInfo[] = [
     role: ['Admin'],
     submenu: [
       {
-        path: '/admin/audit/list',
+        path: '/admin/audit/audit-list',
         title: 'List',
         iconType: '',
         icon: '',
