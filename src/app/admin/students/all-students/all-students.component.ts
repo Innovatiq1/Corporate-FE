@@ -29,6 +29,7 @@ import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import Swal from 'sweetalert2';
+import { Users } from '@core/models/user.model';
 @Component({
   selector: 'app-all-students',
   templateUrl: './all-students.component.html',
@@ -149,6 +150,43 @@ export class AllStudentsComponent
            (error: { message: any; error: any; }) => {
              Swal.fire(
                "Failed to delete Student",
+               error.message || error.error,
+               "error"
+             );
+           }
+         );
+       }
+     });
+
+   }
+   confirmItem(row: any) {
+    
+    
+    // this.id = row.id;
+     Swal.fire({
+       title: "Confirm Active",
+       text: "Are you sure you want to active this Student?",
+       icon: "warning",
+       showCancelButton: true,
+       confirmButtonColor: "#d33",
+       cancelButtonColor: "#3085d6",
+       confirmButtonText: "Active",
+       cancelButtonText: "Cancel",
+     }).then((result) => {
+       if (result.isConfirmed) {
+         this.studentsService.confrim(row.id).subscribe(
+           () => {
+             Swal.fire({
+               title: "Active",
+               text: "Student Active successfully",
+               icon: "success",
+             });
+             //this.fetchCourseKits();
+             this.loadData()
+           },
+           (error: { message: any; error: any; }) => {
+             Swal.fire(
+               "Failed to Active Student",
                error.message || error.error,
                "error"
              );

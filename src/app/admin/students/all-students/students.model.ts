@@ -14,6 +14,7 @@ export class Students {
   avatar:string;
   address:string;
   data:any;
+  isLogin:boolean;
 
   constructor(students: Students) {
     {
@@ -30,6 +31,7 @@ export class Students {
       this.parentsNmae = students.parentsNmae || '',
       this.avatar = students.avatar || '',
       this.address = students.address || '',
+      this.isLogin = students.isLogin
       this.data = students.data || [];
     }
   }

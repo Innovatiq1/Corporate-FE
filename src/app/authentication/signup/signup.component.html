@@ -31,6 +31,16 @@
             </div>
             <div class="row">
               <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+                <ngx-intl-tel-input [cssClass]="'custom'"customPlaceholder="Mobile Number" [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+				[searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+				[selectFirstCountry]="false" [maxLength]="10" 
+				[phoneValidation]="true" [separateDialCode]="true" name="phone" formControlName="phone">
+			</ngx-intl-tel-input>
+      
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>{{"Email" | translate}}</mat-label>
                   <input matInput formControlName="email" required>
