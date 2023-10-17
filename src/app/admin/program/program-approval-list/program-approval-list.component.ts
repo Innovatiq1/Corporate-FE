@@ -60,7 +60,7 @@ implements OnInit{
   ];
   edit :boolean = false;
   dataSource: any;
-  mainCategories!: MainCategory[]; 
+  mainCategories!: MainCategory[];
   subCategories!: SubCategory[];
   allSubCategories!: SubCategory[];
   coursePaginationModel: Partial<CoursePaginationModel>;
@@ -68,6 +68,7 @@ implements OnInit{
   pageSizeArr = [10, 20, 50, 100];
   isLoading = true;
   selection = new SelectionModel<CourseModel>(true, []);
+  searchTerm :string ='';
 
   constructor(private router: Router,
   private courseService: CourseService,private cd: ChangeDetectorRef, private snackBar: MatSnackBar){
@@ -104,7 +105,7 @@ implements OnInit{
     this.coursePaginationModel.limit= $event?.pageSize;
     this.getProgramList();
    }
- 
+
   getProgramList(filters?: any) {
     this.courseService.getCourseProgram({...this.coursePaginationModel,status:'inactive'}).subscribe(
       (response: any) => {
@@ -120,7 +121,23 @@ implements OnInit{
       }
     );
   }
+  performSearch() {
+    console.log("ps")
+    if(this.searchTerm){
+    this.dataSource = this.dataSource?.filter((item: any) =>{
+      console.log("ps",item)
+      const searchList = (item.classId.courseId?.title + item.studentId?.name).toLowerCase()
+      return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+    }
 
+
+    // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    } else {
+      this.getProgramList();
+
+    }
+  }
   approveProgram(id:any,program: any): void {
     program.status = 'active';
     this.courseService.updateCourseProgram(id,program).subscribe(() => {
@@ -187,7 +204,7 @@ implements OnInit{
           this.selection.select(row)
         );
   }
-  
+
   showNotification(
     colorName: string,
     text: string,

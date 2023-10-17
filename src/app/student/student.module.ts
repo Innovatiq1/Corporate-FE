@@ -27,6 +27,7 @@ import { ViewCourseComponent } from './view-course/view-course.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProgramComponent } from './program/program.component';
 import { ViewProgramComponent } from './view-program/view-program.component';
+import { StudentsService } from 'app/admin/students/all-students/students.service';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,6 @@ import { ViewProgramComponent } from './view-program/view-program.component';
     ModalModule.forRoot(),
 
   ],
-  providers: [HomeworkService, stdLeaveReqService],
+  providers: [HomeworkService, stdLeaveReqService,StudentsService],
 })
 export class StudentModule {}

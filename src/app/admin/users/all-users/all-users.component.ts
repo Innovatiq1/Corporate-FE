@@ -40,6 +40,7 @@ export class AllUsersComponent {
   selection = new SelectionModel<CourseModel>(true, []);
   coursePaginationModel!: Partial<CoursePaginationModel>;
   totalItems: any;
+  searchTerm:string = '';
   pageSizeArr = this.utils.pageSizeArr;
 
   constructor(private router: Router,
@@ -49,9 +50,9 @@ export class AllUsersComponent {
     private ref: ChangeDetectorRef,
     private courseService: CourseService,
     private snackBar: MatSnackBar
-    
+
   ) {
-    
+
     this.coursePaginationModel = {};
 }
 
@@ -76,14 +77,14 @@ ngOnInit(): void {
   this.activatedRoute.queryParams.subscribe((params: any) => {
     this.getBlogsList(params);
   });
-  
+
 }
 
 pageSizeChange($event: any) {
   this.coursePaginationModel.page = $event?.pageIndex + 1;
   this.coursePaginationModel.limit = $event?.pageSize;
   this.getBlogsList()
- 
+
 }
 
 private refreshTable() {
@@ -133,6 +134,21 @@ removeSelectedRows() {
     'top',
     'right'
   );
+}
+performSearch() {
+  if(this.searchTerm){
+  this.dataSource = this.dataSource?.filter((item: any) =>{
+    const searchList = (item.type + item.qualification + item.name).toLowerCase()
+    return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+  }
+
+
+  // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+  );
+  } else {
+    this.getBlogsList();
+
+  }
 }
 
 }

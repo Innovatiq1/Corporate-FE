@@ -53,6 +53,7 @@ export class ProgramKitComponent {
   selection = new SelectionModel<CourseModel>(true, []);
   dataSource: any;
   isLoading = true;
+  searchTerm: string = '';
   currentDate: Date;
 
 
@@ -86,17 +87,17 @@ export class ProgramKitComponent {
       // sections: new FormControl('', [ Validators.required,...this.utils.validators.sections]),
     );
   }
-  
+
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   dateValidator(group: FormGroup) {
-    const startDate = group.get('startDate')?.value; 
-    const endDate = group.get('endDate')?.value;       
+    const startDate = group.get('startDate')?.value;
+    const endDate = group.get('endDate')?.value;
 
     if (startDate && endDate) {
       if (startDate > endDate) {
-        group.get('endDate')?.setErrors({ dateError: true }); 
+        group.get('endDate')?.setErrors({ dateError: true });
       } else {
-        group.get('endDate')?.setErrors(null); 
+        group.get('endDate')?.setErrors(null);
       }
     }
   }
@@ -104,7 +105,7 @@ export class ProgramKitComponent {
     return new Date(dateString);
   }
 
-  
+
   fileBrowseHandler(event: any) {
     const files = event.target.files;
     this.onFileDropped(files);
@@ -132,18 +133,18 @@ export class ProgramKitComponent {
     //k//ey name with space add in brackets
    const exportData: Partial<TableElement>[] =
       this.dataSource.map((x: {
-        videoLink: any; name: any; shortDescription: any;  longDescription: any; documentLink: any;  
+        videoLink: any; name: any; shortDescription: any;  longDescription: any; documentLink: any;
 })=>({
-        
-  
+
+
         "Name": x.name,
         "Short Description": x.shortDescription,
         "Long Description": x.longDescription,
-       
-        
-        
+
+
+
         "Document Link": x.documentLink,
-        
+
       }));
 
     TableExportUtil.exportToExcel(exportData, 'excel');
@@ -156,7 +157,7 @@ export class ProgramKitComponent {
 
       name: any; shortDescription: any;  longDescription: any; documentLink: any;
     }, index: any) => [user.name, user.shortDescription, user.longDescription,user.documentLink,
-     
+
       //formatDate(new Date(user.joiningDate), 'yyyy-MM-dd', 'en') || '',
 
 
@@ -179,9 +180,24 @@ export class ProgramKitComponent {
 
     // Save or open the PDF
     doc.save('program-kit-list.pdf');
-    
-  }
 
+  }
+  performSearch() {
+    if(this.searchTerm){
+    this.dataSource = this.dataSource?.filter((item: any) =>{
+      console.log("pr",item)
+      const searchList = (item.name).toLowerCase()
+      return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+    }
+
+
+    // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    } else {
+      // this.fetchCourseKits();
+
+    }
+  }
   submitCourseKit(): void {
     this.isSubmitted = true
     console.log("=========", this.courseKitForm)
@@ -268,7 +284,7 @@ export class ProgramKitComponent {
     this.courseService.getProgramCourseKit({ ...this.courseKitModel })
       .subscribe(response => {
         this.isLoading = false;
-        this.totalItems = response.totalDocs   
+        this.totalItems = response.totalDocs
         this.dataSource = response.docs;
         this.courseKitModel.docs = response.docs;
         this.courseKitModel.page = response.page;
@@ -312,7 +328,7 @@ export class ProgramKitComponent {
             text: "Please start convert this video",
           });
           return
-          
+
         }
         const videoType = "application/x-mpegURL";
         if (videoURL) {

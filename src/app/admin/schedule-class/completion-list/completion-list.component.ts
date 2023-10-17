@@ -76,6 +76,21 @@ export class CompletionListComponent {
 
       }
     }
+    performSearch() {
+      if(this.searchTerm){
+      this.dataSource = this.dataSource?.filter((item: any) =>{
+        const searchList = (item.classId.courseId?.title + item.studentId?.name).toLowerCase()
+        return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+      }
+
+
+      // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+      } else {
+        this.getCompletedClasses();
+
+      }
+    }
     getCompletedClasses() {
       this.classService
         .getSessionCompletedStudent(this.studentPaginationModel.page, this.studentPaginationModel.limit)

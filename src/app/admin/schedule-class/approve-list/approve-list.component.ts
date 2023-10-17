@@ -1,3 +1,4 @@
+import { StudenId } from './../../../core/models/class.model';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -113,6 +114,8 @@ export class ApproveListComponent  {
     this.dataSource.filter = $event.target.value;
 
   }
+
+
   mapClassList() {
     this.studentPaginationModel.docs.forEach((item: Student) => {
       const startDateArr: any = [];
@@ -207,10 +210,13 @@ export class ApproveListComponent  {
   }
   performSearch() {
     if(this.searchTerm){
-    this.dataSource = this.dataSource?.filter((item: any) =>
-    // console.log(item.courseId?.title)
+    this.dataSource = this.dataSource?.filter((item: any) =>{
+      const searchList = (item.classId.courseId?.title + item.studentId?.name).toLowerCase()
+      return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+    }
 
-    item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+
+    // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
     } else {
       this.getRegisteredClasses();

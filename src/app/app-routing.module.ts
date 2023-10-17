@@ -178,7 +178,7 @@ const routes: Routes = [
         (m) => m.AuthenticationModule
       ),
   },
-  { path: '**', component: Page404Component },
+  // { path: '**', component: Page404Component },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, {})],
