@@ -44,6 +44,7 @@ export class StudentApprovalListComponent {
   selection = new SelectionModel<CourseModel>(true, []);
   isLoading :any;
   coursePaginationModel!: Partial<CoursePaginationModel>;
+  searchTerm:string = '';
 
 
   upload() {
@@ -57,7 +58,7 @@ export class StudentApprovalListComponent {
     // this.displayedColumns = ["title", "studentName", "classStartDate", "classEndDate",  "action"];
     this.studentPaginationModel = {} as StudentPaginationModel;
   }
-  
+
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
     ngOnInit(): void {
@@ -101,7 +102,7 @@ export class StudentApprovalListComponent {
         text: 'Program approved successfully.',
         icon: 'success',
         confirmButtonColor: '#526D82',
-      });  
+      });
       this.getRegisteredClasses();
     });
     () => {
@@ -113,6 +114,22 @@ export class StudentApprovalListComponent {
           });
         };
   }
+
+  performSearch() {
+    if(this.searchTerm){
+    this.dataSource = this.dataSource?.filter((item: any) =>{
+      const searchList = (item.classId.courseId?.title + item.studentId?.name).toLowerCase()
+      return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+    }
+
+
+    // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    } else {
+      this.getRegisteredClasses();
+
+    }
+  }
   Status(element: Student, status:string) {
     let item: StudentApproval = {
       approvedBy: this.getCurrentUserId(),
@@ -122,7 +139,7 @@ export class StudentApprovalListComponent {
       studentId: element.studentId.id,
       session: this.getSessions(element)
     };
-   
+
     this.classService.saveApprovedProgramClasses(element.id, item).subscribe((response:any) => {
       Swal.fire({
         title: 'Success',
@@ -160,9 +177,9 @@ export class StudentApprovalListComponent {
     const data = this.dataSource.map((user: {
       //formatDate(arg0: Date, arg1: string, arg2: string): unknown;
 
-      program_name: any; student_name: any; classStartDate: any; classEndDate: any; registeredOn: any; 
-    }, index: any) => [user.program_name, user.student_name, 
-      
+      program_name: any; student_name: any; classStartDate: any; classEndDate: any; registeredOn: any;
+    }, index: any) => [user.program_name, user.student_name,
+
       formatDate(new Date(user.classStartDate), 'yyyy-MM-dd', 'en') || '',
       formatDate(new Date(user.classEndDate), 'yyyy-MM-dd', 'en') || '',
       formatDate(new Date(user.registeredOn), 'yyyy-MM-dd', 'en') || '',
@@ -214,7 +231,7 @@ export class StudentApprovalListComponent {
           this.selection.select(row)
         );
   }
-  
+
   showNotification(
     colorName: string,
     text: string,

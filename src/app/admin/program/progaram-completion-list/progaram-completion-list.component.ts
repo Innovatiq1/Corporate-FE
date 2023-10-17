@@ -35,10 +35,11 @@ export class ProgaramCompletionListComponent {
   totalItems: any;
   studentPaginationModel: StudentPaginationModel;
   isLoading: any;
+  searchTerm:string = '';
 
   constructor(private classService: ClassService,private utils:UtilsService) {
 
-    
+
     this.studentPaginationModel = {} as StudentPaginationModel;
   }
 
@@ -78,9 +79,9 @@ export class ProgaramCompletionListComponent {
       classId: element.classId._id,
       status: "completed",
       studentId: element.studentId.id,
-      session: [] 
+      session: []
     };
-  
+
 
     this.classService.saveApprovedProgramClasses(element.id, item).subscribe((response:any) => {
       Swal.fire({
@@ -102,6 +103,22 @@ export class ProgaramCompletionListComponent {
         };
 
   }
+
+  performSearch() {
+    if(this.searchTerm){
+    this.dataSource = this.dataSource?.filter((item: any) =>{
+      const searchList = (item.program_name + item.studentId?.name).toLowerCase()
+      return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+    }
+
+
+    // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    } else {
+      this.getCompletedClasses();
+
+    }
+  }
   exportExcel() {
     //k//ey name with space add in brackets
    const exportData: Partial<TableElement>[] =
@@ -121,9 +138,9 @@ export class ProgaramCompletionListComponent {
     const data = this.dataSource.map((user: {
       //formatDate(arg0: Date, arg1: string, arg2: string): unknown;
 
-      program_name: any; student_name: any; classStartDate: any; classEndDate: any; registeredOn: any; 
-    }, index: any) => [user.program_name, user.student_name, 
-      
+      program_name: any; student_name: any; classStartDate: any; classEndDate: any; registeredOn: any;
+    }, index: any) => [user.program_name, user.student_name,
+
       formatDate(new Date(user.classStartDate), 'yyyy-MM-dd', 'en') || '',
       formatDate(new Date(user.classEndDate), 'yyyy-MM-dd', 'en') || '',
       formatDate(new Date(user.registeredOn), 'yyyy-MM-dd', 'en') || '',

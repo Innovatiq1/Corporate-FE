@@ -17,7 +17,7 @@
                 <li class="tbl-search-box">
                   <label for="search-input"><i class="material-icons search-icon">search</i></label>
                   <input placeholder="Search" type="text" #filter class="browser-default search-field"
-                    aria-label="Search box">
+                    aria-label="Search box" [(ngModel)]="searchTerm" class="browser-default search-field"  (keyup)="performSearch()">
                 </li>
               </ul>
             </div>
@@ -98,7 +98,7 @@
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
                   <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
-                    
+
                       <button mat-button [matMenuTriggerFor]="menu">
                           <svg class="dropdown-toggle border rounded-circle" data-bs-toggle="dropdown"
                               aria-expanded="false" xmlns="http://www.w3.org/2000/svg" width="25"
@@ -115,8 +115,8 @@
                               <span class="menu-text px-3">Approve</span>
                           </button>
                         </mat-menu>
-                          
-                  
+
+
                   </mat-cell>
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
