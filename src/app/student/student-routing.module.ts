@@ -13,7 +13,7 @@ import { ViewProgramComponent } from './view-program/view-program.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: 'dashboard/student-dashboard',
     component: DashboardComponent,
   },
   {
