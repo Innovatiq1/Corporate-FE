@@ -7,6 +7,9 @@ import { CourseModel, CoursePaginationModel, MainCategory, SubCategory } from '@
 import { CourseService } from '@core/service/course.service';
 import { forkJoin, map} from 'rxjs';
 import Swal from 'sweetalert2';
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-course-approval',
@@ -40,6 +43,7 @@ export class CourseApprovalComponent {
   pageSizeArr = [10, 20, 50, 100];
   isLoading = true;
   selection = new SelectionModel<CourseModel>(true, []);
+  searchTerm: string = '';
 
   constructor(private router: Router,
   private courseService: CourseService,private cd: ChangeDetectorRef, private snackBar: MatSnackBar){
@@ -177,5 +181,67 @@ export class CourseApprovalComponent {
       'right'
     );
   }
-  
+  //search functinality
+  performSearch() {
+    console.log(this.dataSource)
+    console.log(this.searchTerm)
+    if(this.searchTerm){
+    this.dataSource = this.dataSource?.filter((item: any) =>{   
+      console.log("vv", item)
+      const search = (item.main_category_text + item.sub_category_text + item.title).toLowerCase()
+      return search.indexOf(this.searchTerm.toLowerCase())!== -1;
+      
+    }
+    );
+    } else {
+       this.getCoursesList();
+
+    }
+  }
+  // export table data in excel file
+  exportExcel() {
+    //k//ey name with space add in brackets
+   const exportData: Partial<TableElement>[] = this.dataSource.map(
+     (user: any) => ({
+       'Course Name': user.title,
+       'Course Code': user.courseCode,
+       'Main Category': user.main_category_text,
+       'Sub Category': user.sub_category_text,
+       'Fees': user.fee,
+     })
+   );
+    TableExportUtil.exportToExcel(exportData, 'excel');
+  }
+
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [['Course Name','Course Code','Main Category','Sub Category','Fees']];
+    console.log(this.dataSource)
+    const data = this.dataSource.map((user:any) =>
+      [user.title,
+        user.courseCode,
+       user.main_category_text,
+       user.sub_category_text,
+       user.fee
+    ] );
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+
+    // Add a page to the document (optional)
+    //doc.addPage();
+
+    // Generate the table using jspdf-autotable
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+
+
+
+    });
+
+    // Save or open the PDF
+    doc.save('Course-approve-list.pdf');
+  }
+
 }

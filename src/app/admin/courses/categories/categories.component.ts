@@ -22,6 +22,10 @@ import {
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
 import Swal from 'sweetalert2';
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
 
 @Component({
   selector: 'app-categories',
@@ -60,6 +64,7 @@ export class CategoriesComponent implements OnInit {
   selection = new SelectionModel<CourseModel>(true, []);
   subCategory = [];
   data: any;
+  searchTerm: string = '';
 
   constructor(
     private router: Router,
@@ -188,4 +193,61 @@ export class CategoriesComponent implements OnInit {
 edit(id:any){
   this.router.navigate(['/admin/courses/edit-categories/'+ id]);
 }
+
+//search functionality
+performSearch() {
+  console.log(this.dataSource)
+  console.log(this.searchTerm)
+  if(this.searchTerm){
+  this.dataSource = this.dataSource?.filter((item: any) =>{   
+    console.log("vv", item)
+    const search = (item.category_name + item?.subCategories[0]?.category_name).toLowerCase()
+    return search.indexOf(this.searchTerm.toLowerCase())!== -1;
+    
+  }
+  );
+  } else {
+     this.fetchSubCategories();
+
+  }
+}
+exportExcel() {
+  //k//ey name with space add in brackets
+ const exportData: Partial<TableElement>[] = this.dataSource.map(
+   (user: any) => ({
+     'Main Category': user.category_name,
+     'Sub Category': user?.subCategories[0]?.category_name,
+   })
+ );
+  TableExportUtil.exportToExcel(exportData, 'excel');
+}
+
+generatePdf() {
+  const doc = new jsPDF();
+  const headers = [['Main Category','Sub Category']];
+  console.log(this.dataSource)
+  const data = this.dataSource.map((user:any) =>
+    [user.category_name,
+      user?.subCategories[0]?.category_name,
+  ] );
+  //const columnWidths = [60, 80, 40];
+  const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+
+  // Add a page to the document (optional)
+  //doc.addPage();
+
+  // Generate the table using jspdf-autotable
+  (doc as any).autoTable({
+    head: headers,
+    body: data,
+    startY: 20,
+
+
+
+  });
+
+  // Save or open the PDF
+  doc.save('Categories-list.pdf');
+}
+
 }

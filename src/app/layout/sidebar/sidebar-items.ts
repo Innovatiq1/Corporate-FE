@@ -357,7 +357,7 @@ export const ROUTES: any[] = [
     role: ['Admin'],
     children: [
       {
-        path: '/admin/audit/list',
+        path: '/admin/audit/audit-list',
         title: 'List',
         iconType: '',
         icon: '',
