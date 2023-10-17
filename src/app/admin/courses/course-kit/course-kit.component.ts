@@ -10,6 +10,9 @@ import { UtilsService } from '@core/service/utils.service';
 import Swal from 'sweetalert2';
 import {  BsModalService, ModalOptions} from "ngx-bootstrap/modal";
 import { VideoPlayerComponent } from './video-player/video-player.component';
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-course-kit',
@@ -44,7 +47,7 @@ export class CourseKitComponent implements OnInit{
   courseKitModel!: Partial<CourseKitModel>;
   templates: any[] = [];
   currentDate: Date;
-
+  searchTerm: string = '';
 
   constructor(
     private router: Router,
@@ -227,6 +230,66 @@ export class CourseKitComponent implements OnInit{
       'top',
       'right'
     );
+  }
+  //serach functionality
+  performSearch() {
+    console.log(this.dataSource)
+    console.log(this.searchTerm)
+    if(this.searchTerm){
+    this.dataSource = this.dataSource?.filter((item: any) =>{   
+      console.log("vv", item)
+      const search = (item.name + item.shortDescription + item.longDescription).toLowerCase()
+      return search.indexOf(this.searchTerm.toLowerCase())!== -1;
+      
+    }
+    );
+    } else {
+       this.fetchCourseKits();
+  
+    }
+  }
+  // export table data in excel file
+  exportExcel() {
+    //k//ey name with space add in brackets
+   const exportData: Partial<TableElement>[] = this.dataSource.map(
+     (user: any) => ({
+       'Course Name': user.name,
+       'Short Description': user.shortDescription,
+       'Long Description': user.longDescription,
+       'Document Link': user.documentLink,
+     })
+   );
+    TableExportUtil.exportToExcel(exportData, 'excel');
+  }
+
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [['Course Name','Short Description','Long Description','Document Link']];
+    console.log(this.dataSource)
+    const data = this.dataSource.map((user:any) =>
+      [user.name,
+        user.shortDescription,
+       user.longDescription,
+       user.documentLink
+    ] );
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+
+    // Add a page to the document (optional)
+    //doc.addPage();
+
+    // Generate the table using jspdf-autotable
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+
+
+
+    });
+
+    // Save or open the PDF
+    doc.save('CourseKit-list.pdf');
   }
 
 }
