@@ -20,7 +20,7 @@ export class RegistrationService {
         const apiUrl = `${this.prefix}auth/UserCreate`;
         return this.http
           .post<ApiResponse>(apiUrl, course)
-          .pipe(map((response) => { }));
+          //.pipe(map((response) => { }));
       }
 
 }

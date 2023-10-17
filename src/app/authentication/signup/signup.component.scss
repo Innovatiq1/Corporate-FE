@@ -23,6 +23,13 @@
     position: relative;
     z-index: 1;
   }
+  .custom{
+
+    width: 500px;
+  }
+  ngx-intl-tel-input {
+    width: 500px; /* Set your desired width */
+  }
   
   .slideshow img {
     width: 103%;

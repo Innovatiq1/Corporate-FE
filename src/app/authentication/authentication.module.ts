@@ -10,11 +10,13 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { SigninComponent } from './signin/signin.component';
+//import {Ng2TelInputModule} from 'ng2-tel-input';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 @NgModule({
   declarations: [
     Page500Component,
-    Page404Component,
+    
     SigninComponent,
     SignupComponent,
     LockedComponent,
@@ -24,8 +26,11 @@ import { SigninComponent } from './signin/signin.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxIntlTelInputModule,
+    
     AuthenticationRoutingModule,
     SharedModule,
   ],
+  
 })
 export class AuthenticationModule {}

@@ -10,6 +10,11 @@ import { LanguageService } from '@core/service/language.service';
 import { RegistrationService } from '@core/service/registration.service';
 import { Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
+import {
+  SearchCountryField,
+  //TooltipLabel,
+  CountryISO
+} from "ngx-intl-tel-input";
 
 @Component({
   selector: 'app-signup',
@@ -17,6 +22,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
+  phoneNumber: any;
+  SearchCountryField = SearchCountryField;
+  //TooltipLabel = TooltipLabel;
+  CountryISO = CountryISO;
+  preferredCountries: CountryISO[] = [CountryISO.Qatar];
   
   userData = { username: '', email: '', password: '', cpassword: '', type:'',role:''};
   message = '';
@@ -65,6 +75,9 @@ export class SignupComponent implements OnInit {
         '',
         [Validators.required, Validators.email, Validators.minLength(5)],
       ],
+      //phone:[Validators.required],
+      phone: ['', [Validators.required]],
+      //phone:[Validators.required, Validators.minLength(10)],
       password: ['', Validators.required],
       cpassword: ['', Validators.required],
     },{ validators: this.passwordMatchValidator
@@ -80,10 +93,15 @@ export class SignupComponent implements OnInit {
     
     if (this.authForm.valid) {
       const userData: Users = this.authForm.value;
+      //let phone =userData.phone.internationalNumber
+      
+      console.log("======",userData)
       userData.type = 'Student';
       userData.role = 'Student';
+      userData.mobile=userData.phone.internationalNumber
+      //.userData.mobile =
       this.registration.registerUser(userData).subscribe(
-        (response) => {
+        (response: any) => {
           Swal.fire({
             title: 'Registration Successful',
             text: 'Student created successfully',
@@ -91,7 +109,7 @@ export class SignupComponent implements OnInit {
           });
           this.router.navigate(['/authentication/signin']);
         },
-        (error) => {
+        (error: any) => {
         }
       );
     }

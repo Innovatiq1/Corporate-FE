@@ -43,9 +43,21 @@ export interface Student {
     updatedAt?: Date;
     type?: string;
     password: string;
+    mobile?:String;
     joiningDate:Date,
     Active: any;
     menuItems: [];
+    isLogin:boolean;
+    phone:{
+			countryCode:String,
+			dialCode:String,
+			e164Number:String,
+			internationalNumber:String,
+			nationalNumber:String,
+			number:String,
+
+
+		},
     avatar:string;
     filename:string
     education:string;
@@ -74,6 +86,8 @@ export interface Student {
     Active: any;
     menuItems: [];
     avatar:string;
+    city:string;
+    country:string;
     filename:string
     education:string;
 
