@@ -1443,7 +1443,7 @@ export const ROUTES: any[] = [
 
   {
     path: '/student/homework',
-    title: 'MENUITEMS.STUDENT.LIST.HOMEWORK',
+    title: 'Assignments',
     iconType: 'material-icons-two-tone',
     icon: 'article',
     class: '',
@@ -1467,7 +1467,7 @@ export const ROUTES: any[] = [
   },
   {
     path: '/student/timetable',
-    title: 'MENUITEMS.STUDENT.LIST.TIME-TABLE',
+    title: 'Calender',
     iconType: 'material-icons-two-tone',
     icon: 'table_chart',
     class: '',

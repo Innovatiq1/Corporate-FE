@@ -4,13 +4,15 @@ import { ComponentsModule } from "../../shared/components/components.module";
 import { SharedModule } from '@shared';
 import { AuditRoutingModule } from './audit-routing.module';
 import { AuditListComponent } from './audit-list/audit-list.component';
+import { EAttendanceComponent } from './e-attendance/e-attendance.component';
 
 
 
 
 @NgModule({
     declarations: [
-        AuditListComponent
+        AuditListComponent,
+        EAttendanceComponent
     ],
     imports: [
         CommonModule, AuditRoutingModule,
