@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
 import { Role } from './core/models/role';
+import { SettingsComponent } from './student/settings/settings.component';
 const routes: Routes = [
   {
     path: '',
@@ -12,6 +13,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
+      { path: 'settings/student-settings', component: SettingsComponent },
+
       {
         path: 'admin',
         // canActivate: [AuthGuard],
@@ -31,7 +34,7 @@ const routes: Routes = [
           import('./teacher/teacher.module').then((m) => m.TeacherModule),
       },
       {
-        path: 'Student',
+        path: 'student',
         // canActivate: [AuthGuard],
         data: {
           role: Role.Student,
@@ -40,51 +43,10 @@ const routes: Routes = [
           import('./student/student.module').then((m) => m.StudentModule),
       },
       {
-        path: 'coursemanager',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.CourseManager,
-        },
+        path: 'dashboard',
         loadChildren: () =>
-          import('./student/student.module').then((m) => m.StudentModule),
+          import('./admin/dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
-      {
-        path: 'hod',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.HOD,
-        },
-        loadChildren: () =>
-          import('./student/student.module').then((m) => m.StudentModule),
-      },
-      {
-        path: 'trainingcoordinator',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.TrainingCoordinator,
-        },
-        loadChildren: () =>
-          import('./student/student.module').then((m) => m.StudentModule),
-      },
-      {
-        path: 'trainingadministrator',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.TrainingAdministrator,
-        },
-        loadChildren: () =>
-          import('./student/student.module').then((m) => m.StudentModule),
-      },
-      {
-        path: 'supervisor',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.Supervisor,
-        },
-        loadChildren: () =>
-          import('./student/student.module').then((m) => m.StudentModule),
-      },
-
 
 
 

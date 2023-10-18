@@ -10,22 +10,22 @@ MENU_LIST = [
         children: 
         [
             {
-                id: "admin/main",
+                id: "student-analytics",
                 title: "Student Analytics", 
                 type: "none",
             },
             {
-                id: "admin/dashboard2",
+                id: "instructor-analytics",
                 title: "Instructor Analytics", 
                 type: "none",
             },
             {
-                id: "student/student-dashboard",
+                id: "student-dashboard",
                 title: "Student Dashboard", 
                 type: "none",
             },
             {
-                id: "instructor/instructor-dashboard",
+                id: "instructor-dashboard",
                 title: "Instructor Dashboard", 
                 type: "none",
             },
@@ -539,7 +539,7 @@ MENU_LIST = [
 
 
 {
-    id: "student/leave-request",
+    id: "leave-request",
     title: "Leave Request", 
     selected: false, 
     iconsrc: "/assets/announcement-icon.svg", 

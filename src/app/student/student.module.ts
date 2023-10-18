@@ -37,7 +37,6 @@ import { StudentsService } from 'app/admin/students/all-students/students.servic
     leaveDeleteComonent,
     FormDialogComponent,
     TimetableComponent,
-    SettingsComponent,
     CourseComponent,
     ViewCourseComponent,
     ProgramComponent,
