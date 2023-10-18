@@ -13,11 +13,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
-      { path: 'settings/student-settings', component: SettingsComponent },
-
       {
         path: 'admin',
-        // canActivate: [AuthGuard],
         data: {
           role: Role.Admin,
         },
@@ -26,7 +23,6 @@ const routes: Routes = [
       },
       {
         path: 'instructor',
-        // canActivate: [AuthGuard],
         data: {
           role: Role.Instructor,
         },
@@ -35,7 +31,6 @@ const routes: Routes = [
       },
       {
         path: 'student',
-        // canActivate: [AuthGuard],
         data: {
           role: Role.Student,
         },
@@ -47,9 +42,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./admin/dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
-
-
-
+      { path: 'settings/student-settings', component: SettingsComponent },
 
       // Extra components
       {
