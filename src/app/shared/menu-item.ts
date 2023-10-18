@@ -559,6 +559,27 @@ MENU_LIST = [
 
 },
 {
+    id: "instructor",
+    title: "Lectures", 
+    selected: false, 
+    iconsrc: "/assets/announcement-icon.svg", 
+    children: 
+    [
+        {
+            id: "lectures",
+            title: "All Lectures", 
+            type: "none"
+        }, 
+        {
+            id: "exam-schedule",
+            title: "Exam Schedule", 
+            type: "none"
+
+        },
+            ]
+},
+
+{
     id: "settings",
     title: "Settings", 
     selected: false, 
@@ -576,18 +597,6 @@ MENU_LIST = [
             type: "none"
         }
     ]
-},
-{
-    id: "lectures",
-    title: "Lectures", 
-    selected: false, 
-    iconsrc: "/assets/announcement-icon.svg", 
-},
-{
-    id: "exam-schedule",
-    title: "Exam Schedule", 
-    selected: false, 
-    iconsrc: "/assets/announcement-icon.svg", 
 },
 
 ]

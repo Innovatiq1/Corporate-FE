@@ -18,25 +18,16 @@ const routes: Routes = [
       { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
       {
         path: 'admin',
-        data: {
-          role: Role.Admin,
-        },
         loadChildren: () =>
           import('./admin/admin.module').then((m) => m.AdminModule),
       },
       {
         path: 'instructor',
-        data: {
-          role: Role.Instructor,
-        },
         loadChildren: () =>
           import('./teacher/teacher.module').then((m) => m.TeacherModule),
       },
       {
         path: 'student',
-        data: {
-          role: Role.Student,
-        },
         loadChildren: () =>
           import('./student/student.module').then((m) => m.StudentModule),
       },
