@@ -126,7 +126,7 @@ implements OnInit{
     if(this.searchTerm){
     this.dataSource = this.dataSource?.filter((item: any) =>{
       console.log("ps",item)
-      const searchList = (item.classId.courseId?.title + item.studentId?.name).toLowerCase()
+      const searchList = (item?.title).toLowerCase()
       return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
     }
 

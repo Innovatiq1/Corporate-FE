@@ -59,7 +59,7 @@ export class ScheduleClassComponent {
   dataSourceArray: DataSourceModel[] = [];
   coursePaginationModel!: Partial<CoursePaginationModel>;
   pageSizeArr = [10, 20, 50, 100];
-
+  searchTerm: string = '';
 
   displayedColumns = ['courseName', 'startDate', 'endDate', 'Options'];
 
@@ -276,5 +276,22 @@ export class ScheduleClassComponent {
       }
     });
     return sessions;
+  }
+
+  performSearch() {
+    console.log(this.dataSource)
+    console.log(this.searchTerm)
+    if(this.searchTerm){
+    this.dataSource = this.dataSource?.filter((item: any) =>{   
+      console.log("vv", item)
+      const search = (item.courseId?.title).toLowerCase()
+      return search.indexOf(this.searchTerm.toLowerCase())!== -1;
+      
+    }
+    );
+    } else {
+       this.getClassList();
+
+    }
   }
 }
