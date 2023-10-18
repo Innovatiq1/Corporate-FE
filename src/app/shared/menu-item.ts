@@ -10,22 +10,22 @@ MENU_LIST = [
         children: 
         [
             {
-                id: "main",
+                id: "admin/main",
                 title: "Student Analytics", 
                 type: "none",
             },
             {
-                id: "dashboard2",
+                id: "admin/dashboard2",
                 title: "Instructor Analytics", 
                 type: "none",
             },
             {
-                id: "student-dashboard",
+                id: "student/student-dashboard",
                 title: "Student Dashboard", 
                 type: "none",
             },
             {
-                id: "instructor-dashboard",
+                id: "instructor/instructor-dashboard",
                 title: "Instructor Dashboard", 
                 type: "none",
             },
@@ -58,7 +58,7 @@ MENU_LIST = [
     },
     
 {
-    id: "courses",
+    id: "admin/courses",
     title: "Course", 
     iconsrc: "/assets/course-icon.svg", 
     selected: true, 
@@ -90,16 +90,11 @@ MENU_LIST = [
             title: "Categories", 
             type: "none"
         },
-        {
-            id: "student-courses",
-            title: "Courses", 
-            type: "none"
-        }
 
     ]
 },
 {
-    id: "schedule",
+    id: "admin/schedule",
     title: "Schedule Class", 
     iconsrc: "/assets/schedule-icon.svg", 
     selected: false, 
@@ -130,16 +125,11 @@ MENU_LIST = [
     ]
 },
 {
-    id:"program",
+    id:"admin/program",
     title: "Program", 
     iconsrc:"/assets/fellowship-icon.svg", 
     selected: false, 
     children: [
-        // {
-        //     id:"add_program",
-        //     title:"Create a Program", 
-        //     type: "none"
-        // }, 
         {
             id:"program-list",
             title:"All Program", 
@@ -167,19 +157,13 @@ MENU_LIST = [
         },
         {
             id:"program-completion-list",
-            title:"Completion Lisr", 
+            title:"Completion List", 
             type:""
-        },
-        {
-            id: "student-programs",
-            title: "Programs", 
-            type: "none"
         }
-
     ]
 },
 {
-    id: "survey",
+    id: "admin/survey",
     title: "Survey", 
     iconsrc:"/assets/survey-icon.svg", 
     selected: false, 
@@ -200,7 +184,7 @@ MENU_LIST = [
     ]
 },
 {
-    id: "audit",
+    id: "admin/audit",
     title: "Audit", 
     selected: false, 
     iconsrc: "/assets/audit-icon.svg", 
@@ -229,7 +213,7 @@ MENU_LIST = [
 //     ]
 // },
 {
-    id: "users",
+    id: "admin/users",
     title: "Users", 
     selected: false, 
     iconsrc: "/assets/users-icon.svg", 
@@ -270,7 +254,7 @@ MENU_LIST = [
 //     ]
 // },
 {
-    id: "certificate",
+    id: "admin/certificate",
     title: "Certificate Builder", 
     selected: false, 
     iconsrc: "/assets/certificate-icon.svg", 
@@ -290,7 +274,7 @@ MENU_LIST = [
     ]
 },
 {
-    id: "email-configuration",
+    id: "admin/email-configuration",
     title: "Email Configuration", 
     selected: false, 
     iconsrc:"/assets/email-icon.svg", 
@@ -354,7 +338,7 @@ MENU_LIST = [
     ]
 },
 {
-    id: "banners",
+    id: "admin/banners",
     title: "Banners", 
     selected: false, 
     iconsrc: "/assets/banner-icon.svg", 
@@ -385,7 +369,7 @@ MENU_LIST = [
     ]
 },
 {
-    id: "announcement",
+    id: "admin/announcement",
     title: "Announcement", 
     selected: false, 
     iconsrc: "/assets/announcement-icon.svg", 
@@ -400,7 +384,7 @@ MENU_LIST = [
     ]
 },
 {
-    id: "instructors",
+    id: "admin/instructors",
     title: "Instructors", 
     selected: false, 
     iconsrc: "/assets/announcement-icon.svg", 
@@ -430,7 +414,7 @@ MENU_LIST = [
     ]
 },
 {
-    id: "students",
+    id: "admin/students",
     title: "Students", 
     selected: false, 
     iconsrc: "/assets/announcement-icon.svg", 
@@ -455,7 +439,7 @@ MENU_LIST = [
     ]
 },
 {
-    id: "departments",
+    id: "admin/departments",
     title: "Departments", 
     selected: false, 
     iconsrc: "/assets/announcement-icon.svg", 
@@ -475,7 +459,7 @@ MENU_LIST = [
     ]
 },
 {
-    id: "staff",
+    id: "admin/staff",
     title: "Staff", 
     selected: false, 
     iconsrc: "/assets/announcement-icon.svg", 
@@ -496,7 +480,7 @@ MENU_LIST = [
 },
 
 {
-    id: "testimonials",
+    id: "admin/testimonials",
     title: "Testimonials", 
     selected: false, 
     iconsrc: "/assets/testimonials-icon.svg", 
@@ -515,13 +499,47 @@ MENU_LIST = [
     ]
 },
 {
-    id: "homework",
-    title: "Homework", 
-    selected: false, 
-    iconsrc: "/assets/announcement-icon.svg", 
+    id: "student/enrollment",
+    title: "Enrollment", 
+    iconsrc: "/assets/course-icon.svg", 
+    selected: true, 
+    children: [
+        {
+            id: "courses",
+            title: "Courses", 
+            type: "none"
+        },
+        {
+            id: "programs",
+            title: "Programs", 
+            type: "none"
+        }
+    ]
 },
 {
-    id: "leave-request",
+    id: "student/schedule",
+    title: "Schedule", 
+    iconsrc: "/assets/course-icon.svg", 
+    selected: true, 
+    children: [
+        {
+            id: "homework",
+            title: "Homework", 
+            selected: false, 
+            iconsrc: "/assets/announcement-icon.svg", 
+        },
+        {
+            id: "timetable",
+            title: "Time Table", 
+            selected: false, 
+            iconsrc: "/assets/announcement-icon.svg", 
+        }
+]
+},
+
+
+{
+    id: "student/leave-request",
     title: "Leave Request", 
     selected: false, 
     iconsrc: "/assets/announcement-icon.svg", 
@@ -539,12 +557,6 @@ MENU_LIST = [
         }
     ]
 
-},
-{
-    id: "timetable",
-    title: "Time Table", 
-    selected: false, 
-    iconsrc: "/assets/announcement-icon.svg", 
 },
 {
     id: "settings",

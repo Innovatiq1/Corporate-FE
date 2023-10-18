@@ -96,7 +96,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   navigateTo(menu:any,url:any) {    
     this.menuItemClick.emit();
     let userType = localStorage.getItem('user_type')
-    this.router.navigateByUrl(userType + '/' + menu +'/'+url);
+    this.router.navigateByUrl( menu +'/'+url);
 }
 
 

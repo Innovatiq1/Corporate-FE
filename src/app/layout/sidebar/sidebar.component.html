@@ -17,14 +17,13 @@
             </div>
           </li>
           <li *ngFor="let menu of menuitem">
-            <a class="menu-top">{{ menu.title }}</a>
-            <ul >
-              <li *ngFor="let sidebarSubItem of menu.children" 
+            <a class="menu-top menu-toggle" (click)="callToggleMenu($event, menu.children.length)">{{ menu.title }}</a>
+            <ul  class="ml-menu">
+              <li *ngFor="let sidebarSubItem of menu.children"
                 [routerLinkActive]="sidebarSubItem.children.length > 0 ? '' : 'active'">
                 <a  (click)="navigateTo(menu.id,sidebarSubItem.id)" >{{ sidebarSubItem.title }}</a>
                 </li></ul>
-          </li>
-          <li>
+          </li>          <li>
             <a class="" (click)="logout()" class="menu-top">
               <i class="material-icons-two-tone">power_settings_new</i>
               <span class="hide-menu">Logout
