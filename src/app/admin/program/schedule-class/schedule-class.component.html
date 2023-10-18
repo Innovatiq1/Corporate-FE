@@ -26,7 +26,7 @@
                     placeholder="Search"
                     type="text"
                     #filter
-                    class="browser-default search-field"
+                    class="browser-default search-field" [(ngModel)]="searchTerm" (input)="performSearch()"
                     aria-label="Search box"
                   />
                 </li>
