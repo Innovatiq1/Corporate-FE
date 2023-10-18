@@ -28,6 +28,7 @@ export class CreatAnnouncementComponent {
   instructors = false;
   id: any;
   editUrl: any;
+  viewUrl: any;
   inProgress = false;
   announcementForm: FormGroup
   courseList!: CourseTitleModel[];
@@ -41,6 +42,7 @@ export class CreatAnnouncementComponent {
   res: any;
   isEditable = false;
   public Editor: any = ClassicEditor;
+  mode: string = 'editUrl';
 
 
 
@@ -71,6 +73,8 @@ export class CreatAnnouncementComponent {
     private announcementService: AnnouncementService,) {
     let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-announcement');
+    this.viewUrl = urlPath.includes('view-announcement');
+
     this.currentId = urlPath[urlPath.length - 1];
 
     if (this.editUrl === true) {
@@ -82,16 +86,24 @@ export class CreatAnnouncementComponent {
         },
       ];
     }
-
-    if (this.editUrl) {
-      this.getAnnouncementList()
+    else if(this.viewUrl===true){
+      this.breadscrums = [
+        {
+          title:'View Announcement',
+          items: ['Announcement'],
+          active: 'View Announcement',
+        },
+      ];
     }
+
+    // if (this.editUrl) {
+      this.getAnnouncementList()
+    // }
 
     this.announcementForm = this.formBuilder.group({
       subject: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]/)]),
       details: new FormControl('', [Validators.required, ...this.utils.validators.noLeadingSpace]),
-      'forStudents': [true],
-      'forTrianers': [true],
+      announcementFor: new FormControl('', [Validators.required,]),
       'isActive': [true],
     });
   }
@@ -104,13 +116,10 @@ export class CreatAnnouncementComponent {
     if (!this.editUrl) {
       if (this.announcementForm.valid) {
         const formData = this.announcementForm.getRawValue()
-        formData['forStudents'] = this.isChecked;
-        formData['forTrianers'] = this.instructors
         let payload = {
           subject: formData?.subject,
           details: formData?.details.replace(/<\/?span[^>]*>/g, ""),
-          forStudents: formData?.forStudents,
-          forTrianers: formData?.forTrianers,
+          announcementFor: formData?.announcementFor,
           isActive: formData?.isActive,
         }
         this.announcementService.makeAnnouncement(payload).subscribe(
@@ -165,6 +174,14 @@ export class CreatAnnouncementComponent {
 
 
   }
+
+
+  isInputReadonly(): boolean {
+    return this.mode === 'viewUrl'; // If mode is 'viewUrl', return true (readonly); otherwise, return false (editable).
+  }
+  isInputDisabled(): boolean {
+    return this.mode === 'viewUrl'; // If mode is 'viewUrl', return true (disabled); otherwise, return false (enabled).
+  }
   student(event: any) {
     this.isChecked = event.target.checked
   }
@@ -183,8 +200,7 @@ export class CreatAnnouncementComponent {
         this.announcementForm.patchValue({
           subject: data?.subject,
           details: data?.details,
-          forStudents: data?.forStudents,
-          forTrianers: data?.forTrianers,
+          announcementFor: data?.announcementFor,
         });
       }
     }, error => {

@@ -16,6 +16,10 @@ const routes: Routes = [
       path: 'edit-announcement/:id',
       component: CreatAnnouncementComponent,
     },
+    {
+      path: 'view-announcement/:id',
+      component: CreatAnnouncementComponent,
+    },
 ];
 
 @NgModule({

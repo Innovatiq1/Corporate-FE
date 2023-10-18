@@ -12,16 +12,16 @@
 
           </div>
           <form [formGroup]="announcementForm">
-            <h3>{{editUrl ? 'Update Announcement' : 'Create Announcement'}}</h3>
+            <h3>{{ viewUrl ? 'View Announcement' : editUrl ? 'Update Announcement' : 'Create Announcement'}}</h3>
 
             <div class="body m-4">
               <div class="row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <label>Title <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <!-- <mat-label>Course Name</mat-label> -->
 
-                    <input matInput type="text" id="name" formControlName="subject" class="form-control" required>
+                    <input matInput type="text" id="name" formControlName="subject" class="form-control" [readonly]="viewUrl == true" required>
                     <mat-error *ngIf="announcementForm.get('subject')?.hasError('required')">
                       Enter Title
                     </mat-error>
@@ -31,11 +31,25 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Announcement For<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-select formControlName="announcementFor" required>
+                      <mat-option value="student" [disabled]="viewUrl == true">Students</mat-option>
+                      <mat-option value="instrctor" [disabled]="viewUrl == true">Instructor</mat-option>
+                      <mat-option value="staff" [disabled]="viewUrl == true">Staff</mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="announcementForm.get('announcementFor')?.hasError('required') ||announcementForm.get('announcementFor')?.touched">
+                      Select Announcement For
+                    </mat-error>
+                  </mat-form-field>
+                </div>
               </div>
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
                   <label>Course Detailed Description</label>
-                  <ckeditor [editor]="Editor" id="editor" formControlName="details"></ckeditor>
+                  <ckeditor [editor]="Editor" id="editor" formControlName="details" ></ckeditor>
                   <!-- <mat-form-field class="example-full-width mb-3" appearance="outline">
                                     <ckeditor [editor]="Editor" ></ckeditor>
                                     <input matInput formControlName="course_detailed_description" [readonly]="isInputReadonly()">
@@ -48,7 +62,7 @@
 
               </div>
 
-              <div class="row">
+              <!-- <div class="row">
                 <label for="" class="form-label">Announcement For</label>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
 
@@ -63,7 +77,7 @@
                         Instructor</span></mat-checkbox>
                   </section>
                 </div>
-              </div>
+              </div> -->
             </div>
 
           </form>
