@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { LeaveRequestService } from './leave-request.service';
+import { InstructorLeaveRequestService } from './leave-request.service';
 import { HttpClient } from '@angular/common/http';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -22,7 +22,7 @@ import { UnsubscribeOnDestroyAdapter } from '@shared';
   styleUrls: ['./leave-request.component.scss'],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
 })
-export class LeaveRequestComponent
+export class InstructorLeaveRequestComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit
 {
@@ -37,7 +37,7 @@ export class LeaveRequestComponent
     'reason',
     'actions',
   ];
-  exampleDatabase?: LeaveRequestService;
+  exampleDatabase?: InstructorLeaveRequestService;
   dataSource!: ExampleDataSource;
   selection = new SelectionModel<LeaveRequest>(true, []);
   index?: number;
@@ -54,7 +54,7 @@ export class LeaveRequestComponent
 
   constructor(
     public httpClient: HttpClient,
-    public leaveRequestService: LeaveRequestService,
+    public leaveRequestService: InstructorLeaveRequestService,
     private snackBar: MatSnackBar
   ) {
     super();
@@ -104,7 +104,7 @@ export class LeaveRequestComponent
     this.paginator._changePageSize(this.paginator.pageSize);
   }
   public loadData() {
-    this.exampleDatabase = new LeaveRequestService(this.httpClient);
+    this.exampleDatabase = new InstructorLeaveRequestService(this.httpClient);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
       this.paginator,
@@ -144,7 +144,7 @@ export class ExampleDataSource extends DataSource<LeaveRequest> {
   filteredData: LeaveRequest[] = [];
   renderedData: LeaveRequest[] = [];
   constructor(
-    public exampleDatabase: LeaveRequestService,
+    public exampleDatabase: InstructorLeaveRequestService,
     public paginator: MatPaginator,
     public _sort: MatSort
   ) {

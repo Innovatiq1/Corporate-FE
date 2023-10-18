@@ -15,11 +15,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LecturesComponent } from './lectures/lectures.component';
 import { DeleteDialogComponent } from './lectures/dialogs/delete/delete.component';
 import { FormDialogComponent } from './lectures/dialogs/form-dialog/form-dialog.component';
-import { LeaveRequestComponent } from './leave-request/leave-request.component';
-import { SettingsComponent } from './settings/settings.component';
+import { InstructorLeaveRequestComponent } from './leave-request/leave-request.component';
+import { InstructorSettingsComponent } from './settings/settings.component';
 import { ExamScheduleComponent } from './exam-schedule/exam-schedule.component';
 import { LecturesService } from './lectures/lectures.service';
-import { LeaveRequestService } from './leave-request/leave-request.service';
+import { InstructorLeaveRequestService } from './leave-request/leave-request.service';
 import { ExamScheduleService } from './exam-schedule/exam-schedule.service';
 import { SharedModule } from '@shared';
 import { ComponentsModule } from '@shared/components/components.module';
@@ -30,8 +30,8 @@ import { ComponentsModule } from '@shared/components/components.module';
     LecturesComponent,
     DeleteDialogComponent,
     FormDialogComponent,
-    LeaveRequestComponent,
-    SettingsComponent,
+    InstructorLeaveRequestComponent,
+    InstructorSettingsComponent,
     ExamScheduleComponent,
   ],
   imports: [
@@ -50,6 +50,6 @@ import { ComponentsModule } from '@shared/components/components.module';
     ComponentsModule,
     SharedModule,
   ],
-  providers: [LecturesService, LeaveRequestService, ExamScheduleService],
+  providers: [LecturesService, InstructorLeaveRequestService, ExamScheduleService],
 })
 export class TeacherModule {}

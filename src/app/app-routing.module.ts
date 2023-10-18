@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
 import { Role } from './core/models/role';
 import { SettingsComponent } from './student/settings/settings.component';
+import { LeaveRequestComponent } from './student/leave-request/leave-request.component';
+import { InstructorSettingsComponent } from './teacher/settings/settings.component';
+import { InstructorLeaveRequestComponent } from './teacher/leave-request/leave-request.component';
 const routes: Routes = [
   {
     path: '',
@@ -43,6 +46,10 @@ const routes: Routes = [
           import('./admin/dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       { path: 'settings/student-settings', component: SettingsComponent },
+      { path: 'leave-request/student-leaves', component: LeaveRequestComponent },
+      { path: 'settings/instructor-settings', component: InstructorSettingsComponent },
+      { path: 'leave-request/instructor-leaves', component: InstructorLeaveRequestComponent },
+
 
       // Extra components
       {

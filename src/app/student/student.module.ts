@@ -13,11 +13,9 @@ import {
 import { StudentRoutingModule } from './student-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeworkComponent } from './homework/homework.component';
-import { LeaveRequestComponent } from './leave-request/leave-request.component';
 import { DeleteDialogComponent as leaveDeleteComonent } from './leave-request/dialogs/delete/delete.component';
 import { FormDialogComponent } from './leave-request/dialogs/form-dialog/form-dialog.component';
 import { TimetableComponent } from './timetable/timetable.component';
-import { SettingsComponent } from './settings/settings.component';
 import { HomeworkService } from './homework/homework.service';
 import { LeaveRequestService as stdLeaveReqService } from './leave-request/leave-request.service';
 import { SharedModule } from '@shared';
@@ -33,7 +31,6 @@ import { StudentsService } from 'app/admin/students/all-students/students.servic
   declarations: [
     DashboardComponent,
     HomeworkComponent,
-    LeaveRequestComponent,
     leaveDeleteComonent,
     FormDialogComponent,
     TimetableComponent,

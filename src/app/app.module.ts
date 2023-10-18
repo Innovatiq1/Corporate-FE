@@ -37,6 +37,10 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angul
 import { ComponentsModule } from '@shared/components/components.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { StudentsService } from './admin/students/all-students/students.service';
+import { LeaveRequestComponent } from './student/leave-request/leave-request.component';
+import { LeaveRequestService as stdLeaveReqService } from './student/leave-request/leave-request.service';
+import { InstructorLeaveRequestService } from './teacher/leave-request/leave-request.service';
+import { LecturesService } from './teacher/lectures/lectures.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -52,6 +56,7 @@ export function createTranslateLoader(http: HttpClient) {
     AuthLayoutComponent,
     MainLayoutComponent,
     SettingsComponent,
+    LeaveRequestComponent
 
   ],
   imports: [
@@ -84,11 +89,14 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [
     DatePipe,
     StudentsService,
-
-    // { provide: LocationStrategy, useClass: HashLocationStrategy },
+    stdLeaveReqService,
+    InstructorLeaveRequestService,
+    LecturesService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     fakeBackendProvider,
+        // { provide: LocationStrategy, useClass: HashLocationStrategy },
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiIntereptor,

@@ -34,17 +34,9 @@ const routes: Routes = [
     component: HomeworkComponent,
   },
   {
-    path: 'leave-request/student-leaves',
-    component: LeaveRequestComponent,
-  },
-  {
     path: 'schedule/timetable',
     component: TimetableComponent,
   },
-  // {
-  //   path: 'settings/student-settings',
-  //   component: SettingsComponent,
-  // },
   { path: '**', component: Page404Component },
 ];
 
