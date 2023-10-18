@@ -20,6 +20,7 @@ export class ListComponent {
   displayedColumns: string[] = [
     'Title',
     'Decription',
+    'User Role',
     'Actions'
   ];
   dataSource: any;
