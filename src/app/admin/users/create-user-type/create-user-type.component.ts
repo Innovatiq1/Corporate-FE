@@ -236,6 +236,8 @@ convertToMenuV2(obj: any[], value:any): MenuItemModel[] {
       children: [],
       checked: defaultCheck?.checked || false,
       indeterminate: defaultCheck?.indeterminate || false,
+      iconsrc:v?.iconsrc 
+      
     };
     if (children && children.length) {
       res = {
@@ -258,6 +260,7 @@ convertToMenuV2(obj: any[], value:any): MenuItemModel[] {
           isLeaf: true,
           checked: actionChecked?.checked || false,
           indeterminate: actionChecked?.indeterminate || false,
+          iconsrc:actionChecked?.iconsrc
         }
       })
       res = {
