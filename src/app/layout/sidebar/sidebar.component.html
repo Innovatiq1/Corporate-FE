@@ -17,14 +17,35 @@
               <div class="profile-usertitle-job ">{{userType | titlecase}} </div>
             </div>
           </li>
-          <li *ngFor="let menu of menuitem">
-            <a class="menu-top menu-toggle" (click)="callToggleMenu($event, menu.children.length)">{{ menu.title }}</a>
+          <!-- <li *ngFor="let menu of menuitem">
+            <a class="menu-top menu-toggle" (click)="callToggleMenu($event, menu.children.length)"> <span>{{ menu.title }}</span></a>
             <ul  class="ml-menu">
               <li *ngFor="let sidebarSubItem of menu.children"
                 [routerLinkActive]="sidebarSubItem.children.length > 0 ? '' : 'active'">
-                <a  (click)="navigateTo(menu.id,sidebarSubItem.id)" >{{ sidebarSubItem.title }}</a>
-                </li></ul>
-          </li>          
+                <a [routerLink]="sidebarSubItem1.children.length > 0 ? null :''" (click)="navigateTo(menu.id,sidebarSubItem.id)" >{{ sidebarSubItem.title }}</a>
+                </li>
+              </ul>
+          </li> -->
+
+          <li *ngFor="let sidebarItem of menuitem"
+            [routerLinkActive]="sidebarItem.children.length !== 0 ? 'active' : 'active-top'">
+            <a
+              (click)="callToggleMenu($event, sidebarItem.children.length)"
+              class="menu-top menu-toggle">
+              <i >{{sidebarItem.icon}}</i>
+              <span class="hide-menu">{{sidebarItem.title}}
+              </span>
+            </a>
+            <ul class="ml-menu" *ngIf="sidebarItem.children.length > 0">
+              <li *ngFor="let sidebarSubItem of sidebarItem.children"
+                [routerLinkActive]="sidebarSubItem.children.length > 0 ? '' : 'active'">
+                <a (click)="navigateTo(sidebarItem.id,sidebarSubItem.id)" [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarItem.id +'/'+sidebarSubItem.id]"
+                 class="ml-menu">
+                  {{sidebarSubItem.title}}
+                </a>
+              </li>
+            </ul>
+          </li>
           <li>
             <a class="" (click)="logout()" class="menu-top">
               <i class="material-icons-two-tone">power_settings_new</i>
@@ -39,3 +60,6 @@
   </aside>
   <!-- #END# Left Sidebar -->
 </div>
+
+<!-- [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarItem.id +'/'+sidebarSubItem.id]" -->
+<!-- (click)="navigateTo(sidebarItem.id,sidebarSubItem.id)"  -->

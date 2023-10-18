@@ -38,6 +38,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   currentRoute?: string;
   routerObj;
   typesList: any;
+  url:any;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -93,18 +94,23 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     );
   }
-  navigateTo(menu:any,url:any) {    
+  navigateTo(menu:any,url:any) {
     this.menuItemClick.emit();
+    console.log("url", menu +'/'+url)
     let userType = localStorage.getItem('user_type')
     this.router.navigateByUrl( menu +'/'+url);
+    // this.url = menu +'/'+url;
+    // console.log("url",this.url)
 }
+
+
 
 
   ngOnInit() {
     if (this.authenService.currentUserValue) {
       const userRole = this.authenService.currentUserValue.user.role;
       this.userFullName =
-        this.authenService.currentUserValue.user.name 
+        this.authenService.currentUserValue.user.name
       this.userImg = this.authenService.currentUserValue.user.avatar;
       this.getUserTypeList();
       if (userRole === Role.Admin) {
