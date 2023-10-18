@@ -67,7 +67,6 @@ MENU_LIST = [
             id: "all-courses",
             title: "Course List", 
             type: "none",
-            actions: ["edit","view", "delete"],
 
         }, 
         {
@@ -104,7 +103,6 @@ MENU_LIST = [
             id: "class-list",
             title:"Class List", 
             type: "selected",
-            actions: ["edit", "view","delete"],
 
         }, 
         {
@@ -173,7 +171,6 @@ MENU_LIST = [
             id: "survey-list",
             title: "Survey List", 
             type:"none",
-            actions: ["add", "edit", "delete"],
         },
         {
             id:"likert-chart",
@@ -223,13 +220,11 @@ MENU_LIST = [
             id: "user-type",
             title: "User Type", 
             type: "none",
-            actions: ["add", "edit", "inactive"],
         }, 
         {
             id: "all-users",
             title: "All User", 
             type: "none",
-            actions: ["add", "edit"],
         }
     ]
 },
@@ -264,7 +259,6 @@ MENU_LIST = [
             id: "certificates",
             title: "Certificates", 
             type: "none",
-            actions: ["add", "edit", "view", "delete"],
         }, 
         {
             id: "design",
@@ -379,7 +373,6 @@ MENU_LIST = [
             id: "list",
             title: "List", 
             type: "none",
-            actions:["List","edit","view"]
         }
     ]
 },
@@ -394,7 +387,6 @@ MENU_LIST = [
             id: "all-instructors",
             title: "All Instructors", 
             type: "none",
-            actions:["List","edit","view"]
         },
         {
             id: "add-instructor",
@@ -424,7 +416,6 @@ MENU_LIST = [
             id: "all-students",
             title: "All Students", 
             type: "none",
-            actions:["List","edit","view"]
         },
         {
             id: "add-student",
@@ -449,7 +440,6 @@ MENU_LIST = [
             id: "all-departments",
             title: "All Departments", 
             type: "none",
-            actions:["List","edit","view"]
         },
         {
             id: "add-department",
@@ -469,7 +459,6 @@ MENU_LIST = [
             id: "all-staff",
             title: "All Staff", 
             type: "none",
-            actions:["List","edit","view"]
         },
         {
             id: "add-staff",

@@ -121,9 +121,9 @@ export class HeaderComponent
   ngOnInit() {
     if (this.authenService.currentUserValue) {
       const userRole = this.authenService.currentUserValue.user.role;
-      this.userFullName =
-        this.authenService.currentUserValue.user.name 
+      this.userFullName = this.authenService.currentUserValue.user.name 
       this.userImg = this.authenService.currentUserValue.user.avatar;
+      console.log('img',this.userImg)
       if (userRole === Role.Admin) {
         this.userType = Role.Admin;
       } else if (userRole === Role.Instructor) {
@@ -137,7 +137,6 @@ export class HeaderComponent
     this.config = this.configService.configData;
 
     const userRole = this.authService.currentUserValue.role;
-    this.userImg = this.authService.currentUserValue.img;
     this.docElement = document.documentElement;
 
     if (userRole === Role.Admin) {

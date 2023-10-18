@@ -8,12 +8,13 @@
           <li class="sidebar-user-panel">
             <div class="user-panel">
               <div class=" image">
-                <img src="assets/images/profile-1.png" class="img-circle user-img-circle" alt="User Image" />
+                <img [src]="userImg || '../../../assets/noimage.jpg'" class="img-circle user-img-circle" alt="User Image" />
+
               </div>
             </div>
             <div class="profile-usertitle">
-              <div class="sidebar-userpic-name">{{userFullName}} </div>
-              <div class="profile-usertitle-job ">{{userType}} </div>
+              <div class="sidebar-userpic-name">{{userFullName | titlecase}} </div>
+              <div class="profile-usertitle-job ">{{userType | titlecase}} </div>
             </div>
           </li>
           <li *ngFor="let menu of menuitem">
