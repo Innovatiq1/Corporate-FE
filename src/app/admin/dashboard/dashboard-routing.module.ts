@@ -26,6 +26,11 @@ const routes: Routes = [
     path: 'student-dashboard',
     component: StudentDashboard,
   },
+  {
+    path: 'coursemanager-dashboard',
+    component: Dashboard2Component,
+  },
+
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
