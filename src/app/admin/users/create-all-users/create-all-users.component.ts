@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserType, Users } from '@core/models/user.model';
+import { Student, UserType, Users } from '@core/models/user.model';
 import { AdminService } from '@core/service/admin.service';
 import { UserService } from '@core/service/user.service';
 import { UtilsService } from '@core/service/utils.service';
+import { StudentService } from '@core/service/student.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,6 +15,8 @@ import Swal from 'sweetalert2';
 })
 export class CreateAllUsersComponent {
   isLoading = false;
+  files: any;
+  fileName: any;
   create = true;
   status = true;
   edit = true;
@@ -48,31 +51,118 @@ export class CreateAllUsersComponent {
       this.isSubmitted=true;
     }
   }
+  // onSubmit() {
+  //   console.log('Form Value', this.stdForm.value);
+  //   if (!this.stdForm.invalid) {
+  //     this.StudentService.uploadVideo(this.files).subscribe(
+  //       (response: any) => {
+  //         const inputUrl = response.inputUrl;
+
+  //         const userData: Student = this.stdForm.value;
+  //         //this.commonService.setVideoId(videoId)
+
+  //         userData.avatar = inputUrl;
+  //         userData.filename = response.filename;
+  //         userData.type = 'Student';
+  //         userData.role = 'Student';
+  //         userData.isLogin = true;
+
+  //         //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+  //         // this.currentVideoIds.push(videoId);
+  //         this.createInstructor(userData);
+
+  //         Swal.close();
+  //       },
+  //       (error) => {
+  //         Swal.fire({
+  //           icon: 'error',
+  //           title: 'Upload Failed',
+  //           text: 'An error occurred while uploading the video',
+  //         });
+  //         Swal.close();
+  //       }
+  //     );
+  //   }
+  // }
+
   addBlog(formObj:any) {
-    formObj['Active']= this.status
-    formObj['role']=formObj.type
-    formObj['isLogin']=true
-      this.userService.saveUsers(formObj).subscribe(
-        (response:any) => {
-          this.isLoading = false;
-          Swal.fire({
-            title: 'Successful',
-            text: 'User created succesfully',
-            icon: 'success',
-          });
-         
+   // console.log('Form Value', formObj.value);
+    if (!formObj.invalid) {
+      this.studentService.uploadVideo(this.files).subscribe(
+        (response: any) => {
+          console.log("======",formObj.type)
+          const inputUrl = response.inputUrl;
+          
+          formObj['Active']= this.status
+          formObj['role']=formObj.type
+          formObj['isLogin']=true
+
+          const userData: Users = formObj;
+          //this.commonService.setVideoId(videoId)
+
+          userData.avatar = inputUrl;
+          userData.filename = response.filename;
+          
+          //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+          // this.currentVideoIds.push(videoId);
+          this.createUser(userData);
+
+          Swal.close();
         },
-        (error:any) => {
-          this.isLoading = false;
-          Swal.fire(
-            'Failed to create user',
-            error.message || error.error,
-            'error'
-          );
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Upload Failed',
+            text: 'An error occurred while uploading the video',
+          });
+          Swal.close();
         }
       );
+    }
+    
+     
 
   }
+  createUser(userData:Users){
+    this.userService.saveUsers(userData).subscribe(
+      (response:any) => {
+        this.isLoading = false;
+        Swal.fire({
+          title: 'Successful',
+          text: 'User created succesfully',
+          icon: 'success',
+        });
+        this.router.navigate(['/admin/users/all-users'])
+       
+      },
+      (error:any) => {
+        this.isLoading = false;
+        Swal.fire(
+          'Failed to create user',
+          error.message || error.error,
+          'error'
+        );
+      }
+    );
+    
+
+  }
+  onFileUpload(event:any) {
+    this.fileName = event.target.files[0].name;
+    this.files=event.target.files[0]
+    // this.authenticationService.uploadVideo(event.target.files[0]).subscribe(
+    //   (response: any) => {
+    //             //Swal.close();
+    //             console.log("--------",response)
+    //   },
+    //   (error:any) => {
+
+    //   }
+    // );
+
+
+  }
+
   updateBlog(obj:any): any {
     return new Promise((resolve, reject) => {
       obj['Active']= this.status
@@ -104,7 +194,7 @@ export class CreateAllUsersComponent {
   }
 
   constructor(private router: Router,    private fb: FormBuilder,public utils: UtilsService, private userService: UserService,
-    private adminService: AdminService) {
+    private adminService: AdminService,private studentService: StudentService) {
     let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-all-users'); 
     this.currentId = urlPath[urlPath.length - 1];
@@ -130,6 +220,7 @@ export class CreateAllUsersComponent {
       password: new FormControl('', [Validators.required,...this.utils.validators.name,...this.utils.validators.noLeadingSpace]),
       qualification: new FormControl('', [Validators.required,Validators.minLength(2)]),
       type: new FormControl('', [Validators.required]),
+      avatar: new FormControl('', [Validators.required]),
       status: [this.user ? (this.user.Active = this.user.Active === true ? true : false) : null],
 
 
