@@ -90,6 +90,7 @@ export interface Student {
     country:string;
     filename:string
     education:string;
+    isLogin:boolean;
 
   }
   export interface StudentDetail extends Users {
