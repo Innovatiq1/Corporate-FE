@@ -58,14 +58,15 @@ export class HeaderComponent
     private authService: AuthService,
     private router: Router,
     public languageService: LanguageService,
-    private authenService:AuthenService
+    private authenService:AuthenService,
+    private translate: LanguageService
   ) {
     super();
   }
   listLang = [
     { text: 'English', flag: 'assets/images/flags/us.svg', lang: 'en' },
-    { text: 'Spanish', flag: 'assets/images/flags/spain.svg', lang: 'es' },
-    { text: 'German', flag: 'assets/images/flags/germany.svg', lang: 'de' },
+    { text: 'Chinese', flag: 'assets/images/flags/spain.svg', lang: 'ch' },
+    { text: 'Tamil', flag: 'assets/images/flags/germany.svg', lang: 'ts' },
   ];
   notifications: Notifications[] = [
     {
@@ -170,11 +171,12 @@ export class HeaderComponent
     }
     this.isFullScreen = !this.isFullScreen;
   }
-  setLanguage(text: string, lang: string, flag: string) {
-    this.countryName = text;
-    this.flagvalue = flag;
-    this.langStoreValue = lang;
-    this.languageService.setLanguage(lang);
+  setLanguage(event: any) {  
+    console.log("=======",event)
+    // this.countryName = text;
+    // this.flagvalue = flag;
+    this.langStoreValue = event.target.value;
+    this.translate.setLanguage(event.target.value);
   }
   mobileMenuSidebarOpen(event: Event, className: string) {
     const hasClass = (event.target as HTMLInputElement).classList.contains(

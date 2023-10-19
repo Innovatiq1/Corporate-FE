@@ -45,7 +45,7 @@
   "Create Class": "வகுப்பை உருவாக்கவும்",
   "Approve List": "பட்டியலை அங்கீகரிக்கவும்",
   "Completion List": "நிறைவு பட்டியல்",
-  "Programs": "நிகழ்ச்சிகள்",
+  "Program": "நிகழ்ச்சிகள்",
   "Program Approve List": "நிரல் ஒப்புதல் பட்டியல்",
   "Program Kit": "நிரல் தொகுப்பு",
   "Student Approve List": "மாணவர் ஒப்புதல் பட்டியல்",
@@ -96,8 +96,10 @@
   "Action": "செயல்",
   "Resources":"வளங்கள்",
   "Search":"தேடு...",
-  "Pdf":"Pdf"
-
+  "Pdf":"Pdf",
+  "Students": "மாணவர்கள்",
+  "Departments": "துறைகள்",
+  "Staff": "பணியாளர்கள்"
 
 
 
