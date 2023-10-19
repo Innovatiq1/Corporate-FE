@@ -51,6 +51,7 @@ export class CreateAllUsersComponent {
   addBlog(formObj:any) {
     formObj['Active']= this.status
     formObj['role']=formObj.type
+    formObj['isLogin']=true
       this.userService.saveUsers(formObj).subscribe(
         (response:any) => {
           this.isLoading = false;
