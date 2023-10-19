@@ -33,7 +33,7 @@
               (click)="callToggleMenu($event, sidebarItem.children.length)"
               class="menu-top menu-toggle">
               <i class="material-icons-two-tone">{{sidebarItem.icon}}</i>
-              <span class="hide-menu">{{sidebarItem.title}}
+              <span class="hide-menu">{{sidebarItem.title | translate}}
               </span>
             </a>
             <ul class="ml-menu" *ngIf="sidebarItem.children.length > 0">

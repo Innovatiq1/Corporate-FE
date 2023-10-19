@@ -194,7 +194,7 @@ export class ProgramKitComponent {
     // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
     } else {
-      // this.fetchCourseKits();
+      this.fetchCourseKits();
 
     }
   }

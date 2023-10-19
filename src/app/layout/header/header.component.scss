@@ -2,3 +2,20 @@
     height: 30px;
     width: auto;
 }
+select{
+    width: fit-content;
+    height: 51px;
+    background: transparent;
+    color: black;
+    border: none;
+    padding: 0px 10px;
+    margin-right: 10px;
+    font-weight: 600;
+}
+
+
+ select:hover {
+    background: rgba(226, 227, 230, 0.829);
+    cursor: pointer;
+    border-radius: 12px;
+}
