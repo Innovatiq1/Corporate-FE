@@ -4,6 +4,7 @@ import { MainComponent } from './main/main.component';
 import { Dashboard2Component } from './dashboard2/dashboard2.component';
 import { DashboardComponent as StudentDashboard } from 'app/student/dashboard/dashboard.component';
 import { DashboardComponent } from 'app/teacher/dashboard/dashboard.component';
+import { CmDashboardComponent } from './cm-dashboard/cm-dashboard.component';
 const routes: Routes = [
   {
     path: '',
@@ -28,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: 'coursemanager-dashboard',
-    component: Dashboard2Component,
+    component: CmDashboardComponent,
   },
 
 ];
