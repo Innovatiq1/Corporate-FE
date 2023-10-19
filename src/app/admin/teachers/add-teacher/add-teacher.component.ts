@@ -81,6 +81,7 @@ export class AddTeacherComponent {
         userData.filename= response.filename
         userData.type = "Trainers";
         userData.role = "Instructor";
+        userData.isLogin = true;
 
         //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
         // this.currentVideoIds.push(videoId);

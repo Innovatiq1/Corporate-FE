@@ -27,6 +27,10 @@
 
     width: 500px;
   }
+  .invalid-text {
+    color: red;
+    padding:5px;
+  }
   ngx-intl-tel-input {
     width: 500px; /* Set your desired width */
   }
