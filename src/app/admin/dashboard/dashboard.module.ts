@@ -8,9 +8,10 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from '@shared';
 import { ComponentsModule } from '@shared/components/components.module';
+import { CmDashboardComponent } from './cm-dashboard/cm-dashboard.component';
 
 @NgModule({
-  declarations: [MainComponent, Dashboard2Component,    
+  declarations: [MainComponent, Dashboard2Component, CmDashboardComponent,    
    
   ],
   imports: [
