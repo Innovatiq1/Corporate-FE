@@ -507,6 +507,7 @@ MENU_LIST = [
     id: "student/enrollment",
     title: "Enrollment",
     iconsrc: "/assets/course-icon.svg",
+    icon:'Homework',
     selected: true,
     children: [
         {
@@ -525,6 +526,7 @@ MENU_LIST = [
     id: "student/schedule",
     title: "Schedule",
     iconsrc: "/assets/course-icon.svg",
+    icon:'fact_check',
     selected: true,
     children: [
         {
@@ -548,6 +550,7 @@ MENU_LIST = [
     title: "Leave Request",
     selected: false,
     iconsrc: "/assets/announcement-icon.svg",
+    icon:'offline_pin',
     children:
     [
         {
