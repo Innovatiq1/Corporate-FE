@@ -9,18 +9,24 @@ import {
   Renderer2,
   HostListener,
   OnDestroy,
+  Input,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import { ROUTES } from './sidebar-items';
 import { AuthService, Role } from '@core';
-import { RouteInfo } from './sidebar.metadata';
+import { MenuItem, RouteInfo } from './sidebar.metadata';
 import { AuthenService } from '@core/service/authen.service';
+import { AdminService } from '@core/service/admin.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  public sidebarItems!: RouteInfo[];
+  @Input() menuitem: MenuItem[]=[];
+  @Output() menuItemClick = new EventEmitter();
+
   public innerHeight?: number;
   public bodyTag!: HTMLElement;
   listMaxHeight?: string;
@@ -31,13 +37,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
   headerHeight = 60;
   currentRoute?: string;
   routerObj;
+  typesList: any;
+  url:any;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     public elementRef: ElementRef,
     private authService: AuthService,
     private router: Router,
-    private authenService:AuthenService
+    private authenService:AuthenService,
+    private adminService: AdminService
   ) {
     this.elementRef.nativeElement.closest('body');
     this.routerObj = this.router.events.subscribe((event) => {
@@ -70,17 +79,40 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     }
   }
+  getUserTypeList(filters?:any) {
+    this.adminService.getUserTypeList( {}).subscribe(
+      (response: any) => {
+        let userType = localStorage.getItem('user_type')
+        let data = response.docs.filter((item:any) => item.typeName === userType);
+        this.menuitem = data[0].menuItems;
+        console.log('menu',this.menuitem)
+        let limit = filters?.limit ? filters?.limit : 10;
+        if (response.totalDocs <= limit || response.totalDocs <= 0) {
+        }
+      },
+      (error) => {
+      }
+    );
+  }
+  navigateTo(menu:any,url:any) {
+    this.menuItemClick.emit();
+    console.log("url", menu +'/'+url)
+    let userType = localStorage.getItem('user_type')
+    this.router.navigateByUrl( menu +'/'+url);
+    // this.url = menu +'/'+url;
+    // console.log("url",this.url)
+}
+
+
+
+
   ngOnInit() {
     if (this.authenService.currentUserValue) {
       const userRole = this.authenService.currentUserValue.user.role;
       this.userFullName =
-        this.authenService.currentUserValue.user.name 
+        this.authenService.currentUserValue.user.name
       this.userImg = this.authenService.currentUserValue.user.avatar;
-
-      this.sidebarItems = ROUTES.filter(
-        (x) => x.role.indexOf(userRole) !== -1 || x.role.indexOf('All') !== -1
-      );
-      console.log('ite',this.sidebarItems)
+      this.getUserTypeList();
       if (userRole === Role.Admin) {
         this.userType = Role.Admin;
       } else if (userRole === Role.Instructor) {
@@ -98,7 +130,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       } else if (userRole === Role.CourseManager) {
         this.userType = Role.CourseManager;
       } else {
-        this.userType = Role.Admin;
+        this.userType = this.authenService.currentUserValue.user.type;
       }
     }
 

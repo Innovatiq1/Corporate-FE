@@ -83,24 +83,27 @@ export class SigninComponent
           setTimeout(() => {
             const role = this.authenticationService.currentUserValue.user.role;
             if (role === Role.All || role === Role.Admin) {
-              this.router.navigate(['/admin/dashboard/main']);
+              this.router.navigate(['/dashboard/student-analytics']);
             } else if (role === Role.Instructor) {
-              this.router.navigate(['/instructor/dashboard']);
+              this.router.navigate(['/dashboard/instructor-dashboard']);
             } else if (role === Role.Student) {
-              this.router.navigate(['/student/dashboard']);
-            } else if (role === Role.TrainingAdministrator) {
-              this.router.navigate(['/trainingadministrator/dashboard']);
-            } else if (role === Role.Supervisor) {
-              this.router.navigate(['/supervisor/dashboard']);
-            } else if (role === Role.HOD) {
-              this.router.navigate(['/hod/dashboard']);
-            } else if (role === Role.TrainingCoordinator) {
-              this.router.navigate(['/trainingcoordinator/dashboard']);
-            } else if (role === Role.CourseManager) {
-              this.router.navigate(['/coursemanager/dashboard']);
-            }  else {
-              this.router.navigate(['/authentication/signin']);
+              this.router.navigate(['/dashboard/student-dashboard']);
+            } 
+            //   else if (role === Role.TrainingAdministrator) {
+            //   this.router.navigate(['/dashboard/student-analytics']);
+            // } else if (role === Role.Supervisor) {
+            //   this.router.navigate(['/dashboard/student-analytics']);
+            // } else if (role === Role.HOD) {
+            //   this.router.navigate(['/dashboard/student-analytics']);
+            // } else if (role === Role.TrainingCoordinator) {
+            //   this.router.navigate(['/dashboard/student-analytics']);
+            // } else if (role === Role.CourseManager) {
+            //   this.router.navigate(['/dashboard/student-analytics']);
+            // }  
+             else {
+              this.router.navigate(['/dashboard/student-analytics']);
             }
+
             this.loading = false;
           }, 100);            this.authenticationService.saveUserInfo(user);
         }, (error) => {

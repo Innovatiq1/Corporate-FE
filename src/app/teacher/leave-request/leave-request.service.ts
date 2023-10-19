@@ -4,7 +4,7 @@ import { LeaveRequest } from './leave-request.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
 @Injectable()
-export class LeaveRequestService extends UnsubscribeOnDestroyAdapter {
+export class InstructorLeaveRequestService extends UnsubscribeOnDestroyAdapter {
   private readonly API_URL = 'assets/data/leaveRequest.json';
   isTblLoading = true;
   dataChange: BehaviorSubject<LeaveRequest[]> = new BehaviorSubject<

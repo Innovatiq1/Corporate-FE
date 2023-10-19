@@ -231,4 +231,5 @@ export interface Student {
     children: MenuItemModel[];
     checked:boolean;
     indeterminate:boolean;
+    iconsrc:string;
   }

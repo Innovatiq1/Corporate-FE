@@ -5,6 +5,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
 import { Role } from './core/models/role';
+import { SettingsComponent } from './student/settings/settings.component';
+import { LeaveRequestComponent } from './student/leave-request/leave-request.component';
+import { InstructorSettingsComponent } from './teacher/settings/settings.component';
+import { InstructorLeaveRequestComponent } from './teacher/leave-request/leave-request.component';
 const routes: Routes = [
   {
     path: '',
@@ -14,79 +18,28 @@ const routes: Routes = [
       { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
       {
         path: 'admin',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.Admin,
-        },
         loadChildren: () =>
           import('./admin/admin.module').then((m) => m.AdminModule),
       },
       {
         path: 'instructor',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.Instructor,
-        },
         loadChildren: () =>
           import('./teacher/teacher.module').then((m) => m.TeacherModule),
       },
       {
         path: 'student',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.Student,
-        },
         loadChildren: () =>
           import('./student/student.module').then((m) => m.StudentModule),
       },
       {
-        path: 'coursemanager',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.CourseManager,
-        },
+        path: 'dashboard',
         loadChildren: () =>
-          import('./student/student.module').then((m) => m.StudentModule),
+          import('./admin/dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
-      {
-        path: 'hod',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.HOD,
-        },
-        loadChildren: () =>
-          import('./student/student.module').then((m) => m.StudentModule),
-      },
-      {
-        path: 'trainingcoordinator',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.TrainingCoordinator,
-        },
-        loadChildren: () =>
-          import('./student/student.module').then((m) => m.StudentModule),
-      },
-      {
-        path: 'trainingadministrator',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.TrainingAdministrator,
-        },
-        loadChildren: () =>
-          import('./student/student.module').then((m) => m.StudentModule),
-      },
-      {
-        path: 'supervisor',
-        // canActivate: [AuthGuard],
-        data: {
-          role: Role.Supervisor,
-        },
-        loadChildren: () =>
-          import('./student/student.module').then((m) => m.StudentModule),
-      },
-
-
-
+      { path: 'settings/student-settings', component: SettingsComponent },
+      { path: 'leave-request/student-leaves', component: LeaveRequestComponent },
+      { path: 'settings/instructor-settings', component: InstructorSettingsComponent },
+      { path: 'leave-request/instructor-leaves', component: InstructorLeaveRequestComponent },
 
 
       // Extra components

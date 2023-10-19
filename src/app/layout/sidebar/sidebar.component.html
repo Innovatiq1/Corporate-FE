@@ -8,57 +8,41 @@
           <li class="sidebar-user-panel">
             <div class="user-panel">
               <div class=" image">
-                <!-- <img src="{{userImg}}" class="img-circle user-img-circle" alt="User Image" /> -->
-                <img src="assets/images/profile-1.png" class="img-circle user-img-circle" alt="User Image" />
+                <img [src]="userImg || '../../../assets/noimage.jpg'" class="img-circle user-img-circle" alt="User Image" />
+
               </div>
             </div>
             <div class="profile-usertitle">
-              <div class="sidebar-userpic-name">{{userFullName}} </div>
-              <div class="profile-usertitle-job ">{{userType}} </div>
+              <div class="sidebar-userpic-name">{{userFullName | titlecase}} </div>
+              <div class="profile-usertitle-job ">{{userType | titlecase}} </div>
             </div>
           </li>
-          <!-- Top Most level menu -->
-          <li *ngFor="let sidebarItem of sidebarItems"
-            [routerLinkActive]="sidebarItem.submenu.length !== 0 ? 'active' : 'active-top'">
-            <div class="header" *ngIf="sidebarItem.groupTitle === true">{{sidebarItem.title | translate}}</div>
-            <a [routerLink]="sidebarItem.class === '' ? [sidebarItem.path] : null" *ngIf="!sidebarItem.groupTitle;"
-              [ngClass]="[sidebarItem.class]" (click)="callToggleMenu($event, sidebarItem.submenu.length)"
-              class="menu-top">
-              <i [ngClass]="[sidebarItem.iconType]">{{sidebarItem.icon}}</i>
-              <span class="hide-menu">{{sidebarItem.title | translate}}
+          <!-- <li *ngFor="let menu of menuitem">
+            <a class="menu-top menu-toggle" (click)="callToggleMenu($event, menu.children.length)"> <span>{{ menu.title }}</span></a>
+            <ul  class="ml-menu">
+              <li *ngFor="let sidebarSubItem of menu.children"
+                [routerLinkActive]="sidebarSubItem.children.length > 0 ? '' : 'active'">
+                <a [routerLink]="sidebarSubItem1.children.length > 0 ? null :''" (click)="navigateTo(menu.id,sidebarSubItem.id)" >{{ sidebarSubItem.title }}</a>
+                </li>
+              </ul>
+          </li> -->
+
+          <li *ngFor="let sidebarItem of menuitem"
+            [routerLinkActive]="sidebarItem.children.length !== 0 ? 'active' : 'active-top'">
+            <a
+              (click)="callToggleMenu($event, sidebarItem.children.length)"
+              class="menu-top menu-toggle">
+              <i class="material-icons-two-tone">{{sidebarItem.icon}}</i>
+              <span class="hide-menu">{{sidebarItem.title}}
               </span>
-              <span *ngIf="sidebarItem.badge !== '' " [ngClass]="[sidebarItem.badgeClass]">{{sidebarItem.badge}}</span>
             </a>
-            <!-- First level menu -->
-            <ul class="ml-menu" *ngIf="sidebarItem.submenu.length > 0">
-              <li *ngFor="let sidebarSubItem1 of sidebarItem.submenu"
-                [routerLinkActive]="sidebarSubItem1.submenu.length > 0 ? '' : 'active'">
-                <a [routerLink]="sidebarSubItem1.submenu.length > 0 ? null : [sidebarSubItem1.path]"
-                  (click)="callToggleMenu($event,sidebarSubItem1.submenu.length)" [ngClass]="[sidebarSubItem1.class]">
-                  {{sidebarSubItem1.title | translate}}
+            <ul class="ml-menu" *ngIf="sidebarItem.children.length > 0">
+              <li *ngFor="let sidebarSubItem of sidebarItem.children"
+                [routerLinkActive]="sidebarSubItem.children.length > 0 ? '' : 'active'">
+                <a (click)="navigateTo(sidebarItem.id,sidebarSubItem.id)" [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarItem.id +'/'+sidebarSubItem.id]"
+                 class="ml-menu">
+                  {{sidebarSubItem.title}}
                 </a>
-                <!-- Second level menu -->
-                <ul class="ml-menu-2" *ngIf="sidebarSubItem1.submenu.length > 0">
-                  <li *ngFor="let sidebarSubItem2 of sidebarSubItem1.submenu"
-                    [routerLinkActive]="sidebarSubItem2.submenu.length > 0 ? '' : 'active'">
-                    <a [routerLink]="sidebarSubItem2.submenu.length > 0 ? null : [sidebarSubItem2.path]"
-                      (click)="callToggleMenu($event,sidebarSubItem2.submenu.length)"
-                      [ngClass]="[sidebarSubItem2.class]">
-                      {{sidebarSubItem2.title | translate}}
-                    </a>
-                    <!-- Third level menu -->
-                    <ul class="ml-menu-3" *ngIf="sidebarSubItem2.submenu.length > 0">
-                      <li *ngFor="let sidebarSubItem3 of sidebarSubItem2.submenu"
-                        [routerLinkActive]="sidebarSubItem3.submenu.length > 0 ? '' : 'active'">
-                        <a [routerLink]="sidebarSubItem3.submenu.length > 0 ? null : [sidebarSubItem3.path]"
-                          (click)="callToggleMenu($event,sidebarSubItem3.submenu.length)"
-                          [ngClass]="[sidebarSubItem3.class]">
-                          {{sidebarSubItem3.title | translate}}
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
               </li>
             </ul>
           </li>
@@ -76,3 +60,6 @@
   </aside>
   <!-- #END# Left Sidebar -->
 </div>
+
+<!-- [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarItem.id +'/'+sidebarSubItem.id]" -->
+<!-- (click)="navigateTo(sidebarItem.id,sidebarSubItem.id)"  -->

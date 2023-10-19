@@ -11,21 +11,26 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'main',
+    path: 'student-analytics',
     component: MainComponent,
   },
   {
-    path: 'dashboard2',
+    path: 'instructor-analytics',
     component: Dashboard2Component,
   },
   {
-    path: 'teacher-dashboard',
+    path: 'instructor-dashboard',
     component: DashboardComponent,
   },
   {
     path: 'student-dashboard',
     component: StudentDashboard,
   },
+  {
+    path: 'coursemanager-dashboard',
+    component: Dashboard2Component,
+  },
+
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

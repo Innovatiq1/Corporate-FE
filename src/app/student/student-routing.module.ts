@@ -13,11 +13,7 @@ import { ViewProgramComponent } from './view-program/view-program.component';
 
 const routes: Routes = [
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: 'course',
+    path: 'enrollment/courses',
     component: CourseComponent,
   },
   {
@@ -25,7 +21,7 @@ const routes: Routes = [
     component: ViewCourseComponent,
   },
   {
-    path: 'program',
+    path: 'enrollment/programs',
     component: ProgramComponent,
   },
   {
@@ -34,20 +30,12 @@ const routes: Routes = [
   },
 
   {
-    path: 'homework',
+    path: 'schedule/homework',
     component: HomeworkComponent,
   },
   {
-    path: 'leave-request',
-    component: LeaveRequestComponent,
-  },
-  {
-    path: 'timetable',
+    path: 'schedule/timetable',
     component: TimetableComponent,
-  },
-  {
-    path: 'settings',
-    component: SettingsComponent,
   },
   { path: '**', component: Page404Component },
 ];
@@ -56,4 +44,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
+
 export class StudentRoutingModule {}
