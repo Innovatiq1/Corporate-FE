@@ -110,6 +110,9 @@ export class SignupComponent implements OnInit {
           this.router.navigate(['/authentication/signin']);
         },
         (error: any) => {
+          this.submitted = true;
+          this.email=error
+          console.log("=====",error)
         }
       );
     }

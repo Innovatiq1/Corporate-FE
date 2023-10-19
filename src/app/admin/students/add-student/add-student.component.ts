@@ -103,6 +103,7 @@ export class AddStudentComponent {
           userData.filename = response.filename;
           userData.type = 'Student';
           userData.role = 'Student';
+          userData.isLogin = true;
 
           //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
           // this.currentVideoIds.push(videoId);
