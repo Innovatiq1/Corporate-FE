@@ -211,7 +211,7 @@
                                         <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
                                         <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
                                         <td>
-                                            <div class="badge col-green">{{class?.status}}</div>
+                                            <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
                                         </td>
                                         <td>
                                             <button mat-button [matMenuTriggerFor]="menu">
@@ -363,7 +363,7 @@
                                         <td>{{student?.qualification}}</td>
                                         <td>{{student?.createdAt | date}}</td>
                                         <td>
-                                            +65{{student?.mobile}}
+                                        {{student?.mobile}}
                                             <!-- <i class="far fa-file-pdf tbl-pdf"></i> -->
                                         </td>
                                         <td>

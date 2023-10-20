@@ -335,7 +335,7 @@
                     <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
                     <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
                     <td>
-                      <div class="badge col-green">{{class?.status}}</div>
+                      <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
                     </td>
                     <td>
                       <button mat-button [matMenuTriggerFor]="menu">

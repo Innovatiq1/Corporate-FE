@@ -207,6 +207,13 @@ getProgramRegisteredClasses(page: number, limit: number, filterText? : string): 
   const apiUrl = `${this.prefix}admin/studentClasses/studentApproveList`;
   return this.http.get<any>(apiUrl, { params: this.buildRegisteredClassesParams(page, limit, filterText) });
 }
+getStudentsApprovedClasses(): Observable<any> {
+  const apiUrl = `${this.prefix}admin/studentClasses/studentApproveList`;
+  let params = new HttpParams();
+  let query = params.set("status", "approved");
+  return this.http.get<any>(apiUrl, { params: query});
+}
+
 
 getProgramClassListWithPagination(
   filter?:Partial<CoursePaginationModel>): Observable<ApiResponse> {

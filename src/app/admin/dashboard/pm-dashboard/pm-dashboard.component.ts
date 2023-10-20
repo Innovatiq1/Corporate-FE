@@ -4,6 +4,7 @@ import { CourseService } from '@core/service/course.service';
 import { InstructorService } from '@core/service/instructor.service';
 import { StudentService } from '@core/service/student.service';
 import { UserService } from '@core/service/user.service';
+import { ProgramService } from 'app/admin/program/program.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { ChartOptions } from 'chart.js';
 import {
@@ -63,7 +64,7 @@ export class PmDashboardComponent implements OnInit {
     {
       title: 'Dashboad',
       items: [],
-      active: 'programmanager-dashboard',
+      active: 'programcoordinator-dashboard',
     },
   ];
   count: any;
@@ -93,11 +94,13 @@ export class PmDashboardComponent implements OnInit {
   instructorCount: any;
   adminCount: any;
   studentCount: any;
+  registeredProgramClasses: any;
   constructor(private courseService: CourseService,
     private userService: UserService,
     private instructorService: InstructorService,
     private classService: ClassService,
     private router: Router,
+    private _programService:ProgramService,
     private studentService:StudentService) {
     //constructor
     this.getCount();
@@ -286,35 +289,35 @@ export class PmDashboardComponent implements OnInit {
     });
   }
   editCall(student: any) {
-    console.log('hi',student)
     this.router.navigate(['/admin/students/add-student'],{queryParams:{id:student.id}})
   }
   editClass(id:string){
     this.router.navigate([`admin/schedule/create-class`], { queryParams: {id: id}});
   }
   delete(id: string) {
-    console.log(id)
-    this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
-      const matchingClasses = classList.docs.filter((classItem: any) => {
-        return classItem.courseId && classItem.courseId.id === id;
-      });
-      if (matchingClasses.length > 0) {
-        Swal.fire({
-          title: 'Error',
-          text: 'Class have been registered. Cannot delete.',
-          icon: 'error',
+    this._programService
+      .getProgramClassList({ courseId: id })
+      .subscribe((classList: any) => {
+        const matchingClasses = classList.docs.filter((classItem: any) => {
+          return classItem.courseId && classItem.courseId.id === id;
         });
-        return;
-      }
-      this.classService.deleteClass(id).subscribe(() => {
-        Swal.fire({
-          title: 'Success',
-          text: 'Class deleted successfully.',
-          icon: 'success',
+        if (matchingClasses.length > 0) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Classes have been registered with program`. Cannot delete.',
+            icon: 'error',
+          });
+          return;
+        }
+        this._programService.deleteProgramClass(id).subscribe(() => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Class deleted successfully.',
+            icon: 'success',
+          });
+          this.getClassList();
         });
-        this.getClassList();
       });
-    });
   }
 
 
@@ -353,28 +356,32 @@ export class PmDashboardComponent implements OnInit {
      });
 
    }
+   getRegisteredClasses() {
+    this.classService
+      .getStudentsApprovedClasses()
+      .subscribe((response:any) => {
+      this.registeredProgramClasses = response.data.docs.slice(0,5);
+      })
+  }
+
 
 
 
   ngOnInit() {
 this.getClassList()
+this.getRegisteredClasses();
   }
   getClassList() {
-    this.classService
-      .getClassListWithPagination()
+    this._programService
+      .getProgramClassListWithPagination()
       .subscribe(
         (response) => {
-          console.log('classRes', response);
-          if (response.data) {
             this.classesList = response.data.docs.slice(0,5).sort();
-          }
-       
-        },
-        (error) => {
-          console.log('error', error);
-        }
+},
+        () => { }
       );
   }
+
   private chart1() {
     this.areaChartOptions = {
       series: [
