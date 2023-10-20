@@ -31,6 +31,11 @@ const routes: Routes = [
     path: 'coursemanager-dashboard',
     component: CmDashboardComponent,
   },
+  {
+    path: 'hod-dashboard',
+    component: CmDashboardComponent,
+  },
+
 
 ];
 @NgModule({
