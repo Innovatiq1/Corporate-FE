@@ -6,6 +6,7 @@ import { DashboardComponent as StudentDashboard } from 'app/student/dashboard/da
 import { DashboardComponent } from 'app/teacher/dashboard/dashboard.component';
 import { CmDashboardComponent } from './cm-dashboard/cm-dashboard.component';
 import { PmDashboardComponent } from './pm-dashboard/pm-dashboard.component';
+import { TrainingAdministratorComponent } from './training-administrator/training-administrator.component';
 const routes: Routes = [
   {
     path: '',
@@ -38,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: 'trainingadministrator-dashboard',
-    component: CmDashboardComponent,
+    component: TrainingAdministratorComponent,
   },
   {
     path: 'supervisor-dashboard',
