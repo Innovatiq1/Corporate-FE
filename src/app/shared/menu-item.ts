@@ -91,31 +91,15 @@ MENU_LIST = [
             title: "Categories",
             type: "none"
         },
-
-    ]
-},
-{
-    id: "admin/schedule",
-    title: "Schedule Class",
-    iconsrc: "/assets/schedule-icon.svg",
-    icon: 'class',
-    selected: false,
-    children:
-    [
         {
             id: "class-list",
-            title:"Class List",
+            title:"Schedule Class",
             type: "selected",
 
         },
         {
-            id: "create-class",
-            title:"Create Class",
-            type:"none"
-        },
-        {
             id: "approve-list",
-            title:"Approve List",
+            title:"Student Approve List",
             type: "none"
         },
         {
@@ -123,6 +107,8 @@ MENU_LIST = [
             title:"Completion List",
             type:"none"
         }
+
+
     ]
 },
 {

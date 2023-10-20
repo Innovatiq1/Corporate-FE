@@ -22,6 +22,10 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { EditCourseKitComponent } from './course-kit/edit-course-kit/edit-course-kit.component';
 import { EditCategoriesComponent } from './categories/edit-categories/edit-categories.component';
 import { CreateTemplateComponent } from './course-kit/create-template/create-template.component';
+import { CreateClassComponent } from './create-class/create-class.component';
+import { ClassListComponent } from './class-list/class-list.component';
+import { ApproveListComponent } from './approve-list/approve-list.component';
+import { CompletionListComponent } from './completion-list/completion-list.component';
 
 
 @NgModule({
@@ -40,6 +44,11 @@ import { CreateTemplateComponent } from './course-kit/create-template/create-tem
     EditCourseKitComponent,
     EditCategoriesComponent,
     CreateTemplateComponent,
+    ClassListComponent,
+    CreateClassComponent,
+    ApproveListComponent,
+    CompletionListComponent,
+
 
   ],
   imports: [

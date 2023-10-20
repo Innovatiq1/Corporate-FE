@@ -2,11 +2,11 @@ import { CourseId } from './../../../core/models/class.model';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ClassService } from '../class.service';
+import { ClassModel, Session, Student, StudentApproval, StudentPaginationModel } from 'app/admin/schedule-class/class.model';
+import { ClassService } from 'app/admin/schedule-class/class.service';
 import { CoursePaginationModel } from '@core/models/course.model';
 import * as moment from 'moment';
 import { SelectionModel } from '@angular/cdk/collections';
-import { ClassModel, Session, Student, StudentApproval } from '../class.model';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 // import { fromEvent } from 'rxjs';
@@ -166,7 +166,7 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
   }
   //edit
   editClass(id:string){
-    this._router.navigate([`admin/schedule/create-class`], { queryParams: {id: id}});
+    this._router.navigate([`admin/courses/create-class`], { queryParams: {id: id}});
   }
   //delete
   delete(id: string) {

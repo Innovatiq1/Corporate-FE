@@ -2,19 +2,11 @@ import { StudenId } from './../../../core/models/class.model';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ClassService } from '../class.service';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import {
-  ClassModel,
-  Session,
-  Student,
-  StudentApproval,
-  StudentPaginationModel,
-} from '../class.model';
 import * as moment from 'moment';
 import { DataSource, SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
@@ -30,6 +22,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Direction } from '@angular/cdk/bidi';
 import { BehaviorSubject, Observable, fromEvent, map, merge } from 'rxjs';
+import { ClassModel, Session, Student, StudentApproval, StudentPaginationModel } from 'app/admin/schedule-class/class.model';
+import { ClassService } from 'app/admin/schedule-class/class.service';
 
 @Component({
   selector: 'app-approve-list',
