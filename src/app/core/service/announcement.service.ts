@@ -38,6 +38,14 @@ export class AnnouncementService {
       })
     );
   };
+  getAnnouncementsForStudents = (body: any): Observable<any> => {
+    const endpoint = environment.apiUrl + 'admin/announcement/forStudent';
+    return this.http.post(endpoint, body ).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  };
 
   getAnnouncementById(id: any): Observable<any> {
     const apiUrl = `${this.defaultUrl}admin/announcement/${id}`;

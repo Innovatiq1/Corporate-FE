@@ -90,7 +90,7 @@ export class SigninComponent
               this.router.navigate(['/dashboard/student-dashboard']);
             } 
               else if (role === Role.TrainingAdministrator || role === 'Training Administrator' || role === 'training administrator') {
-              this.router.navigate(['/dashboard/student-analytics']);
+              this.router.navigate(['/dashboard/trainingadministrator-dashboard']);
             } else if (role === Role.Supervisor || role === 'Supervisor' || role === 'supervisor') {
               this.router.navigate(['/dashboard/student-analytics']);
             } else if (role === Role.HOD || role === 'hod' || role === 'HOD' || role === 'head of department') {
