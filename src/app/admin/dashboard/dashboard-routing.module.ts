@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'hod-dashboard',
     component: CmDashboardComponent,
   },
+  {
+    path: 'trainingadministrator-dashboard',
+    component: CmDashboardComponent,
+  },
 
 
 ];
