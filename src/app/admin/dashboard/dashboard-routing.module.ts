@@ -5,6 +5,7 @@ import { Dashboard2Component } from './dashboard2/dashboard2.component';
 import { DashboardComponent as StudentDashboard } from 'app/student/dashboard/dashboard.component';
 import { DashboardComponent } from 'app/teacher/dashboard/dashboard.component';
 import { CmDashboardComponent } from './cm-dashboard/cm-dashboard.component';
+import { PmDashboardComponent } from './pm-dashboard/pm-dashboard.component';
 const routes: Routes = [
   {
     path: '',
@@ -43,8 +44,10 @@ const routes: Routes = [
     path: 'supervisor-dashboard',
     component: CmDashboardComponent,
   },
-
-
+  {
+    path: 'programmanager-dashboard',
+    component: PmDashboardComponent,
+  },
 
 ];
 @NgModule({

@@ -36,6 +36,12 @@ MENU_LIST = [
                 type: "none",
             },
             {
+                id: "programmanager-dashboard",
+                title: "Programmanager Dashboard",
+                type: "none",
+            },
+
+            {
                 id: "supervisor-dashboard",
                 title: "Supervisor Dashboard",
                 type: "none",

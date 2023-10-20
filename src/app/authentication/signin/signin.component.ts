@@ -100,7 +100,7 @@ export class SigninComponent
             } else if (role === Role.CourseManager || role === 'coursemanager'|| role === 'Course Manager') {
               this.router.navigate(['/dashboard/coursemanager-dashboard']);
             }  else if (role === Role.ProgramCoordinator || role === 'programcoordinator'|| role === 'Program coordinator') {
-              this.router.navigate(['/dashboard/coursemanager-dashboard']);
+              this.router.navigate(['/dashboard/programmanager-dashboard']);
             } 
              else {
               this.router.navigate(['/dashboard/student-analytics']);

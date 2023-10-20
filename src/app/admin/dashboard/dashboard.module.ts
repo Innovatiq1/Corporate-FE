@@ -9,9 +9,10 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from '@shared';
 import { ComponentsModule } from '@shared/components/components.module';
 import { CmDashboardComponent } from './cm-dashboard/cm-dashboard.component';
+import { PmDashboardComponent } from './pm-dashboard/pm-dashboard.component';
 
 @NgModule({
-  declarations: [MainComponent, Dashboard2Component, CmDashboardComponent,    
+  declarations: [MainComponent, Dashboard2Component, CmDashboardComponent, PmDashboardComponent,    
    
   ],
   imports: [
