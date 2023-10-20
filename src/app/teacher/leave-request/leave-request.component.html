@@ -59,19 +59,34 @@
                 <ng-container matColumnDef="img">
                   <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-5'"> Image
                   </mat-header-cell>
-                  <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-5"> <span
-                      class="mobile-label">Image:</span><img [src]="row.img" />
+                  <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-5"> 
+                    
+                    <span
+                    class="mobile-label">Image:</span><img [src]="row.studentId?.avatar" />
                   </mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="className">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Class Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row"> <span class="mobile-label">Class Name:</span>{{row.className}}
+                  </mat-cell>
+                </ng-container>
+                
+                
                 <ng-container matColumnDef="rNo">
                   <mat-header-cell *matHeaderCellDef mat-sort-header class="psl-3 tbl-col-width-per-8">Roll No
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" class="psl-3 tbl-col-width-per-8"><span class="mobile-label">Roll
-                      No:</span> {{row.rNo}}</mat-cell>
+                      No:</span> {{row.studentId?.rollNo}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="name">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Student Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row"> <span class="mobile-label">Student Name:</span>{{row.name}}
+                  <mat-cell *matCellDef="let row"> <span class="mobile-label">Student Name:</span>{{row.studentId?.name}}
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="applyDate">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Apply Date</mat-header-cell>
+                  <mat-cell *matCellDef="let row"><span class="mobile-label">Apply Date:</span>
+                    {{row.applyDate | date: 'MM/dd/yyyy' }}
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="fromDate">
@@ -91,15 +106,15 @@
                   </mat-header-cell>
                   <mat-cell mat-cell *matCellDef="let row">
                     <span class="mobile-label">Status:</span>
-                    <div *ngIf="row.status==='approve'">
+                    <div *ngIf="row.status==='approved'">
                       <span class="badge badge-solid-green">
                         {{row.status}}</span>
                     </div>
-                    <div *ngIf="row.status==='reject'">
+                    <div *ngIf="row.status==='applied'">
                       <span class="badge badge-solid-red">
                         {{row.status}}</span>
                     </div>
-                    <div *ngIf="row.status==='pending'">
+                    <div *ngIf="row.status==='cancelled'">
                       <span class="badge badge-solid-orange">
                         {{row.status}}</span>
                     </div>
@@ -117,7 +132,7 @@
                   <mat-header-cell *matHeaderCellDef class="psl-3 ">Actions
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row; let i=index;" class="psl-3 ">
-                    <button mat-icon-button (click)="$event.stopPropagation()" class="tbl-action-btn">
+                    <button mat-icon-button (click)="$event.stopPropagation()" class="tbl-action-btn" (click)="editCall(row)">
                       <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                     </button>
                     <button mat-icon-button (click)="$event.stopPropagation()" class="tbl-action-btn">

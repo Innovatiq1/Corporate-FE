@@ -3,9 +3,11 @@ import { BehaviorSubject } from 'rxjs';
 import { LeaveRequest } from './leave-request.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
+import { environment } from 'environments/environment';
 @Injectable()
 export class InstructorLeaveRequestService extends UnsubscribeOnDestroyAdapter {
   private readonly API_URL = 'assets/data/leaveRequest.json';
+  defaultUrl = environment['apiUrl'];
   isTblLoading = true;
   dataChange: BehaviorSubject<LeaveRequest[]> = new BehaviorSubject<
     LeaveRequest[]
@@ -22,13 +24,14 @@ export class InstructorLeaveRequestService extends UnsubscribeOnDestroyAdapter {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAllLeaveRequest(): void {
+  getAllLeaveRequest(id:any): void {
+    const apiUrl = `${this.defaultUrl}admin/leave/instructorList/${id}`;
     this.subs.sink = this.httpClient
-      .get<LeaveRequest[]>(this.API_URL)
+      .get<any>(apiUrl)
       .subscribe({
-        next: (data) => {
+        next: (response) => {
           this.isTblLoading = false;
-          this.dataChange.next(data);
+          this.dataChange.next(response.data.docs);
         },
         error: (error: HttpErrorResponse) => {
           this.isTblLoading = false;
@@ -49,19 +52,22 @@ export class InstructorLeaveRequestService extends UnsubscribeOnDestroyAdapter {
     //     },
     //   });
   }
-  updateLeaveRequest(leaveRequest: LeaveRequest): void {
+  updateLeaveRequest(leaveRequest: LeaveRequest,id:any): void {
     this.dialogData = leaveRequest;
+    const apiUrl = `${this.defaultUrl}admin/leave/${id}`;
 
-    // this.httpClient.put(this.API_URL + leaveRequest.id, leaveRequest)
-    //     .subscribe({
-    //       next: (data) => {
-    //         this.dialogData = leaveRequest;
-    //       },
-    //       error: (error: HttpErrorResponse) => {
-    //          // error code here
-    //       },
-    //     });
-  }
+    this.httpClient.put(apiUrl, leaveRequest)
+        .subscribe({
+          next: (data) => {
+            this.dialogData = leaveRequest;
+          },
+          error: (error: HttpErrorResponse) => {
+             // error code here
+          },
+        });
+  }  
+  
+  
   deleteLeaveRequest(id: number): void {
     console.log(id);
 
