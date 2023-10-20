@@ -15,10 +15,10 @@
                         </div>
                         <div class="card-right">
                             <div>
-                                <h5 class="float-end">Total Students</h5>
+                                <h5 class="float-end">Total<br> Departments</h5>
                             </div>
                             <div class="col-green">
-                                <h3 class="font-weight-bold float-end mb-0">{{count?.students}}</h3>
+                                <h3 class="font-weight-bold float-end mb-0">{{departmentCount}}</h3>
                             </div>
                         </div>
                     </div>
@@ -55,23 +55,21 @@
             <div class="col-lg-3 col-md-3 col-sm-12">
                 <div class="card card-statistic-2">
                     <div class="clearfix">
-                        <div class="card-icon-only shadow-primary float-start">
-                            <img src="https://www.einfosoft.com/templates/admin/smartangular/source/light/assets/images/banner/img4.png "
-                                alt="">
+                      <div class="card-icon-only shadow-primary float-start">
+                        <img src="assets/images/banner/img2.png" alt="">
+                      </div>
+                      <div class="card-right">
+                        <div>
+                          <h5 class="float-end">All Programs</h5>
                         </div>
-                        <div class="card-right">
-                            <div>
-                                <h5 class="float-end">All Payments</h5>
-                            </div>
-                            <div class="col-green">
-                                <h3 class="font-weight-bold float-end mb-0">$358</h3>
-                            </div>
+                        <div class="col-green">
+                          <h3 class="font-weight-bold float-end mb-0">{{count?.programs}}</h3>
                         </div>
+                      </div>
                     </div>
                     <div class="card-content msl-4 mb-3">
-                        <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 05% Higher
-                            Then Last Month
-                        </p>
+                      <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 05% Higher Then Last Month
+                      </p>
                     </div>
                 </div>
             </div>
@@ -100,7 +98,7 @@
 
         </div>
         <!-- #END# Widgets -->
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                 <div class="card" style="border-radius: 31px;">
                     <div class="header mt-3">
@@ -132,9 +130,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row clearfix">
-            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+            <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                 <div class="plain-card">
                     <div class="card-inner">
                         <h6 class="tx-primary m-b-15">New Admission Report</h6>
@@ -183,7 +181,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- area chart -->
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                 <div class="card" style="border-radius: 31px;">
@@ -211,7 +209,7 @@
                                         <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
                                         <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
                                         <td>
-                                            <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
+                                            <div class="badge col-green">{{class?.status}}</div>
                                         </td>
                                         <td>
                                             <button mat-button [matMenuTriggerFor]="menu">
@@ -249,6 +247,91 @@
                 </div>
             </div>
         </div>
+
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="card">
+                <div class="header mt-3">
+                  <h2>Departments List</h2>
+                  <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                      <mat-icon>add_circle_outline</mat-icon>
+                      <span>Add</span>
+                    </button>
+                    <button mat-menu-item disabled>
+                      <mat-icon>delete_outline</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>refresh</mat-icon>
+                      <span>Refresh</span>
+                    </button>
+                  </mat-menu> -->
+                </div>
+                <div class="tableBody">
+                  <div class="table-responsive">
+                    <table class="table display product-overview mb-30" id="support_table">
+                      <thead>
+                        <tr>
+                          <th>Department Name</th>
+                          <th>Head of Department</th>
+                          <th>Phone</th>
+                          <th>Email</th>
+                          <th>Start Year</th>
+                          <th>Students Capacity</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let department of departments">
+                          <!-- <td class="table-img">
+                            <img src="{{instructor?.avatar}}" alt="">
+                          </td> -->
+                          <td>{{department?.department}}</td>
+                          <!-- <td>
+                            <div class="badge col-green">{{department?.department}}</div>
+                          </td> -->
+                          <td>{{department?.hod}}</td>
+                          <td>{{department?.mobile}}</td>
+                          <td>{{department?.email}}</td>
+                          <td>{{department?.departmentStartDate | date}}</td>
+                          <td>{{department?.studentCapacity}}</td>
+                          <td>
+                            <button mat-button [matMenuTriggerFor]="menu">
+                              <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                              xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                              class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
+                              <path
+                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                            </svg>
+        
+                            </button>
+                            
+                                    <mat-menu #menu="matMenu" xPosition="before">
+                                      <button mat-menu-item  class="tbl-action-btn" (click)="editCalls(department)">
+                                        <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                        <span class="menu-text">Edit</span>
+                                      </button>
+                                      <button mat-menu-item class="tbl-action-btn" (click)="deletedepartments(department.id)">
+                                        <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                        <span class="menu-text">Delete</span>
+                                      </button>
+                                    </mat-menu>
+                          </td>
+                        </tr>
+                       
+      
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         <div class="row clearfix">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <div class="card">
@@ -314,7 +397,7 @@
                             </button>
                             
                                     <mat-menu #menu="matMenu" xPosition="before">
-                                      <button mat-menu-item  class="tbl-action-btn" [routerLink]="['/admin/teachers/edit-teacher',instructor.id]">
+                                      <button mat-menu-item  class="tbl-action-btn" [routerLink]="['/admin/instructors/edit-instructor',instructor.id]">
                                         <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                                         <span class="menu-text">Edit</span>
                                       </button>
@@ -334,7 +417,7 @@
               </div>
             </div>
           </div>
-        <div class="row clearfix">
+        <!-- <div class="row clearfix">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="card" style="border-radius: 31px;">
                     <div class="header mt-3">
@@ -364,7 +447,7 @@
                                         <td>{{student?.createdAt | date}}</td>
                                         <td>
                                             {{student?.mobile}}
-                                            <!-- <i class="far fa-file-pdf tbl-pdf"></i> -->
+                                            <!-- <i class="far fa-file-pdf tbl-pdf"></i> --
                                         </td>
                                         <td>
                                             <button mat-button [matMenuTriggerFor]="menu">
@@ -401,6 +484,151 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+        <div class="row">
+            <!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+              <div class="card">
+                <div class="header">
+                  <h2>Parents Review</h2>
+                  <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                      <mat-icon>add_circle_outline</mat-icon>
+                      <span>Add</span>
+                    </button>
+                    <button mat-menu-item disabled>
+                      <mat-icon>delete_outline</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>refresh</mat-icon>
+                      <span>Refresh</span>
+                    </button>
+                  </mat-menu>
+                </div>
+                <div class="body">
+                  <div class="review-block">
+                    <div class="row">
+                      <div class="review-img">
+                        <img src="assets/images/user/user1.jpg" alt="">
+                      </div>
+                      <div class="col">
+                        <h6 class="m-b-5">Alis Smith
+                          <span class="float-end m-r-10 text-muted"> a week ago</span>
+                        </h6>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star_half</i>
+                        <i class="material-icons">star_border</i>
+                        <p class="m-t-15 m-b-15">Lorem ipsum dolor sit amet, consectetur
+                          adipiscing elit. Etiam vel rutrum ex, at
+                          ornare mi. In quis scelerisque dui, eget rhoncus orci. Fusce et sodales
+                          ipsum.
+                          Nam id nunc euismod, aliquet arcu quis, mattis nisi.</p>
+                        <button mat-icon-button class="m-r-10 col-blue">
+                          <mat-icon>thumb_up</mat-icon>
+                        </button>
+                        <button mat-icon-button class="m-r-10 col-red">
+                          <mat-icon>thumb_down</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="row mt-3">
+                      <div class="review-img">
+                        <img src="assets/images/user/user2.jpg" alt="">
+                      </div>
+                      <div class="col">
+                        <h6 class="m-b-5">John Dio
+                          <span class="float-end m-r-10 text-muted"> a week ago</span>
+                        </h6>
+                        <i class="material-icons">star</i>
+                        <i class="material-icons">star_half</i>
+                        <i class="material-icons">star_border</i>
+                        <i class="material-icons">star_border</i>
+                        <i class="material-icons">star_border</i>
+                        <p class="m-t-15 m-b-15">Nam quis ligula est. Nunc sed risus non
+                          turpis tristique tempor. Ut sollicitudin
+                          faucibus magna nec gravida. Suspendisse ullamcorper justo vel porta
+                          imperdiet.
+                          Nunc nec ipsum vel augue placerat faucibus. </p>
+                        <button mat-icon-button class="m-r-10 col-blue">
+                          <mat-icon>thumb_up</mat-icon>
+                        </button>
+                        <button mat-icon-button class="m-r-10 col-red">
+                          <mat-icon>thumb_down</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="text-center  m-b-5">
+                      <button mat-stroked-button color="primary">View all Customer Reviews</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">
+              <div class="card">
+                <div class="header mt-3">
+                  <h2>Upcoming Programs</h2>
+                  <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                      <mat-icon>add_circle_outline</mat-icon>
+                      <span>Add</span>
+                    </button>
+                    <button mat-menu-item disabled>
+                      <mat-icon>delete_outline</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>refresh</mat-icon>
+                      <span>Refresh</span>
+                    </button>
+                  </mat-menu> -->
+                </div>
+                <div class="body">
+                  <div class="card-block">
+                    <div  *ngFor="let program of upcomingPrograms" class="row m-b-20">
+                      <div class="col-auto p-r-0">
+                        <img src="{{program?.image_link}}" alt="user image" class="latest-posts-img">
+                      </div>
+                      <div class="col">
+                        <h6>{{program?.title}}</h6>
+                        <div class="row">
+                          <div class="col">
+                            <b>{{ program?.courseCode }}</b>
+                        </div>
+                        <div class="col">
+                            <b>{{ program?.duration }} Hours</b>
+                        </div>
+                        <div class="col">
+                            <b>{{ program?.courseFee }}$</b>
+                        </div>
+                        <div class="col" [class]="program?.Active ? 'badge badge-solid-red' : 'badge badge-solid-green'">
+                            <b>{{ program?.deliveryMode | titlecase }}</b>
+                        </div>
+                        <div class="col">
+                          <b  style="color: blue;">
+                            <i class="fa fa-play-circle-o"></i> {{program?.sessionStartDate | date}}</b>
+                        </div>
+                        </div>
+      
+                       
+                      </div>
+                    </div>
+                 
+                    <div class="text-center">
+                      <button mat-stroked-button [routerLink]="['/admin/program/program-list']" color="primary">View More</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
 </section>

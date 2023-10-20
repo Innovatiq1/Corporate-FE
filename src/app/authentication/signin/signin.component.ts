@@ -94,7 +94,7 @@ export class SigninComponent
             } else if (role === Role.Supervisor || role === 'Supervisor' || role === 'supervisor') {
               this.router.navigate(['/dashboard/supervisor-dashboard']);
             } else if (role === Role.HOD || role === 'hod' || role === 'HOD' || role === 'head of department') {
-              this.router.navigate(['/dashboard/student-analytics']);
+              this.router.navigate(['/dashboard/hod-dashboard']);
             } else if (role === Role.TrainingCoordinator || role === 'Training Coordinator' || role === 'training coordinator') {
               this.router.navigate(['/dashboard/student-analytics']);
             } else if (role === Role.CourseManager || role === 'coursemanager'|| role === 'Course Manager') {

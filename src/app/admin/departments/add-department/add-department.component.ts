@@ -98,4 +98,8 @@ export class AddDepartmentComponent {
     }
  
   }
+  cancel() {
+  
+    window.history.back();
+  }
 }
