@@ -48,9 +48,9 @@ export type chartOptions = {
   series2: ApexNonAxisChartSeries;
 };  
 @Component({
-  selector: 'app-Pm-dashboard',
-  templateUrl: './Pm-dashboard.component.html',
-  styleUrls: ['./Pm-dashboard.component.scss']
+  selector: 'app-pm-dashboard',
+  templateUrl: './pm-dashboard.component.html',
+  styleUrls: ['./pm-dashboard.component.scss']
 })
 export class PmDashboardComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
