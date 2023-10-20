@@ -10,9 +10,10 @@ import { SharedModule } from '@shared';
 import { ComponentsModule } from '@shared/components/components.module';
 import { CmDashboardComponent } from './cm-dashboard/cm-dashboard.component';
 import { PmDashboardComponent } from './pm-dashboard/pm-dashboard.component';
+import { TrainingAdministratorComponent } from './training-administrator/training-administrator.component';
 
 @NgModule({
-  declarations: [MainComponent, Dashboard2Component, CmDashboardComponent, PmDashboardComponent,    
+  declarations: [MainComponent, Dashboard2Component, CmDashboardComponent, PmDashboardComponent,TrainingAdministratorComponent    
    
   ],
   imports: [
