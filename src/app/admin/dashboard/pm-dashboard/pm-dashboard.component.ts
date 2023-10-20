@@ -95,6 +95,8 @@ export class PmDashboardComponent implements OnInit {
   adminCount: any;
   studentCount: any;
   registeredProgramClasses: any;
+  programList: any;
+  upcomingPrograms: any;
   constructor(private courseService: CourseService,
     private userService: UserService,
     private instructorService: InstructorService,
@@ -363,13 +365,30 @@ export class PmDashboardComponent implements OnInit {
       this.registeredProgramClasses = response.data.docs.slice(0,5);
       })
   }
-
-
-
+  getProgramList(filters?: any) {
+    this.courseService.getCourseProgram({status:'active'}).subscribe(
+      (response: any) => {
+        this.programList = response.docs;
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();  
+        const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+        this.upcomingPrograms = this.programList.filter((item: { sessionStartDate: string | number | Date; }) => {
+          const sessionStartDate = new Date(item.sessionStartDate);
+          return (
+            sessionStartDate >= tomorrow 
+          );
+        });
+      },
+      (error) => {
+      }
+    );
+  }
 
   ngOnInit() {
 this.getClassList()
 this.getRegisteredClasses();
+this.getProgramList();
   }
   getClassList() {
     this._programService
