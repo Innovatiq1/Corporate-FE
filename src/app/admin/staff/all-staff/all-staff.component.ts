@@ -24,6 +24,8 @@ import {
   UnsubscribeOnDestroyAdapter,
 } from '@shared';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-all-staff',
@@ -36,7 +38,6 @@ export class AllstaffComponent
 {
   displayedColumns = [
     'select',
-    'img',
     'name',
     'designation',
     'mobile',
@@ -47,6 +48,7 @@ export class AllstaffComponent
   ];
   exampleDatabase?: StaffService;
   dataSource!: ExampleDataSource;
+
   selection = new SelectionModel<Staff>(true, []);
   id?: number;
   staff?: Staff;
@@ -62,7 +64,8 @@ export class AllstaffComponent
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public staffService: StaffService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public router:Router
   ) {
     super();
   }
@@ -80,105 +83,30 @@ export class AllstaffComponent
     this.loadData();
   }
   addNew() {
-    let tempDirection: Direction;
-    if (localStorage.getItem('isRtl') === 'true') {
-      tempDirection = 'rtl';
-    } else {
-      tempDirection = 'ltr';
-    }
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        staff: this.staff,
-        action: 'add',
-      },
-      direction: tempDirection,
-    });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-        this.exampleDatabase?.dataChange.value.unshift(
-          this.staffService.getDialogData()
-        );
-        this.refreshTable();
-        this.showNotification(
-          'snackbar-success',
-          'Add Record Successfully...!!!',
-          'bottom',
-          'center'
-        );
-      }
-    });
+    this.router.navigate(['/admin/staff/add-staff']);
   }
+
+
+
   editCall(row: Staff) {
 
     console.log("rowEdit",row)
-    this.id = row.id;
-    let tempDirection: Direction;
-    if (localStorage.getItem('isRtl') === 'true') {
-      tempDirection = 'rtl';
-    } else {
-      tempDirection = 'ltr';
-    }
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        staff: row,
-        action: 'edit',
-      },
-      direction: tempDirection,
-    });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // Then you update that record using data from dialogData (values you enetered)
-        if (foundIndex != null && this.exampleDatabase) {
-          this.exampleDatabase.dataChange.value[foundIndex] =
-            this.staffService.getDialogData();
-          // And lastly refresh table
-          this.refreshTable();
-          this.showNotification(
-            'black',
-            'Edit Record Successfully...!!!',
-            'bottom',
-            'center'
-          );
-        }
-      }
-    });
+    this.router.navigate(['/admin/staff/add-staff'],{queryParams:row});
   }
+
+
   deleteItem(row: Staff) {
     this.id = row.id;
-    let tempDirection: Direction;
-    if (localStorage.getItem('isRtl') === 'true') {
-      tempDirection = 'rtl';
-    } else {
-      tempDirection = 'ltr';
-    }
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: row,
-      direction: tempDirection,
+
+    this.staffService.deleteStaff(this.id).subscribe(() => {
+      // this.getCoursesList();
+      Swal.fire({
+        title: 'Success',
+        text: 'Course deleted successfully.',
+        icon: 'success',
+      });
     });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // for delete we use splice in order to remove single object from DataService
-        if (foundIndex != null && this.exampleDatabase) {
-          this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-          this.refreshTable();
-          this.showNotification(
-            'snackbar-danger',
-            'Delete Record Successfully...!!!',
-            'bottom',
-            'center'
-          );
-        }
-      }
-    });
+
   }
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
@@ -232,7 +160,6 @@ export class AllstaffComponent
       }
     );
   }
-
   // export table data in excel file
   exportExcel() {
     // key name with space add in brackets
@@ -302,6 +229,10 @@ export class ExampleDataSource extends DataSource<Staff> {
       this.filterChange,
       this.paginator.page,
     ];
+
+    let payload = {
+      status:'active'
+    }
     this.exampleDatabase.getAllStaffs();
     return merge(...displayDataChanges).pipe(
       map(() => {
@@ -319,6 +250,8 @@ export class ExampleDataSource extends DataSource<Staff> {
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
+
+          console.log("filter", this.filteredData)
         // Sort filtered data
         const sortedData = this.sortData(this.filteredData.slice());
         // Grab the page's slice of the filtered sorted data.
@@ -327,6 +260,7 @@ export class ExampleDataSource extends DataSource<Staff> {
           startIndex,
           this.paginator.pageSize
         );
+        console.log("redered", this.renderedData)
         return this.renderedData;
       })
     );

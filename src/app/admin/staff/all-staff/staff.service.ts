@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, pipe } from 'rxjs';
 import { Staff } from './staff.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
@@ -18,6 +18,7 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
     super();
   }
   get data(): Staff[] {
+    console.log("staff",this.dataChange.value)
     return this.dataChange.value;
   }
   getDialogData() {
@@ -25,10 +26,11 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
   }
   /** CRUD METHODS */
   getAllStaffs(): void {
-    this.subs.sink = this.httpClient.get<Staff[]>(this.API_URL).subscribe({
+    const apiUrl = `${this.prefix}admin/staff/`;
+    this.subs.sink = this.httpClient.get<Staff>(apiUrl).subscribe({
       next: (data) => {
         this.isTblLoading = false;
-        this.dataChange.next(data);
+        this.dataChange.next(data.data);
       },
       error: (error: HttpErrorResponse) => {
         this.isTblLoading = false;
@@ -44,6 +46,17 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
       .pipe(map((response) => { }));
   }
 
+  updateStaff(id:any,course: any) {
+    const apiUrl = `${this.prefix}admin/staff/${id}`;
+    return this.httpClient
+      .put<ApiResponse>(apiUrl, course)
+      .pipe(map((response) => { }));
+  }
+
+  deleteStaff(id:any){
+    const apiUrl = `${this.prefix}admin/staff/${id}`;
+    return this.httpClient.delete(apiUrl).pipe(map((response) => { }))
+  }
   addStaff(staff: Staff): void {
     this.dialogData = staff;
 
@@ -57,8 +70,8 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
     //     },
     //   });
   }
-  updateStaff(staff: Staff): void {
-    this.dialogData = staff;
+  // updateStaff(staff: Staff): void {
+  //   this.dialogData = staff;
 
     // this.httpClient.put(this.API_URL + staff.id, staff)
     //     .subscribe({
@@ -69,9 +82,10 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
     //          // error code here
     //       },
     //     });
-  }
-  deleteStaff(id: number): void {
-    console.log(id);
+  // }
+  // deleteStaff(id: number): void {
+  //   console.log(id);
+
 
     // this.httpClient.delete(this.API_URL + id)
     //     .subscribe({
@@ -82,5 +96,5 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
     //          // error code here
     //       },
     //     });
-  }
+  // }
 }

@@ -8,6 +8,7 @@ export class Staff {
   address: string;
   mobile: string;
   designation: string;
+  data:any;
   constructor(staff: Staff) {
     {
       this.id = staff.id || this.getRandomID();
@@ -18,6 +19,7 @@ export class Staff {
       this.date = formatDate(new Date(), 'yyyy-MM-dd', 'en') || '';
       this.address = staff.address || '';
       this.mobile = staff.mobile || '';
+      this.data = staff.data;
     }
   }
   public getRandomID(): number {
