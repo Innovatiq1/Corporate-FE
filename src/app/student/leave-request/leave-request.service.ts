@@ -48,26 +48,27 @@ export class LeaveRequestService extends UnsubscribeOnDestroyAdapter {
       .subscribe({
         next: (data) => {
           this.dialogData = leaveRequest;
-          console.log('daa',this.dialogData)
         },
         error: (error: HttpErrorResponse) => {
            // error code here
         },
       });
   }
-  updateLeaveRequest(leaveRequest: LeaveRequest): void {
+  updateLeaveRequest(leaveRequest: any,id:any): void {
     this.dialogData = leaveRequest;
+    const apiUrl = `${this.defaultUrl}admin/leave/${id}`;
 
-    // this.httpClient.put(this.API_URL + leaveRequest.id, leaveRequest)
-    //     .subscribe({
-    //       next: (data) => {
-    //         this.dialogData = leaveRequest;
-    //       },
-    //       error: (error: HttpErrorResponse) => {
-    //          // error code here
-    //       },
-    //     });
-  }
+    this.httpClient.put(apiUrl, leaveRequest)
+        .subscribe({
+          next: (data) => {
+            this.dialogData = leaveRequest;
+          },
+          error: (error: HttpErrorResponse) => {
+             // error code here
+          },
+        });
+  }  
+  
   deleteLeaveRequest(id: number) {
     const apiUrl = `${this.defaultUrl}admin/leave/${id}`;
     return this.httpClient

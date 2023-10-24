@@ -14,7 +14,7 @@
   <div mat-dialog-content>
     <form class="register-form m-4" [formGroup]="leaveRequestForm" (ngSubmit)="submit">
       <div class="row">
-        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div  *ngIf="!isEdit"class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
           <label>Class Name<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-select formControlName="className" required>
@@ -27,6 +27,21 @@
             </mat-error>
           </mat-form-field>
         </div>
+        <div *ngIf ="isEdit" class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label>Class Name<span class="mandatory">&nbsp;*</span></label>
+          <mat-form-field class="example-full-width" appearance="outline">
+                    <input matInput formControlName="className" required readonly>
+        <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>person</mat-icon>
+
+            <mat-error *ngIf="leaveRequestForm.get('className')?.hasError('required')">
+              Select Class
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- <input matInput formControlName="className" required>
+        <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>person</mat-icon> -->
+
         <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
           <label>Apply date<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
