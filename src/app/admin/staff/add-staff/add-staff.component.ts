@@ -6,6 +6,7 @@ import {
 } from '@angular/forms';
 import { StaffService } from '../all-staff/staff.service';
 import Swal from 'sweetalert2';
+import { ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-add-staff',
   templateUrl: './add-staff.component.html',
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class AddStaffComponent {
   staffForm: UntypedFormGroup;
+  editData:any;
   breadscrums = [
     {
       title: 'Add Staff',
@@ -20,7 +22,8 @@ export class AddStaffComponent {
       active: 'Add Staff',
     },
   ];
-  constructor(private fb: UntypedFormBuilder, public staffService:StaffService) {
+  constructor(private fb: UntypedFormBuilder, public staffService:StaffService,public active:ActivatedRoute) {
+
     this.staffForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       last_name: [''],
@@ -29,7 +32,7 @@ export class AddStaffComponent {
       password: ['', [Validators.required]],
       conformPassword: ['', [Validators.required]],
       designation: [''],
-      department: [''],
+      joiningDate: [''],
       address: [''],
       email: [
         '',
@@ -38,7 +41,32 @@ export class AddStaffComponent {
       dob: ['', [Validators.required]],
       education: [''],
     });
+
+
+    this.active.queryParams.subscribe(param =>{
+
+      let editData = param;
+      this.patchData(editData)
+    console.log("pa",editData);
+    })
   }
+
+patchData(_data: any){
+  this.staffForm.patchValue({
+    name:_data.name,
+    last_name:_data.last_name ,
+    gender:_data.gender ,
+    mobile: _data.mobile,
+    password:_data.password,
+    conformPassword:_data.conformPassword,
+    designation:_data.designation ,
+    joiningDate:_data.joiningDate,
+    address:_data.address ,
+    email:_data.email ,
+    dob:_data.dob ,
+    education: _data.education,
+  })
+}
   onSubmit() {
     console.log('Form Value', this.staffForm.value);
 

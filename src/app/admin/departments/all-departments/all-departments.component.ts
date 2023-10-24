@@ -64,7 +64,7 @@ export class AllDepartmentsComponent
   totalItems: any;
   pageSizeArr = [10, 25, 50, 100];
   departmentsData: any;
-
+  searchTerm:string = '';
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
@@ -116,6 +116,22 @@ export class AllDepartmentsComponent
       });
     // });
   }
+
+
+
+  performSearch() {
+    if(this.searchTerm){
+    this.dataSource = this.dataSource?.filter((item: any) =>{
+      const searchList = (item.department+ item.hod).toLowerCase()
+      return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+    })
+  }
+  else {
+    this.getAllDepartments();
+
+  }
+}
+
   getAllDepartments(){
     this.deptService.getAllDepartments({ ...this.departmentPaginationModel, status: 'active' }).subscribe((response: { data: { docs: any; totalDocs: any; page: any; limit: any; }; }) =>{
      this.dataSource = response.data.docs;
