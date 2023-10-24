@@ -3,11 +3,11 @@ export enum Role {
   Admin = 'Admin',
   Instructor = 'Instructor',
   Student = 'Student',
-  CourseManager = 'Course Managers',
-  ProgramCoordinator = 'Program Coordinator',
-  TrainingCoordinator = 'Training Coordinators',
+  CourseManager = 'Course Manager',
+  ProgramManager = 'Program Manager',
+  TrainingCoordinator = 'Training Coordinator',
   HOD = 'Head of Department',
-  Supervisor = 'Supervisors',
-  TrainingAdministrator = 'Training Administrators'
+  Supervisor = 'Supervisor',
+  TrainingAdministrator = 'Training Administrator'
 
 }

@@ -63,7 +63,7 @@ export class CmDashboardComponent implements OnInit {
     {
       title: 'Dashboad',
       items: [],
-      active: 'coursemanager-dashboard',
+      active: 'Course Manager Dashboard',
     },
   ];
   count: any;

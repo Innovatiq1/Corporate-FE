@@ -29,3 +29,19 @@
 h5{
   margin-top: 20px;
 }
+label {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+::ng-deep .example-full-width .mdc-text-field--outlined {
+  --mdc-outlined-text-field-container-shape: 12px;
+  font-style: italic;
+}
+
+.mandatory {
+  color: red;
+}
+.btn-sec, .header{
+  margin-left: 80px;
+}

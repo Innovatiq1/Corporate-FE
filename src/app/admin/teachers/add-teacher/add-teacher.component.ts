@@ -79,7 +79,7 @@ export class AddTeacherComponent {
 
         userData.avatar = inputUrl;
         userData.filename= response.filename
-        userData.type = "Trainers";
+        userData.type = "Instructor";
         userData.role = "Instructor";
         userData.isLogin = true;
 

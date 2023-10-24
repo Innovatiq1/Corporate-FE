@@ -18,22 +18,24 @@
           <div class="body">
             <div class="row">
               <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <label>Course Name<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field
                   class="example-full-width mb-3"
                   appearance="outline"
                 >
-                  <mat-label>Course Name</mat-label>
+                  
                   <mat-select  required>
                     <mat-option [value]="'mechanical'" *ngFor="let course of courseList">{{ course?.title }} </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <label>Instructor<span class="mandatory">&nbsp;*</span></label>
+
                 <mat-form-field
                   class="example-full-width mb-3"
                   appearance="outline"
                 >
-                  <mat-label>Instructor</mat-label>
                   <mat-select  required>
                     <mat-option [value]="instructor.id" *ngFor="let instructor of instructorList"> {{ instructor?.name + " " + instructor?.last_name }} </mat-option>
                   </mat-select>

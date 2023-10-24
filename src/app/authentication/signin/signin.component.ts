@@ -84,22 +84,22 @@ export class SigninComponent
             const role = this.authenticationService.currentUserValue.user.role;
             if (role === Role.All || role === Role.Admin) {
               this.router.navigate(['/dashboard/student-analytics']);
-            } else if (role === Role.Instructor) {
+            } else if (role === Role.Instructor || role === 'Trainer' || role ==='instructor') {
               this.router.navigate(['/dashboard/instructor-dashboard']);
             } else if (role === Role.Student|| role === 'student') {
               this.router.navigate(['/dashboard/student-dashboard']);
             } 
-              else if (role === Role.TrainingAdministrator || role === 'Training Administrator' || role === 'training administrator') {
+              else if (role === Role.TrainingAdministrator || role === 'Training administrator' || role === 'training administrator') {
               this.router.navigate(['/dashboard/trainingadministrator-dashboard']);
             } else if (role === Role.Supervisor || role === 'Supervisor' || role === 'supervisor') {
               this.router.navigate(['/dashboard/supervisor-dashboard']);
             } else if (role === Role.HOD || role === 'hod' || role === 'HOD' || role === 'head of department') {
               this.router.navigate(['/dashboard/hod-dashboard']);
             } else if (role === Role.TrainingCoordinator || role === 'Training Coordinator' || role === 'training coordinator') {
-              this.router.navigate(['/dashboard/student-analytics']);
+              this.router.navigate(['/dashboard/trainingcoordinator-dashboard']);
             } else if (role === Role.CourseManager || role === 'coursemanager'|| role === 'Course Manager') {
               this.router.navigate(['/dashboard/coursemanager-dashboard']);
-            }  else if (role === Role.ProgramCoordinator || role === 'programcoordinator'|| role === 'Program coordinator') {
+            }  else if (role === Role.ProgramManager || role === 'programcoordinator'|| role === 'Program manager') {
               this.router.navigate(['/dashboard/programmanager-dashboard']);
             } 
              else {

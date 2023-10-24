@@ -90,7 +90,7 @@ export class TrainingAdministratorComponent  implements OnInit {
     {
       title: 'Dashboad',
       items: [],
-      active: 'Trainingadministrator-dashboard',
+      active: 'Training Administrator Dashboard',
     },
   ];
   constructor(private courseService: CourseService,

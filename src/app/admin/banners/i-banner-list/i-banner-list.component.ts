@@ -22,7 +22,7 @@ export class IBannerListComponent {
     {
       title: 'Blank',
       items: ['Banners'],
-      active: 'Student Banner',
+      active: 'Instructor Banner',
     },
   ];
   instructorBanner : FormGroup
