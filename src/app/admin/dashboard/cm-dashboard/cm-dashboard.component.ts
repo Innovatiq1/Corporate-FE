@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { InstructorService } from '@core/service/instructor.service';
 import { StudentService } from '@core/service/student.service';
@@ -93,6 +94,14 @@ export class CmDashboardComponent implements OnInit {
   instructorCount: any;
   adminCount: any;
   studentCount: any;
+  courseData: any;
+  mainCategories!: MainCategory[];
+  subCategories!: SubCategory[];
+  allSubCategories!: SubCategory[];
+  dataSource: any;
+  coursePaginationModel!: Partial<CoursePaginationModel>;
+  upcomingCourses: any;
+  
   constructor(private courseService: CourseService,
     private userService: UserService,
     private instructorService: InstructorService,
@@ -357,7 +366,8 @@ export class CmDashboardComponent implements OnInit {
 
 
   ngOnInit() {
-this.getClassList()
+this.getClassList();
+this.getAllCourse()
   }
   getClassList() {
     this.classService
@@ -645,5 +655,63 @@ this.getClassList()
         },
       ],
     };
+  }
+  getAllCourse(){
+    this.courseService.getAllCourses({status:'active'}).subscribe(response =>{
+      console.log("res",response)
+     this.courseData = response.data.docs;
+     const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();  
+        const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+        this.upcomingCourses = this.courseData.filter((item: { sessionStartDate: string | number | Date; }) => {
+          const sessionStartDate = new Date(item.sessionStartDate);
+          return (
+            sessionStartDate >= tomorrow 
+          );
+        });
+    })
+  }
+  getCoursesList() {
+    this.courseService.getAllCourses({status:'active'})
+      .subscribe(response => {
+        this.dataSource = response.data.docs;
+        this.mapCategories();
+      }, (error) => {
+      }
+      )
+  }
+  deleteCourse(id: string) {
+    this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
+      const matchingClasses = classList.docs.filter((classItem: any) => {
+        return classItem.courseId && classItem.courseId.id === id;
+      });
+      if (matchingClasses.length > 0) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Classes have been registered with this course. Cannot delete.',
+          icon: 'error',
+        });
+        return;
+      }
+      this.courseService.deleteCourse(id).subscribe(() => {
+        this.getCoursesList();
+        Swal.fire({
+          title: 'Success',
+          text: 'Course deleted successfully.',
+          icon: 'success',
+        });
+      });
+    });
+  }
+  private mapCategories(): void {
+    this.coursePaginationModel.docs?.forEach((item) => {
+      item.main_category_text = this.mainCategories.find((x) => x.id === item.main_category)?.category_name;
+    });
+  
+    this.coursePaginationModel.docs?.forEach((item) => {
+      item.sub_category_text = this.allSubCategories.find((x) => x.id === item.sub_category)?.category_name;
+    });
+  
   }
 }

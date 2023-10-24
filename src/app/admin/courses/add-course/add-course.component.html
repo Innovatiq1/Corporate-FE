@@ -170,6 +170,22 @@
                         </mat-form-field>
                       </div>
                     </div>
+                    
+                      <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                  <label>Start Date</label>
+                                  <input type="date" formControlName="sessionStartDate" id="date"
+                                  class="form-control" />
+                                 
+                                 
+                          </div>
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                  <label>End Date</label>
+                                   <input type="date" formControlName="sessionEndDate"
+                                                class="form-control " id="date" />
+                                 
+                          </div>
+                      </div>
                     <div class="row">
                       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                         <label>Course Detailed Description</label>
@@ -363,7 +379,7 @@
                   </div>
                   <div class="col-md-4">
                     <div class="d-grid gap-4 d-md-flex">
-                    <button mat-raised-button *ngIf="editUrl || viewUrl" type="button" color="warn" id="cancel" [routerLink]="['/admin/courses/all-courses']">Cancel</button>
+                    <button mat-raised-button *ngIf="editUrl || viewUrl" type="button" color="warn" id="cancel" (click)="cancel()">Cancel</button>
                     <button mat-button (click)="submit()" *ngIf="!editUrl  && !viewUrl" id="submit" [attr.data-bs-toggle]="secondFormGroup.valid ? 'modal' : null">Submit</button>
                     <button mat-button *ngIf="editUrl  && !viewUrl" id="save" [attr.data-bs-toggle]="secondFormGroup.valid ? 'modal' : null" (click)="save()"> Save </button>
                     </div>
