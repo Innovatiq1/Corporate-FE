@@ -12,17 +12,16 @@
       <div class="body">
         <form [formGroup]="stdForm" (ngSubmit)="onSubmit()">
         <div class="example-container">
-          
+          <label>User Name<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Username</mat-label>
             <input matInput formControlName="name">
           </mat-form-field>
+          <label>Current Password</label>
           <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Current Password</mat-label>
             <input matInput type="password" formControlName="currentpassword">
           </mat-form-field>
+          <label>New Password<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>New Password</mat-label>
             <input matInput type="password" formControlName="password" [type]="hide ? 'password' : 'text'" required>
             <mat-icon matSuffix (click)="hide = !hide">
               {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -43,14 +42,15 @@
         <div class="row clearfix">
           <div class="col-lg-6 col-md-12">
             <div class="form-group">
+              <label>First Name<span class="mandatory">&nbsp;*</span></label>
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>First Name</mat-label>
                 <input matInput formControlName="name">
               </mat-form-field>
             </div>
           </div>
           <div class="col-lg-6 col-md-12">
             <div class="form-group">
+              <label>Last Name</label>
               <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Last Name</mat-label>
                 <input matInput formControlName="last_name">
@@ -59,39 +59,39 @@
           </div>
           <div class="col-lg-4 col-md-12">
             <div class="form-group">
+              <label>City<span class="mandatory">&nbsp;*</span></label>
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>City</mat-label>
                 <input matInput formControlName="city_name">
               </mat-form-field>
             </div>
           </div>
           <div class="col-lg-4 col-md-12">
             <div class="form-group">
+              <label>Email<span class="mandatory">&nbsp;*</span></label>
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Email</mat-label>
                 <input matInput formControlName="email" readonly>
               </mat-form-field>
             </div>
           </div>
           <div class="col-lg-4 col-md-12">
             <div class="form-group">
+              <label>Country<span class="mandatory">&nbsp;*</span></label>
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Country</mat-label>
                 <input matInput formControlName="country_name">
               </mat-form-field>
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group">
+              <label>Address<span class="mandatory">&nbsp;*</span></label>
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Address</mat-label>
                 <textarea matInput formControlName="address"></textarea>
               </mat-form-field>
             </div>
           </div>
           <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
-              <label>Upload</label>
+              <label>Upload  <span class="mandatory">&nbsp;*</span></label>
               <div class="file-drop-area">
                 <div class="file">
                   <!-- <button mat-raised-button color="primary">Choose file</button> -->

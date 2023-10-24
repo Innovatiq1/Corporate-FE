@@ -15,8 +15,8 @@
     <form class="register-form m-4" [formGroup]="lecturesForm" (ngSubmit)="submit">
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label>Subject Name<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width mb-3" appearance="outline">
-            <mat-label>Subject Name</mat-label>
             <input matInput formControlName="courseName" required>
             <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>person</mat-icon>
             <mat-error *ngIf="lecturesForm.get('courseName')?.hasError('required')">
@@ -34,8 +34,8 @@
           </mat-form-field>
         </div>
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label>Class Name<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width mb-3" appearance="outline">
-            <mat-label>Class Name</mat-label>
             <input matInput formControlName="courseCode" required>
             <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>person</mat-icon>
             <mat-error *ngIf="lecturesForm.get('courseCode')?.hasError('required')">
@@ -46,8 +46,8 @@
       </div>
       <div class="row">
         <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label>Choose a date<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Choose a date</mat-label>
             <input matInput [matDatepicker]="picker" formControlName="sessionStartDate" required>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -57,8 +57,8 @@
           </mat-form-field>
         </div>
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label>Time<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width mb-3" appearance="outline">
-            <mat-label>Time</mat-label>
             <input matInput formControlName="sessionStartTime" required>
             <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>schedule</mat-icon>
             <mat-error *ngIf="lecturesForm.get('sessionStartTime')?.hasError('required')">
@@ -69,8 +69,8 @@
       </div>
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label>Status<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width mb-3" appearance="outline">
-            <mat-label>Status</mat-label>
             <mat-select formControlName="status" required>
               <mat-option *ngFor="let option of statusOptions" [value]="option">{{ option }}</mat-option>
               <!-- <mat-option [value]="'Confirm'">
