@@ -4,6 +4,7 @@ export enum Role {
   Instructor = 'Instructor',
   Student = 'Student',
   CourseManager = 'Course Managers',
+  ProgramCoordinator = 'Program Coordinator',
   TrainingCoordinator = 'Training Coordinators',
   HOD = 'Head of Department',
   Supervisor = 'Supervisors',

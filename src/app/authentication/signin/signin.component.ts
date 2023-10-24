@@ -86,20 +86,22 @@ export class SigninComponent
               this.router.navigate(['/dashboard/student-analytics']);
             } else if (role === Role.Instructor) {
               this.router.navigate(['/dashboard/instructor-dashboard']);
-            } else if (role === Role.Student) {
+            } else if (role === Role.Student|| role === 'student') {
               this.router.navigate(['/dashboard/student-dashboard']);
             } 
-            //   else if (role === Role.TrainingAdministrator) {
-            //   this.router.navigate(['/dashboard/student-analytics']);
-            // } else if (role === Role.Supervisor) {
-            //   this.router.navigate(['/dashboard/student-analytics']);
-            // } else if (role === Role.HOD) {
-            //   this.router.navigate(['/dashboard/student-analytics']);
-            // } else if (role === Role.TrainingCoordinator) {
-            //   this.router.navigate(['/dashboard/student-analytics']);
-            // } else if (role === Role.CourseManager) {
-            //   this.router.navigate(['/dashboard/student-analytics']);
-            // }  
+              else if (role === Role.TrainingAdministrator || role === 'Training Administrator' || role === 'training administrator') {
+              this.router.navigate(['/dashboard/trainingadministrator-dashboard']);
+            } else if (role === Role.Supervisor || role === 'Supervisor' || role === 'supervisor') {
+              this.router.navigate(['/dashboard/supervisor-dashboard']);
+            } else if (role === Role.HOD || role === 'hod' || role === 'HOD' || role === 'head of department') {
+              this.router.navigate(['/dashboard/hod-dashboard']);
+            } else if (role === Role.TrainingCoordinator || role === 'Training Coordinator' || role === 'training coordinator') {
+              this.router.navigate(['/dashboard/student-analytics']);
+            } else if (role === Role.CourseManager || role === 'coursemanager'|| role === 'Course Manager') {
+              this.router.navigate(['/dashboard/coursemanager-dashboard']);
+            }  else if (role === Role.ProgramCoordinator || role === 'programcoordinator'|| role === 'Program coordinator') {
+              this.router.navigate(['/dashboard/programmanager-dashboard']);
+            } 
              else {
               this.router.navigate(['/dashboard/student-analytics']);
             }

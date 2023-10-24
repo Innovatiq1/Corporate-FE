@@ -12,13 +12,8 @@ import {
   UntypedFormControl,
   Validators,
 } from '@angular/forms';
-import {
-  CourseTitleModel,
-  DataSourceModel,
-  InstructorList,
-  LabListModel,
-} from '../class.model';
-import { ClassService } from '../class.service';
+import { ClassModel, CourseTitleModel, DataSourceModel, InstructorList, LabListModel, Session, Student, StudentApproval, StudentPaginationModel } from 'app/admin/schedule-class/class.model';
+import { ClassService } from 'app/admin/schedule-class/class.service';
 import { forkJoin } from 'rxjs';
 import * as moment from 'moment';
 import { DatePipe } from '@angular/common';

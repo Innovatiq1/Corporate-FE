@@ -15,57 +15,32 @@
                     <form [formGroup]="userTypeFormGroup">
                         <div class="body m-4">
                             <div class="row">
-                                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                                    <label>Enter User Type <span class="mandatory">&nbsp;*</span></label>
+                                <div  *ngIf ="isEdit === false"class="col-xl-4 col-lg-5 col-md-10 col-sm-12 mb-2">
+                                    <label>Existing User Types</label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
 
                                         <mat-select formControlName="typeName">
-                                            <mat-option value="USD">System Administrators</mat-option>
-                                            <mat-option value="SGD">Training Administrators</mat-option>
-                                            <mat-option value="NZD">Learners</mat-option>
-                                            <mat-option value="YEN">Supervisors</mat-option>
-                                            <mat-option value="GBP">Head of Department</mat-option>
-                                            <mat-option value="GBP">Training Coordinators</mat-option>
-                                            <mat-option value="GBP">Instructors</mat-option>
-                                            <mat-option value="GBP">Course Managers</mat-option>
+                                            <mat-option *ngFor="let type of userTypeNames" [value]="type.typeName">
+                                                {{ type?.typeName | titlecase }}
+                                              </mat-option>
                                           </mat-select>
-                                        <mat-error *ngIf="userTypeFormGroup.get('typeName')?.hasError('required')">
-                                            Enter User Type
-                                        </mat-error>
                                     </mat-form-field>
-                                </div> -->
-                                
-                                <!-- <div class="col align-items-center mt-5 ">
-                                    <mat-checkbox class="example-margin" (click)="create()" formControlName="isAdmin" checked>Admin</mat-checkbox>
-                                </div> -->
-                            </div>
+                                </div>
+                                                            </div>
                             <div class="row">
                                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
                                     <label>User Type</label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                        <!-- <mat-label>Course Name</mat-label> -->
-                                        <input matInput type="text" id="name" formControlName="typeName"
-                                        class="form-control" placeholder="Enter User Type"
-                                        required>                                      
-                                          <mat-error *ngIf="userTypeFormGroup.get('typeName')?.hasError('required')">
-                                            Enter User Type
-                                        </mat-error>
+                                        <input matInput type="text" formControlName="typeName"
+                                        class="form-control" placeholder="Enter New User Type"
+                                        >                                      
                                     </mat-form-field>
                                 </div>
-                                <!-- <div class="col-md-6">
+                                <div class="col-md-6">
                                     <div class="d-grid gap-3 d-md-flex">
-                                    <button mat-raised-button type="button" class="btn sub" (click)="addUserTypeField()"><img src="/assets/Close.svg" alt="plus">Add User Type</button>
-                                    <button mat-button  id="create" > Create </button>
+                                    <button *ngIf ="isEdit === false" mat-button (click)="createUserType()"  id="create" > Create </button>
                                     </div>
-                                  </div> -->
-                                <!-- <div class="col-xl-4 col-lg-3 col-md-12 col-sm-12 mb-2">
-                                <button class="btn sub" >
-                                    <img src="/assets/Close.svg" alt="plus">
-                                    Add User Type</button>
-                                </div>
-                                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 mb-2 ">
-                                    <button mat-button type="submit" id="submit" class="btn crt-color">Create</button>
-                                </div> -->
+                                  </div>
                             </div>
                         </div>
                     </form>

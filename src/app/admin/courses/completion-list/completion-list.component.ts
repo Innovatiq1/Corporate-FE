@@ -2,8 +2,8 @@ import { MatTableDataSource } from '@angular/material/table';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, ViewChild } from '@angular/core';
-import { Session, Student, StudentApproval, StudentPaginationModel } from '../class.model';
-import { ClassService } from '../class.service';
+import { ClassModel, Session, Student, StudentApproval, StudentPaginationModel } from 'app/admin/schedule-class/class.model';
+import { ClassService } from 'app/admin/schedule-class/class.service';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { MatSort } from '@angular/material/sort';

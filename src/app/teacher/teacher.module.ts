@@ -20,9 +20,11 @@ import { InstructorSettingsComponent } from './settings/settings.component';
 import { ExamScheduleComponent } from './exam-schedule/exam-schedule.component';
 import { LecturesService } from './lectures/lectures.service';
 import { InstructorLeaveRequestService } from './leave-request/leave-request.service';
+//import { FormDialogComponent } from './leave-request/dialogs/form-dialog/form-dialog.component';
 import { ExamScheduleService } from './exam-schedule/exam-schedule.service';
 import { SharedModule } from '@shared';
 import { ComponentsModule } from '@shared/components/components.module';
+import { EditLeaveRequestComponent } from './leave-request/dialogs/edit-leave-request/edit-leave-request.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +32,11 @@ import { ComponentsModule } from '@shared/components/components.module';
     LecturesComponent,
     DeleteDialogComponent,
     FormDialogComponent,
+    FormDialogComponent,
     InstructorLeaveRequestComponent,
     InstructorSettingsComponent,
     ExamScheduleComponent,
+    EditLeaveRequestComponent,
   ],
   imports: [
     CommonModule,

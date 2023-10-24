@@ -20,8 +20,7 @@
                       aria-label="Search box"  [(ngModel)]="courseKitModel.filterText" (ngModelChange)="fetchCourseKits()"
                       (change)="fetchCourseKits()"> -->
                       <input placeholder="Search" type="text" #filter class="browser-default search-field"
-                      aria-label="Search box"   [(ngModel)]="searchTerm" (ngModelChange)="fetchCourseKits()"
-                      (change)="fetchCourseKits()" (keyup)="performSearch()">
+                      aria-label="Search box"   [(ngModel)]="searchTerm" (input)="performSearch()">
                   </li>
                 </ul>
               </div>

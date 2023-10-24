@@ -15,6 +15,9 @@ import { map } from 'rxjs/operators';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
+import { Direction } from '@angular/cdk/bidi';
+import { EditLeaveRequestComponent } from './dialogs/edit-leave-request/edit-leave-request.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-leave-request',
@@ -29,8 +32,10 @@ export class InstructorLeaveRequestComponent
   displayedColumns = [
     'select',
     'img',
+    "className",
     'rNo',
     'name',
+    'applyDate',
     'fromDate',
     'toDate',
     'status',
@@ -55,7 +60,8 @@ export class InstructorLeaveRequestComponent
   constructor(
     public httpClient: HttpClient,
     public leaveRequestService: InstructorLeaveRequestService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     super();
   }
@@ -81,6 +87,47 @@ export class InstructorLeaveRequestComponent
           this.selection.select(row)
         );
   }
+  editCall(row: LeaveRequest) {
+    this.id = row.id;
+    let tempDirection: Direction;
+    if (localStorage.getItem('isRtl') === 'true') {
+      tempDirection = 'rtl';
+    } else {
+      tempDirection = 'ltr';
+    }
+    const dialogRef = this.dialog.open(EditLeaveRequestComponent, {
+      data: {
+        leaveRequest: row,
+        action: 'edit',
+      },
+      direction: tempDirection,
+    });
+    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        // When using an edit things are little different, firstly we find record inside DataService by id
+        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+          (x) => x.id === this.id
+        );
+        // Then you update that record using data from dialogData (values you enetered)
+        if (foundIndex != null && this.exampleDatabase) {
+          this.exampleDatabase.dataChange.value[foundIndex] =
+            this.leaveRequestService.getDialogData();
+            //this.ro
+          // And lastly refresh table
+          this.loadData();
+          this.refreshTable();
+          this.showNotification(
+            'black',
+            'Edit Record Successfully...!!!',
+            'bottom',
+            'center'
+          );
+        }
+      }
+    });
+  }
+
+
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
     this.selection.selected.forEach((item) => {
@@ -161,7 +208,9 @@ export class ExampleDataSource extends DataSource<LeaveRequest> {
       this.filterChange,
       this.paginator.page,
     ];
-    this.exampleDatabase.getAllLeaveRequest();
+    let instructorId = localStorage.getItem('id')
+
+    this.exampleDatabase.getAllLeaveRequest(instructorId);
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data
@@ -169,8 +218,9 @@ export class ExampleDataSource extends DataSource<LeaveRequest> {
           .slice()
           .filter((leaveRequest: LeaveRequest) => {
             const searchStr = (
-              leaveRequest.rNo +
-              leaveRequest.name +
+              leaveRequest.rollNo +
+              leaveRequest.className +
+              leaveRequest.studentId.name +
               leaveRequest.fromDate +
               leaveRequest.toDate +
               leaveRequest.status +
@@ -205,11 +255,14 @@ export class ExampleDataSource extends DataSource<LeaveRequest> {
         case 'id':
           [propertyA, propertyB] = [a.id, b.id];
           break;
-        case 'rNo':
-          [propertyA, propertyB] = [a.rNo, b.rNo];
+          case 'className':
+          [propertyA, propertyB] = [a.className, b.className];
+          break;
+          case 'rNo':
+          [propertyA, propertyB] = [a.studentId.rollNo, b.studentId.rollNo];
           break;
         case 'name':
-          [propertyA, propertyB] = [a.name, b.name];
+          [propertyA, propertyB] = [a.studentId.name, b.studentId.name];
           break;
         case 'fromDate':
           [propertyA, propertyB] = [a.fromDate, b.fromDate];
