@@ -99,7 +99,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <button class="btn-space" [disabled]="!departmentForm.valid " mat-raised-button
                     color="primary">Submit</button>
-                  <button type="button" mat-raised-button color="warn" [routerLink]="['/admin/departments/all-departments']">Cancel</button>
+                  <button type="button" mat-raised-button color="warn" (click)="cancel()">Cancel</button>
                 </div>
               </div>
             </form>

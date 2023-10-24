@@ -7,6 +7,7 @@ import { DashboardComponent } from 'app/teacher/dashboard/dashboard.component';
 import { CmDashboardComponent } from './cm-dashboard/cm-dashboard.component';
 import { PmDashboardComponent } from './pm-dashboard/pm-dashboard.component';
 import { TrainingAdministratorComponent } from './training-administrator/training-administrator.component';
+import { HodDashboardComponent } from './hod-dashboard/hod-dashboard.component';
 const routes: Routes = [
   {
     path: '',
@@ -35,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: 'hod-dashboard',
-    component: CmDashboardComponent,
+    component: HodDashboardComponent,
   },
   {
     path: 'trainingadministrator-dashboard',
