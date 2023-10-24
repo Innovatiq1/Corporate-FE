@@ -16,8 +16,8 @@
               <form [formGroup]="surveyForm">
               <div class="row justify-content-between mt-4">
                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <label>Name <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Name</mat-label>
                     <input matInput formControlName="title" >
                     <mat-icon matSuffix>face</mat-icon>
                     <!-- <mat-error *ngIf="register?.get('first')?.hasError('required')">
@@ -26,7 +26,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 " (click)="preinitRating()">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 mt-4 " (click)="preinitRating()">
                   <button mat-raised-button >Add Ratings
                       <i class="material-icons m-2">star_rate</i>
                   </button>
@@ -38,8 +38,8 @@
               <div class="row" formArrayName="questions">
                 <div class="row mt-5  align-items-center" *ngFor="let question of questions.controls; let index= index" [formGroupName]="index">
                   <div class="col-lg-3">
+                    <label>Question {{index + 1}}</label>
                     <mat-form-field class="example-full-width" appearance="outline">
-                      <mat-label>Question {{index + 1}}</mat-label>
                       <input matInput formControlName="question" >
                       <mat-error *ngIf="surveyForm?.get('question')?.hasError('required')">
                       Question is required
@@ -47,8 +47,8 @@
                     </mat-form-field>
                   </div>
                   <div class="col-lg-3">
+                    <label>Type</label>
                               <mat-form-field class="example-full-width " appearance="outline">
-                                <mat-label>Type</mat-label>
                                 <mat-select formControlName="type"  >
                                   <mat-option value="single">
                                     Single Choice
@@ -65,16 +65,16 @@
                                   </mat-error>
                               </mat-form-field>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-4">
+                    <label>Choices (comma-separated)</label>
                     <mat-form-field class="example-full-width" appearance="outline">
-                      <mat-label>Choices (comma-separated)</mat-label>
                       <input matInput  formControlName="choices" >
                       <!-- <mat-error *ngIf="register?.get('first')?.hasError('required')">
                         First name is required
                       </mat-error> -->
                     </mat-form-field>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-1">
                     <button mat-icon-button color="accent" class="tbl-action-btn" (click)="deleteQuestion(index)">
                       <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'">
                       </app-feather-icons>

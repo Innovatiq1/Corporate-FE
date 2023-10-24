@@ -19,11 +19,11 @@
             <form class="m-4" [formGroup]="stdForm" >
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>First name <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>First name</mat-label>
                     <input matInput formControlName="name" required />
                     <mat-error
                       *ngIf="stdForm.get('name')?.hasError('required')"
@@ -33,31 +33,31 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Last name </label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Last name</mat-label>
                     <input matInput formControlName="last_name" />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Roll No <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Roll No</mat-label>
                     <input matInput formControlName="rollNo" />
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Gender<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Gender</mat-label>
                     <mat-select formControlName="gender" required>
                       <mat-option [value]="'male'"> Male </mat-option>
                       <mat-option [value]="'female'"> Female </mat-option>
@@ -73,11 +73,11 @@
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Email<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Email</mat-label>
                     <input matInput formControlName="email" required />
                     <mat-error
                       *ngIf="
@@ -90,11 +90,11 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Mobile<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Mobile</mat-label>
                     <input
                       matInput
                       formControlName="mobile"
@@ -106,11 +106,11 @@
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Password <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Password</mat-label>
                     <input
                       matInput
                       formControlName="password"
@@ -125,11 +125,11 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Re-Enter Password <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Re-Enter Password</mat-label>
                     <input
                       matInput
                       formControlName="conformPassword"
@@ -148,11 +148,11 @@
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Registration Date <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Registration Date</mat-label>
                     <input
                       matInput
                       [matDatepicker]="rpicker"
@@ -172,11 +172,11 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Select Department <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Select Department</mat-label>
                     <mat-select formControlName="department" required >
                       <mat-option [value]="dept.department" *ngFor="let dept of dept">
                        {{dept.department }}
@@ -192,11 +192,11 @@
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Parents name <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Parents name</mat-label>
                     <input matInput formControlName="parentsName" required />
                     <mat-error
                       *ngIf="stdForm.get('parentsName')?.hasError('required')"
@@ -206,11 +206,11 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Parents Mobile Number </label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Parents Mobile Number</mat-label>
                     <input
                       matInput
                       formControlName="parentsPhone"
@@ -221,11 +221,11 @@
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Date Of Birth <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Date Of Birth</mat-label>
                     <input
                       matInput
                       [matDatepicker]="picker"
@@ -243,33 +243,33 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <label>Blood Group <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Blood Group</mat-label>
                     <input matInput formControlName="blood_group" />
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <label>Education <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Education</mat-label>
                     <textarea matInput formControlName="qualification"></textarea>
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <label>Address </label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Address</mat-label>
                     <textarea matInput formControlName="address"></textarea>
                   </mat-form-field>
                 </div>
@@ -277,7 +277,7 @@
 
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
-                  <label>Upload</label>
+                  <label>Upload <span class="mandatory">&nbsp;*</span></label>
                   <div class="file-drop-area">
                     <div class="file">
                       <!-- <button mat-raised-button color="primary">Choose file</button> -->

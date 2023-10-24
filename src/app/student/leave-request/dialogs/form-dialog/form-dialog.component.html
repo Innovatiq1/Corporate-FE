@@ -15,8 +15,8 @@
     <form class="register-form m-4" [formGroup]="leaveRequestForm" (ngSubmit)="submit">
       <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label>Class Name<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Class Name</mat-label>
             <mat-select formControlName="className" required>
               <mat-option *ngFor="let data of studentApprovedClasses" [value]="data">
                 {{data?.classId?.courseId?.title}}
@@ -28,8 +28,8 @@
           </mat-form-field>
         </div>
         <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label>Apply date<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Apply date</mat-label>
             <input matInput [matDatepicker]="picker1" formControlName="applyDate" required>
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
@@ -51,8 +51,8 @@
       </div>
       <div class="row">
         <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label>From date<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>From date</mat-label>
             <input matInput [matDatepicker]="picker2" formControlName="fromDate" required>
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
@@ -63,8 +63,8 @@
         </div>
 
         <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label>To date<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>To date</mat-label>
             <input matInput [matDatepicker]="picker3" formControlName="toDate" required>
             <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
             <mat-datepicker #picker3></mat-datepicker>
@@ -94,8 +94,8 @@
       </div>
       <div class="row">
         <div class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <label>Reason<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width mb-3" appearance="outline">
-            <mat-label>Reason</mat-label>
             <textarea matInput formControlName="reason"></textarea>
           </mat-form-field>
         </div>

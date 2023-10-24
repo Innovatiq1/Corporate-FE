@@ -15,11 +15,11 @@
           <div class="body">
                 <form [formGroup]="addCusForm!" (ngSubmit)="onSubmitClick()">
                   <div class="mt-3">
+                    <label>Banner For <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-label>Banner For</mat-label>
                     <input matInput formControlName="bannerFor" readonly required />
                     <mat-error
                       *ngIf="addCusForm.get('parentsName')?.hasError('required')"
