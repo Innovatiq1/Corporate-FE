@@ -5,6 +5,7 @@ import { Dashboard2Component } from './dashboard2/dashboard2.component';
 import { DashboardComponent as StudentDashboard } from 'app/student/dashboard/dashboard.component';
 import { DashboardComponent } from 'app/teacher/dashboard/dashboard.component';
 import { CmDashboardComponent } from './cm-dashboard/cm-dashboard.component';
+import { SupervisorDashboardComponent } from './supervisor-dashboard/supervisor-dashboard.component';
 import { PmDashboardComponent } from './pm-dashboard/pm-dashboard.component';
 import { TrainingAdministratorComponent } from './training-administrator/training-administrator.component';
 import { HodDashboardComponent } from './hod-dashboard/hod-dashboard.component';
