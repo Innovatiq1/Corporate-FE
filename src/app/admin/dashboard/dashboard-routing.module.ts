@@ -8,6 +8,7 @@ import { CmDashboardComponent } from './cm-dashboard/cm-dashboard.component';
 import { PmDashboardComponent } from './pm-dashboard/pm-dashboard.component';
 import { TrainingAdministratorComponent } from './training-administrator/training-administrator.component';
 import { HodDashboardComponent } from './hod-dashboard/hod-dashboard.component';
+import { TrainingCoordinatorDbComponent } from './training-coordinator-db/training-coordinator-db.component';
 const routes: Routes = [
   {
     path: '',
@@ -50,7 +51,10 @@ const routes: Routes = [
     path: 'programmanager-dashboard',
     component: PmDashboardComponent,
   },
-
+  {
+    path: 'trainingcoordinator-dashboard',
+    component: TrainingCoordinatorDbComponent,
+  },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

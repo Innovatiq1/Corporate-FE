@@ -1,32 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CourseService } from '@core/service/course.service';
 import { InstructorService } from '@core/service/instructor.service';
 import { StudentService } from '@core/service/student.service';
 import { UserService } from '@core/service/user.service';
-import { ProgramService } from 'app/admin/program/program.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
-import { ChartOptions } from 'chart.js';
-import {
-  ChartComponent,
-  ApexAxisChartSeries,
-  ApexChart,
-  ApexXAxis,
-  ApexDataLabels,
-  ApexTooltip,
-  ApexYAxis,
-  ApexPlotOptions,
-  ApexStroke,
-  ApexLegend,
-  ApexMarkers,
-  ApexGrid,
-  ApexTitleSubtitle,
-  ApexFill,
-  ApexResponsive,
-  ApexTheme,
-  ApexNonAxisChartSeries,
-} from 'ng-apexcharts';
+import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexGrid, ApexLegend, ApexMarkers, ApexNonAxisChartSeries, ApexPlotOptions, ApexResponsive, ApexStroke, ApexTheme, ApexTitleSubtitle, ApexTooltip, ApexXAxis, ApexYAxis, ChartComponent } from 'ng-apexcharts';
 import Swal from 'sweetalert2';
+import { ChartOptions } from 'chart.js';
+import { DeptService } from '@core/service/dept.service';
+import { Department } from 'app/admin/departments/all-departments/department.model';
+
 export type chartOptions = {
 
   series: ApexAxisChartSeries;
@@ -47,13 +31,14 @@ export type chartOptions = {
   labels: string[];
   theme: ApexTheme;
   series2: ApexNonAxisChartSeries;
-};  
+}; 
+
 @Component({
-  selector: 'app-pm-dashboard',
-  templateUrl: './pm-dashboard.component.html',
-  styleUrls: ['./pm-dashboard.component.scss']
+  selector: 'app-training-coordinator-db',
+  templateUrl: './training-coordinator-db.component.html',
+  styleUrls: ['./training-coordinator-db.component.scss']
 })
-export class PmDashboardComponent implements OnInit {
+export class TrainingCoordinatorDbComponent {
   @ViewChild('chart') chart!: ChartComponent;
   public areaChartOptions!: Partial<chartOptions>;
   public barChartOptions!: Partial<chartOptions>;
@@ -64,7 +49,7 @@ export class PmDashboardComponent implements OnInit {
     {
       title: 'Dashboad',
       items: [],
-      active: 'Program Manager Dashboard',
+      active: 'Training Coordinator Dashboard',
     },
   ];
   count: any;
@@ -94,16 +79,19 @@ export class PmDashboardComponent implements OnInit {
   instructorCount: any;
   adminCount: any;
   studentCount: any;
-  registeredProgramClasses: any;
+  departments: any;
   programList: any;
   upcomingPrograms: any;
+  id?: number;
+  departmentCount: any;
+
   constructor(private courseService: CourseService,
     private userService: UserService,
     private instructorService: InstructorService,
     private classService: ClassService,
     private router: Router,
-    private _programService:ProgramService,
-    private studentService:StudentService) {
+    private studentService:StudentService,
+    private deptService:DeptService,) {
     //constructor
     this.getCount();
     this.getInstructorsList();
@@ -291,35 +279,35 @@ export class PmDashboardComponent implements OnInit {
     });
   }
   editCall(student: any) {
+    console.log('hi',student)
     this.router.navigate(['/admin/students/add-student'],{queryParams:{id:student.id}})
   }
   editClass(id:string){
-    this.router.navigate([`admin/schedule/create-class`], { queryParams: {id: id}});
+    this.router.navigate([`admin/courses/create-class`], { queryParams: {id: id}});
   }
   delete(id: string) {
-    this._programService
-      .getProgramClassList({ courseId: id })
-      .subscribe((classList: any) => {
-        const matchingClasses = classList.docs.filter((classItem: any) => {
-          return classItem.courseId && classItem.courseId.id === id;
-        });
-        if (matchingClasses.length > 0) {
-          Swal.fire({
-            title: 'Error',
-            text: 'Classes have been registered with program`. Cannot delete.',
-            icon: 'error',
-          });
-          return;
-        }
-        this._programService.deleteProgramClass(id).subscribe(() => {
-          Swal.fire({
-            title: 'Success',
-            text: 'Class deleted successfully.',
-            icon: 'success',
-          });
-          this.getClassList();
-        });
+    console.log(id)
+    this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
+      const matchingClasses = classList.docs.filter((classItem: any) => {
+        return classItem.courseId && classItem.courseId.id === id;
       });
+      if (matchingClasses.length > 0) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Class have been registered. Cannot delete.',
+          icon: 'error',
+        });
+        return;
+      }
+      this.classService.deleteClass(id).subscribe(() => {
+        Swal.fire({
+          title: 'Success',
+          text: 'Class deleted successfully.',
+          icon: 'success',
+        });
+        this.getClassList();
+      });
+    });
   }
 
 
@@ -358,49 +346,29 @@ export class PmDashboardComponent implements OnInit {
      });
 
    }
-   getRegisteredClasses() {
-    this.classService
-      .getStudentsApprovedClasses()
-      .subscribe((response:any) => {
-      this.registeredProgramClasses = response.data.docs.slice(0,5);
-      })
-  }
-  getProgramList(filters?: any) {
-    this.courseService.getCourseProgram({status:'active'}).subscribe(
-      (response: any) => {
-        this.programList = response.docs;
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();  
-        const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
-        this.upcomingPrograms = this.programList.filter((item: { sessionStartDate: string | number | Date; }) => {
-          const sessionStartDate = new Date(item.sessionStartDate);
-          return (
-            sessionStartDate >= tomorrow 
-          );
-        });
-      },
-      (error) => {
-      }
-    );
-  }
+
+
 
   ngOnInit() {
-this.getClassList()
-this.getRegisteredClasses();
+this.getClassList();
 this.getProgramList();
   }
   getClassList() {
-    this._programService
-      .getProgramClassListWithPagination()
+    this.classService
+      .getClassListWithPagination()
       .subscribe(
         (response) => {
+          console.log('classRes', response);
+          if (response.data) {
             this.classesList = response.data.docs.slice(0,5).sort();
-},
-        () => { }
+          }
+       
+        },
+        (error) => {
+          console.log('error', error);
+        }
       );
   }
-
   private chart1() {
     this.areaChartOptions = {
       series: [
@@ -672,4 +640,24 @@ this.getProgramList();
       ],
     };
   }
+  getProgramList(filters?: any) {
+    this.courseService.getCourseProgram({status:'active'}).subscribe(
+      (response: any) => {
+        this.programList = response.docs;
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();  
+        const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+        this.upcomingPrograms = this.programList.filter((item: { sessionStartDate: string | number | Date; }) => {
+          const sessionStartDate = new Date(item.sessionStartDate);
+          return (
+            sessionStartDate >= tomorrow 
+          );
+        });
+      },
+      (error) => {
+      }
+    );
+  }
+ 
 }

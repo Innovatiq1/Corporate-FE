@@ -14,7 +14,7 @@ export class SBannerCreateComponent {
     {
       title: 'Create Banner',
       items: ['Banner'],
-      active: 'Instructor Banner',
+      active: 'Create Student Banner',
     },
   ];
   public addCusForm!: FormGroup;

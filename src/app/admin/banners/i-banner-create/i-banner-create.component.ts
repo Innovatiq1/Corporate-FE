@@ -14,8 +14,8 @@ export class IBannerCreateComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Extra'],
-      active: 'Blank',
+      items: ['Banners'],
+      active: 'Create Instructor Banner',
     },
   ];
   public addCusForm!: FormGroup;
