@@ -77,4 +77,49 @@ deleteUser(userId: string): Observable<ApiResponse> {
   const apiUrl = `${this.defaultUrl}auth/instructorDelete/${userId}`;
   return this.http.delete<ApiResponse>(apiUrl);
 }
+private buildParams(filter?: Partial<CoursePaginationModel>): HttpParams {
+  let params = new HttpParams();
+  if (filter) {
+    if (filter.sortBy) {
+      params = params.set(
+        "sortBy",
+        `${filter.sortByDirection === "asc" ? "+" : "-"}${filter.sortBy}`
+      );
+    }
+    if (filter.limit) {
+      params = params.set("limit", filter.limit?.toString());
+    }
+    if (filter.page) {
+      params = params.set("page", filter.page?.toString());
+    }
+    if (filter.main_category && +filter.main_category !== 0) {
+      params = params.set("main_category", filter.main_category);
+    }
+    if (filter.sub_category && +filter.sub_category !== 0) {
+      params = params.set("sub_category", filter.sub_category);
+    }
+    if (filter.filterText) {
+      params = params.set("title", filter.filterText?.toString());
+    }
+    if (filter.status && filter.status === "active") {
+      params = params.set("status", "active");
+    } else if (filter.status && filter.status === "inactive") {
+      params = params.set("status", "inactive");
+    }
+  }
+  return params;
+}
+
+getInstructors(payload:any): Observable<ApiResponse> {
+  const apiUrl = `${this.defaultUrl}auth/instructorList/`;
+  return this.http
+    .post<ApiResponse>(apiUrl, payload)
+    .pipe(
+      map((response:any) => {
+        return response;
+        //this.isTblLoading = false;
+      })
+    );
+}
+
 }

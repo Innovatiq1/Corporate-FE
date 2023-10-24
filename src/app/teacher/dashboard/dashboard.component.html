@@ -11,17 +11,17 @@
           <div class="body">
             <div class="row align-items-center">
               <div class="col-md-4">
-                <img src="assets/images/pages/welcome.png" alt="" class="w-100">
+                <img [src]="latestInstructor?.avatar || '../../../assets/noimage.jpg'" alt="" class="w-100">
+                <!-- <img src="../../../assets/noimage.jpg"> -->
               </div>
               <div class="col-md-8">
                 <h4 class="font-20 weight-500 mb-2">
-                  Welcome back <div class="weight-600 font-30 col-blue pt-1">Ashton Cox!</div>
+                  <div class="weight-600 font-30 col pt-1 text-muted">New Instructor</div>
+                   <div class="weight-600 font-30 col-blue pt-1">{{latestInstructor?.name}} {{latestInstructor?.last_name}}!</div>
                 </h4>
-                <p class="font-18 max-width-600">We would like to take this opportunity to welcome you to our practice
+                <p class="font-18 max-width-600">We would like to take this opportunity to welcome you to our organization
                   and to thank you
-                  for choosing our physicians to participate in your healthcare. We look forward to
-                  providing you with personalized, comprehensive health care focusing on wellness and
-                  prevention.</p>
+                  for choosing PSA to participate as an instructor.</p>
               </div>
             </div>
           </div>

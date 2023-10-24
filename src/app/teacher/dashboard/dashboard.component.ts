@@ -1,4 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { UsersModel } from '@core/models/user.model';
+import { InstructorService } from '@core/service/instructor.service';
+import { TeachersService } from 'app/admin/teachers/all-teachers/teachers.service';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -51,6 +54,8 @@ export class DashboardComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
   public avgLecChartOptions!: Partial<avgLecChartOptions>;
   public pieChartOptions!: Partial<pieChartOptions>;
+  UsersModel!: Partial<UsersModel>
+
 
   breadscrums = [
     {
@@ -59,14 +64,31 @@ export class DashboardComponent implements OnInit {
       active: 'Dashboard',
     },
   ];
+  latestInstructor: any;
 
-  constructor() {
+  constructor(private instructorService: InstructorService) {
     //constructor
   }
   ngOnInit() {
     this.chart1();
     this.chart2();
+    this.instructorData();
   }
+
+  instructorData() {
+    let payload = {
+      type: "Instructor"
+    }
+    this.instructorService.getInstructors(payload).subscribe((response: {
+      data: any;
+    }) => {
+      this.latestInstructor = response?.data[0]
+    }, (error) => {
+
+    });
+
+  }
+
   private chart1() {
     this.avgLecChartOptions = {
       series: [
