@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ClassService } from 'app/admin/schedule-class/class.service';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
 import {
   ChartComponent,
@@ -47,6 +48,7 @@ export type areaChartOptions = {
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  registeredCourses: any;
   @ViewChild('chart') chart!: ChartComponent;
   public barChartOptions!: Partial<barChartOptions>;
   public areaChartOptions!: Partial<areaChartOptions>;
@@ -58,12 +60,49 @@ export class DashboardComponent implements OnInit {
       active: 'Dashboard',
     },
   ];
-  constructor() {
-
-    //constructor
+  studentName: string;
+  approvedCourses: any;
+  registeredPrograms: any;
+  approvedPrograms: any;
+  constructor(private classService: ClassService) {
+    let user=JSON.parse(localStorage.getItem('currentUser')!);
+    this.studentName = user?.user?.name;
+    this.getRegisteredAndApprovedCourses()
   }
 
-  // Doughnut chart start
+  getRegisteredAndApprovedCourses(){
+    let studentId=localStorage.getItem('id')
+    const payload = { studentId: studentId, status: 'approved' ,isAll:true};
+    this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
+      this.approvedCourses = response?.data?.length
+    })
+    const payload1 = { studentId: studentId, status: 'registered' ,isAll:true};
+    this.classService.getStudentRegisteredClasses(payload1).subscribe(response =>{
+      this.registeredCourses = response?.data?.length
+      this.getRegisteredAndApprovedPrograms()
+    })
+
+  }
+  getRegisteredAndApprovedPrograms(){
+    let studentId=localStorage.getItem('id')
+    const payload = { studentId: studentId, status: 'registered' ,isAll:true};
+    this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
+      this.registeredPrograms = response?.data?.length    
+      const payload1 = { studentId: studentId, status: 'approved' ,isAll:true};
+      this.classService.getStudentRegisteredProgramClasses(payload1).subscribe(response =>{
+        this.approvedPrograms = response?.data?.length
+        this.doughnutChartData= {
+          labels: this.doughnutChartLabels,
+          datasets: [
+            {
+              data: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms],
+              backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8'],
+            },
+          ],
+        };
+      })
+    })
+  }
 
   public doughnutChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -75,20 +114,12 @@ export class DashboardComponent implements OnInit {
     },
   };
   public doughnutChartLabels: string[] = [
-    'Development',
-    'Java Classes',
-    'Painting ',
-    'Geography Class',
+    'Registered Courses',
+    'Approved Courses',
+    'Registered Programs ',
+    'Approved Programs',
   ];
-  public doughnutChartData: ChartData<'doughnut'> = {
-    labels: this.doughnutChartLabels,
-    datasets: [
-      {
-        data: [32, 25, 20, 23],
-        backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8'],
-      },
-    ],
-  };
+  public doughnutChartData!: ChartData<'doughnut'> 
   public doughnutChartType: ChartType = 'doughnut';
 
   // Doughnut chart end
