@@ -18,14 +18,35 @@
           <div class="body">
             <div class="row">
               <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <label>Survey Categorie<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-select >
+                    <mat-option value="Course" (click)="selectcourseList()">Course</mat-option>
+                    <mat-option value="Program" (click)="selectprogramList()">Program</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="body">
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" *ngIf="selectcourse">
                 <label>Course Name<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field
                   class="example-full-width mb-3"
-                  appearance="outline"
-                >
-                  
+                  appearance="outline">
                   <mat-select  required>
                     <mat-option [value]="'mechanical'" *ngFor="let course of courseList">{{ course?.title }} </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" *ngIf="!selectcourse">
+                <label>Program Name<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field
+                  class="example-full-width mb-3"
+                  appearance="outline">
+                  <mat-select  required>
+                    <mat-option [value]="'program.title'" *ngFor="let program of programData">{{ program?.title }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -162,7 +183,7 @@
             [ngClass]="selected ? 'disabled' : ''"
           >
             <span
-              class="shadow border rounded-circle px-3 py-2"
+              class="shadow border number rounded-circle px-3 py-2"
               (click)="setRow(i)"
               [ngClass]="{ highlight: selectedIndex == i }"
             >
