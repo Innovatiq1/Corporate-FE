@@ -72,6 +72,11 @@
                                                     <img class="img" src="/assets/approve.svg" alt="approve">
                                                     <span class="menu-text">Active</span>
                                                   </button>
+                                                  <button mat-menu-item (click)="delete(types)">
+                                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                                    <span class="menu-text">Delete</span>
+                                                  </button>
+  
   
                                               </mat-menu>
                                 </li>

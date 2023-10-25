@@ -64,9 +64,11 @@ export class UserTypeComponent {
           console.error(error, "result_error");
           Swal.fire({
             title: "Error",
-            text: "UserType already linked with User. Cannot Make Inactive.",
+            text: "UserType attached to  User. Cannot Make Inactive.",
             icon: "error",
           });
+          this.getUserTypeList({});
+
         }
       );
     }
@@ -83,14 +85,32 @@ export class UserTypeComponent {
         },
         (error) => {
           console.error(error, "result_error");
-          Swal.fire({
-            title: "Error",
-            text: "UserType already linked with User. Cannot Make Inactive.",
-            icon: "error",
-          });
         }
       );
     }
+    delete(data: any) {
+      console.log('data',data)
+        this.userService.deleteUserType(data.id,data.typeName).subscribe(() => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Usertype deleted successfully.',
+            icon: 'success',
+          });
+          this.getUserTypeList({});
+
+        },
+        (error) => {
+          Swal.fire({
+            title: "Error",
+            text: "UserType attached to  User. Cannot Delete.",
+            icon: "error",
+          });
+          this.getUserTypeList({});
+
+        }
+);
+    }
+    
   
 
 
