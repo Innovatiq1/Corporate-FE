@@ -14,6 +14,7 @@ import { CertificateService } from '@core/service/certificate.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { InstructorService } from '@core/service/instructor.service';
+import * as moment from 'moment';
 @Component({
   selector: 'app-add-course',
   templateUrl: './add-course.component.html',
@@ -112,6 +113,10 @@ export class AddCourseComponent implements OnInit {
         skill_connect_code: new FormControl('',[Validators.pattern(/^[a-zA-Z0-9]/)]),
         course_description: new FormControl('',[ Validators.maxLength(100)]),
         course_detailed_description: new FormControl('',[]),
+        sessionStartDate: new FormControl('',[]),
+        sessionStartTime: new FormControl('',[]),
+        sessionEndDate: new FormControl('',[]),
+        sessionEndTime: new FormControl('',[]),
       });
       this.secondFormGroup = this._formBuilder.group({
         pdu_technical: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
@@ -162,6 +167,7 @@ export class AddCourseComponent implements OnInit {
       this.mode = 'viewUrl';
   
     }
+    
     let payload = {
       type: 'Instructor',
     };
@@ -172,7 +178,9 @@ export class AddCourseComponent implements OnInit {
         'instructor',
         this.instructorList
       );
+      
     });
+   
 
 }
  
@@ -401,6 +409,10 @@ onFileUpload(event:any) {
       currency_code:courseData?.currency_code,
       skill_connect_code:courseData?.skill_connect_code,
       course_description:courseData?.course_description,
+      sessionStartDate: courseData?.sessionStartDate == "Invalid date" ? null : courseData.sessionStartDate,
+      sessionEndDate: courseData?.sessionEndDate == "Invalid date" ? null : courseData.sessionEndDate,
+      sessionStartTime: courseData?.sessionStartTime,
+      sessionEndTime: courseData?.sessionEndTime,
       course_detailed_description:courseData?.course_detailed_description,
       pdu_technical:wbsData?.pdu_technical,
       pdu_leadership:wbsData?.pdu_leadership,
@@ -412,7 +424,8 @@ onFileUpload(event:any) {
       course_kit:wbsData?.course_kit,
       certificates:wbsData?.certificates,
       image_link:this.image_link,
-      id:this.courseId
+      id:this.courseId,
+     
     }
     this.secondFormGroup.value.course_kit = this.firstFormGroup.value.course_kit?.map((item:any) => item.id);
     this.courseService.updateCourse(payload).subscribe((response:any) => {
@@ -456,10 +469,14 @@ onFileUpload(event:any) {
 
  
   submit() {
+    
     if(this.secondFormGroup.valid){
       const courseData = this.firstFormGroup.value;
+      console.log("sss", courseData)
       const wbsData = this.secondFormGroup.value;
+      
       let payload = {
+        
         title: courseData.title,
         courseCode: courseData?.courseCode,
         main_category: courseData?.main_category,
@@ -470,6 +487,10 @@ onFileUpload(event:any) {
         currency_code:courseData?.currency_code,
         skill_connect_code:courseData?.skill_connect_code,
         course_description:courseData?.course_description,
+        sessionStartDate: courseData?.sessionStartDate == "Invalid date" ? null : courseData.sessionStartDate,
+        sessionEndDate: courseData?.sessionEndDate == "Invalid date" ? null : courseData.sessionEndDate,
+        sessionStartTime: courseData?.sessionStartTime,
+        sessionEndTime: courseData?.sessionEndTime,
         course_detailed_description:courseData?.course_detailed_description,
         pdu_technical:wbsData?.pdu_technical,
         pdu_leadership:wbsData?.pdu_leadership,
@@ -482,8 +503,10 @@ onFileUpload(event:any) {
         certificates:wbsData?.certificates,
         image_link:this.image_link,
         website_link:wbsData?.website_link
+        
       }
       this.courseService.saveCourse(payload).subscribe((response: any) => {
+       
         Swal.fire({
           title: 'Successful',
           text: 'Course created successfully',
@@ -491,6 +514,7 @@ onFileUpload(event:any) {
         });
         this.courseAdded=true;  
         this.router.navigate(['/admin/courses/course-approval'])
+       
       });
 
   } else {
@@ -535,6 +559,10 @@ onFileUpload(event:any) {
         course_detailed_description:this.course?.course_detailed_description,
         skill_connect_code: this.course?.skill_connect_code,
         fee: this.course?.fee?.toString(),
+        sessionStartDate: `${moment(this.course?.sessionStartDate).format("YYYY-MM-DD")}`,
+        sessionEndDate: `${moment(this.course?.sessionEndDate).format("YYYY-MM-DD")}`,
+        sessionStartTime: this.course?.sessionStartTime,
+        sessionEndTime: this.course?.sessionEndTime,
         course_duration_in_days: this.course?.course_duration_in_days?.toString(),
       });
       this.secondFormGroup.patchValue({
@@ -558,5 +586,10 @@ onFileUpload(event:any) {
     });
   
   
+}
+
+cancel() {
+  
+  window.history.back();
 }
 }

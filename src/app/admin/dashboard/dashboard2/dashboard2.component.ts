@@ -278,10 +278,12 @@ export class Dashboard2Component implements OnInit {
         const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
         this.upcomingPrograms = this.programList.filter((item: { sessionStartDate: string | number | Date; }) => {
           const sessionStartDate = new Date(item.sessionStartDate);
+          console.log("sss",sessionStartDate >= tomorrow )
           return (
             sessionStartDate >= tomorrow 
           );
         });
+        console.log("ssss",this.upcomingPrograms )
       },
       (error) => {
       }
