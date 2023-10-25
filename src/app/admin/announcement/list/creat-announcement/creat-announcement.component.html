@@ -35,10 +35,8 @@
                   <label>Announcement For<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-select formControlName="announcementFor" required>
-                      <mat-option value="Admin" [disabled]="viewUrl == true">Admin</mat-option>
                       <mat-option value="Student" [disabled]="viewUrl == true">Student</mat-option>
                       <mat-option value="Instructor" [disabled]="viewUrl == true">Instructor</mat-option>
-                      <mat-option value="Staff" [disabled]="viewUrl == true">Staff</mat-option>
                       <mat-option value="Course Manager" [disabled]="viewUrl == true">Course Manager</mat-option>
                       <mat-option value="Training Administrator" [disabled]="viewUrl == true">Training Administrator</mat-option>
                       <mat-option value="Training Manager" [disabled]="viewUrl == true">Training Co-ordinator</mat-option>
