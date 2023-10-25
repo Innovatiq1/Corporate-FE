@@ -4,6 +4,9 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { environment } from 'environments/environment';
+//import { ApiResponse } from '../models/response'
+import { ApiResponse } from '@core/models/response';
+
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +40,18 @@ export class AuthService {
           localStorage.setItem('id', user.id);
           this.currentUserSubject.next(user);
           return user;
+        })
+      );
+  }
+  forgotPassword(email:any): Observable<ApiResponse> {
+    return this.http
+      .post<ApiResponse>(
+        `${environment.apiUrl}common/forgot-password`,
+        email
+      )
+      .pipe(
+        map((res) => {
+          return res;
         })
       );
   }

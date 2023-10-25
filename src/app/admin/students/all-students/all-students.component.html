@@ -200,7 +200,9 @@
                                       </button>
                                       <div *ngIf="!row?.isLogin">
                                       <button mat-menu-item  (click)="confirmItem(row)" class="align-items-center">
-                                        <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                        <img class="img-w" src="/assets/approve.svg" alt="approve">
+
+                                        <!-- <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons> -->
                                         <span class="menu-text px-3">Confirm</span>
                                       </button>
                                     </div>
