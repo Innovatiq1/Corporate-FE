@@ -17,7 +17,7 @@
                 <li class="tbl-search-box">
                   <label for="search-input"><i class="material-icons search-icon">search</i></label>
                   <input placeholder="Search" type="text" #filter class="browser-default search-field"
-                    aria-label="Search box">
+                    aria-label="Search box" [(ngModel)]="searchTerm" (input)="performSearch()">
                 </li>
               </ul>
             </div>
@@ -184,7 +184,7 @@
                 [style.display]="dataSource.renderedData.length === 0 ? '' : 'none'">
                 No results
               </div> -->
-           
+
               <mat-paginator #paginator [length]="totalItems" [pageIndex]="0"
               [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" (page)="pageSizeChange($event)">
             </mat-paginator>

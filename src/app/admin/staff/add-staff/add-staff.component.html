@@ -83,23 +83,12 @@
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-label>Select Department</mat-label>
-                    <mat-select formControlName="department" required>
-                      <mat-option [value]="'1'">
-                        Library
-                      </mat-option>
-                      <mat-option [value]="'2'">
-                        Administration
-                      </mat-option>
-                      <mat-option [value]="'3'">
-                        Transport
-                      </mat-option>
-                      <mat-option [value]="'4'">
-                        Laboratory
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="staffForm.get('department')?.hasError('required')">
-                      Select Any Department
+                    <mat-label>Joining Date</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="joiningDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                    <mat-error *ngIf="staffForm.get('joiningDate')?.hasError('required')">
+                      Please select date
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -152,7 +141,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <button class="btn-space" [disabled]="!staffForm.valid " mat-raised-button
                     color="primary">Submit</button>
-                  <button type="button" mat-raised-button color="warn">Cancel</button>
+                  <button type="button" mat-raised-button color="warn" [routerLink]="['/admin/staff/all-staff']">Cancel</button>
                 </div>
               </div>
             </form>

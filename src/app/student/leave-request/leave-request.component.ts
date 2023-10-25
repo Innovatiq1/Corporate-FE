@@ -104,12 +104,12 @@ export class LeaveRequestComponent
           this.leaveRequestService.getDialogData()
         );
         this.refreshTable();
-        this.showNotification(
-          'snackbar-success',
-          'Add Record Successfully...!!!',
-          'bottom',
-          'center'
-        );
+        Swal.fire({
+          title: 'Successful',
+          text: "Leave applied successfully",
+          icon: 'success',
+        });
+  
       }
     });
   }
@@ -130,22 +130,18 @@ export class LeaveRequestComponent
     });
     this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
       if (result === 1) {
-        // When using an edit things are little different, firstly we find record inside DataService by id
         const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
           (x) => x.id === this.id
         );
-        // Then you update that record using data from dialogData (values you enetered)
         if (foundIndex != null && this.exampleDatabase) {
           this.exampleDatabase.dataChange.value[foundIndex] =
             this.leaveRequestService.getDialogData();
-          // And lastly refresh table
           this.refreshTable();
-          this.showNotification(
-            'black',
-            'Edit Record Successfully...!!!',
-            'bottom',
-            'center'
-          );
+          Swal.fire({
+            title: 'Successful',
+            text: "Leave edited successfully",
+            icon: 'success',
+          });
         }
       }
     });
@@ -153,42 +149,14 @@ export class LeaveRequestComponent
   deleteItem(row: LeaveRequest) {
     let id = row.id;
     this.leaveRequestService.deleteLeaveRequest(id).subscribe(() => {
-      // this.getAllDepartments();
       Swal.fire({
         title: 'Success',
         text: 'Leave deleted successfully.',
         icon: 'success',
       });
-    });
+      this.loadData();
 
-    // let tempDirection: Direction;
-    // if (localStorage.getItem('isRtl') === 'true') {
-    //   tempDirection = 'rtl';
-    // } else {
-    //   tempDirection = 'ltr';
-    // }
-    // const dialogRef = this.dialog.open(DeleteDialogComponent, {
-    //   data: row,
-    //   direction: tempDirection,
-    // });
-    // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-    //   if (result === 1) {
-    //     const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-    //       (x) => x.id === this.id
-    //     );
-    //     // for delete we use splice in order to remove single object from DataService
-    //     if (foundIndex != null && this.exampleDatabase) {
-    //       this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-    //       this.refreshTable();
-    //       this.showNotification(
-    //         'snackbar-danger',
-    //         'Delete Record Successfully...!!!',
-    //         'bottom',
-    //         'center'
-    //       );
-    //     }
-    //   }
-    // });
+    });
   }
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);

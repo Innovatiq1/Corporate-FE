@@ -30,6 +30,8 @@ export class FormDialogComponent {
   leaveRequestForm: UntypedFormGroup;
   leaveRequest: LeaveRequest;
   studentApprovedClasses: any;
+  id!: number;
+  isEdit = false;
   constructor(
     public dialogRef: MatDialogRef<FormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -41,8 +43,11 @@ export class FormDialogComponent {
     // Set the defaults
     this.action = data.action;
     if (this.action === "edit") {
+      this.isEdit = true;
       this.dialogTitle = "Edit Leave Request";
       this.leaveRequest = data.leaveRequest;
+      this.id = data.leaveRequest.id
+
     } else {
       this.dialogTitle = "New Leave Request";
       const blankObject = {} as LeaveRequest;
@@ -58,17 +63,17 @@ export class FormDialogComponent {
     return this.formControl.hasError("required")
       ? "Required field"
       : this.formControl.hasError("email")
-      ? "Not a valid email"
-      : "";
+        ? "Not a valid email"
+        : "";
   }
-  getApprovedCourse(){
-    let studentId=localStorage.getItem('id')
+  getApprovedCourse() {
+    let studentId = localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved' };
-    this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
-     this.studentApprovedClasses = response.data.docs;
+    this.classService.getStudentRegisteredClasses(payload).subscribe(response => {
+      this.studentApprovedClasses = response.data.docs;
     })
   }
-  
+
   createContactForm(): UntypedFormGroup {
     return this.fb.group({
       id: [this.leaveRequest.id],
@@ -86,18 +91,23 @@ export class FormDialogComponent {
     this.dialogRef.close();
   }
   public confirmAdd(): void {
-    let payload={
-      className:this.leaveRequestForm.value?.className?.classId?.courseId?.title,
-      applyDate:this.leaveRequestForm.value?.applyDate,
-      fromDate:this.leaveRequestForm.value?.fromDate,
-      toDate:this.leaveRequestForm.value?.toDate,
-      reason:this.leaveRequestForm.value?.reason,
-      instructorId:this.leaveRequestForm.value?.className?.classId?.sessions[0]?.instructorId,
-      classId:this.leaveRequestForm.value?.className?.classId?.id,
-      studentId:this.leaveRequestForm.value?.className?.studentId?.id,
-      status:'applied'
+    let payload = {
+      className: this.isEdit ? this.leaveRequestForm.value?.className : this.leaveRequestForm.value?.className?.classId?.courseId?.title,
+      applyDate: this.leaveRequestForm.value?.applyDate,
+      fromDate: this.leaveRequestForm.value?.fromDate,
+      toDate: this.leaveRequestForm.value?.toDate,
+      reason: this.leaveRequestForm.value?.reason,
+      instructorId: this.leaveRequestForm.value?.className?.classId?.sessions[0]?.instructorId,
+      classId: this.leaveRequestForm.value?.className?.classId?.id,
+      studentId: this.leaveRequestForm.value?.className?.studentId?.id,
+      status: 'applied'
 
     }
-    this.leaveRequestService.addLeaveRequest(payload);
+    if (this.action === "edit") {
+      this.leaveRequestService.updateLeaveRequest(payload, this.id);
+
+    } else {
+      this.leaveRequestService.addLeaveRequest(payload);
+    }
   }
 }
