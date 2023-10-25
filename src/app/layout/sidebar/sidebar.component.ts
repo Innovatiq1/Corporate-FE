@@ -181,7 +181,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.authService.logout().subscribe((res) => {
       if (!res.success) {
         this.router.navigate(['/authentication/signin']);
-        localStorage.clear;
+        localStorage.clear();
       }
     });
   }
