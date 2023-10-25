@@ -12,7 +12,7 @@
             <h2> Staff Information</h2>
           </div>
           <div class="body">
-            <form class="m-4" [formGroup]="staffForm" (ngSubmit)="onSubmit()">
+            <form class="m-4" [formGroup]="staffForm" >
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -140,7 +140,9 @@
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <button class="btn-space" [disabled]="!staffForm.valid " mat-raised-button
-                    color="primary">Submit</button>
+                    color="primary" (click)="onSubmit()">Submit</button>
+                    <button class="btn-space" [disabled]="!staffForm.valid " mat-raised-button
+                    color="primary" (click)="update()">Update</button>
                   <button type="button" mat-raised-button color="warn" [routerLink]="['/admin/staff/all-staff']">Cancel</button>
                 </div>
               </div>
