@@ -102,8 +102,7 @@ export class AdminService {
       })
       .pipe(map((response) => response.data));
   }
-
-  createUserType(formData:any): Observable<UserType> {
+    createUserType(formData:any): Observable<UserType> {
     const apiUrl = this.defaultUrl + 'userType';
     return this.http.post<ApiResponse>(apiUrl, formData).pipe(
       map((response) => {

@@ -240,9 +240,9 @@ export class CreateUserTypeComponent {
 
   }
   getAllUserTypes(filters?: any) {
-    this.adminService.getUserTypeList({ ...this.coursePaginationModel }).subscribe(
+    this.adminService.getUserTypeList({ 'allRows':true }).subscribe(
       (response: any) => {
-        this.userTypeNames = response.docs;
+        this.userTypeNames = response;
       },
       (error) => {
       }

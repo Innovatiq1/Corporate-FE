@@ -41,6 +41,7 @@ import { LeaveRequestComponent } from './student/leave-request/leave-request.com
 import { LeaveRequestService as stdLeaveReqService } from './student/leave-request/leave-request.service';
 import { InstructorLeaveRequestService } from './teacher/leave-request/leave-request.service';
 import { LecturesService } from './teacher/lectures/lectures.service';
+import { LoginGuard } from '@core/guard/login.guard';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -92,6 +93,8 @@ export function createTranslateLoader(http: HttpClient) {
     stdLeaveReqService,
     InstructorLeaveRequestService,
     LecturesService,
+    { provide: LoginGuard, useClass: LoginGuard },
+
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     fakeBackendProvider,

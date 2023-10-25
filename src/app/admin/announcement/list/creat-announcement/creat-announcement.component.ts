@@ -60,6 +60,8 @@ export class CreatAnnouncementComponent {
       //this.cd.detectChanges();
     });
 
+    
+
   }
 
   back() {
@@ -67,7 +69,8 @@ export class CreatAnnouncementComponent {
   }
   test(event: any) {
   }
-
+  
+ 
 
   constructor(private router: Router, public classService: ClassService, public utils: UtilsService, private formBuilder: FormBuilder,
     private announcementService: AnnouncementService,) {
@@ -98,6 +101,7 @@ export class CreatAnnouncementComponent {
 
     // if (this.editUrl) {
       this.getAnnouncementList()
+      
     // }
 
     this.announcementForm = this.formBuilder.group({
@@ -110,6 +114,8 @@ export class CreatAnnouncementComponent {
   student1(event: any) {
 
   }
+
+  
 
   saveAnnouncement() {
     this.inProgress = true;

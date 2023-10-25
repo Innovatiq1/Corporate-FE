@@ -7,6 +7,14 @@ import { AbstractControl, FormGroup, ValidationErrors, Validators } from '@angul
 export class UtilsService {
   constructor() {
   }
+  isLoggedIn(): boolean {
+    let user =localStorage.getItem('currentUser')
+    if(user){
+      return true
+    } else {
+      return false
+    }
+}
   pageSizeArr = [10, 25, 50, 100];
 
   validationMessages: any = {
