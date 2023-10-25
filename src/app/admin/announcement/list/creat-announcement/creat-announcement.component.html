@@ -35,9 +35,17 @@
                   <label>Announcement For<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-select formControlName="announcementFor" required>
-                      <mat-option value="Student" [disabled]="viewUrl == true">Students</mat-option>
+                      <mat-option value="Admin" [disabled]="viewUrl == true">Admin</mat-option>
+                      <mat-option value="Student" [disabled]="viewUrl == true">Student</mat-option>
                       <mat-option value="Instructor" [disabled]="viewUrl == true">Instructor</mat-option>
                       <mat-option value="Staff" [disabled]="viewUrl == true">Staff</mat-option>
+                      <mat-option value="Course Manager" [disabled]="viewUrl == true">Course Manager</mat-option>
+                      <mat-option value="Training Administrator" [disabled]="viewUrl == true">Training Administrator</mat-option>
+                      <mat-option value="Training Manager" [disabled]="viewUrl == true">Training Co-ordinator</mat-option>
+                      <mat-option value="Head of Department" [disabled]="viewUrl == true">Head of Department</mat-option>
+                      <mat-option value="Supervisior" [disabled]="viewUrl == true">Supervisior</mat-option>
+                      <mat-option value="Program Manager" [disabled]="viewUrl == true">Program Manager</mat-option>
+                      <mat-option value="Program Co-ordinator" [disabled]="viewUrl == true">Program Co-ordinator</mat-option>
                     </mat-select>
                     <mat-error
                       *ngIf="announcementForm.get('announcementFor')?.hasError('required') ||announcementForm.get('announcementFor')?.touched">
