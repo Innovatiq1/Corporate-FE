@@ -16,11 +16,23 @@ export class RegistrationService {
         private http: HttpClient
     ) { }
 
-    registerUser(course: any) {
+
+    registerUser(course:any): Observable<ApiResponse> {
         const apiUrl = `${this.prefix}auth/UserCreate`;
         return this.http
           .post<ApiResponse>(apiUrl, course)
-          //.pipe(map((response) => { }));
+          .pipe(
+            map((res) => {
+              return res;
+            })
+          );
       }
+    
+    // registerUser(course: any) {
+    //     const apiUrl = `${this.prefix}auth/UserCreate`;
+    //     return this.http
+    //       .post<ApiResponse>(apiUrl, course)
+    //       //.pipe(map((response) => { }));
+    //   }
 
 }
