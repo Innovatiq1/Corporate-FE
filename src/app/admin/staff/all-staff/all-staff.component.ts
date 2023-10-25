@@ -95,18 +95,38 @@ export class AllstaffComponent
   }
 
 
-  deleteItem(row: Staff) {
-    this.id = row.id;
+  deleteItem(id:any) {
 
-    this.staffService.deleteStaff(this.id).subscribe(() => {
-      // this.getCoursesList();
-      Swal.fire({
-        title: 'Success',
-        text: 'Course deleted successfully.',
-        icon: 'success',
-      });
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this Student?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.staffService.deleteStaff(id).subscribe(() => {
+            Swal.fire({
+              title: "Deleted",
+              text: "Staff deleted successfully",
+              icon: "success",
+            });
+            //this.fetchCourseKits();
+            this.loadData()
+          },
+          (error: { message: any; error: any; }) => {
+            Swal.fire(
+              "Failed to delete Staff",
+              error.message || error.error,
+              "error"
+            );
+          }
+        );
+      }
     });
-
   }
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
@@ -250,8 +270,6 @@ export class ExampleDataSource extends DataSource<Staff> {
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
-
-          console.log("filter", this.filteredData)
         // Sort filtered data
         const sortedData = this.sortData(this.filteredData.slice());
         // Grab the page's slice of the filtered sorted data.
@@ -260,7 +278,6 @@ export class ExampleDataSource extends DataSource<Staff> {
           startIndex,
           this.paginator.pageSize
         );
-        console.log("redered", this.renderedData)
         return this.renderedData;
       })
     );

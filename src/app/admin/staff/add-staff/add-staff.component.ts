@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { StaffService } from '../all-staff/staff.service';
 import Swal from 'sweetalert2';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 @Component({
   selector: 'app-add-staff',
   templateUrl: './add-staff.component.html',
@@ -22,7 +22,7 @@ export class AddStaffComponent {
       active: 'Add Staff',
     },
   ];
-  constructor(private fb: UntypedFormBuilder, public staffService:StaffService,public active:ActivatedRoute) {
+  constructor(private fb: UntypedFormBuilder, public staffService:StaffService,public active:ActivatedRoute,public router:Router) {
 
     this.staffForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
@@ -45,9 +45,9 @@ export class AddStaffComponent {
 
     this.active.queryParams.subscribe(param =>{
 
-      let editData = param;
-      this.patchData(editData)
-    console.log("pa",editData);
+      this.editData = param;
+      this.patchData(this.editData)
+    console.log("pa",this.editData);
     })
   }
 
@@ -69,15 +69,28 @@ patchData(_data: any){
 }
   onSubmit() {
     console.log('Form Value', this.staffForm.value);
+  this.staffService.saveStaff(this.staffForm.value).subscribe((response: any) => {
+    console.log("res",response);
+    Swal.fire({
+      title: 'Successful',
+      text: 'Staff created successfully',
+      icon: 'success',
+    });
+    this.router.navigate(['/admin/staff/all-staff'])
+  });
 
-    this.staffService.saveStaff(this.staffForm.value).subscribe((response: any) => {
+
+  }
+
+  update(){
+    this.staffService.updateStaff(this.editData.id,this.staffForm.value).subscribe((response: any) => {
       console.log("res",response);
       Swal.fire({
         title: 'Successful',
-        text: 'Department created successfully',
+        text: 'Staff updated successfully',
         icon: 'success',
       });
-      // this.router.navigate(['/admin/departments/all-departments'])
+      this.router.navigate(['/admin/staff/all-staff'])
     });
   }
 }

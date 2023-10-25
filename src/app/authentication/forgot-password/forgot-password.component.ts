@@ -6,6 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { LanguageService } from '@core/service/language.service';
+import { AuthService } from '@core';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -16,11 +18,14 @@ export class ForgotPasswordComponent implements OnInit {
   langStoreValue?: string;
   submitted = false;
   returnUrl!: string;
+  error: any;
+ // resetLink: boolean;
   constructor(
     private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private translate: LanguageService
+    private translate: LanguageService,
+    private authService:AuthService
   ) {}
   ngOnInit() {
     this.startSlideshow();
@@ -51,11 +56,33 @@ export class ForgotPasswordComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
+   
     // stop here if form is invalid
     if (this.authForm.invalid) {
+
       return;
     } else {
-      this.router.navigate(['/dashboard/main']);
+      this.authService.forgotPassword(this.authForm.value).subscribe({next: (res) => {
+        if (res) {
+          Swal.fire({
+            title: 'Email Send Successful',
+            text: "We have sent new password to your email successfully.",
+            icon: 'success',
+          });
+          this.router.navigate(['/authentication/signin']);
+          
+          
+        } else {
+         // this.error = 'Invalid Login';
+        }
+      },
+      error: (error) => {
+        this.error = error;
+        this.submitted = false;
+        //this.loading = false;
+      },
+    });
+      
     }
   }
   images: string[] = ['/assets/images/login/Image 1- PSA.jpg', '/assets/images/login/Image 2- PSA.jpg', '/assets/images/login/Image 3.jpg',];

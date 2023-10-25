@@ -104,7 +104,7 @@ export class SignupComponent implements OnInit {
         (response: any) => {
           Swal.fire({
             title: 'Registration Successful',
-            text: 'Student created successfully',
+            text: "We have sent an email to you, check your email,to  know the status of your acount",
             icon: 'success',
           });
           this.router.navigate(['/authentication/signin']);
@@ -117,10 +117,7 @@ export class SignupComponent implements OnInit {
       );
     }
     this.submitted = true;
-    if (this.authForm.invalid) {
-      return;
-    } else {
-    }
+    
   }
   
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, pipe } from 'rxjs';
+import { BehaviorSubject, Observable, map, pipe } from 'rxjs';
 import { Staff } from './staff.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
@@ -18,7 +18,6 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
     super();
   }
   get data(): Staff[] {
-    console.log("staff",this.dataChange.value)
     return this.dataChange.value;
   }
   getDialogData() {
@@ -53,9 +52,17 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
       .pipe(map((response) => { }));
   }
 
-  deleteStaff(id:any){
-    const apiUrl = `${this.prefix}admin/staff/${id}`;
-    return this.httpClient.delete(apiUrl).pipe(map((response) => { }))
+  // deleteStaff(id:any){
+  //   const apiUrl = `${this.prefix}admin/staff/${id}`;
+  //   return this.httpClient.delete(apiUrl).pipe(map((response) => { }))
+  // }
+
+  deleteStaff(id: any): Observable<ApiResponse> {
+    return this.httpClient.delete<ApiResponse>(`${this.prefix}admin/staff/${id}`).pipe(
+      map((response) => {
+        return response.data;
+      })
+    );
   }
   addStaff(staff: Staff): void {
     this.dialogData = staff;
