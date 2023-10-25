@@ -204,6 +204,7 @@ export class HeaderComponent
     this.subs.sink = this.authService.logout().subscribe((res) => {
       if (!res.success) {
         this.router.navigate(['/authentication/signin']);
+        localStorage.clear();
       }
     });
   }
