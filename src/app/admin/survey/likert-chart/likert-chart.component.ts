@@ -112,7 +112,7 @@ export class LikertChartComponent {
   getProgramList() {
     this.courseService.getCourseProgram({status:'active'}).subscribe(
       (response: any) => {
-        console.log("page",response)
+        // console.log("page",response)
         this.programData = response.docs;
       },
       (error) => {
