@@ -112,7 +112,7 @@ export class LikertChartComponent {
   getProgramList() {
     this.courseService.getCourseProgram({status:'active'}).subscribe(
       (response: any) => {
-        console.log("page",response)
+        // console.log("page",response)
         this.programData = response.docs;
       },
       (error) => {
@@ -123,7 +123,6 @@ export class LikertChartComponent {
     this.adminService.getUserTypeList({ 'allRows':true }).subscribe(
       (response: any) => {
         let data = response.filter((item:any) =>item.typeName !== 'admin');
-        console.log('data',data);
         this.data = response;
       },
       (error) => {
