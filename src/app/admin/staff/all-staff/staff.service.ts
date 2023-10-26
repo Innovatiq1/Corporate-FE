@@ -24,12 +24,13 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
     return this.dialogData;
   }
   /** CRUD METHODS */
+  // const apiUrl = this.defaultUrl + 'admin/adminUserListing';
   getAllStaffs(): void {
-    const apiUrl = `${this.prefix}admin/staff/`;
+    const apiUrl = `${this.prefix}admin/adminUserListing/`;
     this.subs.sink = this.httpClient.get<Staff>(apiUrl).subscribe({
       next: (data) => {
         this.isTblLoading = false;
-        this.dataChange.next(data.data);
+        this.dataChange.next(data.data.data);
       },
       error: (error: HttpErrorResponse) => {
         this.isTblLoading = false;
@@ -38,19 +39,19 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
     });
   }
 
-  saveStaff(course: any) {
-    const apiUrl = `${this.prefix}admin/staff/`;
-    return this.httpClient
-      .post<ApiResponse>(apiUrl, course)
-      .pipe(map((response) => { }));
-  }
+  // saveStaff(course: any) {
+  //   const apiUrl = `${this.prefix}admin/staff/`;
+  //   return this.httpClient
+  //     .post<ApiResponse>(apiUrl, course)
+  //     .pipe(map((response) => { }));
+  // }
 
-  updateStaff(id:any,course: any) {
-    const apiUrl = `${this.prefix}admin/staff/${id}`;
-    return this.httpClient
-      .put<ApiResponse>(apiUrl, course)
-      .pipe(map((response) => { }));
-  }
+  // updateStaff(id:any,course: any) {
+  //   const apiUrl = `${this.prefix}admin/staff/${id}`;
+  //   return this.httpClient
+  //     .put<ApiResponse>(apiUrl, course)
+  //     .pipe(map((response) => { }));
+  // }
 
   // deleteStaff(id:any){
   //   const apiUrl = `${this.prefix}admin/staff/${id}`;
@@ -58,9 +59,9 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
   // }
 
   deleteStaff(id: any): Observable<ApiResponse> {
-    return this.httpClient.delete<ApiResponse>(`${this.prefix}admin/staff/${id}`).pipe(
+    return this.httpClient.delete<ApiResponse>(`${this.prefix}admin/adminUserListing/${id}`).pipe(
       map((response) => {
-        return response.data;
+        return response;
       })
     );
   }
