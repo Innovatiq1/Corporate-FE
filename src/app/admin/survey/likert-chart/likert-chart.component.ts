@@ -9,6 +9,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CourseTitleModel } from '@core/models/class.model';
+import { AdminService } from '@core/service/admin.service';
 import { CourseService } from '@core/service/course.service';
 import { InstructorService } from '@core/service/instructor.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
@@ -24,7 +25,8 @@ export class LikertChartComponent {
   name = 'Angular ' + VERSION.major;
   selectcourse: boolean = false;
   programData: any = [];
-
+  userTypeNames: any;
+  data:any;
   starRating = 0;
   currentRate = 3.14;
   breadscrums = [
@@ -72,13 +74,14 @@ export class LikertChartComponent {
     private instructorService: InstructorService,
     private _classService: ClassService,
     private courseService: CourseService,
-
+    private adminService: AdminService,
   ) {
     // constructor
   }
 
   ngOnInit() {
     this.getProgramList()
+    this.getAllUserTypes()
     let payload = {
       type: 'Instructor',
     };
@@ -111,6 +114,17 @@ export class LikertChartComponent {
       (response: any) => {
         console.log("page",response)
         this.programData = response.docs;
+      },
+      (error) => {
+      }
+    );
+  }
+  getAllUserTypes(filters?: any) {
+    this.adminService.getUserTypeList({ 'allRows':true }).subscribe(
+      (response: any) => {
+        let data = response.filter((item:any) =>item.typeName !== 'admin');
+        console.log('data',data);
+        this.data = response;
       },
       (error) => {
       }
