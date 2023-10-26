@@ -18,7 +18,7 @@
           <div class="body">
             <div class="row">
               <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                <label>Survey Categorie<span class="mandatory">&nbsp;*</span></label>
+                <label>Survey Category<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field class="example-full-width mb-3" appearance="outline">
                   <mat-select >
                     <mat-option value="Course" (click)="selectcourseList()">Course</mat-option>
@@ -51,14 +51,14 @@
                 </mat-form-field>
               </div>
               <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                <label>Instructor<span class="mandatory">&nbsp;*</span></label>
+                <label>User Type<span class="mandatory">&nbsp;*</span></label>
 
                 <mat-form-field
                   class="example-full-width mb-3"
                   appearance="outline"
                 >
                   <mat-select  required>
-                    <mat-option [value]="instructor.id" *ngFor="let instructor of instructorList"> {{ instructor?.name + " " + instructor?.last_name }} </mat-option>
+                    <mat-option [value]="type.id" *ngFor="let type of data">{{ type?.typeName | titlecase }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
