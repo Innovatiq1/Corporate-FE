@@ -83,7 +83,7 @@
                 <ng-container matColumnDef="designation">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Designation</mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    <span class="mobile-label">Designation:</span>{{row.designation}}</mat-cell>
+                    <span class="mobile-label">Designation:</span>{{row.role}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="mobile">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</mat-header-cell>
@@ -102,10 +102,10 @@
                     <span class="mobile-label">Joining Date:</span> {{row.joiningDate | date: 'MM/dd/yyyy'}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="address">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Address
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Salary
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    <span class="truncate-text"><span class="mobile-label">Address:</span>{{row.address}}</span>
+                    <span class="truncate-text"><span class="mobile-label">Salary:</span>{{row.salary}}</span>
                   </mat-cell>
                 </ng-container>
                 <!-- actions -->

@@ -7,15 +7,17 @@ export class Staff {
   date: string;
   address: string;
   mobile: string;
-  designation: string;
+  role: string;
+  salary:any
   data:any;
   constructor(staff: Staff) {
     {
       this.id = staff.id || this.getRandomID();
       this.img = staff.img || 'assets/images/user/user1.jpg';
       this.name = staff.name || '';
-      this.designation = staff.designation || '';
+      this.role = staff.role || '';
       this.email = staff.email || '';
+      this.salary = staff.salary || '';
       this.date = formatDate(new Date(), 'yyyy-MM-dd', 'en') || '';
       this.address = staff.address || '';
       this.mobile = staff.mobile || '';
