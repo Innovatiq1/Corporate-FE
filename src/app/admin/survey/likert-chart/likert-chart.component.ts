@@ -122,9 +122,7 @@ export class LikertChartComponent {
   getAllUserTypes(filters?: any) {
     this.adminService.getUserTypeList({ 'allRows':true }).subscribe(
       (response: any) => {
-        let data = response.filter((item:any) =>item.typeName !== 'admin');
-        console.log('data',data);
-        this.data = response;
+        this.data = response.filter((item:any) =>item.typeName !== 'admin');
       },
       (error) => {
       }
