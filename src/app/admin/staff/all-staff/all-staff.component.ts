@@ -89,7 +89,6 @@ export class AllstaffComponent
 
 
   editCall(row: Staff) {
-
     console.log("rowEdit",row)
     this.router.navigate(['/admin/staff/add-staff'],{queryParams:row});
   }
@@ -165,6 +164,9 @@ export class AllstaffComponent
     );
   }
   public loadData() {
+
+    // let data = this.staffService.getAllStaffs();
+    // console.log("data",data)
     this.exampleDatabase = new StaffService(this.httpClient);
     this.dataSource = new ExampleDataSource(
       this.exampleDatabase,
@@ -186,7 +188,7 @@ export class AllstaffComponent
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
         Name: x.name,
-        Designation: x.designation,
+        Designation: x.role,
         Mobile: x.mobile,
         Email: x.email,
         'Joining Date': formatDate(new Date(x.date), 'yyyy-MM-dd', 'en') || '',
@@ -257,12 +259,13 @@ export class ExampleDataSource extends DataSource<Staff> {
     return merge(...displayDataChanges).pipe(
       map(() => {
         // Filter data
-        this.filteredData = this.exampleDatabase.data
+     let data_source = this.exampleDatabase.data.filter(res => res.role !== 'Student')
+        this.filteredData = data_source
           .slice()
           .filter((staff: Staff) => {
             const searchStr = (
               staff.name +
-              staff.designation +
+              staff.role +
               staff.email +
               staff.mobile +
               staff.date +
