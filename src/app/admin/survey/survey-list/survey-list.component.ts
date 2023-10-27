@@ -35,6 +35,7 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
   displayedColumns = [
     'select',
     'courseName',
+    'studentName',
     'actions',
   ];
   exampleDatabase?: SurveyService;
@@ -72,10 +73,7 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
     this.loadData();
   }
   editCall(row: SurveyBuilderModel) {
-
-    console.log("rowEdit",row)
-
-    this.router.navigate(['/admin/survey/create-survey'], {queryParams: {id : row}})
+    this.router.navigate(['/admin/survey/view-survey'], {queryParams: {id : row}})
     // this.id = row.id;
     // let tempDirection: Direction;
     // if (localStorage.getItem('isRtl') === 'true') {
@@ -139,27 +137,16 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Course Name']];
+    const headers = [['Course Name','Student Name']];
     console.log(this.dataSource)
     const data = this.dataSource.filteredData.map((user:any) =>
-      [user.title] );
-    //const columnWidths = [60, 80, 40];
+      [user.courseName,user.studentFirstName] );
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
-
-    // Add a page to the document (optional)
-    //doc.addPage();
-
-    // Generate the table using jspdf-autotable
     (doc as any).autoTable({
       head: headers,
       body: data,
       startY: 20,
-
-
-
     });
-
-    // Save or open the PDF
     doc.save('SurveyList.pdf');
   }
   private refreshTable() {
@@ -220,7 +207,8 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
-        Name: x.title,
+        CourseName: x.courseName,
+        StudentName:x.studentFirstName,
       }));
 
     TableExportUtil.exportToExcel(exportData, 'excel');
@@ -286,10 +274,8 @@ export class ExampleDataSource extends DataSource<SurveyBuilderModel> {
         this.filteredData = this.exampleDatabase.data
           .slice()
           .filter((staff: SurveyBuilderModel) => {
-            const searchStr = (
-              staff.title
-            ).toLowerCase();
-            return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+            const searchStr = (staff.courseName)?.toLowerCase();
+            return searchStr?.indexOf(this.filter?.toLowerCase()) !== -1;
           });
         // Sort filtered data
         const sortedData = this.sortData(this.filteredData.slice());

@@ -10,6 +10,7 @@ import { CourseComponent } from './course/course.component';
 import { ViewCourseComponent } from './view-course/view-course.component';
 import { ProgramComponent } from './program/program.component';
 import { ViewProgramComponent } from './view-program/view-program.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,16 @@ const routes: Routes = [
     path: 'schedule/timetable',
     component: TimetableComponent,
   },
+  {
+    path: 'feedback/courses',
+    component: FeedbackComponent,
+  },
+  {
+    path: 'feedback/programs',
+    component: FeedbackComponent,
+  },
+
+
   { path: '**', component: Page404Component },
 ];
 
