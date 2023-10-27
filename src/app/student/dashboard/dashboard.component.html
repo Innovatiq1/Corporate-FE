@@ -7,7 +7,7 @@
     </div>
     <!-- Widgets -->
     <div class="row">
-      <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+      <div class="col-xl-12 col-lg-12 col-md-14 col-sm-14">
         <div class="card">
           <div class="body">
             <div class="row align-items-center">
@@ -19,40 +19,27 @@
               </div>
               <div class="col-md-8">
                 <h4>
-                  <div class="weight-600 col-pink pt-1">Good Job, Sarah. Keep Going!! </div>
+                  <div class="weight-600 col-pink pt-1">Good Job, {{studentName}}. Keep Going!! </div>
                 </h4>
-                <p class="font-15 max-width-600">You task are 80% completed this week. Keep it up and improve your
-                  result. Progress is very good!!!</p>
+                <!-- <p class="font-15 max-width-600">Keep it up and improve your
+                  result. Progress is very good!!!</p> --><br>
                 <div class="row">
                   <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot1 msr-2"></i> Development - 1 hour 50 Mins</div>
+                    <div><i class="fa fa-circle dot1 msr-2"></i> Registered Courses - {{registeredCourses}}</div>
                   </div>
                   <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot2 msr-2"></i> Java Class - 50 Mins</div>
+                    <div><i class="fa fa-circle dot2 msr-2"></i> Approved Courses - {{approvedCourses}}</div>
+                  </div>
+                  <br><br>
+                  <div class="col-lg-6">
+                    <div><i class="fa fa-circle dot3 msr-2"></i> Registered Programs - {{registeredPrograms}}</div>
                   </div>
                   <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot3 msr-2"></i> painting - 1 hour 20 Mins</div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot4 msr-2"></i> Geography Class - 30 Mins</div>
+                    <div><i class="fa fa-circle dot4 msr-2"></i> Approved Programs - {{approvedPrograms}}</div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-        <div class="card l-bg-purple p-2 px-4 text-white py-3">
-          <div class="info d-flex justify-content-between align-items-center">
-            <div class="d-flex flex-column text-white font-22"> <span>English Vocabulary Test</span>
-              <small class="mt-2"><i class="far fa-clock msr-2"></i> 25, Feb, 2020. 04:00 PM</small> </div>
-          </div>
-        </div>
-        <div class="card l-bg-green p-2 px-4 text-white py-3">
-          <div class="info d-flex justify-content-between align-items-center">
-            <div class="d-flex flex-column text-white font-22"> <span>Science Homework Submition</span>
-              <small class="mt-2"><i class="far fa-clock msr-2"></i> 28, Feb, 2020. 10:00 AM</small> </div>
           </div>
         </div>
       </div>

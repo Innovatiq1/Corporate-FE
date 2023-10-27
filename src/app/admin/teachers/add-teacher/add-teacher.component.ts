@@ -10,6 +10,7 @@ import { InstructorService } from '@core/service/instructor.service';
 import { Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { StudentsService } from 'app/admin/students/all-students/students.service';
 
 @Component({
   selector: 'app-add-teacher',
@@ -18,6 +19,8 @@ import { Router } from '@angular/router';
 })
 export class AddTeacherComponent {
   proForm: UntypedFormGroup;
+  dept: any;
+
   breadscrums = [
     {
       title: 'Add Instructor',
@@ -29,6 +32,7 @@ export class AddTeacherComponent {
   fileName: any;
   constructor(private fb: UntypedFormBuilder,
     private instructor: InstructorService,
+    private StudentService: StudentsService,
     private router:Router) {
     this.proForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
@@ -67,6 +71,13 @@ export class AddTeacherComponent {
 
     
   }
+  getDepartment(){
+    this.StudentService.getAllDepartments().subscribe((response: any) =>{
+      this.dept = response.data.docs;
+      console.log("dept",this.dept)
+     })
+  
+  }
   onSubmit() {
     console.log('Form Value', this.proForm.value);
     if(!this.proForm.invalid){
@@ -100,7 +111,9 @@ export class AddTeacherComponent {
     );
     }
   }
-  
+  ngOnInit(){
+    this.getDepartment();
+  }
   private createInstructor(userData: Users): void {
     this.instructor.CreateUser(userData).subscribe(
       () => {

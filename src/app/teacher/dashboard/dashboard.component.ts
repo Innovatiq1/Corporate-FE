@@ -94,7 +94,7 @@ export class DashboardComponent implements OnInit {
       series: [
         {
           name: 'Avg. Lecture',
-          data: [65, 72, 62, 73, 66, 74, 63, 67],
+          data: [65, 72, 62, 73, 66, 74, 63, 67,88,60,80,70],
         },
       ],
       chart: {
@@ -117,7 +117,7 @@ export class DashboardComponent implements OnInit {
         curve: 'smooth',
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'July', 'Aug'],
+        categories: ['Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'July', 'Aug','Sep','Oct','Nov','Dec'],
         title: {
           text: 'Weekday',
         },

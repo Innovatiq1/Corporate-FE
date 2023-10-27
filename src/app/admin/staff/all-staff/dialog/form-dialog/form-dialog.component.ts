@@ -68,7 +68,7 @@ export class FormDialogComponent {
         formatDate(this.staff.date, 'yyyy-MM-dd', 'en'),
         [Validators.required],
       ],
-      designation: [this.staff.designation],
+      designation: [this.staff.role],
       address: [this.staff.address],
       mobile: [this.staff.mobile],
     });
