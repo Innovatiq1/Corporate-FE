@@ -25,6 +25,7 @@ import { ExamScheduleService } from './exam-schedule/exam-schedule.service';
 import { SharedModule } from '@shared';
 import { ComponentsModule } from '@shared/components/components.module';
 import { EditLeaveRequestComponent } from './leave-request/dialogs/edit-leave-request/edit-leave-request.component';
+import { LectureProgramsComponent } from './lecture-programs/lecture-programs.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { EditLeaveRequestComponent } from './leave-request/dialogs/edit-leave-re
     InstructorSettingsComponent,
     ExamScheduleComponent,
     EditLeaveRequestComponent,
+    LectureProgramsComponent,
   ],
   imports: [
     CommonModule,

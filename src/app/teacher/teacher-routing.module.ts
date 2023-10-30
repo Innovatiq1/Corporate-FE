@@ -4,6 +4,8 @@ import { Page404Component } from './../authentication/page404/page404.component'
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LectureProgramsComponent } from './lecture-programs/lecture-programs.component';
+
 
 const routes: Routes = [
   {
@@ -11,8 +13,12 @@ const routes: Routes = [
     component: DashboardComponent,
   },
   {
-    path: 'lectures',
+    path: 'course-lectures',
     component: LecturesComponent,
+  },
+  {
+    path: 'program-lectures',
+    component: LectureProgramsComponent,
   },
   {
     path: 'exam-schedule',
