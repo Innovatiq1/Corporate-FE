@@ -499,7 +499,7 @@ MENU_LIST = [
     id: "student/enrollment",
     title: "Enrollment",
     iconsrc: "/assets/course-icon.svg",
-    icon:'Homework',
+    icon:'school',
     selected: true,
     children: [
         {
@@ -535,8 +535,27 @@ MENU_LIST = [
         }
 ]
 },
-
-
+{
+    id: "student/feedback",
+    title: "Feedback",
+    iconsrc: "/assets/course-icon.svg",
+    icon:'fact_check',
+    selected: true,
+    children: [
+        {
+            id: "courses",
+            title: "Courses",
+            selected: false,
+            iconsrc: "/assets/announcement-icon.svg",
+        },
+        {
+            id: "programs",
+            title: "Programs",
+            selected: false,
+            iconsrc: "/assets/announcement-icon.svg",
+        }
+]
+},
 {
     id: "leave-request",
     title: "Leave Request",

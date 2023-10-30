@@ -13,6 +13,8 @@ export class SurveyBuilderModel {
 
 	_id: string;
 	title: string;
+  courseName!:string;
+  studentFirstName!:string;
 	questions: SurveyBuilderQuestionsModel[];
 	createdAt: string;
 	updatedAt: string;
