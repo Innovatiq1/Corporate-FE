@@ -16,6 +16,9 @@ import {
   ApexLegend,
   ApexFill,
 } from 'ng-apexcharts';
+import { LeaveRequestService } from '../leave-request/leave-request.service';
+import { LeaveService } from '@core/service/leave.service';
+import { AnnouncementService } from '@core/service/announcement.service';
 
 export type barChartOptions = {
   series: ApexAxisChartSeries;
@@ -64,7 +67,16 @@ export class DashboardComponent implements OnInit {
   approvedCourses: any;
   registeredPrograms: any;
   approvedPrograms: any;
-  constructor(private classService: ClassService) {
+  studentApprovedClasses: any;
+  studentApprovedPrograms: any;
+  approvedLeaves: any;
+  announcements: any;
+  upcomingCourseClasses: any;
+  upcomingProgramClasses: any;
+  withdrawCourses: any;
+  withdrawPrograms: any;
+  constructor(private classService: ClassService,private leaveService: LeaveService,
+    private announcementService:AnnouncementService) {
     let user=JSON.parse(localStorage.getItem('currentUser')!);
     this.studentName = user?.user?.name;
     this.getRegisteredAndApprovedCourses()
@@ -76,6 +88,11 @@ export class DashboardComponent implements OnInit {
     this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
       this.approvedCourses = response?.data?.length
     })
+    const payload2 = { studentId: studentId, status: 'withdraw' ,isAll:true};
+    this.classService.getStudentRegisteredClasses(payload2).subscribe(response =>{
+      this.withdrawCourses = response?.data?.length
+    })
+
     const payload1 = { studentId: studentId, status: 'registered' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload1).subscribe(response =>{
       this.registeredCourses = response?.data?.length
@@ -91,6 +108,12 @@ export class DashboardComponent implements OnInit {
       const payload1 = { studentId: studentId, status: 'approved' ,isAll:true};
       this.classService.getStudentRegisteredProgramClasses(payload1).subscribe(response =>{
         this.approvedPrograms = response?.data?.length
+        const payload2 = { studentId: studentId, status: 'withdraw' ,isAll:true};
+        this.classService.getStudentRegisteredProgramClasses(payload2).subscribe(response =>{
+          this.withdrawPrograms = response?.data?.length
+          this.chart1();
+
+        })
         this.doughnutChartData= {
           labels: this.doughnutChartLabels,
           datasets: [
@@ -103,6 +126,59 @@ export class DashboardComponent implements OnInit {
       })
     })
   }
+  getApprovedCourse(){
+    let studentId=localStorage.getItem('id')
+    const payload = { studentId: studentId, status: 'approved' ,isAll:true};
+    this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
+     this.studentApprovedClasses = response.data.slice(0,5);
+     const currentDate = new Date();
+     const currentMonth = currentDate.getMonth();
+     const currentYear = currentDate.getFullYear();  
+     const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+     this.upcomingCourseClasses = this.studentApprovedClasses.filter((item:any) => {
+      const sessionStartDate = new Date(item.classId.sessions[0].sessionStartDate);
+      return (
+        sessionStartDate >= tomorrow 
+      );
+    });
+    })
+  }
+  getApprovedProgram(){
+    let studentId=localStorage.getItem('id')
+    const payload = { studentId: studentId, status: 'approved',isAll:true };
+    this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
+     this.studentApprovedPrograms= response.data.slice(0,5);
+     const currentDate = new Date();
+     const currentMonth = currentDate.getMonth();
+     const currentYear = currentDate.getFullYear();  
+     const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+     this.upcomingProgramClasses = this.studentApprovedPrograms.filter((item:any) => {
+      const sessionStartDate = new Date(item.classId.sessions[0].sessionStartDate);
+      return (
+        sessionStartDate >= tomorrow 
+      );
+    });
+
+    })
+  }
+  getApprovedLeaves(){
+    let studentId=localStorage.getItem('id')
+    const payload = { studentId: studentId, status: 'approved' ,isAll:true};
+    this.leaveService.getAllLeavesByStudentId(payload).subscribe(response =>{
+     this.approvedLeaves = response.data.slice(0,5);
+    })
+  }
+  getAnnouncementForStudents(filter?: any) {
+    let payload ={
+      announcementFor:'Student'
+    }
+    this.announcementService.getAnnouncementsForStudents(payload).subscribe((res: { data: { data: any[]; }; totalRecords: number; }) => {
+      this.announcements = res.data
+    })
+  }
+
+  
+  
 
   public doughnutChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -125,21 +201,29 @@ export class DashboardComponent implements OnInit {
   // Doughnut chart end
 
   ngOnInit() {
-    this.chart1();
     this.chart2();
-  }
+    this.getApprovedCourse();
+    this.getApprovedProgram();
+    this.getApprovedLeaves();
+    this.getAnnouncementForStudents();
+    }
 
   private chart1() {
     this.areaChartOptions = {
       series: [
         {
-          name: 'Mathes',
-          data: [31, 40, 28, 51, 42, 85, 77],
+          name: 'Registered',
+          data: [this.registeredCourses, this.registeredPrograms],
         },
         {
-          name: 'Science',
-          data: [11, 32, 45, 32, 34, 52, 41],
+          name: 'Approved',
+          data: [this.approvedCourses,this.approvedPrograms],
         },
+        {
+          name: 'Cancelled',
+          data: [this.withdrawCourses,this.withdrawPrograms],
+        },
+
       ],
       chart: {
         height: 350,
@@ -149,7 +233,7 @@ export class DashboardComponent implements OnInit {
         },
         foreColor: '#9aa0ac',
       },
-      colors: ['#F77A9A', '#A054F7'],
+      colors: ['#FFA500', '#3d3','#d33'],
       dataLabels: {
         enabled: false,
       },
@@ -158,13 +242,8 @@ export class DashboardComponent implements OnInit {
       },
       xaxis: {
         categories: [
-          'test 1',
-          'test 2',
-          'test 3',
-          'test 4',
-          'test 5',
-          'test 6',
-          'test 7',
+          'Courses',
+          'Programs',
         ],
       },
       grid: {
