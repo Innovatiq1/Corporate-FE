@@ -45,14 +45,17 @@ export class LeaveService {
   }
 
 
-  getAllLeavesByStudentId(id:any,studentId:any): Observable<ApiResponse> {
-    // const apiUrl = this.defaultUrl+'admin/leave/' +id +studentId;
-    const apiUrl = `${this.prefix}admin/leave/${id}/${studentId}`;
-    return this._Http.get<ApiResponse>(apiUrl, {
-    //   params: this.buildParams(filter),
-    });
+  // getAllLeavesByStudentId(dataany): Observable<ApiResponse> {
+  //   const apiUrl = `${this.prefix}admin/leave/${id}/${studentId}`;
+  //   return this._Http.get<ApiResponse>(apiUrl);
+  // }
+  getAllLeavesByStudentId(data:any): Observable<ApiResponse> {
+    return this._Http.get( `${this.prefix}admin/leave/'651bdef02191b64db4db0e00'/${data.studentId}`,{params:data}).pipe(
+      map((response:any) => {
+        return response;
+      })
+    );
   }
-
 //   saveDepartment(course: any) {
 //     const apiUrl = `${this.prefix}admin/department/`;
 //     return this._Http
