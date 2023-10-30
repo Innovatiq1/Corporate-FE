@@ -21,7 +21,7 @@
                     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                       <label>Program Name<span class="mandatory">&nbsp;*</span></label>
                       <mat-form-field class="example-full-width mb-3" appearance="outline">
-                        <mat-select required formControlName="courseId">
+                        <mat-select required formControlName="courseId" (selectionChange)="onSelectChange($event)">
                           <mat-option> Choose Program Name... </mat-option>
                           <mat-option *ngFor="let programName of programList" [value]="programName.id">
                             {{ programName.title }}

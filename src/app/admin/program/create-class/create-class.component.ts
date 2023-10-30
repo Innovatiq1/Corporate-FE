@@ -151,6 +151,8 @@ export class CreateClassComponent {
   toggleStatus() {
     this.status = !this.status;
   }
+  
+
 
   ngOnInit(): void {
     this.subscribeParams = this._activeRoute.params.subscribe((params:any) => {
@@ -303,11 +305,16 @@ export class CreateClassComponent {
  
 
   onSelectChange(event: any) {
-    const filteredData = this.instructorList.filter(
-      (item: { instructor_id: string }) =>
-        item.instructor_id === this.InstructorForm.controls['instructor'].value
+    console.log("==",this.programList)
+    const filteredData = this.programList.filter(
+      (item: { _id: string }) =>
+        item._id === this.classForm.controls['courseId'].value
     );
-    this.user_id = filteredData[0].user_id.user_id;
+    console.log(filteredData)
+    //this.user_id = filteredData[0].user_id.user_id;
+    this.courseTitle=filteredData[0].title
+      this.courseCode=filteredData[0].courseCode
+
   }
 
   onSelectChange1(event :any,element:any) {

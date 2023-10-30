@@ -32,6 +32,13 @@ export class LecturesService extends UnsubscribeOnDestroyAdapter {
     
     //return this.httpClient.get<ApiResponse>(apiUrl, { params: this.buildParams(filter) })
   }
+  getClassListWithPagination1(id: any,filterName:any,filter?:Partial<CoursePaginationModel>) {
+    console.log("sssssssss",id)
+    const apiUrl = `${this.prefix}admin/class/getProgramSession/${id}?filterName=${filterName}`;
+    return this.httpClient.get<ApiResponse>(apiUrl,{ params: this.buildParams(filter) })
+    
+    //return this.httpClient.get<ApiResponse>(apiUrl, { params: this.buildParams(filter) })
+  }
   private buildParams(filter?: Partial<CoursePaginationModel>): HttpParams {
     let params = new HttpParams();
     if (filter) {
@@ -84,6 +91,24 @@ export class LecturesService extends UnsubscribeOnDestroyAdapter {
     //        // error code here
     //     },
     //   });
+  }
+  updateProgramLectures(lectures: Lectures): void {
+    this.dialogData = lectures;
+    console.log("data",lectures)
+    let apiUrl = `${this.prefix}admin/class/updateProgramSession`;
+
+    this.httpClient.post(apiUrl, lectures)
+        .subscribe({
+          next: (data) => {
+            this.dialogData = lectures;
+            //this.getClassListWithPagination()
+            //this.route.navigateByUrl("/instructor/lectures")
+
+          },
+          error: (error: HttpErrorResponse) => {
+             // error code here
+          },
+        });
   }
   updateLectures(lectures: Lectures): void {
     this.dialogData = lectures;
