@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { ChartOptions } from 'chart.js';
 import { DeptService } from '@core/service/dept.service';
 import { Department } from 'app/admin/departments/all-departments/department.model';
+import { CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 
 export type chartOptions = {
 
@@ -31,7 +32,9 @@ export type chartOptions = {
   labels: string[];
   theme: ApexTheme;
   series2: ApexNonAxisChartSeries;
-};  
+
+
+};
 @Component({
   selector: 'app-hod-dashboard',
   templateUrl: './hod-dashboard.component.html',
@@ -83,14 +86,21 @@ export class HodDashboardComponent {
   upcomingPrograms: any;
   id?: number;
   departmentCount: any;
+  courseData: any;
+  mainCategories!: MainCategory[];
+  subCategories!: SubCategory[];
+  allSubCategories!: SubCategory[];
+  dataSource: any;
+  coursePaginationModel!: Partial<CoursePaginationModel>;
+  upcomingCourses: any;
 
   constructor(private courseService: CourseService,
     private userService: UserService,
     private instructorService: InstructorService,
     private classService: ClassService,
     private router: Router,
-    private studentService:StudentService,
-    private deptService:DeptService,) {
+    private studentService: StudentService,
+    private deptService: DeptService,) {
     //constructor
     this.getCount();
     this.getInstructorsList();
@@ -98,19 +108,19 @@ export class HodDashboardComponent {
     this.chart2();
     this.chart3();
 
-  
+
   }
 
   getCount() {
     this.courseService.getCount().subscribe(response => {
       this.count = response?.data;
-      this.instructorCount=this.count?.instructors;
-      this.adminCount=this.count?.admins
-      this.studentCount=this.count?.students
+      this.instructorCount = this.count?.instructors;
+      this.adminCount = this.count?.admins
+      this.studentCount = this.count?.students
       this.chart4();
-  
+
     })
-       
+
   }
   getInstructorsList() {
     let payload = {
@@ -195,42 +205,42 @@ export class HodDashboardComponent {
       this.tillPreviousTwoMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
-          createdAtDate >= monthsAgo && createdAtDate <=twoMonths
+          createdAtDate >= monthsAgo && createdAtDate <= twoMonths
         );
       });
 
       this.tillPreviousFourMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
-          createdAtDate >= monthsAgo && createdAtDate <=fourMonths
+          createdAtDate >= monthsAgo && createdAtDate <= fourMonths
         );
       });
 
       this.tillPreviousSixMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
-          createdAtDate >= monthsAgo && createdAtDate <=sixMonths
+          createdAtDate >= monthsAgo && createdAtDate <= sixMonths
         );
       });
 
       this.tillPreviousEightMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
-          createdAtDate >= monthsAgo && createdAtDate <=eightMonths
+          createdAtDate >= monthsAgo && createdAtDate <= eightMonths
         );
       });
 
       this.tillPreviousTenMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
-          createdAtDate >= monthsAgo && createdAtDate <=tenMonths
+          createdAtDate >= monthsAgo && createdAtDate <= tenMonths
         );
       });
 
       this.tillPreviousTwelveMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
-          createdAtDate >= monthsAgo && createdAtDate <=twelveMonths
+          createdAtDate >= monthsAgo && createdAtDate <= twelveMonths
         );
       });
 
@@ -278,11 +288,11 @@ export class HodDashboardComponent {
     });
   }
   editCall(student: any) {
-    console.log('hi',student)
-    this.router.navigate(['/admin/students/add-student'],{queryParams:{id:student.id}})
+    console.log('hi', student)
+    this.router.navigate(['/admin/students/add-student'], { queryParams: { id: student.id } })
   }
-  editClass(id:string){
-    this.router.navigate([`admin/courses/create-class`], { queryParams: {id: id}});
+  editClass(id: string) {
+    this.router.navigate([`admin/courses/create-class`], { queryParams: { id: id } });
   }
   delete(id: string) {
     console.log(id)
@@ -312,46 +322,47 @@ export class HodDashboardComponent {
 
   deleteStudent(row: any) {
     // this.id = row.id;
-     Swal.fire({
-       title: "Confirm Deletion",
-       text: "Are you sure you want to delete this Student?",
-       icon: "warning",
-       showCancelButton: true,
-       confirmButtonColor: "#d33",
-       cancelButtonColor: "#3085d6",
-       confirmButtonText: "Delete",
-       cancelButtonText: "Cancel",
-     }).then((result) => {
-       if (result.isConfirmed) {
-         this.studentService.deleteUser(row.id).subscribe(
-           () => {
-             Swal.fire({
-               title: "Deleted",
-               text: "Student deleted successfully",
-               icon: "success",
-             });
-             //this.fetchCourseKits();
-             this.getStudentsList()
-           },
-           (error: { message: any; error: any; }) => {
-             Swal.fire(
-               "Failed to delete Student",
-               error.message || error.error,
-               "error"
-             );
-           }
-         );
-       }
-     });
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this Student?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.studentService.deleteUser(row.id).subscribe(
+          () => {
+            Swal.fire({
+              title: "Deleted",
+              text: "Student deleted successfully",
+              icon: "success",
+            });
+            //this.fetchCourseKits();
+            this.getStudentsList()
+          },
+          (error: { message: any; error: any; }) => {
+            Swal.fire(
+              "Failed to delete Student",
+              error.message || error.error,
+              "error"
+            );
+          }
+        );
+      }
+    });
 
-   }
+  }
 
 
 
   ngOnInit() {
-this.getClassList();
-this.getProgramList();
-this.getAllDepartments();
+    this.getClassList();
+    this.getProgramList();
+    this.getAllDepartments();
+    this.getAllCourse();
   }
   getClassList() {
     this.classService
@@ -360,9 +371,9 @@ this.getAllDepartments();
         (response) => {
           console.log('classRes', response);
           if (response.data) {
-            this.classesList = response.data.docs.slice(0,5).sort();
+            this.classesList = response.data.docs.slice(0, 5).sort();
           }
-       
+
         },
         (error) => {
           console.log('error', error);
@@ -609,9 +620,9 @@ this.getAllDepartments();
   }
   private chart4() {
     this.polarChartOptions = {
-      series2: [      this.instructorCount,
-        this.studentCount,
-      this.adminCount  ],
+      series2: [this.instructorCount,
+      this.studentCount,
+      this.adminCount],
       chart: {
         type: 'pie',
         height: 400,
@@ -641,17 +652,17 @@ this.getAllDepartments();
     };
   }
   getProgramList(filters?: any) {
-    this.courseService.getCourseProgram({status:'active'}).subscribe(
+    this.courseService.getCourseProgram({ status: 'active' }).subscribe(
       (response: any) => {
         this.programList = response.docs;
         const currentDate = new Date();
         const currentMonth = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();  
+        const currentYear = currentDate.getFullYear();
         const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
         this.upcomingPrograms = this.programList.filter((item: { sessionStartDate: string | number | Date; }) => {
           const sessionStartDate = new Date(item.sessionStartDate);
           return (
-            sessionStartDate >= tomorrow 
+            sessionStartDate >= tomorrow
           );
         });
       },
@@ -659,10 +670,10 @@ this.getAllDepartments();
       }
     );
   }
-  getAllDepartments(){
-    this.deptService.getAllDepartments().subscribe((response: { data: { docs: any; totalDocs: any; page: any; limit: any; }; }) =>{
-     this.departments = response.data.docs;
-     this.departmentCount = response.data.docs.length;
+  getAllDepartments() {
+    this.deptService.getAllDepartments().subscribe((response: { data: { docs: any; totalDocs: any; page: any; limit: any; }; }) => {
+      this.departments = response.data.docs;
+      this.departmentCount = response.data.docs.length;
     })
   }
   deletedepartments(id: string) {
@@ -670,22 +681,22 @@ this.getAllDepartments();
     //   const matchingClasses = classList.docs.filter((classItem: any) => {
     //     return classItem.courseId && classItem.courseId.id === id;
     //   });
-      // if (matchingClasses.length > 0) {
-      //   Swal.fire({
-      //     title: 'Error',
-      //     text: 'Classes have been registered with this course. Cannot delete.',
-      //     icon: 'error',
-      //   });
-      //   return;
-      // }
-      this.deptService.deleteDepartment(id).subscribe(() => {
-        this.getAllDepartments();
-        Swal.fire({
-          title: 'Success',
-          text: 'Department deleted successfully.',
-          icon: 'success',
-        });
+    // if (matchingClasses.length > 0) {
+    //   Swal.fire({
+    //     title: 'Error',
+    //     text: 'Classes have been registered with this course. Cannot delete.',
+    //     icon: 'error',
+    //   });
+    //   return;
+    // }
+    this.deptService.deleteDepartment(id).subscribe(() => {
+      this.getAllDepartments();
+      Swal.fire({
+        title: 'Success',
+        text: 'Department deleted successfully.',
+        icon: 'success',
       });
+    });
     // });
   }
   editCalls(row: Department) {
@@ -693,4 +704,64 @@ this.getAllDepartments();
     this.router.navigate(['/admin/departments/edit-department/' + this.id])
 
   }
+
+  getAllCourse() {
+    this.courseService.getAllCourses({ status: 'active' }).subscribe(response => {
+      console.log("res", response)
+      this.courseData = response.data.docs;
+      const currentDate = new Date();
+      const currentMonth = currentDate.getMonth();
+      const currentYear = currentDate.getFullYear();
+      const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+      this.upcomingCourses = this.courseData.filter((item: { sessionStartDate: string | number | Date; }) => {
+        const sessionStartDate = new Date(item.sessionStartDate);
+        return (
+          sessionStartDate >= tomorrow
+        );
+      });
+    })
+  }
+  getCoursesList() {
+    this.courseService.getAllCourses({ status: 'active' })
+      .subscribe(response => {
+        this.dataSource = response.data.docs;
+        this.mapCategories();
+      }, (error) => {
+      }
+      )
+  }
+  deleteCourse(id: string) {
+    this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
+      const matchingClasses = classList.docs.filter((classItem: any) => {
+        return classItem.courseId && classItem.courseId.id === id;
+      });
+      if (matchingClasses.length > 0) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Classes have been registered with this course. Cannot delete.',
+          icon: 'error',
+        });
+        return;
+      }
+      this.courseService.deleteCourse(id).subscribe(() => {
+        this.getCoursesList();
+        Swal.fire({
+          title: 'Success',
+          text: 'Course deleted successfully.',
+          icon: 'success',
+        });
+      });
+    });
+  }
+  private mapCategories(): void {
+    this.coursePaginationModel.docs?.forEach((item) => {
+      item.main_category_text = this.mainCategories.find((x) => x.id === item.main_category)?.category_name;
+    });
+
+    this.coursePaginationModel.docs?.forEach((item) => {
+      item.sub_category_text = this.allSubCategories.find((x) => x.id === item.sub_category)?.category_name;
+    });
+
+  }
+
 }
