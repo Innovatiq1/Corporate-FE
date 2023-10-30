@@ -46,7 +46,7 @@ const routes: Routes = [
   },
   {
     path: 'supervisor-dashboard',
-    component: CmDashboardComponent,
+    component: SupervisorDashboardComponent,
   },
   {
     path: 'programmanager-dashboard',
