@@ -141,22 +141,22 @@ export class StudentApprovalListComponent {
     };
 
     this.classService.saveApprovedProgramClasses(element.id, item).subscribe((response:any) => {
-      Swal.fire({
-        title: 'Success',
-        text: 'Program withdrawn successfully.',
-        icon: 'success',
-        confirmButtonColor: '#526D82',
-      });
+      this.showNotification(
+        'snackbar-success',
+        ' Course Withdraw successfully...!!!',
+        'top',
+        'right'
+      );
       this.getRegisteredClasses();
     });
-    () => {
-          Swal.fire({
-            title: 'Error',
-            text: 'Failed to approve course. Please try again.',
-            icon: 'error',
-            confirmButtonColor: '#526D82',
-          });
-        };
+  () => {
+    this.showNotification(
+      'snackbar-success',
+      ' Failed to approve course. Please try again.',
+      'top',
+      'right'
+    );
+  };
   }
   exportExcel() {
     //k//ey name with space add in brackets

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Student } from '@core/models/user.model';
+import { CertificateService } from '@core/service/certificate.service';
 
 import { StudentsService } from 'app/admin/students/all-students/students.service';
 import Swal from 'sweetalert2';
@@ -27,9 +29,80 @@ export class SettingsComponent {
   files: any;
   fileName: any;
   avatar: any;
+  uploadedImage: any;
+  uploaded: any;
+  cmUrl: any;
+  pmUrl: any;
+  hodUrl: any;
+  superUrl: any;
+  tcUrl: any;
+  taUrl: any;
 
-  constructor(private studentService: StudentsService,private fb: UntypedFormBuilder,) {
+  constructor(private studentService: StudentsService,private fb: UntypedFormBuilder, private certificateService:CertificateService,
+    private router: Router) {
     
+    let urlPath = this.router.url.split('/')
+    this.cmUrl = urlPath.includes('coursemanager-settings');
+    this.pmUrl = urlPath.includes('programmanager-settings');
+    this.hodUrl = urlPath.includes('headofdepartment-settings');
+    this.superUrl = urlPath.includes('supervisor-settings');
+    this.tcUrl = urlPath.includes('trainingcoordinator-settings');
+    this.taUrl = urlPath.includes('trainingadministrator-settings');
+    
+    if(this.cmUrl===true){
+      this.breadscrums = [
+        {
+          title:'Settings',
+          items: ['Course Manager'],
+          active: 'Settings',
+        },
+      ];
+    }
+    if(this.pmUrl===true){
+      this.breadscrums = [
+        {
+          title:'Settings',
+          items: ['Program Manager'],
+          active: 'Settings',
+        },
+      ];
+    }
+    if(this.hodUrl===true){
+      this.breadscrums = [
+        {
+          title:'Settings',
+          items: ['Head Of Department'],
+          active: 'Settings',
+        },
+      ];
+    }
+    if(this.superUrl===true){
+      this.breadscrums = [
+        {
+          title:'Settings',
+          items: ['Supervisor'],
+          active: 'Settings',
+        },
+      ];
+    }
+    if(this.tcUrl===true){
+      this.breadscrums = [
+        {
+          title:'Settings',
+          items: ['Training Coordinator'],
+          active: 'Settings',
+        },
+      ];
+    }
+    if(this.taUrl===true){
+      this.breadscrums = [
+        {
+          title:'Settings',
+          items: ['Training Administrator'],
+          active: 'Settings',
+        },
+      ];
+    }
     this.patchValues(),
     //this.patchValues1()
     this.stdForm = this.fb.group({
@@ -66,8 +139,9 @@ export class SettingsComponent {
    // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
     this.studentService.getStudentById(this.studentId).subscribe((res: any) => {
       this.editData = res;
-      
-
+      this.avatar = this.editData.avatar;
+      this.uploaded=this.avatar?.split('/')
+      this.uploadedImage = this.uploaded?.pop();
 
       this.stdForm.patchValue({
         name: this.editData.name,
@@ -87,20 +161,26 @@ export class SettingsComponent {
         city_name: this.editData.city_name,
         
         address: this.editData.address,
-        avatar: this.editData.avatar,
+        uploadedImage:this.editData.avatar,
         
       })
      })
   }
   onFileUpload(event:any) {
     this.fileName = event.target.files[0].name;
-    this.files=event.target.files[0]
-    
+    this.files=event.target.files[0];
 
+    // const file = event.target.files[0];
+    const formData = new FormData();
+    // formData.append('files', file);
+    this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
+    this.avatar = response.avatar;
+      this.uploaded=this.avatar.split('/')
+      this.uploadedImage = this.uploaded.pop();
+    });
   }
 
-  
-     
+ 
 
   onSubmit() {
     console.log('Form Value', this.stdForm.value);
