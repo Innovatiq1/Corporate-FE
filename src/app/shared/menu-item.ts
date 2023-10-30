@@ -586,8 +586,13 @@ MENU_LIST = [
     children:
     [
         {
-            id: "lectures",
-            title: "All Lectures",
+            id: "course-lectures",
+            title: "Course Lectures",
+            type: "none"
+        },
+        {
+            id: "program-lectures",
+            title: "Program Lectures",
             type: "none"
         },
         {

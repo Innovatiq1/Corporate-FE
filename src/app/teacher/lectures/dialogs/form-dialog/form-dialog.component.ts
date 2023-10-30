@@ -11,6 +11,7 @@ import { Lectures } from "../../lectures.model";
 import { MAT_DATE_LOCALE } from "@angular/material/core";
 
 export interface DialogData {
+  program: string;
   id: number;
   action: string;
   lectures: Lectures;
@@ -30,6 +31,7 @@ export class FormDialogComponent {
   lectures: Lectures;
   classId:any
   _id:any
+  program: string;
   
   constructor(
     public dialogRef: MatDialogRef<FormDialogComponent>,
@@ -39,6 +41,7 @@ export class FormDialogComponent {
   ) {
     // Set the defaults
     this.action = data.action;
+    this.program = data.program
     if (this.action === "edit") {
       this.dialogTitle = data.lectures.sName;
       this.lectures = data.lectures;
@@ -84,7 +87,14 @@ export class FormDialogComponent {
     let data=this.lecturesForm.value
     data['classId']=this.classId
     data['_id']=this._id
-    this.lecturesService.updateLectures(data);
+    
+    
+    if(this.program){
+      this.lecturesService.updateProgramLectures(data);
+    }else {
+      this.lecturesService.updateLectures(data);
+
+    }
     //console.log("==data1=",data1)
     //this.lecturesService.addLectures(this.lecturesForm.getRawValue());
   }
