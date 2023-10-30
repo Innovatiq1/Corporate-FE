@@ -243,6 +243,7 @@ getBlogsList(filters?:any) {
     this.blogsList = response.data.data;
     let data=this.blogsList.find((id:any)=>id._id === this.currentId);
     console.log('data',data)
+    this.fileName = data.filename
     if(data){
       this.userForm.patchValue({
         name: data?.name,
@@ -250,6 +251,7 @@ getBlogsList(filters?:any) {
         password: data?.password,
         qualification: data?.qualification,
         type:data?.type,
+        avatar:data?.filename,
       });
     }
   }, error => {

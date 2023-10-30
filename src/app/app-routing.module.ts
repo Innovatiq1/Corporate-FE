@@ -21,131 +21,150 @@ const routes: Routes = [
         path: 'admin',
         loadChildren: () =>
           import('./admin/admin.module').then((m) => m.AdminModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'instructor',
         loadChildren: () =>
           import('./teacher/teacher.module').then((m) => m.TeacherModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'student',
         loadChildren: () =>
           import('./student/student.module').then((m) => m.StudentModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'dashboard',
         loadChildren: () =>
-          import('./admin/dashboard/dashboard.module').then((m) => m.DashboardModule),
-          canActivate: [LoginGuard]
-
+          import('./admin/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
+        canActivate: [LoginGuard],
       },
-      { path: 'settings/student-settings', 
-      component: SettingsComponent,   
-      canActivate: [LoginGuard]
-    },
-      { path: 'leave-request/student-leaves', 
-      component: LeaveRequestComponent ,          
-      canActivate: [LoginGuard]
-    },
-      { path: 'settings/instructor-settings', 
-      component: InstructorSettingsComponent,          
-      canActivate: [LoginGuard]
-    },
-      { path: 'leave-request/instructor-leaves', 
-      component: InstructorLeaveRequestComponent,          
-      canActivate: [LoginGuard]
-    },
-
+      {
+        path: 'settings/student-settings',
+        component: SettingsComponent,
+        canActivate: [LoginGuard],
+      },
+      {
+        path: 'leave-request/student-leaves',
+        component: LeaveRequestComponent,
+        canActivate: [LoginGuard],
+      },
+      {
+        path: 'settings/instructor-settings',
+        component: InstructorSettingsComponent,
+        canActivate: [LoginGuard],
+      },
+      {
+        path: 'leave-request/instructor-leaves',
+        component: InstructorLeaveRequestComponent,
+        canActivate: [LoginGuard],
+      },
+      {
+        path: 'settings/coursemanager-settings',
+        component: SettingsComponent,
+        canActivate: [LoginGuard],
+      },
+      {
+        path: 'settings/programmanager-settings',
+        component: SettingsComponent,
+        canActivate: [LoginGuard],
+      },
+      {
+        path: 'settings/headofdepartment-settings',
+        component: SettingsComponent,
+        canActivate: [LoginGuard],
+      },
+      {
+        path: 'settings/supervisor-settings',
+        component: SettingsComponent,
+        canActivate: [LoginGuard],
+      },
+      {
+        path: 'settings/trainingcoordinator-settings',
+        component: SettingsComponent,
+        canActivate: [LoginGuard],
+      },
+      {
+        path: 'settings/trainingadministrator-settings',
+        component: SettingsComponent,
+        canActivate: [LoginGuard],
+      },
 
       // Extra components
       {
         path: 'calendar',
         loadChildren: () =>
           import('./calendar/calendar.module').then((m) => m.CalendarsModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'task',
         loadChildren: () =>
           import('./task/task.module').then((m) => m.TaskModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'contacts',
         loadChildren: () =>
           import('./contacts/contacts.module').then((m) => m.ContactsModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'email',
         loadChildren: () =>
           import('./email/email.module').then((m) => m.EmailModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'apps',
         loadChildren: () =>
           import('./apps/apps.module').then((m) => m.AppsModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'widget',
         loadChildren: () =>
           import('./widget/widget.module').then((m) => m.WidgetModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'ui',
         loadChildren: () => import('./ui/ui.module').then((m) => m.UiModule),
-        canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'forms',
         loadChildren: () =>
           import('./forms/forms.module').then((m) => m.FormModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'tables',
         loadChildren: () =>
           import('./tables/tables.module').then((m) => m.TablesModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'charts',
         loadChildren: () =>
           import('./charts/charts.module').then((m) => m.ChartsModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'timeline',
         loadChildren: () =>
           import('./timeline/timeline.module').then((m) => m.TimelineModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'icons',
         loadChildren: () =>
           import('./icons/icons.module').then((m) => m.IconsModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'extra-pages',
@@ -153,15 +172,13 @@ const routes: Routes = [
           import('./extra-pages/extra-pages.module').then(
             (m) => m.ExtraPagesModule
           ),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'maps',
         loadChildren: () =>
           import('./maps/maps.module').then((m) => m.MapsModule),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
       {
         path: 'multilevel',
@@ -169,8 +186,7 @@ const routes: Routes = [
           import('./multilevel/multilevel.module').then(
             (m) => m.MultilevelModule
           ),
-          canActivate: [LoginGuard]
-
+        canActivate: [LoginGuard],
       },
     ],
   },

@@ -621,6 +621,36 @@ MENU_LIST = [
             id: "student-settings",
             title: "Student Profile",
             type: "none"
+        },
+        {
+            id: "coursemanager-settings",
+            title: "Course Manager Profile",
+            type: "none"
+        },
+        {
+            id: "programmanager-settings",
+            title: "Program Manager Profile",
+            type: "none"
+        },
+        {
+            id: "headofdepartment-settings",
+            title: "Head Of Department Profile",
+            type: "none"
+        },
+        {
+            id: "supervisor-settings",
+            title: "Supervisor Profile",
+            type: "none"
+        },
+        {
+            id: "trainingcoordinator-settings",
+            title: "Training Coordinator Profile",
+            type: "none"
+        },
+        {
+            id: "trainingadministrator-settings",
+            title: "Training Administrator Profile",
+            type: "none"
         }
     ]
 },
