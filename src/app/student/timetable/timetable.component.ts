@@ -39,9 +39,9 @@ export class TimetableComponent implements OnInit {
      const currentYear = currentDate.getFullYear();  
      const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
      this.upcomingCourseClasses = this.studentApprovedClasses.filter((item:any) => {
-      const sessionStartDate = new Date(item.classId.sessions[0].sessionStartDate);
+      const sessionEndDate = new Date(item.classId.sessions[0].sessionEndDate);
       return (
-        sessionStartDate >= tomorrow 
+        sessionEndDate >= tomorrow 
       );
     });
     this.upcomingCourseClasses.sort((a:any,b:any) => {
@@ -62,9 +62,9 @@ export class TimetableComponent implements OnInit {
      const currentYear = currentDate.getFullYear();  
      const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
      this.upcomingProgramClasses = this.studentApprovedPrograms.filter((item:any) => {
-      const sessionStartDate = new Date(item.classId.sessions[0].sessionStartDate);
+      const sessionEndDate = new Date(item.classId.sessions[0].sessionEndDate);
       return (
-        sessionStartDate >= tomorrow 
+        sessionEndDate >= tomorrow 
       );
     });
     this.upcomingProgramClasses.sort((a:any,b:any) => {

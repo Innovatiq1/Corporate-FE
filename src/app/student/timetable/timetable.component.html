@@ -28,16 +28,18 @@
                       <td *ngFor ="let class of upcomingCourseClasses" class="text text-center" width="14%">
                         <div class="timetable-block">
                           <b class="col-green">{{class?.classId?.courseId?.title}}
-                          </b><br><br>
-                          <div>{{class?.classId?.sessions[0]?.sessionStartTime}} - {{class?.classId?.sessions[0]?.sessionEndTime}}</div>
+                          </b>
                           <div>{{class?.classId?.courseId?.courseCode}}</div>
+                          <br>
+                              <div><span class="text-muted">Start Date - </span>{{class?.classId?.sessions[0]?.sessionStartDate | date}} {{class?.classId?.sessions[0]?.sessionStartTime}}</div>
+                          <div><span class="text-muted">End Date - </span>{{class?.classId?.sessions[0]?.sessionEndDate | date}} {{class?.classId?.sessions[0]?.sessionEndTime}}</div>
                           <div class="text-muted">{{class?.classId?.classDeliveryType | titlecase}}</div>
                         </div>
                       </td>
                     </tr>
                   </tbody>
                   <tbody *ngIf ="upcomingCoursesLength == 0" >
-<span>No Classes</span>
+                    <span>No Classes</span>
                   </tbody>
                 </table>
               </div>
@@ -61,11 +63,13 @@
                   <td *ngFor ="let class of upcomingProgramClasses" class="text text-center" width="14%">
                     <div class="timetable-block">
                       <b class="col-green">{{class?.classId?.courseId?.title}}
-                      </b><br><br>
-                      <div>{{class?.classId?.sessions[0]?.sessionStartTime}} - {{class?.classId?.sessions[0]?.sessionEndTime}}</div>
+                      </b>
                       <div>{{class?.classId?.courseId?.courseCode}}</div>
+                      <br>
+                      <div><span class="text-muted">Start Date - </span>{{class?.classId?.sessions[0]?.sessionStartDate | date}} {{class?.classId?.sessions[0]?.sessionStartTime}}</div>
+                      <div><span class="text-muted">End Date - </span>{{class?.classId?.sessions[0]?.sessionEndDate | date}} {{class?.classId?.sessions[0]?.sessionEndTime}}</div>
                       <div class="text-muted">{{class?.classId?.classDeliveryType | titlecase}}</div>
-                    </div>
+                </div>
                   </td>
                 </tr>
               </tbody>
