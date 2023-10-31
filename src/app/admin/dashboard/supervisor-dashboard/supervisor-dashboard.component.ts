@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CourseService } from '@core/service/course.service';
+import { DeptService } from '@core/service/dept.service';
 import { InstructorService } from '@core/service/instructor.service';
 import { StudentService } from '@core/service/student.service';
 import { UserService } from '@core/service/user.service';
+import { Department } from 'app/admin/departments/all-departments/department.model';
 import { ClassService } from 'app/admin/schedule-class/class.service';
+import { Staff } from 'app/admin/staff/all-staff/staff.model';
+import { StaffService } from 'app/admin/staff/all-staff/staff.service';
 import { ChartOptions } from 'chart.js';
 import {
   ChartComponent,
@@ -50,7 +54,8 @@ export type chartOptions = {
 @Component({
   selector: 'app-supervisor-dashboard',
   templateUrl: './supervisor-dashboard.component.html',
-  styleUrls: ['./supervisor-dashboard.component.scss']
+  styleUrls: ['./supervisor-dashboard.component.scss'],
+  providers: [StaffService]
 })
 export class SupervisorDashboardComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
@@ -93,12 +98,22 @@ export class SupervisorDashboardComponent implements OnInit {
   instructorCount: any;
   adminCount: any;
   studentCount: any;
+  departmentCount: any;
+  departments: any;
+  id?: any;
+  dataSource: any;
+  staffCount: any;
+
+
   constructor(private courseService: CourseService,
     private userService: UserService,
     private instructorService: InstructorService,
     private classService: ClassService,
     private router: Router,
-    private studentService:StudentService) {
+    private studentService:StudentService,
+    private deptService: DeptService,
+    public staffService: StaffService,
+    ) {
     //constructor
     this.getCount();
     this.getInstructorsList();
@@ -357,7 +372,9 @@ export class SupervisorDashboardComponent implements OnInit {
 
 
   ngOnInit() {
-this.getClassList()
+this.getClassList();
+this.getAllDepartments();
+this.loadData();
   }
   getClassList() {
     this.classService
@@ -646,5 +663,89 @@ this.getClassList()
       ],
     };
   }
+
+  getAllDepartments() {
+    this.deptService.getAllDepartments().subscribe((response: { data: { docs: any; totalDocs: any; page: any; limit: any; }; }) => {
+      this.departments = response.data.docs;
+      this.departmentCount = response.data.docs.length;
+    })
+  }
+  deletedepartments(id: string) {
+    // this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
+    //   const matchingClasses = classList.docs.filter((classItem: any) => {
+    //     return classItem.courseId && classItem.courseId.id === id;
+    //   });
+    // if (matchingClasses.length > 0) {
+    //   Swal.fire({
+    //     title: 'Error',
+    //     text: 'Classes have been registered with this course. Cannot delete.',
+    //     icon: 'error',
+    //   });
+    //   return;
+    // }
+    this.deptService.deleteDepartment(id).subscribe(() => {
+      this.getAllDepartments();
+      Swal.fire({
+        title: 'Success',
+        text: 'Department deleted successfully.',
+        icon: 'success',
+      });
+    });
+    // });
+  }
+  editCalls(row: Department) {
+    this.id = row.id;
+    this.router.navigate(['/admin/departments/edit-department/' + this.id])
+
+  }
+
+  public loadData() {
+
+    
+    this.staffService.getAllStaff().subscribe((response:any)=>{
+      console.log("vvv",response);
+      this.dataSource = response.data.data.slice(0, 4).sort();
+      this.staffCount= response.data.data.length;
+    })
+    
+  }
+  editStaff(row: Staff) {
+    console.log("rowEdit",row)
+    this.router.navigate(['/admin/staff/add-staff'],{queryParams:row});
+  }
+  deleteStaff(id:any) {
+
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this Student?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.staffService.deleteStaff(id).subscribe(() => {
+            Swal.fire({
+              title: "Deleted",
+              text: "Staff deleted successfully",
+              icon: "success",
+            });
+            //this.fetchCourseKits();
+            this.loadData()
+          },
+          (error: { message: any; error: any; }) => {
+            Swal.fire(
+              "Failed to delete Staff",
+              error.message || error.error,
+              "error"
+            );
+          }
+        );
+      }
+    });
+  }
+ 
 }
 

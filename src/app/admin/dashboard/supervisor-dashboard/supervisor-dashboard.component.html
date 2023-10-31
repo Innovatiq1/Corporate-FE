@@ -6,7 +6,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="card card-statistic-2">
                     <div class="clearfix">
                         <div class="card-icon-only shadow-primary float-start">
@@ -15,10 +15,10 @@
                         </div>
                         <div class="card-right">
                             <div>
-                                <h5 class="float-end">Total Students</h5>
+                                <h5 class="float-end">Total<br> Departments</h5>
                             </div>
                             <div class="col-green">
-                                <h3 class="font-weight-bold float-end mb-0">{{count?.students}}</h3>
+                                <h3 class="font-weight-bold float-end mb-0">{{departmentCount}}</h3>
                             </div>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="card card-statistic-2">
                     <div class="clearfix">
                         <div class="card-icon-only shadow-primary float-start">
@@ -37,10 +37,10 @@
                         </div>
                         <div class="card-right">
                             <div>
-                                <h5 class="float-end" style="margin-top: 100px;">All Courses</h5>
+                                <h5 class="float-end" style="margin-top: 100px;">Total Staff</h5>
                             </div>
                             <div class="col-green">
-                                <h3 class="font-weight-bold float-end mb-0">{{count?.courses}}</h3>
+                                <h3 class="font-weight-bold float-end mb-0">{{staffCount}}</h3>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="card card-statistic-2">
                     <div class="clearfix">
                         <div class="card-icon-only shadow-primary float-start">
@@ -75,7 +75,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-12">
+            <!-- <div class="col-lg-3 col-md-3 col-sm-12">
                 <div class="card card-statistic-2">
                     <div class="clearfix">
                         <div class="card-icon-only shadow-primary float-start">
@@ -96,11 +96,11 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
         <!-- #END# Widgets -->
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                 <div class="card" style="border-radius: 31px;">
                     <div class="header mt-3">
@@ -132,7 +132,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row clearfix">
             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
                 <div class="plain-card">
@@ -188,7 +188,7 @@
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                 <div class="card" style="border-radius: 31px;">
                     <div class="header mt-3">
-                        <h2>Classes List</h2>
+                        <h2>Staff List</h2>
 
                     </div>
                     <div class="tableBody">
@@ -197,22 +197,24 @@
                                 <thead>
                                     <tr>
                                         <!-- <th>#</th> -->
-                                        <th>Course Name</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Status </th>
+                                        <th>Name</th>
+                                        <th>Designation</th>
+                                        <th>Mobile</th>
+                                        <th>Email </th>
+                                        <th>Joining Date</th>
+                                        <th>Salary</th>
                                         <th>Actions </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let class of classesList ">
+                                    <tr *ngFor="let row of dataSource ">
 
-                                        <td>{{class?.courseId?.title | truncate:10}}</td>
-                                        <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
-                                        <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
-                                        <td>
-                                            <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
-                                        </td>
+                                        <td>{{row.name}}</td>
+                                        <td> {{row.role}} </td>
+                                        <td> {{row.mobile}}</td>
+                                        <td>{{row.email}} </td>
+                                        <td>{{row.joiningDate | date: 'MM/dd/yyyy'}}</td>
+                                        <td>{{row.salary}}</td>
                                         <td>
                                             <button mat-button [matMenuTriggerFor]="menu">
                                                 <svg class="dropdown-toggle" data-bs-toggle="dropdown"
@@ -227,12 +229,12 @@
 
                                             <mat-menu #menu="matMenu" xPosition="before">
                                                 <button mat-menu-item class="tbl-action-btn"
-                                                    (click)="editClass(class.id)">
+                                                (click)="editStaff(row)">
                                                     <app-feather-icons [icon]="'edit'"
                                                         [class]="'tbl-fav-edit'"></app-feather-icons>
                                                     <span class="menu-text">Edit</span>
                                                 </button>
-                                                <button mat-menu-item class="tbl-action-btn" (click)="delete(class.id)">
+                                                <button mat-menu-item class="tbl-action-btn" (click)="deleteStaff(row.id)">
                                                     <app-feather-icons [icon]="'trash-2'"
                                                         [class]="'tbl-fav-delete'"></app-feather-icons>
                                                     <span class="menu-text">Delete</span>
@@ -249,92 +251,90 @@
                 </div>
             </div>
         </div>
-        <div class="row clearfix">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div class="card">
-                <div class="header mt-3">
-                  <h2>Instructors List</h2>
-                  <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
-                    <mat-icon>more_vert</mat-icon>
-                  </button>
-                  <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
-                      <mat-icon>add_circle_outline</mat-icon>
-                      <span>Add</span>
-                    </button>
-                    <button mat-menu-item disabled>
-                      <mat-icon>delete_outline</mat-icon>
-                      <span>Delete</span>
-                    </button>
-                    <button mat-menu-item>
-                      <mat-icon>refresh</mat-icon>
-                      <span>Refresh</span>
-                    </button>
-                  </mat-menu> -->
-                </div>
-                <div class="tableBody">
-                  <div class="table-responsive">
-                    <table class="table display product-overview mb-30" id="support_table">
-                      <thead>
-                        <tr>
-                          <th>Img</th>
-                          <th>Instructors Name</th>
-                          <th>Department</th>
-                          <th>Gender</th>
-                          <th>Degree</th>
-                          <th>Email</th>
-                          <th>Mobile</th>
-                          <th>Joining Date</th>
-                          <th>Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let instructor of instructors">
-                          <td class="table-img">
-                            <img src="{{instructor?.avatar}}" alt="">
-                          </td>
-                          <td>{{instructor?.name}}</td>
-                          <td>
-                            <div class="badge col-green">{{instructor?.department}}</div>
-                          </td>
-                          <td>{{instructor?.gender}}</td>
-                          <td>{{instructor?.qualification}}</td>
-                          <td>{{instructor?.email}}</td>
-                          <td>{{instructor?.mobile}}</td>
-                          <td>{{instructor?.joiningDate | date}}</td>
-                          <td>
-                            <button mat-button [matMenuTriggerFor]="menu">
-                              <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-                              xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                              class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
-                              <path
-                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                            </svg>
-        
-                            </button>
-                            
-                                    <mat-menu #menu="matMenu" xPosition="before">
-                                      <button mat-menu-item  class="tbl-action-btn" [routerLink]="['/admin/teachers/edit-teacher',instructor.id]">
-                                        <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                                        <span class="menu-text">Edit</span>
-                                      </button>
-                                      <button mat-menu-item class="tbl-action-btn" (click)="deleteItem(instructor)">
-                                        <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                                        <span class="menu-text">Delete</span>
-                                      </button>
-                                    </mat-menu>
-                          </td>
-                        </tr>
-                       
-      
-                      </tbody>
-                    </table>
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="card">
+                    <div class="header mt-3">
+                      <h2>Departments List</h2>
+                      <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                          <mat-icon>add_circle_outline</mat-icon>
+                          <span>Add</span>
+                        </button>
+                        <button mat-menu-item disabled>
+                          <mat-icon>delete_outline</mat-icon>
+                          <span>Delete</span>
+                        </button>
+                        <button mat-menu-item>
+                          <mat-icon>refresh</mat-icon>
+                          <span>Refresh</span>
+                        </button>
+                      </mat-menu> -->
+                    </div>
+                    <div class="tableBody">
+                      <div class="table-responsive">
+                        <table class="table display product-overview mb-30" id="support_table">
+                          <thead>
+                            <tr>
+                              <th>Department Name</th>
+                              <th>Head of Department</th>
+                              <th>Phone</th>
+                              <th>Email</th>
+                              <th>Start Year</th>
+                              <th>Students Capacity</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let department of departments">
+                              <!-- <td class="table-img">
+                                <img src="{{instructor?.avatar}}" alt="">
+                              </td> -->
+                              <td>{{department?.department}}</td>
+                              <!-- <td>
+                                <div class="badge col-green">{{department?.department}}</div>
+                              </td> -->
+                              <td>{{department?.hod}}</td>
+                              <td>{{department?.mobile}}</td>
+                              <td>{{department?.email}}</td>
+                              <td>{{department?.departmentStartDate | date}}</td>
+                              <td>{{department?.studentCapacity}}</td>
+                              <td>
+                                <button mat-button [matMenuTriggerFor]="menu">
+                                  <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                                  xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                  class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
+                                  <path
+                                    d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                </svg>
+            
+                                </button>
+                                
+                                        <mat-menu #menu="matMenu" xPosition="before">
+                                          <button mat-menu-item  class="tbl-action-btn" (click)="editCalls(department)">
+                                            <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                            <span class="menu-text">Edit</span>
+                                          </button>
+                                          <button mat-menu-item class="tbl-action-btn" (click)="deletedepartments(department.id)">
+                                            <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                            <span class="menu-text">Delete</span>
+                                          </button>
+                                        </mat-menu>
+                              </td>
+                            </tr>
+                           
+          
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        <div class="row clearfix">
+        <!-- <div class="row clearfix">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="card" style="border-radius: 31px;">
                     <div class="header mt-3">
@@ -364,7 +364,7 @@
                                         <td>{{student?.createdAt | date}}</td>
                                         <td>
                                             {{student?.mobile}}
-                                            <!-- <i class="far fa-file-pdf tbl-pdf"></i> -->
+                                            <!-- <i class="far fa-file-pdf tbl-pdf"></i> --
                                         </td>
                                         <td>
                                             <button mat-button [matMenuTriggerFor]="menu">
@@ -401,6 +401,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
