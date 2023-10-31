@@ -475,26 +475,26 @@ MENU_LIST = [
     ]
 },
 
-{
-    id: "admin/testimonials",
-    title: "Testimonials",
-    selected: false,
-    iconsrc: "/assets/testimonials-icon.svg",
-    icon: 'find_in_page',
-    children:
-    [
-        {
-            id: "testimonials-instructor",
-            title: "Instructor",
-            type: "none"
-        },
-        {
-            id: "testimonials-student",
-            title: "Student",
-            type: "none"
-        }
-    ]
-},
+// {
+//     id: "admin/testimonials",
+//     title: "Testimonials",
+//     selected: false,
+//     iconsrc: "/assets/testimonials-icon.svg",
+//     icon: 'find_in_page',
+//     children:
+//     [
+//         {
+//             id: "testimonials-instructor",
+//             title: "Instructor",
+//             type: "none"
+//         },
+//         {
+//             id: "testimonials-student",
+//             title: "Student",
+//             type: "none"
+//         }
+//     ]
+// },
 {
     id: "student/enrollment",
     title: "Enrollment",
