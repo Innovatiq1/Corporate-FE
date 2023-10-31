@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
-  UntypedFormBuilder,
-  UntypedFormGroup,
+  FormBuilder,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { StaffService } from '../all-staff/staff.service';
@@ -11,13 +11,14 @@ import { StudentService } from '@core/service/student.service';
 import { Users } from '@core/models/user.model';
 import { UserService } from '@core/service/user.service';
 import { AdminService } from '@core/service/admin.service';
+import { ConfirmedValidator } from '@shared/password.validator';
 @Component({
   selector: 'app-add-staff',
   templateUrl: './add-staff.component.html',
   styleUrls: ['./add-staff.component.scss'],
 })
 export class AddStaffComponent {
-  staffForm: UntypedFormGroup;
+  staffForm: FormGroup;
   editData:any;
   isLoading = false;
   files: any;
@@ -33,15 +34,13 @@ export class AddStaffComponent {
   ];
   userTypes: any;
   paramId:any;
-  constructor(private fb: UntypedFormBuilder, public staffService:StaffService,private adminService: AdminService, private userService: UserService,public active:ActivatedRoute,public router:Router, private studentService: StudentService) {
+  constructor(private fb: FormBuilder, public staffService:StaffService,private adminService: AdminService, private userService: UserService,public active:ActivatedRoute,public router:Router, private studentService: StudentService) {
 
     this.staffForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
       last_name: [''],
       gender: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      conformPassword: ['', [Validators.required]],
       type: [''],
       joiningDate: [''],
       address: [''],
@@ -52,8 +51,14 @@ export class AddStaffComponent {
       dob: ['', [Validators.required]],
       qualification: [''],
       avatar:[''],
-      salary:['']
-    });
+      salary:[''],
+      password: ['', [Validators.required]],
+      conformPassword: ['', [Validators.required]],
+    } ,
+    {
+      validator: ConfirmedValidator('password', 'conformPassword')
+    })
+   ;
 
 
     this.active.queryParams.subscribe(param =>{
@@ -70,6 +75,8 @@ export class AddStaffComponent {
   }
 
 patchData(_data: any){
+
+  this.fileName = _data.avatar
   this.staffForm.patchValue({
     name:_data.name,
     last_name:_data.last_name ,
@@ -83,11 +90,16 @@ patchData(_data: any){
     email:_data.email ,
     dob:_data.dob ,
     qualification: _data.qualification,
-    avatar:_data.avatar,
-      salary:_data.salary
+    avatar:this.fileName,
+    salary:_data.salary
   })
 }
-
+// get passwordMatchError() {
+//   return (
+//     this.staffForm.getError('mismatch') &&
+//     this.staffForm.get('confirmPassword')?.touched
+//   );
+// }
 addBlog(formObj:any) {
   console.log('Form Value', formObj.value);
    if (!formObj.invalid) {
