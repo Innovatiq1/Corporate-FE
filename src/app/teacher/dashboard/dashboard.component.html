@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+      <!-- <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
         <div class="card">
           <div class="card-body">
             <div class="float-start">
@@ -49,11 +49,11 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
-            <h2>Subject Chart</h2>
+            <h2>Course Chart</h2>
           </div>
           <div class="body">
             <div id="chart">
@@ -63,14 +63,15 @@
               </apx-chart>
             </div>
             <div class="table-responsive m-t-15">
-              <table class="table align-items-center">
+              <table class="table align-items-center" *ngFor="let dataSource of dataSource">
                 <tbody>
                   <tr>
-                    <td><i class="fa fa-circle col-cyan msr-2"></i> Music</td>
-                    <td>23</td>
-                    <td class="col-green">+32%</td>
+                    <td><i class="fa fa-circle col-cyan msr-2"></i> {{dataSource.courseName}}</td>
+                    <td *ngIf="dataSource.duration===1">{{dataSource.duration}} Day</td>
+                    <td *ngIf="dataSource.duration!==1">{{dataSource.duration}} Days</td>
+                    <!-- <td class="col-green">+32%</td> -->
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td><i class="fa fa-circle col-blue msr-2"></i>Science</td>
                     <td>32</td>
                     <td class="col-green">+12%</td>
@@ -84,7 +85,49 @@
                     <td><i class="fa fa-circle col-green msr-2"></i>Mathes</td>
                     <td>32</td>
                     <td class="col-green">+3%</td>
+                  </tr> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Program Chart</h2>
+          </div>
+          <div class="body">
+            <div id="chart">
+              <apx-chart [series]="pieChartOptions1.series!" [chart]="pieChartOptions1.chart!"
+                [labels]="pieChartOptions1.labels!" [responsive]="pieChartOptions1.responsive!"
+                [dataLabels]="pieChartOptions1.dataLabels!" [legend]="pieChartOptions1.legend!" class="apex-pie-center">
+              </apx-chart>
+            </div>
+            <div class="table-responsive m-t-15">
+              <table class="table align-items-center" *ngFor="let programFilterData of programFilterData">
+                <tbody>
+                  <tr>
+                    <td class="text"><i class="fa fa-circle col-cyan msr-2"></i> {{programFilterData.courseName}}</td>
+                    <td *ngIf="programFilterData.duration===1">{{programFilterData.duration}} Day</td>
+                    <td *ngIf="programFilterData.duration!==1">{{programFilterData.duration}} Days</td>
+                    <!-- <td class="col-green">+32%</td> -->
                   </tr>
+                  <!-- <tr>
+                    <td><i class="fa fa-circle col-blue msr-2"></i>Science</td>
+                    <td>32</td>
+                    <td class="col-green">+12%</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa fa-circle col-orange msr-2"></i>Economics</td>
+                    <td>12</td>
+                    <td class="col-orange">-12%</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa fa-circle col-green msr-2"></i>Mathes</td>
+                    <td>32</td>
+                    <td class="col-green">+3%</td>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
@@ -162,28 +205,28 @@
               <table class="table table-hover ">
                 <thead>
                   <tr>
-                    <th>#</th>
+                    <!-- <th>#</th> -->
                     <th>Subject Name</th>
-                    <th>Standard</th>
+                    <th>Class</th>
                     <th>Time</th>
                     <th>Duration</th>
-                    <th>Details </th>
+                    <!-- <th>Details </th> -->
                   </tr>
                 </thead>
-                <tbody>
+                <tbody *ngFor="let items of currentRecords">
                   <tr>
-                    <td>1</td>
-                    <td>Business studies</td>
-                    <td>Standard 12</td>
-                    <td>10:30 AM</td>
+                    <!-- <td>1</td> -->
+                    <td>{{items.courseName}}</td>
+                    <td>{{items.courseCode}}</td>
+                    <td>{{items.sessionStartTime}}</td>
                     <td>45 Min</td>
-                    <td>
+                    <!-- <td>
                       <button mat-icon-button class="tbl-action-btn">
                         <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
                       </button>
-                    </td>
+                    </td> -->
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td>2</td>
                     <td>Chemistry</td>
                     <td>Standard 11</td>
@@ -242,7 +285,7 @@
                         <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
                       </button>
                     </td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>

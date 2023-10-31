@@ -19,6 +19,8 @@ import {
   ApexNonAxisChartSeries,
   ApexResponsive,
 } from 'ng-apexcharts';
+import { LecturesService } from '../lectures/lectures.service';
+import * as moment from 'moment';
 
 export type avgLecChartOptions = {
   series: ApexAxisChartSeries;
@@ -44,6 +46,14 @@ export type pieChartOptions = {
   responsive: ApexResponsive[];
   labels: string[];
 };
+export type pieChartOptions1 = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  legend: ApexLegend;
+  dataLabels: ApexDataLabels;
+  responsive: ApexResponsive[];
+  labels: string[];
+};
 
 @Component({
   selector: 'app-dashboard',
@@ -54,6 +64,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
   public avgLecChartOptions!: Partial<avgLecChartOptions>;
   public pieChartOptions!: Partial<pieChartOptions>;
+  public pieChartOptions1!: Partial<pieChartOptions>;
   UsersModel!: Partial<UsersModel>
 
 
@@ -65,15 +76,192 @@ export class DashboardComponent implements OnInit {
     },
   ];
   latestInstructor: any;
+  dataSource1: any;
+  programData: any;
+  currentRecords:any;
+  dataSource:any[]=[];
+  programFilterData:any[]=[];
+  //series:any
+  //labels: any
+  programLabels:string[]=[];
+  programSeries: number[] = [];
+  labels: string[] = [];
+  series: number[] = [];
 
-  constructor(private instructorService: InstructorService) {
+  constructor(private instructorService: InstructorService,public lecturesService: LecturesService,) {
     //constructor
   }
   ngOnInit() {
+    this.getClassList()
+    this.getClassList1()
     this.chart1();
-    this.chart2();
+    //this.chart2();
     this.instructorData();
+    
+
   }
+  getClassList() {
+    let instructorId = localStorage.getItem('id')
+    this.lecturesService.getClassListWithPagination(instructorId, '').subscribe(
+      (response) => {
+        //console.log("this",response.data.ssions)
+        console.log("=======")
+   
+        this.dataSource1 = response.data.docs;
+        //this.dataSource1 = response.data.sessions;
+        // this.totalItems = response.data.totalDocs
+        // this.coursePaginationModel.docs = response.data.docs;
+        // this.coursePaginationModel.page = response.data.page;
+        // this.coursePaginationModel.limit = response.data.limit;
+        //this.mapClassList()
+       // this.dataSource = [];
+       this.getSession()
+       this.chart2()
+        
+      },
+      (error) => {
+      }
+    );
+   
+    
+  }
+  getClassList1() {
+    let instructorId = localStorage.getItem('id')
+    this.lecturesService.getClassListWithPagination1(instructorId, '').subscribe(
+      (response) => {
+        //console.log("this",response.data.ssions)
+        console.log("=======")
+   
+        this.programData = response.data.docs;
+        //this.dataSource1 = response.data.sessions;
+        // this.totalItems = response.data.totalDocs
+        // this.coursePaginationModel.docs = response.data.docs;
+        // this.coursePaginationModel.page = response.data.page;
+        // this.coursePaginationModel.limit = response.data.limit;
+        //this.mapClassList()
+       // this.dataSource = [];
+       this.getSession1()
+       this.chart3()
+        
+      },
+      (error) => {
+      }
+    );
+   
+    
+  }
+  getSession() {
+   
+    
+    if(this.dataSource1){
+      
+    this.dataSource1&&this.dataSource1?.forEach((item: any, index: any) => {
+      //console.log(index)
+      //console.log("====seession====",item.sessions[0].instructorId)
+     
+      if (item.sessions[0]&& item.sessions[0]?.courseName&&item.sessions[0]?.courseCode) {
+       // console.log("=======gopal=")
+        let starttimeObject = moment(item.sessions[0].sessionStartTime, "HH:mm");
+        
+        const duration = moment.duration(moment(item.sessions[0].sessionEndDate).diff(moment(item.sessions[0].sessionStartDate)));
+        let daysDifference = duration.asDays()+1
+        //console.log("====item.sessions[0].courseName=====",item.sessions[0].courseName)
+        this.labels.push(item.sessions[0].courseName)
+        this.series?.push(daysDifference)
+        this.dataSource?.push({
+          
+          
+          courseName: item.sessions[0].courseName,
+          courseCode: item.sessions[0].courseCode,
+          sessionStartDate: moment(item.sessions[0].sessionStartDate).format("YYYY-MM-DD"),
+          sessionEndDate: moment(item.sessions[0].sessionEndDate).format("YYYY-MM-DD"),
+          sessionStartTime: starttimeObject.format("hh:mm A"),
+          
+          duration:daysDifference,
+
+          
+        });
+        
+      
+      } else {
+        
+      }
+      this.todayLecture();
+      
+    });
+    //this.cdr.detectChanges();
+    //console.log("ssssssssssss",this.dataSource)
+    //this.myArray.push(newItem);
+    //this.myArray.data = this.dataSource; 
+  }
+    //return sessions;
+    
+  }
+  getSession1() {
+   
+    
+    if(this.programData){
+      console.log("========")
+    this.programData&&this.programData?.forEach((item: any, index: any) => {
+      if (item.sessions[0]&& item.sessions[0]?.courseName&&item.sessions[0]?.courseCode) {
+       // console.log("=======gopal=")
+        let starttimeObject = moment(item.sessions[0].sessionStartTime, "HH:mm");
+        
+        const duration = moment.duration(moment(item.sessions[0].sessionEndDate).diff(moment(item.sessions[0].sessionStartDate)));
+        let daysDifference = duration.asDays()+1
+        //console.log("====item.sessions[0].courseName=====",item.sessions[0].courseName)
+        this.programLabels.push(item.sessions[0].courseName)
+        this.programSeries?.push(daysDifference)
+        this.programFilterData?.push({
+          
+          
+          courseName: item.sessions[0].courseName,
+          courseCode: item.sessions[0].courseCode,
+          
+          duration:daysDifference,
+
+          
+        });
+        
+      
+      } else {
+        
+      }
+      
+    });
+    //this.cdr.detectChanges();
+    //console.log("ssssssssssss",this.dataSource)
+    //this.myArray.push(newItem);
+    //this.myArray.data = this.dataSource; 
+  }
+    //return sessions;
+    
+  }
+  todayLecture(){
+    if(this.dataSource){
+    this.currentRecords = this.filterRecordsByCurrentDate(this.dataSource);
+   // console.log("====currentRecords==",currentRecords)
+    }
+  }
+
+  
+  filterRecordsByCurrentDate(records: any[]) {
+    const currentDate = new Date(); // Get the current date
+    const filteredRecords: any[] = [];
+  
+    records.forEach(record => {
+      const startDate = new Date(record.sessionStartDate); // Replace with the field that contains the start date
+      const endDate = new Date(record.sessionEndDate); // Replace with the field that contains the end date
+  
+      if (currentDate >= startDate && currentDate <= endDate) {
+        filteredRecords.push(record);
+      }
+    });
+  
+    return filteredRecords;
+  }
+  
+  
 
   instructorData() {
     let payload = {
@@ -161,8 +349,11 @@ export class DashboardComponent implements OnInit {
     };
   }
   private chart2() {
+    console.log("===datasorce==",this.dataSource)
+    console.log("series",this.series)
+    console.log("labels",this.labels)
     this.pieChartOptions = {
-      series: [44, 55, 13, 43, 22],
+      series: this.series,
       chart: {
         type: 'donut',
         width: 200,
@@ -173,7 +364,32 @@ export class DashboardComponent implements OnInit {
       dataLabels: {
         enabled: false,
       },
-      labels: ['Science', 'Mathes', 'Economics', 'History', 'Music'],
+      labels: this.labels,
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {},
+        },
+      ],
+    };
+  }
+  private chart3() {
+    //console.log("===datasorce==",this.dataSource)
+    console.log("series",this.series)
+    console.log("labels",this.labels)
+    this.pieChartOptions1 = {
+      series: this.programSeries,
+      chart: {
+        type: 'donut',
+        width: 200,
+      },
+      legend: {
+        show: false,
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      labels: this.programLabels,
       responsive: [
         {
           breakpoint: 480,

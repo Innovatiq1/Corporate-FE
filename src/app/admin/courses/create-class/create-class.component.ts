@@ -88,6 +88,7 @@ export class CreateClassComponent {
   sessions: any = [];
   instForm!: FormArray<any>;
   next: boolean = false;
+  secondFormGroup!: FormGroup;
 
   addNewRow() {
     if (this.isInstructorFailed != 1 && this.isLabFailed != 1) {
@@ -176,8 +177,11 @@ export class CreateClassComponent {
       status: ['open'],
       classStartDate: ['2023-05-20'],
       classEndDate: ['2023-06-10'],
-      sessions: ['', Validators.required],
+
     });
+    this.secondFormGroup = this._fb.group({
+      sessions: ['', Validators.required],
+    })
   }
 
   loadClassList(id: string) {
@@ -341,7 +345,7 @@ export class CreateClassComponent {
     //this.instructorList.filter(item)
     console.log("ibstList",this.instructorList)
     const filteredData = this.instructorList.filter((item: { id: string; }) => item.id === element.instructor);
-    console.log(filteredData,"filter")
+    console.log("filter",filteredData)
      this.user_id = filteredData[0].id;
 
   }
@@ -376,7 +380,7 @@ export class CreateClassComponent {
               //   'top',
               //   'right'
               // );
-              this.router.navigateByUrl(`/admin/schedule/class-list`);
+              this.router.navigateByUrl(`/admin/courses/class-list`);
             }
 
             // this.router.navigateByUrl(`Schedule Class/List`);
@@ -398,7 +402,7 @@ export class CreateClassComponent {
                 icon: 'success',
               });
             }
-            this.router.navigateByUrl(`/admin/schedule/class-list`);
+            this.router.navigateByUrl(`/admin/courses/class-list`);
           });
       }
     }
@@ -518,7 +522,7 @@ export class CreateClassComponent {
     });
   }
   cancel() {
-  
+
     window.history.back();
   }
 }

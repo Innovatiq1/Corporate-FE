@@ -296,6 +296,71 @@
           </div>
         </div>
       </div> -->
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header mt-3">
+              <h2>Upcoming Courses</h2>
+            
+            </div>
+            <div class="tableBody">
+              <div class="table-responsive">
+                <table class="table display product-overview mb-30" id="support_table">
+                  <thead>
+                    <tr>
+                      <th>Img</th>
+                      <th>Course Name</th>
+                      <th>Training Hours</th>
+                      <th>Days</th>
+                      <th>Starting Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let data of upcomingCourses">
+                      <td class="table-img">
+                        <img class="img" src="{{data.image_link}}">
+                      </td>
+                      <td>{{data.title |truncate : 25}}</td>
+                     
+                      <td>{{ data.training_hours}} Hours</td>
+                     <td>{{data.course_duration_in_days}}</td>
+                     <td >
+                        <b  style="color: blue;">
+                          <i class="fa fa-play-circle-o"></i> {{data.sessionStartDate | date}}</b>
+                        </td>
+                      <td>
+                        <button mat-button [matMenuTriggerFor]="menu">
+                          <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                          xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                          class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
+                          <path
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                        </svg>
+    
+                        </button>
+                        
+                                <mat-menu #menu="matMenu" xPosition="before">
+                                  <button mat-menu-item  class="tbl-action-btn" [routerLink]="['/admin/courses/edit-course/',data.id]">
+                                    <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                    <span class="menu-text">Edit</span>
+                                  </button>
+                                  <button mat-menu-item class="tbl-action-btn" (click)="deleteCourse(data.id)">
+                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                    <span class="menu-text">Delete</span>
+                                  </button>
+                                </mat-menu>
+                      </td>
+                    </tr>
+                   
+  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">
         <div class="card">
           <div class="header mt-3">
