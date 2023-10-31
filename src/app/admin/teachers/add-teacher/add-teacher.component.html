@@ -75,6 +75,9 @@
                     <mat-error *ngIf="proForm.get('conformPassword')?.hasError('required')">
                       Re-Enter password is required
                     </mat-error>
+                    <mat-error *ngIf="proForm.get('conformPassword')?.hasError('confirmedValidator')">
+                      Password and Re-Enter Password must be match
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -191,7 +194,7 @@
                     <span>{{fileName ? fileName : ' or drag and drop file here' }}</span>
                     <input formControlName="avatar" (change)="onFileUpload($event)" class="file-input" type="file">
                   </div> -->
-                  
+
                 </div>
               </div>
               <div class="row">

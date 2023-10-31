@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Student, Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
 import { StudentsService } from './../all-students/students.service';
+import { ConfirmedValidator } from '@shared/password.validator';
 @Component({
   selector: 'app-add-student',
   templateUrl: './add-student.component.html',
@@ -66,6 +67,8 @@ export class AddStudentComponent {
       education: [''],
       avatar: [''],
       blood_group: [''],
+    },{
+      validator: ConfirmedValidator('password', 'conformPassword')
     });
   }
 
@@ -191,12 +194,13 @@ getDepartment(){
           blood_group: this.editData.blood_group,
           address: this.editData.address,
           avatar: this.editData.avatar,
-        });
+        },
+        );
       });
     }
   }
   cancel() {
-  
+
     window.history.back();
   }
 

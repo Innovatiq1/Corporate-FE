@@ -78,6 +78,9 @@
                     <mat-error *ngIf="staffForm.get('conformPassword')?.hasError('required')">
                       Re-Enter password is required
                     </mat-error>
+                    <mat-error *ngIf="staffForm.get('conformPassword')?.hasError('confirmedValidator')">
+                      Password and Re-Enter Password must be match
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>
