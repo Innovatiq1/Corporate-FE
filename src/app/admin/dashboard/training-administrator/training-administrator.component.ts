@@ -306,7 +306,7 @@ export class TrainingAdministratorComponent implements OnInit {
     this.router.navigate(['/admin/students/add-student'], { queryParams: { id: student.id } })
   }
   editClass(id: string) {
-    this.router.navigate([`admin/schedule/create-class`], { queryParams: { id: id } });
+    this.router.navigate(['/admin/courses/create-class'], { queryParams: { id: id } });
   }
   delete(id: string) {
     console.log(id)

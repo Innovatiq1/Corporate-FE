@@ -27,7 +27,8 @@ import { DeptService } from '@core/service/dept.service';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 @Component({
   selector: 'app-all-departments',
   templateUrl: './all-departments.component.html',
@@ -239,16 +240,47 @@ export class AllDepartmentsComponent
   exportExcel() {
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
-      this.dataSource.filteredData.map((x: { dName: any; hod: any; phone: any; email: any; sYear: any; sCapacity: any; }) => ({
-        'Department Name': x.dName,
+      this.dataSource.map((x: any) => ({
+        'Department Name': x.department,
         'Head Of Department': x.hod,
-        Phone: x.phone,
+        Phone: x.mobile,
         Email: x.email,
-        'Start Year': x.sYear,
-        'Students Capacity': x.sCapacity,
+        'Start Year': x.departmentStartDate,
+        'Students Capacity': x.studentCapacity,
       }));
 
     TableExportUtil.exportToExcel(exportData, 'excel');
+  }
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [[' Department Name','Head Of Department', 'Phone', 'Email', 'Start Year','Students Capacity']];
+    console.log(this.dataSource)
+    const data = this.dataSource.map((x:any) =>
+      [x.department,
+        x.hod,
+        x.mobile,
+        x.email,
+        x.departmentStartDate,
+        x.studentCapacity
+    ] );
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+  
+    // Add a page to the document (optional)
+    //doc.addPage();
+  
+    // Generate the table using jspdf-autotable
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+  
+  
+  
+    });
+  
+    // Save or open the PDF
+    doc.save('AllDepartments-list.pdf');
   }
   showNotification(
     colorName: string,
