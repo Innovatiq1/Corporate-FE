@@ -160,8 +160,8 @@ export class AllStudentsComponent
 
    }
    confirmItem(row: any) {
-    
-    
+
+
     // this.id = row.id;
      Swal.fire({
        title: "Confirm Active",
@@ -384,6 +384,7 @@ export class ExampleDataSource extends DataSource<Students> {
             const searchStr = (
               students.rollNo +
               students.name +
+              students.last_name +
               students.department +
               students.mobile
             ).toLowerCase();

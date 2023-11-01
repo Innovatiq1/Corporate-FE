@@ -205,7 +205,8 @@ export class ApproveListComponent  {
   performSearch() {
     if(this.searchTerm){
     this.dataSource = this.dataSource?.filter((item: any) =>{
-      const searchList = (item.classId.courseId?.title + item.studentId?.name).toLowerCase()
+      console.log("data",item)
+      const searchList = (item.classId?.courseId?.title + item.studentId?.name + item.studentId?.last_name).toLowerCase();
       return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
     }
 

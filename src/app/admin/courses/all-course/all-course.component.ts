@@ -90,7 +90,7 @@ delete(id: string) {
       return;
     }
     this._courseService.deleteCourse(id).subscribe(() => {
-      this.getCoursesList();
+      this.getAllCourse();
       Swal.fire({
         title: 'Success',
         text: 'Course deleted successfully.',

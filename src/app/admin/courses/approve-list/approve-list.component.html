@@ -106,7 +106,7 @@
                     >Course Name</mat-header-cell
                   >
                   <mat-cell *matCellDef="let row">
-                    <span class="mobile-label">Course Name:</span>{{row.classId?.courseId?.title | titlecase}}
+                    <span class="mobile-label">Course Name:</span>{{row.classId?.courseId?.title }}
                   </mat-cell>
                 </ng-container>
                 <!-- student name  -->
@@ -115,7 +115,7 @@
                     >Student Name</mat-header-cell
                   >
                   <mat-cell *matCellDef="let row">
-                    <span class="mobile-label">Student Name:</span>{{row.studentId?.name + " " + row.studentId?.last_name| titlecase}}
+                    <span class="mobile-label">Student Name:</span>{{row.studentId?.name + " " + row.studentId?.last_name}}
                   </mat-cell>
                 </ng-container>
                 <!-- Class start date -->

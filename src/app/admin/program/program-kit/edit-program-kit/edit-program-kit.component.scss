@@ -63,7 +63,7 @@ label {
     margin-left: 50px;
     /* margin-bottom: 20px; */
     // background: #FFF;
-    border: 1px solid #000000;
+    border: 1px solid red;
     width: 100px;
     height: 40px;
     border-radius: 10px;
@@ -115,4 +115,10 @@ label {
   }
   h5{
     padding-top: 10px;
+  }
+
+  .fname {
+    text-align: center;
+    color: #66a849;
+    margin-right: 17px;
   }

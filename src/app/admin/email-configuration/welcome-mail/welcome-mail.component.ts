@@ -31,20 +31,21 @@ export class WelcomeMailComponent {
       active: 'Welcome Mail',
     },
   ];
-  constructor(private router: Router,  
-    public utils:UtilsService,  
+  constructor(private router: Router,
+    public utils:UtilsService,
     private emailConfigurationService: EmailConfigService,
      private fb: FormBuilder,
      private activatedRoute: ActivatedRoute,
      private ref: ChangeDetectorRef
     ) {
-    
-   
+
+
   }
-  
+
   toggle(_data: any){
     this.edit =!this.edit;
     // this._id = _data._id;
+    console.log(_data)
     this.emailTemplateForm.patchValue({
       email_subject: _data.email_subject,
       email_top_welcome_text:_data.email_top_welcome_text,
@@ -53,20 +54,20 @@ export class WelcomeMailComponent {
     });
 
   }
-  
+
   back(){
     this.edit =!this.edit;
   }
   ngOnInit(): void {
     this.initialize();
-   
+
       this.getForgetPasswordTemplate();
-   
+
   }
 
   initialize() {
     this.createForm();
-    
+
   }
 
   fetchUpdated() {
@@ -82,7 +83,7 @@ export class WelcomeMailComponent {
       email_content1: pageContent?.email_content1,
       bottom_button_text: pageContent?.bottom_button_text,
     });
-  
+
   }
 
   createForm() {
@@ -101,11 +102,11 @@ export class WelcomeMailComponent {
     this.emailConfigurationService.getForgetPasswordTemplate().subscribe( response =>{
       this.assignData  = response?.data?.docs[0]?.welcome_email_template;
       this.ref.detectChanges();
-    
+
   }
   )}
- 
-  
+
+
   update(){
   return new Promise<void>((resolve, reject) => {
         const obj = this.emailTemplateForm.value;
@@ -134,6 +135,6 @@ export class WelcomeMailComponent {
           }
         );
       }
-  
+
    )};
 }
