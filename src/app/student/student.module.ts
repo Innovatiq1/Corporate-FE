@@ -28,6 +28,7 @@ import { ViewProgramComponent } from './view-program/view-program.component';
 import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { ProgramTimetableComponent } from './program-timetable/program-timetable.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     ProgramComponent,
     ViewProgramComponent,
     FeedbackComponent,
+    ProgramTimetableComponent,
   ],
   imports: [
     CommonModule,

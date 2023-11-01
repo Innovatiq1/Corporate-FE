@@ -1,92 +1,16 @@
 <section class="content">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
-      <!-- breadcrumb -->
       <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
       </app-breadcrumb>
     </div>
     <div class="row clearfix">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
-          <mat-tab-group>
-            <mat-tab>
-              <ng-template mat-tab-label>
-                <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
-                Course Timetable
-              </ng-template>
+              <ng-template mat-tab-label>Course Timetable</ng-template>
               <div class="body">
-                <full-calendar [options]="calendarOptions"></full-calendar>
-
-                <!-- <table class="table table-stripped">
-                  <thead>
-                    <tr>
-                      <ng-container *ngFor="let class of upcomingCourseClasses">
-                      <th class="text text-center">{{class?.classId?.sessions[0]?.sessionStartDate | date}}</th>
-                      </ng-container>
-                    </tr>
-                  </thead>
-                  <tbody *ngIf ="upcomingCoursesLength > 0" >
-                    <tr>
-                      <td *ngFor ="let class of upcomingCourseClasses" class="text text-center" width="14%">
-                        <div class="timetable-block">
-                          <b class="col-green">{{class?.classId?.courseId?.title}}
-                          </b>
-                          <div>{{class?.classId?.courseId?.courseCode}}</div>
-                          <br>
-                              <div><span class="text-muted">Start Date - </span>{{class?.classId?.sessions[0]?.sessionStartDate | date}} {{class?.classId?.sessions[0]?.sessionStartTime}}</div>
-                          <div><span class="text-muted">End Date - </span>{{class?.classId?.sessions[0]?.sessionEndDate | date}} {{class?.classId?.sessions[0]?.sessionEndTime}}</div>
-                          <div class="text-muted">{{class?.classId?.classDeliveryType | titlecase}}</div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tbody *ngIf ="upcomingCoursesLength == 0" >
-                    <span>No Classes</span>
-                  </tbody>
-                </table> -->
+                <full-calendar [options]="courseCalendarOptions"></full-calendar>
               </div>
-    
-              </mat-tab>
-              <mat-tab>
-                <ng-template mat-tab-label>
-                  Program Timetable
-                </ng-template>
-                          <div class="body">
-            <table class="table table-stripped">
-              <thead>
-                <tr>
-                  <ng-container *ngFor="let class of upcomingProgramClasses">
-                  <th class="text text-center">{{class?.classId?.sessions[0]?.sessionStartDate | date}}</th>
-                  </ng-container>
-                </tr>
-              </thead>
-              <tbody  *ngIf ="upcomingProgramsLength > 0">
-                <tr>
-                  <td *ngFor ="let class of upcomingProgramClasses" class="text text-center" width="14%">
-                    <div class="timetable-block">
-                      <b class="col-green">{{class?.classId?.courseId?.title}}
-                      </b>
-                      <div>{{class?.classId?.courseId?.courseCode}}</div>
-                      <br>
-                      <div><span class="text-muted">Start Date - </span>{{class?.classId?.sessions[0]?.sessionStartDate | date}} {{class?.classId?.sessions[0]?.sessionStartTime}}</div>
-                      <div><span class="text-muted">End Date - </span>{{class?.classId?.sessions[0]?.sessionEndDate | date}} {{class?.classId?.sessions[0]?.sessionEndTime}}</div>
-                      <div class="text-muted">{{class?.classId?.classDeliveryType | titlecase}}</div>
-                </div>
-                  </td>
-                </tr>
-              </tbody>
-              <tbody *ngIf ="upcomingProgramsLength == 0" >
-                <span>No Classes</span>
-                                  </tbody>
-                
-            </table>
-          </div>
-                </mat-tab>
-  
-
-          </mat-tab-group>
-
-
         </div>
       </div>
     </div>

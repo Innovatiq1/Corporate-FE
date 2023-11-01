@@ -4,20 +4,20 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import { CalendarOptions } from '@fullcalendar/core';
 
 @Component({
-  selector: 'app-timetable',
-  templateUrl: './timetable.component.html',
-  styleUrls: ['./timetable.component.scss'],
+  selector: 'app-program-timetable',
+  templateUrl: './program-timetable.component.html',
+  styleUrls: ['./program-timetable.component.scss'],
 })
 
-export class TimetableComponent implements OnInit {
+export class ProgramTimetableComponent implements OnInit {
   courseCalendarOptions!: CalendarOptions;
   programCalendarOptions!: CalendarOptions
 
   breadscrums = [
     {
-      title: 'Course-Timetable',
+      title: 'Program-Timetable',
       items: ['Timetable'],
-      active: 'Course-Timetable',
+      active: 'Program-Timetable',
     },
   ];
   studentApprovedClasses: any;
