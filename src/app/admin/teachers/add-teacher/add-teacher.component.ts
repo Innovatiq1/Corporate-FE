@@ -140,7 +140,7 @@ export class AddTeacherComponent {
     );
   }
   cancel(){
-    this.router.navigateByUrl('/admin/teachers/all-teachers');
+    this.router.navigateByUrl('/admin/instructors/all-instructors');
 
   }
 }

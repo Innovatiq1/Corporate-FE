@@ -8,7 +8,9 @@ import { Users } from '@core/models/user.model';
 import { CourseService } from '@core/service/course.service';
 import { UserService } from '@core/service/user.service';
 import { UtilsService } from '@core/service/utils.service';
-
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 @Component({
   selector: 'app-all-users',
   templateUrl: './all-users.component.html',
@@ -151,4 +153,48 @@ performSearch() {
   }
 }
 
+exportExcel() {
+  //k//ey name with space add in brackets
+ const exportData: Partial<TableElement>[] = this.dataSource.map(
+   (user: any) => ({
+     'Name': user.name,
+     'User Type': user.type,
+     'Qualification': user.qualification,
+     'Email': user.email,
+     'Status' : user.Active ?  'Active': 'Inactive' 
+   })
+ );
+  TableExportUtil.exportToExcel(exportData, 'excel');
+}
+
+generatePdf() {
+  const doc = new jsPDF();
+  const headers = [['Name','User Type','Qualification','Email','Status']];
+  console.log(this.dataSource)
+  const data = this.dataSource.map((user:any) =>
+    [user.name,
+      user.type,
+     user.qualification,
+     user.email,
+     user.Active ? 'Active': 'Inactive'
+  ] );
+  //const columnWidths = [60, 80, 40];
+  const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+
+  // Add a page to the document (optional)
+  //doc.addPage();
+
+  // Generate the table using jspdf-autotable
+  (doc as any).autoTable({
+    head: headers,
+    body: data,
+    startY: 20,
+
+
+
+  });
+
+  // Save or open the PDF
+  doc.save('AllUsers-list.pdf');
+}
 }
