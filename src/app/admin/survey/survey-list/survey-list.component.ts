@@ -274,7 +274,7 @@ export class ExampleDataSource extends DataSource<SurveyBuilderModel> {
         this.filteredData = this.exampleDatabase.data
           .slice()
           .filter((staff: SurveyBuilderModel) => {
-            const searchStr = (staff.courseName)?.toLowerCase();
+            const searchStr = (staff.courseName + staff.studentFirstName)?.toLowerCase();
             return searchStr?.indexOf(this.filter?.toLowerCase()) !== -1;
           });
         // Sort filtered data
