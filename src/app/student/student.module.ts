@@ -27,6 +27,7 @@ import { ProgramComponent } from './program/program.component';
 import { ViewProgramComponent } from './view-program/view-program.component';
 import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
     CommonModule,
     StudentRoutingModule,
     NgChartsModule,
+    FullCalendarModule,
+
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
@@ -59,6 +62,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
     ModalModule.forRoot(),
 
   ],
-  providers: [HomeworkService, stdLeaveReqService,StudentsService],
+  providers: [    
+HomeworkService, stdLeaveReqService,StudentsService],
 })
 export class StudentModule {}

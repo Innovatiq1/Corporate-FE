@@ -15,7 +15,9 @@
                 Course Timetable
               </ng-template>
               <div class="body">
-                <table class="table table-stripped">
+                <full-calendar [options]="calendarOptions"></full-calendar>
+
+                <!-- <table class="table table-stripped">
                   <thead>
                     <tr>
                       <ng-container *ngFor="let class of upcomingCourseClasses">
@@ -41,7 +43,7 @@
                   <tbody *ngIf ="upcomingCoursesLength == 0" >
                     <span>No Classes</span>
                   </tbody>
-                </table>
+                </table> -->
               </div>
     
               </mat-tab>
