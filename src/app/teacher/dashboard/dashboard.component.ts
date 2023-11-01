@@ -79,6 +79,7 @@ export class DashboardComponent implements OnInit {
   dataSource1: any;
   programData: any;
   currentRecords:any;
+  currentWeekRecords:any;
   dataSource:any[]=[];
   programFilterData:any[]=[];
   //series:any
@@ -187,6 +188,8 @@ export class DashboardComponent implements OnInit {
         
       }
       this.todayLecture();
+      this.weekLecture();
+      
       
     });
     //this.cdr.detectChanges();
@@ -242,6 +245,34 @@ export class DashboardComponent implements OnInit {
     this.currentRecords = this.filterRecordsByCurrentDate(this.dataSource);
    // console.log("====currentRecords==",currentRecords)
     }
+  }
+  weekLecture(){
+    if(this.dataSource){
+  this.currentWeekRecords = this.filterRecordsForCurrentWeek(this.dataSource);
+    }
+
+  }
+  filterRecordsForCurrentWeek(records: any[]) {
+    const { startOfWeek, endOfWeek } = this.getCurrentWeekDates();
+    return records.filter((record) => {
+      const recordStartDate = new Date(record.sessionStartDate);
+      const recordEndDate = new Date(record.sessionEndDate);
+      
+      // Check if there's any overlap between the current week and the record's start and end dates
+      return (
+        (recordStartDate <= endOfWeek && recordEndDate >= startOfWeek)
+      );
+    });
+  }
+  getCurrentWeekDates() {
+    const today = new Date();
+    const currentDay = today.getDay();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - currentDay + 1); // Assuming Monday is the start of the week
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6); // End of the week
+  
+    return { startOfWeek, endOfWeek };
   }
 
   

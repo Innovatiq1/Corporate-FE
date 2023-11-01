@@ -139,24 +139,17 @@
       <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
-            <h2>Lecture In Week</h2>
+            <h2> Course Lecture In Week</h2>
           </div>
           <div class="body">
             <div class="table-responsive">
-              <table class="table table-borderless medicine-list">
-                <tr class="mb-3">
-                  <td><i class="fas fa-microscope pill-style col-green"></i> Chemistry</td>
-                  <td class="text-end">
-                    <span class="badge-outline">M - W - F -</span>
-                  </td>
-                </tr>
+              <table class="table table-borderless medicine-list" *ngFor="let items of currentWeekRecords">
+               
                 <tr>
-                  <td><i class="fas fa-square-root-alt pill-style col-blue"></i> Mathematics</td>
-                  <td class="text-end">
-                    <span class="badge-outline">- T - T - S</span>
-                  </td>
+                  <td><i class="fa fa-circle col-cyan msr-2"></i> {{items.courseName}}</td>
+                 
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td><i class="fas fa-palette pill-style col-indigo"></i> Painting</td>
                   <td class="text-end">
                     <span class="badge-outline">M - - T - S</span>
@@ -185,12 +178,12 @@
                   <td class="text-end">
                     <span class="badge-outline">M - W - F S</span>
                   </td>
-                </tr>
+                </tr> -->
               </table>
             </div>
-            <div class="text-center p-t-20">
+            <!-- <div class="text-center p-t-20">
               <button mat-stroked-button color="primary">View More</button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -198,7 +191,7 @@
         <div class="card">
           <div class="header">
             <h2>
-              Today's Lecture</h2>
+              Course Today's Lecture</h2>
           </div>
           <div class="tableBody">
             <div class="table-responsive">
