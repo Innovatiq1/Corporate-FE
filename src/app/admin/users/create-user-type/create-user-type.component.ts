@@ -85,6 +85,7 @@ export class CreateUserTypeComponent {
   getUserTypeList(filters?: any) {
     this.adminService.getUserTypeList({ ...this.coursePaginationModel }).subscribe(
       (response: any) => {
+        console.log(response)
         this.typesList = response.docs;
         let data = this.typesList.find((id: any) => id._id === this.paramId);
         if (data) {

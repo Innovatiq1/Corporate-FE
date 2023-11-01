@@ -75,7 +75,7 @@ export class CourseKitComponent implements OnInit{
         this.isLoading = false;
         console.log("===response==",response)
         this.totalItems = response.totalDocs
-        
+
         this.dataSource = response.docs;
         this.courseKitModel.docs = response.docs;
         this.courseKitModel.page = response.page;
@@ -122,7 +122,7 @@ export class CourseKitComponent implements OnInit{
             text: "Please start convert this video",
           });
           return
-          
+
         }
         const videoType = "application/x-mpegURL";
         if (videoURL) {
@@ -138,7 +138,7 @@ export class CourseKitComponent implements OnInit{
       });
     }
   }
-  
+
   parseDate(dateString: string): Date {
     return new Date(dateString);
   }
@@ -179,9 +179,9 @@ export class CourseKitComponent implements OnInit{
   pageSizeChange($event: any) {
     this.coursePaginationModel.page = $event?.pageIndex + 1;
     this.coursePaginationModel.limit = $event?.pageSize;
-   
+
   }
- 
+
 
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
@@ -233,19 +233,16 @@ export class CourseKitComponent implements OnInit{
   }
   //serach functionality
   performSearch() {
-    console.log(this.dataSource)
-    console.log(this.searchTerm)
     if(this.searchTerm){
-    this.dataSource = this.dataSource?.filter((item: any) =>{   
-      console.log("vv", item)
+    this.dataSource = this.dataSource?.filter((item: any) =>{
       const search = (item.name + item.shortDescription + item.longDescription).toLowerCase()
       return search.indexOf(this.searchTerm.toLowerCase())!== -1;
-      
+
     }
     );
     } else {
        this.fetchCourseKits();
-  
+
     }
   }
   // export table data in excel file

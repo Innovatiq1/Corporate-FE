@@ -3,6 +3,7 @@ export class Students {
   id: number;
   img: string;
   name: string;
+  last_name: string;
   email: string;
   joiningDate: string;
   gender: string;
@@ -33,6 +34,7 @@ export class Students {
       this.address = students.address || '',
       this.isLogin = students.isLogin
       this.data = students.data || [];
+      this.last_name = students.last_name || '';
     }
   }
   public getRandomID(): number {
