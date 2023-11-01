@@ -94,7 +94,7 @@ export class ViewCourseComponent {
   getRegisteredClassDetails(){
     let studentId=localStorage.getItem('id')
     this.courseService.getStudentClass(studentId,this.classId).subscribe((response) => {
-      this.studentClassDetails=response.data;
+      this.studentClassDetails=response.data.docs[0];
       if(this.studentClassDetails.status =='registered' ){
         this.isRegistered == true;
         this.isStatus=true;

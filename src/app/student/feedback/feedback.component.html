@@ -24,7 +24,7 @@
                     class="example-full-width mb-3"
                     appearance="outline">
                     <mat-select formControlName="courseName" >
-                      <mat-option [value]="course.courseId.title" *ngFor="let course of studentApprovedCourses">{{ course?.courseId?.title }} </mat-option>
+                      <mat-option [value]="course?.courseId?.title" *ngFor="let course of studentApprovedCourses">{{ course?.courseId?.title }} </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
@@ -34,7 +34,7 @@
                     class="example-full-width mb-3"
                     appearance="outline">
                     <mat-select formControlName="courseName">
-                      <mat-option [value]="program.programId.title" *ngFor="let program of studentApprovedPrograms">{{ program?.programId?.title }}</mat-option>
+                      <mat-option [value]="program?.programId?.title" *ngFor="let program of studentApprovedPrograms">{{ program?.programId?.title }}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
