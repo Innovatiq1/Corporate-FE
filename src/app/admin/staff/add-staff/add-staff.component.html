@@ -78,6 +78,9 @@
                     <mat-error *ngIf="staffForm.get('conformPassword')?.hasError('required')">
                       Re-Enter password is required
                     </mat-error>
+                    <mat-error *ngIf="staffForm.get('conformPassword')?.hasError('confirmedValidator')">
+                      Password and Re-Enter Password must be match
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -189,7 +192,7 @@
                     color="primary" (click)="submit()">Submit</button>
                     <button *ngIf="updateBtn" class="btn-space" [disabled]="!staffForm.valid " mat-raised-button
                     color="primary" (click)="update()">Update</button>
-                  <button type="button" mat-raised-button color="warn" [routerLink]="['/admin/staff/all-staff']">Cancel</button>
+                  <button type="button" mat-raised-button color="warn" [routerLink]="['/admin/staff/all-staff']" (click)="cancel()">Cancel</button>
                 </div>
               </div>
             </form>

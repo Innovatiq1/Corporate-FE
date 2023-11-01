@@ -143,6 +143,9 @@
                     >
                       Re-Enter password is required
                     </mat-error>
+                    <mat-error *ngIf="stdForm.get('conformPassword')?.hasError('confirmedValidator')">
+                      Password and Re-Enter Password must be match
+                    </mat-error>
                   </mat-form-field>
                 </div>
               </div>

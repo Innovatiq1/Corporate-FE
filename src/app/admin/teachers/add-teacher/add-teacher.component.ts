@@ -11,6 +11,7 @@ import { Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { StudentsService } from 'app/admin/students/all-students/students.service';
+import { ConfirmedValidator } from '@shared/password.validator';
 
 @Component({
   selector: 'app-add-teacher',
@@ -52,10 +53,12 @@ export class AddTeacherComponent {
       joiningDate:['', [Validators.required]],
       education: [''],
       avatar: [''],
+    },{
+      validator: ConfirmedValidator('password', 'conformPassword')
     });
   }
-  
-  
+
+
   onFileUpload(event:any) {
     this.fileName = event.target.files[0].name;
     this.files=event.target.files[0]
@@ -65,18 +68,18 @@ export class AddTeacherComponent {
     //             console.log("--------",response)
     //   },
     //   (error:any) => {
-        
+
     //   }
     // );
 
-    
+
   }
   getDepartment(){
     this.StudentService.getAllDepartments().subscribe((response: any) =>{
       this.dept = response.data.docs;
       console.log("dept",this.dept)
      })
-  
+
   }
   onSubmit() {
     console.log('Form Value', this.proForm.value);
@@ -84,7 +87,7 @@ export class AddTeacherComponent {
     this.instructor.uploadVideo(this.files).subscribe(
       (response: any) => {
         const inputUrl = response.inputUrl;
-        
+
         const userData: Users = this.proForm.value;
         //this.commonService.setVideoId(videoId)
 
