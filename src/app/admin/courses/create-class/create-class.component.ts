@@ -324,7 +324,7 @@ export class CreateClassComponent {
       this.courseCode=response.courseCode
 
 
-      console.log(response)
+      // console.log(response)
      });
 
    }
