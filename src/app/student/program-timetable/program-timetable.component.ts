@@ -166,9 +166,9 @@ export class ProgramTimetableComponent implements OnInit {
         const sessionEndTime = arg.event.extendedProps['sessionEndTime'];
         return {
           html: `
-            <div style=" font-size:10px; color: blue; white-space: normal; word-wrap: break-word;">
+            <div style=" font-size:10px; color: white;background-color: #1565C0; white-space: normal; word-wrap: break-word;">
               ${title}<br>
-               <span class="text-muted">${sessionStartTime} - ${sessionEndTime}</span>
+               <span style ="color:white">${sessionStartTime} - ${sessionEndTime}</span>
             </div>`
         };
       }  ,    
