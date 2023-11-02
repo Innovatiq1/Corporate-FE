@@ -88,6 +88,8 @@ export class DashboardComponent implements OnInit {
   programSeries: number[] = [];
   labels: string[] = [];
   series: number[] = [];
+  currentProgramRecords: any;
+  currentProgramWeekRecords: any;
 
   constructor(private instructorService: InstructorService,public lecturesService: LecturesService,) {
     //constructor
@@ -222,6 +224,9 @@ export class DashboardComponent implements OnInit {
           courseCode: item.sessions[0].courseCode,
           
           duration:daysDifference,
+          sessionStartDate: moment(item.sessions[0].sessionStartDate).format("YYYY-MM-DD"),
+          sessionEndDate: moment(item.sessions[0].sessionEndDate).format("YYYY-MM-DD"),
+          sessionStartTime: starttimeObject.format("hh:mm A"),
 
           
         });
@@ -230,6 +235,8 @@ export class DashboardComponent implements OnInit {
       } else {
         
       }
+      this.todayProgramLecture();
+      this.weekProgramLecture();
       
     });
     //this.cdr.detectChanges();
@@ -240,6 +247,22 @@ export class DashboardComponent implements OnInit {
     //return sessions;
     
   }
+  todayProgramLecture(){
+    if(this.programFilterData){
+      this.currentProgramRecords = this.filterRecordsByCurrentDate(this.programFilterData);
+      console.log("=testGopal=",this.filterRecordsByCurrentDate(this.programFilterData))
+     // console.log("====currentRecords==",currentRecords)
+      }
+
+  }
+  weekProgramLecture(){
+    if(this.programFilterData){
+      this.currentProgramWeekRecords = this.filterRecordsForCurrentWeek(this.programFilterData);
+      
+        }
+
+  }
+  
   todayLecture(){
     if(this.dataSource){
     this.currentRecords = this.filterRecordsByCurrentDate(this.dataSource);
@@ -253,6 +276,7 @@ export class DashboardComponent implements OnInit {
 
   }
   filterRecordsForCurrentWeek(records: any[]) {
+    console.log("====recordshao===",records)
     const { startOfWeek, endOfWeek } = this.getCurrentWeekDates();
     return records.filter((record) => {
       const recordStartDate = new Date(record.sessionStartDate);
@@ -275,6 +299,7 @@ export class DashboardComponent implements OnInit {
     return { startOfWeek, endOfWeek };
   }
 
+  
   
   filterRecordsByCurrentDate(records: any[]) {
     const currentDate = new Date(); // Get the current date
