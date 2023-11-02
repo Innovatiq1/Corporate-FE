@@ -4,20 +4,20 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import { CalendarOptions } from '@fullcalendar/core';
 
 @Component({
-  selector: 'app-timetable',
-  templateUrl: './timetable.component.html',
-  styleUrls: ['./timetable.component.scss'],
+  selector: 'app-program-timetable',
+  templateUrl: './program-timetable.component.html',
+  styleUrls: ['./program-timetable.component.scss'],
 })
 
-export class TimetableComponent implements OnInit {
+export class ProgramTimetableComponent implements OnInit {
   courseCalendarOptions!: CalendarOptions;
   programCalendarOptions!: CalendarOptions
 
   breadscrums = [
     {
-      title: 'Course-Timetable',
+      title: 'Program-Timetable',
       items: ['Timetable'],
-      active: 'Course-Timetable',
+      active: 'Program-Timetable',
     },
   ];
   studentApprovedClasses: any;
@@ -105,14 +105,12 @@ export class TimetableComponent implements OnInit {
           const sessionEndTime = arg.event.extendedProps['sessionEndTime'];
           return {
             html: `
-            <div style=" font-size:10px; color: white
-            ; white-space: normal; word-wrap: break-word;">
-              ${title}<br>
-               <span style ="color:white">${sessionStartTime} - ${sessionEndTime}</span>
-            </div>`
+              <div style=" font-size:10px; color: blue; white-space: normal; word-wrap: break-word;">
+                ${title}<br>
+                 <span class="text-muted">${sessionStartTime} - ${sessionEndTime}</span>
+              </div>`
           };
-        }  ,  
-        eventDisplay: 'block' 
+        }  ,    
       };
     });
         
@@ -168,12 +166,14 @@ export class TimetableComponent implements OnInit {
         const sessionEndTime = arg.event.extendedProps['sessionEndTime'];
         return {
           html: `
-            <div style=" font-size:10px; color: blue; white-space: normal; word-wrap: break-word;">
+            <div style=" font-size:10px; color: white; white-space: normal; word-wrap: break-word;">
               ${title}<br>
-               <span class="text-muted">${sessionStartTime} - ${sessionEndTime}</span>
+               <span style ="color:white">${sessionStartTime} - ${sessionEndTime}</span>
             </div>`
         };
-      }  ,    
+      }  , 
+      eventDisplay: 'block' 
+   
     };
 
 

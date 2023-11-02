@@ -103,7 +103,7 @@ export class AllTeachersComponent
     //this.location.re
   }
   addNew() {
-    this.route.navigateByUrl("/admin/teachers/add-teacher")
+    this.route.navigateByUrl("/admin/instructors/add-instructor")
 
 
   }

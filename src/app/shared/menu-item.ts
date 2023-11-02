@@ -475,26 +475,26 @@ MENU_LIST = [
     ]
 },
 
-{
-    id: "admin/testimonials",
-    title: "Testimonials",
-    selected: false,
-    iconsrc: "/assets/testimonials-icon.svg",
-    icon: 'find_in_page',
-    children:
-    [
-        {
-            id: "testimonials-instructor",
-            title: "Instructor",
-            type: "none"
-        },
-        {
-            id: "testimonials-student",
-            title: "Student",
-            type: "none"
-        }
-    ]
-},
+// {
+//     id: "admin/testimonials",
+//     title: "Testimonials",
+//     selected: false,
+//     iconsrc: "/assets/testimonials-icon.svg",
+//     icon: 'find_in_page',
+//     children:
+//     [
+//         {
+//             id: "testimonials-instructor",
+//             title: "Instructor",
+//             type: "none"
+//         },
+//         {
+//             id: "testimonials-student",
+//             title: "Student",
+//             type: "none"
+//         }
+//     ]
+// },
 {
     id: "student/enrollment",
     title: "Enrollment",
@@ -515,24 +515,31 @@ MENU_LIST = [
     ]
 },
 {
-    id: "student/schedule",
-    title: "Schedule",
+    id: "student/timetable",
+    title: "Timetable",
     iconsrc: "/assets/course-icon.svg",
     icon:'fact_check',
     selected: true,
     children: [
+        // {
+        //     id: "homework",
+        //     title: "Homework",
+        //     selected: false,
+        //     iconsrc: "/assets/announcement-icon.svg",
+        // },
         {
-            id: "homework",
-            title: "Homework",
+            id: "course-timetable",
+            title: "Course",
             selected: false,
             iconsrc: "/assets/announcement-icon.svg",
         },
         {
-            id: "timetable",
-            title: "Time Table",
+            id: "program-timetable",
+            title: "Program",
             selected: false,
             iconsrc: "/assets/announcement-icon.svg",
         }
+
 ]
 },
 {

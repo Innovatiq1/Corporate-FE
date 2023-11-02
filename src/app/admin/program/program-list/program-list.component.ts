@@ -6,6 +6,9 @@ import { ClassService } from 'app/admin/schedule-class/class.service';
 import { ProgramCourse } from '../program.model';
 import { CoursePaginationModel } from '@core/models/course.model';
 import Swal from 'sweetalert2';
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-program-list',
@@ -88,5 +91,48 @@ export class ProgramListComponent {
   }
   ngOnInit(): void {
     this.getProgramList();
+  }
+  // export table data in excel file
+  exportExcel() {
+    // key name with space add in brackets
+    console.log("vv", this.programData);
+    const exportData: Partial<TableElement>[] =
+      this.programData.map((x: any) => ({
+        'Program Name': x.title,
+        'Duration': x.duration,
+        'Compulsory Count' : x.coreCourseCount,
+        'Elective Count': x.electiveCourseCount
+      }));
+
+    TableExportUtil.exportToExcel(exportData, 'excel');
+  }
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [[' Program Name','Duration', 'Compulsory Count', 'Elective Count']];
+    console.log(this.programData)
+    const data = this.programData.map((x:any) =>
+      [x.title,
+        x.duration,
+        x.coreCourseCount,
+        x.electiveCourseCount
+    ] );
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+  
+    // Add a page to the document (optional)
+    //doc.addPage();
+  
+    // Generate the table using jspdf-autotable
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+  
+  
+  
+    });
+  
+    // Save or open the PDF
+    doc.save('AllPrograms-list.pdf');
   }
 }

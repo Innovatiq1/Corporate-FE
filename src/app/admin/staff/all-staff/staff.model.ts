@@ -10,6 +10,7 @@ export class Staff {
   role: string;
   salary:any
   data:any;
+  joiningDate: any;
   constructor(staff: Staff) {
     {
       this.id = staff.id || this.getRandomID();
@@ -22,6 +23,7 @@ export class Staff {
       this.address = staff.address || '';
       this.mobile = staff.mobile || '';
       this.data = staff.data;
+      this.joiningDate = staff.joiningDate || '';
     }
   }
   public getRandomID(): number {

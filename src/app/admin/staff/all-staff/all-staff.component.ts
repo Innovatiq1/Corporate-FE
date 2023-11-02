@@ -26,6 +26,8 @@ import {
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-all-staff',
@@ -191,13 +193,43 @@ export class AllstaffComponent
         Designation: x.role,
         Mobile: x.mobile,
         Email: x.email,
-        'Joining Date': formatDate(new Date(x.date), 'yyyy-MM-dd', 'en') || '',
-        Address: x.address,
+        'Joining Date': x.joiningDate  || '',
+        Salary: x.salary,
       }));
 
     TableExportUtil.exportToExcel(exportData, 'excel');
   }
-
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [['Name','Designation','Mobile','Email','Joining Date','Salary']];
+    console.log(this.dataSource)
+    const data = this.dataSource.filteredData.map((x:any) =>
+      [x.name,
+        x.role,
+        x.mobile,
+        x.email,
+        x.joiningDate || '',
+        x.salary
+    ] );
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+  
+    // Add a page to the document (optional)
+    //doc.addPage();
+  
+    // Generate the table using jspdf-autotable
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+  
+  
+  
+    });
+  
+    // Save or open the PDF
+    doc.save('AllStaff-list.pdf');
+  }
   showNotification(
     colorName: string,
     text: string,
@@ -222,6 +254,9 @@ export class AllstaffComponent
       this.contextMenu.openMenu();
     }
   }
+    
+  
+  
 }
 export class ExampleDataSource extends DataSource<Staff> {
   filterChange = new BehaviorSubject('');
@@ -323,4 +358,5 @@ export class ExampleDataSource extends DataSource<Staff> {
       );
     });
   }
+
 }

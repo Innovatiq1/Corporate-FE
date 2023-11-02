@@ -37,6 +37,7 @@ export class SettingsComponent {
   superUrl: any;
   tcUrl: any;
   taUrl: any;
+  adminUrl: any;
 
   constructor(private studentService: StudentsService,private fb: UntypedFormBuilder, private certificateService:CertificateService,
     private router: Router) {
@@ -48,6 +49,8 @@ export class SettingsComponent {
     this.superUrl = urlPath.includes('supervisor-settings');
     this.tcUrl = urlPath.includes('trainingcoordinator-settings');
     this.taUrl = urlPath.includes('trainingadministrator-settings');
+    this.adminUrl = urlPath.includes('admin-settings');
+    
     
     if(this.cmUrl===true){
       this.breadscrums = [
@@ -99,6 +102,15 @@ export class SettingsComponent {
         {
           title:'Settings',
           items: ['Training Administrator'],
+          active: 'Settings',
+        },
+      ];
+    }
+    if(this.adminUrl===true){
+      this.breadscrums = [
+        {
+          title:'Settings',
+          items: ['Admin'],
           active: 'Settings',
         },
       ];

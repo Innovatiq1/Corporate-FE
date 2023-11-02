@@ -11,6 +11,7 @@ import { ViewCourseComponent } from './view-course/view-course.component';
 import { ProgramComponent } from './program/program.component';
 import { ViewProgramComponent } from './view-program/view-program.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { ProgramTimetableComponent } from './program-timetable/program-timetable.component';
 
 const routes: Routes = [
   {
@@ -35,9 +36,14 @@ const routes: Routes = [
     component: HomeworkComponent,
   },
   {
-    path: 'schedule/timetable',
+    path: 'timetable/course-timetable',
     component: TimetableComponent,
   },
+  {
+    path: 'timetable/program-timetable',
+    component: ProgramTimetableComponent,
+  },
+
   {
     path: 'feedback/courses',
     component: FeedbackComponent,

@@ -211,5 +211,8 @@ addBlog(formObj:any) {
   update() {
     this.updateBlog(this.staffForm.value);
   }
+  cancel() {
 
+    window.history.back();
+  }
 }

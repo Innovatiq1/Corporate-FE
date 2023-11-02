@@ -93,6 +93,11 @@ const routes: Routes = [
         component: SettingsComponent,
         canActivate: [LoginGuard],
       },
+      {
+        path: 'settings/admin-settings',
+        component: SettingsComponent,
+        canActivate: [LoginGuard],
+      },
 
       // Extra components
       {

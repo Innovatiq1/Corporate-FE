@@ -38,6 +38,10 @@ export class StaffService extends UnsubscribeOnDestroyAdapter {
       },
     });
   }
+  getAllStaff(){
+    const apiUrl = `${this.prefix}admin/adminUserListing/`;
+    return this.httpClient.get<Staff>(apiUrl).pipe(map(response => response))
+  }
 
   // saveStaff(course: any) {
   //   const apiUrl = `${this.prefix}admin/staff/`;

@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AnnouncementService } from '@core/service/announcement.service';
 import { UtilsService } from '@core/service/utils.service';
 import Swal from 'sweetalert2';
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-list',
@@ -98,5 +101,44 @@ export class ListComponent {
 
       this.cdr.detectChanges();
     })
+  }
+   // export table data in excel file
+   exportExcel() {
+    // key name with space add in brackets
+    console.log("vv", this.dataSource);
+    const exportData: Partial<TableElement>[] =
+      this.dataSource.map((x: any) => ({
+        'Title': x.subject,
+        'User Role': x.announcementFor,
+      }));
+
+    TableExportUtil.exportToExcel(exportData, 'excel');
+  }
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [[' Title','User Role']];
+    console.log(this.dataSource)
+    const data = this.dataSource.map((x:any) =>
+      [x.subject,
+        x.announcementFor,
+    ] );
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+  
+    // Add a page to the document (optional)
+    //doc.addPage();
+  
+    // Generate the table using jspdf-autotable
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+  
+  
+  
+    });
+  
+    // Save or open the PDF
+    doc.save('Announcement-list.pdf');
   }
 }

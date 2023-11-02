@@ -75,11 +75,11 @@
                                     <div class="file">
                                     <button mat-raised-button color="primary">Choose file</button>
                                     <span class="file-msg"><h5>{{fileName ? fileName : 'Drag and Drop File Here' }}</h5></span>
-                                    <span class="file-msg"><h5 *ngFor="let file of files; let i = index">{{file.name ? file.name : 'Drag and Drop File Here' }}</h5></span>
+                                    <!-- <span class="file-msg"><h5 *ngFor="let file of files; let i = index">{{file.name ? file.name : 'Drag and Drop File Here' }}</h5></span> -->
                                     <input formControlName="videoLink" (fileDropped)="onFileDropped($event)" (change)="fileBrowseHandler($event)" [readonly]="isInputReadonly()" class="file-input" type="file">
-                                    </div>
-                                    <h5 class="name">{{ fileName }}</h5>
-                                  </div>
+                                    <!-- </div> -->
+                                    <!-- <h5 class="name">{{ fileName }}</h5> -->
+                                  <!-- </div> -->
                                   <div class="files-list">
                                     <div class="single-file" *ngFor="let file of files; let i = index">
                                         <img src="../../assets/images/dnd/ic-file.svg" alt="" class="file-icon" />
@@ -95,6 +95,8 @@
                                         alt="file"
                                         
                                       /> -->
+                                    </div>
+                                    </div>
                                     </div>
                                 </div>
                                   <!-- <app-file-upload formControlName="videoLink" (fileDropped)="onFileDropped($event)" (change)="fileBrowseHandler($event)"></app-file-upload> -->

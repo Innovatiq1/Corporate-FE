@@ -7,9 +7,11 @@
   padding: 26px 20px 30px;
   transition: 0.2s;
 }
-.file{
- text-align: center;
+
+.file {
+  text-align: center;
 }
+
 .file-input {
   position: absolute;
   left: 0;
@@ -19,6 +21,7 @@
   cursor: pointer;
   opacity: 0;
 }
+
 .file-msg {
   display: inline-block;
   margin-left: 5px;
@@ -26,6 +29,21 @@
   font-weight: 500;
   color: #5b5bff;
 }
-h5{
+
+h5 {
   margin-top: 20px;
+}
+
+label {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+::ng-deep .example-full-width .mdc-text-field--outlined {
+  --mdc-outlined-text-field-container-shape: 12px;
+  font-style: italic;
+}
+
+.mandatory {
+  color: red;
 }

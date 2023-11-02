@@ -355,10 +355,10 @@ export class CreateClassComponent {
             icon: 'success',
             confirmButtonColor: '#526D82',
           });
-          this.router.navigateByUrl(`admin/program/schedule-class`);
+          // this.router.navigateByUrl(`admin/program/schedule-class`);
+          window.history.back();
         });
       }
-
   }
   }
 
@@ -476,5 +476,9 @@ export class CreateClassComponent {
     response.docs.forEach((element: LabListModel) => {
       this.labList.push(element);
     });
+  }
+  cancel() {
+  
+    window.history.back();
   }
 }
