@@ -9,13 +9,20 @@
     <div class="col-sm-6 auth-form-section">
       <div class="form-section">
         <div class="auth-wrapper">
-          <h2 class="welcome-msg"> {{"Register with" | translate}} PSA </h2>
+          <h2 class="welcome-msg mt-4"> {{"Register with" | translate}} PSA </h2>
           <select (change)="setLanguage($event)">
             <option *ngFor="let item of listLang" [value]="item.lang">
               {{item.text}}
             </option>
           </select>
           <p class="auth-signup-text text-muted">{{"Enter details to create your account" | translate}}</p>
+          <div class="flex-sb-m w-full text-center mb-3">
+            <div>
+              <span style="font-style: italic;">{{"Already Registered?" | translate}} <a routerLink="/authentication/signin">
+                  {{"Login" | translate}}
+                </a></span>
+            </div>
+          </div>
           <form class="validate-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
             <div class="row">
               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
@@ -30,8 +37,8 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
-                <ngx-intl-tel-input [cssClass]="'custom'"customPlaceholder="Mobile Number" [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4" >
+                <ngx-intl-tel-input [cssClass]="'custom'" customPlaceholder="Mobile Number" [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
 				[searchCountryFlag]="true" [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
 				[selectFirstCountry]="false" [maxLength]="10" 
 				[phoneValidation]="true" [separateDialCode]="true" name="phone" formControlName="phone">
@@ -86,13 +93,13 @@
                 {{"Register" | translate}}
               </button>
             </div>
-            <div class="flex-sb-m w-full  p-b-20">
+            <!-- <div class="flex-sb-m w-full  p-b-20">
               <div>
                 <span style="font-style: italic;">{{"Already Registered?" | translate}} <a routerLink="/authentication/signin">
                     {{"Login" | translate}}
                   </a></span>
               </div>
-            </div>
+            </div> -->
           </form>
           <!-- <h6 class="social-login-title">OR</h6> -->
           <!-- <ul class="list-unstyled social-icon mb-0 mt-3">

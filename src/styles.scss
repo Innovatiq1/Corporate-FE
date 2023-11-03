@@ -1,13 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~plyr/dist/plyr.css';
 ngx-intl-tel-input input {
-	height: 50px;
+	height: 55px;
     width: 410px;
 	margin-bottom: 20px;
 	padding: 10px;
-	border-style: solid;
+	border: 1px solid black;
 	border-width: 1px;
-	border-color: #c7cace;
+	border-color: #7c7e82;
 	border-radius: 4px;
 	font-size: 18px;
 }
