@@ -211,7 +211,7 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
     //k//ey name with space add in brackets
    const exportData: Partial<TableElement>[] =
       this.dataSource.map((user:any) => ({
-        CourseName:user.classId?.courseId?.title,
+        CourseName:user.courseId?.title,
         StartDate: user.classStartDate,
         EndDate: user.classEndDate,
       }));
