@@ -140,6 +140,8 @@ export class CreateClassComponent {
       type: 'Instructor',
     };
 
+    this.addNewRow();
+
     this.instructorService.getInstructor(payload).subscribe((res) => {
       this.instructorList = res;
       console.log(

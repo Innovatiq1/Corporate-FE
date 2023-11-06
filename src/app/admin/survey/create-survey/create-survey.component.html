@@ -98,16 +98,17 @@
                     <div class="p-4">
                       <ul class="list-group list-group-unbordered">
                           <li class="list-group-item">
-                            <b>Student Name </b>
-                            <div class="profile-desc-item float-end">{{studentFirstName}}</div>
+                            <b>Student Name: </b>
+                            <span class="profile-desc-item gap-4">{{studentLastName? studentFirstName + " " + studentLastName:studentFirstName}}</span>
                           </li>
                           <li class="list-group-item">
-                            <b>Course/Program Name </b>
-                            <div class="profile-desc-item float-end">{{courseName}}</div>
+                            <b>Course/Program Name: </b>
+                            <span class="profile-desc-item">{{courseName}}</span>
+                            <!-- <div class="profile-desc-item float-end">{{courseName}}</div> -->
                           </li>
                         </ul>
                     </div>
-  
+
                     <br>
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -119,14 +120,14 @@
                       <mat-radio-group formControlName ="question1"
                         aria-labelledby="example-radio-group-label"
                         class="example-radio-group"
-  
+
                       >
-                        <mat-radio-button 
-                          class="example-radio-button ms-0"
+                        <mat-radio-button
+                          class="example-radio-button ms-0 "
                           *ngFor="let season of course"
                           [value]="season"
                         >
-                          {{ season }}
+                         <span class="session">{{ season }}</span>
                         </mat-radio-button>
                       </mat-radio-group>
                     </div>
@@ -146,7 +147,7 @@
                       <mat-radio-group
                         aria-labelledby="example-radio-group-label"
                         class="example-radio-group" formControlName ="question2"
-  
+
                       >
                         <mat-radio-button
                           class="example-radio-button ms-0"
@@ -241,7 +242,7 @@
               <span style="color: #afaaaa">10- very likely </span>
             </div>
                   </div>
-  
+
               </div>
               <div class="card">
                 <div class="header">
@@ -269,7 +270,7 @@
                   </button>
                 </div>
               </div>
-  
+
             </form>
 
             </div>

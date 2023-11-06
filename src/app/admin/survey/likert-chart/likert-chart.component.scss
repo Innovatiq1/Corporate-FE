@@ -44,3 +44,13 @@ label {
   background-color: #706d6d;
   color: #fff;
 }
+
+.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-selected-focus-icon-color: #3BB143;
+  --mdc-radio-selected-hover-icon-color: #3BB143;
+  --mdc-radio-selected-icon-color: #3BB143;
+  --mdc-radio-selected-pressed-icon-color: #3BB143;
+  --mat-radio-ripple-color: #000;
+  --mat-radio-checked-ripple-color: #3BB143;
+
+}

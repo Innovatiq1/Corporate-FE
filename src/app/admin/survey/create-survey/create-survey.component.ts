@@ -66,6 +66,7 @@ export class CreateSurveyComponent {
   courseName: any;
   programName: any;
   studentFirstName: any;
+  studentLastName!:string;
 
   constructor(
     private fb: FormBuilder,
@@ -102,6 +103,7 @@ export class CreateSurveyComponent {
     this.surveyService.getSurveyBuildersById(id).subscribe((response:any) => {
       this.courseName = response.data.courseName;
       this.studentFirstName = response.data.studentFirstName;
+      this.studentLastName = response.data.studentLastName
       this.selectedIndex = response.data.question5;
       this.question6 = response.data.question6;
 
