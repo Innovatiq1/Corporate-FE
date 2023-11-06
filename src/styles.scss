@@ -11,3 +11,15 @@ ngx-intl-tel-input input {
 	border-radius: 4px;
 	font-size: 18px;
 }
+
+// .mat-mdc-snack-bar-container {
+//    --mdc-snackbar-container-color: #b18413;
+//   --mdc-snackbar-supporting-text-color: rgba(255, 255, 255, 0.87);
+//   --mat-snack-bar-button-color: #ff4081;
+// }
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: #ffffff;
+ --mdc-snackbar-supporting-text-color: rgba(17, 17, 17, 0.87);
+ --mat-snack-bar-button-color: #ff4081;
+}
