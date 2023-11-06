@@ -376,12 +376,12 @@ export class CreateClassComponent {
                 text: 'Class Updated Successfully.',
                 icon: 'success',
               });
-              // this.showNotification(
-              //   'snackbar-success',
-              //   'Class Updated Successfully...!!!',
-              //   'top',
-              //   'right'
-              // );
+              this.showNotification(
+                'snackbar-success',
+                'Class Updated Successfully...!!!',
+                'top',
+                'right'
+              );
               this.router.navigateByUrl(`/admin/courses/class-list`);
             }
 
