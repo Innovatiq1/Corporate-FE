@@ -87,6 +87,7 @@ export class CreateClassComponent {
   instForm!: FormArray<any>;
   next: boolean = false;
   coursePaginationModel!: Partial<CoursePaginationModel>;
+  secondFormGroup!: FormGroup;
 
 
   addNewRow() {
@@ -120,7 +121,7 @@ export class CreateClassComponent {
       }
     });
     let urlPath = this.router.url.split('/')
-    this.editUrl = urlPath.includes('edit-class'); 
+    this.editUrl = urlPath.includes('edit-class');
 
     if(this.editUrl){
     this.breadscrums = [
@@ -140,7 +141,7 @@ export class CreateClassComponent {
     ];
 
   }
-  
+
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 5, 0, 1);
     this.maxDate = new Date(currentYear + 1, 11, 31);
@@ -151,7 +152,7 @@ export class CreateClassComponent {
   toggleStatus() {
     this.status = !this.status;
   }
-  
+
 
 
   ngOnInit(): void {
@@ -167,17 +168,17 @@ export class CreateClassComponent {
           type: 'Instructor',
         }),
         labs: this._classService.getAllLaboratory(),
-  
+
       }).subscribe((response) => {
         this.programList = response.courses;
         this.instructorList = response.instructors;
         this.labList = response.labs;
-  
+
         this.cd.detectChanges();
       });
         this.dataSource = this.dataSourceArray;
     }
-    
+
   if(this.editUrl ){
     forkJoin({
       courses: this.courseService.getCourseProgram({...this.coursePaginationModel,status:'active'}),
@@ -215,7 +216,7 @@ export class CreateClassComponent {
           instructor: item.instructorId?.id,
           lab: item.laboratoryId?.id,
         });
-        
+
       });
       this.dataSource = this.dataSourceArray;
       this.cd.detectChanges();
@@ -238,8 +239,11 @@ export class CreateClassComponent {
       status: ['open'],
       classStartDate: ['2023-05-20'],
       classEndDate: ['2023-06-10'],
-      sessions: ['', Validators.required],
+
     });
+    this.secondFormGroup = this._fb.group({
+      sessions: ['', Validators.required],
+    })
   }
 
   nextBtn() {
@@ -302,7 +306,7 @@ export class CreateClassComponent {
     });
     return sessions;
   }
- 
+
 
   onSelectChange(event: any) {
     console.log("==",this.programList)
@@ -335,7 +339,7 @@ export class CreateClassComponent {
             text: 'Class Created successfully.',
             icon: 'success',
             confirmButtonColor: '#526D82',
-          }); 
+          });
           this.router.navigateByUrl(`admin/program/schedule-class`);
                 });
       }
@@ -350,12 +354,11 @@ export class CreateClassComponent {
             text: 'Class updated successfully.',
             icon: 'success',
             confirmButtonColor: '#526D82',
-          });  
+          });
           // this.router.navigateByUrl(`admin/program/schedule-class`);
           window.history.back();
         });
       }
-  
   }
   }
 

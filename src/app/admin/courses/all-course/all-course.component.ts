@@ -30,6 +30,7 @@ export class AllCourseComponent {
   subCategories!: SubCategory[];
   allSubCategories!: SubCategory[];
   dataSource: any;
+  searchTerm: string = '';
   
   constructor(public _courseService:CourseService,  private classService: ClassService) {
     // constructor
@@ -141,5 +142,21 @@ delete(id: string) {
   
     // Save or open the PDF
     doc.save('AllCourses-list.pdf');
+  }
+  performSearch() {
+    if(this.searchTerm){
+    this.courseData = this.courseData?.filter((item: any) =>{
+      console.log("data",item)
+      const searchList = (item.title).toLowerCase();
+      return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+    }
+
+
+    // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    } else {
+      this.getAllCourse();
+
+    }
   }
 }

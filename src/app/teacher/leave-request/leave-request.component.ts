@@ -14,10 +14,14 @@ import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { SelectionModel } from '@angular/cdk/collections';
-import { UnsubscribeOnDestroyAdapter } from '@shared';
+import { TableElement, TableExportUtil, UnsubscribeOnDestroyAdapter } from '@shared';
 import { Direction } from '@angular/cdk/bidi';
 import { EditLeaveRequestComponent } from './dialogs/edit-leave-request/edit-leave-request.component';
 import { MatDialog } from '@angular/material/dialog';
+import { formatDate } from '@angular/common';
+import jsPDF from 'jspdf';
+
+
 
 @Component({
   selector: 'app-leave-request',
@@ -179,6 +183,98 @@ export class InstructorLeaveRequestComponent
       panelClass: colorName,
     });
   }
+  exportExcel() {
+    //key name with space add in brackets
+    const exportData: Partial<TableElement>[] =
+      this.dataSource.filteredData.map((x) => ({
+      'Class Name': x.className,
+      "Roll No": x.studentId?.rollNo,
+      "Student Name": x.studentId?.name,
+      "Apply Date":formatDate(new Date(x.applyDate), 'yyyy-MM-dd', 'en') || '',
+      "From Date":formatDate(new Date(x.fromDate), 'yyyy-MM-dd', 'en') || '',
+      "To Date":formatDate(new Date(x.toDate), 'yyyy-MM-dd', 'en') || '',
+      "Status": x.status,
+      "Reason": x.reason,
+      }));
+  
+    TableExportUtil.exportToExcel(exportData, 'excel');
+  }
+  // generatePdf() {
+  //   const doc = new jsPDF();
+  //   const headers = [['Class Name', 'Apply Date','From Date','To Date','Status','Reason']];
+  //   const data = this.dataSource.filteredData.map((user: {
+  //    className: any; applyDate:any; fromDate:any; toDate:any; status:any; reason:any
+  //     //formatDate(arg0: Date, arg1: string, arg2: string): unknown;
+  
+      
+  //   }, index: any) => [user.className, 
+  //   //user.studentId?.rollNo, 
+  //     // user.studentId?.name, 
+  //     formatDate(new Date(user.applyDate), 'yyyy-MM-dd', 'en') || '',
+  //     formatDate(new Date(user.fromDate), 'yyyy-MM-dd', 'en') || '',
+  //     formatDate(new Date(user.toDate), 'yyyy-MM-dd', 'en') || '',
+  //     user.status,
+  //     user.reason
+      
+  
+  
+  //   ]);
+  //   //const columnWidths = [60, 80, 40];
+  //   const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+  
+  //   // Add a page to the document (optional)
+  //   //doc.addPage();
+  
+  //   // Generate the table using jspdf-autotable
+  //   (doc as any).autoTable({
+  //     head: headers,
+  //     body: data,
+  //     startY: 20,
+  
+  
+  
+  //   });
+  
+  //   // Save or open the PDF
+  //   doc.save('lecture-list.pdf');
+  // }
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [[' Class Name','Roll No', 'Student Name','Apply Date','From Date','To Date','Status','Reason']];
+    console.log(this.dataSource)
+    const data = this.dataSource.filteredData.map((user:any) =>
+      [user.className,
+        user.studentId?.rollNo, 
+      user.studentId?.name, 
+      formatDate(new Date(user.applyDate), 'yyyy-MM-dd', 'en') || '',
+      formatDate(new Date(user.fromDate), 'yyyy-MM-dd', 'en') || '',
+      formatDate(new Date(user.toDate), 'yyyy-MM-dd', 'en') || '',
+      user.status,
+      user.reason
+        
+        
+    ] );
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+  
+    // Add a page to the document (optional)
+    //doc.addPage();
+  
+    // Generate the table using jspdf-autotable
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+  
+  
+  
+    });
+  
+    // Save or open the PDF
+    doc.save('leaverequest-list.pdf');
+  }
+  
+  
 }
 export class ExampleDataSource extends DataSource<LeaveRequest> {
   filterChange = new BehaviorSubject('');

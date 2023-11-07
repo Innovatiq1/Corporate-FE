@@ -19,7 +19,12 @@ import {
 import { LeaveRequestService } from '../leave-request/leave-request.service';
 import { LeaveService } from '@core/service/leave.service';
 import { AnnouncementService } from '@core/service/announcement.service';
-
+import { StudentNotificationComponent } from '@shared/components/student-notification/student-notification.component';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 export type barChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -76,7 +81,7 @@ export class DashboardComponent implements OnInit {
   withdrawCourses: any;
   withdrawPrograms: any;
   constructor(private classService: ClassService,private leaveService: LeaveService,
-    private announcementService:AnnouncementService) {
+    private announcementService:AnnouncementService, private snackBar: MatSnackBar,) {
     let user=JSON.parse(localStorage.getItem('currentUser')!);
     this.studentName = user?.user?.name;
     this.getRegisteredAndApprovedCourses()
@@ -104,7 +109,7 @@ export class DashboardComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'registered' ,isAll:true};
     this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
-      this.registeredPrograms = response?.data?.length    
+      this.registeredPrograms = response?.data?.length
       const payload1 = { studentId: studentId, status: 'approved' ,isAll:true};
       this.classService.getStudentRegisteredProgramClasses(payload1).subscribe(response =>{
         this.approvedPrograms = response?.data?.length
@@ -133,12 +138,12 @@ export class DashboardComponent implements OnInit {
      this.studentApprovedClasses = response.data.slice(0,5);
      const currentDate = new Date();
      const currentMonth = currentDate.getMonth();
-     const currentYear = currentDate.getFullYear();  
+     const currentYear = currentDate.getFullYear();
      const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
      this.upcomingCourseClasses = this.studentApprovedClasses.filter((item:any) => {
       const sessionStartDate = new Date(item.classId.sessions[0].sessionStartDate);
       return (
-        sessionStartDate >= tomorrow 
+        sessionStartDate >= tomorrow
       );
     });
     })
@@ -150,12 +155,12 @@ export class DashboardComponent implements OnInit {
      this.studentApprovedPrograms= response.data.slice(0,5);
      const currentDate = new Date();
      const currentMonth = currentDate.getMonth();
-     const currentYear = currentDate.getFullYear();  
+     const currentYear = currentDate.getFullYear();
      const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
      this.upcomingProgramClasses = this.studentApprovedPrograms.filter((item:any) => {
       const sessionStartDate = new Date(item.classId.sessions[0].sessionStartDate);
       return (
-        sessionStartDate >= tomorrow 
+        sessionStartDate >= tomorrow
       );
     });
 
@@ -177,8 +182,8 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  
-  
+
+
 
   public doughnutChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -195,12 +200,37 @@ export class DashboardComponent implements OnInit {
     'Registered Programs ',
     'Approved Programs',
   ];
-  public doughnutChartData!: ChartData<'doughnut'> 
+  public doughnutChartData!: ChartData<'doughnut'>
   public doughnutChartType: ChartType = 'doughnut';
 
   // Doughnut chart end
-
+  showNotification(
+    colorName: string,
+    placementFrom: MatSnackBarVerticalPosition,
+    placementAlign: MatSnackBarHorizontalPosition
+  ) {
+    this.snackBar.openFromComponent(StudentNotificationComponent, {
+      duration: 20000,
+      verticalPosition: placementFrom,
+      horizontalPosition: placementAlign,
+      panelClass: colorName,
+    });
+  }
   ngOnInit() {
+
+    // this.snackBar.openFromComponent( StudentNotificationComponent, {
+    //   // duration: 5000,
+    //   panelClass: ['blue-snackbar'],
+    //   horizontalPosition: 'end',
+    //   verticalPosition:'bottom'
+    // })
+    this.showNotification(
+            'blue-snackbar',
+            'bottom',
+            'right'
+          );
+
+
     this.chart2();
     this.getApprovedCourse();
     this.getApprovedProgram();

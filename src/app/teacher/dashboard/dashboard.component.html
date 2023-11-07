@@ -286,5 +286,156 @@
         </div>
       </div>
     </div>
+    <div class="row clearfix">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2> Program Lecture In Week</h2>
+          </div>
+          <div class="body">
+            <div class="table-responsive">
+              <table class="table table-borderless medicine-list" *ngFor="let items of currentProgramWeekRecords">
+               
+                <tr>
+                  <td><i class="fa fa-circle col-cyan msr-2"></i> {{items.courseName}}</td>
+                 
+                </tr>
+                <!-- <tr>
+                  <td><i class="fas fa-palette pill-style col-indigo"></i> Painting</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - - T - S</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-business-time pill-style col-orange"></i> Business Studies</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - W T - -</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-heart pill-style col-red"></i> Biology</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - W - F -</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-laptop-code pill-style col-purple"></i> Computer Studies</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - - T - S</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-globe-asia pill-style col-cyan"></i> Geography</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - W - F S</span>
+                  </td>
+                </tr> -->
+              </table>
+            </div>
+            <!-- <div class="text-center p-t-20">
+              <button mat-stroked-button color="primary">View More</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="card">
+          <div class="header">
+            <h2>
+              Program Today's Lecture</h2>
+          </div>
+          <div class="tableBody">
+            <div class="table-responsive">
+              <table class="table table-hover ">
+                <thead>
+                  <tr>
+                    <!-- <th>#</th> -->
+                    <th>Subject Name</th>
+                    <th>Class</th>
+                    <th>Time</th>
+                    <th>Duration</th>
+                    <!-- <th>Details </th> -->
+                  </tr>
+                </thead>
+                <tbody *ngFor="let items of currentProgramRecords">
+                  <tr>
+                    <!-- <td>1</td> -->
+                    <td>{{items.courseName}}</td>
+                    <td>{{items.courseCode}}</td>
+                    <td>{{items.sessionStartTime}}</td>
+                    <td>45 Min</td>
+                    <!-- <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td> -->
+                  </tr>
+                  <!-- <tr>
+                    <td>2</td>
+                    <td>Chemistry</td>
+                    <td>Standard 11</td>
+                    <td>11:15 AM</td>
+                    <td>30 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Biology</td>
+                    <td>Standard 12</td>
+                    <td>12:00 AM</td>
+                    <td>35 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Physics</td>
+                    <td>Standard 11</td>
+                    <td>12:45 AM</td>
+                    <td>30 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Music</td>
+                    <td>Standard 8</td>
+                    <td>02:00 AM</td>
+                    <td>45 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Computer studies</td>
+                    <td>Standard 10</td>
+                    <td>03:30 AM</td>
+                    <td>35 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

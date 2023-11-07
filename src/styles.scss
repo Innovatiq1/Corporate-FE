@@ -1,13 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~plyr/dist/plyr.css';
 ngx-intl-tel-input input {
-	height: 50px;
+	height: 55px;
     width: 410px;
 	margin-bottom: 20px;
 	padding: 10px;
-	border-style: solid;
+	border: 1px solid black;
 	border-width: 1px;
-	border-color: #c7cace;
+	border-color: #7c7e82;
 	border-radius: 4px;
 	font-size: 18px;
+}
+
+// .mat-mdc-snack-bar-container {
+//    --mdc-snackbar-container-color: #b18413;
+//   --mdc-snackbar-supporting-text-color: rgba(255, 255, 255, 0.87);
+//   --mat-snack-bar-button-color: #ff4081;
+// }
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: #ffffff;
+ --mdc-snackbar-supporting-text-color: rgba(17, 17, 17, 0.87);
+ --mat-snack-bar-button-color: #ff4081;
 }

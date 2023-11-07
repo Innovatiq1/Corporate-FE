@@ -34,6 +34,7 @@ export class CourseComponent {
   studentRegisteredClasses: any;
   studentApprovedClasses: any;
   totalApprovedItems: any;
+  searchTerm: string = '';
 
   constructor(public _courseService:CourseService,  private classService: ClassService) {
     this.coursePaginationModel = {};
@@ -148,4 +149,20 @@ delete(id: string) {
   });
 }
 
+performSearch() {
+  if(this.searchTerm){
+  this.classesData = this.classesData?.filter((item: any) =>{
+    console.log("data",item)
+    const searchList = (item.courseId?.title).toLowerCase();
+    return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+  }
+
+
+  // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+  );
+  } else {
+    this.getAllCourse();
+
+  }
+}
 }

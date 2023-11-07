@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { SharedModule } from '../shared.module';
+import { StudentNotificationComponent } from './student-notification/student-notification.component';
 
 @NgModule({
-  declarations: [FileUploadComponent, BreadcrumbComponent],
+  declarations: [FileUploadComponent, BreadcrumbComponent, StudentNotificationComponent],
   imports: [SharedModule],
   exports: [FileUploadComponent, BreadcrumbComponent],
 })

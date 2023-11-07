@@ -140,6 +140,8 @@ export class CreateClassComponent {
       type: 'Instructor',
     };
 
+    this.addNewRow();
+
     this.instructorService.getInstructor(payload).subscribe((res) => {
       this.instructorList = res;
       console.log(
@@ -324,7 +326,7 @@ export class CreateClassComponent {
       this.courseCode=response.courseCode
 
 
-      console.log(response)
+      // console.log(response)
      });
 
    }
@@ -374,12 +376,12 @@ export class CreateClassComponent {
                 text: 'Class Updated Successfully.',
                 icon: 'success',
               });
-              // this.showNotification(
-              //   'snackbar-success',
-              //   'Class Updated Successfully...!!!',
-              //   'top',
-              //   'right'
-              // );
+              this.showNotification(
+                'snackbar-success',
+                'Class Updated Successfully...!!!',
+                'top',
+                'right'
+              );
               this.router.navigateByUrl(`/admin/courses/class-list`);
             }
 
