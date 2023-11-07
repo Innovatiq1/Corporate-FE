@@ -87,6 +87,11 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
       })
     );
   }
+  getClassesByCourseId(courseId: string): Observable<any> {
+    const apiUrl = `${this.prefix}admin/class/class/${courseId}`;
+    return this.http.get<any>(apiUrl);
+  }
+
 
 
 
