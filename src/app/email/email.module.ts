@@ -7,8 +7,10 @@ import { ReadMailComponent } from './read-mail/read-mail.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ComponentsModule } from '../shared/components/components.module';
 import { SharedModule } from '../shared/shared.module';
+import { EmailSidebarComponent } from './email-sidebar/email-sidebar.component';
+import { SentComponent } from './sent/sent.component';
 @NgModule({
-  declarations: [ComposeComponent, InboxComponent, ReadMailComponent],
+  declarations: [ComposeComponent, InboxComponent, ReadMailComponent, EmailSidebarComponent, SentComponent],
   imports: [
     CommonModule,
     EmailRoutingModule,
