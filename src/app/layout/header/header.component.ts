@@ -17,6 +17,10 @@ import {
   AuthService,
 } from '@core';
 import { AuthenService } from '@core/service/authen.service';
+import { AnnouncementService } from '@core/service/announcement.service';
+import Swal from 'sweetalert2';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SimpleDialogComponent } from 'app/ui/modal/simpleDialog.component';
 
 interface Notifications {
   message: string;
@@ -48,7 +52,9 @@ export class HeaderComponent
   isFullScreen = false;
   userFullName: any;
   userType!: Role;
-
+  announcements: any;
+  icon = 'announcement'
+  color = 'nfc-green'
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -59,70 +65,76 @@ export class HeaderComponent
     private router: Router,
     public languageService: LanguageService,
     private authenService:AuthenService,
-    private translate: LanguageService
+    private translate: LanguageService,
+    private announcementService:AnnouncementService,
+    private dialogModel: MatDialog,
   ) {
     super();
   }
+  simpleDialog?: MatDialogRef<SimpleDialogComponent>;
   listLang = [
     { text: 'English', flag: 'assets/images/flags/us.svg', lang: 'en' },
     { text: 'Chinese', flag: 'assets/images/flags/spain.svg', lang: 'ch' },
     { text: 'Tamil', flag: 'assets/images/flags/germany.svg', lang: 'ts' },
   ];
-  notifications: Notifications[] = [
-    {
-      message: 'Please check your mail',
-      time: '14 mins ago',
-      icon: 'mail',
-      color: 'nfc-green',
-      status: 'msg-unread',
-    },
-    {
-      message: 'New Patient Added..',
-      time: '22 mins ago',
-      icon: 'person_add',
-      color: 'nfc-blue',
-      status: 'msg-read',
-    },
-    {
-      message: 'Your leave is approved!! ',
-      time: '3 hours ago',
-      icon: 'event_available',
-      color: 'nfc-orange',
-      status: 'msg-read',
-    },
-    {
-      message: 'Lets break for lunch...',
-      time: '5 hours ago',
-      icon: 'lunch_dining',
-      color: 'nfc-blue',
-      status: 'msg-read',
-    },
-    {
-      message: 'Patient report generated',
-      time: '14 mins ago',
-      icon: 'description',
-      color: 'nfc-green',
-      status: 'msg-read',
-    },
-    {
-      message: 'Please check your mail',
-      time: '22 mins ago',
-      icon: 'mail',
-      color: 'nfc-red',
-      status: 'msg-read',
-    },
-    {
-      message: 'Salary credited...',
-      time: '3 hours ago',
-      icon: 'paid',
-      color: 'nfc-purple',
-      status: 'msg-read',
-    },
-  ];
+  // notifications: Notifications[] = [
+  //   {
+  //     message: 'Please check your mail',
+  //     time: '14 mins ago',
+  //     icon: 'mail',
+  //     color: 'nfc-green',
+  //     status: 'msg-unread',
+  //   },
+  //   {
+  //     message: 'New Patient Added..',
+  //     time: '22 mins ago',
+  //     icon: 'person_add',
+  //     color: 'nfc-blue',
+  //     status: 'msg-read',
+  //   },
+  //   {
+  //     message: 'Your leave is approved!! ',
+  //     time: '3 hours ago',
+  //     icon: 'event_available',
+  //     color: 'nfc-orange',
+  //     status: 'msg-read',
+  //   },
+  //   {
+  //     message: 'Lets break for lunch...',
+  //     time: '5 hours ago',
+  //     icon: 'lunch_dining',
+  //     color: 'nfc-blue',
+  //     status: 'msg-read',
+  //   },
+  //   {
+  //     message: 'Patient report generated',
+  //     time: '14 mins ago',
+  //     icon: 'description',
+  //     color: 'nfc-green',
+  //     status: 'msg-read',
+  //   },
+  //   {
+  //     message: 'Please check your mail',
+  //     time: '22 mins ago',
+  //     icon: 'mail',
+  //     color: 'nfc-red',
+  //     status: 'msg-read',
+  //   },
+  //   {
+  //     message: 'Salary credited...',
+  //     time: '3 hours ago',
+  //     icon: 'paid',
+  //     color: 'nfc-purple',
+  //     status: 'msg-read',
+  //   },
+  // ];
+
+
+
   ngOnInit() {
     if (this.authenService.currentUserValue) {
       const userRole = this.authenService.currentUserValue.user.role;
-      this.userFullName = this.authenService.currentUserValue.user.name 
+      this.userFullName = this.authenService.currentUserValue.user.name
       this.userImg = this.authenService.currentUserValue.user.avatar;
       console.log('img',this.userImg)
       if (userRole === Role.Admin) {
@@ -160,7 +172,33 @@ export class HeaderComponent
     } else {
       this.flagvalue = val.map((element) => element.flag);
     }
+    this.getAnnouncementForStudents();
   }
+
+  getAnnouncementForStudents(filter?: any) {
+    let payload ={
+      announcementFor:'Student'
+    }
+    this.announcementService.getAnnouncementsForStudents(payload).subscribe((res: { data: { data: any[]; }; totalRecords: number; }) => {
+      this.announcements = res.data;
+    })
+  }
+  showCustomHtml(data:any) {
+    Swal.fire({
+      title: 'Anuncement',
+      html:
+        `<h4>Title </h4> <p>${data.subject}</p>` +
+        `<h5>Course Detailed Description </h5> <p class='fs-6' >${data.details}</p>`,
+      showCloseButton: true,
+      focusConfirm: false,
+      confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
+    });
+  }
+
+cancel(id:any){
+  this.announcements = this.announcements.filter((res: { id: any; }) => res.id !== id);
+}
+
   callFullscreen() {
     if (!this.isFullScreen) {
       if (this.docElement?.requestFullscreen != null) {
@@ -171,7 +209,7 @@ export class HeaderComponent
     }
     this.isFullScreen = !this.isFullScreen;
   }
-  setLanguage(event: any) {  
+  setLanguage(event: any) {
     console.log("=======",event)
     // this.countryName = text;
     // this.flagvalue = flag;

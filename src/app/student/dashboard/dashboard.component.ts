@@ -204,18 +204,18 @@ export class DashboardComponent implements OnInit {
   public doughnutChartType: ChartType = 'doughnut';
 
   // Doughnut chart end
-  showNotification(
-    colorName: string,
-    placementFrom: MatSnackBarVerticalPosition,
-    placementAlign: MatSnackBarHorizontalPosition
-  ) {
-    this.snackBar.openFromComponent(StudentNotificationComponent, {
-      duration: 20000,
-      verticalPosition: placementFrom,
-      horizontalPosition: placementAlign,
-      panelClass: colorName,
-    });
-  }
+  // showNotification(
+  //   colorName: string,
+  //   placementFrom: MatSnackBarVerticalPosition,
+  //   placementAlign: MatSnackBarHorizontalPosition
+  // ) {
+  //   this.snackBar.openFromComponent(StudentNotificationComponent, {
+  //     duration: 20000,
+  //     verticalPosition: placementFrom,
+  //     horizontalPosition: placementAlign,
+  //     panelClass: colorName,
+  //   });
+  // }
   ngOnInit() {
 
     // this.snackBar.openFromComponent( StudentNotificationComponent, {
@@ -224,11 +224,11 @@ export class DashboardComponent implements OnInit {
     //   horizontalPosition: 'end',
     //   verticalPosition:'bottom'
     // })
-    this.showNotification(
-            'blue-snackbar',
-            'bottom',
-            'right'
-          );
+    // this.showNotification(
+    //         'blue-snackbar',
+    //         'bottom',
+    //         'right'
+    //       );
 
 
     this.chart2();

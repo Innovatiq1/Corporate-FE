@@ -36,14 +36,18 @@
           <mat-menu #notificationMenu="matMenu" class="nfc-menu">
             <div class="nfc-header">
               <h5 class="mb-0">Notitications</h5>
-              <a class="nfc-mark-as-read">Mark all as read</a>
+              <!-- <a class="nfc-mark-as-read">Mark all as read</a> -->
             </div>
             <div class="nfc-dropdown">
               <ng-scrollbar style="height: 350px" visibility="hover">
                 <div class="noti-list header-menu">
                   <div class="menu">
-
-                    <div>
+                    <!-- <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                      <p>A title with a text under</p>
+                      <button mat-raised-button color="primary" (click)="showWithTitleMessage()">CLICK
+                        ME</button>
+                    </div> -->
+                    <!-- <div>
                       <button mat-menu-item *ngFor="let notification of notifications" onClick="return false;"
                         [ngClass]="[notification.status]">
                         <span class="table-img msg-user ">
@@ -60,6 +64,36 @@
                           <app-feather-icons [icon]="'x'" [class]="'user-menu-icons'"></app-feather-icons>
                         </span>
                       </button>
+                    </div> -->
+                    <!-- <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                          <div class="header">
+                            <h2>Announcement </h2>
+                          </div>
+                          <div class="body">
+                            <h6>Simple Dialog With Action Button</h6>
+                            <br>
+                            <button mat-raised-button color="primary" (click)="dialog()">Click Me To Open Dialog</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <div>
+                      <button mat-menu-item *ngFor="let notification of announcements"
+                   >
+                        <span class="table-img msg-user ">
+                          <i class="material-icons-two-tone nfc-type-icon"
+                          [ngClass]="[color]">{{icon}}</i>
+                        </span>
+                        <span class="menu-info "  >
+                          <span class="menu-title" (click)="showCustomHtml(notification)">{{notification.subject}}</span>
+                        </span>
+                        <span class="nfc-close " >
+                          <app-feather-icons [icon]="'x'" [class]="'user-menu-icons'" (click)="cancel(notification.id)"></app-feather-icons>
+                        </span>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -73,13 +107,13 @@
         </li>
         <!-- #END# Notifications-->
         <li>
-          
+
           <select (change)="setLanguage($event)">
             <option  *ngFor="let item of listLang" [value]="item.lang">
               {{item.text}}
             </option>
           </select>
-        
+
         </li>
         <li class="nav-item user_profile">
           <button mat-button [matMenuTriggerFor]="profilemenu">
