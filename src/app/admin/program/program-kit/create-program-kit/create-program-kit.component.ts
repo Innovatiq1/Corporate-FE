@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseKit, CourseKitModel } from '@core/models/course.model';
+import { CertificateService } from '@core/service/certificate.service';
 import { CommonService } from '@core/service/common.service';
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
@@ -49,6 +50,9 @@ export class CreateProgramKitComponent {
   course:any;
   fileName:any;
   mode: string = 'editUrl';
+  uploadedDocument: any;
+  uploaded: any;
+  documentLink:any
 
 
   constructor(private router: Router,
@@ -59,6 +63,7 @@ export class CreateProgramKitComponent {
     private courseService: CourseService,
     private commonService: CommonService,
     private activatedRoute: ActivatedRoute,
+    private certificateService: CertificateService
   ) {
     this.currentDate = new Date();
     this.courseKitModel = {};
@@ -153,6 +158,16 @@ ngOnInit(): void {
     }
     //this.fileDropEl.nativeElement.value = "";
   }
+  onFileUpload(event:any) {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('files', file);
+    this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
+      this.documentLink = response.image_link;
+      this.uploaded=this.documentLink.split('/')
+      this.uploadedDocument = this.uploaded.pop();
+    });
+  }
   submitCourseKit(): void {
     this.isSubmitted = true
     console.log("=========", this.courseKitForm)
@@ -207,6 +222,7 @@ ngOnInit(): void {
   }
 
   private createProgramCourseKit(courseKitData: CourseKit): void {
+    courseKitData.documentLink=this.documentLink
     this.courseService.createProgramCourseKit(courseKitData).subscribe(
       () => {
         Swal.fire({

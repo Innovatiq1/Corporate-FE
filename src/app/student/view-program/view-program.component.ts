@@ -56,6 +56,8 @@ export class ViewProgramComponent {
   isApproved = false
   isCancelled = false
   courseName: any;
+  documentLink: any;
+  uploadedDoc: any;
 
   constructor(private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService){
     this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
@@ -93,6 +95,9 @@ export class ViewProgramComponent {
     this.courseService.getProgramById(this.courseId).subscribe((response) => {
       this.courseKitDetails=response?.data?.programKit;
       this.courseName=response?.data?.title;
+      this.documentLink = this.courseKitDetails[0].documentLink;
+      let uploadedDocument=this.documentLink?.split('/')
+      this.uploadedDoc = uploadedDocument?.pop();
     });
   }
   getRegisteredClassDetails(){

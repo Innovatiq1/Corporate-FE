@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseKit, CourseKitModel } from '@core/models/course.model';
+import { CertificateService } from '@core/service/certificate.service';
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
 import * as moment from 'moment';
@@ -42,7 +43,9 @@ export class EditCourseKitComponent {
   courseId!: string;
   fileName:any;
   subscribeParams: any;
-
+  documentLink: any;
+  uploaded: any;
+  uploadedDocument: any;
   editUrl=false
   //activatedRoute: any;
   constructor(private router: Router,
@@ -51,6 +54,7 @@ export class EditCourseKitComponent {
     private formBuilder: FormBuilder,
     public utils: UtilsService,
     private courseService: CourseService,
+    private certificateService: CertificateService
   ) {
     this.courseKitModel = {};
     let urlPath = this.router.url.split('/')
@@ -109,7 +113,8 @@ export class EditCourseKitComponent {
   // }
   submitCourseKit(): void {
     const courseKitData: CourseKit = this.courseKitForm.value;
-      
+    courseKitData.documentLink=this.documentLink
+
     if (this.courseKitForm.valid) {
     
       const updatedCourseKit: CourseKit = {
@@ -160,10 +165,12 @@ export class EditCourseKitComponent {
         let startingTime=startTime?.split(".")[0];
         let endTime=response?.course?.endDate.split("T")[1];
         let endingTime=endTime?.split(".")[0];
+        this.documentLink = response.course?.documentLink;
+        this.uploaded=this.documentLink.split('/')
+        this.uploadedDocument = this.uploaded.pop();
 
         this.courseKitForm.patchValue({
           name: response?.course?.name,
-          documentLink: response?.course?.documentLink,
           shortDescription: response?.course?.shortDescription,
           longDescription: response?.course?.longDescription,
           videoLink: response?.course?.videoLink?response?.course?.videoLink[0]._id:null,
@@ -220,6 +227,15 @@ export class EditCourseKitComponent {
     this.onFileDropped(files);
     this.fileName=""
   }
-
+  onFileUpload(event:any) {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('files', file);
+    this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
+      this.documentLink = response.image_link;
+      this.uploaded=this.documentLink.split('/')
+      this.uploadedDocument = this.uploaded.pop();
+    });
+  }
 
 }
