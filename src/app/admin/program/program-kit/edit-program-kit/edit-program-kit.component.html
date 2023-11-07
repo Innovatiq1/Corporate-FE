@@ -28,16 +28,13 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                                    <label>Document Link<span class="mandatory">&nbsp;*</span></label>
-                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                        <!-- <mat-label>Course Name</mat-label> -->
-
-                                        <input matInput type="text" id="name" formControlName="documentLink"
-                                            class="form-control"  [readonly]="isInputReadonly()" required>
-                                        <mat-error *ngIf="courseKitForm.get('documentLink')?.hasError('required')">
-                                            Enter Document link
-                                        </mat-error>
-                                    </mat-form-field>
+                                    <label>Document<span class="mandatory">&nbsp;*</span></label>              
+                                    <div class="file-drop-area1">
+                                        <div class="file1">
+                                        <button mat-raised-button color="primary">Choose file <input formControlName="documentLink" (change)="onFileUpload($event)" class="file-input" type="file"></button>
+                                        <span class="file-msg"><h5>{{uploadedDocument ? uploadedDocument : 'Drag and Drop File Here' }}</h5></span>
+                                     </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -195,16 +192,17 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                                    <label>Document Link<span class="mandatory">&nbsp;*</span></label>
-                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                        <!-- <mat-label>Course Name</mat-label> -->
+                                    <label>Document<span class="mandatory">&nbsp;*</span></label>              
+                                    <div class="file-drop-area1">
+                                        <div class="file1">
+                                        <input formControlName="documentLink" (change)="onFileUpload($event)" class="file-input1" type="file">
+                                        <div class="infos">
+                                            <h5 class="name">{{ uploadedDocument | titlecase }}</h5>
+                                        </div>
 
-                                        <input matInput type="text" id="name" formControlName="documentLink"
-                                            class="form-control"  [readonly]="isInputReadonly()" required>
-                                        <mat-error *ngIf="courseKitForm.get('documentLink')?.hasError('required')">
-                                            Enter Document link
-                                        </mat-error>
-                                    </mat-form-field>
+                                        <!-- <span class="file-msg"><h5>{{uploadedDocument ? uploadedDocument : 'Drag and Drop File Here' }}</h5></span> -->
+                                     </div>
+                                    </div>
                                 </div>
                             </div>
 

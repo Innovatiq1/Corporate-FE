@@ -17,10 +17,14 @@ import {
   AuthService,
 } from '@core';
 import { AuthenService } from '@core/service/authen.service';
+
 import { AnnouncementService } from '@core/service/announcement.service';
 import Swal from 'sweetalert2';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SimpleDialogComponent } from 'app/ui/modal/simpleDialog.component';
+
+import { StudentsService } from 'app/admin/students/all-students/students.service';
+
 
 interface Notifications {
   message: string;
@@ -55,6 +59,8 @@ export class HeaderComponent
   announcements: any;
   icon = 'announcement'
   color = 'nfc-green'
+  userProfile: any;
+  studentId: any;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -66,8 +72,12 @@ export class HeaderComponent
     public languageService: LanguageService,
     private authenService:AuthenService,
     private translate: LanguageService,
+
     private announcementService:AnnouncementService,
     private dialogModel: MatDialog,
+
+    private studentService:StudentsService,
+
   ) {
     super();
   }
@@ -132,11 +142,20 @@ export class HeaderComponent
 
 
   ngOnInit() {
+    this.userProfile = this.authenService.getUserProfile();
+    console.log("=user=",this.authenService.getUserProfile())
+
+    // Subscribe to changes in user profile
+    this.authenService.profileUpdated.subscribe((updatedProfile: any) => {
+      console.log("==updatedProfile==",updatedProfile)
+      this.userProfile = updatedProfile;
+    });
     if (this.authenService.currentUserValue) {
       const userRole = this.authenService.currentUserValue.user.role;
       this.userFullName = this.authenService.currentUserValue.user.name
       this.userImg = this.authenService.currentUserValue.user.avatar;
       console.log('img',this.userImg)
+      this.student()
       if (userRole === Role.Admin) {
         this.userType = Role.Admin;
       } else if (userRole === Role.Instructor) {
@@ -175,6 +194,7 @@ export class HeaderComponent
     this.getAnnouncementForStudents();
   }
 
+
   getAnnouncementForStudents(filter?: any) {
     let payload ={
       announcementFor:'Student'
@@ -198,6 +218,17 @@ export class HeaderComponent
 cancel(id:any){
   this.announcements = this.announcements.filter((res: { id: any; }) => res.id !== id);
 }
+
+
+  student(){
+    this.studentId = localStorage.getItem('id')
+   // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
+    this.studentService.getStudentById(this.studentId).subscribe((res: any) => {
+     // this.editData = res;
+      this.userProfile = res?.avatar;
+    })
+
+  }
 
   callFullscreen() {
     if (!this.isFullScreen) {

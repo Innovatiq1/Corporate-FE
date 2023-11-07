@@ -122,7 +122,7 @@
                   <ng-container matColumnDef="Document Link">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Document Link</mat-header-cell>
                     <mat-cell *matCellDef="let row" >
-                      <span class="mobile-label">Document Link:</span><a class="dl-container">{{row.documentLink |truncate : 10}}</a></mat-cell>
+                      <span class="mobile-label">Document Link:</span><a href="{{row.documentLink}}" target="_blank" class="dl-container">{{row.documentLink |filename |truncate:10}}</a></mat-cell>
                   </ng-container>
                   <!-- actions -->
                   <ng-container matColumnDef="status">
