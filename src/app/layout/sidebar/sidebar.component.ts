@@ -18,6 +18,7 @@ import { AuthService, Role } from '@core';
 import { MenuItem, RouteInfo } from './sidebar.metadata';
 import { AuthenService } from '@core/service/authen.service';
 import { AdminService } from '@core/service/admin.service';
+import { StudentsService } from 'app/admin/students/all-students/students.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -39,6 +40,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   routerObj;
   typesList: any;
   url:any;
+  userProfile: any;
+  studentId: any;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -46,7 +49,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private authenService:AuthenService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private studentService:StudentsService,
   ) {
     this.elementRef.nativeElement.closest('body');
     this.routerObj = this.router.events.subscribe((event) => {
@@ -107,12 +111,21 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.userProfile = this.authenService.getUserProfile();
+    console.log("=user=",this.authenService.getUserProfile())
+
+    // Subscribe to changes in user profile
+    this.authenService.profileUpdated.subscribe((updatedProfile: any) => {
+      console.log("==updatedProfile==",updatedProfile)
+      this.userProfile = updatedProfile;
+    });
     if (this.authenService.currentUserValue) {
       const userRole = this.authenService.currentUserValue.user.role;
       this.userFullName =
         this.authenService.currentUserValue.user.name
       this.userImg = this.authenService.currentUserValue.user.avatar;
       this.getUserTypeList();
+      this.student()
       if (userRole === Role.Admin) {
         this.userType = Role.Admin;
       } else if (userRole === Role.Instructor) {
@@ -152,6 +165,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const height = this.innerHeight - this.headerHeight;
     this.listMaxHeight = height + '';
     this.listMaxWidth = '500px';
+  }
+  student(){
+    this.studentId = localStorage.getItem('id')
+   // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
+    this.studentService.getStudentById(this.studentId).subscribe((res: any) => {
+     // this.editData = res;
+      this.userProfile = res?.avatar;
+    })
+
   }
   isOpen() {
     return this.bodyTag.classList.contains('overlay-open');

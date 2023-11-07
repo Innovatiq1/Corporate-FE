@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Student } from '@core/models/user.model';
+import { AuthenService } from '@core/service/authen.service';
 import { CertificateService } from '@core/service/certificate.service';
 
 import { StudentsService } from 'app/admin/students/all-students/students.service';
@@ -40,7 +41,7 @@ export class SettingsComponent {
   adminUrl: any;
 
   constructor(private studentService: StudentsService,private fb: UntypedFormBuilder, private certificateService:CertificateService,
-    private router: Router) {
+    private router: Router,private authenservice:AuthenService) {
     
     let urlPath = this.router.url.split('/')
     this.cmUrl = urlPath.includes('coursemanager-settings');
@@ -128,7 +129,7 @@ export class SettingsComponent {
       
       last_name: [''],
       
-      mobile: ['', [Validators.required]],
+      //mobile: ['', [Validators.required]],
       city_name: ['', [Validators.required]],
       country_name: ['', [Validators.required]],
       
@@ -181,6 +182,7 @@ export class SettingsComponent {
   onFileUpload(event:any) {
     this.fileName = event.target.files[0].name;
     this.files=event.target.files[0];
+    this.uploadedImage =event.target.files[0].name;
 
     // const file = event.target.files[0];
     const formData = new FormData();
@@ -224,6 +226,8 @@ export class SettingsComponent {
       this.studentService.uploadVideo(this.files).subscribe(
         (response: any) => {
           const inputUrl = response.inputUrl;
+          this.authenservice.updateUserProfile(response.inputUrl);
+
 
           const userData: Student = this.stdForm1.value;
           //this.commonService.setVideoId(videoId)

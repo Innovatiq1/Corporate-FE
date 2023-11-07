@@ -3,6 +3,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { Student } from '@core/models/user.model';
 import Swal from 'sweetalert2';
+import { AuthenService } from '@core/service/authen.service';
 
 //import { StudentsService } from 'app/admin/students/all-students/students.service';
 
@@ -32,7 +33,7 @@ export class InstructorSettingsComponent {
   //studentId: any;
   
 
-  constructor(private studentService: StudentsService,private fb: UntypedFormBuilder,) {
+  constructor(private studentService: StudentsService,private fb: UntypedFormBuilder,private authenservice:AuthenService) {
     this.patchValues(),
     this.stdForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
@@ -125,6 +126,7 @@ export class InstructorSettingsComponent {
       this.studentService.uploadVideo(this.files).subscribe(
         (response: any) => {
           const inputUrl = response.inputUrl;
+          this.authenservice.updateUserProfile(response.inputUrl);
 
           const userData: Student = this.stdForm1.value;
           //this.commonService.setVideoId(videoId)
