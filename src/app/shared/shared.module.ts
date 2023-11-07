@@ -10,8 +10,9 @@ import { TruncatePipe } from '@core/service/truncate.pipe';
 import { BulletPointsPipe } from '@core/service/content.pipe';
 import { CapitalizeFirstLetterPipe } from '@core/service/capitalizeFirstletter.pipe';
 import { NgbRatingModule} from '@ng-bootstrap/ng-bootstrap';
+import { FileNamePipe } from '@core/service/filename.pipe';
 @NgModule({
-  declarations: [TruncatePipe,BulletPointsPipe,CapitalizeFirstLetterPipe],
+  declarations: [TruncatePipe,BulletPointsPipe,CapitalizeFirstLetterPipe,FileNamePipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -30,8 +31,9 @@ import { NgbRatingModule} from '@ng-bootstrap/ng-bootstrap';
     TranslateModule,
     TruncatePipe,
     BulletPointsPipe,
+    FileNamePipe,
     CapitalizeFirstLetterPipe,
-    NgbRatingModule
+    NgbRatingModule,
   ],
 })
 export class SharedModule {}
