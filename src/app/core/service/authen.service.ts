@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -17,6 +17,7 @@ const Logging = new Logger('AuthenticationService');
 export class AuthenService {
     private currentUserSubject!: BehaviorSubject<any>;
     public currentUser!: Observable<any>;
+    profileUpdated = new EventEmitter<any>();
   
   defaultUrl = environment['apiUrl'];
   constructor(private http: HttpClient) {
@@ -110,5 +111,20 @@ export class AuthenService {
     localStorage.setItem(AppConstants.KEY_USER_DATA, JSON.stringify(info));
     localStorage.setItem('user_type',info.user.type);
 
+}
+private userProfile: any = {
+
+  // Initialize with default user data
+};
+
+getUserProfile() {
+  return this.userProfile;
+}
+
+updateUserProfile(updatedProfile: any) {
+  console.log(updatedProfile)
+  // Update the user's profile information here
+  //this.userProfile = { ...this.userProfile, ...updatedProfile };
+  this.profileUpdated.emit(updatedProfile); 
 }
 }

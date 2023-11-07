@@ -76,7 +76,7 @@ export class SignupComponent implements OnInit {
         [Validators.required, Validators.email, Validators.minLength(5)],
       ],
       //phone:[Validators.required],
-      phone: ['', [Validators.required]],
+      //phone: ['', [Validators.required]],
       //phone:[Validators.required, Validators.minLength(10)],
       password: ['', Validators.required],
       cpassword: ['', Validators.required],
@@ -98,7 +98,7 @@ export class SignupComponent implements OnInit {
       console.log("======",userData)
       userData.type = 'Student';
       userData.role = 'Student';
-      userData.mobile=userData.phone.internationalNumber
+     // userData.mobile=userData.phone.internationalNumber
       //.userData.mobile =
       this.registration.registerUser(userData).subscribe(
         (response: any) => {
