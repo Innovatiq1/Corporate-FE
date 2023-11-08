@@ -157,6 +157,101 @@ MENU_LIST = [
     ]
 },
 {
+    id: "admin/instructors",
+    title: "Instructors",
+    selected: false,
+    iconsrc: "/assets/announcement-icon.svg",
+    icon: 'find_in_page',
+    children:
+    [
+        {
+            id: "all-instructors",
+            title: "All Instructors",
+            type: "none",
+        },
+        {
+            id: "add-instructor",
+            title: "Add Instructor",
+            type: "none",
+        },
+        {
+            id: "article",
+            title: "Articles",
+            type: "none",
+        },
+        {
+            id: "agreement-t-c",
+            title: "Agreement T & C",
+            type: "none",
+        }
+    ]
+},
+{
+    id: "admin/students",
+    title: "Students",
+    selected: false,
+    iconsrc: "/assets/announcement-icon.svg",
+    icon: 'people_alt',
+    children:
+    [
+        {
+            id: "all-students",
+            title: "All Students",
+            type: "none",
+        },
+        {
+            id: "add-student",
+            title: "Add Student",
+            type: "none",
+        },
+        {
+            id: "student-attendance",
+            title: "Student Attendance",
+            type: "none",
+        },
+    ]
+},
+{
+    id: "admin/departments",
+    title: "Departments",
+    selected: false,
+    iconsrc: "/assets/announcement-icon.svg",
+    icon: 'business',
+    children:
+    [
+        {
+            id: "all-departments",
+            title: "All Departments",
+            type: "none",
+        },
+        {
+            id: "add-department",
+            title: "Add Department",
+            type: "none",
+        }
+    ]
+},
+{
+    id: "admin/staff",
+    title: "Staff",
+    selected: false,
+    iconsrc: "/assets/announcement-icon.svg",
+    icon: 'face',
+    children:
+    [
+        {
+            id: "all-staff",
+            title: "All Staff",
+            type: "none",
+        },
+        {
+            id: "add-staff",
+            title: "Add Staff",
+            type: "none",
+        },
+    ]
+},
+{
     id: "admin/survey",
     title: "Survey",
     iconsrc:"/assets/survey-icon.svg",
@@ -379,101 +474,7 @@ MENU_LIST = [
         }
     ]
 },
-{
-    id: "admin/instructors",
-    title: "Instructors",
-    selected: false,
-    iconsrc: "/assets/announcement-icon.svg",
-    icon: 'find_in_page',
-    children:
-    [
-        {
-            id: "all-instructors",
-            title: "All Instructors",
-            type: "none",
-        },
-        {
-            id: "add-instructor",
-            title: "Add Instructor",
-            type: "none",
-        },
-        {
-            id: "article",
-            title: "Articles",
-            type: "none",
-        },
-        {
-            id: "agreement-t-c",
-            title: "Agreement T & C",
-            type: "none",
-        }
-    ]
-},
-{
-    id: "admin/students",
-    title: "Students",
-    selected: false,
-    iconsrc: "/assets/announcement-icon.svg",
-    icon: 'people_alt',
-    children:
-    [
-        {
-            id: "all-students",
-            title: "All Students",
-            type: "none",
-        },
-        {
-            id: "add-student",
-            title: "Add Student",
-            type: "none",
-        },
-        {
-            id: "student-attendance",
-            title: "Student Attendance",
-            type: "none",
-        },
-    ]
-},
-{
-    id: "admin/departments",
-    title: "Departments",
-    selected: false,
-    iconsrc: "/assets/announcement-icon.svg",
-    icon: 'business',
-    children:
-    [
-        {
-            id: "all-departments",
-            title: "All Departments",
-            type: "none",
-        },
-        {
-            id: "add-department",
-            title: "Add Department",
-            type: "none",
-        }
-    ]
-},
-{
-    id: "admin/staff",
-    title: "Staff",
-    selected: false,
-    iconsrc: "/assets/announcement-icon.svg",
-    icon: 'face',
-    children:
-    [
-        {
-            id: "all-staff",
-            title: "All Staff",
-            type: "none",
-        },
-        {
-            id: "add-staff",
-            title: "Add Staff",
-            type: "none",
-        },
-    ]
-},
+
 
 // {
 //     id: "admin/testimonials",

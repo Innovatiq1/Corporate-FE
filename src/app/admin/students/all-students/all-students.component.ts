@@ -46,7 +46,7 @@ export class AllStudentsComponent
     'name',
     'department',
     'gender',
-    // 'mobile',
+    'mobile',
     'email',
     'date',
     'actions',
