@@ -174,16 +174,16 @@ MENU_LIST = [
             title: "Add Instructor",
             type: "none",
         },
-        {
-            id: "article",
-            title: "Articles",
-            type: "none",
-        },
-        {
-            id: "agreement-t-c",
-            title: "Agreement T & C",
-            type: "none",
-        }
+        // {
+        //     id: "article",
+        //     title: "Articles",
+        //     type: "none",
+        // },
+        // {
+        //     id: "agreement-t-c",
+        //     title: "Agreement T & C",
+        //     type: "none",
+        // }
     ]
 },
 {
@@ -380,51 +380,51 @@ MENU_LIST = [
             title: "Welcome E-mail",
             type: "none"
         },
-        {
-            id: "instructor-request",
-            title: "Instructor Request",
-            type: "none"
-        },
-        {
-            id: "invite-user-reject",
-            title: "Invite User Reject",
-            type: "none"
-        },
-        {
-            id: "new-student-referred",
-            title: "New Student Referred",
-            type: "none"
-        },
-        {
-            id: "course-referral-invite",
-            title: "Course Referral Invite",
-            type: "none"
-        },
-        {
-            id: "completed-course",
-            title: "Completed Course",
-            type: "none"
-        },
-        {
-            id: "instructor-course-invite",
-            title: "Instructor Course Invite",
-            type: "none"
-        },
+        // {
+        //     id: "instructor-request",
+        //     title: "Instructor Request",
+        //     type: "none"
+        // },
+        // {
+        //     id: "invite-user-reject",
+        //     title: "Invite User Reject",
+        //     type: "none"
+        // },
+        // {
+        //     id: "new-student-referred",
+        //     title: "New Student Referred",
+        //     type: "none"
+        // },
+        // {
+        //     id: "course-referral-invite",
+        //     title: "Course Referral Invite",
+        //     type: "none"
+        // },
+        // {
+        //     id: "completed-course",
+        //     title: "Completed Course",
+        //     type: "none"
+        // },
+        // {
+        //     id: "instructor-course-invite",
+        //     title: "Instructor Course Invite",
+        //     type: "none"
+        // },
         {
             id: "instructor-accept-course-invite",
             title: "Instructor Accept Course Invite Status",
             type: "none"
         },
-        {
-            id: "send-course-invoice",
-            title: "Send Course Invoice",
-            type: "none"
-        },
-        {
-            id: "admin-new-email",
-            title: "Admin New Email",
-            type: "none"
-        }
+        // {
+        //     id: "send-course-invoice",
+        //     title: "Send Course Invoice",
+        //     type: "none"
+        // },
+        // {
+        //     id: "admin-new-email",
+        //     title: "Admin New Email",
+        //     type: "none"
+        // }
     ]
 },
 {

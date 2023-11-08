@@ -81,6 +81,9 @@
                   <mat-error *ngIf="authForm.get('cpassword')?.hasError('required')">
                     {{"Confirm Password is required" | translate}}
                   </mat-error>
+                  <mat-error *ngIf="authForm.get('cpassword')?.hasError('confirmedValidator')">
+                    Password and Re-Enter Password must be match
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>

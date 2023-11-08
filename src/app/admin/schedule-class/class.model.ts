@@ -148,7 +148,7 @@ export interface DataSourceModel {
   start: string;
   end: string;
   instructor: string;
-  lab: string;
+  // lab: string;
 }
 
 export interface CourseTitleModel extends Pagination {

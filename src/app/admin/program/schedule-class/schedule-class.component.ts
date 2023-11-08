@@ -163,7 +163,7 @@ export class ScheduleClassComponent {
         start: moment().set({ hour: 8, minute: 0 }).format('YYYY-MM-DD HH:mm'),
         end: moment().set({ hour: 8, minute: 0 }).format('YYYY-MM-DD HH:mm'),
         instructor: '0',
-        lab: '0',
+        // lab: '0',
       });
       this.dataSource = this.dataSourceArray;
     }
