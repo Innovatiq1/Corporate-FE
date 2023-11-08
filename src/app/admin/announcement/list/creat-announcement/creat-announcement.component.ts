@@ -60,7 +60,7 @@ export class CreatAnnouncementComponent {
       //this.cd.detectChanges();
     });
 
-    
+
 
   }
 
@@ -69,8 +69,8 @@ export class CreatAnnouncementComponent {
   }
   test(event: any) {
   }
-  
- 
+
+
 
   constructor(private router: Router, public classService: ClassService, public utils: UtilsService, private formBuilder: FormBuilder,
     private announcementService: AnnouncementService,) {
@@ -101,7 +101,7 @@ export class CreatAnnouncementComponent {
 
     // if (this.editUrl) {
       this.getAnnouncementList()
-      
+
     // }
 
     this.announcementForm = this.formBuilder.group({
@@ -115,7 +115,7 @@ export class CreatAnnouncementComponent {
 
   }
 
-  
+
 
   saveAnnouncement() {
     this.inProgress = true;
@@ -125,9 +125,10 @@ export class CreatAnnouncementComponent {
         let payload = {
           subject: formData?.subject,
           details: formData?.details.replace(/<\/?span[^>]*>/g, ""),
-          announcementFor: formData?.announcementFor,
+          announcementFor: formData?.announcementFor.toString().replace(',',' / '),
           isActive: formData?.isActive,
         }
+        console.log(payload)
         this.announcementService.makeAnnouncement(payload).subscribe(
           (res) => {
             Swal.fire({
