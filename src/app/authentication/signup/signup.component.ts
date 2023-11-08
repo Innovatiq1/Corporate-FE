@@ -15,6 +15,7 @@ import {
   //TooltipLabel,
   CountryISO
 } from "ngx-intl-tel-input";
+import { ConfirmedValidator } from '@shared/password.validator';
 
 @Component({
   selector: 'app-signup',
@@ -43,6 +44,7 @@ export class SignupComponent implements OnInit {
   chide = true;
   user: any;
   passwordMatchValidator: any;
+  
   constructor(
     private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
@@ -55,9 +57,11 @@ export class SignupComponent implements OnInit {
       name: ['', Validators.required],
       email: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)] ],
       password: ['', Validators.required],
-      cpassword: ['', Validators.required],
+      cpassword: [''],
       
-
+    },{
+      validator: ConfirmedValidator('password', 'cpassword')
+    
     });
   }
 
@@ -79,8 +83,11 @@ export class SignupComponent implements OnInit {
       //phone: ['', [Validators.required]],
       //phone:[Validators.required, Validators.minLength(10)],
       password: ['', Validators.required],
-      cpassword: ['', Validators.required],
-    },{ validators: this.passwordMatchValidator
+      cpassword: ['']
+    },{ 
+      validator: ConfirmedValidator('password', 'cpassword')
+      // validators: this.passwordMatchValidator,
+      
     });
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';

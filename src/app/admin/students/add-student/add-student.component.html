@@ -194,12 +194,12 @@
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <label>Parents name <span class="mandatory">&nbsp;*</span></label>
+                  <label>Parents name </label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <input matInput formControlName="parentsName" required />
+                    <input matInput formControlName="parentsName" />
                     <mat-error
                       *ngIf="stdForm.get('parentsName')?.hasError('required')"
                     >
@@ -223,7 +223,7 @@
               </div>
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <label>Date Of Birth <span class="mandatory">&nbsp;*</span></label>
+                  <label>Date Of Birth </label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
@@ -232,7 +232,7 @@
                       matInput
                       [matDatepicker]="picker"
                       formControlName="dob"
-                      required
+                      
                     />
                     <mat-datepicker-toggle
                       matSuffix
@@ -245,7 +245,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <label>Blood Group <span class="mandatory">&nbsp;*</span></label>
+                  <label>Blood Group</label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
@@ -279,10 +279,26 @@
 
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
+                  <label>Upload</label>
+                  <div class="file-drop-area">
+                    <div class="file">
+                    <button mat-raised-button color="primary">Choose file <input
+                      formControlName="avatar"
+                      (change)="onFileUpload($event)"
+                      class="file-input"
+                      type="file"
+                    /></button>
+                    <span class="file-msg"><h5>{{fileName ? fileName : 'Drag and Drop File Here' }}</h5></span>
+                    
+                    </div>
+                  </div>
+                  <!-- <app-file-upload formControlName="image_link" (change)="onFileUpload($event)"></app-file-upload> -->
+                </div>
+                <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
                   <label>Upload <span class="mandatory">&nbsp;*</span></label>
                   <div class="file-drop-area">
                     <div class="file">
-                      <!-- <button mat-raised-button color="primary">Choose file</button> -->
+                      <!-- <button mat-raised-button color="primary">Choose file</button> --
                       <img src="/assets/add-image-icon.svg" />
                       <h5>
                         {{ fileName ? fileName : "Drag and Drop File Here" }}
@@ -299,8 +315,8 @@
                     <button mat-raised-button color="primary">Choose file</button>
                     <span>{{fileName ? fileName : ' or drag and drop file here' }}</span>
                     <input formControlName="avatar" (change)="onFileUpload($event)" class="file-input" type="file">
-                  </div> -->
-                </div>
+                  </div> --
+                </div> -->
               </div>
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">

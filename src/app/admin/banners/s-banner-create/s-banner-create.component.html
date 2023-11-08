@@ -29,11 +29,27 @@
                   </mat-form-field>
                   </div>
                   <div class="row">
-                    <div  class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2 mx-auto">
+                    <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2 mx-auto">
                       <label>Upload</label>
                       <div class="file-drop-area">
                         <div class="file">
-                          <!-- <button mat-raised-button color="primary">Choose file</button> -->
+                        <button mat-raised-button color="primary">Choose file <input
+                          formControlName="banner"
+                          (change)="FileUpload($event)"
+                          class="file-input"
+                          type="file"
+                        /></button>
+                        <span class="file-msg"><h5>{{uploadedImage ? uploadedImage : 'Drag and Drop File Here' }}</h5></span>
+                        
+                        </div>
+                      </div>
+                      <!-- <app-file-upload formControlName="image_link" (change)="onFileUpload($event)"></app-file-upload> -->
+                    </div>
+                    <!-- <div  class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2 mx-auto">
+                      <label>Upload</label>
+                      <div class="file-drop-area">
+                        <div class="file">
+                          <!-- <button mat-raised-button color="primary">Choose file</button> --
                           <img src="/assets/add-image-icon.svg" />
                           <h5>
                             {{ uploadedImage ? uploadedImage : "Drag and Drop File Here" }}
@@ -46,7 +62,7 @@
                           />
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="btn-sec mt-3">
                     <button class="btn-space" mat-raised-button color="primary">Save</button>
