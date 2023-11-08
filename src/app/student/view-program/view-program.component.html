@@ -279,7 +279,7 @@
                                       <!-- Document Link -->
                                       <ng-container matColumnDef="Document Link">
                                         <th mat-header-cell *matHeaderCellDef>Document Link  </th>
-                                        <td mat-cell *matCellDef="let row"> <a href="{{row.documentLink}}" target="_blank"class="dl-container">{{row.documentLink |truncate : 10}}</a> </td>
+                                        <td mat-cell *matCellDef="let row"> <a href="{{row.documentLink}}" target="_blank"class="dl-container">{{uploadedDoc |truncate : 10}}</a> </td>
                                       </ng-container>
                             
                               <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>

@@ -610,6 +610,33 @@ MENU_LIST = [
         },
             ]
 },
+{
+    id: "email",
+    title: "Email",
+    selected: false,
+    iconsrc: "/assets/announcement-icon.svg",
+    icon: 'email',
+    children:
+    [
+        {
+            id: "admin/inbox",
+            title: "Inbox",
+            type: "none"
+        },
+        {
+            id: "student/inbox",
+            title: "Student Inbox",
+            type: "none"
+        },
+        {
+            id: "instructor/inbox",
+            title: "Instructor Inbox",
+            type: "none"
+        }
+
+       ]
+},
+
 
 {
     id: "settings",

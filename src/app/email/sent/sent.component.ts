@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { EmailConfigService } from '@core/service/email-config.service';
+
 @Component({
-  selector: 'app-inbox',
-  templateUrl: './inbox.component.html',
-  styleUrls: ['./inbox.component.scss'],
+  selector: 'app-sent',
+  templateUrl: './sent.component.html',
+  styleUrls: ['./sent.component.scss']
 })
-export class InboxComponent implements OnInit {
+export class SentComponent implements OnInit {
   breadscrums = [
     {
-      title: 'Inbox',
+      title: 'Sent',
       items: ['Email'],
-      active: 'Inbox',
+      active: 'Sent',
     },
   ];
   adminUrl: boolean;
@@ -44,8 +45,8 @@ export class InboxComponent implements OnInit {
   }
   
   getMails(){
-    let to= JSON.parse(localStorage.getItem('currentUser')!).user.email;
-    this.emailService.getMailsByToAddress(to).subscribe((response: any) => {
+    let from= JSON.parse(localStorage.getItem('currentUser')!).user.email;
+    this.emailService.getMailsByFromAddress(from).subscribe((response: any) => {
       this.emails = response.docs;
       this.totalItems = response.totalDocs
       this.mailPaginationModel.docs = response.docs;
@@ -57,6 +58,4 @@ export class InboxComponent implements OnInit {
 
 
   }
-  
-
 }

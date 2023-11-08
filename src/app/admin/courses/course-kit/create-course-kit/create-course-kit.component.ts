@@ -9,6 +9,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
+import { CertificateService } from '@core/service/certificate.service';
 
 @Component({
   selector: 'app-create-course-kit',
@@ -49,7 +50,9 @@ export class CreateCourseKitComponent implements OnInit{
   courseId!: string;
   course:any;
   fileName:any;
-  
+  uploadedDocument: any;
+  uploaded: any;
+  documentLink:any
 
 
   constructor(private router: Router,
@@ -60,6 +63,7 @@ export class CreateCourseKitComponent implements OnInit{
     private courseService: CourseService,
     private commonService: CommonService,
     private activatedRoute: ActivatedRoute,
+    private certificateService: CertificateService
   ) {
     this.currentDate = new Date();
     this.courseKitModel = {};
@@ -112,6 +116,7 @@ ngOnInit(): void {
 
 }
 private createCourseKit(courseKitData: CourseKit): void {
+  courseKitData.documentLink=this.documentLink
   this.courseService.createCourseKit(courseKitData).subscribe(
     () => {
       Swal.fire({
@@ -147,6 +152,16 @@ private createCourseKit(courseKitData: CourseKit): void {
       this.model.vltitle = item.name;
     }
     //this.fileDropEl.nativeElement.value = "";
+  }
+  onFileUpload(event:any) {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append('files', file);
+    this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
+      this.documentLink = response.image_link;
+      this.uploaded=this.documentLink.split('/')
+      this.uploadedDocument = this.uploaded.pop();
+    });
   }
   submitCourseKit(): void {
     this.isSubmitted=true

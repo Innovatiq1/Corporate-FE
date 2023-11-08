@@ -44,6 +44,13 @@ const routes: Routes = [
         canActivate: [LoginGuard],
       },
       {
+        path: 'email',
+        loadChildren: () =>
+          import('./email/email.module').then((m) => m.EmailModule),
+        canActivate: [LoginGuard],
+      },
+
+      {
         path: 'settings/student-settings',
         component: SettingsComponent,
         canActivate: [LoginGuard],
@@ -99,6 +106,7 @@ const routes: Routes = [
         canActivate: [LoginGuard],
       },
 
+
       // Extra components
       {
         path: 'calendar',
@@ -116,12 +124,6 @@ const routes: Routes = [
         path: 'contacts',
         loadChildren: () =>
           import('./contacts/contacts.module').then((m) => m.ContactsModule),
-        canActivate: [LoginGuard],
-      },
-      {
-        path: 'email',
-        loadChildren: () =>
-          import('./email/email.module').then((m) => m.EmailModule),
         canActivate: [LoginGuard],
       },
       {
