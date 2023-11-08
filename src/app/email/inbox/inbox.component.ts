@@ -21,6 +21,8 @@ export class InboxComponent implements OnInit {
   totalItems: any;
   pageSizeArr = [10, 25, 50, 100];
   mailPaginationModel: Partial<CoursePaginationModel>;
+  selectedEmails: any[] = [];
+
 
 
   constructor(private router:Router,private emailService:EmailConfigService) {
@@ -42,6 +44,22 @@ export class InboxComponent implements OnInit {
     this.getMails();
 
   }
+
+
+  handleCheckboxSelection(email: any) {
+    const index = this.selectedEmails.findIndex((selected) => selected.id === email.id);
+    if (index > -1) {
+      this.selectedEmails.splice(index, 1); // Unselect if already selected
+    } else {
+      this.selectedEmails.push(email); // Select if not already in the selectedEmails array
+    }
+  }
+  deleteSelectedEmails() {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
+        this.emailService.deleteMail(selectedEmailIds).subscribe((response) => {
+      this.getMails();
+    });
+  }
   
   getMails(){
     let to= JSON.parse(localStorage.getItem('currentUser')!).user.email;
@@ -54,8 +72,6 @@ export class InboxComponent implements OnInit {
       this.mailPaginationModel.totalDocs = response.totalDocs;
 
     });
-
-
   }
   
 

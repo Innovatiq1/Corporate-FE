@@ -21,7 +21,7 @@
                 <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th colspan="3">
+                      <th colspan="5">
                         <div class="inbox-header">
                           <div class="mail-option no-pad-left">
                             <div class="email-btn-group m-l-15">
@@ -34,7 +34,7 @@
                               <button matTooltip="Spam" mat-icon-button aria-label="Example icon-button with a heart icon">
                                 <mat-icon>error</mat-icon>
                               </button>
-                              <button  matTooltip="Delete" (click)="deleteSelectedEmails()" mat-icon-button aria-label="Example icon-button with a heart icon">
+                              <button  matTooltip="Discard" (click)="deleteSelectedEmails()" mat-icon-button aria-label="Example icon-button with a heart icon">
                                 <mat-icon>delete</mat-icon>
                               </button>
                               <!-- <button mat-icon-button aria-label="Example icon-button with a heart icon">
@@ -44,7 +44,7 @@
                                 <mat-icon>local_offer</mat-icon>
                               </button>
                             </div>
-                            </div>
+                          </div>
                         </div>
                       </th>
                       <th class="hidden-xs" colspan="2">
@@ -70,10 +70,15 @@
                       <td class="hidden-xs">
                         <i class="material-icons">star_border</i>
                       </td>
+                      <td class="hidden-xs">
+                        <a *ngIf="adminUrl" [routerLink]="['/email/admin/compose',email.id]" class="draft">Draft</a> 
+                        <a *ngIf="studentUrl" [routerLink]="['/email/student/compose',email.id]" class="draft">Draft</a> 
+                    </td>
+
                       <td class="hidden-xs">{{email?.fromName}}</td>
                       <td class="max-texts">
-                        <a *ngIf="adminUrl" [routerLink]="['/email/admin/read-email',email.id]">{{email?.subject}}</a>
-                        <a *ngIf="studentUrl" [routerLink]="['/email/student/read-email',email.id]">{{email?.subject}}</a>
+                        <a *ngIf="adminUrl" [routerLink]="['/email/admin/compose',email.id]">{{email?.subject}}</a>
+                        <a *ngIf="studentUrl" [routerLink]="['/email/student/compose',email.id]">{{email?.subject}}</a>
   
                       </td>
                       <!-- <td class="hidden-xs">

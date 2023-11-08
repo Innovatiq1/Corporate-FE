@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CertificateService } from '@core/service/certificate.service';
 import { EmailConfigService } from '@core/service/email-config.service';
@@ -26,11 +26,19 @@ export class ComposeComponent {
   attachment: any;
   uploadedAttachment: any;
   studentUrl: boolean;
+  subscribeParams: any;
+  mailId: any;
+  emailDetails: any;
 
-  constructor(private router:Router,private fb:FormBuilder,private certificateService:CertificateService,private emailService:EmailConfigService) {
+  constructor(private router:Router,private fb:FormBuilder,private certificateService:CertificateService,private emailService:EmailConfigService,
+    private activatedRoute:ActivatedRoute) {
     let urlPath = this.router.url.split('/')
     this.adminUrl = urlPath.includes('admin');
     this.studentUrl = urlPath.includes('student');
+    this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
+      this.mailId = params.id;
+      //console.log("=Id===",params.id)
+    });
 
     this.composeForm = this.fb.group({
       to: ['', []],
@@ -42,8 +50,25 @@ export class ComposeComponent {
   }
 
   ngOnInit(){
+    if(this.mailId){
+      this.getMailById();
+    }
 
   }
+  getMailById(){
+    this.emailService.getMailDetailsByMailId(this.mailId).subscribe((response: any) => {
+      let attachment = response?.attachment;
+      let uploaded=attachment?.split('/')
+      this.uploadedAttachment = uploaded?.pop();
+      this.composeForm.patchValue({
+        to:response.to,
+        content:response.content,
+        subject:response.subject,
+      })
+  })
+}
+
+
 
   onFileUpload(event:any) {
     const file = event.target.files[0];
@@ -62,7 +87,8 @@ export class ComposeComponent {
       to:this.composeForm.value.to,
       subject:this.composeForm.value.subject,
       content:this.composeForm.value.content,
-      attachment:this.attachment
+      attachment:this.attachment,
+      status:'active'
     }
     this.emailService.sendEmail(payload).subscribe((response: any) => {
        
@@ -80,6 +106,26 @@ export class ComposeComponent {
     });
 
   }
+  draftEmail(){
+    let payload={
+      to:this.composeForm.value.to,
+      subject:this.composeForm.value.subject,
+      content:this.composeForm.value.content,
+      attachment:this.attachment,
+      status:'draft'
+    }
+    this.emailService.sendEmail(payload).subscribe((response: any) => {
+             if(this.adminUrl){
+      this.router.navigate(['/email/admin/inbox'])
+      } else if(this.studentUrl){
+        this.router.navigate(['/email/student/inbox'])
+      }
+     
+    });
+
+  }
+  
+
   
 
 }

@@ -4,16 +4,16 @@ import { CoursePaginationModel } from '@core/models/course.model';
 import { EmailConfigService } from '@core/service/email-config.service';
 
 @Component({
-  selector: 'app-sent',
-  templateUrl: './sent.component.html',
-  styleUrls: ['./sent.component.scss']
+  selector: 'app-draft-mail',
+  templateUrl: './draft-mail.component.html',
+  styleUrls: ['./draft-mail.component.scss']
 })
-export class SentComponent implements OnInit {
+export class DraftMailComponent {
   breadscrums = [
     {
-      title: 'Sent',
+      title: 'Draft',
       items: ['Email'],
-      active: 'Sent',
+      active: 'Draft',
     },
   ];
   adminUrl: boolean;
@@ -45,6 +45,8 @@ export class SentComponent implements OnInit {
     this.getMails();
 
   }
+
+
   handleCheckboxSelection(email: any) {
     const index = this.selectedEmails.findIndex((selected) => selected.id === email.id);
     if (index > -1) {
@@ -54,21 +56,15 @@ export class SentComponent implements OnInit {
     }
   }
   deleteSelectedEmails() {
-    console.log('mails',this.selectedEmails)
-    // Call your API to delete selected emails
     const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-    
-    // Call your emailService to delete the selected emails
-    this.emailService.deleteMail(selectedEmailIds).subscribe((response) => {
+        this.emailService.deleteMailForever(selectedEmailIds).subscribe((response) => {
       this.getMails();
     });
   }
   
-
-  
   getMails(){
     let from= JSON.parse(localStorage.getItem('currentUser')!).user.email;
-    this.emailService.getMailsByFromAddress(from).subscribe((response: any) => {
+    this.emailService.getDraftedMailsByFromAddress(from).subscribe((response: any) => {
       this.emails = response.docs;
       this.totalItems = response.totalDocs
       this.mailPaginationModel.docs = response.docs;
@@ -77,7 +73,6 @@ export class SentComponent implements OnInit {
       this.mailPaginationModel.totalDocs = response.totalDocs;
 
     });
-
-
   }
+  
 }

@@ -18,11 +18,19 @@
             </a>
           </li>
         <li routerLinkActive="active">
-        <a href="javascript:;" title="Draft">Draft</a>
-      </li>
+          <a *ngIf="adminUrl" routerLink="/email/admin/draft" title="Draft" routerLinkActive="active">Draft
+        </a>
+        <a *ngIf="studentUrl" routerLink="/email/student/draft" title="Draft" routerLinkActive="active">Draft
+        </a>
+  </li>
       <li routerLinkActive="active">
-        <a href="javascript:;" title="Bin">Bin</a>
-      </li>
+        <a *ngIf="adminUrl" routerLink="/email/admin/bin" title="Bin" routerLinkActive="active">Bin
+          <span class="badge bg-orange" *ngIf="totalDeletedItems > 0">{{totalDeletedItems}}</span>
+      </a>
+      <a *ngIf="studentUrl" routerLink="/email/student/bin" title="Bin" routerLinkActive="active">Bin
+          <span class="badge bg-orange" *ngIf="totalDeletedItems > 0">{{totalDeletedItems}}</span>
+      </a>
+</li>
       <li routerLinkActive="active">
         <a href="javascript:;" title="Important">Important</a>
       </li>

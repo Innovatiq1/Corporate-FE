@@ -4,16 +4,16 @@ import { CoursePaginationModel } from '@core/models/course.model';
 import { EmailConfigService } from '@core/service/email-config.service';
 
 @Component({
-  selector: 'app-sent',
-  templateUrl: './sent.component.html',
-  styleUrls: ['./sent.component.scss']
+  selector: 'app-bin-mail',
+  templateUrl: './bin-mail.component.html',
+  styleUrls: ['./bin-mail.component.scss']
 })
-export class SentComponent implements OnInit {
+export class BinMailComponent {
   breadscrums = [
     {
-      title: 'Sent',
+      title: 'Bin',
       items: ['Email'],
-      active: 'Sent',
+      active: 'Bin',
     },
   ];
   adminUrl: boolean;
@@ -31,9 +31,8 @@ export class SentComponent implements OnInit {
     this.adminUrl = urlPath.includes('admin');
     this.studentUrl = urlPath.includes('student');
     this.mailPaginationModel = {};
-
-
   }
+
   pageSizeChange($event: any) {
     this.mailPaginationModel.page = $event?.pageIndex + 1;
     this.mailPaginationModel.limit = $event?.pageSize;
@@ -45,6 +44,7 @@ export class SentComponent implements OnInit {
     this.getMails();
 
   }
+
   handleCheckboxSelection(email: any) {
     const index = this.selectedEmails.findIndex((selected) => selected.id === email.id);
     if (index > -1) {
@@ -54,21 +54,15 @@ export class SentComponent implements OnInit {
     }
   }
   deleteSelectedEmails() {
-    console.log('mails',this.selectedEmails)
-    // Call your API to delete selected emails
-    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-    
-    // Call your emailService to delete the selected emails
-    this.emailService.deleteMail(selectedEmailIds).subscribe((response) => {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id); 
+    this.emailService.deleteMailForever(selectedEmailIds).subscribe((response) => {
       this.getMails();
     });
   }
   
-
-  
   getMails(){
-    let from= JSON.parse(localStorage.getItem('currentUser')!).user.email;
-    this.emailService.getMailsByFromAddress(from).subscribe((response: any) => {
+    let to= JSON.parse(localStorage.getItem('currentUser')!).user.email;
+    this.emailService.getDeletedMailsByToAddress(to).subscribe((response: any) => {
       this.emails = response.docs;
       this.totalItems = response.totalDocs
       this.mailPaginationModel.docs = response.docs;
@@ -80,4 +74,6 @@ export class SentComponent implements OnInit {
 
 
   }
+  
+
 }
