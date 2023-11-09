@@ -34,7 +34,7 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <label>Announcement For<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-select formControlName="announcementFor" required>
+                    <mat-select multiple formControlName="announcementFor" required>
                       <mat-option value="Student" [disabled]="viewUrl == true">Student</mat-option>
                       <mat-option value="Instructor" [disabled]="viewUrl == true">Instructor</mat-option>
                       <mat-option value="Course Manager" [disabled]="viewUrl == true">Course Manager</mat-option>
@@ -60,7 +60,7 @@
                                     <ckeditor [editor]="Editor" ></ckeditor>
                                     <input matInput formControlName="course_detailed_description" [readonly]="isInputReadonly()">
                                     <mat-error  *ngIf="firstFormGroup.get('course_detailed_description')?.hasError('maxLength') && firstFormGroup.get('course_detailed_description')?.touched">
-                                     
+
                                     Enter Course Detailed Description
                                   </mat-error>
                                   </mat-form-field> -->
