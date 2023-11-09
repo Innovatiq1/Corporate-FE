@@ -100,6 +100,11 @@ const routes: Routes = [
       import('./attendance/attendance.module').then((m) => m.AttendanceModule),
   },
   {
+    path: 'payment',
+    loadChildren: () =>
+      import('./payments/payment.module').then((m) => m.PaymentModule),
+  },
+  {
     path: 'testimonials',
     loadChildren: () =>
       import('./testimonials/testimonials.module').then((m) => m.TestimonialsModule),

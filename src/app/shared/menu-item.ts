@@ -460,6 +460,27 @@ MENU_LIST = [
     ]
 },
 {
+    id: "admin/payment",
+    title: "Payments",
+    selected: false,
+    iconsrc: "/assets/payment-icon.svg",
+    icon: 'payment',
+    children:
+    [
+        {
+            id: "course-payments",
+            title: "Course Payments",
+            type: "none"
+        },
+        {
+            id: "program-payments",
+            title: "Program Payments",
+            type: "none"
+        },
+      
+    ]
+},
+{
     id: "admin/announcement",
     title: "Announcement",
     selected: false,
