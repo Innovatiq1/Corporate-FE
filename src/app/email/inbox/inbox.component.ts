@@ -56,11 +56,36 @@ export class InboxComponent implements OnInit {
   }
   deleteSelectedEmails() {
     const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-        this.emailService.deleteMail(selectedEmailIds).subscribe((response) => {
+    const payload={
+      toStatus:'inactive',
+      selectedEmailIds:selectedEmailIds
+    }
+    this.emailService.deleteMail(payload).subscribe((response) => {
       this.getMails();
     });
   }
-  
+  updateEmails() {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
+    const payload={
+      toImportant:true,
+      selectedEmailIds:selectedEmailIds
+    }
+        this.emailService.updateMailImportant(payload).subscribe((response) => {
+      this.getMails();
+    });
+  }
+  archiveEmails() {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
+    const payload={
+      toArchive:true,
+      selectedEmailIds:selectedEmailIds
+    }
+        this.emailService.updateMailImportant(payload).subscribe((response) => {
+      this.getMails();
+    });
+  }
+
+
   getMails(){
     let to= JSON.parse(localStorage.getItem('currentUser')!).user.email;
     this.emailService.getMailsByToAddress(to).subscribe((response: any) => {

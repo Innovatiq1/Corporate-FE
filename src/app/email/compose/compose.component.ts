@@ -88,7 +88,8 @@ export class ComposeComponent {
       subject:this.composeForm.value.subject,
       content:this.composeForm.value.content,
       attachment:this.attachment,
-      status:'active'
+      toStatus:'active',
+      fromStatus:'active'
     }
     this.emailService.sendEmail(payload).subscribe((response: any) => {
        
@@ -112,7 +113,7 @@ export class ComposeComponent {
       subject:this.composeForm.value.subject,
       content:this.composeForm.value.content,
       attachment:this.attachment,
-      status:'draft'
+      fromStatus:'draft'
     }
     this.emailService.sendEmail(payload).subscribe((response: any) => {
              if(this.adminUrl){

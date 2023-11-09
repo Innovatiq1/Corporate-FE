@@ -56,16 +56,22 @@ export class EmailConfigService {
   }
 
   getMailsByToAddress(to:string): Observable<any[]> {
-    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&status=active`;
+    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&toStatus=active&archive=false`;
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
   getMailsByFromAddress(from:string): Observable<any[]> {
-    const apiUrl = `${this.prefix}admin/internal-email/mail?from=${from}&status=active`;
+    const apiUrl = `${this.prefix}admin/internal-email/mail?from=${from}&fromStatus=active&archive=false`;
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
 
+  getImportantMailsByToAddress(to:string): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&toStatus=active&toImportant=true&toArchive=false`;
+    return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }   
+
+
   getDraftedMailsByFromAddress(from:string): Observable<any[]> {
-    const apiUrl = `${this.prefix}admin/internal-email/mail?from=${from}&status=draft`;
+    const apiUrl = `${this.prefix}admin/internal-email/mail?from=${from}&fromStatus=draft&archive=false`;
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
 
@@ -76,7 +82,7 @@ export class EmailConfigService {
   }   
 
   getDeletedMailsByToAddress(to:string): Observable<any[]> {
-    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&status=inactive`;
+    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&toStatus=inactive&archive=false`;
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
 
@@ -85,6 +91,11 @@ export class EmailConfigService {
     const apiUrl = `${this.prefix}admin/internal-email`;
     return this.http.put<ApiResponse>(apiUrl, mail).pipe(map((response) => { }));
   }
+  updateMailImportant(mail:any) {
+    const apiUrl = `${this.prefix}admin/internal-email`;
+    return this.http.put<ApiResponse>(apiUrl, mail).pipe(map((response) => { }));
+  }
+
   deleteMailForever(mail: any){
     console.log('mail',mail)
     const apiUrl = `${this.prefix}admin/internal-email/delete`;

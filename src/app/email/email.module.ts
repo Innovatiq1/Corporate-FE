@@ -11,8 +11,9 @@ import { EmailSidebarComponent } from './email-sidebar/email-sidebar.component';
 import { SentComponent } from './sent/sent.component';
 import { DraftMailComponent } from './draft-mail/draft-mail.component';
 import { BinMailComponent } from './bin-mail/bin-mail.component';
+import { ImportantMailComponent } from './important-mail/important-mail.component';
 @NgModule({
-  declarations: [ComposeComponent, InboxComponent, ReadMailComponent, EmailSidebarComponent, SentComponent, DraftMailComponent, BinMailComponent],
+  declarations: [ComposeComponent, InboxComponent, ReadMailComponent, EmailSidebarComponent, SentComponent, DraftMailComponent, BinMailComponent, ImportantMailComponent],
   imports: [
     CommonModule,
     EmailRoutingModule,

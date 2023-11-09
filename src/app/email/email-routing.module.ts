@@ -6,6 +6,7 @@ import { ReadMailComponent } from './read-mail/read-mail.component';
 import { SentComponent } from './sent/sent.component';
 import { BinMailComponent } from './bin-mail/bin-mail.component';
 import { DraftMailComponent } from './draft-mail/draft-mail.component';
+import { ImportantMailComponent } from './important-mail/important-mail.component';
 const routes: Routes = [
   {
     path: 'admin/inbox',
@@ -37,6 +38,11 @@ const routes: Routes = [
     component: DraftMailComponent
   },
   {
+    path: 'admin/important',
+    component: ImportantMailComponent
+  },
+
+  {
     path: 'student/inbox',
     component: InboxComponent
   },
@@ -65,6 +71,11 @@ const routes: Routes = [
     path: 'student/draft',
     component: DraftMailComponent
   },
+  {
+    path: 'student/important',
+    component: ImportantMailComponent
+  },
+
 
 
 
