@@ -61,6 +61,25 @@ export class DraftMailComponent {
       this.getMails();
     });
   }
+
+  toggleStar(email: any) {
+    if(email.starred || email.fromStarred){
+      email.starred = false;
+    } else if(!email.starred || !email.fromStarred){
+      email.starred = true;
+    }
+    this.selectedEmails.push(email.id)
+    const payload={
+      fromStarred:email.starred,
+      selectedEmailIds:this.selectedEmails
+    }
+    this.emailService.updateMailImportant(payload).subscribe(() => {
+      this.getMails();
+      this.selectedEmails=[]
+    });
+  }
+
+
   
   getMails(){
     let from= JSON.parse(localStorage.getItem('currentUser')!).user.email;

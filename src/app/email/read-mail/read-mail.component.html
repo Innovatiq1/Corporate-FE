@@ -39,14 +39,14 @@
                 <div class="view-mail">
                   <p [innerHTML]="emailDetails?.content"></p>
                 </div>
-                <div class="attachment-mail">
+                <div *ngIf="emailDetails.attachment" class="attachment-mail">
                   <p>
                     <span>
                       <i class="fa fa-paperclip"></i> Attachments </span>
                   </p>
                   <div class="row">
                     <div class="col-md-2">
-                      <a href="{{emailDetails?.attachment}}" target="_blank">
+                      <a  href="{{emailDetails?.attachment}}" target="_blank">
                         <img class="img-thumbnail img-responsive" alt="attachment" src="{{emailDetails?.attachment}}">
                       </a>
                       <a class="name" href="{{emailDetails?.attachment}}" target="_blank"> {{uploadedAttachment}}

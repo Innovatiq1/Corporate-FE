@@ -4,16 +4,16 @@ import { CoursePaginationModel } from '@core/models/course.model';
 import { EmailConfigService } from '@core/service/email-config.service';
 
 @Component({
-  selector: 'app-sent',
-  templateUrl: './sent.component.html',
-  styleUrls: ['./sent.component.scss']
+  selector: 'app-starred-mail',
+  templateUrl: './starred-mail.component.html',
+  styleUrls: ['./starred-mail.component.scss']
 })
-export class SentComponent implements OnInit {
+export class StarredMailComponent {
   breadscrums = [
     {
-      title: 'Sent',
+      title: 'Starred',
       items: ['Email'],
-      active: 'Sent',
+      active: 'Starred',
     },
   ];
   adminUrl: boolean;
@@ -24,11 +24,15 @@ export class SentComponent implements OnInit {
   mailPaginationModel: Partial<CoursePaginationModel>;
   selectedEmails: any[] = [];
 
+
+
   constructor(private router:Router,private emailService:EmailConfigService) {
     let urlPath = this.router.url.split('/')
     this.adminUrl = urlPath.includes('admin');
     this.studentUrl = urlPath.includes('student');
     this.mailPaginationModel = {};
+
+
   }
   pageSizeChange($event: any) {
     this.mailPaginationModel.page = $event?.pageIndex + 1;
@@ -41,58 +45,56 @@ export class SentComponent implements OnInit {
     this.getMails();
 
   }
+
+
   handleCheckboxSelection(email: any) {
     const index = this.selectedEmails.findIndex((selected) => selected.id === email.id);
     if (index > -1) {
-      this.selectedEmails.splice(index, 1); 
+      this.selectedEmails.splice(index, 1); // Unselect if already selected
     } else {
-      this.selectedEmails.push(email); 
+      this.selectedEmails.push(email); // Select if not already in the selectedEmails array
     }
   }
   deleteSelectedEmails() {
     const selectedEmailIds = this.selectedEmails.map((email) => email.id);
     const payload={
-      fromStatus:'inactive',
+      toStatus:'inactive',
       selectedEmailIds:selectedEmailIds
     }
-
-      this.emailService.deleteMail(payload).subscribe((response) => {
+    this.emailService.deleteMail(payload).subscribe((response) => {
       this.getMails();
     });
   }
-
-  archiveEmails() {
-    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-    const payload={
-      fromArchive:true,
-      selectedEmailIds:selectedEmailIds
-    }
-         this.emailService.updateMailImportant(payload).subscribe((response) => {
-      this.getMails();
-    });
-  }
-
-
   updateEmails() {
     const selectedEmailIds = this.selectedEmails.map((email) => email.id);
     const payload={
-      important:true,
+      toImportant:true,
       selectedEmailIds:selectedEmailIds
     }
         this.emailService.updateMailImportant(payload).subscribe((response) => {
       this.getMails();
     });
   }
-
+  archiveEmails() {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
+    const payload={
+      toArchive:true,
+      selectedEmailIds:selectedEmailIds
+    }
+        this.emailService.updateMailImportant(payload).subscribe((response) => {
+      this.getMails();
+    });
+  }
+  
   toggleStar(email: any) {
-    if(email.starred || email.fromStarred){
+    if(email.starred || email.toStarred){
       email.starred = false;
-    } else if(!email.starred || !email.fromStarred){
+    } else if(!email.starred || !email.toStarred){
       email.starred = true;
     }
     this.selectedEmails.push(email.id)
     const payload={
-      fromStarred:email.starred,
+      toStarred:email.starred,
       selectedEmailIds:this.selectedEmails
     }
     this.emailService.updateMailImportant(payload).subscribe(() => {
@@ -101,9 +103,10 @@ export class SentComponent implements OnInit {
     });
   }
 
+
   getMails(){
-    let from= JSON.parse(localStorage.getItem('currentUser')!).user.email;
-    this.emailService.getMailsByFromAddress(from).subscribe((response: any) => {
+    let to= JSON.parse(localStorage.getItem('currentUser')!).user.email;
+    this.emailService.getStarredMails(to).subscribe((response: any) => {
       this.emails = response.docs;
       this.totalItems = response.totalDocs
       this.mailPaginationModel.docs = response.docs;
@@ -113,4 +116,6 @@ export class SentComponent implements OnInit {
 
     });
   }
+  
+
 }

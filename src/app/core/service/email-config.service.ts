@@ -69,6 +69,12 @@ export class EmailConfigService {
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
 
+  getStarredMails(to:string): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&from=${to}&toStarred=true&fromStarred=true&toArchive=false`;
+    return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }   
+
+
 
   getDraftedMailsByFromAddress(from:string): Observable<any[]> {
     const apiUrl = `${this.prefix}admin/internal-email/mail?from=${from}&fromStatus=draft&archive=false`;

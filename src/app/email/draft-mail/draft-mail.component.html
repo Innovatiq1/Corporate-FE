@@ -68,7 +68,9 @@
                         <mat-checkbox  (change)="handleCheckboxSelection(email)" class="example-margin"></mat-checkbox>
                       </td>
                       <td class="hidden-xs">
-                        <i class="material-icons">star_border</i>
+                        <button mat-icon-button (click)="toggleStar(email)">
+                          <mat-icon [ngClass]="{'starred': email.fromStarred || email.starred, 'not-starred': !email.fromStarred && !email.starred}">star</mat-icon>  
+                        </button>
                       </td>
                       <td class="hidden-xs">
                         <a *ngIf="adminUrl" [routerLink]="['/email/admin/compose',email.id]" class="draft">Draft</a> 

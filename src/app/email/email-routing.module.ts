@@ -7,6 +7,7 @@ import { SentComponent } from './sent/sent.component';
 import { BinMailComponent } from './bin-mail/bin-mail.component';
 import { DraftMailComponent } from './draft-mail/draft-mail.component';
 import { ImportantMailComponent } from './important-mail/important-mail.component';
+import { StarredMailComponent } from './starred-mail/starred-mail.component';
 const routes: Routes = [
   {
     path: 'admin/inbox',
@@ -41,6 +42,11 @@ const routes: Routes = [
     path: 'admin/important',
     component: ImportantMailComponent
   },
+  {
+    path: 'admin/starred',
+    component: StarredMailComponent
+  },
+
 
   {
     path: 'student/inbox',
@@ -75,11 +81,10 @@ const routes: Routes = [
     path: 'student/important',
     component: ImportantMailComponent
   },
-
-
-
-
-
+  {
+    path: 'student/starred',
+    component: StarredMailComponent
+  },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -84,6 +84,23 @@ export class InboxComponent implements OnInit {
       this.getMails();
     });
   }
+  
+  toggleStar(email: any) {
+    if(email.starred || email.toStarred){
+      email.starred = false;
+    } else if(!email.starred || !email.toStarred){
+      email.starred = true;
+    }
+    this.selectedEmails.push(email.id)
+    const payload={
+      toStarred:email.starred,
+      selectedEmailIds:this.selectedEmails
+    }
+    this.emailService.updateMailImportant(payload).subscribe(() => {
+      this.getMails();
+      this.selectedEmails=[]
+    });
+  }
 
 
   getMails(){

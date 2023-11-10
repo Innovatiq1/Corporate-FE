@@ -38,7 +38,10 @@
         </a>
       </li>
       <li routerLinkActive="active">
-        <a href="javascript:;" title="Starred">Starred</a>
+        <a *ngIf="adminUrl" routerLink="/email/admin/starred" title="Starred" routerLinkActive="active">Starred
+        </a>
+        <a *ngIf="studentUrl" routerLink="/email/student/starred" title="Starred" routerLinkActive="active">Starred
+        </a>
       </li>
     </ul>
     <!-- <h5 class="b-b p-10 text-strong">Labels</h5>

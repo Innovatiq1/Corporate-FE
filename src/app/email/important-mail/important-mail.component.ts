@@ -26,7 +26,7 @@ export class ImportantMailComponent {
 
 
 
-  constructor(private router:Router,private emailService:EmailConfigService) {
+  constructor(private router: Router, private emailService: EmailConfigService) {
     let urlPath = this.router.url.split('/')
     this.adminUrl = urlPath.includes('admin');
     this.studentUrl = urlPath.includes('student');
@@ -39,9 +39,9 @@ export class ImportantMailComponent {
     this.mailPaginationModel.limit = $event?.pageSize;
     this.getMails();
   }
-  
 
-  ngOnInit(){
+
+  ngOnInit() {
     this.getMails();
 
   }
@@ -57,39 +57,56 @@ export class ImportantMailComponent {
   }
   deleteSelectedEmails() {
     const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-    const payload={
-      toStatus:'inactive',
-      selectedEmailIds:selectedEmailIds
+    const payload = {
+      toStatus: 'inactive',
+      selectedEmailIds: selectedEmailIds
     }
 
-        this.emailService.deleteMail(payload).subscribe((response) => {
+    this.emailService.deleteMail(payload).subscribe((response) => {
       this.getMails();
     });
   }
   archiveEmails() {
     const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-    const payload={
-      toArchive:true,
-      selectedEmailIds:selectedEmailIds
+    const payload = {
+      toArchive: true,
+      selectedEmailIds: selectedEmailIds
     }
-        this.emailService.updateMailImportant(payload).subscribe((response) => {
+    this.emailService.updateMailImportant(payload).subscribe((response) => {
       this.getMails();
     });
   }
 
   updateEmails() {
     const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-    const payload={
-      toImportant:false,
-      selectedEmailIds:selectedEmailIds
+    const payload = {
+      toImportant: false,
+      selectedEmailIds: selectedEmailIds
     }
-        this.emailService.updateMailImportant(payload).subscribe((response) => {
+    this.emailService.updateMailImportant(payload).subscribe((response) => {
       this.getMails();
     });
   }
 
-  getMails(){
-    let to= JSON.parse(localStorage.getItem('currentUser')!).user.email;
+  toggleStar(email: any) {
+    if (email.starred || email.toStarred) {
+      email.starred = false;
+    } else if (!email.starred || !email.toStarred) {
+      email.starred = true;
+    }
+    this.selectedEmails.push(email.id)
+    const payload = {
+      toStarred: email.starred,
+      selectedEmailIds: this.selectedEmails
+    }
+    this.emailService.updateMailImportant(payload).subscribe(() => {
+      this.getMails();
+      this.selectedEmails = []
+    });
+  }
+
+  getMails() {
+    let to = JSON.parse(localStorage.getItem('currentUser')!).user.email;
     this.emailService.getImportantMailsByToAddress(to).subscribe((response: any) => {
       this.emails = response.docs;
       this.totalItems = response.totalDocs
@@ -100,5 +117,5 @@ export class ImportantMailComponent {
 
     });
   }
-  
+
 }

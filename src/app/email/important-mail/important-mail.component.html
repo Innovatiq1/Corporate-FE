@@ -68,10 +68,15 @@
                         <mat-checkbox  (change)="handleCheckboxSelection(email)" class="example-margin"></mat-checkbox>
                       </td>
                       <td class="hidden-xs">
-                        <i class="material-icons">star_border</i>
-                      </td>
-                      <td class="hidden-xs">{{email?.fromName}}</td>
-                      <td class="max-texts">
+                        <button mat-icon-button (click)="toggleStar(email)">
+                          <mat-icon [ngClass]="{'starred': email.toStarred || email.starred, 'not-starred': !email.toStarred && !email.starred}">star</mat-icon>
+                        </button>
+                        </td>
+                      <td class="hidden-xs">
+                        <a *ngIf="adminUrl" [routerLink]="['/email/admin/read-email',email.id]">{{email?.fromName}}</a>
+                        <a *ngIf="studentUrl" [routerLink]="['/email/student/read-email',email.id]">{{email?.fromName}}</a>
+  </td>
+                        <td class="max-texts">
                         <a *ngIf="adminUrl" [routerLink]="['/email/admin/read-email',email.id]">{{email?.subject}}</a>
                         <a *ngIf="studentUrl" [routerLink]="['/email/student/read-email',email.id]">{{email?.subject}}</a>
   
