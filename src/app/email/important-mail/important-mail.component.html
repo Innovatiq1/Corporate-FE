@@ -63,7 +63,7 @@
                   </thead>
                   <tbody>
                   
-                    <tr *ngFor ="let email of emails" class="unread">
+                    <tr *ngFor ="let email of emails"  [class.read]="email.read" [class.unread]="!email.read" >
                       <td class="tbl-checkbox">
                         <mat-checkbox  (change)="handleCheckboxSelection(email)" class="example-margin"></mat-checkbox>
                       </td>
