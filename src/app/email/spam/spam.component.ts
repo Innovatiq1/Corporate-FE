@@ -23,6 +23,7 @@ export class SpamComponent {
   pageSizeArr = [10, 25, 50, 100];
   mailPaginationModel: Partial<CoursePaginationModel>;
   selectedEmails: any[] = [];
+  email: any;
 
 
 
@@ -43,27 +44,61 @@ export class SpamComponent {
 
   ngOnInit(){
     this.getMails();
-
   }
 
-
   handleCheckboxSelection(email: any) {
+    this.email=email;
     const index = this.selectedEmails.findIndex((selected) => selected.id === email.id);
     if (index > -1) {
       this.selectedEmails.splice(index, 1); // Unselect if already selected
     } else {
-      this.selectedEmails.push(email); // Select if not already in the selectedEmails array
+      this.selectedEmails.push(email); 
     }
   }
   deleteSelectedEmails() {
-    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-    const payload={
-      toStatus:'inactive',
-      selectedEmailIds:selectedEmailIds
+    let mailId = JSON.parse(localStorage.getItem('currentUser')!).user.email;
+    const selectedEmails = this.selectedEmails; 
+    const toMatch = selectedEmails.find((email) => email.to === mailId);
+    const fromMatch = selectedEmails.find((email) => email.from === mailId);
+  
+    if (toMatch && fromMatch) {
+      const payloadTo = {
+        toStatus: 'inactive',
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      const payloadFrom = {
+        fromStatus: 'inactive',
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payloadTo).subscribe((response) => {
+        this.getMails();
+      });
+  
+      this.emailService.updateMail(payloadFrom).subscribe((response) => {
+        this.getMails();
+      });
+  
+    } else if (toMatch) {
+      const payload = {
+        toStatus: 'inactive',
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
+    } else if (fromMatch) {
+      const payload = {
+        fromStatus: 'inactive',
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
     }
-    this.emailService.deleteMail(payload).subscribe((response) => {
-      this.getMails();
-    });
   }
   updateEmails() {
     const selectedEmailIds = this.selectedEmails.map((email) => email.id);
@@ -76,14 +111,49 @@ export class SpamComponent {
     });
   }
   archiveEmails() {
-    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-    const payload={
-      toArchive:true,
-      selectedEmailIds:selectedEmailIds
+    let mailId = JSON.parse(localStorage.getItem('currentUser')!).user.email;
+    const selectedEmails = this.selectedEmails; 
+    const toMatch = selectedEmails.find((email) => email.to === mailId);
+    const fromMatch = selectedEmails.find((email) => email.from === mailId);
+  
+    if (toMatch && fromMatch) {
+      const payloadTo = {
+        toArchive: true,
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      const payloadFrom = {
+        fromArchive: true,
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payloadTo).subscribe((response) => {
+        this.getMails();
+      });
+  
+      this.emailService.updateMail(payloadFrom).subscribe((response) => {
+        this.getMails();
+      });
+  
+    } else if (toMatch) {
+      const payload = {
+        toArchive: false,
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
+    } else if (fromMatch) {
+      const payload = {
+        fromArchive: false,
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
     }
-        this.emailService.updateMail(payload).subscribe((response) => {
-      this.getMails();
-    });
   }
   
   toggleStar(email: any) {
@@ -103,6 +173,52 @@ export class SpamComponent {
     });
   }
 
+  removeSpamEmails() {
+    let mailId = JSON.parse(localStorage.getItem('currentUser')!).user.email;
+    const selectedEmails = this.selectedEmails; 
+    const toMatch = selectedEmails.find((email) => email.to === mailId);
+    const fromMatch = selectedEmails.find((email) => email.from === mailId);
+  
+    if (toMatch && fromMatch) {
+      const payloadTo = {
+        toSpam: false,
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      const payloadFrom = {
+        fromSpam: false,
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payloadTo).subscribe((response) => {
+        this.getMails();
+      });
+  
+      this.emailService.updateMail(payloadFrom).subscribe((response) => {
+        this.getMails();
+      });
+  
+    } else if (toMatch) {
+      const payload = {
+        toSpam: false,
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
+    } else if (fromMatch) {
+      const payload = {
+        fromSpam: false,
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
+    }
+  }
+    
 
   getMails(){
     let to= JSON.parse(localStorage.getItem('currentUser')!).user.email;
