@@ -56,14 +56,49 @@ export class StarredMailComponent {
     }
   }
   deleteSelectedEmails() {
-    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-    const payload={
-      toStatus:'inactive',
-      selectedEmailIds:selectedEmailIds
+    let mailId = JSON.parse(localStorage.getItem('currentUser')!).user.email;
+    const selectedEmails = this.selectedEmails; 
+    const toMatch = selectedEmails.find((email) => email.to === mailId);
+    const fromMatch = selectedEmails.find((email) => email.from === mailId);
+  
+    if (toMatch && fromMatch) {
+      const payloadTo = {
+        toStatus: 'inactive',
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      const payloadFrom = {
+        fromStatus: 'inactive',
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payloadTo).subscribe((response) => {
+        this.getMails();
+      });
+  
+      this.emailService.updateMail(payloadFrom).subscribe((response) => {
+        this.getMails();
+      });
+  
+    } else if (toMatch) {
+      const payload = {
+        toStatus: 'inactive',
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
+    } else if (fromMatch) {
+      const payload = {
+        fromStatus: 'inactive',
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
     }
-    this.emailService.deleteMail(payload).subscribe((response) => {
-      this.getMails();
-    });
   }
   updateEmails() {
     const selectedEmailIds = this.selectedEmails.map((email) => email.id);
@@ -76,15 +111,98 @@ export class StarredMailComponent {
     });
   }
   archiveEmails() {
-    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-    const payload={
-      toArchive:true,
-      selectedEmailIds:selectedEmailIds
+    let mailId = JSON.parse(localStorage.getItem('currentUser')!).user.email;
+    const selectedEmails = this.selectedEmails; 
+    const toMatch = selectedEmails.find((email) => email.to === mailId);
+    const fromMatch = selectedEmails.find((email) => email.from === mailId);
+  
+    if (toMatch && fromMatch) {
+      const payloadTo = {
+        toArchive: true,
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      const payloadFrom = {
+        fromArchive: true,
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payloadTo).subscribe((response) => {
+        this.getMails();
+      });
+  
+      this.emailService.updateMail(payloadFrom).subscribe((response) => {
+        this.getMails();
+      });
+  
+    } else if (toMatch) {
+      const payload = {
+        toArchive: false,
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
+    } else if (fromMatch) {
+      const payload = {
+        fromArchive: false,
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
     }
-        this.emailService.updateMail(payload).subscribe((response) => {
-      this.getMails();
-    });
   }
+
+  spamEmails() {
+    let mailId = JSON.parse(localStorage.getItem('currentUser')!).user.email;
+    const selectedEmails = this.selectedEmails; 
+    const toMatch = selectedEmails.find((email) => email.to === mailId);
+    const fromMatch = selectedEmails.find((email) => email.from === mailId);
+  
+    if (toMatch && fromMatch) {
+      const payloadTo = {
+        toSpam: true,
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      const payloadFrom = {
+        fromSpam: true,
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payloadTo).subscribe((response) => {
+        this.getMails();
+      });
+  
+      this.emailService.updateMail(payloadFrom).subscribe((response) => {
+        this.getMails();
+      });
+  
+    } else if (toMatch) {
+      const payload = {
+        toSpam: true,
+        selectedEmailIds: [toMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
+    } else if (fromMatch) {
+      const payload = {
+        fromSpam: true,
+        selectedEmailIds: [fromMatch.id],
+      };
+  
+      this.emailService.updateMail(payload).subscribe((response) => {
+        this.getMails();
+      });
+    }
+  }
+    
+
   
   toggleStar(email: any) {
     if(email.starred || email.toStarred){
