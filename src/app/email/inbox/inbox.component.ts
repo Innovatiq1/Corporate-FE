@@ -39,10 +39,22 @@ export class InboxComponent implements OnInit {
     this.getMails();
   }
   
+  navigate(email:any){
+    if(email.read == false){
+      this.selectedEmails.push(email.id)
+      const payload={
+      read:true,
+      selectedEmailIds:this.selectedEmails
+    }
+    this.emailService.updateMail(payload).subscribe((response) => {
+      this.getMails(); 
+    });
+  }
+  this.router.navigate(['/email/read-email/' +email.id])
+  }
 
   ngOnInit(){
     this.getMails();
-
   }
 
 

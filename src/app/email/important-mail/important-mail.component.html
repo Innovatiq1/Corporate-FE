@@ -72,16 +72,12 @@
                           <mat-icon [ngClass]="{'starred': email.toStarred || email.starred, 'not-starred': !email.toStarred && !email.starred}">star</mat-icon>
                         </button>
                         </td>
-                      <td class="hidden-xs">
-                        <a  [routerLink]="['/email/read-email',email.id]">{{email?.fromName}}</a>
-  </td>
+                        <td class="hidden-xs">
+                          <a type="button"(click)="navigate(email)">{{email?.fromName}}</a>
+                        </td>
                         <td class="max-texts">
-                        <a [routerLink]="['/email/read-email',email.id]">{{email?.subject}}</a>
-  
-                      </td>
-                      <!-- <td class="hidden-xs">
-                        <i class="material-icons">attach_file</i>
-                      </td> -->
+                          <a type="button"(click)="navigate(email)">{{email?.subject}}</a>
+                        </td>                     
                       <td class="text-end"> {{email?.createdAt | date}} </td>
                     </tr>
                   
