@@ -73,14 +73,12 @@
                         </button>
                       </td>
                       <td class="hidden-xs">
-                        <a *ngIf="adminUrl" [routerLink]="['/email/admin/compose',email.id]" class="draft">Draft</a> 
-                        <a *ngIf="studentUrl" [routerLink]="['/email/student/compose',email.id]" class="draft">Draft</a> 
+                        <a  [routerLink]="['/email/compose',email.id]" class="draft">Draft</a> 
                     </td>
 
                       <td class="hidden-xs">{{email?.fromName}}</td>
                       <td class="max-texts">
-                        <a *ngIf="adminUrl" [routerLink]="['/email/admin/compose',email.id]">{{email?.subject}}</a>
-                        <a *ngIf="studentUrl" [routerLink]="['/email/student/compose',email.id]">{{email?.subject}}</a>
+                        <a  [routerLink]="['/email/compose',email.id]">{{email?.subject}}</a>
   
                       </td>
                       <!-- <td class="hidden-xs">

@@ -98,11 +98,7 @@ export class ComposeComponent {
         text: 'Email sent successfully',
         icon: 'success',
       });
-      if(this.adminUrl){
-      this.router.navigate(['/email/admin/inbox'])
-      } else if(this.studentUrl){
-        this.router.navigate(['/email/student/inbox'])
-      }
+      this.router.navigate(['/email/inbox'])
      
     });
 
@@ -116,11 +112,7 @@ export class ComposeComponent {
       fromStatus:'draft'
     }
     this.emailService.sendEmail(payload).subscribe((response: any) => {
-             if(this.adminUrl){
-      this.router.navigate(['/email/admin/inbox'])
-      } else if(this.studentUrl){
-        this.router.navigate(['/email/student/inbox'])
-      }
+      this.router.navigate(['/email/inbox'])
      
     });
 

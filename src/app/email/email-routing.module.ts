@@ -11,91 +11,46 @@ import { StarredMailComponent } from './starred-mail/starred-mail.component';
 import { SpamComponent } from './spam/spam.component';
 const routes: Routes = [
   {
-    path: 'admin/inbox',
+    path: 'inbox',
     component: InboxComponent
   },
   {
-    path: 'admin/compose',
+    path: 'compose',
     component: ComposeComponent
   },
   {
-    path: 'admin/compose/:id',
+    path: 'compose/:id',
     component: ComposeComponent
   },
 
   {
-    path: 'admin/read-email/:id',
+    path: 'read-email/:id',
     component: ReadMailComponent
   },
   {
-    path: 'admin/sent',
+    path: 'sent',
     component: SentComponent
   },
   {
-    path: 'admin/bin',
+    path: 'bin',
     component: BinMailComponent
   },
   {
-    path: 'admin/draft',
+    path: 'draft',
     component: DraftMailComponent
   },
   {
-    path: 'admin/important',
+    path: 'important',
     component: ImportantMailComponent
   },
   {
-    path: 'admin/starred',
+    path: 'starred',
     component: StarredMailComponent
   },
   {
-    path: 'admin/spam',
+    path: 'spam',
     component: SpamComponent
-  },
-
-
-
-  {
-    path: 'student/inbox',
-    component: InboxComponent
-  },
-  {
-    path: 'student/compose',
-    component: ComposeComponent
-  },
-  {
-    path: 'student/compose/:id',
-    component: ComposeComponent
-  },
-
-  {
-    path: 'student/read-email/:id',
-    component: ReadMailComponent
-  },
-  {
-    path: 'student/sent',
-    component: SentComponent
-  },
-  {
-    path: 'student/bin',
-    component: BinMailComponent
-  },
-  {
-    path: 'student/draft',
-    component: DraftMailComponent
-  },
-  {
-    path: 'student/important',
-    component: ImportantMailComponent
-  },
-  {
-    path: 'student/starred',
-    component: StarredMailComponent
-  },
-  {
-    path: 'student/spam',
-    component: SpamComponent
-  },
-
+  }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

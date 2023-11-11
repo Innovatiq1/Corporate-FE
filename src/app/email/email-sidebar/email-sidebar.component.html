@@ -2,51 +2,34 @@
     <button type="button" (click)="compose()" class="btn btn-success waves-effect m-b-15">COMPOSE</button>
     <ul class="" id="mail-folders">
         <li routerLinkActive="active">
-            <a *ngIf="adminUrl" routerLink="/email/admin/inbox" title="Inbox" routerLinkActive="active">Inbox
+            <a  routerLink="/email/inbox" title="Inbox" routerLinkActive="active">Inbox
               <span class="badge bg-orange" >{{totalItems}} </span>
-            </a>
-            <a *ngIf="studentUrl" routerLink="/email/student/inbox" title="Inbox" routerLinkActive="active">Inbox
-              <span class="badge bg-orange" >{{totalItems}}</span>
             </a>
           </li>
           <li routerLinkActive="active">
-            <a *ngIf="adminUrl" routerLink="/email/admin/sent" title="Sent" routerLinkActive="active">Sent
-                <span class="badge bg-orange">{{totalSentItems}}</span>
-            </a>
-            <a *ngIf="studentUrl" routerLink="/email/student/sent" title="Sent" routerLinkActive="active">Sent
+            <a routerLink="/email/sent" title="Sent" routerLinkActive="active">Sent
                 <span class="badge bg-orange">{{totalSentItems}}</span>
             </a>
           </li>
         <li routerLinkActive="active">
-          <a *ngIf="adminUrl" routerLink="/email/admin/draft" title="Draft" routerLinkActive="active">Draft
-        </a>
-        <a *ngIf="studentUrl" routerLink="/email/student/draft" title="Draft" routerLinkActive="active">Draft
+          <a routerLink="/email/draft" title="Draft" routerLinkActive="active">Draft
         </a>
   </li>
       <li routerLinkActive="active">
-        <a *ngIf="adminUrl" routerLink="/email/admin/bin" title="Bin" routerLinkActive="active">Bin
-          <span class="badge bg-orange">{{totalDeletedItems}}</span>
-      </a>
-      <a *ngIf="studentUrl" routerLink="/email/student/bin" title="Bin" routerLinkActive="active">Bin
+        <a  routerLink="/email/bin" title="Bin" routerLinkActive="active">Bin
           <span class="badge bg-orange">{{totalDeletedItems}}</span>
       </a>
 </li>
       <li routerLinkActive="active">
-        <a *ngIf="adminUrl" routerLink="/email/admin/important" title="Important" routerLinkActive="active">Important
-        </a>
-        <a *ngIf="studentUrl" routerLink="/email/student/important" title="Important" routerLinkActive="active">Important
+        <a  routerLink="/email/important" title="Important" routerLinkActive="active">Important
         </a>
       </li>
       <li routerLinkActive="active">
-        <a *ngIf="adminUrl" routerLink="/email/admin/starred" title="Starred" routerLinkActive="active">Starred
-        </a>
-        <a *ngIf="studentUrl" routerLink="/email/student/starred" title="Starred" routerLinkActive="active">Starred
+        <a routerLink="/email/starred" title="Starred" routerLinkActive="active">Starred
         </a>
       </li>
       <li routerLinkActive="active">
-        <a *ngIf="adminUrl" routerLink="/email/admin/spam" title="Spam" routerLinkActive="active">Spam
-        </a>
-        <a *ngIf="studentUrl" routerLink="/email/student/spam" title="Spam" routerLinkActive="active">Spam
+        <a routerLink="/email/spam" title="Spam" routerLinkActive="active">Spam
         </a>
       </li>
 

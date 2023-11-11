@@ -52,12 +52,7 @@ export class EmailSidebarComponent {
 
 
   compose(){
-    if(this.adminUrl){
-    this.router.navigate(['/email/admin/compose']);
-    } else if(this.studentUrl){
-      this.router.navigate(['/email/student/compose']);
-
-    }
+    this.router.navigate(['/email/compose']);
   }
 
 }
