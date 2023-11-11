@@ -72,7 +72,7 @@ export class ImportantMailComponent {
       toArchive: true,
       selectedEmailIds: selectedEmailIds
     }
-    this.emailService.updateMailImportant(payload).subscribe((response) => {
+    this.emailService.updateMail(payload).subscribe((response) => {
       this.getMails();
     });
   }
@@ -83,10 +83,21 @@ export class ImportantMailComponent {
       toImportant: false,
       selectedEmailIds: selectedEmailIds
     }
-    this.emailService.updateMailImportant(payload).subscribe((response) => {
+    this.emailService.updateMail(payload).subscribe((response) => {
       this.getMails();
     });
   }
+  spamEmails() {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
+    const payload={
+      toSpam:true,
+      selectedEmailIds:selectedEmailIds
+    }
+        this.emailService.updateMail(payload).subscribe((response) => {
+      this.getMails();
+    });
+  }
+
 
   toggleStar(email: any) {
     if (email.starred || email.toStarred) {
@@ -99,7 +110,7 @@ export class ImportantMailComponent {
       toStarred: email.starred,
       selectedEmailIds: this.selectedEmails
     }
-    this.emailService.updateMailImportant(payload).subscribe(() => {
+    this.emailService.updateMail(payload).subscribe(() => {
       this.getMails();
       this.selectedEmails = []
     });

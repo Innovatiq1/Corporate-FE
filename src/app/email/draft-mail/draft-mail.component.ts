@@ -73,14 +73,23 @@ export class DraftMailComponent {
       fromStarred:email.starred,
       selectedEmailIds:this.selectedEmails
     }
-    this.emailService.updateMailImportant(payload).subscribe(() => {
+    this.emailService.updateMail(payload).subscribe(() => {
       this.getMails();
       this.selectedEmails=[]
     });
   }
 
-
-  
+  spamEmails() {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
+    const payload={
+      fromSpam:true,
+      selectedEmailIds:selectedEmailIds
+    }
+        this.emailService.updateMail(payload).subscribe((response) => {
+      this.getMails();
+    });
+  }
+ 
   getMails(){
     let from= JSON.parse(localStorage.getItem('currentUser')!).user.email;
     this.emailService.getDraftedMailsByFromAddress(from).subscribe((response: any) => {

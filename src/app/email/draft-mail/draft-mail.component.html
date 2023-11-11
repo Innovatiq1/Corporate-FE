@@ -31,7 +31,7 @@
                               <button  matTooltip="Archive" mat-icon-button aria-label="Example icon-button with a heart icon">
                                 <mat-icon >archive</mat-icon>
                               </button>
-                              <button matTooltip="Spam" mat-icon-button aria-label="Example icon-button with a heart icon">
+                              <button matTooltip="Spam" (click)="spamEmails()" mat-icon-button aria-label="Example icon-button with a heart icon">
                                 <mat-icon>error</mat-icon>
                               </button>
                               <button  matTooltip="Discard" (click)="deleteSelectedEmails()" mat-icon-button aria-label="Example icon-button with a heart icon">

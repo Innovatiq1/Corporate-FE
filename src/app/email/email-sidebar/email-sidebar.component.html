@@ -43,6 +43,13 @@
         <a *ngIf="studentUrl" routerLink="/email/student/starred" title="Starred" routerLinkActive="active">Starred
         </a>
       </li>
+      <li routerLinkActive="active">
+        <a *ngIf="adminUrl" routerLink="/email/admin/spam" title="Spam" routerLinkActive="active">Spam
+        </a>
+        <a *ngIf="studentUrl" routerLink="/email/student/spam" title="Spam" routerLinkActive="active">Spam
+        </a>
+      </li>
+
     </ul>
     <!-- <h5 class="b-b p-10 text-strong">Labels</h5>
     <ul class="" id="mail-labels">

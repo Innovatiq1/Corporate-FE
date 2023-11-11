@@ -70,17 +70,28 @@ export class InboxComponent implements OnInit {
       toImportant:true,
       selectedEmailIds:selectedEmailIds
     }
-        this.emailService.updateMailImportant(payload).subscribe((response) => {
+        this.emailService.updateMail(payload).subscribe((response) => {
       this.getMails();
     });
   }
+  spamEmails() {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
+    const payload={
+      toSpam:true,
+      selectedEmailIds:selectedEmailIds
+    }
+        this.emailService.updateMail(payload).subscribe((response) => {
+      this.getMails();
+    });
+  }
+
   archiveEmails() {
     const selectedEmailIds = this.selectedEmails.map((email) => email.id);
     const payload={
       toArchive:true,
       selectedEmailIds:selectedEmailIds
     }
-        this.emailService.updateMailImportant(payload).subscribe((response) => {
+        this.emailService.updateMail(payload).subscribe((response) => {
       this.getMails();
     });
   }
@@ -96,7 +107,7 @@ export class InboxComponent implements OnInit {
       toStarred:email.starred,
       selectedEmailIds:this.selectedEmails
     }
-    this.emailService.updateMailImportant(payload).subscribe(() => {
+    this.emailService.updateMail(payload).subscribe(() => {
       this.getMails();
       this.selectedEmails=[]
     });
@@ -115,6 +126,5 @@ export class InboxComponent implements OnInit {
 
     });
   }
-  
 
 }

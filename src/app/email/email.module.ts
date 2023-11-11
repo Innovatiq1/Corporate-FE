@@ -13,8 +13,9 @@ import { DraftMailComponent } from './draft-mail/draft-mail.component';
 import { BinMailComponent } from './bin-mail/bin-mail.component';
 import { ImportantMailComponent } from './important-mail/important-mail.component';
 import { StarredMailComponent } from './starred-mail/starred-mail.component';
+import { SpamComponent } from './spam/spam.component';
 @NgModule({
-  declarations: [ComposeComponent, InboxComponent, ReadMailComponent, EmailSidebarComponent, SentComponent, DraftMailComponent, BinMailComponent, ImportantMailComponent, StarredMailComponent],
+  declarations: [ComposeComponent, InboxComponent, ReadMailComponent, EmailSidebarComponent, SentComponent, DraftMailComponent, BinMailComponent, ImportantMailComponent, StarredMailComponent, SpamComponent],
   imports: [
     CommonModule,
     EmailRoutingModule,

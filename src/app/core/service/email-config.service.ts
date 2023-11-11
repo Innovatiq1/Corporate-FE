@@ -74,7 +74,10 @@ export class EmailConfigService {
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
 
-
+  getSpamMails(to:string): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&from=${to}&toSpam=true&fromSpam=true&toArchive=false`;
+    return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }   
 
   getDraftedMailsByFromAddress(from:string): Observable<any[]> {
     const apiUrl = `${this.prefix}admin/internal-email/mail?from=${from}&fromStatus=draft&archive=false`;
@@ -97,7 +100,7 @@ export class EmailConfigService {
     const apiUrl = `${this.prefix}admin/internal-email`;
     return this.http.put<ApiResponse>(apiUrl, mail).pipe(map((response) => { }));
   }
-  updateMailImportant(mail:any) {
+  updateMail(mail:any) {
     const apiUrl = `${this.prefix}admin/internal-email`;
     return this.http.put<ApiResponse>(apiUrl, mail).pipe(map((response) => { }));
   }
