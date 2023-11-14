@@ -52,9 +52,9 @@ export class CourseService {
     }
     return params;
   }
-  saveRegisterClass(studentId: any, classId: string) {
+  saveRegisterClass(payload:any) {
     const apiUrl = `${this.prefix}admin/studentClasses`;
-    return this._Http.post<any>(apiUrl, { studentId: studentId, classId: classId }).pipe(map((response) => response));
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
   }
   registerProgramClass(studentId: any,programName:any, classId: string) {
     const apiUrl = `${this.prefix}admin/studentClasses/registerProgram`;

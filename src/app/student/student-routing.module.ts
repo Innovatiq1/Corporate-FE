@@ -10,6 +10,13 @@ import { ViewCourseComponent } from './view-course/view-course.component';
 import { ProgramComponent } from './program/program.component';
 import { ViewProgramComponent } from './view-program/view-program.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+
+
+import { ProgramTimetableComponent } from './program-timetable/program-timetable.component';
+import { SucessCourseComponent } from './sucess-course/sucess-course.component';
+import { FailureCourseComponent } from './failure-course/failure-course.component';
+
+
 const routes: Routes = [
   {
     path: 'enrollment/courses',
@@ -19,6 +26,15 @@ const routes: Routes = [
     path: 'view-course/:id',
     component: ViewCourseComponent,
   },
+  {
+    path: 'sucess-course/:id',
+    component: SucessCourseComponent,
+  },
+  {
+    path: 'fail-course/:id',
+    component: FailureCourseComponent,
+  },
+
   {
     path: 'enrollment/programs',
     component: ProgramComponent,
