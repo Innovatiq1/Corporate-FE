@@ -205,7 +205,7 @@ export class HeaderComponent
   }
   showCustomHtml(data:any) {
     Swal.fire({
-      title: 'Anuncement',
+      title: 'Notification',
       html:
         `<h4>Title </h4> <p>${data.subject}</p>` +
         `<h5>Course Detailed Description </h5> <p class='fs-6' >${data.details}</p>`,
