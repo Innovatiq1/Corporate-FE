@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit ,Inject} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CourseKitModel } from '@core/models/course.model';
 import { CommonService } from '@core/service/common.service';
@@ -7,6 +6,7 @@ import { CourseService } from '@core/service/course.service';
 import { VideoPlayerComponent } from 'app/admin/courses/course-kit/video-player/video-player.component';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import {  BsModalService, ModalOptions} from "ngx-bootstrap/modal";
+import { DOCUMENT, isPlatformBrowser, DatePipe } from '@angular/common';
 
 import Swal from 'sweetalert2';
 export interface PeriodicElement {
@@ -22,11 +22,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
  
 ];
 @Component({
-  selector: 'app-view-course',
-  templateUrl: './view-course.component.html',
-  styleUrls: ['./view-course.component.scss']
+  selector: 'app-sucess-course',
+  templateUrl: './sucess-course.component.html',
+  styleUrls: ['./sucess-course.component.scss']
 })
-export class ViewCourseComponent {
+export class SucessCourseComponent implements OnInit {
   displayedColumns: string[] = ['position', ' Class Start Date ', ' Class End Date ', 'action'];
   displayedColumns1: string[] = [
     'Course Name',
@@ -55,18 +55,24 @@ export class ViewCourseComponent {
   studentClassDetails: any;
   isStatus = false;
   isApproved = false
-  isCancelled = false;
-  documentLink: any;
-  uploadedDoc: any;
+  isCancelled = false
 
-  constructor(private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService,
-    @Inject(DOCUMENT) private document: any){
+  constructor(@Inject(DOCUMENT) private document: any,
+  private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService){
     this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
       this.classId = params["id"];
     });
     this.getRegisteredClassDetails();
     this.getClassDetails();
   
+
+  }
+  ngOnInit(): void {
+    Swal.fire({
+      title: 'Thank you',
+      text: 'We will approve once verified',
+      icon: 'success',
+    });
 
   }
   getClassDetails(){
@@ -80,25 +86,32 @@ export class ViewCourseComponent {
   registerClass(classId: string) {
     let userdata = JSON.parse(localStorage.getItem('currentUser')!)
     let studentId=localStorage.getItem('id')
+    console.log('title',this.classDetails.courseId.title)
     let payload ={
       email:userdata.user.email,
-      name:userdata.user.name,
       courseTitle:this.classDetails?.courseId?.title,
       courseFee:this.classDetails?.courseId?.fee,
       studentId:studentId,
       classId:this.classId
+
+
     }
     this.courseService.saveRegisterClass(payload).subscribe((response) => {
+      let studentId=localStorage.getItem('user_data');
       this.document.location.href = response.data.session.url;
+
+        Swal.fire({
+          title: 'Thank you',
+          text: 'We will approve once verified',
+          icon: 'success',
+        });
+      this.isRegistered = true;
       this.getClassDetails();
     });
   }
   getCourseKitDetails(){
     this.courseService.getCourseById(this.courseId).subscribe((response) => {
       this.courseKitDetails=response?.course_kit;
-      this.documentLink = this.courseKitDetails[0].documentLink;
-      let uploadedDocument=this.documentLink?.split('/')
-      this.uploadedDoc = uploadedDocument?.pop();
     });
   }
   getRegisteredClassDetails(){

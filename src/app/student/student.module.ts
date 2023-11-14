@@ -29,6 +29,8 @@ import { StudentsService } from 'app/admin/students/all-students/students.servic
 import { FeedbackComponent } from './feedback/feedback.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ProgramTimetableComponent } from './program-timetable/program-timetable.component';
+import { SucessCourseComponent } from './sucess-course/sucess-course.component';
+import { FailureCourseComponent } from './failure-course/failure-course.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { ProgramTimetableComponent } from './program-timetable/program-timetable
     ViewProgramComponent,
     FeedbackComponent,
     ProgramTimetableComponent,
+    SucessCourseComponent,
+    FailureCourseComponent,
   ],
   imports: [
     CommonModule,
