@@ -333,7 +333,7 @@ MENU_LIST = [
     [
         {
             id: "exam-schedule",
-            title: " Course Exam Schdule",
+            title: " Course Exam Schedule",
             type: "none",
         },
         
