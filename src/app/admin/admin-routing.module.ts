@@ -58,6 +58,12 @@ const routes: Routes = [
       import('./audit/audit.module').then((m) => m.AuditModule),
   },
   {
+    path: 'exam',
+    loadChildren: () =>
+      import('./exam-schedule/exam-schedule.module').then((m) => m.ExamScheduleModule),
+  },
+
+  {
     path: 'announcement',
     loadChildren: () =>
       import('./announcement/announcement.module').then((m) => m.AnnouncementModule),

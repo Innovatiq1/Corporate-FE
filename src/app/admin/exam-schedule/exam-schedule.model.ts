@@ -1,7 +1,8 @@
 import { formatDate } from '@angular/common';
 export class ExamSchedule {
+  
   id: number;
-  subject: string;
+  courseName: string;
   class: string;
   date: string;
   time: string;
@@ -10,11 +11,12 @@ export class ExamSchedule {
   totalMarks: string;
   reqMarks: string;
   data:any;
+  docs:[]
 
   constructor(examSchedule: ExamSchedule) {
     {
       this.id = examSchedule.id || this.getRandomID();
-      this.subject = examSchedule.subject || '';
+      this.courseName = examSchedule.courseName || '';
       this.class = examSchedule.class || '';
       this.date = formatDate(new Date(), 'yyyy-MM-dd', 'en') || '';
       this.time = examSchedule.time || '';
@@ -22,6 +24,7 @@ export class ExamSchedule {
       this.roomNo = examSchedule.roomNo || '';
       this.totalMarks = examSchedule.totalMarks || '';
       this.reqMarks = examSchedule.reqMarks || '';
+      this.docs=[]
     }
   }
   public getRandomID(): number {
