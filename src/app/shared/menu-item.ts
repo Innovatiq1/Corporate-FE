@@ -554,34 +554,34 @@ MENU_LIST = [
         }
     ]
 },
-{
-    id: "student/timetable",
-    title: "Timetable",
-    iconsrc: "/assets/course-icon.svg",
-    icon:'fact_check',
-    selected: true,
-    children: [
-        // {
-        //     id: "homework",
-        //     title: "Homework",
-        //     selected: false,
-        //     iconsrc: "/assets/announcement-icon.svg",
-        // },
-        {
-            id: "course-timetable",
-            title: "Course",
-            selected: false,
-            iconsrc: "/assets/announcement-icon.svg",
-        },
-        {
-            id: "program-timetable",
-            title: "Program",
-            selected: false,
-            iconsrc: "/assets/announcement-icon.svg",
-        }
+// {
+//     id: "student/timetable",
+//     title: "Timetable",
+//     iconsrc: "/assets/course-icon.svg",
+//     icon:'fact_check',
+//     selected: true,
+//     children: [
+//         // {
+//         //     id: "homework",
+//         //     title: "Homework",
+//         //     selected: false,
+//         //     iconsrc: "/assets/announcement-icon.svg",
+//         // },
+//         {
+//             id: "course-timetable",
+//             title: "Course",
+//             selected: false,
+//             iconsrc: "/assets/announcement-icon.svg",
+//         },
+//         {
+//             id: "program-timetable",
+//             title: "Program",
+//             selected: false,
+//             iconsrc: "/assets/announcement-icon.svg",
+//         }
 
-]
-},
+// ]
+// },
 {
     id: "student/feedback",
     title: "Feedback",
@@ -666,6 +666,26 @@ MENU_LIST = [
        ]
 },
 
+{
+    id: "timetable",
+    title: "Timetable",
+    selected: false,
+    iconsrc: "/assets/course-icon.svg",
+    icon: 'fact_check',
+    children:
+    [
+        {
+            id: "course-timetable",
+            title: "Course Timetable",
+            type: "none"
+        },
+        {
+            id: "program-timetable",
+            title: "Program Timetable",
+            type: "none"
+        }
+       ]
+},
 
 {
     id: "settings",
