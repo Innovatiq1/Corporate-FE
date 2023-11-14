@@ -5,10 +5,12 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { StudentsService } from './students/all-students/students.service';
 
 
-
 @NgModule({
   declarations: [
 
+  
+   // ExamschduleComponent,
+        
   ],
   imports: [CommonModule, AdminRoutingModule],
   providers: [StudentsService],

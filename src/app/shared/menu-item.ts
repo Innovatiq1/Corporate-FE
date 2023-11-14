@@ -302,6 +302,7 @@ MENU_LIST = [
 
 //     ]
 // },
+
 {
     id: "admin/users",
     title: "Users",
@@ -322,6 +323,23 @@ MENU_LIST = [
         }
     ]
 },
+{
+    id: "admin/exam",
+    title: "Exams",
+    selected: false,
+    iconsrc: "/assets/users-icon.svg",
+    icon: 'people',
+    children:
+    [
+        {
+            id: "exam-schedule",
+            title: " Course Exam Schdule",
+            type: "none",
+        },
+        
+    ]
+},
+
 // {
 //     id: "survey_builder",
 //     title: "Survey Builder",
