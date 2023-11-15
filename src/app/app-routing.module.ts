@@ -49,7 +49,12 @@ const routes: Routes = [
           import('./email/email.module').then((m) => m.EmailModule),
         canActivate: [LoginGuard],
       },
-
+      {
+        path: 'timetable',
+        loadChildren: () =>
+          import('./timetable/timetable.module').then((m) => m.TimetableModule),
+        canActivate: [LoginGuard],
+      },
       {
         path: 'settings/student-settings',
         component: SettingsComponent,

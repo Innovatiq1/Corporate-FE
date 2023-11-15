@@ -4,16 +4,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeworkComponent } from './homework/homework.component';
 import { LeaveRequestComponent } from './leave-request/leave-request.component';
-import { TimetableComponent } from './timetable/timetable.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CourseComponent } from './course/course.component';
 import { ViewCourseComponent } from './view-course/view-course.component';
 import { ProgramComponent } from './program/program.component';
 import { ViewProgramComponent } from './view-program/view-program.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+
+
 import { ProgramTimetableComponent } from './program-timetable/program-timetable.component';
 import { SucessCourseComponent } from './sucess-course/sucess-course.component';
 import { FailureCourseComponent } from './failure-course/failure-course.component';
+
 
 const routes: Routes = [
   {
@@ -46,14 +48,14 @@ const routes: Routes = [
     path: 'schedule/homework',
     component: HomeworkComponent,
   },
-  {
-    path: 'timetable/course-timetable',
-    component: TimetableComponent,
-  },
-  {
-    path: 'timetable/program-timetable',
-    component: ProgramTimetableComponent,
-  },
+  // {
+  //   path: 'timetable/course-timetable',
+  //   component: TimetableComponent,
+  // },
+  // {
+  //   path: 'timetable/program-timetable',
+  //   component: ProgramTimetableComponent,
+  // },
 
   {
     path: 'feedback/courses',
