@@ -27,8 +27,6 @@ export class CourseTimetableComponent implements OnInit {
   upcomingProgramsLength: any;
   upcomingCoursesLength: any;
   allClasses: any;
-  studentUrl: any;
-  adminUrl: any;
 
 
   constructor(private classService: ClassService, private router: Router) {

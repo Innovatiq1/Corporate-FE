@@ -320,6 +320,15 @@ export class CourseService {
     };
     return this._Http.post(url, payload);
   }
+  getAllPayments(
+    filter?: Partial<CoursePaginationModel>
+  ): Observable<ApiResponse> {
+    const apiUrl = this.defaultUrl+'paymentHistory/userPaymentHistory';
+    console.log("==new=",apiUrl)
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+  }
 
 }
 
