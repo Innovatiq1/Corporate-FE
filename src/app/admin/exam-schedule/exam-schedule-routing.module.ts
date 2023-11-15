@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ListComponent } from './list/list.component';
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
+import { ProgramExamScheduleComponent } from './program-exam-schedule/program-exam-schedule.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'exam-schedule-edit/:id',
     component: EditComponent
+  },
+  {
+    path: 'program-exam',
+    component: ProgramExamScheduleComponent
   },
   
 ];
