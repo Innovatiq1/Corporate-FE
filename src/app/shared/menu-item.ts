@@ -336,6 +336,11 @@ MENU_LIST = [
             title: " Course Exam Schedule",
             type: "none",
         },
+        {
+            id: "program-exam",
+            title: "Program Exam Schedule",
+            type: "none",
+        },
         
     ]
 },
