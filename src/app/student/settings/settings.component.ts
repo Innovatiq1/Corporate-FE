@@ -129,7 +129,7 @@ export class SettingsComponent {
       
       last_name: [''],
       
-      //mobile: ['', [Validators.required]],
+      mobile: [''],
       city_name: ['', [Validators.required]],
       country_name: ['', [Validators.required]],
       

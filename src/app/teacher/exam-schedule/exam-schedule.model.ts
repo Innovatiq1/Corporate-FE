@@ -9,6 +9,7 @@ export class ExamSchedule {
   roomNo: string;
   totalMarks: string;
   reqMarks: string;
+  data:any;
 
   constructor(examSchedule: ExamSchedule) {
     {

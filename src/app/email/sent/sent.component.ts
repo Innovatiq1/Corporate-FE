@@ -22,15 +22,13 @@ export class SentComponent implements OnInit {
   totalItems: any;
   pageSizeArr = [10, 25, 50, 100];
   mailPaginationModel: Partial<CoursePaginationModel>;
-
+  selectedEmails: any[] = [];
 
   constructor(private router:Router,private emailService:EmailConfigService) {
     let urlPath = this.router.url.split('/')
     this.adminUrl = urlPath.includes('admin');
     this.studentUrl = urlPath.includes('student');
     this.mailPaginationModel = {};
-
-
   }
   pageSizeChange($event: any) {
     this.mailPaginationModel.page = $event?.pageIndex + 1;
@@ -43,7 +41,77 @@ export class SentComponent implements OnInit {
     this.getMails();
 
   }
-  
+  handleCheckboxSelection(email: any) {
+    const index = this.selectedEmails.findIndex((selected) => selected.id === email.id);
+    if (index > -1) {
+      this.selectedEmails.splice(index, 1); 
+    } else {
+      this.selectedEmails.push(email); 
+    }
+  }
+  deleteSelectedEmails() {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
+    const payload={
+      fromStatus:'inactive',
+      selectedEmailIds:selectedEmailIds
+    }
+
+      this.emailService.deleteMail(payload).subscribe((response) => {
+      this.getMails();
+    });
+  }
+
+  archiveEmails() {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
+    const payload={
+      fromArchive:true,
+      selectedEmailIds:selectedEmailIds
+    }
+         this.emailService.updateMail(payload).subscribe((response) => {
+      this.getMails();
+    });
+  }
+
+
+  updateEmails() {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
+    const payload={
+      important:true,
+      selectedEmailIds:selectedEmailIds
+    }
+        this.emailService.updateMail(payload).subscribe((response) => {
+      this.getMails();
+    });
+  }
+
+  toggleStar(email: any) {
+    if(email.starred || email.fromStarred){
+      email.starred = false;
+    } else if(!email.starred || !email.fromStarred){
+      email.starred = true;
+    }
+    this.selectedEmails.push(email.id)
+    const payload={
+      fromStarred:email.starred,
+      selectedEmailIds:this.selectedEmails
+    }
+    this.emailService.updateMail(payload).subscribe(() => {
+      this.getMails();
+      this.selectedEmails=[]
+    });
+  }
+
+  spamEmails() {
+    const selectedEmailIds = this.selectedEmails.map((email) => email.id);
+    const payload={
+      fromSpam:true,
+      selectedEmailIds:selectedEmailIds
+    }
+        this.emailService.updateMail(payload).subscribe((response) => {
+      this.getMails();
+    });
+  }
+
   getMails(){
     let from= JSON.parse(localStorage.getItem('currentUser')!).user.email;
     this.emailService.getMailsByFromAddress(from).subscribe((response: any) => {
@@ -55,7 +123,5 @@ export class SentComponent implements OnInit {
       this.mailPaginationModel.totalDocs = response.totalDocs;
 
     });
-
-
   }
 }

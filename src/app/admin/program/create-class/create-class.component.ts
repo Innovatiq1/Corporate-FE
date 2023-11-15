@@ -53,7 +53,7 @@ export class CreateClassComponent {
   classForm!: FormGroup;
   InstructorForm!: FormGroup;
   isInstructorFailed: number = 0;
-  isLabFailed: number = 0;
+  // isLabFailed: number = 0;
   isStartDateFailed: number = 0;
   isEndDateFailed: number = 0;
   dataSourceArray: DataSourceModel[] = [];
@@ -70,10 +70,10 @@ export class CreateClassComponent {
   serializedDate = new UntypedFormControl(new Date().toISOString());
   minDate: Date | undefined;
   maxDate!: Date;
-  status = true;
+  // status = true;
   programList!: any
   instructorList: any = [];
-  labList: any = [];
+  // labList: any = [];
   selectedPosition: number = 0;
   selectedLabPosition: number = 0;
   courseNameControl!: FormControl;
@@ -91,15 +91,15 @@ export class CreateClassComponent {
 
 
   addNewRow() {
-    if (this.isInstructorFailed != 1 && this.isLabFailed != 1) {
+    if (this.isInstructorFailed != 1 ) {
       this.isInstructorFailed = 0;
-      this.isLabFailed = 0;
+      // this.isLabFailed = 0;
       const currentYear = new Date().getFullYear();
       this.dataSourceArray.push({
         start: moment().set({ hour: 8, minute: 0 }).format('YYYY-MM-DD HH:mm'),
         end: moment().set({ hour: 8, minute: 0 }).format('YYYY-MM-DD HH:mm'),
         instructor: '0',
-        lab: '0',
+        
       });
       this.dataSource = this.dataSourceArray;
     }
@@ -149,9 +149,9 @@ export class CreateClassComponent {
 
   }
 
-  toggleStatus() {
-    this.status = !this.status;
-  }
+  // toggleStatus() {
+  //   this.status = !this.status;
+  // }
 
 
 
@@ -167,12 +167,12 @@ export class CreateClassComponent {
         instructors: this.instructorService.getInstructor( {
           type: 'Instructor',
         }),
-        labs: this._classService.getAllLaboratory(),
+        // labs: this._classService.getAllLaboratory(),
 
       }).subscribe((response) => {
         this.programList = response.courses;
         this.instructorList = response.instructors;
-        this.labList = response.labs;
+        // this.labList = response.labs;
 
         this.cd.detectChanges();
       });
@@ -185,12 +185,12 @@ export class CreateClassComponent {
       instructors: this.instructorService.getInstructor( {
         type: 'Instructor',
       }),
-      labs: this._classService.getAllLaboratory(),
+      // labs: this._classService.getAllLaboratory(),
     class: this._classService.getProgramClassById(this.classId),
     }).subscribe((response) => {
       this.programList = response.courses.docs;
       this.instructorList = response.instructors;
-      this.labList = response.labs;
+      // this.labList = response.labs;
       let item = response.class;
       this.classForm.patchValue({
         courseId: item.courseId?.id,
@@ -203,7 +203,7 @@ export class CreateClassComponent {
         externalRoom:item?.externalRoom,
         minimumEnrollment: item?.minimumEnrollment,
         maximumEnrollment: item?.maximumEnrollment,
-        status: item?.status,
+        // status: item?.status,
         sessions: item?.sessions
       });
       item.sessions.forEach((item:any) => {
@@ -214,7 +214,7 @@ export class CreateClassComponent {
           start: sessionStartDate,
           end: sessionEndDate,
           instructor: item.instructorId?.id,
-          lab: item.laboratoryId?.id,
+         
         });
 
       });
@@ -222,6 +222,9 @@ export class CreateClassComponent {
       this.cd.detectChanges();
     });
   }
+   if(this.classId == undefined){
+      this.addNewRow();
+    }
   }
 
   loadForm() {
@@ -236,7 +239,7 @@ export class CreateClassComponent {
       externalRoom: [false],
       minimumEnrollment: ['', Validators.required],
       maximumEnrollment: ['', Validators.required],
-      status: ['open'],
+      // status: ['open'],
       classStartDate: ['2023-05-20'],
       classEndDate: ['2023-06-10'],
 
@@ -283,8 +286,8 @@ export class CreateClassComponent {
     this.dataSource.forEach((item: any, index: any) => {
       if (
         this.isInstructorFailed == 0 &&
-        item.instructor != '0' &&
-        item.lab != '0'
+        item.instructor != '0'
+        // item.lab != '0'
       ) {
         sessions.push({
           sessionNumber: index + 1,
@@ -293,7 +296,7 @@ export class CreateClassComponent {
           sessionStartTime: moment(item.start).format('HH:mm'),
           sessionEndTime: moment(item.end).format('HH:mm'),
           instructorId: item.instructor,
-          laboratoryId: item.lab,
+          // laboratoryId: item.lab,
           courseName: this.courseTitle,
           courseCode: this.courseCode,
           status: 'Pending',
@@ -371,10 +374,10 @@ export class CreateClassComponent {
     this.checkAvailabilityOfInstructor(element);
   }
 
-  onChangeLab(element: any, i: number) {
-    this.selectedLabPosition = i;
-    this.checkAvailabilityOfLaboratory(element);
-  }
+  // onChangeLab(element: any, i: number) {
+  //   this.selectedLabPosition = i;
+  //   this.checkAvailabilityOfLaboratory(element);
+  // }
 
   checkAvailabilityOfInstructor(element: {
     instructor: any;
@@ -399,24 +402,24 @@ export class CreateClassComponent {
       });
   }
   checkAvailabilityOfLaboratory(element: {
-    lab: string | undefined;
+    // lab: string | undefined;
     start: string | number | Date;
     end: string | number | Date;
   }) {
     this._classService
       .validateLaboratory(
-        element.lab,
+        // element.lab,
         new DatePipe('en-US').transform(new Date(element.start), 'yyyy-MM-dd')!,
         new DatePipe('en-US').transform(new Date(element.end), 'yyyy-MM-dd')!,
         new DatePipe('en-US').transform(new Date(element.start), 'HH:MM')!,
         new DatePipe('en-US').transform(new Date(element.end), 'HH:MM')!
       )
       .subscribe((response) => {
-        if (!response.data['success']) {
-          this.isLabFailed = 1;
-        } else {
-          this.isLabFailed = 0;
-        }
+        // if (!response.data['success']) {
+        //   this.isLabFailed = 1;
+        // } else {
+        //   this.isLabFailed = 0;
+        // }
       });
   }
 
@@ -466,17 +469,17 @@ export class CreateClassComponent {
     });
   }
 
-  getLaboratoryList() {
-    this.labList = [];
-    this._classService.getAllLaboratory().subscribe((response) => {
-      this.mapPropertiesLab(response);
-    });
-  }
-  mapPropertiesLab(response: any) {
-    response.docs.forEach((element: LabListModel) => {
-      this.labList.push(element);
-    });
-  }
+  // getLaboratoryList() {
+  //   this.labList = [];
+  //   this._classService.getAllLaboratory().subscribe((response) => {
+  //     this.mapPropertiesLab(response);
+  //   });
+  // }
+  // mapPropertiesLab(response: any) {
+  //   response.docs.forEach((element: LabListModel) => {
+  //     this.labList.push(element);
+  //   });
+  // }
   cancel() {
   
     window.history.back();

@@ -56,18 +56,62 @@ export class EmailConfigService {
   }
 
   getMailsByToAddress(to:string): Observable<any[]> {
-    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}`;
+    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&toStatus=active&archive=false`;
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
   getMailsByFromAddress(from:string): Observable<any[]> {
-    const apiUrl = `${this.prefix}admin/internal-email/mail?from=${from}`;
+    const apiUrl = `${this.prefix}admin/internal-email/mail?from=${from}&fromStatus=active&archive=false`;
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
+
+  getImportantMailsByToAddress(to:string): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&toStatus=active&toImportant=true&toArchive=false`;
+    return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }   
+
+  getStarredMails(to:string): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&from=${to}&toStarred=true&fromStarred=true&toArchive=false`;
+    return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }   
+
+  getSpamMails(to:string): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&from=${to}&toSpam=true&fromSpam=true&toArchive=false`;
+    return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }   
+
+  getDraftedMailsByFromAddress(from:string): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?from=${from}&fromStatus=draft&archive=false`;
+    return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }   
+
 
   getMailDetailsByMailId(id:string): Observable<any[]> {
     const apiUrl = `${this.prefix}admin/internal-email/mail-id/${id}`;
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response));
   }   
+
+  getDeletedMailsByToAddress(to:string): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&toStatus=inactive&archive=false`;
+    return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }   
+
+
+  deleteMail(mail:any) {
+    const apiUrl = `${this.prefix}admin/internal-email`;
+    return this.http.put<ApiResponse>(apiUrl, mail).pipe(map((response) => { }));
+  }
+  updateMail(mail:any) {
+    const apiUrl = `${this.prefix}admin/internal-email`;
+    return this.http.put<ApiResponse>(apiUrl, mail).pipe(map((response) => { }));
+  }
+
+  deleteMailForever(mail: any){
+    console.log('mail',mail)
+    const apiUrl = `${this.prefix}admin/internal-email/delete`;
+    return this.http.post<ApiResponse>(apiUrl,mail);
+  }
+
+
 
 
   getForgetPasswordTemplate = (data?:any): Observable<any> => {

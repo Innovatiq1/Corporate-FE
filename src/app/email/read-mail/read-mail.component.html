@@ -39,14 +39,14 @@
                 <div class="view-mail">
                   <p [innerHTML]="emailDetails?.content"></p>
                 </div>
-                <div class="attachment-mail">
+                <div *ngIf="emailDetails.attachment" class="attachment-mail">
                   <p>
                     <span>
                       <i class="fa fa-paperclip"></i> Attachments </span>
                   </p>
                   <div class="row">
                     <div class="col-md-2">
-                      <a href="{{emailDetails?.attachment}}" target="_blank">
+                      <a  href="{{emailDetails?.attachment}}" target="_blank">
                         <img class="img-thumbnail img-responsive" alt="attachment" src="{{emailDetails?.attachment}}">
                       </a>
                       <a class="name" href="{{emailDetails?.attachment}}" target="_blank"> {{uploadedAttachment}}
@@ -54,12 +54,12 @@
                     </div>
                   </div>
                 </div>
-                <div class="replyBox m-t-20">
+                <!-- <div class="replyBox m-t-20">
                   <p class="p-b-20">click here to
                     <a href="#">Reply</a> or
                     <a href="#">Forward</a>
                   </p>
-                </div>
+                </div> -->
               </section>
             </div>
           </div>

@@ -70,9 +70,9 @@
                                   <label>Upload Video</label>
                                   <div class="file-drop-area">
                                     <div class="file">
-                                    <button mat-raised-button color="primary">Choose file</button>
+                                    <button mat-raised-button color="primary">Choose file  <input formControlName="videoLink" (fileDropped)="onFileDropped($event)" (change)="fileBrowseHandler($event)"  class="file-input" type="file"></button>
                                     <span class="file-msg"><h5>{{fileName ? fileName : 'Drag and Drop File Here' }}</h5></span>
-                                    <input formControlName="videoLink" (fileDropped)="onFileDropped($event)" (change)="fileBrowseHandler($event)"  class="file-input" type="file">
+                                   
                                     <div class="files-list">
                                         <div class="single-file" *ngFor="let file of files; let i = index">
                                             <img src="../../assets/images/dnd/ic-file.svg" alt="" class="file-icon" />

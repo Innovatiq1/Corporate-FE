@@ -58,6 +58,12 @@ const routes: Routes = [
       import('./audit/audit.module').then((m) => m.AuditModule),
   },
   {
+    path: 'exam',
+    loadChildren: () =>
+      import('./exam-schedule/exam-schedule.module').then((m) => m.ExamScheduleModule),
+  },
+
+  {
     path: 'announcement',
     loadChildren: () =>
       import('./announcement/announcement.module').then((m) => m.AnnouncementModule),
@@ -98,6 +104,11 @@ const routes: Routes = [
     path: 'attendance',
     loadChildren: () =>
       import('./attendance/attendance.module').then((m) => m.AttendanceModule),
+  },
+  {
+    path: 'payment',
+    loadChildren: () =>
+      import('./payments/payment.module').then((m) => m.PaymentModule),
   },
   {
     path: 'testimonials',

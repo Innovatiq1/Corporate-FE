@@ -12,6 +12,7 @@ export class EmailSidebarComponent {
   studentUrl: boolean;
   totalItems: any;
   totalSentItems: any;
+  totalDeletedItems: any;
 
   constructor(private router:Router,private emailService:EmailConfigService) {
     let urlPath = this.router.url.split('/')
@@ -23,6 +24,7 @@ export class EmailSidebarComponent {
   ngOnInit(){
     this.getMails();
     this.getSentMails();
+    this.getDeletedMails();
 
   }
   getMails(){
@@ -32,6 +34,14 @@ export class EmailSidebarComponent {
       });
   
   }
+  getDeletedMails(){
+    let to= JSON.parse(localStorage.getItem('currentUser')!).user.email;
+    this.emailService.getDeletedMailsByToAddress(to).subscribe((response: any) => {
+      this.totalDeletedItems = response.totalDocs  
+    });
+
+}
+
   getSentMails(){
     let from= JSON.parse(localStorage.getItem('currentUser')!).user.email;
     this.emailService.getMailsByFromAddress(from).subscribe((response: any) => {
@@ -42,12 +52,7 @@ export class EmailSidebarComponent {
 
 
   compose(){
-    if(this.adminUrl){
-    this.router.navigate(['/email/admin/compose']);
-    } else if(this.studentUrl){
-      this.router.navigate(['/email/student/compose']);
-
-    }
+    this.router.navigate(['/email/compose']);
   }
 
 }

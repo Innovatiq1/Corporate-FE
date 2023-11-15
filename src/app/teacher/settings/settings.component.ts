@@ -46,7 +46,7 @@ export class InstructorSettingsComponent {
       
       last_name: [''],
       
-      //mobile: ['', [Validators.required]],
+      mobile: [''],
       city_name: ['', [Validators.required]],
       country_name: ['', [Validators.required]],
       
@@ -81,7 +81,7 @@ export class InstructorSettingsComponent {
         last_name: this.editData.last_name,
         //rollNo: this.editData.rollNo,
         //gender: this.editData.gender,
-        //mobile: this.editData.mobile,
+        mobile: this.editData.mobile,
         
         email: this.editData.email,
         country_name: this.editData.country_name,

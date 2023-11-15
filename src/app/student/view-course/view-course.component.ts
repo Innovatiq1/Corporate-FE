@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CourseKitModel } from '@core/models/course.model';
 import { CommonService } from '@core/service/common.service';
@@ -58,7 +59,8 @@ export class ViewCourseComponent {
   documentLink: any;
   uploadedDoc: any;
 
-  constructor(private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService){
+  constructor(private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService,
+    @Inject(DOCUMENT) private document: any){
     this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
       this.classId = params["id"];
     });
@@ -76,15 +78,18 @@ export class ViewCourseComponent {
     })
   }
   registerClass(classId: string) {
+    let userdata = JSON.parse(localStorage.getItem('currentUser')!)
     let studentId=localStorage.getItem('id')
-    this.courseService.saveRegisterClass(studentId, this.classId).subscribe((response) => {
-      let studentId=localStorage.getItem('user_data');
-        Swal.fire({
-          title: 'Thank you',
-          text: 'We will approve once verified',
-          icon: 'success',
-        });
-      this.isRegistered = true;
+    let payload ={
+      email:userdata.user.email,
+      name:userdata.user.name,
+      courseTitle:this.classDetails?.courseId?.title,
+      courseFee:this.classDetails?.courseId?.fee,
+      studentId:studentId,
+      classId:this.classId
+    }
+    this.courseService.saveRegisterClass(payload).subscribe((response) => {
+      this.document.location.href = response.data.session.url;
       this.getClassDetails();
     });
   }

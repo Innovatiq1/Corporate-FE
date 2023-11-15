@@ -38,14 +38,14 @@ export class AddCourseComponent implements OnInit {
   uploaded: any;
   fundingGrant!: FormControl;
   fundingGrants!: FundingGrant[];
-  survey!: Survey[];
-  surveyCategoryControl!: FormControl;
+  // survey!: Survey[];
+  // surveyCategoryControl!: FormControl;
   instuctorCategoryControl!: FormControl;
   courseKitCategoryControl!: FormControl;
   certificatesCategoryControl!: FormControl;
-  instructors!: Instructor[];
+  // instructors!: Instructor[];
   courseKits!: CourseKit[];
-  certificates!:Certificate[];
+  // certificates!:Certificate[];
   next = true;
   isSubmitted=false;
   isWbsSubmitted=false;
@@ -61,7 +61,7 @@ export class AddCourseComponent implements OnInit {
   subscribeParams: any;
   mode: string = 'editUrl';
   public Editor: any = ClassicEditor;
-  instructorList: any = [];
+  // instructorList: any = [];
 
   breadscrums = [
     {
@@ -125,12 +125,12 @@ export class AddCourseComponent implements OnInit {
       image_link: new FormControl('', [Validators.maxLength(255)]),
       website_link: new FormControl('', [Validators.pattern(/^(https?:\/\/)?(www\.)?[a-zA-Z0-9]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/)]),
       funding_grant: new FormControl('',[Validators.required]),
-      survey: new FormControl('',[Validators.required]),
+      // survey: new FormControl('',[Validators.required]),
       id: new FormControl(''),
-      course_instructor: new FormControl('', [Validators.required]),
+      // course_instructor: new FormControl('', [Validators.required]),
       // assign_exam: new FormControl('', []),
       course_kit: new FormControl('', [Validators.required]),
-      certificates: new FormControl('',[Validators.required]),
+      // certificates: new FormControl('',[Validators.required]),
       });
       this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
         this.courseId = params.id;
@@ -148,10 +148,10 @@ export class AddCourseComponent implements OnInit {
     this.subCategoryControl = this.firstFormGroup.get('sub_category') as FormControl;
     this.currencyControl = this.firstFormGroup.get('currency_code') as FormControl;
     this.fundingGrant = this.secondFormGroup.get('funding_grant') as FormControl;
-    this.surveyCategoryControl = this.secondFormGroup.get('survey') as FormControl;
-    this.instuctorCategoryControl = this.secondFormGroup.get('course_instructor') as FormControl;
+    // this.surveyCategoryControl = this.secondFormGroup.get('survey') as FormControl;
+    // this.instuctorCategoryControl = this.secondFormGroup.get('course_instructor') as FormControl;
     this.courseKitCategoryControl = this.secondFormGroup.get('course_kit') as FormControl;
-    this.certificatesCategoryControl = this.secondFormGroup.get('certificates') as FormControl;
+    // this.certificatesCategoryControl = this.secondFormGroup.get('certificates') as FormControl;
     // // this.setMainCategoryControlState();
     // this.setSubCategoryControlState();
     // this.setCurrencyControlState();
@@ -172,14 +172,14 @@ export class AddCourseComponent implements OnInit {
       type: 'Instructor',
     };
 
-    this.instructorService.getInstructor(payload).subscribe((res) => {
-      this.instructorList = res;
-      console.log(
-        'instructor',
-        this.instructorList
-      );
+    // this.instructorService.getInstructor(payload).subscribe((res) => {
+    //   this.instructorList = res;
+    //   console.log(
+    //     'instructor',
+    //     this.instructorList
+    //   );
       
-    });
+    // });
    
 
 }
@@ -341,17 +341,17 @@ onFileUpload(event:any) {
               });
             }
 
-            const instructorObj = this.instructors.find((i) => {
-              return assignInstructors === i.user_id?.name + ' ' + i.user_id?.last_name;
-            });
+            // const instructorObj = this.instructors.find((i) => {
+            //   return assignInstructors === i.user_id?.name + ' ' + i.user_id?.last_name;
+            // });
 
-            if (instructorObj === undefined) {
-              Swal.fire({
-                title: 'Error',
-                text: 'Cannot find Instructor',
-                icon: 'error',
-              });
-            }
+            // if (instructorObj === undefined) {
+            //   Swal.fire({
+            //     title: 'Error',
+            //     text: 'Cannot find Instructor',
+            //     icon: 'error',
+            //   });
+            // }
            
             const courseKitObj = this.courseKits.find((i) => {
               return assignCourseKit === i.name
@@ -380,7 +380,7 @@ onFileUpload(event:any) {
               pdu_leadership: parseInt(pdu_leadership),
               pdu_strategic: parseInt(pdu_strategic),
               funding_grant: [fundingGrantObj!.id],
-              course_instructor: [instructorObj!.id],
+              // course_instructor: [instructorObj!.id],
               course_kit: [courseKitObj!.id],
               
             };
@@ -418,11 +418,11 @@ onFileUpload(event:any) {
       pdu_leadership:wbsData?.pdu_leadership,
       pdu_strategic:wbsData?.pdu_strategic,
       funding_grant:wbsData?.funding_grant,
-      survey:wbsData?.survey,
-      course_instructor:wbsData?.course_instructor,
+      // survey:wbsData?.survey,
+      // course_instructor:wbsData?.course_instructor,
       // assign_exam:wbsData.assign_exam,
       course_kit:wbsData?.course_kit,
-      certificates:wbsData?.certificates,
+      // certificates:wbsData?.certificates,
       image_link:this.image_link,
       id:this.courseId,
      
@@ -447,19 +447,19 @@ onFileUpload(event:any) {
       mainCategory: this.courseService.getMainCategories(),
       subCategory: this.courseService.getSubCategories(),
       fundingGrant: this.courseService.getFundingGrant(),
-      survey: this.courseService.getSurvey(),
-      instructor: this.courseService.getInstructors(),
+      // survey: this.courseService.getSurvey(),
+      // instructor: this.courseService.getInstructors(),
       courseKit: this.courseService.getCourseKit(),
-      certificates: this.certificateService.getcertificateBuilders(),
+      // certificates: this.certificateService.getcertificateBuilders(),
       
-    }).subscribe((response: { mainCategory: any; subCategory: any; fundingGrant: any; survey: any;instructor: any; courseKit: { docs: any; }; certificates: { data: { docs: any; }; }}) => {
+    }).subscribe((response: { mainCategory: any; subCategory: any; fundingGrant: any; courseKit: { docs: any; };}) => {
       this.mainCategories = response.mainCategory;
       this.allSubCategories = response.subCategory;
       this.fundingGrants = response.fundingGrant;
-      this.survey = response.survey;
-      this.instructors = response.instructor;
+      // this.survey = response.survey;
+      // this.instructors = response.instructor;
       this.courseKits = response.courseKit?.docs; 
-      this.certificates = response.certificates.data.docs;
+      // this.certificates = response.certificates.data.docs;
     });
   }
 
@@ -496,11 +496,11 @@ onFileUpload(event:any) {
         pdu_leadership:wbsData?.pdu_leadership,
         pdu_strategic:wbsData?.pdu_strategic,
         funding_grant:wbsData?.funding_grant,
-        survey:wbsData?.survey,
-        course_instructor:wbsData?.course_instructor,
+        // survey:wbsData?.survey,
+        // course_instructor:wbsData?.course_instructor,
         // assign_exam:wbsData.assign_exam,
         course_kit:wbsData?.course_kit,
-        certificates:wbsData?.certificates,
+        // certificates:wbsData?.certificates,
         image_link:this.image_link,
         website_link:wbsData?.website_link
         
@@ -525,23 +525,23 @@ onFileUpload(event:any) {
     forkJoin({
       mainCategory: this.courseService.getMainCategories(),
       subCategory: this.courseService.getSubCategories(),
-      survey: this.courseService.getSurvey(),
+      // survey: this.courseService.getSurvey(),
       fundingGrant: this.courseService.getFundingGrant(),
       courseKit: this.courseService.getCourseKit(),
       course: this.courseService.getCourseById(this.courseId),
-      instructor: this.courseService.getInstructors(),
-      certificates: this.certificateService.getcertificateBuilders()
+      // instructor: this.courseService.getInstructors(),
+      // certificates: this.certificateService.getcertificateBuilders()
     }).subscribe((response: any) => {
       this.mainCategories = response.mainCategory;
       this.fundingGrants = response.fundingGrant;
       this.courseKits = response.courseKit?.docs;
-      this.survey = response.survey;
+      // this.survey = response.survey;
       this.allSubCategories = response.subCategory;
       this.course = response.course;
       // this. = response.assign_exam;
-      this.instructors = response.instructor;
+      // this.instructors = response.instructor;
       // this.surveys = response.surveys.data.docs;
-      this.certificates = response.certificates.data.docs;
+      // this.certificates = response.certificates.data.docs;
       this.image_link = this.course.image_link;
       this.uploaded=this.image_link?.split('/')
       this.uploadedImage = this.uploaded?.pop();
@@ -569,15 +569,15 @@ onFileUpload(event:any) {
         website_link: this.course?.website_link,
         funding_grant: fundingGrantId,
         // assign_exam: this.assign_exam?.assign_exam,
-        certificates: this.course?.certificates,
-        survey: this.course?.survey?.id,
+        // certificates: this.course?.certificates,
+        // survey: this.course?.survey?.id,
         course_description: this.course?.course_description,
         course_detailed_description: this.course?.course_detailed_description,
         id: this.course?.id,
         pdu_technical: this.course?.pdu_technical?.toString(),
         pdu_leadership: this.course?.pdu_leadership?.toString(),
         pdu_strategic: this.course?.pdu_strategic?.toString(),
-        course_instructor: this.course?.course_instructor?.id,
+        // course_instructor: this.course?.course_instructor?.id,
         course_kit: this.course?.course_kit[0].id,
         uploadedImage:this.course?.image_link,
       });

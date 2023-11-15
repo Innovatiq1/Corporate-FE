@@ -15,7 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeworkComponent } from './homework/homework.component';
 import { DeleteDialogComponent as leaveDeleteComonent } from './leave-request/dialogs/delete/delete.component';
 import { FormDialogComponent } from './leave-request/dialogs/form-dialog/form-dialog.component';
-import { TimetableComponent } from './timetable/timetable.component';
+// import { TimetableComponent } from './timetable/timetable.component';
 import { HomeworkService } from './homework/homework.service';
 import { LeaveRequestService as stdLeaveReqService } from './leave-request/leave-request.service';
 import { SharedModule } from '@shared';
@@ -28,7 +28,12 @@ import { ViewProgramComponent } from './view-program/view-program.component';
 import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { ProgramTimetableComponent } from './program-timetable/program-timetable.component';
+
+// import { ProgramTimetableComponent } from './program-timetable/program-timetable.component';
+
+import { SucessCourseComponent } from './sucess-course/sucess-course.component';
+import { FailureCourseComponent } from './failure-course/failure-course.component';
+
 
 @NgModule({
   declarations: [
@@ -36,13 +41,18 @@ import { ProgramTimetableComponent } from './program-timetable/program-timetable
     HomeworkComponent,
     leaveDeleteComonent,
     FormDialogComponent,
-    TimetableComponent,
+    // TimetableComponent,
     CourseComponent,
     ViewCourseComponent,
     ProgramComponent,
     ViewProgramComponent,
     FeedbackComponent,
-    ProgramTimetableComponent,
+
+    // ProgramTimetableComponent,
+
+    SucessCourseComponent,
+    FailureCourseComponent,
+
   ],
   imports: [
     CommonModule,
