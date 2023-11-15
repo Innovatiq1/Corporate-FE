@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 import { SelectionModel } from '@angular/cdk/collections';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list',
@@ -81,9 +82,45 @@ editCall(row: ExamSchedule) {
   this.router.navigate(['/admin/exam/exam-schedule-edit/' + this.id])
 
 }
-delete(row: ExamSchedule){
+// delete(row: ExamSchedule){
 
-}
+// }
+delete(row: ExamSchedule) {
+  // this.id = row.id;
+   Swal.fire({
+     title: "Confirm Deletion",
+     text: "Are you sure you want to delete this Exam Schedule?",
+     icon: "warning",
+     showCancelButton: true,
+     confirmButtonColor: "#d33",
+     cancelButtonColor: "#3085d6",
+     confirmButtonText: "Delete",
+     cancelButtonText: "Cancel",
+   }).then((result) => {
+     if (result.isConfirmed) {
+       this.examScheduleService.deleteExam(row.id).subscribe(
+         () => {
+           Swal.fire({
+             title: "Deleted",
+             text: "Exam Schedule deleted successfully",
+             icon: "success",
+           });
+           this.loadData()
+           //this.fetchCourseKits();
+           //this.instructorData()
+         },
+         (error: { message: any; error: any; }) => {
+           Swal.fire(
+             "Failed to delete  Instructor",
+             error.message || error.error,
+             "error"
+           );
+         }
+       );
+     }
+   });
+
+ }
 
 }
 export class ExampleDataSource extends DataSource<ExamSchedule> {
@@ -122,8 +159,8 @@ connect(): Observable<ExamSchedule[]> {
         .slice()
         .filter((examSchedule: ExamSchedule) => {
           const searchStr = (
-            examSchedule.courseName 
-            // examSchedule.class +
+            examSchedule.courseName +
+            examSchedule.courseCode 
             // examSchedule.date +
             // examSchedule.time +
             // examSchedule.duration +

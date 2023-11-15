@@ -42,6 +42,7 @@
                         [owlDateTimeTrigger]="date"
                         [owlDateTime]="date"
                         formControlName="startDate"
+                        (dateTimeChange)="onEndTimeChange($event)"
                        
                       />
                       <mat-icon
@@ -69,6 +70,7 @@
                             [owlDateTimeTrigger]="date2"
                             [owlDateTime]="date2"
                             formControlName="endDate"
+                            (dateTimeChange)="onEndTimeChange1($event)"
                             
                           />
                           <mat-icon
