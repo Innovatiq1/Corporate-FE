@@ -1,12 +1,16 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { formatDate } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import {CourseKitModel, CourseModel } from '@core/models/course.model';
+import {CourseKitModel, CourseModel, CoursePaginationModel } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 @Component({
   selector: 'app-course-payments',
   templateUrl: './course-payments.component.html',
@@ -22,11 +26,7 @@ export class CoursePaymentsComponent {
     'Payment Status',
     'status',
   ];
-  dataSource1 = [
-    { name: 'Ship Safety Officer', date: 'Nov 9', amount: '2500', sname: 'Gung Tui', status: 'Done' },
-    { name: 'Cargo Operations', date: 'Nov 10', amount: '2000', sname: 'Chung Lee', status: 'Done' },
-  ];
-
+  
   breadscrums = [
     {
       // title: 'Programs',
@@ -40,6 +40,8 @@ export class CoursePaymentsComponent {
   pageSizeArr = this.utils.pageSizeArr;
   selection = new SelectionModel<CourseModel>(true, []);
   dataSource: any;
+  coursePaginationModel!: Partial<CoursePaginationModel>;
+  searchTerm: string = '';
 
   constructor(private router: Router, private formBuilder: FormBuilder,
     public utils: UtilsService, private courseService: CourseService,
@@ -53,9 +55,15 @@ export class CoursePaymentsComponent {
 
   
   ngOnInit(): void {
-   
+   this.getAllCourse();
   }
-
+  getAllCourse(){
+    this.courseService.getAllPayments({ ...this.coursePaginationModel}).subscribe(response =>{
+      console.log("res",response)
+     this.dataSource = response.data.docs;
+     this.totalItems = response.data.totalDocs;
+    })
+  }
   pageSizeChange($event: any) {
     this.courseKitModel.page = $event?.pageIndex + 1;
     this.courseKitModel.limit = $event?.pageSize;
@@ -108,6 +116,67 @@ export class CoursePaymentsComponent {
       'top',
       'right'
     );
+  }
+   //search functinality
+   performSearch() {
+    console.log(this.dataSource)
+    console.log(this.searchTerm)
+    if(this.searchTerm){
+    this.dataSource = this.dataSource?.filter((item: any) =>{   
+      console.log("vv", item)
+      const search = (item.course + item.name).toLowerCase()
+      return search.indexOf(this.searchTerm.toLowerCase())!== -1;
+      
+    }
+    );
+    } else {
+       this.getAllCourse();
+
+    }
+  }
+  exportExcel() {
+    //k//ey name with space add in brackets
+   const exportData: Partial<TableElement>[] =
+      this.dataSource.map((user:any) => ({
+        CourseName:user.course,
+        PaymentDate: formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
+        Amount: user.price,
+        StudentName: user.name,
+        Status: user.status
+      }));
+    TableExportUtil.exportToExcel(exportData, 'excel');
+  }
+  // pdf
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [['Course Name','Payment Date','Amount', 'Student Name', 'Status']];
+    console.log(this.dataSource)
+    const data = this.dataSource.map((user:any) =>
+      [user.course,
+      formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
+       user.price,
+       user.name,
+       user.status
+
+    ] );
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+
+    // Add a page to the document (optional)
+    //doc.addPage();
+
+    // Generate the table using jspdf-autotable
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+
+
+
+    });
+
+    // Save or open the PDF
+    doc.save('Course Payments.pdf');
   }
 
 }
