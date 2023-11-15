@@ -31,7 +31,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 
 // import { ProgramTimetableComponent } from './program-timetable/program-timetable.component';
 
-import { ProgramTimetableComponent } from './program-timetable/program-timetable.component';
 import { SucessCourseComponent } from './sucess-course/sucess-course.component';
 import { FailureCourseComponent } from './failure-course/failure-course.component';
 
@@ -51,7 +50,6 @@ import { FailureCourseComponent } from './failure-course/failure-course.componen
 
     // ProgramTimetableComponent,
 
-    ProgramTimetableComponent,
     SucessCourseComponent,
     FailureCourseComponent,
 

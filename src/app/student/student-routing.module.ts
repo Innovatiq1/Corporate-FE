@@ -12,7 +12,6 @@ import { ViewProgramComponent } from './view-program/view-program.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 
 
-import { ProgramTimetableComponent } from './program-timetable/program-timetable.component';
 import { SucessCourseComponent } from './sucess-course/sucess-course.component';
 import { FailureCourseComponent } from './failure-course/failure-course.component';
 
