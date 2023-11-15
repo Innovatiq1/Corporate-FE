@@ -89,29 +89,25 @@ export class ImportantMailComponent {
   }
   spamEmails() {
     const selectedEmailIds = this.selectedEmails.map((email) => email.id);
-    const payload={
-      toSpam:true,
-      selectedEmailIds:selectedEmailIds
+    const payload = {
+      toSpam: true,
+      selectedEmailIds: selectedEmailIds
     }
-        this.emailService.updateMail(payload).subscribe((response) => {
+    this.emailService.updateMail(payload).subscribe((response) => {
       this.getMails();
     });
   }
-
-  navigate(email:any){
-    if(email.read == false){
-      this.selectedEmails.push(email.id)
-      const payload={
-      read:true,
-      selectedEmailIds:this.selectedEmails
+  navigate(email: any) {
+    this.selectedEmails.push(email.id)
+    const payload = {
+      read: true,
+      selectedEmailIds: this.selectedEmails
     }
     this.emailService.updateMail(payload).subscribe((response) => {
-      this.getMails(); 
+      this.getMails();
     });
+    this.router.navigate(['/email/read-email/' + email.id])
   }
-  this.router.navigate(['/email/read-email/' +email.id])
-  }
-
 
 
   toggleStar(email: any) {

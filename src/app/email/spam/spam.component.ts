@@ -220,7 +220,6 @@ export class SpamComponent {
   }
 
   navigate(email:any){
-    if(email.read == false){
       this.selectedEmails.push(email.id)
       const payload={
       read:true,
@@ -229,7 +228,6 @@ export class SpamComponent {
     this.emailService.updateMail(payload).subscribe((response) => {
       this.getMails(); 
     });
-  }
   this.router.navigate(['/email/read-email/' +email.id])
   }
 
