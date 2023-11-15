@@ -55,12 +55,13 @@ export class EmailConfigService {
       .pipe(map((response) => { }));
   }
 
-  getMailsByToAddress(to:string): Observable<any[]> {
-    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&toStatus=active&archive=false`;
+  getMailsByToAddress(to:string,filterName:any): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?filterName=${filterName}&to=${to}&toStatus=active&archive=false`;
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
-  getMailsByFromAddress(from:string): Observable<any[]> {
-    const apiUrl = `${this.prefix}admin/internal-email/mail?from=${from}&fromStatus=active&archive=false`;
+
+  getMailsByFromAddress(from:string,filterName:any): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?filterName=${filterName}&from=${from}&fromStatus=active&archive=false`;
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
 
@@ -69,8 +70,8 @@ export class EmailConfigService {
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
 
-  getStarredMails(to:string): Observable<any[]> {
-    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&from=${to}&toStarred=true&fromStarred=true&toArchive=false`;
+  getStarredMails(to:string,filterName:any): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?filterName=${filterName}&to=${to}&from=${to}&toStarred=true&fromStarred=true&toArchive=false`;
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
 

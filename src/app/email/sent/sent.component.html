@@ -40,6 +40,13 @@
                               aria-label="Example icon-button with a heart icon">
                               <mat-icon>delete</mat-icon>
                             </button>
+                            <div class="tbl-search-box">
+                              <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                            <input placeholder="Search" type="text" #filter class="browser-default search-field" [(ngModel)]="filterName" (input)="performSearch()"
+                            aria-label="Search box">
+        
+                          </div>
+
                             <!-- <button mat-icon-button aria-label="Example icon-button with a heart icon">
                                 <mat-icon>folder</mat-icon>
                               </button> -->

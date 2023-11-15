@@ -13,6 +13,8 @@ export class EmailSidebarComponent {
   totalItems: any;
   totalSentItems: any;
   totalDeletedItems: any;
+  filterName='';
+
 
   constructor(private router:Router,private emailService:EmailConfigService) {
     let urlPath = this.router.url.split('/')
@@ -29,7 +31,7 @@ export class EmailSidebarComponent {
   }
   getMails(){
       let to= JSON.parse(localStorage.getItem('currentUser')!).user.email;
-      this.emailService.getMailsByToAddress(to).subscribe((response: any) => {
+      this.emailService.getMailsByToAddress(to,this.filterName).subscribe((response: any) => {
         this.totalItems = response.totalDocs  
       });
   
@@ -44,7 +46,7 @@ export class EmailSidebarComponent {
 
   getSentMails(){
     let from= JSON.parse(localStorage.getItem('currentUser')!).user.email;
-    this.emailService.getMailsByFromAddress(from).subscribe((response: any) => {
+    this.emailService.getMailsByFromAddress(from,this.filterName).subscribe((response: any) => {
       this.totalSentItems = response.totalDocs  
     });
 
