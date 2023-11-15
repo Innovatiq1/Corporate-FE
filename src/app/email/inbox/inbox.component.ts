@@ -40,7 +40,6 @@ export class InboxComponent implements OnInit {
   }
   
   navigate(email:any){
-    if(email.read == false){
       this.selectedEmails.push(email.id)
       const payload={
       read:true,
@@ -49,7 +48,6 @@ export class InboxComponent implements OnInit {
     this.emailService.updateMail(payload).subscribe((response) => {
       this.getMails(); 
     });
-  }
   this.router.navigate(['/email/read-email/' +email.id])
   }
 

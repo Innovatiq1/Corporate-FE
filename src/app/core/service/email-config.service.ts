@@ -104,6 +104,11 @@ export class EmailConfigService {
     const apiUrl = `${this.prefix}admin/internal-email`;
     return this.http.put<ApiResponse>(apiUrl, mail).pipe(map((response) => { }));
   }
+  replyMail(id:any,mail:any) {
+    const apiUrl = `${this.prefix}admin/internal-email/reply/${id}?read=false`;
+    return this.http.put<ApiResponse>(apiUrl, mail).pipe(map((response) => { }));
+  }
+
 
   deleteMailForever(mail: any){
     console.log('mail',mail)
