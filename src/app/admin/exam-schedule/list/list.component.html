@@ -74,7 +74,7 @@
                   </ng-container>
                   <ng-container matColumnDef="duration">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Duration</mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span class="mobile-label">Duration:</span> {{row.duration}} hours
+                    <mat-cell *matCellDef="let row"><span class="mobile-label">Duration:</span> {{row.duration}}
                     </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="actions">
@@ -84,7 +84,7 @@
                         class="tbl-action-btn">
                         <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                       </button>
-                      <button mat-icon-button (click)="$event.stopPropagation()" (click)="delete(row.id)"
+                      <button mat-icon-button (click)="$event.stopPropagation()" (click)="delete(row)"
                         class="tbl-action-btn">
                         <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                       </button>

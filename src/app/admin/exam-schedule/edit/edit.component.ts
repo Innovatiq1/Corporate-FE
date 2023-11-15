@@ -6,6 +6,8 @@ import { CourseService } from '@core/service/course.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { forkJoin } from 'rxjs';
 import { ExamScheduleService } from '../exam-schedule.service';
+import * as moment from 'moment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit',
@@ -64,6 +66,43 @@ export class EditComponent {
     this.getData()
     
     }
+    onEndTimeChange(event: any) {
+      //this.startTime=event.value
+      // Handle the end time change event
+      console.log('End Time Changed:', event.value);
+      // You can perform additional actions based on the selected end time
+    }
+    onEndTimeChange1(event: any) {
+      //this.endTime=event.value
+      // Handle the end time change event
+      console.log('End Time Changed:', event);
+      console.log("==test=",this.examsheduleForm.get('startDate')?.value)
+      const startTime = this.examsheduleForm.get('startDate')?.value;
+      const endTime = this.examsheduleForm?.get('endDate')?.value;
+  
+      if (startTime && endTime) {
+        console.log("==startTime=",startTime)
+        const timeDifference= this.calculateTimeDifference(startTime, endTime);
+        console.log("timeDifference",timeDifference)
+        this.examsheduleForm.get('duration')?.setValue(timeDifference);
+      }
+  
+      // You can perform additional actions based on the selected end time
+    }
+    private calculateTimeDifference(startTime: Date, endTime: Date): string {
+      // Calculate time difference in seconds
+      const timeDifferenceInSeconds = Math.abs(Math.round((endTime.getTime() - startTime.getTime()) /  (1000 * 60)));
+      if (timeDifferenceInSeconds < 60) {
+        // Display in minutes
+        return `${timeDifferenceInSeconds} minute${timeDifferenceInSeconds !== 1 ? 's' : ''}`;
+      } else {
+        // Display in hours
+        const timeDifferenceInHours = Math.floor(timeDifferenceInSeconds / 60);
+        return `${timeDifferenceInHours} hour${timeDifferenceInHours !== 1 ? 's' : ''}`;
+      }
+     // return timeDifferenceInSeconds;
+    }
+  
     cancel(){
       this.router.navigate(['/admin/exam/exam-schedule'])
 
@@ -109,6 +148,40 @@ export class EditComponent {
   
      }
      onSubmit(){
+      const fomdata= this.examsheduleForm.value
+
+     let startTime=moment(fomdata.startDate).format('HH:mm a')
+     let start=moment(startTime, 'HH:mm:ss').format('h:mm A');
+     let endTime=moment(fomdata.endDate).format('HH:mm')
+     let end=moment(endTime, 'HH:mm:ss').format('h:mm A');
+    fomdata['courseCode']=this.courseCode,
+     fomdata['courseName']=this.courseTitle,
+     fomdata['startDate']=fomdata.startDate,
+     fomdata['endDate']=fomdata.endDate,
+     fomdata['startTime']= start,
+     fomdata['endTime']= end,
+     
+
+      this.examSchedule.updateExamSchedule(this.examId,fomdata).subscribe(
+        () => {
+          Swal.fire({
+            title: "Successful",
+            text: "Exam Schedule update successfully",
+            icon: "success",
+          });
+          //this.fileDropEl.nativeElement.value = "";
+        this.examsheduleForm.reset();
+        //this.toggleList()
+        this.router.navigateByUrl('/admin/exam/exam-schedule');
+        },
+        (error: { message: any; error: any; }) => {
+          Swal.fire(
+            "Failed to create course kit",
+            error.message || error.error,
+            "error"
+          );
+        }
+      );
 
      }
 }
