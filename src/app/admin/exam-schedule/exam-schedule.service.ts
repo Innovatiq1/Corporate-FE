@@ -67,30 +67,34 @@ export class ExamScheduleService extends UnsubscribeOnDestroyAdapter {
   //   //     },
   //   //   });
   // }
-  updateExamSchedule(examSchedule: ExamSchedule): void {
-    this.dialogData = examSchedule;
-
-    // this.httpClient.put(this.API_URL + examSchedule.id, examSchedule)
-    //     .subscribe({
-    //       next: (data) => {
-    //         this.dialogData = examSchedule;
-    //       },
-    //       error: (error: HttpErrorResponse) => {
-    //          // error code here
-    //       },
-    //     });
+  updateExamSchedule(id:any,examSchedule: any) {
+    const apiUrl = `${this.prefix}admin/examShedule/${id}`;
+    return this.httpClient
+      .put<ApiResponse>(apiUrl, examSchedule)
+      .pipe(map((response) => { }));
   }
-  deleteExamSchedule(id: number): void {
+ 
+  // updateExamSchedule(examSchedule: ExamSchedule): void {
+  //   this.dialogData = examSchedule;
+
+  //   // this.httpClient.put(this.API_URL + examSchedule.id, examSchedule)
+  //   //     .subscribe({
+  //   //       next: (data) => {
+  //   //         this.dialogData = examSchedule;
+  //   //       },
+  //   //       error: (error: HttpErrorResponse) => {
+  //   //          // error code here
+  //   //       },
+  //   //     });
+  // }
+  deleteExam(id: number){
     console.log(id);
-
-    // this.httpClient.delete(this.API_URL + id)
-    //     .subscribe({
-    //       next: (data) => {
-    //         console.log(id);
-    //       },
-    //       error: (error: HttpErrorResponse) => {
-    //          // error code here
-    //       },
-    //     });
+    const apiUrl = `${this.prefix}admin/examShedule/${id}`;
+    return this.httpClient
+      .delete<ApiResponse>(apiUrl)
+      .pipe(map((response) => { }));
   }
+
+    
+  
 }

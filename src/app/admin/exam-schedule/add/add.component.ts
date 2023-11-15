@@ -26,6 +26,8 @@ export class AddComponent {
     },
   ];
   courseTitle: any;
+  startTime: any;
+  endTime: any;
   
   constructor(
     private fb: UntypedFormBuilder,
@@ -44,8 +46,10 @@ export class AddComponent {
       duration:  ['', [Validators.required]]
       
     });
+   
     
   }
+  
   ngOnInit(): void {
     forkJoin({
       courses: this._classService.getAllCoursesTitle('active'),
@@ -61,6 +65,45 @@ export class AddComponent {
     });
     
     }
+    onEndTimeChange(event: any) {
+      this.startTime=event.value
+      // Handle the end time change event
+      console.log('End Time Changed:', event.value);
+      // You can perform additional actions based on the selected end time
+    }
+    onEndTimeChange1(event: any) {
+      this.endTime=event.value
+      // Handle the end time change event
+      console.log('End Time Changed:', event);
+      console.log("==test=",this.examsheduleForm.get('startDate')?.value)
+      const startTime = this.examsheduleForm.get('startDate')?.value;
+      const endTime = this.examsheduleForm?.get('endDate')?.value;
+  
+      if (startTime && endTime) {
+        console.log("==startTime=",startTime)
+        const timeDifference= this.calculateTimeDifference(startTime, endTime);
+        console.log("timeDifference",timeDifference)
+        this.examsheduleForm.get('duration')?.setValue(timeDifference);
+      }
+  
+      // You can perform additional actions based on the selected end time
+    }
+    private calculateTimeDifference(startTime: Date, endTime: Date): string {
+      // Calculate time difference in seconds
+      const timeDifferenceInSeconds = Math.abs(Math.round((endTime.getTime() - startTime.getTime()) /  (1000 * 60)));
+      if (timeDifferenceInSeconds < 60) {
+        // Display in minutes
+        return `${timeDifferenceInSeconds} minute${timeDifferenceInSeconds !== 1 ? 's' : ''}`;
+      } else {
+        // Display in hours
+        const timeDifferenceInHours = Math.floor(timeDifferenceInSeconds / 60);
+        return `${timeDifferenceInHours} hour${timeDifferenceInHours !== 1 ? 's' : ''}`;
+      }
+     // return timeDifferenceInSeconds;
+    }
+  
+  
+  
     cancel(){
       this.router.navigate(['/admin/exam/exam-schedule'])
 

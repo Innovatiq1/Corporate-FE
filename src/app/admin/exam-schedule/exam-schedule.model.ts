@@ -3,6 +3,7 @@ export class ExamSchedule {
   
   id: number;
   courseName: string;
+  courseCode:string;
   class: string;
   date: string;
   time: string;
@@ -17,6 +18,7 @@ export class ExamSchedule {
     {
       this.id = examSchedule.id || this.getRandomID();
       this.courseName = examSchedule.courseName || '';
+      this.courseCode = examSchedule.courseCode || '';
       this.class = examSchedule.class || '';
       this.date = formatDate(new Date(), 'yyyy-MM-dd', 'en') || '';
       this.time = examSchedule.time || '';
