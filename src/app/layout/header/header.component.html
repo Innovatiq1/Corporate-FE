@@ -81,14 +81,13 @@
                     </div> -->
 
                     <div>
-                      <button mat-menu-item *ngFor="let notification of announcements"
-                   >
+                      <button class="mat-list" *ngFor="let notification of announcements">
                         <span class="table-img msg-user ">
                           <i class="material-icons-two-tone nfc-type-icon"
                           [ngClass]="[color]">{{icon}}</i>
                         </span>
                         <span class="menu-info "  >
-                          <span class="menu-title" (click)="showCustomHtml(notification)">{{notification.subject}}</span>
+                          <span class="menu-title mt-1" (click)="showCustomHtml(notification)">{{notification.subject}}</span>
                         </span>
                         <span class="nfc-close " >
                           <app-feather-icons [icon]="'x'" [class]="'user-menu-icons'" (click)="cancel(notification.id)"></app-feather-icons>
@@ -100,8 +99,7 @@
               </ng-scrollbar>
             </div>
             <div class="nfc-footer">
-              <a class="nfc-read-all">Read
-                All Notifications</a>
+              <a class="nfc-read-all">Close</a>
             </div>
           </mat-menu>
         </li>
