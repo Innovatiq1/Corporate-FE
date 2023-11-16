@@ -62,7 +62,7 @@
                         <mat-checkbox  (change)="handleCheckboxSelection(email)" class="example-margin"></mat-checkbox>
                       </td>
                       <td class="hidden-xs">                      
-                        <a  [routerLink]="['/email/read-email',email.id]">{{email?.fromName}}</a>
+                        <a  [routerLink]="['/email/read-email',email.id]">{{email?.mail[0]?.fromName}}</a>
   </td>
                       <td class="max-texts">
                         <a  [routerLink]="['/email/read-email',email.id]">{{email?.subject}}</a>

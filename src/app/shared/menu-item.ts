@@ -337,6 +337,12 @@ MENU_LIST = [
             type: "none",
         },
 
+        {
+            id: "program-exam",
+            title: "Program Exam Schedule",
+            type: "none",
+        },
+        
     ]
 },
 
@@ -652,7 +658,7 @@ MENU_LIST = [
 },
 {
     id: "email",
-    title: "Email",
+    title: "Internal Email",
     selected: false,
     iconsrc: "/assets/announcement-icon.svg",
     icon: 'email',

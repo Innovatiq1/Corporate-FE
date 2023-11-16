@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { EmailConfigService } from '@core/service/email-config.service';
@@ -23,6 +23,9 @@ export class StarredMailComponent {
   pageSizeArr = [10, 25, 50, 100];
   mailPaginationModel: Partial<CoursePaginationModel>;
   selectedEmails: any[] = [];
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
+  filterName='';
+
 
 
 
@@ -201,6 +204,16 @@ export class StarredMailComponent {
       });
     }
   }
+
+  performSearch() {
+    if(this.filterName){
+      this.getMails()
+    } else {
+      this.getMails()
+
+    }
+  }
+
     
 
   
@@ -224,7 +237,7 @@ export class StarredMailComponent {
 
   getMails(){
     let to= JSON.parse(localStorage.getItem('currentUser')!).user.email;
-    this.emailService.getStarredMails(to).subscribe((response: any) => {
+    this.emailService.getStarredMails(to,this.filterName).subscribe((response: any) => {
       this.emails = response.docs;
       this.totalItems = response.totalDocs
       this.mailPaginationModel.docs = response.docs;

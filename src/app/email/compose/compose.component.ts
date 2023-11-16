@@ -29,6 +29,8 @@ export class ComposeComponent {
   subscribeParams: any;
   mailId: any;
   emailDetails: any;
+  currentDate!: Date;
+
 
   constructor(private router:Router,private fb:FormBuilder,private certificateService:CertificateService,private emailService:EmailConfigService,
     private activatedRoute:ActivatedRoute) {
@@ -61,8 +63,8 @@ export class ComposeComponent {
       let uploaded=attachment?.split('/')
       this.uploadedAttachment = uploaded?.pop();
       this.composeForm.patchValue({
-        to:response.to,
-        content:response.content,
+        to:response.mail[0].to,
+        content:response.mail[0].content,
         subject:response.subject,
       })
   })
@@ -83,11 +85,23 @@ export class ComposeComponent {
   }
 
   sendEmail(){
-    let payload={
+    let mail: any = [];
+    let userDetails =  JSON.parse(localStorage.getItem('currentUser')!);
+    this.currentDate = new Date();
+    mail.push({
       to:this.composeForm.value.to,
-      subject:this.composeForm.value.subject,
       content:this.composeForm.value.content,
       attachment:this.attachment,
+      from:userDetails.user.email,
+      fromName:userDetails.user.name,
+      fromProfile:userDetails.user.avatar,
+      date:this.currentDate,
+      read:false
+
+})
+    let payload={
+      mail:mail,
+      subject:this.composeForm.value.subject,
       toStatus:'active',
       fromStatus:'active'
     }
@@ -104,13 +118,24 @@ export class ComposeComponent {
 
   }
   draftEmail(){
-    let payload={
+    let mail: any = [];
+    let userDetails =  JSON.parse(localStorage.getItem('currentUser')!);
+    this.currentDate = new Date();
+    mail.push({
       to:this.composeForm.value.to,
-      subject:this.composeForm.value.subject,
       content:this.composeForm.value.content,
       attachment:this.attachment,
+      from:userDetails.user.email,
+      fromName:userDetails.user.name,
+      fromProfile:userDetails.user.avatar,
+      date:this.currentDate,
+})
+    let payload={
+      mail:mail,
+      subject:this.composeForm.value.subject,
       fromStatus:'draft'
     }
+
     this.emailService.sendEmail(payload).subscribe((response: any) => {
       this.router.navigate(['/email/inbox'])
      

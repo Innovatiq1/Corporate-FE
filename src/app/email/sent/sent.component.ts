@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { EmailConfigService } from '@core/service/email-config.service';
@@ -23,6 +23,9 @@ export class SentComponent implements OnInit {
   pageSizeArr = [10, 25, 50, 100];
   mailPaginationModel: Partial<CoursePaginationModel>;
   selectedEmails: any[] = [];
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
+  filterName='';
+
 
   constructor(private router:Router,private emailService:EmailConfigService) {
     let urlPath = this.router.url.split('/')
@@ -41,6 +44,16 @@ export class SentComponent implements OnInit {
     this.getMails();
 
   }
+
+  performSearch() {
+    if(this.filterName){
+      this.getMails()
+    } else {
+      this.getMails()
+
+    }
+  }
+
   handleCheckboxSelection(email: any) {
     const index = this.selectedEmails.findIndex((selected) => selected.id === email.id);
     if (index > -1) {
@@ -114,7 +127,7 @@ export class SentComponent implements OnInit {
 
   getMails(){
     let from= JSON.parse(localStorage.getItem('currentUser')!).user.email;
-    this.emailService.getMailsByFromAddress(from).subscribe((response: any) => {
+    this.emailService.getMailsByFromAddress(from,this.filterName).subscribe((response: any) => {
       this.emails = response.docs;
       this.totalItems = response.totalDocs
       this.mailPaginationModel.docs = response.docs;

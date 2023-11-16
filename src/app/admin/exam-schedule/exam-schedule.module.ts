@@ -9,6 +9,7 @@ import { ExamScheduleService } from './exam-schedule.service';
 import { AddComponent } from './add/add.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { EditComponent } from './edit/edit.component';
+import { ProgramExamScheduleComponent } from './program-exam-schedule/program-exam-schedule.component';
 
 
 
@@ -17,7 +18,8 @@ import { EditComponent } from './edit/edit.component';
   declarations: [
     ListComponent,
     AddComponent,
-    EditComponent
+    EditComponent,
+    ProgramExamScheduleComponent
   ],
   imports: [
     CommonModule,
