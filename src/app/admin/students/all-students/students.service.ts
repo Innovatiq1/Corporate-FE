@@ -80,6 +80,11 @@ export class StudentsService extends UnsubscribeOnDestroyAdapter {
     });
   }
 
+  getStudent(data: any) {
+    const apiUrl = `${this.defaultUrl}auth/instructorList`;
+    return this.httpClient.post<Student>(apiUrl,data).pipe(map((response) => response));
+  }
+
   getStudentById(id: string) {
     const apiUrl = `${this.defaultUrl}auth/instructorListByID/${id}`;
     return this.httpClient.get<Student>(apiUrl).pipe(map((response) => response));

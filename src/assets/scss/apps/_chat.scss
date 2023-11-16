@@ -52,12 +52,14 @@
         background: #efefef;
       }
       .name {
-        font-size: 15px;
+        font-size: 18px;
+        margin-top: 10px;
       }
     }
     img {
-      width: 45px;
+      width: 54px;
       @include border-radius(50%);
+      height: 50px;
     }
   }
   img {

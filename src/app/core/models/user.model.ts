@@ -91,6 +91,7 @@ export interface Student {
     filename:string
     education:string;
     isLogin:boolean;
+    data:any
 
   }
   export interface StudentDetail extends Users {

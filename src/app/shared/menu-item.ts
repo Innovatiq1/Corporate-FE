@@ -336,7 +336,7 @@ MENU_LIST = [
             title: " Course Exam Schedule",
             type: "none",
         },
-        
+
     ]
 },
 
@@ -495,7 +495,7 @@ MENU_LIST = [
             title: "Program Payments",
             type: "none"
         },
-      
+
     ]
 },
 {
@@ -664,6 +664,22 @@ MENU_LIST = [
             type: "none"
         }
        ]
+},
+
+{
+  id: "chat",
+  title: "Chat",
+  selected: false,
+  iconsrc: "/assets/announcement-icon.svg",
+  icon: 'email',
+  children:
+  [
+      {
+          id: "inbox",
+          title: "Inbox",
+          type: "none"
+      }
+     ]
 },
 
 {
