@@ -76,7 +76,7 @@ export const ROUTES: any[] = [
       // },
     ],
   },
-  
+
   {
     path: '',
     title: 'Course',

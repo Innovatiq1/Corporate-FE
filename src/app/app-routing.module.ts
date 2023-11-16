@@ -50,6 +50,12 @@ const routes: Routes = [
         canActivate: [LoginGuard],
       },
       {
+        path: 'chat',
+        loadChildren: () =>
+          import('./apps/apps.module').then((m) => m.AppsModule),
+        canActivate: [LoginGuard],
+      },
+      {
         path: 'timetable',
         loadChildren: () =>
           import('./timetable/timetable.module').then((m) => m.TimetableModule),

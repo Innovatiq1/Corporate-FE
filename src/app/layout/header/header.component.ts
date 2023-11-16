@@ -200,7 +200,10 @@ export class HeaderComponent
       announcementFor:'Student'
     }
     this.announcementService.getAnnouncementsForStudents(payload).subscribe((res: { data: { data: any[]; }; totalRecords: number; }) => {
-      this.announcements = res.data;
+      const announcementsData:any = res.data;
+      this.announcements = announcementsData.reverse();
+      console.log( this.announcements,"+")
+      // console.log(announcementsData.reverse(),"+++++++")
     })
   }
   showCustomHtml(data:any) {
