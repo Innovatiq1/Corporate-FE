@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { EmailConfigService } from '@core/service/email-config.service';
@@ -23,6 +23,10 @@ export class ImportantMailComponent {
   pageSizeArr = [10, 25, 50, 100];
   mailPaginationModel: Partial<CoursePaginationModel>;
   selectedEmails: any[] = [];
+  filterName='';
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
+
+
 
 
 
@@ -34,6 +38,16 @@ export class ImportantMailComponent {
 
 
   }
+
+  performSearch() {
+    if(this.filterName){
+      this.getMails()
+    } else {
+      this.getMails()
+
+    }
+  }
+
   pageSizeChange($event: any) {
     this.mailPaginationModel.page = $event?.pageIndex + 1;
     this.mailPaginationModel.limit = $event?.pageSize;
@@ -129,7 +143,7 @@ export class ImportantMailComponent {
 
   getMails() {
     let to = JSON.parse(localStorage.getItem('currentUser')!).user.email;
-    this.emailService.getImportantMailsByToAddress(to).subscribe((response: any) => {
+    this.emailService.getImportantMailsByToAddress(to,this.filterName).subscribe((response: any) => {
       this.emails = response.docs;
       this.totalItems = response.totalDocs
       this.mailPaginationModel.docs = response.docs;

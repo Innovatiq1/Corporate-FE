@@ -22,7 +22,7 @@ export class ComposeComponent {
     },
   ];
   adminUrl: boolean;
-  composeForm:any;
+  composeForm: any;
   attachment: any;
   uploadedAttachment: any;
   studentUrl: boolean;
@@ -32,118 +32,118 @@ export class ComposeComponent {
   currentDate!: Date;
 
 
-  constructor(private router:Router,private fb:FormBuilder,private certificateService:CertificateService,private emailService:EmailConfigService,
-    private activatedRoute:ActivatedRoute) {
+  constructor(private router: Router, private fb: FormBuilder, private certificateService: CertificateService, private emailService: EmailConfigService,
+    private activatedRoute: ActivatedRoute) {
     let urlPath = this.router.url.split('/')
     this.adminUrl = urlPath.includes('admin');
     this.studentUrl = urlPath.includes('student');
-    this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
+    this.subscribeParams = this.activatedRoute.params.subscribe((params: any) => {
       this.mailId = params.id;
-      //console.log("=Id===",params.id)
     });
 
     this.composeForm = this.fb.group({
       to: ['', []],
       subject: ['', []],
-      attachment:['',[]],
-      content:['',[]]
+      attachment: ['', []],
+      content: ['', []]
     })
 
   }
 
-  ngOnInit(){
-    if(this.mailId){
+  ngOnInit() {
+    if (this.mailId) {
       this.getMailById();
     }
 
   }
-  getMailById(){
+  getMailById() {
     this.emailService.getMailDetailsByMailId(this.mailId).subscribe((response: any) => {
       let attachment = response?.attachment;
-      let uploaded=attachment?.split('/')
+      let uploaded = attachment?.split('/')
       this.uploadedAttachment = uploaded?.pop();
       this.composeForm.patchValue({
-        to:response.mail[0].to,
-        content:response.mail[0].content,
-        subject:response.subject,
+        to: response.mail[0].to,
+        content: response.mail[0].content,
+        subject: response.subject,
       })
-  })
-}
+    })
+  }
 
 
 
-  onFileUpload(event:any) {
+  onFileUpload(event: any) {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('files', file);
-  
-    this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
+
+    this.certificateService.uploadCourseThumbnail(formData).subscribe((response: any) => {
       this.attachment = response.image_link;
-      let uploaded=this.attachment.split('/')
+      let uploaded = this.attachment.split('/')
       this.uploadedAttachment = uploaded.pop();
     });
   }
 
-  sendEmail(){
+  sendEmail() {
     let mail: any = [];
-    let userDetails =  JSON.parse(localStorage.getItem('currentUser')!);
+    let userDetails = JSON.parse(localStorage.getItem('currentUser')!);
     this.currentDate = new Date();
     mail.push({
-      to:this.composeForm.value.to,
-      content:this.composeForm.value.content,
-      attachment:this.attachment,
-      from:userDetails.user.email,
-      fromName:userDetails.user.name,
-      fromProfile:userDetails.user.avatar,
-      date:this.currentDate,
-      read:false
+      to: this.composeForm.value.to,
+      content: this.composeForm.value.content,
+      attachment: this.attachment,
+      from: userDetails.user.email,
+      fromName: userDetails.user.name,
+      fromProfile: userDetails.user.avatar,
+      date: this.currentDate,
+      read: false
+    });
 
-})
-    let payload={
-      mail:mail,
-      subject:this.composeForm.value.subject,
-      toStatus:'active',
-      fromStatus:'active'
-    }
+    let payload = {
+      mail: mail,
+      subject: this.composeForm.value.subject,
+      toStatus: 'active',
+      fromStatus: 'active'
+    };
+
     this.emailService.sendEmail(payload).subscribe((response: any) => {
-       
+
       Swal.fire({
         title: 'Successful',
         text: 'Email sent successfully',
         icon: 'success',
       });
       this.router.navigate(['/email/inbox'])
-     
+
     });
 
   }
-  draftEmail(){
+  draftEmail() {
     let mail: any = [];
-    let userDetails =  JSON.parse(localStorage.getItem('currentUser')!);
+    let userDetails = JSON.parse(localStorage.getItem('currentUser')!);
     this.currentDate = new Date();
     mail.push({
-      to:this.composeForm.value.to,
-      content:this.composeForm.value.content,
-      attachment:this.attachment,
-      from:userDetails.user.email,
-      fromName:userDetails.user.name,
-      fromProfile:userDetails.user.avatar,
-      date:this.currentDate,
-})
-    let payload={
-      mail:mail,
-      subject:this.composeForm.value.subject,
-      fromStatus:'draft'
+      to: this.composeForm.value.to,
+      content: this.composeForm.value.content,
+      attachment: this.attachment,
+      from: userDetails.user.email,
+      fromName: userDetails.user.name,
+      fromProfile: userDetails.user.avatar,
+      date: this.currentDate,
+    })
+    let payload = {
+      mail: mail,
+      subject: this.composeForm.value.subject,
+      fromStatus: 'draft'
     }
 
     this.emailService.sendEmail(payload).subscribe((response: any) => {
       this.router.navigate(['/email/inbox'])
-     
+
     });
 
   }
-  
 
-  
+
+
 
 }

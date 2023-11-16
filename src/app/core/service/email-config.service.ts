@@ -65,8 +65,8 @@ export class EmailConfigService {
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
 
-  getImportantMailsByToAddress(to:string): Observable<any[]> {
-    const apiUrl = `${this.prefix}admin/internal-email/mail?to=${to}&toStatus=active&toImportant=true&toArchive=false`;
+  getImportantMailsByToAddress(to:string,filterName:any): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/internal-email/mail?filterName=${filterName}&to=${to}&toStatus=active&toImportant=true&toArchive=false`;
     return this.http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }   
 

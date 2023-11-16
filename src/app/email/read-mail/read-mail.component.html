@@ -31,8 +31,8 @@
                     </a>
                     <div class="flex-grow-1">
                       <span class="date float-end">{{mail?.date | date}}</span>
-                      <h4 class="text-primary">{{mail?.fromName}}</h4>
-                      <small class="text-muted">From: {{mail?.from}}</small>
+                      <h6 class="text-primary">{{mail?.fromName}} ( {{mail?.from}} )</h6>
+                      <small class="text-muted">to: {{mail?.to}}</small>
                     </div>
                   </div>
                 <div class="view-mail">
@@ -58,10 +58,10 @@
               </div>
 
               <div class="replyBox m-t-20">
-                <p class="p-b-20">
+                <p  *ngIf="!showReplyAllForm && !showReplyForm"class="p-b-20">
                   Click here to
-                  <a type="button" (click)="toggleReplyForm()"><span class="reply">Reply</span></a>
-                  <!-- <a href="#">Forward</a> -->
+                  <a type="button" (click)="toggleReplyForm()"><span class="reply">Reply</span></a> or 
+                  <a type="button" (click)="toggleReplyAllForm()"><span class="reply">Reply all</span></a>
                 </p>
                 <div *ngIf="showReplyForm">
                   <form [formGroup]="replyForm" (submit)="sendReply()">
@@ -78,6 +78,22 @@
                     <mat-icon type="button" class="float-end del" (click)="toggleReplyForm()">delete</mat-icon>
                   </form>
                 </div>
+                <div *ngIf="showReplyAllForm">
+                  <form [formGroup]="replyForm" (submit)="replyAll()">
+                    <ckeditor  formControlName="content"[editor]="Editor"></ckeditor>
+                    <div class="file-drop-area">
+                      <div class="file">
+                      <button mat-raised-button color="primary">Choose File                      
+                        <input formControlName="attachment" (change)="onFileUpload($event)" class="file-input" type="file">
+                      </button>
+                      <span class="file-msg"><h5>{{uploadedAttachment ? uploadedAttachment : 'Drag and Drop File Here' }}</h5></span>
+                      </div>
+                    </div><br>
+                    <button type="submit" class="btn btn-primary mt-2">Send Reply</button>
+                    <mat-icon type="button" class="float-end del" (click)="toggleReplyAllForm()">delete</mat-icon>
+                  </form>
+                </div>
+
               </div>              </section>
           </div>
         </div>
