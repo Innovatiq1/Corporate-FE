@@ -6,7 +6,7 @@ import { SupportComponent } from './support/support.component';
 import { DragDropComponent } from './drag-drop/drag-drop.component';
 const routes: Routes = [
   {
-    path: 'chat',
+    path: 'inbox',
     component: ChatComponent,
   },
   {
