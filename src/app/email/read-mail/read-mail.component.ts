@@ -44,6 +44,8 @@ export class ReadMailComponent implements OnInit {
     this.replyForm = this.fb.group({
       attachment: ['', []],
       content: ['', []],
+      to: ['', []],
+
     })
 
 
@@ -71,10 +73,24 @@ export class ReadMailComponent implements OnInit {
 
   toggleReplyForm() {
     this.showReplyForm = !this.showReplyForm;
+    const lastIndex = this.emailDetails.mail.length - 1;
+    const lastEmailAddress = this.emailDetails.mail[lastIndex];
+
+    this.replyForm.patchValue({
+      to:lastEmailAddress.from
+    })
   }
 
   toggleReplyAllForm() {
     this.showReplyAllForm = !this.showReplyAllForm;
+    const fromEmail = this.emailDetails.mail[0].from
+    const toEmail = this.emailDetails.mail[0].to
+    const joinedEmails = `${fromEmail},${toEmail}`;
+
+    this.replyForm.patchValue({
+      to:joinedEmails
+    })
+
   }
 
   onFileUpload(event: any) {
@@ -95,7 +111,7 @@ export class ReadMailComponent implements OnInit {
     const lastIndex = this.emailDetails.mail.length - 1;
     const lastEmailAddress = this.emailDetails.mail[lastIndex];
     let payload = {
-      to: lastEmailAddress.from,
+      to: this.replyForm.value.to,
       content: this.replyForm.value.content,
       attachment: this.attachment,
       from: userDetails.user.email,
@@ -119,14 +135,10 @@ export class ReadMailComponent implements OnInit {
   }
 
   replyAll() {
-    let mail: any = [];
     let userDetails = JSON.parse(localStorage.getItem('currentUser')!);
     this.currentDate = new Date();
-    const fromEmail = this.emailDetails.mail[0].from
-    const toEmail = this.emailDetails.mail[0].to
-    const joinedEmails = `${fromEmail},${toEmail}`;
     let payload = {
-      to: joinedEmails,
+      to: this.replyForm.value.to,
       content: this.replyForm.value.content,
       attachment: this.attachment,
       from: userDetails.user.email,
@@ -134,7 +146,6 @@ export class ReadMailComponent implements OnInit {
       fromProfile: userDetails.user.avatar,
       date: this.currentDate,
       read: false
-
     }
     this.emailService.replyMail(this.emailDetails.id, payload).subscribe((response: any) => {
 

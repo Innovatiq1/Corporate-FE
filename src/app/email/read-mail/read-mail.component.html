@@ -65,6 +65,10 @@
                 </p>
                 <div *ngIf="showReplyForm">
                   <form [formGroup]="replyForm" (submit)="sendReply()">
+                    <mat-form-field class="example-full-width"  appearance="outline">
+                      <mat-label>TO</mat-label>
+                      <input  formControlName="to"matInput id="email_address">
+                    </mat-form-field>
                     <ckeditor  formControlName="content"[editor]="Editor"></ckeditor>
                     <div class="file-drop-area">
                       <div class="file">
@@ -80,6 +84,10 @@
                 </div>
                 <div *ngIf="showReplyAllForm">
                   <form [formGroup]="replyForm" (submit)="replyAll()">
+                    <mat-form-field class="example-full-width"  appearance="outline">
+                      <mat-label>TO</mat-label>
+                      <input  formControlName="to"matInput id="email_address">
+                    </mat-form-field>
                     <ckeditor  formControlName="content"[editor]="Editor"></ckeditor>
                     <div class="file-drop-area">
                       <div class="file">
