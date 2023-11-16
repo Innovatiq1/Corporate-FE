@@ -33,6 +33,7 @@ export class ReadMailComponent implements OnInit {
   public Editor: any = ClassicEditor;
   toMails!: string;
   filteredMails: any;
+  currentTime!: string;
 
 
   constructor(private emailService: EmailConfigService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,
@@ -115,6 +116,9 @@ export class ReadMailComponent implements OnInit {
     this.currentDate = new Date();
     const lastIndex = this.emailDetails.mail.length - 1;
     const lastEmailAddress = this.emailDetails.mail[lastIndex];
+    this.currentDate = new Date();
+    this.currentTime = this.currentDate.toLocaleTimeString();
+
     let payload = {
       to: this.replyForm.value.to,
       content: this.replyForm.value.content,
@@ -123,6 +127,7 @@ export class ReadMailComponent implements OnInit {
       fromName: userDetails.user.name,
       fromProfile: userDetails.user.avatar,
       date: this.currentDate,
+      time:this.currentTime,
       read: false
 
     }
@@ -142,6 +147,7 @@ export class ReadMailComponent implements OnInit {
   replyAll() {
     let userDetails = JSON.parse(localStorage.getItem('currentUser')!);
     this.currentDate = new Date();
+    this.currentTime = this.currentDate.toLocaleTimeString();
     let payload = {
       to: this.replyForm.value.to,
       content: this.replyForm.value.content,
@@ -150,6 +156,7 @@ export class ReadMailComponent implements OnInit {
       fromName: userDetails.user.name,
       fromProfile: userDetails.user.avatar,
       date: this.currentDate,
+      time:this.currentTime,
       read: false
     }
     this.emailService.replyMail(this.emailDetails.id, payload).subscribe((response: any) => {

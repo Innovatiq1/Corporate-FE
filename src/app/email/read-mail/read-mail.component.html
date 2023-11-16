@@ -30,7 +30,7 @@
                       <img alt="" src="{{mail?.fromProfile}}">
                     </a>
                     <div class="flex-grow-1">
-                      <span class="date float-end">{{mail?.date | date}}</span>
+                      <span class="date float-end">{{mail?.date | date}} {{mail?.time}}</span>
                       <h6 class="text-primary">{{mail?.fromName}} ( {{mail?.from}} )</h6>
                       <small class="text-muted">to: {{mail?.to}}</small>
                     </div>

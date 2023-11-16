@@ -30,6 +30,7 @@ export class ComposeComponent {
   mailId: any;
   emailDetails: any;
   currentDate!: Date;
+  currentTime!: string;
 
 
   constructor(private router: Router, private fb: FormBuilder, private certificateService: CertificateService, private emailService: EmailConfigService,
@@ -75,7 +76,6 @@ export class ComposeComponent {
     const file = event.target.files[0];
     const formData = new FormData();
     formData.append('files', file);
-
     this.certificateService.uploadCourseThumbnail(formData).subscribe((response: any) => {
       this.attachment = response.image_link;
       let uploaded = this.attachment.split('/')
@@ -87,6 +87,8 @@ export class ComposeComponent {
     let mail: any = [];
     let userDetails = JSON.parse(localStorage.getItem('currentUser')!);
     this.currentDate = new Date();
+    this.currentTime = this.currentDate.toLocaleTimeString();
+
     mail.push({
       to: this.composeForm.value.to,
       content: this.composeForm.value.content,
@@ -95,6 +97,7 @@ export class ComposeComponent {
       fromName: userDetails.user.name,
       fromProfile: userDetails.user.avatar,
       date: this.currentDate,
+      time:this.currentTime,
       read: false
     });
 
@@ -121,6 +124,7 @@ export class ComposeComponent {
     let mail: any = [];
     let userDetails = JSON.parse(localStorage.getItem('currentUser')!);
     this.currentDate = new Date();
+    this.currentTime = this.currentDate.toLocaleTimeString();
     mail.push({
       to: this.composeForm.value.to,
       content: this.composeForm.value.content,
@@ -129,6 +133,7 @@ export class ComposeComponent {
       fromName: userDetails.user.name,
       fromProfile: userDetails.user.avatar,
       date: this.currentDate,
+      time:this.currentTime
     })
     let payload = {
       mail: mail,
