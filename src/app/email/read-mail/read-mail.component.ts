@@ -32,7 +32,7 @@ export class ReadMailComponent implements OnInit {
   attachment: any;
   public Editor: any = ClassicEditor;
   toMails!: string;
-  replyMails: any;
+  filteredMails: any;
 
 
   constructor(private emailService: EmailConfigService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,
@@ -58,8 +58,13 @@ export class ReadMailComponent implements OnInit {
     this.emailService.getMailDetailsByMailId(this.emailId).subscribe((response: any) => {
       this.emailDetails = response;
       this.mails = response?.mail;
-      this.replyMails = response?.replyMail;
-
+      let userDetails = JSON.parse(localStorage.getItem('currentUser')!);
+      this.filteredMails = this.mails.filter((mail: { from: string; to: string; }) => {
+        let fromEmails = mail.from.split(',').map(email => email.trim());
+        let toEmails = mail.to.split(',').map(email => email.trim());
+        return fromEmails.includes(userDetails.user.email) || toEmails.includes(userDetails.user.email);
+      });
+      
       if (Array.isArray(this.mails)) {
         const toList = this.mails.map((mail: any) => mail.to).join(',');
         this.toMails = toList;
