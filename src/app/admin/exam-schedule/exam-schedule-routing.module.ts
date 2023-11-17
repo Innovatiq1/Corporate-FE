@@ -4,6 +4,8 @@ import { ListComponent } from './list/list.component';
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import { ProgramExamScheduleComponent } from './program-exam-schedule/program-exam-schedule.component';
+import { CreateProgramExamScheduleComponent } from './create-program-exam-schedule/create-program-exam-schedule.component';
+import { EditProgramExamScheduleComponent } from './edit-program-exam-schedule/edit-program-exam-schedule.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,14 @@ const routes: Routes = [
     path: 'program-exam',
     component: ProgramExamScheduleComponent
   },
+  {
+    path: 'program-exam-add',
+    component: CreateProgramExamScheduleComponent
+  },
+  {
+    path: 'program-exam-edit/:id',
+    component: EditProgramExamScheduleComponent
+  }
   
 ];
 

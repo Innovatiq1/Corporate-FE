@@ -325,8 +325,11 @@ export class CreateClassComponent {
   }
 
   onSelectChange1(event :any,element:any) {
-        const filteredData = this.instructorList.filter((item: { instructor_id: string; }) => item.instructor_id===element.instructor);
-   this.user_id=filteredData[0].user_id.user_id
+    console.log("===",this.instructorList)
+    console.log("===",element.instructor)
+        const filteredData = this.instructorList.filter((item: { _id: string; }) => item._id===element.instructor);
+        console.log("filteredData",filteredData)
+        this.user_id=filteredData[0]._id
 
   }
 

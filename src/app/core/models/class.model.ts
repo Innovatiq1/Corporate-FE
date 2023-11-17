@@ -27,6 +27,7 @@ export interface CourseTitleModel extends Pagination {
   _id: string;
   id: string;
   title: string;
+  
 }
 
 export interface CourseListModel extends Pagination {

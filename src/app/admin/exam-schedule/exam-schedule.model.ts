@@ -4,6 +4,8 @@ export class ExamSchedule {
   id: number;
   courseName: string;
   courseCode:string;
+  ProgramName:string;
+  programCode:string;
   class: string;
   date: string;
   time: string;
@@ -18,6 +20,9 @@ export class ExamSchedule {
     {
       this.id = examSchedule.id || this.getRandomID();
       this.courseName = examSchedule.courseName || '';
+      this.ProgramName = examSchedule.ProgramName || '';
+      this.programCode = examSchedule.programCode || '';
+ 
       this.courseCode = examSchedule.courseCode || '';
       this.class = examSchedule.class || '';
       this.date = formatDate(new Date(), 'yyyy-MM-dd', 'en') || '';
