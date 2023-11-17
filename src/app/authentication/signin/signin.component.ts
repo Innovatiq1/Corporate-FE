@@ -54,7 +54,7 @@ export class SigninComponent
   ];
 
   ngOnInit() {
-    this.startSlideshow();
+    // this.startSlideshow();
    
   }
   get f() {
@@ -167,14 +167,14 @@ export class SigninComponent
         });
     }
   }
-  images: string[] = ['/assets/images/login/Image 1- PSA.jpg', '/assets/images/login/Image 2- PSA.jpg', '/assets/images/login/Image 3.jpg',];
+  images: string[] = ['/assets/images/login/Learning.jpeg'];
     currentIndex = 0;
 
-  startSlideshow() {
-    setInterval(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.images.length;
-    }, 4000);
-  }
+  // startSlideshow() {
+  //   setInterval(() => {
+  //     this.currentIndex = (this.currentIndex + 1) % this.images.length;
+  //   }, 4000);
+  // }
   // ngOnChanges() {
   //   this.updateStrengthIndicator();
   // }

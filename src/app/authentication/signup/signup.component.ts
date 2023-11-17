@@ -72,7 +72,7 @@ export class SignupComponent implements OnInit {
     { text: 'Tamil', flag: 'assets/images/flags/germany.svg', lang: 'ts' },
   ];
   ngOnInit() {
-    this.startSlideshow()
+    // this.startSlideshow()
     this.authForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: [
@@ -135,11 +135,11 @@ export class SignupComponent implements OnInit {
     this.langStoreValue = event.target.value;
     this.translate.setLanguage(event.target.value);
   }
-  images: string[] = ['/assets/images/login/Image 1- PSA.jpg', '/assets/images/login/Image 2- PSA.jpg', '/assets/images/login/register-img.jpg',];
+  images: string[] = ['/assets/images/login/Learning.jpeg'];
   currentIndex = 0;
-  startSlideshow() {
-    setInterval(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.images.length;
-    }, 4000);
-  }
+  // startSlideshow() {
+  //   setInterval(() => {
+  //     this.currentIndex = (this.currentIndex + 1) % this.images.length;
+  //   }, 4000);
+  // }
 }

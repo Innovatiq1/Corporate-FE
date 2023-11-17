@@ -11,7 +11,7 @@
     <div class="col-sm-6 auth-form-section">
       <div class="form-section">
         <div class="auth-wrapper">
-          <h2 class="welcome-msg">  {{ 'Welcome to' | translate }} PSA</h2>
+          <h2 class="welcome-msg">  {{ 'Welcome to' | translate }} TMS</h2>
           <select (change)="setLanguage($event)">
             <option *ngFor="let item of listLang" [value]="item.lang">
               {{item.text}}
