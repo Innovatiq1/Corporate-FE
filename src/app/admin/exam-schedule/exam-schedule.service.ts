@@ -43,8 +43,36 @@ export class ExamScheduleService extends UnsubscribeOnDestroyAdapter {
         },
       });
   }
+  getAllProgramExamSchedule():void {
+    const apiUrl = `${this.prefix}admin/examShedule/programExamList`;
+    this.subs.sink = this.httpClient
+      .get<ExamSchedule>(apiUrl)
+      .subscribe({
+        next: (response) => {
+          this.isTblLoading = false;
+          this.dataChange.next(response.data);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.isTblLoading = false;
+          console.log(error.name + ' ' + error.message);
+        },
+      });
+
+  }
   addExamSchedule(course: any) {
     const apiUrl = `${this.prefix}admin/examShedule/`;
+    return this.httpClient
+      .post<ApiResponse>(apiUrl, course)
+      .pipe(map((response) => { }));
+  }
+  addExamScheduleProgram(course: any) {
+    const apiUrl = `${this.prefix}admin/examShedule/programExamCreate`;
+    return this.httpClient
+      .post<ApiResponse>(apiUrl, course)
+      .pipe(map((response) => { }));
+  }
+  addProgramExamSchedule(course: any) {
+    const apiUrl = `${this.prefix}admin/examShedule/programExamCreate`;
     return this.httpClient
       .post<ApiResponse>(apiUrl, course)
       .pipe(map((response) => { }));
@@ -53,6 +81,11 @@ export class ExamScheduleService extends UnsubscribeOnDestroyAdapter {
     const apiUrl = `${this.prefix}admin/examShedule/${id}`;
     return this.httpClient.get<ExamSchedule>(apiUrl).pipe(map((response) => response));
   }
+  getProgramExamById(id: string) {
+    const apiUrl = `${this.prefix}admin/examShedule/programExamById/${id}`;
+    return this.httpClient.get<ExamSchedule>(apiUrl).pipe(map((response) => response));
+  }
+
 
   // addExamSchedule(examSchedule: ExamSchedule): void {
   //   this.dialogData = examSchedule;
@@ -67,6 +100,13 @@ export class ExamScheduleService extends UnsubscribeOnDestroyAdapter {
   //   //     },
   //   //   });
   // }
+  updateProgramExamSchedule(id:any,examSchedule: any) {
+    const apiUrl = `${this.prefix}admin/examShedule/programExamUpdate/${id}`;
+    return this.httpClient
+      .put<ApiResponse>(apiUrl, examSchedule)
+      .pipe(map((response) => { }));
+  }
+ 
   updateExamSchedule(id:any,examSchedule: any) {
     const apiUrl = `${this.prefix}admin/examShedule/${id}`;
     return this.httpClient
@@ -90,6 +130,13 @@ export class ExamScheduleService extends UnsubscribeOnDestroyAdapter {
   deleteExam(id: number){
     console.log(id);
     const apiUrl = `${this.prefix}admin/examShedule/${id}`;
+    return this.httpClient
+      .delete<ApiResponse>(apiUrl)
+      .pipe(map((response) => { }));
+  }
+  deleteprogramExam(id: number){
+    console.log(id);
+    const apiUrl = `${this.prefix}admin/examShedule/programExamDelete/${id}`;
     return this.httpClient
       .delete<ApiResponse>(apiUrl)
       .pipe(map((response) => { }));

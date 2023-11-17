@@ -41,7 +41,7 @@ examSchedule?: ExamSchedule;
 breadscrums = [
   {
     title: 'Schedule',
-    items: ['Instructor'],
+    items: ['Course'],
     active: 'Exam Schedule',
   },
 ];
