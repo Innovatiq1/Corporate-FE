@@ -28,7 +28,7 @@ export class ForgotPasswordComponent implements OnInit {
     private authService:AuthService
   ) {}
   ngOnInit() {
-    // this.startSlideshow();
+    this.startSlideshow();
     this.authForm = this.formBuilder.group({
       email: [
         '',
@@ -85,13 +85,13 @@ export class ForgotPasswordComponent implements OnInit {
       
     }
   }
-  images: string[] = ['/assets/images/login/Learning.jpeg'];
+  images: string[] = ['/assets/images/login/Learning.jpeg', '/assets/images/login/learning2.jpg', '/assets/images/login/learning4.jpg'];
     currentIndex = 0;
 
-  // startSlideshow() {
-  //   setInterval(() => {
-  //     this.currentIndex = (this.currentIndex + 1) % this.images.length;
-  //   }, 4000);
-  // }
+  startSlideshow() {
+    setInterval(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.images.length;
+    }, 4000);
+  }
  
 }
