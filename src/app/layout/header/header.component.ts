@@ -208,10 +208,11 @@ export class HeaderComponent
   }
   showCustomHtml(data:any) {
     Swal.fire({
+      position: "top-end",
       title: 'Notification',
       html:
-        `<h4>Title </h4> <p>${data.subject}</p>` +
-        `<h5>Course Detailed Description </h5> <p class='fs-6' >${data.details}</p>`,
+        `<div class="align-left"><h4>Title </h4> <p>${data.subject}</p> </div>` +
+        `<div class="align-left"><h5>Course Detailed Description </h5> <p class='fs-6' >${data.details}</p></div>`,
       showCloseButton: true,
       focusConfirm: false,
       confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',

@@ -342,7 +342,7 @@ MENU_LIST = [
             title: "Program Exam Schedule",
             type: "none",
         },
-        
+
     ]
 },
 
@@ -672,21 +672,21 @@ MENU_LIST = [
        ]
 },
 
-{
-  id: "chat",
-  title: "Chat",
-  selected: false,
-  iconsrc: "/assets/announcement-icon.svg",
-  icon: 'email',
-  children:
-  [
-      {
-          id: "inbox",
-          title: "Inbox",
-          type: "none"
-      }
-     ]
-},
+// {
+//   id: "chat",
+//   title: "Chat",
+//   selected: false,
+//   iconsrc: "/assets/announcement-icon.svg",
+//   icon: 'email',
+//   children:
+//   [
+//       {
+//           id: "inbox",
+//           title: "Inbox",
+//           type: "none"
+//       }
+//      ]
+// },
 
 {
     id: "timetable",
