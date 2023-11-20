@@ -33,6 +33,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 
 import { SucessCourseComponent } from './sucess-course/sucess-course.component';
 import { FailureCourseComponent } from './failure-course/failure-course.component';
+import { ExamsSheduleComponent } from './exams-shedule/exams-shedule.component';
+import { ExamScheduleService } from 'app/admin/exam-schedule/exam-schedule.service';
+import { ProgramSheduleComponent } from './program-shedule/program-shedule.component';
 
 
 @NgModule({
@@ -52,6 +55,8 @@ import { FailureCourseComponent } from './failure-course/failure-course.componen
 
     SucessCourseComponent,
     FailureCourseComponent,
+    ExamsSheduleComponent,
+    ProgramSheduleComponent,
 
   ],
   imports: [
@@ -75,6 +80,6 @@ import { FailureCourseComponent } from './failure-course/failure-course.componen
 
   ],
   providers: [    
-HomeworkService, stdLeaveReqService,StudentsService],
+HomeworkService, stdLeaveReqService,StudentsService,ExamScheduleService]
 })
 export class StudentModule {}

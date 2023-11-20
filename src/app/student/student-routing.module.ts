@@ -14,6 +14,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
 
 import { SucessCourseComponent } from './sucess-course/sucess-course.component';
 import { FailureCourseComponent } from './failure-course/failure-course.component';
+import { ExamsSheduleComponent } from './exams-shedule/exams-shedule.component';
+import { ProgramSheduleComponent } from './program-shedule/program-shedule.component';
 
 
 const routes: Routes = [
@@ -63,6 +65,14 @@ const routes: Routes = [
   {
     path: 'feedback/programs',
     component: FeedbackComponent,
+  },
+  {
+    path: 'exams/courses',
+    component: ExamsSheduleComponent
+  },
+  {
+    path: 'exams/programs',
+    component: ProgramSheduleComponent
   },
 
 
