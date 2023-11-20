@@ -269,9 +269,9 @@
                               <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
                             </table>
                             
-                    
-                        <p class="m-t-30">[innerHTML]="classDetails?.course_detailed_description"</p>
-                        <br>
+                            <p [innerHTML]="classDetails?.courseId?.course_description| bulletPoints |truncate :
+                            40">
+                                    <br>
                       </div>
   
                     </div>
