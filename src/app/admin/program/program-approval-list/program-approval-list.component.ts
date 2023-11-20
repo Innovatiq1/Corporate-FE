@@ -162,19 +162,19 @@ implements OnInit{
       this.dataSource.map((user:any) => ({
         ProgramName:user?.title,
         CompulsoryCount: user?.coreCourseCount,
-        ElectiveCount: user?.electiveCourseCount,
-        status:user?.status
+        ElectiveCount: user?.electiveCourseCount
+       
       }));
     TableExportUtil.exportToExcel(exportData, 'excel');
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Program Name','Compulsory Count','Elective Count','Status']];
+    const headers = [['Program Name','Compulsory Count','Elective Count']];
     const data = this.dataSource.map((user:any) =>
       [user?.title,
         user?.coreCourseCount,
        user?.electiveCourseCount,
-       user?.status,
+       
 
     ] );
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];

@@ -1,4 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { formatDate } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import {
@@ -143,7 +144,7 @@ export class AuditListComponent {
         Action: user?.auditData?.courseKit?.name,
         Status: user.operation,
         'Modified By': user?.modifiedBy?.name,
-        'Modified On': user.updatedAt,
+        'Modified On': formatDate(new Date(user.updatedAt), 'yyyy-MM-dd', 'en') || '',
       })
     );
     TableExportUtil.exportToExcel(exportData, 'excel');
@@ -160,7 +161,7 @@ export class AuditListComponent {
       user?.auditData?.courseKit?.name,
       user.operation,
       user?.modifiedBy?.name,
-      user.fee,
+      formatDate(new Date(user.updatedAt), 'yyyy-MM-dd', 'en') || '',
     ]);
     //const columnWidths = [60, 80, 40];
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];

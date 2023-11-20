@@ -193,7 +193,7 @@ export class AllstaffComponent
         Designation: x.role,
         Mobile: x.mobile,
         Email: x.email,
-        'Joining Date': x.joiningDate  || '',
+        'Joining Date': formatDate(new Date(x?.joiningDate), 'yyyy-MM-dd', 'en') || '',
         Salary: x.salary,
       }));
 
@@ -208,7 +208,7 @@ export class AllstaffComponent
         x.role,
         x.mobile,
         x.email,
-        x.joiningDate || '',
+        formatDate(new Date(x?.joiningDate), 'yyyy-MM-dd', 'en') || '',
         x.salary
     ] );
     //const columnWidths = [60, 80, 40];
@@ -316,6 +316,7 @@ export class ExampleDataSource extends DataSource<Staff> {
           startIndex,
           this.paginator.pageSize
         );
+        console.log("vkvk",this.renderedData)
         return this.renderedData;
       })
     );

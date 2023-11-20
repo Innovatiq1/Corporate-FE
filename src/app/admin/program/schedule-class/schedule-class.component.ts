@@ -7,7 +7,7 @@ import { ClassService } from 'app/admin/schedule-class/class.service';
 import { forkJoin } from 'rxjs';
 import { DataSourceModel } from 'app/admin/schedule-class/class.model';
 import * as moment from 'moment';
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { InstructorService } from '@core/service/instructor.service';
@@ -130,8 +130,8 @@ export class ScheduleClassComponent {
     const exportData: Partial<TableElement>[] =
       this.dataSource.map((user: any) => ({
         ProgramName: user?.courseId?.title,
-        StartDate: user?.sessions[0]?.sessionStartDate,
-        EndDate: user?.sessions[0]?.sessionEndDate,
+        StartDate: formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
+        EndDate: formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
       }));
     TableExportUtil.exportToExcel(exportData, 'excel');
   }
@@ -140,8 +140,8 @@ export class ScheduleClassComponent {
     const headers = [['Program Name', 'Start Date', 'End Date']];
     const data = this.dataSource.map((user: any) =>
       [user?.courseId?.title,
-      user?.sessions[0].sessionStartDate,
-      user?.sessions[0].sessionEndDate
+        formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '', 
+        formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' 
       ]);
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
     (doc as any).autoTable({
