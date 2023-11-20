@@ -83,7 +83,7 @@
                 <ng-container matColumnDef="name">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    <span class="mobile-label">Name:</span> {{row.name}}</mat-cell>
+                    <span class="mobile-label">Name:</span> {{row.name  | capitalizeFirstLetter}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="designation">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Designation</mat-header-cell>
@@ -104,7 +104,7 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Joining Date
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                    <span class="mobile-label">Joining Date:</span> {{row.joiningDate | date: 'MM/dd/yyyy'}}</mat-cell>
+                    <span class="mobile-label">Joining Date:</span> {{row.joiningDate | date}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="address">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Salary

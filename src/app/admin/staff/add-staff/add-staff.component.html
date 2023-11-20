@@ -184,7 +184,7 @@
                       class="file-input"
                       type="file"
                     /></button>
-                    <span class="file-msg"><h5>{{fileName ? fileName : 'Drag and Drop File Here' }}</h5></span>
+                    <span class="file-msg"><h5>{{uploadedImage ? uploadedImage  : 'Drag and Drop File Here' }}</h5></span>
                     
                     </div>
                   </div>
@@ -219,7 +219,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <button *ngIf="!updateBtn" class="btn-space" [disabled]="!staffForm.valid " mat-raised-button
                     color="primary" (click)="submit()">Submit</button>
-                    <button *ngIf="updateBtn" class="btn-space" [disabled]="!staffForm.valid " mat-raised-button
+                    <button *ngIf="updateBtn" class="btn-space" mat-raised-button
                     color="primary" (click)="update()">Update</button>
                   <button type="button" mat-raised-button color="warn" [routerLink]="['/admin/staff/all-staff']" (click)="cancel()">Cancel</button>
                 </div>

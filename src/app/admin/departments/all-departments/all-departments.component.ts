@@ -29,6 +29,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-all-departments',
   templateUrl: './all-departments.component.html',
@@ -46,7 +47,7 @@ export class AllDepartmentsComponent
     'email',
     'sYear',
     'sCapacity',
-    'actions',
+    'status',
   ];
   exampleDatabase?: DepartmentService;
   dataSource!: any;
@@ -245,7 +246,7 @@ export class AllDepartmentsComponent
         'Head Of Department': x.hod,
         Phone: x.mobile,
         Email: x.email,
-        'Start Year': x.departmentStartDate,
+        'Start Year':  formatDate(new Date(x?.departmentStartDate), 'yyyy-MM-dd', 'en') || '',
         'Students Capacity': x.studentCapacity,
       }));
 
@@ -260,7 +261,7 @@ export class AllDepartmentsComponent
         x.hod,
         x.mobile,
         x.email,
-        x.departmentStartDate,
+        formatDate(new Date(x?.departmentStartDate), 'yyyy-MM-dd', 'en') || '',
         x.studentCapacity
     ] );
     //const columnWidths = [60, 80, 40];

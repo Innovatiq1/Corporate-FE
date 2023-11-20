@@ -1,3 +1,3 @@
 export interface TableElement {
-  [key: string]: string | number;
+  [key: string]: string | number | Date;
 }

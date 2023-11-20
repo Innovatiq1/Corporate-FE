@@ -12,6 +12,7 @@ import { Users } from '@core/models/user.model';
 import { UserService } from '@core/service/user.service';
 import { AdminService } from '@core/service/admin.service';
 import { ConfirmedValidator } from '@shared/password.validator';
+import { CertificateService } from '@core/service/certificate.service';
 @Component({
   selector: 'app-add-staff',
   templateUrl: './add-staff.component.html',
@@ -34,7 +35,10 @@ export class AddStaffComponent {
   ];
   userTypes: any;
   paramId:any;
-  constructor(private fb: FormBuilder, public staffService:StaffService,private adminService: AdminService, private userService: UserService,public active:ActivatedRoute,public router:Router, private studentService: StudentService) {
+  uploadedImage: any;
+  uploaded: any;
+  avatar: any;
+  constructor(private fb: FormBuilder, public staffService:StaffService,private adminService: AdminService, private userService: UserService,public active:ActivatedRoute,public router:Router, private studentService: StudentService,private certificateService:CertificateService,) {
 
     this.staffForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
@@ -77,6 +81,9 @@ export class AddStaffComponent {
 patchData(_data: any){
 
   this.fileName = _data.avatar
+  this.avatar = this.editData.avatar;
+      this.uploaded=this.avatar?.split('/')
+      this.uploadedImage = this.uploaded?.pop();
   this.staffForm.patchValue({
     name:_data.name,
     last_name:_data.last_name ,
@@ -174,6 +181,16 @@ addBlog(formObj:any) {
   onFileUpload(event:any) {
     this.fileName = event.target.files[0].name;
     this.files=event.target.files[0];
+    this.uploadedImage =event.target.files[0].name;
+
+    // const file = event.target.files[0];
+    const formData = new FormData();
+    // formData.append('files', file);
+    this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
+    this.avatar = response.avatar;
+      this.uploaded=this.avatar.split('/')
+      this.uploadedImage = this.uploaded.pop();
+    });
   }
 
   updateBlog(obj:any): any {

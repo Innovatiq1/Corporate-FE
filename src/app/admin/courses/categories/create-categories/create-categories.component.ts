@@ -99,7 +99,8 @@ export class CreateCategoriesComponent implements OnInit{
   initSubCategoryForm(): void {
     this.subCategoryForm = this.formBuilder.group({
       main_category_id: [''],
-      subcategories: this.formBuilder.array([])
+      subcategories: this.formBuilder.array([]),
+      category_name: ['', Validators.required]
     });
   }
 
@@ -173,6 +174,7 @@ export class CreateCategoriesComponent implements OnInit{
         this.subCategoryForm.reset();
         this.initSubCategoryForm();
         this.addSubCategoryField();
+        this.router.navigate(['/admin/courses/categories'])
       },
       (error) => {
         Swal.fire('Error', 'Failed to create subcategories!', 'error');
