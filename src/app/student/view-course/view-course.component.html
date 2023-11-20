@@ -16,8 +16,7 @@
                   <div class="name-center">{{classDetails?.courseId?.courseCode}}</div>
                 </div>
                 <img src="{{classDetails?.courseId?.image_link}}" class="user-img" alt="">
-                <p [innerHTML]="classDetails?.courseId?.course_description| bulletPoints |truncate :
-                40">
+                <p [innerHTML]="classDetails?.courseId?.course_description| bulletPoints">
               
                 <div class="row">
                   <div class="col-4">
@@ -40,8 +39,7 @@
             <mat-tab-group mat-align-tabs="start">
               <mat-tab label="About">
                 <div class="p-4">
-                  <p class="text-default"  [innerHTML]="classDetails?.courseId?.course_detailed_description| bulletPoints |truncate :
-                  40">
+                  <p class="text-default"  [innerHTML]="classDetails?.courseId?.course_detailed_description| bulletPoints ">
                 
                   <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
@@ -119,8 +117,7 @@
                           </table>
                           
                   
-                      <p class="m-t-30"[innerHTML]="classDetails?.courseId?.course_detailed_description| bulletPoints |truncate :
-                      40" >
+                      <p class="m-t-30"[innerHTML]="classDetails?.courseId?.course_detailed_description| bulletPoints" >
                       <br>
                     </div>
 
@@ -269,8 +266,7 @@
                               <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
                             </table>
                             
-                            <p [innerHTML]="classDetails?.courseId?.course_description| bulletPoints |truncate :
-                            40">
+                            <p [innerHTML]="classDetails?.courseId?.course_description| bulletPoints">
                                     <br>
                       </div>
   
