@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CourseTitleModel } from '@core/models/class.model';
+import { AdminService } from '@core/service/admin.service';
 import { AnnouncementService } from '@core/service/announcement.service';
 import { UtilsService } from '@core/service/utils.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
@@ -43,6 +44,7 @@ export class CreatAnnouncementComponent {
   isEditable = false;
   public Editor: any = ClassicEditor;
   mode: string = 'editUrl';
+  userTypeNames: any;
 
 
 
@@ -50,6 +52,7 @@ export class CreatAnnouncementComponent {
     this.status = !this.status;
   }
   ngOnInit() {
+    this.getAllUserTypes();
     forkJoin({
       courses: this.classService.getAllCoursesTitle('active'),
 
@@ -73,7 +76,7 @@ export class CreatAnnouncementComponent {
 
 
   constructor(private router: Router, public classService: ClassService, public utils: UtilsService, private formBuilder: FormBuilder,
-    private announcementService: AnnouncementService,) {
+    private announcementService: AnnouncementService,private adminService: AdminService) {
     let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-announcement');
     this.viewUrl = urlPath.includes('view-announcement');
@@ -121,14 +124,15 @@ export class CreatAnnouncementComponent {
     this.inProgress = true;
     if (!this.editUrl) {
       if (this.announcementForm.valid) {
-        const formData = this.announcementForm.getRawValue()
+        const formData = this.announcementForm.getRawValue();
+
         let payload = {
           subject: formData?.subject,
           details: formData?.details.replace(/<\/?span[^>]*>/g, ""),
           announcementFor: formData?.announcementFor.toString().replace(',',' / '),
           isActive: formData?.isActive,
         }
-        console.log(payload)
+        // console.log(payload)
         this.announcementService.makeAnnouncement(payload).subscribe(
           (res) => {
             Swal.fire({
@@ -153,8 +157,16 @@ export class CreatAnnouncementComponent {
         this.isSubmitted = true;
       }
     } else {
+
       if (this.announcementForm.valid) {
-        this.announcementService.updateAnnouncement(this.announcementForm.value, this.currentId).subscribe(
+
+        let payload = {
+          subject: this.announcementForm.value?.subject,
+          details: this.announcementForm.value?.details.replace(/<\/?span[^>]*>/g, ""),
+          announcementFor: this.announcementForm.value?.announcementFor.toString().replace(',',' / '),
+          isActive: this.announcementForm.value?.isActive,
+        }
+        this.announcementService.updateAnnouncement(payload, this.currentId).subscribe(
           (res) => {
             Swal.fire({
               title: 'Successful',
@@ -203,16 +215,34 @@ export class CreatAnnouncementComponent {
       this.isLoading = false;
       this.announcementList = response.data.data;
       let data = this.announcementList.find((id: any) => id._id === this.currentId);
+      // console.log(data,"data")
       if (data) {
+
+        let anuFor:any =[];
+        anuFor.push(data.announcementFor)
+       let anuce = anuFor.map((res:any) => res).toString().replace(' / ',',').split(',');
+      //  anuFor = [];
+      //  anuFor.push(anuce);
+      //  console.log("var",anuce)
         this.announcementForm.patchValue({
           subject: data?.subject,
           details: data?.details,
-          announcementFor: data?.announcementFor,
+          announcementFor: anuce,
         });
       }
     }, error => {
       this.isLoading = false;
 
     });
+  }
+
+  getAllUserTypes(filters?: any) {
+    this.adminService.getUserTypeList({ 'allRows':true }).subscribe(
+      (response: any) => {
+        this.userTypeNames = response;
+      },
+      (error) => {
+      }
+    );
   }
 }
