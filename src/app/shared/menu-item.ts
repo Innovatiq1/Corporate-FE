@@ -560,6 +560,26 @@ MENU_LIST = [
         }
     ]
 },
+{
+    id: "student/exams",
+    title: "Exams",
+    iconsrc: "/assets/course-icon.svg",
+    icon:'school',
+    selected: true,
+    children: [
+        {
+            id: "courses",
+            title: "Courses",
+            type: "none"
+        },
+        {
+            id: "programs",
+            title: "Programs",
+            type: "none"
+        }
+    ]
+},
+
 // {
 //     id: "student/timetable",
 //     title: "Timetable",
@@ -648,12 +668,12 @@ MENU_LIST = [
             title: "Program Lectures",
             type: "none"
         },
-        {
-            id: "exam-schedule",
-            title: "Exam Schedule",
-            type: "none"
+        // {
+        //     id: "exam-schedule",
+        //     title: "Exam Schedule",
+        //     type: "none"
 
-        },
+        // },
             ]
 },
 {
