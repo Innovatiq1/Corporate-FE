@@ -133,7 +133,9 @@ export class CourseTimetableComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload).subscribe(response => {
-      this.studentApprovedClasses = response.data.slice(0, 5);
+      console.log('re',response)
+
+      this.studentApprovedClasses = response.data.docs.slice(0, 5);
       const currentDate = new Date();
       const currentMonth = currentDate.getMonth();
       const currentYear = currentDate.getFullYear();
