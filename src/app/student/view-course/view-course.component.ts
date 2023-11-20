@@ -58,6 +58,7 @@ export class ViewCourseComponent {
   isCancelled = false;
   documentLink: any;
   uploadedDoc: any;
+  title!: string;
 
   constructor(private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService,
     @Inject(DOCUMENT) private document: any){
@@ -86,7 +87,8 @@ export class ViewCourseComponent {
       courseTitle:this.classDetails?.courseId?.title,
       courseFee:this.classDetails?.courseId?.fee,
       studentId:studentId,
-      classId:this.classId
+      classId:this.classId,
+      title:this.title
     }
     this.courseService.saveRegisterClass(payload).subscribe((response) => {
       this.document.location.href = response.data.session.url;
@@ -99,6 +101,7 @@ export class ViewCourseComponent {
       this.documentLink = this.courseKitDetails[0].documentLink;
       let uploadedDocument=this.documentLink?.split('/')
       this.uploadedDoc = uploadedDocument?.pop();
+      this.title = response?.title;
     });
   }
   getRegisteredClassDetails(){

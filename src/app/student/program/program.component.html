@@ -8,13 +8,11 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card">
-            <mat-tab-group>
-              <mat-tab>  
-                <ng-template mat-tab-label>
-                  <div class="tbl-search-box">
-                    <label for="search-input"
-                      ><i class="material-icons search-icon">search</i></label
-                    >
+            <div class="materialTableHeader">
+              <div class="left">
+                <ul class="header-buttons-left ms-0">
+                  <li class="tbl-search-box">
+                    <label for="search-input"><i class="material-icons search-icon">search</i></label>
                     <input
                       placeholder="Search"
                       type="text"
@@ -22,12 +20,15 @@
                       class="browser-default search-field text"
                       aria-label="Search box"
                       [(ngModel)]="filterName" (input)="performSearch()"
-  
                     />
-                  </div>
-                  <div class="course mx-4">All Programs</div>
-                  <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
-                  
+                  </li>
+                </ul>
+              </div>
+            </div>  
+            <mat-tab-group>
+              <mat-tab>  
+                <ng-template mat-tab-label>
+                  <div class="course mx-4">All Programs</div>                  
                 </ng-template>
   
             <div class="body">

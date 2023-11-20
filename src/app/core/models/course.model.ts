@@ -207,9 +207,11 @@ export interface CoursePaginationModel extends Pagination {
 	sub_category: string|undefined;
 	filterText: string;
 	filterProgram: string;
+	filterRegisteredCourse: string;
 	sortBy: string;
 	sortByDirection: string;
 	status: string;
+	studentId: any;
 }
 
 export interface ProgramCourse {

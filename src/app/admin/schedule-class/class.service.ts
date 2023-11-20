@@ -32,28 +32,13 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
       if (filter.page) params = params.set("page", filter.page?.toString());
       if (filter.filterText) params = params.set("courseName", filter.filterText?.toString());
       if (filter.filterProgram) params = params.set("programName", filter.filterProgram?.toString());
+      if (filter.filterRegisteredCourse) params = params.set("title", filter.filterRegisteredCourse?.toString());
+      if (filter.studentId) params = params.set("studentId", filter.studentId);
+      if (filter.status) params = params.set("status", filter.status);
 
     }
     return params;
   }
-
-
-  // getClassListWithPaginationF(): void {
-  //   const apiUrl = `${this.prefix}admin/class/`;
-  //   this.subs.sink = this.http
-  //     .get<ClassModel[]>(apiUrl)
-  //     .subscribe({
-  //       next: (data) => {
-  //         this.isTblLoading = false;
-  //         this.dataChange.next(data);
-  //       },
-  //       error: (error: HttpErrorResponse) => {
-  //         this.isTblLoading = false;
-  //         console.log(error.name + ' ' + error.message);
-  //       },
-  //     });
-  // }
-
 
 
   private buildRegisteredClassesParams(page: number, limit: number, filterText?: string): HttpParams {
@@ -71,13 +56,6 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
 
     return params;
   }
-  getStudentRegisteredClasses(data:any) {
-    return this.http.get(`${this.prefix}admin/studentClasses/`,{ params: data }).pipe(
-      map((response:any) => {
-        return response;
-      })
-    );
-  }
   getStudentRegisteredProgramClasses(data:any) {
     return this.http.get(`${this.prefix}admin/studentClasses/studentApproveList`,{ params: data }).pipe(
       map((response:any) => {
@@ -90,13 +68,18 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
     return this.http.get<any>(apiUrl);
   }
 
-
-
-
   getRegisteredClasses(page: number, limit: number, filterText? : string): Observable<any> {
     const apiUrl = `${this.prefix}admin/studentClasses`;
     return this.http.get<any>(apiUrl, { params: this.buildRegisteredClassesParams(page, limit, filterText) });
   }
+  getStudentRegisteredClasses(data:any) {
+    return this.http.get(`${this.prefix}admin/studentClasses/`,{ params: this.buildParams(data) }).pipe(
+      map((response:any) => {
+        return response;
+      })
+    );
+  }
+
   saveApprovedClasses(id: string, item: StudentApproval): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}admin/studentClasses/${id}`;
     return this.http.put<ApiResponse>(apiUrl, item);
@@ -117,7 +100,6 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
       })
     );
   }
-//getById
   getClassById(id: string) {
     const apiUrl = `${this.prefix}admin/class/${id}`;
     return this.http.get<any>(apiUrl).pipe(map((response) => response.data));

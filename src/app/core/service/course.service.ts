@@ -61,7 +61,6 @@ export class CourseService {
     return this._Http.post<any>(apiUrl, {program_name:programName, studentId: studentId, classId: classId }).pipe(map((response) => response));
   }
 
- 
   getAllCourses(
     filter?: Partial<CoursePaginationModel>
   ): Observable<ApiResponse> {

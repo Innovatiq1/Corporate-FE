@@ -4,6 +4,7 @@ import { CourseService } from '@core/service/course.service';
 import {  CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 import Swal from 'sweetalert2';
 import { ClassService } from 'app/admin/schedule-class/class.service';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
@@ -22,6 +23,8 @@ export class CourseComponent {
   studentRegisteredModel!: Partial<CoursePaginationModel>;
   studentApprovedModel!: Partial<CoursePaginationModel>;
   filterName='';
+  filterRegistered='';
+  filterApproved='';
   classesData: any;
   pagination :any;
   totalItems: any;
@@ -35,6 +38,7 @@ export class CourseComponent {
   studentApprovedClasses: any;
   totalApprovedItems: any;
   @ViewChild('filter', { static: true }) filter!: ElementRef;
+  tab: number = 0;
 
 
   constructor(public _courseService:CourseService,  private classService: ClassService) {
@@ -49,9 +53,19 @@ export class CourseComponent {
     this.getRegisteredCourse();
     this.getApprovedCourse();
   }
+
+  tabChanged(event: MatTabChangeEvent) {
+    if(event.index == 0){
+      this.tab = 0
+    } else if (event.index == 1){
+      this.tab = 1
+    } else if(event.index == 2){
+      this.tab = 2
+    }
+  }
 getAllCourse(){
   let filterText = this.filterName
-  this.classService.getClassListWithPagination({ filterText,...this.coursePaginationModel, status: 'active' }).subscribe(response =>{
+  this.classService.getClassListWithPagination({ filterText,...this.coursePaginationModel, status: 'open' }).subscribe(response =>{
    this.classesData = response.data.docs;
    this.totalItems = response.data.totalDocs
    this.coursePaginationModel.docs = response.data.docs;
@@ -64,7 +78,8 @@ getAllCourse(){
 }
 getRegisteredCourse(){
   let studentId=localStorage.getItem('id')
-  const payload = { studentId: studentId, status: 'registered' };
+  let filterRegisteredCourse = this.filterRegistered
+  const payload = {  filterRegisteredCourse,studentId: studentId, status: 'registered' ,...this.coursePaginationModel};
   this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
    this.studentRegisteredClasses = response.data.docs;
    this.totalRegisteredItems = response.data.totalDocs
@@ -155,12 +170,8 @@ delete(id: string) {
 
 
 performSearch() {
-  if(this.filterName){
     this.getAllCourse();
-  } else {
-    this.getAllCourse();
-
-  }
+    this.getRegisteredCourse();
 }
 
 }
