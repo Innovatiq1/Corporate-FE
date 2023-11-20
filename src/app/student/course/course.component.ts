@@ -34,7 +34,6 @@ export class CourseComponent {
   studentRegisteredClasses: any;
   studentApprovedClasses: any;
   totalApprovedItems: any;
-  searchTerm: string = '';
   @ViewChild('filter', { static: true }) filter!: ElementRef;
 
 
@@ -52,7 +51,6 @@ export class CourseComponent {
   }
 getAllCourse(){
   let filterText = this.filterName
-
   this.classService.getClassListWithPagination({ filterText,...this.coursePaginationModel, status: 'active' }).subscribe(response =>{
    this.classesData = response.data.docs;
    this.totalItems = response.data.totalDocs

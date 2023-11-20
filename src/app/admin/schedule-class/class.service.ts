@@ -31,6 +31,8 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
       if (filter.limit) params = params.set("limit", filter.limit?.toString());
       if (filter.page) params = params.set("page", filter.page?.toString());
       if (filter.filterText) params = params.set("courseName", filter.filterText?.toString());
+      if (filter.filterProgram) params = params.set("programName", filter.filterProgram?.toString());
+
     }
     return params;
   }
@@ -52,11 +54,6 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
   //     });
   // }
 
-  getClassListWithPagination(
-    filter?:Partial<CoursePaginationModel>): Observable<ApiResponse> {
-    const apiUrl = `${this.prefix}admin/class/`;
-    return this.http.get<ApiResponse>(apiUrl, { params: this.buildParams(filter) })
-  }
 
 
   private buildRegisteredClassesParams(page: number, limit: number, filterText?: string): HttpParams {
@@ -223,6 +220,12 @@ getStudentsApprovedClasses(): Observable<any> {
   let params = new HttpParams();
   let query = params.set("status", "approved");
   return this.http.get<any>(apiUrl, { params: query});
+}
+
+getClassListWithPagination(
+  filter?:Partial<CoursePaginationModel>): Observable<ApiResponse> {
+  const apiUrl = `${this.prefix}admin/class/`;
+  return this.http.get<ApiResponse>(apiUrl, { params: this.buildParams(filter) })
 }
 
 

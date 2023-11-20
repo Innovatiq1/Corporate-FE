@@ -98,7 +98,6 @@ export class ScheduleClassComponent {
       .subscribe(
         (response) => {
           this.dataSource = response.data.docs;
-          console.log('data', this.dataSource);
           this.totalItems = response.data.totalDocs;
           this.coursePaginationModel.docs = response.data.docs;
           this.coursePaginationModel.page = response.data.page;

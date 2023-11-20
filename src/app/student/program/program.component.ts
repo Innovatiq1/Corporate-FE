@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CourseService } from '@core/service/course.service';
 import {  CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 import Swal from 'sweetalert2';
@@ -21,8 +21,8 @@ export class ProgramComponent {
   coursePaginationModel: Partial<CoursePaginationModel>;
   studentRegisteredModel!: Partial<CoursePaginationModel>;
   studentApprovedModel!: Partial<CoursePaginationModel>;
-
-
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
+  filterName='';
   classesData: any;
   pagination :any;
   totalItems: any;
@@ -54,18 +54,30 @@ export class ProgramComponent {
   }
 
 getClassList() {
-  this.classService.getProgramClassListWithPagination({ ...this.coursePaginationModel,status:'active' }).subscribe(
+  let filterProgram = this.filterName
+  this.classService.getProgramClassListWithPagination({ filterProgram,...this.coursePaginationModel, status: 'active' }).subscribe(
     (response) => {
       this.dataSource = response.data.docs;
       this.totalItems = response.data.totalDocs
       this.coursePaginationModel.docs = response.data.docs;
       this.coursePaginationModel.page = response.data.page;
       this.coursePaginationModel.limit = response.data.limit;
+      this.coursePaginationModel.page = 1; // Set the page to 1
     },
     (error) => {
     }
   );
 }
+
+performSearch() {
+  if(this.filterName){
+    this.getClassList();
+  } else {
+    this.getClassList();
+
+  }
+}
+
 getRegisteredCourse(){
   let studentId=localStorage.getItem('id')
   const payload = { studentId: studentId, status: 'registered' };

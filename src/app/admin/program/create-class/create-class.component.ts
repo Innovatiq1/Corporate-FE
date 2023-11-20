@@ -312,21 +312,16 @@ export class CreateClassComponent {
 
 
   onSelectChange(event: any) {
-    console.log("==",this.programList)
     const filteredData = this.programList.filter(
       (item: { _id: string }) =>
         item._id === this.classForm.controls['courseId'].value
     );
-    console.log(filteredData)
-    //this.user_id = filteredData[0].user_id.user_id;
     this.courseTitle=filteredData[0].title
       this.courseCode=filteredData[0].courseCode
 
   }
 
   onSelectChange1(event :any,element:any) {
-    console.log("===",this.instructorList)
-    console.log("===",element.instructor)
         const filteredData = this.instructorList.filter((item: { _id: string; }) => item._id===element.instructor);
         console.log("filteredData",filteredData)
         this.user_id=filteredData[0]._id
@@ -338,6 +333,7 @@ export class CreateClassComponent {
       let sessions = this.getSession();
       if (sessions) {
         this.classForm.value.sessions = sessions;
+        this.classForm.value.programName = this.courseTitle
         this.isSubmitted = true;
         this._classService.saveProgramClass(this.classForm.value).subscribe((response:any) => {
           Swal.fire({
@@ -354,6 +350,7 @@ export class CreateClassComponent {
       let sessions = this.getSession();
       if (sessions) {
         this.classForm.value.sessions = sessions;
+        this.classForm.value.programName = this.courseTitle
         this._classService.updateProgramClass(this.classId, this.classForm.value).subscribe((response:any) => {
           Swal.fire({
             title: 'Success',
@@ -361,7 +358,6 @@ export class CreateClassComponent {
             icon: 'success',
             confirmButtonColor: '#526D82',
           });
-          // this.router.navigateByUrl(`admin/program/schedule-class`);
           window.history.back();
         });
       }
@@ -376,11 +372,6 @@ export class CreateClassComponent {
     this.selectedPosition = i;
     this.checkAvailabilityOfInstructor(element);
   }
-
-  // onChangeLab(element: any, i: number) {
-  //   this.selectedLabPosition = i;
-  //   this.checkAvailabilityOfLaboratory(element);
-  // }
 
   checkAvailabilityOfInstructor(element: {
     instructor: any;
@@ -398,31 +389,23 @@ export class CreateClassComponent {
       .subscribe((response: any) => {
         if (!response['success']) {
           this.isInstructorFailed = 1;
-          // this.cd.detectChanges();
         } else {
           this.isInstructorFailed = 0;
         }
       });
   }
   checkAvailabilityOfLaboratory(element: {
-    // lab: string | undefined;
     start: string | number | Date;
     end: string | number | Date;
   }) {
     this._classService
       .validateLaboratory(
-        // element.lab,
         new DatePipe('en-US').transform(new Date(element.start), 'yyyy-MM-dd')!,
         new DatePipe('en-US').transform(new Date(element.end), 'yyyy-MM-dd')!,
         new DatePipe('en-US').transform(new Date(element.start), 'HH:MM')!,
         new DatePipe('en-US').transform(new Date(element.end), 'HH:MM')!
       )
       .subscribe((response) => {
-        // if (!response.data['success']) {
-        //   this.isLabFailed = 1;
-        // } else {
-        //   this.isLabFailed = 0;
-        // }
       });
   }
 

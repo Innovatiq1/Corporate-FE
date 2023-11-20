@@ -206,6 +206,7 @@ export interface CoursePaginationModel extends Pagination {
 	main_category: string|undefined;
 	sub_category: string|undefined;
 	filterText: string;
+	filterProgram: string;
 	sortBy: string;
 	sortByDirection: string;
 	status: string;
