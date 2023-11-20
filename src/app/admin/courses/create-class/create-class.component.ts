@@ -319,16 +319,9 @@ export class CreateClassComponent {
     return sessions;
   }
   onSelectChange(event :any) {
-    // console.log("this.classForm.controls['instructor'].value",this.classForm.controls['courseId'].value)
-
      this.courseService.getCourseById(this.classForm.controls['courseId'].value).subscribe((response) => {
-       console.log("-==========",response)
-      // this.router.navigateByUrl(`Schedule Class/List`);
       this.courseTitle=response.title
       this.courseCode=response.courseCode
-
-
-      // console.log(response)
      });
 
    }
@@ -369,6 +362,7 @@ export class CreateClassComponent {
       this.sessions = this.getSession();
       if (this.sessions) {
         this.classForm.value.sessions = sessions;
+        this.classForm.value.courseName = this.courseTitle
         this._classService
           .updateClass(this.classId, this.classForm.value)
           .subscribe((response) => {
@@ -393,6 +387,7 @@ export class CreateClassComponent {
     } else {
       if (sessions) {
         this.classForm.value.sessions = sessions;
+        this.classForm.value.courseName = this.courseTitle
         // this.inProgress = false;
         // this.isSubmitted = true;
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
