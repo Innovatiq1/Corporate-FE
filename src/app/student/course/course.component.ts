@@ -91,7 +91,8 @@ getRegisteredCourse(){
 }
 getApprovedCourse(){
   let studentId=localStorage.getItem('id')
-  const payload = { studentId: studentId, status: 'approved' };
+  let filterApprovedCourse = this.filterApproved
+  const payload = {  filterApprovedCourse,studentId: studentId, status: 'approved' ,...this.coursePaginationModel};
   this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
    this.studentApprovedClasses = response.data.docs;
    this.totalApprovedItems = response.data.totalDocs
@@ -172,6 +173,7 @@ delete(id: string) {
 performSearch() {
     this.getAllCourse();
     this.getRegisteredCourse();
+    this.getApprovedCourse();
 }
 
 }
