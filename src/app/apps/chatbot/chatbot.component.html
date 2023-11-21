@@ -1,7 +1,7 @@
 <!-- Chatbot -->
-<div class="botIcon" [ngClass]="isVisited ? 'showBotSubject' : ''">
+<div class="botIcon" [ngClass]="showBotSubject ? 'showBotSubject' : ''">
   <div class="botIconContainer">
-    <div class="iconInner" (click)="checkVisited()">
+    <div class="iconInner" (click)="onIconClick()">
       <i class="fa fa-commenting" aria-hidden="true"></i>
     </div>
   </div>
@@ -9,34 +9,28 @@
     <div class="Messenger_messenger">
       <div class="Messenger_header">
         <h4 class="Messenger_prompt">How can we help you?</h4>
-        <span class="chat_close_icon" (click)="checkVisited()"
+        <span class="chat_close_icon" (click)="onIconClick()"
           ><i class="fa fa-window-close" aria-hidden="true"></i
         ></span>
       </div>
       <div class="Messenger_content">
         <div class="Messages">
-          <div class="Messages_list">
-            <div class="msg user">
-              <span class="responseText">Hi</span>
-            </div>
-            <div class="msg">
-              <span class="avtr"></span>
-              <span class="responseText">hello</span>
-            </div>
-            <div class="msg">
-              <span class="avtr"></span>
-              <span class="responseText">yes</span>
+					<div class="Messages_list">
+            <div *ngFor="let msg of messages" class="msg" [ngClass]="{'user': msg.type === 'user', 'bot': msg.type === 'bot'}">
+              <span class="avtr"><figure style="background-image: url(https://mrseankumar25.github.io/Sandeep-Kumar-Frontend-Developer-UI-Specialist/images/avatar.png)"></figure></span>
+              <span class="responsText">{{ msg.text }}</span>
             </div>
           </div>
-        </div>
-        <form id="messenger">
+				</div>
+      </div>
+        <form id="messenger" (submit)="onMessengerSubmit()">
           <div class="Input Input-blank">
-            <input
+            <input #msgInput
               name="msg"
               class="Input_field"
               placeholder="Send a message..."
             />
-            <button type="submit" class="Input_button Input_button-send">
+            <button type="submit" class="Input_button Input_button-send" >
               <div class="Icon">
                 <svg
                   viewBox="1496 193 57 54"
@@ -67,30 +61,35 @@
       </div>
     </div>
   </div>
-</div>
 <!-- Chatbot -->
 
-<!-- <div class="container p-5">
-  <div class="row">
-    <div class="col-12">
-      <div class="row">
-        <div class="column"></div>
-        <div class="column column-50">
-          <ng-container *ngFor="let message of messages">
-            <div class="message" [ngClass]="{from: message.author === 'bot',to: message.author === 'user'}">
-              {{ message.content }}
-            </div>
-          </ng-container>
-          <div class="input-group mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-sm" *ngIf="messages.length == 0; else dialogInfo" for="nameField">Chat Bot</span>
-            <input [(ngModel)]="value" (keyup.enter)="sendMessage()" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <button (click)="sendMessage()" class="btn btn-outline-primary" type="button" id="button-addon2">Send</button>
+<!-- <div class="botIcon showBotSubject" (click)="onIconClick()"> -->
+  <!-- Your icon content goes here -->
+  <!-- <div class="iconInner" id="iconBtn">	<i class="fa fa-commenting" aria-hidden="true"></i></div>
+</div> -->
+
+
+<!-- <div class="Layout Layout-open Layout-expand Layout-right">
+  <div class="Messenger_messenger">
+    <div class="Messenger_header">
+      <h4 class="Messenger_prompt">How can we help you?</h4> <span class="chat_close_icon"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+    </div>
+    <div class="Messenger_content">
+      <div class="Messages">
+        <div class="Messages_list"> -->
+          <!-- Messages list content goes here -->
+          <!-- <div *ngFor="let msg of messages" class="msg" [ngClass]="{'user': msg.type === 'user', 'bot': msg.type === 'bot'}">
+            <span class="avtr"><figure style="background-image: url(https://mrseankumar25.github.io/Sandeep-Kumar-Frontend-Developer-UI-Specialist/images/avatar.png)"></figure></span>
+            <span class="responsText">{{ msg.text }}</span>
           </div>
-          <ng-template #dialogInfo>
-            <span class="input-group-text" id="inputGroup-sizing-sm" for="nameField">Total messages: {{ messages.length }}</span>
-          </ng-template>
-        </div>
-        <div class="column"></div>
+        </div> -->
+
+        <!-- Messenger form goes here -->
+        <!-- <form id="messenger" (submit)="onMessengerSubmit()">
+          <input type="text" name="msg" #msgInput /> -->
+          <!-- Your form fields go here -->
+          <!-- <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
   </div>
