@@ -34,6 +34,8 @@ export class ReadMailComponent implements OnInit {
   toMails!: string;
   filteredMails: any;
   currentTime!: string;
+  showCCField = false;
+
 
 
   constructor(private emailService: EmailConfigService, private activatedRoute: ActivatedRoute, private fb: FormBuilder,
@@ -46,6 +48,7 @@ export class ReadMailComponent implements OnInit {
       attachment: ['', []],
       content: ['', []],
       to: ['', []],
+      cc:['',[]]
 
     })
 
@@ -81,9 +84,8 @@ export class ReadMailComponent implements OnInit {
     this.showReplyForm = !this.showReplyForm;
     const lastIndex = this.emailDetails.mail.length - 1;
     const lastEmailAddress = this.emailDetails.mail[lastIndex];
-
     this.replyForm.patchValue({
-      to:lastEmailAddress.from
+      to:lastEmailAddress.from,
     })
   }
 
@@ -92,13 +94,17 @@ export class ReadMailComponent implements OnInit {
     const fromEmail = this.emailDetails.mail[0].from
     const toEmail = this.emailDetails.mail[0].to
     const joinedEmails = `${fromEmail},${toEmail}`;
-
     this.replyForm.patchValue({
-      to:joinedEmails
+      to:joinedEmails,
     })
 
   }
 
+  toggleCCField() {
+    this.showCCField = !this.showCCField;
+  }
+
+ 
   onFileUpload(event: any) {
     const file = event.target.files[0];
     const formData = new FormData();
@@ -121,6 +127,7 @@ export class ReadMailComponent implements OnInit {
 
     let payload = {
       to: this.replyForm.value.to,
+      cc:this.replyForm.value.cc,
       content: this.replyForm.value.content,
       attachment: this.attachment,
       from: userDetails.user.email,
@@ -150,6 +157,7 @@ export class ReadMailComponent implements OnInit {
     this.currentTime = this.currentDate.toLocaleTimeString();
     let payload = {
       to: this.replyForm.value.to,
+      cc:this.replyForm.value.cc,
       content: this.replyForm.value.content,
       attachment: this.attachment,
       from: userDetails.user.email,
