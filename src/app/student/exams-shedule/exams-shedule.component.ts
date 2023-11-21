@@ -148,8 +148,8 @@ connect(): Observable<ExamSchedule[]> {
     this.filterChange,
     this.paginator.page,
   ];
-  //let studentId = localStorage.getItem('id')
-  this.exampleDatabase.getAllExamSchedule();
+  let studentId = localStorage.getItem('id')
+  this.exampleDatabase.getAllExams(studentId);
   return merge(...displayDataChanges).pipe(
     map(() => {
       // Filter data

@@ -43,6 +43,22 @@ export class ExamScheduleService extends UnsubscribeOnDestroyAdapter {
         },
       });
   }
+  getAllProgramExams(id:any): void {
+    console.log("======get")
+    const apiUrl = `${this.prefix}admin/studentClasses/students/Program/Exams/${id}`;
+    this.subs.sink = this.httpClient
+      .get<ExamSchedule>(apiUrl)
+      .subscribe({
+        next: (response) => {
+          this.isTblLoading = false;
+          this.dataChange.next(response.data);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.isTblLoading = false;
+          console.log(error.name + ' ' + error.message);
+        },
+      });
+  }
   getAllExams(id:any): void {
     console.log("======get")
     const apiUrl = `${this.prefix}admin/studentClasses/students/Exams/${id}`;
