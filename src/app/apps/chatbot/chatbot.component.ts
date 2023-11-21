@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Event } from '@angular/router';
 import {Message,ChatbotService} from './chatbot.service'
 
@@ -7,28 +7,122 @@ import {Message,ChatbotService} from './chatbot.service'
   templateUrl: './chatbot.component.html',
   styleUrls: ['./chatbot.component.scss']
 })
-export class ChatbotComponent implements OnInit {
+export class ChatbotComponent  {
 
-  isVisited:boolean = false;
-  messages: Message[] = [];
-  value: any;
-  constructor( public chatService: ChatbotService) {}
+  @ViewChild('msgInput') msgInput!: ElementRef;
 
-  ngOnInit(){
-    this.chatService.conversation.subscribe((val) => {
-      // console.log(this.value)
-      this.messages = this.messages.concat(val);
+  showBotSubject: boolean = false;
+  showMessenger: boolean = false;
+  messages: any[] = [];
+  name: string = '';
+
+  constructor() {}
+
+  onIconClick() {
+    this.showBotSubject =  !this.showBotSubject;
+    // this.msgInput.nativeElement.focus();
+  }
+
+  onCloseClick() {
+    this.showBotSubject = false;
+    this.showMessenger = false;
+  }
+
+  onBotSubjectSubmit() {
+    this.showBotSubject = false;
+    this.showMessenger = true;
+  }
+
+  onMessengerSubmit() {
+    const val = this.msgInput.nativeElement.value.toLowerCase();
+    const mainval = this.msgInput.nativeElement.value;
+    let nowtime = new Date();
+    let nowhoue = nowtime.getHours();
+
+    const userMsg = { type: 'user', text: mainval };
+    const appendMsg = (msg: string) => {
+      this.messages.push({ type: 'bot', text: msg });
+      this.msgInput.nativeElement.value = '';
+    };
+
+    this.messages.push(userMsg);
+
+    if (
+      val.includes('hello') ||
+      val.includes('hi') ||
+      val.includes('good morning') ||
+      val.includes('good afternoon') ||
+      val.includes('good evening') ||
+      val.includes('good night')
+    ) {
+      if (nowhoue >= 12 && nowhoue <= 16) {
+        appendMsg('Hello, Good afternoon');
+      } else if (nowhoue >= 10 && nowhoue <= 12) {
+        appendMsg('hi');
+      } else if (nowhoue >= 0 && nowhoue <= 10) {
+        appendMsg('Hello, Good morning');
+      } else {
+        appendMsg('Good evening');
+      }
+
+      appendMsg("what's your name?");
+    } else if (val.includes('i have problem with')) {
+      if (val.includes('course') || val.includes('program') || val.includes('payment')) {
+        appendMsg('Can you write your queries in details.');
+        // appendMsg('Is it helpful? (yes/no)');
+      } else if (val.includes('okay') || val.includes('ok')) {
+        appendMsg('Thank you!.');
+        appendMsg('Is it helpful? (yes/no)');
+      } else {
+        appendMsg("Sorry, I'm not able to understand your point. Please ask something else.");
+      }
+    } else if (val.includes('yes')) {
+      appendMsg("It's my pleasure that I can help you");
+      this.sayBye();
+    } else if (val.includes('no')) {
+      appendMsg("It's my bad that I can't able to help you. Please try later");
+      this.sayBye();
+    } else if (
+      val.includes('my name is ') ||
+      val.includes('i am ') ||
+      val.includes("i'm ") ||
+      mainval.split(' ').length < 2
+    ) {
+      if (val.includes('my name is')) {
+        this.name = val.replace('my name is', '');
+      } else if (val.includes('i am')) {
+        this.name = val.replace('i am', '');
+      } else if (val.includes("i'm")) {
+        this.name = val.replace("i'm", '');
+      } else {
+        this.name = mainval;
+      }
+
+      appendMsg(`Hi ${this.name}, how can I help you?`);
+    } else {
+      appendMsg("Sorry, I'm not able to understand what you want to say");
+    }
+
+
+    setTimeout(() => {
+      const lastMsgElement = document.querySelector('.Messages_list .msg:last-child');
+      if (lastMsgElement) {
+        lastMsgElement.scrollIntoView({ behavior: 'smooth' });
+      }
     });
-
-  }
-  sendMessage() {
-    // console.log(this.value)
-    this.chatService.getBotAnswer(this.value);
-    this.value = '';
   }
 
-  public checkVisited() {
-    // reverse the value of property
-    this.isVisited = !this.isVisited;
- }
+  sayBye() {
+    let nowtime = new Date();
+    let nowhoue = nowtime.getHours();
+
+    if (nowhoue <= 10) {
+      this.messages.push({ type: 'bot', text: 'Have a nice day! :)' });
+    } else if (nowhoue >= 11 || nowhoue <= 20) {
+      this.messages.push({ type: 'bot', text: 'Goodbye!' });
+    } else {
+      this.messages.push({ type: 'bot', text: 'Good night!' });
+    }
+  }
+
 }
