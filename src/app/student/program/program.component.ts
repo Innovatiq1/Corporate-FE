@@ -55,7 +55,7 @@ export class ProgramComponent {
 
 getClassList() {
   let filterProgram = this.filterName
-  this.classService.getProgramClassListWithPagination({ filterProgram,...this.coursePaginationModel, status: 'active' }).subscribe(
+  this.classService.getProgramClassListWithPagination({ filterProgram,...this.coursePaginationModel, status: 'open' }).subscribe(
     (response) => {
       this.dataSource = response.data.docs;
       this.totalItems = response.data.totalDocs
