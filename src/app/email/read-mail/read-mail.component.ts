@@ -63,10 +63,11 @@ export class ReadMailComponent implements OnInit {
       this.emailDetails = response;
       this.mails = response?.mail;
       let userDetails = JSON.parse(localStorage.getItem('currentUser')!);
-      this.filteredMails = this.mails.filter((mail: { from: string; to: string; }) => {
+      this.filteredMails = this.mails.filter((mail: { from: string; to: string;cc:string }) => {
         let fromEmails = mail.from.split(',').map(email => email.trim());
         let toEmails = mail.to.split(',').map(email => email.trim());
-        return fromEmails.includes(userDetails.user.email) || toEmails.includes(userDetails.user.email);
+        let ccEmails = mail.cc.split(',').map(email => email.trim());
+        return fromEmails.includes(userDetails.user.email) || toEmails.includes(userDetails.user.email) || ccEmails.includes(userDetails.user.email)  ;
       });
       
       if (Array.isArray(this.mails)) {
