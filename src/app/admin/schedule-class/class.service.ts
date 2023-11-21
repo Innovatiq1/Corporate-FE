@@ -58,7 +58,7 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
     return params;
   }
   getStudentRegisteredProgramClasses(data:any) {
-    return this.http.get(`${this.prefix}admin/studentClasses/studentApproveList`,{ params: data }).pipe(
+    return this.http.get(`${this.prefix}admin/studentClasses/studentApproveList`,{ params: this.buildParams(data) }).pipe(
       map((response:any) => {
         return response;
       })

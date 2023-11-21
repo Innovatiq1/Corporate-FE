@@ -4,6 +4,7 @@ import { CourseService } from '@core/service/course.service';
 import {  CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 import Swal from 'sweetalert2';
 import { ClassService } from 'app/admin/schedule-class/class.service';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 @Component({
   selector: 'app-program',
   templateUrl: './program.component.html',
@@ -17,7 +18,7 @@ export class ProgramComponent {
       active: 'All Programs',
     },
   ];
-
+  tab: number = 0;
   coursePaginationModel: Partial<CoursePaginationModel>;
   studentRegisteredModel!: Partial<CoursePaginationModel>;
   studentApprovedModel!: Partial<CoursePaginationModel>;
@@ -35,6 +36,9 @@ export class ProgramComponent {
   totalRegisteredItems: any;
   studentApprovedClasses: any;
   totalApprovedItems: any;
+  filterRegistered='';
+  filterApproved='';
+
 
 
 
@@ -53,6 +57,17 @@ export class ProgramComponent {
 
   }
 
+  tabChanged(event: MatTabChangeEvent) {
+    if(event.index == 0){
+      this.tab = 0
+    } else if (event.index == 1){
+      this.tab = 1
+    } else if(event.index == 2){
+      this.tab = 2
+    }
+  }
+
+
 getClassList() {
   let filterProgram = this.filterName
   this.classService.getProgramClassListWithPagination({ filterProgram,...this.coursePaginationModel, status: 'open' }).subscribe(
@@ -70,17 +85,15 @@ getClassList() {
 }
 
 performSearch() {
-  if(this.filterName){
     this.getClassList();
-  } else {
-    this.getClassList();
-
-  }
+    this.getRegisteredCourse();
+    this.getApprovedCourse();
 }
 
 getRegisteredCourse(){
   let studentId=localStorage.getItem('id')
-  const payload = { studentId: studentId, status: 'registered' };
+  let filterRegisteredCourse = this.filterRegistered
+  const payload = {  filterRegisteredCourse,studentId: studentId, status: 'registered' ,...this.coursePaginationModel};
   this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
    this.studentRegisteredClasses = response.data.docs;
    this.totalRegisteredItems = response.data.totalDocs
@@ -92,7 +105,8 @@ getRegisteredCourse(){
 }
 getApprovedCourse(){
   let studentId=localStorage.getItem('id')
-  const payload = { studentId: studentId, status: 'approved' };
+  let filterApprovedCourse = this.filterApproved
+  const payload = {  filterApprovedCourse,studentId: studentId, status: 'approved' ,...this.coursePaginationModel};
   this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
    this.studentApprovedClasses = response.data.docs;
    this.totalApprovedItems = response.data.totalDocs
