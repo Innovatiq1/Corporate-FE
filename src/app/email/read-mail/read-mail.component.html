@@ -32,7 +32,7 @@
                     <div class="flex-grow-1">
                       <span class="date float-end">{{mail?.date | date}} {{mail?.time}}</span>
                       <h6 class="text-primary">{{mail?.fromName}} ( {{mail?.from}} )</h6>
-                      <small class="text-muted">to: {{mail?.to}}</small>
+                      <small class="text-muted">to: {{mail?.to}}, cc:{{mail?.cc}}</small>
                     </div>
                   </div>
                 <div class="view-mail">
@@ -64,11 +64,18 @@
                   <a type="button" (click)="toggleReplyAllForm()"><span class="reply">Reply all</span></a>
                 </p>
                 <div *ngIf="showReplyForm">
-                  <form [formGroup]="replyForm" (submit)="sendReply()">
-                    <mat-form-field class="example-full-width"  appearance="outline">
+                  <form [formGroup]="replyForm" >
+                    <mat-form-field class="example-full-width to-field" appearance="outline">
                       <mat-label>TO</mat-label>
-                      <input  formControlName="to"matInput id="email_address">
-                    </mat-form-field>
+                      <input formControlName="to" matInput id="email_address">
+                      <button mat-button class="cc-button" (click)="toggleCCField()">CC</button>
+                    </mat-form-field>                    
+                    <div *ngIf="showCCField" class="form-line">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>CC</mat-label>
+                        <input formControlName="cc" matInput id="cc_email_address">
+                      </mat-form-field>
+                    </div>
                     <ckeditor  formControlName="content"[editor]="Editor"></ckeditor>
                     <div class="file-drop-area">
                       <div class="file">
@@ -78,16 +85,23 @@
                       <span class="file-msg"><h5>{{uploadedAttachment ? uploadedAttachment : 'Drag and Drop File Here' }}</h5></span>
                       </div>
                     </div><br>
-                    <button type="submit" class="btn btn-primary mt-2">Send Reply</button>
+                    <button type="submit" (click)="sendReply()" class="btn btn-primary mt-2">Send Reply</button>
                     <mat-icon type="button" class="float-end del" (click)="toggleReplyForm()">delete</mat-icon>
                   </form>
                 </div>
                 <div *ngIf="showReplyAllForm">
-                  <form [formGroup]="replyForm" (submit)="replyAll()">
-                    <mat-form-field class="example-full-width"  appearance="outline">
+                  <form [formGroup]="replyForm" >
+                    <mat-form-field class="example-full-width to-field" appearance="outline">
                       <mat-label>TO</mat-label>
-                      <input  formControlName="to"matInput id="email_address">
-                    </mat-form-field>
+                      <input formControlName="to" matInput id="email_address">
+                      <button mat-button class="cc-button" (click)="toggleCCField()">CC</button>
+                    </mat-form-field>                    
+                    <div *ngIf="showCCField" class="form-line">
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>CC</mat-label>
+                        <input formControlName="cc" matInput id="cc_email_address">
+                      </mat-form-field>
+                    </div>
                     <ckeditor  formControlName="content"[editor]="Editor"></ckeditor>
                     <div class="file-drop-area">
                       <div class="file">
@@ -97,7 +111,7 @@
                       <span class="file-msg"><h5>{{uploadedAttachment ? uploadedAttachment : 'Drag and Drop File Here' }}</h5></span>
                       </div>
                     </div><br>
-                    <button type="submit" class="btn btn-primary mt-2">Send Reply</button>
+                    <button type="submit"  (click)="replyAll()"class="btn btn-primary mt-2">Send Reply</button>
                     <mat-icon type="button" class="float-end del" (click)="toggleReplyAllForm()">delete</mat-icon>
                   </form>
                 </div>

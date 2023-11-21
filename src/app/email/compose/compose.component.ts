@@ -31,6 +31,8 @@ export class ComposeComponent {
   emailDetails: any;
   currentDate!: Date;
   currentTime!: string;
+  showCCField = false;
+
 
 
   constructor(private router: Router, private fb: FormBuilder, private certificateService: CertificateService, private emailService: EmailConfigService,
@@ -46,7 +48,9 @@ export class ComposeComponent {
       to: ['', []],
       subject: ['', []],
       attachment: ['', []],
-      content: ['', []]
+      content: ['', []],
+      cc: ['']
+
     })
 
   }
@@ -57,6 +61,10 @@ export class ComposeComponent {
     }
 
   }
+
+  toggleCCField() {
+    this.showCCField = !this.showCCField;
+  }
   getMailById() {
     this.emailService.getMailDetailsByMailId(this.mailId).subscribe((response: any) => {
       let attachment = response?.attachment;
@@ -66,6 +74,7 @@ export class ComposeComponent {
         to: response.mail[0].to,
         content: response.mail[0].content,
         subject: response.subject,
+        cc:response.mail[0].cc
       })
     })
   }
@@ -91,6 +100,7 @@ export class ComposeComponent {
 
     mail.push({
       to: this.composeForm.value.to,
+      cc:this.composeForm.value.cc,
       content: this.composeForm.value.content,
       attachment: this.attachment,
       from: userDetails.user.email,
@@ -127,6 +137,7 @@ export class ComposeComponent {
     this.currentTime = this.currentDate.toLocaleTimeString();
     mail.push({
       to: this.composeForm.value.to,
+      cc:this.composeForm.value.cc,
       content: this.composeForm.value.content,
       attachment: this.attachment,
       from: userDetails.user.email,
