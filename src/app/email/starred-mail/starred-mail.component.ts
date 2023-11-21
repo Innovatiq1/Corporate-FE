@@ -220,8 +220,10 @@ export class StarredMailComponent {
   toggleStar(email: any) {
     if(email.starred || email.toStarred){
       email.starred = false;
+      email.toStarred = false;
     } else if(!email.starred || !email.toStarred){
       email.starred = true;
+      email.toStarred = true;
     }
     this.selectedEmails.push(email.id)
     const payload={

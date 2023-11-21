@@ -58,8 +58,8 @@ export class SpamComponent {
   deleteSelectedEmails() {
     let mailId = JSON.parse(localStorage.getItem('currentUser')!).user.email;
     const selectedEmails = this.selectedEmails; 
-    const toMatch = selectedEmails.find((email) => email.to === mailId);
-    const fromMatch = selectedEmails.find((email) => email.from === mailId);
+    const toMatch = selectedEmails.find((email) => email.mail[0].to === mailId);
+    const fromMatch = selectedEmails.find((email) => email.mail[0].from === mailId);
   
     if (toMatch && fromMatch) {
       const payloadTo = {
@@ -176,8 +176,9 @@ export class SpamComponent {
   removeSpamEmails() {
     let mailId = JSON.parse(localStorage.getItem('currentUser')!).user.email;
     const selectedEmails = this.selectedEmails; 
-    const toMatch = selectedEmails.find((email) => email.to === mailId);
-    const fromMatch = selectedEmails.find((email) => email.from === mailId);
+
+    const toMatch = selectedEmails.find((email) => email.mail[0].to === mailId);
+    const fromMatch = selectedEmails.find((email) => email.mail[0].from === mailId);
   
     if (toMatch && fromMatch) {
       const payloadTo = {
