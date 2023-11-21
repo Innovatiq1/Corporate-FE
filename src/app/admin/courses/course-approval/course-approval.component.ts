@@ -120,7 +120,7 @@ export class CourseApprovalComponent {
         title: 'Success',
         text: 'Course approved successfully.',
         icon: 'success',
-        confirmButtonColor: '#526D82',
+        // confirmButtonColor: '#526D82',
       });
       this.getCoursesList();
     }, (error) => {
@@ -128,7 +128,7 @@ export class CourseApprovalComponent {
         title: 'Error',
         text: 'Failed to approve course. Please try again.',
         icon: 'error',
-        confirmButtonColor: '#526D82',
+        // confirmButtonColor: '#526D82',
       });
     });
   }

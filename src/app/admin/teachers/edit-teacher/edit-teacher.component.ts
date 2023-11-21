@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { InstructorService } from '@core/service/instructor.service';
 import { Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
+import { StudentsService } from 'app/admin/students/all-students/students.service';
 
 @Component({
   selector: 'app-edit-teacher',
@@ -32,8 +33,8 @@ export class EditTeacherComponent {
   user: any;
   fileName: any;
   files: any;
-  
-  constructor(private fb: UntypedFormBuilder,public teachersService: TeachersService,private activatedRoute: ActivatedRoute,
+  dept: any;
+  constructor(private fb: UntypedFormBuilder,public teachersService: TeachersService,private activatedRoute: ActivatedRoute, private StudentService: StudentsService,
     
     private instructor: InstructorService,private router:Router) {
     //this.proForm = this.createContactForm();
@@ -111,6 +112,7 @@ export class EditTeacherComponent {
 ngOnInit(): void {
     //this.setup()
 this.getData();
+this.getDepartment();
 }
 getData(){
   forkJoin({
@@ -185,5 +187,12 @@ cancel() {
   window.history.back();
 }
 
+getDepartment(){
+  this.StudentService.getAllDepartments().subscribe((response: any) =>{
+    this.dept = response.data.docs;
+    console.log("dept",this.dept)
+   })
+
+}
   
 }
