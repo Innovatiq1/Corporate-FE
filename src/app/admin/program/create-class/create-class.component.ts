@@ -340,7 +340,7 @@ export class CreateClassComponent {
             title: 'Success',
             text: 'Class Created successfully.',
             icon: 'success',
-            confirmButtonColor: '#526D82',
+            // confirmButtonColor: '#d33',
           });
           this.router.navigateByUrl(`admin/program/schedule-class`);
                 });
@@ -356,7 +356,7 @@ export class CreateClassComponent {
             title: 'Success',
             text: 'Class updated successfully.',
             icon: 'success',
-            confirmButtonColor: '#526D82',
+            // confirmButtonColor: '#d33',
           });
           window.history.back();
         });

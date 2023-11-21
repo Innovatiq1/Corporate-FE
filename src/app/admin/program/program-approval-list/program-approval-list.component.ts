@@ -145,7 +145,7 @@ implements OnInit{
         title: 'Success',
         text: 'Program approved successfully.',
         icon: 'success',
-        confirmButtonColor: '#526D82',
+        // confirmButtonColor: '#d33',
       });
       this.getProgramList();
     }, (error) => {
@@ -153,7 +153,7 @@ implements OnInit{
         title: 'Error',
         text: 'Failed to approve program. Please try again.',
         icon: 'error',
-        confirmButtonColor: '#526D82',
+        // confirmButtonColor: '#d33',
       });
     });
   }

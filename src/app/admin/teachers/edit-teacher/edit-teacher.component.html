@@ -86,23 +86,13 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                  <label>Select Department<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-select formControlName="department" required>
-                      <mat-option [value]="'mechanical'">
-                        Mechanical
-                      </mat-option>
-                      <mat-option [value]="'science'">
-                        Science
-                      </mat-option>
-                      <mat-option [value]="'mathematics'">
-                        Mathematics
-                      </mat-option>
-                      <mat-option [value]="'computer'">
-                        Computer
-                      </mat-option>
-                      <mat-option [value]="'civil'">
-                        Civil
+                  <label>Select Department <span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline">
+                    <mat-select formControlName="department" required >
+                      <mat-option [value]="dept.department" *ngFor="let dept of dept">
+                       {{dept.department }}
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="proForm.get('department')?.hasError('required')">
