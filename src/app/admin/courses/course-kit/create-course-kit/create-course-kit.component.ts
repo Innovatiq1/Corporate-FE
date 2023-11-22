@@ -77,8 +77,8 @@ export class CreateCourseKitComponent implements OnInit{
       shortDescription: new FormControl('', [Validators.required,...this.utils.validators.descripton, ...this.utils.validators.noLeadingSpace]),
       longDescription: new FormControl('', [Validators.required,...this.utils.validators.longDescription, ...this.utils.validators.noLeadingSpace]),
       videoLink:new FormControl('', []),
-      startDate: ['', [Validators.required]],
-      endDate: ['', [Validators.required]]
+      // startDate: ['', [Validators.required]],
+      // endDate: ['', [Validators.required]]
       // sections: new FormControl('', [ Validators.required,...this.utils.validators.sections]),
     } ,{ validator: this.dateValidator });
 

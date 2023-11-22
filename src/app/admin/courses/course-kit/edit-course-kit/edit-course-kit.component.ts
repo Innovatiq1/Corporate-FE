@@ -77,8 +77,8 @@ export class EditCourseKitComponent {
       shortDescription: new FormControl('', [ ]),
       longDescription: new FormControl('', []),
       videoLink:new FormControl('',[]),
-      startDate: ['', [Validators.required]],
-      endDate: ['', [Validators.required]]
+      // startDate: ['', [Validators.required]],
+      // endDate: ['', [Validators.required]]
       // sections: new FormControl('', [ Validators.required,...this.utils.validators.sections]),
     } ,{ validator: this.dateValidator });
 
@@ -159,12 +159,12 @@ export class EditCourseKitComponent {
       if(response){
         this.course = response.course;
         this.fileName=response?.course?.videoLink?response?.course?.videoLink[0].filename:null
-        let startingDate=response?.course?.startDate;
-        let endingDate=response?.course?.endDate;
-        let startTime=response?.course?.startDate.split("T")[1];
-        let startingTime=startTime?.split(".")[0];
-        let endTime=response?.course?.endDate.split("T")[1];
-        let endingTime=endTime?.split(".")[0];
+        // let startingDate=response?.course?.startDate;
+        // let endingDate=response?.course?.endDate;
+        // let startTime=response?.course?.startDate?.split("T")[1];
+        // let startingTime=startTime?.split(".")[0];
+        // let endTime=response?.course?.endDate.split("T")[1];
+        // let endingTime=endTime?.split(".")[0];
         this.documentLink = response.course?.documentLink;
         this.uploaded=this.documentLink.split('/')
         this.uploadedDocument = this.uploaded.pop();
@@ -174,9 +174,9 @@ export class EditCourseKitComponent {
           shortDescription: response?.course?.shortDescription,
           longDescription: response?.course?.longDescription,
           videoLink: response?.course?.videoLink?response?.course?.videoLink[0]._id:null,
-          startDate:this.courseKitForm.get('startDate')?.patchValue(startingDate),
+          // startDate:this.courseKitForm.get('startDate')?.patchValue(startingDate),
             // moment(startingDate).format("MM/DD/YYYY,h:mm A"),
-            endDate:this.courseKitForm.get('endDate')?.patchValue(endingDate),
+            // endDate:this.courseKitForm.get('endDate')?.patchValue(endingDate),
           
         });
 

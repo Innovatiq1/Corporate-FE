@@ -246,7 +246,6 @@
                                         <td mat-cell *matCellDef="let row">   
                                             <a class="vl-container" *ngFor="let video of row.videoLink; let i = index"
                                             href="javaScript:void(0)"
-                                            [class.disabled]="parseDate(row.endDate) < currentDate"
                                             (click)="playVideo(video)">
                                             {{ video.filename |truncate : 10}}
                       

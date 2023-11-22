@@ -12,7 +12,7 @@
                         <!-- <h2>Create Course</h2> -->
 
                     </div>
-                    <form [formGroup]="courseKitForm" (ngSubmit)="submitCourseKit()">
+                    <form [formGroup]="courseKitForm" >
                         <div class="body m-4">
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -96,11 +96,10 @@
                                 </div>
                               </div>
 
-                              <div class="row">
+                              <!-- <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                                     <label>Video Start Date</label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                        <!-- <mat-label>Course Name</mat-label> -->
                                         <input
                                         matInput
                                         [owlDateTimeTrigger]="date"
@@ -116,15 +115,11 @@
                                       >
                                       <owl-date-time #date></owl-date-time>
                                         
-                                        <!-- <mat-error *ngIf="courseKitForm.get('startDate')?.hasError('required')">
-                                            Enter Course Name
-                                        </mat-error> -->
                                     </mat-form-field>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                                     <label>Video End Date<span class="mandatory">&nbsp;*</span></label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                        <!-- <mat-label>Course Name</mat-label> -->
                                         <input
                                         matInput
                                         [owlDateTimeTrigger]="date2"
@@ -145,7 +140,7 @@
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
-                            </div>
+                            </div> -->
                         
                         </div>
                     </form>
