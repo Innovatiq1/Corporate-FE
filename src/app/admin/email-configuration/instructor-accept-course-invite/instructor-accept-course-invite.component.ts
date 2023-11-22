@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { EmailConfigService } from '@core/service/email-config.service';
 import { UtilsService } from '@core/service/utils.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,11 +13,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./instructor-accept-course-invite.component.scss']
 })
 export class InstructorAcceptCourseInviteComponent {
- 
+
   edit = true;
   emailTemplateForm!: FormGroup;
   id: any;
-  itemData: any; 
+  itemData: any;
   pageContent: any;
   isLoading = false;
   assignData = [];
@@ -31,20 +32,48 @@ export class InstructorAcceptCourseInviteComponent {
       active: 'Instructor Accept Course Invite Status ',
     },
   ];
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold']
+      ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  };
   constructor(
     private fb: FormBuilder,
-    public utils:UtilsService, 
-    private emailConfigurationService: EmailConfigService, 
+    public utils:UtilsService,
+    private emailConfigurationService: EmailConfigService,
     private ref: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
-   
+
   ) { }
 
   ngOnInit(): void {
     this.initialize();
-    
+
       this.getForgetPasswordTemplate();
-   
+
   }
 
   toggle(_data: any){
@@ -54,13 +83,13 @@ export class InstructorAcceptCourseInviteComponent {
       email_subject: _data.email_subject,
       email_top_header_text:_data.email_top_header_text,
       email_content:_data.email_content,
-     
+
     });
 
   }
   initialize() {
     this.createForm();
-    
+
   }
   back(){
     this.edit =!this.edit;
@@ -85,7 +114,7 @@ export class InstructorAcceptCourseInviteComponent {
         email_subject: ['', [Validators.required]],
         email_top_header_text: ['', [Validators.required]],
         email_content: ['', [Validators.required]],
-        
+
       },
     );
     this.emailTemplateForm.valueChanges.subscribe(() => {
@@ -98,7 +127,7 @@ export class InstructorAcceptCourseInviteComponent {
       this.ref.detectChanges();
   }
 )}
-  
+
   update(){
     return new Promise<void>((resolve, reject) => {
       // this.markAllTouched();

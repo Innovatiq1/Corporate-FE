@@ -31,7 +31,7 @@
                         <div class="row para mt-4" *ngFor="let listdata of assignData;  let j = index;">
                             <div class="col-md-11" >
                                 <p>Trainer Accept Course</p>
-                    
+
                             </div>
                             <div class="col-md-1">
                                 <button mat-button [matMenuTriggerFor]="menu">
@@ -41,9 +41,9 @@
                                     <path
                                       d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                                   </svg>
-              
+
                                   </button>
-                                  
+
                                           <mat-menu #menu="matMenu" xPosition="before">
                                             <button mat-menu-item  class="tbl-action-btn" (click)="toggle(listdata)">
                                               <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'" ></app-feather-icons>
@@ -59,7 +59,7 @@
                                 <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2 mx-auto">
                                     <label>Email Subject<span class="mandatory">&nbsp;*</span></label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                        <input matInput type="text" id="name" 
+                                        <input matInput type="text" id="name"
                                             class="form-control" placeholder="Welcome" formControlName="email_subject">
                                     </mat-form-field>
                                 </div>
@@ -68,7 +68,7 @@
                                 <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2 mx-auto">
                                     <label>Top Welcome Text<span class="mandatory">&nbsp;*</span></label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                        <input matInput type="text" id="name" 
+                                        <input matInput type="text" id="name"
                                         formControlName="email_top_header_text" class="form-control" placeholder="Course Invoice Details">
                                     </mat-form-field>
                                 </div>
@@ -76,12 +76,13 @@
                             <div class="row">
                                 <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2 mx-auto">
                                   <label>Text<span class="mandatory">&nbsp;*</span></label>
-                                  <ckeditor [editor]="Editor" id="editor" formControlName="email_content"></ckeditor>
-                                 
+                                  <!-- <ckeditor [editor]="Editor" id="editor" formControlName="email_content"></ckeditor> -->
+                                  <angular-editor placeholder="Enter text..." formControlName="email_content" [config]="config"></angular-editor>
+
                                 </div>
-          
+
                               </div>
-                            
+
                             <div class="row body">
                                 <div class="col-md-5 offset-lg-1">
                                   <button mat-button id="back" (click)="back()">Back</button>
@@ -89,14 +90,14 @@
                                 <div class="col-md-3 offset-lg-3">
                                   <div class="d-grid gap-4 d-md-flex">
                                   <button mat-button id="submit" (click)="update()">Update</button>
-                           
+
                                   </div>
                                 </div>
                               </div>
-                          
+
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
         </div>
