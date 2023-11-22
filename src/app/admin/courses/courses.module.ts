@@ -26,6 +26,7 @@ import { CreateClassComponent } from './create-class/create-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { ApproveListComponent } from './approve-list/approve-list.component';
 import { CompletionListComponent } from './completion-list/completion-list.component';
+import { StudentVideoPlayerComponent } from './course-kit/student-video-player/student-video-player.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { CompletionListComponent } from './completion-list/completion-list.compo
     CreateCategoriesComponent,
 
     VideoPlayerComponent,
+    StudentVideoPlayerComponent,
     CreateCourseKitComponent,
     EditCourseKitComponent,
     EditCategoriesComponent,
@@ -48,6 +50,7 @@ import { CompletionListComponent } from './completion-list/completion-list.compo
     CreateClassComponent,
     ApproveListComponent,
     CompletionListComponent,
+    StudentVideoPlayerComponent,
 
 
   ],

@@ -52,6 +52,17 @@ export class CourseService {
     }
     return params;
   }
+
+  saveVideoPlayTime(payload:any) {
+    const apiUrl = `${this.prefix}admin/video-played`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+  getVideoPlayedById(studentId:any,classId: string) {
+    const apiUrl = `${this.prefix}admin/video-played/${studentId}/${classId}`;
+    return this._Http.get<CourseModel>(apiUrl).pipe(map((response) => response));
+  }
+
+
   saveRegisterClass(payload:any) {
     const apiUrl = `${this.prefix}admin/studentClasses`;
     return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
