@@ -43,7 +43,7 @@ const routes: Routes = [
         component: CompletedCourseComponent
       },
       {
-        path: 'instructor-course-invite',
+        path: 'course-registered-email',
         component: InstructorCourseInviteComponent
       },
       {
