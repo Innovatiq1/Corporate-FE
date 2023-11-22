@@ -177,41 +177,89 @@ ngOnInit(): void {
         ...this.courseKitForm.value,
 
       };
-      this.courseService
-        .editProgramCourseKit(this.courseId, updatedCourseKit)
-        .subscribe(
-          () => {
-            Swal.fire({
-              title: "Updated",
-              text: "Program Kit updated successfully",
-              icon: "success",
-            });
-            //this.modalRef.close();
-            this.router.navigateByUrl('/admin/program/program-kit');
-          },
-          (error: { message: any; error: any; }) => {
-            Swal.fire(
-              "Failed to update program kit",
-              error.message || error.error,
-              "error"
-            );
-          }
-        );
-    } else {
-      this.isSubmitted=true;    }
+      Swal.fire({
+        title: 'Uploading...',
+        text: 'Please wait...',
+        allowOutsideClick: false,
+        timer: 18000,
+        timerProgressBar: true
+        // onBeforeOpen: () => {
+        // //   Swal.showLoading();
+        //  },
+      })
+      // this.courseService
+      //   .editProgramCourseKit(this.courseId, updatedCourseKit)
+      //   .subscribe(
+      //     () => {
+      //       Swal.fire({
+      //         title: "Updated",
+      //         text: "Program Kit updated successfully",
+      //         icon: "success",
+      //       });
+      //       //this.modalRef.close();
+      //       this.router.navigateByUrl('/admin/program/program-kit');
+      //     },
+          
+          
+      //   );
+      
+      this.courseService.uploadVideo(this.files).subscribe(
+        (response: any) => {
+          const videoId = response.videoIds;
+          this.commonService.setVideoId(videoId)
+
+          courseKitData.videoLink = videoId;
+          //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+          // this.currentVideoIds.push(videoId);
+          this.editProgramCourseKit(courseKitData);
+
+          Swal.close();
+        },
+        (err: any) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Upload Failed',
+            text: 'An error occurred while uploading the video',
+          });
+          Swal.close();
+        }
+      );
+      // } else {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Invalid File Type',
+      //     text: 'Please upload video files',
+      //   });
+      // }
+    }
+
+    else {
+      //this.createCourseKit(courseKitData);
+      // this.isSubmitted=false
+    }
+    
   }
-  private createProgramCourseKit(courseKitData: CourseKit): void {
-    this.courseService.createProgramCourseKit(courseKitData).subscribe(
+
+  private editProgramCourseKit(courseKitData: CourseKit): void {
+    courseKitData.documentLink=this.documentLink
+    const updatedCourseKit: CourseKit = {
+      id: this.courseId,
+        ...this.courseKitForm.value,
+    
+       };
+    this.courseService.editProgramCourseKit(this.courseId, updatedCourseKit).subscribe(
       () => {
         Swal.fire({
-          title: "Successful",
-          text: "Program Kit created successfully",
+          title: "Updated",
+          text: "Program Kit Updated successfully",
           icon: "success",
         });
         //this.fileDropEl.nativeElement.value = "";
         this.courseKitForm.reset();
         //this.toggleList()
-        this.router.navigateByUrl('/admin/program/program-kit');
+        //this.router.navigateByUrl("/admin/courses/create-template");
+        this.router.navigateByUrl('/admin/program/program-kit-template');
+        //this.router.navigateByUrl('/admin/program/program-kit');
 
       },
       (error) => {
