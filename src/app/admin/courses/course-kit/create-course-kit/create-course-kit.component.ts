@@ -80,7 +80,7 @@ export class CreateCourseKitComponent implements OnInit{
       // startDate: ['', [Validators.required]],
       // endDate: ['', [Validators.required]]
       // sections: new FormControl('', [ Validators.required,...this.utils.validators.sections]),
-    } ,{ validator: this.dateValidator });
+    });
 
     this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
       this.courseId = params.id;

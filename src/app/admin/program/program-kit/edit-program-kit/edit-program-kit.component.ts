@@ -95,11 +95,7 @@ export class EditProgramKitComponent {
       shortDescription: new FormControl('', [Validators.required,...this.utils.validators.descripton, ...this.utils.validators.noLeadingSpace]),
       longDescription: new FormControl('', [Validators.required,...this.utils.validators.longDescription, ...this.utils.validators.noLeadingSpace]),
       videoLink:new FormControl('', []),
-      startDate: new FormControl('',[Validators.required]),
-      endDate: new FormControl('',[Validators.required]),
-
-      // sections: new FormControl('', [ Validators.required,...this.utils.validators.sections]),
-    } ,{ validator: this.dateValidator });
+    });
 
     this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
       this.courseId = params.id;
@@ -239,27 +235,14 @@ ngOnInit(): void {
         if(response){
           this.course = response.course;
           this.fileName=response?.course?.videoLink?response?.course?.videoLink[0].filename:null
-          let startingDate=response?.course?.startDate;
-          let endingDate=response?.course?.endDate;
-          let startTime=response?.course?.startDate.split("T")[1];
-          let startingTime=startTime?.split(".")[0];
-          let endTime=response?.course?.endDate.split("T")[1];
-          let endingTime=endTime?.split(".")[0];
           this.documentLink = response.course?.documentLink;
         this.uploaded=this.documentLink.split('/')
-        this.uploadedDocument = this.uploaded.pop();
-         // let start=moment(startingDate, 'HH:mm:ss').format('hh:mm:ss A');
-          console.log(moment(startingDate).format("MM/DD/YYYY, h:mm A"))
-  
+        this.uploadedDocument = this.uploaded.pop();  
           this.courseKitForm.patchValue({
             name: response?.course?.name,
             shortDescription: response?.course?.shortDescription,
             longDescription: response?.course?.longDescription,
-            videoLink: response?.course?.videoLink?response?.course?.videoLink[0]._id:null,
-            startDate:this.courseKitForm.get('startDate')?.patchValue(startingDate),
-            // moment(startingDate).format("MM/DD/YYYY,h:mm A"),
-            endDate:this.courseKitForm.get('endDate')?.patchValue(endingDate),
-            
+            videoLink: response?.course?.videoLink?response?.course?.videoLink[0]._id:null,            
           });
   
         }
