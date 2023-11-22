@@ -435,8 +435,8 @@ MENU_LIST = [
         //     type: "none"
         // },
         {
-            id: "instructor-accept-course-invite",
-            title: "Instructor Accept Course Invite Status",
+            id: "course-registered-email",
+            title: "Course Registered Email",
             type: "none"
         },
         // {
