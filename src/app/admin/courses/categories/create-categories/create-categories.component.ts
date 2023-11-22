@@ -157,10 +157,10 @@ export class CreateCategoriesComponent implements OnInit{
   }
   createSubCategory(): void {
     this.isSubmitted=true
-    if (this.subCategoryForm.invalid) {
-      this.validations=true
-      return;
-    }
+    // if (this.subCategoryForm.invalid) {
+    //   this.validations=true
+    //   return;
+    // }
 
     this.subCategoryData = this.subcategories.value;
     this.subCategoryData.forEach(subcategory => {
