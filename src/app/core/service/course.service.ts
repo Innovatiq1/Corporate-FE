@@ -57,9 +57,9 @@ export class CourseService {
     const apiUrl = `${this.prefix}admin/video-played`;
     return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
   }
-  getVideoPlayedById(studentId:any,classId: string) {
+  getVideoPlayedById(studentId:any,classId: any) {
     const apiUrl = `${this.prefix}admin/video-played/${studentId}/${classId}`;
-    return this._Http.get<CourseModel>(apiUrl).pipe(map((response) => response));
+    return this._Http.get<any>(apiUrl).pipe(map((response) => response));
   }
 
 

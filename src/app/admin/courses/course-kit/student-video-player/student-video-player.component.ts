@@ -4,6 +4,7 @@ import { BsModalRef } from "ngx-bootstrap/modal";
 import * as Plyr from "plyr";
 import { environment } from "environments/environment";
 import { CourseService } from "@core/service/course.service";
+import { ClassService } from "app/admin/schedule-class/class.service";
 
 @Component({
   selector: 'app-student-video-player',
@@ -27,7 +28,7 @@ export class StudentVideoPlayerComponent {
     {} as ElementRef<HTMLVideoElement>;
 
   constructor(
-    public bsModalRef: BsModalRef,private courseService: CourseService
+    public bsModalRef: BsModalRef,private courseService: CourseService,private classService: ClassService
   ) {}
   ngOnInit(): void {
     if (this.videoURL) this.initPlayer(this.videoURL);
@@ -100,15 +101,27 @@ export class StudentVideoPlayerComponent {
       this.video.nativeElement.addEventListener('ended', () => {
       let classId = localStorage.getItem('classId');
       let studentId = localStorage.getItem('id')
-      let payload = {
-        status:'ended',
-        studentId:studentId,
-        classId:classId
-
-      }
-      this.courseService.saveVideoPlayTime(payload).subscribe(
-        () => {
-        })    
+      this.courseService.getVideoPlayedById(studentId,classId).subscribe((response)=>{
+        if(response){
+        } else {
+          let payload = {
+            status:'ended',
+            studentId:studentId,
+            classId:classId
+          }
+          this.courseService.saveVideoPlayTime(payload).subscribe(
+            () => {
+              let payload ={
+                status:'completed',
+                studentId:studentId,
+              }
+              this.classService.saveApprovedClasses(classId,payload).subscribe((response)=>{
+              })
+            })    
+  
+        }
+      })
+  
     });
 
   });
