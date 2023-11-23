@@ -63,7 +63,7 @@
             </div>
             <div class="body overflow-auto">
               <div class="responsive_table">
-                <table mat-table matSort [dataSource]="dataSource1" class="mat-cell advance-table">
+                <table mat-table matSort [dataSource]="dataSource" class="mat-cell advance-table">
                   <!-- Checkbox Column -->
                   <!-- Checkbox Column -->
                   <ng-container matColumnDef="select">
@@ -83,29 +83,29 @@
                   <ng-container matColumnDef="Program Name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Program Name</mat-header-cell>
                     <mat-cell *matCellDef="let row" >
-                      <span class="mobile-label">Program Name:</span>{{row.name}}</mat-cell>
+                      <span class="mobile-label">Program Name:</span>{{row.program}}</mat-cell>
                   </ng-container>
                   <!-- Short Description -->
                   <ng-container matColumnDef="Payment Date">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Payment Date</mat-header-cell>
                     <mat-cell *matCellDef="let row" >
-                      <span class="mobile-label">Payment Date:</span>{{row.date}}</mat-cell>
+                      <span class="mobile-label">Payment Date:</span>{{row.createdAt | date}}</mat-cell>
                   </ng-container>
                    <!-- Long Description -->
                    <ng-container matColumnDef="Amount">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
                     <mat-cell *matCellDef="let row" >
-                      <span class="mobile-label">Amount:</span>{{row.amount}}</mat-cell>
+                      <span class="mobile-label">Amount:</span>{{row.price}}$</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="Student Name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Student Name</mat-header-cell>
                     <mat-cell *matCellDef="let row" >
-                      <span class="mobile-label">Student Name:</span>{{row.sname}}</mat-cell>
+                      <span class="mobile-label">Student Name:</span>{{row.name}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="Payment Status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Payment Status</mat-header-cell>
                     <mat-cell *matCellDef="let row" >
-                      <span class="mobile-label">Payment Status:</span>{{row.status}}</mat-cell>
+                      <span class="mobile-label">Payment Status:</span>{{row.status | titlecase}}</mat-cell>
                   </ng-container>
                   
                 
@@ -124,7 +124,7 @@
                       </button>
 
                               <mat-menu #menu="matMenu" xPosition="before">
-                                <button mat-menu-item>
+                                <button mat-menu-item (click)="view(row._id)">
                                   <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
                                   <span class="menu-text">View</span>
                                 </button>

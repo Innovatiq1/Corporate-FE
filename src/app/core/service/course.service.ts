@@ -67,9 +67,9 @@ export class CourseService {
     const apiUrl = `${this.prefix}admin/studentClasses`;
     return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
   }
-  registerProgramClass(studentId: any,programName:any, classId: string) {
+  registerProgramClass(payload:any) {
     const apiUrl = `${this.prefix}admin/studentClasses/registerProgram`;
-    return this._Http.post<any>(apiUrl, {program_name:programName, studentId: studentId, classId: classId }).pipe(map((response) => response));
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
   }
 
   getAllCourses(
@@ -339,6 +339,15 @@ export class CourseService {
       params: this.buildParams(filter),
     });
   }
+  getAllProgramsPayments(
+    filter?: Partial<CoursePaginationModel>
+  ): Observable<ApiResponse> {
+    const apiUrl = this.defaultUrl+'paymentHistory/programsPaymentHistory';
+    console.log("==new=",apiUrl)
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+  }
 
   getAllPaymentsById(Id:any
   ): Observable<ApiResponse> {
@@ -346,6 +355,12 @@ export class CourseService {
     console.log("==new=",apiUrl)
     return this._Http.get<ApiResponse>(apiUrl);
   }
+  getAllProgramsPaymentsById(Id:any
+    ): Observable<ApiResponse> {
+      const apiUrl = this.defaultUrl+`paymentHistory/programsPaymentHistory/${Id}`;
+      console.log("==new=",apiUrl)
+      return this._Http.get<ApiResponse>(apiUrl);
+    }
 }
 
 

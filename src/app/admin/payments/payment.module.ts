@@ -9,12 +9,14 @@ import { CoursePaymentsComponent } from './course-payments/course-payments.compo
 import { ProgramPaymentsComponent } from './program-payments/program-payments.component';
 import { PaymentRoutingModule } from './payment-routing.module';
 import { ViewPaymentsComponent } from './view-payments/view-payments.component';
+import { ViewProgramPaymentComponent } from './view-program-payment/view-program-payment.component';
 
 @NgModule({
   declarations: [
     CoursePaymentsComponent,
     ProgramPaymentsComponent,
-    ViewPaymentsComponent
+    ViewPaymentsComponent,
+    ViewProgramPaymentComponent
   ],
   imports: [
     CommonModule,

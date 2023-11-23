@@ -1,10 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import {CourseKitModel, CourseModel } from '@core/models/course.model';
+import {CourseKitModel, CourseModel, CoursePaginationModel } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
 
@@ -13,7 +13,7 @@ import { UtilsService } from '@core/service/utils.service';
   templateUrl: './program-payments.component.html',
   styleUrls: ['./program-payments.component.scss']
 })
-export class ProgramPaymentsComponent {
+export class ProgramPaymentsComponent implements OnInit {
   displayedColumns: string[] = [
     'select',
     'Program Name',
@@ -23,10 +23,10 @@ export class ProgramPaymentsComponent {
     'Payment Status',
     'status',
   ];
-  dataSource1 = [
-    { name: 'Ship Energy Efficiency Courses', date: 'Nov 9', amount: '2500', sname: 'Gung Tui', status: 'Done' },
-    { name: 'Fuel Bunkering Operations', date: 'Nov 10', amount: '2000', sname: 'Chung Lee', status: 'Done' },
-  ];
+  // dataSource1 = [
+  //   { name: 'Ship Energy Efficiency Courses', date: 'Nov 9', amount: '2500', sname: 'Gung Tui', status: 'Done' },
+  //   { name: 'Fuel Bunkering Operations', date: 'Nov 10', amount: '2000', sname: 'Chung Lee', status: 'Done' },
+  // ];
 
   breadscrums = [
     {
@@ -41,6 +41,7 @@ export class ProgramPaymentsComponent {
   pageSizeArr = this.utils.pageSizeArr;
   selection = new SelectionModel<CourseModel>(true, []);
   dataSource: any;
+  coursePaginationModel!: Partial<CoursePaginationModel>;
 
   constructor(private router: Router, private formBuilder: FormBuilder,
     public utils: UtilsService, private courseService: CourseService,
@@ -54,9 +55,20 @@ export class ProgramPaymentsComponent {
 
   
   ngOnInit(): void {
-   
+   this.getAllPrograms();
   }
-
+  getAllPrograms(){
+    this.courseService.getAllProgramsPayments({ ...this.coursePaginationModel}).subscribe(response =>{
+      console.log("res",response)
+     this.dataSource = response.data.docs;
+     this.totalItems = response.data.totalDocs;
+    })
+  }
+  view(id:any){
+    console.log("id", id)
+    this.router.navigate(['/admin/payment/view-program-payment/'], {queryParams:{id:id}})
+    // [routerLink]="['/admin/payment/view-payments/']"
+    }
   pageSizeChange($event: any) {
     this.courseKitModel.page = $event?.pageIndex + 1;
     this.courseKitModel.limit = $event?.pageSize;
