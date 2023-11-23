@@ -22,9 +22,12 @@ export class CourseComponent {
   coursePaginationModel: Partial<CoursePaginationModel>;
   studentRegisteredModel!: Partial<CoursePaginationModel>;
   studentApprovedModel!: Partial<CoursePaginationModel>;
+  studentCompletedModel!: Partial<CoursePaginationModel>;
+
   filterName='';
   filterRegistered='';
   filterApproved='';
+  filterCompleted ='';
   classesData: any;
   pagination :any;
   totalItems: any;
@@ -36,7 +39,10 @@ export class CourseComponent {
   dataSource: any;
   studentRegisteredClasses: any;
   studentApprovedClasses: any;
+  studentCompletedClasses: any;
   totalApprovedItems: any;
+  totalCompletedItems: any;
+
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   tab: number = 0;
 
@@ -45,6 +51,7 @@ export class CourseComponent {
     this.coursePaginationModel = {};
     this.studentRegisteredModel = {};
     this.studentApprovedModel = {};
+    this.studentCompletedModel = {};
 
   }
 
@@ -52,6 +59,7 @@ export class CourseComponent {
     this.getAllCourse();
     this.getRegisteredCourse();
     this.getApprovedCourse();
+    this.getCompletedCourse();
   }
 
   tabChanged(event: MatTabChangeEvent) {
@@ -61,6 +69,8 @@ export class CourseComponent {
       this.tab = 1
     } else if(event.index == 2){
       this.tab = 2
+    } else if(event.index == 3){
+      this.tab = 3
     }
   }
 getAllCourse(){
@@ -103,6 +113,21 @@ getApprovedCourse(){
   })
 }
 
+getCompletedCourse(){
+  let studentId=localStorage.getItem('id')
+  let filterCompletedCourse = this.filterCompleted
+  const payload = {  filterCompletedCourse,studentId: studentId, status: 'completed' ,...this.coursePaginationModel};
+  this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
+   this.studentCompletedClasses = response.data.docs;
+   this.totalCompletedItems = response.data.totalDocs
+   this.studentCompletedModel.docs = response.data.docs;
+   this.studentCompletedModel.page = response.data.page;
+   this.studentCompletedModel.limit = response.data.limit;
+   this.studentCompletedModel.totalDocs = response.data.totalDocs;
+  })
+}
+
+
 
 pageSizeChange($event: any) {
   this.coursePaginationModel.page = $event?.pageIndex + 1;
@@ -119,6 +144,13 @@ pageStudentApprovedSizeChange($event: any) {
   this.studentApprovedModel.limit = $event?.pageSize;
   this.getApprovedCourse();
 }
+
+pageStudentCompletedSizeChange($event: any) {
+  this.studentCompletedModel.page = $event?.pageIndex + 1;
+  this.studentCompletedModel.limit = $event?.pageSize;
+  this.getCompletedCourse();
+}
+
 
 
 private mapCategories(): void {
@@ -174,6 +206,7 @@ performSearch() {
     this.getAllCourse();
     this.getRegisteredCourse();
     this.getApprovedCourse();
+    this.getCompletedCourse();
 }
 
 }

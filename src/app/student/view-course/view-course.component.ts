@@ -65,6 +65,7 @@ export class ViewCourseComponent {
   isStatus = false;
   isApproved = false
   isCancelled = false;
+  isCompleted = false
   documentLink: any;
   uploadedDoc: any;
   title!: string;
@@ -140,6 +141,11 @@ export class ViewCourseComponent {
         this.isRegistered == true;
         this.isApproved=true;
       }
+      if(this.studentClassDetails.status =='completed' ){
+        this.isRegistered == true;
+        this.isCompleted=true;
+      }
+
       if(this.studentClassDetails.status =='cancel' ){
         this.isRegistered == true;
         this.isCancelled=true;

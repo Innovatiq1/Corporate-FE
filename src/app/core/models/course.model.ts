@@ -209,6 +209,7 @@ export interface CoursePaginationModel extends Pagination {
 	filterProgram: string;
 	filterRegisteredCourse: string;
 	filterApprovedCourse: string;
+	filterCompletedCourse: string;
 	sortBy: string;
 	sortByDirection: string;
 	status: string;
