@@ -13,4 +13,14 @@ export class CommonService {
   getVideoId() {
     return this.videoId;
   }
+
+  private progressArray: any[] = [];
+
+  getProgressArray(): any[] {
+    return this.progressArray;
+  }
+
+  setProgress(progress: any): void {
+    this.progressArray=progress
+  }
 }

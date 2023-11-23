@@ -36,9 +36,9 @@ export class ViewCourseComponent {
   displayedColumns1: string[] = [
     'Course Name',
     'Short Description',
-    'Long Description',
     'Video Link',
-    'Document Link'
+    'Document Link',
+    'Completed'
     ];
   dataSource:any;
   currentPlaybackProgress: number = 0;
@@ -152,11 +152,6 @@ export class ViewCourseComponent {
       }
     });
   }
-  // getCourseKitDetails(){
-  //   this.courseService.getClassList(this.courseId).subscribe((response) => {
-  //     this.courseKitDetails=response?.course_kit;
-  //   });
-  // }
   getJobTemplates() {
     this.courseService.getJobTempletes().subscribe(
       (data: any) => {
@@ -167,14 +162,6 @@ export class ViewCourseComponent {
       }
     );
   }
-
-  // playVideo(video: { url: any; }): void {
-  //   if (video?.url) {
-  //     this.openVidePlayer(video);
-  //   } else {
-  //     console.error("Invalid video URL");
-  //   }
-  // }
 
   playVideo(video: { url: any, playbackProgress: number }): void {
     if (video?.url) {

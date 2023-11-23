@@ -5,6 +5,7 @@ import * as Plyr from "plyr";
 import { environment } from "environments/environment";
 import { CourseService } from "@core/service/course.service";
 import { ClassService } from "app/admin/schedule-class/class.service";
+import { CommonService } from "@core/service/common.service";
 
 @Component({
   selector: 'app-student-video-player',
@@ -28,7 +29,8 @@ export class StudentVideoPlayerComponent {
     {} as ElementRef<HTMLVideoElement>;
 
   constructor(
-    public bsModalRef: BsModalRef,private courseService: CourseService,private classService: ClassService
+    public bsModalRef: BsModalRef,private courseService: CourseService,private classService: ClassService,
+    private commonService: CommonService
   ) {}
   ngOnInit(): void {
     if (this.videoURL) this.initPlayer(this.videoURL);
@@ -96,8 +98,13 @@ export class StudentVideoPlayerComponent {
     this.video.nativeElement.addEventListener('timeupdate', () => {
       const progress = (this.video.nativeElement.currentTime / this.video.nativeElement.duration) * 100;
       this.array.push(progress);
-      localStorage.setItem('currentPlaybackProgress', progress.toString());
+      this.commonService.setProgress(this.array);
+
+
     });
+    
+
+
       this.video.nativeElement.addEventListener('ended', () => {
       let classId = localStorage.getItem('classId');
       let studentId = localStorage.getItem('id')
@@ -140,6 +147,20 @@ export class StudentVideoPlayerComponent {
   }
 
   destroyModal(): void {
+      const playBackTime = this.commonService.getProgressArray();
+      let lastButOneValue = playBackTime[playBackTime.length - 1];
+      let classId = localStorage.getItem('classId');
+      let studentId = localStorage.getItem('id')
+      let payload = {
+        studentId:studentId,
+        classId:classId,
+        playbackTime:lastButOneValue
+      }
+
+      this.classService.saveApprovedClasses(classId,payload).subscribe((response)=>{
+      })
+  
+
     this.hls.destroy();
     this.bsModalRef.hide();
   }
