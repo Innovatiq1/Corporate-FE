@@ -340,6 +340,12 @@ export class CourseService {
     });
   }
 
+  getAllPaymentsById(Id:any
+  ): Observable<ApiResponse> {
+    const apiUrl = this.defaultUrl+`paymentHistory/userPaymentHistory/${Id}`;
+    console.log("==new=",apiUrl)
+    return this._Http.get<ApiResponse>(apiUrl);
+  }
 }
 
 

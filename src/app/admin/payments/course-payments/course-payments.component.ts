@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
 import { formatDate } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
@@ -34,7 +35,6 @@ export class CoursePaymentsComponent {
       active: 'Course Payments',
     },
   ];
-  
   courseKitModel!: Partial<CourseKitModel>;
   totalItems: any;
   pageSizeArr = this.utils.pageSizeArr;
@@ -42,12 +42,12 @@ export class CoursePaymentsComponent {
   dataSource: any;
   coursePaginationModel!: Partial<CoursePaginationModel>;
   searchTerm: string = '';
+ 
 
   constructor(private router: Router, private formBuilder: FormBuilder,
     public utils: UtilsService, private courseService: CourseService,
     private snackBar: MatSnackBar,
   ) {
-   
     
   }
 
@@ -85,6 +85,12 @@ export class CoursePaymentsComponent {
           this.selection.select(row)
         );
   }
+
+view(id:any){
+console.log("id", id)
+this.router.navigate(['/admin/payment/view-payments/'], {queryParams:{id:id}})
+// [routerLink]="['/admin/payment/view-payments/']"
+}
 
   showNotification(
     colorName: string,
