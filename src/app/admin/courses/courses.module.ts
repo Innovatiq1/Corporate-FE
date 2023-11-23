@@ -26,7 +26,11 @@ import { CreateClassComponent } from './create-class/create-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { ApproveListComponent } from './approve-list/approve-list.component';
 import { CompletionListComponent } from './completion-list/completion-list.component';
+
+import { AngularEditorModule } from '@kolkov/angular-editor';
+
 import { StudentVideoPlayerComponent } from './course-kit/student-video-player/student-video-player.component';
+
 
 
 @NgModule({
@@ -66,6 +70,7 @@ import { StudentVideoPlayerComponent } from './course-kit/student-video-player/s
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     CKEditorModule,
+    AngularEditorModule
   ],
 })
 export class CoursesModule {}

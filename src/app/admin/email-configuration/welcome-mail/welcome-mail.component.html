@@ -76,7 +76,8 @@
                             <div class="row">
                                 <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2 mx-auto">
                                   <label>Text<span class="mandatory">&nbsp;*</span></label>
-                                  <ckeditor [editor]="Editor" id="editor" formControlName="email_content1"></ckeditor>
+                                  <!-- <ckeditor [editor]="Editor" id="editor" formControlName="email_content1"></ckeditor> -->
+                                  <angular-editor placeholder="Enter text..." formControlName="email_content1" [config]="config"></angular-editor>
 
                                 </div>
 

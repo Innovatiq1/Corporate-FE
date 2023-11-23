@@ -15,6 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { InstructorService } from '@core/service/instructor.service';
 import * as moment from 'moment';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 @Component({
   selector: 'app-add-course',
   templateUrl: './add-course.component.html',
@@ -70,7 +71,35 @@ export class AddCourseComponent implements OnInit {
       active: 'Create Course',
     },
   ];
-  
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold']
+      ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  };
+
   constructor(private router: Router,private fb: FormBuilder, private _formBuilder: FormBuilder,
     private courseService: CourseService,
     private certificateService:CertificateService,
@@ -81,7 +110,7 @@ export class AddCourseComponent implements OnInit {
       let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-course');
     this.viewUrl = urlPath.includes('view-course');
-    
+
     if(this.editUrl===true){
       this.breadscrums = [
         {
@@ -100,7 +129,7 @@ export class AddCourseComponent implements OnInit {
         },
       ];
     }
-   
+
       this.firstFormGroup = this._formBuilder.group({
         title: ['', [Validators.required,Validators.pattern(/^[a-zA-Z ]/)]],
         courseCode: ['', [Validators.required,Validators.pattern(/^[a-zA-Z0-9]/)]],
@@ -109,7 +138,7 @@ export class AddCourseComponent implements OnInit {
         fee: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
         currency_code: new FormControl('',[]),
         course_duration_in_days: new FormControl('',[Validators.min(1),Validators.pattern(/^\d+(\.\d+)?$/)]),
-        training_hours: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),        
+        training_hours: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
         skill_connect_code: new FormControl('',[Validators.pattern(/^[a-zA-Z0-9]/)]),
         course_description: new FormControl('',[ Validators.maxLength(100)]),
         course_detailed_description: new FormControl('',[]),
@@ -138,8 +167,8 @@ export class AddCourseComponent implements OnInit {
       if(this.editUrl || this.viewUrl){
       this.getData();
       }
-  
-  
+
+
   }
 
 
@@ -165,9 +194,9 @@ export class AddCourseComponent implements OnInit {
     }
     if(this.viewUrl){
       this.mode = 'viewUrl';
-  
+
     }
-    
+
     let payload = {
       type: 'Instructor',
     };
@@ -178,12 +207,12 @@ export class AddCourseComponent implements OnInit {
     //     'instructor',
     //     this.instructorList
     //   );
-      
+
     // });
-   
+
 
 }
- 
+
 isInputReadonly(): boolean {
   return this.mode === 'viewUrl'; // If mode is 'viewUrl', return true (readonly); otherwise, return false (editable).
 }
@@ -305,7 +334,7 @@ onFileUpload(event:any) {
 
             const mainCategoryObj = this.mainCategories.find((i) => {
               return mainCategory === i.category_name
-              
+
             })
 
             if (mainCategoryObj === undefined) {
@@ -352,7 +381,7 @@ onFileUpload(event:any) {
             //     icon: 'error',
             //   });
             // }
-           
+
             const courseKitObj = this.courseKits.find((i) => {
               return assignCourseKit === i.name
             })
@@ -382,7 +411,7 @@ onFileUpload(event:any) {
               funding_grant: [fundingGrantObj!.id],
               // course_instructor: [instructorObj!.id],
               course_kit: [courseKitObj!.id],
-              
+
             };
             return uploadData;
           });
@@ -425,7 +454,7 @@ onFileUpload(event:any) {
       // certificates:wbsData?.certificates,
       image_link:this.image_link,
       id:this.courseId,
-     
+
     }
     this.secondFormGroup.value.course_kit = this.firstFormGroup.value.course_kit?.map((item:any) => item.id);
     this.courseService.updateCourse(payload).subscribe((response:any) => {
@@ -451,14 +480,14 @@ onFileUpload(event:any) {
       // instructor: this.courseService.getInstructors(),
       courseKit: this.courseService.getCourseKit(),
       // certificates: this.certificateService.getcertificateBuilders(),
-      
+
     }).subscribe((response: { mainCategory: any; subCategory: any; fundingGrant: any; courseKit: { docs: any; };}) => {
       this.mainCategories = response.mainCategory;
       this.allSubCategories = response.subCategory;
       this.fundingGrants = response.fundingGrant;
       // this.survey = response.survey;
       // this.instructors = response.instructor;
-      this.courseKits = response.courseKit?.docs; 
+      this.courseKits = response.courseKit?.docs;
       // this.certificates = response.certificates.data.docs;
     });
   }
@@ -467,16 +496,16 @@ onFileUpload(event:any) {
     console.log('Form Value', this.firstFormGroup.value);
   }
 
- 
+
   submit() {
-    
+
     if(this.secondFormGroup.valid){
       const courseData = this.firstFormGroup.value;
       console.log("sss", courseData)
       const wbsData = this.secondFormGroup.value;
-      
+
       let payload = {
-        
+
         title: courseData.title,
         courseCode: courseData?.courseCode,
         main_category: courseData?.main_category,
@@ -503,18 +532,18 @@ onFileUpload(event:any) {
         // certificates:wbsData?.certificates,
         image_link:this.image_link,
         website_link:wbsData?.website_link
-        
+
       }
       this.courseService.saveCourse(payload).subscribe((response: any) => {
-       
+
         Swal.fire({
           title: 'Successful',
           text: 'Course created successfully',
           icon: 'success',
         });
-        this.courseAdded=true;  
+        this.courseAdded=true;
         this.router.navigate(['/admin/courses/course-approval'])
-       
+
       });
 
   } else {
@@ -584,12 +613,12 @@ onFileUpload(event:any) {
       this.mainCategoryChange();
       this.cd.detectChanges();
     });
-  
-  
+
+
 }
 
 cancel() {
-  
+
   window.history.back();
 }
 }

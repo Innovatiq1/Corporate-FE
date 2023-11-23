@@ -16,13 +16,14 @@ import { SendCourseInvoiceComponent } from './send-course-invoice/send-course-in
 import { InstructorCourseInviteComponent } from './instructor-course-invite/instructor-course-invite.component';
 import { InstructorAcceptCourseInviteComponent } from './instructor-accept-course-invite/instructor-accept-course-invite.component';
 import { AdminNewEmailComponent } from './admin-new-email/admin-new-email.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 
 @NgModule({
     declarations: [
-      
-    
+
+
     ForgotPasswordComponent,
                  WelcomeMailComponent,
                  InstructorRequestComponent,
@@ -37,7 +38,7 @@ import { AdminNewEmailComponent } from './admin-new-email/admin-new-email.compon
   ],
     imports: [
         CommonModule, EmailConfigurationRoutingModule,
-        ComponentsModule,SharedModule, CKEditorModule,ModalModule.forRoot(),
+        ComponentsModule,SharedModule, CKEditorModule,ModalModule.forRoot(),AngularEditorModule
     ]
 })
 export class EmailConfigurationModule { }
