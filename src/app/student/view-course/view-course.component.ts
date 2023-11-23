@@ -1,11 +1,13 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CourseKitModel } from '@core/models/course.model';
 import { CommonService } from '@core/service/common.service';
 import { CourseService } from '@core/service/course.service';
+import { StudentVideoPlayerComponent } from 'app/admin/courses/course-kit/student-video-player/student-video-player.component';
 import { VideoPlayerComponent } from 'app/admin/courses/course-kit/video-player/video-player.component';
 import { ClassService } from 'app/admin/schedule-class/class.service';
+import { local } from 'd3';
 import {  BsModalService, ModalOptions} from "ngx-bootstrap/modal";
 
 import Swal from 'sweetalert2';
@@ -15,6 +17,7 @@ export interface PeriodicElement {
   weight: number;
   symbol: string;
 }
+
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -27,6 +30,8 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./view-course.component.scss']
 })
 export class ViewCourseComponent {
+  @ViewChild('video', { static: false }) video!: ElementRef;
+
   displayedColumns: string[] = ['position', ' Class Start Date ', ' Class End Date ', 'action'];
   displayedColumns1: string[] = [
     'Course Name',
@@ -36,6 +41,10 @@ export class ViewCourseComponent {
     'Document Link'
     ];
   dataSource:any;
+  currentPlaybackProgress: number = 0;
+  playbackProgress: number = 0; // Add this line to define the property
+
+
   courseKitModel!: Partial<CourseKitModel>;
   templates: any[] = [];
   currentDate!: Date;
@@ -59,14 +68,18 @@ export class ViewCourseComponent {
   documentLink: any;
   uploadedDoc: any;
   title!: string;
+  videoStatus!: string;
+  courseCompleted = false;
 
   constructor(private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService,
     @Inject(DOCUMENT) private document: any){
     this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
       this.classId = params["id"];
     });
+    localStorage.setItem('classId',this.classId)
     this.getRegisteredClassDetails();
     this.getClassDetails();
+    this.getVideoPlayed();
   
 
   }
@@ -78,6 +91,17 @@ export class ViewCourseComponent {
       this.getCourseKitDetails();
     })
   }
+  getVideoPlayed(){
+    let studentId = localStorage.getItem('id')
+    this.courseService.getVideoPlayedById(studentId,this.classId).subscribe((response)=>{
+      let videoPlayed =response;
+      this.videoStatus = response?.status
+      if(this.videoStatus == 'ended'){
+        this.courseCompleted = true
+      }
+    })
+  }
+
   registerClass(classId: string) {
     let userdata = JSON.parse(localStorage.getItem('currentUser')!)
     let studentId=localStorage.getItem('id')
@@ -138,7 +162,15 @@ export class ViewCourseComponent {
     );
   }
 
-  playVideo(video: { url: any; }): void {
+  // playVideo(video: { url: any; }): void {
+  //   if (video?.url) {
+  //     this.openVidePlayer(video);
+  //   } else {
+  //     console.error("Invalid video URL");
+  //   }
+  // }
+
+  playVideo(video: { url: any, playbackProgress: number }): void {
     if (video?.url) {
       this.openVidePlayer(video);
     } else {
@@ -146,10 +178,9 @@ export class ViewCourseComponent {
     }
   }
 
-  openVidePlayer(videoLink: { url?: any; id?: any; }): void {
-    // const { videoLink } = videoLink;
-    if (videoLink?.id) {
-      const videoId = videoLink.id;
+  openVidePlayer(videoLink: { url?: any; id?: any;playbackProgress?: number  }): void {
+    if (videoLink?.url?.id) {
+      const videoId = videoLink.url.id;
       this.courseService.getVideoById(videoId).subscribe((res) => {
         const videoURL = res.data.videoUrl;
         if (!videoURL) {
@@ -167,15 +198,17 @@ export class ViewCourseComponent {
             initialState: {
               videoURL,
               videoType,
+              playbackProgress: videoLink.playbackProgress || 0, // Default to 0 if not provided
+
             },
             class: "videoPlayer-modal",
           };
-          this.modalServices.show(VideoPlayerComponent, initialState);
+          this.modalServices.show(StudentVideoPlayerComponent, initialState);
         }
       });
     }
   }
-  
+    
   parseDate(dateString: string): Date {
     return new Date(dateString);
   }

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseKit, CourseKitModel } from '@core/models/course.model';
 import { CertificateService } from '@core/service/certificate.service';
+import { CommonService } from '@core/service/common.service';
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
 import * as moment from 'moment';
@@ -54,7 +55,8 @@ export class EditCourseKitComponent {
     private formBuilder: FormBuilder,
     public utils: UtilsService,
     private courseService: CourseService,
-    private certificateService: CertificateService
+    private certificateService: CertificateService,
+    private commonService: CommonService,
   ) {
     this.courseKitModel = {};
     let urlPath = this.router.url.split('/')
@@ -111,6 +113,36 @@ export class EditCourseKitComponent {
   // submitCourseKit(): void {
 
   // }
+  // 
+  
+  private editCourseKit(courseKitData: CourseKit): void {
+    courseKitData.documentLink=this.documentLink;
+    const updatedCourseKit: CourseKit = {
+      id: this.courseId,
+      ...this.courseKitForm.value,
+
+    };
+    this.courseService.editCourseKit(this.courseId, updatedCourseKit).subscribe(
+      () => {
+        Swal.fire({
+          title: "Updated",
+          text: "Course Kit Updated successfully",
+          icon: "success",
+        });
+        // this.fileDropEl.nativeElement.value = "";
+        this.courseKitForm.reset();
+        // this.toggleList()
+        this.router.navigateByUrl("/admin/courses/create-template");
+      },
+      (error) => {
+        Swal.fire(
+          "Failed to update course kit",
+          error.message || error.error,
+          "error"
+        );
+      }
+    );
+  }
   submitCourseKit(): void {
     const courseKitData: CourseKit = this.courseKitForm.value;
     courseKitData.documentLink=this.documentLink
@@ -122,33 +154,62 @@ export class EditCourseKitComponent {
         ...this.courseKitForm.value,
 
       };
-      this.courseService
-        .editCourseKit(this.courseId, updatedCourseKit)
-        .subscribe(
-          () => {
-            Swal.fire({
-              title: "Updated",
-              text: "Course Kit updated successfully",
-              icon: "success",
-            });
-            //this.modalRef.close();
-            this.router.navigateByUrl("/admin/courses/course-kit")
-          },
-          (error: { message: any; error: any; }) => {
-            Swal.fire(
-              "Failed to update course kit",
-              error.message || error.error,
-              "error"
-            );
-          }
-        );
-    } else {
-      this.isSubmitted=true;    }
-  }
-  toggleList() {
-    this.router.navigateByUrl("Course/Course Kit")
+      Swal.fire({
+        // title: "Updated",
+        // text: "Course Kit updated successfully",
+        // icon: "success",
+        title: 'Uploading...',
+        text: 'Please wait...',
+        allowOutsideClick: false,
+        timer: 18000,
+        timerProgressBar: true,
+      });
+      // this.courseService.editCourseKit(this.courseId, updatedCourseKit).subscribe(() => {
+      //     Swal.fire({
+      //       // title: "Updated",
+      //       // text: "Course Kit updated successfully",
+      //       // icon: "success",
+      
+      //     });
+      //     //this.modalRef.close();
+      //     this.router.navigateByUrl('/admin/courses/course-kit');
+      // });
+      this.courseService.uploadVideo(this.files).subscribe(
+        (response: any) => {
+          const videoId = response.videoIds;
+          this.commonService.setVideoId(videoId)
 
+          courseKitData.videoLink = videoId;
+        
+          //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+          // this.currentVideoIds.push(videoId);
+          this.editCourseKit(courseKitData);
+
+          Swal.close();
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Upload Failed',
+            text: 'An error occurred while uploading the video',
+          });
+          Swal.close();
+        }
+      );
+    } 
+      
+    else {
+      //this.createCourseKit(courseKitData);
+      // this.isSubmitted=false
+    }
+  
+    // else {
+    //   this.isSubmitted=true;    }
   }
+  // toggleList() {
+  //   this.router.navigateByUrl("Course/Course Kit")
+
+  // }
   
  
   getData(){

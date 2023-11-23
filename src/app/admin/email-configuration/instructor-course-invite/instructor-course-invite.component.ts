@@ -92,17 +92,42 @@ export class InstructorCourseInviteComponent {
 
   getForgetPasswordTemplate() {
     this.emailConfigurationService.getForgetPasswordTemplate().subscribe( response =>{
-      this.assignData  = response?.data?.docs[0]?.mentor_project_invite_template;
+      this.assignData  = response?.data?.docs[0]?.new_project_add_template;
       this.ref.detectChanges();
   }
 )}
+removeTagsAndSpaces(inputString: string) {
+  // Remove <p> tags
+  const stringWithoutPTags = inputString.replace(/<p>/gi, '').replace(/<\/p>/gi, '');
+
+  // Remove <br> tags
+  const stringWithoutBrTags = stringWithoutPTags.replace(/<br\s*\/?>/gi, '');
+  const stringWithoutNbsp = stringWithoutBrTags.replace(/&nbsp;/g, '');
+
+
+  // Remove spaces
+  //const stringWithoutSpaces = stringWithoutBrTags.replace(/\s+/g, '');
+
+  return stringWithoutNbsp;
+}
 update(){
   return new Promise<void>((resolve, reject) => {
     // this.markAllTouched();
     if (this.emailTemplateForm.valid) {
       
         let obj = this.emailTemplateForm.value;
-        obj['insertaction'] = 'mentor_project_invite_template';
+        let test =obj.email_content
+        
+
+        //const stringWithoutSpaces = test.replace(/\s+/g, '');
+
+        // Remove <p> tags
+        const stringWithoutPTags = this.removeTagsAndSpaces(test)
+        obj['email_content']=stringWithoutPTags
+        console.log("stringWithoutPTags",stringWithoutPTags)
+      
+
+        obj['insertaction'] = 'new_project_add_template';
         this.emailConfigurationService.updateForgetPasswordTemplate(obj,this.id).subscribe(
           (res) => {
             Swal.fire({
