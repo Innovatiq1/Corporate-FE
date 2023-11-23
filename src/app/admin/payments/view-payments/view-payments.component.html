@@ -1,0 +1,148 @@
+<!-- <section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb 
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+        <!-- Your content goes here  
+
+        <div class="row clearfix">
+            <form [formGroup]="feedbackForm">
+                <div class="col-lg-4 col-md-4">
+                    <div class="card about">
+
+                        <mat-tab-group mat-align-tabs="start">
+                            <mat-tab label="About">
+                                <div class="p-4">
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b>Name </b>
+                                            <div class="profile-desc-item float-end"></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Email </b>
+                                            <div class="profile-desc-item float-end"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12">
+                    <div class="card about">
+                        <mat-tab-group>
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    Payment Details
+                                </ng-template>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="project_widget">
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b>Course Name </b>
+                                            <div class="profile-desc-item float-end"></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b> Payment Date </b>
+                                            <div class="profile-desc-item float-end"></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b> Payment Type </b>
+                                            <div class="profile-desc-item float-end"></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b> Price </b>
+                                            <div class="profile-desc-item float-end"></div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Status</b>
+                                            <div class="profile-desc-item float-end"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section> -->
+
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+        <!-- Your content goes here  -->
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-12 ">
+                <form [formGroup]="feedbackForm">
+                    <div class="card about">
+                        <mat-tab-group mat-align-tabs="start">
+                            <mat-tab label="About">
+                                <div class="p-4">
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b>Name</b>
+                                            <div class="profile-desc-item float-end">{{name | titlecase}}</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Email</b>
+                                            <div class="profile-desc-item float-end">{{email}}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <form [formGroup]="feedbackForm">
+                    <div class="card ">
+                        <mat-tab-group>
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    Payment Details
+                                </ng-template>
+                                <div class="p-4">
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b>Course Name</b>
+                                            <div class="profile-desc-item float-end">{{course | titlecase}}</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Payment Date</b>
+                                            <div class="profile-desc-item float-end">{{createdAt |date}}</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Payment Type</b>
+                                            <div class="profile-desc-item float-end">{{paymentType | titlecase}}</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Amount</b>
+                                            <div class="profile-desc-item float-end">{{price}}$</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Payment Status</b>
+                                            <div class="profile-desc-item float-end">{{status | titlecase}}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>

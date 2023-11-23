@@ -8,11 +8,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CoursePaymentsComponent } from './course-payments/course-payments.component';
 import { ProgramPaymentsComponent } from './program-payments/program-payments.component';
 import { PaymentRoutingModule } from './payment-routing.module';
+import { ViewPaymentsComponent } from './view-payments/view-payments.component';
 
 @NgModule({
   declarations: [
     CoursePaymentsComponent,
-    ProgramPaymentsComponent
+    ProgramPaymentsComponent,
+    ViewPaymentsComponent
   ],
   imports: [
     CommonModule,
