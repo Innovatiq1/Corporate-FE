@@ -124,7 +124,7 @@
                       </button>
 
                               <mat-menu #menu="matMenu" xPosition="before">
-                                <button mat-menu-item>
+                                <button mat-menu-item   (click)="view(row._id)">
                                   <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
                                   <span class="menu-text">View</span>
                                 </button>
