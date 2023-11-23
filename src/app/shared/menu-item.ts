@@ -383,6 +383,11 @@ MENU_LIST = [
             id: "design",
             title: "Design",
             type: "none"
+        },
+        {
+            id: "template",
+            title: "Certificate Template",
+            type: "none"
         }
     ]
 },
