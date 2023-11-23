@@ -6,22 +6,22 @@ import { id } from '@swimlane/ngx-charts';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 
 @Component({
-  selector: 'app-view-payments',
-  templateUrl: './view-payments.component.html',
-  styleUrls: ['./view-payments.component.scss']
+  selector: 'app-view-program-payment',
+  templateUrl: './view-program-payment.component.html',
+  styleUrls: ['./view-program-payment.component.scss']
 })
-export class ViewPaymentsComponent implements OnInit {
+export class ViewProgramPaymentComponent {
   breadscrums = [
     {
       title: 'Payments',
       items: ['Payments'],
-      active: 'View Course Payments',
+      active: 'View Program Payments',
     },
   ];
   displayedColumns: string[] = ['position', ' Class Start Date ', ' Class End Date ', 'action'];
   dataSource:any;
   feedbackForm!: FormGroup;
-  course:any;
+  program:any;
   paymentid: any;
   createdAt:any;
   paymentType:any;
@@ -47,10 +47,9 @@ export class ViewPaymentsComponent implements OnInit {
   }
 
   getAllCourse(){
-    this.courseService.getAllPaymentsById(this.paymentid).subscribe(response =>{
+    this.courseService.getAllProgramsPaymentsById(this.paymentid).subscribe(response =>{
     this.dataSource = response;
-    console.log("res", this.dataSource.course)
-    this.course = this.dataSource.course;
+    this.program = this.dataSource.program;
     this.createdAt = this.dataSource.createdAt;
     this.paymentType = this.dataSource.paymentType;
     this.price = this.dataSource.price;

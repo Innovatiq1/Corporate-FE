@@ -36,6 +36,8 @@ import { FailureCourseComponent } from './failure-course/failure-course.componen
 import { ExamsSheduleComponent } from './exams-shedule/exams-shedule.component';
 import { ExamScheduleService } from 'app/admin/exam-schedule/exam-schedule.service';
 import { ProgramSheduleComponent } from './program-shedule/program-shedule.component';
+import { SuccessProgramComponent } from './success-program/success-program.component';
+import { FailureProgramComponent } from './failure-program/failure-program.component';
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import { ProgramSheduleComponent } from './program-shedule/program-shedule.compo
     FailureCourseComponent,
     ExamsSheduleComponent,
     ProgramSheduleComponent,
+    SuccessProgramComponent,
+    FailureProgramComponent,
 
   ],
   imports: [

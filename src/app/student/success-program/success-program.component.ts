@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CourseKitModel } from '@core/models/course.model';
 import { CommonService } from '@core/service/common.service';
@@ -9,24 +9,13 @@ import { ClassService } from 'app/admin/schedule-class/class.service';
 import {  BsModalService, ModalOptions} from "ngx-bootstrap/modal";
 
 import Swal from 'sweetalert2';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
- 
-];
 @Component({
-  selector: 'app-view-program',
-  templateUrl: './view-program.component.html',
-  styleUrls: ['./view-program.component.scss']
+  selector: 'app-success-program',
+  templateUrl: './success-program.component.html',
+  styleUrls: ['./success-program.component.scss']
 })
-export class ViewProgramComponent {
+export class SuccessProgramComponent implements OnInit{
   displayedColumns: string[] = ['position', ' Class Start Date ', ' Class End Date ', 'action'];
   displayedColumns1: string[] = [
     'Course Name',
@@ -59,7 +48,6 @@ export class ViewProgramComponent {
   courseName: any;
   documentLink: any;
   uploadedDoc: any;
-  title!: string;
 
   constructor(private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService,
     @Inject(DOCUMENT) private document: any){
@@ -71,6 +59,14 @@ export class ViewProgramComponent {
   
 
   }
+  ngOnInit(): void {
+    Swal.fire({
+      title: 'Thank you',
+      text: 'We will approve once verified',
+      icon: 'success',
+    });
+
+  }
   getClassDetails(){
     this.classService.getProgramClassById(this.classId).subscribe((response)=>{
       this.classDetails =response;
@@ -79,7 +75,23 @@ export class ViewProgramComponent {
       this.getCourseKitDetails();
     })
   }
- 
+  // registerClass(classId: string) {
+  //   let userdata = JSON.parse(localStorage.getItem('currentUser')!)
+  //   let studentId=localStorage.getItem('id')
+  //   let payload ={
+  //     email:userdata.user.email,
+  //     name:userdata.user.name,
+  //     courseTitle:this.classDetails?.courseId?.title,
+  //     courseFee:this.classDetails?.courseId?.fee,
+  //     studentId:studentId,
+  //     classId:this.classId,
+  //     title:this.title
+  //   }
+  //   this.courseService.saveRegisterClass(payload).subscribe((response) => {
+  //     this.document.location.href = response.data.session.url;
+  //     this.getClassDetails();
+  //   });
+  // }
   registerProgram(classId: string) {
     let userdata = JSON.parse(localStorage.getItem('currentUser')!)
     let studentId=localStorage.getItem('id')
@@ -87,10 +99,10 @@ export class ViewProgramComponent {
       email:userdata.user.email,
       name:userdata.user.name,
       programTitle:this.classDetails?.courseId?.title,
-      programFee:this.classDetails?.courseId?.courseFee,
+      programFee:this.classDetails?.courseId?.fee,
       studentId:studentId,
       classId:this.classId,
-      title:this.title
+      // title:this.title
     }
     // console.log('data',data)
     // let studentId=localStorage.getItem('id')
@@ -99,7 +111,16 @@ export class ViewProgramComponent {
       this.document.location.href = response.data.session.url;
       this.getClassDetails();
     });
-   
+    // this.courseService.registerProgramClass(studentId,programName, this.classId).subscribe((response) => {
+    //   let studentId=localStorage.getItem('user_data');
+    //     Swal.fire({
+    //       title: 'Thank you',
+    //       text: 'We will approve once verified',
+    //       icon: 'success',
+    //     });
+    //   this.isRegistered = true;
+    //   this.getClassDetails();
+    // });
   }
   getCourseKitDetails(){
     this.courseService.getProgramById(this.courseId).subscribe((response) => {

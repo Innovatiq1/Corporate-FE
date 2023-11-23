@@ -16,6 +16,8 @@ import { SucessCourseComponent } from './sucess-course/sucess-course.component';
 import { FailureCourseComponent } from './failure-course/failure-course.component';
 import { ExamsSheduleComponent } from './exams-shedule/exams-shedule.component';
 import { ProgramSheduleComponent } from './program-shedule/program-shedule.component';
+import { SuccessProgramComponent } from './success-program/success-program.component';
+import { FailureProgramComponent } from './failure-program/failure-program.component';
 
 
 const routes: Routes = [
@@ -34,6 +36,14 @@ const routes: Routes = [
   {
     path: 'fail-course/:id',
     component: FailureCourseComponent,
+  },
+  {
+    path: 'sucess-program/:id',
+    component: SuccessProgramComponent,
+  },
+  {
+    path: 'fail-program/:id',
+    component: FailureProgramComponent,
   },
 
   {

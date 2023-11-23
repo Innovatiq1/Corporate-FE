@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CoursePaymentsComponent } from './course-payments/course-payments.component';
 import { ProgramPaymentsComponent } from './program-payments/program-payments.component';
 import { ViewPaymentsComponent } from './view-payments/view-payments.component';
+import { ViewProgramPaymentComponent } from './view-program-payment/view-program-payment.component';
 
 const routes: Routes = [
     {
@@ -12,6 +13,10 @@ const routes: Routes = [
     {
         path: 'view-payments',
         component: ViewPaymentsComponent
+      },
+      {
+        path: 'view-program-payment',
+        component: ViewProgramPaymentComponent
       },
     {
         path: 'program-payments',
