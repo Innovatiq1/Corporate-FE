@@ -7,9 +7,14 @@ import { ClassService } from 'app/admin/schedule-class/class.service';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { MatSort } from '@angular/material/sort';
-import jsPDF from 'jspdf';
+//import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { TableElement, TableExportUtil } from '@shared';
+import { jsPDF } from 'jspdf';
+import DomToImage from 'dom-to-image';
+import { number } from 'echarts';
+import { StudentService } from '@core/service/student.service';
+
 
 @Component({
   selector: 'app-completion-list',
@@ -33,6 +38,10 @@ export class CompletionListComponent {
       active: 'Completion List',
     },
   ];
+pdfData: any = [];
+dafaultGenratepdf: boolean = false;
+element: any;
+
 
 
 
@@ -207,4 +216,106 @@ export class CompletionListComponent {
         }));
       TableExportUtil.exportToExcel(exportData, 'excel');
     }
+    generateCertificate(element: Student){
+      console.log("=========",element)
+      this.dafaultGenratepdf = true;
+      this.pdfData = [];
+            let pdfObj = {
+        title: element?.courseId?.title ,
+        name: element?.studentId
+        ?.name,
+        //project_week: project_week,
+        completdDate: new Date(),
+
+      }
+      this.pdfData.push(pdfObj);
+      console.log(this.pdfData)
+      var convertIdDynamic = 'contentToConvert'
+      console.log(convertIdDynamic)
+      const dashboard = document.getElementById('contentToConvert');
+      console.log("==dashboard===",dashboard)
+        //this.generatePdf1(dashboard, element?.studentId._id, element?.courseId._id,"course");
+        this.genratePdf3(convertIdDynamic, element?.studentId._id, element?.courseId._id);
+    
+
+    }
+    
+    genratePdf3(convertIdDynamic: any, memberId: any, memberProgrmId: any) {
+      this.dafaultGenratepdf = true;
+      setTimeout(() => {
+        const dashboard = document.getElementById(convertIdDynamic);
+        if(dashboard!=null){
+        const dashboardHeight = dashboard.clientHeight;
+        const dashboardWidth = dashboard.clientWidth;
+  
+  
+        const options = { background: 'white', width: dashboardWidth, height: dashboardHeight };
+  
+        DomToImage.toPng(dashboard, options).then((imgData) => {
+          const doc = new jsPDF(dashboardWidth > dashboardHeight ? 'l' : 'p', 'mm', [dashboardWidth, dashboardHeight]);
+          const imgProps = doc.getImageProperties(imgData);
+          const pdfWidth = doc.internal.pageSize.getWidth();
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  
+          doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          //doc.save('Dashboard for hyperpanels.pdf');
+  
+          const pdfData = new File([doc.output("blob")], "programCertificate.pdf", {
+            type: "application/pdf",
+          });
+          Swal.fire({
+            // title: "Updated",
+            // text: "Course Kit updated successfully",
+            // icon: "success",
+            title: 'Certificate Generating...',
+            text: 'Please wait...',
+            allowOutsideClick: false,
+            timer: 18000,
+            timerProgressBar: true,
+          });
+          this.classService.uploadFileApi(pdfData).subscribe((data:any) => {
+            let objpdf = {
+              pdfurl: data.inputUrl,
+              memberId: memberId,
+              CourseId: memberProgrmId,
+            };
+            
+            this.updateCertificte(objpdf)
+           
+            
+          },(err) => {
+  
+          }
+          )
+  
+  
+          
+  
+        });
+        this.dafaultGenratepdf = false;
+      }
+      }, 1000);
+    
+    }
+  
+    
+    updateCertificte(objpdf:any){
+      this.classService.updateCertificateUser(objpdf).subscribe(
+        (response) => {
+          Swal.fire({
+            title: "Updated",
+            text: "Certificate Created successfully",
+            icon: "success",
+          });
+
+        },
+        (err) => {
+
+        },
+      )
+
+    }
+   
+
+
 }

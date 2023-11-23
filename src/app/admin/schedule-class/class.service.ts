@@ -248,6 +248,20 @@ updateProgramClass(id: string, formData: any): Observable<ApiResponse> {
     })
   );
 }
+uploadFileApi(file:any) {
+  let formData = new FormData();
+formData.append('Files', file);
+const apiUrl = `${this.prefix}admin/video/upload`;
+return this.http.post<ApiResponse>(apiUrl, formData);
+
+
+}
+updateCertificateUser(data:any){
+const apiUrl = `${this.prefix}admin/studentClasses/student/certificate`;
+return this.http.put<ApiResponse>(apiUrl, data);
+
+}
+
 
 
 }
