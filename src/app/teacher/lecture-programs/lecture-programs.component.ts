@@ -21,6 +21,7 @@ import { TableElement } from '@shared/TableElement';
 import { formatDate } from '@angular/common';
 import { TableExportUtil } from '@shared/tableExportUtil';
 import jsPDF from 'jspdf';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lecture-programs',
@@ -188,12 +189,12 @@ addNew() {
         this.lecturesService.getDialogData()
       );
       this.refreshTable();
-      this.showNotification(
-        'snackbar-success',
-        'Add Record Successfully...!!!',
-        'bottom',
-        'center'
-      );
+      Swal.fire({
+        title: 'Success',
+        text: 'Add Record Successfully...!!!',
+        icon: 'success',
+        // confirmButtonColor: '#526D82',
+      });
     }
   });
 }
@@ -245,13 +246,13 @@ editCall(row: Lectures) {
           this.lecturesService.getDialogData();
         // And lastly refresh table
         this.refreshTable();
-        this.getClassList()
-        this.showNotification(
-          'black',
-          'Edit Record Successfully...!!!',
-          'bottom',
-          'center'
-        );
+        this.getClassList();
+        Swal.fire({
+          title: 'Success',
+          text: 'Edit Record Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
       }
     }
   });
@@ -277,12 +278,12 @@ deleteItem(row: Lectures) {
       if (foundIndex != null && this.exampleDatabase) {
         this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
-        this.showNotification(
-          'snackbar-danger',
-          'Delete Record Successfully...!!!',
-          'bottom',
-          'center'
-        );
+        Swal.fire({
+          title: 'Success',
+          text: 'Delete Record Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
       }
     }
   });
@@ -317,12 +318,12 @@ removeSelectedRows() {
   //   this.refreshTable();
   //   this.selection = new SelectionModel<Lectures>(true, []);
   // });
-  this.showNotification(
-    'snackbar-danger',
-    totalSelect + ' Record Delete Successfully...!!!',
-    'bottom',
-    'center'
-  );
+  Swal.fire({
+    title: 'Success',
+    text: 'Record Deleted Successfully...!!!',
+    icon: 'success',
+    // confirmButtonColor: '#526D82',
+  });
 }
 public loadData() {
   //this.exampleDatabase = new LecturesService(this.httpClient);

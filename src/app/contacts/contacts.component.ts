@@ -24,6 +24,7 @@ import {
   UnsubscribeOnDestroyAdapter,
 } from '@shared';
 import { formatDate } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contacts',
@@ -103,12 +104,12 @@ export class ContactsComponent
           this.contactsService.getDialogData()
         );
         this.refreshTable();
-        this.showNotification(
-          'snackbar-success',
-          'Add Record Successfully...!!!',
-          'bottom',
-          'center'
-        );
+        Swal.fire({
+          title: 'Success',
+          text: 'Add Record Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
       }
     });
   }
@@ -152,12 +153,12 @@ export class ContactsComponent
             this.contactsService.getDialogData();
           // And lastly refresh table
           this.refreshTable();
-          this.showNotification(
-            'black',
-            'Edit Record Successfully...!!!',
-            'bottom',
-            'center'
-          );
+          Swal.fire({
+            title: 'Success',
+            text: 'Edit Record Successfully...!!!',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
         }
       }
     });
@@ -185,12 +186,12 @@ export class ContactsComponent
         if (foundIndex != null && this.exampleDatabase) {
           this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
           this.refreshTable();
-          this.showNotification(
-            'snackbar-danger',
-            'Delete Record Successfully...!!!',
-            'bottom',
-            'center'
-          );
+          Swal.fire({
+            title: 'Success',
+            text: 'Delete Record Successfully...!!!',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
         }
       }
     });
@@ -224,12 +225,12 @@ export class ContactsComponent
       this.refreshTable();
       this.selection = new SelectionModel<Contacts>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'bottom',
-      'center'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
   }
   public loadData() {
     this.exampleDatabase = new ContactsService(this.httpClient);

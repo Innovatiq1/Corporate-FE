@@ -146,12 +146,18 @@ export class StudentComponent {
       this.refreshTable();
       this.selection = new SelectionModel<CourseModel>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'top',
-      'right'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
+    // this.showNotification(
+    //   'snackbar-danger',
+    //   totalSelect + ' Record Delete Successfully...!!!',
+    //   'top',
+    //   'right'
+    // );
   }
   
   exportExcel() {

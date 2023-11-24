@@ -28,6 +28,7 @@ import { INITIAL_EVENTS } from './events-util';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { UnsubscribeOnDestroyAdapter } from '../shared/UnsubscribeOnDestroyAdapter';
 import { Direction } from '@angular/cdk/bidi';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-calendar',
@@ -144,12 +145,18 @@ export class CalendarComponent
         });
         this.calendarOptions.events = this.calendarEvents;
         this.addCusForm.reset();
-        this.showNotification(
-          'snackbar-success',
-          'Add Record Successfully...!!!',
-          'bottom',
-          'center'
-        );
+        Swal.fire({
+          title: 'Success',
+          text: 'Add Record Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+        // this.showNotification(
+        //   'snackbar-success',
+        //   'Add Record Successfully...!!!',
+        //   'bottom',
+        //   'center'
+        // );
       }
     });
   }
@@ -208,12 +215,18 @@ export class CalendarComponent
             this.editEvent(index, this.calendarData);
           }
         }, this);
-        this.showNotification(
-          'black',
-          'Edit Record Successfully...!!!',
-          'bottom',
-          'center'
-        );
+        Swal.fire({
+          title: 'Success',
+          text: 'Edit Record Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+        // this.showNotification(
+        //   'black',
+        //   'Edit Record Successfully...!!!',
+        //   'bottom',
+        //   'center'
+        // );
         this.addCusForm.reset();
       } else if (result === 'delete') {
         this.calendarData = this.calendarService.getDialogData();
@@ -222,13 +235,18 @@ export class CalendarComponent
             row.event.remove();
           }
         }, this);
-
-        this.showNotification(
-          'snackbar-danger',
-          'Delete Record Successfully...!!!',
-          'bottom',
-          'center'
-        );
+        Swal.fire({
+          title: 'Success',
+          text: 'Delete Record Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+        // this.showNotification(
+        //   'snackbar-danger',
+        //   'Delete Record Successfully...!!!',
+        //   'bottom',
+        //   'center'
+        // );
       }
     });
   }

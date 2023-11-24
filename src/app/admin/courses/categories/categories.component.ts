@@ -183,12 +183,12 @@ export class CategoriesComponent implements OnInit {
       this.refreshTable();
       this.selection = new SelectionModel<CourseModel>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'top',
-      'right'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
   }
 edit(id:any){
   this.router.navigate(['/admin/courses/edit-categories/'+ id]);
