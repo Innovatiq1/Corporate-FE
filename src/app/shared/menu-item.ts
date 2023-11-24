@@ -434,11 +434,11 @@ MENU_LIST = [
         //     title: "Completed Course",
         //     type: "none"
         // },
-        // {
-        //     id: "instructor-course-invite",
-        //     title: "Instructor Course Invite",
-        //     type: "none"
-        // },
+        {
+            id: "course-approval-email",
+            title: "Course Approval",
+            type: "none"
+        },
         {
             id: "course-registered-email",
             title: "Course Registered Email",
