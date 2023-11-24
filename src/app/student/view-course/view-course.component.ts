@@ -71,6 +71,7 @@ export class ViewCourseComponent {
   title!: string;
   videoStatus!: string;
   courseCompleted = false;
+  certificateIssued = false;
 
   constructor(private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService,
     @Inject(DOCUMENT) private document: any){
@@ -141,10 +142,16 @@ export class ViewCourseComponent {
         this.isRegistered == true;
         this.isApproved=true;
       }
-      if(this.studentClassDetails.status =='completed' ){
+      if(!this.studentClassDetails.certifiacteUrl && this.studentClassDetails.status =='completed' ){
         this.isRegistered == true;
         this.isCompleted=true;
       }
+      if(this.studentClassDetails.certifiacteUrl && this.studentClassDetails.status =='completed' ){
+        this.isRegistered == true;
+        this.isCompleted=true;
+        this.certificateIssued = true;
+      }
+
 
       if(this.studentClassDetails.status =='cancel' ){
         this.isRegistered == true;
