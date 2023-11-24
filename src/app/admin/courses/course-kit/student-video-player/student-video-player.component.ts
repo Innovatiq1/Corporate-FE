@@ -57,7 +57,6 @@ export class StudentVideoPlayerComponent {
     this.hls.config.xhrSetup = async function xhrSetup(xhr, url) {
       const urlString = new URL(url);
       const baseURL = urlString.href.split("?")[0];
-      console.log(urlString);
       const signedURL: string = await new Promise((resolve, reject) => {
         let xhrSigned = new XMLHttpRequest();
         const key = url;
@@ -94,17 +93,17 @@ export class StudentVideoPlayerComponent {
         forced: true,
         onChange: (e: any) => this.updateQuality(e),
       };
+      let time =this.commonService.getPlayBackTime();
      this.player =  new Plyr(this.video.nativeElement, defaultOptions);
     this.video.nativeElement.addEventListener('timeupdate', () => {
       const progress = (this.video.nativeElement.currentTime / this.video.nativeElement.duration) * 100;
       this.array.push(progress);
       this.commonService.setProgress(this.array);
-
-
     });
-    
-
-
+    this.video.nativeElement.addEventListener('loadedmetadata', () => {
+      const initialPlaybackPosition = (time / 100) * this.video.nativeElement.duration;
+      this.video.nativeElement.currentTime = initialPlaybackPosition;
+        });
       this.video.nativeElement.addEventListener('ended', () => {
       let classId = localStorage.getItem('classId');
       let studentId = localStorage.getItem('id')

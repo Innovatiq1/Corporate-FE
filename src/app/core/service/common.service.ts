@@ -23,4 +23,15 @@ export class CommonService {
   setProgress(progress: any): void {
     this.progressArray=progress
   }
+
+  private playBackTime!: number;
+
+  setPlayBackTime(time: number) {
+    this.playBackTime = time;
+  }
+
+  getPlayBackTime() {
+    return this.playBackTime;
+  }
+
 }

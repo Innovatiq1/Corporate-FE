@@ -74,7 +74,7 @@ export class ViewCourseComponent {
   certificateIssued = false;
 
   constructor(private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService,
-    @Inject(DOCUMENT) private document: any){
+    @Inject(DOCUMENT) private document: any,private commonService: CommonService){
     this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
       this.classId = params["id"];
     });
@@ -134,6 +134,7 @@ export class ViewCourseComponent {
     let studentId=localStorage.getItem('id')
     this.courseService.getStudentClass(studentId,this.classId).subscribe((response) => {
       this.studentClassDetails=response.data.docs[0];
+      this.commonService.setPlayBackTime(this.studentClassDetails?.playbackTime)
       if(this.studentClassDetails.status =='registered' ){
         this.isRegistered == true;
         this.isStatus=true;
