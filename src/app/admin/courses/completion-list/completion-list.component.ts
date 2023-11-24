@@ -236,7 +236,8 @@ certifiacteUrl:boolean = false;
         name: element?.studentId
         ?.name,
         //project_week: project_week,
-        completdDate: new Date(),
+        completdDate:moment().format('DD ddd MMM YYYY'),
+        
 
       }
       this.pdfData.push(pdfObj);
