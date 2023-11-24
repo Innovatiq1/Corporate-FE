@@ -14,7 +14,7 @@ import { CommonService } from "@core/service/common.service";
 })
 export class StudentVideoPlayerComponent {
   @Input()
-  videoURL: string="";
+  videoURL: string = "";
   @Input() videoType: string = "application/x-mpegURL";
   signedUrl: string = "";
   private player!: Plyr;
@@ -29,12 +29,12 @@ export class StudentVideoPlayerComponent {
     {} as ElementRef<HTMLVideoElement>;
 
   constructor(
-    public bsModalRef: BsModalRef,private courseService: CourseService,private classService: ClassService,
+    public bsModalRef: BsModalRef, private courseService: CourseService, private classService: ClassService,
     private commonService: CommonService
-  ) {}
+  ) { }
   ngOnInit(): void {
     if (this.videoURL) this.initPlayer(this.videoURL);
-    
+
   }
 
   initPlayer(currentVideo: string) {
@@ -62,25 +62,25 @@ export class StudentVideoPlayerComponent {
         const key = url;
         const apiURL = environment.apiUrl;
         const userObject = localStorage.getItem("user_data");
-        if(userObject){
-        const user = JSON.parse(userObject);
-        xhrSigned.open(
-          "GET",
-          `${apiURL}admin/video/signed/url?url=${encodeURIComponent(key)}`
-        );
-        xhrSigned.responseType = "json";
-        xhrSigned.setRequestHeader("Authorization", `JWT ${user.token}`);
-        xhrSigned.send();
+        if (userObject) {
+          const user = JSON.parse(userObject);
+          xhrSigned.open(
+            "GET",
+            `${apiURL}admin/video/signed/url?url=${encodeURIComponent(key)}`
+          );
+          xhrSigned.responseType = "json";
+          xhrSigned.setRequestHeader("Authorization", `JWT ${user.token}`);
+          xhrSigned.send();
 
-        xhrSigned.onload = function () {
-          if (xhrSigned.status === 200) {
-            let responseObj = xhrSigned.response;
-            resolve(responseObj.data);
-          } else {
-            reject();
-          }
-        };
-      }
+          xhrSigned.onload = function () {
+            if (xhrSigned.status === 200) {
+              let responseObj = xhrSigned.response;
+              resolve(responseObj.data);
+            } else {
+              reject();
+            }
+          };
+        }
       });
       xhr.open("GET", signedURL);
     };
@@ -93,72 +93,76 @@ export class StudentVideoPlayerComponent {
         forced: true,
         onChange: (e: any) => this.updateQuality(e),
       };
-      let time =this.commonService.getPlayBackTime();
-     this.player =  new Plyr(this.video.nativeElement, defaultOptions);
-    this.video.nativeElement.addEventListener('timeupdate', () => {
-      const progress = (this.video.nativeElement.currentTime / this.video.nativeElement.duration) * 100;
-      this.array.push(progress);
-      this.commonService.setProgress(this.array);
-    });
-    this.video.nativeElement.addEventListener('loadedmetadata', () => {
-      const initialPlaybackPosition = (time / 100) * this.video.nativeElement.duration;
-      this.video.nativeElement.currentTime = initialPlaybackPosition;
-        });
+      let time = this.commonService.getPlayBackTime();
+      this.player = new Plyr(this.video.nativeElement, defaultOptions);
+      this.video.nativeElement.addEventListener('timeupdate', () => {
+        const progress = (this.video.nativeElement.currentTime / this.video.nativeElement.duration) * 100;
+        this.array.push(progress);
+        this.commonService.setProgress(this.array);
+      });
+      this.video.nativeElement.addEventListener('loadedmetadata', () => {
+        const initialPlaybackPosition = (time / 100) * this.video.nativeElement.duration;
+        this.video.nativeElement.currentTime = initialPlaybackPosition;
+      });
       this.video.nativeElement.addEventListener('ended', () => {
-      let classId = localStorage.getItem('classId');
-      let studentId = localStorage.getItem('id')
-      this.courseService.getVideoPlayedById(studentId,classId).subscribe((response)=>{
-        if(response){
-        } else {
-          let payload = {
-            status:'ended',
-            studentId:studentId,
-            classId:classId
-          }
-          this.courseService.saveVideoPlayTime(payload).subscribe(
-            () => {
-              let payload ={
-                status:'completed',
-                studentId:studentId,
-              }
-              this.classService.saveApprovedClasses(classId,payload).subscribe((response)=>{
+        let classId = localStorage.getItem('classId');
+        let studentId = localStorage.getItem('id')
+        this.courseService.getVideoPlayedById(studentId, classId).subscribe((response) => {
+          if (response) {
+          } else {
+            let payload = {
+              status: 'ended',
+              studentId: studentId,
+              classId: classId
+            }
+            this.courseService.saveVideoPlayTime(payload).subscribe(
+              () => {
+                let payload = {
+                  status: 'completed',
+                  studentId: studentId,
+                }
+                this.classService.saveApprovedClasses(classId, payload).subscribe((response) => {
+                })
               })
-            })    
-  
-        }
-      })
-  
-    });
 
-  });
+          }
+        })
+
+      });
+
+    });
     this.hls.attachMedia(this.video.nativeElement);
     this.hls.loadSource(currentVideo);
-   ( window as any)["hls"] = this.hls;
+    (window as any)["hls"] = this.hls;
 
   }
 
   updateQuality(newQuality: any) {
-    ( window as any)["hls"].levels.forEach((level: { height: any; }, levelIndex: any) => {
+    (window as any)["hls"].levels.forEach((level: { height: any; }, levelIndex: any) => {
       if (level.height === newQuality) {
-        ( window as any)["hls"].currentLevel = levelIndex;
+        (window as any)["hls"].currentLevel = levelIndex;
       }
     });
   }
 
   destroyModal(): void {
-      const playBackTime = this.commonService.getProgressArray();
-      let lastButOneValue = playBackTime[playBackTime.length - 1];
-      let classId = localStorage.getItem('classId');
-      let studentId = localStorage.getItem('id')
-      let payload = {
-        studentId:studentId,
-        classId:classId,
-        playbackTime:lastButOneValue
-      }
+    const playBackTime = this.commonService.getProgressArray();
+    let lastButOneValue = playBackTime[playBackTime.length - 1];
+    let classId = localStorage.getItem('classId');
+    let studentId = localStorage.getItem('id')
+    let payload = {
+      studentId: studentId,
+      classId: classId,
+      playbackTime: lastButOneValue
+    }
+    let time = this.commonService.getPlayBackTime();
+    if (lastButOneValue < time) {
+    } else {
 
-      this.classService.saveApprovedClasses(classId,payload).subscribe((response)=>{
+      this.classService.saveApprovedClasses(classId, payload).subscribe((response) => {
       })
-  
+    }
+
 
     this.hls.destroy();
     this.bsModalRef.hide();
