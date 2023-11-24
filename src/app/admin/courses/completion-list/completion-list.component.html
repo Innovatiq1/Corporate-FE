@@ -105,8 +105,16 @@
 
                     </button> -->
 
-                    <span class="label l-bg-red shadow-style" (click)="complete(row)">Approve</span>
-                    <span class="label l-bg-red shadow-style" (click)="generateCertificate(row)">Certificate</span>
+                    <!-- <span class="label l-bg-red shadow-style" (click)="complete(row)">Approve</span> -->
+                    <div *ngIf="row.certificate">
+                      <span class="label l-bg-green shadow-style" >Certificate issued</span>
+                    
+                  </div>
+                  <div *ngIf="!row.certificate">
+                    <span class="label l-bg-red shadow-style" (click)="generateCertificate(row)">Issue Certificate</span>
+                    <!-- Content to display when certificateUrl is empty -->
+                    <!-- <p>No certificate available</p> -->
+                  </div>                 
                   </mat-cell>
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -229,9 +237,10 @@
                       ">
                     has successfully completed the <b>
                       {{listpdfData?.title}}
-                      Ship Safety Officer
-                  </b> project
-                    on <b> 23/11/2023
+                      <!-- Ship Safety Officer -->
+                  </b> Course
+                    on <b> {{listpdfData?.completdDate}}
+                      
                       <!-- {{listpdfData?.project_completed_date | date: 'dd/MM/yyyy'}}. -->
                   </b>
                   </p>
@@ -249,7 +258,7 @@
                         font-style: italic;
                         max-width: 276px;
                       ">
-                      Ship Safety Officer
+                       {{listpdfData?.title}}
                     <!-- {{listpdfData?.student_projectname}} -->
                      Course is a rigorous 
                      4 week

@@ -41,6 +41,7 @@ export class CompletionListComponent {
 pdfData: any = [];
 dafaultGenratepdf: boolean = false;
 element: any;
+certifiacteUrl:boolean = false;
 
 
 
@@ -217,6 +218,16 @@ element: any;
       TableExportUtil.exportToExcel(exportData, 'excel');
     }
     generateCertificate(element: Student){
+      Swal.fire({
+        // title: "Updated",
+        // text: "Course Kit updated successfully",
+        // icon: "success",
+        title: 'Certificate Generating...',
+        text: 'Please wait...',
+        allowOutsideClick: false,
+        timer: 24000,
+        timerProgressBar: true,
+      });
       console.log("=========",element)
       this.dafaultGenratepdf = true;
       this.pdfData = [];
@@ -260,19 +271,10 @@ element: any;
           doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
           //doc.save('Dashboard for hyperpanels.pdf');
   
-          const pdfData = new File([doc.output("blob")], "programCertificate.pdf", {
+          const pdfData = new File([doc.output("blob")], "courseCertificate.pdf", {
             type: "application/pdf",
           });
-          Swal.fire({
-            // title: "Updated",
-            // text: "Course Kit updated successfully",
-            // icon: "success",
-            title: 'Certificate Generating...',
-            text: 'Please wait...',
-            allowOutsideClick: false,
-            timer: 18000,
-            timerProgressBar: true,
-          });
+          
           this.classService.uploadFileApi(pdfData).subscribe((data:any) => {
             let objpdf = {
               pdfurl: data.inputUrl,
@@ -302,6 +304,15 @@ element: any;
     updateCertificte(objpdf:any){
       this.classService.updateCertificateUser(objpdf).subscribe(
         (response) => {
+          if(response.data.certifiacteUrl){
+            this.certifiacteUrl=true
+
+          }
+          
+          this.getCompletedClasses();
+          //let certifiacteUrl =response.data.certifiacteUrl
+
+          console.log()
           Swal.fire({
             title: "Updated",
             text: "Certificate Created successfully",
