@@ -47,7 +47,7 @@ const routes: Routes = [
         component: InstructorCourseInviteComponent
       },
       {
-        path: 'instructor-accept-course-invite',
+        path: 'course-approval-email',
         component: InstructorAcceptCourseInviteComponent
       },
       {

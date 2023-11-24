@@ -26,7 +26,7 @@ export class InstructorCourseInviteComponent {
     {
       title: 'Forgot Mail',
       items: ['Email Configuration'],
-      active: 'Instructor Course Invite',
+      active: 'Course Registered Email',
     },
   ];
   constructor(

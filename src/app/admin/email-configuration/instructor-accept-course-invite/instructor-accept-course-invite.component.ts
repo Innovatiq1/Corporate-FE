@@ -29,7 +29,7 @@ export class InstructorAcceptCourseInviteComponent {
     {
       title: 'Forgot Mail',
       items: ['Email Configuration'],
-      active: 'Instructor Accept Course Invite Status ',
+      active: 'Course Approval ',
     },
   ];
   config: AngularEditorConfig = {
@@ -127,7 +127,20 @@ export class InstructorAcceptCourseInviteComponent {
       this.ref.detectChanges();
   }
 )}
+removeTagsAndSpaces(inputString: string) {
+  // Remove <p> tags
+  const stringWithoutPTags = inputString.replace(/<p>/gi, '').replace(/<\/p>/gi, '');
 
+  // Remove <br> tags
+  const stringWithoutBrTags = stringWithoutPTags.replace(/<br\s*\/?>/gi, '');
+  const stringWithoutNbsp = stringWithoutBrTags.replace(/&nbsp;/g, '');
+
+
+  // Remove spaces
+  //const stringWithoutSpaces = stringWithoutBrTags.replace(/\s+/g, '');
+
+  return stringWithoutNbsp;
+}
   update(){
     return new Promise<void>((resolve, reject) => {
       // this.markAllTouched();
