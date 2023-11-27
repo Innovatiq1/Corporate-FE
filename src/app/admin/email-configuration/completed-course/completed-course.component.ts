@@ -54,6 +54,7 @@ export class CompletedCourseComponent {
       email_top_header_text:_data.email_top_header_text,
       email_content:_data.email_content,
      
+      bottom_button_text:_data.bottom_button_text,
     });
 
   }
@@ -67,6 +68,21 @@ export class CompletedCourseComponent {
   fetchUpdated() {
     this.patchForm(this.itemData);
   }
+  removeTagsAndSpaces(inputString: string) {
+    // Remove <p> tags
+    const stringWithoutPTags = inputString.replace(/<p>/gi, '').replace(/<\/p>/gi, '');
+  
+    // Remove <br> tags
+    const stringWithoutBrTags = stringWithoutPTags.replace(/<br\s*\/?>/gi, '');
+    const stringWithoutNbsp = stringWithoutBrTags.replace(/&nbsp;/g, '');
+  
+  
+    // Remove spaces
+    //const stringWithoutSpaces = stringWithoutBrTags.replace(/\s+/g, '');
+  
+    return stringWithoutNbsp;
+  }
+  
 
   patchForm(pageContent: any) {
     this.pageContent = pageContent;
@@ -74,6 +90,7 @@ export class CompletedCourseComponent {
       email_subject: pageContent?.email_subject,
       email_top_header_text: pageContent?.email_top_header_text,
       email_content: pageContent?.email_content,
+      bottom_button_text:pageContent?.bottom_button_text
     });
     // this.markAllTouched();
   }
@@ -84,6 +101,8 @@ export class CompletedCourseComponent {
         email_subject: ['', [Validators.required]],
         email_top_header_text: ['', [Validators.required]],
         email_content: ['', [Validators.required]],
+        bottom_button_text:['',[Validators.required]]
+
         
       },
     );
@@ -93,6 +112,7 @@ export class CompletedCourseComponent {
 
   getForgetPasswordTemplate() {
     this.emailConfigurationService.getForgetPasswordTemplate().subscribe( response =>{
+      
       this.assignData  = response?.data?.docs[0]?.completed_project_template;
       this.ref.detectChanges();
   }
@@ -103,6 +123,16 @@ return new Promise<void>((resolve, reject) => {
   if (this.emailTemplateForm.valid) {
    
       let obj = this.emailTemplateForm.value;
+      let test =obj.email_content
+        
+
+        //const stringWithoutSpaces = test.replace(/\s+/g, '');
+
+        // Remove <p> tags
+        const stringWithoutPTags = this.removeTagsAndSpaces(test)
+        obj['email_content']=stringWithoutPTags
+        console.log("stringWithoutPTags",stringWithoutPTags)
+      
       obj['insertaction'] = 'completed_project_template';
       this.emailConfigurationService.updateForgetPasswordTemplate(obj,this.id).subscribe(
         (res) => {
