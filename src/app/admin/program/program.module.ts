@@ -20,6 +20,7 @@ import { CreateProgramKitComponent } from './program-kit/create-program-kit/crea
 import { EditProgramKitComponent } from './program-kit/edit-program-kit/edit-program-kit.component';
 import { CreateClassComponent } from './create-class/create-class.component';
 import { CreateTemplateComponent } from './program-kit/create-template/create-template.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 
@@ -43,7 +44,7 @@ import { CreateTemplateComponent } from './program-kit/create-template/create-te
         ModalModule.forRoot(),
         ProgramRoutingModule,
         ComponentsModule,OwlDateTimeModule,OwlNativeDateTimeModule,
-        CKEditorModule,
+        CKEditorModule,AngularEditorModule
 
 
     ]

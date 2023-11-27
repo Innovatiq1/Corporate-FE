@@ -38,7 +38,7 @@
                       <mat-label>TO</mat-label>
                       <input formControlName="to" matInput id="email_address">
                       <button mat-button class="cc-button" (click)="toggleCCField()">CC</button>
-                    </mat-form-field>                    
+                    </mat-form-field>
                     <div *ngIf="showCCField" class="form-line">
                       <mat-form-field class="example-full-width" appearance="outline">
                         <mat-label>CC</mat-label>
@@ -52,10 +52,11 @@
                       <input formControlName="subject" matInput id="subject">
                     </mat-form-field>
                   </div>
-                  <ckeditor  formControlName="content"[editor]="Editor" data="<p>Hello, world!</p>"></ckeditor>
+                  <!-- <ckeditor  formControlName="content"[editor]="Editor" data="<p>Hello, world!</p>"></ckeditor> -->
+                  <angular-editor placeholder="Enter text..." formControlName="content" [config]="config"></angular-editor>
                     <div class="file-drop-area">
                       <div class="file">
-                      <button mat-raised-button color="primary">Choose File                      
+                      <button mat-raised-button color="primary">Choose File
                         <input formControlName="attachment" (change)="onFileUpload($event)" class="file-input" type="file">
                       </button>
                       <span class="file-msg"><h5>{{uploadedAttachment ? uploadedAttachment : 'Drag and Drop File Here' }}</h5></span>

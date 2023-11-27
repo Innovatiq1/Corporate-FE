@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CertificateService } from '@core/service/certificate.service';
 import { EmailConfigService } from '@core/service/email-config.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-compose',
@@ -33,7 +34,34 @@ export class ComposeComponent {
   currentTime!: string;
   showCCField = false;
 
-
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold']
+      ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  };
 
   constructor(private router: Router, private fb: FormBuilder, private certificateService: CertificateService, private emailService: EmailConfigService,
     private activatedRoute: ActivatedRoute) {
