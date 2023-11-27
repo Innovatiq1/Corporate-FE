@@ -429,11 +429,11 @@ MENU_LIST = [
         //     title: "Course Referral Invite",
         //     type: "none"
         // },
-        // {
-        //     id: "completed-course",
-        //     title: "Completed Course",
-        //     type: "none"
-        // },
+        {
+            id: "completed-course",
+            title: "Completed Course",
+            type: "none"
+        },
         {
             id: "course-approval-email",
             title: "Course Approval",
