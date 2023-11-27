@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { EmailConfigService } from '@core/service/email-config.service';
 import { UtilsService } from '@core/service/utils.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-instructor-course-invite',
@@ -29,6 +30,36 @@ export class InstructorCourseInviteComponent {
       active: 'Course Registered Email',
     },
   ];
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold']
+      ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  };
+  
   constructor(
     private fb: FormBuilder,
     public utils:UtilsService, 
