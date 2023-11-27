@@ -154,12 +154,18 @@ export class AllTeachersComponent
             this.teachersService.getDialogData();
           // And lastly refresh table
           this.refreshTable();
-          this.showNotification(
-            'black',
-            'Edit Record Successfully...!!!',
-            'bottom',
-            'center'
-          );
+          Swal.fire({
+            title: 'Success',
+            text: 'Edit Record Successfully...!!!',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
+          // this.showNotification(
+          //   'black',
+          //   'Edit Record Successfully...!!!',
+          //   'bottom',
+          //   'center'
+          // );
         }
       }
     });
@@ -229,12 +235,18 @@ export class AllTeachersComponent
       this.refreshTable();
       this.selection = new SelectionModel<Teachers>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'bottom',
-      'center'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
+    // this.showNotification(
+    //   'snackbar-danger',
+    //   totalSelect + ' Record Delete Successfully...!!!',
+    //   'bottom',
+    //   'center'
+    // );
   }
   public loadData() {
     this.exampleDatabase = new TeachersService(this.httpClient);

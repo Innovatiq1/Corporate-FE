@@ -16,6 +16,7 @@ import { UtilsService } from '@core/service/utils.service';
 import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-audit-list',
@@ -128,12 +129,12 @@ export class AuditListComponent {
       this.refreshTable();
       this.selection = new SelectionModel<CourseModel>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'top',
-      'right'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
   }
   // export table data in excel file
   exportExcel() {

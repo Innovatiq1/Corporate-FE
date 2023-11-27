@@ -178,12 +178,18 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
       this.refreshTable();
       this.selection = new SelectionModel<SurveyBuilderModel>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'bottom',
-      'center'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
+    // this.showNotification(
+    //   'snackbar-danger',
+    //   totalSelect + ' Record Delete Successfully...!!!',
+    //   'bottom',
+    //   'center'
+    // );
   }
   public loadData() {
     this.exampleDatabase = new SurveyService(this.httpClient);

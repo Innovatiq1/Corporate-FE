@@ -141,22 +141,21 @@ export class StudentApprovalListComponent {
     };
 
     this.classService.saveApprovedProgramClasses(element.id, item).subscribe((response:any) => {
-      this.showNotification(
-        'snackbar-success',
-        ' Course Withdraw successfully...!!!',
-        'top',
-        'right'
-      );
+      Swal.fire({
+        title: 'Success',
+        text: 'Course approved successfully.',
+        icon: 'success',
+        // confirmButtonColor: '#526D82',
+      });
       this.getRegisteredClasses();
+    }, (error) => {
+      Swal.fire({
+        title: 'Error',
+        text: 'Failed to approve course. Please try again.',
+        icon: 'error',
+        // confirmButtonColor: '#526D82',
+      });
     });
-  () => {
-    this.showNotification(
-      'snackbar-success',
-      ' Failed to approve course. Please try again.',
-      'top',
-      'right'
-    );
-  };
   }
   exportExcel() {
     const exportData: Partial<TableElement>[] =
@@ -289,12 +288,18 @@ export class StudentApprovalListComponent {
       this.refreshTable();
       this.selection = new SelectionModel<CourseModel>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'top',
-      'right'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
+    // this.showNotification(
+    //   'snackbar-danger',
+    //   totalSelect + ' Record Delete Successfully...!!!',
+    //   'top',
+    //   'right'
+    // );
   }
 
 }

@@ -20,6 +20,7 @@ import { EditLeaveRequestComponent } from './dialogs/edit-leave-request/edit-lea
 import { MatDialog } from '@angular/material/dialog';
 import { formatDate } from '@angular/common';
 import jsPDF from 'jspdf';
+import Swal from 'sweetalert2';
 
 
 
@@ -120,12 +121,12 @@ export class InstructorLeaveRequestComponent
           // And lastly refresh table
           this.loadData();
           this.refreshTable();
-          this.showNotification(
-            'black',
-            'Edit Record Successfully...!!!',
-            'bottom',
-            'center'
-          );
+          Swal.fire({
+            title: 'Success',
+            text: 'Edit Record Successfully...!!!',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
         }
       }
     });
@@ -143,12 +144,12 @@ export class InstructorLeaveRequestComponent
       this.refreshTable();
       this.selection = new SelectionModel<LeaveRequest>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'bottom',
-      'center'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
   }
 
   private refreshTable() {

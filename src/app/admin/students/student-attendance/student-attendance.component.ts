@@ -24,6 +24,7 @@ import {
   UnsubscribeOnDestroyAdapter,
 } from '@shared';
 import { formatDate } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-student-attendance',
@@ -100,12 +101,18 @@ export class StudentAttendanceComponent
           this.studentAttendanceService.getDialogData()
         );
         this.refreshTable();
-        this.showNotification(
-          'snackbar-success',
-          'Add Record Successfully...!!!',
-          'bottom',
-          'center'
-        );
+        Swal.fire({
+          title: 'Success',
+          text: 'Add Record Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+        // this.showNotification(
+        //   'snackbar-success',
+        //   'Add Record Successfully...!!!',
+        //   'bottom',
+        //   'center'
+        // );
       }
     });
   }
@@ -136,12 +143,18 @@ export class StudentAttendanceComponent
             this.studentAttendanceService.getDialogData();
           // And lastly refresh table
           this.refreshTable();
-          this.showNotification(
-            'black',
-            'Edit Record Successfully...!!!',
-            'bottom',
-            'center'
-          );
+          Swal.fire({
+            title: 'Success',
+            text: 'Edit Record Successfully...!!!',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
+          // this.showNotification(
+          //   'black',
+          //   'Edit Record Successfully...!!!',
+          //   'bottom',
+          //   'center'
+          // );
         }
       }
     });
@@ -167,12 +180,18 @@ export class StudentAttendanceComponent
         if (foundIndex != null && this.exampleDatabase) {
           this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
           this.refreshTable();
-          this.showNotification(
-            'snackbar-danger',
-            'Delete Record Successfully...!!!',
-            'bottom',
-            'center'
-          );
+          Swal.fire({
+            title: 'Success',
+            text: 'Delete Record Successfully...!!!',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
+          // this.showNotification(
+          //   'snackbar-danger',
+          //   'Delete Record Successfully...!!!',
+          //   'bottom',
+          //   'center'
+          // );
         }
       }
     });
@@ -206,12 +225,18 @@ export class StudentAttendanceComponent
       this.refreshTable();
       this.selection = new SelectionModel<StudentAttendance>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'bottom',
-      'center'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
+    // this.showNotification(
+    //   'snackbar-danger',
+    //   totalSelect + ' Record Delete Successfully...!!!',
+    //   'bottom',
+    //   'center'
+    // );
   }
   public loadData() {
     this.exampleDatabase = new StudentAttendanceService(this.httpClient);

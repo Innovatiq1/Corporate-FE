@@ -175,12 +175,12 @@ export class AllDepartmentsComponent
         if (foundIndex != null && this.exampleDatabase) {
           this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
           this.refreshTable();
-          this.showNotification(
-            'snackbar-danger',
-            'Delete Record Successfully...!!!',
-            'bottom',
-            'center'
-          );
+          Swal.fire({
+            title: 'Success',
+            text: 'Delete Record Successfully...!!!',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
         }
       }
     });
@@ -214,12 +214,13 @@ export class AllDepartmentsComponent
       this.refreshTable();
       this.selection = new SelectionModel<Department>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'bottom',
-      'center'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
+
   }
   public loadData() {
     this.exampleDatabase = new DepartmentService(this.httpClient);

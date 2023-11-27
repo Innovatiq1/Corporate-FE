@@ -24,6 +24,8 @@ import { Direction } from '@angular/cdk/bidi';
 import { BehaviorSubject, Observable, fromEvent, map, merge } from 'rxjs';
 import { ClassModel, Session, Student, StudentApproval, StudentPaginationModel } from 'app/admin/schedule-class/class.model';
 import { ClassService } from 'app/admin/schedule-class/class.service';
+import Swal from 'sweetalert2';
+import { id } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-approve-list',
@@ -147,30 +149,24 @@ export class ApproveListComponent  {
     this._classService
       .saveApprovedClasses(element.id, item)
       .subscribe((_response: any) => {
-        // Swal.fire({
-        //   title: 'Success',
-        //   text: 'Course approved successfully.',
-        //   icon: 'success',
-        //   confirmButtonColor: '#526D82',
-        // });
-
-        this.showNotification(
-          'snackbar-success',
-          ' Course approved successfully...!!!',
-          'top',
-          'right'
-        );
+        Swal.fire({
+          title: 'Success',
+          text: 'Course approved successfully.',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
         this.getRegisteredClasses();
-      });
-    () => {
-      this.showNotification(
-        'snackbar-danger',
-        ' Failed to approve course. Please try again...!!!',
-        'top',
-        'right'
-      );
-    };
+      }, (error) => {
+            Swal.fire({
+              title: 'Error',
+              text: 'Failed to approve course. Please try again.',
+              icon: 'error',
+              // confirmButtonColor: '#526D82',
+            });
+          });
   }
+
+ 
 
   Status(element: Student, status: string) {
     const item: StudentApproval = {
@@ -185,22 +181,21 @@ export class ApproveListComponent  {
     this._classService
       .saveApprovedClasses(element.id, item)
       .subscribe((response: any) => {
-        this.showNotification(
-          'snackbar-success',
-          ' Course Withdraw successfully...!!!',
-          'top',
-          'right'
-        );
+        Swal.fire({
+          title: 'Success',
+          text: 'Course Withdraw successfully.',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
         this.getRegisteredClasses();
+      }, (error) => {
+        Swal.fire({
+          title: 'Error',
+          text: 'Failed to approve course. Please try again.',
+          icon: 'error',
+          // confirmButtonColor: '#526D82',
+        });
       });
-    () => {
-      this.showNotification(
-        'snackbar-success',
-        ' Failed to approve course. Please try again.',
-        'top',
-        'right'
-      );
-    };
   }
   performSearch() {
     if(this.searchTerm){

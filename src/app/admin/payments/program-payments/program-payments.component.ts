@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import {CourseKitModel, CourseModel, CoursePaginationModel } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-program-payments',
@@ -115,12 +116,18 @@ export class ProgramPaymentsComponent implements OnInit {
       this.refreshTable();
       this.selection = new SelectionModel<CourseModel>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'top',
-      'right'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
+    // this.showNotification(
+    //   'snackbar-danger',
+    //   totalSelect + ' Record Delete Successfully...!!!',
+    //   'top',
+    //   'right'
+    // );
   }
 
 }

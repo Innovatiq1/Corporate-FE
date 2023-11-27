@@ -187,12 +187,12 @@ export class LeaveRequestComponent
       this.refreshTable();
       this.selection = new SelectionModel<LeaveRequest>(true, []);
     });
-    this.showNotification(
-      'snackbar-danger',
-      totalSelect + ' Record Delete Successfully...!!!',
-      'bottom',
-      'center'
-    );
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
   }
   public loadData() {
     this.exampleDatabase = new LeaveRequestService(this.httpClient);
