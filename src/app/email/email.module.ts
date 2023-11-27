@@ -14,6 +14,7 @@ import { BinMailComponent } from './bin-mail/bin-mail.component';
 import { ImportantMailComponent } from './important-mail/important-mail.component';
 import { StarredMailComponent } from './starred-mail/starred-mail.component';
 import { SpamComponent } from './spam/spam.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 @NgModule({
   declarations: [ComposeComponent, InboxComponent, ReadMailComponent, EmailSidebarComponent, SentComponent, DraftMailComponent, BinMailComponent, ImportantMailComponent, StarredMailComponent, SpamComponent],
   imports: [
@@ -22,6 +23,7 @@ import { SpamComponent } from './spam/spam.component';
     CKEditorModule,
     ComponentsModule,
     SharedModule,
+    AngularEditorModule
   ],
 })
 export class EmailModule {}
