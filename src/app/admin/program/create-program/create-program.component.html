@@ -151,8 +151,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
-                                        <ckeditor [editor]="Editor" id="editor"
-                                            formControlName="coreProgramDescription"></ckeditor>
+                                        <!-- <ckeditor [editor]="Editor" id="editor"
+                                            formControlName="coreProgramDescription"></ckeditor> -->
+                                            <angular-editor placeholder="Enter text..." formControlName="coreProgramDescription" [config]="config"></angular-editor>
                                     </div>
                                 </div>
                             </div>
@@ -215,9 +216,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                                        <ckeditor [editor]="Editor" id="editor"
+                                        <!-- <ckeditor [editor]="Editor" id="editor"
                                             formControlName="electiveProgramDescription">
-                                        </ckeditor>
+                                        </ckeditor> -->
+                                        <angular-editor placeholder="Enter text..." formControlName="electiveProgramDescription" [config]="config"></angular-editor>
                                     </div>
                                 </div>
                                 <div class="card-body"></div>
@@ -268,7 +270,7 @@
                                 <div class="col mt-3">
                                     <div class="d-flex gap-4">
                                         <span class="fw-bold" style="margin-top: 1px;">Currency</span>
-                                        <select style="margin-left: 7px; width: 25%; border: solid 1px rgb(56, 56, 56); 
+                                        <select style="margin-left: 7px; width: 25%; border: solid 1px rgb(56, 56, 56);
                                             height: 30px;font-style: italic; font-size: 12px;" class="form-select"
                                             aria-label="Default select example" formControlName="currency">
                                             <option disabled>Choose...</option>
@@ -291,23 +293,26 @@
                                 <span class="fw-bold mx-3"> Learning Outcomes</span>
                                 <div class="row">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                                        <ckeditor [editor]="Editor" id="editor" formControlName="learningOutcomes">
-                                        </ckeditor>
+                                        <!-- <ckeditor [editor]="Editor" id="editor" formControlName="learningOutcomes">
+                                        </ckeditor> -->
+                                        <angular-editor placeholder="Enter text..." formControlName="learningOutcomes" [config]="config"></angular-editor>
                                     </div>
                                 </div>
                             </div>
                             <div class="mt-2">
                                 <span class="fw-bold mx-3">Who Should Attend</span>
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                                    <ckeditor [editor]="Editor" id="editor" formControlName="attendees">
-                                    </ckeditor>
+                                    <!-- <ckeditor [editor]="Editor" id="editor" formControlName="attendees">
+                                    </ckeditor> -->
+                                    <angular-editor placeholder="Enter text..." formControlName="attendees" [config]="config"></angular-editor>
                                 </div>
                             </div>
                             <div class="mt-2">
                                 <span class="fw-bold mx-3">Prerequisites</span>
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                                    <ckeditor [editor]="Editor" id="editor" formControlName="prerequisites">
-                                    </ckeditor>
+                                    <!-- <ckeditor [editor]="Editor" id="editor" formControlName="prerequisites">
+                                    </ckeditor> -->
+                                    <angular-editor placeholder="Enter text..." formControlName="prerequisites" [config]="config"></angular-editor>
                                 </div>
                             </div>
                         </div>
