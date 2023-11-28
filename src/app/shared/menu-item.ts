@@ -374,16 +374,16 @@ MENU_LIST = [
     icon: 'photo_album',
     children:
     [
-        {
-            id: "certificates",
-            title: "Certificates",
-            type: "none",
-        },
-        {
-            id: "design",
-            title: "Design",
-            type: "none"
-        },
+        // {
+        //     id: "certificates",
+        //     title: "Certificates",
+        //     type: "none",
+        // },
+        // {
+        //     id: "design",
+        //     title: "Design",
+        //     type: "none"
+        // },
         {
             id: "template",
             title: "Certificate Template",
