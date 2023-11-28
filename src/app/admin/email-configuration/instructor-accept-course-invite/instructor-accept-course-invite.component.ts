@@ -147,6 +147,16 @@ removeTagsAndSpaces(inputString: string) {
       if (this.emailTemplateForm.valid) {
 
           let obj = this.emailTemplateForm.value;
+          // let obj = this.emailTemplateForm.value;
+          let test =obj.email_content
+          
+  
+          //const stringWithoutSpaces = test.replace(/\s+/g, '');
+  
+          // Remove <p> tags
+          const stringWithoutPTags = this.removeTagsAndSpaces(test)
+          obj['email_content']=stringWithoutPTags
+          console.log("stringWithoutPTags",stringWithoutPTags)
           obj['insertaction'] = 'mentor_accept_project_invite_status_template';
           this.emailConfigurationService.updateForgetPasswordTemplate(obj,this.id).subscribe(
             (res) => {
