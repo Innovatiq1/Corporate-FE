@@ -270,9 +270,14 @@ certifiacteUrl:boolean = false;
           const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
   
           doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          const currentDateTime = moment();
+
+    // Format the date and time
+  let currentDate = currentDateTime.format('MMMM Do YYYY, h:mm:ss a');
+  console.log("=======",currentDate)
           //doc.save('Dashboard for hyperpanels.pdf');
   
-          const pdfData = new File([doc.output("blob")], "courseCertificate.pdf", {
+          const pdfData = new File([doc.output("blob")], currentDate+"courseCertificate.pdf", {
             type: "application/pdf",
           });
           
