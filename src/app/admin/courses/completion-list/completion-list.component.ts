@@ -271,13 +271,15 @@ certifiacteUrl:boolean = false;
   
           doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
           const currentDateTime = moment();
+          const randomString = this.generateRandomString(10);
+          console.log("randomString",randomString)
 
     // Format the date and time
-  let currentDate = currentDateTime.format('MMMM Do YYYY, h:mm:ss a');
-  console.log("=======",currentDate)
-          //doc.save('Dashboard for hyperpanels.pdf');
+  // let currentDate = currentDateTime.format('MMMM Do YYYY, h:mm:ss a');
+  // console.log("=======",currentDate)
+  //         //doc.save('Dashboard for hyperpanels.pdf');
   
-          const pdfData = new File([doc.output("blob")], currentDate+"courseCertificate.pdf", {
+          const pdfData = new File([doc.output("blob")], randomString+"courseCertificate.pdf", {
             type: "application/pdf",
           });
           
@@ -305,6 +307,20 @@ certifiacteUrl:boolean = false;
       }, 1000);
     
     }
+    generateRandomString(length: number) {
+      const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+      }
+      return result;
+    }
+    
+    // Example: Generate a random string of length 10
+    
+    //c//onsole.log(randomString);
+    
   
     
     updateCertificte(objpdf:any){
