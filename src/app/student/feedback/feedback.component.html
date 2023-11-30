@@ -24,7 +24,7 @@
                     class="example-full-width mb-3"
                     appearance="outline">
                     <mat-select formControlName="courseName" >
-                      <mat-option [value]="course?.courseId?.title" *ngFor="let course of studentApprovedCourses">{{ course?.courseId?.title }} </mat-option>
+                      <mat-option [value]="course?.classId?.courseId?.title" *ngFor="let course of studentApprovedCourses">{{ course?.classId?.courseId?.title | titlecase}} </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>

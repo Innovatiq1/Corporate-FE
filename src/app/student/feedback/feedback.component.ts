@@ -125,16 +125,16 @@ export class FeedbackComponent {
   }
   getApprovedCourse(){
     let studentId=localStorage.getItem('id')
-    const payload = { studentId: studentId, status: 'approved','isAll':true };
+    const payload = { studentId: studentId, status: 'completed','isAll':true };
     this._classService.getStudentRegisteredClasses(payload).subscribe(response =>{
-     this.studentApprovedCourses = response.data;
+     this.studentApprovedCourses = response.data.docs;
     })
   }
   getApprovedPrograms(){
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved',isAll:true };
     this._classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
-     this.studentApprovedPrograms = response.data;
+     this.studentApprovedPrograms = response.data.docs;
     })
   }
   submit(){
