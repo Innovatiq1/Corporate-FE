@@ -34,4 +34,15 @@ export class CommonService {
     return this.playBackTime;
   }
 
+  private videoDetails: any;
+
+  setVideoDetails(video: any) {
+    this.videoDetails = video;
+  }
+
+  getVideoDetails() {
+    return this.videoDetails;
+  }
+
+
 }
