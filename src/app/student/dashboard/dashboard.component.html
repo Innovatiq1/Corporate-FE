@@ -425,7 +425,7 @@
                 <li *ngFor="let upcomingclass of upcomingCourseClasses" class="lecture-list">
                   <div class="set-flex">
                     <div class="media-title font-16">{{upcomingclass?.classId?.courseName}}</div>
-                    <div class="text-job text-muted mb-0">{{upcomingclass?.classId?.sessions[0]?.courseCode}}</div>
+                    <div class="text-job text-muted mb-0">{{upcomingclass?.classId?.courseId?.courseCode}}</div>
                   </div>
                   <div class="ms-auto">
                     <div class="media-title font-16">{{upcomingclass?.classId?.sessions[0]?.sessionStartDate | date}}</div>
