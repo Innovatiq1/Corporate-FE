@@ -22,7 +22,7 @@ export interface PeriodicElement {
 const ELEMENT_DATA: PeriodicElement[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
- 
+
 ];
 @Component({
   selector: 'app-view-course',
@@ -82,7 +82,7 @@ export class ViewCourseComponent {
     this.getRegisteredClassDetails();
     this.getClassDetails();
     this.getVideoPlayed();
-  
+
 
   }
   getClassDetails(){
@@ -191,7 +191,7 @@ export class ViewCourseComponent {
             text: "Please start convert this video",
           });
           return
-          
+
         }
         const videoType = "application/x-mpegURL";
         if (videoURL) {
@@ -199,17 +199,19 @@ export class ViewCourseComponent {
             initialState: {
               videoURL,
               videoType,
-              playbackProgress: videoLink.playbackProgress || 0, // Default to 0 if not provided
+              playbackProgress: videoLink.playbackProgress || 0,
+             // Default to 0 if not provided
 
             },
             class: "videoPlayer-modal",
+            backdrop: 'static', keyboard: false
           };
           this.modalServices.show(StudentVideoPlayerComponent, initialState);
         }
       });
     }
   }
-    
+
   parseDate(dateString: string): Date {
     return new Date(dateString);
   }
