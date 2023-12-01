@@ -8,7 +8,7 @@ import { StudentVideoPlayerComponent } from 'app/admin/courses/course-kit/studen
 import { VideoPlayerComponent } from 'app/admin/courses/course-kit/video-player/video-player.component';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { local } from 'd3';
-import {  BsModalService, ModalOptions} from "ngx-bootstrap/modal";
+import { BsModalService, ModalOptions } from "ngx-bootstrap/modal";
 
 import Swal from 'sweetalert2';
 export interface PeriodicElement {
@@ -20,8 +20,10 @@ export interface PeriodicElement {
 
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+
+  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
+  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
+
 
 ];
 @Component({
@@ -39,8 +41,8 @@ export class ViewCourseComponent {
     'Video Link',
     'Document Link',
     'Completed'
-    ];
-  dataSource:any;
+  ];
+  dataSource: any;
   currentPlaybackProgress: number = 0;
   playbackProgress: number = 0; // Add this line to define the property
 
@@ -60,7 +62,7 @@ export class ViewCourseComponent {
   classId: any;
   classDetails: any;
   courseId: any;
-  courseKitDetails:any;
+  courseKitDetails: any;
   studentClassDetails: any;
   isStatus = false;
   isApproved = false
@@ -72,116 +74,136 @@ export class ViewCourseComponent {
   videoStatus!: string;
   courseCompleted = false;
   certificateIssued = false;
+  courseKit: any[] = [
 
-  constructor(private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService,
-    @Inject(DOCUMENT) private document: any,private commonService: CommonService){
+  ];
+  coursekitDetails: any;
+  playBackTime!: number;
+
+  constructor(private classService: ClassService, private activatedRoute: ActivatedRoute, private modalServices: BsModalService, private courseService: CourseService,
+    @Inject(DOCUMENT) private document: any, private commonService: CommonService) {
     this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
       this.classId = params["id"];
     });
-    localStorage.setItem('classId',this.classId)
+    localStorage.setItem('classId', this.classId)
     this.getRegisteredClassDetails();
     this.getClassDetails();
-    this.getVideoPlayed();
+
+    // this.getVideoPlayed();
 
 
   }
-  getClassDetails(){
-    this.classService.getClassById(this.classId).subscribe((response)=>{
-      this.classDetails =response;
-      this.courseId=this.classDetails.courseId.id
-      this.dataSource=this.classDetails.sessions;
+  getClassDetails() {
+    this.classService.getClassById(this.classId).subscribe((response) => {
+      this.classDetails = response;
+      this.courseId = this.classDetails.courseId.id
+      this.dataSource = this.classDetails.sessions;
       this.getCourseKitDetails();
     })
   }
-  getVideoPlayed(){
-    let studentId = localStorage.getItem('id')
-    this.courseService.getVideoPlayedById(studentId,this.classId).subscribe((response)=>{
-      let videoPlayed =response;
-      this.videoStatus = response?.status
-      if(this.videoStatus == 'ended'){
-        this.courseCompleted = true
-      }
-    })
-  }
+  // getVideoPlayed(){
+  //   let studentId = localStorage.getItem('id')
+  //   this.courseService.getVideoPlayedById(studentId,this.classId).subscribe((response)=>{
+  //     let videoPlayed =response;
+  //     this.videoStatus = response?.status
+  //     if(this.videoStatus == 'ended'){
+  //       this.courseCompleted = true
+  //     }
+  //   })
+  // }
 
   registerClass(classId: string) {
     let userdata = JSON.parse(localStorage.getItem('currentUser')!)
-    let studentId=localStorage.getItem('id')
-    let payload ={
-      email:userdata.user.email,
-      name:userdata.user.name,
-      courseTitle:this.classDetails?.courseId?.title,
-      courseFee:this.classDetails?.courseId?.fee,
-      studentId:studentId,
-      classId:this.classId,
-      title:this.title
+    let studentId = localStorage.getItem('id');
+
+    let payload = {
+      email: userdata.user.email,
+      name: userdata.user.name,
+      courseTitle: this.classDetails?.courseId?.title,
+      courseFee: this.classDetails?.courseId?.fee,
+      studentId: studentId,
+      classId: this.classId,
+      title: this.title,
+      coursekit: this.courseKit
     }
     this.courseService.saveRegisterClass(payload).subscribe((response) => {
       this.document.location.href = response.data.session.url;
       this.getClassDetails();
     });
   }
-  getCourseKitDetails(){
+  getCourseKitDetails() {
     this.courseService.getCourseById(this.courseId).subscribe((response) => {
-      this.courseKitDetails=response?.course_kit;
+      this.courseKitDetails = response?.course_kit;
+      if (Array.isArray(this.courseKitDetails)) {
+        this.courseKit = this.courseKitDetails.map((kit) => ({
+          shortDescription: kit.shortDescription,
+          longDescription: kit.longDescription,
+          documentLink: kit.documentLink,
+          name: kit.name,
+          filename: kit.videoLink[0].filename,
+          videoId: kit.videoLink[0].id,
+          inputUrl: kit.videoLink[0].inputUrl,
+          url: kit.videoLink[0].url,
+          playbackTime: 0
+        }
+        ));
+      }
       this.documentLink = this.courseKitDetails[0].documentLink;
-      let uploadedDocument=this.documentLink?.split('/')
+      let uploadedDocument = this.documentLink?.split('/')
       this.uploadedDoc = uploadedDocument?.pop();
       this.title = response?.title;
     });
   }
-  getRegisteredClassDetails(){
-    let studentId=localStorage.getItem('id')
-    this.courseService.getStudentClass(studentId,this.classId).subscribe((response) => {
-      this.studentClassDetails=response.data.docs[0];
-      this.commonService.setPlayBackTime(this.studentClassDetails?.playbackTime)
-      if(this.studentClassDetails.status =='registered' ){
+  getRegisteredClassDetails() {
+    let studentId = localStorage.getItem('id')
+    this.courseService.getStudentClass(studentId, this.classId).subscribe((response) => {
+      this.studentClassDetails = response.data.docs[0];
+      this.coursekitDetails = response.data.docs[0].coursekit;
+      let totalPlaybackTime = 0;
+      let documentCount = 0;
+      this.coursekitDetails.forEach((doc: { playbackTime: any; }, index: number) => {
+        const playbackTime = doc.playbackTime;
+        totalPlaybackTime += playbackTime;
+        documentCount++
+      });
+      let time = totalPlaybackTime / documentCount
+      this.playBackTime = time
+      if (this.studentClassDetails.status == 'registered') {
         this.isRegistered == true;
-        this.isStatus=true;
+        this.isStatus = true;
       }
-      if(this.studentClassDetails.status =='approved' ){
+      if (this.studentClassDetails.status == 'approved') {
         this.isRegistered == true;
-        this.isApproved=true;
+        this.isApproved = true;
       }
-      if(!this.studentClassDetails.certifiacteUrl && this.studentClassDetails.status =='completed' ){
+      if (!this.studentClassDetails.certifiacteUrl && this.studentClassDetails.status == 'completed') {
         this.isRegistered == true;
-        this.isCompleted=true;
+        this.isCompleted = true;
       }
-      if(this.studentClassDetails.certifiacteUrl && this.studentClassDetails.status =='completed' ){
+      if (this.studentClassDetails.certifiacteUrl && this.studentClassDetails.status == 'completed') {
         this.isRegistered == true;
-        this.isCompleted=true;
+        this.isCompleted = true;
         this.certificateIssued = true;
       }
-
-
-      if(this.studentClassDetails.status =='cancel' ){
+      if (this.studentClassDetails.status == 'cancel') {
         this.isRegistered == true;
-        this.isCancelled=true;
+        this.isCancelled = true;
       }
     });
   }
-  getJobTemplates() {
-    this.courseService.getJobTempletes().subscribe(
-      (data: any) => {
-        this.templates = data.templates;
-      },
-      (error) => {
-        console.error('Error fetching job templates:', error);
-      }
-    );
-  }
-
-  playVideo(video: { url: any, playbackProgress: number }): void {
+  playVideo(video: { url: any, playbackProgress: number, id: any, playbackTime: any }): void {
     if (video?.url) {
       this.openVidePlayer(video);
+      this.commonService.setPlayBackTime(video?.playbackTime)
+
     } else {
       console.error("Invalid video URL");
     }
   }
 
-  openVidePlayer(videoLink: { url?: any; id?: any;playbackProgress?: number  }): void {
-    if (videoLink?.url?.id) {
-      const videoId = videoLink.url.id;
+  openVidePlayer(videoLink: { url?: any; id?: any; playbackProgress?: number }): void {
+    if (videoLink?.id) {
+      const videoId = videoLink.id;
       this.courseService.getVideoById(videoId).subscribe((res) => {
         const videoURL = res.data.videoUrl;
         if (!videoURL) {
@@ -206,6 +228,8 @@ export class ViewCourseComponent {
             class: "videoPlayer-modal",
             backdrop: 'static', keyboard: false
           };
+          this.commonService.setVideoDetails(videoLink)
+
           this.modalServices.show(StudentVideoPlayerComponent, initialState);
         }
       });
