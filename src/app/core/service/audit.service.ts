@@ -34,7 +34,7 @@ export class AuditService {
     return params;
   }
   getAuditList(filter: Partial<AuditListingModel> | undefined): Observable<AuditListingModel> {
-    const apiUrl = `${this.prefix}admin/audit/`;
+    const apiUrl = `${this.prefix}auth/userLogs/`;
     return this.http
       .get<ApiResponse>(apiUrl, { params: this.buildParams(filter) })
       .pipe(

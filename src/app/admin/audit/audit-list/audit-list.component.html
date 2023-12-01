@@ -79,40 +79,53 @@
                   </ng-container>
                  
                    <!-- Course Name -->
-                  <ng-container matColumnDef="Screen Name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Screen Name</mat-header-cell>
+                  <ng-container matColumnDef="Name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
                     <mat-cell *matCellDef="let row" >
-                      <span class="mobile-label">Screen Name:</span>{{row.collectionName | capitalizeFirstLetter}}</mat-cell>
+                      <span class="mobile-label">Name:</span>{{row.name | capitalizeFirstLetter}} {{row.last_name?row.last_name:''| capitalizeFirstLetter}}</mat-cell>
                   </ng-container>
                   <!-- Course Code -->
-                  <ng-container matColumnDef="Action">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Action
+                  <ng-container matColumnDef="Email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" >
-                      <span class="mobile-label">Action:</span>{{row?.auditData?.courseKit?.name | capitalizeFirstLetter}}</mat-cell>
+                      <span class="mobile-label">Email:</span>{{row?.email }}</mat-cell>
                   </ng-container>
-                  <!-- Main Category -->
-                  <ng-container matColumnDef="Status">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status
+                  <ng-container matColumnDef="User Type">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>User Type
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" >
-                      <span class="mobile-label">Status:</span>{{row.operation | capitalizeFirstLetter}}</mat-cell>
+                      <span class="mobile-label">User Type:</span>{{row.type}}</mat-cell>
+                  </ng-container>
+                  
+                  <!-- Main Category -->
+                  <ng-container matColumnDef="Login Time">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Login Time
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" >
+                      <span class="mobile-label">Login Time:</span>{{row.loginTime | date:'medium'}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="Logout Time">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Logout Time
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" >
+                      <span class="mobile-label">Logout Time:</span>{{row.logoutTime | date:'medium'}}</mat-cell>
                   </ng-container>
                    <!-- Sub Category -->
-                  <ng-container matColumnDef="Modified By">
+                  <!-- <ng-container matColumnDef="Modified By">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Modified By
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" >
                       <span class="mobile-label">Modified By:</span>{{row?.modifiedBy?.name | capitalizeFirstLetter}}</mat-cell>
-                  </ng-container>
+                  </ng-container> -->
                    <!--Fees -->
-                  <ng-container matColumnDef="Modified On">
+                  <!-- <ng-container matColumnDef="Modified On">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Modified On
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
                       <span class="mobile-label">Modified On:</span> 
                        {{row.updatedAt | date}}</mat-cell>
-                  </ng-container>
+                  </ng-container> -->
                   <!-- actions -->
                   
                   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

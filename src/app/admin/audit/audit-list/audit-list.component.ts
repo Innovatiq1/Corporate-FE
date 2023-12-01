@@ -26,11 +26,14 @@ import Swal from 'sweetalert2';
 export class AuditListComponent {
   displayedColumns: string[] = [
     'select',
-    'Screen Name',
-    'Action',
-    'Status',
-    'Modified By',
-    'Modified On',
+    'Name',
+    'Email',
+    'User Type',
+    
+
+    'Login Time',
+    'Logout Time',
+    
   ];
   breadscrums = [
     {
@@ -75,9 +78,10 @@ export class AuditListComponent {
     this.getAuditList();
   }
   getAuditList(filter?: any): void {
-    let payload = { ...this.AuditPaginationModel, type: 'userAudit' };
+    let payload = { ...this.AuditPaginationModel};
     if (filter) payload = { ...payload, filter };
     this.auditService.getAuditList(payload).subscribe((response: any) => {
+      console.log("=====ress",response.docs)
       this.dataSource = response.docs;
       this.isLoading = false;
       this.totalItems = response.totalDocs
