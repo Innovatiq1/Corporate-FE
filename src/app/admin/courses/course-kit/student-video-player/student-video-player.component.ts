@@ -27,6 +27,7 @@ export class StudentVideoPlayerComponent {
 
   @ViewChild("video", { static: true }) video: ElementRef<HTMLVideoElement> =
     {} as ElementRef<HTMLVideoElement>;
+  studentClassDetails: any;
 
   constructor(
     public bsModalRef: BsModalRef, private courseService: CourseService, private classService: ClassService,
@@ -34,7 +35,6 @@ export class StudentVideoPlayerComponent {
   ) { }
   ngOnInit(): void {
     if (this.videoURL) this.initPlayer(this.videoURL);
-
   }
 
   initPlayer(currentVideo: string) {
@@ -106,22 +106,44 @@ export class StudentVideoPlayerComponent {
       });
       this.video.nativeElement.addEventListener('ended', () => {
         let classId = localStorage.getItem('classId');
-        let studentId = localStorage.getItem('id')
-        this.courseService.getVideoPlayedById(studentId, classId).subscribe((response) => {
+        let studentId = localStorage.getItem('id');
+        const videoDetails = this.commonService.getVideoDetails();
+        this.courseService.getVideoPlayedById(studentId, classId, videoDetails.id).subscribe((response) => {
           if (response) {
           } else {
             let payload = {
               status: 'ended',
               studentId: studentId,
-              classId: classId
+              classId: classId,
+              videoId: videoDetails.id
             }
             this.courseService.saveVideoPlayTime(payload).subscribe(
               () => {
-                let payload = {
-                  status: 'completed',
-                  studentId: studentId,
-                }
-                this.classService.saveApprovedClasses(classId, payload).subscribe((response) => {
+                this.courseService.getStudentClass(studentId, classId).subscribe((response) => {
+                  this.studentClassDetails = response.data.docs[0].coursekit;
+                  if (this.studentClassDetails.playbackTime !== 100 || !this.studentClassDetails.playbackTime) {
+                    const unmatchedDocuments = this.studentClassDetails.filter((doc: { videoId: any; }) => doc.videoId !== videoDetails.id);
+                    const allUnmatchedCompleted = unmatchedDocuments.every((doc: { playbackTime: number; }) => doc.playbackTime === 100);
+
+                    if (allUnmatchedCompleted) {
+                      let payload = {
+                        status: 'completed',
+                        studentId: studentId,
+                        playbackTime :100
+                      }
+                      this.classService.saveApprovedClasses(classId, payload).subscribe((response) => {
+                      })
+                    } else {
+                      let payload = {
+                        status: 'notCompleted',
+                        studentId: studentId,
+                      }
+                      this.classService.saveApprovedClasses(classId, payload).subscribe((response) => {
+                      })
+                    }
+                  } else {
+
+                  }
                 })
               })
 
@@ -147,13 +169,15 @@ export class StudentVideoPlayerComponent {
 
   destroyModal(): void {
     const playBackTime = this.commonService.getProgressArray();
+    const videoDetails = this.commonService.getVideoDetails();
     let lastButOneValue = playBackTime[playBackTime.length - 1];
     let classId = localStorage.getItem('classId');
     let studentId = localStorage.getItem('id')
     let payload = {
       studentId: studentId,
       classId: classId,
-      playbackTime: lastButOneValue
+      playbackTime: lastButOneValue,
+      videoId: videoDetails.id
     }
     let time = this.commonService.getPlayBackTime();
     if (lastButOneValue < time) {

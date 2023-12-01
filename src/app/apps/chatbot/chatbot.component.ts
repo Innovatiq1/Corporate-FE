@@ -13,11 +13,13 @@ export class ChatbotComponent  {
 
   showBotSubject: boolean = false;
   showMessenger: boolean = false;
-  messages: any[] = [];
+  messages: any[] = [{ type: 'bot', text: `Courses Programs Login Signup Others ` }];
   name: string = '';
 
   constructor() {}
 
+  ngOnInit(){
+  }
   onIconClick() {
     this.showBotSubject =  !this.showBotSubject;
     // this.msgInput.nativeElement.focus();
@@ -48,59 +50,29 @@ export class ChatbotComponent  {
     this.messages.push(userMsg);
 
     if (
-      val.includes('hello') ||
-      val.includes('hi') ||
-      val.includes('good morning') ||
-      val.includes('good afternoon') ||
-      val.includes('good evening') ||
-      val.includes('good night')
+      val.includes('Courses') ||
+      val.includes('1')
     ) {
-      if (nowhoue >= 12 && nowhoue <= 16) {
-        appendMsg('Hello, Good afternoon');
-      } else if (nowhoue >= 10 && nowhoue <= 12) {
-        appendMsg('hi');
-      } else if (nowhoue >= 0 && nowhoue <= 10) {
-        appendMsg('Hello, Good morning');
-      } else {
-        appendMsg('Good evening');
-      }
+      appendMsg("1.Payment 2.Course registration 3.Course Approval 4.Certificate issue");
+    }
+     else if (val.includes('payment') || val.includes('course registration') || val.includes('course approval') || val.includes('certificate issue')) {
+      appendMsg("Please elaborate the issue you are facing");
+      // if (val.includes('course') || val.includes('program') || val.includes('payment')) {
+      //   appendMsg('Can you write your queries in details.');
+      //   // appendMsg('Is it helpful? (yes/no)');
+      // } else if (val.includes('okay') || val.includes('ok')) {
+      //   appendMsg('Thank you!.');
+      //   appendMsg('Is it helpful? (yes/no)');
+      // } else {
+      //   appendMsg("Sorry, I'm not able to understand your point. Please ask something else.");
+      // }
 
-      appendMsg("what's your name?");
-    } else if (val.includes('i have problem with')) {
-      if (val.includes('course') || val.includes('program') || val.includes('payment')) {
-        appendMsg('Can you write your queries in details.');
-        // appendMsg('Is it helpful? (yes/no)');
-      } else if (val.includes('okay') || val.includes('ok')) {
-        appendMsg('Thank you!.');
-        appendMsg('Is it helpful? (yes/no)');
-      } else {
-        appendMsg("Sorry, I'm not able to understand your point. Please ask something else.");
-      }
-    } else if (val.includes('yes')) {
-      appendMsg("It's my pleasure that I can help you");
+    } else if (val.includes('program') || val.includes('2')) {
+      appendMsg("1.Payment 2.Program registration 3.Program Approval 4.Certificate issue");
       this.sayBye();
     } else if (val.includes('no')) {
       appendMsg("It's my bad that I can't able to help you. Please try later");
       this.sayBye();
-    } else if (
-      val.includes('my name is ') ||
-      val.includes('i am ') ||
-      val.includes("i'm ") ||
-      mainval.split(' ').length < 2
-    ) {
-      if (val.includes('my name is')) {
-        this.name = val.replace('my name is', '');
-      } else if (val.includes('i am')) {
-        this.name = val.replace('i am', '');
-      } else if (val.includes("i'm")) {
-        this.name = val.replace("i'm", '');
-      } else {
-        this.name = mainval;
-      }
-
-      appendMsg(`Hi ${this.name}, how can I help you?`);
-    } else {
-      appendMsg("Sorry, I'm not able to understand what you want to say");
     }
 
 

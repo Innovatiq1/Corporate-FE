@@ -17,7 +17,7 @@
         <div class="Messages">
 					<div class="Messages_list">
             <div *ngFor="let msg of messages" class="msg" [ngClass]="{'user': msg.type === 'user', 'bot': msg.type === 'bot'}">
-              <span class="avtr"><figure style="background-image: url(https://mrseankumar25.github.io/Sandeep-Kumar-Frontend-Developer-UI-Specialist/images/avatar.png)"></figure></span>
+              <span class="avtr"><figure style="background-image: url(../../../assets/images/bot.png)"></figure></span>
               <span class="responsText">{{ msg.text }}</span>
             </div>
           </div>
