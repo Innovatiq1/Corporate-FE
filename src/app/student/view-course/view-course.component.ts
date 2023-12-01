@@ -20,8 +20,10 @@ export interface PeriodicElement {
 
 
 const ELEMENT_DATA: PeriodicElement[] = [
+
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
   { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
+
 
 ];
 @Component({
@@ -86,6 +88,7 @@ export class ViewCourseComponent {
     localStorage.setItem('classId', this.classId)
     this.getRegisteredClassDetails();
     this.getClassDetails();
+
     // this.getVideoPlayed();
 
 
@@ -218,10 +221,12 @@ export class ViewCourseComponent {
             initialState: {
               videoURL,
               videoType,
-              playbackProgress: videoLink.playbackProgress || 0, // Default to 0 if not provided
+              playbackProgress: videoLink.playbackProgress || 0,
+             // Default to 0 if not provided
 
             },
             class: "videoPlayer-modal",
+            backdrop: 'static', keyboard: false
           };
           this.commonService.setVideoDetails(videoLink)
 
