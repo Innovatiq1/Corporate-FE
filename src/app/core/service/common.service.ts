@@ -44,5 +44,16 @@ export class CommonService {
     return this.videoDetails;
   }
 
+  private completedPercentage!: number;
+
+  setCompletedPercentage(time: number) {
+    this.completedPercentage = time;
+  }
+
+  getCompletedPercentage() {
+    return this.completedPercentage;
+  }
+
+
 
 }

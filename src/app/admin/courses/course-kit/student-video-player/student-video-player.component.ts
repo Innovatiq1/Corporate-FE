@@ -186,6 +186,14 @@ export class StudentVideoPlayerComponent {
       this.classService.saveApprovedClasses(classId, payload).subscribe((response) => {
       })
     }
+    let percentage =this.commonService.getCompletedPercentage();
+    let body = {
+      studentId: studentId,
+      playbackTime :percentage
+    }
+    this.classService.saveApprovedClasses(classId, body).subscribe((response) => {
+    })
+
 
 
     this.hls.destroy();
