@@ -62,4 +62,12 @@ export class AuthService {
     this.currentUserSubject.next(this.currentUserValue);
     return of({ success: false });
   }
+  logout1(email:any) {
+    const apiUrl = `${environment.apiUrl}auth/userlogs/logout`
+   return this.http.put<ApiResponse>(apiUrl,email).pipe(map((response) => response));
+    // remove user from local storage to log user out
+    
+  }
+  
+  
 }
