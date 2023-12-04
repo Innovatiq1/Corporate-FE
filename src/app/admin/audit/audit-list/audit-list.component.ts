@@ -145,11 +145,11 @@ export class AuditListComponent {
     //k//ey name with space add in brackets
     const exportData: Partial<TableElement>[] = this.dataSource.map(
       (user: any) => ({
-        'Screen Name': user.collectionName,
-        Action: user?.auditData?.courseKit?.name,
-        Status: user.operation,
-        'Modified By': user?.modifiedBy?.name,
-        'Modified On': formatDate(new Date(user.updatedAt), 'yyyy-MM-dd', 'en') || '',
+        'Name': user.name,
+        'Email': user?.email,
+        'User Type': user.type,
+        'Login Time': formatDate(new Date(user.loginTime), 'yyyy-MM-dd hh:mm:ss a', 'en') || '',
+        'Logout Time': formatDate(new Date(user.logoutTime), 'yyyy-MM-dd hh:mm:ss a', 'en') || '',
       })
     );
     TableExportUtil.exportToExcel(exportData, 'excel');
@@ -158,15 +158,15 @@ export class AuditListComponent {
   generatePdf() {
     const doc = new jsPDF();
     const headers = [
-      ['Screen Name', 'Action', 'Status', 'Modified By', 'Modified On'],
+      ['Name', 'Email', 'User Type', 'Login Time', 'Logout Time'],
     ];
     console.log(this.dataSource);
     const data = this.dataSource.map((user: any) => [
-      user.collectionName,
-      user?.auditData?.courseKit?.name,
-      user.operation,
-      user?.modifiedBy?.name,
-      formatDate(new Date(user.updatedAt), 'yyyy-MM-dd', 'en') || '',
+      user.name,
+      user?.email,
+      user.type,
+      formatDate(new Date(user.loginTime), 'yyyy-MM-dd hh:mm:ss a', 'en') || '',
+      formatDate(new Date(user.logoutTime), 'yyyy-MM-dd hh:mm:ss a', 'en') || '',
     ]);
     //const columnWidths = [60, 80, 40];
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
