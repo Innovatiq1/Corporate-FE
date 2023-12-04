@@ -167,7 +167,9 @@ export class ViewCourseComponent {
         documentCount++
       });
       let time = totalPlaybackTime / documentCount
-      this.playBackTime = time
+      this.playBackTime = time;
+      this.commonService.setCompletedPercentage(this.playBackTime)
+
       if (this.studentClassDetails.status == 'registered') {
         this.isRegistered == true;
         this.isStatus = true;
