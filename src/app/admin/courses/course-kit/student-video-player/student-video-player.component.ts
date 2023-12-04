@@ -189,7 +189,7 @@ export class StudentVideoPlayerComponent {
     let percentage =this.commonService.getCompletedPercentage();
     let body = {
       studentId: studentId,
-      playbackTime :percentage
+      playBackTime :percentage
     }
     this.classService.saveApprovedClasses(classId, body).subscribe((response) => {
     })
