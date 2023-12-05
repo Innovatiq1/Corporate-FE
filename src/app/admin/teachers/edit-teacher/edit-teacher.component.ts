@@ -66,16 +66,16 @@ export class EditTeacherComponent {
   onSubmit() {
     console.log('Form Value', this.proForm.value);
     if(this.proForm.valid){
-      // this.instructor.uploadVideo(this.files).subscribe(
-      //   (response: any) => {
-      //     const inputUrl = response.inputUrl;
+      this.instructor.uploadVideo(this.files).subscribe(
+        (response: any) => {
+          const inputUrl = response.inputUrl;
           
           const userData: Users = this.proForm.value;
           //this.commonService.setVideoId(videoId)
   
-          //userData.avatar = inputUrl;
+          userData.avatar = inputUrl;
           userData.filename= this.fileName
-          userData.type = "Trainers";
+          userData.type = "Instructor";
           userData.role = "Instructor";
   
           //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
@@ -83,26 +83,26 @@ export class EditTeacherComponent {
           this.updateInstructor(userData);
   
           Swal.close();
-       // },
-        
-    }
+       },
+       );
+      }
   }
   private updateInstructor(userData: Users): void {
     this.teachersService.updateUser(this.userId,userData).subscribe(
       () => {
         Swal.fire({
           title: "Successful",
-          text: "Instructor update successfully",
+          text: "Instructor updated successfully",
           icon: "success",
         });
         //this.fileDropEl.nativeElement.value = "";
       this.proForm.reset();
       //this.toggleList()
-      this.router.navigateByUrl('/admin/teachers/all-teachers');
+      this.router.navigateByUrl('/admin/instructors/all-instructors');
       },
       (error: { message: any; error: any; }) => {
         Swal.fire(
-          "Failed to create course kit",
+          "Failed to update instructor",
           error.message || error.error,
           "error"
         );

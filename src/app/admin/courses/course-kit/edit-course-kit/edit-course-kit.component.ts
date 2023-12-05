@@ -75,7 +75,7 @@ export class EditCourseKitComponent {
     }
     this.courseKitForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required,Validators.required, ...this.utils.validators.name, ...this.utils.validators.noLeadingSpace ]),
-      documentLink: new FormControl('', [Validators.required, ]),
+      documentLink: new FormControl('', [ ]),
       shortDescription: new FormControl('', [ ]),
       longDescription: new FormControl('', []),
       videoLink:new FormControl('',[]),

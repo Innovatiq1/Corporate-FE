@@ -107,11 +107,11 @@
 
                     <!-- <span class="label l-bg-red shadow-style" (click)="complete(row)">Approve</span> -->
                     <div *ngIf="row.certificate">
-                      <span class="label l-bg-green shadow-style" >Certificate issued</span>
+                      <span class="label l-bg-green shadow-style" id="issued" >Certificate issued</span>
                     
                   </div>
                   <div *ngIf="!row.certificate">
-                    <span class="label l-bg-red shadow-style" (click)="generateCertificate(row)">Issue Certificate</span>
+                    <span class="label shadow-style" id="submit" (click)="generateCertificate(row)">Issue Certificate</span>
                     <!-- Content to display when certificateUrl is empty -->
                     <!-- <p>No certificate available</p> -->
                   </div>                 
