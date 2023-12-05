@@ -13,7 +13,7 @@ export class ChatbotComponent  {
 
   showBotSubject: boolean = false;
   showMessenger: boolean = false;
-  messages: any[] = [{ type: 'bot', text: `Courses Programs Login Signup Others ` }];
+  messages: any[] = [];
   name: string = '';
 
   constructor() {}
@@ -50,7 +50,7 @@ export class ChatbotComponent  {
     this.messages.push(userMsg);
 
     if (
-      val.includes('Courses') ||
+      val.includes('courses') ||
       val.includes('1')
     ) {
       appendMsg("1.Payment 2.Course registration 3.Course Approval 4.Certificate issue");
@@ -69,13 +69,21 @@ export class ChatbotComponent  {
 
     } else if (val.includes('program') || val.includes('2')) {
       appendMsg("1.Payment 2.Program registration 3.Program Approval 4.Certificate issue");
-      this.sayBye();
-    } else if (val.includes('no')) {
-      appendMsg("It's my bad that I can't able to help you. Please try later");
-      this.sayBye();
+      // this.sayBye();
+    } else if (val.includes('login')) {
+      appendMsg(" 1.Wait for Admin approval 2.Looks like your login information is incorrect  3.Others");
+      if(val.includes('admin approval')){
+        appendMsg(" Please wait for administrator to approve it .Thank you for your patience...");
+      }
+      // this.sayBye();
+    }else if (val.includes('signup')) {
+      appendMsg("Type your issue");
+      // this.sayBye();
     }
-
-
+    else if (val.includes('others')) {
+      appendMsg("Type your issue");
+      // this.sayBye();
+    }
     setTimeout(() => {
       const lastMsgElement = document.querySelector('.Messages_list .msg:last-child');
       if (lastMsgElement) {
