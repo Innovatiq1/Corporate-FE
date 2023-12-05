@@ -275,19 +275,23 @@ cancel(id:any){
   }
   logout() {
     interface OuterObject {
-            user: {
-        email: string;
-        
-      };
+            id: any;
+           
     }
-    const storedDataString: string | null = localStorage.getItem('user_data');
+    const storedDataString: string | null = localStorage.getItem('userLogs');
 
 // Check if the retrieved data is not null before parsing
 const data: OuterObject = storedDataString !== null ? JSON.parse(storedDataString) : {};
-let data1={
-  email:data.user.email
+
+//const storedDataString1s= localStorage.getItem('userLogs');
+//const storedDataString1: string | null = localStorage.getItem('userLogs');
+
+// Check if the retrieved data is not null before parsing
+let data1 ={
+  id:data.id
 }
-  
+
+
 this.authService.logout1(data1).subscribe((res) => {
   if (res) {
     
@@ -295,7 +299,7 @@ this.authService.logout1(data1).subscribe((res) => {
 });
      
     
-      console.log(data.user.email)
+      //console.log(data.user.email)
   this.subs.sink = this.authService.logout().subscribe((res) => {
       if (!res.success) {
         this.router.navigate(['/authentication/signin']);
