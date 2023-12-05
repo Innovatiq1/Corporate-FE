@@ -102,14 +102,16 @@
                             <ng-container matColumnDef="action">
                               <th mat-header-cell *matHeaderCellDef> Action </th>
                               <td mat-cell *matCellDef="let element">  
-                                <button *ngIf="!isRegistered && !isStatus && !isApproved && !isCancelled"class="btn btn-primary"
+                                <button *ngIf="!isRegistered && !isStatus && !isApproved && !isCancelled && !isCompleted"class="btn btn-primary"
                                 (click)="registerProgram(element._id)">
                                 Register
                             </button>
                                 
                             <span  class="badge badge-solid-orange mx-2"*ngIf="isRegistered || isStatus">Registered</span>
-                            <span   class="badge badge-solid-green mx-2"*ngIf="isApproved">Approved</span>
-                            <span    class="badge badge-solid-red mx-2"*ngIf="isCancelled">Cancelled</span>
+                            <span class="badge badge-solid-green mx-2" *ngIf="isApproved">Approved</span>
+                            <span class="badge badge-solid-red mx-2" *ngIf="isCancelled">Cancelled</span>
+                            <span class="badge badge-solid-green mx-2" *ngIf="isCompleted">Completed</span>
+  
 
                           </td>
                             </ng-container>
@@ -235,7 +237,7 @@
                 </div> -->
               </mat-tab>
   
-              <mat-tab *ngIf="isApproved" >
+              <mat-tab *ngIf="isApproved || isCompleted" >
                 <ng-template mat-tab-label>
                   <!-- <mat-icon class="example-tab-icon msr-2">settings</mat-icon> -->
                   Program
@@ -254,7 +256,7 @@
                           </thead>
                           <tbody>
                             <tr *ngFor="let item of courseCompletedDetails" class="odd gradeX">
-                              <td class="center">{{item?.title}}</td>
+                              <td class="center">{{item?.title | titlecase}}</td>
                               <td [ngClass]="{'red-text': item.playbackTime< 50, 'green-text': item.playbackTime>= 50}">{{item?.playbackTime?.toFixed(2) || 0}}%</td>
                               </tr>
                               </tbody>
@@ -268,27 +270,60 @@
                                 </thead>
                                 <tbody>
                                   <tr *ngFor="let item of electivecourseCompletedDetails" class="odd gradeX">
-                                    <td class="center">{{item?.title}}</td>
-                                    <td [ngClass]="{'red-text': item.playbackTime< 50, 'green-text': item.playbackTime>= 50}">{{item?.playbackTime?.toFixed(2) || 0}}%</td>
+                                    <td class="center">{{item?.electivetitle}}</td>
+                                    <td [ngClass]="{'red-text': item.electiveplaybackTime< 50, 'green-text': item.electiveplaybackTime>= 50}">{{item?.electiveplaybackTime?.toFixed(2) || 0}}%</td>
                                     </tr>
                                     </tbody>
                                     </table>
       
                               </div>
-                              <h5 class="text">Program Completed : <span >60%</span></h5>
+                              <h5 class="text">Program Completed : <span [ngClass]="{'red-text': completedProgramPercentage< 50, 'green-text':completedProgramPercentage>= 50}" >{{completedProgramPercentage}}%</span></h5>
 
                       </div>
   
                     </div>
                   </div>
               </mat-tab>
-              <mat-tab *ngIf = "isCompleted">
+              <mat-tab *ngIf="isCompleted && certificateIssued">
                 <ng-template mat-tab-label>
-                  <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
-                 Certificate
-                </ng-template>
-</mat-tab>
-            </mat-tab-group>
+                  Certificate
+                </ng-template>  
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="project_widget">
+  
+                    <div class="body">
+                      <table mat-table [dataSource]="dataSource">  
+                        <ng-container matColumnDef="position">
+                          <th mat-header-cell *matHeaderCellDef> Instructor </th>
+                          <td mat-cell *matCellDef="let element"> {{element?.instructorId?.name}}
+                            {{element?.instructorId?.last_name ? element?.instructorId?.last_name:''}} </td>
+                        </ng-container>
+  
+                        <ng-container matColumnDef=" Class Start Date ">
+                          <th mat-header-cell *matHeaderCellDef> Class Start Date </th>
+                          <td mat-cell *matCellDef="let element"> {{element?.sessionStartDate | date}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef=" Class End Date ">
+                          <th mat-header-cell *matHeaderCellDef> Class End Date </th>
+                          <td mat-cell *matCellDef="let element"> {{element?.sessionEndDate | date}} </td>
+                        </ng-container>
+  
+                        <ng-container matColumnDef="action">
+                          <th mat-header-cell *matHeaderCellDef> Download </th>
+                          <td mat-cell *matCellDef="let element">
+                            <a href="{{studentClassDetails?.certifiacteUrl}}" target="_blank"><mat-icon>download</mat-icon></a>
+                          </td>
+                        </ng-container>
+  
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+                    </div>
+  
+                  </div>
+                </div>
+              </mat-tab>
+              </mat-tab-group>
           </div>
         </div>
       </div>

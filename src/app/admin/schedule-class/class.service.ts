@@ -86,7 +86,7 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
     const apiUrl = `${this.prefix}admin/studentClasses/${id}`;
     return this.http.put<ApiResponse>(apiUrl, item);
   }
-  saveApprovedProgramClasses(id: string, item: StudentApproval): Observable<ApiResponse> {
+  saveApprovedProgramClasses(id: string, item: any): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}admin/studentClasses/studentApproveList/${id}`;
     return this.http.put<ApiResponse>(apiUrl, item);
   }

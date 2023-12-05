@@ -228,7 +228,6 @@ certifiacteUrl:boolean = false;
         timer: 24000,
         timerProgressBar: true,
       });
-      console.log("=========",element)
       this.dafaultGenratepdf = true;
       this.pdfData = [];
             let pdfObj = {
@@ -241,11 +240,9 @@ certifiacteUrl:boolean = false;
 
       }
       this.pdfData.push(pdfObj);
-      console.log(this.pdfData)
       var convertIdDynamic = 'contentToConvert'
       console.log(convertIdDynamic)
       const dashboard = document.getElementById('contentToConvert');
-      console.log("==dashboard===",dashboard)
         //this.generatePdf1(dashboard, element?.studentId._id, element?.courseId._id,"course");
         this.genratePdf3(convertIdDynamic, element?.studentId._id, element?.courseId._id);
     
@@ -272,7 +269,6 @@ certifiacteUrl:boolean = false;
           doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
           const currentDateTime = moment();
           const randomString = this.generateRandomString(10);
-          console.log("randomString",randomString)
 
     // Format the date and time
   // let currentDate = currentDateTime.format('MMMM Do YYYY, h:mm:ss a');
@@ -297,10 +293,6 @@ certifiacteUrl:boolean = false;
   
           }
           )
-  
-  
-          
-  
         });
         this.dafaultGenratepdf = false;
       }
