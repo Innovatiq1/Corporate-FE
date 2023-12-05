@@ -149,7 +149,7 @@ export class AuditListComponent {
         'Email': user?.email,
         'User Type': user.type,
         'Login Time': formatDate(new Date(user.loginTime), 'yyyy-MM-dd hh:mm:ss a', 'en') || '',
-        'Logout Time': formatDate(new Date(user.logoutTime), 'yyyy-MM-dd hh:mm:ss a', 'en') || '',
+        'Logout Time': user.logoutTime?formatDate(new Date(user.logoutTime), 'yyyy-MM-dd hh:mm:ss a', 'en') :''
       })
     );
     TableExportUtil.exportToExcel(exportData, 'excel');
@@ -166,7 +166,7 @@ export class AuditListComponent {
       user?.email,
       user.type,
       formatDate(new Date(user.loginTime), 'yyyy-MM-dd hh:mm:ss a', 'en') || '',
-      formatDate(new Date(user.logoutTime), 'yyyy-MM-dd hh:mm:ss a', 'en') || '',
+      user.logoutTime?formatDate(new Date(user.logoutTime), 'yyyy-MM-dd hh:mm:ss a', 'en'):''
     ]);
     //const columnWidths = [60, 80, 40];
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
