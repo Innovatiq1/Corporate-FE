@@ -29,11 +29,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ViewProgramComponent {
   displayedColumns: string[] = ['position', ' Class Start Date ', ' Class End Date ', 'action'];
   displayedColumns1: string[] = [
-    'Course Name',
-    'Short Description',
-    'Long Description',
-    'Video Link',
-    'Document Link'
+    'title',
     ];
   dataSource:any;
   courseKitModel!: Partial<CourseKitModel>;
@@ -60,6 +56,10 @@ export class ViewProgramComponent {
   documentLink: any;
   uploadedDoc: any;
   title!: string;
+  programDetails: any;
+  isCompleted = false;
+  courseCompletedDetails: { title: string, playbackTime: number }[] = [];
+  electivecourseCompletedDetails: { title: string, playbackTime: number }[] = [];
 
   constructor(private classService: ClassService,private activatedRoute:ActivatedRoute,private modalServices:BsModalService, private courseService:CourseService,
     @Inject(DOCUMENT) private document: any){
@@ -102,7 +102,33 @@ export class ViewProgramComponent {
    
   }
   getCourseKitDetails(){
+    let studentId=localStorage.getItem('id')
     this.courseService.getProgramById(this.courseId).subscribe((response) => {
+      this.programDetails = response.data 
+     
+      if (this.programDetails.coreprogramCourse && this.programDetails.coreprogramCourse.length > 0) {
+        const courseIds = this.programDetails.coreprogramCourse.map((course: { coreProgramName: { id: any; }; }) => course.coreProgramName.id);
+          courseIds.forEach((courseId: any) => {
+          this.courseService.getStudentRegisteredByCourseId(studentId, courseId).subscribe((courseResponse) => {
+            const title = courseResponse?.courseId?.title;
+            const playbackTime = courseResponse?.playbackTime;
+        
+            this.courseCompletedDetails.push({ title, playbackTime });
+                    });
+        });
+      
+      }
+      if (this.programDetails.electiveprogramCourse && this.programDetails.electiveprogramCourse.length > 0) {
+        const electivecourseIds = this.programDetails.electiveprogramCourse.map((course: { electiveProgramName: { id: any; }; }) => course.electiveProgramName.id);
+          electivecourseIds.forEach((courseId: any) => {
+          this.courseService.getStudentRegisteredByCourseId(studentId, courseId).subscribe((courseResponse) => {
+            const title = courseResponse?.courseId?.title;
+            const playbackTime = courseResponse?.playbackTime;
+            this.electivecourseCompletedDetails.push({ title, playbackTime });
+                    });
+        });
+      
+      }
       this.courseKitDetails=response?.data?.programKit;
       this.courseName=response?.data?.title;
       this.documentLink = this.courseKitDetails[0].documentLink;

@@ -132,7 +132,7 @@
                                                     class="form-select rounded-2 w-50 border-secondary"
                                                     formControlName="coreProgramName">
                                                     <option>Choose...</option>
-                                                    <option *ngFor="let item of programList" [value]="item.title">
+                                                    <option *ngFor="let item of programList" [value]="item.id">
                                                         {{item.title}}</option>
                                                 </select>
                                             </div>
@@ -197,7 +197,7 @@
                                                     class="form-select rounded-2 w-50 border-secondary"
                                                     formControlName="electiveProgramName">
                                                     <option>Choose...</option>
-                                                    <option *ngFor="let item of programList" [value]="item.title">
+                                                    <option *ngFor="let item of programList" [value]="item.id">
                                                         {{item.title}}</option>
                                                 </select>
                                             </div>
