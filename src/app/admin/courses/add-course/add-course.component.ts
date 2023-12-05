@@ -577,6 +577,7 @@ onFileUpload(event:any) {
       let sub_categoryId = this.course?.sub_category?.id;
       let categoryId = this.course?.main_category?.id;
       let fundingGrantId = this.course?.funding_grant?.id;
+      let courseKitId = this.course?.course_kit?.map((item: { id: any; }) => item?.id) || [];
       this.firstFormGroup.patchValue({
         currency_code: this.course.currency_code ? this.course.currency_code: null,
         training_hours: this.course?.training_hours?.toString(),
@@ -607,7 +608,7 @@ onFileUpload(event:any) {
         pdu_leadership: this.course?.pdu_leadership?.toString(),
         pdu_strategic: this.course?.pdu_strategic?.toString(),
         // course_instructor: this.course?.course_instructor?.id,
-        course_kit: this.course?.course_kit[0].id,
+        course_kit: courseKitId,
         uploadedImage:this.course?.image_link,
       });
       this.mainCategoryChange();

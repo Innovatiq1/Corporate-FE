@@ -141,7 +141,7 @@ export class AddStudentComponent {
       },
       (error) => {
         Swal.fire(
-          'Failed to create course kit',
+          'Failed to create student',
           error.message || error.error,
           'error'
         );
@@ -230,14 +230,14 @@ getDepartment(){
   update() {
     console.log('Form Value', this.stdForm.value);
     if(this.stdForm.valid){
-      // this.instructor.uploadVideo(this.files).subscribe(
-      //   (response: any) => {
-      //     const inputUrl = response.inputUrl;
+      this.StudentService.uploadVideo(this.files).subscribe(
+        (response: any) => {
+          const inputUrl = response.inputUrl;
 
           const userData: Student = this.stdForm.value;
           //this.commonService.setVideoId(videoId)
 
-          //userData.avatar = inputUrl;
+          userData.avatar = inputUrl;
           userData.filename= this.fileName
           userData.type = "Student";
           userData.role = "Student";
@@ -247,9 +247,10 @@ getDepartment(){
           this.updateInstructor(userData);
 
           Swal.close();
-       // },
+       },
 
-    }
+       );
+      }
   }
   private updateInstructor(userData: Student): void {
     this.StudentService.updateStudent(this.StudentId, userData).subscribe(
@@ -266,7 +267,7 @@ getDepartment(){
       },
       (error: { message: any; error: any }) => {
         Swal.fire(
-          'Failed to create course kit',
+          'Failed to update student',
           error.message || error.error,
           'error'
         );

@@ -132,7 +132,7 @@ export class AddTeacherComponent {
       },
       (error) => {
         Swal.fire(
-          "Failed to create course kit",
+          "Failed to create instructor",
           error.message || error.error,
           "error"
         );

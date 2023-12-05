@@ -141,7 +141,7 @@ createSubCategory(): void {
 //console.log("===this.subCategoryData===",this.subCategoryData)
   this.courseService.updateSubCategory(this.subcategoryId,this.subCategoryData).subscribe(
     (response) => {
-      Swal.fire('Success', 'Subcategories created successfully!', 'success');
+      Swal.fire('Success', 'Subcategories upated successfully!', 'success');
       this.mainCategoryForm.reset();
       this.subCategoryForm.reset();
       this.initSubCategoryForm();
@@ -153,7 +153,7 @@ createSubCategory(): void {
       //this.fetchSubCategories();
     },
     (error) => {
-      Swal.fire('Error', 'Failed to create subcategories!', 'error');
+      Swal.fire('Error', 'Failed to update subcategories!', 'error');
     }
   );
   this.isSubmitted=false
@@ -168,11 +168,11 @@ createMainCategory(): void {
   const mainCategoryData = this.mainCategoryForm.value;
   this.courseService.updateMainCategory(this.mainCategoryId,mainCategoryData).subscribe(
     (response) => {
-      Swal.fire('Success', 'Main category created successfully!', 'success');
+      Swal.fire('Success', 'Main category Updated successfully!', 'success');
       //this.mainCategoryId = response.data._id;
     },
     (error) => {
-      Swal.fire('Error', 'Failed to create main category!', 'error');
+      Swal.fire('Error', 'Failed to update main category!', 'error');
     }
   );
   this.isSubmitted=false
