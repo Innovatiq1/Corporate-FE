@@ -28,6 +28,8 @@ export class StudentVideoPlayerComponent {
   @ViewChild("video", { static: true }) video: ElementRef<HTMLVideoElement> =
     {} as ElementRef<HTMLVideoElement>;
   studentClassDetails: any;
+  coursekitDetails: any;
+  playBackTime!: number;
 
   constructor(
     public bsModalRef: BsModalRef, private courseService: CourseService, private classService: ClassService,
@@ -129,7 +131,7 @@ export class StudentVideoPlayerComponent {
                       let payload = {
                         status: 'completed',
                         studentId: studentId,
-                        playbackTime :100
+                        playbackTime: 100
                       }
                       this.classService.saveApprovedClasses(classId, payload).subscribe((response) => {
                       })
@@ -182,20 +184,30 @@ export class StudentVideoPlayerComponent {
     let time = this.commonService.getPlayBackTime();
     if (lastButOneValue < time) {
     } else {
-
       this.classService.saveApprovedClasses(classId, payload).subscribe((response) => {
+        this.courseService.getStudentClass(studentId, classId).subscribe((response) => {
+          this.studentClassDetails = response.data.docs[0];
+          this.coursekitDetails = response.data.docs[0].coursekit;
+          let totalPlaybackTime = 0;
+          let documentCount = 0;
+          this.coursekitDetails.forEach((doc: { playbackTime: any; }, index: number) => {
+            const playbackTime = doc.playbackTime;
+            totalPlaybackTime += playbackTime;
+            documentCount++
+          });
+          let time = totalPlaybackTime / documentCount
+          this.playBackTime = time;
+          this.commonService.setCompletedPercentage(this.playBackTime)
+          let percentage = this.commonService.getCompletedPercentage();
+          let body = {
+            studentId: studentId,
+            playBackTime: percentage
+          }
+          this.classService.saveApprovedClasses(classId, body).subscribe((response) => {
+          })
+        })
       })
     }
-    let percentage =this.commonService.getCompletedPercentage();
-    let body = {
-      studentId: studentId,
-      playBackTime :percentage
-    }
-    this.classService.saveApprovedClasses(classId, body).subscribe((response) => {
-    })
-
-
-
     this.hls.destroy();
     this.bsModalRef.hide();
   }
