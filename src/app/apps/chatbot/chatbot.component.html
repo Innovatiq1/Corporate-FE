@@ -8,7 +8,7 @@
   <div class="Layout Layout-open Layout-expand Layout-right">
     <div class="Messenger_messenger">
       <div class="Messenger_header">
-        <h4 class="Messenger_prompt">How can we help you?</h4>
+        <h4 class="Messenger_prompt">Chat</h4>
         <span class="chat_close_icon" (click)="onIconClick()"
           ><i class="fa fa-window-close" aria-hidden="true"></i
         ></span>
@@ -16,6 +16,19 @@
       <div class="Messenger_content">
         <div class="Messages">
 					<div class="Messages_list">
+            <div class="msg bot">
+              <span class="avtr"><figure style="background-image: url(../../../assets/images/bot.png)"></figure></span>
+              <!-- <span class="responsText">{{ msg.text }} hello</span> -->
+              <span class="responsText" >How can i help you today?
+                <ul>
+                  <li>1.Courses</li>
+                  <li>2.Programs</li>
+                  <li>3.Login</li>
+                  <li>4.Signup</li>
+                  <li>5.Others</li>
+                </ul>
+              </span>
+            </div>
             <div *ngFor="let msg of messages" class="msg" [ngClass]="{'user': msg.type === 'user', 'bot': msg.type === 'bot'}">
               <span class="avtr"><figure style="background-image: url(../../../assets/images/bot.png)"></figure></span>
               <span class="responsText">{{ msg.text }}</span>
