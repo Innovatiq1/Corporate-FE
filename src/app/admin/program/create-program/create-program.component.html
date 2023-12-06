@@ -128,16 +128,23 @@
                                         <div class="col-10">
                                             <div class="d-flex gap-4">
                                                 <label class="card_course ">Certificate Program</label>
-                                                <select name="coursename"
+                                                <mat-form-field class="example-full-width" appearance="outline">
+                                                    <mat-select name="coursename"
+                                                    formControlName="coreProgramName">
+                                                        <mat-option>Choose...</mat-option>
+                                                        <mat-option *ngFor="let item of programList" [value]="item.id"> {{item.title}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <!-- <mat-select name="coursename"
                                                     class="form-select rounded-2 w-50 border-secondary"
                                                     formControlName="coreProgramName">
-                                                    <option>Choose...</option>
-                                                    <option *ngFor="let item of programList" [value]="item.id">
-                                                        {{item.title}}</option>
-                                                </select>
+                                                    <mat-option>Choose...</mat-option>
+                                                    <mat-option *ngFor="let item of programList" [value]="item.id">
+                                                        {{item.title}}</mat-option>
+                                                </mat-select> -->
                                             </div>
                                         </div>
-                                        <div class="col-1 ms-5">
+                                        <div class="col-1" style="right: 40px;position: absolute;">
                                             <svg (click)="deleteCoreCard(i)" class="ms-2 rounded-4 border"
                                                 xmlns="http://www.w3.org/2000/svg" width="34" height="34"
                                                 viewBox="0 0 24 24"
@@ -193,16 +200,23 @@
                                         <div class="col-10">
                                             <div class="d-flex gap-4">
                                                 <label class="card_course ">Elective course</label>
-                                                <select name="coursename"
+                                                <mat-form-field class="example-full-width" appearance="outline">
+                                                    <mat-select name="coursename"
+                                                    formControlName="electiveProgramName">
+                                                        <mat-option>Choose...</mat-option>
+                                                        <mat-option *ngFor="let item of programList" [value]="item.id"> {{item.title}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <!-- <select name="coursename"
                                                     class="form-select rounded-2 w-50 border-secondary"
                                                     formControlName="electiveProgramName">
                                                     <option>Choose...</option>
                                                     <option *ngFor="let item of programList" [value]="item.id">
                                                         {{item.title}}</option>
-                                                </select>
+                                                </select> -->
                                             </div>
                                         </div>
-                                        <div class="col-1 ms-5">
+                                        <div class="col-1" style="right: 40px;position: absolute;">
                                             <svg (click)="deleteElectiveCard(i)" class="ms-2 rounded-4 border"
                                                 xmlns="http://www.w3.org/2000/svg" width="34" height="34"
                                                 viewBox="0 0 24 24"

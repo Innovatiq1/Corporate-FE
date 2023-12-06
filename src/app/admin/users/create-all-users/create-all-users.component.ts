@@ -163,7 +163,44 @@ export class CreateAllUsersComponent {
 
   }
 
-  updateBlog(obj:any): any {
+  updateBlog(formObj:any) {
+    if (!formObj.invalid) {
+      this.studentService.uploadVideo(this.files).subscribe(
+        (response: any) => {
+          console.log("======",formObj.type)
+          const inputUrl = response.inputUrl;
+          
+          formObj['Active']= this.status
+          formObj['role']=formObj.type
+          formObj['isLogin']=true
+
+          const userData: Users = formObj;
+          //this.commonService.setVideoId(videoId)
+
+          userData.avatar = inputUrl;
+          userData.filename = response.filename;
+          
+          //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+          // this.currentVideoIds.push(videoId);
+          this.updateUser(userData);
+
+          Swal.close();
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Upload Failed',
+            text: 'An error occurred while uploading the video',
+          });
+          Swal.close();
+        }
+      );
+    }
+    
+     
+
+  }
+  updateUser(obj:any){
     return new Promise((resolve, reject) => {
       obj['Active']= this.status
       this.userService.updateUsers(obj, this.currentId).subscribe(
@@ -251,7 +288,7 @@ getBlogsList(filters?:any) {
         password: data?.password,
         qualification: data?.qualification,
         type:data?.type,
-        avatar:data?.filename,
+        avatar:data?.avatar,
       });
     }
   }, error => {

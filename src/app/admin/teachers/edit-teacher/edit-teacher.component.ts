@@ -144,7 +144,7 @@ getData(){
         gender: response?.course?.gender,
         mobile: response?.course?.mobile,
         password: response?.course?.password,
-        conformPassword: response?.course?.conformPassword,
+        conformPassword: response?.course?.password,
         email:response?.course?.email,
         qualification:response?.course?.qualification,
         dob:response?.course?.dob,
