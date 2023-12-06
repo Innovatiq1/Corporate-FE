@@ -110,7 +110,6 @@ export class ViewProgramComponent {
     let studentId = localStorage.getItem('id')
     this.courseService.getProgramById(this.courseId).subscribe((response) => {
       this.programDetails = response.data
-
       if (this.programDetails.coreprogramCourse && this.programDetails.coreprogramCourse.length > 0) {
         const courseIds = this.programDetails.coreprogramCourse.map((course: { coreProgramName: { id: any; }; }) => course.coreProgramName.id);
         courseIds.forEach((courseId: any) => {
@@ -123,7 +122,7 @@ export class ViewProgramComponent {
             this.completedProgramPercentage = averagePlaybackTime
             if (this.completedProgramPercentage === 100) {
               this.coreCompleted = true;
-                        }
+                        } 
 
           });
         });
@@ -156,6 +155,24 @@ export class ViewProgramComponent {
             });
           });
   
+        } else {
+          this.courseService.getProgramRegisteredClasses(studentId, this.classId).subscribe((response) => {
+            this.studentClassDetails = response.data;
+            if (this.studentClassDetails.status == 'approved') {
+      
+          if(this.coreCompleted){
+            let payload = {
+              status: 'completed',
+              studentId: studentId,
+              playbackTime: 100
+            }
+            this.classService.saveApprovedProgramClasses(this.classId, payload).subscribe((response) => {
+            })
+
+          }
+        }
+      })
+
         }
   
 
