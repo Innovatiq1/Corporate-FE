@@ -88,8 +88,9 @@
                   <ng-container matColumnDef="Email">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Email
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" >
-                      <span class="mobile-label">Email:</span>{{row?.email }}</mat-cell>
+                    <mat-cell *matCellDef="let row" class="email-column">
+                      <div class="email-content">
+                      <span class="mobile-label">Email:</span>{{row?.email }}</div></mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="User Type">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>User Type

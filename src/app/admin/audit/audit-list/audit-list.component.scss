@@ -23,3 +23,11 @@ svg {
 .menu-text{
     padding-left: 20px;
 }
+.email-column {
+    overflow: visible !important;
+    white-space: nowrap !important; /* Prevent email text from wrapping to the next line */
+  }
+  
+  .email-content {
+     margin: -50px;
+  }

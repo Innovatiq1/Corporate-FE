@@ -332,7 +332,7 @@ export class CreateProgramComponent {
         _id: any; coreProgramName: any; coreProgramDescription: any;
       }) => {
         return this.fb.group({
-          coreProgramName: [item?.coreProgramName.title],
+          coreProgramName: [item?.coreProgramName.id],
           coreProgramDescription: [item?.coreProgramDescription],
         });
       });
@@ -343,7 +343,7 @@ export class CreateProgramComponent {
         _id: any; electiveProgramName: any; electiveProgramDescription: any;
       }) => {
         return this.fb.group({
-          electiveProgramName: [item?.electiveProgramName.title],
+          electiveProgramName: [item?.electiveProgramName.id],
           electiveProgramDescription: [item?.electiveProgramDescription],
         });
       });
