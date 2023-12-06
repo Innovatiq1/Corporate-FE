@@ -80,7 +80,7 @@ export class AddStaffComponent {
 
 patchData(_data: any){
 
-  this.fileName = _data.avatar
+  this.fileName = _data.filename
   this.avatar = this.editData.avatar;
       this.uploaded=this.avatar?.split('/')
       this.uploadedImage = this.uploaded?.pop();
@@ -90,7 +90,7 @@ patchData(_data: any){
     gender:_data.gender ,
     mobile: _data.mobile,
     password:_data.password,
-    conformPassword:_data.conformPassword,
+    conformPassword:_data.password,
     type:_data.type ,
     joiningDate:_data.joiningDate,
     address:_data.address ,
@@ -181,19 +181,53 @@ addBlog(formObj:any) {
   onFileUpload(event:any) {
     this.fileName = event.target.files[0].name;
     this.files=event.target.files[0];
-    this.uploadedImage =event.target.files[0].name;
+    // this.uploadedImage =event.target.files[0].name;
 
-    // const file = event.target.files[0];
-    const formData = new FormData();
-    // formData.append('files', file);
-    this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
-    this.avatar = response.avatar;
-      this.uploaded=this.avatar.split('/')
-      this.uploadedImage = this.uploaded.pop();
-    });
+    // // const file = event.target.files[0];
+    // const formData = new FormData();
+    // // formData.append('files', file);
+    // this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
+    // this.avatar = response.fileName;
+    //   this.uploaded=this.avatar.split('/')
+    //   this.uploadedImage = this.uploaded.pop();
+    // });
   }
-
-  updateBlog(obj:any): any {
+  updateBlog(formObj:any) {
+    console.log('Form Value', formObj.value);
+     if (!formObj.invalid) {
+       this.studentService.uploadVideo(this.files).subscribe(
+         (response: any) => {
+           console.log("======",formObj.type)
+          //  const inputUrl = response.inputUrl;
+  
+           formObj['Active']= this.status
+           formObj['role']=formObj.type
+           formObj['isLogin']=true
+  
+           const userData: Users = formObj;
+           //this.commonService.setVideoId(videoId)
+  
+          //  userData.avatar = inputUrl;
+          //  userData.filename = response.filename;
+  
+           //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+           // this.currentVideoIds.push(videoId);
+           this.updateUser(userData);
+  
+           Swal.close();
+         },
+         (error) => {
+           Swal.fire({
+             icon: 'error',
+             title: 'Upload Failed',
+             text: 'An error occurred while uploading the video',
+           });
+           Swal.close();
+         }
+       );
+     }
+    }
+  updateUser(obj:any): any {
     return new Promise((resolve, reject) => {
       obj['Active']= this.status
       this.userService.updateUsers(obj, this.paramId).subscribe(

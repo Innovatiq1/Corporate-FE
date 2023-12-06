@@ -189,7 +189,7 @@ getDepartment(){
           parentsPhone: this.editData.parentsPhone,
           dob: this.editData.dob,
           password: this.editData.password,
-          conformPassword: this.editData.conformPassword,
+          conformPassword: this.editData.password,
           education: this.editData.education,
           blood_group: this.editData.blood_group,
           address: this.editData.address,
