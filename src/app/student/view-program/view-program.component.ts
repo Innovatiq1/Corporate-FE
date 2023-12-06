@@ -137,6 +137,10 @@ export class ViewProgramComponent {
               if (electiveplaybackTime === 100) {
                 this.electiveCompleted = true;
                           }
+                          this.courseService.getProgramRegisteredClasses(studentId, this.classId).subscribe((response) => {
+                            this.studentClassDetails = response.data;
+                            if (this.studentClassDetails.status == 'approved') {
+                      
                           if(this.coreCompleted && this.electiveCompleted){
                             let payload = {
                               status: 'completed',
@@ -147,6 +151,8 @@ export class ViewProgramComponent {
                             })
       
                           }
+                        }
+                      })
             });
           });
   
