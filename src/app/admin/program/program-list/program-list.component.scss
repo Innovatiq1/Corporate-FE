@@ -45,12 +45,21 @@
 
   svg {
     position: absolute;
+    top: 0;
+    right: -35px;
     fill: #000;
     background-color: #d3cdcd;
-    margin-left: 15px;
+    margin-top: 0px;
+    margin-right: 8px;
     border-radius: 10px;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding: 3px;
+    // position: absolute;
+    // fill: #000;
+    // background-color: #d3cdcd;
+    // margin-left: 15px;
+    // border-radius: 10px;
+    // padding-left: 3px;
+    // padding-right: 3px;
 }
 
 // modal-box styling

@@ -50,32 +50,48 @@
                       <h5>{{program?.title | truncate:35}}
                       </h5>
                       <div class="row">
-                        <div class="col-6">
+                        <div class="col-7">
                           <h6>Program Period</h6>
                         </div>
-                        <div class="col-6">
-                          <p style="width: 125%;">{{program?.sessionStartDate |date }} -
+                        <div class="col-5">
+                          <p style="width: 150%;">{{program?.sessionStartDate |date }} -
                             {{program?.sessionEndDate |date }} </p>
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-6">
+                        <div class="col-7">
                           <h6>Duration</h6>
                         </div>
-                        <div class="col-6">
+                        <div class="col-3">
                           <p>{{program?.duration}} Hours </p>
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-6">
+                        <div class="col-7">
                           <h6>Payment</h6>
                         </div>
-                        <div class="col-6">
+                        <div class="col-3">
                           <p>{{program?.courseFee}}$</p>
                         </div>
                       </div>
+                      <div class="row">
+                        <div class="col-7">
+                          <h6>Compulsory Courses</h6>
+                        </div>
+                        <div class="col-3">
+                          <p>{{program?.coreCourseCount}}</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-7">
+                          <h6>Elective Courses</h6>
+                        </div>
+                        <div class="col-3">
+                          <p>{{program?.electiveCourseCount || 0}}</p>
+                        </div>
+                      </div>
                     </span>
-                    <span>
+                    <span class="ms-4">
                       <button mat-button  [matMenuTriggerFor]="menu">
                         <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
                         xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -136,7 +152,7 @@
                           <p class="fw-semibold" style="color: #979595">
                             Elective Count
                             <span class="ecount">
-                              {{program?.electiveCourseCount}}</span>
+                              {{program?.electiveCourseCount || 0}}</span>
                           </p>
                         </div>
                         <div *ngFor="let elective of program?.electiveprogramCourse">
