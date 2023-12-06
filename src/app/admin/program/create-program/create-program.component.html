@@ -171,7 +171,7 @@
                                 <label>Elective Count</label>
                                 <input type="text" class="form-control rounded-3 p-1 w-25 border-secondary"
                                     formControlName="electiveCourseCount"
-                                    [class.invalid-input]="isSubmitted && programFormGroup.get('electiveCourseCount')?.invalid || programFormGroup.get('electiveCourseCount')?.invalid && programFormGroup.get('electiveCourseCount')?.touched" />
+                                    >
                             </div>
                             <div class="d-flex gap-4">
                                 <button (click)="addElectiveCard()" class="btn rounded-2 px-4">
@@ -186,10 +186,10 @@
                                 </button>
                             </div>
                         </div>
-                        <div *ngIf="isSubmitted"
+                        <!-- <div *ngIf="isSubmitted"
                             [class.invalid-text]="isSubmitted && programFormGroup.get('electiveCourseCount')?.invalid || programFormGroup.get('electiveCourseCount')?.invalid && programFormGroup.get('electiveCourseCount')?.touched">
                             {{ utils.getErrorMessage(programFormGroup, 'electiveCourseCount')?.message }}
-                        </div>
+                        </div> -->
 
                         <div  formArrayName="electivePrograms"class="m-3">
                             <div class="card border-light mb-3 shadow rounded-5"

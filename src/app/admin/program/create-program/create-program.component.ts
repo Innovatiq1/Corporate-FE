@@ -160,11 +160,11 @@ export class CreateProgramComponent {
 
 
   deleteCoreCard(index: number) {
-    this.coreProgramCards.splice(index, 1);
+    this.corePrograms.controls.splice(index, 1);
   }
 
   deleteElectiveCard(index: number) {
-    this.electiveProgramCards.splice(index, 1);
+    this.electivePrograms.controls.splice(index, 1);
   }
 
 
@@ -245,7 +245,7 @@ export class CreateProgramComponent {
           courseCode: this.programFormGroup.value.programCode,
           deliveryMode: this.programFormGroup.value.deliveryMode,
           coreCourseCount: this.programFormGroup.value.coreCourseCount,
-          electiveCourseCount: this.programFormGroup.value.electiveCourseCount,
+          // electiveCourseCount: this.programFormGroup.value.electiveCourseCount,
           sessionStartDate: this.programFormGroup.value.sessionStartDate ? this.programFormGroup.value.sessionStartDate : null,
           sessionEndDate: this.programFormGroup.value.sessionEndDate ? this.programFormGroup.value.sessionEndDate : null,
           sessionStartTime: this.programFormGroup.value.sessionStartTime,
@@ -257,7 +257,7 @@ export class CreateProgramComponent {
           attendees: this.programFormGroup.value.attendees,
           prerequisites: this.programFormGroup.value.prerequisites,
           coreprogramCourse: this.corePrograms.value,
-          electiveprogramCourse: this.electivePrograms.value,
+          // electiveprogramCourse: this.electivePrograms.value,
           image_link: this.image_link,
           id: this.courseId,
           programKit: this.programFormGroup.value.programKit ? this.programFormGroup.value.programKit : null
@@ -287,7 +287,7 @@ export class CreateProgramComponent {
   getProgramList(filters?: any) {
     this.classService.getAllCoursesTitle('active').subscribe(
       (response: any) => {
-        this.programList = response;
+        this.programList = response.reverse();
       },
       (error) => {
       }

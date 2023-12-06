@@ -73,7 +73,7 @@ export class CreateClassComponent {
   minDate: Date | undefined;
   maxDate!: Date;
   // status = true;
-  courseList!: CourseTitleModel[];
+  courseList!: any;
   instructorList: any = [];
   // labList: any = [];
   selectedPosition: number = 0;
@@ -157,7 +157,7 @@ export class CreateClassComponent {
       // instructors: this.instructorService.getInstructor(),
       // labs: this._classService.getAllLaboratory(),
     }).subscribe((response) => {
-      this.courseList = response.courses;
+      this.courseList = response.courses.reverse();
       console.log(this.courseList, 'cList');
       // this.instructorList = response.instructors;
       // this.labList = response.labs;
@@ -318,14 +318,16 @@ export class CreateClassComponent {
     });
     return sessions;
   }
-  onSelectChange(event :any) {
-     this.courseService.getCourseById(this.classForm.controls['courseId'].value).subscribe((response) => {
-      this.courseTitle=response.title
-      this.courseCode=response.courseCode
-     });
+ 
+  onSelectChange(event: any) {
+    const filteredData = this.courseList.filter(
+      (item: { _id: string }) =>
+        item._id === this.classForm.controls['courseId'].value
+    );
+    this.courseTitle=filteredData[0].title
+    this.courseCode=filteredData[0].courseCode
 
-   }
-
+  }
   // onSelectChange(event: any) {
   //   //this.instructorList.filter(item)
   //   const filteredData = this.instructorList.filter(
