@@ -56,7 +56,7 @@ export class EditComponent {
       // instructors: this.instructorService.getInstructor(),
       //labs: this._classService.getAllLaboratory(),
     }).subscribe((response) => {
-      this.courseList = response.courses;
+      this.courseList = response.courses.reverse();
       console.log(this.courseList, 'cList');
       // this.instructorList = response.instructors;
       //this.labList = response.labs;
