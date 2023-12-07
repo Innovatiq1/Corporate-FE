@@ -733,6 +733,27 @@ MENU_LIST = [
         }
        ]
 },
+{
+    id: "instructor-timetable",
+    title: "Instructor TimeTable",
+    selected: false,
+    iconsrc: "/assets/course-icon.svg",
+    icon: 'fact_check',
+    children:
+    [
+        {
+            id: "instrutor-course-timetable",
+            title: "Course Timetable",
+            type: "none"
+        }
+        ,{
+            id: "instrutor-program-timetable",
+            title: "Program Timetable",
+            type: "none"
+        }
+
+       ]
+},
 
 {
     id: "settings",
