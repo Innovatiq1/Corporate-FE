@@ -132,7 +132,7 @@ export class FeedbackComponent {
   }
   getApprovedPrograms(){
     let studentId=localStorage.getItem('id')
-    const payload = { studentId: studentId, status: 'approved',isAll:true };
+    const payload = { studentId: studentId, status: 'completed', 'isAll':true };
     this._classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
      this.studentApprovedPrograms = response.data.docs;
     })

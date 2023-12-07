@@ -72,6 +72,8 @@ export class DashboardComponent implements OnInit {
   approvedCourses: any;
   registeredPrograms: any;
   approvedPrograms: any;
+  completedCourses: any;
+  completedPrograms : any;
   studentApprovedClasses: any;
   studentApprovedPrograms: any;
   approvedLeaves: any;
@@ -103,6 +105,10 @@ export class DashboardComponent implements OnInit {
       this.registeredCourses = response?.data?.docs?.length
       this.getRegisteredAndApprovedPrograms()
     })
+    const payload3 = { studentId: studentId, status: 'completed' ,isAll:true};
+    this.classService.getStudentRegisteredClasses(payload3).subscribe(response =>{
+      this.completedCourses = response?.data?.docs?.length
+    })
 
   }
   getRegisteredAndApprovedPrograms(){
@@ -113,6 +119,9 @@ export class DashboardComponent implements OnInit {
       const payload1 = { studentId: studentId, status: 'approved' ,isAll:true};
       this.classService.getStudentRegisteredProgramClasses(payload1).subscribe(response =>{
         this.approvedPrograms = response?.data?.docs?.length
+        const payload3 = { studentId: studentId, status: 'completed' ,isAll:true};
+      this.classService.getStudentRegisteredProgramClasses(payload3).subscribe(response =>{
+        this.completedPrograms = response?.data?.docs?.length
         const payload2 = { studentId: studentId, status: 'withdraw' ,isAll:true};
         this.classService.getStudentRegisteredProgramClasses(payload2).subscribe(response =>{
           this.withdrawPrograms = response?.data?.length
@@ -123,12 +132,13 @@ export class DashboardComponent implements OnInit {
           labels: this.doughnutChartLabels,
           datasets: [
             {
-              data: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms],
-              backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8'],
+              data: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms, this.completedCourses, this.completedPrograms],
+              backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8', '#73af5a', '#af5a79'],
             },
           ],
         };
       })
+    })
     })
   }
   getApprovedCourse(){
@@ -199,6 +209,8 @@ export class DashboardComponent implements OnInit {
     'Approved Courses',
     'Registered Programs ',
     'Approved Programs',
+    'Completed Courses' , 
+    'Completed Programs'
   ];
   public doughnutChartData!: ChartData<'doughnut'>
   public doughnutChartType: ChartType = 'doughnut';
@@ -248,6 +260,10 @@ export class DashboardComponent implements OnInit {
         {
           name: 'Approved',
           data: [this.approvedCourses,this.approvedPrograms],
+        },
+        {
+          name: 'Completed',
+          data: [this.completedCourses,this.completedPrograms],
         },
         {
           name: 'Cancelled',
