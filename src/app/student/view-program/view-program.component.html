@@ -270,14 +270,14 @@
                                 </thead>
                                 <tbody>
                                   <tr *ngFor="let item of electivecourseCompletedDetails" class="odd gradeX">
-                                    <td class="center">{{item?.electivetitle}}</td>
+                                    <td class="center">{{item?.electivetitle | titlecase}}</td>
                                     <td [ngClass]="{'red-text': item.electiveplaybackTime< 50, 'green-text': item.electiveplaybackTime>= 50}">{{item?.electiveplaybackTime?.toFixed(2) || 0}}%</td>
                                     </tr>
                                     </tbody>
                                     </table>
       
                               </div>
-                              <h5 class="text">Program Completed : <span [ngClass]="{'red-text': completedProgramPercentage< 50, 'green-text':completedProgramPercentage>= 50}" >{{completedProgramPercentage}}%</span></h5>
+                              <h5 class="text">Program Completed : <span [ngClass]="{'red-text': completedProgramPercentage< 50, 'green-text':completedProgramPercentage>= 50}" >{{completedProgramPercentage.toFixed(2) || 0}}%</span></h5>
 
                       </div>
   
