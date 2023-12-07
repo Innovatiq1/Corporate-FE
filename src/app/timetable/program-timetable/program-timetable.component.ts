@@ -137,7 +137,7 @@ export class ProgramTimetableComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload).subscribe(response => {
-      this.studentApprovedClasses = response.data.slice(0, 5);
+      this.studentApprovedClasses = response.data.docs.slice(0, 5);
       const currentDate = new Date();
       const currentMonth = currentDate.getMonth();
       const currentYear = currentDate.getFullYear();
@@ -201,7 +201,7 @@ export class ProgramTimetableComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved',isAll:true };
     this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
-     this.studentApprovedPrograms= response.data.slice(0,5);
+     this.studentApprovedPrograms= response.data.docs.slice(0,5);
      const currentDate = new Date();
      const currentMonth = currentDate.getMonth();
      const currentYear = currentDate.getFullYear();  
