@@ -311,11 +311,17 @@
                   <h6>{{data.title |truncate : 25}}</h6>
                   <div class="row">
                     <div class="col-md-2">
+                      <b>{{ data?.courseCode }}</b>
+                    </div>
+                    <div class="col-md-2">
                       <b>{{ data.training_hours}} Hours</b>
                     </div>
                     <div class="col-md-2">
                       <b>{{data.course_duration_in_days}}</b>
                     </div>
+                    <!-- <div class="col-md-3" [class]="data?.Active ? 'badge badge-solid-red' : 'badge badge-solid-green'">
+                      <b>{{ data?.classDeliveryType | titlecase }}</b>
+                    </div> -->
                     <div class="col-md-3">
                       <b style="color: blue;"><i class="fa fa-play-circle-o"></i> {{data.sessionStartDate | date}}</b>
                     </div>
