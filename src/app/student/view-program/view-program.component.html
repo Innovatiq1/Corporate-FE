@@ -277,7 +277,7 @@
                                     </table>
       
                               </div>
-                              <h5 class="text">Program Completed : <span [ngClass]="{'red-text': completedProgramPercentage< 50, 'green-text':completedProgramPercentage>= 50}" >{{completedProgramPercentage}}%</span></h5>
+                              <h5 class="text">Program Completed : <span [ngClass]="{'red-text': completedProgramPercentage< 50, 'green-text':completedProgramPercentage>= 50}" >{{completedProgramPercentage.toFixed(2) || 0}}%</span></h5>
 
                       </div>
   
