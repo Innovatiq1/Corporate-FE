@@ -55,7 +55,7 @@ export class CreateProgramComponent {
   files: any[] = [];
 
   coreProgramCards: { coreProgramName: string; coreProgramCode: string }[] = [{ coreProgramName: '', coreProgramCode: '' }];
-  electiveProgramCards: { electiveProgramName: string; electiveProgramCode: string }[] = [{ electiveProgramName: '', electiveProgramCode: '' }];
+  electiveProgramCards: { electiveProgramName: any; electiveProgramCode: string }[] = [{ electiveProgramName: null, electiveProgramCode: '' }];
 
   programFormGroup: FormGroup;
   editPermission: any;
@@ -147,7 +147,7 @@ export class CreateProgramComponent {
   addElectiveCard(): void {
     this.electivePrograms.push(
       this.fb.group({
-        electiveProgramName: ["", []],
+        electiveProgramName: [null, []],
         electiveProgramCode: ["", []],
         electiveProgramDescription: ["", []],
       })
@@ -205,7 +205,7 @@ export class CreateProgramComponent {
           courseCode: this.programFormGroup.value.programCode,
           deliveryMode: this.programFormGroup.value.deliveryMode,
           coreCourseCount: this.programFormGroup.value.coreCourseCount,
-          electiveCourseCount: this.programFormGroup.value.electiveCourseCount,
+          electiveCourseCount: this.programFormGroup.value.electiveCourseCount ? this.programFormGroup.value.electiveCourseCount : 0,
           sessionStartDate: this.programFormGroup.value.sessionStartDate == "Invalid date" ? null : this.programFormGroup.value.sessionStartDate,
           sessionEndDate: this.programFormGroup.value.sessionEndDate == "Invalid date" ? null : this.programFormGroup.value.sessionEndDate,
           sessionStartTime: this.programFormGroup.value.sessionStartTime,
@@ -245,7 +245,7 @@ export class CreateProgramComponent {
           courseCode: this.programFormGroup.value.programCode,
           deliveryMode: this.programFormGroup.value.deliveryMode,
           coreCourseCount: this.programFormGroup.value.coreCourseCount,
-          // electiveCourseCount: this.programFormGroup.value.electiveCourseCount,
+          electiveCourseCount: this.programFormGroup.value.electiveCourseCount ? this.programFormGroup.value.electiveCourseCount : 0,
           sessionStartDate: this.programFormGroup.value.sessionStartDate ? this.programFormGroup.value.sessionStartDate : null,
           sessionEndDate: this.programFormGroup.value.sessionEndDate ? this.programFormGroup.value.sessionEndDate : null,
           sessionStartTime: this.programFormGroup.value.sessionStartTime,
@@ -257,7 +257,7 @@ export class CreateProgramComponent {
           attendees: this.programFormGroup.value.attendees,
           prerequisites: this.programFormGroup.value.prerequisites,
           coreprogramCourse: this.corePrograms.value,
-          // electiveprogramCourse: this.electivePrograms.value,
+          electiveprogramCourse: this.electivePrograms.value?this.electivePrograms.value: null,
           image_link: this.image_link,
           id: this.courseId,
           programKit: this.programFormGroup.value.programKit ? this.programFormGroup.value.programKit : null

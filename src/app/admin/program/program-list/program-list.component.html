@@ -114,7 +114,7 @@
                     </span>
                   </div>
                   <div class="row">
-                    <div class="col count">
+                    <div class="col">
                       <div class="m-4">
                         <div class="d-flex justify-content-between mt-3">
                           <p class="fw-semibold" style="color: #979595">
@@ -146,13 +146,13 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col">
+                    <div class="col count" *ngIf="program?.electiveCourseCount > 0">
                       <div class="m-4">
                         <div class="d-flex justify-content-between mt-4">
                           <p class="fw-semibold" style="color: #979595">
                             Elective Count
                             <span class="ecount">
-                              {{program?.electiveCourseCount || 0}}</span>
+                              {{program?.electiveCourseCount}}</span>
                           </p>
                         </div>
                         <div *ngFor="let elective of program?.electiveprogramCourse">
