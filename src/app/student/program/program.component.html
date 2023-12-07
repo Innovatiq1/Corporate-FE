@@ -75,7 +75,10 @@
                         <h6 class="mb-xs mt-xs title"> {{data?.courseId?.title |truncate : 40}}</h6>
                         <p class="text-muted"><time>{{data?.courseId?.duration}} Hours</time></p>
                       </div>
-                      <p class="text-muted"><time>{{data?.classDeliveryType | titlecase}}</time></p>
+                      <h6><time>{{data?.classDeliveryType | titlecase}}</time></h6>
+                      <h6 style="font-size: 15px;">Compulsory Course <span class="ccount">{{data?.courseId?.coreCourseCount}}</span></h6>
+                      <h6 style="font-size: 15px;">Elective Course <span class="ecount"> {{data?.courseId?.electiveCourseCount}}</span></h6>
+
 
                       <!-- <h6>Core Course:{{data?.courseId?.coreCourseCount}}</h6>
                       <h6 class="course-card-description">Elective Course:{{data?.courseId?.electiveCourseCount}}</h6> -->
@@ -129,7 +132,8 @@
                     <p class="text-muted"><time>{{data?.classId?.courseId?.duration}} Hours</time></p>
                   </div>
                   <p class="text-muted"><time>{{data?.classId?.classDeliveryType | titlecase}}</time></p>
-
+                  <h6 style="font-size: 15px;">Compulsory Course <span class="ccount">{{data?.classId?.courseId?.coreCourseCount}}</span></h6>
+                  <h6 style="font-size: 15px;">Elective Course <span class="ecount"> {{data?.classId?.courseId?.electiveCourseCount}}</span></h6>
                   <!-- <h6>Core Course:{{data?.courseId?.coreCourseCount}}</h6>
                   <h6 class="course-card-description">Elective Course:{{data?.courseId?.electiveCourseCount}}</h6> -->
                   <div class="text-center mb-3">
@@ -179,6 +183,8 @@
                 <p class="text-muted"><time>{{data?.classId?.courseId?.duration}} Hours</time></p>
               </div>
               <p class="text-muted"><time>{{data?.classId?.classDeliveryType | titlecase}}</time></p>
+              <h6 style="font-size: 15px;">Compulsory Course <span class="ccount">{{data?.classId?.courseId?.coreCourseCount}}</span></h6>
+              <h6 style="font-size: 15px;">Elective Course <span class="ecount"> {{data?.classId?.courseId?.electiveCourseCount}}</span></h6>
               <div class="text-center mb-3">
                 <button mat-icon-button class="tbl-action-btn" [routerLink]="['/student/view-program/',data.classId?.id]">
                   <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
@@ -213,6 +219,8 @@
               <p class="text-muted"><time>{{data?.classId?.courseId?.duration}} Hours</time></p>
             </div>
             <p class="text-muted"><time>{{data?.classId?.classDeliveryType | titlecase}}</time></p>
+            <h6 style="font-size: 15px;">Compulsory Course <span class="ccount">{{data?.classId?.courseId?.coreCourseCount}}</span></h6>
+            <h6 style="font-size: 15px;">Elective Course <span class="ecount"> {{data?.classId?.courseId?.electiveCourseCount}}</span></h6>
             <div class="text-center mb-3">
               <button mat-icon-button class="tbl-action-btn" [routerLink]="['/student/view-program/',data.classId?.id]">
                 <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
