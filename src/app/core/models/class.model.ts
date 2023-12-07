@@ -1,4 +1,4 @@
-import { CourseModel } from "./course.model";
+import { CourseModel, Program } from "./course.model";
 import { Pagination } from "./pagination.model";
 
 export interface InstructorList {
@@ -206,6 +206,7 @@ export interface Student extends Pagination {
   _id: string;
   classId: ClassModel;
   courseId: CourseModel;
+  programId: Program;
   createdAt: string;
   id: string;
   registeredOn: string;
@@ -215,6 +216,7 @@ export interface Student extends Pagination {
   updatedAt: string;
   classStartDate: string;
   classEndDate: string;
+  programTitle: string;
 }
 
 export interface StudenId {

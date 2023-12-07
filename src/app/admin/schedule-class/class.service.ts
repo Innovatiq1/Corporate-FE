@@ -259,7 +259,11 @@ return this.http.post<ApiResponse>(apiUrl, formData);
 updateCertificateUser(data:any){
 const apiUrl = `${this.prefix}admin/studentClasses/student/certificate`;
 return this.http.put<ApiResponse>(apiUrl, data);
+}
 
+updateProgramCertificateUser(data:any){
+  const apiUrl = `${this.prefix}admin/studentClasses/program/certificate`;
+  return this.http.put<ApiResponse>(apiUrl, data);
 }
 
 
