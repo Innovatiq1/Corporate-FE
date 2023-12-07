@@ -196,11 +196,11 @@ export class ViewProgramComponent {
         this.isRegistered == true;
         this.isApproved = true;
       }
-      if (!this.studentClassDetails.certifiacteUrl && this.studentClassDetails.status == 'completed') {
+      if (!this.studentClassDetails.certificateUrl && this.studentClassDetails.status == 'completed') {
         this.isRegistered == true;
         this.isCompleted = true;
       }
-      if (this.studentClassDetails.certifiacteUrl && this.studentClassDetails.status == 'completed') {
+      if (this.studentClassDetails.certificateUrl && this.studentClassDetails.status == 'completed') {
         this.isRegistered == true;
         this.isCompleted = true;
         this.certificateIssued = true;

@@ -5,7 +5,9 @@ import { UtilsService } from '@core/service/utils.service';
 import { TableElement } from '@shared/TableElement';
 import { TableExportUtil } from '@shared/tableExportUtil';
 import { ClassService } from 'app/admin/schedule-class/class.service';
-import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import { jsPDF } from 'jspdf';
+import DomToImage from 'dom-to-image';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
 
@@ -36,6 +38,11 @@ export class ProgaramCompletionListComponent {
   studentPaginationModel: StudentPaginationModel;
   isLoading: any;
   searchTerm:string = '';
+  dafaultGenratepdf: boolean = false;
+element: any;
+certificateUrl:boolean = false;
+pdfData: any = [];
+
 
   constructor(private classService: ClassService,private utils:UtilsService) {
 
@@ -132,12 +139,105 @@ export class ProgaramCompletionListComponent {
 
     TableExportUtil.exportToExcel(exportData, 'excel');
   }
+  generateCertificate(element: Student){
+    Swal.fire({
+      title: 'Certificate Generating...',
+      text: 'Please wait...',
+      allowOutsideClick: false,
+      timer: 40000,
+      timerProgressBar: true,
+    });
+    this.dafaultGenratepdf = true;
+    this.pdfData = [];
+          let pdfObj = {
+      title: element?.programId?.title ,
+      name: element?.studentId
+      ?.name,
+      completdDate:moment().format('DD ddd MMM YYYY'),
+    }
+    this.pdfData.push(pdfObj);
+    var convertIdDynamic = 'contentToConvert'
+    const dashboard = document.getElementById('contentToConvert');
+      this.genratePdf3(convertIdDynamic, element?.studentId._id, element?.programId._id);
+  }
+  
+  genratePdf3(convertIdDynamic: any, memberId: any, memberProgrmId: any) {
+    this.dafaultGenratepdf = true;
+    setTimeout(() => {
+      const dashboard = document.getElementById(convertIdDynamic);
+      if(dashboard!=null){
+      const dashboardHeight = dashboard.clientHeight;
+      const dashboardWidth = dashboard.clientWidth;
+      const options = { background: 'white', width: dashboardWidth, height: dashboardHeight };
+      DomToImage.toPng(dashboard, options).then((imgData) => {
+        const doc = new jsPDF(dashboardWidth > dashboardHeight ? 'l' : 'p', 'mm', [dashboardWidth, dashboardHeight]);
+        const imgProps = doc.getImageProperties(imgData);
+        const pdfWidth = doc.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        const currentDateTime = moment();
+        const randomString = this.generateRandomString(10);
+        const pdfData = new File([doc.output("blob")], randomString+"programCertificate.pdf", {
+          type: "application/pdf",
+        });
+        
+        this.classService.uploadFileApi(pdfData).subscribe((data:any) => {
+          let objpdf = {
+            pdfurl: data.inputUrl,
+            memberId: memberId,
+            CourseId: memberProgrmId,
+          };
+          
+          this.updateCertificate(objpdf)
+         
+          
+        },(err) => {
+
+        }
+        )
+      });
+      this.dafaultGenratepdf = false;
+    }
+    }, 1000);
+  
+  }
+  generateRandomString(length: number) {
+    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters.charAt(randomIndex);
+    }
+    return result;
+  }  
+
+  
+  updateCertificate(objpdf:any){
+    this.classService.updateProgramCertificateUser(objpdf).subscribe(
+      (response) => {
+        if(response.data.certificateUrl){
+          this.certificateUrl=true
+        }
+        
+        this.getCompletedClasses();
+        Swal.fire({
+          title: "Updated",
+          text: "Certificate Created successfully",
+          icon: "success",
+        });
+
+      },
+      (err) => {
+
+      },
+    )
+
+  }
+
   generatePdf() {
     const doc = new jsPDF();
     const headers = [['Program Name', 'Student Name', 'Class Start Date','Class End Date','Registered Date']];
     const data = this.dataSource.map((user: {
-      //formatDate(arg0: Date, arg1: string, arg2: string): unknown;
-
       program_name: any; student_name: any; classStartDate: any; classEndDate: any; registeredOn: any;
     }, index: any) => [user.program_name, user.student_name,
 
@@ -149,11 +249,6 @@ export class ProgaramCompletionListComponent {
     ]);
     //const columnWidths = [60, 80, 40];
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
-
-    // Add a page to the document (optional)
-    //doc.addPage();
-
-    // Generate the table using jspdf-autotable
     (doc as any).autoTable({
       head: headers,
       body: data,
@@ -162,8 +257,6 @@ export class ProgaramCompletionListComponent {
 
 
     });
-
-    // Save or open the PDF
     doc.save('student-completion.pdf');
   }
 
