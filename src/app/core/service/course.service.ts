@@ -370,7 +370,6 @@ export class CourseService {
       filter?: Partial<any>
     ): Observable<ApiResponse> {
       const apiUrl = this.defaultUrl + 'admin/chatbot';
-      console.log("==new=", apiUrl)
       return this._Http.get<ApiResponse>(apiUrl, {
         params: this.buildParams(filter),
       });
