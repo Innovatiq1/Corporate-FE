@@ -40,6 +40,16 @@
                 [(ngModel)]="filterApproved" (input)="performSearch()"
 
               />
+              <input *ngIf ="tab == 3"
+              placeholder="Search"
+              type="text"
+              #filter
+              class="browser-default search-field text"
+              aria-label="Search box"
+              [(ngModel)]="filterCompleted" (input)="performSearch()"
+
+            />
+
                   </li>
                 </ul>
               </div>
@@ -184,6 +194,41 @@
   aria-label="select pagination option">
 </mat-paginator>
 </mat-tab>
+<mat-tab>  
+  <ng-template mat-tab-label>
+    <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
+    Completed Programs
+  </ng-template>
+<div class="body">
+    <div class="row" >
+      <div class="col-md-3" *ngFor="let data of studentCompletedClasses">
+        <div class="student-program-card course-card-blog">
+          <div class="course-card-image">
+            <img class="img" [src]="data?.classId?.courseId?.image_link || '../../../assets/noimage.jpg'" alt="Image">
+
+          </div>
+          <div class="blog-table">
+            <div class="post-user mt-3">
+              <h6 class="mb-xs mt-xs title"> {{data?.classId?.courseId?.title |truncate : 40}}</h6>
+              <p class="text-muted"><time>{{data?.classId?.courseId?.duration}} Hours</time></p>
+            </div>
+            <p class="text-muted"><time>{{data?.classId?.classDeliveryType | titlecase}}</time></p>
+            <div class="text-center mb-3">
+              <button mat-icon-button class="tbl-action-btn" [routerLink]="['/student/view-program/',data.classId?.id]">
+                <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
+              </button>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
+  <mat-paginator class="paginator rounded-5" #paginator [length]="totalCompletedItems" (page)="pageStudentCompletedSizeChange($event)" [pageSizeOptions]="pageSizeArr"
+aria-label="select pagination option">
+</mat-paginator>
+</mat-tab>
+
 
 
 

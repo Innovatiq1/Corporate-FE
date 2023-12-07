@@ -22,6 +22,8 @@ export class ProgramComponent {
   coursePaginationModel: Partial<CoursePaginationModel>;
   studentRegisteredModel!: Partial<CoursePaginationModel>;
   studentApprovedModel!: Partial<CoursePaginationModel>;
+  studentCompletedModel!: Partial<CoursePaginationModel>;
+
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   filterName='';
   classesData: any;
@@ -35,26 +37,25 @@ export class ProgramComponent {
   studentRegisteredClasses: any;
   totalRegisteredItems: any;
   studentApprovedClasses: any;
+  studentCompletedClasses: any;
   totalApprovedItems: any;
+  totalCompletedItems: any;
   filterRegistered='';
   filterApproved='';
-
-
-
+  filterCompleted='';
 
   constructor(public _courseService:CourseService,  private classService: ClassService) {
     this.coursePaginationModel = {};
     this.studentRegisteredModel = {};
     this.studentApprovedModel = {};
-
-
+    this.studentCompletedModel = {};
   }
 
   ngOnInit(){
     this.getClassList();
     this.getRegisteredCourse();
     this.getApprovedCourse();
-
+    this.getCompletedCourse();
   }
 
   tabChanged(event: MatTabChangeEvent) {
@@ -64,6 +65,8 @@ export class ProgramComponent {
       this.tab = 1
     } else if(event.index == 2){
       this.tab = 2
+    } else if(event.index == 3){
+      this.tab = 3
     }
   }
 
@@ -88,6 +91,7 @@ performSearch() {
     this.getClassList();
     this.getRegisteredCourse();
     this.getApprovedCourse();
+    this.getCompletedCourse();
 }
 
 getRegisteredCourse(){
@@ -116,6 +120,20 @@ getApprovedCourse(){
    this.studentApprovedModel.totalDocs = response.data.totalDocs;
   })
 }
+getCompletedCourse(){
+  let studentId=localStorage.getItem('id')
+  let filterCompletedCourse = this.filterCompleted
+  const payload = {  filterCompletedCourse,studentId: studentId, status: 'completed' ,...this.coursePaginationModel};
+  this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
+   this.studentCompletedClasses = response.data.docs;
+   this.totalCompletedItems = response.data.totalDocs
+   this.studentCompletedModel.docs = response.data.docs;
+   this.studentCompletedModel.page = response.data.page;
+   this.studentCompletedModel.limit = response.data.limit;
+   this.studentCompletedModel.totalDocs = response.data.totalDocs;
+  })
+}
+
 
 
 pageSizeChange($event: any) {
@@ -133,6 +151,12 @@ pageStudentApprovedSizeChange($event: any) {
   this.studentApprovedModel.limit = $event?.pageSize;
   this.getApprovedCourse();
 }
+pageStudentCompletedSizeChange($event: any) {
+  this.studentCompletedModel.page = $event?.pageIndex + 1;
+  this.studentCompletedModel.limit = $event?.pageSize;
+  this.getCompletedCourse();
+}
+
 
 
 }
