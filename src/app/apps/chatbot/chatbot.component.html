@@ -8,7 +8,7 @@
   <div class="Layout Layout-open Layout-expand Layout-right">
     <div class="Messenger_messenger">
       <div class="Messenger_header">
-        <h4 class="Messenger_prompt">Chat</h4>
+        <h4 class="Messenger_prompt">How can i help you today?</h4>
         <span class="chat_close_icon" (click)="onIconClick()"
           ><i class="fa fa-window-close" aria-hidden="true"></i
         ></span>
@@ -19,31 +19,30 @@
             <div class="msg bot">
               <span class="avtr"><figure style="background-image: url(../../../assets/images/bot.png)"></figure></span>
               <!-- <span class="responsText">{{ msg.text }} hello</span> -->
-              <span class="responsText" >How can i help you today?
-                <ul>
-                  <li>1.Courses</li>
-                  <li>2.Programs</li>
-                  <li>3.Login</li>
-                  <li>4.Signup</li>
-                  <li>5.Others</li>
-                </ul>
+               <span class="responsText d-flex gap-1 flex-wrap" ><span class="text-black">Which area do you want to know for sure?</span>
+                  <button class="badge badge-solid-green" *ngFor="let item of initialLoad" (click)="chooseIssues(item)">{{item}}</button>
+                  <!-- <span class="badge badge-solid-green">Programs</span>
+                  <span class="badge badge-solid-green">Login</span>
+                  <span class="badge badge-solid-green">Signup</span>
+                  <span class="badge badge-solid-green">Others</span> -->
               </span>
             </div>
             <div *ngFor="let msg of messages" class="msg" [ngClass]="{'user': msg.type === 'user', 'bot': msg.type === 'bot'}">
               <span class="avtr"><figure style="background-image: url(../../../assets/images/bot.png)"></figure></span>
               <span class="responsText">{{ msg.text }}</span>
+              <!-- <div *ngIf="isLoading"  class="typing-loader"></div> -->
             </div>
           </div>
 				</div>
       </div>
-        <form id="messenger" (submit)="onMessengerSubmit()">
+        <form id="messenger" >
           <div class="Input Input-blank">
-            <input #msgInput
+            <input #msgInput [(ngModel)]="userMsg"
               name="msg"
               class="Input_field"
               placeholder="Send a message..."
             />
-            <button type="submit" class="Input_button Input_button-send" >
+            <button type="submit" #msgSubmit class="Input_button Input_button-send" (click)="onMessengerSubmit($event)" >
               <div class="Icon">
                 <svg
                   viewBox="1496 193 57 54"
@@ -76,34 +75,3 @@
   </div>
 <!-- Chatbot -->
 
-<!-- <div class="botIcon showBotSubject" (click)="onIconClick()"> -->
-  <!-- Your icon content goes here -->
-  <!-- <div class="iconInner" id="iconBtn">	<i class="fa fa-commenting" aria-hidden="true"></i></div>
-</div> -->
-
-
-<!-- <div class="Layout Layout-open Layout-expand Layout-right">
-  <div class="Messenger_messenger">
-    <div class="Messenger_header">
-      <h4 class="Messenger_prompt">How can we help you?</h4> <span class="chat_close_icon"><i class="fa fa-window-close" aria-hidden="true"></i></span>
-    </div>
-    <div class="Messenger_content">
-      <div class="Messages">
-        <div class="Messages_list"> -->
-          <!-- Messages list content goes here -->
-          <!-- <div *ngFor="let msg of messages" class="msg" [ngClass]="{'user': msg.type === 'user', 'bot': msg.type === 'bot'}">
-            <span class="avtr"><figure style="background-image: url(https://mrseankumar25.github.io/Sandeep-Kumar-Frontend-Developer-UI-Specialist/images/avatar.png)"></figure></span>
-            <span class="responsText">{{ msg.text }}</span>
-          </div>
-        </div> -->
-
-        <!-- Messenger form goes here -->
-        <!-- <form id="messenger" (submit)="onMessengerSubmit()">
-          <input type="text" name="msg" #msgInput /> -->
-          <!-- Your form fields go here -->
-          <!-- <button type="submit">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div> -->
