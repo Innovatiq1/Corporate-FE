@@ -62,6 +62,12 @@ const routes: Routes = [
         canActivate: [LoginGuard],
       },
       {
+        path: 'instructor-timetable',
+        loadChildren: () =>
+          import('./instructor-timetable/instructor-timetable.module').then((m) => m.InstructorTimetableModule),
+        canActivate: [LoginGuard],
+      },
+      {
         path: 'settings/student-settings',
         component: SettingsComponent,
         canActivate: [LoginGuard],

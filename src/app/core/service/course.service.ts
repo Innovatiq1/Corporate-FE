@@ -366,6 +366,27 @@ export class CourseService {
       console.log("==new=",apiUrl)
       return this._Http.get<ApiResponse>(apiUrl);
     }
+    getAllChats(
+      filter?: Partial<any>
+    ): Observable<ApiResponse> {
+      const apiUrl = this.defaultUrl + 'admin/chatbot';
+      return this._Http.get<ApiResponse>(apiUrl, {
+        params: this.buildParams(filter),
+      });
+    }
+  
+    getChatById(Id: any
+    ): Observable<ApiResponse> {
+      const apiUrl = this.defaultUrl + `admin/chatbot/${Id}`;
+      return this._Http.get<ApiResponse>(apiUrl);
+    }
+  
+    saveChat(payload: any) {
+      const apiUrl = `${this.prefix}admin/chatbot`;
+      return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+    }
+  
+  
 }
 
 
