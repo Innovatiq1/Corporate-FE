@@ -268,8 +268,6 @@
                       <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
                     </table>
-
-                    <p [innerHTML]="classDetails?.courseId?.course_description| bulletPoints">
                       <h5 class="text">Course Completed : <span [ngClass]="{'red-text': playBackTime< 50, 'green-text': playBackTime>= 50}">{{playBackTime.toFixed(2) || 0}}%</span></h5>
                       <br>
                   </div>
