@@ -11,6 +11,9 @@ import { InstructorCourseInviteComponent } from './instructor-course-invite/inst
 import { InstructorAcceptCourseInviteComponent } from './instructor-accept-course-invite/instructor-accept-course-invite.component';
 import { SendCourseInvoiceComponent } from './send-course-invoice/send-course-invoice.component';
 import { AdminNewEmailComponent } from './admin-new-email/admin-new-email.component';
+import { ProgramRegistrationComponent } from './program-registration/program-registration.component';
+import { ProgramApprovalComponent } from './program-approval/program-approval.component';
+import { ProgramCompletionComponent } from './program-completion/program-completion.component';
 
 
 const routes: Routes = [
@@ -58,6 +61,18 @@ const routes: Routes = [
         path: 'admin-new-email',
         component: AdminNewEmailComponent
       },
+      {
+        path: 'program-registration-email',
+        component: ProgramRegistrationComponent
+      },
+      {
+        path: 'program-approval-email',
+        component: ProgramApprovalComponent
+      },
+      {
+        path: 'program-completion-email',
+        component: ProgramCompletionComponent
+      }
 
 ];
 

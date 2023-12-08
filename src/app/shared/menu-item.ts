@@ -444,6 +444,21 @@ MENU_LIST = [
             title: "Course Registered Email",
             type: "none"
         },
+        {
+            id: "program-registration-email",
+            title: "Program Registered Email",
+            type: "none"
+        },
+        {
+            id: "program-approval-email",
+            title: "Program Approval",
+            type: "none"
+        },
+        {
+            id: "program-completion-email",
+            title: "Completed Program",
+            type: "none"
+        },
         // {
         //     id: "send-course-invoice",
         //     title: "Send Course Invoice",
