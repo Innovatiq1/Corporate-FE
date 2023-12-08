@@ -29,7 +29,6 @@ import { CompletionListComponent } from './completion-list/completion-list.compo
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
-import { StudentVideoPlayerComponent } from './course-kit/student-video-player/student-video-player.component';
 
 
 
@@ -45,7 +44,6 @@ import { StudentVideoPlayerComponent } from './course-kit/student-video-player/s
     CreateCategoriesComponent,
 
     VideoPlayerComponent,
-    StudentVideoPlayerComponent,
     CreateCourseKitComponent,
     EditCourseKitComponent,
     EditCategoriesComponent,
@@ -54,7 +52,6 @@ import { StudentVideoPlayerComponent } from './course-kit/student-video-player/s
     CreateClassComponent,
     ApproveListComponent,
     CompletionListComponent,
-    StudentVideoPlayerComponent,
 
 
   ],

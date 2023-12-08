@@ -38,6 +38,7 @@ import { ExamScheduleService } from 'app/admin/exam-schedule/exam-schedule.servi
 import { ProgramSheduleComponent } from './program-shedule/program-shedule.component';
 import { SuccessProgramComponent } from './success-program/success-program.component';
 import { FailureProgramComponent } from './failure-program/failure-program.component';
+import { StudentVideoPlayerComponent } from './view-course/student-video-player/student-video-player.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { FailureProgramComponent } from './failure-program/failure-program.compo
     ProgramSheduleComponent,
     SuccessProgramComponent,
     FailureProgramComponent,
+    StudentVideoPlayerComponent
 
   ],
   imports: [

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,23 @@ export class CommonService {
 
   getCompletedPercentage() {
     return this.completedPercentage;
+  }
+  private notifyVideo = new Subject<void>();
+  private unsubscribe$ = new Subject<void>();
+
+
+  notifyVideoObservable$ = this.notifyVideo.asObservable();
+
+  notifyVideoMethod() {
+    this.notifyVideo.next();
+  }
+  getUnsubscribeSignal() {
+    return this.unsubscribe$.asObservable();
+  }
+
+  unsubscribe() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 

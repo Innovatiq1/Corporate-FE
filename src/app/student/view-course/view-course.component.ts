@@ -1,16 +1,17 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CourseKitModel } from '@core/models/course.model';
 import { CommonService } from '@core/service/common.service';
 import { CourseService } from '@core/service/course.service';
-import { StudentVideoPlayerComponent } from 'app/admin/courses/course-kit/student-video-player/student-video-player.component';
 import { VideoPlayerComponent } from 'app/admin/courses/course-kit/video-player/video-player.component';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { local } from 'd3';
 import { BsModalService, ModalOptions } from "ngx-bootstrap/modal";
 
 import Swal from 'sweetalert2';
+import { StudentVideoPlayerComponent } from './student-video-player/student-video-player.component';
+import { Subject, takeUntil } from 'rxjs';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -31,7 +32,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './view-course.component.html',
   styleUrls: ['./view-course.component.scss']
 })
-export class ViewCourseComponent {
+export class ViewCourseComponent implements OnDestroy {
   @ViewChild('video', { static: false }) video!: ElementRef;
 
   displayedColumns: string[] = ['position', ' Class Start Date ', ' Class End Date ', 'action'];
@@ -79,6 +80,8 @@ export class ViewCourseComponent {
   ];
   coursekitDetails: any;
   playBackTime!: number;
+  private unsubscribe$ = new Subject<void>();
+
 
   constructor(private classService: ClassService, private activatedRoute: ActivatedRoute, private modalServices: BsModalService, private courseService: CourseService,
     @Inject(DOCUMENT) private document: any, private commonService: CommonService) {
@@ -86,12 +89,11 @@ export class ViewCourseComponent {
       this.classId = params["id"];
     });
     localStorage.setItem('classId', this.classId)
+    this.commonService.notifyVideoObservable$.pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+      this.getRegisteredClassDetails();
+    });
     this.getRegisteredClassDetails();
     this.getClassDetails();
-
-    // this.getVideoPlayed();
-
-
   }
   getClassDetails() {
     this.classService.getClassById(this.classId).subscribe((response) => {
@@ -240,5 +242,10 @@ export class ViewCourseComponent {
 
   parseDate(dateString: string): Date {
     return new Date(dateString);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

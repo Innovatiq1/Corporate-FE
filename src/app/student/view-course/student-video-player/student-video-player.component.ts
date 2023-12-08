@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, Input, OnInit, ViewChild, ElementRef, OnDestroy } from "@angular/core";
 import Hls from "hls.js";
 import { BsModalRef } from "ngx-bootstrap/modal";
 import * as Plyr from "plyr";
@@ -6,13 +6,15 @@ import { environment } from "environments/environment";
 import { CourseService } from "@core/service/course.service";
 import { ClassService } from "app/admin/schedule-class/class.service";
 import { CommonService } from "@core/service/common.service";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
   selector: 'app-student-video-player',
   templateUrl: './student-video-player.component.html',
   styleUrls: ['./student-video-player.component.scss']
 })
-export class StudentVideoPlayerComponent {
+export class StudentVideoPlayerComponent implements OnDestroy{
+  private unsubscribe$ = new Subject<void>();
   @Input()
   videoURL: string = "";
   @Input() videoType: string = "application/x-mpegURL";
@@ -203,13 +205,20 @@ export class StudentVideoPlayerComponent {
             studentId: studentId,
             playBackTime: percentage
           }
-          this.classService.saveApprovedClasses(classId, body).subscribe((response) => {
+          this.classService.saveApprovedClasses(classId, body).pipe(takeUntil(this.unsubscribe$))
+          .subscribe((response) => {
+            this.commonService.notifyVideoMethod();
           })
         })
       })
     }
     this.hls.destroy();
     this.bsModalRef.hide();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
 }
