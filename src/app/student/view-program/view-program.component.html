@@ -136,7 +136,7 @@
                         <li class="list-group-item">
                           <b class="badge badge-solid-blue">Elective Course </b>
                         </li>
-                        <li class="list-group-item" *ngFor="let elective of programDetails?.electiveprogramCourse">{{elective.electiveProgramName.title | titlecase}}</li>
+                        <li class="list-group-item" *ngFor="let elective of programDetails?.electiveprogramCourse">{{elective?.electiveProgramName?.title | titlecase}}</li>
 
                     
                         <!-- <li class="list-group-item">
