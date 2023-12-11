@@ -17,6 +17,9 @@ import { InstructorCourseInviteComponent } from './instructor-course-invite/inst
 import { InstructorAcceptCourseInviteComponent } from './instructor-accept-course-invite/instructor-accept-course-invite.component';
 import { AdminNewEmailComponent } from './admin-new-email/admin-new-email.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ProgramRegistrationComponent } from './program-registration/program-registration.component';
+import { ProgramApprovalComponent } from './program-approval/program-approval.component';
+import { ProgramCompletionComponent } from './program-completion/program-completion.component';
 
 
 
@@ -34,7 +37,10 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
                  SendCourseInvoiceComponent,
                  InstructorCourseInviteComponent,
                  InstructorAcceptCourseInviteComponent,
-                 AdminNewEmailComponent
+                 AdminNewEmailComponent,
+                 ProgramRegistrationComponent,
+                 ProgramApprovalComponent,
+                 ProgramCompletionComponent
   ],
     imports: [
         CommonModule, EmailConfigurationRoutingModule,

@@ -283,7 +283,7 @@ export class Dashboard2Component implements OnInit {
   getProgramList(filters?: any) {
     this.courseService.getCourseProgram({status:'active'}).subscribe(
       (response: any) => {
-        this.programList = response.docs;
+        this.programList = response.docs.slice(0,5);
         const currentDate = new Date();
         const currentMonth = currentDate.getMonth();
         const currentYear = currentDate.getFullYear();  
@@ -304,7 +304,7 @@ export class Dashboard2Component implements OnInit {
   getAllCourse(){
     this.courseService.getAllCourses({status:'active'}).subscribe(response =>{
       console.log("res",response)
-     this.courseData = response.data.docs;
+     this.courseData = response.data.docs.slice(0,5);
      const currentDate = new Date();
         const currentMonth = currentDate.getMonth();
         const currentYear = currentDate.getFullYear();  
