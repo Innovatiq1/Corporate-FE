@@ -229,28 +229,39 @@ getDepartment(){
 
   update() {
     console.log('Form Value', this.stdForm.value);
-    if(this.stdForm.valid){
-      this.StudentService.uploadVideo(this.files).subscribe(
-        (response: any) => {
-          const inputUrl = response.inputUrl;
-
-          const userData: Student = this.stdForm.value;
-          //this.commonService.setVideoId(videoId)
-
-          userData.avatar = inputUrl;
-          userData.filename= this.fileName
-          userData.type = "Student";
-          userData.role = "Student";
-
-          //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-          // this.currentVideoIds.push(videoId);
-          this.updateInstructor(userData);
-
-          Swal.close();
-       },
-
-       );
+  
+    // Check if the form is valid
+    if (this.stdForm.valid) {
+      if (this.files) {
+        // If files are present, upload the video
+        this.StudentService.uploadVideo(this.files).subscribe(
+          (response: any) => {
+            const inputUrl = response.inputUrl;
+  
+            const userData: Student = this.stdForm.value;
+            userData.avatar = inputUrl;
+            userData.filename = this.fileName;
+            userData.type = "Student";
+            userData.role = "Student";
+  
+            this.updateInstructor(userData);
+  
+            Swal.close();
+          },
+          (error: any) => {
+            // Handle the error during file upload
+            console.error('File upload failed:', error);
+          }
+        );
+      } else {
+        // If no files are present, update the user directly
+        const userData: Student = this.stdForm.value;
+        userData.type = "Student";
+        userData.role = "Student";
+  
+        this.updateInstructor(userData);
       }
+    }
   }
   private updateInstructor(userData: Student): void {
     this.StudentService.updateStudent(this.StudentId, userData).subscribe(

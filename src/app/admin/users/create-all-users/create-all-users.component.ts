@@ -164,24 +164,25 @@ export class CreateAllUsersComponent {
   }
 
   updateBlog(formObj:any) {
-    if (!formObj.invalid) {
+    console.log('Form Value', formObj.value);
+      if (!formObj.invalid) {
+    if (this.files) {
+      // If files are present, upload the video
       this.studentService.uploadVideo(this.files).subscribe(
         (response: any) => {
-          console.log("======",formObj.type)
-          const inputUrl = response.inputUrl;
-          
-          formObj['Active']= this.status
-          formObj['role']=formObj.type
-          formObj['isLogin']=true
+          console.log("======", formObj.type);
+
+          formObj['Active'] = this.status;
+          formObj['role'] = formObj.type;
+          formObj['isLogin'] = true;
 
           const userData: Users = formObj;
-          //this.commonService.setVideoId(videoId)
 
-          userData.avatar = inputUrl;
-          userData.filename = response.filename;
-          
-          //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-          // this.currentVideoIds.push(videoId);
+          // Process response if needed
+          // const inputUrl = response.inputUrl;
+          // userData.avatar = inputUrl;
+          // userData.filename = response.filename;
+
           this.updateUser(userData);
 
           Swal.close();
@@ -195,11 +196,18 @@ export class CreateAllUsersComponent {
           Swal.close();
         }
       );
-    }
-    
-     
+    } else {
+      // If no files are present, update the user directly
+      formObj['Active'] = this.status;
+      formObj['role'] = formObj.type;
+      formObj['isLogin'] = true;
 
+      const userData: Users = formObj;
+      this.updateUser(userData);
+      Swal.close();
+    }
   }
+}
   updateUser(obj:any){
     return new Promise((resolve, reject) => {
       obj['Active']= this.status
@@ -257,7 +265,7 @@ export class CreateAllUsersComponent {
       password: new FormControl('', [Validators.required,...this.utils.validators.name,...this.utils.validators.noLeadingSpace]),
       qualification: new FormControl('', [Validators.required,Validators.minLength(2)]),
       type: new FormControl('', [Validators.required]),
-      avatar: new FormControl('', [Validators.required]),
+      avatar: new FormControl('', []),
       status: [this.user ? (this.user.Active = this.user.Active === true ? true : false) : null],
 
 
