@@ -194,39 +194,49 @@ addBlog(formObj:any) {
   }
   updateBlog(formObj:any) {
     console.log('Form Value', formObj.value);
-     if (!formObj.invalid) {
-       this.studentService.uploadVideo(this.files).subscribe(
-         (response: any) => {
-           console.log("======",formObj.type)
-          //  const inputUrl = response.inputUrl;
-  
-           formObj['Active']= this.status
-           formObj['role']=formObj.type
-           formObj['isLogin']=true
-  
-           const userData: Users = formObj;
-           //this.commonService.setVideoId(videoId)
-  
-          //  userData.avatar = inputUrl;
-          //  userData.filename = response.filename;
-  
-           //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-           // this.currentVideoIds.push(videoId);
-           this.updateUser(userData);
-  
-           Swal.close();
-         },
-         (error) => {
-           Swal.fire({
-             icon: 'error',
-             title: 'Upload Failed',
-             text: 'An error occurred while uploading the video',
-           });
-           Swal.close();
-         }
-       );
-     }
+      if (!formObj.invalid) {
+    if (this.files) {
+      // If files are present, upload the video
+      this.studentService.uploadVideo(this.files).subscribe(
+        (response: any) => {
+          console.log("======", formObj.type);
+
+          formObj['Active'] = this.status;
+          formObj['role'] = formObj.type;
+          formObj['isLogin'] = true;
+
+          const userData: Users = formObj;
+
+          // Process response if needed
+          // const inputUrl = response.inputUrl;
+          // userData.avatar = inputUrl;
+          // userData.filename = response.filename;
+
+          this.updateUser(userData);
+
+          Swal.close();
+        },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Upload Failed',
+            text: 'An error occurred while uploading the video',
+          });
+          Swal.close();
+        }
+      );
+    } else {
+      // If no files are present, update the user directly
+      formObj['Active'] = this.status;
+      formObj['role'] = formObj.type;
+      formObj['isLogin'] = true;
+
+      const userData: Users = formObj;
+      this.updateUser(userData);
+      Swal.close();
     }
+  }
+}
   updateUser(obj:any): any {
     return new Promise((resolve, reject) => {
       obj['Active']= this.status

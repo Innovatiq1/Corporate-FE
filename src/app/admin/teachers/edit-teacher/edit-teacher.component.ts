@@ -63,30 +63,67 @@ export class EditTeacherComponent {
     });
   
   }
+  // onSubmit() {
+  //   console.log('Form Value', this.proForm.value);
+  //   if(this.proForm.valid){
+  //     this.instructor.uploadVideo(this.files).subscribe(
+  //       (response: any) => {
+  //         const inputUrl = response.inputUrl;
+          
+  //         const userData: Users = this.proForm.value;
+  //         //this.commonService.setVideoId(videoId)
+  
+  //         userData.avatar = inputUrl;
+  //         userData.filename= this.fileName
+  //         userData.type = "Instructor";
+  //         userData.role = "Instructor";
+  
+  //         //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+  //         // this.currentVideoIds.push(videoId);
+  //         this.updateInstructor(userData);
+  
+  //         Swal.close();
+  //      },
+  //      );
+  //     }
+  // }
   onSubmit() {
     console.log('Form Value', this.proForm.value);
-    if(this.proForm.valid){
-      this.instructor.uploadVideo(this.files).subscribe(
-        (response: any) => {
-          const inputUrl = response.inputUrl;
-          
-          const userData: Users = this.proForm.value;
-          //this.commonService.setVideoId(videoId)
   
-          userData.avatar = inputUrl;
-          userData.filename= this.fileName
-          userData.type = "Instructor";
-          userData.role = "Instructor";
+    // Check if the form is valid
+    if (this.proForm.valid) {
+      if (this.files) {
+        // If files are present, upload the video
+        this.instructor.uploadVideo(this.files).subscribe(
+          (response: any) => {
+            const inputUrl = response.inputUrl;
   
-          //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-          // this.currentVideoIds.push(videoId);
-          this.updateInstructor(userData);
+            const userData: Users = this.proForm.value;
+            userData.avatar = inputUrl;
+            userData.filename = this.fileName;
+            userData.type = "Instructor";
+            userData.role = "Instructor";
   
-          Swal.close();
-       },
-       );
+            this.updateInstructor(userData);
+  
+            Swal.close();
+          },
+          (error: any) => {
+            // Handle the error during file upload
+            console.error('File upload failed:', error);
+          }
+        );
+      } else {
+        // If no files are present, update the instructor directly
+        const userData: Users = this.proForm.value;
+        userData.type = "Instructor";
+        userData.role = "Instructor";
+  
+        this.updateInstructor(userData);
       }
+    }
   }
+  
   private updateInstructor(userData: Users): void {
     this.teachersService.updateUser(this.userId,userData).subscribe(
       () => {
