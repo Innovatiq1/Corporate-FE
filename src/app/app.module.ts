@@ -43,6 +43,7 @@ import { InstructorLeaveRequestService } from './teacher/leave-request/leave-req
 import { LecturesService } from './teacher/lectures/lectures.service';
 import { LoginGuard } from '@core/guard/login.guard';
 import { ChatbotComponent } from './apps/chatbot/chatbot.component';
+import { TicketComponent } from './ticket/ticket.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -59,7 +60,8 @@ export function createTranslateLoader(http: HttpClient) {
     MainLayoutComponent,
     SettingsComponent,
     LeaveRequestComponent,
-    ChatbotComponent
+    ChatbotComponent,
+    TicketComponent
 
   ],
   imports: [

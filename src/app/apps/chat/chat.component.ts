@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StudentsService } from 'app/admin/students/all-students/students.service';
+import { SupportService } from '../support/support.service';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -16,18 +18,27 @@ export class ChatComponent {
     },
   ];
   students: any;
- currentTime:any
+  chatId!:string;
+ currentTime:any;
+ source:any;
 format: string|undefined;
-  constructor(private studentService:StudentsService) {
+user!:string;
+  dataToUpdate: any;
+  constructor(private studentService:StudentsService,public activeRoute: ActivatedRoute, private supportService: SupportService,public router:Router) {
     //constructor
     const today = new Date();
      this.currentTime = today.getHours() + ":" + today.getMinutes() ;
+
+     this.activeRoute.queryParams.subscribe(param =>{
+      this.chatId = param['id'];
+     })
   }
 
   ngOnInit(){
 this.getAllStudents();
 this.formatAMPM(new Date)
-console.log(this.currentTime)
+console.log(this.currentTime);
+this. getDetailedAboutTickets();
   }
 
    formatAMPM(date: { getHours: () => any; getMinutes: () => any; }) {
@@ -52,4 +63,24 @@ console.log(this.currentTime)
     });
 
   }
+
+  getDetailedAboutTickets(){
+   this.supportService.getTicketById(this.chatId).subscribe(res =>{
+console.log("res",res);
+ this.dataToUpdate = res;
+  this.source = res.messages;
+ this.user = res.messages[0].role;
+
+   })
+  }
+  cancel(){
+    this.router.navigate(['apps/support'])
+  }
+ update(){
+  // console.log("source",this.dataToUpdate);
+  this.supportService.updateChat(this.dataToUpdate).subscribe(res =>{
+    this.router.navigate(['apps/support'])
+  })
+}
+
 }
