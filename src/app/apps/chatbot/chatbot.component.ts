@@ -16,53 +16,58 @@ export class ChatbotComponent {
   name: string = '';
   initialLoad: any;
   userSelectedItem = '';
-  userMsg!: string ;
+  userMsg: string = '';
+  mainval: any;
 
   constructor(public courseService: CourseService) {
-    this.initialLoad = ['Courses','Programs','Login','Signup','Others']
+    this.initialLoad = ['Courses', 'Programs', 'Login', 'Signup', 'Others'];
   }
 
   ngOnInit() {}
 
   onIconClick() {
-    console.log("clicked")
+    console.log('clicked');
     this.showBotSubject = !this.showBotSubject;
     // this.msgInput.nativeElement.focus();
-
-
   }
 
-  onCloseClick() {
-    this.showBotSubject = false;
-    this.showMessenger = false;
-  }
+  // onCloseClick() {
+  //   this.showBotSubject = false;
+  //   this.showMessenger = false;
+  //   this.mainval = '';
+  //   this.msgInput.nativeElement.value = '';
+  // }
 
   onBotSubjectSubmit() {
     this.showBotSubject = false;
     this.showMessenger = true;
   }
-  chooseIssues(selectedItem:string){
-console.log("iteam",selectedItem);
-this.userMsg = selectedItem;
+  chooseIssues(selectedItem: string) {
+    // console.log('iteam', selectedItem);
+    this.userMsg = selectedItem;
   }
   onMessengerSubmit(event: any) {
-    console.log('event', event);
+    this.userMsg = '';
     let student = JSON.parse(localStorage.getItem('user_data')!).user.name;
     let studentId = JSON.parse(localStorage.getItem('user_data')!).user.id;
     const val = this.msgInput.nativeElement.value.toLowerCase();
-    const mainval = this.msgInput.nativeElement.value;
+    this.mainval = this.msgInput.nativeElement.value;
     let nowtime = new Date();
     let nowhoue = nowtime.getHours();
 
-    const userMsg = { type: 'user', text: mainval, id: studentId };
+    const userMsg = {
+      type: 'user',
+      role: student,
+      text: this.mainval,
+      status: 'open',
+      id: studentId,
+    };
     const appendMsg = (msg: string) => {
       this.messages.push({ type: 'bot', text: msg });
       this.msgInput.nativeElement.value = '';
     };
-
     this.messages.push(userMsg);
-
-    if (val === 'courses' || val.includes('1')) {
+    if (val === 'courses') {
       appendMsg(
         '1.Payment 2.Course registration 3.Course Approval 4.Certificate issue'
       );
@@ -93,7 +98,6 @@ this.userMsg = selectedItem;
       appendMsg('Could you give us some more details on ...?');
 
       this.msgSubmit.nativeElement.addEventListener('click', (event: any) => {
-
         setTimeout(() => {
           this.sayBye();
         }, 3000);
@@ -155,7 +159,6 @@ this.userMsg = selectedItem;
     this.messages.push({
       type: 'bot',
       text: 'We understood your issue .please wait for us to resolve.Thank you for your patience....! ',
-
     });
     this.messages.push({ type: 'bot', text: 'Have a nice day! :)' });
     // if (nowhoue <= 10) {

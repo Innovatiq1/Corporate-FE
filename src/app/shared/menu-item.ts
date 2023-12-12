@@ -785,6 +785,22 @@ MENU_LIST = [
     ]
 },
 
+{
+  id: "apps",
+  title: "Support",
+  selected: false,
+  iconsrc: "/assets/announcement-icon.svg",
+  icon: 'chat',
+  children:
+  [
+      {
+          id: "support",
+          title: "All Tickets",
+          type: "none"
+      }
+  ]
+},
+
 ]
 
 MENU_ITEMS = [...MENU_LIST];
