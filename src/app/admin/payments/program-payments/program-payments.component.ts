@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -46,14 +46,14 @@ export class ProgramPaymentsComponent implements OnInit {
 
   constructor(private router: Router, private formBuilder: FormBuilder,
     public utils: UtilsService, private courseService: CourseService,
-    private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,private ref: ChangeDetectorRef,
   ) {
    
-    
+    this.coursePaginationModel = {};
   }
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
   
   ngOnInit(): void {
    this.getAllPrograms();
@@ -62,8 +62,13 @@ export class ProgramPaymentsComponent implements OnInit {
     this.courseService.getAllProgramsPayments({ ...this.coursePaginationModel}).subscribe(response =>{
       console.log("res",response)
      this.dataSource = response.data.docs;
+     this.ref.detectChanges();
      this.totalItems = response.data.totalDocs;
-    })
+     this.coursePaginationModel.docs = response.docs;
+     this.coursePaginationModel.page = response.page;
+     this.coursePaginationModel.limit = response.limit;
+     }, error => {
+     });
   }
   view(id:any){
     console.log("id", id)
@@ -71,8 +76,9 @@ export class ProgramPaymentsComponent implements OnInit {
     // [routerLink]="['/admin/payment/view-payments/']"
     }
   pageSizeChange($event: any) {
-    this.courseKitModel.page = $event?.pageIndex + 1;
-    this.courseKitModel.limit = $event?.pageSize;
+    this.coursePaginationModel.page = $event?.pageIndex + 1;
+    this.coursePaginationModel.limit = $event?.pageSize;
+    this.getAllPrograms();
   }
 
   private refreshTable() {

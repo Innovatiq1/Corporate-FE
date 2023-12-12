@@ -29,6 +29,8 @@ export class ViewPaymentsComponent implements OnInit {
   status:any;
   email:any;
   name:any;
+  payment_intent: any;
+  transactionId: any;
 
   constructor(
     private fb: FormBuilder,
@@ -57,6 +59,8 @@ export class ViewPaymentsComponent implements OnInit {
     this.status = this.dataSource.status;
     this.name = this.dataSource.name;
     this.email = this.dataSource.email;
+    this.payment_intent = this.dataSource.payment_intent;
+    this.transactionId = this.dataSource.transactionId;
 
     }, (err:any) => {});
   }

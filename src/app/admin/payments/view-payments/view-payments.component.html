@@ -22,6 +22,10 @@
                                             <b>Email</b>
                                             <div class="profile-desc-item float-end">{{email}}</div>
                                         </li>
+                                        <li class="list-group-item">
+                                            <b>Course Name</b>
+                                            <div class="profile-desc-item float-end">{{course | titlecase}}</div>
+                                        </li>
                                     </ul>
                                 </div>
                             </mat-tab>
@@ -40,10 +44,6 @@
                                 <div class="p-4">
                                     <ul class="list-group list-group-unbordered">
                                         <li class="list-group-item">
-                                            <b>Course Name</b>
-                                            <div class="profile-desc-item float-end">{{course | titlecase}}</div>
-                                        </li>
-                                        <li class="list-group-item">
                                             <b>Payment Date</b>
                                             <div class="profile-desc-item float-end">{{createdAt |date}}</div>
                                         </li>
@@ -58,6 +58,20 @@
                                         <li class="list-group-item">
                                             <b>Payment Status</b>
                                             <div class="profile-desc-item float-end">{{status | titlecase}}</div>
+                                        </li>
+                                        <li class="list-group-item" *ngIf="payment_intent !== null">
+                                            <b>Payment Intent</b>
+                                            <div class="profile-desc-item float-end">{{payment_intent}}</div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <b>Transaction ID</b>
+                                                </div>
+                                                <div class="col-6" style="width: 50%;">
+                                                    <div class="profile-desc-item">{{transactionId}}</div>   
+                                                </div>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
