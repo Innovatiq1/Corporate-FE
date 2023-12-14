@@ -12,7 +12,14 @@ export class LoginGuard implements CanActivate {
         if (this.utilsService.isLoggedIn()) { 
             return true;
         }
-        this.router.navigate(['/authentication/signin']);
+        let userType = JSON.parse(localStorage.getItem('user_data')!).user.type;
+        if(userType == 'admin' || userType =='Instructor'){
+        this.router.navigate(['/authentication/TMS/signin']);
+        } else if(userType == 'Student'){
+          this.router.navigate(['/authentication/LMS/signin']);
+        } else {
+          this.router.navigate(['/authentication/TMS/signin']);
+        }
         return false;
     }
 }

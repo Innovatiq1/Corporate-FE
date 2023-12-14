@@ -76,7 +76,11 @@ export class ForgotPasswordComponent implements OnInit {
             text: "We have sent new password to your email successfully.",
             icon: 'success',
           });
-          this.router.navigate(['/authentication/signin']);
+          if(this.tmsUrl){
+          this.router.navigate(['/authentication/TMS/signin']);
+          } else if(this.lmsUrl){
+            this.router.navigate(['/authentication/LMS/signin']);
+            }
           
           
         } else {
