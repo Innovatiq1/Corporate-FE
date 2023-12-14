@@ -61,6 +61,7 @@ export class HeaderComponent
   color = 'nfc-green'
   userProfile: any;
   studentId: any;
+  isAdmin: boolean = false;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -154,7 +155,7 @@ export class HeaderComponent
       const userRole = this.authenService.currentUserValue.user.role;
       this.userFullName = this.authenService.currentUserValue.user.name
       this.userImg = this.authenService.currentUserValue.user.avatar;
-      console.log('img',this.userImg)
+      console.log('img',this.student)
       this.student()
       if (userRole === Role.Admin) {
         this.userType = Role.Admin;
@@ -162,6 +163,7 @@ export class HeaderComponent
         this.userType = Role.Instructor;
       } else if (userRole === Role.Student) {
         this.userType = Role.Student;
+        this.updateLogoForStudent();
       } else {
         this.userType = Role.Admin;
       }
@@ -303,4 +305,19 @@ this.authService.logout1(data1).subscribe((res) => {
       }
     });
   }
+  updateLogoForStudent() {
+    let userType = JSON.parse(localStorage.getItem('user_data')!).user.type;
+    if (userType === 'Admin' || userType === 'Instructor') {
+      this.isAdmin = true;
+      const logoSpan = document.querySelector('.logo-name');
+      if (logoSpan) {
+        logoSpan.textContent = 'TMS';
+      }
+    } else if (userType === 'Student') {
+      const logoSpan = document.querySelector('.logo-name');
+      if (logoSpan) {
+        logoSpan.textContent = 'LMS';
+      }
+    }
+}
 }
