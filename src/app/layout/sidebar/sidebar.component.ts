@@ -202,7 +202,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
   logout() {
     this.authService.logout().subscribe((res) => {
       if (!res.success) {
-        this.router.navigate(['/authentication/signin']);
+        let userType = JSON.parse(localStorage.getItem('user_data')!).user.type;
+        if(userType == 'admin' || userType =='Instructor'){
+        this.router.navigate(['/authentication/TMS/signin']);
+        } else if(userType == 'Student'){
+          this.router.navigate(['/authentication/LMS/signin']);
+        } else {
+          this.router.navigate(['/authentication/TMS/signin']);
+        }
         localStorage.clear();
       }
     });

@@ -44,6 +44,8 @@ export class SignupComponent implements OnInit {
   chide = true;
   user: any;
   passwordMatchValidator: any;
+  tmsUrl: boolean;
+  lmsUrl: boolean;
   
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -52,6 +54,10 @@ export class SignupComponent implements OnInit {
     private translate: LanguageService,
     private registration: RegistrationService
   ) { 
+    let urlPath = this.router.url.split('/')
+    this.tmsUrl = urlPath.includes('TMS');
+    this.lmsUrl = urlPath.includes('LMS');
+
 
     this.authForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -100,13 +106,8 @@ export class SignupComponent implements OnInit {
     
     if (this.authForm.valid) {
       const userData: Users = this.authForm.value;
-      //let phone =userData.phone.internationalNumber
-      
-      console.log("======",userData)
-      userData.type = 'Student';
+            userData.type = 'Student';
       userData.role = 'Student';
-     // userData.mobile=userData.phone.internationalNumber
-      //.userData.mobile =
       this.registration.registerUser(userData).subscribe(
         (response: any) => {
           Swal.fire({
@@ -114,7 +115,7 @@ export class SignupComponent implements OnInit {
             text: "We have sent an email to you, check your email,to  know the status of your acount",
             icon: 'success',
           });
-          this.router.navigate(['/authentication/signin']);
+          this.router.navigate(['/authentication/LMS/signin']);
         },
         (error: any) => {
           this.submitted = true;

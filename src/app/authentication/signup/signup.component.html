@@ -9,7 +9,10 @@
     <div class="col-sm-6 auth-form-section">
       <div class="form-section">
         <div class="auth-wrapper">
-          <h2 class="welcome-msg mt-4"> {{"Register with" | translate}} TMS </h2>
+          <h2 class="welcome-msg mt-4"> {{"Register with" | translate}} 
+            <span *ngIf="tmsUrl">TMS</span>
+            <span *ngIf="lmsUrl">LMS</span>
+ </h2>
           <select (change)="setLanguage($event)">
             <option *ngFor="let item of listLang" [value]="item.lang">
               {{item.text}}
@@ -18,9 +21,14 @@
           <p class="auth-signup-text text-muted">{{"Enter details to create your account" | translate}}</p>
           <div class="flex-sb-m w-full text-center mb-3">
             <div>
-              <span style="font-style: italic;">{{"Already Registered?" | translate}} <a routerLink="/authentication/signin">
-                  {{"Login" | translate}}
-                </a></span>
+              <span style="font-style: italic;">{{"Already Registered?" | translate}} 
+                <a *ngIf ="tmsUrl" routerLink="/authentication/TMS/signin"
+                class="sign-up-link">{{"Login" | translate}}
+              </a>
+              <a *ngIf="lmsUrl" routerLink="/authentication/LMS/signin"
+              class="sign-up-link"> {{"Login" | translate}}
+            </a>
+              </span>
             </div>
           </div>
           <form class="validate-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">

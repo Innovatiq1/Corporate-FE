@@ -13,17 +13,32 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'signin',
+    path: 'TMS/signin',
     component: SigninComponent,
   },
   {
-    path: 'signup',
+    path: 'LMS/signin',
+    component: SigninComponent,
+  },
+
+  {
+    path: 'TMS/signup',
     component: SignupComponent,
   },
   {
-    path: 'forgot-password',
+    path: 'LMS/signup',
+    component: SignupComponent,
+  },
+
+  {
+    path: 'TMS/forgot-password',
     component: ForgotPasswordComponent,
   },
+  {
+    path: 'LMS/forgot-password',
+    component: ForgotPasswordComponent,
+  },
+
   {
     path: 'locked',
     component: LockedComponent,
@@ -32,6 +47,15 @@ const routes: Routes = [
     path: 'page404',
     component: Page404Component,
   },
+  {
+    path: 'LMS/page404',
+    component: Page404Component,
+  },
+  {
+    path: 'TMS/page404',
+    component: Page404Component,
+  },
+
   {
     path: 'page500',
     component: Page500Component,

@@ -279,30 +279,26 @@ cancel(id:any){
            
     }
     const storedDataString: string | null = localStorage.getItem('userLogs');
-
-// Check if the retrieved data is not null before parsing
-const data: OuterObject = storedDataString !== null ? JSON.parse(storedDataString) : {};
-
-//const storedDataString1s= localStorage.getItem('userLogs');
-//const storedDataString1: string | null = localStorage.getItem('userLogs');
-
-// Check if the retrieved data is not null before parsing
-let data1 ={
+    const data: OuterObject = storedDataString !== null ? JSON.parse(storedDataString) : {};
+    let data1 ={
   id:data.id
 }
 
 
 this.authService.logout1(data1).subscribe((res) => {
   if (res) {
-    
   }
 });
-     
-    
-      //console.log(data.user.email)
   this.subs.sink = this.authService.logout().subscribe((res) => {
       if (!res.success) {
-        this.router.navigate(['/authentication/signin']);
+        let userType = JSON.parse(localStorage.getItem('user_data')!).user.type;
+        if(userType == 'admin' || userType =='Instructor'){
+        this.router.navigate(['/authentication/TMS/signin']);
+        } else if(userType == 'Student'){
+          this.router.navigate(['/authentication/LMS/signin']);
+        } else {
+          this.router.navigate(['/authentication/TMS/signin']);
+        }
         localStorage.clear();
       }
     });

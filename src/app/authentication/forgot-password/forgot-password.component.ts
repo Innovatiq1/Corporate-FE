@@ -19,6 +19,8 @@ export class ForgotPasswordComponent implements OnInit {
   submitted = false;
   returnUrl!: string;
   error: any;
+  tmsUrl: boolean;
+  lmsUrl: boolean;
  // resetLink: boolean;
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -26,7 +28,12 @@ export class ForgotPasswordComponent implements OnInit {
     private router: Router,
     private translate: LanguageService,
     private authService:AuthService
-  ) {}
+  ) {
+    let urlPath = this.router.url.split('/')
+    this.tmsUrl = urlPath.includes('TMS');
+    this.lmsUrl = urlPath.includes('LMS');
+
+  }
   ngOnInit() {
     this.startSlideshow();
     this.authForm = this.formBuilder.group({

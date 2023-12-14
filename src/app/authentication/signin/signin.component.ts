@@ -30,6 +30,8 @@ export class SigninComponent
   isSubmitted = false;
   email:any;
   password:any;
+  tmsUrl: boolean;
+  lmsUrl: boolean;
   constructor(
     private formBuilder: UntypedFormBuilder,
     private route: ActivatedRoute,
@@ -40,6 +42,10 @@ export class SigninComponent
     private translate: LanguageService
   ) {
     super();
+    let urlPath = this.router.url.split('/')
+    this.tmsUrl = urlPath.includes('TMS');
+    this.lmsUrl = urlPath.includes('LMS');
+
 
     this.authForm = this.formBuilder.group({
       email: ['',[Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)] ],
@@ -73,18 +79,15 @@ export class SigninComponent
     this.authForm.get('password')?.setValue('12345678');
   }
   loginUser(){
-    // if(this.authForm.valid){
   let formData =this.authForm.getRawValue()
-  console.log(formData)
   this.isLoading = true;
-
   this.authenticationService.loginUser(formData.email.trim(), formData.password.trim())
         .subscribe(user => {
           setTimeout(() => {
             const role = this.authenticationService.currentUserValue.user.role;
-            if (role === Role.All || role === Role.Admin) {
+            if ((role === Role.All && this.tmsUrl) || (role === Role.Admin && this.tmsUrl)) {
               this.router.navigate(['/dashboard/student-analytics']);
-            } else if (role === Role.Instructor || role === 'Trainer' || role ==='instructor') {
+            } else if ((role === Role.Instructor && this.tmsUrl) || (role === 'Trainer' && this.tmsUrl) || (role ==='instructor' && this.tmsUrl)) {
               this.router.navigate(['/dashboard/instructor-dashboard']);
             } else if (role === Role.Student|| role === 'student') {
               this.router.navigate(['/dashboard/student-dashboard']);
@@ -103,7 +106,7 @@ export class SigninComponent
               this.router.navigate(['/dashboard/programmanager-dashboard']);
             } 
              else {
-              this.router.navigate(['/dashboard/student-analytics']);
+              this.router.navigate(['/authentication/page404']);
             }
 
             this.loading = false;

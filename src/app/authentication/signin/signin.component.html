@@ -11,15 +11,24 @@
     <div class="col-sm-6 auth-form-section">
       <div class="form-section">
         <div class="auth-wrapper">
-          <h2 class="welcome-msg">  {{ 'Welcome to' | translate }} TMS</h2>
+          <h2 class="welcome-msg">  {{ 'Welcome to' | translate }} 
+            <span *ngIf="tmsUrl">TMS</span>
+            <span *ngIf="lmsUrl">LMS</span>
+          </h2>
           <select (change)="setLanguage($event)">
             <option *ngFor="let item of listLang" [value]="item.lang">
               {{item.text}}
             </option>
           </select>
-          <p class="auth-signup-text text-muted">{{ 'Need an account?' | translate }}<a routerLink="/authentication/signup"
-              class="sign-up-link">{{ 'Sign up' | translate }}
-            </a></p>
+          <div *ngIf ="tmsUrl">          <br>
+          </div>
+          <p *ngIf ="lmsUrl"class="auth-signup-text text-muted">{{ 'Need an account?' | translate }}
+            <a  routerLink="/authentication/LMS/signup"
+            class="sign-up-link">{{ 'Sign up' | translate }}
+          </a>
+
+
+          </p>
           <!-- <div class="d-flex justify-content-between lbl-alert mb-3">
             <div>
               <button mat-raised-button color="primary" type="button" (click)="adminSet();">Admin</button>
@@ -83,7 +92,8 @@
                   </span>
                 </label>
               </div>
-              <a class="txt1" routerLink="/authentication/forgot-password">{{"Forgot Password?" | translate}}</a>
+              <a class="txt1"  *ngIf="tmsUrl" routerLink="/authentication/TMS/forgot-password">{{"Forgot Password?" | translate}}</a>
+              <a class="txt1" *ngIf="lmsUrl" routerLink="/authentication/LMS/forgot-password">{{"Forgot Password?" | translate}}</a>
             </div>
             <div class="container-auth-form-btn">
               <div style="text-align:center;">
