@@ -18,6 +18,86 @@ export class UtilsService {
   pageSizeArr = [10, 25, 50, 100];
 
   validationMessages: any = {
+    dname: [
+      { type: 'required', message: 'Enter Department Name' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+    budget: [
+      { type: 'required', message: 'Enter Budget' },
+      { type: 'min', message: 'Enter Budget between 1-999999' },
+      { type: 'max', message: 'Enter Budget between 1-999999' },
+      { type: 'pattern', message: 'Enter Digits' },
+    ],
+    director: [{ type: 'required', message: 'Select Director' }],
+    dept: [{ type: 'required', message: 'Select any Department' }],
+    ro: [{ type: 'required', message: 'Select any RO' }],
+    trainingAdmin: [{ type: 'required', message: 'Select any Training Admin' }],
+    percentage: [
+      { type: 'required', message: 'Enter Percentage' },
+      { type: 'min', message: 'Percentage must be at least 1%' },
+      { type: 'max', message: 'Percentage must be at most 100%' },
+    ],
+    value: [
+      { type: 'required', message: 'Enter Value' },
+      { type: 'min', message: 'Value must be at least 1' },
+    ],
+    total: [
+      { type: 'required', message: 'Enter Total Budget' },
+      { type: 'min', message: 'Total must be at least 1' },
+    ],
+    ename: [
+      { type: 'required', message: 'Enter Employee Name' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+    designation: [
+      { type: 'required', message: 'Enter Designation' },
+      { type: 'min', message: 'Total must be at least 2' },
+    ],
+    department: [
+      { type: 'required', message: 'Enter Department' },
+      { type: 'min', message: 'Total must be at least 2' },
+    ],
+    sname: [
+      { type: 'required', message: 'Enter RO Name' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+    lname: [
+      { type: 'required', message: 'Enter Training Admin Name' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+    dhname: [
+      { type: 'required', message: 'Enter Director Name' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+    cname: [
+      { type: 'required', message: 'Enter Course Name' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+    vname: [
+      { type: 'required', message: 'Enter Vendor Name' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+    uname: [
+      { type: 'required', message: 'Enter Username' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+    cost: [
+      { type: 'required', message: 'Enter Course Cost' },
+      { type: 'min', message: 'Value must be at least 1' },
+    ],
+    timeline: [
+      { type: 'required', message: 'Enter Course Timeline' },
+      { type: 'min', message: 'Timeline must be at least 1 day' },
+    ],
+
     'title': [
       { type: 'required', message: 'Enter Course Name' },
       { type: 'minlength', message: 'Enter minimum 2 characters' },
@@ -227,6 +307,22 @@ export class UtilsService {
 
 
   validators: any = {
+    dname: [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(150),
+    ],
+    ename: [
+      // Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(150),
+    ],
+    budget: [Validators.required, Validators.min(1), Validators.max(99999999)],
+    percentage: [Validators.required, Validators.min(1), Validators.max(100)],
+    value: [Validators.required, Validators.min(1)],
+    onlyAlphabets: [Validators.pattern(/^[a-zA-Z\s]+$/)],
+    designation: [Validators.required, Validators.min(2)],
+
     title: [ Validators.required,Validators.minLength(2), Validators.maxLength(255)],
     bannerFor: [Validators.required],
     imagePath: [Validators.required],
@@ -253,7 +349,6 @@ export class UtilsService {
     website: [ Validators.maxLength(255), Validators.pattern(/^(https?:\/\/)?(www\.)?[a-zA-Z0-9]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/)],
     pdu: [ Validators.min(0), Validators.max(999), Validators.pattern(/^\d+(\.\d+)?$/)],
     category_name:[Validators.minLength(2),Validators.maxLength(255)],
-    onlyAlphabets: [Validators.pattern(/^[a-zA-Z\s]+$/)],
     noLeadingSpace: [Validators.pattern(/^\S/), (control: AbstractControl) => {
       if (Array.isArray(control.value)) {
         if (control && control.value && !control.value[0]?.trim().length) {
@@ -268,6 +363,23 @@ export class UtilsService {
       return null;
     }],
   };
+  getErrorMessage1(
+    control: AbstractControl | null,
+    fieldName: string
+  ): string | null {
+    if (!control) {
+      return null;
+    }
+
+    for (const validator of this.validationMessages[fieldName]) {
+      if (control.hasError(validator.type)) {
+        return validator.message;
+      }
+    }
+
+    return null;
+  }
+
   getErrorMessage(userForm: FormGroup, key: string) {
     let err = this.validationMessages[key].find((val: any) => {
       return userForm?.get(key)?.hasError(val.type);
