@@ -85,7 +85,7 @@ export class SigninComponent
         .subscribe(user => {
           setTimeout(() => {
             const role = this.authenticationService.currentUserValue.user.role;
-            if ((role === Role.All && this.tmsUrl) || (role === Role.Admin && this.tmsUrl)) {
+            if ((role === Role.All && this.tmsUrl) || (role === Role.Admin && this.tmsUrl || role=="RO"  || role == "Director" || role == "Employee")) {
               this.router.navigate(['/dashboard/student-analytics']);
             } else if ((role === Role.Instructor && this.tmsUrl) || (role === 'Trainer' && this.tmsUrl) || (role ==='instructor' && this.tmsUrl)) {
               this.router.navigate(['/dashboard/instructor-dashboard']);
