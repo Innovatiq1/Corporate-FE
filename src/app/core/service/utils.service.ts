@@ -380,6 +380,12 @@ export class UtilsService {
     return null;
   }
 
+  noLeadingSpace(control: AbstractControl) {
+    if (control && control.value && !control.value?.trim().length) {
+      control.setValue('');
+    }
+    return null;
+  }
   getErrorMessage(userForm: FormGroup, key: string) {
     let err = this.validationMessages[key].find((val: any) => {
       return userForm?.get(key)?.hasError(val.type);
