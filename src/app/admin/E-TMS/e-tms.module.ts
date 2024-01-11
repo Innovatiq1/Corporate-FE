@@ -5,6 +5,11 @@ import { EmployeeRequestComponent } from './employee-request/employee-request.co
 import { EmployeeStatusComponent } from './employee-status/employee-status.component';
 import { AllRequestComponent } from './all-request/all-request.component';
 import { ETmsRoutingModule } from './e-tms-routing.module';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { ComponentsModule } from '@shared/components/components.module';
+import { SharedModule } from '@shared';
+import { NgxGaugeModule } from 'ngx-gauge';
 
 
 
@@ -17,7 +22,14 @@ import { ETmsRoutingModule } from './e-tms-routing.module';
   ],
   imports: [
     CommonModule,
-    ETmsRoutingModule
+    ETmsRoutingModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
+    NgApexchartsModule,
+    ComponentsModule,
+    SharedModule,
+    NgxGaugeModule,
   ]
 })
 export class ETmsModule { }
