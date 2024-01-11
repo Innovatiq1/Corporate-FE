@@ -86,8 +86,8 @@ MENU_LIST = [
     
             },
             {
-                id: "employee-request",
-                title: "Employee Request",
+                id: "course-request",
+                title: "Course Request",
                 type: "none"
             },
             {
