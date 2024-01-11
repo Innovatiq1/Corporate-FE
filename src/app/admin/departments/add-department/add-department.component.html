@@ -29,12 +29,12 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <label>Head Of Department<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput formControlName="hod" required>
-                    <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>person</mat-icon>
-                    <mat-error *ngIf="departmentForm.get('hod')?.hasError('required')">
-                      HOD name required
-                    </mat-error>
-                  </mat-form-field>
+                    <mat-select (selectionChange)="onSelectChange1($event)" formControlName="hod" required>
+                      <mat-option *ngFor="let item of users" [value]="item.id">
+                        {{item.name}} {{item.last_name}}
+                      </mat-option>
+                    </mat-select>
+                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
