@@ -1,1 +1,139 @@
-<p>all-request works!</p>
+<section class="content">
+    <div class="content-block">
+      <div class="block-header" *ngFor="let breadscrum of breadscrums">
+        <!-- breadcrumb -->
+        <app-breadcrumb
+          [title]="breadscrum.title"
+          [active_item]="breadscrum.active"
+        >
+        </app-breadcrumb>
+      </div>
+  
+      <!-- Search-btns -->
+      <div>
+        <form
+          id="header-search-people"
+          class="form-area"
+          novalidate="novalidate"
+          autocomplete="off"
+        >
+          <div class="row">
+            <div class="col-md-10">
+              <div class="styled-input wide multi">
+                <div class="first-name" id="input-first-name">
+                  <input
+                    type="text"
+                    name="fn"
+                    id="fn"
+                    autocomplete="off"
+                    data-placeholder-focus="false"
+                    required
+                  />
+                  <label>Employee</label>
+                </div>
+                <div class="last-name" id="input-last-name">
+                  <input
+                    type="text"
+                    name="ln"
+                    id="ln"
+                    autocomplete="off"
+                    data-placeholder-focus="false"
+                    required
+                  />
+                  <label>RO</label>
+                </div>
+                <div class="city" id="input-city">
+                  <input
+                    type="text"
+                    name="city"
+                    id="city"
+                    autocomplete="off"
+                    data-placeholder-focus="false"
+                  />
+                  <label>Director</label>
+                </div>
+                <div class="city" id="input-city">
+                  <input
+                    type="text"
+                    name="city"
+                    id="city"
+                    autocomplete="off"
+                    data-placeholder-focus="false"
+                  />
+                  <label>Training Admin</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 no-pad-left-10">
+              <button
+                type="submit"
+                class="primary-btn serach-btn"
+                id="submit_btn"
+              >
+                SEARCH
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- #table_content -->
+      <div class="row clearfix mt-4">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <h2>All Request</h2>
+            </div>
+  
+            <div class="tableBody">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Employee</th>
+                      <th>Course</th>
+                      <th>RO</th>
+                      <th>Director</th>
+                      <th>Training Admin</th>
+                      <th>Vendor Name</th>
+                      <th>Course Timeline</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let data of SourceData">
+                          <td>{{data?.employeeName}}</td>
+                          <td>{{data?.courseName}}</td>
+                          <td>{{data?.roName}}</td>
+                          <td>{{data?.directorName}}</td>
+                          <td>{{data?.trainingAdminName}}</td>
+                          <td>{{data?.vendorName}}</td>
+                          <td>{{data?.courseTimeline}}</td>
+                          <td>
+                            <button mat-button [matMenuTriggerFor]="menu">
+                              <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                                xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
+                                <path
+                                  d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                              </svg>
+                            </button>
+                            <mat-menu #menu="matMenu" xPosition="before">
+                              <button mat-menu-item  >
+                                <app-feather-icons [icon]="'eye'"  [class]="'tbl-fav-edit'"></app-feather-icons>
+                                <span class="menu-text">View</span>
+                              </button>
+                            </mat-menu>
+                          </td>
+                      </tr>
+                    <!-- content -->
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  </div> -->
+      </div>
+    </div>
+  </section>

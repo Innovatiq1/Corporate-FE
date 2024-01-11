@@ -19,7 +19,7 @@ const routes: Routes = [
     component: EmployeeStatusComponent
   },
   {
-    path: 'all-request',
+    path: 'all-requests',
     component: AllRequestComponent
   },
 ];

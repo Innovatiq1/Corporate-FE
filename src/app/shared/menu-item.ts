@@ -67,7 +67,7 @@ MENU_LIST = [
 
 //Etms
     {
-        id: "e-tms",
+        id: "admin/e-tms",
         title: "E-TMS",
         iconsrc: "/assets/course-icon.svg",
         icon: 'school',
@@ -91,7 +91,7 @@ MENU_LIST = [
                 type: "none"
             },
             {
-                id: "all-request",
+                id: "all-requests",
                 title: "All Requests",
                 type:"none"
             },

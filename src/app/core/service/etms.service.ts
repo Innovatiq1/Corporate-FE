@@ -5,10 +5,9 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { BehaviorSubject, Observable, map } from "rxjs";
 import { environment } from "environments/environment";
 import { ApiResponse } from "@core/models/general.response";
-import { CourseModel, CoursePaginationModel } from "@core/models/course.model";
+import { CoursePaginationModel } from "@core/models/course.model";
 import { EmpRequest } from "@core/models/emp-request.model";
 import { UnsubscribeOnDestroyAdapter } from '@shared';
-import { User } from "@core/models/user";
 import { Users } from "@core/models/user.model";
 // import { CourseKit, CourseModel, CoursePaginationModel, Program } from "@core/models/course.model";
 
@@ -62,7 +61,7 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
     const apiUrl = `${this.prefix}admin/courseRequest`;
     return this._Http
       .post<ApiResponse>(apiUrl, request)
-      .pipe(map((response) => { }));
+      .pipe(map(() => { }));
   }
 
   getAllRequestsByEmployeeId(employeeId:any): Observable<ApiResponse> {
@@ -98,7 +97,7 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
   updateStatus(data:any,id:any) {
     const apiUrl = `${this.prefix}admin/courseRequest/${id}`;
     return this._Http.put<ApiResponse>(apiUrl, data)
-      .pipe(map((response) => { }));
+      .pipe(map(() => { }));
   }
 
   getAllRequests(): Observable<any> {

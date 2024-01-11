@@ -1,1 +1,145 @@
-<p>employee-request works!</p>
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+        <!-- Widgets -->
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card card-statistic-2">
+                    <div class="clearfix">
+                        <div class="card-icon-only shadow-primary float-start">
+                            <img src="assets/images/banner/approved.png" alt="">
+                        </div>
+                        <div class="card-right">
+                            <div>
+                                <h6 class="float-end">Total Approved</h6>
+                            </div>
+                            <div class="col-green">
+                                <h3 class="font-weight-bold float-end mb-0">10</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card card-statistic-2">
+                    <div class="clearfix">
+                        <div class="card-icon-only shadow-primary float-start">
+                            <img src="assets/images/banner/rejected.png" alt="">
+                        </div>
+                        <div class="card-right">
+                            <div>
+                                <h6 class="float-end">Rejected</h6>
+                            </div>
+                            <div class="col-green">
+                                <h3 class="font-weight-bold float-end mb-0">05</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card card-statistic-2">
+                    <div class="clearfix">
+                        <div class="card-icon-only shadow-primary float-start">
+                            <img src="assets/images/banner/pending.png" alt="">
+                            <i class="assignment_turned_in float-start"></i>
+                        </div>
+                        <div class="card-right">
+                            <div>
+                                <h6 class="float-end">Pending</h6>
+                            </div>
+                            <div class="col-green">
+                                <h3 class="font-weight-bold float-end mb-0">01</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="card card-statistic-2">
+                    <div class="clearfix">
+                        <div class="card-icon-only shadow-primary float-start">
+                            <img src="assets/images/banner/completed.png" alt="">
+                        </div>
+                        <div class="card-right">
+                            <div>
+                                <h6 class="float-end">Completed</h6>
+                            </div>
+                            <div class="col-green">
+                                <h3 class="font-weight-bold float-end mb-0">08</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <div class="row clearfix" >
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Course Approval Request</h2>
+                        <div class="col-md-2">
+                            <select class="form-select m-2 header-dropdown" aria-label="Default select example">
+                                <option selected>Aug 23</option>
+                                <option value="1">July 23</option>
+                                <option value="2">June 23</option>
+                                <option value="3">May 23</option>
+                                <option value="4">Apr 23</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="tableBody">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Course</th>
+                                        <th>Payment</th>
+                                        <th>Vendor Name</th>
+                                        <th>Course Timeline</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let request of dataSource ">
+                                        <td class="table-img">
+                                            <img src="{{request?.employeeId?.avatar || './../../assets/images/profile.png'}}" alt="">
+                                        </td>
+                                        <td>{{request?.employeeId?.name}}</td>
+                                        <td>{{request?.courseName | titlecase}}</td>
+                                        <td>${{request?.courseCost}}</td>
+                                        <td>{{request?.vendorName | titlecase}}</td>
+                                        <td>{{request?.courseTimeline}}</td>
+
+                                        <td class="d-grid gap-2 d-md-flex">
+                                            <button (click)="approve(request.id)"
+                                            type="button"
+                                            class="btn btn-outline-primary height">
+                                            Approve
+                                          </button>
+                                          <button type="button"  mat-raised-button color="warn" 
+                                          (click)="$event.stopPropagation()" (click)="reject(request)">Reject</button>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  </div> -->
+        </div>
+<!-- Approval work flow  -->
+        <!-- <app-workflow *ngIf="ShowFlowTable"></app-workflow> -->
+    </div>
+
+</section>
