@@ -13,6 +13,7 @@ import { EtmsService } from '@core/service/etms.service';
 import { UtilsService } from '@core/service/utils.service';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
 import Swal from 'sweetalert2';
+import { EditRequestComponent } from './edit-request/edit-request.component';
 
 @Component({
   selector: 'app-employee-request',
@@ -56,7 +57,8 @@ export class EmployeeRequestComponent
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     public httpClient: HttpClient,
-    public utils: UtilsService
+    public utils: UtilsService,
+    public exampleDatabase: EtmsService
   ) {
     super();
     let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
@@ -176,38 +178,38 @@ export class EmployeeRequestComponent
   }
 
   reject(row: EmpRequest) {
-    // this.id = row.id;
-    // let tempDirection: Direction;
-    // if (localStorage.getItem('isRtl') === 'true') {
-    //   tempDirection = 'rtl';
-    // } else {
-    //   tempDirection = 'ltr';
-    // }
-    // const dialogRef = this.dialog.open(EditEmpRequestComponent, {
-    //   data: {
-    //     empRequest: row,
-    //     action: 'edit',
-    //   },
-    //   direction: tempDirection,
-    // });
-    // this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-    //   if (result === 1) {
-    //     const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-    //       (x) => x.id === this.id
-    //     );
+    this.id = row.id;
+    let tempDirection: Direction;
+    if (localStorage.getItem('isRtl') === 'true') {
+      tempDirection = 'rtl';
+    } else {
+      tempDirection = 'ltr';
+    }
+    const dialogRef = this.dialog.open(EditRequestComponent, {
+      data: {
+        empRequest: row,
+        action: 'edit',
+      },
+      direction: tempDirection,
+    });
+    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+          (x) => x.id === this.id
+        );
 
-    //     if (foundIndex != null && this.exampleDatabase) {
-    //       this.exampleDatabase.dataChange.value[foundIndex] =
-    //         this.employeeService.getDialogData();
-    //     }
-    //     if (this.ro) {
-    //       this.getAllRequestsByRo();
-    //     } else if (this.director) {
-    //       this.getAllRequestsByDirector();
-    //     } else if (this.trainingAdmin) {
-    //       this.getAllRequestsByTrainingAdmin();
-    //     }
-    //   }
-    // });
+        if (foundIndex != null && this.exampleDatabase) {
+          this.exampleDatabase.dataChange.value[foundIndex] =
+            this.etmsService.getDialogData();
+        }
+        if (this.ro) {
+          this.getAllRequestsByRo();
+        } else if (this.director) {
+          this.getAllRequestsByDirector();
+        } else if (this.trainingAdmin) {
+          this.getAllRequestsByTrainingAdmin();
+        }
+      }
+    });
   }
 }
