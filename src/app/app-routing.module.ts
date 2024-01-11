@@ -1,10 +1,9 @@
-import { Page404Component } from './authentication/page404/page404.component';
+
 import { AuthLayoutComponent } from './layout/app-layout/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
-import { Role } from './core/models/role';
 import { SettingsComponent } from './student/settings/settings.component';
 import { LeaveRequestComponent } from './student/leave-request/leave-request.component';
 import { InstructorSettingsComponent } from './teacher/settings/settings.component';
@@ -43,6 +42,8 @@ const routes: Routes = [
           ),
         canActivate: [LoginGuard],
       },
+      
+      
       {
         path: 'email',
         loadChildren: () =>

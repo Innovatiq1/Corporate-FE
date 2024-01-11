@@ -8,6 +8,11 @@ const routes: Routes = [
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
+    path: 'e-tms',
+    loadChildren: () =>
+      import('./E-TMS/e-tms.module').then((m) => m.ETmsModule),
+  },
+  {
     path: 'instructors',
     loadChildren: () =>
       import('./teachers/teachers.module').then((m) => m.TeachersModule),
