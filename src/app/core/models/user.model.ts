@@ -47,6 +47,8 @@ export interface Student {
     joiningDate:Date,
     Active: any;
     menuItems: [];
+    last_name:any;
+    
     isLogin:boolean;
     phone:{
 			countryCode:String,

@@ -61,6 +61,14 @@ export class UserService {
       })
       .pipe(map((response) => response));
   }
+  getUserList1(): Observable<any> {
+    const apiUrl = this.defaultUrl + 'auth/usersList';
+    return this.http
+      .post<ApiResponse>(apiUrl, {
+       
+      })
+      .pipe(map((response) => response));
+  }
   deleteUser(id: string) {
     const apiUrl = `${this.defaultUrl}admin/adminUserListing/${id}`;
     return this.http
