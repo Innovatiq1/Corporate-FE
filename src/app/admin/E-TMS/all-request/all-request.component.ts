@@ -30,6 +30,7 @@ export class AllRequestComponent {
     this.empService.getAllRequests().subscribe((res) => {
       
       this.SourceData = res.data.docs.docs;
+      this.totalItems = res.data.totalDocs;
       console.log('response',this.SourceData);
 
     })
