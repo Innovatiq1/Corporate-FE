@@ -19,9 +19,9 @@
                     <label>Employee Name </label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput formControlName="name" />
-                      <!-- <mat-error *ngIf="requestForm.get('employeeId')?.invalid && requestForm.get('employeeId')?.touched">
-                        {{ utils.getErrorMessage(requestForm.get('employeeId'), 'ename') }}
-                      </mat-error> -->
+                      <mat-error *ngIf="requestForm.get('employeeId')?.invalid && requestForm.get('employeeId')?.touched">
+                        {{ utils.getErrorMessage1(requestForm.get('employeeId'), 'ename') }}
+                      </mat-error>
                     </mat-form-field>
                   </div>
                   <div class="col-lg-4">
@@ -29,10 +29,10 @@
                     <label>Designation <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput formControlName="designation" />
-                      <!-- <mat-error
+                      <mat-error
                         *ngIf="requestForm.get('designation')?.invalid && requestForm.get('designation')?.touched">
-                        {{ utils.getErrorMessage(requestForm.get('designation'), 'designation') }}
-                      </mat-error> -->
+                        {{ utils.getErrorMessage1(requestForm.get('designation'), 'designation') }}
+                      </mat-error>
                     </mat-form-field>
   
                   </div>
@@ -41,9 +41,9 @@
                     <label>Department <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput formControlName="department" />
-                      <!-- <mat-error *ngIf="requestForm.get('department')?.invalid && requestForm.get('department')?.touched">
-                        {{ utils.getErrorMessage(requestForm.get('department'), 'department') }}
-                      </mat-error> -->
+                      <mat-error *ngIf="requestForm.get('department')?.invalid && requestForm.get('department')?.touched">
+                        {{ utils.getErrorMessage1(requestForm.get('department'), 'department') }}
+                      </mat-error>
                     </mat-form-field>
   
                   </div>
@@ -61,9 +61,9 @@
                     <label>Email ID <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput  formControlName="email" />
-                      <!-- <mat-error *ngIf="requestForm.get('email')?.invalid && requestForm.get('email')?.touched">
-                        {{ utils.getErrorMessage(requestForm.get('email'), 'email') }}
-                      </mat-error> -->
+                      <mat-error *ngIf="requestForm.get('email')?.invalid && requestForm.get('email')?.touched">
+                        {{ utils.getErrorMessage1(requestForm.get('email'), 'email') }}
+                      </mat-error>
                     </mat-form-field>
   
                   </div>
@@ -71,9 +71,9 @@
                     <label>Ro Name  </label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput  formControlName="ro" />
-                      <!-- <mat-error *ngIf="requestForm.get('ro')?.invalid && requestForm.get('ro')?.touched">
-                        {{ utils.getErrorMessage(requestForm.get('supervisor'), 'sname') }}
-                      </mat-error> -->
+                      <mat-error *ngIf="requestForm.get('ro')?.invalid && requestForm.get('ro')?.touched">
+                        {{ utils.getErrorMessage1(requestForm.get('ro'), 'sname') }}
+                      </mat-error>
                     </mat-form-field>
   
                   </div>
@@ -84,10 +84,10 @@
                     <label>Training Admin  </label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput  formControlName="trainingAdmin" />
-                      <!-- <mat-error
+                      <mat-error
                         *ngIf="requestForm.get('traningAdmin')?.invalid && requestForm.get('traningAdmin')?.touched">
-                        {{ utils.getErrorMessage(requestForm.get('traningAdmin'), 'lname') }}
-                      </mat-error> -->
+                        {{ utils.getErrorMessage1(requestForm.get('traningAdmin'), 'lname') }}
+                      </mat-error>
                     </mat-form-field>
   
                   </div>
@@ -95,10 +95,10 @@
                     <label>Director </label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput  formControlName="directorName" />
-                      <!-- <mat-error
+                      <mat-error
                         *ngIf="requestForm.get('directorName')?.invalid && requestForm.get('directorName')?.touched">
-                        {{ utils.getErrorMessage(requestForm.get('directorName'), 'dhname') }}
-                      </mat-error> -->
+                        {{ utils.getErrorMessage1(requestForm.get('directorName'), 'dhname') }}
+                      </mat-error>
                     </mat-form-field>
   
                   </div>
@@ -111,9 +111,9 @@
                     <label>Course Name <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput  formControlName="courseName" />
-                      <!-- <mat-error *ngIf="requestForm.get('courseName')?.invalid && requestForm.get('courseName')?.touched">
-                        {{ utils.getErrorMessage(requestForm.get('courseName'), 'cname') }}
-                      </mat-error> -->
+                      <mat-error *ngIf="requestForm.get('courseName')?.invalid && requestForm.get('courseName')?.touched">
+                        {{ utils.getErrorMessage1(requestForm.get('courseName'), 'cname') }}
+                      </mat-error>
                     </mat-form-field>
   
                   </div>
@@ -121,9 +121,9 @@
                     <label>Vendor Name <span class="mandatory">&nbsp;*</span> </label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput  formControlName="vendorName" />
-                      <!-- <mat-error *ngIf="requestForm.get('vendorName')?.invalid && requestForm.get('vendorName')?.touched">
-                        {{ utils.getErrorMessage(requestForm.get('vendorName'), 'vname') }}
-                      </mat-error> -->
+                      <mat-error *ngIf="requestForm.get('vendorName')?.invalid && requestForm.get('vendorName')?.touched">
+                        {{ utils.getErrorMessage1(requestForm.get('vendorName'), 'vname') }}
+                      </mat-error>
                     </mat-form-field>
   
                   </div>
@@ -134,9 +134,9 @@
                     <label>Course Cost <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput  formControlName="courseCost" />
-                      <!-- <mat-error *ngIf="requestForm.get('courseCost')?.invalid && requestForm.get('courseCost')?.touched">
-                        {{ utils.getErrorMessage(requestForm.get('courseCost'), 'cost') }}
-                      </mat-error> -->
+                      <mat-error *ngIf="requestForm.get('courseCost')?.invalid && requestForm.get('courseCost')?.touched">
+                        {{ utils.getErrorMessage1(requestForm.get('courseCost'), 'cost') }}
+                      </mat-error>
                     </mat-form-field>
   
                   </div>
@@ -144,16 +144,16 @@
                     <label>Course Timeline <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput  formControlName="courseTimeline" />
-                      <!-- <mat-error
+                      <mat-error
                         *ngIf="requestForm.get('courseTimeline')?.invalid && requestForm.get('courseTimeline')?.touched">
-                        {{ utils.getErrorMessage(requestForm.get('courseTimeline'), 'timeline') }}
-                      </mat-error> -->
+                        {{ utils.getErrorMessage1(requestForm.get('courseTimeline'), 'timeline') }}
+                      </mat-error>
                     </mat-form-field>
   
                   </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                  <button class="btn btn-outline" routerLink="/admin/approval-work-flow/employee-status">
+                  <button class="btn btn-outline" routerLink="/admin/e-tms/employee-status">
                     <span class="btn-txt">Cancel</span>
                   </button>
                   <button class="btn btn-outline-primary">

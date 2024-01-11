@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CoursePaginationModel } from '@core/models/course.model';
 import { EmpRequest } from '@core/models/emp-request.model';
 import { EtmsService } from '@core/service/etms.service';
+import { UtilsService } from '@core/service/utils.service';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
 import Swal from 'sweetalert2';
 
@@ -34,6 +36,9 @@ export class EmployeeRequestComponent
   trainingAdmin = false;
   dataSource: any;
   id?: number;
+  coursePaginationModel!: Partial<CoursePaginationModel>;
+  totalItems: any;
+  pageSizeArr = this.utils.pageSizeArr;
  
   classesList = [
     {
@@ -50,7 +55,8 @@ export class EmployeeRequestComponent
     private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    public httpClient: HttpClient
+    public httpClient: HttpClient,
+    public utils: UtilsService
   ) {
     super();
     let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
@@ -149,6 +155,14 @@ export class EmployeeRequestComponent
           this.getAllRequestsByTrainingAdmin();
         }
       });
+  }
+
+  pageSizeChange($event: any) {
+    this.coursePaginationModel.page = $event?.pageIndex + 1;
+    this.coursePaginationModel.limit = $event?.pageSize;
+    this.getAllRequestsByRo();
+    this.getAllRequestsByDirector();
+    this.getAllRequestsByTrainingAdmin();
   }
 
   reject(row: EmpRequest) {
