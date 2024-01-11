@@ -87,6 +87,9 @@ export class EmployeeRequestComponent
     this.etmsService.getAllRequestsByRo(roId).subscribe(
       (response) => {
         this.dataSource = response.data.docs;
+        this.totalItems = response.data.totalDocs;
+    // this.coursePaginationModel.page = response.page;
+    // this.coursePaginationModel.limit = response.limit;
       },
       (error) => {}
     );
@@ -97,6 +100,9 @@ export class EmployeeRequestComponent
     this.etmsService.getAllRequestsByDirector(directorId).subscribe(
       (response) => {
         this.dataSource = response.data.docs;
+        this.totalItems = response.data.totalDocs;
+    // this.coursePaginationModel.page = response.page;
+    // this.coursePaginationModel.limit = response.limit;
       },
       (error) => {}
     );
@@ -110,6 +116,9 @@ export class EmployeeRequestComponent
         (response) => {
           this.dataSource = response.data.docs;
           console.log("datasource",this.dataSource);
+          this.totalItems = response.data.totalDocs;
+    // this.coursePaginationModel.page = response.page;
+    // this.coursePaginationModel.limit = response.limit;
         },
         (error) => {}
       );
@@ -163,6 +172,7 @@ export class EmployeeRequestComponent
     this.getAllRequestsByRo();
     this.getAllRequestsByDirector();
     this.getAllRequestsByTrainingAdmin();
+    console.log("pagination", this.coursePaginationModel.page)
   }
 
   reject(row: EmpRequest) {
