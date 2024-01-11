@@ -12,6 +12,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { ComponentsModule } from '@shared/components/components.module';
 import { SharedModule } from '@shared';
 import { NgxGaugeModule } from 'ngx-gauge';
+import { EditRequestComponent } from './employee-request/edit-request/edit-request.component';
 
 
 
@@ -21,7 +22,8 @@ import { NgxGaugeModule } from 'ngx-gauge';
     EmployeeRequestComponent,
     EmployeeStatusComponent,
     AllRequestComponent,
-    CreateRequestComponent
+    CreateRequestComponent,
+    EditRequestComponent
   ],
   imports: [
 
