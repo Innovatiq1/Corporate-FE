@@ -115,7 +115,7 @@ export class AddDepartmentComponent  implements OnInit {
       console.log('res',response)
       this.departmentForm.patchValue({
         department:response?.department,
-        hod:response?.hod,
+        hod:response?.hodId,
         mobile:response?.mobile,
         email:response?.email,
         departmentStartDate:response?.departmentStartDate,
@@ -128,6 +128,9 @@ export class AddDepartmentComponent  implements OnInit {
 
   onSubmit() {
     if(this.editUrl){
+    const department= this.departmentForm.value
+    department['hod']= this.hodName
+    department['hodId']= this.hod
       this.deptService.updateDepartment(this.departmentForm.value,this.departmentId).subscribe((response:any) => {
         Swal.fire({
           title: 'Successful',
