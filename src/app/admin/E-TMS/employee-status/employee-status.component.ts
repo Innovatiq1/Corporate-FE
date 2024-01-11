@@ -46,7 +46,7 @@ constructor(private router:Router,private etmsService: EtmsService,public utils:
 
 
   createReq(){
-this.router.navigate(['/admin/approval-work-flow/create-req'])
+this.router.navigate(['/admin/e-tms/create-request'])
   }
 
 

@@ -4,6 +4,7 @@ import { EtmsDashboardComponent } from './etms-dashboard/etms-dashboard.componen
 import { EmployeeRequestComponent } from './employee-request/employee-request.component';
 import { EmployeeStatusComponent } from './employee-status/employee-status.component';
 import { AllRequestComponent } from './all-request/all-request.component';
+import { CreateRequestComponent } from './create-request/create-request.component';
 
 const routes: Routes = [
   {
@@ -11,7 +12,7 @@ const routes: Routes = [
     component: EtmsDashboardComponent
   },
   {
-    path: 'employee-request',
+    path: 'course-request',
     component: EmployeeRequestComponent
   },
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'all-requests',
     component: AllRequestComponent
+  },
+  {
+    path: 'create-request',
+    component: CreateRequestComponent
   },
 ];
 
