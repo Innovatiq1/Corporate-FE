@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export let MENU_ITEMS: any[] = [];
 export let MENU_LIST: any[] = [];
@@ -63,6 +64,61 @@ MENU_LIST = [
             }
               ]
     },
+
+//Etms
+    {
+        id: "admin/e-tms",
+        title: "E-TMS",
+        iconsrc: "/assets/course-icon.svg",
+        icon: 'school',
+        selected: true,
+        children: [
+            {
+                id: "etms-dashboard",
+                title: "E-TMS Dashboard",
+                type: "none",
+    
+            },
+            {
+                id: "employee-status",
+                title: "Employee Status",
+                type: "none",
+    
+            },
+            {
+                id: "employee-request",
+                title: "Employee Request",
+                type: "none"
+            },
+            {
+                id: "all-requests",
+                title: "All Requests",
+                type:"none"
+            },
+        
+        ]
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 {
     id: "admin/courses",
