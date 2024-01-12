@@ -28,7 +28,7 @@ export class EmployeeRequestComponent
     {
       title: 'ETMS',
       items: [''],
-      active: 'Employee Request ',
+      active: 'Course Request ',
     },
   ];
   ro = false;
@@ -61,6 +61,7 @@ export class EmployeeRequestComponent
     public exampleDatabase: EtmsService
   ) {
     super();
+    this.coursePaginationModel = {};
     let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
    
     if (user.user.type == 'RO') {
@@ -86,12 +87,13 @@ export class EmployeeRequestComponent
   }
   getAllRequestsByRo() {
     let roId = localStorage.getItem('id');
-    this.etmsService.getAllRequestsByRo(roId).subscribe(
+    this.etmsService.getAllRequestsByRo({...this.coursePaginationModel,roId}).subscribe(
       (response) => {
         this.dataSource = response.data.docs;
         this.totalItems = response.data.totalDocs;
-    // this.coursePaginationModel.page = response.page;
-    // this.coursePaginationModel.limit = response.limit;
+        this.coursePaginationModel.docs = response.docs;
+        this.coursePaginationModel.page = response.page;
+        this.coursePaginationModel.limit = response.limit;
       },
       (error) => {}
     );
@@ -99,12 +101,13 @@ export class EmployeeRequestComponent
 
   getAllRequestsByDirector() {
     let directorId = localStorage.getItem('id');
-    this.etmsService.getAllRequestsByDirector(directorId).subscribe(
+    this.etmsService.getAllRequestsByDirector({...this.coursePaginationModel,directorId}).subscribe(
       (response) => {
         this.dataSource = response.data.docs;
         this.totalItems = response.data.totalDocs;
-    // this.coursePaginationModel.page = response.page;
-    // this.coursePaginationModel.limit = response.limit;
+        this.coursePaginationModel.docs = response.docs;
+        this.coursePaginationModel.page = response.page;
+        this.coursePaginationModel.limit = response.limit;
       },
       (error) => {}
     );
@@ -113,17 +116,17 @@ export class EmployeeRequestComponent
   getAllRequestsByTrainingAdmin() {
     let trainingAdminId = localStorage.getItem('id');
     this.etmsService
-      .getAllRequestsByTrainingAdmin(trainingAdminId)
+      .getAllRequestsByTrainingAdmin({...this.coursePaginationModel,trainingAdminId})
       .subscribe(
         (response) => {
           this.dataSource = response.data.docs;
           console.log("datasource",this.dataSource);
           this.totalItems = response.data.totalDocs;
-    // this.coursePaginationModel.page = response.page;
-    // this.coursePaginationModel.limit = response.limit;
-        },
-        (error) => {}
-      );
+          this.coursePaginationModel.docs = response.docs;
+          this.coursePaginationModel.page = response.page;
+          this.coursePaginationModel.limit = response.limit;
+          }, error => {
+          });
   }
 
   approve(id: any) {

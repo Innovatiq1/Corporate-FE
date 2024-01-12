@@ -78,18 +78,24 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
 
 
   getAllRequestsByRo(ro:any): Observable<ApiResponse> {
-    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?ro=${ro}`;
-    return this._Http.get<ApiResponse>(apiUrl);
+    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?ro=${ro.roId}`;
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(ro),
+    });
   }
 
   getAllRequestsByDirector(director:any): Observable<ApiResponse> {
-    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?director=${director}`;
-    return this._Http.get<ApiResponse>(apiUrl);
+    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?director=${director.directorId}`;
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(director),
+    });
   }
 
   getAllRequestsByTrainingAdmin(trainingAdmin:any): Observable<ApiResponse> {
-    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?trainingAdmin=${trainingAdmin}`;
-    return this._Http.get<ApiResponse>(apiUrl);
+    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?trainingAdmin=${trainingAdmin.trainingAdminId}`;
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(trainingAdmin),
+    });
   }
 
   updateStatus(data:any,id:any) {
