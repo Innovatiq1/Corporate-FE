@@ -64,14 +64,12 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
       .pipe(map(() => { }));
   }
 
-  getAllRequestsByEmployeeId(employeeId:any): Observable<ApiResponse> {
-    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?employeeId=${employeeId}`;
-    return this._Http.get<ApiResponse>(apiUrl);
+  getAllRequestsByEmployeeId(employee:any): Observable<ApiResponse> {
+    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?employeeId=${employee.employeeId}`;
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(employee),
+    });
   }
-  //  getUserId(Id:any): Observable<ApiResponse> {
-  //   const apiUrl = `${this.prefix}auth/instructorListByID/${Id}`;
-  //   return this._Http.get<ApiResponse>(apiUrl);
-  // }
   getUserId(id: any) {
     const apiUrl = `${this.prefix}auth/instructorListByID/${id}`;
     return this._Http.get<Users>(apiUrl).pipe(map((response) => response));
@@ -100,9 +98,12 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
       .pipe(map(() => { }));
   }
 
-  getAllRequests(): Observable<any> {
+  getAllRequests(data:any): Observable<any> {
     const apiUrl = `${this.prefix}admin/courseRequest/`;
-    return this._Http.get<any>(apiUrl);
+    return this._Http.get<any>(apiUrl,
+      {
+        params: this.buildParams(data),
+      });
   }
 
 

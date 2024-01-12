@@ -14,7 +14,6 @@ export class AllRequestComponent {
   breadscrums = [
     {
       title: 'Approval Work Flow',
-      // items: ['Extra'],
       active: 'All Request',
     },
   ];
@@ -23,23 +22,28 @@ export class AllRequestComponent {
   totalItems: any;
   pageSizeArr = this.utils.pageSizeArr;
   constructor(public empService: EtmsService, public utils: UtilsService) { 
+    this.coursePaginationModel = {};
   }
 
 
   ngOnInit() {
-    this.empService.getAllRequests().subscribe((res) => {
-      
+    this.getAllRequests();
+  }
+
+  getAllRequests(){
+    this.empService.getAllRequests({...this.coursePaginationModel}).subscribe((res) => {
       this.SourceData = res.data.docs.docs;
       this.totalItems = res.data.totalDocs;
-      console.log('response',this.SourceData);
-
+      this.coursePaginationModel.docs = res.data.docs;
+      this.coursePaginationModel.page = res.data.page;
+      this.coursePaginationModel.limit = res.data.limit;
     })
   }
 
   pageSizeChange($event: any) {
     this.coursePaginationModel.page = $event?.pageIndex + 1;
     this.coursePaginationModel.limit = $event?.pageSize;
-    this.SourceData();
+    this.getAllRequests();
   }
 
 }

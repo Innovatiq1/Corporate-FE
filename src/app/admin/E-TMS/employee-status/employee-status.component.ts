@@ -71,7 +71,7 @@ this.router.navigate(['/admin/e-tms/create-request'])
 
   getAllRequestsByEmployeeId(){
     let employeeId = localStorage.getItem('id')
-    this.etmsService.getAllRequestsByEmployeeId(employeeId).subscribe(response =>{
+    this.etmsService.getAllRequestsByEmployeeId({...this.coursePaginationModel,employeeId}).subscribe(response =>{
      this.dataSource = response.data.docs;
      this.totalItems = response.data.totalDocs;
      this.coursePaginationModel.docs = response.docs;
