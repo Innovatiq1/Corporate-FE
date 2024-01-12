@@ -17,63 +17,72 @@
           novalidate="novalidate"
           autocomplete="off"
         >
-          <div class="row">
-            <div class="col-md-10">
-              <div class="styled-input wide multi">
-                <div class="first-name" id="input-first-name">
-                  <input
-                    type="text"
-                    name="fn"
-                    id="fn"
-                    autocomplete="off"
-                    data-placeholder-focus="false"
-                    required
-                  />
-                  <label>Employee</label>
-                </div>
-                <div class="last-name" id="input-last-name">
-                  <input
-                    type="text"
-                    name="ln"
-                    id="ln"
-                    autocomplete="off"
-                    data-placeholder-focus="false"
-                    required
-                  />
-                  <label>RO</label>
-                </div>
-                <div class="city" id="input-city">
-                  <input
-                    type="text"
-                    name="city"
-                    id="city"
-                    autocomplete="off"
-                    data-placeholder-focus="false"
-                  />
-                  <label>Director</label>
-                </div>
-                <div class="city" id="input-city">
-                  <input
-                    type="text"
-                    name="city"
-                    id="city"
-                    autocomplete="off"
-                    data-placeholder-focus="false"
-                  />
-                  <label>Training Admin</label>
-                </div>
+        <div class="row">
+          <div class="col-md-10">
+            <div class="styled-input wide multi">
+              <div class="first-name" id="input-first-name">
+                <input
+                  type="text"
+                  name="fn"
+                  id="fn"
+                  autocomplete="off"
+                  data-placeholder-focus="false"
+                  [(ngModel)]="employeeText"
+                  (ngModelChange)="onSearchChange()" 
+                  required
+                />
+                <label>Employee</label>
+              </div>
+              <div class="last-name" id="input-last-name">
+                <input
+                  type="text"
+                  name="ln"
+                  id="ln"
+                  autocomplete="off"
+                  data-placeholder-focus="false"
+                  [(ngModel)]="roText"
+                  
+                  (ngModelChange)="onRoChange()" 
+                  required
+                />
+                <label>RO</label>
+              </div>
+              <div class="city" id="input-city">
+                <input
+                  type="text"
+                  name="city"
+                  id="city"
+                  autocomplete="off"
+                  data-placeholder-focus="false"
+                  [(ngModel)]="directorText"
+                  (ngModelChange)="onDirectorChange()" 
+                />
+                <label>Director</label>
+              </div>
+              <div class="city" id="input-city">
+                <input
+                  type="text"
+                  name="city"
+                  id="city"
+                  autocomplete="off"
+                  data-placeholder-focus="false"
+                  [(ngModel)]="trainingadminText"
+                  (ngModelChange)="onTrainingChange()" 
+                />
+                <label>Training Admin</label>
               </div>
             </div>
-            <div class="col-md-2 no-pad-left-10">
-              <button
-                type="submit"
-                class="primary-btn serach-btn"
-                id="submit_btn"
-              >
-                SEARCH
-              </button>
-            </div>
           </div>
+          <!-- <div class="col-md-2 no-pad-left-10">
+            <button (click)="submitForm()"
+              type="submit"
+              class="primary-btn serach-btn"
+              id="submit_btn"
+            >
+              SEARCH
+            </button>
+          </div> -->
+        </div>
         </form>
       </div>
       <!-- #table_content -->

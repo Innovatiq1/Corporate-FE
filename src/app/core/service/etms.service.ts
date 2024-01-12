@@ -104,8 +104,8 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
       .pipe(map(() => { }));
   }
 
-  getAllRequests(data:any): Observable<any> {
-    const apiUrl = `${this.prefix}admin/courseRequest/`;
+  getAllRequests(searchValue:any,searchType:any,data:any): Observable<any> {
+    const apiUrl = `${this.prefix}admin/courseRequest?searchValue=${searchValue}&searchType=${searchType}`;
     return this._Http.get<any>(apiUrl,
       {
         params: this.buildParams(data),
