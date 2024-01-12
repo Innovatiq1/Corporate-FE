@@ -58,7 +58,7 @@ export class EditRequestComponent {
       this.ro = true;
     } else if (user.user.type == 'Director') {
       this.director = true;
-    } else if (user.user.type == 'Training Adminstrator') {
+    } else if (user.user.type == 'Training Administrator') {
       this.trainingAdmin = true;
     }
 
