@@ -20,7 +20,7 @@ export class AllRequestComponent {
   breadscrums = [
     {
       title: 'Approval Work Flow',
-      active: 'All Request',
+      active: 'All Requests',
     },
   ];
   SourceData:any;
