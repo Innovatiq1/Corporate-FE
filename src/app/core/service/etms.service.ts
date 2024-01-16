@@ -112,7 +112,12 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
       });
   }
 
-
+  /**get request details by id */
+  getRequestById(id: any) {
+    const apiUrl = `${this.prefix}admin/courseRequest/${id}`;
+    return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+  }
+  
   
 }
 
