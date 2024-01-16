@@ -161,7 +161,7 @@ export class AllRequestComponent {
   
       
   
-    }
+    
   }
 
   onTrainingChange() {
