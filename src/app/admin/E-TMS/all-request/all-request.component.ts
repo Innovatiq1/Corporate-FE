@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { EtmsService } from '@core/service/etms.service';
 import { UtilsService } from '@core/service/utils.service';
@@ -7,16 +8,16 @@ import { UtilsService } from '@core/service/utils.service';
 @Component({
   selector: 'app-all-request',
   templateUrl: './all-request.component.html',
-  styleUrls: ['./all-request.component.scss']
+  styleUrls: ['./all-request.component.scss'],
 })
 export class AllRequestComponent {
+
   searchType:string ='';
   searchValue:string ='';
   employeeText: string = '';
   roText: string = '';
   directorText: string = '';
-  trainingadminText:string = '';
-
+  trainingadminText: string = '';
 
   breadscrums = [
     {
@@ -24,18 +25,22 @@ export class AllRequestComponent {
       active: 'All Requests',
     },
   ];
-  SourceData:any;
+  SourceData: any;
   coursePaginationModel!: Partial<CoursePaginationModel>;
   totalItems: any;
   pageSizeArr = this.utils.pageSizeArr;
-  constructor(public empService: EtmsService, public utils: UtilsService) { 
+  constructor(
+    public empService: EtmsService,
+    public utils: UtilsService,
+    private router: Router
+  ) {
     this.coursePaginationModel = {};
   }
-
 
   ngOnInit() {
     this.getAllRequests();
   }
+
 
   getAllRequests(){
     this.empService.getAllRequests(this.searchValue,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
@@ -119,14 +124,11 @@ export class AllRequestComponent {
         this.searchValue=""
         this.getAllRequests()
 
-      
-  
-      
-  
+    
     }
-  
   }
   onDirectorChange() {
+
        if(this.directorText.length>2){
       this.searchType="Director"
       this.searchValue=this.directorText;
@@ -143,6 +145,7 @@ export class AllRequestComponent {
         pageSize: this.coursePaginationModel?.limit || 10 // Provide a default pageSize if limit is undefined
       });
       console.log('Search Text 1:', this.directorText);
+
      // this.searchType=""
      
   
@@ -159,9 +162,10 @@ export class AllRequestComponent {
       
   
     }
-  
-  
+  }
+
   onTrainingChange() {
+
        if(this.trainingadminText.length>2){
       this.searchType="TrainingAdmin"
       this.searchValue=this.trainingadminText;
@@ -178,6 +182,7 @@ export class AllRequestComponent {
         pageSize: this.coursePaginationModel?.limit || 10 // Provide a default pageSize if limit is undefined
       });
       console.log('Search Text 1:', this.trainingadminText);
+
       //this.searchType=""
      
   
@@ -192,7 +197,13 @@ export class AllRequestComponent {
       
   
     }
-  
   }
 
+  /**
+   * navigates to the view request page
+   */
+  viewReq(id: string) {
+    console.log('viewReq', id);
+    this.router.navigate(['/admin/e-tms/view-request'], { queryParams: {id: id} });
+  }
 }

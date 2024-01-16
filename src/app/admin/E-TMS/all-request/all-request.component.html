@@ -118,20 +118,21 @@
                           <td>{{data?.vendorName}}</td>
                           <td>{{data?.courseTimeline}}</td>
                           <td>
-                            <button mat-button [matMenuTriggerFor]="menu">
+                            <button class="badge badge-solid-purple" (click)="viewReq(data?._id)">view</button>
+                            <!-- <button mat-button [matMenuTriggerFor]="menu">
                               <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
                                 xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                                 class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
                                 <path
                                   d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
                               </svg>
-                            </button>
-                            <mat-menu #menu="matMenu" xPosition="before">
+                            </button> -->
+                            <!-- <mat-menu #menu="matMenu" xPosition="before">
                               <button mat-menu-item  >
                                 <app-feather-icons [icon]="'eye'"  [class]="'tbl-fav-edit'"></app-feather-icons>
-                                <span class="menu-text">View</span>
+                                <span class="menu-text" (click)="viewReq(data?._id)">View</span>
                               </button>
-                            </mat-menu>
+                            </mat-menu> -->
                           </td>
                       </tr>
                     <!-- content -->

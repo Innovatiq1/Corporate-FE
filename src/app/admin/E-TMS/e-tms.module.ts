@@ -13,6 +13,7 @@ import { ComponentsModule } from '@shared/components/components.module';
 import { SharedModule } from '@shared';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { EditRequestComponent } from './employee-request/edit-request/edit-request.component';
+import { ViewAllRequestComponent } from './all-request/view-all-request/view-all-request.component';
 
 
 
@@ -23,7 +24,8 @@ import { EditRequestComponent } from './employee-request/edit-request/edit-reque
     EmployeeStatusComponent,
     AllRequestComponent,
     CreateRequestComponent,
-    EditRequestComponent
+    EditRequestComponent,
+    ViewAllRequestComponent
   ],
   imports: [
 

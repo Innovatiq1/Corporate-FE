@@ -5,6 +5,8 @@ import { EmployeeRequestComponent } from './employee-request/employee-request.co
 import { EmployeeStatusComponent } from './employee-status/employee-status.component';
 import { AllRequestComponent } from './all-request/all-request.component';
 import { CreateRequestComponent } from './create-request/create-request.component';
+import { ViewAllRequestComponent } from './all-request/view-all-request/view-all-request.component';
+
 
 const routes: Routes = [
   {
@@ -26,6 +28,10 @@ const routes: Routes = [
   {
     path: 'create-request',
     component: CreateRequestComponent
+  },
+  {
+    path: 'view-request',
+    component: ViewAllRequestComponent
   },
 ];
 
