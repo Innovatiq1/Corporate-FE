@@ -11,6 +11,7 @@ import { UtilsService } from '@core/service/utils.service';
 })
 export class AllRequestComponent {
   searchType:string ='';
+  searchValue:string ='';
   employeeText: string = '';
   roText: string = '';
   directorText: string = '';
@@ -37,7 +38,7 @@ export class AllRequestComponent {
   }
 
   getAllRequests(){
-    this.empService.getAllRequests(this.employeeText,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
+    this.empService.getAllRequests(this.searchValue,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
       this.SourceData = res.data.docs.docs;
       this.totalItems = res.data.totalDocs;
       this.coursePaginationModel.docs = res.data.docs;
@@ -56,20 +57,29 @@ export class AllRequestComponent {
     if(this.employeeText.length>2){
      if(this.employeeText){
       this.searchType="Employee"
-      this.empService.getAllRequests(this.employeeText,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
+      //this.coursePaginationModel.page=
+      this.searchValue= this.employeeText
+      this.empService.getAllRequests(this.searchValue,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
         
         this.SourceData = res.data.docs.docs;
         this.totalItems = res.data.totalDocs;
         console.log('response',this.SourceData);
+        
   
       })
+      this.pageSizeChange({
+        pageIndex: this.coursePaginationModel?.page ? this.coursePaginationModel.page - 1 : 0,
+        pageSize: this.coursePaginationModel?.limit || 10 // Provide a default pageSize if limit is undefined
+      });
       // You can perform actions with the search texts here
       console.log('Search Text 1:', this.employeeText);
-      this.searchType=""
+     // this.searchType=""
      
   
      } 
     } else if(this.employeeText.length===0){
+       this.searchType=""
+       this.searchValue=""
       this.getAllRequests()
       
   
@@ -82,22 +92,31 @@ export class AllRequestComponent {
    console.log("===Tst==")
    
        if(this.roText.length>2){
+        if(this.roText){
+        console.log("sssssssssss",this.roText)
       this.searchType="RO"
-      this.empService.getAllRequests(this.roText,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
+      this.searchValue=this.roText;
+      this.empService.getAllRequests(this.searchValue,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
         
         this.SourceData = res.data.docs.docs;
         this.totalItems = res.data.totalDocs;
         console.log('response',this.SourceData);
   
       })
+      this.pageSizeChange({
+        pageIndex: this.coursePaginationModel?.page ? this.coursePaginationModel.page - 1 : 0,
+        pageSize: this.coursePaginationModel?.limit || 10 // Provide a default pageSize if limit is undefined
+      });
       // You can perform actions with the search texts here
       console.log('Search Text 1:', this.roText);
-      this.searchType=""
+     // this.searchType=""
      
   
   
-  
+    }
       } else if(this.roText.length===0){
+        this.searchType=""
+        this.searchValue=""
         this.getAllRequests()
 
       
@@ -110,7 +129,8 @@ export class AllRequestComponent {
   onDirectorChange() {
        if(this.directorText.length>2){
       this.searchType="Director"
-      this.empService.getAllRequests(this.directorText,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
+      this.searchValue=this.directorText;
+      this.empService.getAllRequests(this.searchValue,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
         
         this.SourceData = res.data.docs.docs;
         this.totalItems = res.data.totalDocs;
@@ -118,13 +138,19 @@ export class AllRequestComponent {
   
       })
       // You can perform actions with the search texts here
+      this.pageSizeChange({
+        pageIndex: this.coursePaginationModel?.page ? this.coursePaginationModel.page - 1 : 0,
+        pageSize: this.coursePaginationModel?.limit || 10 // Provide a default pageSize if limit is undefined
+      });
       console.log('Search Text 1:', this.directorText);
-      this.searchType=""
+     // this.searchType=""
      
   
   
   
       } else if(this.directorText.length===0){
+        this.searchType=""
+        this.searchValue=""
         this.getAllRequests()
 
       }
@@ -138,7 +164,8 @@ export class AllRequestComponent {
   onTrainingChange() {
        if(this.trainingadminText.length>2){
       this.searchType="TrainingAdmin"
-      this.empService.getAllRequests(this.trainingadminText,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
+      this.searchValue=this.trainingadminText;
+      this.empService.getAllRequests(this.searchValue,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
         
         this.SourceData = res.data.docs.docs;
         this.totalItems = res.data.totalDocs;
@@ -146,13 +173,19 @@ export class AllRequestComponent {
   
       })
       // You can perform actions with the search texts here
+      this.pageSizeChange({
+        pageIndex: this.coursePaginationModel?.page ? this.coursePaginationModel.page - 1 : 0,
+        pageSize: this.coursePaginationModel?.limit || 10 // Provide a default pageSize if limit is undefined
+      });
       console.log('Search Text 1:', this.trainingadminText);
-      this.searchType=""
+      //this.searchType=""
      
   
   
   
       }else if(this.trainingadminText.length===0){
+        this.searchType=""
+        this.searchValue=""
       this.getAllRequests()
       
   
