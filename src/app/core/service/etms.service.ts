@@ -118,7 +118,10 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
     return this._Http.get<any>(apiUrl).pipe(map((response) => response));
   }
   
-  
+  getRequestCount(id: any) {
+    const apiUrl = `${this.prefix}admin/courseRequest/req/count?director=${id}`;
+    return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+  }
 }
 
 
