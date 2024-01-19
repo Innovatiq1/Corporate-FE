@@ -223,13 +223,34 @@ export class EmployeeRequestComponent
 
   getCount(){
     let userId = localStorage.getItem('id');
+    let userRole = localStorage.getItem('user_type');
 console.log("userId = " + userId);
-    this.etmsService.getRequestCount(userId).subscribe(res =>{
-      this.approved = res.data.docs.courseRequestApproved;
-      this.rejected = res.data.docs.courseRequestRejected;
-      this.pending = res.data.docs.courseRequestPending;
+console.log("userRole = " + userRole);
+if(userRole === "RO"){
+  this.etmsService.getRequestRoCount(userId).subscribe(res =>{
+    this.approved = res.data.docs.courseRequestApproved;
+    this.rejected = res.data.docs.courseRequestRejected;
+    this.pending = res.data.docs.courseRequestPending;
 
 console.log(res);
-    })
+  })
+}else if(userRole == "Director"){
+  this.etmsService.getRequestDirectorCount(userId).subscribe(res =>{
+    this.approved = res.data.docs.courseRequestApproved;
+    this.rejected = res.data.docs.courseRequestRejected;
+    this.pending = res.data.docs.courseRequestPending;
+
+console.log(res);
+  })
+}else if(userRole === "Training Administrator"){
+  this.etmsService.getRequestTrainingAdminCount(userId).subscribe(res =>{
+    this.approved = res.data.docs.courseRequestApproved;
+    this.rejected = res.data.docs.courseRequestRejected;
+    this.pending = res.data.docs.courseRequestPending;
+
+console.log(res);
+  })
+}
+   
   }
 }
