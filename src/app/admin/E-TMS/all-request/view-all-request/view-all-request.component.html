@@ -20,46 +20,46 @@
               <div class="col-6">
                 <div class="bg-body-secondary p-3 rounded-3">
                   <div
-                    class="d-flex flex-wrap align-items-center justify-content-between"
+                    class="row align-items-center justify-content-between"
                   >
-                    <div>
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">User Name</h5>
                       <h6 class="mb-0">{{ userName }}</h6>
                     </div>
-                    <div>
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">Email</h5>
                       <h6 class="mb-0">{{ email }}</h6>
                     </div>
                   </div>
                   <hr />
                   <div
-                    class="d-flex flex-wrap align-items-center justify-content-between mt-4"
+                    class="row justify-content-between mt-4"
                   >
-                    <div>
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">Course Name</h5>
                       <h6 class="mb-0">{{ courseName }}</h6>
                     </div>
 
-                    <div>
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">Course Cost</h5>
                       <h6 class="mb-0">${{ courseCost }}</h6>
                     </div>
                   </div>
                   <hr />
-                  <div class="d-flex flex-wrap justify-content-between mt-4">
-                    <div>
+                  <div class="row justify-content-between mt-4">
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">Course TimeLine</h5>
                       <h6 class="mb-0">{{ coursetimeline }}</h6>
                     </div>
 
-                    <div>
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">Department</h5>
                       <h6 class="mb-0">{{ departmentName }}</h6>
                     </div>
                   </div>
                   <hr />
-                  <div class="d-flex flex-wrap justify-content-between mt-4">
-                    <div>
+                  <div class="row justify-content-between mt-4">
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">Designation</h5>
                       <h6 class="mb-0">{{ designationName }}</h6>
                     </div>
@@ -77,23 +77,23 @@
               </div>
               <div class="col-6">
                 <div class="p-3 bg-danger-subtle rounded-3">
-                  <div class="d-flex justify-content-between">
-                    <div>
+                  <div class="row justify-content-between">
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">Employee Name</h5>
                       <h6 class="mb-0">{{ employeeName }}</h6>
                     </div>
-                    <div>
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">Vendor Name</h5>
                       <h6 class="mb-0">{{ vendorName }}</h6>
                     </div>
                   </div>
                   <hr />
-                  <div class="d-flex justify-content-between mt-4">
-                    <div>
+                  <div class="row justify-content-between mt-4">
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">RO Name</h5>
                       <h6 class="mb-0">{{ roName }}</h6>
                     </div>
-                    <div>
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">RO Approval</h5>
                       <h6
                         [ngClass]="roApproval === 'Approved'
@@ -108,12 +108,12 @@
                     </div>
                   </div>
                   <hr />
-                  <div class="d-flex justify-content-between mt-3">
-                    <div>
+                  <div class="row justify-content-between mt-3">
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">Director Name</h5>
                       <h6 class="mb-0">{{ directorName }}</h6>
                     </div>
-                    <div>
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">DirectorApproval</h5>
                       <h6
                         [ngClass]="
@@ -130,12 +130,12 @@
                   </div>    
 
                   <hr />
-                  <div class="d-flex justify-content-between mt-4">
-                    <div>
+                  <div class="row justify-content-between mt-4">
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">Training Admin Name</h5>
                       <h6 class="mb-0">{{ trainingadminName }}</h6>
                     </div>
-                    <div>
+                    <div class="col-6">
                       <h5 class="text-muted mb-0">TrainingAdmin Approval</h5>
                       <h6
                         [ngClass]="

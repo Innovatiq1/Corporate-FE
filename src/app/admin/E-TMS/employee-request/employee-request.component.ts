@@ -40,6 +40,11 @@ export class EmployeeRequestComponent
   coursePaginationModel!: Partial<CoursePaginationModel>;
   totalItems: any;
   pageSizeArr = this.utils.pageSizeArr;
+
+
+  approved = 0;
+  pending = 0;
+  rejected = 0;
  
   classesList = [
     {
@@ -63,7 +68,6 @@ export class EmployeeRequestComponent
     super();
     this.coursePaginationModel = {};
     let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
-   
     if (user.user.type == 'RO') {
       this.ro = true;
     } else if (user.user.type == 'Director') {
@@ -84,6 +88,7 @@ export class EmployeeRequestComponent
     } else if (this.trainingAdmin) {
       this.getAllRequestsByTrainingAdmin();
     }
+    this.getCount();
   }
   getAllRequestsByRo() {
     let roId = localStorage.getItem('id');
@@ -214,5 +219,17 @@ export class EmployeeRequestComponent
         }
       }
     });
+  }
+
+  getCount(){
+    let userId = localStorage.getItem('id');
+console.log("userId = " + userId);
+    this.etmsService.getRequestCount(userId).subscribe(res =>{
+      this.approved = res.data.docs.courseRequestApproved;
+      this.rejected = res.data.docs.courseRequestRejected;
+      this.pending = res.data.docs.courseRequestPending;
+
+console.log(res);
+    })
   }
 }
