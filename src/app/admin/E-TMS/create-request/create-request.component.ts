@@ -4,6 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CourseService } from '@core/service/course.service';
 import { EtmsService } from '@core/service/etms.service';
 import { UtilsService } from '@core/service/utils.service';
 import Swal from 'sweetalert2';
@@ -31,8 +32,9 @@ export class CreateRequestComponent implements OnInit {
   roName!:string;
   directorName!:string;
   directorId!: string;
+  sourceData:any;
 
-  constructor(private etmsService:EtmsService,private fb: FormBuilder, private router:Router, public utils:UtilsService){
+  constructor(private etmsService:EtmsService,private fb: FormBuilder,private _courseService: CourseService, private router:Router, public utils:UtilsService){
 
     // this.requestForm = this.fb.group({
      
@@ -58,7 +60,8 @@ export class CreateRequestComponent implements OnInit {
 
   ngOnInit() {
     //console.log("=====tttttttttttttttt======")
-  this.getUserId()
+  this.getUserId();
+  this.getCourseList();
     
   }
   getUserId() {
@@ -107,6 +110,14 @@ export class CreateRequestComponent implements OnInit {
     });
   }
   
+/** getting all course list */
+  getCourseList() {
+    this._courseService.getAllCourses({status:'active'}).subscribe((courses) => {
+      this.sourceData = courses.data.docs;
+      console.log("courses",this.sourceData)
+
+    })
+  }
 
  onSubmit() {
   if (this.requestForm.valid) {
