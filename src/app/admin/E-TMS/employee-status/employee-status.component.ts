@@ -16,12 +16,14 @@ import { UtilsService } from '@core/service/utils.service';
 })
 export class EmployeeStatusComponent {
   displayedColumns: string[] = [
+    'ID',
     'course',
     'payment',
     'approved on',
     'approval stage',
     'status',
-    'reason'];
+    'reason',
+    'actions'];
   coursePaginationModel!: Partial<CoursePaginationModel>;
   totalItems: any;
   pageSizeArr = this.utils.pageSizeArr;
