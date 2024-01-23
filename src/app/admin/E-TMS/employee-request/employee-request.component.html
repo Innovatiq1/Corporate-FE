@@ -101,11 +101,11 @@
                                         <td>${{request?.courseCost}}</td>
                                         <td>{{request?.vendorName | titlecase}}</td>
                                         <td>{{request?.courseTimeline}}</td>
-
+                                        <!-- (click)="approve(request.id)" -->
                                         <td class="d-grid gap-2 d-md-flex">
-                                            <button (click)="approve(request.id)"
+                                            <button 
                                             type="button"
-                                            class="btn btn-outline-primary height">
+                                            class="btn btn-outline-primary height" (click)="$event.stopPropagation()" (click)="approve(request)">
                                             Approve
                                           </button>
                                           <button type="button"  mat-raised-button color="warn" 
