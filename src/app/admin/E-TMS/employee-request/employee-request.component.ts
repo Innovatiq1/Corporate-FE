@@ -134,46 +134,81 @@ export class EmployeeRequestComponent
           });
   }
 
-  approve(id: any) {
-    if (this.ro) {
-      this.payload = {
-        roApproval: 'Approved',
-      };
-    } else if (this.director) {
-      this.payload = {
-        directorApproval: 'Approved',
-      };
-    } else if (this.trainingAdmin) {
-      this.payload = {
-        trainingAdminApproval: 'Approved',
-      };
+  approve(req: any) {
+    console.log(req._id);
+    this.id = req._id;
+    let tempDirection: Direction;
+    if (localStorage.getItem('isRtl') === 'true') {
+      tempDirection = 'rtl';
+    } else {
+      tempDirection = 'ltr';
     }
-    this.etmsService
-      .updateStatus(this.payload, id)
-      .subscribe((response: any) => {
+    const dialogRef = this.dialog.open(EditRequestComponent, {
+      data: {
+        empRequest: req,
+        action: 'approve',
+      },
+      direction: tempDirection,
+    });
+    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+          (x) => x.id === this.id
+        );
+
+        if (foundIndex != null && this.exampleDatabase) {
+          this.exampleDatabase.dataChange.value[foundIndex] =
+            this.etmsService.getDialogData();
+        }
         if (this.ro) {
-          Swal.fire({
-            title: 'Approved Sucessfully',
-            text: 'Sent Course Approval Request to Director',
-            icon: 'success',
-          });
           this.getAllRequestsByRo();
         } else if (this.director) {
-          Swal.fire({
-            title: 'Approved Sucessfully',
-            text: 'Sent Course Approval Request to Training Admin',
-            icon: 'success',
-          });
           this.getAllRequestsByDirector();
         } else if (this.trainingAdmin) {
-          Swal.fire({
-            title: 'Successful',
-            text: 'Approved Sucessfully',
-            icon: 'success',
-          });
           this.getAllRequestsByTrainingAdmin();
         }
-      });
+      }
+    });
+
+    // if (this.ro) {
+    //   this.payload = {
+    //     roApproval: 'Approved',
+    //   };
+    // } else if (this.director) {
+    //   this.payload = {
+    //     directorApproval: 'Approved',
+    //   };
+    // } else if (this.trainingAdmin) {
+    //   this.payload = {
+    //     trainingAdminApproval: 'Approved',
+    //   };
+    // }
+    // this.etmsService
+    //   .updateStatus(this.payload, id)
+    //   .subscribe((response: any) => {
+    //     if (this.ro) {
+    //       Swal.fire({
+    //         title: 'Approved Sucessfully',
+    //         text: 'Sent Course Approval Request to Director',
+    //         icon: 'success',
+    //       });
+    //       this.getAllRequestsByRo();
+    //     } else if (this.director) {
+    //       Swal.fire({
+    //         title: 'Approved Sucessfully',
+    //         text: 'Sent Course Approval Request to Training Admin',
+    //         icon: 'success',
+    //       });
+    //       this.getAllRequestsByDirector();
+    //     } else if (this.trainingAdmin) {
+    //       Swal.fire({
+    //         title: 'Successful',
+    //         text: 'Approved Sucessfully',
+    //         icon: 'success',
+    //       });
+    //       this.getAllRequestsByTrainingAdmin();
+    //     }
+    //   });
   }
 
   pageSizeChange($event: any) {
@@ -200,6 +235,7 @@ export class EmployeeRequestComponent
       },
       direction: tempDirection,
     });
+
     this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
       if (result === 1) {
         const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
