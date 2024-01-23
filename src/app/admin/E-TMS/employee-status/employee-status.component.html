@@ -62,18 +62,25 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header>
                       Approval Stages
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row">
+                    <mat-cell *matCellDef="let row" class="approval-stages-cell">
                       <span class="mobile-label">Approval Stages:</span>
-                      RO Approval<br><br>
-                      Director Approval<br><br>
-                      Training Admin Approval<br>
+                      <div class="approval-stage mt-3 mb-2">RO Approval</div>
+                      <div class="approval-stage mt-3 mb-2">Director Approval</div>
+                      <div class="approval-stage my-2">Training Admin Approval</div>
                     </mat-cell>
                   </ng-container>
+                  
                   <!-- approval stage -->
                   <ng-container matColumnDef="status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Status
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row">
+                    <mat-cell *matCellDef="let row" class="approval-stages-cell">
+                      <span class="mobile-label">Status:</span>
+                      <div class="approval-reason mt-3 mb-2" [ngClass]="{'approved': row?.roApproval === 'Approved', 'rejected': row?.roApproval === 'Rejected', 'pending': row?.roApproval === 'Pending'}">{{row?.roApproval}}</div>
+                      <div class="approval-reason" [ngClass]="{'approved': row?.directorApproval === 'Approved', 'rejected': row?.directorApproval === 'Rejected', 'pending': row?.directorApproval === 'Pending'}">{{row?.directorApproval}}</div>
+                      <div class="approval-reason" [ngClass]="{'approved': row?.trainingAdminApproval === 'Approved', 'rejected': row?.trainingAdminApproval === 'Rejected', 'pending': row?.trainingAdminApproval === 'Pending'}">{{row?.trainingAdminApproval}}</div>
+                    </mat-cell>
+                    <!-- <mat-cell *matCellDef="let row">
                       <span class="mobile-label ">Status:</span>
                       <span >
                         <div [ngClass]="{'approved': row?.roApproval === 'Approved', 'rejected': row?.roApproval === 'Rejected', 'pending': row?.roApproval === 'Pending'}">
@@ -89,20 +96,26 @@
                         </div>
                         
                       </span>
-                    </mat-cell>
+                    </mat-cell> -->
                   </ng-container>
                   <!-- approval stage -->
                   <ng-container matColumnDef="reason">
     <mat-header-cell *matHeaderCellDef mat-sort-header
       >Reason
     </mat-header-cell>
-    <mat-cell *matCellDef="let row">
+    <mat-cell *matCellDef="let row" class="approval-stages-cell">
+      <span class="mobile-label">Reason:</span>
+      <div class="approval-reason mt-3 mb-2"> {{row?.roReason}}</div>
+      <div class="approval-reason ">{{row?.directorReason}}</div>
+      <div class="approval-reason ">{{row?.trainingAdminReason}}</div>
+    </mat-cell>
+    <!-- <mat-cell *matCellDef="let row">
       <span class="mobile-label">Reason:</span>                      
       {{row?.roReason}}<br><br>
       {{row?.directorReason}}<br><br>
       {{row?.trainingAdminReason}}<br>
   
-    </mat-cell>
+    </mat-cell> -->
   </ng-container>
   <ng-container matColumnDef="actions">
     <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
@@ -125,11 +138,10 @@
                   <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
                   <span class="menu-text">View</span>
                 </button> -->
-                <button mat-menu-item [routerLink]="['/admin/e-tms/create-request']">
+                <button mat-menu-item (click)="edit(row.id)" >
                   <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                   <span class="menu-text px-3">Edit</span>
                 </button>
-               
               </mat-menu>
     </mat-cell>
   </ng-container>

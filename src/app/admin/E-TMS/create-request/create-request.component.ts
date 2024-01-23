@@ -3,7 +3,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CoursePaginationModel } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { EtmsService } from '@core/service/etms.service';
 import { UtilsService } from '@core/service/utils.service';
@@ -33,12 +34,26 @@ export class CreateRequestComponent implements OnInit {
   directorName!:string;
   directorId!: string;
   sourceData:any;
+  editUrl: any;
+ _id: any;
+ urlPath: any;
 
-  constructor(private etmsService:EtmsService,private fb: FormBuilder,private _courseService: CourseService, private router:Router, public utils:UtilsService){
+  constructor(private etmsService:EtmsService,private fb: FormBuilder,private _courseService: CourseService, private router:Router, public activeRoute: ActivatedRoute, public utils:UtilsService){
+    this.activeRoute.queryParams.subscribe(params =>{
+      this._id = params["id"]
+      this.urlPath = params["action"]
+    })
+   
+    if(this.urlPath === "edit"){
+      this.breadscrums = [
+        {
+          title:'Edit Request',
+          active: 'Edit Request',
+        },
+      ];
+    }
 
-    // this.requestForm = this.fb.group({
-     
-    // });
+   
 
     this.requestForm = this.fb.group({
       name: ['',[...this.utils.validators.ename, this.utils.noLeadingSpace]],
@@ -61,6 +76,9 @@ export class CreateRequestComponent implements OnInit {
   ngOnInit() {
     //console.log("=====tttttttttttttttt======")
   this.getUserId();
+  if (this.urlPath === "edit") {
+    this.getData();
+  }
   this.getCourseList();
     
   }
@@ -155,6 +173,41 @@ export class CreateRequestComponent implements OnInit {
       this.router.navigate(['/admin/e-tms/employee-status']);
     });
   } 
+}
+
+
+getData() {
+  let userId = localStorage.getItem('id');
+  this.etmsService.getRequestById(this._id).subscribe(
+    (response: any) => {
+      if (response) {
+        this.dataSource = response;
+        this.employeeID = response._id;
+        this.roId = response.ro;
+        this.trainingAdminId = response.trainingAdmin;
+        this.directorId = response.director;
+        this.trainingAdminName = response?.trainingAdminName;
+        this.directorName = response?.directorName;
+        this.roName = response?.roName;
+        this.employeeName = response?.name + ' ' + (response.last_name ? response.last_name : '');
+
+        this.requestForm.patchValue({
+          name: response?.employeeName + ' ' + (response.last_name ? response.last_name : ''),
+          employeeId: response?.employeeId,
+          department: response?.department,
+          designation: response?.designation,
+          email: response?.email,
+          ro: response?.roName,
+          trainingAdmin: response?.trainingAdminName,
+          directorName: response?.directorName,
+          courseName: response?.courseName,
+          vendorName: response?.vendorName,
+          courseCost: response?.courseCost,
+          courseTimeline: response?.courseTimeline
+        });
+      } 
+    },
+  );
 }
 
 }

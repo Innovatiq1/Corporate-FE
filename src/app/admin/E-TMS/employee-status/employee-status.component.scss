@@ -26,3 +26,13 @@
     padding-left: 3px;
     padding-right: 3px;
   } 
+  .approval-stages-cell {
+    display: flex;
+    flex-direction: column;
+  }
+  .approval-stage {
+    min-height: 20px;
+  }
+  .approval-reason{
+    min-height: 50px;
+  }

@@ -30,6 +30,10 @@ const routes: Routes = [
     component: CreateRequestComponent
   },
   {
+    path: 'edit-request',
+    component: CreateRequestComponent
+  },
+  {
     path: 'view-request',
     component: ViewAllRequestComponent
   },

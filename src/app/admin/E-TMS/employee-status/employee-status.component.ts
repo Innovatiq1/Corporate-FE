@@ -29,7 +29,7 @@ export class EmployeeStatusComponent {
   pageSizeArr = this.utils.pageSizeArr;
 
 
-
+  id: any;
   selection = new SelectionModel<any>(true, []);
   dataSource :any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -88,6 +88,8 @@ this.router.navigate(['/admin/e-tms/create-request'])
     this.coursePaginationModel.limit = $event?.pageSize;
     this.getAllRequestsByEmployeeId();
   }
-
+edit(id: string){
+  this.router.navigate(['/admin/e-tms/edit-request'],{queryParams:{id : id, action : "edit"}})
+}
 
 }
