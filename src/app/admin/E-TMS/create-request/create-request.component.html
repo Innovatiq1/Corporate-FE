@@ -124,10 +124,12 @@
                   <div class="col-lg-6">
                     <label>Vendor Name <span class="mandatory">&nbsp;*</span> </label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
-                      <mat-select multiple formControlName="vendorName" required>
-                        <!-- <mat-option value={{users.typeName}}  *ngFor="let users of userTypeNames">{{users.typeName}}</mat-option> -->
+                      <mat-select formControlName="vendorName" required>
+                        <mat-option value="Comat">Comat</mat-option>
+                        <mat-option value="John">John</mat-option>
+                        <mat-option value="Lam">Lam</mat-option>
                       </mat-select>
-                      <mat-error *ngIf="requestForm.get('vendorName')?.invalid && requestForm.get('courseName')?.touched">
+                      <mat-error *ngIf="requestForm.get('vendorName')?.invalid && requestForm.get('vendorName')?.touched">
                         {{ utils.getErrorMessage1(requestForm.get('vendorName'), 'vname') }}
                       </mat-error>
                     </mat-form-field>
@@ -162,7 +164,8 @@
                     <span class="btn-txt">Cancel</span>
                   </button>
                   <button class="btn btn-outline-primary">
-                    <span class="btn-txt">Submit</span>
+                    <span class="btn-txt">{{urlPath=== "edit" ? 'Re-Submit' : 'Submit'}}</span>
+                    
                   </button>
                 </div>
               </form>
