@@ -41,7 +41,7 @@ export class EditRequestComponent {
   ) {
     
     this.action = data.action;
-    if (this.action === "edit") {
+    if (this.action === "edit" || this.action === "approve") {
       
       this.dialogTitle = "Edit Employee Request";
       this.empRequest = data.empRequest;
@@ -76,7 +76,8 @@ export class EditRequestComponent {
   }
  
   ngOnInit(): void {
-    this.confirmAdd()
+    // this.confirmAdd();
+    // this.approveRequest();
     if (this.ro) {
       this.getAllRequestsByRo();
     } else if (this.director) {
@@ -167,5 +168,55 @@ export class EditRequestComponent {
       }
     });
   }
+  }
+
+
+  /** To approve  */
+
+  approveRequest(){
+    if (this.ro) {
+      this.payload = {
+        roApproval: "Approved",
+        roReason: this.empRequestForm.value.reason,
+      }
+    } else if (this.director) {
+      this.payload = {
+        directorApproval: "Approved",
+        directorReason: this.empRequestForm.value.reason,
+      }
+    } else if (this.trainingAdmin) {
+      this.payload = {
+        trainingAdminApproval: "Approved",
+        trainingAdminReason: this.empRequestForm.value.reason,
+      }
+    }
+    if (this.empRequestForm.valid) {
+    this.etmsService
+      .updateStatus(this.payload, this._id)
+      .subscribe((response: any) => {
+        if (this.ro) {
+          Swal.fire({
+            title: 'Approved Sucessfully',
+            text: 'Sent Course Approval Request to Director',
+            icon: 'success',
+          });
+          this.getAllRequestsByRo();
+        } else if (this.director) {
+          Swal.fire({
+            title: 'Approved Sucessfully',
+            text: 'Sent Course Approval Request to Training Admin',
+            icon: 'success',
+          });
+          this.getAllRequestsByDirector();
+        } else if (this.trainingAdmin) {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Approved Sucessfully',
+            icon: 'success',
+          });
+          this.getAllRequestsByTrainingAdmin();
+        }
+      });
+    }
   }
 }
