@@ -45,6 +45,7 @@ export class AllRequestComponent {
   getAllRequests(){
     this.empService.getAllRequests(this.searchValue,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
       this.SourceData = res.data.docs.docs;
+      console.log(this.SourceData)
       this.totalItems = res.data.totalDocs;
       this.coursePaginationModel.docs = res.data.docs;
       this.coursePaginationModel.page = res.data.page;
@@ -148,19 +149,12 @@ export class AllRequestComponent {
 
      // this.searchType=""
      
-  
-  
-  
       } else if(this.directorText.length===0){
         this.searchType=""
         this.searchValue=""
         this.getAllRequests()
 
       }
-      
-  
-      
-  
     
   }
 
@@ -185,17 +179,11 @@ export class AllRequestComponent {
 
       //this.searchType=""
      
-  
-  
-  
       }else if(this.trainingadminText.length===0){
         this.searchType=""
         this.searchValue=""
       this.getAllRequests()
       
-  
-      
-  
     }
   }
 
