@@ -252,7 +252,7 @@ export class CreateRequestComponent implements OnInit {
                 employeeName: this.employeeName,
                 director: this.directorId,
                 courseName: requestData.courseName,
-                vendorName: requestData.vendorName,
+                vendorName: requestData.vendor,
                 courseCost: requestData.courseCost,
                 courseTimeline: requestData.courseTimeline,
                 roApproval: 'Pending',
@@ -308,7 +308,7 @@ export class CreateRequestComponent implements OnInit {
           trainingAdmin: response?.trainingAdminName,
           directorName: response?.directorName,
           courseName: response?.courseName,
-          vendorName: response?.vendorName,
+          vendor: response?.vendorName,
           courseCost: response?.courseCost,
           courseTimeline: response?.courseTimeline,
         });
