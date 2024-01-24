@@ -89,6 +89,8 @@
                                         <th>Payment</th>
                                         <th>Vendor Name</th>
                                         <th>Course Timeline</th>
+                                        <th>Created At</th>
+                                        <th>Approved On</th>
                                         <th *ngIf="pendingCourses">Actions</th>
                                     </tr>
                                 </thead>
@@ -103,6 +105,10 @@
                                         <td>${{request?.courseCost}}</td>
                                         <td>{{request?.vendorName | titlecase}}</td>
                                         <td>{{request?.courseTimeline}}</td>
+                                        <td>{{request?.createdAt | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
+                                        <td *ngIf ="ro">{{request?.roApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
+                                        <td *ngIf ="director">{{request?.directorApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
+                                        <td *ngIf ="trainingAdmin">{{request?.trainingadminApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
 
                                         <!-- (click)="approve(request.id)" -->
                                         <td *ngIf ="pendingCourses" class="d-grid gap-2 d-md-flex">
