@@ -170,9 +170,24 @@ export class EmployeeRequestComponent
       } else if(this.rejectedCourses){
         this.getAllRejectedRequestsByRo()
       }
-    } 
-    this.getAllRequestsByDirector();
-    this.getAllRequestsByTrainingAdmin();
+    } else if(this.director){
+      if(this.pendingCourses){
+        this.getAllRequestsByDirector();
+      } else if(this.approvedCourses){
+        this.getAllApprovedRequestsByDirector();
+      } else if(this.rejectedCourses){
+        this.getAllRejectedRequestsByDirector()
+      }
+    }else if(this.trainingAdmin){
+      if(this.pendingCourses){
+        this.getAllRequestsByTrainingAdmin();
+      } else if(this.approvedCourses){
+        this.getAllApprovedRequestsByTrainingAdmin();
+      } else if(this.rejectedCourses){
+        this.getAllRejectedRequestsByTrainingAdmin()
+      }
+    }
+    // this.getAllRequestsByTrainingAdmin();
     console.log("pagination", this.coursePaginationModel.page)
   }
 
