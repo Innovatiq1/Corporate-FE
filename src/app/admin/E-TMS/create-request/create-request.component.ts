@@ -37,6 +37,7 @@ export class CreateRequestComponent implements OnInit {
   editUrl: any;
  _id: any;
  urlPath: any;
+  requestId: any;
 
   constructor(private etmsService:EtmsService,private fb: FormBuilder,private _courseService: CourseService, private router:Router, public activeRoute: ActivatedRoute, public utils:UtilsService){
     this.activeRoute.queryParams.subscribe(params =>{
@@ -58,6 +59,7 @@ export class CreateRequestComponent implements OnInit {
     this.requestForm = this.fb.group({
       name: ['',[...this.utils.validators.ename, this.utils.noLeadingSpace]],
       employeeId: ['',[...this.utils.validators.ename, this.utils.noLeadingSpace]],
+      requestId: ['',[...this.utils.validators.ename, this.utils.noLeadingSpace]],
       designation: ['', [...this.utils.validators.designation, this.utils.noLeadingSpace]],
       department: ['', [...this.utils.validators.designation, this.utils.noLeadingSpace]],
       email: ['', [...this.utils.validators.email, this.utils.noLeadingSpace]],
@@ -74,7 +76,18 @@ export class CreateRequestComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log("=====tttttttttttttttt======")
+    let payload ={
+      generateId:"yes"
+    }
+    this.etmsService.createRequest(payload).subscribe((response: any) => {
+      console.log('rees',response)
+      this.requestId = response.data.employeeData.requestId
+      console.log('idddddd',this.requestId)
+      this.requestForm.patchValue({
+        requestId:this.requestId
+      })
+    })
+    
   this.getUserId();
   if (this.urlPath === "edit") {
     this.getData();
@@ -143,6 +156,7 @@ export class CreateRequestComponent implements OnInit {
       this.etmsService.getUserId(this.directorId).subscribe((res:any) => {
       this.etmsService.getUserId(this.trainingAdminId).subscribe((data:any) => {
       const payload = {
+        requestId: this.requestId ,
         employeeId: this.employeeID ,
         designation: requestData.designation,
         department: requestData.department,
@@ -199,7 +213,7 @@ getData() {
 
         this.requestForm.patchValue({
           name: response?.employeeName + ' ' + (response.last_name ? response.last_name : ''),
-          employeeId: response?.employeeId,
+          requestId: response?.requestId,
           department: response?.department,
           designation: response?.designation,
           email: response?.email,
