@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
@@ -57,7 +58,6 @@ export class CreateRequestComponent implements OnInit {
     });
 
     if (this.urlPath === 'edit') {
-
       this.breadscrums = [
         {
           title: 'Edit Request',
@@ -67,7 +67,6 @@ export class CreateRequestComponent implements OnInit {
     }
 
     this.requestForm = this.fb.group({
-
       name: ['', [...this.utils.validators.ename, this.utils.noLeadingSpace]],
       employeeId: [
         '',
@@ -95,7 +94,7 @@ export class CreateRequestComponent implements OnInit {
         '',
         [...this.utils.validators.dname, this.utils.noLeadingSpace],
       ],
-      vendorName: [
+      vendor: [
         '',
         [...this.utils.validators.dname, this.utils.noLeadingSpace],
       ],
@@ -111,24 +110,23 @@ export class CreateRequestComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    let payload ={
-      generateId:"yes"
-    }
+    let payload = {
+      generateId: 'yes',
+    };
     this.etmsService.createRequest(payload).subscribe((response: any) => {
-      console.log('rees',response)
-      this.requestId = response.data.employeeData.requestId
-      console.log('idddddd',this.requestId)
+      console.log('rees', response);
+      this.requestId = response.data.employeeData.requestId;
+      console.log('idddddd', this.requestId);
       this.requestForm.patchValue({
-        requestId:this.requestId
-      })
-    })
-    
-  this.getUserId();
-  if (this.urlPath === "edit") {
-    this.getData();
-  }
-  this.getCourseList();
+        requestId: this.requestId,
+      });
+    });
+
+    this.getUserId();
+    if (this.urlPath === 'edit') {
+      this.getData();
+    }
+    this.getCourseList();
   }
   getUserId() {
     //sconsole.log("======trrrr")
@@ -209,54 +207,74 @@ export class CreateRequestComponent implements OnInit {
   //   });
   // }
 
+  onCourseSelected(event: MatAutocompleteSelectedEvent) {
+    const selectedCourseTitle: string = event.option.value;
+    const selectedCourse = this.sourceData.find((course: { title: string; }) => course.title === selectedCourseTitle);
+    this._courseService.getCourseById(selectedCourse._id).subscribe(
+      (response: any) => {
+        const vendorName = response.vendor;
 
+        if (vendorName) {
+          this.requestForm.patchValue({
+            vendor: vendorName,
+          });
+        }
+      },
+      (error: any) => {
+        console.error('errors', error);
+      }
+    );
+  }
 
- onSubmit() {
-  if (this.requestForm.valid) {
-    const requestData = this.requestForm.value;
-    let user = JSON.parse(localStorage.getItem('currentUser') || '{}')
-    this.etmsService.getUserId(this.roId).subscribe((response:any) => {
-      this.etmsService.getUserId(this.directorId).subscribe((res:any) => {
-      this.etmsService.getUserId(this.trainingAdminId).subscribe((data:any) => {
-      const payload = {
-        requestId: this.requestId ,
-        employeeId: this.employeeID ,
-        designation: requestData.designation,
-        department: requestData.department,
-        email: requestData.email,
-        ro: this.roId,
-        trainingAdmin: this.trainingAdminId,
-        trainingAdminName: this.trainingAdminName,
-        directorName: this.directorName,
-        roName:this.roName,
-        employeeName:this.employeeName,
-        director: this.directorId,
-        courseName: requestData.courseName,
-        vendorName: requestData.vendorName,
-        courseCost: requestData.courseCost,
-        courseTimeline: requestData.courseTimeline,
-        roApproval:"Pending",
-        directorApproval:"Pending",
-        trainingAdminApproval:"Pending",
-        userName:user.user.name,
-        roEmail:response.email,
-        directorEmail:res.email,
-        trainingAdminEmail:data.email
-      };
-      this.etmsService.createRequest(payload).subscribe((response: any) => {
-        Swal.fire({
-          title: 'Successful',
-          text: 'Request created successfully',
-          icon: 'success',
+  onSubmit() {
+    if (this.requestForm.valid) {
+      const requestData = this.requestForm.value;
+      let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      this.etmsService.getUserId(this.roId).subscribe((response: any) => {
+        this.etmsService.getUserId(this.directorId).subscribe((res: any) => {
+          this.etmsService
+            .getUserId(this.trainingAdminId)
+            .subscribe((data: any) => {
+              const payload = {
+                requestId: this.requestId,
+                employeeId: this.employeeID,
+                designation: requestData.designation,
+                department: requestData.department,
+                email: requestData.email,
+                ro: this.roId,
+                trainingAdmin: this.trainingAdminId,
+                trainingAdminName: this.trainingAdminName,
+                directorName: this.directorName,
+                roName: this.roName,
+                employeeName: this.employeeName,
+                director: this.directorId,
+                courseName: requestData.courseName,
+                vendor: requestData.vendor,
+                courseCost: requestData.courseCost,
+                courseTimeline: requestData.courseTimeline,
+                roApproval: 'Pending',
+                directorApproval: 'Pending',
+                trainingAdminApproval: 'Pending',
+                userName: user.user.name,
+                roEmail: response.email,
+                directorEmail: res.email,
+                trainingAdminEmail: data.email,
+              };
+              this.etmsService
+                .createRequest(payload)
+                .subscribe((response: any) => {
+                  Swal.fire({
+                    title: 'Successful',
+                    text: 'Request created successfully',
+                    icon: 'success',
+                  });
+                  this.router.navigate(['/admin/e-tms/employee-status']);
+                });
+            });
         });
-        this.router.navigate(['/admin/e-tms/employee-status']);
       });
-    });
-    })
-  })
-
-  } 
-}
+    }
+  }
 
 
   getData() {
@@ -275,8 +293,10 @@ export class CreateRequestComponent implements OnInit {
           response?.name + ' ' + (response.last_name ? response.last_name : '');
 
         this.requestForm.patchValue({
-
-          name: response?.employeeName + ' ' + (response.last_name ? response.last_name : ''),
+          name:
+            response?.employeeName +
+            ' ' +
+            (response.last_name ? response.last_name : ''),
           requestId: response?.requestId,
           department: response?.department,
           designation: response?.designation,
@@ -285,7 +305,7 @@ export class CreateRequestComponent implements OnInit {
           trainingAdmin: response?.trainingAdminName,
           directorName: response?.directorName,
           courseName: response?.courseName,
-          vendorName: response?.vendorName,
+          vendor: response?.vendor,
           courseCost: response?.courseCost,
           courseTimeline: response?.courseTimeline,
         });
