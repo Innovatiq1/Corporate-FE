@@ -107,9 +107,10 @@
                                         <td>${{request?.courseCost}}</td>
                                         <td>{{request?.vendorName | titlecase}}</td>
                                         <td>{{request?.courseTimeline}}</td>
-                                        <td *ngIf ="ro">{{request?.roApproval}}</td>
-                                        <td *ngIf ="director">{{request?.directorApproval  }}</td>
-                                        <td *ngIf ="trainingAdmin">{{request?.trainingAdminApproval  }}</td>
+                                        
+                                        <td *ngIf ="ro" [ngStyle]="{ 'color': request?.roApproval === 'Approved' ? 'green' : (request?.roApproval === 'Rejected' ? 'red' : '') }">{{request?.roApproval}}</td>
+                                        <td *ngIf ="director" [ngStyle]="{ 'color': request?.directorApproval === 'Approved' ? 'green' : (request?.directorApproval === 'Rejected' ? 'red' : '') }">{{request?.directorApproval  }}</td>
+                                        <td *ngIf ="trainingAdmin" [ngStyle]="{ 'color': request?.trainingAdminApproval === 'Approved' ? 'green' : (request?.trainingAdminApproval === 'Rejected' ? 'red' : '') }">{{request?.trainingAdminApproval  }}</td>
                                         
                                         <td>{{request?.createdAt | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
                                         <td *ngIf ="ro">{{request?.roApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
