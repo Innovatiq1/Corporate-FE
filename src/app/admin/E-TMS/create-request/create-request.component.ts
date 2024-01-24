@@ -99,7 +99,7 @@ export class CreateRequestComponent implements OnInit {
         '',
         [...this.utils.validators.dname, this.utils.noLeadingSpace],
       ],
-      vendor: [
+      vendorName: [
         '',
         [...this.utils.validators.dname, this.utils.noLeadingSpace],
       ],
@@ -219,7 +219,7 @@ export class CreateRequestComponent implements OnInit {
 
         if (vendorName) {
           this.requestForm.patchValue({
-            vendor: vendorName,
+            vendorName: vendorName,
           });
         }
       },
@@ -252,7 +252,7 @@ export class CreateRequestComponent implements OnInit {
                 employeeName: this.employeeName,
                 director: this.directorId,
                 courseName: requestData.courseName,
-                vendor: requestData.vendor,
+                vendorName: requestData.vendorName,
                 courseCost: requestData.courseCost,
                 courseTimeline: requestData.courseTimeline,
                 roApproval: 'Pending',
@@ -308,7 +308,7 @@ export class CreateRequestComponent implements OnInit {
           trainingAdmin: response?.trainingAdminName,
           directorName: response?.directorName,
           courseName: response?.courseName,
-          vendor: response?.vendor,
+          vendorName: response?.vendorName,
           courseCost: response?.courseCost,
           courseTimeline: response?.courseTimeline,
         });

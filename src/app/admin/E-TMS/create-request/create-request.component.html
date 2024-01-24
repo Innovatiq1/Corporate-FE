@@ -145,14 +145,14 @@
                   <div class="col-lg-6">
                     <label>Vendor Name <span class="mandatory">&nbsp;*</span> </label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
-                      <input matInput  formControlName="vendor" />
+                      <input matInput  formControlName="vendorName" />
                       <!-- <mat-select formControlName="vendorName" required>
                         <mat-option value="Comat">Comat</mat-option>
                         <mat-option value="John">John</mat-option>
                         <mat-option value="Lam">Lam</mat-option>
                       </mat-select> -->
-                      <mat-error *ngIf="requestForm.get('vendor')?.invalid && requestForm.get('vendor')?.touched">
-                        {{ utils.getErrorMessage1(requestForm.get('vendor'), 'vname') }}
+                      <mat-error *ngIf="requestForm.get('vendorName')?.invalid && requestForm.get('vendorName')?.touched">
+                        {{ utils.getErrorMessage1(requestForm.get('vendorName'), 'vname') }}
                       </mat-error>
                     </mat-form-field>
                   </div>
