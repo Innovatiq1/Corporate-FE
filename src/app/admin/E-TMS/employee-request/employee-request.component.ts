@@ -158,6 +158,23 @@ export class EmployeeRequestComponent
     }
 
   }
+  pageSizeChange($event: any) {
+    this.coursePaginationModel.page = $event?.pageIndex + 1;
+    this.coursePaginationModel.limit = $event?.pageSize;
+    if(this.ro){
+      if(this.pendingCourses){
+        this.getAllRequestsByRo();
+      } else if(this.approvedCourses){
+        this.getAllApprovedRequestsByRo();
+      } else if(this.rejectedCourses){
+        this.getAllRejectedRequestsByRo()
+      }
+    } 
+    this.getAllRequestsByDirector();
+    this.getAllRequestsByTrainingAdmin();
+    console.log("pagination", this.coursePaginationModel.page)
+  }
+
 
   onRejectedClick(){
     this.pendingCourses = false;
@@ -341,14 +358,6 @@ export class EmployeeRequestComponent
     //   });
   }
 
-  pageSizeChange($event: any) {
-    this.coursePaginationModel.page = $event?.pageIndex + 1;
-    this.coursePaginationModel.limit = $event?.pageSize;
-    this.getAllRequestsByRo();
-    this.getAllRequestsByDirector();
-    this.getAllRequestsByTrainingAdmin();
-    console.log("pagination", this.coursePaginationModel.page)
-  }
 
   reject(row: EmpRequest) {
     this.id = row.id;
