@@ -41,6 +41,7 @@ export class CreateRequestComponent implements OnInit {
   _id: any;
   urlPath: any;
   searchTerm: string = '';
+  requestId: any;
 
   constructor(
     private etmsService: EtmsService,
