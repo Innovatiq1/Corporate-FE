@@ -78,21 +78,21 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
 
 
   getAllRequestsByRo(ro:any): Observable<ApiResponse> {
-    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?ro=${ro.roId}`;
+    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?ro=${ro.roId}&roApproval=${ro.roApproval}`;
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(ro),
     });
   }
 
   getAllRequestsByDirector(director:any): Observable<ApiResponse> {
-    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?director=${director.directorId}`;
+    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?director=${director.directorId}&directorApproval=${director.directorApproval}`;
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(director),
     });
   }
 
   getAllRequestsByTrainingAdmin(trainingAdmin:any): Observable<ApiResponse> {
-    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?trainingAdmin=${trainingAdmin.trainingAdminId}`;
+    const apiUrl = `${this.prefix}admin/courseRequest/req/employee?trainingAdmin=${trainingAdmin.trainingAdminId}&trainingAdminApproval=${trainingAdmin.trainingAdminApproval}`;
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(trainingAdmin),
     });

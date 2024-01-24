@@ -40,6 +40,9 @@ export class EmployeeRequestComponent
   coursePaginationModel!: Partial<CoursePaginationModel>;
   totalItems: any;
   pageSizeArr = this.utils.pageSizeArr;
+  approvedCourses = false;
+  rejectedCourses = false;
+  pendingCourses = false;
 
 
   approved = 0;
@@ -92,7 +95,7 @@ export class EmployeeRequestComponent
   }
   getAllRequestsByRo() {
     let roId = localStorage.getItem('id');
-    this.etmsService.getAllRequestsByRo({...this.coursePaginationModel,roId}).subscribe(
+    this.etmsService.getAllRequestsByRo({...this.coursePaginationModel,roId,roApproval:"Pending"}).subscribe(
       (response) => {
         this.dataSource = response.data.docs;
         this.totalItems = response.data.totalDocs;
@@ -104,9 +107,9 @@ export class EmployeeRequestComponent
     );
   }
 
-  getAllRequestsByDirector() {
-    let directorId = localStorage.getItem('id');
-    this.etmsService.getAllRequestsByDirector({...this.coursePaginationModel,directorId}).subscribe(
+  getAllApprovedRequestsByRo() {
+    let roId = localStorage.getItem('id');
+    this.etmsService.getAllRequestsByRo({...this.coursePaginationModel,roId,roApproval:"Approved"}).subscribe(
       (response) => {
         this.dataSource = response.data.docs;
         this.totalItems = response.data.totalDocs;
@@ -117,15 +120,110 @@ export class EmployeeRequestComponent
       (error) => {}
     );
   }
+  getAllRejectedRequestsByRo() {
+    let roId = localStorage.getItem('id');
+    this.etmsService.getAllRequestsByRo({...this.coursePaginationModel,roId,roApproval:"Rejected"}).subscribe(
+      (response) => {
+        this.dataSource = response.data.docs;
+        this.totalItems = response.data.totalDocs;
+        this.coursePaginationModel.docs = response.docs;
+        this.coursePaginationModel.page = response.page;
+        this.coursePaginationModel.limit = response.limit;
+      },
+      (error) => {}
+    );
+  }
+  onPendingClick(){
+    this.pendingCourses = true;
+    this.approvedCourses = false;
+    this.rejectedCourses = false;
+    if (this.ro) {
+      this.getAllRequestsByRo();
+    } else if (this.director) {
+      this.getAllRequestsByDirector();
+    } else if (this.trainingAdmin) {
+      this.getAllRequestsByTrainingAdmin();
+    }
+  }
+  onApprovedClick(){
+    this.pendingCourses = false;
+    this.approvedCourses = true;
+    this.rejectedCourses = false;
+    if (this.ro) {
+      this.getAllApprovedRequestsByRo();
+    } else if (this.director) {
+      this.getAllApprovedRequestsByDirector();
+    } else if (this.trainingAdmin) {
+      this.getAllApprovedRequestsByTrainingAdmin();
+    }
+
+  }
+
+  onRejectedClick(){
+    this.pendingCourses = false;
+    this.approvedCourses = false;
+    this.rejectedCourses = true;
+    if (this.ro) {
+      this.getAllRejectedRequestsByRo();
+    } else if (this.director) {
+      this.getAllRejectedRequestsByDirector();
+    } else if (this.trainingAdmin) {
+      this.getAllRejectedRequestsByTrainingAdmin();
+    }
+
+  }
+
+
+  getAllRequestsByDirector() {
+    let directorId = localStorage.getItem('id');
+    this.etmsService.getAllRequestsByDirector({...this.coursePaginationModel,directorId,directorApproval:"Pending"}).subscribe(
+      (response) => {
+        this.dataSource = response.data.docs;
+        this.totalItems = response.data.totalDocs;
+        this.coursePaginationModel.docs = response.docs;
+        this.coursePaginationModel.page = response.page;
+        this.coursePaginationModel.limit = response.limit;
+      },
+      (error) => {}
+    );
+  }
+
+  getAllApprovedRequestsByDirector() {
+    let directorId = localStorage.getItem('id');
+    this.etmsService.getAllRequestsByDirector({...this.coursePaginationModel,directorId,directorApproval:"Approved"}).subscribe(
+      (response) => {
+        this.dataSource = response.data.docs;
+        this.totalItems = response.data.totalDocs;
+        this.coursePaginationModel.docs = response.docs;
+        this.coursePaginationModel.page = response.page;
+        this.coursePaginationModel.limit = response.limit;
+      },
+      (error) => {}
+    );
+  }
+
+  getAllRejectedRequestsByDirector() {
+    let directorId = localStorage.getItem('id');
+    this.etmsService.getAllRequestsByDirector({...this.coursePaginationModel,directorId,directorApproval:"Rejected"}).subscribe(
+      (response) => {
+        this.dataSource = response.data.docs;
+        this.totalItems = response.data.totalDocs;
+        this.coursePaginationModel.docs = response.docs;
+        this.coursePaginationModel.page = response.page;
+        this.coursePaginationModel.limit = response.limit;
+      },
+      (error) => {}
+    );
+  }
+
 
   getAllRequestsByTrainingAdmin() {
     let trainingAdminId = localStorage.getItem('id');
     this.etmsService
-      .getAllRequestsByTrainingAdmin({...this.coursePaginationModel,trainingAdminId})
+      .getAllRequestsByTrainingAdmin({...this.coursePaginationModel,trainingAdminId,trainingAdminApproval:"Pending"})
       .subscribe(
         (response) => {
           this.dataSource = response.data.docs;
-          console.log("datasource",this.dataSource);
           this.totalItems = response.data.totalDocs;
           this.coursePaginationModel.docs = response.docs;
           this.coursePaginationModel.page = response.page;
@@ -133,6 +231,38 @@ export class EmployeeRequestComponent
           }, error => {
           });
   }
+
+  getAllApprovedRequestsByTrainingAdmin() {
+    let trainingAdminId = localStorage.getItem('id');
+    this.etmsService
+      .getAllRequestsByTrainingAdmin({...this.coursePaginationModel,trainingAdminId,trainingAdminApproval:"Approved"})
+      .subscribe(
+        (response) => {
+          this.dataSource = response.data.docs;
+          this.totalItems = response.data.totalDocs;
+          this.coursePaginationModel.docs = response.docs;
+          this.coursePaginationModel.page = response.page;
+          this.coursePaginationModel.limit = response.limit;
+          }, error => {
+          });
+  }
+
+  getAllRejectedRequestsByTrainingAdmin() {
+    let trainingAdminId = localStorage.getItem('id');
+    this.etmsService
+      .getAllRequestsByTrainingAdmin({...this.coursePaginationModel,trainingAdminId,trainingAdminApproval:"Rejected"})
+      .subscribe(
+        (response) => {
+          this.dataSource = response.data.docs;
+          this.totalItems = response.data.totalDocs;
+          this.coursePaginationModel.docs = response.docs;
+          this.coursePaginationModel.page = response.page;
+          this.coursePaginationModel.limit = response.limit;
+          }, error => {
+          });
+  }
+
+
 
   approve(req: any) {
     console.log(req._id);

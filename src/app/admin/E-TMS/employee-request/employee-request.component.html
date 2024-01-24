@@ -13,12 +13,12 @@
                         <div class="card-icon-only shadow-primary float-start">
                             <img src="assets/images/banner/approved.png" alt="">
                         </div>
-                        <div class="card-right">
+                        <div class="card-right" (click)="onApprovedClick()" type="button" >
                             <div>
-                                <h6 class="float-end">Total Approved</h6>
+                                <h6  type="button" class="float-end">Approved</h6>
                             </div>
                             <div class="col-green">
-                                <h3 class="font-weight-bold float-end mb-0">{{approved}}</h3>
+                                <h3 type="button" class="font-weight-bold float-end mb-0">{{approved}}</h3>
                             </div>
                         </div>
                     </div>
@@ -30,9 +30,9 @@
                         <div class="card-icon-only shadow-primary float-start">
                             <img src="assets/images/banner/rejected.png" alt="">
                         </div>
-                        <div class="card-right">
+                        <div  (click)="onRejectedClick()" type="button"class="card-right">
                             <div>
-                                <h6 class="float-end">Rejected</h6>
+                                <h6 type="button"class="float-end">Rejected</h6>
                             </div>
                             <div class="col-green">
                                 <h3 class="font-weight-bold float-end mb-0">{{rejected}}</h3>
@@ -49,9 +49,9 @@
                             <img src="assets/images/banner/pending.png" alt="">
                             <i class="assignment_turned_in float-start"></i>
                         </div>
-                        <div class="card-right">
+                        <div class="card-right" (click)="onPendingClick()" type="button">
                             <div>
-                                <h6 class="float-end">Pending</h6>
+                                <h6  class="float-end">Pending</h6>
                             </div>
                             <div class="col-green">
                                 <h3 class="font-weight-bold float-end mb-0">{{pending}}</h3>
@@ -89,7 +89,7 @@
                                         <th>Payment</th>
                                         <th>Vendor Name</th>
                                         <th>Course Timeline</th>
-                                        <th>Actions</th>
+                                        <th *ngIf="pendingCourses">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -103,8 +103,9 @@
                                         <td>${{request?.courseCost}}</td>
                                         <td>{{request?.vendorName | titlecase}}</td>
                                         <td>{{request?.courseTimeline}}</td>
+
                                         <!-- (click)="approve(request.id)" -->
-                                        <td class="d-grid gap-2 d-md-flex">
+                                        <td *ngIf ="pendingCourses" class="d-grid gap-2 d-md-flex">
                                             <button 
                                             type="button"
                                             class="btn btn-outline-primary height" (click)="$event.stopPropagation()" (click)="approve(request)">
