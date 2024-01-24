@@ -8,74 +8,109 @@ import { CoursePaginationModel } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { EtmsService } from '@core/service/etms.service';
 import { UtilsService } from '@core/service/utils.service';
+import { Observable, map, startWith } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-request',
   templateUrl: './create-request.component.html',
-  styleUrls: ['./create-request.component.scss']
+  styleUrls: ['./create-request.component.scss'],
 })
 export class CreateRequestComponent implements OnInit {
-
-  requestForm!: FormGroup
-  dataSource:object | undefined
+  requestForm!: FormGroup;
+  dataSource: object | undefined;
   breadscrums = [
     {
       title: 'Employee Request',
       active: 'Create Request',
     },
   ];
+
+  country = [{ name: 'United States' }, { name: 'United States1' }];
   employeeID!: string;
   roId!: any;
   trainingAdminId!: string;
-  trainingAdminName!:string;
-  employeeName!:string
-  roName!:string;
-  directorName!:string;
+  trainingAdminName!: string;
+  employeeName!: string;
+  roName!: string;
+  directorName!: string;
   directorId!: string;
-  sourceData:any;
+  sourceData: any;
   editUrl: any;
- _id: any;
- urlPath: any;
-  requestId: any;
 
-  constructor(private etmsService:EtmsService,private fb: FormBuilder,private _courseService: CourseService, private router:Router, public activeRoute: ActivatedRoute, public utils:UtilsService){
-    this.activeRoute.queryParams.subscribe(params =>{
-      this._id = params["id"]
-      this.urlPath = params["action"]
-    })
-   
-    if(this.urlPath === "edit"){
+  _id: any;
+  urlPath: any;
+  searchTerm: string = '';
+
+  constructor(
+    private etmsService: EtmsService,
+    private fb: FormBuilder,
+    private _courseService: CourseService,
+    private router: Router,
+    public activeRoute: ActivatedRoute,
+    public utils: UtilsService
+  ) {
+    this.activeRoute.queryParams.subscribe((params) => {
+      this._id = params['id'];
+      this.urlPath = params['action'];
+    });
+
+    if (this.urlPath === 'edit') {
+
       this.breadscrums = [
         {
-          title:'Edit Request',
+          title: 'Edit Request',
           active: 'Edit Request',
         },
       ];
     }
 
-   
-
     this.requestForm = this.fb.group({
-      name: ['',[...this.utils.validators.ename, this.utils.noLeadingSpace]],
-      employeeId: ['',[...this.utils.validators.ename, this.utils.noLeadingSpace]],
-      requestId: ['',[...this.utils.validators.ename, this.utils.noLeadingSpace]],
-      designation: ['', [...this.utils.validators.designation, this.utils.noLeadingSpace]],
-      department: ['', [...this.utils.validators.designation, this.utils.noLeadingSpace]],
+
+      name: ['', [...this.utils.validators.ename, this.utils.noLeadingSpace]],
+      employeeId: [
+        '',
+        [...this.utils.validators.ename, this.utils.noLeadingSpace],
+      ],
+      designation: [
+        '',
+        [...this.utils.validators.designation, this.utils.noLeadingSpace],
+      ],
+      department: [
+        '',
+        [...this.utils.validators.designation, this.utils.noLeadingSpace],
+      ],
       email: ['', [...this.utils.validators.email, this.utils.noLeadingSpace]],
       ro: ['', [...this.utils.validators.ename, this.utils.noLeadingSpace]],
-      trainingAdmin: ['', [...this.utils.validators.ename, this.utils.noLeadingSpace]],
-      directorName: ['',[...this.utils.validators.ename, this.utils.noLeadingSpace]],
-      courseName: ['',[...this.utils.validators.dname, this.utils.noLeadingSpace]],
-      vendorName: ['',[...this.utils.validators.dname, this.utils.noLeadingSpace]],
-      courseCost: ['',[...this.utils.validators.value, this.utils.noLeadingSpace]],
-      courseTimeline: ['',[...this.utils.validators.value, this.utils.noLeadingSpace]],
-     
+      trainingAdmin: [
+        '',
+        [...this.utils.validators.ename, this.utils.noLeadingSpace],
+      ],
+      directorName: [
+        '',
+        [...this.utils.validators.ename, this.utils.noLeadingSpace],
+      ],
+      courseName: [
+        '',
+        [...this.utils.validators.dname, this.utils.noLeadingSpace],
+      ],
+      vendorName: [
+        '',
+        [...this.utils.validators.dname, this.utils.noLeadingSpace],
+      ],
+      courseCost: [
+        '',
+        [...this.utils.validators.value, this.utils.noLeadingSpace],
+      ],
+      courseTimeline: [
+        '',
+        [...this.utils.validators.value, this.utils.noLeadingSpace],
+      ],
     });
-
   }
 
   ngOnInit() {
+
     let payload ={
       generateId:"yes"
     }
@@ -93,60 +128,87 @@ export class CreateRequestComponent implements OnInit {
     this.getData();
   }
   this.getCourseList();
-    
   }
   getUserId() {
     //sconsole.log("======trrrr")
-    let userId = localStorage.getItem('id')
-    this.etmsService.getUserId(userId).subscribe((response:any) => {
-      this.dataSource =response
-      this.employeeID=response._id
-      this.roId=response.ro
-      this.trainingAdminId=response.trainingAdmin
-      this.directorId=response.director,
-      this.trainingAdminName=response?.trainingAdminName,
-      this.directorName=response?.directorName,
-      this.roName=response?.roName,
-      this.employeeName=  response?.name + ' ' +(response.last_name
-          ? response.last_name
-          : ''),
-      
-      this.requestForm.patchValue({
-        name: response?.name + ' ' +(response.last_name
-          ? response.last_name
-          : ''),
-      
-      employeeId: response?.employeeId,
-      department:response?.department,
-      designation:response?.designation,
-      email: response?.email,
-      ro:response?.roName,
-      trainingAdmin: response?.trainingAdminName,
-      directorName:response?.directorName,
+    let userId = localStorage.getItem('id');
+    this.etmsService.getUserId(userId).subscribe(
+      (response: any) => {
+        this.dataSource = response;
+        this.employeeID = response._id;
+        this.roId = response.ro;
+        this.trainingAdminId = response.trainingAdmin;
+        (this.directorId = response.director),
+          (this.trainingAdminName = response?.trainingAdminName),
+          (this.directorName = response?.directorName),
+          (this.roName = response?.roName),
+          (this.employeeName =
+            response?.name +
+            ' ' +
+            (response.last_name ? response.last_name : '')),
+          this.requestForm.patchValue({
+            name:
+              response?.name +
+              ' ' +
+              (response.last_name ? response.last_name : ''),
 
-      // designation: ['', [...this.utils.validators.designation, this.utils.noLeadingSpace]],
-      // department: ['', [...this.utils.validators.designation, this.utils.noLeadingSpace]],
-      // email: ['', [...this.utils.validators.email, this.utils.noLeadingSpace]],
-      // supervisor: ['', [...this.utils.validators.ename, this.utils.noLeadingSpace]],
-      // learingAdmin: ['', [...this.utils.validators.ename, this.utils.noLeadingSpace]],
-      // departmentHead: ['',[...this.utils.validators.ename, this.utils.noLeadingSpace]],
-      // courseName: ['',[...this.utils.validators.dname, this.utils.noLeadingSpace]],
-      // vendorName: ['',[...this.utils.validators.dname, this.utils.noLeadingSpace]],
-      // courseCost: ['',[...this.utils.validators.value, this.utils.noLeadingSpace]],
-      // courseTimeline: ['',[...this.utils.validators.value, this.utils.noLeadingSpace]],
-     
-    });
+            employeeId: response?.employeeId,
+            department: response?.department,
+            designation: response?.designation,
+            email: response?.email,
+            ro: response?.roName,
+            trainingAdmin: response?.trainingAdminName,
+            directorName: response?.directorName,
 
-    }, () => {
-    });
+            // designation: ['', [...this.utils.validators.designation, this.utils.noLeadingSpace]],
+            // department: ['', [...this.utils.validators.designation, this.utils.noLeadingSpace]],
+            // email: ['', [...this.utils.validators.email, this.utils.noLeadingSpace]],
+            // supervisor: ['', [...this.utils.validators.ename, this.utils.noLeadingSpace]],
+            // learingAdmin: ['', [...this.utils.validators.ename, this.utils.noLeadingSpace]],
+            // departmentHead: ['',[...this.utils.validators.ename, this.utils.noLeadingSpace]],
+            // courseName: ['',[...this.utils.validators.dname, this.utils.noLeadingSpace]],
+            // vendorName: ['',[...this.utils.validators.dname, this.utils.noLeadingSpace]],
+            // courseCost: ['',[...this.utils.validators.value, this.utils.noLeadingSpace]],
+            // courseTimeline: ['',[...this.utils.validators.value, this.utils.noLeadingSpace]],
+          });
+      },
+      () => {}
+    );
   }
-  
-/** getting all course list */
+
+
+  /** getting all course list */
   getCourseList() {
-    this._courseService.getAllCourses({status:'active'}).subscribe((courses) => {
-      this.sourceData = courses.data.docs;
-    })
+    this.etmsService.getAllCoursesTitle('active').subscribe((courses) => {
+      this.sourceData = courses;
+      console.log('courses', this.sourceData);
+    });
   }
+
+  /** Performing course search */
+
+  performSearch() {
+    if (this.requestForm.value.courseName) {
+      this.sourceData = this.sourceData?.filter((item: any) => {
+        const searchList = item.title.toLowerCase();
+        return (
+          searchList.indexOf(
+            this.requestForm.value.courseName.toLowerCase()
+          ) !== -1
+        );
+      });
+    } else {
+      this.getCourseList();
+    }
+  }
+
+  // filteredCourse(title:any) {
+  //   this.sourceData = this.sourceData.filter((course: { title: string; }) => {
+  //     return course.title.toLowerCase().indexOf(title.toLowerCase()) > -1;
+  //   });
+  // }
+
+
 
  onSubmit() {
   if (this.requestForm.valid) {
@@ -196,10 +258,9 @@ export class CreateRequestComponent implements OnInit {
 }
 
 
-getData() {
-  let userId = localStorage.getItem('id');
-  this.etmsService.getRequestById(this._id).subscribe(
-    (response: any) => {
+  getData() {
+    let userId = localStorage.getItem('id');
+    this.etmsService.getRequestById(this._id).subscribe((response: any) => {
       if (response) {
         this.dataSource = response;
         this.employeeID = response._id;
@@ -209,9 +270,11 @@ getData() {
         this.trainingAdminName = response?.trainingAdminName;
         this.directorName = response?.directorName;
         this.roName = response?.roName;
-        this.employeeName = response?.name + ' ' + (response.last_name ? response.last_name : '');
+        this.employeeName =
+          response?.name + ' ' + (response.last_name ? response.last_name : '');
 
         this.requestForm.patchValue({
+
           name: response?.employeeName + ' ' + (response.last_name ? response.last_name : ''),
           requestId: response?.requestId,
           department: response?.department,
@@ -223,11 +286,9 @@ getData() {
           courseName: response?.courseName,
           vendorName: response?.vendorName,
           courseCost: response?.courseCost,
-          courseTimeline: response?.courseTimeline
+          courseTimeline: response?.courseTimeline,
         });
-      } 
-    },
-  );
-}
-
+      }
+    });
+  }
 }
