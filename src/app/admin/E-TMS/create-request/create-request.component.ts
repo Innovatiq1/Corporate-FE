@@ -132,8 +132,6 @@ export class CreateRequestComponent implements OnInit {
   getCourseList() {
     this._courseService.getAllCourses({status:'active'}).subscribe((courses) => {
       this.sourceData = courses.data.docs;
-      console.log("courses",this.sourceData)
-
     })
   }
 
@@ -141,37 +139,45 @@ export class CreateRequestComponent implements OnInit {
   if (this.requestForm.valid) {
     const requestData = this.requestForm.value;
     let user = JSON.parse(localStorage.getItem('currentUser') || '{}')
-    const payload = {
-      employeeId: this.employeeID ,
-      designation: requestData.designation,
-      department: requestData.department,
-      email: requestData.email,
-      ro: this.roId,
-      trainingAdmin: this.trainingAdminId,
-      trainingAdminName: this.trainingAdminName,
-      directorName: this.directorName,
-      roName:this.roName,
-      employeeName:this.employeeName,
-      director: this.directorId,
-      courseName: requestData.courseName,
-      vendorName: requestData.vendorName,
-      courseCost: requestData.courseCost,
-      courseTimeline: requestData.courseTimeline,
-      roApproval:"Pending",
-      directorApproval:"Pending",
-      trainingAdminApproval:"Pending",
-      userName:user.user.name
-    };
-
-    
-    this.etmsService.createRequest(payload).subscribe((response: any) => {
-      Swal.fire({
-        title: 'Successful',
-        text: 'Request created successfully',
-        icon: 'success',
+    this.etmsService.getUserId(this.roId).subscribe((response:any) => {
+      this.etmsService.getUserId(this.directorId).subscribe((res:any) => {
+      this.etmsService.getUserId(this.trainingAdminId).subscribe((data:any) => {
+      const payload = {
+        employeeId: this.employeeID ,
+        designation: requestData.designation,
+        department: requestData.department,
+        email: requestData.email,
+        ro: this.roId,
+        trainingAdmin: this.trainingAdminId,
+        trainingAdminName: this.trainingAdminName,
+        directorName: this.directorName,
+        roName:this.roName,
+        employeeName:this.employeeName,
+        director: this.directorId,
+        courseName: requestData.courseName,
+        vendorName: requestData.vendorName,
+        courseCost: requestData.courseCost,
+        courseTimeline: requestData.courseTimeline,
+        roApproval:"Pending",
+        directorApproval:"Pending",
+        trainingAdminApproval:"Pending",
+        userName:user.user.name,
+        roEmail:response.email,
+        directorEmail:res.email,
+        trainingAdminEmail:data.email
+      };
+      this.etmsService.createRequest(payload).subscribe((response: any) => {
+        Swal.fire({
+          title: 'Successful',
+          text: 'Request created successfully',
+          icon: 'success',
+        });
+        this.router.navigate(['/admin/e-tms/employee-status']);
       });
-      this.router.navigate(['/admin/e-tms/employee-status']);
     });
+    })
+  })
+
   } 
 }
 
