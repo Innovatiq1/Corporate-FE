@@ -43,6 +43,7 @@ export interface CourseUploadData {
    currency_code: number;
    skill_connect_code?: string;
    course_description?: string;
+   vendor?: string;
    course_detailed_description?: string;
    pdu_technical?: number;
    pdu_leadership?: number;

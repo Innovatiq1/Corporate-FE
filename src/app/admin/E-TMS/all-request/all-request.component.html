@@ -98,6 +98,7 @@
                 <table class="table">
                   <thead>
                     <tr>
+                      <th>Request-ID</th>
                       <th>Employee</th>
                       <th>Course</th>
                       <th>RO</th>
@@ -110,6 +111,7 @@
                   </thead>
                   <tbody>
                       <tr *ngFor="let data of SourceData">
+                          <td>{{data?.requestId}}</td>
                           <td>{{data?.employeeName}}</td>
                           <td>{{data?.courseName}}</td>
                           <td>{{data?.roName}}</td>

@@ -30,7 +30,7 @@
               <div class="responsive_table">
                 <table mat-table [dataSource]="dataSource" mat-table matSort class="mat-cell advance-table">
                   <ng-container matColumnDef="ID">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Request-ID</mat-header-cell>
                     <mat-cell *matCellDef="let row">
                       <span class="mobile-label">ID:</span>{{row.requestId}}
                     </mat-cell>

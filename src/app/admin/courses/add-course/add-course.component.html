@@ -355,6 +355,16 @@
                         </mat-error>
                         </mat-form-field>
                       </div>
+
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <label>Vendor</label>
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                          <input matInput formControlName="vendor" [readonly]="isInputReadonly()" placeholder="Enter Vendor">
+                          <mat-error  *ngIf="secondFormGroup.get('vendor')?.hasError('maxLength') && secondFormGroup.get('vendor')?.touched">
+                            Enter Vendor
+                           </mat-error>
+                        </mat-form-field>
+                      </div>
                       <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                         <label>Certificates <span class="mandatory">&nbsp;*</span></label>
                         <mat-form-field class="example-full-width mb-3" appearance="outline">

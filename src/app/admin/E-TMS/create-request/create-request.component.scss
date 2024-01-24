@@ -12,3 +12,7 @@ label {
   .mat-mdc-form-field-error {
     margin-left: -20px;
   }
+  ::ng-deep .filled .mdc-text-field--outlined{
+    background-color: rgb(222, 221, 221);
+  }
+ 
