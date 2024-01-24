@@ -72,6 +72,11 @@ export class CreateRequestComponent implements OnInit {
         '',
         [...this.utils.validators.ename, this.utils.noLeadingSpace],
       ],
+      requestId: [
+        '',
+        [...this.utils.validators.ename, this.utils.noLeadingSpace],
+      ],
+
       designation: [
         '',
         [...this.utils.validators.designation, this.utils.noLeadingSpace],
@@ -114,9 +119,7 @@ export class CreateRequestComponent implements OnInit {
       generateId: 'yes',
     };
     this.etmsService.createRequest(payload).subscribe((response: any) => {
-      console.log('rees', response);
       this.requestId = response.data.employeeData.requestId;
-      console.log('idddddd', this.requestId);
       this.requestForm.patchValue({
         requestId: this.requestId,
       });
