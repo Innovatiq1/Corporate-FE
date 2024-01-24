@@ -108,17 +108,38 @@
                   <hr>
                   <h5>Course Details</h5>
                 </div>
+                <!-- <mat-form-field class="width">
+                  <input matInput placeholder="Search" [matAutocomplete]="auto"/>
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of sourceData" [value]="option.title">
+                      {{ option.title }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field> -->
                 <div class="row mt-3">
                   <div class="col-lg-6">
                     <label>Course Name <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <input matInput placeholder="Search" formControlName="courseName" [matAutocomplete]="auto" (input)="performSearch()" #filter />
+                      <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let course of sourceData" [value]="course.title">
+                          {{ course.title }}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error *ngIf="requestForm.get('courseName')?.invalid && requestForm.get('courseName')?.touched">
+                        {{ utils.getErrorMessage1(requestForm.get('courseName'), 'cname') }}
+                      </mat-error>
+                    </mat-form-field>
+                    
+                    <!-- <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <input matInput  formControlName="courseName"  />
                       <mat-select  formControlName="courseName" required>
                         <mat-option value={{course.title}}  *ngFor="let course of sourceData">{{course.title}}</mat-option>
                       </mat-select>
                       <mat-error *ngIf="requestForm.get('courseName')?.invalid && requestForm.get('courseName')?.touched">
                         {{ utils.getErrorMessage1(requestForm.get('courseName'), 'cname') }}
                       </mat-error>
-                    </mat-form-field>
+                    </mat-form-field> -->
   
                   </div>
                   <div class="col-lg-6">
@@ -173,5 +194,16 @@
           </div>
         </div>
       </div>
+
+      <form>
+        <mat-form-field class="width">
+          <input matInput placeholder="Search" [matAutocomplete]="auto"/>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of sourceData" [value]="option.title">
+              {{ option.title }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
     </div>
   </section>

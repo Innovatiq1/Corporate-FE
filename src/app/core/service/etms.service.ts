@@ -9,6 +9,7 @@ import { CoursePaginationModel } from "@core/models/course.model";
 import { EmpRequest } from "@core/models/emp-request.model";
 import { UnsubscribeOnDestroyAdapter } from '@shared';
 import { Users } from "@core/models/user.model";
+import { CourseTitleModel } from "@core/models/class.model";
 // import { CourseKit, CourseModel, CoursePaginationModel, Program } from "@core/models/course.model";
 
 @Injectable({
@@ -129,6 +130,12 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
   getRequestTrainingAdminCount(id: any) {
     const apiUrl = `${this.prefix}admin/courseRequest/req/count?trainingAdmin=${id}`;
     return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+  }
+
+/**get all courses list */
+  getAllCoursesTitle(status: string): Observable<CourseTitleModel[]> {
+    const apiUrl = `${this.prefix}admin/courses-new/title?status=${status}`;
+    return this._Http.get<ApiResponse>(apiUrl).pipe(map((response) => response.data));
   }
 }
 
