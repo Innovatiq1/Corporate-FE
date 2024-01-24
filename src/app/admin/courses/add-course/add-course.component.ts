@@ -159,6 +159,7 @@ export class AddCourseComponent implements OnInit {
       // course_instructor: new FormControl('', [Validators.required]),
       // assign_exam: new FormControl('', []),
       course_kit: new FormControl('', [Validators.required]),
+      vendor: new FormControl('',[ Validators.maxLength(100)]),
       // certificates: new FormControl('',[Validators.required]),
       });
       this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
@@ -330,6 +331,7 @@ onFileUpload(event:any) {
               surveyDetail,
               assignInstructors,
               assignCourseKit,
+              vendor
             ] = row as string[];
 
             const mainCategoryObj = this.mainCategories.find((i) => {
@@ -411,7 +413,7 @@ onFileUpload(event:any) {
               funding_grant: [fundingGrantObj!.id],
               // course_instructor: [instructorObj!.id],
               course_kit: [courseKitObj!.id],
-
+              vendor: vendor,
             };
             return uploadData;
           });
@@ -451,6 +453,7 @@ onFileUpload(event:any) {
       // course_instructor:wbsData?.course_instructor,
       // assign_exam:wbsData.assign_exam,
       course_kit:wbsData?.course_kit,
+      vendor:wbsData?.vendor,
       // certificates:wbsData?.certificates,
       image_link:this.image_link,
       id:this.courseId,
@@ -531,6 +534,7 @@ onFileUpload(event:any) {
         course_kit:wbsData?.course_kit,
         // certificates:wbsData?.certificates,
         image_link:this.image_link,
+        vendor: wbsData?.vendor,
         website_link:wbsData?.website_link
 
       }
@@ -610,6 +614,7 @@ onFileUpload(event:any) {
         // course_instructor: this.course?.course_instructor?.id,
         course_kit: courseKitId,
         uploadedImage:this.course?.image_link,
+        vendor: this.course?.vendor,
       });
       this.mainCategoryChange();
       this.cd.detectChanges();

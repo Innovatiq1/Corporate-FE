@@ -17,7 +17,7 @@
                   <!-- Name -->
                   <div class="col-lg-4">
                     <label>Employee Name </label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput formControlName="name" />
                       <mat-error *ngIf="requestForm.get('employeeId')?.invalid && requestForm.get('employeeId')?.touched">
                         {{ utils.getErrorMessage1(requestForm.get('employeeId'), 'ename') }}
@@ -27,7 +27,7 @@
                   <div class="col-lg-4">
                     <!-- Designation -->
                     <label>Designation <span class="mandatory">&nbsp;*</span></label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput formControlName="designation" />
                       <mat-error
                         *ngIf="requestForm.get('designation')?.invalid && requestForm.get('designation')?.touched">
@@ -39,7 +39,7 @@
                   <div class="col-lg-4">
                     <!-- Department -->
                     <label>Department <span class="mandatory">&nbsp;*</span></label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput formControlName="department" />
                       <mat-error *ngIf="requestForm.get('department')?.invalid && requestForm.get('department')?.touched">
                         {{ utils.getErrorMessage1(requestForm.get('department'), 'department') }}
@@ -52,14 +52,14 @@
                   <div class="col-lg-4">
                     <!-- Employee ID -->
                     <label>Employee ID</label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput  formControlName="employeeId"  />
                     </mat-form-field>
                   </div>
   
                   <div class="col-lg-4">
                     <label>Email ID <span class="mandatory">&nbsp;*</span></label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput  formControlName="email" />
                       <mat-error *ngIf="requestForm.get('email')?.invalid && requestForm.get('email')?.touched">
                         {{ utils.getErrorMessage1(requestForm.get('email'), 'email') }}
@@ -69,7 +69,7 @@
                   </div>
                   <div class="col-lg-4">
                     <label>Ro Name  </label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput  formControlName="ro" />
                       <mat-error *ngIf="requestForm.get('ro')?.invalid && requestForm.get('ro')?.touched">
                         {{ utils.getErrorMessage1(requestForm.get('ro'), 'sname') }}
@@ -82,7 +82,7 @@
   
                   <div class="col-lg-6">
                     <label>Training Admin  </label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput  formControlName="trainingAdmin" />
                       <mat-error
                         *ngIf="requestForm.get('traningAdmin')?.invalid && requestForm.get('traningAdmin')?.touched">
@@ -93,7 +93,7 @@
                   </div>
                   <div class="col-lg-6">
                     <label>Director </label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput  formControlName="directorName" />
                       <mat-error
                         *ngIf="requestForm.get('directorName')?.invalid && requestForm.get('directorName')?.touched">
@@ -103,7 +103,7 @@
   
                   </div>
                 </div>
-                <p class="mandatory">*Please check if the the above values are correct? If not please modify the profile</p>
+                <p class="mandatory">*Please check if the the above values are correct? If not please login to your profile & update the credentials correctly.</p>
                 <div>
                   <hr>
                   <h5>Course Details</h5>
