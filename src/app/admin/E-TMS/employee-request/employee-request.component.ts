@@ -84,6 +84,7 @@ export class EmployeeRequestComponent
   }
 
   ngOnInit() {
+    this.pendingCourses =true;
     if (this.ro) {
       this.getAllRequestsByRo();
     } else if (this.director) {
