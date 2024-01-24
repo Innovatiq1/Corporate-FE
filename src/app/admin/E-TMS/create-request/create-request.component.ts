@@ -182,7 +182,7 @@ export class CreateRequestComponent implements OnInit {
   /** getting all course list */
   getCourseList() {
     this.etmsService.getAllCoursesTitle('active').subscribe((courses) => {
-      this.sourceData = courses;
+      this.sourceData = courses.reverse();
       console.log('courses', this.sourceData);
     });
   }
