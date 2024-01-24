@@ -37,6 +37,7 @@ export class CreateRequestComponent implements OnInit {
   directorId!: string;
   sourceData: any;
   editUrl: any;
+
   _id: any;
   urlPath: any;
   searchTerm: string = '';
@@ -55,6 +56,7 @@ export class CreateRequestComponent implements OnInit {
     });
 
     if (this.urlPath === 'edit') {
+
       this.breadscrums = [
         {
           title: 'Edit Request',
@@ -64,6 +66,7 @@ export class CreateRequestComponent implements OnInit {
     }
 
     this.requestForm = this.fb.group({
+
       name: ['', [...this.utils.validators.ename, this.utils.noLeadingSpace]],
       employeeId: [
         '',
@@ -107,12 +110,24 @@ export class CreateRequestComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log("=====tttttttttttttttt======")
-    this.getUserId();
-    if (this.urlPath === 'edit') {
-      this.getData();
+
+    let payload ={
+      generateId:"yes"
     }
-    this.getCourseList();
+    this.etmsService.createRequest(payload).subscribe((response: any) => {
+      console.log('rees',response)
+      this.requestId = response.data.employeeData.requestId
+      console.log('idddddd',this.requestId)
+      this.requestForm.patchValue({
+        requestId:this.requestId
+      })
+    })
+    
+  this.getUserId();
+  if (this.urlPath === "edit") {
+    this.getData();
+  }
+  this.getCourseList();
   }
   getUserId() {
     //sconsole.log("======trrrr")
@@ -161,6 +176,7 @@ export class CreateRequestComponent implements OnInit {
     );
   }
 
+
   /** getting all course list */
   getCourseList() {
     this.etmsService.getAllCoursesTitle('active').subscribe((courses) => {
@@ -192,12 +208,18 @@ export class CreateRequestComponent implements OnInit {
   //   });
   // }
 
-  onSubmit() {
-    if (this.requestForm.valid) {
-      const requestData = this.requestForm.value;
-      let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
+
+ onSubmit() {
+  if (this.requestForm.valid) {
+    const requestData = this.requestForm.value;
+    let user = JSON.parse(localStorage.getItem('currentUser') || '{}')
+    this.etmsService.getUserId(this.roId).subscribe((response:any) => {
+      this.etmsService.getUserId(this.directorId).subscribe((res:any) => {
+      this.etmsService.getUserId(this.trainingAdminId).subscribe((data:any) => {
       const payload = {
-        employeeId: this.employeeID,
+        requestId: this.requestId ,
+        employeeId: this.employeeID ,
         designation: requestData.designation,
         department: requestData.department,
         email: requestData.email,
@@ -205,19 +227,21 @@ export class CreateRequestComponent implements OnInit {
         trainingAdmin: this.trainingAdminId,
         trainingAdminName: this.trainingAdminName,
         directorName: this.directorName,
-        roName: this.roName,
-        employeeName: this.employeeName,
+        roName:this.roName,
+        employeeName:this.employeeName,
         director: this.directorId,
         courseName: requestData.courseName,
         vendorName: requestData.vendorName,
         courseCost: requestData.courseCost,
         courseTimeline: requestData.courseTimeline,
-        roApproval: 'Pending',
-        directorApproval: 'Pending',
-        trainingAdminApproval: 'Pending',
-        userName: user.user.name,
+        roApproval:"Pending",
+        directorApproval:"Pending",
+        trainingAdminApproval:"Pending",
+        userName:user.user.name,
+        roEmail:response.email,
+        directorEmail:res.email,
+        trainingAdminEmail:data.email
       };
-
       this.etmsService.createRequest(payload).subscribe((response: any) => {
         Swal.fire({
           title: 'Successful',
@@ -226,8 +250,13 @@ export class CreateRequestComponent implements OnInit {
         });
         this.router.navigate(['/admin/e-tms/employee-status']);
       });
-    }
-  }
+    });
+    })
+  })
+
+  } 
+}
+
 
   getData() {
     let userId = localStorage.getItem('id');
@@ -245,11 +274,9 @@ export class CreateRequestComponent implements OnInit {
           response?.name + ' ' + (response.last_name ? response.last_name : '');
 
         this.requestForm.patchValue({
-          name:
-            response?.employeeName +
-            ' ' +
-            (response.last_name ? response.last_name : ''),
-          employeeId: response?.employeeId,
+
+          name: response?.employeeName + ' ' + (response.last_name ? response.last_name : ''),
+          requestId: response?.requestId,
           department: response?.department,
           designation: response?.designation,
           email: response?.email,

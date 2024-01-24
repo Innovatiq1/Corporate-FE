@@ -62,7 +62,7 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
     const apiUrl = `${this.prefix}admin/courseRequest`;
     return this._Http
       .post<ApiResponse>(apiUrl, request)
-      .pipe(map(() => { }));
+      .pipe(map((response) => response));
   }
 
   getAllRequestsByEmployeeId(employee:any): Observable<ApiResponse> {
