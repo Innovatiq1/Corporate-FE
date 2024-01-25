@@ -186,7 +186,7 @@
                     <span class="btn-txt">Cancel</span>
                   </button>
                   <button class="btn btn-outline-primary">
-                    <span class="btn-txt" *ngIf="urlPath !== 'edit'" (click)="onSubmit()">{{ urlPath === 'leave' ? 'Re-Submit' : 'Submit' }}</span>
+                    <span class="btn-txt" *ngIf="urlPath !== 'edit'" (click)="onSubmit()">{{ urlPath === 'copy' ? 'Re-Submit' : 'Submit' }}</span>
                     <span class="btn-txt" *ngIf="urlPath === 'edit'" (click)="save()">Save</span>
                   </button>
                 </div>

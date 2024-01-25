@@ -30,7 +30,7 @@ const routes: Routes = [
     component: CreateRequestComponent
   },
   {
-    path: 'leave-request',
+    path: 'copy-request',
     component: CreateRequestComponent
   },
   {
