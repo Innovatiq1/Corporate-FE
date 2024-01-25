@@ -90,9 +90,10 @@
                                         <th>Vendor Name</th>
                                         <th>Course Timeline</th>
                                        
-                                        <th>Status</th>
+                                        <th *ngIf="!pendingCourses && approvedCourses || rejectedCourses">Status</th>
                                         <th>Created At</th>
-                                        <th>Approved On</th>
+                                        <th *ngIf="!pendingCourses&&approvedCourses">Approved On</th>
+                                        <th *ngIf="rejectedCourses">Rejected On</th>
                                         <th *ngIf="pendingCourses">Actions</th>
                                     </tr>
                                 </thead>
@@ -108,14 +109,17 @@
                                         <td>{{request?.vendorName | titlecase}}</td>
                                         <td>{{request?.courseTimeline}}</td>
                                         
-                                        <td *ngIf ="ro" [ngStyle]="{ 'color': request?.roApproval === 'Approved' ? 'green' : (request?.roApproval === 'Rejected' ? 'red' : '') }">{{request?.roApproval}}</td>
-                                        <td *ngIf ="director" [ngStyle]="{ 'color': request?.directorApproval === 'Approved' ? 'green' : (request?.directorApproval === 'Rejected' ? 'red' : '') }">{{request?.directorApproval  }}</td>
-                                        <td *ngIf ="trainingAdmin" [ngStyle]="{ 'color': request?.trainingAdminApproval === 'Approved' ? 'green' : (request?.trainingAdminApproval === 'Rejected' ? 'red' : '') }">{{request?.trainingAdminApproval  }}</td>
+                                        <td *ngIf ="ro && !pendingCourses" [ngStyle]="{ 'color': request?.roApproval === 'Approved' ? 'green' : (request?.roApproval === 'Rejected' ? 'red' : '') }">{{request?.roApproval}}</td>
+                                        <td *ngIf ="director && !pendingCourses" [ngStyle]="{ 'color': request?.directorApproval === 'Approved' ? 'green' : (request?.directorApproval === 'Rejected' ? 'red' : '') }">{{request?.directorApproval  }}</td>
+                                        <td *ngIf ="trainingAdmin && !pendingCourses" [ngStyle]="{ 'color': request?.trainingAdminApproval === 'Approved' ? 'green' : (request?.trainingAdminApproval === 'Rejected' ? 'red' : '') }">{{request?.trainingAdminApproval  }}</td>
                                         
                                         <td>{{request?.createdAt | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
-                                        <td *ngIf ="ro">{{request?.roApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
-                                        <td *ngIf ="director">{{request?.directorApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
-                                        <td *ngIf ="trainingAdmin">{{request?.trainingadminApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
+                                        <td  *ngIf ="ro&& !pendingCourses">{{request?.roApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
+                                        <td  *ngIf ="director&& !pendingCourses">{{request?.directorApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
+                                        <td   *ngIf ="trainingAdmin&& !pendingCourses">{{request?.trainingadminApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
+                                        <td  *ngIf ="ro&& rejectedCourses">{{request?.roRejectedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
+                                        <td  *ngIf ="director&& rejectedCourses">{{request?.directorRejectedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
+                                        <td   *ngIf ="trainingAdmin&& rejectedCourses">{{request?.trainingAdminRejectedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
 
                                         <!-- (click)="approve(request.id)" -->
                                         <td *ngIf="pendingCourses">
