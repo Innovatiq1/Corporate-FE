@@ -2,8 +2,92 @@
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
-      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      <app-breadcrumb
+        [title]="breadscrum.title"
+        [items]="breadscrum.items"
+        [active_item]="breadscrum.active"
+      >
       </app-breadcrumb>
+    </div>
+    <div class="card">
+      <div class="header">
+        <h2>Profile Settings</h2>
+      </div>
+      <div class="body">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          <div class="example-container">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <label
+                  >Employee Name<span class="mandatory">&nbsp;*</span></label
+                >
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="empName" />
+                </mat-form-field>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <label>Designation</label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="designation" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <label>Department<span class="mandatory">&nbsp;*</span></label>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input matInput formControlName="department" />
+              <!-- <mat-icon matSuffix (click)="hide = !hide">
+              {{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+            </mat-form-field>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <label>RO Name<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="roName" readonly="true"/>
+                  <!-- <mat-select formControlName="roName" required>
+                    <mat-option [value]= "roname" >{{roname}}</mat-option>
+                  </mat-select> -->
+                  <mat-error
+                    *ngIf="profileForm.get('director')?.hasError('required') ||profileForm.get('director')?.touched">
+                    Select a training admin
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <label>Training Admin<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="director" readonly="true"/>
+                    <!-- <mat-select formControlName="director" required>
+                      <mat-option value=''></mat-option>
+                    </mat-select> -->
+                    <mat-error
+                      *ngIf="profileForm.get('director')?.hasError('required') ||profileForm.get('director')?.touched">
+                      Select a training admin
+                    </mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <label>Director<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="TA" readonly="true"/>
+                  <!-- <mat-select formControlName="TA" required>
+                    <mat-option value=''>TA</mat-option>
+                  </mat-select> -->
+                  <mat-error
+                    *ngIf="profileForm.get('TA')?.hasError('required') ||profileForm.get('TA')?.touched">
+                    Select a training admin
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <button mat-raised-button color="primary">Save</button>
+        </form>
+      </div>
     </div>
     <div class="card">
       <div class="header">
@@ -11,27 +95,37 @@
       </div>
       <div class="body">
         <form [formGroup]="stdForm" (ngSubmit)="onSubmit()">
-        <div class="example-container">
-          <label>User Name<span class="mandatory">&nbsp;*</span></label>
-          <mat-form-field class="example-full-width" appearance="outline">
-            <input matInput formControlName="name">
-          </mat-form-field>
-          <label>Current Password</label>
-          <mat-form-field class="example-full-width" appearance="outline">
-            <input matInput type="password" formControlName="currentpassword">
-          </mat-form-field>
-          <label>New Password<span class="mandatory">&nbsp;*</span></label>
-          <mat-form-field class="example-full-width" appearance="outline">
-            <input matInput type="password" formControlName="password" [type]="hide ? 'password' : 'text'" required>
-            <mat-icon matSuffix (click)="hide = !hide">
-              {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </mat-form-field>
-        </div>
-      
-        <button mat-raised-button color="primary">Save</button>
-      </form>
+          <div class="example-container">
+            <label>User Name<span class="mandatory">&nbsp;*</span></label>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input matInput formControlName="name" />
+            </mat-form-field>
+            <label>Current Password</label>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input
+                matInput
+                type="password"
+                formControlName="currentpassword"
+              />
+            </mat-form-field>
+            <label>New Password<span class="mandatory">&nbsp;*</span></label>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input
+                matInput
+                type="password"
+                formControlName="password"
+                [type]="hide ? 'password' : 'text'"
+                required
+              />
+              <mat-icon matSuffix (click)="hide = !hide">
+                {{ hide ? "visibility_off" : "visibility" }}</mat-icon
+              >
+            </mat-form-field>
+          </div>
+
+          <button mat-raised-button color="primary">Save</button>
+        </form>
       </div>
-   
     </div>
     <div class="card">
       <div class="header">
@@ -39,82 +133,92 @@
       </div>
       <div class="body">
         <form [formGroup]="stdForm1" (ngSubmit)="onSubmit1()">
-        <div class="row clearfix">
-          <div class="col-lg-6 col-md-12">
-            <div class="form-group">
-              <label>First Name<span class="mandatory">&nbsp;*</span></label>
-              <mat-form-field class="example-full-width" appearance="outline">
-                <input matInput formControlName="name">
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div class="form-group">
-              <label>Last Name</label>
-              <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Last Name</mat-label>
-                <input matInput formControlName="last_name">
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div class="form-group">
-              <label>Mobile Number</label>
-              <mat-form-field class="example-full-width" appearance="outline">
-                <input matInput formControlName="mobile">
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div class="form-group">
-              <label>City<span class="mandatory">&nbsp;*</span></label>
-              <mat-form-field class="example-full-width" appearance="outline">
-                <input matInput formControlName="city_name">
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div class="form-group">
-              <label>Email<span class="mandatory">&nbsp;*</span></label>
-              <mat-form-field class="example-full-width" appearance="outline">
-                <input matInput formControlName="email" readonly>
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-12">
-            <div class="form-group">
-              <label>Country<span class="mandatory">&nbsp;*</span></label>
-              <mat-form-field class="example-full-width" appearance="outline">
-                <input matInput formControlName="country_name">
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="form-group">
-              <label>Address<span class="mandatory">&nbsp;*</span></label>
-              <mat-form-field class="example-full-width" appearance="outline">
-                <textarea matInput formControlName="address"></textarea>
-              </mat-form-field>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
-              <label>Upload</label>
-              <div class="file-drop-area">
-                <div class="file">
-                <button mat-raised-button color="primary">Choose file  <input
-                  formControlName="avatar"
-                  (change)="onFileUpload($event)"
-                  class="file-input"
-                  type="file"
-                /></button>
-                <span class="file-msg"><h5>{{uploadedImage ? uploadedImage : 'Drag and Drop File Here' }}</h5></span>
-                
-                </div>
+          <div class="row clearfix">
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>First Name<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="name" />
+                </mat-form-field>
               </div>
-              <!-- <app-file-upload formControlName="image_link" (change)="onFileUpload($event)"></app-file-upload> -->
             </div>
-            <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>Last Name</label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Last Name</mat-label>
+                  <input matInput formControlName="last_name" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>Mobile Number</label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="mobile" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>City<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="city_name" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>Email<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="email" readonly />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>Country<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="country_name" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Address<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <textarea matInput formControlName="address"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
+                <label>Upload</label>
+                <div class="file-drop-area">
+                  <div class="file">
+                    <button mat-raised-button color="primary">
+                      Choose file
+                      <input
+                        formControlName="avatar"
+                        (change)="onFileUpload($event)"
+                        class="file-input"
+                        type="file"
+                      />
+                    </button>
+                    <span class="file-msg"
+                      ><h5>
+                        {{
+                          uploadedImage
+                            ? uploadedImage
+                            : "Drag and Drop File Here"
+                        }}
+                      </h5></span
+                    >
+                  </div>
+                </div>
+                <!-- <app-file-upload formControlName="image_link" (change)="onFileUpload($event)"></app-file-upload> -->
+              </div>
+              <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
               <label>Upload <span class="mandatory">&nbsp;*</span></label>
               <div class="file-drop-area">
                 <div class="file">
@@ -137,12 +241,12 @@
                 <input formControlName="avatar" (change)="onFileUpload($event)" class="file-input" type="file">
               </div> --
             </div> -->
+            </div>
+            <div class="col-md-12">
+              <button mat-raised-button color="primary">Save Changes</button>
+            </div>
           </div>
-          <div class="col-md-12">
-            <button mat-raised-button color="primary">Save Changes</button>
-          </div>
-        </div>
-      </form>
+        </form>
       </div>
     </div>
   </div>

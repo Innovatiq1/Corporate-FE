@@ -15,7 +15,7 @@
               <form class="m-4" *ngIf="requestForm" [formGroup]="requestForm" >
                 <div class="row">
                   <!-- Name -->
-                  <div class="col-lg-4">
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <label>Employee Name </label>
                     <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput formControlName="name" />
@@ -24,7 +24,7 @@
                       </mat-error>
                     </mat-form-field>
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <!-- Designation -->
                     <label>Designation <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width filled mb-3" appearance="outline">
@@ -34,9 +34,8 @@
                         {{ utils.getErrorMessage1(requestForm.get('designation'), 'designation') }}
                       </mat-error>
                     </mat-form-field>
-  
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <!-- Department -->
                     <label>Department <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width filled mb-3" appearance="outline">
@@ -45,19 +44,17 @@
                         {{ utils.getErrorMessage1(requestForm.get('department'), 'department') }}
                       </mat-error>
                     </mat-form-field>
-  
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-lg-4">
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <!-- Employee ID -->
                     <label>Request ID</label>
                     <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput  formControlName="requestId"  readonly />
                     </mat-form-field>
                   </div>
-  
-                  <div class="col-lg-4">
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <label>Email ID <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput  formControlName="email" />
@@ -65,9 +62,8 @@
                         {{ utils.getErrorMessage1(requestForm.get('email'), 'email') }}
                       </mat-error>
                     </mat-form-field>
-  
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                     <label>Ro Name  </label>
                     <mat-form-field class="example-full-width filled mb-3" appearance="outline">
                       <input matInput  formControlName="ro" />
@@ -75,11 +71,9 @@
                         {{ utils.getErrorMessage1(requestForm.get('ro'), 'sname') }}
                       </mat-error>
                     </mat-form-field>
-  
                   </div>
                 </div>
                 <div class="row">
-  
                   <div class="col-lg-6">
                     <label>Training Admin  </label>
                     <mat-form-field class="example-full-width filled mb-3" appearance="outline">
