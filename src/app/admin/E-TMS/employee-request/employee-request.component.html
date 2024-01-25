@@ -118,15 +118,16 @@
                                         <td *ngIf ="trainingAdmin">{{request?.trainingadminApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
 
                                         <!-- (click)="approve(request.id)" -->
-                                        <td *ngIf ="pendingCourses" class="d-grid gap-2 d-md-flex">
-                                            <button 
-                                            type="button"
-                                            class="btn btn-outline-primary height" (click)="$event.stopPropagation()" (click)="approve(request)">
-                                            Approve
-                                          </button>
-                                          <button type="button"  mat-raised-button color="warn" 
-                                          (click)="$event.stopPropagation()" (click)="reject(request)">Reject</button>
-                                        </td>
+                                        <td *ngIf="pendingCourses">
+                                            <div class="d-flex gap-2 justify-content-between">
+                                              <button type="button" class="btn btn-outline-primary shadow height" (click)="$event.stopPropagation()" (click)="approve(request)">
+                                                Approve
+                                              </button>
+                                              <button type="button" mat-raised-button color="warn" (click)="$event.stopPropagation()" (click)="reject(request)">
+                                                Reject
+                                              </button>
+                                            </div>
+                                          </td>
                                     </tr>
 
                                 </tbody>
