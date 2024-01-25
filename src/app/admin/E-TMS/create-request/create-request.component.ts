@@ -285,7 +285,7 @@ export class CreateRequestComponent implements OnInit {
     this.etmsService.getRequestById(this._id).subscribe((response: any) => {
       if (response) {
         this.dataSource = response;
-        this.employeeID = response._id;
+        this.employeeID = response.employeeId;
         this.roId = response.ro;
         this.trainingAdminId = response.trainingAdmin;
         this.directorId = response.director;
@@ -293,7 +293,7 @@ export class CreateRequestComponent implements OnInit {
         this.directorName = response?.directorName;
         this.roName = response?.roName;
         this.employeeName =
-          response?.name + ' ' + (response.last_name ? response.last_name : '');
+          response?.employeeName + ' ' + (response.last_name ? response.last_name : '');
 
         this.requestForm.patchValue({
           name:
