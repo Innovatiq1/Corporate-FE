@@ -9,10 +9,10 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div class="card">
             <div class="header">
-              <h2 class="text-center">New Request</h2>
+              <h2 class="text-center">{{urlPath==="edit" ? 'Edit Request' : 'New Request'}}</h2>
             </div>
             <div class="body">
-              <form class="m-4" *ngIf="requestForm" [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+              <form class="m-4" *ngIf="requestForm" [formGroup]="requestForm" >
                 <div class="row">
                   <!-- Name -->
                   <div class="col-lg-4">
@@ -186,8 +186,8 @@
                     <span class="btn-txt">Cancel</span>
                   </button>
                   <button class="btn btn-outline-primary">
-                    <span class="btn-txt">{{urlPath=== "edit" ? 'Re-Submit' : 'Submit'}}</span>
-                    
+                    <span class="btn-txt" *ngIf="urlPath !== 'edit'" (click)="onSubmit()">{{ urlPath === 'leave' ? 'Re-Submit' : 'Submit' }}</span>
+                    <span class="btn-txt" *ngIf="urlPath === 'edit'" (click)="save()">Save</span>
                   </button>
                 </div>
               </form>

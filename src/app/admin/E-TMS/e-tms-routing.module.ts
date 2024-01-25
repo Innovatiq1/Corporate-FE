@@ -30,6 +30,10 @@ const routes: Routes = [
     component: CreateRequestComponent
   },
   {
+    path: 'leave-request',
+    component: CreateRequestComponent
+  },
+  {
     path: 'edit-request',
     component: CreateRequestComponent
   },

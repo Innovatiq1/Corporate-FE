@@ -126,7 +126,7 @@ export class CreateRequestComponent implements OnInit {
     });
 
     this.getUserId();
-    if (this.urlPath === 'edit') {
+    if (this.urlPath === 'leave' || this.urlPath === 'edit') {
       this.getData();
     }
     this.getCourseList();
@@ -279,6 +279,55 @@ export class CreateRequestComponent implements OnInit {
     }
   }
 
+  save(){
+    if (this.requestForm.valid) {
+      const requestData = this.requestForm.value;
+      let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      this.etmsService.getUserId(this.roId).subscribe((response: any) => {
+        this.etmsService.getUserId(this.directorId).subscribe((res: any) => {
+          this.etmsService
+            .getUserId(this.trainingAdminId)
+            .subscribe((data: any) => {
+              const payload = {
+                requestId: this.requestId,
+                employeeId: this.employeeID,
+                designation: requestData.designation,
+                department: requestData.department,
+                email: requestData.email,
+                ro: this.roId,
+                trainingAdmin: this.trainingAdminId,
+                trainingAdminName: this.trainingAdminName,
+                directorName: this.directorName,
+                roName: this.roName,
+                employeeName: this.employeeName,
+                director: this.directorId,
+                courseName: requestData.courseName,
+                vendorName: requestData.vendorName,
+                courseCost: requestData.courseCost,
+                courseTimeline: requestData.courseTimeline,
+                roApproval: 'Pending',
+                directorApproval: 'Pending',
+                trainingAdminApproval: 'Pending',
+                userName: user.user.name,
+                roEmail: response.email,
+                directorEmail: res.email,
+                trainingAdminEmail: data.email,
+              };
+              this.etmsService
+                .updateStatus(payload, this._id)
+                .subscribe((response: any) => {
+                  Swal.fire({
+                    title: 'Successful',
+                    text: 'Request updated successfully',
+                    icon: 'success',
+                  });
+                  this.router.navigate(['/admin/e-tms/employee-status']);
+                });
+            });
+        });
+      });
+    }
+  }
 
   getData() {
     let userId = localStorage.getItem('id');
