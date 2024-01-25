@@ -91,8 +91,8 @@ this.router.navigate(['/admin/e-tms/create-request'])
     this.coursePaginationModel.limit = $event?.pageSize;
     this.getAllRequestsByEmployeeId();
   }
-leave(id: string){
-  this.router.navigate(['/admin/e-tms/leave-request'],{queryParams:{id : id, action : "leave"}})
+copy(id: string){
+  this.router.navigate(['/admin/e-tms/copy-request'],{queryParams:{id : id, action : "copy"}})
 }
 edit(id: string){
   this.router.navigate(['/admin/e-tms/edit-request'],{queryParams:{id : id, action : "edit"}})

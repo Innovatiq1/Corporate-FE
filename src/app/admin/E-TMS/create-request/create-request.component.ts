@@ -126,7 +126,7 @@ export class CreateRequestComponent implements OnInit {
     });
 
     this.getUserId();
-    if (this.urlPath === 'leave' || this.urlPath === 'edit') {
+    if (this.urlPath === 'copy' || this.urlPath === 'edit') {
       this.getData();
     }
     this.getCourseList();
