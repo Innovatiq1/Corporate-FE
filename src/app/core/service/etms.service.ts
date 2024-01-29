@@ -161,6 +161,23 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
        });
    }
 
+
+  getBudgetRequestsByDirector(director:any): Observable<ApiResponse> {
+    const apiUrl = `${this.prefix}admin/budget/budg/director?director=${director.directorId}&approval=${director.directorApproval}`;
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(director),
+    });
+  }
+  getBudgetRequestDirectorCount(id: any) {
+    const apiUrl = `${this.prefix}admin/budget/budg/count?director=${id}`;
+    return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+  }
+  updateBudgetStatus(data:any,id:any) {
+    const apiUrl = `${this.prefix}admin/budget/${id}`;
+    return this._Http.put<ApiResponse>(apiUrl, data)
+      .pipe(map(() => { }));
+  }
+
 }
 
 

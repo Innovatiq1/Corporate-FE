@@ -110,6 +110,11 @@ MENU_LIST = [
                 title: "Department Training Plan ",
                 type: "none"
             },
+            {
+                id: "budget-request",
+                title: "Budget Request",
+                type: "none"
+            },
         
         ]
     },
