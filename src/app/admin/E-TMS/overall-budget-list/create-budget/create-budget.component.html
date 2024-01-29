@@ -1,0 +1,105 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header" *ngFor="let breadscrum of breadscrums">
+        <!-- breadcrumb -->
+        <app-breadcrumb
+          [title]="breadscrum.title"
+          [active_item]="breadscrum.active"
+        >
+        </app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <h2 class="text-center">New Budget Notification</h2>
+            </div>
+            <div class="body">
+              <div class="row">
+                <!-- Budget -->
+                <div class="col-lg-3">
+                  <label>Traning Budget </label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput  required>
+                    <!-- <mat-error *ngIf="courseForm.get('cName')?.hasError('required')">
+                      Course name is required
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                     <!-- Year -->
+                     <label>Year</label>
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-select  required>
+                    <mat-option [value]="1">
+                    2023
+                    </mat-option>
+                    <mat-option [value]="2">
+                     2021
+                    </mat-option>
+                  </mat-select>
+                  <!-- <mat-error *ngIf="courseForm.get('pName')?.hasError('required')">
+                    Select any professor
+                  </mat-error> -->
+                </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+                  <!-- Percentage -->
+                  <label>By Percentage</label>
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <input matInput  required>
+                  <!-- <mat-error *ngIf="courseForm.get('cName')?.hasError('required')">
+                    Course name is required
+                  </mat-error> -->
+                </mat-form-field>
+                </div>
+                <div class="col-lg-3">
+  
+                <!-- Type -->
+                <label>Traning Type</label>
+                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                  <mat-select  required>
+                    <mat-option [value]="1">
+                      Planned
+                    </mat-option>
+                    <mat-option [value]="2">
+                     Unplanned
+                    </mat-option>
+                  </mat-select>
+                  <!-- <mat-error *ngIf="courseForm.get('pName')?.hasError('required')">
+                    Select any professor
+                  </mat-error> -->
+                </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-lg-6">
+                    <label>Name</label>
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <input matInput  required>
+                      <!-- <mat-error *ngIf="courseForm.get('cName')?.hasError('required')">
+                        Course name is required
+                      </mat-error> -->
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-6">
+                    <label>Approval Email Id </label>
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <input matInput  required>
+                      <!-- <mat-error *ngIf="courseForm.get('cName')?.hasError('required')">
+                        Course name is required
+                      </mat-error> -->
+                    </mat-form-field>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button class="btn btn-outline-primary" routerLink="/admin/e-tms/overall-budget-list"><span class="btn-txt">Cancel</span></button>
+                <button class="btn btn-outline-primary"><span class=" btn-txt">Submit</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
