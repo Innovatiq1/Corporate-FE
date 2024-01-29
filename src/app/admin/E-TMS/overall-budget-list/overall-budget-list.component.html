@@ -116,7 +116,8 @@
                       >Approve Status
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                      <span class="mobile-label">Approve Status:</span>{{row?.status}}
+                      <span class="mobile-label">Approve Status:</span>
+                      <span [ngStyle]="{ 'color': row?.approval === 'Approved' ? 'green' : row?.approval === 'Pending' ? 'blue' :  (row?.approval === 'Rejected' ? 'red' : '') }">{{row?.approval}}</span>
                     </mat-cell>
                   </ng-container>
                   <!-- actions -->
