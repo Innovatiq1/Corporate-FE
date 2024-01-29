@@ -14,6 +14,12 @@ import { SharedModule } from '@shared';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { EditRequestComponent } from './employee-request/edit-request/edit-request.component';
 import { ViewAllRequestComponent } from './all-request/view-all-request/view-all-request.component';
+import { OverallBudgetListComponent } from './overall-budget-list/overall-budget-list.component';
+import { DeptBudgetAllocationComponent } from './dept-budget-allocation/dept-budget-allocation.component';
+import { DeptTrainingPlanComponent } from './dept-training-plan/dept-training-plan.component';
+import { CreateBudgetComponent } from './overall-budget-list/create-budget/create-budget.component';
+import { CreateDepartmentBudgetComponent } from './dept-budget-allocation/create-department-budget/create-department-budget.component';
+import { CreateDeptTrainingComponent } from './dept-training-plan/create-dept-training/create-dept-training.component';
 
 
 
@@ -25,7 +31,13 @@ import { ViewAllRequestComponent } from './all-request/view-all-request/view-all
     AllRequestComponent,
     CreateRequestComponent,
     EditRequestComponent,
-    ViewAllRequestComponent
+    ViewAllRequestComponent,
+    OverallBudgetListComponent,
+    DeptBudgetAllocationComponent,
+    DeptTrainingPlanComponent,
+    CreateBudgetComponent,
+    CreateDepartmentBudgetComponent,
+    CreateDeptTrainingComponent
   ],
   imports: [
 

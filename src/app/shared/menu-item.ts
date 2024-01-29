@@ -95,6 +95,21 @@ MENU_LIST = [
                 title: "All Requests",
                 type:"none"
             },
+            {
+                id: "overall-budget-list",
+                title: "Overall Budget List ",
+                type: "none"
+            },
+            {
+                id: "department-budget-allocation",
+                title: "Department Budget Allocation ",
+                type: "none"
+            },
+            {
+                id: "department-training-plan",
+                title: "Department Training Plan ",
+                type: "none"
+            },
         
         ]
     },

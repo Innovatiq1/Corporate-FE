@@ -6,6 +6,12 @@ import { EmployeeStatusComponent } from './employee-status/employee-status.compo
 import { AllRequestComponent } from './all-request/all-request.component';
 import { CreateRequestComponent } from './create-request/create-request.component';
 import { ViewAllRequestComponent } from './all-request/view-all-request/view-all-request.component';
+import { OverallBudgetListComponent } from './overall-budget-list/overall-budget-list.component';
+import { DeptBudgetAllocationComponent } from './dept-budget-allocation/dept-budget-allocation.component';
+import { DeptTrainingPlanComponent } from './dept-training-plan/dept-training-plan.component';
+import { CreateBudgetComponent } from './overall-budget-list/create-budget/create-budget.component';
+import { CreateDepartmentBudgetComponent } from './dept-budget-allocation/create-department-budget/create-department-budget.component';
+import { CreateDeptTrainingComponent } from './dept-training-plan/create-dept-training/create-dept-training.component';
 
 
 const routes: Routes = [
@@ -40,6 +46,31 @@ const routes: Routes = [
   {
     path: 'view-request',
     component: ViewAllRequestComponent
+  },
+  {
+    path: 'overall-budget-list',
+    component: OverallBudgetListComponent,
+    
+  },
+  {
+    path: 'department-budget-allocation',
+    component: DeptBudgetAllocationComponent,
+  },
+  {
+    path: 'department-training-plan',
+    component: DeptTrainingPlanComponent,
+  },
+  {
+    path: 'create-budget',
+    component: CreateBudgetComponent,
+  },
+  {
+    path: 'create-department-budget',
+    component: CreateDepartmentBudgetComponent,
+  },
+  {
+    path: 'create-department-training',
+    component: CreateDeptTrainingComponent,
   },
 ];
 
