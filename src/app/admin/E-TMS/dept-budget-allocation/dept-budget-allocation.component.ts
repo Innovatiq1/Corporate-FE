@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { TableElement, TableExportUtil } from '@shared';
+import { EtmsDashboardComponent } from '../etms-dashboard/etms-dashboard.component';
+import { EtmsService } from '@core/service/etms.service';
 
 @Component({
   selector: 'app-dept-budget-allocation',
@@ -51,6 +53,7 @@ export class DeptBudgetAllocationComponent implements OnInit{
   constructor(private router: Router, private formBuilder: FormBuilder,
     public utils: UtilsService, private courseService: CourseService,
     private snackBar: MatSnackBar,private ref: ChangeDetectorRef,
+    private etmsService:EtmsService
   ) {
     this.coursePaginationModel = {};
     this.router.events.subscribe(event => {
@@ -65,40 +68,29 @@ export class DeptBudgetAllocationComponent implements OnInit{
 
   
   ngOnInit(): void {
-  //  this.getAllDepartments();
+   this.getAllDepartmentBudgets();
   }
-  // getAllDepartments(){
-  //   this.courseService.getAllDepartments({ ...this.coursePaginationModel}).subscribe(response =>{
-  //    this.dataSource = response.data.docs;
-  //    this.ref.detectChanges();
-  //    this.totalItems = response.data.totalDocs;
-  //    this.coursePaginationModel.docs = response.docs;
-  //   this.coursePaginationModel.page = response.page;
-  //   this.coursePaginationModel.limit = response.limit;
-  //   }, error => {
-  //   });
-  // }
   edit(row: CourseModel) {
     this.id = row.id;
     this.router.navigate(['/admin/budget/edit-dept-budget/' + this.id])
 
   }
-  delete(id: string) {
-      // this.courseService.deleteDepartment(id).subscribe(() => {
-      //   this.getAllDepartments();
-      //   Swal.fire({
-      //     title: 'Success',
-      //     text: 'Department deleted successfully.',
-      //     icon: 'success',
-      //   });
-      // });
-  }
 
   pageSizeChange($event: any) {
     this.coursePaginationModel.page = $event?.pageIndex + 1;
     this.coursePaginationModel.limit = $event?.pageSize;
-    // this.getAllDepartments();
+    this.getAllDepartmentBudgets()
   }
+  getAllDepartmentBudgets(){
+    this.etmsService.getAllDepartmentBudgets({...this.coursePaginationModel}).subscribe((res) => {
+      this.dataSource = res.docs;
+      this.totalItems = res.totalDocs;
+      this.coursePaginationModel.docs = res.docs;
+      this.coursePaginationModel.page = res.page;
+      this.coursePaginationModel.limit = res.limit;
+    })
+  }
+
 
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
