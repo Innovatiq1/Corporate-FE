@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-dept-training.component.scss']
 })
 export class CreateDeptTrainingComponent {
-
+  breadscrums = [
+    {
+      title: 'Over All Budget',
+      // items: ['Extra'],
+      active: 'Create Training Plan',
+    },
+  ];
 }

@@ -69,6 +69,10 @@ const routes: Routes = [
     component: CreateDepartmentBudgetComponent,
   },
   {
+    path: 'edit-department-budget',
+    component: CreateDepartmentBudgetComponent,
+  },
+  {
     path: 'create-department-training',
     component: CreateDeptTrainingComponent,
   },
