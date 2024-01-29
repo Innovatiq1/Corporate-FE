@@ -66,7 +66,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="card">
                     <div class="header">
-                        <h2>Course Approval Request</h2>
+                        <h2>Budget Approval Request</h2>
                         <!-- <div class="col-md-2">
                             <select class="form-select m-2 header-dropdown" aria-label="Default select example">
                                 <option selected>Aug 23</option>
@@ -87,6 +87,7 @@
                                         <th>Year</th>
                                         <th>Overall Budget</th>
                                         <th>Training Type</th>
+                                        <th>Approval Status</th>
                                         
                                        
                                         <!-- <th *ngIf="!pendingCourses && approvedCourses || rejectedCourses">Status</th>
@@ -101,10 +102,11 @@
                                         <!-- <td class="table-img">
                                             <img src="{{request?.employeeId?.avatar || '../../../assets/profile.png'}}" alt="">
                                         </td> -->
-                                        <td>{{request?.name}}</td>
+                                        <td>{{request?.employeeName}}</td>
                                         <td>{{request?.year}}</td>
                                         <td>{{request?.trainingBudget}}</td>
                                         <td>{{request?.trainingType}}</td>
+                                        <td [ngStyle]="{ 'color': request?.approval === 'Approved' ? 'green' :  request?.approval === 'Pending' ? 'blue' : (request?.approval === 'Rejected' ? 'red' : '') }">{{request?.approval  }}</td>
                                         <!-- <td>{{request?.vendorName | titlecase}}</td>
                                         <td>{{request?.courseTimeline}}</td> -->
                                         
