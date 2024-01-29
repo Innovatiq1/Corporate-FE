@@ -46,7 +46,7 @@
             </div>
             <div class="body overflow-auto">
               <div class="responsive_table">
-                <table mat-table [dataSource]="dataSource" mat-table matSort class="mat-cell advance-table">
+                <table mat-table [dataSource]="SourceData" mat-table matSort class="mat-cell advance-table">
                   <!-- Checkbox Column -->
                   <ng-container matColumnDef="select">
                     <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'">
@@ -75,21 +75,21 @@
                         class="mobile-label">Image:</span> <img [src]="row.classId?.courseId?.image_link || 'assets/noimage.jpg'" />
                     </mat-cell>
                   </ng-container> -->
-                  <ng-container matColumnDef="training budget">
+                  <!-- <ng-container matColumnDef="training budget">
                     <mat-header-cell *matHeaderCellDef mat-sort-header
                       >Training Budge</mat-header-cell
                     >
                     <mat-cell *matCellDef="let row">
-                      <span class="mobile-label">Training Budge:</span>{{row.training }}
+                      <span class="mobile-label">Training Budge:</span>{{row.trainingBudget }}
                     </mat-cell>
-                  </ng-container>
+                  </ng-container> -->
                   <!-- Percentage  -->
                   <ng-container matColumnDef="percentage">
                     <mat-header-cell *matHeaderCellDef mat-sort-header
-                      >By Percentage</mat-header-cell
+                      >Year</mat-header-cell
                     >
                     <mat-cell *matCellDef="let row">
-                      <span class="mobile-label">By Percentage:</span>{{row.percentage}}
+                      <span class="mobile-label">Year:</span>{{row.year}}
                     </mat-cell>
                   </ng-container>
                   <!-- overall budget -->
@@ -99,7 +99,7 @@
                       >Overall Budget
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                      <span class="mobile-label">Overall Budget:</span>{{row?.overall}}
+                      <span class="mobile-label">Overall Budget:</span>{{row?.trainingBudget}}
                     </mat-cell>
                   </ng-container>
   
@@ -108,7 +108,15 @@
                       >Traning Type
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                      <span class="mobile-label">Traning Type:</span>{{row?.type}}
+                      <span class="mobile-label">Traning Type:</span>{{row?.trainingType}}
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header
+                      >Approve Status
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <span class="mobile-label">Approve Status:</span>{{row?.status}}
                     </mat-cell>
                   </ng-container>
                   <!-- actions -->

@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { OverallBuget } from '@core/models/overall-budget.model';
+import { EtmsService } from '@core/service/etms.service';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -97,13 +98,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./overall-budget-list.component.scss']
 })
 export class OverallBudgetListComponent implements OnInit {
+  SourceData: any;
   displayedColumns: string[] = [
     'select',
     // 'no',
-    'training budget',
+    // 'training budget',
     'percentage',
     'overall budget',
     'type',
+    'status',
     'action',
   ];
   dataSource = ELEMENT_DATA;
@@ -124,7 +127,7 @@ export class OverallBudgetListComponent implements OnInit {
       active: 'Over All Budget List',
     },
   ];
-  constructor(public router:Router) {
+  constructor(public router:Router,private etmsService: EtmsService,) {
     this.pieChartOptions = {
       series: [44, 55],
       chart: {
@@ -149,7 +152,21 @@ export class OverallBudgetListComponent implements OnInit {
   ngOnInit() {
     this.dataSource2.paginator = this.paginator;
     this.chart2();
+     this.getAllRequests();
+    
   }
+   getAllRequests(){
+    this.etmsService.getAllBudgets().subscribe((res) => {
+      this.SourceData = res.data.docs;
+      console.log(this.SourceData)
+      // this.totalItems = res.data.totalDocs;
+      // this.coursePaginationModel.docs = res.data.docs;
+      // this.coursePaginationModel.page = res.data.page;
+      // this.coursePaginationModel.limit = res.data.limit;
+    })
+  }
+  
+
 
   private chart2() {
     this.barChartOptions = {

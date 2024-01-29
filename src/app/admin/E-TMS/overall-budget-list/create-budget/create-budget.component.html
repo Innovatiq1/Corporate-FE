@@ -15,54 +15,58 @@
               <h2 class="text-center">New Budget Notification</h2>
             </div>
             <div class="body">
+              <form class="m-4" *ngIf="requestForm" [formGroup]="requestForm" >
+
               <div class="row">
                 <!-- Budget -->
                 <div class="col-lg-3">
                   <label>Traning Budget </label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput  required>
-                    <!-- <mat-error *ngIf="courseForm.get('cName')?.hasError('required')">
-                      Course name is required
-                    </mat-error> -->
+                    <input matInput  required formControlName="trainingBudget">
+                    
                   </mat-form-field>
                 </div>
                 <div class="col-lg-3">
                      <!-- Year -->
                      <label>Year</label>
                 <mat-form-field class="example-full-width mb-3" appearance="outline">
-                  <mat-select  required>
-                    <mat-option [value]="1">
-                    2023
+                  <mat-select    formControlName="year" required>
+                    <mat-option [value]="'2024'">
+                    2024
                     </mat-option>
-                    <mat-option [value]="2">
-                     2021
+                    <mat-option [value]="'2025'">
+                     2025
                     </mat-option>
+                    <mat-option [value]="'2026'">
+                      2026
+                     </mat-option>
+                     <mat-option [value]="'2027'">
+                      2027
+                     </mat-option>
                   </mat-select>
                   <!-- <mat-error *ngIf="courseForm.get('pName')?.hasError('required')">
                     Select any professor
                   </mat-error> -->
                 </mat-form-field>
                 </div>
-                <div class="col-lg-3">
-                  <!-- Percentage -->
+                <!-- <div class="col-lg-3">
+                  
                   <label>By Percentage</label>
                 <mat-form-field class="example-full-width mb-3" appearance="outline">
                   <input matInput  required>
-                  <!-- <mat-error *ngIf="courseForm.get('cName')?.hasError('required')">
-                    Course name is required
-                  </mat-error> -->
+                 
                 </mat-form-field>
-                </div>
+                </div> -->
                 <div class="col-lg-3">
   
                 <!-- Type -->
                 <label>Traning Type</label>
                 <mat-form-field class="example-full-width mb-3" appearance="outline">
-                  <mat-select  required>
-                    <mat-option [value]="1">
+                  <mat-select  formControlName="trainingType"  required>
+                    <mat-option [value]="'Planned'">
                       Planned
                     </mat-option>
-                    <mat-option [value]="2">
+                    <mat-option [value]="'Unplanned'">
                      Unplanned
                     </mat-option>
                   </mat-select>
@@ -75,8 +79,8 @@
               <div class="row">
                   <div class="col-lg-6">
                     <label>Name</label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
-                      <input matInput  required>
+                    <mat-form-field class="example-full-width mb-3" appearance="outline" >
+                      <input matInput  required formControlName="name">
                       <!-- <mat-error *ngIf="courseForm.get('cName')?.hasError('required')">
                         Course name is required
                       </mat-error> -->
@@ -84,9 +88,9 @@
                   </div>
                   <div class="col-lg-6">
                     <label>Approval Email Id </label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline">
-                      <input matInput  required>
-                      <!-- <mat-error *ngIf="courseForm.get('cName')?.hasError('required')">
+                    <mat-form-field class="example-full-width mb-3" appearance="outline" >
+                      <input matInput  required formControlName="email">
+                      <!-- <mat-error *ngIf="courseForm.get('cName')?ss.hasError('required')">
                         Course name is required
                       </mat-error> -->
                     </mat-form-field>
@@ -94,8 +98,9 @@
               </div>
               <div class="d-flex justify-content-between">
                 <button class="btn btn-outline-primary" routerLink="/admin/e-tms/overall-budget-list"><span class="btn-txt">Cancel</span></button>
-                <button class="btn btn-outline-primary"><span class=" btn-txt">Submit</span></button>
+                <button class="btn btn-outline-primary" (click)="onSubmit()"><span class=" btn-txt">Submit</span></button>
               </div>
+              </form>
             </div>
           </div>
         </div>
