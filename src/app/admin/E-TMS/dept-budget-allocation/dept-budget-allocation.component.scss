@@ -26,6 +26,18 @@ svg {
 .menu-text {
     padding-left: 20px;
 }
+.approved {
+    color: rgb(19, 199, 19);
+  }
+  
+  .rejected {
+    color: red;
+  }
+  
+  .pending {
+    color: #1d62ed;
+  }
+  
 .create{
     border: 1px solid black;
     border-radius: 10px;

@@ -138,6 +138,14 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
     return this._Http.get<ApiResponse>(apiUrl).pipe(map((response) => response.data));
   }
 
+  getAllDepartmentBudgets(data:any): Observable<any> {
+    const apiUrl = `${this.prefix}admin/budget/department-budget/budget`;
+    return this._Http.get<any>(apiUrl,{
+      params: this.buildParams(data),
+    }).pipe(map((response) => response.data));
+  }
+
+
   getBudgetRequestsByDirector(director:any): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}admin/budget/budg/director?director=${director.directorId}&approval=${director.directorApproval}`;
     return this._Http.get<ApiResponse>(apiUrl, {
