@@ -22,6 +22,8 @@ import { CreateDepartmentBudgetComponent } from './dept-budget-allocation/create
 import { CreateDeptTrainingComponent } from './dept-training-plan/create-dept-training/create-dept-training.component';
 import { BudgetRequestComponent } from './budget-request/budget-request.component';
 import { EditBudgetRequestComponent } from './budget-request/edit-budget-request/edit-budget-request.component';
+import { DeptBudgetRequestComponent } from './dept-budget-request/dept-budget-request.component';
+import { EditDeptBudgetRequestComponent } from './dept-budget-request/edit-dept-budget-request/edit-dept-budget-request.component';
 
 
 
@@ -41,7 +43,9 @@ import { EditBudgetRequestComponent } from './budget-request/edit-budget-request
     CreateDepartmentBudgetComponent,
     CreateDeptTrainingComponent,
     BudgetRequestComponent,
-    EditBudgetRequestComponent
+    EditBudgetRequestComponent,
+    DeptBudgetRequestComponent,
+    EditDeptBudgetRequestComponent
   ],
   imports: [
 

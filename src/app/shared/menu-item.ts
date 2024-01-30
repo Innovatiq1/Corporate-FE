@@ -115,6 +115,11 @@ MENU_LIST = [
                 title: "Budget Request",
                 type: "none"
             },
+            {
+                id: "dapartment-budget-request",
+                title: "Department Budget Request",
+                type: "none"
+            },
         
         ]
     },
