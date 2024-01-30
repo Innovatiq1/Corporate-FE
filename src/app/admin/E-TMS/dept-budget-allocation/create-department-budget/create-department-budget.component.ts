@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '@core/models/user';
 import { AuthService } from '@core/service/auth.service';
 import { CourseService } from '@core/service/course.service';
+import { DeptService } from '@core/service/dept.service';
+import { EtmsService } from '@core/service/etms.service';
 import { UtilsService } from '@core/service/utils.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-department-budget',
   templateUrl: './create-department-budget.component.html',
-  styleUrls: ['./create-department-budget.component.scss']
+  styleUrls: ['./create-department-budget.component.scss'],
 })
-export class CreateDepartmentBudgetComponent implements OnInit  {
+export class CreateDepartmentBudgetComponent implements OnInit {
   breadscrums = [
     {
       title: 'Over All Budget',
@@ -26,51 +32,119 @@ export class CreateDepartmentBudgetComponent implements OnInit  {
   subscribeParams: any;
   departmentId: any;
   users!: User[];
-  constructor(private fb: UntypedFormBuilder,private courseService: CourseService,private router:Router,
-    private activatedRoute:ActivatedRoute,  private authService: AuthService, public utils:UtilsService) {
-    let urlPath = this.router.url.split('/')
-    this.editUrl = urlPath.includes('edit-department-budget'); 
-    if(this.editUrl===true){
+  department: any;
+  hodVal:any;
+  directorId: any;
+  employeName!: string;
+  directorName: any;
+  constructor(
+    private fb: UntypedFormBuilder,
+    private courseService: CourseService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private deptService: DeptService,
+    private authService: AuthService,
+    public utils: UtilsService,
+    private etmsService: EtmsService
+  ) {
+    let urlPath = this.router.url.split('/');
+    this.editUrl = urlPath.includes('edit-department-budget');
+    if (this.editUrl === true) {
       this.breadscrums = [
         {
-          title:'Overall Budget',
+          title: 'Overall Budget',
           // items: ['Department'],
           active: 'Edit Department',
         },
       ];
-     
     }
 
     this.departmentForm = this.fb.group({
-      department: ['',[Validators.required,...this.utils.validators.dname, this.utils.noLeadingSpace]],
-      director: ['', [Validators.required]],
-      percentage: ['', [Validators.required,...this.utils.validators.percentage, this.utils.noLeadingSpace]],
-      value: ['', [Validators.required,...this.utils.validators.value, this.utils.noLeadingSpace]],
-      trainingBudget: ['', [Validators.required,...this.utils.validators.budget, this.utils.noLeadingSpace]],
-      budget: ['',[Validators.required,...this.utils.validators.value, this.utils.noLeadingSpace]],
-     
+      department: [
+        '',
+        [
+          Validators.required,
+          ...this.utils.validators.dname,
+          this.utils.noLeadingSpace,
+        ],
+      ],
+      hod: ['', [Validators.required]],
+      year: [
+        '',
+        [ ],
+      ],
+      name: [
+        '',
+        [
+          Validators.required,
+          this.utils.noLeadingSpace,
+        ],
+      ],
+      trainingBudget: [
+        '',
+        [
+          Validators.required,
+          ...this.utils.validators.budget,
+          this.utils.noLeadingSpace,
+        ],
+      ],
+      approvedEmail: [
+        '',
+        [
+          Validators.required,
+        ],
+      ],
     });
-    this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
-      this.departmentId = params.id;
-    });
-    if(this.editUrl){
+    this.subscribeParams = this.activatedRoute.params.subscribe(
+      (params: any) => {
+        this.departmentId = params.id;
+      }
+    );
+    if (this.editUrl) {
       // this.getDepartmentById();
     }
   }
- ngOnInit(): void {
-  // this.loadUsers();
- }
- 
-    // private loadUsers() {
-    //   this.authService.getDirectorHeads().subscribe(
-    //     (response: any) => {
-    //       this.users = response.data;
-    //     },
-    //     (error) => {
-    //     }
-    //   );
-    // }
- 
+  ngOnInit(): void {
+    // this.loadUsers();
+    this.getAllDepartment();
+
+    this.getUserId();
+  }
+
+  getAllDepartment() {
+    this.deptService
+      .getAllDepartments({ status: 'active' })
+      .subscribe((data: any) => {
+        this.department = data.data.docs;
+        console.log('data.data.docs,', this.department);
+      });
+  }
+
+  onSelectDept(event: any) {
+    console.log('onSelectDept', event.target.innerText);
+    const data = event.target.innerText;
+
+    this.department
+      .filter((res: { department: any }) => res.department === data)
+      .map((data:any) =>{
+       this.departmentForm.patchValue({
+        hod: data.hod
+       })
+      }
+      
+      );
+    
+  }
+  // private loadUsers() {
+  //   this.authService.getDirectorHeads().subscribe(
+  //     (response: any) => {
+  //       this.users = response.data;
+  //     },
+  //     (error) => {
+  //     }
+  //   );
+  // }
+
   // getDepartmentById(){
   //   this.courseService.getDepartmentById(this.departmentId).subscribe((response:any)=>{
   //     let details = response;
@@ -85,8 +159,66 @@ export class CreateDepartmentBudgetComponent implements OnInit  {
 
   //   })
   // }
+  getUserId() {
+    let userId = localStorage.getItem('id');
+
+    this.etmsService.getUserId(userId).subscribe((response: any) => {
+      console.log("response",response)
+      this.directorId = response.director,
+      this.employeName=response?.name +
+                ' ' +
+                (response.last_name ? response.last_name : ''),
+      this.etmsService.getUserId(this.directorId).subscribe((res: any) => {
+        
+          
+        this.directorName = response?.directorName,
+        
+        this.departmentForm.patchValue({
+          trainingBudget:"",
+          year: "",
+          name: this.directorName,
+          approvedEmail: res?.email,
+         
+        });
+      });
+
+  });
+  }
+
+
+
 
   onSubmit() {
+    let userName = JSON.parse(localStorage.getItem('user_data')!).user.name;
+    let dirID = JSON.parse(localStorage.getItem('user_data')!).user.director;
+    console.log("userName: " + dirID);
+let payload = {
+departmentName:this.departmentForm.value.department,
+hod: this.departmentForm.value.hod,
+year:this.departmentForm.value.year,
+trainingBudget:this.departmentForm.value.trainingBudget,
+name:this.departmentForm.value.name,
+email:this.departmentForm.value.approvedEmail,
+director:dirID,
+approval:"Pending",
+employeName:userName
+
+
+}
+console.log(payload)
+this.etmsService.createDept(payload).subscribe(data => {
+  console.log(data);
+  if(data){
+    Swal.fire({
+      icon:'success',
+      title: 'Department Created Successfully',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    this.router.navigate(['/etms/department']);
+    
+  }
+})
     // if (this.departmentForm.valid) {
     //   if (this.editUrl) {
     //     this.courseService.updateDepartment(this.departmentForm.value, this.departmentId).subscribe((response: any) => {
@@ -97,7 +229,6 @@ export class CreateDepartmentBudgetComponent implements OnInit  {
     //       });
     //       this.router.navigate(['/admin/budget/dept-budget'])
     //     });
-  
     //   } else {
     //     this.courseService.saveDepartment(this.departmentForm.value).subscribe((response: any) => {
     //       Swal.fire({
@@ -109,8 +240,6 @@ export class CreateDepartmentBudgetComponent implements OnInit  {
     //     });
     //   }
     // } else {
-     
     // }
   }
-
 }
