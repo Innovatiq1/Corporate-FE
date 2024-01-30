@@ -96,6 +96,11 @@ MENU_LIST = [
                 type:"none"
             },
             {
+                id: "new-course-approval",
+                title: "New Course Approval",
+                type: "none"
+            },
+            {
                 id: "overall-budget-list",
                 title: "Overall Budget List ",
                 type: "none"
@@ -120,6 +125,7 @@ MENU_LIST = [
                 title: "Department Budget Request",
                 type: "none"
             },
+            
         
         ]
     },
