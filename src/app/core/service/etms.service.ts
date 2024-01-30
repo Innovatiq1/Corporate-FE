@@ -193,7 +193,12 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
     return this._Http.put<ApiResponse>(apiUrl, data)
       .pipe(map(() => { }));
   }
-
+createDept(request:any){
+  const apiUrl = `${this.prefix}admin/budget/department-budget/budget`;
+     return this._Http
+       .post<ApiResponse>(apiUrl, request)
+       .pipe(map((response) => response));
+}
 }
 
 

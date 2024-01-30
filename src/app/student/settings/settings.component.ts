@@ -312,7 +312,5 @@ export class SettingsComponent {
       console.log(this.profileForm.value);
     });
 
-
-    
   }
 }
