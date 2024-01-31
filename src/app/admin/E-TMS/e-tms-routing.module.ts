@@ -15,6 +15,7 @@ import { CreateDeptTrainingComponent } from './dept-training-plan/create-dept-tr
 import { BudgetRequestComponent } from './budget-request/budget-request.component';
 import { DeptBudgetRequestComponent } from './dept-budget-request/dept-budget-request.component';
 import { NewCourseApprovalComponent } from './new-course-approval/new-course-approval.component';
+import { NewCourseRequestComponent } from './new-course-request/new-course-request.component';
 
 
 const routes: Routes = [
@@ -95,6 +96,10 @@ const routes: Routes = [
   {
     path: 'new-course-approval',
     component: NewCourseApprovalComponent,
+  },
+  {
+    path: 'new-course-request',
+    component: NewCourseRequestComponent,
   },
 ];
 

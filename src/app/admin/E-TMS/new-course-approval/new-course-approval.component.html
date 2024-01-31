@@ -29,10 +29,9 @@
                                     <tr>
                                         <!-- <th>#</th> -->
                                         <th>Course Name</th>
-                                        <th>Course Code</th>
-                                        <th>Main Category</th>
-                                        <th>Sub Category</th>
-                                        <th>Fees</th>
+                                        <th>Vendor Name</th>
+                                        <th>Employee Name</th>
+                                        <th>Email</th>
                                         
                                        
                                         <!-- <th *ngIf="!pendingCourses && approvedCourses || rejectedCourses">Status</th>
@@ -47,11 +46,10 @@
                                         <!-- <td class="table-img">
                                             <img src="{{request?.employeeId?.avatar || '../../../assets/profile.png'}}" alt="">
                                         </td> -->
-                                        <td>{{request?.courseName}}</td>
-                                        <td>{{request?.courseCode}}</td>
-                                        <td>{{request?.mainCategory}}</td>
-                                        <td>{{request?.subCategory}}</td>
-                                        <td>{{request?.fees  }}</td>
+                                        <td>{{request?.title}}</td>
+                                        <td>{{request?.employeeName}}</td>
+                                        <td>{{request?.vendorName}}</td>
+                                        <td>{{request?.email}}</td>
                                         <!-- <td>{{request?.vendorName | titlecase}}</td>
                                         <td>{{request?.courseTimeline}}</td> -->
                                         
@@ -70,10 +68,10 @@
                                         <!-- (click)="approve(request.id)" -->
                                         <td>
                                             <div class="d-flex gap-2 ">
-                                              <button type="button" class="btn btn-outline-primary shadow height">
+                                              <button type="button" class="btn btn-outline-primary shadow height" (click)="$event.stopPropagation()" (click)="approve(request)">
                                                 Approve
                                               </button>
-                                              <button type="button" mat-raised-button color="warn" >
+                                              <button type="button" mat-raised-button color="warn" (click)="$event.stopPropagation()" (click)="reject(request)">
                                                 Reject
                                               </button>
                                             </div>
@@ -82,9 +80,9 @@
 
                                 </tbody>
                             </table>
-                            <!-- <mat-paginator #paginator [length]="totalItems" [pageIndex]="0" [pageSize]="10"
+                            <mat-paginator #paginator [length]="totalItems" [pageIndex]="0" [pageSize]="10"
                             [pageSizeOptions]="[5, 10, 25, 100]" (page)="pageSizeChange($event)">
-                          </mat-paginator> -->
+                          </mat-paginator>
                         </div>
                     </div>
                 </div>
