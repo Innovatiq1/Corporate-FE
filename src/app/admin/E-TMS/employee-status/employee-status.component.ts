@@ -57,6 +57,10 @@ constructor(private router:Router,private etmsService: EtmsService,public utils:
 this.router.navigate(['/admin/e-tms/create-request'])
   }
 
+  createCourseReq(){
+    this.router.navigate(['/admin/e-tms/create-course-request'])
+      }
+    
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;

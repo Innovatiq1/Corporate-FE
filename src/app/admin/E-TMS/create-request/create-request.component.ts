@@ -43,6 +43,7 @@ export class CreateRequestComponent implements OnInit {
   urlPath: any;
   searchTerm: string = '';
   requestId: any;
+  newCourseReqUrl: boolean = false;;
 
   constructor(
     private etmsService: EtmsService,
@@ -50,12 +51,16 @@ export class CreateRequestComponent implements OnInit {
     private _courseService: CourseService,
     private router: Router,
     public activeRoute: ActivatedRoute,
-    public utils: UtilsService
+    public utils: UtilsService,
+    private courseService:CourseService
   ) {
     this.activeRoute.queryParams.subscribe((params) => {
       this._id = params['id'];
       this.urlPath = params['action'];
     });
+
+    let urlPath = this.router.url.split('/')
+    this.newCourseReqUrl = urlPath.includes('create-course-request');
 
     if (this.urlPath === 'edit') {
       this.breadscrums = [
@@ -231,6 +236,7 @@ export class CreateRequestComponent implements OnInit {
 
   onSubmit() {
     if (this.requestForm.valid) {
+      if(!this.newCourseReqUrl){
       const requestData = this.requestForm.value;
       let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
       this.etmsService.getUserId(this.roId).subscribe((response: any) => {
@@ -276,7 +282,40 @@ export class CreateRequestComponent implements OnInit {
             });
         });
       });
-    }
+    } else if(this.newCourseReqUrl){
+      const requestData = this.requestForm.value;
+      let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      this.etmsService.getUserId(this.roId).subscribe((response: any) => {
+        this.etmsService.getUserId(this.directorId).subscribe((res: any) => {
+          this.etmsService
+            .getUserId(this.trainingAdminId)
+            .subscribe((data: any) => {
+              const payload = {
+                employeeId: this.employeeID,
+                designation: requestData.designation,
+                department: requestData.department,
+                email: requestData.email,
+                directorName: this.directorName,
+                employeeName: this.employeeName,
+                director: this.directorId,
+                title: requestData.courseName,
+                vendorName: requestData.vendorName,
+                directorEmail: res.email,
+                status:"inactive"
+              };
+              this.courseService.saveCourse(payload).subscribe((response: any) => {
+                  Swal.fire({
+                    title: 'Successful',
+                    text: 'Course request created successfully',
+                    icon: 'success',
+                  });
+                  this.router.navigate(['/admin/e-tms/employee-status']);
+                });
+            });
+        });
+      });
+
+    }}
   }
 
   save(){

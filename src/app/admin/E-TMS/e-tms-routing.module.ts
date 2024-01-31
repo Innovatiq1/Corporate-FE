@@ -39,6 +39,11 @@ const routes: Routes = [
     component: CreateRequestComponent
   },
   {
+    path: 'create-course-request',
+    component: CreateRequestComponent
+  },
+
+  {
     path: 'copy-request',
     component: CreateRequestComponent
   },

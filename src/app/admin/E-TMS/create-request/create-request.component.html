@@ -110,7 +110,7 @@
                     </mat-option>
                   </mat-autocomplete>
                 </mat-form-field> -->
-                <div class="row mt-3">
+                <div *ngIf="!newCourseReqUrl" class="row mt-3">
                   <div class="col-lg-6">
                     <label>Course Name <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -124,35 +124,39 @@
                         {{ utils.getErrorMessage1(requestForm.get('courseName'), 'cname') }}
                       </mat-error>
                     </mat-form-field>
-                    
-                    <!-- <mat-form-field class="example-full-width mb-3" appearance="outline">
-                      <input matInput  formControlName="courseName"  />
-                      <mat-select  formControlName="courseName" required>
-                        <mat-option value={{course.title}}  *ngFor="let course of sourceData">{{course.title}}</mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="requestForm.get('courseName')?.invalid && requestForm.get('courseName')?.touched">
-                        {{ utils.getErrorMessage1(requestForm.get('courseName'), 'cname') }}
-                      </mat-error>
-                    </mat-form-field> -->
-  
-                  </div>
+                                      </div>
                   <div class="col-lg-6">
                     <label>Vendor Name <span class="mandatory">&nbsp;*</span> </label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput  formControlName="vendorName" />
-                      <!-- <mat-select formControlName="vendorName" required>
-                        <mat-option value="Comat">Comat</mat-option>
-                        <mat-option value="John">John</mat-option>
-                        <mat-option value="Lam">Lam</mat-option>
-                      </mat-select> -->
                       <mat-error *ngIf="requestForm.get('vendorName')?.invalid && requestForm.get('vendorName')?.touched">
                         {{ utils.getErrorMessage1(requestForm.get('vendorName'), 'vname') }}
                       </mat-error>
                     </mat-form-field>
                   </div>
-  
                 </div>
-                <div class="row">
+                <div *ngIf="newCourseReqUrl" class="row mt-3">
+                  <div class="col-lg-6">
+                    <label>Course Name <span class="mandatory">&nbsp;*</span></label>
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <input matInput  formControlName="courseName" />
+                      <mat-error *ngIf="requestForm.get('courseName')?.invalid && requestForm.get('courseName')?.touched">
+                        {{ utils.getErrorMessage1(requestForm.get('courseName'), 'cname') }}
+                      </mat-error>
+                    </mat-form-field>   
+                  </div>
+                  <div class="col-lg-6">
+                    <label>Vendor Name <span class="mandatory">&nbsp;*</span> </label>
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <input matInput  formControlName="vendorName" />
+                      <mat-error *ngIf="requestForm.get('vendorName')?.invalid && requestForm.get('vendorName')?.touched">
+                        {{ utils.getErrorMessage1(requestForm.get('vendorName'), 'vname') }}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div *ngIf="!newCourseReqUrl" class="row">
                   <div class="col-lg-6">
                     <label>Course Cost <span class="mandatory">&nbsp;*</span></label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
