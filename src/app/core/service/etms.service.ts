@@ -199,6 +199,24 @@ createDept(request:any){
        .post<ApiResponse>(apiUrl, request)
        .pipe(map((response) => response));
 }
+getNewRequestsByEmployeeId(employee:any): Observable<ApiResponse> {
+  const apiUrl = `${this.prefix}admin/courses-new?status=${employee.employeeStatus}&employee=${employee.employeeId}`;
+  return this._Http.get<ApiResponse>(apiUrl, {
+    params: this.buildParams(employee),
+  });
+}
+getCourseRequestsByTrainingAdmin(trainingAdmin:any): Observable<ApiResponse> {
+  const apiUrl = `${this.prefix}admin/courses-new?status=${trainingAdmin.trainingAdminStatus}&trainingAdmin=${trainingAdmin.trainingAdminId}`;
+  return this._Http.get<ApiResponse>(apiUrl, {
+    params: this.buildParams(trainingAdmin),
+  });
+}
+
+updateCourseStatus(data:any,id:any) {
+  const apiUrl = `${this.prefix}admin/courses-new/${id}`;
+  return this._Http.put<ApiResponse>(apiUrl, data)
+    .pipe(map(() => { }));
+}
 }
 
 

@@ -28,7 +28,7 @@ export class EmployeeRequestComponent
     {
       title: 'ETMS',
       items: [''],
-      active: 'Course Request ',
+      active: 'Training Approval Request ',
     },
   ];
   ro = false;

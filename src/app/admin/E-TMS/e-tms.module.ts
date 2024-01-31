@@ -25,6 +25,8 @@ import { EditBudgetRequestComponent } from './budget-request/edit-budget-request
 import { DeptBudgetRequestComponent } from './dept-budget-request/dept-budget-request.component';
 import { EditDeptBudgetRequestComponent } from './dept-budget-request/edit-dept-budget-request/edit-dept-budget-request.component';
 import { NewCourseApprovalComponent } from './new-course-approval/new-course-approval.component';
+import { NewCourseRequestComponent } from './new-course-request/new-course-request.component';
+import { EditNewCourseComponent } from './new-course-approval/edit-new-course/edit-new-course.component';
 
 
 
@@ -47,7 +49,9 @@ import { NewCourseApprovalComponent } from './new-course-approval/new-course-app
     EditBudgetRequestComponent,
     DeptBudgetRequestComponent,
     EditDeptBudgetRequestComponent,
-    NewCourseApprovalComponent
+    NewCourseApprovalComponent,
+    NewCourseRequestComponent,
+    EditNewCourseComponent
   ],
   imports: [
 
