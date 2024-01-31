@@ -70,7 +70,7 @@ export class CreateRequestComponent implements OnInit {
         },
       ];
     }
-
+    if(!this.newCourseReqUrl){
     this.requestForm = this.fb.group({
       name: ['', [...this.utils.validators.ename, this.utils.noLeadingSpace]],
       employeeId: [
@@ -117,6 +117,42 @@ export class CreateRequestComponent implements OnInit {
         [...this.utils.validators.value, this.utils.noLeadingSpace],
       ],
     });
+  } else if (this.newCourseReqUrl){
+    this.requestForm = this.fb.group({
+    name: ['', [...this.utils.validators.ename, this.utils.noLeadingSpace]],
+    employeeId: [
+      '',
+      [...this.utils.validators.ename, this.utils.noLeadingSpace],
+    ],
+    requestId: [
+      '',
+      [...this.utils.validators.ename, this.utils.noLeadingSpace],
+    ],
+
+    designation: [
+      '',
+      [...this.utils.validators.designation, this.utils.noLeadingSpace],
+    ],
+    department: [
+      '',
+      [...this.utils.validators.designation, this.utils.noLeadingSpace],
+    ],
+    email: ['', [...this.utils.validators.email, this.utils.noLeadingSpace]],
+    directorName: [
+      '',
+      [...this.utils.validators.ename, this.utils.noLeadingSpace],
+    ],
+    courseName: [
+      '',
+      [...this.utils.validators.dname, this.utils.noLeadingSpace],
+    ],
+    vendorName: [
+      '',
+      [...this.utils.validators.dname, this.utils.noLeadingSpace],
+    ],
+  });
+
+  }
   }
 
   ngOnInit() {
@@ -235,6 +271,7 @@ export class CreateRequestComponent implements OnInit {
   }
 
   onSubmit() {
+
     if (this.requestForm.valid) {
       if(!this.newCourseReqUrl){
       const requestData = this.requestForm.value;
