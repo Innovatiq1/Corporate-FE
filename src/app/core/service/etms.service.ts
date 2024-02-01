@@ -217,6 +217,25 @@ updateCourseStatus(data:any,id:any) {
   return this._Http.put<ApiResponse>(apiUrl, data)
     .pipe(map(() => { }));
 }
+
+getBudgetById(id: any) {
+  const apiUrl = `${this.prefix}admin/budget/${id}`;
+  return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+}
+
+
+updateTrainingBudget(id:any,data:any,) {
+  const apiUrl = `${this.prefix}admin/budget/${id}`;
+  return this._Http.put<ApiResponse>(apiUrl, data)
+    .pipe(map(() => { }));
+}
+
+deleteTrainingBudget(id: any) {
+  const apiUrl = `${this.prefix}admin/budget/${id}`;
+  return this._Http.delete<any>(apiUrl).pipe(map((response) => response));
+}
+
+
 }
 
 

@@ -24,6 +24,7 @@ import {
   ApexTheme,
   ApexNonAxisChartSeries,
 } from 'ng-apexcharts';
+import Swal from 'sweetalert2';
 export type chartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -89,13 +90,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
     overall: '$ 24,000',
     type: 'UnPlanned',
   },
-
 ];
 
 @Component({
   selector: 'app-overall-budget-list',
   templateUrl: './overall-budget-list.component.html',
-  styleUrls: ['./overall-budget-list.component.scss']
+  styleUrls: ['./overall-budget-list.component.scss'],
 })
 export class OverallBudgetListComponent implements OnInit {
   SourceData: any;
@@ -127,7 +127,7 @@ export class OverallBudgetListComponent implements OnInit {
       active: 'Over All Budget List',
     },
   ];
-  constructor(public router:Router,private etmsService: EtmsService,) {
+  constructor(public router: Router, private etmsService: EtmsService) {
     this.pieChartOptions = {
       series: [44, 55],
       chart: {
@@ -152,21 +152,18 @@ export class OverallBudgetListComponent implements OnInit {
   ngOnInit() {
     this.dataSource2.paginator = this.paginator;
     this.chart2();
-     this.getAllRequests();
-    
+    this.getAllRequests();
   }
-   getAllRequests(){
+  getAllRequests() {
     this.etmsService.getAllBudgets().subscribe((res) => {
       this.SourceData = res.data.docs;
-      console.log(this.SourceData)
+      console.log(this.SourceData);
       // this.totalItems = res.data.totalDocs;
       // this.coursePaginationModel.docs = res.data.docs;
       // this.coursePaginationModel.page = res.data.page;
       // this.coursePaginationModel.limit = res.data.limit;
-    })
+    });
   }
-  
-
 
   private chart2() {
     this.barChartOptions = {
@@ -214,7 +211,7 @@ export class OverallBudgetListComponent implements OnInit {
           'Finance',
           'Operations',
           'Corporate',
-          'Shop Floor'
+          'Shop Floor',
         ],
         position: 'bottom',
         labels: {
@@ -265,7 +262,7 @@ export class OverallBudgetListComponent implements OnInit {
           show: false,
         },
         labels: {
-          show: false,
+            show: false,
           formatter: function (val) {
             return val + '%';
           },
@@ -274,8 +271,8 @@ export class OverallBudgetListComponent implements OnInit {
     };
   }
 
-  newBudget(){
-    this.router.navigate(['/admin/e-tms/create-budget'])
+  newBudget() {
+    this.router.navigate(['/admin/e-tms/create-budget']);
   }
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -283,13 +280,36 @@ export class OverallBudgetListComponent implements OnInit {
     return numSelected === numRows;
   }
 
-   /** Selects all rows if they are not all selected; otherwise clear selection. */
-   masterToggle() {
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.dataSource.forEach((row: any) =>
-          this.selection.select(row)
-        );
+      : this.dataSource.forEach((row: any) => this.selection.select(row));
   }
 
+  edit(id: any) {
+    this.router.navigate(['/admin/e-tms/create-budget'], {
+      queryParams: { id: id, action: 'edit' },
+    });
+  }
+
+  deleteTraining(id: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this budget data!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.etmsService.deleteTrainingBudget(id).subscribe((res) => {
+          if (res) {
+            Swal.fire('Deleted!', 'Budget deleted successfully.', 'success');
+          }
+          this.getAllRequests();
+        });
+      }
+    });
+  }
 }

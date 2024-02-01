@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EtmsService } from '@core/service/etms.service';
 import { UtilsService } from '@core/service/utils.service';
 import Swal from 'sweetalert2';
@@ -19,15 +19,32 @@ export class CreateBudgetComponent {
       active: 'Create New Budget',
     },
   ];
+  breadscrumsEdit = [
+    {
+      title: 'Over All Budget',
+      // items: ['Extra'],
+      active: 'Edit Budget',
+    },
+  ];
   directorName!: string;
   directorId!: string;
   employeName!:string;
   dataSource: object | undefined;
+  private _id: any;
+  action: any;
   constructor( private etmsService: EtmsService,
     public utils: UtilsService,
     private router: Router,
+    public activeRoute: ActivatedRoute,
     
     private fb: FormBuilder){
+      /**getting id from budget list */
+      this.activeRoute.queryParams.subscribe((params) => {
+        this._id = params['id'];
+        this.action = params['action'];
+        console.log(this.action);
+      });
+
     this.requestForm = this.fb.group({
       trainingBudget: ['', [this.utils.noLeadingSpace]],
       year: [
@@ -52,9 +69,11 @@ export class CreateBudgetComponent {
   }
 
   ngOnInit() {
-    this.getUserId()
-    
-  
+    if (this.action === 'edit') {
+      this.editRequest();
+    }else{
+      this.getUserId();
+    }
 }
 getUserId() {
   let userId = localStorage.getItem('id');
@@ -75,21 +94,50 @@ getUserId() {
         trainingType:"",
         name: this.directorName,
         email: res?.email,
-        
        
-
         
       });
     });
   //sconsole.log("======trrrr")
-  
  
-    
-
-
-
 });
 }
+
+editRequest(){
+  this.etmsService.getBudgetById(this._id).subscribe((res: any) => {
+    console.log("data", res);
+
+    this.requestForm.patchValue({
+      trainingBudget: res.trainingBudget,
+      year: res.year,
+      trainingType: res.trainingType,
+      name: res.name,
+      email: res.email,
+    })
+  })
+}
+
+updateRequest(){
+  let payload = {
+    trainingBudget: this.requestForm.value.trainingBudget,
+    year: this.requestForm.value.year,
+    trainingType: this.requestForm.value.trainingType,
+    name: this.requestForm.value.name,
+    email: this.requestForm.value.email,
+  }
+  this.etmsService.updateTrainingBudget(this._id, payload).subscribe((res: any) => {
+    console.log("data", res);
+    Swal.fire({
+      icon:'success',
+      title: 'Budget Updated Successfully',
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    this.router.navigate(['/admin/e-tms/overall-budget-list']);
+  })
+}
+
+
 onSubmit(){
   if (this.requestForm.valid) {
     const requestData = this.requestForm.value;

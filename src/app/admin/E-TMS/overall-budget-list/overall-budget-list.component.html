@@ -135,21 +135,18 @@
                       </svg>
   
                       </button>
-  
-  
-  
                               <mat-menu #menu="matMenu" xPosition="before">
                                 <!-- <button mat-menu-item [routerLink]="['/admin/courses/view-course-kit/',row.id]">
                                   <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
                                   <span class="menu-text">View</span>
                                 </button> -->
-                                <button mat-menu-item  >
+                                <button mat-menu-item  (click)="edit(row.id)">
                                   <!-- <img class="img-w" src="/assets/approve.svg" alt="approve"> -->
-                                  <span class="menu-text px-3">Edit</span>
+                                  <span class="menu-text px-3" >Edit</span>
                                 </button>
-                                <button mat-menu-item   >
+                                <button mat-menu-item  (click)="deleteTraining(row.id)">
                                   <!-- <img class="img-w" src="/assets/archive.svg" alt="approve">   -->
-                                  <span class="menu-text px-3">Delete</span>
+                                  <span class="menu-text px-3" >Delete</span>
                                 </button>
                               </mat-menu>
                     </mat-cell>
