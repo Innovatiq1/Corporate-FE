@@ -91,12 +91,11 @@ getUserId() {
 });
 }
 onSubmit(){
-  console.log("ccccccccc",this.requestForm)
   if (this.requestForm.valid) {
     const requestData = this.requestForm.value;
-    requestData['employeName']=this.employeName;
-    requestData['status']='Pending'
-    
+    requestData['employeeName']=this.employeName;
+    requestData['approval']='Pending';
+    requestData['director']=this.directorId
             this.etmsService
               .createBudget(requestData)
               .subscribe((response: any) => {
