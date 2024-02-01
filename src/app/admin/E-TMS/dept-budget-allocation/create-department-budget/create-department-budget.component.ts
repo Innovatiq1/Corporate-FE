@@ -33,7 +33,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
   departmentId: any;
   users!: User[];
   department: any;
-  hodVal:any;
+  hodVal: any;
   directorId: any;
   employeName!: string;
   directorName: any;
@@ -71,7 +71,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
       hod: ['', [Validators.required]],
       year: [
         '',
-        [ ],
+        [],
       ],
       name: [
         '',
@@ -126,14 +126,14 @@ export class CreateDepartmentBudgetComponent implements OnInit {
 
     this.department
       .filter((res: { department: any }) => res.department === data)
-      .map((data:any) =>{
-       this.departmentForm.patchValue({
-        hod: data.hod
-       })
+      .map((data: any) => {
+        this.departmentForm.patchValue({
+          hod: data.hod
+        })
       }
-      
+
       );
-    
+
   }
   // private loadUsers() {
   //   this.authService.getDirectorHeads().subscribe(
@@ -163,26 +163,26 @@ export class CreateDepartmentBudgetComponent implements OnInit {
     let userId = localStorage.getItem('id');
 
     this.etmsService.getUserId(userId).subscribe((response: any) => {
-      console.log("response",response)
+      console.log("response", response)
       this.directorId = response.director,
-      this.employeName=response?.name +
-                ' ' +
-                (response.last_name ? response.last_name : ''),
-      this.etmsService.getUserId(this.directorId).subscribe((res: any) => {
-        
-          
-        this.directorName = response?.directorName,
-        
-        this.departmentForm.patchValue({
-          trainingBudget:"",
-          year: "",
-          name: this.directorName,
-          approvedEmail: res?.email,
-         
-        });
-      });
+        this.employeName = response?.name +
+        ' ' +
+        (response.last_name ? response.last_name : ''),
+        this.etmsService.getUserId(this.directorId).subscribe((res: any) => {
 
-  });
+
+          this.directorName = response?.directorName,
+
+            this.departmentForm.patchValue({
+              trainingBudget: "",
+              year: "",
+              name: this.directorName,
+              approvedEmail: res?.email,
+
+            });
+        });
+
+    });
   }
 
 
@@ -192,33 +192,33 @@ export class CreateDepartmentBudgetComponent implements OnInit {
     let userName = JSON.parse(localStorage.getItem('user_data')!).user.name;
     let dirID = JSON.parse(localStorage.getItem('user_data')!).user.director;
     console.log("userName: " + dirID);
-let payload = {
-departmentName:this.departmentForm.value.department,
-hod: this.departmentForm.value.hod,
-year:this.departmentForm.value.year,
-trainingBudget:this.departmentForm.value.trainingBudget,
-name:this.departmentForm.value.name,
-email:this.departmentForm.value.approvedEmail,
-director:dirID,
-approval:"Pending",
-employeName:userName
+    let payload = {
+      departmentName: this.departmentForm.value.department,
+      hod: this.departmentForm.value.hod,
+      year: this.departmentForm.value.year,
+      trainingBudget: this.departmentForm.value.trainingBudget,
+      name: this.departmentForm.value.name,
+      email: this.departmentForm.value.approvedEmail,
+      director: dirID,
+      approval: "Pending",
+      employeeName: userName
 
 
-}
-console.log(payload)
-this.etmsService.createDept(payload).subscribe(data => {
-  console.log(data);
-  if(data){
-    Swal.fire({
-      icon:'success',
-      title: 'Department Created Successfully',
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    this.router.navigate(['/etms/department']);
-    
-  }
-})
+    }
+    console.log(payload)
+    this.etmsService.createDept(payload).subscribe(data => {
+      console.log(data);
+      if (data) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Department Created Successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.router.navigate(['/etms/department']);
+
+      }
+    })
     // if (this.departmentForm.valid) {
     //   if (this.editUrl) {
     //     this.courseService.updateDepartment(this.departmentForm.value, this.departmentId).subscribe((response: any) => {
