@@ -115,7 +115,7 @@
                       </svg>
                     </button>
                     <mat-menu #menu="matMenu" xPosition="before">
-                      <button mat-menu-item  (click)="edit(element)">
+                      <button mat-menu-item  (click)="edit(element.id)">
                         <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                         <span class="menu-text">Edit</span>
                       </button>

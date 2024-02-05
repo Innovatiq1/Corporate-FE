@@ -37,6 +37,8 @@ export class CreateDepartmentBudgetComponent implements OnInit {
   directorId: any;
   employeName!: string;
   directorName: any;
+  private _id: any;
+  action: any;
   constructor(
     private fb: UntypedFormBuilder,
     private courseService: CourseService,
@@ -47,9 +49,15 @@ export class CreateDepartmentBudgetComponent implements OnInit {
     public utils: UtilsService,
     private etmsService: EtmsService
   ) {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this._id = params['id'];
+      this.action = params['action'];
+      console.log(this.action);
+    });
+
     let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit-department-budget');
-    if (this.editUrl === true) {
+    if (this.action === "edit") {
       this.breadscrums = [
         {
           title: 'Overall Budget',
@@ -100,12 +108,14 @@ export class CreateDepartmentBudgetComponent implements OnInit {
         this.departmentId = params.id;
       }
     );
-    if (this.editUrl) {
-      // this.getDepartmentById();
+    
+    if (this.action === 'edit') {
+      this.editRequest();
     }
   }
   ngOnInit(): void {
     // this.loadUsers();
+    this.editRequest();
     this.getAllDepartment();
 
     this.getUserId();
@@ -174,8 +184,8 @@ export class CreateDepartmentBudgetComponent implements OnInit {
           this.directorName = response?.directorName,
 
             this.departmentForm.patchValue({
-              trainingBudget: "",
-              year: "",
+              // trainingBudget: "",
+              // year: "",
               name: this.directorName,
               approvedEmail: res?.email,
 
@@ -215,7 +225,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-        this.router.navigate(['/etms/department']);
+        this.router.navigate(['/admin/e-tms/department-budget-allocation']);
 
       }
     })
@@ -242,4 +252,23 @@ export class CreateDepartmentBudgetComponent implements OnInit {
     // } else {
     // }
   }
+
+  
+  editRequest() {
+    this.etmsService.getDeptBudgetById(this._id).subscribe((res: any) => {
+      console.log("data", res);
+  
+      this.departmentForm.patchValue({
+        department: res.departmentName,
+        hod: res.hod,
+        trainingBudget: res.trainingBudget,
+        year: res.year,
+      });
+    });
+  }
+
+updateRequest(){
+  this.router.navigate(['/admin/e-tms/edit-department-budget/']);
+}
+
 }

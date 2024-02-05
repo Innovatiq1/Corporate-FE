@@ -71,10 +71,15 @@ export class DeptBudgetAllocationComponent implements OnInit{
   ngOnInit(): void {
    this.getAllDepartmentBudgets();
   }
-  edit(row: CourseModel) {
-    this.id = row.id;
-    this.router.navigate(['/admin/budget/edit-dept-budget/' + this.id])
+  // edit(row: CourseModel) {
+  //   this.id = row.id;
+  //   this.router.navigate(['/admin/e-tms/edit-department-budget/' + this.id])
 
+  // }
+  edit(id: any) {
+    this.router.navigate(['/admin/e-tms/edit-department-budget'], {
+      queryParams: { id: id, action: 'edit' },
+    });
   }
 
   pageSizeChange($event: any) {
