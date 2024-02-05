@@ -234,10 +234,22 @@ deleteTrainingBudget(id: any) {
   const apiUrl = `${this.prefix}admin/budget/${id}`;
   return this._Http.delete<any>(apiUrl).pipe(map((response) => response));
 }
+/** Budget */
 
 getDeptBudgetById(id: any) {
   const apiUrl = `${this.prefix}admin/budget/department-budget/budget/${id}`;
   return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+}
+
+
+updateBudget(id: any, payload:any) {
+  const apiUrl = `${this.prefix}admin/budget/department-budget/budget/${id}`;
+  return this._Http.put<ApiResponse>(apiUrl, payload).pipe(map((response) => response));;
+} 
+
+deleteBudget(id: any) {
+  const apiUrl = `${this.prefix}admin/budget/department-budget/budget/${id}`;
+  return this._Http.delete<any>(apiUrl).pipe(map((response) => response));
 }
 
 }
