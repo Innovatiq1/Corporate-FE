@@ -268,7 +268,31 @@ export class CreateDepartmentBudgetComponent implements OnInit {
   }
 
 updateRequest(){
-  this.router.navigate(['/admin/e-tms/edit-department-budget/']);
+ const payload = {
+  departmentName: this.departmentForm.value.department,
+  hod: this.departmentForm.value.hod,
+  year: this.departmentForm.value.year,
+  trainingBudget: this.departmentForm.value.trainingBudget,
+  name: this.departmentForm.value.name,
+  email: this.departmentForm.value.approvedEmail,
+  // director: this.directorId,
+  // approval: "Pending",
+  employeeName: this.employeName
+ }
+  this.etmsService.updateBudget(this._id,payload).subscribe(data =>{
+    console.log(data);
+    if(data){
+      Swal.fire({
+        icon:'success',
+        title: 'Department Budget Updated Successfully',
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      this.router.navigate(['/admin/e-tms/department-budget-allocation']);
+    }
+  })
+
+  // this.router.navigate(['/admin/e-tms/edit-department-budget/']);
 }
 
 }
