@@ -23,7 +23,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
     {
       title: 'Over All Budget',
       // items: ['Extra'],
-      active: 'Create Department',
+      active: 'Allocate Department Budget',
     },
   ];
   authForm!: UntypedFormGroup;
@@ -62,7 +62,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
         {
           title: 'Overall Budget',
           // items: ['Department'],
-          active: 'Edit Department',
+          active: 'Allocate Department Budget',
         },
       ];
     }
