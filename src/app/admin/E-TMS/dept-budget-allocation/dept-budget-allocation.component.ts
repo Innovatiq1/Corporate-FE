@@ -215,7 +215,7 @@ export class DeptBudgetAllocationComponent implements OnInit{
           this.getAllDepartmentBudgets();
           Swal.fire(
             'Deleted!',
-            'Your file has been deleted.',
+            'Budget Deleted Successfully.',
           'success'
           )
         })

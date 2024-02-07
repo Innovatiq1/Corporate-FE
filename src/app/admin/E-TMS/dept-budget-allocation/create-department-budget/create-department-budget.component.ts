@@ -64,7 +64,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
           // items: ['Department'],
           active: 'Edit Department',
         },
-      ];
+      ]; 
     }
 
     this.departmentForm = this.fb.group({
