@@ -197,6 +197,19 @@
     }
   }
 
+  .btn-outline-primary1 {
+    background: $theme-white-active-color !important;
+    color: #fff !important;
+    border: 1px solid $theme-white !important;
+    
+
+    &:hover {
+      background: 0 0 !important;
+      color: $theme-white-bar !important;
+      border: 1px solid $theme-white-active-color !important;
+    }
+  }
+
   .timelineLabelColor strong {
     color: $theme-white-active-color !important;
   }
