@@ -1,31 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { BehaviorSubject, Observable, map } from "rxjs";
-import { environment } from "environments/environment";
-import { ApiResponse } from "@core/models/general.response";
-import { CoursePaginationModel } from "@core/models/course.model";
-import { EmpRequest } from "@core/models/emp-request.model";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { BehaviorSubject, Observable, map } from 'rxjs';
+import { environment } from 'environments/environment';
+import { ApiResponse } from '@core/models/general.response';
+import { CoursePaginationModel } from '@core/models/course.model';
+import { EmpRequest } from '@core/models/emp-request.model';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
-import { Users } from "@core/models/user.model";
-import { CourseTitleModel } from "@core/models/class.model";
+import { Users } from '@core/models/user.model';
+import { CourseTitleModel } from '@core/models/class.model';
 // import { CourseKit, CourseModel, CoursePaginationModel, Program } from "@core/models/course.model";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class EtmsService extends UnsubscribeOnDestroyAdapter{
-  
+export class EtmsService extends UnsubscribeOnDestroyAdapter {
   private prefix: string = environment.apiUrl;
   defaultUrl = environment['apiUrl'];
-  dataChange: BehaviorSubject<EmpRequest[]> = new BehaviorSubject<EmpRequest[]>([]);
+  dataChange: BehaviorSubject<EmpRequest[]> = new BehaviorSubject<EmpRequest[]>(
+    []
+  );
 
-  constructor(private _Http : HttpClient) {
+  constructor(private _Http: HttpClient) {
     super();
   }
   dialogData!: EmpRequest;
- 
+
   getDialogData() {
     return this.dialogData;
   }
@@ -34,29 +35,27 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
     if (filter) {
       if (filter.sortBy) {
         params = params.set(
-          "sortBy",
-          `${filter.sortByDirection === "asc" ? "+" : "-"}${filter.sortBy}`
+          'sortBy',
+          `${filter.sortByDirection === 'asc' ? '+' : '-'}${filter.sortBy}`
         );
       }
       if (filter.limit) {
-        params = params.set("limit", filter.limit?.toString());
+        params = params.set('limit', filter.limit?.toString());
       }
       if (filter.page) {
-        params = params.set("page", filter.page?.toString());
+        params = params.set('page', filter.page?.toString());
       }
       if (filter.filterText) {
-        params = params.set("title", filter.filterText?.toString());
+        params = params.set('title', filter.filterText?.toString());
       }
-      if (filter.status && filter.status === "active") {
-        params = params.set("status", "active");
-      } else if (filter.status && filter.status === "inactive") {
-        params = params.set("status", "inactive");
+      if (filter.status && filter.status === 'active') {
+        params = params.set('status', 'active');
+      } else if (filter.status && filter.status === 'inactive') {
+        params = params.set('status', 'inactive');
       }
     }
     return params;
   }
-
-
 
   createRequest(request: any) {
     const apiUrl = `${this.prefix}admin/courseRequest`;
@@ -65,7 +64,7 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
       .pipe(map((response) => response));
   }
 
-  getAllRequestsByEmployeeId(employee:any): Observable<ApiResponse> {
+  getAllRequestsByEmployeeId(employee: any): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}admin/courseRequest/req/employee?employeeId=${employee.employeeId}`;
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(employee),
@@ -75,42 +74,42 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
     const apiUrl = `${this.prefix}auth/instructorListByID/${id}`;
     return this._Http.get<Users>(apiUrl).pipe(map((response) => response));
   }
-  
 
-
-  getAllRequestsByRo(ro:any): Observable<ApiResponse> {
+  getAllRequestsByRo(ro: any): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}admin/courseRequest/req/employee?ro=${ro.roId}&roApproval=${ro.roApproval}`;
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(ro),
     });
   }
 
-  getAllRequestsByDirector(director:any): Observable<ApiResponse> {
+  getAllRequestsByDirector(director: any): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}admin/courseRequest/req/employee?director=${director.directorId}&directorApproval=${director.directorApproval}`;
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(director),
     });
   }
 
-  getAllRequestsByTrainingAdmin(trainingAdmin:any): Observable<ApiResponse> {
+  getAllRequestsByTrainingAdmin(trainingAdmin: any): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}admin/courseRequest/req/employee?trainingAdmin=${trainingAdmin.trainingAdminId}&trainingAdminApproval=${trainingAdmin.trainingAdminApproval}`;
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(trainingAdmin),
     });
   }
 
-  updateStatus(data:any,id:any) {
+  updateStatus(data: any, id: any) {
     const apiUrl = `${this.prefix}admin/courseRequest/${id}`;
-    return this._Http.put<ApiResponse>(apiUrl, data)
-      .pipe(map(() => { }));
+    return this._Http.put<ApiResponse>(apiUrl, data).pipe(map(() => {}));
   }
 
-  getAllRequests(searchValue:any,searchType:any,data:any): Observable<any> {
+  getAllRequests(
+    searchValue: any,
+    searchType: any,
+    data: any
+  ): Observable<any> {
     const apiUrl = `${this.prefix}admin/courseRequest?searchValue=${searchValue}&searchType=${searchType}`;
-    return this._Http.get<any>(apiUrl,
-      {
-        params: this.buildParams(data),
-      });
+    return this._Http.get<any>(apiUrl, {
+      params: this.buildParams(data),
+    });
   }
 
   /**get request details by id */
@@ -118,7 +117,7 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
     const apiUrl = `${this.prefix}admin/courseRequest/${id}`;
     return this._Http.get<any>(apiUrl).pipe(map((response) => response));
   }
-  
+
   getRequestDirectorCount(id: any) {
     const apiUrl = `${this.prefix}admin/courseRequest/req/count?director=${id}`;
     return this._Http.get<any>(apiUrl).pipe(map((response) => response));
@@ -132,37 +131,37 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
     return this._Http.get<any>(apiUrl).pipe(map((response) => response));
   }
 
-/**get all courses list */
+  /**get all courses list */
   getAllCoursesTitle(status: string): Observable<CourseTitleModel[]> {
     const apiUrl = `${this.prefix}admin/courses-new/title?status=${status}`;
-    return this._Http.get<ApiResponse>(apiUrl).pipe(map((response) => response.data));
+    return this._Http
+      .get<ApiResponse>(apiUrl)
+      .pipe(map((response) => response.data));
   }
 
-  getAllDepartmentBudgets(data:any): Observable<any> {
+  getAllDepartmentBudgets(data: any): Observable<any> {
     const apiUrl = `${this.prefix}admin/budget/department-budget/budget`;
-    return this._Http.get<any>(apiUrl,{
-      params: this.buildParams(data),
-    }).pipe(map((response) => response.data));
+    return this._Http
+      .get<any>(apiUrl, {
+        params: this.buildParams(data),
+      })
+      .pipe(map((response) => response.data));
   }
-  createBudget(request:any){
+  createBudget(request: any) {
     const apiUrl = `${this.prefix}admin/budget`;
-     return this._Http
-       .post<ApiResponse>(apiUrl, request)
-       .pipe(map((response) => response));
- 
-   }
- 
- 
- getAllBudgets(): Observable<any> {
-     const apiUrl = `${this.prefix}admin/budget`;
-     return this._Http.get<any>(apiUrl,
-       {
-        // params: this.buildParams(data),
-       });
-   }
+    return this._Http
+      .post<ApiResponse>(apiUrl, request)
+      .pipe(map((response) => response));
+  }
 
+  getAllBudgets(): Observable<any> {
+    const apiUrl = `${this.prefix}admin/budget`;
+    return this._Http.get<any>(apiUrl, {
+      // params: this.buildParams(data),
+    });
+  }
 
-  getBudgetRequestsByDirector(director:any): Observable<ApiResponse> {
+  getBudgetRequestsByDirector(director: any): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}admin/budget/budg/director?director=${director.directorId}&approval=${director.directorApproval}`;
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(director),
@@ -172,13 +171,12 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
     const apiUrl = `${this.prefix}admin/budget/budg/count?director=${id}`;
     return this._Http.get<any>(apiUrl).pipe(map((response) => response));
   }
-  updateBudgetStatus(data:any,id:any) {
+  updateBudgetStatus(data: any, id: any) {
     const apiUrl = `${this.prefix}admin/budget/${id}`;
-    return this._Http.put<ApiResponse>(apiUrl, data)
-      .pipe(map(() => { }));
+    return this._Http.put<ApiResponse>(apiUrl, data).pipe(map(() => {}));
   }
 
-  getDeptBudgetRequestsByDirector(director:any): Observable<ApiResponse> {
+  getDeptBudgetRequestsByDirector(director: any): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}admin/budget/department-budget/budg/director?director=${director.directorId}&approval=${director.directorApproval}`;
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(director),
@@ -188,71 +186,64 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter{
     const apiUrl = `${this.prefix}admin/budget/department-budget/budg/count?director=${id}`;
     return this._Http.get<any>(apiUrl).pipe(map((response) => response));
   }
-  updateDeptBudgetStatus(data:any,id:any) {
+  updateDeptBudgetStatus(data: any, id: any) {
     const apiUrl = `${this.prefix}admin/budget/department-budget/budget/${id}`;
-    return this._Http.put<ApiResponse>(apiUrl, data)
-      .pipe(map(() => { }));
+    return this._Http.put<ApiResponse>(apiUrl, data).pipe(map(() => {}));
   }
-createDept(request:any){
-  const apiUrl = `${this.prefix}admin/budget/department-budget/budget`;
-     return this._Http
-       .post<ApiResponse>(apiUrl, request)
-       .pipe(map((response) => response));
+  createDept(request: any) {
+    const apiUrl = `${this.prefix}admin/budget/department-budget/budget`;
+    return this._Http
+      .post<ApiResponse>(apiUrl, request)
+      .pipe(map((response) => response));
+  }
+  getNewRequestsByEmployeeId(employee: any): Observable<ApiResponse> {
+    const apiUrl = `${this.prefix}admin/courses-new?status=${employee.employeeStatus}&employee=${employee.employeeId}`;
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(employee),
+    });
+  }
+  getCourseRequestsByTrainingAdmin(
+    trainingAdmin: any
+  ): Observable<ApiResponse> {
+    const apiUrl = `${this.prefix}admin/courses-new?status=${trainingAdmin.trainingAdminStatus}&trainingAdmin=${trainingAdmin.trainingAdminId}`;
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(trainingAdmin),
+    });
+  }
+
+  updateCourseStatus(data: any, id: any) {
+    const apiUrl = `${this.prefix}admin/courses-new/${id}`;
+    return this._Http.put<ApiResponse>(apiUrl, data).pipe(map(() => {}));
+  }
+
+  getBudgetById(id: any) {
+    const apiUrl = `${this.prefix}admin/budget/${id}`;
+    return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+  }
+
+  updateTrainingBudget(id: any, data: any) {
+    const apiUrl = `${this.prefix}admin/budget/${id}`;
+    return this._Http.put<ApiResponse>(apiUrl, data).pipe(map(() => {}));
+  }
+
+  deleteTrainingBudget(id: any) {
+    const apiUrl = `${this.prefix}admin/budget/${id}`;
+    return this._Http.delete<any>(apiUrl).pipe(map((response) => response));
+  }
+  /** Budget Allocation*/
+
+  getDeptBudgetById(id: any) {
+    const apiUrl = `${this.prefix}admin/budget/department-budget/budget/${id}`;
+    return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+  }
+  updateBudget(id: any, payload: any) {
+    const apiUrl = `${this.prefix}admin/budget/department-budget/budget/${id}`;
+    return this._Http
+      .put<ApiResponse>(apiUrl, payload)
+      .pipe(map((response) => response));
+  }
+  deleteBudget(id: any) {
+    const apiUrl = `${this.prefix}admin/budget/department-budget/budget/${id}`;
+    return this._Http.delete<any>(apiUrl).pipe(map((response) => response));
+  }
 }
-getNewRequestsByEmployeeId(employee:any): Observable<ApiResponse> {
-  const apiUrl = `${this.prefix}admin/courses-new?status=${employee.employeeStatus}&employee=${employee.employeeId}`;
-  return this._Http.get<ApiResponse>(apiUrl, {
-    params: this.buildParams(employee),
-  });
-}
-getCourseRequestsByTrainingAdmin(trainingAdmin:any): Observable<ApiResponse> {
-  const apiUrl = `${this.prefix}admin/courses-new?status=${trainingAdmin.trainingAdminStatus}&trainingAdmin=${trainingAdmin.trainingAdminId}`;
-  return this._Http.get<ApiResponse>(apiUrl, {
-    params: this.buildParams(trainingAdmin),
-  });
-}
-
-updateCourseStatus(data:any,id:any) {
-  const apiUrl = `${this.prefix}admin/courses-new/${id}`;
-  return this._Http.put<ApiResponse>(apiUrl, data)
-    .pipe(map(() => { }));
-}
-
-getBudgetById(id: any) {
-  const apiUrl = `${this.prefix}admin/budget/${id}`;
-  return this._Http.get<any>(apiUrl).pipe(map((response) => response));
-}
-
-
-updateTrainingBudget(id:any,data:any,) {
-  const apiUrl = `${this.prefix}admin/budget/${id}`;
-  return this._Http.put<ApiResponse>(apiUrl, data)
-    .pipe(map(() => { }));
-}
-
-deleteTrainingBudget(id: any) {
-  const apiUrl = `${this.prefix}admin/budget/${id}`;
-  return this._Http.delete<any>(apiUrl).pipe(map((response) => response));
-}
-/** Budget */
-
-getDeptBudgetById(id: any) {
-  const apiUrl = `${this.prefix}admin/budget/department-budget/budget/${id}`;
-  return this._Http.get<any>(apiUrl).pipe(map((response) => response));
-}
-
-
-updateBudget(id: any, payload:any) {
-  const apiUrl = `${this.prefix}admin/budget/department-budget/budget/${id}`;
-  return this._Http.put<ApiResponse>(apiUrl, payload).pipe(map((response) => response));;
-} 
-
-deleteBudget(id: any) {
-  const apiUrl = `${this.prefix}admin/budget/department-budget/budget/${id}`;
-  return this._Http.delete<any>(apiUrl).pipe(map((response) => response));
-}
-
-}
-
-
-
