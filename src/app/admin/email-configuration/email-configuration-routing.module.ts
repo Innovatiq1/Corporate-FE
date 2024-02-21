@@ -4,7 +4,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { WelcomeMailComponent } from './welcome-mail/welcome-mail.component';
 import { InstructorRequestComponent } from './instructor-request/instructor-request.component';
 import { InviteUserRejectComponent } from './invite-user-reject/invite-user-reject.component';
-import { NewStudentReferredComponent } from './new-student-referred/new-student-referred.component';
 import { CourseReferralInviteComponent } from './course-referral-invite/course-referral-invite.component';
 import { CompletedCourseComponent } from './completed-course/completed-course.component';
 import { InstructorCourseInviteComponent } from './instructor-course-invite/instructor-course-invite.component';
@@ -14,6 +13,7 @@ import { AdminNewEmailComponent } from './admin-new-email/admin-new-email.compon
 import { ProgramRegistrationComponent } from './program-registration/program-registration.component';
 import { ProgramApprovalComponent } from './program-approval/program-approval.component';
 import { ProgramCompletionComponent } from './program-completion/program-completion.component';
+import { DirectorCourseNotificationComponent } from './director-course-notification/director-course-notification.component';
 
 
 const routes: Routes = [
@@ -34,8 +34,8 @@ const routes: Routes = [
         component: InviteUserRejectComponent
       },
       {
-        path: 'new-student-referred',
-        component: NewStudentReferredComponent
+        path: 'director-course-notification',
+        component: DirectorCourseNotificationComponent
       },
       {
         path: 'course-referral-invite',

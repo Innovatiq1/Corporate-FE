@@ -8,7 +8,6 @@ import { WelcomeMailComponent } from './welcome-mail/welcome-mail.component';
 import { InstructorRequestComponent } from './instructor-request/instructor-request.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { InviteUserRejectComponent } from './invite-user-reject/invite-user-reject.component';
-import { NewStudentReferredComponent } from './new-student-referred/new-student-referred.component';
 import { CourseReferralInviteComponent } from './course-referral-invite/course-referral-invite.component';
 import { CompletedCourseComponent } from './completed-course/completed-course.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -20,6 +19,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ProgramRegistrationComponent } from './program-registration/program-registration.component';
 import { ProgramApprovalComponent } from './program-approval/program-approval.component';
 import { ProgramCompletionComponent } from './program-completion/program-completion.component';
+import { DirectorCourseNotificationComponent } from './director-course-notification/director-course-notification.component';
 
 
 
@@ -31,7 +31,7 @@ import { ProgramCompletionComponent } from './program-completion/program-complet
                  WelcomeMailComponent,
                  InstructorRequestComponent,
                  InviteUserRejectComponent,
-                 NewStudentReferredComponent,
+                 DirectorCourseNotificationComponent,
                  CourseReferralInviteComponent,
                  CompletedCourseComponent,
                  SendCourseInvoiceComponent,
