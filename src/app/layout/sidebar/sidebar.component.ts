@@ -203,6 +203,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
   logout() {
+    interface OuterObject {
+      id: any;
+     
+}
+const storedDataString: string | null = localStorage.getItem('userLogs');
+const data: OuterObject = storedDataString !== null ? JSON.parse(storedDataString) : {};
+let data1 ={
+id:data.id
+}
+
+
+this.authService.logout1(data1).subscribe((res) => {
+if (res) {
+}
+});
+
     this.authService.logout().subscribe((res) => {
       if (!res.success) {
         let userType = JSON.parse(localStorage.getItem('user_data')!).user.type;
