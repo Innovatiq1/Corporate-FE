@@ -69,6 +69,8 @@ export class CreateBudgetComponent {
   }
 
   ngOnInit() {
+    const employeeEmail = JSON.parse(localStorage.getItem('user_data')!).user.email;
+    console.log("employeeEmail" , employeeEmail);
     if (this.action === 'edit') {
       this.editRequest();
     }else{
@@ -139,11 +141,13 @@ updateRequest(){
 
 
 onSubmit(){
+  const employeeEmail = JSON.parse(localStorage.getItem('user_data')!).user.email;
   if (this.requestForm.valid) {
     const requestData = this.requestForm.value;
     requestData['employeeName']=this.employeName;
     requestData['approval']='Pending';
     requestData['director']=this.directorId
+    requestData['employeeEmail'] = employeeEmail;
             this.etmsService
               .createBudget(requestData)
               .subscribe((response: any) => {
@@ -153,9 +157,7 @@ onSubmit(){
                   icon: 'success',
                 });
                 this.router.navigate(['/admin/e-tms/overall-budget-list']);
-              });
-          
+              }); 
   }
-
 }
 }
