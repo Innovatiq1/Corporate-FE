@@ -64,7 +64,7 @@
             </div>
             <ng-scrollbar style="height: 300px" visibility="hover">
             <div class="table-responsive m-t-15">
-              <table class="table align-items-center" *ngFor="let dataSource of dataSource.slice(0, 5)">
+              <table class="table align-items-center" *ngFor="let dataSource of dataSource?.slice(0, 5)">
                 <tbody>
                   <tr>
                     <td class="col-8"><i class="fa fa-circle col-cyan msr-2"></i> {{dataSource.courseName}}</td>
@@ -108,7 +108,7 @@
             </div>
             <ng-scrollbar style="height: 300px" visibility="hover">
             <div class="table-responsive m-t-15">
-              <table class="table align-items-center" *ngFor="let programFilterData of programFilterData.slice(0, 5)">
+              <table class="table align-items-center" *ngFor="let programFilterData of programFilterData?.slice(0, 5)">
                 <tbody>
                   <tr>
                     <td class="text col-8"><i class="fa fa-circle col-cyan msr-2"></i> {{programFilterData.courseName}}</td>
@@ -148,7 +148,7 @@
           <div class="body">
             <ng-scrollbar style="height: 250px" visibility="hover">
             <div class="table-responsive">
-              <table class="table table-borderless medicine-list" *ngFor="let items of currentWeekRecords.slice(0, 5)">
+              <table class="table table-borderless medicine-list" *ngFor="let items of currentWeekRecords?.slice(0, 5)">
                
                 <tr>
                   <td><i class="fa fa-circle col-cyan msr-2"></i> {{items.courseName}}</td>
@@ -213,7 +213,7 @@
                     <!-- <th>Details </th> -->
                   </tr>
                 </thead>
-                <tbody *ngFor="let items of currentRecords.slice(0, 5)">
+                <tbody *ngFor="let items of currentRecords?.slice(0, 5)">
                   <tr>
                     <!-- <td>1</td> -->
                     <td>{{items.courseName}}</td>
@@ -303,7 +303,7 @@
           <div class="body">
             <ng-scrollbar style="height: 250px" visibility="hover">
             <div class="table-responsive">
-              <table class="table table-borderless medicine-list" *ngFor="let items of currentProgramWeekRecords.slice(0, 5)">
+              <table class="table table-borderless medicine-list" *ngFor="let items of currentProgramWeekRecords?.slice(0, 5)">
                
                 <tr>
                   <td><i class="fa fa-circle col-cyan msr-2"></i> {{items.courseName}}</td>
@@ -368,7 +368,7 @@
                     <!-- <th>Details </th> -->
                   </tr>
                 </thead>
-                <tbody *ngFor="let items of currentProgramRecords.slice(0, 5)">
+                <tbody *ngFor="let items of currentProgramRecords?.slice(0, 5)">
                   <tr>
                     <!-- <td>1</td> -->
                     <td>{{items.courseName}}</td>
