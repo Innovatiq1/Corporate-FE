@@ -6,11 +6,11 @@ import { EmailConfigService } from '@core/service/email-config.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-new-student-referred',
-  templateUrl: './new-student-referred.component.html',
-  styleUrls: ['./new-student-referred.component.scss']
+  selector: 'app-director-course-notification',
+  templateUrl: './director-course-notification.component.html',
+  styleUrls: ['./director-course-notification.component.scss']
 })
-export class NewStudentReferredComponent {
+export class DirectorCourseNotificationComponent {
   updateStudentRef:FormGroup  ;
   edit = true;
   welcomeUrl: any;
@@ -33,7 +33,7 @@ export class NewStudentReferredComponent {
     {
       title: 'Forgot Mail',
       items: ['Email Configuration'],
-      active: 'New Student Referred',
+      active: 'Director Course Notification',
     },
   ];
   constructor(private emailConfigurationService: EmailConfigService, private router: Router,private formBuilder: FormBuilder){
@@ -55,7 +55,7 @@ export class NewStudentReferredComponent {
   
   getForgetPasswordTemplate() {
     this.emailConfigurationService.getForgetPasswordTemplate().subscribe( response =>{
-      this.assignData  = response?.data?.docs[0]?.new_member_reffered_template;
+      this.assignData  = response?.data?.docs[0]?.director_course_notification;
 
       console.log(this.assignData,"ofEmail967978")
       // this.ref.detectChanges();
@@ -68,7 +68,7 @@ export class NewStudentReferredComponent {
   update() {
     return new Promise<void>((resolve, reject) => {
           const obj = this.updateStudentRef.value;
-          obj.insertaction = 'new_member_reffered_template';
+          obj.insertaction = 'director_course_notification';
           this.emailConfigurationService.updateForgetPasswordTemplate(obj, this._id).subscribe(
             (res) => {
               Swal.fire({

@@ -43,7 +43,7 @@ export class AuthService {
         })
       );
   }
-  forgotPassword(email:any): Observable<ApiResponse> {
+  forgotPassword(email: any): Observable<ApiResponse> {
     return this.http
       .post<ApiResponse>(
         `${environment.apiUrl}common/forgot-password`,
@@ -57,17 +57,14 @@ export class AuthService {
   }
 
   logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(this.currentUserValue);
     return of({ success: false });
   }
-  logout1(data:any) {
+  logout1(data: any) {
     const apiUrl = `${environment.apiUrl}auth/userlogs/logout`
-   return this.http.put<ApiResponse>(apiUrl,data).pipe(map((response) => response));
-    // remove user from local storage to log user out
-    
+    return this.http.put<ApiResponse>(apiUrl, data).pipe(map((response) => response));
   }
-  
-  
+
+
 }

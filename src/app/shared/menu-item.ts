@@ -533,11 +533,11 @@ MENU_LIST = [
             title: "Completed Program",
             type: "none"
         },
-        // {
-        //     id: "send-course-invoice",
-        //     title: "Send Course Invoice",
-        //     type: "none"
-        // },
+        {
+            id: "director-course-notification",
+            title: "Director Course Notification",
+            type: "none"
+        },
         // {
         //     id: "admin-new-email",
         //     title: "Admin New Email",
