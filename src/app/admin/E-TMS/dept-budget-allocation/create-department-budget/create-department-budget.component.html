@@ -1,26 +1,21 @@
 <section class="content">
-  <div class="content-block">
-    <div class="block-header" *ngFor="let breadscrum of breadscrums">
-      <!-- breadcrumb -->
-      <app-breadcrumb
-        [title]="breadscrum.title"
-        [active_item]="breadscrum.active"
-      >
-      </app-breadcrumb>
-    </div>
-    <div class="row clearfix">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card">
-          <div class="header">
-            <h2 class="text-center">
-              {{ action === "edit" ? "Edit" : "Create" }} Department
-            </h2>
-          </div>
-          <div class="body">
-            <form class="m-4" [formGroup]="departmentForm">
-              <div class="row">
-                <!-- Budget -->
-                <!-- <div class="col-lg-4">
+    <div class="content-block">
+      <div class="block-header" *ngFor="let breadscrum of breadscrums">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="breadscrum.title" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <h2 class="text-center">{{action === "edit"?'Edit':'Allocate'}} Department Budget</h2>
+            </div>
+            <div class="body">
+              <form class="m-4" [formGroup]="departmentForm">
+                <div class="row">
+                  <!-- Budget -->
+                  <!-- <div class="col-lg-4">
                     <label>Department Name<span class="mandatory">&nbsp;*</span> </label>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <input matInput formControlName="department" required>
