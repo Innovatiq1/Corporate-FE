@@ -48,10 +48,8 @@ export class LecturesComponent
   displayedColumns = [
     'select',
     'sName',
-    'class',
     'date',
     'endDate',
-    'duration',
     'time',
     'status',
     'actions',
@@ -172,7 +170,7 @@ export class LecturesComponent
     this.cdr.detectChanges();
     //console.log("ssssssssssss",this.dataSource)
     //this.myArray.push(newItem);
-    this.myArray.data = this.dataSource; 
+    this.myArray.data = this.dataSource1;
   }
     //return sessions;
     

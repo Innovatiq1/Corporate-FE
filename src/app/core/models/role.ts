@@ -8,6 +8,8 @@ export enum Role {
   TrainingCoordinator = 'Training Coordinator',
   HOD = 'Head of Department',
   Supervisor = 'Supervisor',
-  TrainingAdministrator = 'Training Administrator'
+  TrainingAdministrator = 'Training Administrator',
+  Approver = 'Approver',
+  TrainingCoordinatorAdministrator = 'Training Coordinator Administrator',
 
 }

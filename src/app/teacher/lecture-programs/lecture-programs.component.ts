@@ -34,10 +34,8 @@ implements OnInit
 displayedColumns = [
   'select',
   'sName',
-  'class',
   'date',
   'endDate',
-  'duration',
   'time',
   'status',
   'actions',
@@ -158,7 +156,7 @@ getSession() {
   this.cdr.detectChanges();
   //console.log("ssssssssssss",this.dataSource)
   //this.myArray.push(newItem);
-  this.myArray.data = this.dataSource; 
+  this.myArray.data = this.dataSource1; 
 }
   //return sessions;
   

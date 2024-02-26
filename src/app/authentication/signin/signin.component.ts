@@ -104,6 +104,10 @@ export class SigninComponent
               this.router.navigate(['/dashboard/coursemanager-dashboard']);
             }  else if (role === Role.ProgramManager || role === 'programcoordinator'|| role === 'Program manager') {
               this.router.navigate(['/dashboard/programmanager-dashboard']);
+            } else if (role === Role.Approver || role === 'approver'|| role === 'approver') {
+              this.router.navigate(['/admin/courses/all-courses']);
+            } else if (role === Role.TrainingCoordinatorAdministrator || role === 'Training Coordinator Administrator'|| role === 'Training Coordinator Administrator') {
+              this.router.navigate(['/admin/students/all-students']);
             } 
              else {
               this.router.navigate(['/authentication/page404']);
