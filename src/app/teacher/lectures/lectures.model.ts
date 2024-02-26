@@ -11,6 +11,7 @@ export class Lectures {
   sessionStartDate:string;
   classId:string;
   _id: string;
+  sessions: any;
   
   constructor(lectures: Lectures) {
     {

@@ -1405,6 +1405,33 @@ export const ROUTES: any[] = [
   },
 
   {
+    path: '/approver/dashboard',
+    title: 'MENUITEMS.STUDENT.LIST.DASHBOARD',
+    iconType: 'material-icons-two-tone',
+    icon: 'space_dashboard',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    role: ['Approver'],
+    children: [],
+  },
+
+  {
+    path: '/trainingcoordinatordministrator/dashboard',
+    title: 'MENUITEMS.STUDENT.LIST.DASHBOARD',
+    iconType: 'material-icons-two-tone',
+    icon: 'space_dashboard',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    role: ['Training Coordinator Administrator'],
+    children: [],
+  },
+
+
+  {
     path: '/student/dashboard',
     title: 'MENUITEMS.STUDENT.LIST.DASHBOARD',
     iconType: 'material-icons-two-tone',
