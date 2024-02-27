@@ -66,6 +66,26 @@
                 </mat-form-field>
               </div>
             </div>
+           <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <mat-form-field
+                class="example-full-width mb-3"
+                appearance="outline"
+              >
+              <mat-label>{{"Gender" | translate}}</mat-label>
+                <mat-select formControlName="gender" required>
+                  <mat-option [value]="'male'">{{"Male" | translate}}</mat-option>
+                  <mat-option [value]="'female'"> {{"Female" | translate}} </mat-option>
+                  <mat-option [value]="'other'"> {{"Other" | translate}} </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="authForm.get('gender')?.hasError('required')"
+                >
+                  {{"Gender is required" | translate}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+           </div>
             <div class="row">
               <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
                 <mat-form-field class="example-full-width" appearance="outline">

@@ -270,7 +270,7 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let class of registeredProgramClasses">
-                                        <td>{{class?.program_name | titlecase}}</td>
+                                        <td>{{class?.programTitle | titlecase}}</td>
                                         <td>{{class?.student_name | titlecase }} </td>
                                         <td>{{class?.classId?.sessions[0]?.sessionStartDate  |
                                             date}}</td>

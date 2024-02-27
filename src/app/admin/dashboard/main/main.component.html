@@ -599,7 +599,7 @@
                 <tbody>
                   <tr *ngFor="let student of students">
                     <td class="table-img">
-                      <img src="{{student?.avatar}}" alt="">
+                      <img src="{{student?.avatar || 'assets/profile.png'}}" alt="">
                     </td>
                     <td>{{student?.name}}</td>
                     <td>{{student?.qualification}}</td>

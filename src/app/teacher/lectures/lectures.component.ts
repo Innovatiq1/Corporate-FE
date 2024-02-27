@@ -78,6 +78,7 @@ export class LecturesComponent
   ];
   totalItems: any;
   filterName='';
+  pageSizeArr = [10, 25, 50, 100];
   //dataSource: any=[];
   //dataSource:any[] = [];
   //dataSource: any;
@@ -300,6 +301,13 @@ export class LecturesComponent
       }
     });
   }
+
+  pageSizeChange($event: any) {
+    this.coursePaginationModel.page = $event?.pageIndex + 1;
+    this.coursePaginationModel.limit = $event?.pageSize;
+    this.getClassList();
+  }
+
   private refreshTable() {
    // this.paginator._changePageSize(this.paginator.pageSize);
   }

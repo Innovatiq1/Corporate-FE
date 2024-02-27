@@ -90,7 +90,11 @@
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
                       <span class="mobile-label">Sub Category:</span>
-                      {{row.subCategories[0].category_name}}
+                      <ng-container *ngFor="let subCategory of row.subCategories">
+                        {{ subCategory.category_name }}
+                        <br>
+                      </ng-container>
+                      <!-- {{row.subCategories[0].category_name}} -->
                      </mat-cell>
                   </ng-container>
                   <!-- actions -->
