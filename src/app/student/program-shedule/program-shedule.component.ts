@@ -42,6 +42,8 @@ breadscrums = [
     active: 'Exam Schedule',
   },
 ];
+  userType: any;
+  student: boolean = false;
 
 constructor(
   public httpClient: HttpClient,
@@ -55,6 +57,10 @@ constructor(
 @ViewChild('filter', { static: true }) filter!: ElementRef;
 
 ngOnInit() {
+  this.userType = localStorage.getItem('user_type');
+  if(this.userType ==='admin') { 
+    this.student = true;
+  }
   this.loadData();
 }
 
