@@ -212,6 +212,7 @@ export class CreateClassComponent {
           start: `${moment(item.sessionStartDate).format('YYYY-MM-DD')}`,
           end: `${moment(item.sessionEndDate).format('YYYY-MM-DD')}`,
           instructor: item.instructorId?.id,
+          
           // lab: item.laboratoryId?.id,
         });
       });
@@ -358,7 +359,7 @@ export class CreateClassComponent {
   submit() {
     // if(!this.viewUrl&&!this.editUrl){
     const sessions = this.getSession();
-
+console.log('sessions',sessions)
     // }
     if (this.classId) {
       this.sessions = this.getSession();
