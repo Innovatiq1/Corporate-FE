@@ -93,6 +93,17 @@ delete(id: string) {
       });
       return;
     }
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this  Course?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
     this._courseService.deleteCourse(id).subscribe(() => {
       this.getAllCourse();
       Swal.fire({
@@ -101,7 +112,11 @@ delete(id: string) {
         icon: 'success',
       });
     });
+  }
   });
+
+});
+  
 }
 
   // export table data in excel file
