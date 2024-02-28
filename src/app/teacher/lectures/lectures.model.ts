@@ -10,6 +10,7 @@ export class Lectures {
   sessionStartTime:string;
   sessionStartDate:string;
   classId:string;
+  courseId:string;
   _id: string;
   sessions: any;
   
@@ -26,6 +27,7 @@ export class Lectures {
       this.sessionStartTime=lectures.sessionStartTime || '';
       this.sessionStartDate=lectures.sessionStartDate || '';
       this.classId=lectures.classId || '';
+      this.courseId=lectures.courseId || '';
       this._id=lectures._id || '';
     }
   }
