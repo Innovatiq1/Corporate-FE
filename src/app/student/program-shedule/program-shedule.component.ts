@@ -174,7 +174,7 @@ connect(): Observable<ExamSchedule[]> {
           return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
         });
       // Sort filtered data
-      const sortedData = this.sortData(this.filteredData.slice());
+      const sortedData = this.sortData(this.filteredData.slice().reverse());
       // Grab the page's slice of the filtered sorted data.
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       this.renderedData = sortedData.splice(
