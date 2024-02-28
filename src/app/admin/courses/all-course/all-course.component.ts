@@ -122,10 +122,12 @@ delete(id: string) {
   // export table data in excel file
   exportExcel() {
     // key name with space add in brackets
-    console.log("vv", this.dataSource);
+    console.log("vv", this.courseData);
     const exportData: Partial<TableElement>[] =
       this.courseData.map((x: any) => ({
         'Course Name': x.title,
+        'Course Code':x.courseCode,
+        
         'Duration': x.training_hours,
       }));
 
