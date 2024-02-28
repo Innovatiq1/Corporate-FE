@@ -28,6 +28,7 @@ export class AddComponent {
   courseTitle: any;
   startTime: any;
   endTime: any;
+  userType: any;
   
   constructor(
     private fb: UntypedFormBuilder,
@@ -51,6 +52,8 @@ export class AddComponent {
   }
   
   ngOnInit(): void {
+     this.userType = localStorage.getItem('user_type');
+    console.log("userType: " + this.userType);
     forkJoin({
       courses: this._classService.getAllCoursesTitle('active'),
       // instructors: this.instructorService.getInstructor(),
@@ -105,7 +108,13 @@ export class AddComponent {
   
   
     cancel(){
-      this.router.navigate(['/admin/exam/exam-schedule'])
+      if(this.userType === 'admin'){
+        this.router.navigate(['/admin/exam/exam-schedule']);
+      }else if(this.userType === 'Student'){
+        this.router.navigate(['/student/exams/courses']);
+      }
+      
+      // this.router.navigate(['/student/exams/courses']);
 
     }
     onSelectChange(event :any) {
@@ -142,7 +151,12 @@ export class AddComponent {
         text: 'Exam schdeule add successfully',
         icon: 'success',
       });
-      this.router.navigate(['/admin/exam/exam-schedule'])
+      if(this.userType === 'admin'){
+        this.router.navigate(['/admin/exam/exam-schedule']);
+      }else if(this.userType === 'Student'){
+        this.router.navigate(['/student/exams/courses']);
+      }
+      
     });
 
   } 

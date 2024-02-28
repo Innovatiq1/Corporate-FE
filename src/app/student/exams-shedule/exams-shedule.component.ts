@@ -148,11 +148,13 @@ connect(): Observable<ExamSchedule[]> {
     this.filterChange,
     this.paginator.page,
   ];
-  let studentId = localStorage.getItem('id')
+  let studentId = localStorage.getItem('id');
+  console.log("id=" + studentId)
   this.exampleDatabase.getAllExams(studentId);
   return merge(...displayDataChanges).pipe(
     map(() => {
       // Filter data
+      console.log("filteData",this.exampleDatabase);
       this.filteredData = this.exampleDatabase.data
         .slice()
         .filter((examSchedule: ExamSchedule) => {
@@ -166,6 +168,7 @@ connect(): Observable<ExamSchedule[]> {
           ).toLowerCase();
           return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
         });
+        
       // Sort filtered data
       const sortedData = this.sortData(this.filteredData.slice());
       // Grab the page's slice of the filtered sorted data.
