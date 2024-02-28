@@ -40,12 +40,13 @@ export class FormDialogComponent {
     private fb: UntypedFormBuilder
   ) {
     // Set the defaults
+    console.log("Setting defaults",data.lectures.sessions[0]._id)
     this.action = data.action;
     this.program = data.program
     if (this.action === "edit") {
       this.dialogTitle = data.lectures.sName;
       this.lectures = data.lectures;
-      this.classId=data.lectures.classId
+      this.classId=data.lectures.sessions[0]._id;
       this._id=data.lectures._id
     } else {
       this.dialogTitle = "New Lectures";
@@ -83,12 +84,12 @@ export class FormDialogComponent {
     this.dialogRef.close();
   }
   public confirmAdd(): void {
-    console.log("====fopa====")
+    
     let data=this.lecturesForm.value
     data['classId']=this.classId
     data['_id']=this._id
     
-    
+    console.log("====fopa====",data);
     if(this.program){
       this.lecturesService.updateProgramLectures(data);
     }else {
