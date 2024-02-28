@@ -64,12 +64,13 @@
             </div>
             <ng-scrollbar style="height: 300px" visibility="hover">
             <div class="table-responsive m-t-15">
-              <table class="table align-items-center" *ngFor="let dataSource of dataSource?.slice(0, 5)">
+              <table class="table align-items-center" *ngFor="let dataSource of dataSource1?.slice(0, 5)">
                 <tbody>
                   <tr>
                     <td class="col-8"><i class="fa fa-circle col-cyan msr-2"></i> {{dataSource.courseName}}</td>
-                    <td class="col-3" *ngIf="dataSource.duration===1">{{dataSource.duration}} Day</td>
-                    <td class="col-3" *ngIf="dataSource.duration!==1">{{dataSource.duration}} Days</td>
+                    <td class="col-8"> ${{dataSource.instructorCost}}</td>
+                    <!-- <td class="col-3" *ngIf="dataSource.duration===1">{{dataSource.duration}} Day</td>
+                    <td class="col-3" *ngIf="dataSource.duration!==1">{{dataSource.duration}} Days</td> -->
                     <!-- <td class="col-green">+32%</td> -->
                   </tr>
                   <!-- <tr>
@@ -112,8 +113,9 @@
                 <tbody>
                   <tr>
                     <td class="text col-8"><i class="fa fa-circle col-cyan msr-2"></i> {{programFilterData.courseName}}</td>
-                    <td clas="col-3" *ngIf="programFilterData.duration===1">{{programFilterData.duration}} Day</td>
-                    <td clas="col-3" *ngIf="programFilterData.duration!==1">{{programFilterData.duration}} Days</td>
+                    <td class="col-8">$ {{programFilterData?.instructorCost}}</td>
+                    <!-- <td clas="col-3" *ngIf="programFilterData.duration===1">{{programFilterData.duration}} Day</td>
+                    <td clas="col-3" *ngIf="programFilterData.duration!==1">{{programFilterData.duration}} Days</td> -->
                     <!-- <td class="col-green">+32%</td> -->
                   </tr>
                   <!-- <tr>
@@ -207,9 +209,9 @@
                   <tr>
                     <!-- <th>#</th> -->
                     <th>Subject Name</th>
-                    <th>Class</th>
-                    <th>Time</th>
-                    <th>Duration</th>
+                    <!-- <th>Class</th> -->
+                    <th>Start Time</th>
+                    <th>End Time</th>
                     <!-- <th>Details </th> -->
                   </tr>
                 </thead>
@@ -217,9 +219,9 @@
                   <tr>
                     <!-- <td>1</td> -->
                     <td>{{items.courseName}}</td>
-                    <td>{{items.courseCode}}</td>
+                    <!-- <td>{{items.courseCode}}</td> -->
                     <td>{{items.sessionStartTime}}</td>
-                    <td>45 Min</td>
+                    <td>{{items.sessionEndTime}}</td>
                     <!-- <td>
                       <button mat-icon-button class="tbl-action-btn">
                         <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
@@ -362,9 +364,9 @@
                   <tr>
                     <!-- <th>#</th> -->
                     <th>Subject Name</th>
-                    <th>Class</th>
-                    <th>Time</th>
-                    <th>Duration</th>
+                    <!-- <th>Class</th> -->
+                    <th>Start Time</th>
+                    <th>End Time</th>
                     <!-- <th>Details </th> -->
                   </tr>
                 </thead>
@@ -372,9 +374,9 @@
                   <tr>
                     <!-- <td>1</td> -->
                     <td>{{items.courseName}}</td>
-                    <td>{{items.courseCode}}</td>
+                    <!-- <td>{{items.courseCode}}</td> -->
                     <td>{{items.sessionStartTime}}</td>
-                    <td>45 Min</td>
+                    <td>{{items.sessionEndTime}}</td>
                     <!-- <td>
                       <button mat-icon-button class="tbl-action-btn">
                         <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>

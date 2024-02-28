@@ -211,7 +211,8 @@
                                         <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
                                         <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
                                         <td>
-                                            <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
+                                            <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}
+                                            </div>
                                         </td>
                                         <td>
                                             <button mat-button [matMenuTriggerFor]="menu">
@@ -227,7 +228,7 @@
 
                                             <mat-menu #menu="matMenu" xPosition="before">
                                                 <button mat-menu-item class="tbl-action-btn"
-                                                [routerLink]="['/admin/program/edit-class',class.id]">
+                                                    [routerLink]="['/admin/program/edit-class',class.id]">
                                                     <app-feather-icons [icon]="'edit'"
                                                         [class]="'tbl-fav-edit'"></app-feather-icons>
                                                     <span class="menu-text">Edit</span>
@@ -272,11 +273,11 @@
                                     <tr *ngFor="let class of registeredProgramClasses">
                                         <td>{{class?.programTitle | titlecase}}</td>
                                         <td>{{class?.student_name | titlecase }} </td>
-                                        <td>{{class?.classId?.sessions[0]?.sessionStartDate  |
+                                        <td>{{class?.classId?.sessions[0]?.sessionStartDate |
                                             date}}</td>
                                         <td>
-                                            {{class?.classId?.sessions[0]?.sessionEndDate  |
-                                                date}}
+                                            {{class?.classId?.sessions[0]?.sessionEndDate |
+                                            date}}
                                             <!-- <i class="far fa-file-pdf tbl-pdf"></i> -->
                                         </td>
                                         <td>
@@ -324,62 +325,43 @@
                 <div class="card">
                   <div class="header mt-3">
                     <h2>Upcoming Programs</h2>
-                    <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
-                      <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu">
-                      <button mat-menu-item>
-                        <mat-icon>add_circle_outline</mat-icon>
-                        <span>Add</span>
-                      </button>
-                      <button mat-menu-item disabled>
-                        <mat-icon>delete_outline</mat-icon>
-                        <span>Delete</span>
-                      </button>
-                      <button mat-menu-item>
-                        <mat-icon>refresh</mat-icon>
-                        <span>Refresh</span>
-                      </button>
-                    </mat-menu> -->
                   </div>
                   <div class="body">
-                    <div class="card-block">
-                      <div  *ngFor="let program of upcomingPrograms" class="row m-b-20">
-                        <div class="col-auto p-r-0">
-                          <img src="{{program?.image_link}}" alt="user image" class="latest-posts-img">
+                    <div class="card-block" *ngFor="let program of upcomingPrograms">
+                      <div class="row m-b-20">
+                        <div class="col-md-3">
+                          <img src="{{program?.image_link}}" alt="user image" class="img-fluid">
                         </div>
-                        <div class="col">
+                        <div class="col-md-8" style="margin-left: -15px;">
                           <h6>{{program?.title}}</h6>
                           <div class="row">
-                            <div class="col">
+                            <div class="col-md-2">
                               <b>{{ program?.courseCode }}</b>
-                          </div>
-                          <div class="col">
+                            </div>
+                            <div class="col-md-2">
                               <b>{{ program?.duration }} Hours</b>
-                          </div>
-                          <div class="col">
+                            </div>
+                            <div class="col-md-2">
                               <b>{{ program?.courseFee }}$</b>
-                          </div>
-                          <div class="col" [class]="program?.Active ? 'badge badge-solid-red' : 'badge badge-solid-green'">
+                            </div>
+                            <div class="col-md-3" [class]="program?.Active ? 'badge badge-solid-red' : 'badge badge-solid-green'">
                               <b>{{ program?.deliveryMode | titlecase }}</b>
-                          </div>
-                          <div class="col">
-                            <b  style="color: blue;">
-                              <i class="fa fa-play-circle-o"></i> {{program?.sessionStartDate | date}}</b>
-                          </div>
+                            </div>
+                            <div class="col-md-3">
+                              <b style="color: blue;"><i class="fa fa-play-circle-o"></i> {{program?.sessionStartDate | date}}</b>
+                            </div>
                           </div>
         
                          
                         </div>
                       </div>
-                   
-                      <div class="text-center">
-                        <button mat-stroked-button [routerLink]="['/admin/program/program-list']" color="primary">View More</button>
-                      </div>
+                    </div>
+                    <div class="text-center">
+                      <button mat-stroked-button [routerLink]="['/admin/program/program-list']" color="primary">View More</button>
                     </div>
                   </div>
                 </div>
               </div>
-                  </div>
+        </div>
     </div>
 </section>

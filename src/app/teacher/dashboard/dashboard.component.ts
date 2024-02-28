@@ -164,6 +164,7 @@ export class DashboardComponent implements OnInit {
               item.sessions[0].sessionStartTime,
               'HH:mm'
             );
+            let endtimeObject = moment(item.sessions[0].sessionEndTime, "HH:mm");
             console.log(starttimeObject,"++++");
             const duration = moment.duration(
               moment(item.sessions[0].sessionEndDate).diff(
@@ -185,6 +186,7 @@ export class DashboardComponent implements OnInit {
                 'YYYY-MM-DD'
               ),
               sessionStartTime: starttimeObject.format('hh:mm A'),
+              sessionEndTime: endtimeObject.format("hh:mm A"),
               duration: daysDifference,
             });
           } else {
@@ -214,6 +216,7 @@ export class DashboardComponent implements OnInit {
               item.sessions[0].sessionStartTime,
               'HH:mm'
             );
+        let endtimeObject = moment(item.sessions[0].sessionEndTime, "HH:mm");
 
             const duration = moment.duration(
               moment(item.sessions[0].sessionEndDate).diff(
@@ -227,7 +230,7 @@ export class DashboardComponent implements OnInit {
             this.programFilterData?.push({
               courseName: item.sessions[0].courseName,
               courseCode: item.sessions[0].courseCode,
-
+              instructorCost:item.instructorCost,
               duration: daysDifference,
               sessionStartDate: moment(
                 item.sessions[0].sessionStartDate
@@ -236,6 +239,7 @@ export class DashboardComponent implements OnInit {
                 'YYYY-MM-DD'
               ),
               sessionStartTime: starttimeObject.format('hh:mm A'),
+          sessionEndTime: endtimeObject.format("hh:mm A"),
             });
           } else {
           }
