@@ -114,6 +114,7 @@ export class CourseTimetableComponent implements OnInit {
         plugins: [dayGridPlugin],
         events: filteredEvents,
         eventContent: function(arg, createElement) {
+          console.log("arg", arg);
           const title = arg.event.title;
           const sessionStartTime = arg.event.extendedProps['sessionStartTime'];
           const sessionEndTime = arg.event.extendedProps['sessionEndTime'];

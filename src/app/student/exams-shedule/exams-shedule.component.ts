@@ -34,6 +34,7 @@ selection = new SelectionModel<ExamSchedule>(true, []);
 index?: number;
 id?: number;
 examSchedule?: ExamSchedule;
+student:boolean = false;
 
 breadscrums = [
   {
@@ -42,6 +43,7 @@ breadscrums = [
     active: 'Exam Schedule',
   },
 ];
+  userType: any;
 
 constructor(
   public httpClient: HttpClient,
@@ -55,6 +57,11 @@ constructor(
 @ViewChild('filter', { static: true }) filter!: ElementRef;
 
 ngOnInit() {
+  this.userType = localStorage.getItem('user_type');
+  console.log('user type'+this.userType);
+  if(this.userType ==='admin') { 
+    this.student = true;
+  }
   this.loadData();
 }
 
@@ -149,12 +156,12 @@ connect(): Observable<ExamSchedule[]> {
     this.paginator.page,
   ];
   let studentId = localStorage.getItem('id');
-  console.log("id=" + studentId)
+  // console.log("id=" + studentId)
   this.exampleDatabase.getAllExams(studentId);
   return merge(...displayDataChanges).pipe(
     map(() => {
       // Filter data
-      console.log("filteData",this.exampleDatabase);
+      // console.log("filteData",this.exampleDatabase);
       this.filteredData = this.exampleDatabase.data
         .slice()
         .filter((examSchedule: ExamSchedule) => {
