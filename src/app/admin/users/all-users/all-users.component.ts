@@ -80,6 +80,7 @@ ngOnInit(): void {
   this.activatedRoute.queryParams.subscribe((params: any) => {
     this.getBlogsList(params);
   });
+  
 
 }
 
@@ -153,7 +154,10 @@ performSearch() {
 
   }
 }
-
+edit(row:any){
+  console.log("row: " + row.id);
+this.router.navigate(['/admin/users/edit-all-users'], {queryParams:{row:row}})
+}
 exportExcel() {
   //k//ey name with space add in brackets
  const exportData: Partial<TableElement>[] = this.dataSource.map(
