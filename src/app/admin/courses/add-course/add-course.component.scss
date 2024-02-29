@@ -173,6 +173,9 @@ h5{
   font-style: italic;
   padding: 10px;
 }
+::ng-deep .angular-editor-textarea{
+  border-radius: 12px;
+}
 #date{
   height: 56px;
   margin-bottom: 20px;

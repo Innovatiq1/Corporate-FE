@@ -195,7 +195,11 @@ export class AddCourseComponent implements OnInit {
     }
     if(this.viewUrl){
       this.mode = 'viewUrl';
-
+      this.config ={
+        editable : false,
+        enableToolbar: false,
+        showToolbar: false,
+      }
     }
 
     let payload = {
