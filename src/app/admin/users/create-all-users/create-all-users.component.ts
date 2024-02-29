@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Student, UserType, Users } from '@core/models/user.model';
 import { AdminService } from '@core/service/admin.service';
 import { UserService } from '@core/service/user.service';
@@ -38,6 +38,7 @@ export class CreateAllUsersComponent {
       active: 'Create All Users',
     },
   ];
+  data: any;
 
   
   update() {
@@ -239,10 +240,11 @@ export class CreateAllUsersComponent {
   }
 
   constructor(private router: Router,    private fb: FormBuilder,public utils: UtilsService, private userService: UserService,
-    private adminService: AdminService,private studentService: StudentService) {
+    private adminService: AdminService,private studentService: StudentService, private activeRoute: ActivatedRoute) {
     let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-all-users'); 
     this.currentId = urlPath[urlPath.length - 1];
+    console.log(this.currentId,"+++++++++++")
     this.getUserTypeList();
 
     if(this.editUrl===true){
@@ -267,9 +269,10 @@ export class CreateAllUsersComponent {
       type: new FormControl('', [Validators.required]),
       avatar: new FormControl('', []),
       status: [this.user ? (this.user.Active = this.user.Active === true ? true : false) : null],
+    });
 
-
-
+    this.activeRoute.queryParams.subscribe((params) => {
+      console.log("params", params['id'],);
     });
 }
 getUserTypeList(filters?:any) {
@@ -283,24 +286,40 @@ getUserTypeList(filters?:any) {
 }
 
 getBlogsList(filters?:any) {
-  this.userService.getUserList().subscribe((response: any) => {
-    console.log('res',response);
-    this.blogsList = response.data.data;
-    let data=this.blogsList.find((id:any)=>id._id === this.currentId);
-    console.log('data',data)
-    this.fileName = data.filename
-    if(data){
-      this.userForm.patchValue({
-        name: data?.name,
-        email:data?.email,
-        password: data?.password,
-        qualification: data?.qualification,
-        type:data?.type,
-        avatar:data?.avatar,
+  // this.userService.getUserList().subscribe((response: any) => {
+  //   console.log('res',response);
+  //   this.blogsList = response.data.data;
+  //   let data=this.blogsList.find((id:any)=>id._id === this.currentId);
+  //   console.log('data',data)
+  //   this.fileName = data.filename
+  //   if(data){
+  //     this.userForm.patchValue({
+  //       name: data?.name,
+  //       email:data?.email,
+  //       password: data?.password,
+  //       qualification: data?.qualification,
+  //       type:data?.type,
+  //       avatar:data?.avatar,
+  //     });
+  //   }
+  // }, error => {
+  // });
+
+  this.userService.getUserById(this.currentId).subscribe((response: any) => {
+    console.log("listing user", response);
+    this.data = response.data.data;
+    if( this.data){
+          this.userForm.patchValue({
+            name:  this.data?.name,
+            email: this.data?.email,
+            password:  this.data?.password,
+            qualification:  this.data?.qualification,
+            type: this.data?.type,
+            avatar: this.data?.avatar,
+          });
+        }
+      }, error => {
       });
-    }
-  }, error => {
-  });
 }
 
 }
