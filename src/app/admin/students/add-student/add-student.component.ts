@@ -273,8 +273,9 @@ getDepartment(){
         });
         //this.fileDropEl.nativeElement.value = "";
         this.stdForm.reset();
+        window.history.back();
         //this.toggleList()
-        this.router.navigateByUrl('/admin/students/all-students');
+        // this.router.navigateByUrl('/admin/students/all-students');
       },
       (error: { message: any; error: any }) => {
         Swal.fire(
