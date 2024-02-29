@@ -308,6 +308,7 @@ getBlogsList(filters?:any) {
   this.userService.getUserById(this.currentId).subscribe((response: any) => {
     console.log("listing user", response);
     this.data = response.data.data;
+    this.fileName =  this.data.filename
     if( this.data){
           this.userForm.patchValue({
             name:  this.data?.name,
