@@ -265,7 +265,7 @@ export class CreateAllUsersComponent {
       name: new FormControl('', [Validators.required,...this.utils.validators.name,...this.utils.validators.noLeadingSpace]),
       email: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)]),
       password: new FormControl('', [Validators.required,...this.utils.validators.name,...this.utils.validators.noLeadingSpace]),
-      qualification: new FormControl('', [Validators.required,Validators.minLength(2)]),
+      education: new FormControl('', [Validators.required,Validators.minLength(2)]),
       type: new FormControl('', [Validators.required]),
       avatar: new FormControl('', []),
       status: [this.user ? (this.user.Active = this.user.Active === true ? true : false) : null],
@@ -314,7 +314,7 @@ getBlogsList(filters?:any) {
             name:  this.data?.name,
             email: this.data?.email,
             password:  this.data?.password,
-            qualification:  this.data?.qualification,
+            education:  this.data?.education,
             type: this.data?.type,
             avatar: this.data?.avatar,
           });

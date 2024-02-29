@@ -50,15 +50,15 @@
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                                         <!-- <mat-label>Course Name</mat-label> -->
 
-                                        <input matInput type="text" id="name" formControlName="qualification"
+                                        <input matInput type="text" id="name" formControlName="education"
                                             class="form-control"  required>
-                                        <mat-error *ngIf="userForm.get('qualification')?.hasError('required')">
+                                        <mat-error *ngIf="userForm.get('education')?.hasError('required')">
                                             Enter Qualification
                                         </mat-error>
                                         <!-- <mat-error  *ngIf="userForm.get('qualification')?.hasError('minLength') && userForm.get('qualification')?.touched">
                                             Enter a valid Qualification
                                            </mat-error> -->
-                                           <mat-error  *ngIf="userForm.get('qualification')?.hasError('minLength') && userForm.get('qualification')?.touched">
+                                           <mat-error  *ngIf="userForm.get('education')?.hasError('minLength') && userForm.get('education')?.touched">
                                             Enter a valid Qualification
                                            </mat-error>
                                     </mat-form-field>
