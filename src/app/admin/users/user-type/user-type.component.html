@@ -18,7 +18,7 @@
                 </ul>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card" *ngFor="let types of typesList let j = index">
+                <div class="card" *ngFor="let types of typesList let j = index" style="cursor: pointer;" (click)="edit(types.id)">
                     <div class="materialTableHeader">
                         <div class="left">
                             <ul class="header-buttons-left ms-0">

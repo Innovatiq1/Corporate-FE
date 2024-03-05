@@ -104,7 +104,7 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header
                     >Program Name</mat-header-cell
                   >
-                  <mat-cell *matCellDef="let row">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/edit-class',row.id]">
                     <span class="mobile-label">Program Name:</span>{{row.courseId?.title}}
                   </mat-cell>
                 </ng-container>
@@ -116,7 +116,7 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header
                     >Class Start Date
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/edit-class',row.id]">
                     <span class="mobile-label">Start Date:</span>{{row.sessions[0]?.sessionStartDate | date}}
 
                   </mat-cell>
@@ -126,7 +126,7 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header
                     >Class End Date
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/edit-class',row.id]">
                     <span class="mobile-label">End Date:</span>{{row.sessions[0]?.sessionEndDate | date}}
                   </mat-cell>
                 </ng-container>

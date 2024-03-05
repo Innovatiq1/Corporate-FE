@@ -167,7 +167,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let instructor of instructors">
+                  <tr *ngFor="let instructor of instructors" style="cursor: pointer;" [routerLink]="['/admin/instructors/edit-instructor',instructor.id]">
                     <td class="table-img">
                       <img src="{{instructor?.avatar}}" alt="">
                     </td>
@@ -302,7 +302,7 @@
             <h2>Upcoming Courses</h2>
           </div>
           <div class="body">
-            <div class="card-block"*ngFor="let data of upcomingCourses">
+            <div class="card-block" *ngFor="let data of upcomingCourses" style="cursor: pointer;" [routerLink]="['/admin/courses/all-courses']">
               <div class="row m-b-20">
                 <div class="col-md-3">
                   <img src="{{data.image_link}}" alt="user image" class="img-fluid">
@@ -343,7 +343,7 @@
             <h2>Upcoming Programs</h2>
           </div>
           <div class="body">
-            <div class="card-block" *ngFor="let program of upcomingPrograms">
+            <div class="card-block" *ngFor="let program of upcomingPrograms" style="cursor: pointer;" [routerLink]="['/admin/program/program-list']">
               <div class="row m-b-20">
                 <div class="col-md-3">
                   <img src="{{program?.image_link}}" alt="user image" class="img-fluid">

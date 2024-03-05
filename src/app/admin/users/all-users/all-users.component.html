@@ -71,7 +71,7 @@
                         [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
                       </mat-checkbox>
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-6'">
+                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]" [ngClass]="'tbl-col-width-per-6'">
                       <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
                         [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
                       </mat-checkbox>
@@ -81,35 +81,35 @@
                    <!-- Course Name -->
                   <ng-container matColumnDef="Name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-                    <mat-cell *matCellDef="let row" >
+                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
                       <span class="mobile-label">Name:</span>{{row.name | capitalizeFirstLetter}}</mat-cell>
                   </ng-container>
                   <!-- Course Code -->
                   <ng-container matColumnDef="User Type">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>User Type
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" >
+                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
                       <span class="mobile-label">User Type:</span>{{row.type}}</mat-cell>
                   </ng-container>
                   <!-- Main Category -->
                   <ng-container matColumnDef="Qualification">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Qualification
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" >
+                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
                       <span class="mobile-label">Qualification:</span>{{row.education | capitalizeFirstLetter}}</mat-cell>
                   </ng-container>
                    <!-- Sub Category -->
                   <ng-container matColumnDef="Email">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Email
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" >
+                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
                       <span class="mobile-label">Email:</span>{{row.email}}</mat-cell>
                   </ng-container>
                    <!--Fees -->
                   <ng-container matColumnDef="Status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Status
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="mt-4" [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
+                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]" class="mt-4" [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
                       <span class="mobile-label">Status:</span>
                        {{row.Active ?  'Active': 'Inactive' }}</mat-cell>
                   </ng-container>
