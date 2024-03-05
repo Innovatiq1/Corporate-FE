@@ -62,7 +62,7 @@
                       [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
                     </mat-checkbox>
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-6'">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row.id)" [ngClass]="'tbl-col-width-per-6'">
                     <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
                       [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
                     </mat-checkbox>
@@ -71,7 +71,7 @@
                 <!-- ID Column -->
                 <ng-container matColumnDef="id">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-                  <mat-cell *matCellDef="let row">{{row?.id}}</mat-cell>
+                  <mat-cell *matCellDef="let row" (click)="editCall(row.id)">{{row?.id}}</mat-cell>
                 </ng-container>
                 <!-- <ng-container matColumnDef="img">
                   <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
@@ -82,12 +82,12 @@
                 </ng-container> -->
                 <ng-container matColumnDef="courseName">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Course/Program Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row.id)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Course Name:</span> {{row?.courseName}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="studentName">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Student Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row.id)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Student Name:</span> {{row?.studentFirstName}} {{row?.studentLastName}}</mat-cell>
                 </ng-container>
 

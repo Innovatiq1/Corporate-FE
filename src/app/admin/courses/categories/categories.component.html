@@ -81,14 +81,14 @@
                    <!-- Main Category -->
                   <ng-container matColumnDef="Main Category">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Main Category</mat-header-cell>
-                    <mat-cell *matCellDef="let row" >
+                    <mat-cell *matCellDef="let row" (click)="edit(row.id)">
                       <span class="mobile-label">Main Category:</span> {{row.category_name}}</mat-cell>
                   </ng-container>
                   <!-- Sub Category -->
                   <ng-container matColumnDef="Sub Category" >
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Sub Category
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row">
+                    <mat-cell *matCellDef="let row" (click)="edit(row.id)">
                       <span class="mobile-label">Sub Category:</span>
                       <ng-container *ngFor="let subCategory of row.subCategories">
                         {{ subCategory.category_name }}

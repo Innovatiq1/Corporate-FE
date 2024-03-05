@@ -44,37 +44,37 @@
                   <!-- ID Column -->
                   <ng-container matColumnDef="id">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-                    <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                    <mat-cell *matCellDef="let row" (click)="editCall(row)">{{row.id}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="courseName">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span class="mobile-label">Subject:</span> {{row.courseName}}</mat-cell>
+                    <mat-cell *matCellDef="let row" (click)="editCall(row)"><span class="mobile-label">Subject:</span> {{row.courseName}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="course Code">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Course Code</mat-header-cell>
-                    <mat-cell *matCellDef="let row"> <span class="mobile-label">Course Code:</span>{{row.courseCode}}</mat-cell>
+                    <mat-cell *matCellDef="let row" (click)="editCall(row)"> <span class="mobile-label">Course Code:</span>{{row.courseCode}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="start Date">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
-                    <mat-cell *matCellDef="let row"> <span class="mobile-label">Start
+                    <mat-cell *matCellDef="let row" (click)="editCall(row)"> <span class="mobile-label">Start
                         Date:</span>{{row.startDate | date: 'MM/dd/yyyy' }}
                     </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="end Date">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
-                    <mat-cell *matCellDef="let row"> <span class="mobile-label">End 
+                    <mat-cell *matCellDef="let row" (click)="editCall(row)"> <span class="mobile-label">End 
                         Date:</span>{{row.endDate | date: 'MM/dd/yyyy' }}
                     </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="time">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Time</mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span class="mobile-label">Time:</span> {{row.startTime }}
+                    <mat-cell *matCellDef="let row" (click)="editCall(row)"><span class="mobile-label">Time:</span> {{row.startTime }}
                     </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="duration">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Duration</mat-header-cell>
-                    <mat-cell *matCellDef="let row"><span class="mobile-label">Duration:</span> {{row.duration}}
+                    <mat-cell *matCellDef="let row" (click)="editCall(row)"><span class="mobile-label">Duration:</span> {{row.duration}}
                     </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="actions">

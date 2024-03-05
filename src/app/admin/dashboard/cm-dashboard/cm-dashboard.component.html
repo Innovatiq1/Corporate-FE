@@ -205,7 +205,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let class of classesList ">
+                                    <tr *ngFor="let class of classesList " style="cursor: pointer;" (click)="editClass(class.id)">
 
                                         <td>{{class?.courseId?.title | truncate:10}}</td>
                                         <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
@@ -290,7 +290,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let instructor of instructors">
+                                    <tr *ngFor="let instructor of instructors" style="cursor: pointer;" [routerLink]="['/admin/instructors/edit-instructor',instructor.id]">
                                         <td class="table-img">
                                             <img src="{{instructor?.avatar}}" alt="">
                                         </td>
@@ -361,7 +361,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let student of students">
+                                    <tr *ngFor="let student of students" style="cursor: pointer;"  (click)="editCall(student)">
                                         <td class="table-img">
                                             <img src="{{student?.avatar || 'assets/profile.png'}}" alt="">
                                         </td>
@@ -432,7 +432,7 @@
                 </mat-menu> -->
               </div>
               <div class="body">
-                <div class="card-block"*ngFor="let data of upcomingCourses">
+                <div class="card-block"*ngFor="let data of upcomingCourses" style="cursor: pointer;" [routerLink]="['/admin/courses/all-courses']">
                   <div class="row m-b-20">
                     <div class="col-md-3">
                       <img src="{{data.image_link}}" alt="user image" class="img-fluid">

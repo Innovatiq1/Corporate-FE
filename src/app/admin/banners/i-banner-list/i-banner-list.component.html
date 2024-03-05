@@ -27,7 +27,7 @@
           <div class="body">
             <div class="row" >
               <div class="col-md-4" *ngFor="let banner of bannerList">
-                <div class="course-card1 course-card-blog">
+                <div class="course-card1 course-card-blog" (click)="onChange(banner._id,'true')">
                   <div class="course-card-image1">
                     <img class="img" src="{{banner.imagePath}}">
                   </div>

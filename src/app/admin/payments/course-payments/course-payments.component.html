@@ -73,7 +73,7 @@
                         [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
                       </mat-checkbox>
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-6'">
+                    <mat-cell *matCellDef="let row" (click)="view(row._id)" [ngClass]="'tbl-col-width-per-6'">
                       <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
                         [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
                       </mat-checkbox>
@@ -82,29 +82,29 @@
                    <!-- Course Name -->
                   <ng-container matColumnDef="Course Name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name</mat-header-cell>
-                    <mat-cell *matCellDef="let row" >
+                    <mat-cell *matCellDef="let row" (click)="view(row._id)">
                       <span class="mobile-label">Course Name:</span>{{row.course}}</mat-cell>
                   </ng-container>
                   <!-- Short Description -->
                   <ng-container matColumnDef="Payment Date">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Payment Date</mat-header-cell>
-                    <mat-cell *matCellDef="let row" >
+                    <mat-cell *matCellDef="let row" (click)="view(row._id)">
                       <span class="mobile-label">Payment Date:</span>{{row.createdAt | date}}</mat-cell>
                   </ng-container>
                    <!-- Long Description -->
                    <ng-container matColumnDef="Amount">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
-                    <mat-cell *matCellDef="let row" >
+                    <mat-cell *matCellDef="let row" (click)="view(row._id)">
                       <span class="mobile-label">Amount:</span>{{row.price}} $</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="Student Name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Student Name</mat-header-cell>
-                    <mat-cell *matCellDef="let row" >
+                    <mat-cell *matCellDef="let row" (click)="view(row._id)">
                       <span class="mobile-label">Student Name:</span>{{row.name}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="Payment Status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Payment Status</mat-header-cell>
-                    <mat-cell *matCellDef="let row" >
+                    <mat-cell *matCellDef="let row" (click)="view(row._id)">
                       <span class="mobile-label">Payment Status:</span>{{row.status | titlecase}}</mat-cell>
                   </ng-container>
                   

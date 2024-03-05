@@ -205,7 +205,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let class of classesList ">
+                                    <tr *ngFor="let class of classesList " style="cursor: pointer;" [routerLink]="['/admin/program/edit-class',class.id]">
 
                                         <td>{{class?.courseId?.title | truncate:10}}</td>
                                         <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
@@ -327,7 +327,7 @@
                     <h2>Upcoming Programs</h2>
                   </div>
                   <div class="body">
-                    <div class="card-block" *ngFor="let program of upcomingPrograms">
+                    <div class="card-block" *ngFor="let program of upcomingPrograms" style="cursor: pointer;" [routerLink]="['/admin/program/program-list']">
                       <div class="row m-b-20">
                         <div class="col-md-3">
                           <img src="{{program?.image_link}}" alt="user image" class="img-fluid">

@@ -28,7 +28,7 @@
                                 </div>
                             </div> -->
                         </div>
-                        <div class="row para mt-4" *ngFor="let listdata of assignData;  let j = index;">
+                        <div class="row para mt-4" *ngFor="let listdata of assignData;  let j = index;" (click)="toggle(listdata)">
                             <div class="col-md-11" >
                                 <p>Reset: Your TI Password</p>
                     

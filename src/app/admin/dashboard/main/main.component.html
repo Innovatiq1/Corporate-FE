@@ -327,7 +327,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor ="let class of classesList ">
+                  <tr *ngFor ="let class of classesList " style="cursor: pointer;" (click)="editClass(class.id)">
                     <!-- <td class="table-img">
                       <img src="{{class?.courseId?.image_link}}" alt="course">
                     </td> -->
@@ -597,7 +597,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let student of students">
+                  <tr *ngFor="let student of students" style="cursor: pointer;" (click)="editCall(student)">
                     <td class="table-img">
                       <img src="{{student?.avatar || 'assets/profile.png'}}" alt="">
                     </td>

@@ -73,11 +73,11 @@
                 <!-- ID Column -->
                 <ng-container matColumnDef="id">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-                  <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)">{{row.id}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="class">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Class</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Class:</span> {{row.className}}</mat-cell>
                 </ng-container>
                 <!-- <ng-container matColumnDef="section">
@@ -88,33 +88,33 @@
                 </ng-container> -->
                 <ng-container matColumnDef="applyDate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Apply Date</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Apply Date:</span>{{row.applyDate | date}}
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="fromDate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>From Date</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">From Date:</span> {{row.fromDate | date}}
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="toDate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>To Date</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">To Date:</span> {{row.toDate | date}}
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="reason">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Reason
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="truncate-text"><span class="mobile-label">Reason:</span>{{row.reason| titlecase}}</span>
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="status">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> Status
                   </mat-header-cell>
-                  <mat-cell mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Status:</span>
                     <div *ngIf="row.status==='applied'">
                       <span class="badge badge-solid-orange">

@@ -44,21 +44,21 @@
                 <!-- Course Name -->
                 <ng-container matColumnDef="Title">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
-                  <mat-cell *matCellDef="let row">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/announcement/view-announcement',row.id]">
                     <span class="mobile-label">Title:</span>{{row.subject}}</mat-cell>
                 </ng-container>
                 <!-- Course Code -->
                 <ng-container matColumnDef="Decription">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Decription
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/announcement/view-announcement',row.id]">
                     <p [innerHTML]="row.details | bulletPoints"></p>
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="User Role">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>User Role
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/announcement/view-announcement',row.id]">
                     <p [innerHTML]="row.announcementFor | bulletPoints"></p>
                   </mat-cell>
 

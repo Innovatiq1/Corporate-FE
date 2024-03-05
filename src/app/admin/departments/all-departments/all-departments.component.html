@@ -69,7 +69,7 @@
                       [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
                     </mat-checkbox>
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-7'">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" [ngClass]="'tbl-col-width-per-7'">
                     <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
                       [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
                     </mat-checkbox>
@@ -78,39 +78,39 @@
                 <!-- ID Column -->
                 <ng-container matColumnDef="id">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-                  <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)">{{row.id}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="dName">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Department Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Department Name:</span> {{row?.department | capitalizeFirstLetter}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="hod">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Head Of Department
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Head Of Department:</span>{{row?.hod | capitalizeFirstLetter}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="phone">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Phone</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Phone:</span> {{row?.mobile }}
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="email">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Email:</span>{{row?.email}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="sYear">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Start Year</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Start Year:</span>{{row.departmentStartDate | date}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="sCapacity">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Students Capacity
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Students Capacity:</span>{{row?.studentCapacity}}</mat-cell>
                 </ng-container>
                 <!-- actions -->

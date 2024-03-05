@@ -94,33 +94,33 @@
                           <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
                           </mat-header-cell>
                           <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <span
-                              class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"/>
+                              class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"  (click)="editCall(row)"/>
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="rollNo">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Roll No
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> <span
+                          <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Roll No:</span>{{row?.rollNo}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="name">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Name
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> <span
+                          <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Name:</span>{{row.name | titlecase}}   {{ row.last_name ? row.last_name : '' }}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="department">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Department
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                          <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                             <span class="mobile-label">Department:</span> {{row?.department}}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="gender">
                           <mat-header-cell *matHeaderCellDef mat-sort-header> Gender
                           </mat-header-cell>
-                          <mat-cell mat-cell *matCellDef="let row">
+                          <mat-cell mat-cell *matCellDef="let row"  (click)="editCall(row)">
                             <span class="mobile-label">Gender:</span>
                             <div *ngIf="row.gender==='male'">
                               <span class="badge badge-solid-green">
@@ -139,14 +139,14 @@
                         <ng-container matColumnDef="mobile">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"> <span
+                          <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Mobile:</span>{{row?.mobile}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="email">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Email
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)"><span
+                          <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)"><span
                               class="mobile-label">Email:</span> {{row?.email}}
                           </mat-cell>
                         </ng-container>
@@ -154,7 +154,7 @@
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Admission
                             Date
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                          <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                             <span class="mobile-label">Admission Date:</span>{{row?.joiningDate| date: 'MM/dd/yyyy'}}
                           </mat-cell>
                         </ng-container>
@@ -288,7 +288,7 @@
             </ng-template>
             <div class="row mt-5 ml-0 mr-0" >
               <div class="col-md-4" *ngFor="let data of dataSource.filteredData">
-                <div class="card border-apply">
+                <div class="card border-apply" (click)="aboutStudent(data.id)">
                   <div class="m-b-20">
                     <div class="contact-grid">
                       <div class="profile-header l-bg-purple-dark">
