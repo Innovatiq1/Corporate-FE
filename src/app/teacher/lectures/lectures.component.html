@@ -69,7 +69,7 @@
                       [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
                     </mat-checkbox>
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-7'">
+                  <mat-cell *matCellDef="let row"  (click)="editCall(row)" [ngClass]="'tbl-col-width-per-7'">
                     <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
                       [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
                     </mat-checkbox>
@@ -82,7 +82,7 @@
                 </ng-container> -->
                 <ng-container matColumnDef="sName">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row">
+                  <mat-cell *matCellDef="let row"  (click)="editCall(row)">
                     <span class="mobile-label">Course Name:</span>{{row.courseName}}
                     </mat-cell>
                 </ng-container>
@@ -94,13 +94,13 @@
                 </ng-container> -->
                 <ng-container matColumnDef="date">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label"> Start Date:</span> {{row.sessions[0].sessionStartDate | date: 'MM/dd/yyyy'}}
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="endDate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> End Date</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label"> End Date:</span> {{row.sessions[0].sessionEndDate | date: 'MM/dd/yyyy'}}
                   </mat-cell>
                 </ng-container>
@@ -119,13 +119,13 @@
                 
                 <ng-container matColumnDef="time">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Time</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Time:</span> {{row.sessions[0].sessionStartTime}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="status">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> Status
                   </mat-header-cell>
-                  <mat-cell mat-cell *matCellDef="let row">
+                  <mat-cell mat-cell *matCellDef="let row"  (click)="editCall(row)">
                     <span class="mobile-label">Status:</span>
                     <div *ngIf="row.sessions[0].status==='Confirm'">
                       <span class="badge badge-solid-green">
