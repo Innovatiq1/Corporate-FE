@@ -55,7 +55,7 @@
                         [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
                       </mat-checkbox>
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-6'">
+                    <mat-cell *matCellDef="let row" (click)="edit(row.id)" [ngClass]="'tbl-col-width-per-6'">
                       <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
                         [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
                       </mat-checkbox>
@@ -88,7 +88,7 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header
                       >Year</mat-header-cell
                     >
-                    <mat-cell *matCellDef="let row">
+                    <mat-cell *matCellDef="let row" (click)="edit(row.id)">
                       <span class="mobile-label">Year:</span>{{row.year}}
                     </mat-cell>
                   </ng-container>
@@ -98,7 +98,7 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header
                       >Overall Budget
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row">
+                    <mat-cell *matCellDef="let row" (click)="edit(row.id)">
                       <span class="mobile-label">Overall Budget:</span>${{row?.trainingBudget}}
                     </mat-cell>
                   </ng-container>
@@ -107,7 +107,7 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header
                       >Traning Type
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row">
+                    <mat-cell *matCellDef="let row" (click)="edit(row.id)">
                       <span class="mobile-label">Traning Type:</span>{{row?.trainingType}}
                     </mat-cell>
                   </ng-container>
@@ -115,7 +115,7 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header
                       >Approve Status
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row">
+                    <mat-cell *matCellDef="let row" (click)="edit(row.id)">
                       <span class="mobile-label">Approve Status:</span>
                       <span [ngStyle]="{ 'color': row?.approval === 'Approved' ? 'green' : row?.approval === 'Pending' ? 'blue' :  (row?.approval === 'Rejected' ? 'red' : '') }">{{row?.approval}}</span>
                     </mat-cell>
