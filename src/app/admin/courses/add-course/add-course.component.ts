@@ -62,6 +62,7 @@ export class AddCourseComponent implements OnInit {
   subscribeParams: any;
   mode: string = 'editUrl';
   public Editor: any = ClassicEditor;
+  thumbnail: any;
   // instructorList: any = [];
 
   breadscrums = [
@@ -290,17 +291,28 @@ mainCategoryChange(): void {
 
 onFileUpload(event:any) {
   const file = event.target.files[0];
+  
+  this.thumbnail = file
   const formData = new FormData();
-  formData.append('files', file);
-
-  this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
-    this.image_link = response.image_link;
-    this.uploaded=this.image_link.split('/')
-    this.uploadedImage = this.uploaded.pop();
-    this.firstFormGroup.patchValue({
-      // image_link: response,
-    });
-  });
+  formData.append('files', this.thumbnail);
+this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
+  this.image_link = data.data.thumbnail;
+  this.uploaded=this.image_link.split('/')
+  let image  = this.uploaded.pop();
+  this.uploaded= image.split('\\');
+  this.uploadedImage = this.uploaded.pop();
+  
+})
+  // this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
+  //   this.image_link = response.image_link;
+  //   console.log("imagesss",this.image_link)
+  //   this.uploaded=this.image_link.split('/')
+  //   this.uploadedImage = this.uploaded.pop();
+  //   console.log("uploaded",this.uploadedImage)
+  //   this.firstFormGroup.patchValue({
+  //     // image_link: response,
+  //   });
+  // });
 }
 
 
