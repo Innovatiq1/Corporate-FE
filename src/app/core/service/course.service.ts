@@ -385,8 +385,16 @@ export class CourseService {
       const apiUrl = `${this.prefix}admin/chatbot`;
       return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
     }
-  
-  
+ 
+
+    uploadCourseThumbnail(file:any) {
+      const apiUrl = `${this.defaultUrl}admin/thumbnail/`;
+      return this._Http.post<any>(apiUrl, file).pipe(
+        map((response) => {
+          return response
+        })
+      );
+    }
 }
 
 

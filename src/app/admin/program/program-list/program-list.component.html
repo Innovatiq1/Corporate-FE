@@ -43,10 +43,10 @@
           <div class="body">
             <div class="row">
               <div class="col-md-3" *ngFor="let program of programData">
-                <div class="program-card" style="cursor: pointer;" [routerLink]="['/admin/program/edit-program/',program.id]">
+                <div class="program-card" >
                   <div class="cards" style="display: flex;">
-                    <img class="img mb-3" src="{{program?.image_link}}" height="200" width="400">
-                    <span class="text">
+                    <img class="img mb-3" src="{{program?.image_link}}" style="cursor: pointer;" [routerLink]="['/admin/program/edit-program/',program.id]" height="200" width="400">
+                    <span class="text" style="cursor: pointer;" [routerLink]="['/admin/program/edit-program/',program.id]">
                       <h5>{{program?.title | truncate:35}}
                       </h5>
                       <div class="row">
@@ -113,7 +113,7 @@
                       </mat-menu>
                     </span>
                   </div>
-                  <div class="row">
+                  <div class="row" style="cursor: pointer;" [routerLink]="['/admin/program/edit-program/',program.id]">
                     <div class="col">
                       <div class="m-4">
                         <div class="d-flex justify-content-between mt-3">
