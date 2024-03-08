@@ -11,6 +11,7 @@ import { Student, Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
 import { StudentsService } from './../all-students/students.service';
 import { ConfirmedValidator } from '@shared/password.validator';
+import { CourseService } from '@core/service/course.service';
 @Component({
   selector: 'app-add-student',
   templateUrl: './add-student.component.html',
@@ -34,11 +35,13 @@ export class AddStudentComponent {
   viewUrl: boolean = false;
   uploaded: any;
   dept: any;
+  thumbnail: any;
   constructor(
     private fb: UntypedFormBuilder,
     private activatedRoute: ActivatedRoute,
     private StudentService: StudentsService,
-    private router: Router
+    private router: Router,
+    private courseService: CourseService,
   ) {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       console.log('id', params);
@@ -77,8 +80,22 @@ export class AddStudentComponent {
   }
 
    onFileUpload(event:any) {
-    this.fileName = event.target.files[0].name;
-    this.files=event.target.files[0]
+    const file = event.target.files[0];
+  
+    this.thumbnail = file
+    const formData = new FormData();
+    formData.append('files', this.thumbnail);
+   this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
+    this.avatar = data.data.thumbnail;
+    this.uploaded=this.avatar.split('/')
+    let image  = this.uploaded.pop();
+    this.uploaded= image.split('\\');
+    this.fileName = this.uploaded.pop();
+    console.log("uploaded",this.fileName)
+    console.log("uploadedddd",this.uploaded)
+  });
+    // this.fileName = event.target.files[0].name;
+    // this.files=event.target.files[0]
     // this.authenticationService.uploadVideo(event.target.files[0]).subscribe(
     //   (response: any) => {
     //             //Swal.close();
@@ -92,39 +109,55 @@ export class AddStudentComponent {
 
   }
 
+  // onSubmit() {
+  //   console.log('Form Value', this.stdForm.value);
+  //   if (!this.stdForm.invalid) {
+  //     this.StudentService.uploadVideo(this.files).subscribe(
+  //       (response: any) => {
+  //         const inputUrl = response.inputUrl;
+
+  //         const userData: Student = this.stdForm.value;
+  //         //this.commonService.setVideoId(videoId)
+
+  //         userData.avatar = inputUrl;
+  //         userData.filename = response.filename;
+  //         userData.type = 'Student';
+  //         userData.role = 'Student';
+  //         userData.isLogin = true;
+
+  //         //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+  //         // this.currentVideoIds.push(videoId);
+  //         this.createInstructor(userData);
+
+  //         Swal.close();
+  //       },
+  //       (error) => {
+  //         Swal.fire({
+  //           icon: 'error',
+  //           title: 'Upload Failed',
+  //           text: 'An error occurred while uploading the video',
+  //         });
+  //         Swal.close();
+  //       }
+  //     );
+  //   }
+  // }
   onSubmit() {
     console.log('Form Value', this.stdForm.value);
     if (!this.stdForm.invalid) {
-      this.StudentService.uploadVideo(this.files).subscribe(
-        (response: any) => {
-          const inputUrl = response.inputUrl;
+        const userData: Student = this.stdForm.value;
+        
+        // Set the avatar path to the URL received during file upload
+        userData.avatar = this.avatar;
+        
+        userData.type = 'Student';
+        userData.role = 'Student';
+        userData.isLogin = true;
 
-          const userData: Student = this.stdForm.value;
-          //this.commonService.setVideoId(videoId)
-
-          userData.avatar = inputUrl;
-          userData.filename = response.filename;
-          userData.type = 'Student';
-          userData.role = 'Student';
-          userData.isLogin = true;
-
-          //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-          // this.currentVideoIds.push(videoId);
-          this.createInstructor(userData);
-
-          Swal.close();
-        },
-        (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Upload Failed',
-            text: 'An error occurred while uploading the video',
-          });
-          Swal.close();
-        }
-      );
+        this.createInstructor(userData);
     }
-  }
+}
+
 
   private createInstructor(userData: Student): void {
     this.StudentService.CreateStudent(userData).subscribe(
@@ -172,8 +205,13 @@ getDepartment(){
       this.viewUrl = true;
       this.edit = true;
       this.StudentService.getStudentById(id).subscribe((res) => {
-        this.fileName =res.filename
+        // this.fileName =res.avatar
         this.editData = res;
+        this.avatar = this.editData.avatar;
+      this.uploaded=this.avatar?.split('/')
+      let image  = this.uploaded.pop();
+      this.uploaded= image.split('\\');
+      this.fileName = this.uploaded.pop();
         console.log('editdata', this.editData);
         // this.stdForm.get('department')?.setValue(this.editData.department);
         this.stdForm.patchValue({
@@ -193,7 +231,7 @@ getDepartment(){
           education: this.editData.education,
           blood_group: this.editData.blood_group,
           address: this.editData.address,
-          avatar: this.editData.avatar,
+          fileName: this.fileName,
         },
         );
       });
@@ -227,42 +265,86 @@ getDepartment(){
   //   }
   // }
 
+  // update() {
+  //   console.log('Form Value', this.stdForm);
+  //   if (this.stdForm.valid) {
+  //     this.StudentService.uploadVideo(this.files).subscribe((response: any) => {
+  //       const inputUrl = response.inputUrl;
+
+  //       const userData: Student = this.stdForm.value;
+  //       //this.commonService.setVideoId(videoId)
+
+  //       userData.avatar = inputUrl;
+  //       userData.filename = this.fileName;
+  //       userData.type = 'Student';
+  //       userData.role = 'Student';
+
+  //       //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+  //       // this.currentVideoIds.push(videoId);
+  //       this.updateInstructor(userData);
+
+  //       Swal.close();
+  //     });
+  //   }
+  // }
+
+  // update() {
+  //   console.log('Form Value', this.stdForm.value);
+  
+  //   // Check if the form is valid
+  //   if (this.stdForm.valid) {
+  //     if (this.files) {
+  //       // If files are present, upload the video
+  //       this.StudentService.uploadVideo(this.files).subscribe(
+  //         (response: any) => {
+  //           const inputUrl = response.inputUrl;
+  
+  //           const userData: Student = this.stdForm.value;
+  //           userData.avatar = inputUrl;
+  //           userData.filename = this.fileName;
+  //           userData.type = "Student";
+  //           userData.role = "Student";
+  
+  //           this.updateInstructor(userData);
+  
+  //           Swal.close();
+  //         },
+  //         (error: any) => {
+  //           // Handle the error during file upload
+  //           console.error('File upload failed:', error);
+  //         }
+  //       );
+  //     } else {
+  //       // If no files are present, update the user directly
+  //       const userData: Student = this.stdForm.value;
+  //       userData.type = "Student";
+  //       userData.role = "Student";
+  
+  //       this.updateInstructor(userData);
+  //     }
+  //   }
+  // }
   update() {
     console.log('Form Value', this.stdForm.value);
-  
+
     // Check if the form is valid
     if (this.stdForm.valid) {
-      if (this.files) {
-        // If files are present, upload the video
-        this.StudentService.uploadVideo(this.files).subscribe(
-          (response: any) => {
-            const inputUrl = response.inputUrl;
-  
-            const userData: Student = this.stdForm.value;
-            userData.avatar = inputUrl;
-            userData.filename = this.fileName;
-            userData.type = "Student";
-            userData.role = "Student";
-  
-            this.updateInstructor(userData);
-  
-            Swal.close();
-          },
-          (error: any) => {
-            // Handle the error during file upload
-            console.error('File upload failed:', error);
-          }
-        );
-      } else {
-        // If no files are present, update the user directly
-        const userData: Student = this.stdForm.value;
-        userData.type = "Student";
-        userData.role = "Student";
-  
-        this.updateInstructor(userData);
-      }
+      // Create userData object with form values
+      const userData: Student = this.stdForm.value;
+
+      // Set the avatar path to the existing avatar URL
+      userData.avatar = this.avatar;
+
+      userData.type = "Student";
+      userData.role = "Student";
+
+      // Call the updateInstructor function with userData
+      this.updateInstructor(userData);
+
+      Swal.close();
     }
-  }
+}
+
   private updateInstructor(userData: Student): void {
     this.StudentService.updateStudent(this.StudentId, userData).subscribe(
       () => {

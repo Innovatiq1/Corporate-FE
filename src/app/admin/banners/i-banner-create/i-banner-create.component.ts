@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { BannersService } from '../banners.service';
 import { Router } from '@angular/router';
+import { CourseService } from '@core/service/course.service';
 
 @Component({
   selector: 'app-i-banner-create',
@@ -25,7 +26,9 @@ export class IBannerCreateComponent {
   status = true;
   banner_for!: string;
   bannerList: any;
-  constructor(private fb: FormBuilder, public dialog: MatDialog,private bannerService :BannersService,public router:Router) {}
+  thumbnail: any;
+
+  constructor(private fb: FormBuilder,private courseService: CourseService, public dialog: MatDialog,private bannerService :BannersService,public router:Router) {}
   public ngOnInit(): void {
     this.addCusForm = this.fb.group({
       bannerFor: ['Instructor Banner', [Validators.required, Validators.pattern('[a-zA-Z]+([a-zA-Z ]+)*')] ],
@@ -69,15 +72,27 @@ export class IBannerCreateComponent {
 
 
   FileUpload(event:any){
-    const file =event.target.files[0]
-    const formData = new FormData()
-    formData.append('files', file)
-    this.bannerService.uploadCourseThumbnail(formData).subscribe((response:any)=>{
-    this.image_link = response.image_link;
+    // const file =event.target.files[0]
+    // const formData = new FormData()
+    // formData.append('files', file)
+    // this.bannerService.uploadCourseThumbnail(formData).subscribe((response:any)=>{
+    // this.image_link = response.image_link;
+    // this.uploaded=this.image_link.split('/')
+    // this.uploadedImage = this.uploaded.pop();
+    // })
+    const file = event.target.files[0];
+  
+    this.thumbnail = file
+    const formData = new FormData();
+    formData.append('files', this.thumbnail);
+  this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
+    this.image_link = data.data.thumbnail;
     this.uploaded=this.image_link.split('/')
+    let image  = this.uploaded.pop();
+    this.uploaded= image.split('\\');
     this.uploadedImage = this.uploaded.pop();
-    })
-  }
+  })
+}
 
 }
 

@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Student } from '@core/models/user.model';
 import { AuthenService } from '@core/service/authen.service';
 import { CertificateService } from '@core/service/certificate.service';
+import { CourseService } from '@core/service/course.service';
 import { EtmsService } from '@core/service/etms.service';
 
 import { StudentsService } from 'app/admin/students/all-students/students.service';
@@ -47,6 +48,7 @@ export class SettingsComponent {
   taUrl: any;
   adminUrl: any;
   roname: any;
+  thumbnail: any;
 
   constructor(
     private studentService: StudentsService,
@@ -54,7 +56,8 @@ export class SettingsComponent {
     private fb: UntypedFormBuilder,
     private certificateService: CertificateService,
     private router: Router,
-    private authenservice: AuthenService
+    private authenservice: AuthenService,
+    private courseService: CourseService,
   ) {
     let urlPath = this.router.url.split('/');
     this.cmUrl = urlPath.includes('coursemanager-settings');
@@ -175,7 +178,9 @@ export class SettingsComponent {
       this.editData = res;
       this.avatar = this.editData.avatar;
       this.uploaded = this.avatar?.split('/');
-      this.uploadedImage = this.uploaded?.pop();
+      let image  = this.uploaded.pop();
+      this.uploaded= image.split('\\');
+      this.uploadedImage = this.uploaded.pop();
 
       this.stdForm.patchValue({
         name: this.editData.name,
@@ -199,21 +204,37 @@ export class SettingsComponent {
     });
   }
   onFileUpload(event: any) {
-    this.fileName = event.target.files[0].name;
-    this.files = event.target.files[0];
-    this.uploadedImage = event.target.files[0].name;
-
-    // const file = event.target.files[0];
+    // this.fileName = event.target.files[0].name;
+    // this.files = event.target.files[0];
+    const file = event.target.files[0];
+  
+    this.thumbnail = file
     const formData = new FormData();
-    // formData.append('files', file);
-    this.certificateService
-      .uploadCourseThumbnail(formData)
-      .subscribe((response: any) => {
-        this.avatar = response.avatar;
-        this.uploaded = this.avatar.split('/');
-        this.uploadedImage = this.uploaded.pop();
-      });
+    formData.append('files', this.thumbnail);
+   this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
+    this.avatar = data.data.thumbnail;
+    this.uploaded=this.avatar.split('/')
+    let image  = this.uploaded.pop();
+    this.uploaded= image.split('\\');
+    this.uploadedImage = this.uploaded.pop();
+   
+      // this.onSubmit1();
+ 
+  });
+    // this.uploadedImage = event.target.files[0].name;
+
+    // // const file = event.target.files[0];
+    // const formData = new FormData();
+    // // formData.append('files', file);
+    // this.certificateService
+    //   .uploadCourseThumbnail(formData)
+    //   .subscribe((response: any) => {
+    //     this.avatar = response.avatar;
+    //     this.uploaded = this.avatar.split('/');
+    //     this.uploadedImage = this.uploaded.pop();
+    //   });
   }
+
 
   onSubmit() {
     console.log('Form Value', this.stdForm.value);
@@ -238,39 +259,55 @@ export class SettingsComponent {
       // },
     }
   }
+  // onSubmit1() {
+  //   console.log('========', this.stdForm1);
+  //   if (!this.stdForm1.invalid) {
+  //     this.studentService.uploadVideo(this.files).subscribe(
+  //       (response: any) => {
+  //         const inputUrl = response.inputUrl;
+  //         this.authenservice.updateUserProfile(response.inputUrl);
+
+  //         const userData: Student = this.stdForm1.value;
+  //         //this.commonService.setVideoId(videoId)
+
+  //         userData.avatar = inputUrl;
+  //         userData.filename = response.filename;
+  //         userData.type = 'Student';
+  //         userData.role = 'Student';
+
+  //         //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+  //         // this.currentVideoIds.push(videoId);
+  //         this.updateInstructor(userData);
+
+  //         Swal.close();
+  //       },
+  //       (error: any) => {
+  //         Swal.fire({
+  //           icon: 'error',
+  //           title: 'Upload Failed',
+  //           text: 'An error occurred while uploading the video',
+  //         });
+  //         Swal.close();
+  //       }
+  //     );
+  //   }
+  // }
   onSubmit1() {
     console.log('========', this.stdForm1);
     if (!this.stdForm1.invalid) {
-      this.studentService.uploadVideo(this.files).subscribe(
-        (response: any) => {
-          const inputUrl = response.inputUrl;
-          this.authenservice.updateUserProfile(response.inputUrl);
+      // No need to call uploadVideo() here since it's not needed
+        const userData: Student = this.stdForm1.value;
+        userData.avatar = this.avatar; // Assuming this.avatar contains the URL of the uploaded thumbnail
+        userData.type = 'Student';
+        userData.role = 'Student';
 
-          const userData: Student = this.stdForm1.value;
-          //this.commonService.setVideoId(videoId)
+        this.updateInstructor(userData);
 
-          userData.avatar = inputUrl;
-          userData.filename = response.filename;
-          userData.type = 'Student';
-          userData.role = 'Student';
-
-          //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-          // this.currentVideoIds.push(videoId);
-          this.updateInstructor(userData);
-
-          Swal.close();
-        },
-        (error: any) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Upload Failed',
-            text: 'An error occurred while uploading the video',
-          });
-          Swal.close();
-        }
-      );
+        Swal.close();
     }
-  }
+   
+}
+
   private updateInstructor(userData: Student): void {
     this.studentService.updateStudent(this.studentId, userData).subscribe(
       () => {
