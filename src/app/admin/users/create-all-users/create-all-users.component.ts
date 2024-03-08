@@ -7,6 +7,7 @@ import { UserService } from '@core/service/user.service';
 import { UtilsService } from '@core/service/utils.service';
 import { StudentService } from '@core/service/student.service';
 import Swal from 'sweetalert2';
+import { CourseService } from '@core/service/course.service';
 
 @Component({
   selector: 'app-create-all-users',
@@ -30,7 +31,9 @@ export class CreateAllUsersComponent {
   blogsList: any;
   currentId: string;
   hide = true;
-  
+  thumbnail: any;
+  avatar: any;
+
   breadscrums = [
     {
       title: 'Create All Users',
@@ -86,43 +89,64 @@ export class CreateAllUsersComponent {
   //   }
   // }
 
-  addBlog(formObj:any) {
-   // console.log('Form Value', formObj.value);
-    if (!formObj.invalid) {
-      this.studentService.uploadVideo(this.files).subscribe(
-        (response: any) => {
-          console.log("======",formObj.type)
-          const inputUrl = response.inputUrl;
+  // addBlog(formObj:any) {
+  //  // console.log('Form Value', formObj.value);
+  //   if (!formObj.invalid) {
+  //     this.studentService.uploadVideo(this.files).subscribe(
+  //       (response: any) => {
+  //         console.log("======",formObj.type)
+  //         const inputUrl = response.inputUrl;
           
-          formObj['Active']= this.status
-          formObj['role']=formObj.type
-          formObj['isLogin']=true
+  //         formObj['Active']= this.status
+  //         formObj['role']=formObj.type
+  //         formObj['isLogin']=true
 
-          const userData: Users = formObj;
-          //this.commonService.setVideoId(videoId)
+  //         const userData: Users = formObj;
+  //         //this.commonService.setVideoId(videoId)
 
-          userData.avatar = inputUrl;
-          userData.filename = response.filename;
+  //         userData.avatar = inputUrl;
+  //         userData.filename = response.filename;
           
-          //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-          // this.currentVideoIds.push(videoId);
-          this.createUser(userData);
+  //         //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+  //         // this.currentVideoIds.push(videoId);
+  //         this.createUser(userData);
 
-          Swal.close();
-        },
-        (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Upload Failed',
-            text: 'An error occurred while uploading the video',
-          });
-          Swal.close();
-        }
-      );
-    }
+  //         Swal.close();
+  //       },
+  //       (error) => {
+  //         Swal.fire({
+  //           icon: 'error',
+  //           title: 'Upload Failed',
+  //           text: 'An error occurred while uploading the video',
+  //         });
+  //         Swal.close();
+  //       }
+  //     );
+  //   }
     
      
 
+  // }
+  addBlog(formObj: any) {
+    console.log('Form Value', formObj.value);
+    if (!formObj.invalid) {
+      // Process form data without uploading anything
+      // Additional logic can be added here as needed
+      console.log("======", formObj.type);
+      formObj['Active'] = this.status;
+      formObj['role'] = formObj.type;
+      formObj['isLogin'] = true;
+  
+      const userData: Users = formObj;
+      userData.avatar = this.avatar;
+      // You may want to set avatar and filename if needed
+      // userData.avatar = 'your_avatar_url';
+      // userData.filename = 'your_filename';
+  
+      this.createUser(userData);
+  
+      Swal.close();
+    }
   }
   createUser(userData:Users){
     this.userService.saveUsers(userData).subscribe(
@@ -149,8 +173,20 @@ export class CreateAllUsersComponent {
 
   }
   onFileUpload(event:any) {
-    this.fileName = event.target.files[0].name;
-    this.files=event.target.files[0]
+    const file = event.target.files[0];
+  
+    this.thumbnail = file
+    const formData = new FormData();
+    formData.append('files', this.thumbnail);
+   this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
+    this.avatar = data.data.thumbnail;
+    this.uploaded=this.avatar.split('/')
+    let image  = this.uploaded.pop();
+    this.uploaded= image.split('\\');
+    this.fileName = this.uploaded.pop();
+  });
+    // this.fileName = event.target.files[0].name;
+    // this.files=event.target.files[0]
     // this.authenticationService.uploadVideo(event.target.files[0]).subscribe(
     //   (response: any) => {
     //             //Swal.close();
@@ -164,49 +200,66 @@ export class CreateAllUsersComponent {
 
   }
 
-  updateBlog(formObj:any) {
-    console.log('Form Value', formObj.value);
-      if (!formObj.invalid) {
-    if (this.files) {
-      // If files are present, upload the video
-      this.studentService.uploadVideo(this.files).subscribe(
-        (response: any) => {
-          console.log("======", formObj.type);
+//   updateBlog(formObj:any) {
+//     console.log('Form Value', formObj.value);
+//       if (!formObj.invalid) {
+//     if (this.files) {
+//       // If files are present, upload the video
+//       this.studentService.uploadVideo(this.files).subscribe(
+//         (response: any) => {
+//           console.log("======", formObj.type);
 
-          formObj['Active'] = this.status;
-          formObj['role'] = formObj.type;
-          formObj['isLogin'] = true;
+//           formObj['Active'] = this.status;
+//           formObj['role'] = formObj.type;
+//           formObj['isLogin'] = true;
 
-          const userData: Users = formObj;
+//           const userData: Users = formObj;
 
-          // Process response if needed
-          // const inputUrl = response.inputUrl;
-          // userData.avatar = inputUrl;
-          // userData.filename = response.filename;
+//           // Process response if needed
+//           // const inputUrl = response.inputUrl;
+//           // userData.avatar = inputUrl;
+//           // userData.filename = response.filename;
 
-          this.updateUser(userData);
+//           this.updateUser(userData);
 
-          Swal.close();
-        },
-        (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Upload Failed',
-            text: 'An error occurred while uploading the video',
-          });
-          Swal.close();
-        }
-      );
-    } else {
-      // If no files are present, update the user directly
-      formObj['Active'] = this.status;
-      formObj['role'] = formObj.type;
-      formObj['isLogin'] = true;
+//           Swal.close();
+//         },
+//         (error) => {
+//           Swal.fire({
+//             icon: 'error',
+//             title: 'Upload Failed',
+//             text: 'An error occurred while uploading the video',
+//           });
+//           Swal.close();
+//         }
+//       );
+//     } else {
+//       // If no files are present, update the user directly
+//       formObj['Active'] = this.status;
+//       formObj['role'] = formObj.type;
+//       formObj['isLogin'] = true;
 
-      const userData: Users = formObj;
-      this.updateUser(userData);
-      Swal.close();
-    }
+//       const userData: Users = formObj;
+//       this.updateUser(userData);
+//       Swal.close();
+//     }
+//   }
+// }
+updateBlog(formObj: any) {
+  console.log('Form Value', formObj.value);
+  if (!formObj.invalid) {
+    // Prepare user data for update
+    formObj['Active'] = this.status;
+    formObj['role'] = formObj.type;
+    formObj['isLogin'] = true;
+
+    const userData: Users = formObj;
+
+    // Ensure that the avatar property contains the correct URL
+    userData.avatar = this.avatar // Replace 'your_existing_avatar_url' with the actual avatar URL
+
+    this.updateUser(userData);
+    Swal.close();
   }
 }
   updateUser(obj:any){
@@ -240,7 +293,7 @@ export class CreateAllUsersComponent {
   }
 
   constructor(private router: Router,    private fb: FormBuilder,public utils: UtilsService, private userService: UserService,
-    private adminService: AdminService,private studentService: StudentService, private activeRoute: ActivatedRoute) {
+    private adminService: AdminService,private studentService: StudentService, private activeRoute: ActivatedRoute,  private courseService: CourseService,) {
     let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-all-users'); 
     this.currentId = urlPath[urlPath.length - 1];
@@ -308,7 +361,12 @@ getBlogsList(filters?:any) {
   this.userService.getUserById(this.currentId).subscribe((response: any) => {
     console.log("listing user", response);
     this.data = response.data.data;
-    this.fileName =  this.data.filename
+    // this.fileName = this.data.filename
+    this.avatar =  this.data.avatar
+    this.uploaded=this.avatar?.split('/')
+    let image  = this.uploaded.pop();
+    this.uploaded= image.split('\\');
+    this.fileName = this.uploaded.pop();
     if( this.data){
           this.userForm.patchValue({
             name:  this.data?.name,
@@ -316,7 +374,7 @@ getBlogsList(filters?:any) {
             password:  this.data?.password,
             education:  this.data?.education,
             type: this.data?.type,
-            avatar: this.data?.avatar,
+            fileName: this.data?.avatar,
           });
         }
       }, error => {

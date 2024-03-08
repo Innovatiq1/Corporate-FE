@@ -11,6 +11,7 @@ import { InstructorService } from '@core/service/instructor.service';
 import { Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
 import { StudentsService } from 'app/admin/students/all-students/students.service';
+import { CourseService } from '@core/service/course.service';
 
 @Component({
   selector: 'app-edit-teacher',
@@ -34,7 +35,10 @@ export class EditTeacherComponent {
   fileName: any;
   files: any;
   dept: any;
-  constructor(private fb: UntypedFormBuilder,public teachersService: TeachersService,private activatedRoute: ActivatedRoute, private StudentService: StudentsService,
+  avatar: any;
+  uploaded: any;
+  thumbnail: any;
+  constructor(private fb: UntypedFormBuilder,private courseService: CourseService,public teachersService: TeachersService,private activatedRoute: ActivatedRoute, private StudentService: StudentsService,
     
     private instructor: InstructorService,private router:Router) {
     //this.proForm = this.createContactForm();
@@ -87,43 +91,62 @@ export class EditTeacherComponent {
   //      );
   //     }
   // }
+  // onSubmit() {
+  //   console.log('Form Value', this.proForm.value);
+  
+  //   // Check if the form is valid
+  //   if (this.proForm.valid) {
+  //     if (this.files) {
+  //       // If files are present, upload the video
+  //       this.instructor.uploadVideo(this.files).subscribe(
+  //         (response: any) => {
+  //           const inputUrl = response.inputUrl;
+  
+  //           const userData: Users = this.proForm.value;
+  //           userData.avatar = inputUrl;
+  //           userData.filename = this.fileName;
+  //           userData.type = "Instructor";
+  //           userData.role = "Instructor";
+  
+  //           this.updateInstructor(userData);
+  
+  //           Swal.close();
+  //         },
+  //         (error: any) => {
+  //           // Handle the error during file upload
+  //           console.error('File upload failed:', error);
+  //         }
+  //       );
+  //     } else {
+  //       // If no files are present, update the instructor directly
+  //       const userData: Users = this.proForm.value;
+  //       userData.type = "Instructor";
+  //       userData.role = "Instructor";
+  
+  //       this.updateInstructor(userData);
+  //     }
+  //   }
+  // }
   onSubmit() {
     console.log('Form Value', this.proForm.value);
-  
+
     // Check if the form is valid
     if (this.proForm.valid) {
-      if (this.files) {
-        // If files are present, upload the video
-        this.instructor.uploadVideo(this.files).subscribe(
-          (response: any) => {
-            const inputUrl = response.inputUrl;
-  
-            const userData: Users = this.proForm.value;
-            userData.avatar = inputUrl;
-            userData.filename = this.fileName;
-            userData.type = "Instructor";
-            userData.role = "Instructor";
-  
-            this.updateInstructor(userData);
-  
-            Swal.close();
-          },
-          (error: any) => {
-            // Handle the error during file upload
-            console.error('File upload failed:', error);
-          }
-        );
-      } else {
-        // If no files are present, update the instructor directly
-        const userData: Users = this.proForm.value;
-        userData.type = "Instructor";
-        userData.role = "Instructor";
-  
-        this.updateInstructor(userData);
-      }
+      // Create userData object with form values
+      const userData: Users = this.proForm.value;
+
+      // Set the avatar path to the existing avatar URL
+      userData.avatar = this.avatar;
+
+      userData.type = "Instructor";
+      userData.role = "Instructor";
+
+      // Call the updateInstructor function with userData
+      this.updateInstructor(userData);
+
+      Swal.close();
     }
-  }
-  
+}
   private updateInstructor(userData: Users): void {
     this.teachersService.updateUser(this.userId,userData).subscribe(
       () => {
@@ -162,7 +185,12 @@ getData(){
       //this.user = response.course;
       
       console.log("response?.course?.education",response?.course?.education)
-      this.fileName =response?.course?.filename
+      // this.fileName =response?.course?.filename
+      this.avatar =  response.course?.avatar
+      this.uploaded=this.avatar?.split('/')
+      let image  = this.uploaded.pop();
+      this.uploaded= image.split('\\');
+      this.fileName = this.uploaded.pop();
 
       
      
@@ -188,7 +216,7 @@ getData(){
         address:response?.course?.address,
         department:response?.course?.department,
         joiningDate:response?.course?.joiningDate,
-        avatar:response?.course?.avatar,
+        fileName:this.fileName,
         
         
         
@@ -205,8 +233,20 @@ getData(){
 
 }
 onFileUpload(event:any) {
-  this.fileName = event.target.files[0].name;
-  this.files=event.target.files[0]
+  const file = event.target.files[0];
+  
+    this.thumbnail = file
+    const formData = new FormData();
+    formData.append('files', this.thumbnail);
+   this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
+    this.avatar = data.data.thumbnail;
+    this.uploaded=this.avatar.split('/')
+    let image  = this.uploaded.pop();
+    this.uploaded= image.split('\\');
+    this.fileName = this.uploaded.pop();
+  });
+  // this.fileName = event.target.files[0].name;
+  // this.files=event.target.files[0]
   // this.authenticationService.uploadVideo(event.target.files[0]).subscribe(
   //   (response: any) => {
   //             //Swal.close();
