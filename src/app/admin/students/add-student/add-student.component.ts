@@ -205,11 +205,11 @@ getDepartment(){
       this.StudentService.getStudentById(id).subscribe((res) => {
         // this.fileName =res.avatar
         this.editData = res;
-        this.avatar = this.editData.avatar;
+        this.avatar = this.editData?.avatar;
       this.uploaded=this.avatar?.split('/')
-      let image  = this.uploaded.pop();
-      this.uploaded= image.split('\\');
-      this.fileName = this.uploaded.pop();
+      let image  = this.uploaded?.pop();
+      this.uploaded= image?.split('\\');
+      this.fileName = this.uploaded?.pop();
         console.log('editdata', this.editData);
         // this.stdForm.get('department')?.setValue(this.editData.department);
         this.stdForm.patchValue({
