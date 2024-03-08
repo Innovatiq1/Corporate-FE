@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { ConfirmedValidator } from '@shared/password.validator';
+import { CourseService } from '@core/service/course.service';
 
 @Component({
   selector: 'app-add-teacher',
@@ -21,6 +22,9 @@ import { ConfirmedValidator } from '@shared/password.validator';
 export class AddTeacherComponent {
   proForm: UntypedFormGroup;
   dept: any;
+  uploaded: any;
+  thumbnail: any;
+  avatar: any;
 
   breadscrums = [
     {
@@ -34,6 +38,7 @@ export class AddTeacherComponent {
   constructor(private fb: UntypedFormBuilder,
     private instructor: InstructorService,
     private StudentService: StudentsService,
+    private courseService: CourseService,
     private router:Router) {
     this.proForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
@@ -60,8 +65,20 @@ export class AddTeacherComponent {
 
 
   onFileUpload(event:any) {
-    this.fileName = event.target.files[0].name;
-    this.files=event.target.files[0]
+    const file = event.target.files[0];
+  
+    this.thumbnail = file
+    const formData = new FormData();
+    formData.append('files', this.thumbnail);
+   this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
+    this.avatar = data.data.thumbnail;
+    this.uploaded=this.avatar.split('/')
+    let image  = this.uploaded.pop();
+    this.uploaded= image.split('\\');
+    this.fileName = this.uploaded.pop();
+  });
+    // this.fileName = event.target.files[0].name;
+    // this.files=event.target.files[0]
     // this.authenticationService.uploadVideo(event.target.files[0]).subscribe(
     //   (response: any) => {
     //             //Swal.close();
@@ -81,39 +98,55 @@ export class AddTeacherComponent {
      })
 
   }
+  // onSubmit() {
+  //   console.log('Form Value', this.proForm.value);
+  //   if(!this.proForm.invalid){
+  //   this.instructor.uploadVideo(this.files).subscribe(
+  //     (response: any) => {
+  //       const inputUrl = response.inputUrl;
+
+  //       const userData: Users = this.proForm.value;
+  //       //this.commonService.setVideoId(videoId)
+
+  //       userData.avatar = inputUrl;
+  //       userData.filename= response.filename
+  //       userData.type = "Instructor";
+  //       userData.role = "Instructor";
+  //       userData.isLogin = true;
+
+  //       //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+  //       // this.currentVideoIds.push(videoId);
+  //       this.createInstructor(userData);
+
+  //       Swal.close();
+  //     },
+  //     (error) => {
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Upload Failed',
+  //         text: 'An error occurred while uploading the video',
+  //       });
+  //       Swal.close();
+  //     }
+  //   );
+  //   }
+  // }
   onSubmit() {
     console.log('Form Value', this.proForm.value);
-    if(!this.proForm.invalid){
-    this.instructor.uploadVideo(this.files).subscribe(
-      (response: any) => {
-        const inputUrl = response.inputUrl;
-
+    if (!this.proForm.invalid) {
         const userData: Users = this.proForm.value;
-        //this.commonService.setVideoId(videoId)
-
-        userData.avatar = inputUrl;
-        userData.filename= response.filename
-        userData.type = "Instructor";
-        userData.role = "Instructor";
+        
+        // Set the avatar path to the URL received during file upload
+        userData.avatar = this.avatar;
+        
+        userData.type = 'Instructor';
+        userData.role = 'Instructor';
         userData.isLogin = true;
 
-        //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-        // this.currentVideoIds.push(videoId);
         this.createInstructor(userData);
-
-        Swal.close();
-      },
-      (error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Upload Failed',
-          text: 'An error occurred while uploading the video',
-        });
-        Swal.close();
-      }
-    );
     }
-  }
+}
+
   ngOnInit(){
     this.getDepartment();
   }

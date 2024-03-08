@@ -316,7 +316,9 @@ export class CreateProgramComponent {
       this.course = response.data;
       this.image_link = this.course.image_link;
       this.uploaded = this.image_link?.split('/')
-      this.uploadedImage = this.uploaded?.pop();
+      let image  = this.uploaded.pop();
+      this.uploaded= image.split('\\');
+      this.uploadedImage = this.uploaded.pop();
       this.programFormGroup.patchValue({
         course: this.course?.title,
         programCode: this.course?.courseCode,

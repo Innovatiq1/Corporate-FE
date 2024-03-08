@@ -91,8 +91,6 @@ export class AddStudentComponent {
     let image  = this.uploaded.pop();
     this.uploaded= image.split('\\');
     this.fileName = this.uploaded.pop();
-    console.log("uploaded",this.fileName)
-    console.log("uploadedddd",this.uploaded)
   });
     // this.fileName = event.target.files[0].name;
     // this.files=event.target.files[0]
