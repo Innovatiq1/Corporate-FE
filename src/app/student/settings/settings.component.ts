@@ -49,7 +49,7 @@ export class SettingsComponent {
   adminUrl: any;
   roname: any;
   thumbnail: any;
-
+  student: Student | undefined;
   constructor(
     private studentService: StudentsService,
     private etmsService: EtmsService,
@@ -298,8 +298,8 @@ export class SettingsComponent {
       // No need to call uploadVideo() here since it's not needed
         const userData: Student = this.stdForm1.value;
         userData.avatar = this.avatar; // Assuming this.avatar contains the URL of the uploaded thumbnail
-        userData.type = 'Student';
-        userData.role = 'Student';
+        userData.type = this.editData.role;
+        userData.role = this.editData.type;
 
         this.updateInstructor(userData);
 

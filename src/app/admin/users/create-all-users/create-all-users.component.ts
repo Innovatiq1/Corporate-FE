@@ -179,11 +179,11 @@ export class CreateAllUsersComponent {
     const formData = new FormData();
     formData.append('files', this.thumbnail);
    this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
-    this.avatar = data.data.thumbnail;
-    this.uploaded=this.avatar.split('/')
-    let image  = this.uploaded.pop();
-    this.uploaded= image.split('\\');
-    this.fileName = this.uploaded.pop();
+    this.avatar = data.data?.thumbnail;
+    this.uploaded=this.avatar?.split('/')
+    let image  = this.uploaded?.pop();
+    this.uploaded= image?.split('\\');
+    this.fileName = this.uploaded?.pop();
   });
     // this.fileName = event.target.files[0].name;
     // this.files=event.target.files[0]
@@ -362,11 +362,11 @@ getBlogsList(filters?:any) {
     console.log("listing user", response);
     this.data = response.data.data;
     // this.fileName = this.data.filename
-    this.avatar =  this.data.avatar
+    this.avatar =  this.data?.avatar
     this.uploaded=this.avatar?.split('/')
-    let image  = this.uploaded.pop();
-    this.uploaded= image.split('\\');
-    this.fileName = this.uploaded.pop();
+    let image  = this.uploaded?.pop();
+    this.uploaded= image?.split('\\');
+    this.fileName = this.uploaded?.pop();
     if( this.data){
           this.userForm.patchValue({
             name:  this.data?.name,
