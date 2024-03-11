@@ -395,6 +395,28 @@ export class CourseService {
         })
       );
     }
+  
+    saveVideo(payload: any){
+    console.log("payload",payload);
+      const apiUrl = `${this.prefix}uploadVideo/`;
+      return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+    }
+
+    getAllCourseKit(
+      filter?: Partial<any>
+    ): Observable<ApiResponse> {
+      const apiUrl = `${this.prefix}uploadVideo/`;
+      return this._Http.get<ApiResponse>(apiUrl, {
+        params: this.buildParams(filter),
+      });
+    }
+
+      getCoursekitVideoById(id: any) {
+        const apiUrl = `${this.prefix}uploadVideo/${id}`;
+        console.log("==new=",apiUrl)
+        return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+      }
+    
 }
 
 

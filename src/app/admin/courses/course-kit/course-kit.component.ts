@@ -88,6 +88,28 @@ export class CourseKitComponent implements OnInit{
 
       });
 
+//  chaged by Ganesh
+
+// this.courseService.getAllCourseKit().subscribe(response => {
+//   console.log("allData",response.data);
+//   if(response){
+//   this.isLoading = false;
+//   this.dataSource = response.data.docs;
+//     this.courseKitModel.docs = response.data.docs;
+//     this.courseKitModel.page = response.data.page;
+//     this.courseKitModel.limit = response.data.limit;
+//     this.courseKitModel.totalDocs = response.data.totalDocs;
+//     this.getJobTemplates();
+
+//   }
+
+//  },
+//  (error) => {
+
+//  })
+
+
+
   }
 
   getJobTemplates() {
@@ -101,20 +123,21 @@ export class CourseKitComponent implements OnInit{
     );
   }
 
-  playVideo(video: { url: any; }): void {
-    if (video?.url) {
+  playVideo(video: { video_url: any; }): void {
+    console.log('Video',video)
+    if (video?.video_url) {
       this.openVidePlayer(video);
     } else {
       console.error("Invalid video URL");
     }
   }
 
-  openVidePlayer(videoLink: { url?: any; id?: any; }): void {
+  openVidePlayer(videoLink: { video_url?: any; id?: any; }): void {
     // const { videoLink } = videoLink;
     if (videoLink?.id) {
-      const videoId = videoLink.id;
-      this.courseService.getVideoById(videoId).subscribe((res) => {
-        const videoURL = res.data.videoUrl;
+      const videoURL = videoLink.video_url;
+      // this.courseService.getVideoById(videoId).subscribe((res) => {
+      //   const videoURL = res.data.videoUrl;
         if (!videoURL) {
           Swal.fire({
             icon: "error",
@@ -124,18 +147,18 @@ export class CourseKitComponent implements OnInit{
           return
 
         }
-        const videoType = "application/x-mpegURL";
+        // const videoType = "application/x-mpegURL";
         if (videoURL) {
           const initialState: ModalOptions = {
             initialState: {
               videoURL,
-              videoType,
+              // videoType,
             },
             class: "videoPlayer-modal",
           };
           this.modalServices.show(VideoPlayerComponent, initialState);
         }
-      });
+      // });
     }
   }
 
