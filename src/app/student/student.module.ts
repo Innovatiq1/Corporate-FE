@@ -39,7 +39,11 @@ import { ProgramSheduleComponent } from './program-shedule/program-shedule.compo
 import { SuccessProgramComponent } from './success-program/success-program.component';
 import { FailureProgramComponent } from './failure-program/failure-program.component';
 import { StudentVideoPlayerComponent } from './view-course/student-video-player/student-video-player.component';
-
+import {VgCoreModule} from '@videogular/ngx-videogular/core';
+import {VgControlsModule} from '@videogular/ngx-videogular/controls';
+import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
+import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
+import { TimeFormatPipe } from '../../app/core/pipes/time-format.pipe';
 
 @NgModule({
   declarations: [
@@ -62,7 +66,8 @@ import { StudentVideoPlayerComponent } from './view-course/student-video-player/
     ProgramSheduleComponent,
     SuccessProgramComponent,
     FailureProgramComponent,
-    StudentVideoPlayerComponent
+    StudentVideoPlayerComponent,
+    TimeFormatPipe
 
   ],
   imports: [
@@ -70,6 +75,7 @@ import { StudentVideoPlayerComponent } from './view-course/student-video-player/
     StudentRoutingModule,
     NgChartsModule,
     FullCalendarModule,
+   
 
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),

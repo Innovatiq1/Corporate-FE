@@ -53,6 +53,9 @@ export class CreateCourseKitComponent implements OnInit{
   uploadedDocument: any;
   uploaded: any;
   documentLink:any
+  docs: any;
+  videoLink: any;
+  videoSrc: any;
 
 
   constructor(private router: Router,
@@ -112,13 +115,18 @@ export class CreateCourseKitComponent implements OnInit{
     element.end = element.start;
   }
 ngOnInit(): void {
- 
+ this.courseService.getAllCourseKit().subscribe(data => {
+  console.log("allData",data)
+ })
 
 }
 private createCourseKit(courseKitData: CourseKit): void {
-  courseKitData.documentLink=this.documentLink
+  
+  // courseKitData.documentLink=this.documentLink;
+  console.log("createCourseKit",courseKitData)
   this.courseService.createCourseKit(courseKitData).subscribe(
-    () => {
+    (res) => {
+      console.log("res",res)
       Swal.fire({
         title: "Successful",
         text: "Course Kit created successfully",
@@ -127,7 +135,7 @@ private createCourseKit(courseKitData: CourseKit): void {
       // this.fileDropEl.nativeElement.value = "";
       this.courseKitForm.reset();
       // this.toggleList()
-      this.router.navigateByUrl("/admin/courses/create-template");
+      this.router.navigateByUrl("/admin/courses/course-kit");
     },
     (error) => {
       Swal.fire(
@@ -138,10 +146,19 @@ private createCourseKit(courseKitData: CourseKit): void {
     }
   );
 }
-  fileBrowseHandler(event: any) {
-    const files = event.target.files;
-    this.onFileDropped(files);
-  }
+
+//videoUpload
+fileBrowseHandler(event: any) {
+  const file = event.target.files[0];
+  this.videoLink = file;
+  this.videoSrc = this.videoLink.name
+}
+
+
+  // fileBrowseHandler(event: any) {
+  //   const files = event.target.files;
+  //   this.onFileDropped(files);
+  // }
   onFileDropped($event: any) {
     this.prepareFilesList($event);
   }
@@ -153,54 +170,97 @@ private createCourseKit(courseKitData: CourseKit): void {
     }
     //this.fileDropEl.nativeElement.value = "";
   }
+
+  // Ganesh
+  // onFileUpload(event:any) {
+  //   const file = event.target.files[0];..
+  //   this.docs = file;..
+  //   this.uploadedDocument = this.docs.name;..
+  //   // const formData = new FormData();
+  //   // formData.append('files', file);
+  //   console.log("formData",this.docs);..
+  //   // this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
+  //   //   this.documentLink = response.image_link;
+  //   //   this.uploaded=this.documentLink.split('/')
+  //   //   this.uploadedDocument = this.uploaded.pop();
+  //   // });
+  // }
+
+
   onFileUpload(event:any) {
     const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append('files', file);
-    this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
-      this.documentLink = response.image_link;
-      this.uploaded=this.documentLink.split('/')
-      this.uploadedDocument = this.uploaded.pop();
-    });
+    this.docs = file;
+    this.uploadedDocument = this.docs.name;
+    // const formData = new FormData();
+    // formData.append('files', file);
+    // // console.log("formData",this.docs);
+    // this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
+    //   this.documentLink = response.image_link;
+    //   this.uploaded=this.documentLink.split('/')
+    //   this.uploadedDocument = this.uploaded.pop();
+    // });
+  }
+
+
+  submitCourseKit1(){
+    const formdata = new FormData();
+    formdata.append('files', this.docs);
+    formdata.append('files', this.videoLink);
+    formdata.append('video_filename', this.videoSrc);
+    formdata.append('doc_filename', this.uploadedDocument);
+    // formdata.append('courseKitName', this.courseKitForm.value.name);
+    // formdata.append('short_description', this.courseKitForm.value.shortDescription);
+    // formdata.append('long_description', this.courseKitForm.value.longDescription);
+    // formdata.append('video_url', this.videoLink);
+  this.courseService.saveVideo(formdata).subscribe(data =>{
+    console.log("data",data.data);
+
+    const courseKitData: CourseKit = this.courseKitForm.value;
+    courseKitData.videoLink = data.data._id;
+    courseKitData.documentLink=data.data.document;
+    this.createCourseKit(courseKitData);
+  })
+
   }
   submitCourseKit(): void {
     this.isSubmitted=true
     console.log("=========",this.courseKitForm)
     if (this.courseKitForm.valid) {
-      const courseKitData: CourseKit = this.courseKitForm.value;
-                const loader = Swal.fire({
-            title: 'Uploading...',
-            text: 'Please wait...',
-            allowOutsideClick: false,
-            timer: 18000,
-            timerProgressBar: true
-            // onBeforeOpen: () => {
-            // //   Swal.showLoading();
-            //  },
-          })
+      // const courseKitData: CourseKit = this.courseKitForm.value;
+          //       const loader = Swal.fire({
+          //   title: 'Uploading...',
+          //   text: 'Please wait...',
+          //   allowOutsideClick: false,
+          //   timer: 18000,
+          //   timerProgressBar: true
+          //   // onBeforeOpen: () => {
+          //   // //   Swal.showLoading();
+          //   //  },
+          // })
         
 
-          this.courseService.uploadVideo(this.files).subscribe(
-            (response: any) => {
-              const videoId = response.videoIds;
-              this.commonService.setVideoId(videoId)
+          // this.courseService.uploadVideo(this.files).subscribe(
+          //   (response: any) => {
+          //     const videoId = response.videoIds;
+          //     this.commonService.setVideoId(videoId)
+          //     console.log("data123",videoId);
+          //     courseKitData.videoLink = videoId;
+          //     //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
+          //     // this.currentVideoIds.push(videoId);
+          //     console.log("data123454",courseKitData);
+          //     this.createCourseKit(courseKitData);
 
-              courseKitData.videoLink = videoId;
-              //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-              // this.currentVideoIds.push(videoId);
-              this.createCourseKit(courseKitData);
-
-              Swal.close();
-            },
-            (error) => {
-              Swal.fire({
-                icon: 'error',
-                title: 'Upload Failed',
-                text: 'An error occurred while uploading the video',
-              });
-              Swal.close();
-            }
-          );
+          //     Swal.close();
+          //   },
+          //   (error) => {
+          //     Swal.fire({
+          //       icon: 'error',
+          //       title: 'Upload Failed',
+          //       text: 'An error occurred while uploading the video',
+          //     });
+          //     Swal.close();
+          //   }
+          // );
         // } else {
         //   Swal.fire({
         //     icon: 'error',

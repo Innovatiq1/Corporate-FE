@@ -26,7 +26,7 @@ export class VideoPlayerComponent {
     public bsModalRef: BsModalRef,
   ) {}
   ngOnInit(): void {
-    if (this.videoURL) this.initPlayer(this.videoURL);
+    if (this.videoURL) this.loadVideo(this.videoURL);
     
   }
 

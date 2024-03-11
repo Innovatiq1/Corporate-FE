@@ -77,6 +77,7 @@ getAllCourse(){
   let filterText = this.filterName
   this.classService.getClassListWithPagination({ filterText,...this.coursePaginationModel, status: 'open' }).subscribe(response =>{
    this.classesData = response.data.docs;
+   console.log(this.classesData,"====++");
    this.totalItems = response.data.totalDocs
    this.coursePaginationModel.docs = response.data.docs;
    this.coursePaginationModel.page = response.data.page;

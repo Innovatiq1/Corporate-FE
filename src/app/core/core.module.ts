@@ -5,9 +5,9 @@ import { AuthGuard } from './guard/auth.guard';
 import { AuthService } from './service/auth.service';
 import { DirectionService } from './service/direction.service';
 import { throwIfAlreadyLoaded } from './guard/module-import.guard';
-
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [CommonModule],
   providers: [RightSidebarService, AuthGuard, AuthService, DirectionService],
 })
