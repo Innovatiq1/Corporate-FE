@@ -137,4 +137,9 @@ deleteUser(userId: string): Observable<ApiResponse> {
   const apiUrl = `${this.defaultUrl}auth/instructorDelete/${userId}`;
   return this.http.delete<ApiResponse>(apiUrl);
 }
+
+getQuestionJson(){
+  return this.http.get<any>("assets/questions.json");
+}
+
 }
