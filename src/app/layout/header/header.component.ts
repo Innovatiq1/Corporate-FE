@@ -195,7 +195,18 @@ export class HeaderComponent
     }
     this.getAnnouncementForStudents();
   }
-
+onClick(){
+  let role = localStorage.getItem('user_type')
+  if(role == 'admin'){
+    this.router.navigate(['/settings/admin-settings']);
+  }else if (role == 'Student'){
+    this.router.navigate(['/settings/student-settings']);
+  }
+  else if (role == 'Instructor'){
+    this.router.navigate(['/settings/instructor-settings']);
+  }
+  
+}
 
   getAnnouncementForStudents(filter?: any) {
     let payload ={

@@ -1,12 +1,8 @@
-<section class="content">
+<section class="content" *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
-      <app-breadcrumb
-        [title]="breadscrum.title"
-        [items]="breadscrum.items"
-        [active_item]="breadscrum.active"
-      >
+      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
       </app-breadcrumb>
     </div>
     <div class="card">
@@ -18,9 +14,7 @@
           <div class="example-container">
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <label
-                  >Employee Name<span class="mandatory">&nbsp;*</span></label
-                >
+                <label>Employee Name<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="empName" />
                 </mat-form-field>
@@ -35,16 +29,16 @@
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <label>Department<span class="mandatory">&nbsp;*</span></label>
-            <mat-form-field class="example-full-width" appearance="outline">
-              <input matInput formControlName="department" />
-              <!-- <mat-icon matSuffix (click)="hide = !hide">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="department" />
+                  <!-- <mat-icon matSuffix (click)="hide = !hide">
               {{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
-            </mat-form-field>
+                </mat-form-field>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <label>RO Name<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <input matInput formControlName="roName" readonly="true"/>
+                  <input matInput formControlName="roName" readonly="true" />
                   <!-- <mat-select formControlName="roName" required>
                     <mat-option [value]= "roname" >{{roname}}</mat-option>
                   </mat-select> -->
@@ -60,25 +54,24 @@
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <label>Training Admin<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <input matInput formControlName="director" readonly="true"/>
-                    <!-- <mat-select formControlName="director" required>
+                  <input matInput formControlName="director" readonly="true" />
+                  <!-- <mat-select formControlName="director" required>
                       <mat-option value=''></mat-option>
                     </mat-select> -->
-                    <mat-error
-                      *ngIf="profileForm.get('director')?.hasError('required') ||profileForm.get('director')?.touched">
-                      Select a training admin
-                    </mat-error>
-                  </mat-form-field>
+                  <mat-error
+                    *ngIf="profileForm.get('director')?.hasError('required') ||profileForm.get('director')?.touched">
+                    Select a training admin
+                  </mat-error>
+                </mat-form-field>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <label>Director<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <input matInput formControlName="TA" readonly="true"/>
+                  <input matInput formControlName="TA" readonly="true" />
                   <!-- <mat-select formControlName="TA" required>
                     <mat-option value=''>TA</mat-option>
                   </mat-select> -->
-                  <mat-error
-                    *ngIf="profileForm.get('TA')?.hasError('required') ||profileForm.get('TA')?.touched">
+                  <mat-error *ngIf="profileForm.get('TA')?.hasError('required') ||profileForm.get('TA')?.touched">
                     Select a training admin
                   </mat-error>
                 </mat-form-field>
@@ -102,24 +95,13 @@
             </mat-form-field>
             <label>Current Password</label>
             <mat-form-field class="example-full-width" appearance="outline">
-              <input
-                matInput
-                type="password"
-                formControlName="currentpassword"
-              />
+              <input matInput type="password" formControlName="currentpassword" />
             </mat-form-field>
             <label>New Password<span class="mandatory">&nbsp;*</span></label>
             <mat-form-field class="example-full-width" appearance="outline">
-              <input
-                matInput
-                type="password"
-                formControlName="password"
-                [type]="hide ? 'password' : 'text'"
-                required
-              />
+              <input matInput type="password" formControlName="password" [type]="hide ? 'password' : 'text'" required />
               <mat-icon matSuffix (click)="hide = !hide">
-                {{ hide ? "visibility_off" : "visibility" }}</mat-icon
-              >
+                {{ hide ? "visibility_off" : "visibility" }}</mat-icon>
             </mat-form-field>
           </div>
 
@@ -127,7 +109,7 @@
         </form>
       </div>
     </div>
-    <div class="card">
+    <div class="card" id="account-settings">
       <div class="header">
         <h2>Account Settings</h2>
       </div>
@@ -198,22 +180,17 @@
                   <div class="file">
                     <button mat-raised-button color="primary">
                       Choose file
-                      <input
-                        formControlName="avatar"
-                        (change)="onFileUpload($event)"
-                        class="file-input"
-                        type="file"
-                      />
+                      <input formControlName="avatar" (change)="onFileUpload($event)" class="file-input" type="file" />
                     </button>
-                    <span class="file-msg"
-                      ><h5>
+                    <span class="file-msg">
+                      <h5>
                         {{
-                          uploadedImage
-                            ? uploadedImage
-                            : "Drag and Drop File Here"
+                        uploadedImage
+                        ? uploadedImage
+                        : "Drag and Drop File Here"
                         }}
-                      </h5></span
-                    >
+                      </h5>
+                    </span>
                   </div>
                 </div>
                 <!-- <app-file-upload formControlName="image_link" (change)="onFileUpload($event)"></app-file-upload> -->
@@ -246,6 +223,263 @@
               <button mat-raised-button color="primary">Save Changes</button>
             </div>
           </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content" *ngIf="isAdmin">
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      </app-breadcrumb>
+    </div>
+    <!-- </div> -->
+
+    <div class="card" *ngIf="!showAccountSettings && !showProfileSettings">
+      <div class="header">
+        <h2>Settings</h2>
+      </div>
+      <div class="body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="row">
+                <div class="col-md-8 m-3">
+                  <label>User Management</label>
+                </div>
+                <div class="col-md-2 m-3">
+                  <img src="assets/images/settings/User-Profile.png" style="width: 80px; height: 80px;">
+                </div>
+              </div>
+              <hr>
+              <div class="m-3">
+                <div class="row">
+                  <div class="col-3">
+                    <!-- <a href="admin/users/all-users">All Users</a> -->
+                    <button id="save" [routerLink]="['/admin/users/all-users']"> All Users </button>
+                  </div>
+                  <div class="col-3">
+                    <button id="save" [routerLink]="['/admin/students/all-students']"> Students</button>
+                  </div>
+                  <div class="col-3">
+                    <button id="save" [routerLink]="['/admin/instructors/all-instructors']"> Instructors </button>
+                  </div>
+                  <div class="col-3">
+                    <button id="save" [routerLink]="['/admin/staff/all-staff']"> Staff </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="row">
+                <div class="col-md-8 m-3">
+                  <label>Security</label>
+                </div>
+                <div class="col-md-2 m-3">
+                  <img src="assets/images/settings/security.png" style="width: 80px; height: 80px;">
+                </div>
+              </div>
+              <hr>
+              <div class="m-3">
+                <div class="row">
+                  <div class="col-5">
+                    <!-- <a href="admin/users/all-users">Account Settings</a> -->
+                    <button id="save" (click)="navigateToAccountSettings()"> Account Settings</button>
+                    <!-- <button id="save"  [routerLink]="['/student/account-settings']" > Account Settings</button> -->
+                  </div>
+                  <!-- <div class="card" *ngIf="showAccountSettings">
+                    <!-- Content of Account Settings Card --
+                  </div> -->
+                  <div class="col-5">
+                    <!-- <a href="admin/students/all-students">Security Settings</a> -->
+                    <button id="save" (click)="navigateToProfileSettings()"> Security Settings</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="row">
+                <div class="col-md-8 m-3">
+                  <label>Roles</label>
+                </div>
+                <div class="col-md-2 m-3">
+                  <img src="assets/images/settings/role.png" style="width: 80px; height: 80px;">
+                </div>
+              </div>
+              <hr>
+              <div class="m-3">
+                <div class="row">
+                  <div class="col-3">
+                    <button id="save" [routerLink]="['/admin/users/user-type']"> User Types </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="row">
+                <div class="col-md-8 m-3">
+                  <label>System Configuration</label>
+                </div>
+                <div class="col-md-2 m-3">
+                  <img src="assets/images/settings/system-configuration.png" style="width: 80px; height: 80px;">
+                </div>
+              </div>
+              <hr>
+              <div class="m-3">
+                <div class="row">
+                  <div class="col-3">
+                    <button id="save" [routerLink]="['/admin/departments/all-departments']"> Departments </button>
+                  </div>
+                  <div class="col-2">
+                    <button id="save" [routerLink]="['/admin/banners/instructor-banner-list']"> Banners </button>
+                  </div>
+                  <div class="col-5">
+                    <button id="save" [routerLink]="['/admin/email-configuration/welcome-mail']"> Email Configuration
+                    </button>
+                  </div>
+                  <div class="col-2" style="margin-left: -40px;">
+                    <button id="save" [routerLink]="['/admin/questions/all-questions']"> Assessments </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="card" *ngIf="showAccountSettings">
+      <div class="header">
+        <h2>Account Settings</h2>
+      </div>
+      <div class="body">
+        <form [formGroup]="stdForm1" (ngSubmit)="onSubmit1()">
+          <div class="row clearfix">
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>First Name<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="name" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>Last Name</label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Last Name</mat-label>
+                  <input matInput formControlName="last_name" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>Mobile Number</label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="mobile" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>City<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="city_name" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>Email<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="email" readonly />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>Country<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="country_name" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Address<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <textarea matInput formControlName="address"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
+                <label>Upload</label>
+                <div class="file-drop-area">
+                  <div class="file">
+                    <button mat-raised-button color="primary">
+                      Choose file
+                      <input formControlName="avatar" (change)="onFileUpload($event)" class="file-input" type="file" />
+                    </button>
+                    <span class="file-msg">
+                      <h5>
+                        {{
+                        uploadedImage
+                        ? uploadedImage
+                        : "Drag and Drop File Here"
+                        }}
+                      </h5>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-12">
+              <button mat-raised-button color="primary">Save Changes</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <div class="card" *ngIf="showProfileSettings">
+      <div class="header">
+        <h2>Security Settings</h2>
+      </div>
+      <div class="body">
+        <form [formGroup]="stdForm" (ngSubmit)="onSubmit()">
+          <div class="example-container">
+            <label>User Name<span class="mandatory">&nbsp;*</span></label>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input matInput formControlName="name" />
+            </mat-form-field>
+            <label>Current Password</label>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input matInput type="password" formControlName="currentpassword" />
+            </mat-form-field>
+            <label>New Password<span class="mandatory">&nbsp;*</span></label>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <input matInput type="password" formControlName="password" [type]="hide ? 'password' : 'text'" required />
+              <mat-icon matSuffix (click)="hide = !hide">
+                {{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <button mat-raised-button color="primary">Save</button>
         </form>
       </div>
     </div>
