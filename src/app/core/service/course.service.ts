@@ -152,7 +152,7 @@ export class CourseService {
   }
   getCourseById(id: string) {
     const apiUrl = `${this.prefix}admin/courses-new/${id}`;
-    return this._Http.get<CourseModel>(apiUrl).pipe(map((response) => response));
+    return this._Http.get<any>(apiUrl).pipe(map((response) => response));
   }
   updateCourse(course:any) {
     const apiUrl = `${this.prefix}admin/courses-new/${course.id}`;

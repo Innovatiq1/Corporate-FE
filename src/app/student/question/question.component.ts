@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CourseService } from '@core/service/course.service';
 import { QuestionService } from '@core/service/question.service';
+import { ClassService } from 'app/admin/schedule-class/class.service';
 import { interval } from 'rxjs';
 
 @Component({
@@ -19,19 +22,36 @@ export class QuestionComponent implements OnInit {
   interval$: any;
   progress: string = "0";
   isQuizCompleted : boolean = false;
-  constructor(private questionService: QuestionService) { }
+  currentId!: string;
+  courseId!: string;
+  studentId!: string;
+  classId!: string;
+  constructor(private questionService: QuestionService,private courseService:CourseService,private router: Router,
+    private classService: ClassService) { }
 
   ngOnInit(): void {
     this.name = localStorage.getItem("name")!;
     this.getAllQuestions();
     this.startCounter();
+    this.getCourseDetails();
   }
   getAllQuestions() {
     this.questionService.getQuestionJson()
       .subscribe(res => {
-        this.questionList = res.data.docs[0].questions;
+        // this.questionList = res.data.docs[0].questions;
       })
   }
+  getCourseDetails(){
+    let urlPath = this.router.url.split('/')
+    this.courseId = urlPath[urlPath.length - 1];
+    this.studentId = urlPath[urlPath.length - 2];
+    this.classId = urlPath[urlPath.length - 3];
+
+    this.courseService.getCourseById(this.courseId).subscribe((response) => {
+    this.questionList = response?.assessment?.questions;
+  })
+}
+
   nextQuestion() {
     this.currentQuestion++;
   }
@@ -46,6 +66,23 @@ export class QuestionComponent implements OnInit {
     }
     if (option.correct) {
       this.points += 10;
+      if(this.points > 10){
+        let payload = {
+          status: 'completed',
+          studentId: this.studentId,
+          playbackTime: 100,
+        };
+        this.classService
+          .saveApprovedClasses(this.classId, payload)
+          .subscribe((response) => {
+            setTimeout(() => {
+              this.router.navigate(['/student/view-course/'+ this.classId]);    
+            }, 7000);
+      
+          });
+
+
+      }
       this.correctAnswer++;
       setTimeout(() => {
         this.currentQuestion++;

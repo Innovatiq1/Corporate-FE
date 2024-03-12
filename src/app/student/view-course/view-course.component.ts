@@ -7,7 +7,7 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CourseKitModel } from '@core/models/course.model';
 import { CommonService } from '@core/service/common.service';
 import { CourseService } from '@core/service/course.service';
@@ -104,7 +104,8 @@ export class ViewCourseComponent implements OnDestroy {
     private courseService: CourseService,
     @Inject(DOCUMENT) private document: any,
     private commonService: CommonService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {
     this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
       this.classId = params['id'];
@@ -189,16 +190,18 @@ export class ViewCourseComponent implements OnDestroy {
                       (doc: { playbackTime: number }) =>
                         doc.playbackTime === 100
                     );
-                    // console.log("payloadcomple",allUnmatchedCompleted)
                     if (allUnmatchedCompleted) {
-                      let payload = {
-                        status: 'completed',
-                        studentId: studentId,
-                        playbackTime: 100,
-                      };
-                      this.classService
-                        .saveApprovedClasses(classId, payload)
-                        .subscribe((response) => {});
+                      this.courseService
+                      .getStudentClass(studentId, this.classId)
+                      .subscribe((response) => {
+                        this.studentClassDetails = response.data.docs[0]
+                        if(this.studentClassDetails.status == 'approved'){
+                          this.router.navigate(['/student/questions/', classId, studentId, this.courseId]);    
+                        } else {
+
+                        }
+
+                      })                
                     } else {
                       let payload = {
                         status: 'notCompleted',
