@@ -43,7 +43,8 @@ breadscrums = [
   },
 ];
   userType: any;
-  student: boolean = false;
+  // student:boolean = false;
+  student: boolean = true;
 
 constructor(
   public httpClient: HttpClient,

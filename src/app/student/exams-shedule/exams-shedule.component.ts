@@ -34,7 +34,8 @@ selection = new SelectionModel<ExamSchedule>(true, []);
 index?: number;
 id?: number;
 examSchedule?: ExamSchedule;
-student:boolean = false;
+// student:boolean = false;
+student:boolean = true;
 
 breadscrums = [
   {
