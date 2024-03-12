@@ -18,6 +18,8 @@ import { ExamsSheduleComponent } from './exams-shedule/exams-shedule.component';
 import { ProgramSheduleComponent } from './program-shedule/program-shedule.component';
 import { SuccessProgramComponent } from './success-program/success-program.component';
 import { FailureProgramComponent } from './failure-program/failure-program.component';
+import { QuestionComponent } from './question/question.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 const routes: Routes = [
@@ -83,6 +85,14 @@ const routes: Routes = [
   {
     path: 'exams/programs',
     component: ProgramSheduleComponent
+  },
+  {
+    path: 'questions',
+    component: QuestionComponent,
+  },
+  {
+    path: 'welcome',
+    component: WelcomeComponent,
   },
 
 

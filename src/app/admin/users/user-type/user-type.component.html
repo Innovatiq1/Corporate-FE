@@ -18,9 +18,9 @@
                 </ul>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card" *ngFor="let types of typesList let j = index" style="cursor: pointer;" (click)="edit(types.id)">
+                <div class="card" *ngFor="let types of typesList let j = index">
                     <div class="materialTableHeader">
-                        <div class="left">
+                        <div class="left" style="cursor: pointer;" (click)="edit(types.id)">
                             <ul class="header-buttons-left ms-0">
                                 <li class="tbl-title">
                                     <h2 style="font-weight: 600;">{{types?.typeName | capitalizeFirstLetter}} 
@@ -84,7 +84,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="body overflow-auto">
+                    <div class="body overflow-auto" style="cursor: pointer;" (click)="edit(types.id)">
                         <div class="responsive_table">
                             <ng-container>
                                 <h5 class="card-title text-center">Accessibility Menu</h5>

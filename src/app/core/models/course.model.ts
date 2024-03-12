@@ -52,6 +52,7 @@ export interface CourseUploadData {
    survey?: string[];
    course_instructor?: string[];
    course_kit?: string[];
+   assessment?: string[];
  }
  export interface MainCategory {
     subCategories: any;
@@ -115,6 +116,15 @@ export interface ProgramKit {
 export interface FundingGrant {
 	_id: string;
 	grant_type: string;
+	createdAt: string;
+	updatedAt: string;
+	__v: number;
+	id: string;
+}
+export interface Assessment {
+	_id: string;
+	docs: Assessment[];
+	name: string;
 	createdAt: string;
 	updatedAt: string;
 	__v: number;

@@ -39,7 +39,10 @@ import { ProgramSheduleComponent } from './program-shedule/program-shedule.compo
 import { SuccessProgramComponent } from './success-program/success-program.component';
 import { FailureProgramComponent } from './failure-program/failure-program.component';
 import { StudentVideoPlayerComponent } from './view-course/student-video-player/student-video-player.component';
-import { TimeFormatPipe } from '../../app/core/pipes/time-format.pipe';
+import { TimeFormatPipe } from '../../app/core/pipes/time-format.pipe';import { QuestionComponent } from './question/question.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { ChangeBgDirective } from 'app/change-bg.directive';
+
 
 @NgModule({
   declarations: [
@@ -63,7 +66,10 @@ import { TimeFormatPipe } from '../../app/core/pipes/time-format.pipe';
     SuccessProgramComponent,
     FailureProgramComponent,
     StudentVideoPlayerComponent,
-    TimeFormatPipe
+    TimeFormatPipe,
+    QuestionComponent,
+    WelcomeComponent,
+    ChangeBgDirective
 
   ],
   imports: [

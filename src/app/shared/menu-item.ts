@@ -419,6 +419,22 @@ MENU_LIST = [
 
     ]
 },
+{
+    id: "admin/questions",
+    title: "Questions",
+    selected: false,
+    iconsrc: "/assets/users-icon.svg",
+    icon: 'people',
+    children:
+    [
+        {
+            id: "all-questions",
+            title: "All Questions",
+            type: "none",
+        },
+
+    ]
+},
 
 // {
 //     id: "survey_builder",
@@ -723,6 +739,36 @@ MENU_LIST = [
         }
 ]
 },
+// {
+//     id: "student/questions",
+//     title: "Questions",
+//     iconsrc: "/assets/course-icon.svg",
+//     icon:'fact_check',
+//     selected: true,
+//     children: [
+//         {
+//             id: "questions",
+//             title: "Questions",
+//             selected: false,
+//             iconsrc: "/assets/announcement-icon.svg",
+//         },
+// ]
+// },
+// {
+//     id: "student/welcome",
+//     title: "Welcome",
+//     iconsrc: "/assets/course-icon.svg",
+//     icon:'fact_check',
+//     selected: true,
+//     children: [
+//         {
+//             id: "welcome",
+//             title: "Welcome",
+//             selected: false,
+//             iconsrc: "/assets/announcement-icon.svg",
+//         }
+// ]
+// },
 {
     id: "leave-request",
     title: "Leave Request",

@@ -274,9 +274,14 @@
                   </div>
                     <div class="row">
                       <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                        <label>Website Link</label>
+                        <label>Assign Assessment</label>
                         <mat-form-field class="example-full-width mb-3" appearance="outline">
-                          <input matInput formControlName="website_link" placeholder="www" [readonly]="isInputReadonly()">
+                          <mat-select formControlName="assessment" required>
+                            <mat-option *ngFor="let item of assessments" [value]="item.id" [disabled]="viewUrl == true">
+                              {{item.name}}
+                            </mat-option>
+
+                          </mat-select>
                           <mat-error  *ngIf="secondFormGroup.get('website_link')?.hasError('pattern') && secondFormGroup.get('website_link')?.touched">
                           Enter Website
                         </mat-error>
