@@ -402,6 +402,13 @@ export class CourseService {
       return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
     }
 
+
+    updateVideo(id:string,payload: any){
+      console.log("payload",payload);
+        const apiUrl = `${this.prefix}uploadVideo/${id}`;
+        return this._Http.put<ApiResponse>(apiUrl, payload);
+      }
+
     getAllCourseKit(
       filter?: Partial<any>
     ): Observable<ApiResponse> {
