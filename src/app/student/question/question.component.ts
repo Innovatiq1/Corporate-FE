@@ -66,7 +66,7 @@ export class QuestionComponent implements OnInit {
     }
     if (option.correct) {
       this.points += 10;
-      if(this.points > 10){
+      if(this.points >= 10){
         let payload = {
           status: 'completed',
           studentId: this.studentId,
