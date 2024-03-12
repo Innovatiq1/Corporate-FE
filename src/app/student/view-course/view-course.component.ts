@@ -19,7 +19,6 @@ import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
 import { StudentVideoPlayerComponent } from './student-video-player/student-video-player.component';
 import { Subject, takeUntil } from 'rxjs';
-import { VgApiService } from '@videogular/ngx-videogular/core';
 import * as Plyr from 'plyr';
 import { T } from '@angular/cdk/keycodes';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
