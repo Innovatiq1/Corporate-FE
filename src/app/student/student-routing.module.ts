@@ -94,6 +94,14 @@ const routes: Routes = [
     path: 'welcome',
     component: WelcomeComponent,
   },
+  {
+    path: 'account-settings',
+    component: SettingsComponent,  
+  },
+  {
+    path: 'security-settings',
+    component: SettingsComponent,  
+  },
 
 
   { path: '**', component: Page404Component },

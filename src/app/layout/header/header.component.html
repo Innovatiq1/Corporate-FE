@@ -132,7 +132,7 @@
                   <button mat-menu-item class="user-item-list">
                     <app-feather-icons [icon]="'mail'" [class]="'user-menu-icons'"></app-feather-icons>Inbox
                   </button>
-                  <button mat-menu-item class="user-item-list" [routerLink]="['/settings/admin-settings']">
+                  <button mat-menu-item class="user-item-list" (click)="onClick()" >
                     <app-feather-icons [icon]="'settings'" [class]="'user-menu-icons'"></app-feather-icons>Settings
                   </button>
                   <button mat-menu-item (click)="logout()" class="user-item-list">

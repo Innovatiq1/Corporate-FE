@@ -56,7 +56,7 @@
             <div class="row" >
               <div class="col-md-3" *ngFor="let data of courseData">
                 <div class="course-card course-card-blog">
-                  <div class="course-card-image">
+                  <div class="course-card-image" style= "cursor: pointer;" [routerLink]="['/admin/courses/view-course/',data.id]">
                     <img class="img" src="{{data.image_link || 'assets/noimage.jpg'}}">
                   </div>
                   <div class="blog-table">
