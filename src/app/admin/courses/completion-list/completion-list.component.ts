@@ -14,6 +14,7 @@ import { jsPDF } from 'jspdf';
 import DomToImage from 'dom-to-image';
 import { number } from 'echarts';
 import { StudentService } from '@core/service/student.service';
+import { dA } from '@fullcalendar/core/internal-common';
 
 
 @Component({
@@ -112,6 +113,7 @@ certifiacteUrl:boolean = false;
         this.studentPaginationModel.limit = response.limit;
         this.totalItems=response.totalDocs;
         this.dataSource = response.docs;
+        console.log("dataSource", this.dataSource);
         this.dataSource.sort = this.matSort;
         this.mapClassList();
         })
@@ -239,6 +241,7 @@ certifiacteUrl:boolean = false;
         
 
       }
+      console.log("pdf",pdfObj)
       this.pdfData.push(pdfObj);
       var convertIdDynamic = 'contentToConvert'
       console.log(convertIdDynamic)
@@ -278,14 +281,14 @@ certifiacteUrl:boolean = false;
           const pdfData = new File([doc.output("blob")], randomString+"courseCertificate.pdf", {
             type: "application/pdf",
           });
-          
+          console.log("pdf123",pdfData)
           this.classService.uploadFileApi(pdfData).subscribe((data:any) => {
             let objpdf = {
               pdfurl: data.inputUrl,
               memberId: memberId,
               CourseId: memberProgrmId,
             };
-            
+            console.log("pdf1235464",objpdf)
             this.updateCertificte(objpdf)
            
             
