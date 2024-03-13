@@ -312,7 +312,7 @@ MENU_LIST = [
 },
 {
     id: "admin/payment",
-    title: "Payment Transactions",
+    title: "Transactions",
     selected: false,
     iconsrc: "/assets/payment-icon.svg",
     icon: 'payment',
@@ -375,48 +375,48 @@ MENU_LIST = [
     ]
 },
 
-{
-    id: "admin/questions",
-    title: "Questions",
-    selected: false,
-    iconsrc: "/assets/users-icon.svg",
-    icon: 'people',
-    children:
-    [
-        {
-            id: "all-questions",
-            title: "All Questions",
-            type: "none",
-        },
+// {
+//     id: "admin/questions",
+//     title: "Questions",
+//     selected: false,
+//     iconsrc: "/assets/users-icon.svg",
+//     icon: 'people',
+//     children:
+//     [
+//         {
+//             id: "all-questions",
+//             title: "All Questions",
+//             type: "none",
+//         },
 
-    ]
-},
+//     ]
+// },
 
-{
-    id: "admin/certificate",
-    title: "Certificate Builder",
-    selected: false,
-    iconsrc: "/assets/certificate-icon.svg",
-    icon: 'photo_album',
-    children:
-    [
-        // {
-        //     id: "certificates",
-        //     title: "Certificates",
-        //     type: "none",
-        // },
-        // {
-        //     id: "design",
-        //     title: "Design",
-        //     type: "none"
-        // },
-        {
-            id: "template",
-            title: "Certificate Template",
-            type: "none"
-        }
-    ]
-},
+// {
+//     id: "admin/certificate",
+//     title: "Certificate Builder",
+//     selected: false,
+//     iconsrc: "/assets/certificate-icon.svg",
+//     icon: 'photo_album',
+//     children:
+//     [
+//         // {
+//         //     id: "certificates",
+//         //     title: "Certificates",
+//         //     type: "none",
+//         // },
+//         // {
+//         //     id: "design",
+//         //     title: "Design",
+//         //     type: "none"
+//         // },
+//         {
+//             id: "template",
+//             title: "Certificate Template",
+//             type: "none"
+//         }
+//     ]
+// },
 {
     id: "admin/email-configuration",
     title: "Email Configuration",
@@ -529,21 +529,21 @@ MENU_LIST = [
 
 //     ]
 // },
-{
-    id: "admin/announcement",
-    title: "Announcement",
-    selected: false,
-    iconsrc: "/assets/announcement-icon.svg",
-    icon: 'announcement',
-    children:
-    [
-        {
-            id: "list",
-            title: "List",
-            type: "none",
-        }
-    ]
-},
+// {
+//     id: "admin/announcement",
+//     title: "Announcement",
+//     selected: false,
+//     iconsrc: "/assets/announcement-icon.svg",
+//     icon: 'announcement',
+//     children:
+//     [
+//         {
+//             id: "list",
+//             title: "List",
+//             type: "none",
+//         }
+//     ]
+// },
 
 
 {
