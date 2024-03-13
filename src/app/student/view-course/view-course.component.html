@@ -190,7 +190,7 @@
                        
 
 
-                      <ul class="list-group list-group-unbordered">
+                      <ul class="m-2 list-group-unbordered">
                         <li class="list-group-item">
                           <b>Delivery </b>
                           <div class="profile-desc-item float-end">
@@ -213,10 +213,8 @@
                         </li>
                       </ul>
 
-
-                          <h5 class="text bg-light p-2">Course Completed : <span [ngClass]="{'red-text': playBackTime< 50, 'green-text': playBackTime>= 50}">{{playBackTime.toFixed(2) || 0}}%</span></h5>
+                          <h5 class=" bg-light p-2">Course Completed : <span [ngClass]="{'red-text': playBackTime< 50, 'green-text': playBackTime>= 50}">{{playBackTime.toFixed(2) || 0}}%</span></h5>
                         </div>
-
                         <div class="tab-pane fade" id="des" role="tabpanel" aria-labelledby="des-tab">
                           <!-- <h5 class="text">Course Completed : <span [ngClass]="{'red-text': playBackTime< 50, 'green-text': playBackTime>= 50}">{{playBackTime.toFixed(2) || 0}}%</span></h5> -->
                         {{longDescription}}
@@ -327,7 +325,6 @@
                               <th mat-header-cell *matHeaderCellDef> Class End Date </th>
                               <td mat-cell *matCellDef="let element"> {{element?.sessionEndDate | date}} </td>
                             </ng-container>
-      
                             <!-- <ng-container matColumnDef="action">
                               <th mat-header-cell *matHeaderCellDef> Completed </th>
                               <td mat-cell *matCellDef="let element">
@@ -349,9 +346,6 @@
                                 </td>
                               </div>
                             </ng-container>
-
-
-      
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                           </table>

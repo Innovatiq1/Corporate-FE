@@ -208,10 +208,6 @@ fileBrowseHandler(event: any) {
     formdata.append('files', this.videoLink);
     formdata.append('video_filename', this.videoSrc);
     formdata.append('doc_filename', this.uploadedDocument);
-    // formdata.append('courseKitName', this.courseKitForm.value.name);
-    // formdata.append('short_description', this.courseKitForm.value.shortDescription);
-    // formdata.append('long_description', this.courseKitForm.value.longDescription);
-    // formdata.append('video_url', this.videoLink);
   this.courseService.saveVideo(formdata).subscribe(data =>{
     console.log("data",data.data);
 
