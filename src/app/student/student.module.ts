@@ -34,7 +34,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { SucessCourseComponent } from './sucess-course/sucess-course.component';
 import { FailureCourseComponent } from './failure-course/failure-course.component';
 import { ExamsSheduleComponent } from './exams-shedule/exams-shedule.component';
-import { ExamScheduleService } from 'app/admin/exam-schedule/exam-schedule.service';
 import { ProgramSheduleComponent } from './program-shedule/program-shedule.component';
 import { SuccessProgramComponent } from './success-program/success-program.component';
 import { FailureProgramComponent } from './failure-program/failure-program.component';
@@ -42,6 +41,7 @@ import { StudentVideoPlayerComponent } from './view-course/student-video-player/
 import { TimeFormatPipe } from '../../app/core/pipes/time-format.pipe';import { QuestionComponent } from './question/question.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ChangeBgDirective } from 'app/change-bg.directive';
+import { ExamScheduleService } from 'app/timetable/exam-schedule.service';
 
 
 @NgModule({

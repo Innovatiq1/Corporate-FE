@@ -79,7 +79,7 @@ public loadData() {
 }
 editCall(row: ExamSchedule) {
   this.id = row.id;
-  this.router.navigate(['/admin/exam/exam-schedule-edit/' + this.id])
+  this.router.navigate(['/timetable/course-exam-edit/' + this.id])
 
 }
 // delete(row: ExamSchedule){

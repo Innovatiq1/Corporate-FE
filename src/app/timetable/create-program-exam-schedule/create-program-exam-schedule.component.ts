@@ -106,7 +106,7 @@ export class CreateProgramExamScheduleComponent {
   
   
     cancel(){
-      this.router.navigate(['/admin/exam/program-exam'])
+      this.router.navigate(['/timetable/program-exam'])
 
     }
     onSelectChange(event :any) {
@@ -143,7 +143,7 @@ export class CreateProgramExamScheduleComponent {
         text: 'Exam schdeule add successfully',
         icon: 'success',
       });
-      this.router.navigate(['/admin/exam/program-exam'])
+      this.router.navigate(['/timetable/program-exam'])
     });
 
     } 

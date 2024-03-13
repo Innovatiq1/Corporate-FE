@@ -105,7 +105,7 @@ export class EditProgramExamScheduleComponent {
     }
   
     cancel(){
-      this.router.navigate(['/admin/exam/program-exam'])
+      this.router.navigate(['/timetable/program-exam'])
 
     }
     getData(){
@@ -174,7 +174,7 @@ export class EditProgramExamScheduleComponent {
           //this.fileDropEl.nativeElement.value = "";
         this.examsheduleForm.reset();
         //this.toggleList()
-        this.router.navigateByUrl('/admin/exam/program-exam');
+        this.router.navigateByUrl('/timetable/program-exam');
         },
         (error: { message: any; error: any; }) => {
           Swal.fire(

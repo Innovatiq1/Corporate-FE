@@ -62,11 +62,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./audit/audit.module').then((m) => m.AuditModule),
   },
-  {
-    path: 'exam',
-    loadChildren: () =>
-      import('./exam-schedule/exam-schedule.module').then((m) => m.ExamScheduleModule),
-  },
 
   {
     path: 'announcement',

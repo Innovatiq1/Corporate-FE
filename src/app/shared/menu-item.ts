@@ -277,39 +277,38 @@ MENU_LIST = [
     children:
     [
         {
+            id: "program-timetable",
+            title: "Program Timetable",
+            type: "none"
+        },
+        {
             id: "course-timetable",
             title: "Course Timetable",
             type: "none"
         },
         {
-            id: "program-timetable",
-            title: "Program Timetable",
-            type: "none"
-        }
-       ]
-},
-{
-    id: "admin/exam",
-    title: "Exams",
-    selected: false,
-    iconsrc: "/assets/users-icon.svg",
-    icon: 'people',
-    children:
-    [
-        {
-            id: "exam-schedule",
-            title: " Course Exam Schedule",
-            type: "none",
-        },
-
-        {
             id: "program-exam",
             title: "Program Exam Schedule",
             type: "none",
         },
-
-    ]
+        {
+            id: "course-exam",
+            title: " Course Exam Schedule",
+            type: "none",
+        }
+       ]
 },
+// {
+//     id: "admin/exam",
+//     title: "Exams",
+//     selected: false,
+//     iconsrc: "/assets/users-icon.svg",
+//     icon: 'people',
+//     children:
+//     [
+
+//     ]
+// },
 {
     id: "admin/payment",
     title: "Transactions",

@@ -76,7 +76,7 @@ public loadData() {
 }
 editCall(row: ExamSchedule) {
   this.id = row.id;
-  this.router.navigate(['/admin/exam/program-exam-edit/' + this.id])
+  this.router.navigate(['/timetable/program-exam-edit/' + this.id])
 
 }
 // delete(row: ExamSchedule){
