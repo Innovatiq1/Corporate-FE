@@ -269,6 +269,27 @@ MENU_LIST = [
     ]
 },
 {
+    id: "student/enrollment",
+    title: "Enrollment",
+    iconsrc: "/assets/course-icon.svg",
+    icon:'school',
+    selected: true,
+    children: [
+        {
+            id: "programs",
+            title: "Programs",
+            type: "none"
+        },
+        {
+            id: "courses",
+            title: "Courses",
+            type: "none"
+        },
+
+    ]
+},
+
+{
     id: "timetable",
     title: "Timetable",
     selected: false,
@@ -545,26 +566,6 @@ MENU_LIST = [
 // },
 
 
-{
-    id: "student/enrollment",
-    title: "Enrollment",
-    iconsrc: "/assets/course-icon.svg",
-    icon:'school',
-    selected: true,
-    children: [
-        {
-            id: "programs",
-            title: "Programs",
-            type: "none"
-        },
-        {
-            id: "courses",
-            title: "Courses",
-            type: "none"
-        },
-
-    ]
-},
 {
     id: "student/exams",
     title: "Exams",
