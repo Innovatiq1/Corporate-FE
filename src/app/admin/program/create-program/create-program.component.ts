@@ -229,7 +229,7 @@ export class CreateProgramComponent {
           electiveprogramCourse: this.electivePrograms.value,
           image_link: this.image_link,
           id: this.courseId,
-          programKit: this.programFormGroup.value.programKit ? this.programFormGroup.value.programKit : null
+          // programKit: this.programFormGroup.value.programKit ? this.programFormGroup.value.programKit : null
         }
         this.courseService.updateCourseProgram(this.courseId, payload).subscribe(
           (_res: any) => {
@@ -269,7 +269,7 @@ export class CreateProgramComponent {
           electiveprogramCourse: this.electivePrograms.value?this.electivePrograms.value: null,
           image_link: this.image_link,
           id: this.courseId,
-          programKit: this.programFormGroup.value.programKit ? this.programFormGroup.value.programKit : null
+          // programKit: this.programFormGroup.value.programKit ? this.programFormGroup.value.programKit : null
         }
         this.courseService.createCourseProgram(payload).subscribe(
           (res: any) => {
@@ -336,7 +336,7 @@ export class CreateProgramComponent {
         attendees: this.course?.attendees,
         prerequisites: this.course?.prerequisites,
         electiveprogramCourse: this.course?.electiveprogramCourse,
-        programKit: this.course?.programKit?.[0]?.id,
+        // programKit: this.course?.programKit?.[0]?.id,
       });
 
       const itemControls = response.data.coreprogramCourse.map((item: {
