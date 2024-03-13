@@ -37,8 +37,8 @@ export class AuditListComponent {
   ];
   breadscrums = [
     {
-      title: 'Audit',
-      items: ['Audit'],
+      title: 'Logs',
+      items: ['Logs'],
       active: 'List',
     },
   ];

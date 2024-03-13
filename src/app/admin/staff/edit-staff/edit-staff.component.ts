@@ -29,7 +29,7 @@ export class EditStaffComponent {
   breadscrums = [
     {
       title: 'Edit Staff',
-      items: ['Staff'],
+      items: ['Users'],
       active: 'Edit Staff',
     },
   ];

@@ -59,9 +59,9 @@ export class AllStudentsComponent
   rowData:any;
   breadscrums = [
     {
-      title: 'All Student',
-      items: ['Student'],
-      active: 'All Student',
+      title: 'Students',
+      items: ['Users'],
+      active: 'Students',
     },
   ];
   constructor(
@@ -87,11 +87,11 @@ export class AllStudentsComponent
     this.loadData();
   }
   addNew() {
-   this.router.navigate(['/admin/students/add-student'])
+   this.router.navigate(['/admin/users/add-student'])
   }
   editCall(row: Students) {
     console.log("edit",row)
-    this.router.navigate(['/admin/students/add-student'],{queryParams:{id:row.id}})
+    this.router.navigate(['/admin/users/add-student'],{queryParams:{id:row.id}})
   }
   // deleteItem(row: Students) {
   //   this.id = row.id;
@@ -317,7 +317,7 @@ export class AllStudentsComponent
   }
 
   aboutStudent(id:any){
-    this.router.navigate(['/admin/students/about-student'],{queryParams:{data:id}})
+    this.router.navigate(['/admin/users/about-student'],{queryParams:{data:id}})
 
   }
 

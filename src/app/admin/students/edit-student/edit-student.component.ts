@@ -37,7 +37,7 @@ export class EditStudentComponent {
   breadscrums = [
     {
       title: 'Edit Student',
-      items: ['Student'],
+      items: ['Users'],
       active: 'Edit Student',
     },
   ];

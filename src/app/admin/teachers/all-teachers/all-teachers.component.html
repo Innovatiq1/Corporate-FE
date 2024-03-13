@@ -94,26 +94,26 @@
                           <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
                           </mat-header-cell>
                           <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"><span
-                              class="mobile-label">Image:</span> <img [src]="row.avatar || 'assets/profile.png'" [routerLink]="['/admin/instructors/edit-instructor',row.id]"/>
+                              class="mobile-label">Image:</span> <img [src]="row.avatar || 'assets/profile.png'" [routerLink]="['/admin/users/edit-instructor',row.id]"/>
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="name">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Name
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/instructors/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)"><span
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)"><span
                               class="mobile-label">Name:</span> {{row.name}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="department">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Department
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/instructors/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)">
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)">
                             <span class="mobile-label">Department:</span>{{row.department}}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="gender">
                           <mat-header-cell *matHeaderCellDef mat-sort-header> Gender
                           </mat-header-cell>
-                          <mat-cell mat-cell *matCellDef="let row" [routerLink]="['/admin/instructors/edit-instructor',row.id]">
+                          <mat-cell mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]">
                             <span class="mobile-label">Gender:</span>
                             <div *ngIf="row.gender==='male'">
                               <span class="badge badge-solid-green">
@@ -132,28 +132,28 @@
                         <ng-container matColumnDef="degree">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Degree
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/instructors/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)"> <span
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Degree:</span>{{row.qualification}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="mobile">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/instructors/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)"> <span
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Mobile:</span>{{row.mobile}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="email">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Email
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/instructors/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)"> <span
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Email:</span>{{row.email}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="date">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Joining Date
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/instructors/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)">
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)">
                             <span class="mobile-label">Joining Date:</span>{{row.joiningDate | date}}</mat-cell>
                         </ng-container>
                         <!-- actions -->
@@ -178,7 +178,7 @@
                                         <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
                                         <span class="menu-text">View</span>
                                       </button> -->
-                                      <button mat-menu-item [routerLink]="['/admin/instructors/edit-instructor',row.id]" >
+                                      <button mat-menu-item [routerLink]="['/admin/users/edit-instructor',row.id]" >
                                         <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                                         <span class="menu-text px-3">Edit</span>
                                       </button>

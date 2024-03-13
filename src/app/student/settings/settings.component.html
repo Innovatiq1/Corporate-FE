@@ -262,13 +262,13 @@
                     <button id="save" [routerLink]="['/admin/users/all-users']"> All Users </button>
                   </div>
                   <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/students/all-students']"> Students</button>
+                    <button id="save" [routerLink]="['/admin/users/all-students']"> Students</button>
                   </div>
                   <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/instructors/all-instructors']"> Instructors </button>
+                    <button id="save" [routerLink]="['/admin/users/all-instructors']"> Instructors </button>
                   </div>
                   <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/staff/all-staff']"> Staff </button>
+                    <button id="save" [routerLink]="['/admin/users/all-staff']"> Staff </button>
                   </div>
                 </div>
               </div>
@@ -343,17 +343,29 @@
                   <div class="col-3">
                     <button id="save" [routerLink]="['/admin/departments/all-departments']"> Departments </button>
                   </div>
-                  <div class="col-2">
-                    <button id="save" [routerLink]="['/admin/banners/instructor-banner-list']"> Banners </button>
-                  </div>
                   <div class="col-5">
                     <button id="save" [routerLink]="['/admin/email-configuration/welcome-mail']"> Email Configuration
                     </button>
                   </div>
-                  <div class="col-2" style="margin-left: -40px;">
+                  <div class="col-3">
+                    <button id="save" [routerLink]="['/admin/banners/instructor-banner-list']"> Banners </button>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-2" style="margin-left: 0px;">
                     <button id="save" [routerLink]="['/admin/questions/all-questions']"> Assessments </button>
                   </div>
+                  <div class="col-2" style="margin-left:40px;">
+                    <button id="save" [routerLink]="['/admin/announcement/list']"> Announcements </button>
+                  </div>
+
+                <div class="col-2" style="margin-left:120px;">
+                  <button id="save" [routerLink]="['/admin/certificate/template']"> Certificate </button>
                 </div>
+                </div>
+
+
               </div>
             </div>
           </div>
