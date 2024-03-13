@@ -108,7 +108,7 @@ export class AddComponent {
   
   
     cancel(){
-      if(this.userType === 'admin'){
+      if(this.userType === 'admin' || this.userType === 'Instructor'){
         this.router.navigate(['/timetable/course-exam']);
       }else if(this.userType === 'Student'){
         this.router.navigate(['/student/exams/courses']);
@@ -151,7 +151,7 @@ export class AddComponent {
         text: 'Exam schdeule add successfully',
         icon: 'success',
       });
-      if(this.userType === 'admin'){
+      if(this.userType === 'admin' || this.userType === 'Instructor'){
         this.router.navigate(['/timetable/course-exam']);
       }else if(this.userType === 'Student'){
         this.router.navigate(['/student/exams/courses']);
