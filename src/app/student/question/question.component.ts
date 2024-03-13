@@ -62,10 +62,6 @@ export class QuestionComponent implements OnInit {
 
     if(currentQno === this.questionList.length){
       this.isQuizCompleted = true;
-      this.stopCounter();
-    }
-    if (option.correct) {
-      this.points += 10;
       if(this.points >= 10){
         let payload = {
           status: 'completed',
@@ -83,6 +79,11 @@ export class QuestionComponent implements OnInit {
 
 
       }
+
+      this.stopCounter();
+    }
+    if (option.correct) {
+      this.points += 10;
       this.correctAnswer++;
       setTimeout(() => {
         this.currentQuestion++;
