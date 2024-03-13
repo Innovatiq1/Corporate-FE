@@ -73,6 +73,7 @@ pdfData: any = [];
       this.studentPaginationModel.limit = response.limit;
       this.totalItems=response.totalDocs;
       this.dataSource= response.docs;
+      console.log("dataSource: " ,  this.dataSource);
       })
   }
   getCurrentUserId(): string {
