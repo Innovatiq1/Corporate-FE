@@ -50,6 +50,11 @@ export class SettingsComponent {
   roname: any;
   thumbnail: any;
   student: Student | undefined;
+  isAdmin: boolean = false;
+  accountUrl: any;
+  securityUrl: any;
+  showAccountSettings: boolean = false;
+  showProfileSettings: boolean = false;
   constructor(
     private studentService: StudentsService,
     private etmsService: EtmsService,
@@ -67,6 +72,8 @@ export class SettingsComponent {
     this.tcUrl = urlPath.includes('trainingcoordinator-settings');
     this.taUrl = urlPath.includes('trainingadministrator-settings');
     this.adminUrl = urlPath.includes('admin-settings');
+    this.accountUrl = urlPath.includes('account-settings');
+    this.securityUrl = urlPath.includes('security-settings');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -130,6 +137,27 @@ export class SettingsComponent {
           active: 'Settings',
         },
       ];
+      this.isAdmin = true;
+    }
+    if (this.accountUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.securityUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
     }
     this.patchValues(),
       //this.patchValues1()
@@ -170,6 +198,25 @@ export class SettingsComponent {
 
   ngOnInit() {
     this.getUserProfile();
+    let role = localStorage.getItem('user_type')
+    if(role == 'admin'){
+      this.isAdmin = true
+    }else if (role == 'student'){
+      this.isAdmin = false;
+    }
+    if(this.accountUrl){
+      this.showAccountSettings = true;
+    }
+    if(this.securityUrl){
+      this.showProfileSettings = true;
+    }
+  }
+  navigateToAccountSettings() {
+   
+    this.router.navigate(['/student/account-settings']);
+  }
+  navigateToProfileSettings() {
+    this.router.navigate(['/student/security-settings']);
   }
   patchValues() {
     this.studentId = localStorage.getItem('id');

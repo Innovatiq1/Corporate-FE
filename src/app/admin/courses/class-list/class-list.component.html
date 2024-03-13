@@ -91,21 +91,21 @@
                 </ng-container>
                 <ng-container matColumnDef="Course Name">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row" >
+                  <mat-cell *matCellDef="let row"  (click)="editClass(row.id)">
                     <span class="mobile-label">Course Name:</span> {{row.courseId?.title}}</mat-cell>
                 </ng-container>
                 <!-- Start date -->
                 <ng-container matColumnDef="Start Date">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" >
+                  <mat-cell *matCellDef="let row"  (click)="editClass(row.id)">
                     <span class="mobile-label">Start Date:</span>{{row.sessions[0]?.sessionStartDate | date }} </mat-cell>
                 </ng-container>
                 <!-- Enddate -->
                 <ng-container matColumnDef="End Date">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" >
+                  <mat-cell *matCellDef="let row"  (click)="editClass(row.id)">
                     <span class="mobile-label">End Date:</span>{{row.sessions[0]?.sessionEndDate | date }} </mat-cell>
                 </ng-container>
                 <!-- actions -->
