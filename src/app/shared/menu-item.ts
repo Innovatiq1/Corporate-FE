@@ -269,6 +269,54 @@ MENU_LIST = [
     ]
 },
 {
+    id: "student/enrollment",
+    title: "Enrollment",
+    iconsrc: "/assets/course-icon.svg",
+    icon:'school',
+    selected: true,
+    children: [
+        {
+            id: "programs",
+            title: "Programs",
+            type: "none"
+        },
+        {
+            id: "courses",
+            title: "Courses",
+            type: "none"
+        },
+
+    ]
+},
+{
+    id: "instructor",
+    title: "Lectures",
+    selected: false,
+    iconsrc: "/assets/announcement-icon.svg",
+    icon: 'menu_book',
+    children:
+    [
+        {
+            id: "course-lectures",
+            title: "Course Lectures",
+            type: "none"
+        },
+        {
+            id: "program-lectures",
+            title: "Program Lectures",
+            type: "none"
+        },
+        // {
+        //     id: "exam-schedule",
+        //     title: "Exam Schedule",
+        //     type: "none"
+
+        // },
+            ]
+},
+
+
+{
     id: "timetable",
     title: "Timetable",
     selected: false,
@@ -277,39 +325,38 @@ MENU_LIST = [
     children:
     [
         {
+            id: "program-timetable",
+            title: "Program Timetable",
+            type: "none"
+        },
+        {
             id: "course-timetable",
             title: "Course Timetable",
             type: "none"
         },
         {
-            id: "program-timetable",
-            title: "Program Timetable",
-            type: "none"
-        }
-       ]
-},
-{
-    id: "admin/exam",
-    title: "Exams",
-    selected: false,
-    iconsrc: "/assets/users-icon.svg",
-    icon: 'people',
-    children:
-    [
-        {
-            id: "exam-schedule",
-            title: " Course Exam Schedule",
-            type: "none",
-        },
-
-        {
             id: "program-exam",
             title: "Program Exam Schedule",
             type: "none",
         },
-
-    ]
+        {
+            id: "course-exam",
+            title: " Course Exam Schedule",
+            type: "none",
+        }
+       ]
 },
+// {
+//     id: "admin/exam",
+//     title: "Exams",
+//     selected: false,
+//     iconsrc: "/assets/users-icon.svg",
+//     icon: 'people',
+//     children:
+//     [
+
+//     ]
+// },
 {
     id: "admin/payment",
     title: "Transactions",
@@ -547,26 +594,6 @@ MENU_LIST = [
 
 
 {
-    id: "student/enrollment",
-    title: "Enrollment",
-    iconsrc: "/assets/course-icon.svg",
-    icon:'school',
-    selected: true,
-    children: [
-        {
-            id: "programs",
-            title: "Programs",
-            type: "none"
-        },
-        {
-            id: "courses",
-            title: "Courses",
-            type: "none"
-        },
-
-    ]
-},
-{
     id: "student/exams",
     title: "Exams",
     iconsrc: "/assets/course-icon.svg",
@@ -655,32 +682,6 @@ MENU_LIST = [
         }
     ]
 
-},
-{
-    id: "instructor",
-    title: "Lectures",
-    selected: false,
-    iconsrc: "/assets/announcement-icon.svg",
-    icon: 'menu_book',
-    children:
-    [
-        {
-            id: "course-lectures",
-            title: "Course Lectures",
-            type: "none"
-        },
-        {
-            id: "program-lectures",
-            title: "Program Lectures",
-            type: "none"
-        },
-        // {
-        //     id: "exam-schedule",
-        //     title: "Exam Schedule",
-        //     type: "none"
-
-        // },
-            ]
 },
 {
     id: "email",

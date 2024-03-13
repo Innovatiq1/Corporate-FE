@@ -5,8 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import { UnsubscribeOnDestroyAdapter } from '@shared/UnsubscribeOnDestroyAdapter';
-import { ExamSchedule } from 'app/admin/exam-schedule/exam-schedule.model';
-import { ExamScheduleService } from 'app/admin/exam-schedule/exam-schedule.service';
+import { ExamSchedule } from 'app/timetable/exam-schedule.model';
+import { ExamScheduleService } from 'app/timetable/exam-schedule.service';
 import { BehaviorSubject, Observable, fromEvent, map, merge } from 'rxjs';
 import Swal from 'sweetalert2';
 
