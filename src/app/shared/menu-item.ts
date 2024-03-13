@@ -288,6 +288,33 @@ MENU_LIST = [
 
     ]
 },
+{
+    id: "instructor",
+    title: "Lectures",
+    selected: false,
+    iconsrc: "/assets/announcement-icon.svg",
+    icon: 'menu_book',
+    children:
+    [
+        {
+            id: "course-lectures",
+            title: "Course Lectures",
+            type: "none"
+        },
+        {
+            id: "program-lectures",
+            title: "Program Lectures",
+            type: "none"
+        },
+        // {
+        //     id: "exam-schedule",
+        //     title: "Exam Schedule",
+        //     type: "none"
+
+        // },
+            ]
+},
+
 
 {
     id: "timetable",
@@ -655,32 +682,6 @@ MENU_LIST = [
         }
     ]
 
-},
-{
-    id: "instructor",
-    title: "Lectures",
-    selected: false,
-    iconsrc: "/assets/announcement-icon.svg",
-    icon: 'menu_book',
-    children:
-    [
-        {
-            id: "course-lectures",
-            title: "Course Lectures",
-            type: "none"
-        },
-        {
-            id: "program-lectures",
-            title: "Program Lectures",
-            type: "none"
-        },
-        // {
-        //     id: "exam-schedule",
-        //     title: "Exam Schedule",
-        //     type: "none"
-
-        // },
-            ]
 },
 {
     id: "email",
