@@ -135,6 +135,45 @@ MENU_LIST = [
         
         ]
     },
+    {
+        id:"admin/program",
+        title: "Program",
+        iconsrc:"/assets/fellowship-icon.svg",
+        icon: 'bookmark',
+        selected: false,
+        children: [
+            {
+                id:"program-list",
+                title:"All Program",
+                type:""
+            },
+            {
+                id:"schedule-class",
+                title:"Schedule Class",
+                type:""
+            },
+            {
+                id:"program-approve-list",
+                title:"Program Approve List",
+                type:""
+            },
+            {
+                id:"program-kit",
+                title:"Program Kit",
+                type:""
+            },
+            {
+                id:"student-approve-list",
+                title:"Student Approval List",
+                type:""
+            },
+            {
+                id:"program-completion-list",
+                title:"Completion List",
+                type:""
+            }
+        ]
+    },
 
 
 
@@ -192,192 +231,6 @@ MENU_LIST = [
     ]
 },
 {
-    id:"admin/program",
-    title: "Program",
-    iconsrc:"/assets/fellowship-icon.svg",
-    icon: 'bookmark',
-    selected: false,
-    children: [
-        {
-            id:"program-list",
-            title:"All Program",
-            type:""
-        },
-        {
-            id:"schedule-class",
-            title:"Schedule Class",
-            type:""
-        },
-        {
-            id:"program-approve-list",
-            title:"Program Approve List",
-            type:""
-        },
-        {
-            id:"program-kit",
-            title:"Program Kit",
-            type:""
-        },
-        {
-            id:"student-approve-list",
-            title:"Student Approval List",
-            type:""
-        },
-        {
-            id:"program-completion-list",
-            title:"Completion List",
-            type:""
-        }
-    ]
-},
-{
-    id: "admin/instructors",
-    title: "Instructors",
-    selected: false,
-    iconsrc: "/assets/announcement-icon.svg",
-    icon: 'find_in_page',
-    children:
-    [
-        {
-            id: "all-instructors",
-            title: "All Instructors",
-            type: "none",
-        },
-        {
-            id: "add-instructor",
-            title: "Add Instructor",
-            type: "none",
-        },
-        // {
-        //     id: "article",
-        //     title: "Articles",
-        //     type: "none",
-        // },
-        // {
-        //     id: "agreement-t-c",
-        //     title: "Agreement T & C",
-        //     type: "none",
-        // }
-    ]
-},
-{
-    id: "admin/students",
-    title: "Students",
-    selected: false,
-    iconsrc: "/assets/announcement-icon.svg",
-    icon: 'people_alt',
-    children:
-    [
-        {
-            id: "all-students",
-            title: "All Students",
-            type: "none",
-        },
-        {
-            id: "add-student",
-            title: "Add Student",
-            type: "none",
-        },
-        {
-            id: "student-attendance",
-            title: "Student Attendance",
-            type: "none",
-        },
-    ]
-},
-{
-    id: "admin/departments",
-    title: "Departments",
-    selected: false,
-    iconsrc: "/assets/announcement-icon.svg",
-    icon: 'business',
-    children:
-    [
-        {
-            id: "all-departments",
-            title: "All Departments",
-            type: "none",
-        },
-        {
-            id: "add-department",
-            title: "Add Department",
-            type: "none",
-        }
-    ]
-},
-{
-    id: "admin/staff",
-    title: "Staff",
-    selected: false,
-    iconsrc: "/assets/announcement-icon.svg",
-    icon: 'face',
-    children:
-    [
-        {
-            id: "all-staff",
-            title: "All Staff",
-            type: "none",
-        },
-        {
-            id: "add-staff",
-            title: "Add Staff",
-            type: "none",
-        },
-    ]
-},
-{
-    id: "admin/survey",
-    title: "Survey",
-    iconsrc:"/assets/survey-icon.svg",
-    icon: 'school',
-    selected: false,
-    children:
-    [
-        {
-            id: "survey-list",
-            title: "Survey List",
-            type:"none",
-        },
-        {
-            id:"likert-chart",
-            title:"Likert Chart",
-            type:""
-        }
-
-    ]
-},
-{
-    id: "admin/audit",
-    title: "Audit",
-    selected: false,
-    iconsrc: "/assets/audit-icon.svg",
-    icon: 'attach_money',
-    children:
-    [
-        {
-            id: "audit-list",
-            title: "List",
-            type:"none"
-        },
-        {
-            id: "e-attendance",
-            title: "E-Attendance",
-            type:"none"
-        }
-    ]
-},
-// {
-//     id: "home_content",
-//     title: "Home Content",
-//     iconsrc: "/assets/home-content-icon.svg",
-//     selected: false,
-//     children:
-//     [
-
-//     ]
-// },
-
-{
     id: "admin/users",
     title: "Users",
     selected: false,
@@ -385,17 +238,55 @@ MENU_LIST = [
     icon: 'people',
     children:
     [
+        // {
+        //     id: "user-type",
+        //     title: "User Type",
+        //     type: "none",
+        // },
         {
-            id: "user-type",
-            title: "User Type",
+            id: "all-users",
+            title: "All Users",
             type: "none",
         },
         {
-            id: "all-users",
-            title: "All User",
+            id: "all-instructors",
+            title: "Instructors",
             type: "none",
-        }
+        },
+        {
+            id: "all-students",
+            title: "Students",
+            type: "none",
+        },
+        {
+            id: "all-staff",
+            title: "Staff",
+            type: "none",
+        },
+
+
+
     ]
+},
+{
+    id: "timetable",
+    title: "Timetable",
+    selected: false,
+    iconsrc: "/assets/course-icon.svg",
+    icon: 'fact_check',
+    children:
+    [
+        {
+            id: "course-timetable",
+            title: "Course Timetable",
+            type: "none"
+        },
+        {
+            id: "program-timetable",
+            title: "Program Timetable",
+            type: "none"
+        }
+       ]
 },
 {
     id: "admin/exam",
@@ -420,6 +311,71 @@ MENU_LIST = [
     ]
 },
 {
+    id: "admin/payment",
+    title: "Payment Transactions",
+    selected: false,
+    iconsrc: "/assets/payment-icon.svg",
+    icon: 'payment',
+    children:
+    [
+        {
+            id: "program-payments",
+            title: "Program Payments",
+            type: "none"
+        },
+        {
+            id: "course-payments",
+            title: "Course Payments",
+            type: "none"
+        },
+
+
+    ]
+},
+
+{
+    id: "admin/survey",
+    title: "Survey",
+    iconsrc:"/assets/survey-icon.svg",
+    icon: 'school',
+    selected: false,
+    children:
+    [
+        {
+            id: "survey-list",
+            title: "Survey List",
+            type:"none",
+        },
+        {
+            id:"likert-chart",
+            title:"Likert Chart",
+            type:""
+        }
+
+    ]
+},
+{
+    id: "admin/audit",
+    title: "Logs",
+    selected: false,
+    iconsrc: "/assets/audit-icon.svg",
+    icon: 'attach_money',
+    children:
+    [
+        {
+            id: "audit-list",
+            title: "List",
+            type:"none"
+        },
+        {
+            id: "e-attendance",
+            title: "E-Attendance",
+            type:"none"
+        }
+    ]
+},
+
+{
     id: "admin/questions",
     title: "Questions",
     selected: false,
@@ -436,26 +392,6 @@ MENU_LIST = [
     ]
 },
 
-// {
-//     id: "survey_builder",
-//     title: "Survey Builder",
-//     selected: false,
-//     iconsrc: "/assets/survey-builder-icon.svg",
-//     children:
-//     [
-//         {
-//             id: "surveys",
-//             title: "Surveys",
-//             type: "none",
-//             actions: ["add", "edit", "view", "delete"]
-//         },
-//         {
-//             id: "survey_add",
-//             title: "Add",
-//             type: "none"
-//         }
-//     ]
-// },
 {
     id: "admin/certificate",
     title: "Certificate Builder",
@@ -561,59 +497,38 @@ MENU_LIST = [
         // }
     ]
 },
-{
-    id: "admin/banners",
-    title: "Banners",
-    selected: false,
-    iconsrc: "/assets/banner-icon.svg",
-    icon: 'art_track',
-    children:
-    [
-        {
-            id: "instructor-banner-list",
-            title: "Instructor Banners",
-            type: "none"
-        },
-        {
-            id: "create-instructor-banner",
-            title: "Add Instructor Banner",
-            type: "none"
-        },
+// {
+//     id: "admin/banners",
+//     title: "Banners",
+//     selected: false,
+//     iconsrc: "/assets/banner-icon.svg",
+//     icon: 'art_track',
+//     children:
+//     [
+//         {
+//             id: "instructor-banner-list",
+//             title: "Instructor Banners",
+//             type: "none"
+//         },
+//         {
+//             id: "create-instructor-banner",
+//             title: "Add Instructor Banner",
+//             type: "none"
+//         },
 
-        {
-            id: "student-banner-list",
-            title: "Student Banners",
-            type: "none"
-        },
-        {
-            id: "create-student-banner",
-            title: "Add Student Banner",
-            type: "none"
-        }
+//         {
+//             id: "student-banner-list",
+//             title: "Student Banners",
+//             type: "none"
+//         },
+//         {
+//             id: "create-student-banner",
+//             title: "Add Student Banner",
+//             type: "none"
+//         }
 
-    ]
-},
-{
-    id: "admin/payment",
-    title: "Payments",
-    selected: false,
-    iconsrc: "/assets/payment-icon.svg",
-    icon: 'payment',
-    children:
-    [
-        {
-            id: "course-payments",
-            title: "Course Payments",
-            type: "none"
-        },
-        {
-            id: "program-payments",
-            title: "Program Payments",
-            type: "none"
-        },
-
-    ]
-},
+//     ]
+// },
 {
     id: "admin/announcement",
     title: "Announcement",
@@ -631,26 +546,6 @@ MENU_LIST = [
 },
 
 
-// {
-//     id: "admin/testimonials",
-//     title: "Testimonials",
-//     selected: false,
-//     iconsrc: "/assets/testimonials-icon.svg",
-//     icon: 'find_in_page',
-//     children:
-//     [
-//         {
-//             id: "testimonials-instructor",
-//             title: "Instructor",
-//             type: "none"
-//         },
-//         {
-//             id: "testimonials-student",
-//             title: "Student",
-//             type: "none"
-//         }
-//     ]
-// },
 {
     id: "student/enrollment",
     title: "Enrollment",
@@ -659,15 +554,16 @@ MENU_LIST = [
     selected: true,
     children: [
         {
+            id: "programs",
+            title: "Programs",
+            type: "none"
+        },
+        {
             id: "courses",
             title: "Courses",
             type: "none"
         },
-        {
-            id: "programs",
-            title: "Programs",
-            type: "none"
-        }
+
     ]
 },
 {
@@ -739,36 +635,6 @@ MENU_LIST = [
         }
 ]
 },
-// {
-//     id: "student/questions",
-//     title: "Questions",
-//     iconsrc: "/assets/course-icon.svg",
-//     icon:'fact_check',
-//     selected: true,
-//     children: [
-//         {
-//             id: "questions",
-//             title: "Questions",
-//             selected: false,
-//             iconsrc: "/assets/announcement-icon.svg",
-//         },
-// ]
-// },
-// {
-//     id: "student/welcome",
-//     title: "Welcome",
-//     iconsrc: "/assets/course-icon.svg",
-//     icon:'fact_check',
-//     selected: true,
-//     children: [
-//         {
-//             id: "welcome",
-//             title: "Welcome",
-//             selected: false,
-//             iconsrc: "/assets/announcement-icon.svg",
-//         }
-// ]
-// },
 {
     id: "leave-request",
     title: "Leave Request",
@@ -832,63 +698,6 @@ MENU_LIST = [
        ]
 },
 
-// {
-//   id: "chat",
-//   title: "Chat",
-//   selected: false,
-//   iconsrc: "/assets/announcement-icon.svg",
-//   icon: 'email',
-//   children:
-//   [
-//       {
-//           id: "inbox",
-//           title: "Inbox",
-//           type: "none"
-//       }
-//      ]
-// },
-
-{
-    id: "timetable",
-    title: "Timetable",
-    selected: false,
-    iconsrc: "/assets/course-icon.svg",
-    icon: 'fact_check',
-    children:
-    [
-        {
-            id: "course-timetable",
-            title: "Course Timetable",
-            type: "none"
-        },
-        {
-            id: "program-timetable",
-            title: "Program Timetable",
-            type: "none"
-        }
-       ]
-},
-// {
-//     id: "instructor-timetable",
-//     title: "Instructor TimeTable",
-//     selected: false,
-//     iconsrc: "/assets/course-icon.svg",
-//     icon: 'fact_check',
-//     children:
-//     [
-//         {
-//             id: "instrutor-course-timetable",
-//             title: "Course Timetable",
-//             type: "none"
-//         }
-//         ,{
-//             id: "instrutor-program-timetable",
-//             title: "Program Timetable",
-//             type: "none"
-//         }
-
-//        ]
-// },
 
 {
     id: "settings",

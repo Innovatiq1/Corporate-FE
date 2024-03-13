@@ -66,9 +66,9 @@ export class AllTeachersComponent
   //isTblLoading = true;
   breadscrums = [
     {
-      title: 'All Instructor',
-      items: ['Instructor'],
-      active: 'All Instructor',
+      title: 'Instructors',
+      items: ['Users'],
+      active: 'Instructors',
     },
   ];
   totalItems: any;
@@ -103,7 +103,7 @@ export class AllTeachersComponent
     //this.location.re
   }
   addNew() {
-    this.route.navigateByUrl("/admin/instructors/add-instructor")
+    this.route.navigateByUrl("/admin/users/add-instructor")
 
 
   }

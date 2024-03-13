@@ -13,12 +13,12 @@ const routes: Routes = [
       import('./E-TMS/e-tms.module').then((m) => m.ETmsModule),
   },
   {
-    path: 'instructors',
+    path: 'users',
     loadChildren: () =>
       import('./teachers/teachers.module').then((m) => m.TeachersModule),
   },
   {
-    path: 'students',
+    path: 'users',
     loadChildren: () =>
       import('./students/students.module').then((m) => m.StudentsModule),
   },
@@ -92,7 +92,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'staff',
+    path: 'users',
     loadChildren: () =>
       import('./staff/staff.module').then((m) => m.StaffModule),
   },

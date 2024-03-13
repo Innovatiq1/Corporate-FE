@@ -25,7 +25,7 @@ export class EditTeacherComponent {
   breadscrums = [
     {
       title: 'Edit Instructor',
-      items: ['Instructor'],
+      items: ['Users'],
       active: 'Edit Instructor',
     },
   ];
@@ -158,7 +158,7 @@ export class EditTeacherComponent {
         //this.fileDropEl.nativeElement.value = "";
       this.proForm.reset();
       //this.toggleList()
-      this.router.navigateByUrl('/admin/instructors/all-instructors');
+      this.router.navigateByUrl('/admin/users/all-instructors');
       },
       (error: { message: any; error: any; }) => {
         Swal.fire(

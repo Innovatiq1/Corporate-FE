@@ -31,7 +31,7 @@ export class AddStaffComponent {
   breadscrums = [
     {
       title: 'Add Staff',
-      items: ['Staff'],
+      items: ['Users'],
       active: 'Add Staff',
     },
   ];
@@ -305,7 +305,7 @@ updateBlog(formObj: any) {
           }).then(() => {
             resolve(response);
           });
-          this.router.navigate(['/admin/staff/all-staff'])
+          this.router.navigate(['/admin/users/all-staff'])
 
         },
         (error) => {

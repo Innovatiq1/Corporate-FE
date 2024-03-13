@@ -107,7 +107,7 @@ export class SigninComponent
             } else if (role === Role.Approver || role === 'approver'|| role === 'approver') {
               this.router.navigate(['/admin/courses/all-courses']);
             } else if (role === Role.TrainingCoordinatorAdministrator || role === 'Training Coordinator Administrator'|| role === 'Training Coordinator Administrator') {
-              this.router.navigate(['/admin/students/all-students']);
+              this.router.navigate(['/admin/users/all-students']);
             } 
              else {
               this.router.navigate(['/authentication/page404']);

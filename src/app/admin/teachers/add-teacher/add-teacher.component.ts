@@ -29,7 +29,7 @@ export class AddTeacherComponent {
   breadscrums = [
     {
       title: 'Add Instructor',
-      items: ['Instructor'],
+      items: ['Users'],
       active: 'Add Instructor',
     },
   ];
@@ -161,7 +161,7 @@ export class AddTeacherComponent {
         //this.fileDropEl.nativeElement.value = "";
       this.proForm.reset();
       //this.toggleList()
-      this.router.navigateByUrl('/admin/instructors/all-instructors');
+      this.router.navigateByUrl('/admin/users/all-instructors');
       },
       (error) => {
         Swal.fire(
@@ -173,7 +173,7 @@ export class AddTeacherComponent {
     );
   }
   cancel(){
-    this.router.navigateByUrl('/admin/instructors/all-instructors');
+    this.router.navigateByUrl('/admin/users/all-instructors');
 
   }
 }

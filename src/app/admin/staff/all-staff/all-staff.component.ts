@@ -57,9 +57,9 @@ export class AllstaffComponent
   isLoading = true;
   breadscrums = [
     {
-      title: 'All Staff',
-      items: ['Staff'],
-      active: 'All Staff',
+      title: 'Staff',
+      items: ['Users'],
+      active: 'Staff',
     },
   ];
   constructor(
@@ -85,14 +85,14 @@ export class AllstaffComponent
     this.loadData();
   }
   addNew() {
-    this.router.navigate(['/admin/staff/add-staff']);
+    this.router.navigate(['/admin/users/add-staff']);
   }
 
 
 
   editCall(row: Staff) {
     console.log("rowEdit",row)
-    this.router.navigate(['/admin/staff/add-staff'],{queryParams:row});
+    this.router.navigate(['/admin/users/add-staff'],{queryParams:row});
   }
 
 
