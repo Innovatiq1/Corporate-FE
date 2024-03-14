@@ -153,18 +153,8 @@ MENU_LIST = [
                 type:""
             },
             {
-                id:"program-approve-list",
-                title:"Program Approve List",
-                type:""
-            },
-            {
                 id:"program-kit",
                 title:"Program Kit",
-                type:""
-            },
-            {
-                id:"student-approve-list",
-                title:"Student Approval List",
                 type:""
             },
             {
@@ -270,6 +260,16 @@ MENU_LIST = [
             title:"Registered Courses",
             type: "none"
         },
+        {
+            id: "program-approval",
+            title: "Program Approval",
+            type:"none"
+        },
+        {
+            id: "programs-registered",
+            title:"Registered Programs",
+            type: "none"
+        }
     ]
 },
 

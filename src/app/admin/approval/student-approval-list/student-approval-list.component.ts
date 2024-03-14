@@ -32,8 +32,8 @@ export class StudentApprovalListComponent {
   ];
   breadscrums = [
     {
-      items: ['Student Approval'],
-      active: 'Student Approval list',
+      items: ['Approval'],
+      active: 'Registered Programs',
     },
   ];
 
