@@ -247,7 +247,7 @@ MENU_LIST = [
     id: "admin/approval",
     title: "Approval",
     iconsrc: "/assets/course-icon.svg",
-    icon: 'school',
+    icon: 'verified_user',
     selected: true,
     children: [
         {
