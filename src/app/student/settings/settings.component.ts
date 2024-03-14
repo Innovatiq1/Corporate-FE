@@ -53,8 +53,12 @@ export class SettingsComponent {
   isAdmin: boolean = false;
   accountUrl: any;
   securityUrl: any;
+  bannersUrl: any;
+  emailUrl: any;
   showAccountSettings: boolean = false;
   showProfileSettings: boolean = false;
+  showEmailConfig: boolean = false;
+  showBanners: boolean = false;
   constructor(
     private studentService: StudentsService,
     private etmsService: EtmsService,
@@ -74,6 +78,8 @@ export class SettingsComponent {
     this.adminUrl = urlPath.includes('admin-settings');
     this.accountUrl = urlPath.includes('account-settings');
     this.securityUrl = urlPath.includes('security-settings');
+    this.bannersUrl = urlPath.includes('banners');
+    this.emailUrl = urlPath.includes('email-configuration');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -159,6 +165,26 @@ export class SettingsComponent {
       ];
       this.isAdmin = true;
     }
+    if (this.bannersUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.emailUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
     this.patchValues(),
       //this.patchValues1()
       (this.stdForm = this.fb.group({
@@ -210,6 +236,12 @@ export class SettingsComponent {
     if(this.securityUrl){
       this.showProfileSettings = true;
     }
+    if(this.bannersUrl){
+      this.showBanners = true;
+    }
+    if(this.emailUrl){
+      this.showEmailConfig = true;
+    }
   }
   navigateToAccountSettings() {
    
@@ -217,6 +249,14 @@ export class SettingsComponent {
   }
   navigateToProfileSettings() {
     this.router.navigate(['/student/security-settings']);
+  }
+  navigateToEmailSettings(){
+    this.router.navigate(['/student/email-configuration']);
+   
+  }
+  navigateToBannerSettings(){
+    this.router.navigate(['/student/banners']);
+    
   }
   patchValues() {
     this.studentId = localStorage.getItem('id');

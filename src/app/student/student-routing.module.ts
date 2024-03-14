@@ -102,6 +102,14 @@ const routes: Routes = [
     path: 'security-settings',
     component: SettingsComponent,  
   },
+  {
+    path: 'banners',
+    component: SettingsComponent,  
+  },
+  {
+    path: 'email-configuration',
+    component: SettingsComponent,  
+  },
 
 
   { path: '**', component: Page404Component },
