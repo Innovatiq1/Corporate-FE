@@ -1,4 +1,4 @@
-<section class="content" *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings">
+<section class="content" *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
@@ -238,19 +238,19 @@
     </div>
     <!-- </div> -->
 
-    <div class="card" *ngIf="!showAccountSettings && !showProfileSettings">
+    <div class="card" *ngIf="!showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners">
       <div class="header">
         <h2>Settings</h2>
       </div>
       <div class="body">
         <div class="row">
           <div class="col-md-6">
-            <div class="card">
+            <div class="card" style="background-color: rgb(214 209 209 / 63%);">
               <div class="row">
                 <div class="col-md-8 m-3">
                   <label>User Management</label>
                 </div>
-                <div class="col-md-2 m-3">
+                <div class="col-md-2 mt-3">
                   <img src="assets/images/settings/User-Profile.png" style="width: 80px; height: 80px;">
                 </div>
               </div>
@@ -275,13 +275,13 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="card">
+            <div class="card" style="background-color: rgb(214 209 209 / 63%);">
               <div class="row">
                 <div class="col-md-8 m-3">
                   <label>Security</label>
                 </div>
-                <div class="col-md-2 m-3">
-                  <img src="assets/images/settings/security.png" style="width: 80px; height: 80px;">
+                <div class="col-md-2 mt-3">
+                  <img src="assets/images/settings/security1.png" style="width: 85px; height: 85px;">
                 </div>
               </div>
               <hr>
@@ -307,12 +307,12 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <div class="card">
+            <div class="card" style="height: 240px; background-color: rgb(214 209 209 / 63%);">
               <div class="row">
                 <div class="col-md-8 m-3">
                   <label>Roles</label>
                 </div>
-                <div class="col-md-2 m-3">
+                <div class="col-md-2 my-3">
                   <img src="assets/images/settings/role.png" style="width: 80px; height: 80px;">
                 </div>
               </div>
@@ -328,13 +328,13 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="card">
+            <div class="card" style="background-color: rgb(214 209 209 / 63%);">
               <div class="row">
                 <div class="col-md-8 m-3">
                   <label>System Configuration</label>
                 </div>
-                <div class="col-md-2 m-3">
-                  <img src="assets/images/settings/system-configuration.png" style="width: 80px; height: 80px;">
+                <div class="col-md-2 my-3">
+                  <img src="assets/images/settings/system-configuration1.png" style="width: 80px; height: 80px;">
                 </div>
               </div>
               <hr>
@@ -344,23 +344,23 @@
                     <button id="save" [routerLink]="['/admin/departments/all-departments']"> Departments </button>
                   </div>
                   <div class="col-5">
-                    <button id="save" [routerLink]="['/admin/email-configuration/welcome-mail']"> Email Configuration
+                    <button id="save" (click)="navigateToEmailSettings()" > Email Configuration
                     </button>
                   </div>
-                  <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/banners/instructor-banner-list']"> Banners </button>
+                  <div class="col-3" style="margin-left: -35px;">
+                    <button id="save"  (click)="navigateToBannerSettings()"> Banners </button>
                   </div>
 
                 </div>
-                <div class="row">
-                  <div class="col-2" style="margin-left: 0px;">
+                <div class="row py-2">
+                  <div class="col-3">
                     <button id="save" [routerLink]="['/admin/questions/all-questions']"> Assessments </button>
                   </div>
-                  <div class="col-2" style="margin-left:40px;">
+                  <div class="col-4">
                     <button id="save" [routerLink]="['/admin/announcement/list']"> Announcements </button>
                   </div>
 
-                <div class="col-2" style="margin-left:120px;">
+                <div class="col-3">
                   <button id="save" [routerLink]="['/admin/certificate/template']"> Certificate </button>
                 </div>
                 </div>
@@ -495,5 +495,96 @@
         </form>
       </div>
     </div>
+    <div class="card" style="margin: auto; height: 500px; width: 70%;background-color: rgb(228 220 220);" *ngIf="showEmailConfig">
+      <!-- <div class="header">
+        <h2>Email Configuration</h2>
+      </div> -->
+      <div class="row">
+        <div class="col-md-8">
+          <label class="py-5 px-3">Email Configuration</label>
+        </div>
+        <div class="col-md-2">
+          <img src="assets/images/settings/email1.png" style="width: 150px; height: 150px;">
+        </div>
+      </div>
+      <div class="body">
+        <div class="row pb-3">
+              <div class="col-md-6">
+                <button id="save" [routerLink]="['/admin/email-configuration/forgot-password']"> Forgot Password </button>
+              </div>
+              <div class="col-md-5">
+                <button id="save" [routerLink]="['/admin/email-configuration/welcome-mail']"> Welcome E-mail </button>
+              </div>
+        </div>
+        <div class="row py-3">
+          <div class="col-md-6">
+            <button id="save" [routerLink]="['/admin/email-configuration/completed-course']"> Completed Course </button>
+          </div>
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['/admin/email-configuration/program-completion-email']"> Completed Program </button>
+           
+          </div>
+        </div>
+        <div class="row py-3">
+         
+          <div class="col-md-6">
+            <button id="save" [routerLink]="['/admin/email-configuration/course-registered-email']"> Course Registered E-mail </button>
+          </div>
+          
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['/admin/email-configuration/course-approval-email']"> Course Approval </button>
+          </div>
+
+        
+        </div>
+        <div class="row py-3">
+          <div class="col-md-6">
+            <button id="save" [routerLink]="['/admin/email-configuration/program-registration-email']"> Program Registered E-mail </button>
+          </div>
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['/admin/email-configuration/program-approval-email']"> Program Approval </button>
+          </div>
+        </div>
+        <div class="row py-3">
+          <div class="col-md-6">
+            <button id="save" [routerLink]="['/admin/email-configuration/director-course-notification']"> Director Course Notification </button>
+          </div>
+        </div>
+        <div class="col-md-12 py-3">
+          <button mat-raised-button color="primary" [routerLink]="['/settings/admin-settings']">Back</button>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="card" style="margin: auto; height: 300px; width: 65%;background-color: rgb(228 220 220);" *ngIf="showBanners">
+      <!-- <div class="header">
+        <h2>Email Configuration</h2>
+      </div> -->
+      <div class="row">
+        <div class="col-md-8">
+          <label class="py-4 px-5">Banners</label>
+        </div>
+        <div class="col-md-2 my-3 mx-auto">
+          <img src="assets/images/settings/banner.png" style="width: 80px; height: 80px;">
+        </div>
+      </div>
+      <div class="body">
+        <div class="row px-4">
+          <div class="col-md-6">
+              <button id="save" [routerLink]="['/admin/banners/instructor-banner-list']">Instructor Banners </button>
+          </div>
+          <div class="col-md-5">
+              <button id="save" [routerLink]="['/admin/banners/student-banner-list']"> Student Banners </button>
+          </div>
+        </div>
+    
+        <div class="col-md-12 px-4 py-5">
+          <button mat-raised-button color="primary" [routerLink]="['/settings/admin-settings']">Back</button>
+        </div>
+      
+      </div>
+    </div>
+    
   </div>
 </section>
