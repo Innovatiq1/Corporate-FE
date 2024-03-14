@@ -8,7 +8,7 @@ MENU_LIST = [
         title: "Dashboard",
         selected: false,
         iconsrc: "/assets/announcement-icon.svg",
-        icon: 'space_dashboard',
+        icon: 'assessment',
         children:
         [
             {
@@ -139,7 +139,7 @@ MENU_LIST = [
         id:"admin/program",
         title: "Program",
         iconsrc:"/assets/fellowship-icon.svg",
-        icon: 'bookmark',
+        icon: 'school',
         selected: false,
         children: [
             {
@@ -181,7 +181,7 @@ MENU_LIST = [
     id: "admin/courses",
     title: "Course",
     iconsrc: "/assets/course-icon.svg",
-    icon: 'school',
+    icon: 'import_contacts',
     selected: true,
     children: [
         {
@@ -321,7 +321,7 @@ MENU_LIST = [
     title: "Timetable",
     selected: false,
     iconsrc: "/assets/course-icon.svg",
-    icon: 'fact_check',
+    icon: 'date_range',
     children:
     [
         {
@@ -362,7 +362,7 @@ MENU_LIST = [
     title: "Transactions",
     selected: false,
     iconsrc: "/assets/payment-icon.svg",
-    icon: 'payment',
+    icon: 'monetization_on',
     children:
     [
         {
@@ -384,7 +384,7 @@ MENU_LIST = [
     id: "admin/survey",
     title: "Survey",
     iconsrc:"/assets/survey-icon.svg",
-    icon: 'school',
+    icon: 'rate_review',
     selected: false,
     children:
     [
@@ -406,7 +406,7 @@ MENU_LIST = [
     title: "Logs",
     selected: false,
     iconsrc: "/assets/audit-icon.svg",
-    icon: 'attach_money',
+    icon: 'find_in_page',
     children:
     [
         {
@@ -597,7 +597,7 @@ MENU_LIST = [
     id: "student/exams",
     title: "Exams",
     iconsrc: "/assets/course-icon.svg",
-    icon:'school',
+    icon:'assignment',
     selected: true,
     children: [
         {
@@ -645,7 +645,7 @@ MENU_LIST = [
     id: "student/feedback",
     title: "Feedback",
     iconsrc: "/assets/course-icon.svg",
-    icon:'fact_check',
+    icon:'rate_review',
     selected: true,
     children: [
         {
@@ -667,7 +667,7 @@ MENU_LIST = [
     title: "Leave Request",
     selected: false,
     iconsrc: "/assets/announcement-icon.svg",
-    icon:'offline_pin',
+    icon:'local_pharmacy',
     children:
     [
         {
