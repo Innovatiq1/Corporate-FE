@@ -8,7 +8,6 @@ import { AboutCourseComponent } from './about-course/about-course.component';
 import { AllCourseComponent } from './all-course/all-course.component';
 import { SharedModule } from '@shared';
 import { ComponentsModule } from '@shared/components/components.module';
-import { CourseApprovalComponent } from './course-approval/course-approval.component';
 import { CourseKitComponent } from './course-kit/course-kit.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -24,7 +23,6 @@ import { EditCategoriesComponent } from './categories/edit-categories/edit-categ
 import { CreateTemplateComponent } from './course-kit/create-template/create-template.component';
 import { CreateClassComponent } from './create-class/create-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
-import { ApproveListComponent } from './approve-list/approve-list.component';
 import { CompletionListComponent } from './completion-list/completion-list.component';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -38,7 +36,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     EditCourseComponent,
     AboutCourseComponent,
     AllCourseComponent,
-    CourseApprovalComponent,
     CourseKitComponent,
     CategoriesComponent,
     CreateCategoriesComponent,
@@ -50,7 +47,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     CreateTemplateComponent,
     ClassListComponent,
     CreateClassComponent,
-    ApproveListComponent,
     CompletionListComponent,
 
 

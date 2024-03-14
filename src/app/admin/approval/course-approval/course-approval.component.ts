@@ -29,7 +29,7 @@ export class CourseApprovalComponent {
   breadscrums = [
     {
       title: 'Course Approval',
-      items: ['Course'],
+      items: ['Approval'],
       active: 'Course Approval',
     },
   ];

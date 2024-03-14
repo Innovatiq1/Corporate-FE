@@ -45,9 +45,9 @@ export class ApproveListComponent  {
 
   breadscrums = [
     {
-      title: 'Class List',
-      items: ['Schedule Class'],
-      active: 'Approve List',
+      title: 'Registered Courses',
+      items: ['Approval'],
+      active: 'Registered Courses',
     },
   ];
   searchTerm: string = '';

@@ -191,16 +191,6 @@ MENU_LIST = [
 
         },
         {
-            id: "add-course",
-            title: "Create Course",
-            type: "none"
-        },
-        {
-            id: "course-approval",
-            title: "Course Approval",
-            type:"none"
-        },
-        {
             id: "course-kit",
             title: "Course Kit",
             type: "none"
@@ -215,11 +205,6 @@ MENU_LIST = [
             title:"Schedule Class",
             type: "selected",
 
-        },
-        {
-            id: "approve-list",
-            title:"Student Approve List",
-            type: "none"
         },
         {
             id: "completion-list",
@@ -268,6 +253,26 @@ MENU_LIST = [
 
     ]
 },
+{
+    id: "admin/approval",
+    title: "Approval",
+    iconsrc: "/assets/course-icon.svg",
+    icon: 'school',
+    selected: true,
+    children: [
+        {
+            id: "course-approval",
+            title: "Course Approval",
+            type:"none"
+        },
+        {
+            id: "courses-registered",
+            title:"Registered Courses",
+            type: "none"
+        },
+    ]
+},
+
 {
     id: "student/enrollment",
     title: "Enrollment",
