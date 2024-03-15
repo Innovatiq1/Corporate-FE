@@ -8,7 +8,7 @@ MENU_LIST = [
         title: "Dashboard",
         selected: false,
         iconsrc: "/assets/announcement-icon.svg",
-        icon: 'space_dashboard',
+        icon: 'assessment',
         children:
         [
             {
@@ -139,7 +139,7 @@ MENU_LIST = [
         id:"admin/program",
         title: "Program",
         iconsrc:"/assets/fellowship-icon.svg",
-        icon: 'bookmark',
+        icon: 'school',
         selected: false,
         children: [
             {
@@ -153,18 +153,8 @@ MENU_LIST = [
                 type:""
             },
             {
-                id:"program-approve-list",
-                title:"Program Approve List",
-                type:""
-            },
-            {
                 id:"program-kit",
                 title:"Program Kit",
-                type:""
-            },
-            {
-                id:"student-approve-list",
-                title:"Student Approval List",
                 type:""
             },
             {
@@ -181,7 +171,7 @@ MENU_LIST = [
     id: "admin/courses",
     title: "Course",
     iconsrc: "/assets/course-icon.svg",
-    icon: 'school',
+    icon: 'import_contacts',
     selected: true,
     children: [
         {
@@ -189,16 +179,6 @@ MENU_LIST = [
             title: "Course List",
             type: "none",
 
-        },
-        {
-            id: "add-course",
-            title: "Create Course",
-            type: "none"
-        },
-        {
-            id: "course-approval",
-            title: "Course Approval",
-            type:"none"
         },
         {
             id: "course-kit",
@@ -215,11 +195,6 @@ MENU_LIST = [
             title:"Schedule Class",
             type: "selected",
 
-        },
-        {
-            id: "approve-list",
-            title:"Student Approve List",
-            type: "none"
         },
         {
             id: "completion-list",
@@ -268,6 +243,36 @@ MENU_LIST = [
 
     ]
 },
+{
+    id: "admin/approval",
+    title: "Approval",
+    iconsrc: "/assets/course-icon.svg",
+    icon: 'verified_user',
+    selected: true,
+    children: [
+        {
+            id: "course-approval",
+            title: "Course Approval",
+            type:"none"
+        },
+        {
+            id: "courses-registered",
+            title:"Registered Courses",
+            type: "none"
+        },
+        {
+            id: "program-approval",
+            title: "Program Approval",
+            type:"none"
+        },
+        {
+            id: "programs-registered",
+            title:"Registered Programs",
+            type: "none"
+        }
+    ]
+},
+
 {
     id: "student/enrollment",
     title: "Enrollment",
@@ -321,7 +326,7 @@ MENU_LIST = [
     title: "Timetable",
     selected: false,
     iconsrc: "/assets/course-icon.svg",
-    icon: 'fact_check',
+    icon: 'date_range',
     children:
     [
         {
@@ -362,7 +367,7 @@ MENU_LIST = [
     title: "Transactions",
     selected: false,
     iconsrc: "/assets/payment-icon.svg",
-    icon: 'payment',
+    icon: 'monetization_on',
     children:
     [
         {
@@ -384,7 +389,7 @@ MENU_LIST = [
     id: "admin/survey",
     title: "Survey",
     iconsrc:"/assets/survey-icon.svg",
-    icon: 'school',
+    icon: 'rate_review',
     selected: false,
     children:
     [
@@ -406,7 +411,7 @@ MENU_LIST = [
     title: "Logs",
     selected: false,
     iconsrc: "/assets/audit-icon.svg",
-    icon: 'attach_money',
+    icon: 'find_in_page',
     children:
     [
         {
@@ -597,7 +602,7 @@ MENU_LIST = [
     id: "student/exams",
     title: "Exams",
     iconsrc: "/assets/course-icon.svg",
-    icon:'school',
+    icon:'assignment',
     selected: true,
     children: [
         {
@@ -645,7 +650,7 @@ MENU_LIST = [
     id: "student/feedback",
     title: "Feedback",
     iconsrc: "/assets/course-icon.svg",
-    icon:'fact_check',
+    icon:'rate_review',
     selected: true,
     children: [
         {
@@ -667,7 +672,7 @@ MENU_LIST = [
     title: "Leave Request",
     selected: false,
     iconsrc: "/assets/announcement-icon.svg",
-    icon:'offline_pin',
+    icon:'local_pharmacy',
     children:
     [
         {
