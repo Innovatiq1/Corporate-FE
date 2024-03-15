@@ -110,6 +110,10 @@ const routes: Routes = [
     path: 'email-configuration',
     component: SettingsComponent,  
   },
+  {
+    path: 'customization-settings',
+    component: SettingsComponent,  
+  },
 
 
   { path: '**', component: Page404Component },

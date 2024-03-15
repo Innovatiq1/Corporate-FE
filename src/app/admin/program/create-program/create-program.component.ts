@@ -278,7 +278,7 @@ export class CreateProgramComponent {
               text: 'Program created succesfully',
               icon: 'success',
             });
-            this.router.navigate(['/admin/program/program-approve-list'])
+            this.router.navigate(['/admin/approval/program-approval'])
           },
           (err: any) => {
             Swal.fire(

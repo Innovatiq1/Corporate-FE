@@ -598,7 +598,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
           icon: 'success',
         });
         this.courseAdded=true;
-        this.router.navigate(['/admin/courses/course-approval'])
+        this.router.navigate(['/admin/approval/course-approval'])
 
       });
 

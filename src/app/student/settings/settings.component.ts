@@ -55,10 +55,13 @@ export class SettingsComponent {
   securityUrl: any;
   bannersUrl: any;
   emailUrl: any;
+  customUrl: any;
   showAccountSettings: boolean = false;
   showProfileSettings: boolean = false;
   showEmailConfig: boolean = false;
   showBanners: boolean = false;
+  showCustomSettings: boolean = false;
+  currentContent: number = 1;
   constructor(
     private studentService: StudentsService,
     private etmsService: EtmsService,
@@ -80,6 +83,7 @@ export class SettingsComponent {
     this.securityUrl = urlPath.includes('security-settings');
     this.bannersUrl = urlPath.includes('banners');
     this.emailUrl = urlPath.includes('email-configuration');
+    this.customUrl = urlPath.includes('customization-settings');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -185,6 +189,16 @@ export class SettingsComponent {
       ];
       this.isAdmin = true;
     }
+    if (this.customUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
     this.patchValues(),
       //this.patchValues1()
       (this.stdForm = this.fb.group({
@@ -242,6 +256,9 @@ export class SettingsComponent {
     if(this.emailUrl){
       this.showEmailConfig = true;
     }
+    if(this.customUrl){
+      this.showCustomSettings = true;
+    }
   }
   navigateToAccountSettings() {
    
@@ -257,6 +274,15 @@ export class SettingsComponent {
   navigateToBannerSettings(){
     this.router.navigate(['/student/banners']);
     
+  }
+  navigateToCustomSettings(){
+    this.router.navigate(['/student/customization-settings']);
+    
+  }
+ 
+
+  showMainContent(contentId: number) {
+    this.currentContent = contentId;
   }
   patchValues() {
     this.studentId = localStorage.getItem('id');
