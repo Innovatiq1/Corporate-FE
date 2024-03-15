@@ -58,3 +58,52 @@ h5{
 .banner{
   padding-left: 100px;
 }
+.container {
+  display: flex;
+  border-radius: 10px;
+}
+
+.sidenav {
+  width: 200px;
+  background-color: #f1f1f1;
+  // padding-top: 20px;
+  // margin: 20px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.main-content {
+  width: calc(100% - 200px);
+  padding: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #f9f9f9;
+  border-left: 1px solid #ddd;
+}
+.sidenav button.active {
+  color: black;
+  background-color: #cfe2ff;
+  border: none;
+  padding-top: 20px;
+  text-align: start;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.sidenav button {
+  color: black;
+  background-color: #f1f1f1;
+  border: none;
+  // padding-top: 20px;
+  text-align: start;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.sidenav label{
+  padding-top: 20px;
+  padding-left: 10px;
+}
