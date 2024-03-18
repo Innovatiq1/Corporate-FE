@@ -8,6 +8,7 @@ import { Student, UsersPaginationModel } from '../models/user.model';
 import { AppConstants } from '@shared/constants/app.constants';
 import { ApiResponse } from '@core/models/general.response';
 import { environment } from 'environments/environment';
+import { CoursePaginationModel } from '@core/models/course.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class QuestionService {
     return this.currentUserSubject.value;
   }
 
-  private buildParams(filter?: Partial<UsersPaginationModel>): HttpParams {
+  private buildParams(filter?: Partial<CoursePaginationModel>): HttpParams {
     let params = new HttpParams();
     if (filter) {
       if (filter.sortBy) {
@@ -66,17 +67,20 @@ export class QuestionService {
       .post<ApiResponse>(apiUrl, request)
       .pipe(map((response) => response));
   }
-  updateQuestions(
-    questionId: string,
-    questions: any
-  ): Observable<ApiResponse> {
-    const apiUrl = `${this.defaultUrl}admin/assesment/${questionId}`;
-    return this.http.put<ApiResponse>(apiUrl, questions);
+  updateQuestions(question:any) {
+    const apiUrl = `${this.defaultUrl}admin/assesment/${question.id}`;
+    return this.http
+      .put<ApiResponse>(apiUrl, question)
+      .pipe(map((response) => { }));
   }
-  getQuestionJson(): Observable<any> {
+  getQuestionsById(id?: string) {
+    const apiUrl = `${this.defaultUrl}admin/assesment/${id}`;
+    return this.http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
+  }
+  getQuestionJson( filter?: Partial<CoursePaginationModel>): Observable<ApiResponse> {
     const apiUrl = `${this.defaultUrl}admin/assesment`;
     return this.http.get<any>(apiUrl, {
-      // params: this.buildParams(data),
+      params: this.buildParams(filter),
     });
   }
 

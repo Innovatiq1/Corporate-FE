@@ -5,6 +5,7 @@ import { CoursePaginationModel, SubCategory } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { QuestionService } from '@core/service/question.service';
 import { UtilsService } from '@core/service/utils.service';
+import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -24,10 +25,32 @@ export class AddQuestionsComponent implements OnInit {
   ];
 
 questionForm!: FormGroup; 
+questionId!: string;
+editUrl: any;
+question: any;
+subscribeParams: any;
 
 
-constructor(private formBuilder: FormBuilder,private router: Router, private questionService: QuestionService, private cdr: ChangeDetectorRef) {
+constructor(private formBuilder: FormBuilder,private router: Router, private questionService: QuestionService, private cdr: ChangeDetectorRef,private activatedRoute: ActivatedRoute,) {
   
+  let urlPath = this.router.url.split('/')
+  this.editUrl = urlPath.includes('edit-questions');
+
+
+  if(this.editUrl===true){
+    this.breadscrums = [
+      {
+        title:'Edit Questions',
+        items: ['Assessments'],
+        active: 'Edit Questions',
+      },
+    ];
+  }
+
+  this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
+    this.questionId = params.id;
+    //console.log("=Id===",params.id)
+  });
 }
 
 ngOnInit() {
@@ -37,6 +60,7 @@ ngOnInit() {
       this.createQuestion()
     ])
   });
+  this.getData();
 }
 
 
@@ -108,5 +132,82 @@ save() {
       }
     );
   }
+  
 }
+update(){
+  if (this.questionForm.valid) {
+    const payload = {
+      name: this.questionForm.value.name,
+      questions: this.questionForm.value.questions.map((question: any) => ({
+        questionText: question.questionText,
+        options: question.options.map((option: any) => ({
+          text: option.text,
+          correct: option.correct
+        }))
+      })),
+      id:this.questionId,
+
+    };
+
+    
+    this.questionService.updateQuestions(payload).subscribe(
+      (res: any) => {
+        Swal.fire({
+          title: 'Successful',
+          text: 'Question Updated successfully',
+          icon: 'success',
+        });
+        this.router.navigate(['/admin/questions/all-questions'])
+      
+      },
+      (err: any) => {
+        Swal.fire(
+          'Failed to update Question',
+          'error'
+        );
+      }
+    );
+  }
+}
+
+getData() {
+  this.questionService.getQuestionsById(this.questionId).subscribe((response: any) => {
+    if (response && response.questions) {
+      this.question = response;
+      this.questionForm.patchValue({
+        name: response.name,
+      });
+
+      const questionsArray = this.questionForm.get('questions') as FormArray;
+      while (questionsArray.length !== 0) {
+        questionsArray.removeAt(0);
+      }
+
+      response.questions.forEach((question: any) => {
+        if (question.questionText.trim() !== '') { 
+          const newQuestionGroup = this.createQuestion();
+          newQuestionGroup.patchValue({
+            questionText: question.questionText,
+          });
+
+          const optionsArray = newQuestionGroup.get('options') as FormArray;
+          optionsArray.clear(); 
+          question.options.forEach((option: any) => {
+            optionsArray.push(
+              this.formBuilder.group({
+                text: option.text,
+                correct: option.correct
+              })
+            );
+          });
+          questionsArray.push(newQuestionGroup);
+        }
+      });
+     
+    }
+  });
+}
+
+
+
 }

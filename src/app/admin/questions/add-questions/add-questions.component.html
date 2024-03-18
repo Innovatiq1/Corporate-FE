@@ -86,7 +86,7 @@
                                             <!-- Dynamic options -->
                                             <div *ngFor="let option of getOptions(i).controls; let j=index" [formGroupName]="j">
                                                 <!-- Use [formControlName] with respect to 'option' FormGroup -->
-                                                <label>Answer <span class="mandatory">&nbsp;*</span></label>
+                                                <label>Answer {{j+1}} <span class="mandatory">&nbsp;*</span></label>
                                                 <mat-form-field class="example-full-width mb-3" appearance="outline">
                                                     <input type="text" matInput [formControlName]="'text'"  placeholder="Answer">
                                                 </mat-form-field>
@@ -113,7 +113,8 @@
                             <button mat-button id="back" [routerLink]="['/admin/questions/all-questions']">Back</button>
                         </div>
                         <div class="col-md-3">
-                            <button mat-button type="submit" id="submit" (click)="save()">Submit</button>
+                            <button *ngIf="!editUrl" class="btn-space" mat-raised-button color="primary" type="submit" id="submit" (click)="save()">Submit</button>
+                            <button *ngIf="editUrl" class="btn-space" mat-raised-button color="primary" (click)="update()">Update</button>
                         </div>
                     </div>
                 </div>
