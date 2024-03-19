@@ -61,7 +61,7 @@ export class MainComponent implements OnInit {
     {
       title: 'Dashboad',
       items: [],
-      active: 'Student Analytics',
+      active: 'Analytics',
     },
   ];
   count: any;

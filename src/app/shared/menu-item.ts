@@ -13,7 +13,7 @@ MENU_LIST = [
         [
             {
                 id: "student-analytics",
-                title: "Student Analytics",
+                title: "Analytics",
                 type: "none",
             },
             // {
