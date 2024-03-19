@@ -14,9 +14,11 @@ import { PmDashboardComponent } from './pm-dashboard/pm-dashboard.component';
 import { TrainingAdministratorComponent } from './training-administrator/training-administrator.component';
 import { HodDashboardComponent } from './hod-dashboard/hod-dashboard.component';
 import { TrainingCoordinatorDbComponent } from './training-coordinator-db/training-coordinator-db.component';
+import { DashboardTabsComponent } from './dashboard-tabs/dashboard-tabs.component';
+import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 
 @NgModule({
-  declarations: [MainComponent, Dashboard2Component, CmDashboardComponent, PmDashboardComponent, TrainingAdministratorComponent, HodDashboardComponent, TrainingCoordinatorDbComponent, SupervisorDashboardComponent,    
+  declarations: [MainComponent, Dashboard2Component, CmDashboardComponent, PmDashboardComponent, TrainingAdministratorComponent, HodDashboardComponent, TrainingCoordinatorDbComponent, SupervisorDashboardComponent, DashboardTabsComponent, StudentDashboardComponent,    
    
   ],
   imports: [

@@ -16,11 +16,11 @@ MENU_LIST = [
                 title: "Student Analytics",
                 type: "none",
             },
-            {
-                id: "instructor-analytics",
-                title: "Instructor Analytics",
-                type: "none",
-            },
+            // {
+            //     id: "instructor-analytics",
+            //     title: "Instructor Analytics",
+            //     type: "none",
+            // },
             {
                 id: "student-dashboard",
                 title: "Student Dashboard",

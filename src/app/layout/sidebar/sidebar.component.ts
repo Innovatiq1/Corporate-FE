@@ -91,6 +91,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.adminService.getUserTypeList( {'allRows':true}).subscribe(
       (response: any) => {
         let userType = localStorage.getItem('user_type')
+        console.log("menus",response)
         let data = response.filter((item:any) => item.typeName === userType);
         this.menuitem = data[0].menuItems;
         let limit = filters?.limit ? filters?.limit : 10;
