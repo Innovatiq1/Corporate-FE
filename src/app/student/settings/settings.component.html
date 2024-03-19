@@ -1,5 +1,5 @@
 <section class="content"
-  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners">
+  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
@@ -239,7 +239,7 @@
     </div>
     <!-- </div> -->
 
-    <div class="card" *ngIf="!showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners">
+    <div class="card" *ngIf="!showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings">
       <div class="header">
         <h2>Settings</h2>
       </div>
@@ -367,6 +367,29 @@
                 </div>
 
 
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card" style="height: 240px; background-color: rgb(214 209 209 / 63%);">
+              <div class="row">
+                <div class="col-md-8 m-3">
+                  <label>Customization</label>
+                </div>
+                <div class="col-md-2 my-3">
+                  <img src="assets/images/settings/customization.png" style="width: 80px; height: 80px;">
+                </div>
+              </div>
+              <hr>
+              <div class="m-3">
+                <div class="row">
+                  <div class="col-5">
+                    <button id="save" (click)="navigateToCustomSettings()"> Field Customization </button>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
@@ -593,6 +616,122 @@
         </div>
 
       </div>
+    </div>
+
+
+    <div class="card" *ngIf="showCustomSettings">
+      <div class="header">
+        <h2>Customization Settings</h2>
+      </div>
+      <div class="body">
+        <div class="container">
+          <!-- Sidebar -->
+          <div class="sidenav">
+            <label>Custom Fields</label>
+            <button [class.active]="currentContent === 1" (click)="showMainContent(1)"> <p>Course Name</p> </button>
+            <button  [class.active]="currentContent === 2" (click)="showMainContent(2)"><p>Course Code</p> </button>
+            <button  [class.active]="currentContent === 3" (click)="showMainContent(3)"><p>Email Id</p> </button>
+            <!-- <a [class.active]="currentContent === 1" (click)="showMainContent(1)">Course Name</a>
+            <a [class.active]="currentContent === 2" (click)="showMainContent(2)">Course Code</a>
+            <a [class.active]="currentContent === 3" (click)="showMainContent(3)">Email Id</a> -->
+          </div>
+        
+          <!-- Main Content Sections -->
+          <div class="main-content" *ngIf="currentContent === 1">
+            <form>
+              <div class="row clearfix">
+                <label>Edit Course Name Field</label>
+                <div class="col-lg-6 col-md-12 m-3">
+                  <div class="form-group">
+                    <label>Label Name<span class="mandatory">&nbsp;*</span></label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <input matInput  />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-8">
+                    <button mat-raised-button color="primary" [routerLink]="['/settings/admin-settings']">Back</button>
+                  </div>
+                  <div class="col-md-4">
+                    <button mat-raised-button color="primary">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        
+          <div class="main-content" *ngIf="currentContent === 2">
+            <form >
+              <div class="row clearfix">
+                <label>Edit Course Code Field</label>
+                <div class="col-lg-6 col-md-12 m-3">
+                  <div class="form-group">
+                    <label>Label Name<span class="mandatory">&nbsp;*</span></label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <input matInput  />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-8">
+                    <button mat-raised-button color="primary" [routerLink]="['/settings/admin-settings']">Back</button>
+                  </div>
+                  <div class="col-md-4">
+                    <button mat-raised-button color="primary">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="main-content" *ngIf="currentContent === 3">
+            <form >
+              <div class="row clearfix">
+                <label>Edit Email Id Field</label>
+                <div class="col-lg-6 col-md-12 m-3">
+                  <div class="form-group">
+                    <label>Label Name<span class="mandatory">&nbsp;*</span></label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <input matInput  />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-8">
+                    <button mat-raised-button color="primary" [routerLink]="['/settings/admin-settings']">Back</button>
+                  </div>
+                  <div class="col-md-4">
+                    <button mat-raised-button color="primary">Save Changes</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+
+        <!-- <form [formGroup]="stdForm1">
+          <div class="row clearfix">
+            <div class="col-lg-6 col-md-12">
+              <div class="form-group">
+                <label>First Name<span class="mandatory">&nbsp;*</span></label>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput formControlName="name" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <button mat-raised-button color="primary">Back</button>
+              </div>
+              <div class="col-md-4">
+                <button mat-raised-button color="primary">Save Changes</button>
+              </div>
+            </div>
+          </div>
+        </form> -->
+      </div>
+
     </div>
 
   </div>

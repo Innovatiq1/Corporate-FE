@@ -122,7 +122,7 @@
                 <div class="row">
                   <div class="col-md-3" *ngFor="let data of studentRegisteredClasses">
                     <div class="course-card course-card-blog">
-                      <div class="course-card-image">
+                      <div class="course-card-image" style="cursor: pointer;"  [routerLink]="['/student/view-course/',data.id]">
                         <img class="img" [src]="data?.classId?.courseId?.image_link || '../../../assets/noimage.jpg'" alt="Image">
                       </div>
                       <div class="blog-table">
@@ -174,7 +174,7 @@
                 <div class="row">
                   <div class="col-md-3" *ngFor="let data of studentApprovedClasses">
                     <div class="course-card course-card-blog">
-                      <div class="course-card-image">
+                      <div class="course-card-image" style="cursor: pointer;"  [routerLink]="['/student/view-course/',data.id]">
                         <img class="img" [src]="data?.classId?.courseId?.image_link || '../../../assets/noimage.jpg'" alt="Image">
                       </div>
                       <div class="blog-table">
@@ -227,7 +227,7 @@
                 <div class="row">
                   <div class="col-md-3" *ngFor="let data of studentCompletedClasses">
                     <div class="course-card course-card-blog">
-                      <div class="course-card-image">
+                      <div class="course-card-image" style="cursor: pointer;"  [routerLink]="['/student/view-course/',data.id]">
                         <img class="img" [src]="data?.classId?.courseId?.image_link || '../../../assets/noimage.jpg'" alt="Image">
                       </div>
                       <div class="blog-table">

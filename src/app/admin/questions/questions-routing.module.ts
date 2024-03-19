@@ -12,6 +12,10 @@ const routes: Routes = [
         path: 'add-questions',
         component: AddQuestionsComponent,
     },
+    {
+        path: 'edit-questions/:id',
+        component: AddQuestionsComponent,
+    },
    
     
 ];
