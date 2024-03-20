@@ -49,10 +49,11 @@ export interface CourseUploadData {
    pdu_leadership?: number;
    pdu_strategic?: number;
    funding_grant?: string[];
-   survey?: string[];
+//    survey?: string[];
    course_instructor?: string[];
    course_kit?: string[];
    assessment?: string[];
+   survey?: string[];
  }
  export interface MainCategory {
     subCategories: any;
@@ -124,6 +125,15 @@ export interface FundingGrant {
 export interface Assessment {
 	_id: string;
 	docs: Assessment[];
+	name: string;
+	createdAt: string;
+	updatedAt: string;
+	__v: number;
+	id: string;
+}
+export interface Feedback {
+	_id: string;
+	docs: Feedback[];
 	name: string;
 	createdAt: string;
 	updatedAt: string;

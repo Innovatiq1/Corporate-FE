@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import {
   Component,
   VERSION,
@@ -5,15 +6,21 @@ import {
   Input,
   Output,
   ViewEncapsulation,
+  ElementRef,
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CourseTitleModel } from '@core/models/class.model';
+import { CoursePaginationModel } from '@core/models/course.model';
 import { AdminService } from '@core/service/admin.service';
 import { CourseService } from '@core/service/course.service';
 import { InstructorService } from '@core/service/instructor.service';
+import { UtilsService } from '@core/service/utils.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import Swal from 'sweetalert2';
+import { SurveyService } from '../survey.service';
 
 @Component({
   selector: 'app-likert-chart',
@@ -22,13 +29,13 @@ import Swal from 'sweetalert2';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class LikertChartComponent {
-  name = 'Angular ' + VERSION.major;
-  selectcourse: boolean = false;
-  programData: any = [];
-  userTypeNames: any;
-  data:any;
-  starRating = 0;
-  currentRate = 3.14;
+  // name = 'Angular ' + VERSION.major;
+  // selectcourse: boolean = false;
+  // programData: any = [];
+  // userTypeNames: any;
+  // data:any;
+  // starRating = 0;
+  // currentRate = 3.14;
   breadscrums = [
     {
       title: 'Likert Chart',
@@ -37,95 +44,137 @@ export class LikertChartComponent {
     },
   ];
   selected = false;
-  instructorList: any = [];
-  courseList!: CourseTitleModel[];
-  countNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  selectedIndex: number | undefined;
-  favoriteSeason?: string;
-  course: string[] = [
-    'Strongly Disagree',
-    'Disagree',
-    'Normal',
-    'Agree',
-    'Strongly Agree',
-  ];
-  levelofcourse: string[] = [
-    'Strongly Disagree',
-    'Disagree',
-    'Normal',
-    'Agree',
-    'Strongly Agree',
-  ];
-  expectations: string[]=[
-    'Strongly Disagree',
-    'Disagree',
-    'Normal',
-    'Agree',
-    'Strongly Agree',
-  ];
-  subject : string[]=[
-    'Strongly Disagree',
-    'Disagree',
-    'Normal',
-    'Agree',
-    'Strongly Agree',
-  ];
+  displayedColumns: string[] = [
+    'Name',
+    'Count',
+    'Created At',
+    'status'
+   ];
+  dataSource: any;
+  coursePaginationModel!: Partial<CoursePaginationModel>;
+  totalItems: any;
+  pageSizeArr = this.utils.pageSizeArr;
+  selection = new SelectionModel<any>(true, []);
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
+  // instructorList: any = [];
+  // courseList!: CourseTitleModel[];
+  // countNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  // selectedIndex: number | undefined;
+  // favoriteSeason?: string;
+  // course: string[] = [
+  //   'Strongly Disagree',
+  //   'Disagree',
+  //   'Normal',
+  //   'Agree',
+  //   'Strongly Agree',
+  // ];
+  // levelofcourse: string[] = [
+  //   'Strongly Disagree',
+  //   'Disagree',
+  //   'Normal',
+  //   'Agree',
+  //   'Strongly Agree',
+  // ];
+  // expectations: string[]=[
+  //   'Strongly Disagree',
+  //   'Disagree',
+  //   'Normal',
+  //   'Agree',
+  //   'Strongly Agree',
+  // ];
+  // subject : string[]=[
+  //   'Strongly Disagree',
+  //   'Disagree',
+  //   'Normal',
+  //   'Agree',
+  //   'Strongly Agree',
+  // ];
   constructor(
     private instructorService: InstructorService,
     private _classService: ClassService,
     private courseService: CourseService,
     private adminService: AdminService,
+    public utils: UtilsService,
+    public surveyService: SurveyService,
   ) {
+    this.coursePaginationModel = {};
     // constructor
   }
 
   ngOnInit() {
-    this.getProgramList()
-    this.getAllUserTypes()
-    let payload = {
-      type: 'Instructor',
-    };
-
-    this.instructorService.getInstructor(payload).subscribe((res) => {
-      this.instructorList = res;
-      console.log('instructor', this.instructorList);
-    });
-
-    this._classService.getAllCoursesTitle('active').subscribe((course) => {
-      this.courseList = course;
-      console.log('course', this.courseList);
-    });
+    this.getAllSurveys();
   }
-  public setRow(_index: number) {
-    this.selectedIndex = _index;
+  getAllSurveys() {
+    this.surveyService.getSurvey({ ...this.coursePaginationModel})
+      .subscribe(res => {
+        this.dataSource = res.data.docs;
+        this.totalItems = res.data.totalDocs;
+        this.coursePaginationModel.docs = res.docs;
+        this.coursePaginationModel.page = res.page;
+        this.coursePaginationModel.limit = res.limit;
+      })
   }
-
-
-  selectcourseList(){
-    this.selectcourse = true;
+  pageSizeChange($event: any) {
+    this.coursePaginationModel.page = $event?.pageIndex + 1;
+    this.coursePaginationModel.limit = $event?.pageSize;
+    this.getAllSurveys();
+  }
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.length;
+    return numSelected === numRows;
   }
 
-  selectprogramList(){
-    this.selectcourse = false;
-  }
-
-  getProgramList() {
-    this.courseService.getCourseProgram({status:'active'}).subscribe(
-      (response: any) => {
-        // console.log("page",response)
-        this.programData = response.docs;
-      },
-      (error) => {
-      }
-    );
-  }
-  getAllUserTypes(filters?: any) {
-    this.adminService.getUserTypeList({ 'allRows':true }).subscribe(
-      (response: any) => {
-        this.data = response.filter((item:any) =>item.typeName !== 'admin');
-      },
-      (error) => {
-      }
-    );
+   /** Selects all rows if they are not all selected; otherwise clear selection. */
+   masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.forEach((row: any) =>
+          this.selection.select(row)
+        );
   }
 }
+  //   this.instructorService.getInstructor(payload).subscribe((res) => {
+  //     this.instructorList = res;
+  //     console.log('instructor', this.instructorList);
+  //   });
+
+  //   this._classService.getAllCoursesTitle('active').subscribe((course) => {
+  //     this.courseList = course;
+  //     console.log('course', this.courseList);
+  //   });
+  // }
+  // public setRow(_index: number) {
+  //   this.selectedIndex = _index;
+  // }
+
+
+  // selectcourseList(){
+  //   this.selectcourse = true;
+  // }
+
+  // selectprogramList(){
+  //   this.selectcourse = false;
+  // }
+
+  // getProgramList() {
+  //   this.courseService.getCourseProgram({status:'active'}).subscribe(
+  //     (response: any) => {
+  //       // console.log("page",response)
+  //       this.programData = response.docs;
+  //     },
+  //     (error) => {
+  //     }
+  //   );
+  // }
+//   getAllUserTypes(filters?: any) {
+//     this.adminService.getUserTypeList({ 'allRows':true }).subscribe(
+//       (response: any) => {
+//         this.data = response.filter((item:any) =>item.typeName !== 'admin');
+//       },
+//       (error) => {
+//       }
+//     );
+//   }
+// }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SurveyListComponent } from './survey-list/survey-list.component';
 import { LikertChartComponent } from './likert-chart/likert-chart.component';
 import { CreateSurveyComponent } from './create-survey/create-survey.component';
+import { CreateLikertChartComponent } from './create-likert-chart/create-likert-chart.component';
 
 const routes: Routes = [
   {
@@ -10,13 +11,22 @@ const routes: Routes = [
     component: SurveyListComponent
   },
   {
-    path:"likert-chart",
+    path:"survey-questions",
     component: LikertChartComponent
   },
 
   {
     path:"view-survey",
     component: CreateSurveyComponent
+  },
+
+  {
+    path:"create-survey-questions",
+    component: CreateLikertChartComponent
+  },
+  {
+    path:"edit-survey-questions/:id",
+    component: CreateLikertChartComponent
   },
 ];
 
