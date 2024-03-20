@@ -6,13 +6,14 @@ import { ComponentsModule } from '@shared/components/components.module';
 import { SharedModule } from '@shared';
 import { SurveyRoutingModule } from './survey-routing.module';
 import { CreateSurveyComponent } from './create-survey/create-survey.component';
+import { CreateLikertChartComponent } from './create-likert-chart/create-likert-chart.component';
 
 
 
 
 @NgModule({
   declarations: [
-    SurveyListComponent,LikertChartComponent, CreateSurveyComponent
+    SurveyListComponent,LikertChartComponent, CreateSurveyComponent, CreateLikertChartComponent
   ],
   imports: [
     CommonModule,SurveyRoutingModule,

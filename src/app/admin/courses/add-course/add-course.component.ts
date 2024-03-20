@@ -5,7 +5,7 @@ import {
   FormControl,
   FormGroup
 } from '@angular/forms';
-import { Assessment, Certificate, CourseKit, CourseUploadData, FundingGrant, Instructor, MainCategory, SubCategory, Survey } from '@core/models/course.model';
+import { Assessment, Certificate, CourseKit, CourseUploadData, Feedback, FundingGrant, Instructor, MainCategory, SubCategory, Survey } from '@core/models/course.model';
 import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
 import { CourseService } from '@core/service/course.service';
@@ -17,6 +17,7 @@ import { InstructorService } from '@core/service/instructor.service';
 import * as moment from 'moment';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { QuestionService } from '@core/service/question.service';
+import { SurveyService } from 'app/admin/survey/survey.service';
 @Component({
   selector: 'app-add-course',
   templateUrl: './add-course.component.html',
@@ -45,11 +46,13 @@ export class AddCourseComponent implements OnInit {
   instuctorCategoryControl!: FormControl;
   courseKitCategoryControl!: FormControl;
   assessmentControl!: FormControl;
+  feedbackControl!: FormControl;
   certificatesCategoryControl!: FormControl;
   // instructors!: Instructor[];
   courseKits!: CourseKit[];
   courseKits1:any
   assessments!: Assessment[];
+  feedbacks!: Feedback[];
   // certificates!:Certificate[];
   next = true;
   isSubmitted=false;
@@ -111,7 +114,8 @@ export class AddCourseComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
     private instructorService: InstructorService,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    public surveyService: SurveyService,
     ) {
       let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-course');
@@ -165,6 +169,7 @@ export class AddCourseComponent implements OnInit {
       // course_instructor: new FormControl('', [Validators.required]),
       // assign_exam: new FormControl('', []),
       assessment: new FormControl('', [Validators.required]),
+      survey: new FormControl('', [Validators.required]),
       course_kit: new FormControl('', [Validators.required]),
       vendor: new FormControl('',[ Validators.maxLength(100)]),
       // certificates: new FormControl('',[Validators.required]),
@@ -189,6 +194,7 @@ export class AddCourseComponent implements OnInit {
     // this.instuctorCategoryControl = this.secondFormGroup.get('course_instructor') as FormControl;
     this.courseKitCategoryControl = this.secondFormGroup.get('course_kit') as FormControl;
     this.assessmentControl = this.secondFormGroup.get('assessment') as FormControl;
+    this.feedbackControl = this.secondFormGroup.get('survey') as FormControl;
     // this.certificatesCategoryControl = this.secondFormGroup.get('certificates') as FormControl;
     // // this.setMainCategoryControlState();
     // this.setSubCategoryControlState();
@@ -355,6 +361,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
               assignInstructors,
               assignCourseKit,
               assignAssessment,
+              assignFeedback,
               vendor
             ] = row as string[];
 
@@ -431,6 +438,18 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
                 icon: 'error',
               });
             }
+
+            const feedbackObj = this.feedbacks.find((i) => {
+              return assignFeedback === i.name
+            })
+
+            if (feedbackObj === undefined) {
+              Swal.fire({
+                title: 'Error',
+                text: 'Cannot find Feedback Questionnaire',
+                icon: 'error',
+              });
+            }
             const uploadData: CourseUploadData = {
               title,
               courseCode,
@@ -449,6 +468,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
               funding_grant: [fundingGrantObj!.id],
               // course_instructor: [instructorObj!.id],
               assessment: [assessmentObj!.id],
+              survey: [feedbackObj!.id],
               course_kit: [courseKitObj!.id],
               vendor: vendor,
             };
@@ -489,6 +509,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       // survey:wbsData?.survey,
       // course_instructor:wbsData?.course_instructor,
       assessment:wbsData?.assessment,
+      survey:wbsData?.survey,
       course_kit:wbsData?.course_kit,
       vendor:wbsData?.vendor,
       // certificates:wbsData?.certificates,
@@ -498,6 +519,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
     }
     this.secondFormGroup.value.course_kit = this.firstFormGroup.value.course_kit?.map((item:any) => item.id);
     this.secondFormGroup.value.assessment = this.firstFormGroup.value.assessment?.map((item:any) => item.id);
+    this.secondFormGroup.value.survey = this.firstFormGroup.value.survey?.map((item:any) => item.id);
     this.courseService.updateCourse(payload).subscribe((response:any) => {
       Swal.fire({
         title: 'Successful',
@@ -521,10 +543,11 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       // instructor: this.courseService.getInstructors(),
       courseKit: this.courseService.getCourseKit(),
       assessment: this.questionService.getQuestionJson(),
+      survey: this.surveyService.getSurvey(),
       // certificates: this.certificateService.getcertificateBuilders(),
 
     }).subscribe((response: {
-      assessment: any; mainCategory: any; subCategory: any; fundingGrant: any; courseKit: { docs: any; }; 
+      assessment: any;survey: any; mainCategory: any; subCategory: any; fundingGrant: any; courseKit: { docs: any; }; 
 }) => {
       this.mainCategories = response.mainCategory;
       this.allSubCategories = response.subCategory;
@@ -533,6 +556,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       // this.instructors = response.instructor;
       this.courseKits = response.courseKit?.docs;
       this.assessments = response.assessment.data.docs;
+      this.feedbacks = response.survey.data.docs;
       // this.certificates = response.certificates.data.docs;
     });
     
@@ -583,6 +607,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
         // survey:wbsData?.survey,
         // course_instructor:wbsData?.course_instructor,
         assessment:wbsData?.assessment,
+        survey:wbsData?.survey,
         course_kit:wbsData?.course_kit,
         // certificates:wbsData?.certificates,
         image_link:this.image_link,
@@ -614,6 +639,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       fundingGrant: this.courseService.getFundingGrant(),
       courseKit: this.courseService.getCourseKit(),
       assessment: this.questionService.getQuestionJson(),
+      survey: this.surveyService.getSurvey(),
       course: this.courseService.getCourseById(this.courseId),
       // instructor: this.courseService.getInstructors(),
       // certificates: this.certificateService.getcertificateBuilders()
@@ -622,6 +648,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       this.fundingGrants = response.fundingGrant;
       this.courseKits = response.courseKit?.docs;
       this.assessments = response.assessment?.data.docs;
+      this.feedbacks = response.survey?.data.docs;
       // this.survey = response.survey;
       this.allSubCategories = response.subCategory;
       this.course = response.course;
@@ -639,6 +666,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       let fundingGrantId = this.course?.funding_grant?.id;
       let courseKitId = this.course?.course_kit?.map((item: { id: any; }) => item?.id) || [];
       let assessmentId = this.course?.assessment?.id;
+      let feedbackId = this.course?.survey?.id;
       this.firstFormGroup.patchValue({
         currency_code: this.course.currency_code ? this.course.currency_code: null,
         training_hours: this.course?.training_hours?.toString(),
@@ -671,6 +699,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
         // course_instructor: this.course?.course_instructor?.id,
         course_kit: courseKitId,
         assessment: assessmentId,
+        survey: feedbackId,
         uploadedImage:this.course?.image_link,
         vendor: this.course?.vendor,
       });

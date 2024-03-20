@@ -399,7 +399,7 @@ MENU_LIST = [
             type:"none",
         },
         {
-            id:"likert-chart",
+            id:"survey-questions",
             title:"Likert Chart",
             type:""
         }

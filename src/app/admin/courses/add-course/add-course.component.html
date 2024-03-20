@@ -272,6 +272,34 @@
                       <label>Thumbnail</label><br>
                       <img *ngIf="uploadedImage"   class="thumbnail-img" src="{{image_link}}" >
                   </div>
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <label>Website Link</label>
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <input matInput formControlName="website_link" [readonly]="isInputReadonly()" placeholder="www">
+                        <mat-error  *ngIf="secondFormGroup.get('website_link')?.hasError('pattern') && secondFormGroup.get('website_link')?.touched">
+                        Enter Website
+                      </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <label>Assign Feedback Questionnaire <span class="mandatory">&nbsp;*</span></label>
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-select formControlName="survey" required>
+                          <mat-option *ngFor="let item of feedbacks" [value]="item.id" [disabled]="viewUrl == true">
+                            {{item.name}}
+                          </mat-option>
+
+                        </mat-select>
+                        <mat-error *ngIf="
+                        secondFormGroup.get('survey')?.hasError('required') ||
+                        secondFormGroup.get('survey')?.touched
+                        ">
+                        Select Feedback Questionnaire
+                      </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
                     <div class="row">
                       <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                         <label>Assign Assessment</label>
@@ -282,8 +310,8 @@
                             </mat-option>
 
                           </mat-select>
-                          <mat-error  *ngIf="secondFormGroup.get('website_link')?.hasError('pattern') && secondFormGroup.get('website_link')?.touched">
-                          Enter Website
+                          <mat-error  *ngIf="secondFormGroup.get('assessment')?.hasError('pattern') && secondFormGroup.get('assessment')?.touched">
+                         Select Assessment
                         </mat-error>
                         </mat-form-field>
                       </div>

@@ -1,56 +1,82 @@
-p {
-  font-family: Lato;
-}
-
-ngb-rating {
-  color: rgb(253, 204, 13);
-  font-size: 80px;
-}
-
-.star {
-  position: relative;
-  display: inline-block;
-  font-size: 3rem;
-  color: #d3d3d3;
-}
-.full {
-  color: #FDCC0D;
-}
-.half {
+svg {
   position: absolute;
-  display: inline-block;
-  overflow: hidden;
-  color: #FDCC0D;
+  fill: #000;
+  background-color: #d3cdcd;
+  margin-top: -15px;
+  margin-left: -15px;
+  border-radius: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
 }
-label {
-  font-size: 20px;
-  font-weight: 500;
+// modal-box styling
+::ng-deep .mat-mdc-menu-content {
+      margin: 0;
+      padding: 8px 20px;
+      border-radius: 10px;
+      list-style-type: none;
+     
 }
-
-::ng-deep .example-full-width .mdc-text-field--outlined {
-  --mdc-outlined-text-field-container-shape: 12px;
-  font-style: italic;
+// modal-box curving
+::ng-deep .mat-mdc-menu-panel{
+  --mat-menu-container-shape: 12px;
 }
-
-.mandatory {
-  color: red;
-}
-
-.number{
-  cursor: pointer;
-}
-
-.highlight{
-  background-color: #706d6d;
-  color: #fff;
+.menu-text{
+  padding-left: 20px;
 }
 
-.mat-mdc-radio-button.mat-accent {
-  --mdc-radio-selected-focus-icon-color: #3BB143;
-  --mdc-radio-selected-hover-icon-color: #3BB143;
-  --mdc-radio-selected-icon-color: #3BB143;
-  --mdc-radio-selected-pressed-icon-color: #3BB143;
-  --mat-radio-ripple-color: #000;
-  --mat-radio-checked-ripple-color: #3BB143;
+// p {
+//   font-family: Lato;
+// }
 
-}
+// ngb-rating {
+//   color: rgb(253, 204, 13);
+//   font-size: 80px;
+// }
+
+// .star {
+//   position: relative;
+//   display: inline-block;
+//   font-size: 3rem;
+//   color: #d3d3d3;
+// }
+// .full {
+//   color: #FDCC0D;
+// }
+// .half {
+//   position: absolute;
+//   display: inline-block;
+//   overflow: hidden;
+//   color: #FDCC0D;
+// }
+// label {
+//   font-size: 20px;
+//   font-weight: 500;
+// }
+
+// ::ng-deep .example-full-width .mdc-text-field--outlined {
+//   --mdc-outlined-text-field-container-shape: 12px;
+//   font-style: italic;
+// }
+
+// .mandatory {
+//   color: red;
+// }
+
+// .number{
+//   cursor: pointer;
+// }
+
+// .highlight{
+//   background-color: #706d6d;
+//   color: #fff;
+// }
+
+// .mat-mdc-radio-button.mat-accent {
+//   --mdc-radio-selected-focus-icon-color: #3BB143;
+//   --mdc-radio-selected-hover-icon-color: #3BB143;
+//   --mdc-radio-selected-icon-color: #3BB143;
+//   --mdc-radio-selected-pressed-icon-color: #3BB143;
+//   --mat-radio-ripple-color: #000;
+//   --mat-radio-checked-ripple-color: #3BB143;
+
+// }
