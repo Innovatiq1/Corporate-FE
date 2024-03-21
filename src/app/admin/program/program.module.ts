@@ -8,6 +8,7 @@ import { CreateProgramComponent } from './create-program/create-program.componen
 import { ScheduleClassComponent } from './schedule-class/schedule-class.component';
 import { ProgramRoutingModule } from './program-routing.module';
 import { ComponentsModule } from "../../shared/components/components.module";
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import {
   OwlDateTimeModule,
   OwlNativeDateTimeModule,
@@ -19,6 +20,7 @@ import { EditProgramKitComponent } from './program-kit/edit-program-kit/edit-pro
 import { CreateClassComponent } from './create-class/create-class.component';
 import { CreateTemplateComponent } from './program-kit/create-template/create-template.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ViewProgramComponent } from './view-program/view-program.component';
 
 
 
@@ -32,7 +34,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         CreateProgramKitComponent,
         EditProgramKitComponent,
         CreateClassComponent,
-        CreateTemplateComponent
+        CreateTemplateComponent,
+        ViewProgramComponent
          ],
     imports: [
         CommonModule,
@@ -40,7 +43,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         ModalModule.forRoot(),
         ProgramRoutingModule,
         ComponentsModule,OwlDateTimeModule,OwlNativeDateTimeModule,
-        CKEditorModule,AngularEditorModule
+        CKEditorModule,AngularEditorModule,NgScrollbarModule
 
 
     ]
