@@ -10,6 +10,7 @@ import { CreateClassComponent } from './create-class/create-class.component';
 import { CreateProgramKitComponent } from './program-kit/create-program-kit/create-program-kit.component';
 import { EditProgramKitComponent } from './program-kit/edit-program-kit/edit-program-kit.component';
 import { CreateTemplateComponent } from './program-kit/create-template/create-template.component';
+import { ViewProgramComponent } from './view-program/view-program.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,11 @@ const routes: Routes = [
     path:'program-kit-template', 
     component:CreateTemplateComponent
   },
+  {
+    path:'view-program/:id', 
+    component:ViewProgramComponent
+  }
+  
 ];
 
 @NgModule({
