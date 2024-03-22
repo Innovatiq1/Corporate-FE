@@ -68,6 +68,13 @@ export class FeedbackComponent {
   studentApprovedPrograms: any;
   feedbackForm:FormGroup
   userDetails: any;
+  courseId!: string;
+  studentId!: string;
+  classId!: string;
+  public questionList: any = [];
+  selectedOptions: any[] = [];
+  courseName: any;
+  options: any;
   constructor(
     private _classService: ClassService,
     private courseService: CourseService,
@@ -117,6 +124,7 @@ export class FeedbackComponent {
     this.getAllUserTypes()
     this.getApprovedCourse()
     this.getApprovedPrograms()
+    this.getCourseDetails();
     this._classService.getAllCoursesTitle('active').subscribe((course) => {
       this.courseList = course;
     });
@@ -137,32 +145,67 @@ export class FeedbackComponent {
      this.studentApprovedPrograms = response.data.docs;
     })
   }
-  submit(){
-    this.feedbackForm.patchValue({
-      question5: this.selectedIndex,
-      question6:this.question6
+  submit() {
+  this.selectedOptions.forEach(option => {
+        option.studentFirstName = this.userDetails.user.name;
+        option.studentLastName = this.userDetails.user.last_name;
     });
-     this.feedbackForm.value.studentFirstName = this.userDetails.user.name;
-    this.feedbackForm.value.studentLastName = this.userDetails.user.last_name;
-
-    this.surveyService.addSurveyBuilder(this.feedbackForm.value).subscribe(
-      (response) => {
-        Swal.fire(
-          'Successful',
-          'Feedback submitted succesfully',
-          'success'
-        ).then((r) => {
-          this.feedbackForm.reset();
-          });
-      },
-      (err) => {
-        console.log(err);
-      }
+    let selectedOptions = {
+      selectedOptions: this.selectedOptions, 
+      studentFirstName: this.userDetails.user.name,
+      studentLastName: this.userDetails.user.last_name,
+      courseName: this.courseName
+    };
+    this.surveyService.addSurveyBuilder(selectedOptions).subscribe(
+        (response) => {
+            Swal.fire(
+                'Successful',
+                'Feedback submitted successfully',
+                'success'
+            ).then((r) => {
+                this.feedbackForm.reset();
+            });
+        },
+        (err) => {
+            console.log(err);
+        }
     );
+}
 
+  submitAnswer(questionId: any, selectedOption: any) {
+    const index = this.selectedOptions.findIndex(option => option.questionId === questionId);
+    if (index !== -1) {
+      this.selectedOptions[index].selectedOption = selectedOption;
+    } else {
+      this.selectedOptions.push({ questionText: questionId, selectedOption: selectedOption});
+    }
   }
   
-  
+  // submit(){
+  //   // this.feedbackForm.patchValue({
+  //   //   question5: this.selectedIndex,
+  //   //   question6:this.question6
+  //   // });
+  //   this.selectedOptions.studentFirstName = this.userDetails.user.name;
+  //   this.selectedOptions.studentLastName = this.userDetails.user.last_name;
+
+  //   this.surveyService.addSurveyBuilder(this.selectedOptions).subscribe(
+  //     (response) => {
+  //       Swal.fire(
+  //         'Successful',
+  //         'Feedback submitted succesfully',
+  //         'success'
+  //       ).then((r) => {
+  //         this.feedbackForm.reset();
+  //         });
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+
+  // }
+
   public setRow(_index: number) {
     this.selectedIndex = _index;
   }
@@ -195,5 +238,18 @@ export class FeedbackComponent {
       }
     );
   }
+
+  getCourseDetails(){
+    let urlPath = this.router.url.split('/')
+    this.courseId = urlPath[urlPath.length - 1];
+    this.studentId = urlPath[urlPath.length - 2];
+    this.classId = urlPath[urlPath.length - 3];
+
+    this.courseService.getCourseById(this.courseId).subscribe((response) => {
+    this.questionList = response?.survey?.questions;
+    console.log("ques", this.questionList)
+    this.courseName = response?.title
+  })
+}
 
 }

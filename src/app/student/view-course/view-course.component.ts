@@ -458,6 +458,11 @@ export class ViewCourseComponent implements OnDestroy {
         });
     }
   }
+  feedback(){
+    let classId = localStorage.getItem('classId');
+    let studentId = localStorage.getItem('id');
+    this.router.navigate(['/student/feedback/courses', classId, studentId, this.courseId]);    
+  }
   
   ngOnDestroy() {
     this.unsubscribe$.next();

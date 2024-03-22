@@ -67,6 +67,7 @@ export class CreateSurveyComponent {
   programName: any;
   studentFirstName: any;
   studentLastName!:string;
+  questionList: any;
 
   constructor(
     private fb: FormBuilder,
@@ -82,7 +83,7 @@ export class CreateSurveyComponent {
     });
     this.feedbackForm = this.fb.group({
       courseName: ['',[] ],
-      question1: ['', []],
+      // question1: ['', []],
       question2:['',[] ],
       question3: ['',[] ],
       question4: ['',[] ],
@@ -104,17 +105,19 @@ export class CreateSurveyComponent {
       this.courseName = response.data.courseName;
       this.studentFirstName = response.data.studentFirstName;
       this.studentLastName = response.data.studentLastName
-      this.selectedIndex = response.data.question5;
-      this.question6 = response.data.question6;
+      // this.selectedIndex = response.data.question5;
+      // this.question6 = response.data.question6;
+      this.questionList = response?.data?.selectedOptions;
 
       this.feedbackForm.patchValue({
         courseName: response.data.courseName,
-        question1:response.data?.question1,
-        question2:response.data?.question2,
-        question3:response.data?.question3,
-        question4:response.data?.question4,
-        question6:response.data?.question6,
-        question7:response.data?.question7,
+        // question1: response.data.selectedOption
+        // question1:response.data?.question1,
+        // question2:response.data?.question2,
+        // question3:response.data?.question3,
+        // question4:response.data?.question4,
+        // question6:response.data?.question6,
+        // question7:response.data?.question7,
 
 
       });
