@@ -142,7 +142,7 @@
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="Compulsory Count">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>Compulsory Count
+                          <mat-header-cell *matHeaderCellDef mat-sort-header class="compulsory-count-header">Compulsory Count
                           </mat-header-cell>
                           <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-program/',row.id]"> <span
                               class="mobile-label">Compulsory Count:</span>{{row.coreCourseCount}}
