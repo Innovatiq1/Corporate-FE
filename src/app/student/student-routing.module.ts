@@ -71,7 +71,7 @@ const routes: Routes = [
   // },
 
   {
-    path: 'feedback/courses',
+    path: 'feedback/courses/:id/:id/:id',
     component: FeedbackComponent,
   },
   {

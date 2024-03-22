@@ -112,29 +112,27 @@
                     <br>
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                  <div class="card">
+                  <div class="card" *ngFor="let row of questionList">
                     <div class="header">
-                      <h2>1.The Course objectives were clear</h2>
+                      <h2>{{row.questionText}}</h2>
                     </div>
                     <div class="body">
-                      <mat-radio-group formControlName ="question1"
+                      <mat-radio-group
                         aria-labelledby="example-radio-group-label"
-                        class="example-radio-group"
-
+                        class="example-radio-group" 
                       >
+                    
                         <mat-radio-button
-                          class="example-radio-button ms-0 "
-                          *ngFor="let season of course"
-                          [value]="season"
-                        >
-                         <span class="session">{{ season }}</span>
+                          class="example-radio-button ms-0"
+                         >
+                          {{row?.selectedOption}}
                         </mat-radio-button>
                       </mat-radio-group>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                   <div class="card">
                     <div class="header">
@@ -256,7 +254,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="row mt-4">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
                   <button

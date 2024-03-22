@@ -1,23 +1,19 @@
 <section class="content">
-    <div class="content-block">
-      <div class="block-header" *ngFor="let breadscrum of breadscrums">
-        <!-- breadcrumb -->
-        <app-breadcrumb
-          [title]="breadscrum.title"
-          [items]="breadscrum.items"
-          [active_item]="breadscrum.active"
-        >
-        </app-breadcrumb>
-      </div>
-      <div class="row clearfix">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div class="card">
-            <!-- <div class="header">
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      </app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <!-- <div class="header">
               <h2>{{coursesUrl?'Courses Feedback':'Programs Feedback'}}</h2>
             </div> -->
-            <div class="body">
-              <form [formGroup]="feedbackForm">
-              <div class="row">
+          <div class="body">
+            <form [formGroup]="feedbackForm">
+              <!-- <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2" *ngIf="coursesUrl">
                   <label>Course Name</label>
                   <mat-form-field
@@ -37,8 +33,8 @@
                       <mat-option [value]="program?.programTitle" *ngFor="let program of studentApprovedPrograms">{{ program?.programTitle }}</mat-option>
                     </mat-select>
                   </mat-form-field>
-                </div>
-                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                </div> -->
+              <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                   <label>User Type<span class="mandatory">&nbsp;*</span></label>
   
                   <mat-form-field
@@ -50,32 +46,27 @@
                     </mat-select>
                   </mat-form-field>
                 </div> -->
-              </div>
+              <!-- </div> -->
               <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                  <div class="card">
+                  <div class="card" *ngFor="let row of questionList">
                     <div class="header">
-                      <h2>1.The {{coursesUrl?'Course':'Program'}} objectives were clear</h2>
+                      <h2>{{row.questionText}}</h2>
                     </div>
                     <div class="body">
-                      <mat-radio-group formControlName ="question1"
-                        aria-labelledby="example-radio-group-label"
-                        class="example-radio-group"
-  
-                      >
-                        <mat-radio-button
-                          class="example-radio-button ms-0"
-                          *ngFor="let season of course"
-                          [value]="season"
-                        >
-                          {{ season }}
+                      <mat-radio-group formControlName="question1" aria-labelledby="example-radio-group-label"
+                        class="example-radio-group" [(ngModel)]="row.selectedOption"
+                        (change)="submitAnswer(row.questionText, row.selectedOption)">
+                        <mat-radio-button class="example-radio-button ms-0" *ngFor="let option of row.options"
+                          [value]="option.text">
+                          {{ option.text}}
                         </mat-radio-button>
                       </mat-radio-group>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                   <div class="card">
                     <div class="header">
@@ -198,15 +189,12 @@
                   </div>
                 </div>
               </div>
-  
+   -->
               <div class="row mt-4">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                  <button
-                  class="btn-space"
-                  mat-raised-button
-                  color="primary" (click)="submit()">
-                  Submit
-                </button>
+                  <button class="btn-space" mat-raised-button color="primary" (click)="submit()">
+                    Submit
+                  </button>
                   <!-- <button
                     type="button"
                     mat-raised-button
@@ -218,10 +206,9 @@
                 </div>
               </div>
             </form>
-            </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>
