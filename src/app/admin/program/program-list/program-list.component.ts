@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
@@ -9,6 +9,10 @@ import Swal from 'sweetalert2';
 import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { sort } from 'd3';
 
 @Component({
   selector: 'app-program-list',
@@ -23,6 +27,17 @@ export class ProgramListComponent {
       active: 'All Program',
     },
   ];
+  displayedColumns = [
+    'name',
+    'code',
+    'Duration',
+    'Start Date',
+    'End Date',
+    'Payment',
+    'Compulsory Count',
+    'Elective Count',
+    'actions',
+  ];
   isLoading = false;
   isNoMoreData = false;
   programData: any = [];
@@ -31,6 +46,12 @@ export class ProgramListComponent {
   pageSizeArr = this.utils.pageSizeArr;
   coursePaginationModel!: Partial<CoursePaginationModel>;
   totalItems: any;
+  // filterName='';
+  searchTerm: string = '';
+  selection = new SelectionModel<ProgramCourse>(true, []);
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
 
   constructor(
   
@@ -38,13 +59,17 @@ export class ProgramListComponent {
     private activatedRoute: ActivatedRoute,
     private ref: ChangeDetectorRef,
     private courseService: CourseService,
-    private classService: ClassService
+    private classService: ClassService,
+    private route :Router,
   ) { this.coursePaginationModel = {};
+
+  // @ViewChild('filter', { static: true }) filter!: ElementRef;
  }
 
   getProgramList(filters?: any) {
     this.isLoading = true;
     this.isNoMoreData = false;
+    // let filterText = this.filterName
     this.courseService.getCourseProgram({...this.coursePaginationModel,status:'active'}).subscribe(
       (response: any) => {
         console.log("page",response)
@@ -92,6 +117,20 @@ export class ProgramListComponent {
   ngOnInit(): void {
     this.getProgramList();
   }
+
+performSearch() {
+  if(this.searchTerm){
+  this.programData = this.programData?.filter((item: any) =>{
+    console.log("data",item)
+    const searchList = (item.title).toLowerCase();
+    return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+  }
+  );
+  } else {
+    this.getProgramList();
+
+  }
+}
   // export table data in excel file
   exportExcel() {
     // key name with space add in brackets
@@ -134,5 +173,58 @@ export class ProgramListComponent {
   
     // Save or open the PDF
     doc.save('AllPrograms-list.pdf');
+  }
+  refresh() {
+    //this.loadData();
+    window.location.reload();
+
+    //this.location.re
+  }
+  addNew() {
+    this.route.navigateByUrl("/admin/program/create-program")
+
+
+  }
+  private refreshTable() {
+    this.paginator._changePageSize(this.paginator.pageSize);
+  }
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.programData.renderedData.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.programData.renderedData.forEach((row: ProgramCourse) =>
+          this.selection.select(row)
+        );
+  }
+  removeSelectedRows() {
+    const totalSelect = this.selection.selected.length;
+    this.selection.selected.forEach((item) => {
+      const index: number = this.programData.renderedData.findIndex(
+        (d: ProgramCourse) => d === item
+      );
+      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+      // this.exampleDatabase?.dataChange.value.splice(index, 1);
+      this.refreshTable();
+      this.selection = new SelectionModel<ProgramCourse>(true, []);
+    });
+    Swal.fire({
+      title: 'Success',
+      text: 'Record Deleted Successfully...!!!',
+      icon: 'success',
+      // confirmButtonColor: '#526D82',
+    });
+    // this.showNotification(
+    //   'snackbar-danger',
+    //   totalSelect + ' Record Delete Successfully...!!!',
+    //   'bottom',
+    //   'center'
+    // );
   }
 }

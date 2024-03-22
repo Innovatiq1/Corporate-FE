@@ -1,3 +1,46 @@
+svg{
+    position: absolute;
+    fill: #000;
+    background-color: #d3cdcd;
+    margin-top: -15px;
+    margin-left: -15px;
+    border-radius: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+::ng-deep .mat-mdc-menu-content {
+        margin: 0;
+        padding: 8px 20px;
+        border-radius: 10px;
+        list-style-type: none;
+       
+}
+::ng-deep .mat-mdc-menu-panel{
+    --mat-menu-container-shape: 12px;
+}
+.menu-text{
+    padding-left: 20px;
+}
+.call{
+   
+    margin-left: 70px;
+}
+.mail{
+    margin-left: 40px;
+}
+
+.bg {
+    fill: #000;
+    background-color: #d3cdcd;
+  }
+  .color{
+    color:#6777ef
+  }
+  
+  .img-w{
+  width: 16%;
+  }
+
 @media (min-width: 768px) {
     .col-md-3 {
         flex: 0 0 auto;
@@ -43,7 +86,7 @@
       pointer-events: none;
   }
 
-  svg {
+  .grid svg {
     position: absolute;
     top: 0;
     right: -35px;
@@ -77,3 +120,10 @@
 .menu-text{
     padding-left: 20px;
 }
+::ng-deep .mat-sort-header-content {
+    text-align: center !important; /* Ensure text alignment */
+    display: flex !important;
+    align-items: center !important;
+    white-space: nowrap;
+}
+
