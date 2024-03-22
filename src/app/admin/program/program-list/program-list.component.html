@@ -45,7 +45,7 @@
               <div class="col-md-3" *ngFor="let program of programData">
                 <div class="program-card" >
                   <div class="cards" style="display: flex;">
-                    <div style="cursor: pointer;" [routerLink]="['/admin/program/edit-program/',program.id]">
+                    <div style="cursor: pointer;" [routerLink]="['/admin/program/view-program/',program.id]">
                       <img class="img mb-3" src="{{program?.image_link}}"  height="200" width="400">
                     </div>
                     
