@@ -251,6 +251,16 @@ MENU_LIST = [
     selected: true,
     children: [
         {
+            id: "program-approval",
+            title: "Program Approval",
+            type:"none"
+        },
+        {
+            id: "programs-registered",
+            title:"Registered Programs",
+            type: "none"
+        },
+        {
             id: "course-approval",
             title: "Course Approval",
             type:"none"
@@ -260,16 +270,7 @@ MENU_LIST = [
             title:"Registered Courses",
             type: "none"
         },
-        {
-            id: "program-approval",
-            title: "Program Approval",
-            type:"none"
-        },
-        {
-            id: "programs-registered",
-            title:"Registered Programs",
-            type: "none"
-        }
+      
     ]
 },
 
@@ -302,15 +303,16 @@ MENU_LIST = [
     children:
     [
         {
-            id: "course-lectures",
-            title: "Course Lectures",
-            type: "none"
-        },
-        {
             id: "program-lectures",
             title: "Program Lectures",
             type: "none"
         },
+        {
+            id: "course-lectures",
+            title: "Course Lectures",
+            type: "none"
+        },
+       
         // {
         //     id: "exam-schedule",
         //     title: "Exam Schedule",
@@ -348,6 +350,11 @@ MENU_LIST = [
             id: "course-exam",
             title: " Course Exam Schedule",
             type: "none",
+        },
+        {
+            id: "e-attendance",
+            title: "E-Attendance",
+            type:"none"
         }
        ]
 },
@@ -371,13 +378,13 @@ MENU_LIST = [
     children:
     [
         {
-            id: "program-payments",
-            title: "Program Payments",
+            id: "course-payments",
+            title: "Course Payments",
             type: "none"
         },
         {
-            id: "course-payments",
-            title: "Course Payments",
+            id: "program-payments",
+            title: "Program Payments",
             type: "none"
         },
 
@@ -419,11 +426,7 @@ MENU_LIST = [
             title: "List",
             type:"none"
         },
-        {
-            id: "e-attendance",
-            title: "E-Attendance",
-            type:"none"
-        }
+       
     ]
 },
 
@@ -606,15 +609,16 @@ MENU_LIST = [
     selected: true,
     children: [
         {
+            id: "programs",
+            title: "Programs",
+            type: "none"
+        },
+        {
             id: "courses",
             title: "Courses",
             type: "none"
         },
-        {
-            id: "programs",
-            title: "Programs",
-            type: "none"
-        }
+       
     ]
 },
 
@@ -654,17 +658,18 @@ MENU_LIST = [
     selected: true,
     children: [
         {
+            id: "programs",
+            title: "Programs",
+            selected: false,
+            iconsrc: "/assets/announcement-icon.svg",
+        },
+        {
             id: "courses",
             title: "Courses",
             selected: false,
             iconsrc: "/assets/announcement-icon.svg",
         },
-        {
-            id: "programs",
-            title: "Programs",
-            selected: false,
-            iconsrc: "/assets/announcement-icon.svg",
-        }
+       
 ]
 },
 {

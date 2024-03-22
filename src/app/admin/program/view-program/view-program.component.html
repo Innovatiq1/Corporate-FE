@@ -62,13 +62,14 @@
           <div class="body">
             <div class="" [ngClass]="
             program.id === programDataById ? ' sl-item sl-success ':'sl-item sl-danger'"  *ngFor="let program of programData; let i = index">
-              <div class="sl-content" [ngClass]="
+              <div class="sl-content" style="cursor: pointer;" [ngClass]="
               program.id === programDataById ? ' bg-c-green ' : 'border-class'
             " (click)="getProgramKits(program.id)">
+            <h6>{{ program.title | titlecase }}</h6>
                 <small class="text-muted">
                   <i class="fa fa-play-circle-o"></i>  {{ program.duration }} hours</small>
                   <!-- <span class="feedLblStyle1 lblCommentStyle">Program {{i+1}}</span> -->
-                  <h6>{{ program.title | titlecase }}</h6>
+                  
               </div>
             </div>
             <!-- <div class="sl-item sl-success">
@@ -82,10 +83,11 @@
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-            <div class="info-box7  order-info-box7">
+            <div class="info-box7  order-info-box7 bg-white">
               <div class="info-box7-block">
                 <!-- Program Period -->
                 <div class="row">
+                  <img class="image-link" src="{{response?.image_link}}">
                   <!-- <div class="row mt-3">
                     <div class="col-6">
                       <span class="period ">Program Period</span>
@@ -97,17 +99,25 @@
                   </div> -->
                   <!-- Details of Program -->
                   <div class="col-6">
-                    <h6>Compulsory Count</h6><p  class="badge bg-teal">{{response?.coreCourseCount}}</p>
-                    <div class="p-2 info-box7  order-info-box7" *ngFor="let core of response?.coreprogramCourse">
+                    <div class="row">
+                      <div class="col-7"><h6>Compulsory Count</h6></div>
+                      <div class="col-3"><p  class="badge bg-teal">{{response?.coreCourseCount}}</p></div>
+                    </div>
+                    
+                    <div class="p-2 info-box7  order-info-box7 bg-grey" *ngFor="let core of response?.coreprogramCourse">
                       <h6>Compulsory Course</h6><p>{{core?.coreProgramName?.title}}</p>
                       <h6>Description</h6><p  [innerHTML]="core?.coreProgramDescription | bulletPoints | truncate:150"></p>
                       <h6>Course Fees:</h6><p>${{core?.coreProgramName?.fee}}</p>
                     </div>
                   </div>
                   <div class="col-6 ">
-                    <h6>Elactive Count</h6><p class="badge bg-purple">{{response?.electiveCourseCount}}</p>
-                    <div class=" p-2 info-box7  order-info-box7"  *ngFor="let elactive of response?.electiveprogramCourse">
-                      <h6>Elactive Course</h6><p >{{elactive?.electiveProgramName?.title}}</p>
+                    <div class="row">
+                      <div class="col-6"><h6>Elective Count</h6></div>
+                      <div class="col-3"><p class="badge bg-purple">{{response?.electiveCourseCount}}</p></div>
+                    </div>
+                    
+                    <div class=" p-2 info-box7  order-info-box7 bg-grey"  *ngFor="let elactive of response?.electiveprogramCourse">
+                      <h6>Elective Course</h6><p >{{elactive?.electiveProgramName?.title}}</p>
                       <h6>Description</h6><p  [innerHTML]="elactive?.electiveProgramDescription | bulletPoints | truncate:150"></p>
                       <h6>Course Fees:</h6><p>${{elactive?.electiveProgramName?.fee}}</p>
                     </div>
