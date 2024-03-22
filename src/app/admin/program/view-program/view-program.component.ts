@@ -50,8 +50,15 @@ export class ViewProgramComponent {
   getProgramByID(id:string) {
     this.courseService.getProgramById(id).subscribe((response:any) =>{
       this.response = response.data;
+      console.log("this.response",this.response)
       this.programDataById = response.data.id;
+      console.log("this.programDataById",this.programData);
 
     });
+  }
+
+  getProgramKits(id:string):void {
+    console.log("getid",id);
+    this.getProgramByID(id);
   }
 }
