@@ -45,9 +45,9 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
   isLoading = true;
   breadscrums = [
     {
-      title: 'Survey List',
+      title: 'Feedbacks List',
       items: ['Survey'],
-      active: 'Survey List',
+      active: 'Feedbacks List',
     },
   ];
   constructor(
