@@ -272,7 +272,7 @@ export class ViewCourseComponent implements OnDestroy {
       // if (Array.isArray(this.courseKitDetails)) {
 
       this.courseKitDetails.map((item: any) => {
-        this.url = item.videoLink[0].video_url;
+        this.url = item?.videoLink[0]?.video_url;
         console.log('url', this.url);
       });
 
@@ -282,10 +282,10 @@ export class ViewCourseComponent implements OnDestroy {
         longDescription: kit.longDescription,
         documentLink: kit.documentLink,
         name: kit.name,
-        filename: kit.videoLink[0].doc_filename,
-        videoId: kit.videoLink[0].id,
-        inputUrl: kit.videoLink[0].video_url,
-        url: kit.videoLink[0].url,
+        filename: kit?.videoLink[0]?.doc_filename,
+        videoId: kit?.videoLink[0]?.id,
+        inputUrl: kit?.videoLink[0]?.video_url,
+        url: kit?.videoLink[0]?.url,
         playbackTime: 0
       }
 
@@ -304,9 +304,9 @@ export class ViewCourseComponent implements OnDestroy {
     this.courseService
       .getStudentClass(studentId, this.classId)
       .subscribe((response) => {
-        this.studentClassDetails = response.data.docs[0];
-        this.coursekitDetails = response.data.docs[0].coursekit;
-        this.longDescription = this.coursekitDetails[0].longDescription;
+        this.studentClassDetails = response?.data?.docs[0];
+        this.coursekitDetails = response?.data?.docs[0]?.coursekit;
+        this.longDescription = this?.coursekitDetails[0]?.longDescription;
         console.log('student', this.studentClassDetails);
         let totalPlaybackTime = 0;
         let documentCount = 0;
@@ -458,11 +458,11 @@ export class ViewCourseComponent implements OnDestroy {
         });
     }
   }
-  feedback(){
-    let classId = localStorage.getItem('classId');
-    let studentId = localStorage.getItem('id');
-    this.router.navigate(['/student/feedback/courses', classId, studentId, this.courseId]);    
-  }
+  // feedback(){
+  //   let classId = localStorage.getItem('classId');
+  //   let studentId = localStorage.getItem('id');
+  //   this.router.navigate(['/student/feedback/courses', classId, studentId, this.courseId]);    
+  // }
   
   ngOnDestroy() {
     this.unsubscribe$.next();

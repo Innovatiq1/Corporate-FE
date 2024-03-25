@@ -401,13 +401,13 @@ MENU_LIST = [
     children:
     [
         {
-            id: "survey-list",
-            title: "Survey List",
+            id: "feedbacks-list",
+            title: "Feedbacks List",
             type:"none",
         },
         {
-            id:"survey-questions",
-            title:"Likert Chart",
+            id:"survey-list",
+            title:"Survey List",
             type:""
         }
 

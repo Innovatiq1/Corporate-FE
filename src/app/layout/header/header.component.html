@@ -131,11 +131,11 @@
             <div class="noti-list">
               <div class="menu ">
                 <div class="user_dw_menu">
-                  <button mat-menu-item class="user-item-list">
-                    <app-feather-icons [icon]="'user'" [class]="'user-menu-icons'"></app-feather-icons>Account
+                  <button mat-menu-item class="user-item-list" [routerLink]="['/student/account-settings']">
+                    <app-feather-icons [icon]="'user'" [class]="'user-menu-icons'"></app-feather-icons>User Information
                   </button>
-                  <button mat-menu-item class="user-item-list">
-                    <app-feather-icons [icon]="'mail'" [class]="'user-menu-icons'"></app-feather-icons>Inbox
+                  <button mat-menu-item class="user-item-list" [routerLink]="['/student/security-settings']">
+                    <app-feather-icons [icon]="'lock'" [class]="'user-menu-icons'"></app-feather-icons>Change Password
                   </button>
                   <!-- <button mat-menu-item class="user-item-list" (click)="onClick()" >
                     <app-feather-icons [icon]="'settings'" [class]="'user-menu-icons'"></app-feather-icons>Settings
