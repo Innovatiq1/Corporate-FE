@@ -50,23 +50,28 @@ export class ViewProgramComponent {
   ngOnInit() {
     this.getProgramLists();
     if (this.courseId) {
-      this.getProgramByID(this.courseId);
+      this.activatedRoute.params.subscribe((params: any) => {
+        
+        this.courseId = params.id;
+        this.getProgramByID(this.courseId);
+      });
     }
   }
   getProgramByID(id: string) {
     this.courseService.getProgramById(id).subscribe((response: any) => {
+     
       if (response && response.data && response.data.id) {
         this.response = response.data;
-        console.log("this.response", this.response);
         this.programDataById = this.response.id;
-        console.log("this.programDataById", this.programDataById);
       } else {
-        console.error("Response or ID is null.");
+       
       }
     });
   }
+
+  
   getProgramKits(id: string): void {
-    console.log("getid", id);
+    
     this.getProgramByID(id);
   }
 
