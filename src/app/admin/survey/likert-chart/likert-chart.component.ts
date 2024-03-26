@@ -38,9 +38,9 @@ export class LikertChartComponent {
   // currentRate = 3.14;
   breadscrums = [
     {
-      title: 'Likert Chart',
+      title: 'Survey List',
       items: ['Survey'],
-      active: 'Likert Chart',
+      active: 'Survey List',
     },
   ];
   selected = false;

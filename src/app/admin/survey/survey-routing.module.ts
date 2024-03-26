@@ -7,11 +7,11 @@ import { CreateLikertChartComponent } from './create-likert-chart/create-likert-
 
 const routes: Routes = [
   {
-    path:"survey-list",
+    path:"feedbacks-list",
     component: SurveyListComponent
   },
   {
-    path:"survey-questions",
+    path:"survey-list",
     component: LikertChartComponent
   },
 
