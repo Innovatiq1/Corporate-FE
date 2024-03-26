@@ -55,12 +55,25 @@ export class SettingsComponent {
   securityUrl: any;
   bannersUrl: any;
   emailUrl: any;
+  usersUrl: any;
   customUrl: any;
+  integrateUrl: any;
+  automateUrl: any;
+  customsUrl: any;
+  lmsUrl: any;
+  configUrl: any;
   showAccountSettings: boolean = false;
   showProfileSettings: boolean = false;
   showEmailConfig: boolean = false;
   showBanners: boolean = false;
+  showIntegration: boolean = false;
+  showAutomation: boolean = false;
+  showUsers: boolean = false;
   showCustomSettings: boolean = false;
+  showCustoms:boolean = false;
+  showLms: boolean = false;
+  showConfig: boolean = false;
+
   currentContent: number = 1;
   constructor(
     private studentService: StudentsService,
@@ -82,8 +95,14 @@ export class SettingsComponent {
     this.accountUrl = urlPath.includes('account-settings');
     this.securityUrl = urlPath.includes('security-settings');
     this.bannersUrl = urlPath.includes('banners');
+    this.usersUrl = urlPath.includes('users');
+    this.integrateUrl = urlPath.includes('integration');
     this.emailUrl = urlPath.includes('email-configuration');
     this.customUrl = urlPath.includes('customization-settings');
+    this.automateUrl = urlPath.includes('automation');
+    this.customsUrl = urlPath.includes('customization');
+    this.lmsUrl = urlPath.includes('LMS-TAE');
+    this.configUrl = urlPath.includes('configuration');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -199,6 +218,66 @@ export class SettingsComponent {
       ];
       this.isAdmin = true;
     }
+    if (this.usersUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.integrateUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.automateUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.customsUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.lmsUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.configUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
     this.patchValues(),
       //this.patchValues1()
       (this.stdForm = this.fb.group({
@@ -253,11 +332,29 @@ export class SettingsComponent {
     if(this.bannersUrl){
       this.showBanners = true;
     }
+    if(this.usersUrl){
+      this.showUsers = true;
+    }
     if(this.emailUrl){
       this.showEmailConfig = true;
     }
     if(this.customUrl){
       this.showCustomSettings = true;
+    }
+    if(this.integrateUrl){
+      this.showIntegration = true;
+    }
+    if(this.automateUrl){
+      this.showAutomation = true;
+    }
+    if(this.customsUrl){
+      this.showCustoms = true;
+    }
+    if(this.lmsUrl){
+      this.showLms = true;
+    }
+    if(this.configUrl){
+      this.showConfig = true;
     }
   }
   navigateToAccountSettings() {
@@ -274,6 +371,24 @@ export class SettingsComponent {
   navigateToBannerSettings(){
     this.router.navigate(['/student/banners']);
     
+  }
+  navigateToUserSettings(){
+    this.router.navigate(['/student/users']);
+  }
+  navigateToIntegrateSettings(){
+    this.router.navigate(['/student/integration']);
+  }
+  navigateToAutomateSettings(){
+    this.router.navigate(['/student/automation']);
+  }
+  navigateToCustomsSettings(){
+    this.router.navigate(['/student/customization']);
+  }
+  navigateToLmsSettings(){
+    this.router.navigate(['/student/LMS-TAE']);
+  }
+  navigateToConfigSettings(){
+    this.router.navigate(['/student/configuration']);
   }
   navigateToCustomSettings(){
     this.router.navigate(['/student/customization-settings']);
