@@ -112,6 +112,16 @@ export class CreateCategoriesComponent implements OnInit{
     }
 
     const mainCategoryData = this.mainCategoryForm.value;
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to Main category!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
     this.courseService.createMainCategory(mainCategoryData).subscribe(
       (response) => {
         Swal.fire('Success', 'Main category created successfully!', 'success');
@@ -121,6 +131,11 @@ export class CreateCategoriesComponent implements OnInit{
         Swal.fire('Error', 'Failed to create main category!', 'error');
       }
     );
+      }
+    });
+
+
+
     this.isSubmitted=false
   }
   deleteItem(item: any) {
@@ -167,19 +182,32 @@ export class CreateCategoriesComponent implements OnInit{
       subcategory.main_category_id = this.mainCategoryId;
     });
 
-    this.courseService.createSubCategory(this.subCategoryData).subscribe(
-      (response) => {
-        Swal.fire('Success', 'Subcategories created successfully!', 'success');
-        this.mainCategoryForm.reset();
-        this.subCategoryForm.reset();
-        this.initSubCategoryForm();
-        this.addSubCategoryField();
-        this.router.navigate(['/admin/courses/categories'])
-      },
-      (error) => {
-        Swal.fire('Error', 'Failed to create subcategories!', 'error');
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to create sub category!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.courseService.createSubCategory(this.subCategoryData).subscribe(
+          (response) => {
+            Swal.fire('Success', 'Subcategories created successfully!', 'success');
+            this.mainCategoryForm.reset();
+            this.subCategoryForm.reset();
+            this.initSubCategoryForm();
+            this.addSubCategoryField();
+            this.router.navigate(['/admin/courses/categories'])
+          },
+          (error) => {
+            Swal.fire('Error', 'Failed to create subcategories!', 'error');
+          }
+        );
       }
-    );
+    });
+    
+   
     this.isSubmitted=false
   }
 

@@ -106,26 +106,39 @@ export class FormDialogComponent {
 
   }
   private updateInstructor(userData: Student): void {
-    this.studentsService.updateStudent(this.userId,userData).subscribe(
-      () => {
-        Swal.fire({
-          title: "Successful",
-          text: "Instructor update successfully",
-          icon: "success",
-        });
-        //this.fileDropEl.nativeElement.value = "";
-      this.createContactForm().reset();
-      //this.toggleList()
-      // this.router.navigateByUrl('/admin/teachers/all-teachers');
-      },
-      (error: { message: any; error: any; }) => {
-        Swal.fire(
-          "Failed to create course kit",
-          error.message || error.error,
-          "error"
-        );
-      }
-    );
+
+    Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to update!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.studentsService.updateStudent(this.userId,userData).subscribe(
+        () => {
+          Swal.fire({
+            title: "Successful",
+            text: "Instructor update successfully",
+            icon: "success",
+          });
+          //this.fileDropEl.nativeElement.value = "";
+        this.createContactForm().reset();
+        //this.toggleList()
+        // this.router.navigateByUrl('/admin/teachers/all-teachers');
+        },
+        (error: { message: any; error: any; }) => {
+          Swal.fire(
+            "Failed to create course kit",
+            error.message || error.error,
+            "error"
+          );
+        }
+      );
+    }
+  });
+    
   }
 
 

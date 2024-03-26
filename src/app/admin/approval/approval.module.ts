@@ -14,6 +14,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angul
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { StudentApprovalListComponent } from './student-approval-list/student-approval-list.component';
 import { ProgramApprovalListComponent } from './program-approval-list/program-approval-list.component';
+import { TrainingApprovalReqComponent } from './training-approval-req/training-approval-req.component';
+import { EditRequestComponent } from './training-approval-req/edit-request/edit-request.component';
 
 
 
@@ -24,6 +26,8 @@ import { ProgramApprovalListComponent } from './program-approval-list/program-ap
     ApproveListComponent,
     StudentApprovalListComponent,
     ProgramApprovalListComponent,
+    TrainingApprovalReqComponent,
+    EditRequestComponent,
 
 
 

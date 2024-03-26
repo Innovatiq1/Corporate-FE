@@ -366,26 +366,39 @@ console.log('sessions',sessions)
       if (this.sessions) {
         this.classForm.value.sessions = sessions;
         this.classForm.value.courseName = this.courseTitle
-        this._classService
-          .updateClass(this.classId, this.classForm.value)
-          .subscribe((response) => {
-            if (response) {
-              Swal.fire({
-                title: 'Success',
-                text: 'Class Updated Successfully.',
-                icon: 'success',
-              });
-              // this.showNotification(
-              //   'snackbar-success',
-              //   'Class Updated Successfully...!!!',
-              //   'top',
-              //   'right'
-              // );
-              this.router.navigateByUrl(`/admin/courses/class-list`);
-            }
 
-            // this.router.navigateByUrl(`Schedule Class/List`);
-          });
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'Do you want to update this class!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed){
+            this._classService
+            .updateClass(this.classId, this.classForm.value)
+            .subscribe((response) => {
+              if (response) {
+                Swal.fire({
+                  title: 'Success',
+                  text: 'Class Updated Successfully.',
+                  icon: 'success',
+                });
+                // this.showNotification(
+                //   'snackbar-success',
+                //   'Class Updated Successfully...!!!',
+                //   'top',
+                //   'right'
+                // );
+                this.router.navigateByUrl(`/admin/courses/class-list`);
+              }
+  
+              // this.router.navigateByUrl(`Schedule Class/List`);
+            });
+          }
+        });
+
       }
     } else {
       if (sessions) {
@@ -394,18 +407,30 @@ console.log('sessions',sessions)
         // this.inProgress = false;
         // this.isSubmitted = true;
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        this._classService
-          .saveClass(this.classForm.value)
-          .subscribe((response) => {
-            if (response) {
-              Swal.fire({
-                title: 'Success',
-                text: 'Class Created Successfully.',
-                icon: 'success',
-              });
-            }
-            this.router.navigateByUrl(`/admin/courses/class-list`);
-          });
+
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'Do you want to create schedule a class!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed){
+            this._classService
+            .saveClass(this.classForm.value)
+            .subscribe((response) => {
+              if (response) {
+                Swal.fire({
+                  title: 'Success',
+                  text: 'Class Created Successfully.',
+                  icon: 'success',
+                });
+              }
+              this.router.navigateByUrl(`/admin/courses/class-list`);
+            });
+          }
+        }); 
       }
     }
   }

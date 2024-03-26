@@ -152,7 +152,20 @@ export class AddStudentComponent {
         userData.role = 'Student';
         userData.isLogin = true;
 
-        this.createInstructor(userData);
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'Do You want to create a student profile!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed){
+            this.createInstructor(userData);
+            Swal.close();
+          }
+        });
+       
     }
 }
 
@@ -337,9 +350,21 @@ getDepartment(){
       userData.role = "Student";
 
       // Call the updateInstructor function with userData
-      this.updateInstructor(userData);
 
-      Swal.close();
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do You want to update this student profile!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed){
+          this.updateInstructor(userData);
+          Swal.close();
+        }
+      });
+     
     }
 }
 

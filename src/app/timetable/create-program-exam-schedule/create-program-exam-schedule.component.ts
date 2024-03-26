@@ -136,15 +136,28 @@ export class CreateProgramExamScheduleComponent {
      fomdata['endDate']=fomdata.endDate,
      fomdata['startTime']= start,
      fomdata['endTime']= end,
-     console.log()
-     this.examSchedule.addExamScheduleProgram(fomdata).subscribe((response:any) => {
-      Swal.fire({
-        title: 'Successful',
-        text: 'Exam schdeule add successfully',
-        icon: 'success',
-      });
-      this.router.navigate(['/timetable/program-exam'])
+    //  console.log()
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to create exam schedule!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.examSchedule.addExamScheduleProgram(fomdata).subscribe((response:any) => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Exam schdeule add successfully',
+            icon: 'success',
+          });
+          this.router.navigate(['/timetable/program-exam'])
+        });
+      }
     });
+     
 
     } 
 

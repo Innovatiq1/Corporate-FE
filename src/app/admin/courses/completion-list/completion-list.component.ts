@@ -149,24 +149,38 @@ certifiacteUrl:boolean = false;
         studentId: element.studentId.id,
         session: []
       };
-      this.classService.saveApprovedClasses(element.id, item).subscribe((response:any) => {
-        Swal.fire({
-          title: 'Success',
-          text: 'Course approved successfully.',
-          icon: 'success',
-          // confirmButtonColor: '#d33',
-        });
 
-        this.getCompletedClasses();
-      });
-      () => {
-            Swal.fire({
-              title: 'Error',
-              text: 'Failed to approve course. Please try again.',
-              icon: 'error',
-              // confirmButtonColor: '#d33',
-            });
-          };
+      
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to approve this course!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.classService.saveApprovedClasses(element.id, item).subscribe((response:any) => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Course approved successfully.',
+            icon: 'success',
+            // confirmButtonColor: '#d33',
+          });
+  
+          this.getCompletedClasses();
+        });
+        () => {
+              Swal.fire({
+                title: 'Error',
+                text: 'Failed to approve course. Please try again.',
+                icon: 'error',
+                // confirmButtonColor: '#d33',
+              });
+            };
+      }
+    });
+  
 
     }
 
@@ -319,28 +333,42 @@ certifiacteUrl:boolean = false;
   
     
     updateCertificte(objpdf:any){
-      this.classService.updateCertificateUser(objpdf).subscribe(
-        (response) => {
-          if(response.data.certifiacteUrl){
-            this.certifiacteUrl=true
 
-          }
-          
-          this.getCompletedClasses();
-          //let certifiacteUrl =response.data.certifiacteUrl
-
-          console.log()
-          Swal.fire({
-            title: "Updated",
-            text: "Certificate Created successfully",
-            icon: "success",
-          });
-
-        },
-        (err) => {
-
-        },
-      )
+      
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to create certificate!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.classService.updateCertificateUser(objpdf).subscribe(
+          (response) => {
+            if(response.data.certifiacteUrl){
+              this.certifiacteUrl=true
+  
+            }
+            
+            this.getCompletedClasses();
+            //let certifiacteUrl =response.data.certifiacteUrl
+  
+            console.log()
+            Swal.fire({
+              title: "Updated",
+              text: "Certificate Created successfully",
+              icon: "success",
+            });
+  
+          },
+          (err) => {
+  
+          },
+        )
+      }
+    });
+      
 
     }
    

@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SupportService } from './support.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 // export interface PeriodicElement {
 //   checked: boolean;
 //   name: string;
@@ -70,9 +71,23 @@ export class SupportComponent implements OnInit {
   }
 
   delete(id:string){
+
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this ticket?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
     this.ticketService.deleteTicket(id).subscribe(res =>{
       this.listOfTicket();
     })
+  }
+  });
   }
 
 

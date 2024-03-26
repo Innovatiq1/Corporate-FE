@@ -121,6 +121,9 @@ export class EditCourseKitComponent {
   ngOnInit(): void {
     //this.setup()
     this.getData();
+
+    console.log('sday', this.courseKitForm.value);
+
   }
 
   // submitCourseKit(): void {
@@ -134,26 +137,41 @@ export class EditCourseKitComponent {
       id: this.courseId,
       ...this.courseKitForm.value,
     };
-    this.courseService.editCourseKit(this.courseId, updatedCourseKit).subscribe(
-      () => {
-        Swal.fire({
-          title: 'Updated',
-          text: 'Course Kit Updated successfully',
-          icon: 'success',
-        });
-        // this.fileDropEl.nativeElement.value = "";
-        this.courseKitForm.reset();
-        // this.toggleList()
-        this.router.navigateByUrl('admin/courses/course-kit');
-      },
-      (error) => {
-        Swal.fire(
-          'Failed to update course kit',
-          error.message || error.error,
-          'error'
+
+    Swal.fire({
+      title: 'Are you sure?',
+          text: 'You want to update this course kit!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.courseService.editCourseKit(this.courseId, updatedCourseKit).subscribe(
+          () => {
+            Swal.fire({
+              title: 'Updated',
+              text: 'Course Kit Updated successfully',
+              icon: 'success',
+            });
+            // this.fileDropEl.nativeElement.value = "";
+            this.courseKitForm.reset();
+            // this.toggleList()
+            this.router.navigateByUrl('admin/courses/course-kit');
+          },
+          (error) => {
+            Swal.fire(
+              'Failed to update course kit',
+              error.message || error.error,
+              'error'
+            );
+          }
         );
-      }
-    );
+  }
+  });
+
+
+
   }
   submitCourseKit(): void {
     // const courseKitData: CourseKit = this.courseKitForm.value;
@@ -228,8 +246,8 @@ export class EditCourseKitComponent {
       // );
     } 
 
-    // else {
-    //   this.isSubmitted=true;    }
+    else {
+      this.isSubmitted=true;    }
   }
   // toggleList() {
   //   this.router.navigateByUrl("Course/Course Kit")

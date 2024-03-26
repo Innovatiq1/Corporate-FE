@@ -180,22 +180,35 @@ addNew() {
     },
     direction: tempDirection,
   });
-  this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-    if (result === 1) {
-      // After dialog is closed we're doing frontend updates
-      // For add we're just pushing a new row inside DataService
-      this.exampleDatabase?.dataChange.value.unshift(
-        this.lecturesService.getDialogData()
-      );
-      this.refreshTable();
-      Swal.fire({
-        title: 'Success',
-        text: 'Add Record Successfully...!!!',
-        icon: 'success',
-        // confirmButtonColor: '#526D82',
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to create a record!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+        if (result === 1) {
+          // After dialog is closed we're doing frontend updates
+          // For add we're just pushing a new row inside DataService
+          this.exampleDatabase?.dataChange.value.unshift(
+            this.lecturesService.getDialogData()
+          );
+          this.refreshTable();
+          Swal.fire({
+            title: 'Success',
+            text: 'Add Record Successfully...!!!',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
+        }
       });
     }
   });
+ 
 }
 performSearch() {
   //console.log(this.dataSource)
@@ -231,30 +244,43 @@ editCall(row: Lectures) {
     },
     direction: tempDirection,
   });
-  this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-    console.log("========",result)
-    if (result === 1) {
-      this.getClassList()
-      // When using an edit things are little different, firstly we find record inside DataService by id
-      const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-        (x) => x.id === this.id
-      );
-      // Then you update that record using data from dialogData (values you enetered)
-      if (foundIndex != null && this.exampleDatabase) {
-        this.exampleDatabase.dataChange.value[foundIndex] =
-          this.lecturesService.getDialogData();
-        // And lastly refresh table
-        this.refreshTable();
-        this.getClassList();
-        Swal.fire({
-          title: 'Success',
-          text: 'Edit Record Successfully...!!!',
-          icon: 'success',
-          // confirmButtonColor: '#526D82',
-        });
-      }
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to update this user!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+        console.log("========",result)
+        if (result === 1) {
+          this.getClassList()
+          // When using an edit things are little different, firstly we find record inside DataService by id
+          const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+            (x) => x.id === this.id
+          );
+          // Then you update that record using data from dialogData (values you enetered)
+          if (foundIndex != null && this.exampleDatabase) {
+            this.exampleDatabase.dataChange.value[foundIndex] =
+              this.lecturesService.getDialogData();
+            // And lastly refresh table
+            this.refreshTable();
+            this.getClassList();
+            Swal.fire({
+              title: 'Success',
+              text: 'Edit Record Successfully...!!!',
+              icon: 'success',
+              // confirmButtonColor: '#526D82',
+            });
+          }
+        }
+      });
     }
   });
+  
 }
 deleteItem(row: Lectures) {
   this.id = row.id;

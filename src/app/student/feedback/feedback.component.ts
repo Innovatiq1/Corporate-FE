@@ -81,7 +81,8 @@ export class FeedbackComponent {
     private adminService: AdminService,
     private router: Router,
     private fb:FormBuilder,
-    private surveyService: SurveyService
+    private surveyService: SurveyService,
+    private classService: ClassService
   ) {
     this.feedbackForm = this.fb.group({
       courseName: ['',[] ],
@@ -165,11 +166,40 @@ export class FeedbackComponent {
             ).then((r) => {
                 this.feedbackForm.reset();
             });
+            let payload = {
+              status: 'completed',
+              studentId: this.studentId,
+              playbackTime: 100,
+            };
+            this.classService
+              .saveApprovedClasses(this.classId, payload)
+              .subscribe((response) => {
+                setTimeout(() => {
+                  this.router.navigate(['/student/view-course/'+ this.classId]);    
+                }, 4000);
+          
+              });
         },
         (err) => {
             console.log(err);
         }
     );
+}
+
+skip(){
+  let payload = {
+    status: 'completed',
+    studentId: this.studentId,
+    playbackTime: 100,
+  };
+  this.classService
+    .saveApprovedClasses(this.classId, payload)
+    .subscribe((response) => {
+      setTimeout(() => {
+        this.router.navigate(['/student/view-course/'+ this.classId]);    
+      }, 4000);
+
+    });
 }
 
   submitAnswer(questionId: any, selectedOption: any) {

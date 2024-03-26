@@ -113,24 +113,33 @@ save() {
         }))
       }))
     };
-
-    
-    this.questionService.createQuestion(payload).subscribe(
-      (res: any) => {
-        Swal.fire({
-          title: 'Successful',
-          text: 'Question created successfully',
-          icon: 'success',
-        });
-        this.router.navigate(['/admin/questions/all-questions'])
-      },
-      (err: any) => {
-        Swal.fire(
-          'Failed to create Question',
-          'error'
-        );
-      }
-    );
+Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to create question!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.questionService.createQuestion(payload).subscribe(
+        (res: any) => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Question created successfully',
+            icon: 'success',
+          });
+          this.router.navigate(['/admin/questions/all-questions'])
+        },
+        (err: any) => {
+          Swal.fire(
+            'Failed to create Question',
+            'error'
+          );
+        }
+      );
+    }
+  });
   }
   
 }
@@ -148,25 +157,36 @@ update(){
       id:this.questionId,
 
     };
-
+Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to update!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.questionService.updateQuestions(payload).subscribe(
+        (res: any) => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Question Updated successfully',
+            icon: 'success',
+          });
+          this.router.navigate(['/admin/questions/all-questions'])
+        
+        },
+        (err: any) => {
+          Swal.fire(
+            'Failed to update Question',
+            'error'
+          );
+        }
+      );
+    }
+  });
     
-    this.questionService.updateQuestions(payload).subscribe(
-      (res: any) => {
-        Swal.fire({
-          title: 'Successful',
-          text: 'Question Updated successfully',
-          icon: 'success',
-        });
-        this.router.navigate(['/admin/questions/all-questions'])
-      
-      },
-      (err: any) => {
-        Swal.fire(
-          'Failed to update Question',
-          'error'
-        );
-      }
-    );
+    
   }
 }
 

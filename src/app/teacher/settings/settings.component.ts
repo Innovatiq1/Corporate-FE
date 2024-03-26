@@ -168,26 +168,39 @@ export class InstructorSettingsComponent {
 
   }
   private updateInstructor(userData: Student): void {
-    this.studentService.updateStudent(this.studentId,userData).subscribe(
-      () => {
-        Swal.fire({
-          title: "Successful",
-          text: "Instructor data update successfully",
-          icon: "success",
-        });
-        //this.fileDropEl.nativeElement.value = "";
-      //this.stdForm.reset();
-      //this.toggleList()
-      //this.router.navigateByUrl('/admin/teachers/all-teachers');
-      },
-      (error: { message: any; error: any; }) => {
-        Swal.fire(
-          "Failed to create course kit",
-          error.message || error.error,
-          "error"
-        );
-      }
-    );
+
+    Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to update!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.studentService.updateStudent(this.studentId,userData).subscribe(
+        () => {
+          Swal.fire({
+            title: "Successful",
+            text: "Instructor data update successfully",
+            icon: "success",
+          });
+          //this.fileDropEl.nativeElement.value = "";
+        //this.stdForm.reset();
+        //this.toggleList()
+        //this.router.navigateByUrl('/admin/teachers/all-teachers');
+        },
+        (error: { message: any; error: any; }) => {
+          Swal.fire(
+            "Failed to create course kit",
+            error.message || error.error,
+            "error"
+          );
+        }
+      );
+    }
+  });
+   
   }
   onFileUpload(event:any) {
     this.fileName = event.target.files[0].name;

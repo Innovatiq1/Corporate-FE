@@ -247,6 +247,7 @@ ngOnInit(): void {
         ...this.courseKitForm.value,
     
        };
+       
     this.courseService.editProgramCourseKit(this.courseId, updatedCourseKit).subscribe(
       () => {
         Swal.fire({

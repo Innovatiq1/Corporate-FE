@@ -221,29 +221,41 @@ ngOnInit(): void {
 
   private createProgramCourseKit(courseKitData: CourseKit): void {
     courseKitData.documentLink=this.documentLink
-    this.courseService.createProgramCourseKit(courseKitData).subscribe(
-      () => {
-        Swal.fire({
-          title: "Successful",
-          text: "Program Kit created successfully",
-          icon: "success",
-        });
-        //this.fileDropEl.nativeElement.value = "";
-        this.courseKitForm.reset();
-        //this.toggleList()
-        //this.router.navigateByUrl("/admin/courses/create-template");
-        this.router.navigateByUrl('/admin/program/program-kit-template');
-        //this.router.navigateByUrl('/admin/program/program-kit');
-
-      },
-      (error) => {
-        Swal.fire(
-          "Failed to create program kit",
-          error.message || error.error,
-          "error"
-        );
-      }
-    );
+    Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to create program kit!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.courseService.createProgramCourseKit(courseKitData).subscribe(
+        () => {
+          Swal.fire({
+            title: "Successful",
+            text: "Program Kit created successfully",
+            icon: "success",
+          });
+          //this.fileDropEl.nativeElement.value = "";
+          this.courseKitForm.reset();
+          //this.toggleList()
+          //this.router.navigateByUrl("/admin/courses/create-template");
+          this.router.navigateByUrl('/admin/program/program-kit-template');
+          //this.router.navigateByUrl('/admin/program/program-kit');
+  
+        },
+        (error) => {
+          Swal.fire(
+            "Failed to create program kit",
+            error.message || error.error,
+            "error"
+          );
+        }
+      );
+    }
+  });
+    
   }
   isInputReadonly(): boolean {
     return this.mode === 'viewUrl'; // If mode is 'viewUrl', return true (readonly); otherwise, return false (editable).

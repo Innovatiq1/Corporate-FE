@@ -268,16 +268,28 @@ export class CreateRequestComponent implements OnInit {
                 directorEmail: res.email,
                 trainingAdminEmail: data.email,
               };
-              this.etmsService
-                .createRequest(payload)
-                .subscribe((response: any) => {
-                  Swal.fire({
-                    title: 'Successful',
-                    text: 'Request created successfully',
-                    icon: 'success',
+              Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to create request!',
+                icon: 'warning',
+                confirmButtonText: 'Yes',
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+              }).then((result) => {
+                if (result.isConfirmed){
+                  this.etmsService
+                  .createRequest(payload)
+                  .subscribe((response: any) => {
+                    Swal.fire({
+                      title: 'Successful',
+                      text: 'Request created successfully',
+                      icon: 'success',
+                    });
+                    this.router.navigate(['/admin/e-tms/employee-status']);
                   });
-                  this.router.navigate(['/admin/e-tms/employee-status']);
-                });
+                }
+              });
+             
             });
         });
       });
@@ -302,14 +314,26 @@ export class CreateRequestComponent implements OnInit {
                 trainingAdminEmail: data.email,
                 status:"inactive"
               };
-              this.courseService.saveCourse(payload).subscribe((response: any) => {
-                  Swal.fire({
-                    title: 'Successful',
-                    text: 'Course request created successfully',
-                    icon: 'success',
+
+              Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to create request!',
+                icon: 'warning',
+                confirmButtonText: 'Yes',
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+              }).then((result) => {
+                if (result.isConfirmed){
+                  this.courseService.saveCourse(payload).subscribe((response: any) => {
+                    Swal.fire({
+                      title: 'Successful',
+                      text: 'Course request created successfully',
+                      icon: 'success',
+                    });
+                    this.router.navigate(['/admin/e-tms/employee-status']);
                   });
-                  this.router.navigate(['/admin/e-tms/employee-status']);
-                });
+                }
+              });
             });
         });
       });
@@ -351,21 +375,50 @@ export class CreateRequestComponent implements OnInit {
                 directorEmail: res.email,
                 trainingAdminEmail: data.email,
               };
-              this.etmsService
-                .updateStatus(payload, this._id)
-                .subscribe((response: any) => {
-                  Swal.fire({
-                    title: 'Successful',
-                    text: 'Request updated successfully',
-                    icon: 'success',
+              Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to update request!',
+                icon: 'warning',
+                confirmButtonText: 'Yes',
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+              }).then((result) => {
+                if (result.isConfirmed){
+                  this.etmsService
+                  .updateStatus(payload, this._id)
+                  .subscribe((response: any) => {
+                    Swal.fire({
+                      title: 'Successful',
+                      text: 'Request updated successfully',
+                      icon: 'success',
+                    });
+                    this.router.navigate(['/admin/e-tms/employee-status']);
                   });
-                  this.router.navigate(['/admin/e-tms/employee-status']);
-                });
+                }
+              });
+
+              
             });
         });
       });
     }
   }
+
+
+
+  // Swal.fire({
+  //   title: 'Are you sure?',
+  //   text: 'Do you want to update request!',
+  //   icon: 'warning',
+  //   confirmButtonText: 'Yes',
+  //   showCancelButton: true,
+  //   cancelButtonColor: '#d33',
+  // }).then((result) => {
+  //   if (result.isConfirmed){
+      
+  //   }
+  // });
+
 
   getData() {
     let userId = localStorage.getItem('id');

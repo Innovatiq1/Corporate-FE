@@ -131,27 +131,52 @@ export class AddDepartmentComponent  implements OnInit {
     const department= this.departmentForm.value
     department['hod']= this.hodName
     department['hodId']= this.hod
-      this.deptService.updateDepartment(this.departmentForm.value,this.departmentId).subscribe((response:any) => {
-        Swal.fire({
-          title: 'Successful',
-          text: 'Department updated successfully',
-          icon: 'success',
+
+    
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to update department!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.deptService.updateDepartment(this.departmentForm.value,this.departmentId).subscribe((response:any) => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Department updated successfully',
+            icon: 'success',
+          });
+          this.router.navigate(['/admin/departments/all-departments'])
         });
-        this.router.navigate(['/admin/departments/all-departments'])
-      });
-  
+      }
+    });
+      
     } else {
     const department= this.departmentForm.value
     department['hod']= this.hodName
     department['hodId']= this.hod
-      this.deptService.saveDepartment(this.departmentForm.value).subscribe((response: any) => {
-        Swal.fire({
-          title: 'Successful',
-          text: 'Department created successfully',
-          icon: 'success',
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to create department!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.deptService.saveDepartment(this.departmentForm.value).subscribe((response: any) => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Department created successfully',
+            icon: 'success',
+          });
+          this.router.navigate(['/admin/departments/all-departments'])
         });
-        this.router.navigate(['/admin/departments/all-departments'])
-      });
+      }
+    });
+     
     }
  
   }

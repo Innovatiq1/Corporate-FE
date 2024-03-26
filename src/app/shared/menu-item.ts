@@ -270,6 +270,11 @@ MENU_LIST = [
             title:"Registered Courses",
             type: "none"
         },
+        {
+            id: "training-approval-req",
+            title:"Training Approval Request",
+            type: "none"
+        },
       
     ]
 },
@@ -369,26 +374,68 @@ MENU_LIST = [
 
 //     ]
 // },
+// {
+//     id: "admin/payment",
+//     title: "Transactions",
+//     selected: false,
+//     iconsrc: "/assets/payment-icon.svg",
+//     icon: 'monetization_on',
+//     children:
+//     [
+//         {
+//             id: "course-payments",
+//             title: "Course Payments",
+//             type: "none"
+//         },
+//         {
+//             id: "program-payments",
+//             title: "Program Payments",
+//             type: "none"
+//         },
+
+
+//     ]
+// },
+
 {
-    id: "admin/payment",
-    title: "Transactions",
-    selected: false,
-    iconsrc: "/assets/payment-icon.svg",
-    icon: 'monetization_on',
-    children:
-    [
+    id: "admin/budgets",
+    title: "Budget & Payments",
+    iconsrc: "/assets/course-icon.svg",
+    icon: 'attach_money',
+    selected: true,
+    children: [
         {
-            id: "course-payments",
-            title: "Course Payments",
+            id: "training-request",
+            title: "Training Approval Request",
+            type: "none",
+
+        },
+        {
+            id: "all-requests",
+            title: "All Requests",
+            type:"none"
+        },
+        {
+            id: "budget",
+            title: "Budget",
             type: "none"
         },
         {
-            id: "program-payments",
-            title: "Program Payments",
+            id: "allocation",
+            title: "Allocation ",
             type: "none"
         },
-
-
+        {
+            id: "program-payment",
+            title: "Program Payment ",
+            type: "none"
+        },
+        {
+            id: "course-payment",
+            title: "Course Payment ",
+            type: "none"
+        },
+        
     ]
 },
 

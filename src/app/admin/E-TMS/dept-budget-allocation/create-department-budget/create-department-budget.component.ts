@@ -216,19 +216,32 @@ export class CreateDepartmentBudgetComponent implements OnInit {
 
     }
     console.log(payload)
-    this.etmsService.createDept(payload).subscribe(data => {
-      console.log(data);
-      if (data) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Department Created Successfully',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        this.router.navigate(['/admin/e-tms/department-budget-allocation']);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to create department!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
 
+
+        this.etmsService.createDept(payload).subscribe(data => {
+          console.log(data);
+          if (data) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Department Created Successfully',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            this.router.navigate(['/admin/e-tms/department-budget-allocation']);
+    
+          }
+        })
       }
-    })
+    });
     // if (this.departmentForm.valid) {
     //   if (this.editUrl) {
     //     this.courseService.updateDepartment(this.departmentForm.value, this.departmentId).subscribe((response: any) => {
@@ -279,18 +292,30 @@ updateRequest(){
   // approval: "Pending",
   employeeName: this.employeName
  }
-  this.etmsService.updateBudget(this._id,payload).subscribe(data =>{
-    console.log(data);
-    if(data){
-      Swal.fire({
-        icon:'success',
-        title: 'Department Budget Updated Successfully',
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      this.router.navigate(['/admin/e-tms/department-budget-allocation']);
+ Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to update!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.etmsService.updateBudget(this._id,payload).subscribe(data =>{
+        console.log(data);
+        if(data){
+          Swal.fire({
+            icon:'success',
+            title: 'Department Budget Updated Successfully',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          this.router.navigate(['/admin/e-tms/department-budget-allocation']);
+        }
+      })
     }
-  })
+  });
+ 
 
   // this.router.navigate(['/admin/e-tms/edit-department-budget/']);
 }

@@ -185,14 +185,27 @@ export class ScheduleClassComponent {
           });
           return;
         }
-        this.courseService.deleteProgramClass(id).subscribe(() => {
-          Swal.fire({
-            title: 'Success',
-            text: 'Class deleted successfully.',
-            icon: 'success',
-          });
-          this.getClassList();
-        });
+        Swal.fire({
+          title: "Confirm Deletion",
+          text: "Are you sure you want to delete this Class?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Delete",
+          cancelButtonText: "Cancel",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.courseService.deleteProgramClass(id).subscribe(() => {
+              Swal.fire({
+                title: 'Success',
+                text: 'Class deleted successfully.',
+                icon: 'success',
+              });
+              this.getClassList();
+            });
+      }
+      });
       });
   }
 

@@ -205,21 +205,35 @@ export class AllDepartmentsComponent
   }
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
-    this.selection.selected.forEach((item) => {
-      const index: number = this.dataSource.renderedData.findIndex(
-        (d: Department) => d === item
-      );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
-      this.exampleDatabase?.dataChange.value.splice(index, 1);
-      this.refreshTable();
-      this.selection = new SelectionModel<Department>(true, []);
-    });
+
     Swal.fire({
-      title: 'Success',
-      text: 'Record Deleted Successfully...!!!',
-      icon: 'success',
-      // confirmButtonColor: '#526D82',
+      title: 'Are you sure?',
+      text: 'Do you want to update this user!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.selection.selected.forEach((item) => {
+          const index: number = this.dataSource.renderedData.findIndex(
+            (d: Department) => d === item
+          );
+          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          this.exampleDatabase?.dataChange.value.splice(index, 1);
+          this.refreshTable();
+          this.selection = new SelectionModel<Department>(true, []);
+        });
+        Swal.fire({
+          title: 'Success',
+          text: 'Record Deleted Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+      }
     });
+    
+   
 
   }
   public loadData() {

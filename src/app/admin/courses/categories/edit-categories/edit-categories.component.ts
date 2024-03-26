@@ -139,23 +139,37 @@ createSubCategory(): void {
 
 //console.log("===lllllllllllll===",this.subcategoryId)
 //console.log("===this.subCategoryData===",this.subCategoryData)
-  this.courseService.updateSubCategory(this.subcategoryId,this.subCategoryData).subscribe(
-    (response) => {
-      Swal.fire('Success', 'Subcategories upated successfully!', 'success');
-      this.mainCategoryForm.reset();
-      this.subCategoryForm.reset();
-      this.initSubCategoryForm();
-      this.addSubCategoryField();
-      this.router.navigateByUrl("/admin/courses/categories")  
-        //this.list = !this.list;
-        //this.create = !this.create;
-      // this.list = !this.list;
-      //this.fetchSubCategories();
-    },
-    (error) => {
-      Swal.fire('Error', 'Failed to update subcategories!', 'error');
-    }
-  );
+
+Swal.fire({
+  title: 'Are you sure?',
+  text: 'Do you want to update this sub category!',
+  icon: 'warning',
+  confirmButtonText: 'Yes',
+  showCancelButton: true,
+  cancelButtonColor: '#d33',
+}).then((result) => {
+  if (result.isConfirmed){
+    this.courseService.updateSubCategory(this.subcategoryId,this.subCategoryData).subscribe(
+      (response) => {
+        Swal.fire('Success', 'Subcategories upated successfully!', 'success');
+        this.mainCategoryForm.reset();
+        this.subCategoryForm.reset();
+        this.initSubCategoryForm();
+        this.addSubCategoryField();
+        this.router.navigateByUrl("/admin/courses/categories")  
+          //this.list = !this.list;
+          //this.create = !this.create;
+        // this.list = !this.list;
+        //this.fetchSubCategories();
+      },
+      (error) => {
+        Swal.fire('Error', 'Failed to update subcategories!', 'error');
+      }
+    );
+  }
+});
+
+ 
   this.isSubmitted=false
 
 }
@@ -166,15 +180,29 @@ createMainCategory(): void {
   }
 
   const mainCategoryData = this.mainCategoryForm.value;
-  this.courseService.updateMainCategory(this.mainCategoryId,mainCategoryData).subscribe(
-    (response) => {
-      Swal.fire('Success', 'Main category Updated successfully!', 'success');
-      //this.mainCategoryId = response.data._id;
-    },
-    (error) => {
-      Swal.fire('Error', 'Failed to update main category!', 'error');
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to update this main category!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.courseService.updateMainCategory(this.mainCategoryId,mainCategoryData).subscribe(
+        (response) => {
+          Swal.fire('Success', 'Main category Updated successfully!', 'success');
+          //this.mainCategoryId = response.data._id;
+        },
+        (error) => {
+          Swal.fire('Error', 'Failed to update main category!', 'error');
+        }
+      );
     }
-  );
+  });
+
+  
   this.isSubmitted=false
 }
 

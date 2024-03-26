@@ -123,28 +123,42 @@ ngOnInit(): void {
 private createCourseKit(courseKitData: CourseKit): void {
   
   // courseKitData.documentLink=this.documentLink;
-  console.log("createCourseKit",courseKitData)
-  this.courseService.createCourseKit(courseKitData).subscribe(
-    (res) => {
-      console.log("res",res)
-      Swal.fire({
-        title: "Successful",
-        text: "Course Kit created successfully",
-        icon: "success",
-      });
-      // this.fileDropEl.nativeElement.value = "";
-      this.courseKitForm.reset();
-      // this.toggleList()
-      this.router.navigateByUrl("/admin/courses/course-kit");
-    },
-    (error) => {
-      Swal.fire(
-        "Failed to create course kit",
-        error.message || error.error,
-        "error"
+  console.log("createCourseKit",courseKitData);
+
+
+  Swal.fire({
+    title: 'Are you sure?',
+        text: 'You want to create a course kit!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.courseService.createCourseKit(courseKitData).subscribe(
+        (res) => {
+          console.log("res",res)
+          Swal.fire({
+            title: "Successful",
+            text: "Course Kit created successfully",
+            icon: "success",
+          });
+          // this.fileDropEl.nativeElement.value = "";
+          this.courseKitForm.reset();
+          // this.toggleList()
+          this.router.navigateByUrl("/admin/courses/course-kit");
+        },
+        (error) => {
+          Swal.fire(
+            "Failed to create course kit",
+            error.message || error.error,
+            "error"
+          );
+        }
       );
-    }
-  );
+}
+});
+
 }
 
 //videoUpload

@@ -281,25 +281,39 @@ export class LecturesComponent
       data: row,
       direction: tempDirection,
     });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // for delete we use splice in order to remove single object from DataService
-        if (foundIndex != null && this.exampleDatabase) {
-          this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-          this.refreshTable();
-          Swal.fire({
-            title: 'Success',
-            text: 'Delete Record Successfully...!!!',
-            icon: 'success',
-            // confirmButtonColor: '#526D82',
-          });
-        
-        }
-      }
-    });
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this record?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+          if (result === 1) {
+            const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+              (x) => x.id === this.id
+            );
+            // for delete we use splice in order to remove single object from DataService
+            if (foundIndex != null && this.exampleDatabase) {
+              this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
+              this.refreshTable();
+              Swal.fire({
+                title: 'Success',
+                text: 'Delete Record Successfully...!!!',
+                icon: 'success',
+                // confirmButtonColor: '#526D82',
+              });
+            
+            }
+          }
+        });
+  }
+  });
+    
   }
 
   pageSizeChange($event: any) {

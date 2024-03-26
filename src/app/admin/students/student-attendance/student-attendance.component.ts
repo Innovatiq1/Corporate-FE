@@ -93,28 +93,41 @@ export class StudentAttendanceComponent
       },
       direction: tempDirection,
     });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-        this.exampleDatabase?.dataChange.value.unshift(
-          this.studentAttendanceService.getDialogData()
-        );
-        this.refreshTable();
-        Swal.fire({
-          title: 'Success',
-          text: 'Add Record Successfully...!!!',
-          icon: 'success',
-          // confirmButtonColor: '#526D82',
-        });
-        // this.showNotification(
-        //   'snackbar-success',
-        //   'Add Record Successfully...!!!',
-        //   'bottom',
-        //   'center'
-        // );
-      }
-    });
+
+    Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to create!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+        if (result === 1) {
+          // After dialog is closed we're doing frontend updates
+          // For add we're just pushing a new row inside DataService
+          this.exampleDatabase?.dataChange.value.unshift(
+            this.studentAttendanceService.getDialogData()
+          );
+          this.refreshTable();
+          Swal.fire({
+            title: 'Success',
+            text: 'Add Record Successfully...!!!',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
+          // this.showNotification(
+          //   'snackbar-success',
+          //   'Add Record Successfully...!!!',
+          //   'bottom',
+          //   'center'
+          // );
+        }
+      });
+    }
+  });
+    
   }
   editCall(row: StudentAttendance) {
     this.id = row.id;
@@ -171,30 +184,46 @@ export class StudentAttendanceComponent
       data: row,
       direction: tempDirection,
     });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // for delete we use splice in order to remove single object from DataService
-        if (foundIndex != null && this.exampleDatabase) {
-          this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-          this.refreshTable();
-          Swal.fire({
-            title: 'Success',
-            text: 'Delete Record Successfully...!!!',
-            icon: 'success',
-            // confirmButtonColor: '#526D82',
-          });
-          // this.showNotification(
-          //   'snackbar-danger',
-          //   'Delete Record Successfully...!!!',
-          //   'bottom',
-          //   'center'
-          // );
-        }
+
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+          if (result === 1) {
+            const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+              (x) => x.id === this.id
+            );
+            // for delete we use splice in order to remove single object from DataService
+            if (foundIndex != null && this.exampleDatabase) {
+              this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
+              this.refreshTable();
+              Swal.fire({
+                title: 'Success',
+                text: 'Delete Record Successfully...!!!',
+                icon: 'success',
+                // confirmButtonColor: '#526D82',
+              });
+              // this.showNotification(
+              //   'snackbar-danger',
+              //   'Delete Record Successfully...!!!',
+              //   'bottom',
+              //   'center'
+              // );
+            }
+          }
+        });
       }
     });
+
+   
   }
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
