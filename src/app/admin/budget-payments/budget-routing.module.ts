@@ -9,6 +9,8 @@ import { ProgramPaymentComponent } from './program-payment/program-payment.compo
 import { CreateRequestComponent } from './create-request/create-request.component';
 import { CreateBudgetComponent } from './budget/create-budget/create-budget.component';
 import { CreateDeptBudgetRequestComponent } from './allocation/create-dept-budget-request/create-dept-budget-request.component';
+import { ViewCoursePaymentComponent } from './course-payment/view-course-payment/view-course-payment.component';
+import { ViewProgramPaymentComponent } from './program-payment/view-program-payment/view-program-payment.component';
 
 
 const routes: Routes = [
@@ -47,6 +49,14 @@ const routes: Routes = [
   {
     path: 'create-budget',
     component: CreateBudgetComponent
+  },
+  {
+    path: 'view-course-payment',
+    component: ViewCoursePaymentComponent
+  },
+  {
+    path: 'view-program-payment',
+    component: ViewProgramPaymentComponent
   }
 ];
 

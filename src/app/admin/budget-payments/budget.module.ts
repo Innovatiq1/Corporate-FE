@@ -20,6 +20,8 @@ import { EditRequestComponent } from './training-aproval-req/edit-request/edit-r
 import { CreateDeptBudgetRequestComponent } from './allocation/create-dept-budget-request/create-dept-budget-request.component';
 import { CreateRequestComponent } from './create-request/create-request.component';
 import { CreateBudgetComponent } from './budget/create-budget/create-budget.component';
+import { ViewCoursePaymentComponent } from './course-payment/view-course-payment/view-course-payment.component';
+import { ViewProgramPaymentComponent } from './program-payment/view-program-payment/view-program-payment.component';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { CreateBudgetComponent } from './budget/create-budget/create-budget.comp
     CreateDeptBudgetRequestComponent,
     CreateRequestComponent,
     CreateBudgetComponent,
+    ViewCoursePaymentComponent,
+    ViewProgramPaymentComponent,
   ],
   imports: [
     CommonModule,
