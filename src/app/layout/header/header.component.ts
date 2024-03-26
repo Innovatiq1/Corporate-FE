@@ -195,6 +195,28 @@ export class HeaderComponent
     }
     this.getAnnouncementForStudents();
   }
+
+  navigateToUserSettings(){
+    this.router.navigate(['/student/users']);
+  }
+  navigateToIntegrateSettings(){
+    this.router.navigate(['/student/integration']);
+  }
+  navigateToAutomateSettings(){
+    this.router.navigate(['/student/automation']);
+  }
+  navigateToCustomsSettings(){
+    this.router.navigate(['/student/customization']);
+  }
+  navigateToProfileSettings() {
+    this.router.navigate(['/student/security-settings']);
+  }
+  navigateToLmsSettings(){
+    this.router.navigate(['/student/LMS-TAE']);
+  }
+  navigateToConfigSettings(){
+    this.router.navigate(['/student/configuration']);
+  }
 onClick(){
   let role = localStorage.getItem('user_type')
   if(role == 'admin'){

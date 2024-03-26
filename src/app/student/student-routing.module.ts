@@ -107,6 +107,30 @@ const routes: Routes = [
     component: SettingsComponent,  
   },
   {
+    path: 'users',
+    component: SettingsComponent,  
+  },
+  {
+    path: 'integration',
+    component: SettingsComponent,  
+  },
+  {
+    path: 'automation',
+    component: SettingsComponent,  
+  },
+  {
+    path: 'customization',
+    component: SettingsComponent,  
+  },
+  {
+    path: 'LMS-TAE',
+    component: SettingsComponent,  
+  },
+  {
+    path: 'configuration',
+    component: SettingsComponent,  
+  },
+  {
     path: 'email-configuration',
     component: SettingsComponent,  
   },
