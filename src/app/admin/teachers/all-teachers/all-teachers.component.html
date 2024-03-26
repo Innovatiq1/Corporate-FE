@@ -70,7 +70,7 @@
                     <div class="responsive_table">
                       <table mat-table [dataSource]="dataSource" matSort class="mat-cell advance-table">
                         <!-- Checkbox Column -->
-                        <ng-container matColumnDef="select">
+                        <!-- <ng-container matColumnDef="select">
                           <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'">
                             <mat-checkbox (change)="$event ? masterToggle() : null"
                               [checked]="selection.hasValue() && isAllSelected()"
@@ -83,7 +83,7 @@
                               [ngClass]="'tbl-checkbox'">
                             </mat-checkbox>
                           </mat-cell>
-                        </ng-container>
+                        </ng-container> -->
                         <!-- ID Column -->
                         <ng-container matColumnDef="id">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Id

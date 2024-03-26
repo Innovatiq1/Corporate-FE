@@ -22,7 +22,7 @@ import Swal from 'sweetalert2';
 })
 export class StudentApprovalListComponent {
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     'Program Name',
     'Student Name',
     'Class Start Date',

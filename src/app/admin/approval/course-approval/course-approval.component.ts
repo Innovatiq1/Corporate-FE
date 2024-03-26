@@ -18,7 +18,7 @@ import 'jspdf-autotable';
 })
 export class CourseApprovalComponent {
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     'Course Name',
     'Course Code',
     'Main Category',

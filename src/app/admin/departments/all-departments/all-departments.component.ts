@@ -40,7 +40,7 @@ export class AllDepartmentsComponent
   implements OnInit
 {
   displayedColumns = [
-    'select',
+    // 'select',
     'dName',
     'hod',
     'phone',

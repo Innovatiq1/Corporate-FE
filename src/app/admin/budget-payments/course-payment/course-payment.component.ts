@@ -21,7 +21,7 @@ import Swal from 'sweetalert2';
 })
 export class CoursePaymentComponent {
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     'Course Name',
     'Payment Date',
     'Amount',

@@ -39,7 +39,7 @@ export class AllstaffComponent
   implements OnInit
 {
   displayedColumns = [
-    'select',
+    // 'select',
     'name',
     'designation',
     'mobile',

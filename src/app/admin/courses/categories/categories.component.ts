@@ -34,7 +34,7 @@ import 'jspdf-autotable';
 })
 export class CategoriesComponent implements OnInit {
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     'Main Category',
     'Sub Category',
     'status',

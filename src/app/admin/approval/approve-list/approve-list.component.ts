@@ -34,7 +34,7 @@ import { id } from '@swimlane/ngx-charts';
 })
 export class ApproveListComponent  {
   displayedColumns = [
-    'select',
+    // 'select',
     'coursename',
     'studentname',
     'classstartDate',

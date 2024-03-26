@@ -35,7 +35,7 @@ export class InstructorLeaveRequestComponent
   implements OnInit
 {
   displayedColumns = [
-    'select',
+    // 'select',
     'img',
     "className",
     'rNo',

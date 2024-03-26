@@ -33,7 +33,7 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
   implements OnInit
 {
   displayedColumns = [
-    'select',
+    // 'select',
     'courseName',
     'studentName',
     'actions',

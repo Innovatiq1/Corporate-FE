@@ -21,7 +21,7 @@ import { EtmsService } from '@core/service/etms.service';
 })
 export class AllocationComponent implements OnInit{
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     'Department Name',
     'Percentage Allocated',
     'By Value',

@@ -46,7 +46,7 @@ export class LecturesComponent
   implements OnInit
 {
   displayedColumns = [
-    'select',
+    // 'select',
     'sName',
     'date',
     'endDate',

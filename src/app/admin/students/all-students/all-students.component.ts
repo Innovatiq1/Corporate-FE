@@ -40,7 +40,7 @@ export class AllStudentsComponent
   implements OnInit
 {
   displayedColumns = [
-    'select',
+    // 'select',
     'img',
     'rollNo',
     'name',

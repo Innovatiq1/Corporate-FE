@@ -24,7 +24,7 @@ import 'jspdf-autotable';
 })
 export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
   displayedColumns = [
-    'select',
+    // 'select',
     'img',
     'Course Name',
     'Start Date',

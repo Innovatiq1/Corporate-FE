@@ -19,9 +19,9 @@ export class CreateUserTypeComponent {
 
   breadscrums = [
     {
-      title: 'Create User Type',
+      title: 'Create User Role',
       items: ['Users'],
-      active: 'Create User Type',
+      active: 'Create User Role',
     },
   ];
 

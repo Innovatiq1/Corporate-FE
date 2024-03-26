@@ -36,7 +36,7 @@ export class LeaveRequestComponent
   extends UnsubscribeOnDestroyAdapter
   implements OnInit {
   displayedColumns = [
-    'select',
+    // 'select',
     'class',
     'applyDate',
     'fromDate',
