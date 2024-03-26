@@ -101,7 +101,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class BudgetComponent {
   SourceData: any;
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     // 'no',
     // 'training budget',
     'percentage',

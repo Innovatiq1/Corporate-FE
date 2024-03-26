@@ -16,9 +16,9 @@ import Swal from 'sweetalert2';
 export class UserTypeComponent {
   breadscrums = [
     {
-      title: 'User Type',
+      title: 'User Role',
       items: ['Users'],
-      active: 'User Type',
+      active: 'User Role',
     },
   ];
   modal:boolean = false;

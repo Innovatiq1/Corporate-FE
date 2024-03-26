@@ -24,7 +24,7 @@ import { dA } from '@fullcalendar/core/internal-common';
 })
 export class CompletionListComponent {
   displayedColumns = [
-    'select',
+    // 'select',
     'Course Name',
     'Student Name',
     'Start Date',

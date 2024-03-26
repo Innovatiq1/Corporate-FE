@@ -18,7 +18,7 @@ import Swal from 'sweetalert2';
 })
 export class ProgaramCompletionListComponent {
   displayedColumns = [
-    'select',
+    // 'select',
     'Program Name',
     'Student Name',
     'Class Start Date',

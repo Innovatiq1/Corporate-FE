@@ -25,7 +25,7 @@ import Swal from 'sweetalert2';
 })
 export class AuditListComponent {
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     'Name',
     'Email',
     'User Type',

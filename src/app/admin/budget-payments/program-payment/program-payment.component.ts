@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 export class ProgramPaymentComponent {
 
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     'Program Name',
     'Payment Date',
     'Amount',

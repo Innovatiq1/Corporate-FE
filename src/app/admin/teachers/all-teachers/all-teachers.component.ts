@@ -45,7 +45,7 @@ export class AllTeachersComponent
   implements OnInit
 {
   displayedColumns = [
-    'select',
+    // 'select',
     'img',
     'name',
     'department',

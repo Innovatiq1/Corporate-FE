@@ -45,7 +45,7 @@ import 'jspdf-autotable';
 export class ProgramApprovalListComponent
 implements OnInit{
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     'Program Name',
     'Compulsory Count',
     'Elective Count',

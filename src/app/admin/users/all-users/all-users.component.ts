@@ -20,7 +20,7 @@ import Swal from 'sweetalert2';
 export class AllUsersComponent {
 
   displayedColumns: string[] = [
-    'select',
+    // 'select',
     'Name',
     'User Type',
     'Qualification',

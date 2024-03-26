@@ -32,7 +32,7 @@ export class LectureProgramsComponent  extends UnsubscribeOnDestroyAdapter
 implements OnInit
 {
 displayedColumns = [
-  'select',
+  // 'select',
   'sName',
   'date',
   'endDate',

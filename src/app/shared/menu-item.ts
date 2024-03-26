@@ -66,75 +66,75 @@ MENU_LIST = [
     },
 
 //Etms
-  {
-        id: "admin/e-tms",
-        title: "E-TMS",
-        iconsrc: "/assets/course-icon.svg",
-        icon: 'school',
-        selected: true,
-        children: [
-            {
-                id: "etms-dashboard",
-                title: "E-TMS Dashboard",
-                type: "none",
+//   {
+//         id: "admin/e-tms",
+//         title: "E-TMS",
+//         iconsrc: "/assets/course-icon.svg",
+//         icon: 'school',
+//         selected: true,
+//         children: [
+//             {
+//                 id: "etms-dashboard",
+//                 title: "E-TMS Dashboard",
+//                 type: "none",
     
-            },
-            {
-                id: "employee-status",
-                title: "Employee Status",
-                type: "none",
+//             },
+//             {
+//                 id: "employee-status",
+//                 title: "Employee Status",
+//                 type: "none",
     
-            },
-            {
-                id: "new-course-request",
-                title: "New Course Request",
-                type: "none",
+//             },
+//             {
+//                 id: "new-course-request",
+//                 title: "New Course Request",
+//                 type: "none",
     
-            },
-            {
-                id: "course-request",
-                title: "Course Request",
-                type: "none"
-            },
-            {
-                id: "all-requests",
-                title: "All Requests",
-                type:"none"
-            },
-            {
-                id: "new-course-approval",
-                title: "New Course Approval",
-                type: "none"
-            },
-            {
-                id: "overall-budget-list",
-                title: "Overall Budget List ",
-                type: "none"
-            },
-            {
-                id: "department-budget-allocation",
-                title: "Department Budget Allocation ",
-                type: "none"
-            },
-            {
-                id: "department-training-plan",
-                title: "Department Training Plan ",
-                type: "none"
-            },
-            {
-                id: "budget-request",
-                title: "Budget Request",
-                type: "none"
-            },
-            {
-                id: "dapartment-budget-request",
-                title: "Department Budget Request",
-                type: "none"
-            },
+//             },
+//             {
+//                 id: "course-request",
+//                 title: "Course Request",
+//                 type: "none"
+//             },
+//             {
+//                 id: "all-requests",
+//                 title: "All Requests",
+//                 type:"none"
+//             },
+//             {
+//                 id: "new-course-approval",
+//                 title: "New Course Approval",
+//                 type: "none"
+//             },
+//             {
+//                 id: "overall-budget-list",
+//                 title: "Overall Budget List ",
+//                 type: "none"
+//             },
+//             {
+//                 id: "department-budget-allocation",
+//                 title: "Department Budget Allocation ",
+//                 type: "none"
+//             },
+//             {
+//                 id: "department-training-plan",
+//                 title: "Department Training Plan ",
+//                 type: "none"
+//             },
+//             {
+//                 id: "budget-request",
+//                 title: "Budget Request",
+//                 type: "none"
+//             },
+//             {
+//                 id: "dapartment-budget-request",
+//                 title: "Department Budget Request",
+//                 type: "none"
+//             },
             
         
-        ]
-    },
+//         ]
+//     },
     {
         id:"admin/program",
         title: "Program",
