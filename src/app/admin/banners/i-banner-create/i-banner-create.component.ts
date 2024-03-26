@@ -45,24 +45,36 @@ export class IBannerCreateComponent {
        const formData = this.addCusForm.getRawValue()
        formData['imagePath']=this.image_link;
        formData['isActivated']= this.status
-       this.bannerService.addBanner(formData).subscribe((response:any)=>{
-        Swal.fire({
-          title: 'Successful',
-          text: "Banner created successfully",
-          icon: 'success',
-        });
-        // this. closeDialog();
-        this.router.navigate(['/admin/banners/instructor-banner-list'])
-      },
-      (err) => {
-        Swal.fire(
-          'Create banner failed',
-          'error'
-        );
-      },
-      () => {
+       Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to create banner!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.bannerService.addBanner(formData).subscribe((response:any)=>{
+          Swal.fire({
+            title: 'Successful',
+            text: "Banner created successfully",
+            icon: 'success',
+          });
+          // this. closeDialog();
+          this.router.navigate(['/admin/banners/instructor-banner-list'])
+        },
+        (err) => {
+          Swal.fire(
+            'Create banner failed',
+            'error'
+          );
+        },
+        () => {
+        }
+         );
       }
-       );
+    });
+       
    }
     else {
     }

@@ -270,6 +270,11 @@ MENU_LIST = [
             title:"Registered Courses",
             type: "none"
         },
+        {
+            id: "training-approval-req",
+            title:"Training Approval Request",
+            type: "none"
+        },
       
     ]
 },
@@ -389,6 +394,48 @@ MENU_LIST = [
         },
 
 
+    ]
+},
+
+{
+    id: "admin/budgets",
+    title: "Budget & Payments",
+    iconsrc: "/assets/course-icon.svg",
+    icon: 'attach_money',
+    selected: true,
+    children: [
+        {
+            id: "training-request",
+            title: "Training Approval Request",
+            type: "none",
+
+        },
+        {
+            id: "all-requests",
+            title: "All Requests",
+            type:"none"
+        },
+        {
+            id: "budget",
+            title: "Budget",
+            type: "none"
+        },
+        {
+            id: "allocation",
+            title: "Allocation ",
+            type: "none"
+        },
+        {
+            id: "program-payment",
+            title: "Program Payment ",
+            type: "none"
+        },
+        {
+            id: "course-payment",
+            title: "Course Payment ",
+            type: "none"
+        },
+        
     ]
 },
 

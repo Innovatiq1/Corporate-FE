@@ -144,20 +144,33 @@ export class AddComponent {
      fomdata['endDate']=fomdata.endDate,
      fomdata['startTime']= start,
      fomdata['endTime']= end,
-     console.log()
-     this.examSchedule.addExamSchedule(fomdata).subscribe((response:any) => {
-      Swal.fire({
-        title: 'Successful',
-        text: 'Exam schdeule add successfully',
-        icon: 'success',
-      });
-      if(this.userType === 'admin' || this.userType === 'Instructor'){
-        this.router.navigate(['/timetable/course-exam']);
-      }else if(this.userType === 'Student'){
-        this.router.navigate(['/student/exams/courses']);
+    //  console.log()
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to create exam schedule!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.examSchedule.addExamSchedule(fomdata).subscribe((response:any) => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Exam schdeule add successfully',
+            icon: 'success',
+          });
+          if(this.userType === 'admin' || this.userType === 'Instructor'){
+            this.router.navigate(['/timetable/course-exam']);
+          }else if(this.userType === 'Student'){
+            this.router.navigate(['/student/exams/courses']);
+          }
+          
+        });
       }
-      
     });
+  
 
   } 
 

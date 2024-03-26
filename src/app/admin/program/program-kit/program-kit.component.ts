@@ -252,27 +252,41 @@ export class ProgramKitComponent {
   }
 
   private createProgramCourseKit(courseKitData: CourseKit): void {
-    this.courseService.createProgramCourseKit(courseKitData).subscribe(
-      () => {
-        Swal.fire({
-          title: "Successful",
-          text: "Program Kit created successfully",
-          icon: "success",
-        });
-        //this.fileDropEl.nativeElement.value = "";
-        this.courseKitForm.reset();
-        this.toggleList()
-        // this.router.navigateByUrl('/Course/create-template');
 
-      },
-      (error) => {
-        Swal.fire(
-          "Failed to create program kit",
-          error.message || error.error,
-          "error"
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to create a program kit!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){ 
+        this.courseService.createProgramCourseKit(courseKitData).subscribe(
+          () => {
+            Swal.fire({
+              title: "Successful",
+              text: "Program Kit created successfully",
+              icon: "success",
+            });
+            //this.fileDropEl.nativeElement.value = "";
+            this.courseKitForm.reset();
+            this.toggleList()
+            // this.router.navigateByUrl('/Course/create-template');
+    
+          },
+          (error) => {
+            Swal.fire(
+              "Failed to create program kit",
+              error.message || error.error,
+              "error"
+            );
+          }
         );
       }
-    );
+    });
+
+    
   }
   pageSizeChange($event: any) {
     this.courseKitModel.page = $event?.pageIndex + 1;
@@ -416,6 +430,26 @@ export class ProgramKitComponent {
       this.courseService?.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<CourseModel>(true, []);
+    });
+
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete selected rows?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Success',
+          text: 'Record Deleted Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+      }
     });
     Swal.fire({
       title: 'Success',

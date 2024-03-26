@@ -126,6 +126,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./testimonials/testimonials.module').then((m) => m.TestimonialsModule),
   },
+  {
+    path:'budgets',
+    loadChildren: () =>
+    import('./budget-payments/budget.module').then((m) => m.BudgetModule)
+  }
 ];
 
 @NgModule({

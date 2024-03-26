@@ -520,15 +520,26 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
     this.secondFormGroup.value.course_kit = this.firstFormGroup.value.course_kit?.map((item:any) => item.id);
     this.secondFormGroup.value.assessment = this.firstFormGroup.value.assessment?.map((item:any) => item.id);
     this.secondFormGroup.value.survey = this.firstFormGroup.value.survey?.map((item:any) => item.id);
-    this.courseService.updateCourse(payload).subscribe((response:any) => {
-      Swal.fire({
-        title: 'Successful',
-        text: 'Course saved successfully',
-        icon: 'success',
-      });
-      this.router.navigate(['/admin/courses/all-courses'])
-    });
 
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to update this course!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.courseService.updateCourse(payload).subscribe((response:any) => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Course saved successfully',
+            icon: 'success',
+          });
+          this.router.navigate(['/admin/courses/all-courses'])
+        });
+      }
+    });
   }  else {
     this.isWbsSubmitted = true;
   }
@@ -615,18 +626,28 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
         website_link:wbsData?.website_link
 
       }
-      this.courseService.saveCourse(payload).subscribe((response: any) => {
 
-        Swal.fire({
-          title: 'Successful',
-          text: 'Course created successfully',
-          icon: 'success',
-        });
-        this.courseAdded=true;
-        this.router.navigate(['/admin/approval/course-approval'])
-
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want to create a course!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed){
+          this.courseService.saveCourse(payload).subscribe((response: any) => {
+            Swal.fire({
+              title: 'Successful',
+              text: 'Course created successfully',
+              icon: 'success',
+            });
+            this.courseAdded=true;
+            this.router.navigate(['/admin/approval/course-approval'])
+    
+          });
+        }
       });
-
   } else {
     this.isWbsSubmitted = true;
   }

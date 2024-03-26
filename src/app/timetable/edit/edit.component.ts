@@ -162,26 +162,39 @@ export class EditComponent {
      fomdata['endTime']= end,
      
 
-      this.examSchedule.updateExamSchedule(this.examId,fomdata).subscribe(
-        () => {
-          Swal.fire({
-            title: "Successful",
-            text: "Exam Schedule update successfully",
-            icon: "success",
-          });
-          //this.fileDropEl.nativeElement.value = "";
-        this.examsheduleForm.reset();
-        //this.toggleList()
-        this.router.navigateByUrl('/admin/exam/exam-schedule');
-        },
-        (error: { message: any; error: any; }) => {
-          Swal.fire(
-            "Failed to create course kit",
-            error.message || error.error,
-            "error"
-          );
-        }
-      );
+     Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to update this exam schedule!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.examSchedule.updateExamSchedule(this.examId,fomdata).subscribe(
+          () => {
+            Swal.fire({
+              title: "Successful",
+              text: "Exam Schedule update successfully",
+              icon: "success",
+            });
+            //this.fileDropEl.nativeElement.value = "";
+          this.examsheduleForm.reset();
+          //this.toggleList()
+          this.router.navigateByUrl('/admin/exam/exam-schedule');
+          },
+          (error: { message: any; error: any; }) => {
+            Swal.fire(
+              "Failed to create course kit",
+              error.message || error.error,
+              "error"
+            );
+          }
+        );
+      }
+    });
+
+    
 
      }
 }

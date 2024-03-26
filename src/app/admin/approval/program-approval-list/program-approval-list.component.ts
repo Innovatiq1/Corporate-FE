@@ -140,22 +140,35 @@ implements OnInit{
   }
   approveProgram(id:any,program: any): void {
     program.status = 'active';
-    this.courseService.updateCourseProgram(id,program).subscribe(() => {
-      Swal.fire({
-        title: 'Success',
-        text: 'Program approved successfully.',
-        icon: 'success',
-        // confirmButtonColor: '#d33',
-      });
-      this.getProgramList();
-    }, (error) => {
-      Swal.fire({
-        title: 'Error',
-        text: 'Failed to approve program. Please try again.',
-        icon: 'error',
-        // confirmButtonColor: '#d33',
-      });
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to approve this program!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.courseService.updateCourseProgram(id,program).subscribe(() => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Program approved successfully.',
+            icon: 'success',
+            // confirmButtonColor: '#d33',
+          });
+          this.getProgramList();
+        }, (error) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Failed to approve program. Please try again.',
+            icon: 'error',
+            // confirmButtonColor: '#d33',
+          });
+        });
+      }
     });
+ 
   }
   exportExcel() {
    const exportData: Partial<TableElement>[] =
@@ -220,21 +233,36 @@ implements OnInit{
   }
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
-    this.selection.selected.forEach((item) => {
-      const index: number = this.dataSource.findIndex(
-        (d: CourseModel) => d === item
-      );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
-      this.courseService?.dataChange.value.splice(index, 1);
-      this.refreshTable();
-      this.selection = new SelectionModel<CourseModel>(true, []);
-    });
+
     Swal.fire({
-      title: 'Success',
-      text: 'Record Deleted Successfully...!!!',
-      icon: 'success',
-      // confirmButtonColor: '#526D82',
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this course kit?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.selection.selected.forEach((item) => {
+          const index: number = this.dataSource.findIndex(
+            (d: CourseModel) => d === item
+          );
+          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          this.courseService?.dataChange.value.splice(index, 1);
+          this.refreshTable();
+          this.selection = new SelectionModel<CourseModel>(true, []);
+        });
+        Swal.fire({
+          title: 'Success',
+          text: 'Record Deleted Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+      }
     });
+   
     // this.showNotification(
     //   'snackbar-danger',
     //   totalSelect + ' Record Delete Successfully...!!!',

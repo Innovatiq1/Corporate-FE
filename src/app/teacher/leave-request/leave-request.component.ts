@@ -107,49 +107,77 @@ export class InstructorLeaveRequestComponent
       },
       direction: tempDirection,
     });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // Then you update that record using data from dialogData (values you enetered)
-        if (foundIndex != null && this.exampleDatabase) {
-          this.exampleDatabase.dataChange.value[foundIndex] =
-            this.leaveRequestService.getDialogData();
-            //this.ro
-          // And lastly refresh table
-          this.loadData();
-          this.refreshTable();
-          Swal.fire({
-            title: 'Success',
-            text: 'Edit Record Successfully...!!!',
-            icon: 'success',
-            // confirmButtonColor: '#526D82',
-          });
-        }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to update this user!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+          if (result === 1) {
+            // When using an edit things are little different, firstly we find record inside DataService by id
+            const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+              (x) => x.id === this.id
+            );
+            // Then you update that record using data from dialogData (values you enetered)
+            if (foundIndex != null && this.exampleDatabase) {
+              this.exampleDatabase.dataChange.value[foundIndex] =
+                this.leaveRequestService.getDialogData();
+                //this.ro
+              // And lastly refresh table
+              this.loadData();
+              this.refreshTable();
+              Swal.fire({
+                title: 'Success',
+                text: 'Edit Record Successfully...!!!',
+                icon: 'success',
+                // confirmButtonColor: '#526D82',
+              });
+            }
+          }
+        });
       }
     });
+   
   }
 
 
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
-    this.selection.selected.forEach((item) => {
-      const index: number = this.dataSource.renderedData.findIndex(
-        (d) => d === item
-      );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
-      this.exampleDatabase?.dataChange.value.splice(index, 1);
-      this.refreshTable();
-      this.selection = new SelectionModel<LeaveRequest>(true, []);
-    });
+
     Swal.fire({
-      title: 'Success',
-      text: 'Record Deleted Successfully...!!!',
-      icon: 'success',
-      // confirmButtonColor: '#526D82',
-    });
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete selected record?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.selection.selected.forEach((item) => {
+          const index: number = this.dataSource.renderedData.findIndex(
+            (d) => d === item
+          );
+          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          this.exampleDatabase?.dataChange.value.splice(index, 1);
+          this.refreshTable();
+          this.selection = new SelectionModel<LeaveRequest>(true, []);
+        });
+        Swal.fire({
+          title: 'Success',
+          text: 'Record Deleted Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+  }
+  });
+
+  
   }
 
   private refreshTable() {

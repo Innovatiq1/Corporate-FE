@@ -127,6 +127,17 @@ export class CreateStudentComponent {
   }
   updateReview(formData:any) {
     return new Promise((resolve, reject) => {
+
+      Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to update!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      
       this.reviewService.updateReview(formData, this.currentId).subscribe(
         (review) => {
           Swal.fire('Successful', 'Review updated successfully', 'success');
@@ -144,6 +155,8 @@ export class CreateStudentComponent {
           reject(err)
         }
       );
+    }
+  });
     })
     
   }

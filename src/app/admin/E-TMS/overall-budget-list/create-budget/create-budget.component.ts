@@ -127,16 +127,28 @@ updateRequest(){
     name: this.requestForm.value.name,
     email: this.requestForm.value.email,
   }
-  this.etmsService.updateTrainingBudget(this._id, payload).subscribe((res: any) => {
-    console.log("data", res);
-    Swal.fire({
-      icon:'success',
-      title: 'Budget Updated Successfully',
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    this.router.navigate(['/admin/e-tms/overall-budget-list']);
-  })
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to update budget!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.etmsService.updateTrainingBudget(this._id, payload).subscribe((res: any) => {
+        console.log("data", res);
+        Swal.fire({
+          icon:'success',
+          title: 'Budget Updated Successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.router.navigate(['/admin/e-tms/overall-budget-list']);
+      })
+    }
+  });
+ 
 }
 
 
@@ -148,7 +160,17 @@ onSubmit(){
     requestData['approval']='Pending';
     requestData['director']=this.directorId
     requestData['employeeEmail'] = employeeEmail;
-            this.etmsService
+
+    Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to create request!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed){
+      this.etmsService
               .createBudget(requestData)
               .subscribe((response: any) => {
                 Swal.fire({
@@ -157,7 +179,10 @@ onSubmit(){
                   icon: 'success',
                 });
                 this.router.navigate(['/admin/e-tms/overall-budget-list']);
-              }); 
+              });  
+    }
+  });
+           
   }
 }
 }

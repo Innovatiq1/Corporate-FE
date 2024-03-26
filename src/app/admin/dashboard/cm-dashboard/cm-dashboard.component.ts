@@ -315,6 +315,18 @@ export class CmDashboardComponent implements OnInit {
         });
         return;
       }
+      Swal.fire({
+        title: "Confirm Deletion",
+        text: "Are you sure you want to delete ?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+        
       this.classService.deleteClass(id).subscribe(() => {
         Swal.fire({
           title: 'Success',
@@ -323,6 +335,9 @@ export class CmDashboardComponent implements OnInit {
         });
         this.getClassList();
       });
+        }
+      });
+
     });
   }
 
@@ -694,14 +709,30 @@ this.getAllCourse()
         });
         return;
       }
-      this.courseService.deleteCourse(id).subscribe(() => {
-        this.getCoursesList();
-        Swal.fire({
-          title: 'Success',
-          text: 'Course deleted successfully.',
-          icon: 'success',
-        });
+
+      Swal.fire({
+        title: "Confirm Deletion",
+        text: "Are you sure you want to delete?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed){
+          this.courseService.deleteCourse(id).subscribe(() => {
+            this.getCoursesList();
+            Swal.fire({
+              title: 'Success',
+              text: 'Course deleted successfully.',
+              icon: 'success',
+            });
+          });
+        }
       });
+     
+     
     });
   }
   private mapCategories(): void {

@@ -90,25 +90,40 @@ export class UserTypeComponent {
     }
     delete(data: any) {
       console.log('data',data)
-        this.userService.deleteUserType(data.id,data.typeName).subscribe(() => {
-          Swal.fire({
-            title: 'Success',
-            text: 'Usertype deleted successfully.',
-            icon: 'success',
-          });
-          this.getUserTypeList({});
 
-        },
-        (error) => {
-          Swal.fire({
-            title: "Error",
-            text: "UserType attached to  User. Cannot Delete.",
-            icon: "error",
-          });
-          this.getUserTypeList({});
-
+      Swal.fire({
+        title: "Confirm Deletion",
+        text: "Are you sure you want to delete?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed){
+          this.userService.deleteUserType(data.id,data.typeName).subscribe(() => {
+            Swal.fire({
+              title: 'Success',
+              text: 'Usertype deleted successfully.',
+              icon: 'success',
+            });
+            this.getUserTypeList({});
+  
+          },
+          (error) => {
+            Swal.fire({
+              title: "Error",
+              text: "UserType attached to  User. Cannot Delete.",
+              icon: "error",
+            });
+            this.getUserTypeList({});
+  
+          }
+  );
         }
-);
+      });
+        
     }
     
   

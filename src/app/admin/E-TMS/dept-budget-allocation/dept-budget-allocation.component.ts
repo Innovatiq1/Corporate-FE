@@ -131,20 +131,34 @@ export class DeptBudgetAllocationComponent implements OnInit{
   }
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
-    this.selection.selected.forEach((item) => {
-      const index: number = this.dataSource.findIndex(
-        (d: CourseModel) => d === item
-      );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
-      this.courseService?.dataChange.value.splice(index, 1);
-      this.refreshTable();
-      this.selection = new SelectionModel<CourseModel>(true, []);
-    });
+
     Swal.fire({
-      title: 'Success',
-      text: 'Training Deleted Successfully...!!!',
-      icon: 'success',
+      title: 'Are you sure?',
+      text: 'Do you want to update this user!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.selection.selected.forEach((item) => {
+          const index: number = this.dataSource.findIndex(
+            (d: CourseModel) => d === item
+          );
+          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          this.courseService?.dataChange.value.splice(index, 1);
+          this.refreshTable();
+          this.selection = new SelectionModel<CourseModel>(true, []);
+        });
+        Swal.fire({
+          title: 'Success',
+          text: 'Training Deleted Successfully...!!!',
+          icon: 'success',
+        });
+      }
     });
+
+  
   }
   approveCourse(): void {
     Swal.fire({

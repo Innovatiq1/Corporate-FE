@@ -148,21 +148,37 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
 
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
-    this.selection.selected.forEach((item) => {
-      const index: number = this.dataSource.findIndex(
-        (d: ClassModel) => d === item
-      );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
-      this._classService?.dataChange.value.splice(index, 1);
-      this.refreshTable();
-      this.selection = new SelectionModel<ClassModel>(true, []);
-    });
+
     Swal.fire({
-      title: 'Success',
-      text: 'Record Deleted Successfully...!!!',
-      icon: 'success',
-      // confirmButtonColor: '#526D82',
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this course kit?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.selection.selected.forEach((item) => {
+          const index: number = this.dataSource.findIndex(
+            (d: ClassModel) => d === item
+          );
+          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          this._classService?.dataChange.value.splice(index, 1);
+          this.refreshTable();
+          this.selection = new SelectionModel<ClassModel>(true, []);
+        });
+        Swal.fire({
+          title: 'Success',
+          text: 'Record Deleted Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+      }
     });
+
+   
   }
   //edit
   editClass(id:string){
@@ -175,22 +191,37 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
       const matchingClasses = classList.docs.filter((classItem: any) => {
         return classItem.courseId && classItem.courseId.id === id;
       });
-      if (matchingClasses.length > 0) {
-        Swal.fire({
-          title: 'Error',
-          text: 'Class have been registered . Cannot delete.',
-          icon: 'error',
-        });
-        return;
-      }
-      this._classService.deleteClass(id).subscribe(() => {
-        Swal.fire({
-          title: 'Success',
-          text: 'Class deleted successfully.',
-          icon: 'success',
-        });
-        this.getClassList();
-      });
+
+      Swal.fire({
+        title: "Confirm Deletion",
+        text: "Are you sure you want to delete this Class?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          if (matchingClasses.length > 0) {
+            Swal.fire({
+              title: 'Error',
+              text: 'Class have been registered . Cannot delete.',
+              icon: 'error',
+            });
+            return;
+          }
+          this._classService.deleteClass(id).subscribe(() => {
+            Swal.fire({
+              title: 'Success',
+              text: 'Class deleted successfully.',
+              icon: 'success',
+            });
+            this.getClassList();
+          });
+    }
+    });
+
     });
   }
   performSearch() {

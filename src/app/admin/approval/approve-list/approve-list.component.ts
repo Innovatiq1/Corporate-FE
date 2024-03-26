@@ -146,27 +146,38 @@ export class ApproveListComponent  {
       studentId: element.studentId.id,
       session: this.getSessions(element),
     };
-    this._classService
-      .saveApprovedClasses(element.id, item)
-      .subscribe((_response: any) => {
-        Swal.fire({
-          title: 'Success',
-          text: 'Course approved successfully.',
-          icon: 'success',
-          // confirmButtonColor: '#526D82',
-        });
-        this.getRegisteredClasses();
-      }, (error) => {
-            Swal.fire({
-              title: 'Error',
-              text: 'Failed to approve course. Please try again.',
-              icon: 'error',
-              // confirmButtonColor: '#526D82',
-            });
-          });
-  }
 
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to approve this course!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this._classService
+        .saveApprovedClasses(element.id, item)
+        .subscribe((_response: any) => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Course approved successfully.',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
+          this.getRegisteredClasses();
+        }, (error) => {
+              Swal.fire({
+                title: 'Error',
+                text: 'Failed to approve course. Please try again.',
+                icon: 'error',
+                // confirmButtonColor: '#526D82',
+              });
+            });
+      }
+    });
  
+  }
 
   Status(element: Student, status: string) {
     const item: StudentApproval = {
@@ -177,25 +188,36 @@ export class ApproveListComponent  {
       studentId: element.studentId.id,
       session: this.getSessions(element),
     };
-
-    this._classService
-      .saveApprovedClasses(element.id, item)
-      .subscribe((response: any) => {
-        Swal.fire({
-          title: 'Success',
-          text: 'Course Withdraw successfully.',
-          icon: 'success',
-          // confirmButtonColor: '#526D82',
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to withdraw this course!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this._classService
+        .saveApprovedClasses(element.id, item)
+        .subscribe((response: any) => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Course Withdraw successfully.',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
+          this.getRegisteredClasses();
+        }, (error) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Failed to approve course. Please try again.',
+            icon: 'error',
+            // confirmButtonColor: '#526D82',
+          });
         });
-        this.getRegisteredClasses();
-      }, (error) => {
-        Swal.fire({
-          title: 'Error',
-          text: 'Failed to approve course. Please try again.',
-          icon: 'error',
-          // confirmButtonColor: '#526D82',
-        });
-      });
+      }
+    });
+  
   }
   performSearch() {
     if(this.searchTerm){

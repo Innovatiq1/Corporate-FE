@@ -149,27 +149,38 @@ export class CreateAllUsersComponent {
     }
   }
   createUser(userData:Users){
-    this.userService.saveUsers(userData).subscribe(
-      (response:any) => {
-        this.isLoading = false;
-        Swal.fire({
-          title: 'Successful',
-          text: 'User created succesfully',
-          icon: 'success',
-        });
-        this.router.navigate(['/admin/users/all-users'])
-       
-      },
-      (error:any) => {
-        this.isLoading = false;
-        Swal.fire(
-          'Failed to create user',
-          error.message || error.error,
-          'error'
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do You want to create a user!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.userService.saveUsers(userData).subscribe(
+          (response:any) => {
+            this.isLoading = false;
+            Swal.fire({
+              title: 'Successful',
+              text: 'User created succesfully',
+              icon: 'success',
+            });
+            this.router.navigate(['/admin/users/all-users'])
+           
+          },
+          (error:any) => {
+            this.isLoading = false;
+            Swal.fire(
+              'Failed to create user',
+              error.message || error.error,
+              'error'
+            );
+          }
         );
       }
-    );
-    
+    });
 
   }
   onFileUpload(event:any) {
@@ -257,9 +268,21 @@ updateBlog(formObj: any) {
 
     // Ensure that the avatar property contains the correct URL
     userData.avatar = this.avatar // Replace 'your_existing_avatar_url' with the actual avatar URL
-
-    this.updateUser(userData);
-    Swal.close();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to update this user!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.updateUser(userData);
+        Swal.close();
+      }
+    });
+    // this.updateUser(userData);
+    // Swal.close();
   }
 }
   updateUser(obj:any){

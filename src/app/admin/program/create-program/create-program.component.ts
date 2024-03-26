@@ -231,22 +231,36 @@ export class CreateProgramComponent {
           id: this.courseId,
           // programKit: this.programFormGroup.value.programKit ? this.programFormGroup.value.programKit : null
         }
-        this.courseService.updateCourseProgram(this.courseId, payload).subscribe(
-          (_res: any) => {
-            Swal.fire({
-              title: 'Successful',
-              text: 'Program updated succesfully',
-              icon: 'success',
-            });
-            this.router.navigate(['/admin/program/program-list'])
-          },
-          (err: any) => {
-            Swal.fire(
-              'Failed to update Program',
-              'error'
+
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'You want to update this program!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed){
+            this.courseService.updateCourseProgram(this.courseId, payload).subscribe(
+              (_res: any) => {
+                Swal.fire({
+                  title: 'Successful',
+                  text: 'Program updated succesfully',
+                  icon: 'success',
+                });
+                this.router.navigate(['/admin/program/program-list'])
+              },
+              (err: any) => {
+                Swal.fire(
+                  'Failed to update Program',
+                  'error'
+                );
+              }
             );
           }
-        );
+        });
+
+       
       }
       else {
         let payload = {
@@ -271,22 +285,35 @@ export class CreateProgramComponent {
           id: this.courseId,
           // programKit: this.programFormGroup.value.programKit ? this.programFormGroup.value.programKit : null
         }
-        this.courseService.createCourseProgram(payload).subscribe(
-          (res: any) => {
-            Swal.fire({
-              title: 'Successful',
-              text: 'Program created succesfully',
-              icon: 'success',
-            });
-            this.router.navigate(['/admin/approval/program-approval'])
-          },
-          (err: any) => {
-            Swal.fire(
-              'Failed to create Program',
-              'error'
+
+
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'You want to create a program!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed){
+            this.courseService.createCourseProgram(payload).subscribe(
+              (res: any) => {
+                Swal.fire({
+                  title: 'Successful',
+                  text: 'Program created succesfully',
+                  icon: 'success',
+                });
+                this.router.navigate(['/admin/approval/program-approval'])
+              },
+              (err: any) => {
+                Swal.fire(
+                  'Failed to create Program',
+                  'error'
+                );
+              }
             );
           }
-        );
+        });
       }
     }
     else {

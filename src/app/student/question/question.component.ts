@@ -27,7 +27,7 @@ export class QuestionComponent implements OnInit {
   studentId!: string;
   classId!: string;
   constructor(private questionService: QuestionService,private courseService:CourseService,private router: Router,
-    private classService: ClassService) { }
+      ) { }
 
   ngOnInit(): void {
     this.name = localStorage.getItem("name")!;
@@ -63,21 +63,21 @@ export class QuestionComponent implements OnInit {
     if(currentQno === this.questionList.length){
       this.isQuizCompleted = true;
       if(this.points >= 10){
-        let payload = {
-          status: 'completed',
-          studentId: this.studentId,
-          playbackTime: 100,
-        };
-        this.classService
-          .saveApprovedClasses(this.classId, payload)
-          .subscribe((response) => {
-            setTimeout(() => {
-              this.router.navigate(['/student/view-course/'+ this.classId]);    
-            }, 7000);
+        // let payload = {
+        //   status: 'completed',
+        //   studentId: this.studentId,
+        //   playbackTime: 100,
+        // };
+        // this.classService
+        //   .saveApprovedClasses(this.classId, payload)
+        //   .subscribe((response) => {
+        //     setTimeout(() => {
+        //       this.router.navigate(['/student/view-course/'+ this.classId]);    
+        //     }, 7000);
       
-          });
+        //   });
 
-
+        this.router.navigate(['/student/feedback/courses', this.classId, this.studentId, this.courseId]);
       }
 
       this.stopCounter();

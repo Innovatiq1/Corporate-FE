@@ -113,21 +113,36 @@ export class ProgramPaymentsComponent implements OnInit {
   }
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
-    this.selection.selected.forEach((item) => {
-      const index: number = this.dataSource.findIndex(
-        (d: CourseModel) => d === item
-      );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
-      this.courseService?.dataChange.value.splice(index, 1);
-      this.refreshTable();
-      this.selection = new SelectionModel<CourseModel>(true, []);
-    });
     Swal.fire({
-      title: 'Success',
-      text: 'Record Deleted Successfully...!!!',
-      icon: 'success',
-      // confirmButtonColor: '#526D82',
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.selection.selected.forEach((item) => {
+          const index: number = this.dataSource.findIndex(
+            (d: CourseModel) => d === item
+          );
+          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          this.courseService?.dataChange.value.splice(index, 1);
+          this.refreshTable();
+          this.selection = new SelectionModel<CourseModel>(true, []);
+        });
+        Swal.fire({
+          title: 'Success',
+          text: 'Record Deleted Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+      }
     });
+    
+   
     // this.showNotification(
     //   'snackbar-danger',
     //   totalSelect + ' Record Delete Successfully...!!!',

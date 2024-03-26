@@ -162,6 +162,15 @@ export class CreatAnnouncementComponent {
           isActive: formData?.isActive,
         }
         // console.log(payload)
+        Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to create announcement!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
         this.announcementService.makeAnnouncement(payload).subscribe(
           (res) => {
             Swal.fire({
@@ -182,6 +191,9 @@ export class CreatAnnouncementComponent {
           }
         );
       }
+    });
+        
+      }
       else {
         this.isSubmitted = true;
       }
@@ -195,6 +207,16 @@ export class CreatAnnouncementComponent {
           announcementFor: this.announcementForm.value?.announcementFor.toString().replace(',',' / '),
           isActive: this.announcementForm.value?.isActive,
         }
+
+        Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to update this announcement!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
         this.announcementService.updateAnnouncement(payload, this.currentId).subscribe(
           (res) => {
             Swal.fire({
@@ -213,7 +235,10 @@ export class CreatAnnouncementComponent {
           },
           () => {
           }
-        );
+        );  
+      }
+    });
+        
       }
       else {
         this.isSubmitted = true;

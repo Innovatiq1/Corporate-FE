@@ -114,23 +114,35 @@ save() {
       }))
     };
 
-    
-    this.surveyService.createSurveyQuestions(payload).subscribe(
-      (res: any) => {
-        Swal.fire({
-          title: 'Successful',
-          text: 'Survey Question created successfully',
-          icon: 'success',
-        });
-        this.router.navigate(['/admin/survey/survey-questions'])
-      },
-      (err: any) => {
-        Swal.fire(
-          'Failed to create Survey Question',
-          'error'
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to survey question!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.surveyService.createSurveyQuestions(payload).subscribe(
+          (res: any) => {
+            Swal.fire({
+              title: 'Successful',
+              text: 'Survey Question created successfully',
+              icon: 'success',
+            });
+            this.router.navigate(['/admin/survey/survey-questions'])
+          },
+          (err: any) => {
+            Swal.fire(
+              'Failed to create Survey Question',
+              'error'
+            );
+          }
         );
       }
-    );
+    });
+    
+   
   }
   
 }
@@ -146,27 +158,35 @@ update(){
         }))
       })),
       id:this.questionId,
-
     };
-
-    
-    this.surveyService.updateSurveyQuestions(payload).subscribe(
-      (res: any) => {
-        Swal.fire({
-          title: 'Successful',
-          text: 'Survey Question Updated successfully',
-          icon: 'success',
-        });
-        this.router.navigate(['/admin/survey/survey-questions'])
-      
-      },
-      (err: any) => {
-        Swal.fire(
-          'Failed to update Survey Question',
-          'error'
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to update this survey question!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.surveyService.updateSurveyQuestions(payload).subscribe(
+          (res: any) => {
+            Swal.fire({
+              title: 'Successful',
+              text: 'Survey Question Updated successfully',
+              icon: 'success',
+            });
+            this.router.navigate(['/admin/survey/survey-questions'])
+          
+          },
+          (err: any) => {
+            Swal.fire(
+              'Failed to update Survey Question',
+              'error'
+            );
+          }
         );
       }
-    );
+    }); 
   }
 }
 getData() {

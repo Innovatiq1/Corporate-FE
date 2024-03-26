@@ -151,26 +151,40 @@ export class AddTeacherComponent {
     this.getDepartment();
   }
   private createInstructor(userData: Users): void {
-    this.instructor.CreateUser(userData).subscribe(
-      () => {
-        Swal.fire({
-          title: "Successful",
-          text: "Instructor created successfully",
-          icon: "success",
-        });
-        //this.fileDropEl.nativeElement.value = "";
-      this.proForm.reset();
-      //this.toggleList()
-      this.router.navigateByUrl('/admin/users/all-instructors');
-      },
-      (error) => {
-        Swal.fire(
-          "Failed to create instructor",
-          error.message || error.error,
-          "error"
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do You want to create a instructor!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.instructor.CreateUser(userData).subscribe(
+          () => {
+            Swal.fire({
+              title: "Successful",
+              text: "Instructor created successfully",
+              icon: "success",
+            });
+            //this.fileDropEl.nativeElement.value = "";
+          this.proForm.reset();
+          //this.toggleList()
+          this.router.navigateByUrl('/admin/users/all-instructors');
+          },
+          (error) => {
+            Swal.fire(
+              "Failed to create instructor",
+              error.message || error.error,
+              "error"
+            );
+          }
         );
       }
-    );
+    });
+   
   }
   cancel(){
     this.router.navigateByUrl('/admin/users/all-instructors');

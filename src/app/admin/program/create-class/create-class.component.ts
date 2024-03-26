@@ -335,23 +335,44 @@ export class CreateClassComponent {
         this.classForm.value.sessions = sessions;
         this.classForm.value.programName = this.courseTitle
         this.isSubmitted = true;
-        this._classService.saveProgramClass(this.classForm.value).subscribe((response:any) => {
-          Swal.fire({
-            title: 'Success',
-            text: 'Class Created successfully.',
-            icon: 'success',
-            // confirmButtonColor: '#d33',
-          });
-          this.router.navigateByUrl(`admin/program/schedule-class`);
-                });
+
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'Do you want to create a class!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed){
+            this._classService.saveProgramClass(this.classForm.value).subscribe((response:any) => {
+              Swal.fire({
+                title: 'Success',
+                text: 'Class Created successfully.',
+                icon: 'success',
+                // confirmButtonColor: '#d33',
+              });
+              this.router.navigateByUrl(`admin/program/schedule-class`);
+               });
+          }
+        });
       }
     }
     if(this.editUrl){
       let sessions = this.getSession();
       if (sessions) {
         this.classForm.value.sessions = sessions;
-        this.classForm.value.programName = this.courseTitle
-        this._classService.updateProgramClass(this.classId, this.classForm.value).subscribe((response:any) => {
+        this.classForm.value.programName = this.courseTitle;
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'You want to update this class!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed){ 
+          this._classService.updateProgramClass(this.classId, this.classForm.value).subscribe((response:any) => {
           Swal.fire({
             title: 'Success',
             text: 'Class updated successfully.',
@@ -360,6 +381,9 @@ export class CreateClassComponent {
           });
           window.history.back();
         });
+          }
+        });
+      
       }
   }
   }

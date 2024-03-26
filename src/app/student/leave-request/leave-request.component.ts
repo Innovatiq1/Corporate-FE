@@ -96,22 +96,35 @@ export class LeaveRequestComponent
       },
       direction: tempDirection,
     });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-        this.exampleDatabase?.dataChange.value.unshift(
-          this.leaveRequestService.getDialogData()
-        );
-        this.refreshTable();
-        Swal.fire({
-          title: 'Successful',
-          text: "Leave applied successfully",
-          icon: 'success',
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to apply leave!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+          if (result === 1) {
+            // After dialog is closed we're doing frontend updates
+            // For add we're just pushing a new row inside DataService
+            this.exampleDatabase?.dataChange.value.unshift(
+              this.leaveRequestService.getDialogData()
+            );
+            this.refreshTable();
+            Swal.fire({
+              title: 'Successful',
+              text: "Leave applied successfully",
+              icon: 'success',
+            });
+      
+          }
         });
-  
       }
     });
+   
   }
   editCall(row: LeaveRequest) {
     this.id = row.id;
@@ -128,35 +141,61 @@ export class LeaveRequestComponent
       },
       direction: tempDirection,
     });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        if (foundIndex != null && this.exampleDatabase) {
-          this.exampleDatabase.dataChange.value[foundIndex] =
-            this.leaveRequestService.getDialogData();
-          this.refreshTable();
-          Swal.fire({
-            title: 'Successful',
-            text: "Leave edited successfully",
-            icon: 'success',
-          });
-        }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to update leave!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+          if (result === 1) {
+            const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+              (x) => x.id === this.id
+            );
+            if (foundIndex != null && this.exampleDatabase) {
+              this.exampleDatabase.dataChange.value[foundIndex] =
+                this.leaveRequestService.getDialogData();
+              this.refreshTable();
+              Swal.fire({
+                title: 'Successful',
+                text: "Leave edited successfully",
+                icon: 'success',
+              });
+            }
+          }
+        });
       }
     });
+    
   }
   deleteItem(row: LeaveRequest) {
     let id = row.id;
-    this.leaveRequestService.deleteLeaveRequest(id).subscribe(() => {
-      Swal.fire({
-        title: 'Success',
-        text: 'Leave deleted successfully.',
-        icon: 'success',
-      });
-      this.loadData();
-
-    });
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete this leave?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.leaveRequestService.deleteLeaveRequest(id).subscribe(() => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Leave deleted successfully.',
+            icon: 'success',
+          });
+          this.loadData();
+    
+        });
+  }
+  });
+    
   }
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);

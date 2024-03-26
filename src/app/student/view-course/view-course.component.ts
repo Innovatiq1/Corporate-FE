@@ -157,6 +157,7 @@ export class ViewCourseComponent implements OnDestroy {
 
       this.videoPlayer.nativeElement.currentTime = initialPlaybackPosition;
     });
+
     this.videoPlayer.nativeElement.addEventListener('ended', () => {
       let classId = localStorage.getItem('classId');
       let studentId = localStorage.getItem('id');
@@ -190,11 +191,14 @@ export class ViewCourseComponent implements OnDestroy {
                       (doc: { playbackTime: number }) =>
                         doc.playbackTime === 100
                     );
+                    // console.log("reached",allUnmatchedCompleted);
                     if (allUnmatchedCompleted) {
+                    
                       this.courseService
                       .getStudentClass(studentId, this.classId)
                       .subscribe((response) => {
                         this.studentClassDetails = response.data.docs[0]
+                        // console.log("enterd", this.studentClassDetails);
                         if(this.studentClassDetails.status == 'approved'){
                           this.router.navigate(['/student/questions/', classId, studentId, this.courseId]);    
                         } else {
