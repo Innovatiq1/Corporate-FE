@@ -410,7 +410,7 @@ console.log('sessions',sessions)
 
         Swal.fire({
           title: 'Are you sure?',
-          text: 'Do you want to create schedule a class!',
+          text: 'Do you want to schedule a class!',
           icon: 'warning',
           confirmButtonText: 'Yes',
           showCancelButton: true,

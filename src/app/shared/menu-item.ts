@@ -374,28 +374,28 @@ MENU_LIST = [
 
 //     ]
 // },
-{
-    id: "admin/payment",
-    title: "Transactions",
-    selected: false,
-    iconsrc: "/assets/payment-icon.svg",
-    icon: 'monetization_on',
-    children:
-    [
-        {
-            id: "course-payments",
-            title: "Course Payments",
-            type: "none"
-        },
-        {
-            id: "program-payments",
-            title: "Program Payments",
-            type: "none"
-        },
+// {
+//     id: "admin/payment",
+//     title: "Transactions",
+//     selected: false,
+//     iconsrc: "/assets/payment-icon.svg",
+//     icon: 'monetization_on',
+//     children:
+//     [
+//         {
+//             id: "course-payments",
+//             title: "Course Payments",
+//             type: "none"
+//         },
+//         {
+//             id: "program-payments",
+//             title: "Program Payments",
+//             type: "none"
+//         },
 
 
-    ]
-},
+//     ]
+// },
 
 {
     id: "admin/budgets",
@@ -406,7 +406,7 @@ MENU_LIST = [
     children: [
         {
             id: "training-request",
-            title: "Training Approval Request",
+            title: "Training Request",
             type: "none",
 
         },
