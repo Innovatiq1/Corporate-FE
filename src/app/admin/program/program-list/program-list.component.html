@@ -157,7 +157,7 @@
                         </ng-container>
 
                         <!-- actions -->
-                        <ng-container matColumnDef="actions">
+                        <!-- <ng-container matColumnDef="actions">
                           <mat-header-cell class="pr-0" *matHeaderCellDef>Actions
                           </mat-header-cell>
                           <mat-cell *matCellDef="let row" let i=index; class="pr-0">
@@ -178,7 +178,7 @@
                               <!-- <button mat-menu-item [routerLink]="['/admin/courses/view-course-kit/',row.id]">
                                         <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
                                         <span class="menu-text">View</span>
-                                      </button> -->
+                                      </button>
                               <button mat-menu-item [routerLink]="['/admin/program/edit-program/',row.id]">
                                 <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                                 <span class="menu-text px-3">Edit</span>
@@ -203,8 +203,8 @@
                               class="tbl-action-btn">
                               <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                             </button>
-                          </mat-cell>  -->
-                        </ng-container>
+                          </mat-cell> 
+                        </ng-container> -->
                         <mat-header-row *matHeaderRowDef="displayedColumns">
                         </mat-header-row>
                         <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->

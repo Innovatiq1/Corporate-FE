@@ -36,7 +36,6 @@ export class ProgramListComponent {
     'Payment',
     'Compulsory Count',
     'Elective Count',
-    'actions',
   ];
   isLoading = false;
   isNoMoreData = false;
