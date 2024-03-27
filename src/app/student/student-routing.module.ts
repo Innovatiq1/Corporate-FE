@@ -20,6 +20,7 @@ import { SuccessProgramComponent } from './success-program/success-program.compo
 import { FailureProgramComponent } from './failure-program/failure-program.component';
 import { QuestionComponent } from './question/question.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-coutomzation.component';
 
 
 const routes: Routes = [
@@ -137,6 +138,10 @@ const routes: Routes = [
   {
     path: 'customization-settings',
     component: SettingsComponent,  
+  },
+  {
+    path: 'logo-coutomization',
+    component: LogoCoutomzationComponent,
   },
 
 

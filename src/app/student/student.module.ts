@@ -42,6 +42,7 @@ import { TimeFormatPipe } from '../../app/core/pipes/time-format.pipe';import { 
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ChangeBgDirective } from 'app/change-bg.directive';
 import { ExamScheduleService } from 'app/timetable/exam-schedule.service';
+import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-coutomzation.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { ExamScheduleService } from 'app/timetable/exam-schedule.service';
     TimeFormatPipe,
     QuestionComponent,
     WelcomeComponent,
-    ChangeBgDirective
+    ChangeBgDirective,
+    LogoCoutomzationComponent
 
   ],
   imports: [
