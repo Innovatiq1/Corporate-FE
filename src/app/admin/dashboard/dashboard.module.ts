@@ -16,9 +16,12 @@ import { HodDashboardComponent } from './hod-dashboard/hod-dashboard.component';
 import { TrainingCoordinatorDbComponent } from './training-coordinator-db/training-coordinator-db.component';
 import { DashboardTabsComponent } from './dashboard-tabs/dashboard-tabs.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
+import { SupportComponent } from '../../apps/support/support.component';
+import { EtmsDashboardComponent } from '../E-TMS/etms-dashboard/etms-dashboard.component';
+import { NgxGaugeModule } from 'ngx-gauge';
 
 @NgModule({
-  declarations: [MainComponent, Dashboard2Component, CmDashboardComponent, PmDashboardComponent, TrainingAdministratorComponent, HodDashboardComponent, TrainingCoordinatorDbComponent, SupervisorDashboardComponent, DashboardTabsComponent, StudentDashboardComponent,    
+  declarations: [MainComponent, Dashboard2Component, CmDashboardComponent, PmDashboardComponent, TrainingAdministratorComponent, HodDashboardComponent, TrainingCoordinatorDbComponent, SupervisorDashboardComponent, DashboardTabsComponent, StudentDashboardComponent, SupportComponent, EtmsDashboardComponent  
    
   ],
   imports: [
@@ -31,6 +34,7 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
     NgApexchartsModule,
     ComponentsModule,
     SharedModule,
+    NgxGaugeModule
   ],
 })
 export class DashboardModule {}

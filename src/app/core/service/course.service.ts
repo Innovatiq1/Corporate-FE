@@ -397,7 +397,6 @@ export class CourseService {
     }
   
     saveVideo(payload: any){
-    console.log("payload",payload);
       const apiUrl = `${this.prefix}uploadVideo/`;
       return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
     }
@@ -420,8 +419,11 @@ export class CourseService {
 
       getCoursekitVideoById(id: any) {
         const apiUrl = `${this.prefix}uploadVideo/${id}`;
-        console.log("==new=",apiUrl)
         return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+      }
+      createCurrency(currencyData: any): Observable<any> {
+        const apiUrl = `${this.prefix}admin/configuration/currency`;
+        return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
       }
     
 }

@@ -684,7 +684,6 @@
           <div class="col-md-6 banner">
             <button id="no-link"> Storage </button>
           </div>
-
         </div>
 
 
@@ -742,10 +741,9 @@
             <button id="saved" routerLink="/student/logo-coutomization"> Logo </button>
           </div>
           <div class="col-md-5">
-            <!-- <button id="save" [routerLink]="['/admin/survey/create-survey-questions']"> Survey </button> -->
+            <button id="save" (click)="openDialog(currencyDialog)"> Currency </button>
           </div>
         </div>
-
       </div>
     </div>
     <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showLms">
@@ -1017,4 +1015,19 @@
     </div>
 
   </div>
+  <ng-template #currencyDialog let-dialogRef="dialogRef" let-data>
+    <h2 mat-dialog-title>Select Currency</h2>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Currency</mat-label>
+        <mat-select [(ngModel)]="selectedCurrency">
+          <mat-option *ngFor="let code of currencyCodes" [value]="code">{{code}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="dialogRef.close()">Cancel</button>
+      <button mat-button (click)="updateCurrency(dialogRef)">Update Currency</button>
+    </div>
+  </ng-template>
 </section>

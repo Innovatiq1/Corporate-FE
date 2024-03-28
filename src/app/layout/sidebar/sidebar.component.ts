@@ -75,7 +75,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
   callToggleMenu(event: Event, length: number) {
-    console.log("close",event.target, length)
     if (length > 0) {
       const parentElement = (event.target as HTMLInputElement).closest('li');
       const activeClass = parentElement?.classList.contains('active');
@@ -91,9 +90,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.adminService.getUserTypeList( {'allRows':true}).subscribe(
       (response: any) => {
         let userType = localStorage.getItem('user_type')
-        console.log("menus",response)
         let data = response.filter((item:any) => item.typeName === userType);
-        this.menuitem = data[0].menuItems;
+        this.menuitem = data[0].menuItems.filter((item: any) => item.title !== 'Support');
         let limit = filters?.limit ? filters?.limit : 10;
         if (response.totalDocs <= limit || response.totalDocs <= 0) {
         }
@@ -104,11 +102,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
   navigateTo(menu:any,url:any) {
     this.menuItemClick.emit();
-    console.log("url", menu +'/'+url)
     let userType = localStorage.getItem('user_type')
     this.router.navigateByUrl( menu +'/'+url);
-    // this.url = menu +'/'+url;
-    // console.log("url",this.url)
 }
 
 
@@ -116,11 +111,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userProfile = this.authenService.getUserProfile();
-    console.log("=user=",this.authenService.getUserProfile())
 
     // Subscribe to changes in user profile
     this.authenService.profileUpdated.subscribe((updatedProfile: any) => {
-      console.log("==updatedProfile==",updatedProfile)
       this.userProfile = updatedProfile;
     });
     if (this.authenService.currentUserValue) {
