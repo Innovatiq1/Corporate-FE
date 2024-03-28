@@ -24,6 +24,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SimpleDialogComponent } from 'app/ui/modal/simpleDialog.component';
 
 import { StudentsService } from 'app/admin/students/all-students/students.service';
+import { LogoService } from 'app/student/settings/logo.service';
+import { Subscription } from 'rxjs';
 
 
 interface Notifications {
@@ -62,6 +64,10 @@ export class HeaderComponent
   userProfile: any;
   studentId: any;
   isAdmin: boolean = false;
+  logoTitle: any;
+  logoImage: any;
+  data: any;
+  subscription!: Subscription;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -73,6 +79,7 @@ export class HeaderComponent
     public languageService: LanguageService,
     private authenService:AuthenService,
     private translate: LanguageService,
+    private logoService: LogoService,
 
     private announcementService:AnnouncementService,
     private dialogModel: MatDialog,
@@ -81,6 +88,12 @@ export class HeaderComponent
 
   ) {
     super();
+
+    /* getting logo details from logoservice **/
+    this.subscription = this.logoService.currentData.subscribe(data => {
+      this.logoTitle = data.data.docs[0].title;
+      this.logoImage = data.data.docs[0].image;
+    });
   }
   simpleDialog?: MatDialogRef<SimpleDialogComponent>;
   listLang = [
@@ -143,19 +156,23 @@ export class HeaderComponent
 
 
   ngOnInit() {
+    this.logoService.getLogo().subscribe(data => {
+      // console.log("logo,title",data.data.docs[0].title);
+      
+    });
     this.userProfile = this.authenService.getUserProfile();
-    console.log("=user=",this.authenService.getUserProfile())
+    // console.log("=user=",this.authenService.getUserProfile())
 
     // Subscribe to changes in user profile
     this.authenService.profileUpdated.subscribe((updatedProfile: any) => {
-      console.log("==updatedProfile==",updatedProfile)
+      // console.log("==updatedProfile==",updatedProfile)
       this.userProfile = updatedProfile;
     });
     if (this.authenService.currentUserValue) {
       const userRole = this.authenService.currentUserValue.user.role;
       this.userFullName = this.authenService.currentUserValue.user.name
       this.userImg = this.authenService.currentUserValue.user.avatar;
-      console.log('img',this.student)
+      // console.log('img',this.student)
       this.student()
       if (userRole === Role.Admin) {
         this.userType = Role.Admin;
@@ -237,7 +254,7 @@ onClick(){
     this.announcementService.getAnnouncementsForStudents(payload).subscribe((res: { data: { data: any[]; }; totalRecords: number; }) => {
       const announcementsData:any = res.data;
       this.announcements = announcementsData.reverse();
-      console.log( this.announcements,"+")
+      // console.log( this.announcements,"+")
       // console.log(announcementsData.reverse(),"+++++++")
     })
   }
@@ -280,7 +297,7 @@ cancel(id:any){
     this.isFullScreen = !this.isFullScreen;
   }
   setLanguage(event: any) {
-    console.log("=======",event)
+    // console.log("=======",event)
     // this.countryName = text;
     // this.flagvalue = flag;
     this.langStoreValue = event.target.value;
