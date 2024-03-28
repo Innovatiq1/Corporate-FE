@@ -104,7 +104,7 @@ export class EditComponent {
     }
   
     cancel(){
-      this.router.navigate(['/admin/exam/exam-schedule'])
+      this.router.navigate(['/timetable/course-exam'])
 
     }
     getData(){

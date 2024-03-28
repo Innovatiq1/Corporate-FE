@@ -314,7 +314,37 @@
 .card-spacing {
   padding-right: 0px;
 }
-
+#back {
+  // margin-left: 15px;
+  // margin-bottom: 20px;
+  background: #FFF;
+  border: 1px solid #000000;
+  width: 90px;
+  // height: 35px;
+  // border-radius: 10px;
+  color: black;
+  // font-weight: 700;
+}
+#submit {
+  background: #6777ef;
+  border: none;
+  color: #FFF;
+}
+#save {
+  background: #6777ef;
+  border: none;
+  width: 90px;
+  color: #FFF;
+}
+#next {
+  background: #6777ef;
+  border: none;
+  width: 95px;
+  color: #FFF;
+}
+#skip{
+  width: 95px;
+}
 .course-card-blog {
   margin-top: 30px;
   .course-card-caption {

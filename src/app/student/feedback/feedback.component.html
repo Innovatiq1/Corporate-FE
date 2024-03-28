@@ -190,14 +190,15 @@
                 </div>
               </div>
    -->
-              <div class="row mt-4">
+              <div class="row mt-4" style="float: right;">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                  <button class="btn-space" mat-raised-button color="primary" (click)="submit()">
-                    Submit
-                  </button>
-                  <button class="btn-space" mat-raised-button color="warn" (click)="skip()">
+                  <button class="btn-space" mat-raised-button color="warn" id="skip" (click)="skip()">
                     Skip
                   </button>
+                  <button mat-raised-button id="submit" (click)="submit()">
+                    Submit
+                  </button>
+                  
                   <!-- <button
                     type="button"
                     mat-raised-button

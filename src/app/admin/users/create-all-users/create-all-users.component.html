@@ -156,12 +156,12 @@
                         </div>
                     </form>
                     <div class="row body">
-                        <div class="col-md-8">
-                          <button mat-button id="back" [routerLink]="['/admin/users/all-users']">Back</button>
+                        <div class="col-md-10">
+                          <button  mat-raised-button id="back" [routerLink]="['/admin/users/all-users']">Back</button>
                         </div>
-                        <div class="col-md-4">
-                          <div class="d-grid gap-4 d-md-flex">
-                          <button mat-button id="submit" (click)="update()">{{editUrl? 'Update': 'Create'}}</button>
+                        <div class="col-md-2">
+                          <div class="d-grid d-md-flex">
+                          <button mat-raised-button id="submit" (click)="update()">{{editUrl? 'Update': 'Create'}}</button>
                    
                           </div>
                         </div>

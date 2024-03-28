@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CourseService } from '@core/service/course.service';
 import { CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 import Swal from 'sweetalert2';
@@ -7,6 +7,8 @@ import { ClassService } from 'app/admin/schedule-class/class.service';
 import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
 @Component({
   selector: 'app-all-course',
   templateUrl: './all-course.component.html',
@@ -20,7 +22,14 @@ export class AllCourseComponent {
       active: 'All Course',
     },
   ];
-
+  displayedColumns = [
+    'name',
+    'code',
+    'Days',
+    'Training Hours',
+    'Fees',
+    'Vendor',
+  ];
   coursePaginationModel: Partial<CoursePaginationModel>;
   courseData: any;
   pagination :any;
@@ -31,6 +40,8 @@ export class AllCourseComponent {
   allSubCategories!: SubCategory[];
   dataSource: any;
   searchTerm: string = '';
+  selection = new SelectionModel<MainCategory>(true, []);
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   
   constructor(public _courseService:CourseService,  private classService: ClassService) {
     // constructor
@@ -175,5 +186,47 @@ delete(id: string) {
       this.getAllCourse();
 
     }
+  }
+  private refreshTable() {
+    this.paginator._changePageSize(this.paginator.pageSize);
+  }
+  removeSelectedRows() {
+    const totalSelect = this.selection.selected.length;
+
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.selection.selected.forEach((item) => {
+          const index: number = this.courseData.renderedData.findIndex(
+            (d: MainCategory) => d === item
+          );
+          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          // this.exampleDatabase?.dataChange.value.splice(index, 1);
+          this.refreshTable();
+          this.selection = new SelectionModel<MainCategory>(true, []);
+        });
+        Swal.fire({
+          title: 'Success',
+          text: 'Record Deleted Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+      }
+    });
+   
+    // this.showNotification(
+    //   'snackbar-danger',
+    //   totalSelect + ' Record Delete Successfully...!!!',
+    //   'bottom',
+    //   'center'
+    // );
   }
 }

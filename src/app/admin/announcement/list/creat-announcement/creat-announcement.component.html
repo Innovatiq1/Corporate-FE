@@ -86,20 +86,32 @@
                   </section>
                 </div>
               </div> -->
+              <div class="row">
+                <div class="col-md-10">
+                  <button mat-raised-button  id="back" [routerLink]="['/admin/announcement/list']">Back</button>
+                </div>
+                <div class="col-md-2">
+                  <button mat-raised-button *ngIf="!editUrl"  id="submit" (click)="saveAnnouncement()">Create</button>
+                  <button mat-raised-button *ngIf="editUrl"  id="submit" (click)="saveAnnouncement()">Update</button>
+                </div>
+              </div>
             </div>
 
           </form>
-          <div class="row">
-            <div class="col-md-8 offset-lg-1">
-              <button mat-button id="back" [routerLink]="['/admin/announcement/list']">Back</button>
+          <!-- <div class="row m-3">
+            <div class="col-md-9">
+              <button mat-raised-button type="button" id="back" [routerLink]="['/admin/announcement/list']">Back</button>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
 
-              <button mat-raised-button type="button" color="primary" id="submit"
-                (click)="saveAnnouncement()">Submit</button>
+              <button *ngIf="!editUrl" mat-raised-button type="button" color="primary" id="submit"
+                (click)="saveAnnouncement()">Create</button>
+                <button mat-raised-button *ngIf="editUrl" type="button" color="primary" id="submit"
+                (click)="saveAnnouncement()">Update</button>
 
             </div>
-          </div>
+          </div> -->
+         
         </div>
       </div>
     </div>
