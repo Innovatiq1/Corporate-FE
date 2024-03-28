@@ -389,7 +389,7 @@ this.getAllCourse()
       .getClassListWithPagination()
       .subscribe(
         (response) => {
-          console.log('classRes', response);
+          
           if (response.data) {
             this.classesList = response.data.docs.slice(0,5).sort();
           }

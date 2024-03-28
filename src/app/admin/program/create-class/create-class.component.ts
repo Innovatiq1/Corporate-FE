@@ -17,7 +17,6 @@ import * as moment from 'moment';
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CourseService } from '@core/service/course.service';
-
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -28,7 +27,8 @@ import Swal from 'sweetalert2';
 import { CourseTitleModel, DataSourceModel, InstructorList, LabListModel } from 'app/admin/schedule-class/class.model';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { CoursePaginationModel } from '@core/models/course.model';
-// import * as moment from 'moment';
+import { Subscription } from 'rxjs';
+import { StudentsService } from '../../students/all-students/students.service';
 
 @Component({
   selector: 'app-create-class',
@@ -63,7 +63,7 @@ export class CreateClassComponent {
   courseCode: any;
   classId!: string;
   title: boolean = false;
-
+  studentId: any;
   breadscrums :any[];
   startDate = new Date(1990, 0, 1);
   date = new UntypedFormControl(new Date());
@@ -88,7 +88,9 @@ export class CreateClassComponent {
   next: boolean = false;
   coursePaginationModel!: Partial<CoursePaginationModel>;
   secondFormGroup!: FormGroup;
-
+  configuration: any;
+  configurationSubscription!: Subscription;
+  defaultCurrency: string = '';
 
   addNewRow() {
     if (this.isInstructorFailed != 1 ) {
@@ -112,7 +114,8 @@ export class CreateClassComponent {
     private cd: ChangeDetectorRef,
     private snackBar: MatSnackBar,
     private courseService: CourseService,
-    private instructorService: InstructorService
+    private instructorService: InstructorService,
+    private studentsService: StudentsService
   ) {
     this._activeRoute.queryParams.subscribe((params) => {
       this.classId = params['id'];
@@ -225,8 +228,23 @@ export class CreateClassComponent {
    if(this.classId == undefined){
       this.addNewRow();
     }
+    this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
+      this.configuration = configuration;
+      if (this.configuration?.length > 0) {
+        this.defaultCurrency = this.configuration[0].value;
+        this.classForm.patchValue({
+        currency: this.defaultCurrency,
+        })
+      }
+    });
+    this.loadData()
   }
 
+  loadData(){
+    this.studentId = localStorage.getItem('id')
+    this.studentsService.getStudentById(this.studentId).subscribe(res => {
+    })
+}
   loadForm() {
     this.classForm = this._fb.group({
       courseId: ['', [Validators.required]],

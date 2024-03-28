@@ -64,7 +64,7 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
       .getClassListWithPagination({ ...this.coursePaginationModel })
       .subscribe(
         (response) => {
-          console.log('classRes', response);
+          
           if (response.data) {
             this.isLoading = false;
             this.dataSource = response.data.docs;

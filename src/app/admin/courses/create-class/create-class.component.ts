@@ -19,7 +19,8 @@ import * as moment from 'moment';
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CourseService } from '@core/service/course.service';
-
+import { Subscription } from 'rxjs';
+import { StudentsService } from '../../students/all-students/students.service';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -89,6 +90,11 @@ export class CreateClassComponent {
   instForm!: FormArray<any>;
   next: boolean = false;
   secondFormGroup!: FormGroup;
+  studentId: any;
+  configuration: any;
+  configurationSubscription!: Subscription;
+  defaultCurrency: string = '';
+  
 
   addNewRow() {
     if (this.isInstructorFailed != 1) {
@@ -112,7 +118,8 @@ export class CreateClassComponent {
     private cd: ChangeDetectorRef,
     private snackBar: MatSnackBar,
     private courseService: CourseService,
-    private instructorService: InstructorService
+    private instructorService: InstructorService,
+    private studentsService: StudentsService
   ) {
     this._activeRoute.queryParams.subscribe((params) => {
       this.classId = params['id'];
@@ -142,29 +149,34 @@ export class CreateClassComponent {
       type: 'Instructor',
     };
 
-    // this.addNewRow();
-
     this.instructorService.getInstructor(payload).subscribe((res) => {
       this.instructorList = res;
-      console.log(
-        'instructor',
-        this.instructorList
-      );
     });
 
     forkJoin({
       courses: this._classService.getAllCoursesTitle('active'),
-      // instructors: this.instructorService.getInstructor(),
-      // labs: this._classService.getAllLaboratory(),
     }).subscribe((response) => {
       this.courseList = response.courses.reverse();
-      console.log(this.courseList, 'cList');
-      // this.instructorList = response.instructors;
-      // this.labList = response.labs;
-
       this.cd.detectChanges();
     });
+ 
+    this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
+      this.configuration = configuration;
+      if (this.configuration?.length > 0) {
+        this.defaultCurrency = this.configuration[0].value;
+        this.classForm.patchValue({
+        currency: this.defaultCurrency,
+        })
+      }
+    });
+    this.loadData()
   }
+
+  loadData(){
+    this.studentId = localStorage.getItem('id')
+    this.studentsService.getStudentById(this.studentId).subscribe(res => {
+    })
+}
 
   loadForm() {
     this.classForm = this._fb.group({

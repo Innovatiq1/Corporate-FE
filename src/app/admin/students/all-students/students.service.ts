@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map, tap } from 'rxjs';
 import { Students } from './students.model';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
@@ -11,7 +11,10 @@ export class StudentsService extends UnsubscribeOnDestroyAdapter {
   private readonly API_URL = 'assets/data/students.json';
   defaultUrl = environment['apiUrl'];
   isTblLoading = true;
+  private configuration: any;
   dataChange: BehaviorSubject<Students[]> = new BehaviorSubject<Students[]>([]);
+  private configurationSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public configuration$: Observable<any> = this.configurationSubject.asObservable();
   // Temporarily stores data from dialogs
   dialogData!: Students;
   constructor(private httpClient: HttpClient) {
@@ -85,9 +88,19 @@ export class StudentsService extends UnsubscribeOnDestroyAdapter {
     return this.httpClient.post<Student>(apiUrl,data).pipe(map((response) => response));
   }
 
-  getStudentById(id: string) {
+  getStudentById(id: string): Observable<any> {
     const apiUrl = `${this.defaultUrl}auth/instructorListByID/${id}`;
-    return this.httpClient.get<Student>(apiUrl).pipe(map((response) => response));
+    return this.httpClient.get<any>(apiUrl).pipe(
+      map(response => {
+        const configuration = response.configuration;
+        this.updateConfigurationState(configuration);
+        return response;
+      })
+    );
+  }
+
+  private updateConfigurationState(configuration: any): void {
+    this.configurationSubject.next(configuration);
   }
   // getStudent(body:any): Observable<Students> {
   //   const apiUrl = `${this.defaultUrl}auth/instructorList/`;

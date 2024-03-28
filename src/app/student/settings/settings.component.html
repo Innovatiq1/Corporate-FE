@@ -358,12 +358,12 @@
                   <div class="col-3">
                     <button id="save" [routerLink]="['/admin/questions/all-questions']"> Assessments </button>
                   </div>
-                  <div class="col-4">
+                  <div class="col-3">
                     <button id="save" [routerLink]="['/admin/announcement/list']"> Announcements </button>
                   </div>
 
-                  <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/certificate/template']"> Certificate </button>
+                  <div class="col-2">
+                    <button id="save" [routerLink]="['/admin/certificate/template']"> Certificate kii</button>
                   </div>
                 </div>
 
@@ -684,7 +684,6 @@
           <div class="col-md-6 banner">
             <button id="no-link"> Storage </button>
           </div>
-
         </div>
 
 
@@ -738,6 +737,11 @@
           </div>
         </div>
 
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="save" (click)="openDialog(currencyDialog)"> Currency </button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showLms">
@@ -1009,4 +1013,18 @@
     </div>
 
   </div>
+  <ng-template #currencyDialog let-dialogRef="dialogRef" let-data>
+    <h2 mat-dialog-title>Select Currency</h2>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Currency</mat-label>
+        <mat-select [value]="selectedCurrency" (selectionChange)="onSelect($event.value, dialogRef)">
+          <mat-option *ngFor="let code of currencyCodes" [value]="code">{{code}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="dialogRef.close()">Cancel</button>
+    </div>
+  </ng-template>
 </section>

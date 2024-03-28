@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, TemplateRef} from '@angular/core';
 import {
   FormGroup,
   UntypedFormBuilder,
@@ -14,6 +14,7 @@ import { EtmsService } from '@core/service/etms.service';
 
 import { StudentsService } from 'app/admin/students/all-students/students.service';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-settings',
@@ -77,6 +78,8 @@ export class SettingsComponent {
   showForms: boolean = false;
 
   currentContent: number = 1;
+  currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
+  selectedCurrency: string | undefined;
   constructor(
     private studentService: StudentsService,
     private etmsService: EtmsService,
@@ -85,6 +88,7 @@ export class SettingsComponent {
     private router: Router,
     private authenservice: AuthenService,
     private courseService: CourseService,
+    public dialog: MatDialog
   ) {
     let urlPath = this.router.url.split('/');
     this.cmUrl = urlPath.includes('coursemanager-settings');
@@ -428,6 +432,8 @@ export class SettingsComponent {
       let image  = this.uploaded.pop();
       this.uploaded= image.split('\\');
       this.uploadedImage = this.uploaded.pop();
+      const currencyConfig = this.editData.configuration.find((config: any) => config.value);
+      const selectedCurrency = currencyConfig ? currencyConfig.value : null;
 
       this.stdForm.patchValue({
         name: this.editData.name,
@@ -448,6 +454,7 @@ export class SettingsComponent {
         address: this.editData.address,
         uploadedImage: this.editData.avatar,
       });
+      this.selectedCurrency = selectedCurrency;
     });
   }
   onFileUpload(event: any) {
@@ -484,7 +491,6 @@ export class SettingsComponent {
 
 
   onSubmit() {
-    console.log('Form Value', this.stdForm.value);
     if (this.stdForm.valid) {
       // this.instructor.uploadVideo(this.files).subscribe(
       //   (response: any) => {
@@ -507,7 +513,6 @@ export class SettingsComponent {
     }
   }
   // onSubmit1() {
-  //   console.log('========', this.stdForm1);
   //   if (!this.stdForm1.invalid) {
   //     this.studentService.uploadVideo(this.files).subscribe(
   //       (response: any) => {
@@ -540,7 +545,6 @@ export class SettingsComponent {
   //   }
   // }
   onSubmit1() {
-    console.log('========', this.stdForm1);
     if (!this.stdForm1.invalid) {
       // No need to call uploadVideo() here since it's not needed
         const userData: Student = this.stdForm1.value;
@@ -595,7 +599,6 @@ export class SettingsComponent {
   getUserProfile() {
     const userId = localStorage.getItem('id');
     this.etmsService.getUserId(userId).subscribe((response: any) => {
-      console.log("from_Profile",response);
         this.roname = response.roName
         this.profileForm.patchValue({
         empName: response.name,
@@ -607,6 +610,37 @@ export class SettingsComponent {
       })
       console.log(this.profileForm.value);
     });
+  }
 
+  openDialog(templateRef: any): void {
+    const dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+      data: { selectedCurrency: this.selectedCurrency }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.selectedCurrency = result;
+        this.courseService.createCurrency({ value: result }).subscribe(
+          response => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Currency Configuration Success',
+            icon: 'success'
+          });
+          },
+          error => {
+            Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error,
+          });
+          }
+        );
+      }
+    });
+  }
+
+  onSelect(currencyCode: string, dialogRef: any) {
+    dialogRef.close(currencyCode);
   }
 }
