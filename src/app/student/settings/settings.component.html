@@ -1,5 +1,5 @@
 <section class="content"
-  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig">
+  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig &&!showForms">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
@@ -240,7 +240,7 @@
     <!-- </div> -->
 
     <div class="card"
-      *ngIf="!showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig">
+      *ngIf="!showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig && !showForms">
       <div class="header">
         <h2>Settings</h2>
       </div>
@@ -723,7 +723,7 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save" (click)="navigateToCustomSettings()"> Forms </button>
+            <button id="save" (click)="navigateToFormSettings()"> Forms </button>
           </div>
           <div class="col-md-5">
             <button id="save" [routerLink]="['/admin/certificate/template']"> Certificates </button>
@@ -771,6 +771,99 @@
             <button id="no-link"> Exam Configuration </button>
           </div>
 
+        </div>
+
+      </div>
+    </div>
+    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showForms">
+      <div class="row">
+        <div class="col-md-8">
+          <label class="py-4 px-5">Forms</label>
+        </div>
+        <div class="col-md-2 my-3 mx-auto">
+          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+        </div>
+      </div>
+      <div class="body">
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="save" [routerLink]="['/admin/program/create-program']">Program </button>
+          </div>
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['/admin/program/create-class']"> Program Class </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="save" [routerLink]="['/admin/courses/add-course']">Course </button>
+          </div>
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['/admin/courses/create-class']">Course Class </button>
+          </div>
+        </div>
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="save" [routerLink]="['/admin/courses/create-course-kit']">Course Kit </button>
+          </div>
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['/admin/courses/create-categories']">Categories </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="save" [routerLink]="['/admin/users/create-all-users']">User </button>
+          </div>
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['/admin/users/add-instructor']">Instructor </button>
+          </div>
+        </div>
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="save" [routerLink]="['/admin/users/add-student']">Student </button>
+          </div>
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['/admin/users/add-staff']">Staff </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="save" [routerLink]="['/timetable/program-exam-add']">Program Exam Schedule </button>
+          </div>
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['/timetable/course-exam-add']">Course Exam Schedule </button>
+          </div>
+        </div>
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="save" [routerLink]="['/admin/departments/add-department']">Department </button>
+          </div>
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['/admin/budgets/create-budget']">New Budget </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="save" [routerLink]="['/admin/budgets/create-dept-budget-request']">Department Budget </button>
+          </div>
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['/admin/budgets/create-request']">Training Budget </button>
+          </div>
+        </div>
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="save" [routerLink]="['/admin/announcement/create-announcement']">Announcement </button>
+          </div>
+          <div class="col-md-5">
+            <button id="save" [routerLink]="['admin/banners/create-instructor-banner']">Instructor Banner </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="save" [routerLink]="['/admin/banners/create-student-banner']">Student Banner </button>
+          </div>
+        </div>
+        <div class="col-md-12 py-3">
+          <button mat-raised-button color="primary" [routerLink]="['/student/customization']">Back</button>
         </div>
 
       </div>

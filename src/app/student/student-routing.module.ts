@@ -132,6 +132,10 @@ const routes: Routes = [
     component: SettingsComponent,  
   },
   {
+    path: 'forms',
+    component: SettingsComponent,  
+  },
+  {
     path: 'email-configuration',
     component: SettingsComponent,  
   },
