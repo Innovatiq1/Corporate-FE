@@ -5,8 +5,8 @@
         (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
       <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
       <a class="navbar-brand" routerLink={{homePage}}>
-        <img src="assets/images/logo/innovatiq-logo-index.png" alt="" />
-        <span class="logo-name">TMS</span>
+        <img src="{{logoImage}}" alt="" />
+        <span class="logo-name">{{logoTitle}}</span>
       </a>
     </div>
     <div class="collapse navbar-collapse" [ngClass]="isNavbarCollapsed ? '' : 'show'">
