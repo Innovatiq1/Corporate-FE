@@ -1020,13 +1020,14 @@
     <div mat-dialog-content>
       <mat-form-field>
         <mat-label>Currency</mat-label>
-        <mat-select [value]="selectedCurrency" (selectionChange)="onSelect($event.value, dialogRef)">
+        <mat-select [(ngModel)]="selectedCurrency">
           <mat-option *ngFor="let code of currencyCodes" [value]="code">{{code}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="dialogRef.close()">Cancel</button>
+      <button mat-button (click)="updateCurrency(dialogRef)">Update Currency</button>
     </div>
   </ng-template>
 </section>

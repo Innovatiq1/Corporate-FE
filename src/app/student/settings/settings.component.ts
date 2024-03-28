@@ -79,7 +79,7 @@ export class SettingsComponent {
 
   currentContent: number = 1;
   currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
-  selectedCurrency: string | undefined;
+  selectedCurrency: string = "";
   constructor(
     private studentService: StudentsService,
     private etmsService: EtmsService,
@@ -612,6 +612,27 @@ export class SettingsComponent {
     });
   }
 
+  updateCurrency(dialogRef: any) {
+    const selectedCurrency = this.selectedCurrency;
+    this.courseService.createCurrency({ value: selectedCurrency }).subscribe(
+      response => {
+        Swal.fire({
+          title: 'Successful',
+          text: 'Currency Configuration Success',
+          icon: 'success'
+        });
+        dialogRef.close(selectedCurrency);
+      },
+      error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error,
+        });
+      }
+    );
+  }
+
   openDialog(templateRef: any): void {
     const dialogRef = this.dialog.open(templateRef, {
       width: '500px',
@@ -620,22 +641,6 @@ export class SettingsComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.selectedCurrency = result;
-        this.courseService.createCurrency({ value: result }).subscribe(
-          response => {
-          Swal.fire({
-            title: 'Successful',
-            text: 'Currency Configuration Success',
-            icon: 'success'
-          });
-          },
-          error => {
-            Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: error,
-          });
-          }
-        );
       }
     });
   }
