@@ -62,6 +62,7 @@ export class SettingsComponent {
   customsUrl: any;
   lmsUrl: any;
   configUrl: any;
+  formsUrl: any;
   showAccountSettings: boolean = false;
   showProfileSettings: boolean = false;
   showEmailConfig: boolean = false;
@@ -73,6 +74,7 @@ export class SettingsComponent {
   showCustoms:boolean = false;
   showLms: boolean = false;
   showConfig: boolean = false;
+  showForms: boolean = false;
 
   currentContent: number = 1;
   constructor(
@@ -103,6 +105,7 @@ export class SettingsComponent {
     this.customsUrl = urlPath.includes('customization');
     this.lmsUrl = urlPath.includes('LMS-TAE');
     this.configUrl = urlPath.includes('configuration');
+    this.formsUrl = urlPath.includes('forms');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -278,6 +281,16 @@ export class SettingsComponent {
       ];
       this.isAdmin = true;
     }
+    if (this.formsUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
     this.patchValues(),
       //this.patchValues1()
       (this.stdForm = this.fb.group({
@@ -356,6 +369,9 @@ export class SettingsComponent {
     if(this.configUrl){
       this.showConfig = true;
     }
+    if(this.formsUrl){
+      this.showForms = true;
+    }
   }
   navigateToAccountSettings() {
    
@@ -389,6 +405,9 @@ export class SettingsComponent {
   }
   navigateToConfigSettings(){
     this.router.navigate(['/student/configuration']);
+  }
+  navigateToFormSettings(){
+    this.router.navigate(['/student/forms']);
   }
   navigateToCustomSettings(){
     this.router.navigate(['/student/customization-settings']);
