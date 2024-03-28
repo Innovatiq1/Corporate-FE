@@ -117,12 +117,13 @@
               </mat-form-field>
             </div>
           </div>
-        <div class="row">
+        <div class="row" style="float: right;">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
             <div class="example-button-row">
-              <button mat-raised-button color="primary" [disabled]="!leaveRequestForm.valid" [mat-dialog-close]="1"
-                (click)="confirmAdd()">Save</button>
               <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancel</button>
+              <button mat-raised-button id="submit" [disabled]="!leaveRequestForm.valid" [mat-dialog-close]="1"
+                (click)="confirmAdd()">Update</button>
+              
             </div>
           </div>
         </div>

@@ -79,7 +79,7 @@
               </div>
             </div>
           </div>
-          <button mat-raised-button color="primary">Save</button>
+          <button mat-raised-button id="submit" style="float: right;">Update</button>
         </form>
       </div>
     </div>
@@ -106,7 +106,7 @@
             </mat-form-field>
           </div>
 
-          <button mat-raised-button color="primary">Save</button>
+          <button mat-raised-button id="submit" style="float: right;">Update</button>
         </form>
       </div>
     </div>
@@ -221,7 +221,7 @@
             </div> -->
             </div>
             <div class="col-md-12">
-              <button mat-raised-button color="primary">Save Changes</button>
+              <button mat-raised-button id="submit" style="float: right;">Update</button>
             </div>
           </div>
         </form>
@@ -261,16 +261,16 @@
                 <div class="row">
                   <div class="col-3">
                     <!-- <a href="admin/users/all-users">All Users</a> -->
-                    <button id="save" [routerLink]="['/admin/users/all-users']"> All Users </button>
+                    <button id="saved" [routerLink]="['/admin/users/all-users']"> All Users </button>
                   </div>
                   <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/users/all-students']"> Students</button>
+                    <button id="saved" [routerLink]="['/admin/users/all-students']"> Students</button>
                   </div>
                   <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/users/all-instructors']"> Instructors </button>
+                    <button id="saved" [routerLink]="['/admin/users/all-instructors']"> Instructors </button>
                   </div>
                   <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/users/all-staff']"> Staff </button>
+                    <button id="saved" [routerLink]="['/admin/users/all-staff']"> Staff </button>
                   </div>
                 </div>
               </div>
@@ -291,7 +291,7 @@
                 <div class="row">
                   <div class="col-5">
                     <!-- <a href="admin/users/all-users">Account Settings</a> -->
-                    <button id="save" (click)="navigateToAccountSettings()"> Account Settings</button>
+                    <button id="saved" (click)="navigateToAccountSettings()"> Account Settings</button>
                     <!-- <button id="save"  [routerLink]="['/student/account-settings']" > Account Settings</button> -->
                   </div>
                   <!-- <div class="card" *ngIf="showAccountSettings">
@@ -299,7 +299,7 @@
                   </div> -->
                   <div class="col-5">
                     <!-- <a href="admin/students/all-students">Security Settings</a> -->
-                    <button id="save" (click)="navigateToProfileSettings()"> Security Settings</button>
+                    <button id="saved" (click)="navigateToProfileSettings()"> Security Settings</button>
                   </div>
 
                 </div>
@@ -322,7 +322,7 @@
               <div class="m-3">
                 <div class="row">
                   <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/users/user-type']"> User Types </button>
+                    <button id="saved" [routerLink]="['/admin/users/user-type']"> User Types </button>
                   </div>
 
                 </div>
@@ -343,27 +343,27 @@
               <div class="m-3">
                 <div class="row">
                   <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/departments/all-departments']"> Departments </button>
+                    <button id="saved" [routerLink]="['/admin/departments/all-departments']"> Departments </button>
                   </div>
                   <div class="col-5">
-                    <button id="save" (click)="navigateToEmailSettings()"> Email Configuration
+                    <button id="saved" (click)="navigateToEmailSettings()"> Email Configuration
                     </button>
                   </div>
                   <div class="col-3" style="margin-left: -35px;">
-                    <button id="save" (click)="navigateToBannerSettings()"> Banners </button>
+                    <button id="saved" (click)="navigateToBannerSettings()"> Banners </button>
                   </div>
 
                 </div>
                 <div class="row py-2">
                   <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/questions/all-questions']"> Assessments </button>
+                    <button id="saved" [routerLink]="['/admin/questions/all-questions']"> Assessments </button>
                   </div>
                   <div class="col-4">
-                    <button id="save" [routerLink]="['/admin/announcement/list']"> Announcements </button>
+                    <button id="saved" [routerLink]="['/admin/announcement/list']"> Announcements </button>
                   </div>
 
                   <div class="col-3">
-                    <button id="save" [routerLink]="['/admin/certificate/template']"> Certificate </button>
+                    <button id="saved" [routerLink]="['/admin/certificate/template']"> Certificate </button>
                   </div>
                 </div>
 
@@ -387,7 +387,7 @@
               <div class="m-3">
                 <div class="row">
                   <div class="col-5">
-                    <button id="save" (click)="navigateToCustomSettings()"> Field Customization </button>
+                    <button id="saved" (click)="navigateToCustomSettings()"> Field Customization </button>
                   </div>
 
                 </div>
@@ -486,7 +486,7 @@
 
             </div>
             <div class="col-md-12">
-              <button mat-raised-button color="primary">Save Changes</button>
+              <button mat-raised-button id="submit" style="float: right;">Update</button>
             </div>
           </div>
         </form>
@@ -516,7 +516,7 @@
             </mat-form-field>
           </div>
 
-          <button mat-raised-button color="primary">Save</button>
+          <button mat-raised-button id="submit" style="float: right;">Update</button>
         </form>
       </div>
     </div>
@@ -535,20 +535,20 @@
       <div class="body">
         <div class="row pb-3">
           <div class="col-md-6 email">
-            <button id="save" [routerLink]="['/admin/email-configuration/welcome-mail']"> Welcome E-mail </button>
+            <button id="saved" [routerLink]="['/admin/email-configuration/welcome-mail']"> Welcome E-mail </button>
 
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/email-configuration/program-registration-email']"> Program
+            <button id="saved" [routerLink]="['/admin/email-configuration/program-registration-email']"> Program
               Registered E-mail </button>
           </div>
         </div>
         <div class="row py-3">
           <div class="col-md-6 email">
-            <button id="save" [routerLink]="['/admin/email-configuration/forgot-password']"> Forgot Password </button>
+            <button id="saved" [routerLink]="['/admin/email-configuration/forgot-password']"> Forgot Password </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/email-configuration/course-registered-email']"> Course Registered
+            <button id="saved" [routerLink]="['/admin/email-configuration/course-registered-email']"> Course Registered
               E-mail </button>
 
           </div>
@@ -556,12 +556,12 @@
         <div class="row py-3">
 
           <div class="col-md-6 email">
-            <button id="save" [routerLink]="['/admin/email-configuration/course-approval-email']"> Course Approval
+            <button id="saved" [routerLink]="['/admin/email-configuration/course-approval-email']"> Course Approval
             </button>
           </div>
 
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/email-configuration/director-course-notification']"> Director
+            <button id="saved" [routerLink]="['/admin/email-configuration/director-course-notification']"> Director
               Course Notification </button>
           </div>
 
@@ -569,21 +569,21 @@
         </div>
         <div class="row py-3">
           <div class="col-md-6 email">
-            <button id="save" [routerLink]="['/admin/email-configuration/program-approval-email']"> Program Approval
+            <button id="saved" [routerLink]="['/admin/email-configuration/program-approval-email']"> Program Approval
             </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/email-configuration/completed-course']"> Completed Course </button>
+            <button id="saved" [routerLink]="['/admin/email-configuration/completed-course']"> Completed Course </button>
           </div>
         </div>
         <div class="row py-3">
           <div class="col-md-6 email">
-            <button id="save" [routerLink]="['/admin/email-configuration/program-completion-email']"> Completed Program
+            <button id="saved" [routerLink]="['/admin/email-configuration/program-completion-email']"> Completed Program
             </button>
           </div>
         </div>
         <div class="col-md-12 py-3">
-          <button mat-raised-button color="primary" [routerLink]="['/student/integration']">Back</button>
+          <button mat-raised-button id="back" [routerLink]="['/student/integration']">Back</button>
         </div>
 
       </div>
@@ -604,15 +604,15 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/banners/instructor-banner-list']">Instructor Banners </button>
+            <button id="saved" [routerLink]="['/admin/banners/instructor-banner-list']">Instructor Banners </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/banners/student-banner-list']"> Student Banners </button>
+            <button id="saved" [routerLink]="['/admin/banners/student-banner-list']"> Student Banners </button>
           </div>
         </div>
 
         <div class="col-md-12 px-4 py-5">
-          <button mat-raised-button color="primary" [routerLink]="['/student/customization']">Back</button>
+          <button mat-raised-button id="back" [routerLink]="['/student/customization']">Back</button>
         </div>
 
       </div>
@@ -629,23 +629,23 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/users/create-user-type']"> User Access </button>
+            <button id="saved" [routerLink]="['/admin/users/create-user-type']"> User Access </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/users/user-type']"> Roles </button>
+            <button id="saved" [routerLink]="['/admin/users/user-type']"> Roles </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/users/all-users']"> All Users </button>
+            <button id="saved" [routerLink]="['/admin/users/all-users']"> All Users </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/departments/all-departments']"> Departments </button>
+            <button id="saved" [routerLink]="['/admin/departments/all-departments']"> Departments </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/approval/program-approval']"> Approvals </button>
+            <button id="saved" [routerLink]="['/admin/approval/program-approval']"> Approvals </button>
           </div>
           <div class="col-md-5">
             <button id="no-link"> Import/Export Users </button>
@@ -669,7 +669,7 @@
             <button id="no-link"> 3rd Party Tools </button>
           </div>
           <div class="col-md-5">
-            <button id="save" (click)="navigateToEmailSettings()"> SMTP </button>
+            <button id="saved" (click)="navigateToEmailSettings()"> SMTP </button>
           </div>
         </div>
         <div class="row px-4 py-4">
@@ -702,7 +702,7 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/announcement/list']"> Announcement </button>
+            <button id="saved" [routerLink]="['/admin/announcement/list']"> Announcement </button>
           </div>
           <div class="col-md-5">
             <button id="no-link"> Notification </button>
@@ -723,23 +723,23 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save" (click)="navigateToFormSettings()"> Forms </button>
+            <button id="saved" (click)="navigateToFormSettings()"> Forms </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/certificate/template']"> Certificates </button>
+            <button id="saved" [routerLink]="['/admin/certificate/template']"> Certificates </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="save" (click)="navigateToBannerSettings()"> Banners </button>
+            <button id="saved" (click)="navigateToBannerSettings()"> Banners </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/survey/create-survey-questions']"> Survey </button>
+            <button id="saved" [routerLink]="['/admin/survey/create-survey-questions']"> Survey </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save"routerLink="/student/logo-coutomization"> Logo </button>
+            <button id="saved" routerLink="/student/logo-coutomization"> Logo </button>
           </div>
           <div class="col-md-5">
             <!-- <button id="save" [routerLink]="['/admin/survey/create-survey-questions']"> Survey </button> -->
@@ -763,7 +763,7 @@
             <button id="no-link"> Tutorial Configuration </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/questions/add-questions']"> Assessment Configuration </button>
+            <button id="saved" [routerLink]="['/admin/questions/add-questions']"> Assessment Configuration </button>
           </div>
         </div>
         <div class="row px-4 py-4">
@@ -787,83 +787,83 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/program/create-program']">Program </button>
+            <button id="saved" [routerLink]="['/admin/program/create-program']">Program </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/program/create-class']"> Program Class </button>
+            <button id="saved" [routerLink]="['/admin/program/create-class']"> Program Class </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/courses/add-course']">Course </button>
+            <button id="saved" [routerLink]="['/admin/courses/add-course']">Course </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/courses/create-class']">Course Class </button>
+            <button id="saved" [routerLink]="['/admin/courses/create-class']">Course Class </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/courses/create-course-kit']">Course Kit </button>
+            <button id="saved" [routerLink]="['/admin/courses/create-course-kit']">Course Kit </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/courses/create-categories']">Categories </button>
+            <button id="saved" [routerLink]="['/admin/courses/create-categories']">Categories </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/users/create-all-users']">User </button>
+            <button id="saved" [routerLink]="['/admin/users/create-all-users']">User </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/users/add-instructor']">Instructor </button>
+            <button id="saved" [routerLink]="['/admin/users/add-instructor']">Instructor </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/users/add-student']">Student </button>
+            <button id="saved" [routerLink]="['/admin/users/add-student']">Student </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/users/add-staff']">Staff </button>
+            <button id="saved" [routerLink]="['/admin/users/add-staff']">Staff </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/timetable/program-exam-add']">Program Exam Schedule </button>
+            <button id="saved" [routerLink]="['/timetable/program-exam-add']">Program Exam Schedule </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/timetable/course-exam-add']">Course Exam Schedule </button>
+            <button id="saved" [routerLink]="['/timetable/course-exam-add']">Course Exam Schedule </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/departments/add-department']">Department </button>
+            <button id="saved" [routerLink]="['/admin/departments/add-department']">Department </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/budgets/create-budget']">New Budget </button>
+            <button id="saved" [routerLink]="['/admin/budgets/create-budget']">New Budget </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/budgets/create-dept-budget-request']">Department Budget </button>
+            <button id="saved" [routerLink]="['/admin/budgets/create-dept-budget-request']">Department Budget </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['/admin/budgets/create-request']">Training Budget </button>
+            <button id="saved" [routerLink]="['/admin/budgets/create-request']">Training Budget </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/announcement/create-announcement']">Announcement </button>
+            <button id="saved" [routerLink]="['/admin/announcement/create-announcement']">Announcement </button>
           </div>
           <div class="col-md-5">
-            <button id="save" [routerLink]="['admin/banners/create-instructor-banner']">Instructor Banner </button>
+            <button id="saved" [routerLink]="['/admin/banners/create-instructor-banner']">Instructor Banner </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="save" [routerLink]="['/admin/banners/create-student-banner']">Student Banner </button>
+            <button id="saved" [routerLink]="['/admin/banners/create-student-banner']">Student Banner </button>
           </div>
         </div>
         <div class="col-md-12 py-3">
-          <button mat-raised-button color="primary" [routerLink]="['/student/customization']">Back</button>
+          <button mat-raised-button id="back" [routerLink]="['/student/customization']">Back</button>
         </div>
 
       </div>
@@ -933,10 +933,10 @@
                 </div>
                 <div class="row">
                   <div class="col-md-8">
-                    <button mat-raised-button color="primary" [routerLink]="['/student/customization']">Back</button>
+                    <button mat-raised-button id="back" [routerLink]="['/student/customization']">Back</button>
                   </div>
                   <div class="col-md-4">
-                    <button mat-raised-button color="primary">Save Changes</button>
+                    <button mat-raised-button id="submit">Update</button>
                   </div>
                 </div>
               </div>
@@ -957,10 +957,10 @@
                 </div>
                 <div class="row">
                   <div class="col-md-8">
-                    <button mat-raised-button color="primary" [routerLink]="['/student/customization']">Back</button>
+                    <button mat-raised-button id="back" [routerLink]="['/student/customization']">Back</button>
                   </div>
                   <div class="col-md-4">
-                    <button mat-raised-button color="primary">Save Changes</button>
+                    <button mat-raised-button id="submit">Update</button>
                   </div>
                 </div>
               </div>
@@ -980,10 +980,10 @@
                 </div>
                 <div class="row">
                   <div class="col-md-8">
-                    <button mat-raised-button color="primary" [routerLink]="['/student/customization']">Back</button>
+                    <button mat-raised-button id="back" [routerLink]="['/student/customization']">Back</button>
                   </div>
                   <div class="col-md-4">
-                    <button mat-raised-button color="primary">Save Changes</button>
+                    <button mat-raised-button id="submit">Update</button>
                   </div>
                 </div>
               </div>

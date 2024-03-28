@@ -399,7 +399,7 @@ MENU_LIST = [
 
 {
     id: "admin/budgets",
-    title: "Budget & Payments",
+    title: "Finance",
     iconsrc: "/assets/course-icon.svg",
     icon: 'attach_money',
     selected: true,

@@ -204,11 +204,11 @@
                   <!-- </form> -->
                 </div>
                 <div class="row">
-                  <div class="col-md-9">
-                    <button mat-button matStepperPrevious id="back" [routerLink]="['/admin/courses/all-courses']">Back</button>
+                  <div class="col-md-10">
+                    <button mat-raised-button matStepperPrevious id="back" [routerLink]="['/admin/courses/all-courses']">Back</button>
                   </div>
                   <div class="col-md-2">
-                    <button mat-button matStepperNext id="next" class="disableNext"
+                    <button mat-raised-button matStepperNext id="next" class="disableNext"
                     [disabled]="firstFormGroup.get('title')?.invalid || firstFormGroup.get('courseCode')?.invalid || firstFormGroup.get('main_category')?.invalid || firstFormGroup.get('sub_category')?.invalid">Next</button>
                     <!-- [disabled]="firstFormGroup.invalid" -->
                   </div>
@@ -417,14 +417,14 @@
                     </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-8">
-                    <button mat-button matStepperPrevious id="back">Back</button>
+                  <div class="col-md-9">
+                    <button mat-raised-button matStepperPrevious id="back">Back</button>
                   </div>
-                  <div class="col-md-4">
-                    <div class="d-grid gap-4 d-md-flex">
-                    <button mat-raised-button *ngIf="editUrl || viewUrl" type="button" color="warn" id="cancel" (click)="cancel()">Cancel</button>
-                    <button mat-button (click)="submit()" *ngIf="!editUrl  && !viewUrl" id="submit" [attr.data-bs-toggle]="secondFormGroup.valid ? 'modal' : null">Submit</button>
-                    <button mat-button *ngIf="editUrl  && !viewUrl" id="save" [attr.data-bs-toggle]="secondFormGroup.valid ? 'modal' : null" (click)="save()"> Save </button>
+                  <div class="col-md-3">
+                    <div class="d-grid d-md-flex">
+                    <button mat-raised-button class="btn-space" *ngIf="editUrl || viewUrl" type="button" color="warn" id="cancel" (click)="cancel()">Cancel</button>
+                    <button mat-raised-button (click)="submit()" *ngIf="!editUrl  && !viewUrl" id="submit" [attr.data-bs-toggle]="secondFormGroup.valid ? 'modal' : null">Submit</button>
+                    <button mat-raised-button *ngIf="editUrl  && !viewUrl" id="save" [attr.data-bs-toggle]="secondFormGroup.valid ? 'modal' : null" (click)="save()"> Update </button>
                     </div>
                   </div>
                 </div>
