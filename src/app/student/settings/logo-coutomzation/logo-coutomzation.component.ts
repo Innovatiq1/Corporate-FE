@@ -24,6 +24,7 @@ export class LogoCoutomzationComponent {
   logoFile: any;
   patchId!: string;
   upload: any;
+  fileError: string = '';
   constructor(private logoService: LogoService, public fb: FormBuilder) {
     this.LogoForm = this.fb.group({
       title: [''],
@@ -31,21 +32,43 @@ export class LogoCoutomzationComponent {
     });
     // constructor
   }
-
   ngOnInit() {
-  this.getLogo();
+    this.getLogo();
   }
-getLogo(){
-    /* get all the logos **/
+  getLogo() {
+    /* get all logos **/
     this.logoService.getLogo().subscribe((logo) => {
       this.Logos = logo?.data?.docs;
-      console.log('logos', this.Logos);
     });
-}
+  }
   /* get logo from HTML **/
+  // onFileUpload(event: any) {
+  //   const file = event.target.files[0];
+  //   this.logoFile = file;
+  //   this.logoImg = this.logoFile.name;
+  // }
+
   onFileUpload(event: any) {
-    // console.log(event.target.files[0]);
     const file = event.target.files[0];
+  this.fileError = ''
+    if (!file) {
+      this.fileError = 'Please select a file';
+      return;
+    }
+  
+    const maxSizeInMB = 2;
+    const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+  
+    if (file.size > maxSizeInBytes) {
+      this.fileError = `File size must not exceed ${maxSizeInMB}MB.`;
+      return;
+    }
+    const allowedFormats = ['image/png', 'image/jpeg', 'image/jpg'];
+  
+    if (!allowedFormats.includes(file.type)) {
+      this.fileError = `Allowed file formats are: .png, .jpeg, .jpg`;
+      return;
+    }
     this.logoFile = file;
     this.logoImg = this.logoFile.name;
   }
@@ -63,9 +86,7 @@ getLogo(){
             title: res?.title,
           });
         }
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     });
   }
   cancel() {
@@ -83,26 +104,26 @@ getLogo(){
       showCancelButton: true,
       cancelButtonColor: '#d33',
     }).then((result) => {
-      if (result.isConfirmed){
+      if (result.isConfirmed) {
         const formdata = new FormData();
         formdata.append('files', this.logoFile);
         formdata.append('title', this.LogoForm.value.title);
         formdata.append('filename', this.logoImg);
-        this.logoService.updateLogo(this.patchId, formdata).subscribe((data) => {
-        if(data){
-          this.isLogo = false;
-          this.getLogo() ;
-          Swal.fire({
-            title: 'Success',
-            text: 'Logo Updated successfully.',
-            icon: 'success',
-            // confirmButtonColor: '#d33',
+        this.logoService
+          .updateLogo(this.patchId, formdata)
+          .subscribe((data) => {
+            if (data) {
+              this.isLogo = false;
+              this.getLogo();
+              Swal.fire({
+                title: 'Success',
+                text: 'Logo Updated successfully.',
+                icon: 'success',
+                // confirmButtonColor: '#d33',
+              });
+            }
           });
-          
-        }
-        });
       }
     });
-    
   }
 }

@@ -27,7 +27,7 @@ export class LogoService {
     return this.http.get(apiUrl).pipe(
       map(response => {
         this.updateData(response); // Pass the response to updateData
-        return response; // Return the response as well if needed
+        return response; 
       })
     );
   }

@@ -157,22 +157,22 @@ export class HeaderComponent
 
   ngOnInit() {
     this.logoService.getLogo().subscribe(data => {
-      console.log("logo,title",data.data.docs[0].title);
+      // console.log("logo,title",data.data.docs[0].title);
       
     });
     this.userProfile = this.authenService.getUserProfile();
-    console.log("=user=",this.authenService.getUserProfile())
+    // console.log("=user=",this.authenService.getUserProfile())
 
     // Subscribe to changes in user profile
     this.authenService.profileUpdated.subscribe((updatedProfile: any) => {
-      console.log("==updatedProfile==",updatedProfile)
+      // console.log("==updatedProfile==",updatedProfile)
       this.userProfile = updatedProfile;
     });
     if (this.authenService.currentUserValue) {
       const userRole = this.authenService.currentUserValue.user.role;
       this.userFullName = this.authenService.currentUserValue.user.name
       this.userImg = this.authenService.currentUserValue.user.avatar;
-      console.log('img',this.student)
+      // console.log('img',this.student)
       this.student()
       if (userRole === Role.Admin) {
         this.userType = Role.Admin;
@@ -254,7 +254,7 @@ onClick(){
     this.announcementService.getAnnouncementsForStudents(payload).subscribe((res: { data: { data: any[]; }; totalRecords: number; }) => {
       const announcementsData:any = res.data;
       this.announcements = announcementsData.reverse();
-      console.log( this.announcements,"+")
+      // console.log( this.announcements,"+")
       // console.log(announcementsData.reverse(),"+++++++")
     })
   }
@@ -297,7 +297,7 @@ cancel(id:any){
     this.isFullScreen = !this.isFullScreen;
   }
   setLanguage(event: any) {
-    console.log("=======",event)
+    // console.log("=======",event)
     // this.countryName = text;
     // this.flagvalue = flag;
     this.langStoreValue = event.target.value;

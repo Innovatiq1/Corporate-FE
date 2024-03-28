@@ -68,6 +68,9 @@
                         />
                         Choose file
                       </button>
+                      <span *ngIf="fileError" class="error-msg">
+                        <h5>{{ fileError }}</h5>
+                      </span>
                       <span class="file-msg">
                         <h5>
                           {{ logoImg ? logoImg : "Drag and Drop File Here" }}
@@ -80,7 +83,7 @@
                       <button class="btn-space" type="button" mat-raised-button color="warn" (click)="cancel()">
                      Cancel
                    </button>
-                      <button  mat-raised-button color="primary" (click)="updateLogo()" >
+                      <button  mat-raised-button color="primary" (click)="updateLogo()" [disabled]="fileError !== ''" >
                         Update
                       </button>
                   </div>
