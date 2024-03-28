@@ -18,12 +18,14 @@ export class ProgramPaymentComponent {
 
   displayedColumns: string[] = [
     // 'select',
+    'Student Name',
+    'email',
     'Program Name',
     'Payment Date',
     'Amount',
-    'Student Name',
     'Payment Status',
-    'status',
+    // 'status',
+    
   ];
   // dataSource1 = [
   //   { name: 'Ship Energy Efficiency Courses', date: 'Nov 9', amount: '2500', sname: 'Gung Tui', status: 'Done' },
@@ -34,7 +36,7 @@ export class ProgramPaymentComponent {
     {
       // title: 'Programs',
       items: ['Payments'],
-      active: 'Course Payments',
+      active: '',
     },
   ];
   
@@ -150,5 +152,8 @@ export class ProgramPaymentComponent {
     //   'top',
     //   'right'
     // );
+  }
+  getStatusClass(status: string): string {
+    return status === 'success' ? 'success' : 'fail';
   }
 }
