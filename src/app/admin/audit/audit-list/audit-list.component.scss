@@ -25,9 +25,121 @@ svg {
 }
 .email-column {
     overflow: visible !important;
-    white-space: nowrap !important; /* Prevent email text from wrapping to the next line */
+    white-space: nowrap !important;
   }
   
   .email-content {
      margin: -50px;
   }
+
+  .card {
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  
+    .materialTableHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      border-color: #dae1f3;
+      background-color: #dae1f3;
+  
+      .tbl-title h2 {
+        margin: 0;
+        font-size: 20px;
+        color: #333;
+      }
+  
+      .tbl-export-btn {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+  
+        li {
+          margin-left: 10px;
+  
+          .export-button {
+            cursor: pointer;
+            img {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+    }
+  
+    .body {
+      padding: 10px 15px;
+      font-family: "Roboto", sans-serif;
+  
+      .straight-line-table {
+        .log-item {
+          display: flex;
+          align-items: center;
+          padding: 10px 0;
+  
+          span {
+            margin-right: 15px;
+            white-space: nowrap;
+            &.name{
+                font-weight: 700;
+                font-size: 14px;
+            }
+  
+            &.and-separator {
+              margin-right: 10px;
+              margin-left: 0px;
+            }   
+  
+            &.user-type {
+                background-color: #e0e0e0;
+                padding: 1px 9px;
+                border-radius: 2px;
+                font-weight: 700;
+                letter-spacing: 1px;
+
+            }
+            &a{
+                color: aqua;
+            }
+
+          }
+        }
+      }
+  
+      .tbl-spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+    }
+  }
+  a {
+    color: #00bfed;
+    text-decoration: underline;
+}
+
+
+  
+.user-updated-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .updated-time {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #918f8f;
+    font-weight: 400;
+  }
+  
+  
+  
+  
+  
