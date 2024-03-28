@@ -7,6 +7,329 @@
     </div>
     <div class="row">
       <div class="col-md-12">
+        <mat-tab-group>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <i class="material-icons-two-tone psr-3">list_alt</i>
+              List View
+            </ng-template>
+            <div class="mt-5">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                  <div class="materialTableHeader">
+                    <div class="left">
+                      <ul class="header-buttons-left ms-0">
+                        <li class="tbl-title">
+                          <h2>All Courses</h2>
+                        </li>
+                        <li class="tbl-search-box">
+                          <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                          <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                            aria-label="Search box" [(ngModel)]="searchTerm" (input)="performSearch()" />
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="right">
+                      <ul class="tbl-export-btn">
+                        <!-- <li class="tbl-header-btn">
+                          <div class="m-l-10" matTooltip="ADD">
+                            <button mat-mini-fab color="primary" (click)="addNew()">
+                              <mat-icon class="col-white">add</mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                        <li class="tbl-header-btn">
+                          <div class="m-l-10" matTooltip="REFRESH">
+                            <button mat-mini-fab color="primary" (click)="refresh()">
+                              <mat-icon class="col-white">refresh</mat-icon>
+                            </button>
+                          </div>
+                        </li> -->
+                        <li class="tbl-header-btn">
+                          <div class="m-l-10" [hidden]=!selection.hasValue() matTooltip="DELETE">
+                            <button mat-mini-fab color="warn" (click)="removeSelectedRows()">
+                              <mat-icon class="col-white">delete
+                              </mat-icon>
+                            </button>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="export-button m-l-10" matTooltip="XLSX">
+                            <img src="assets/excel.svg" alt="" (click)="exportExcel()" />
+                          </div>
+                        </li>
+                        <li>
+                          <div class="export-button m-l-10" matTooltip="PDF">
+                            <img src="assets/pdf (1).svg" alt="" (click)="generatePdf()" />
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="body overflow-auto">
+                    <div class="responsive_table">
+                      <table mat-table [dataSource]="courseData" matSort class="mat-cell advance-table">
+                        <!-- Checkbox Column -->
+                        <!-- <ng-container matColumnDef="select">
+                          <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'">
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
+                            </mat-checkbox>
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" [ngClass]="'tbl-col-width-per-6'">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                              [ngClass]="'tbl-checkbox'">
+                            </mat-checkbox>
+                          </mat-cell>
+                        </ng-container> -->
+                        <!-- ID Column -->
+                        <!-- <ng-container matColumnDef="id">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Id
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row">{{row.id}}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="img">
+                          <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
+                          </mat-header-cell>
+                          <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"><span
+                              class="mobile-label">Image:</span> <img [src]="row?.image_link || 'assets/profile.png'"
+                              [routerLink]="['/admin/program/view-program/',row.id]" />
+                          </mat-cell>
+                        </ng-container> -->
+                        <ng-container matColumnDef="name">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-course/',row.id]"><span
+                              class="mobile-label">Course Name:</span> {{row.title |titlecase}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="code">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Course Code
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-course/',row.id]"><span
+                              class="mobile-label">Course Code:</span> {{row.courseCode}}
+                          </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Days">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Days
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-course/',row.id]"> <span
+                              class="mobile-label">Days:</span>{{row.course_duration_in_days}} Days
+                          </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="Training Hours">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Traning Hours
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-course/',row.id]"> <span
+                              class="mobile-label">Traning Hours:</span>{{row.training_hours}} Hours
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="Fees">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Fees
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-course/',row.id]"> <span
+                              class="mobile-label">Fees:</span>$ {{row.fee}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="Vendor">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header class="compulsory-count-header">Vendor
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-course/',row.id]"> <span
+                              class="mobile-label">Vendor:</span>{{row.vendor}}
+                          </mat-cell>
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns">
+                        </mat-header-row>
+                        <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+                        <mat-row *matRowDef="let row; columns: displayedColumns;" [style.cursor]="'pointer'" matRipple>
+                        </mat-row>
+                      </table>
+                      <!-- Loading spinner -->
+                      <!-- <div *ngIf="exampleDatabase?.isTblLoading" class="tbl-spinner">
+                        <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
+                        </mat-progress-spinner>
+                      </div> -->
+                      <!-- context menu start -->
+                      <!-- <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
+                        [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">
+                      </div>
+                      <mat-menu #contextMenu="matMenu">
+                        <ng-template matMenuContent let-item="item">
+                          <button mat-menu-item (click)="addNew()">
+                            <mat-icon>add_box</mat-icon>
+                            <span>Add Record</span>
+                          </button>
+                          <button mat-menu-item (click)="editCall(item)">
+                            <mat-icon>create</mat-icon>
+                            <span>Edit Record</span>
+                          </button>
+                          <button mat-menu-item (click)="deleteItem(item)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Delete Record</span>
+                          </button>
+                          <button mat-menu-item (click)="refresh()">
+                            <mat-icon>refresh</mat-icon>
+                            <span>Refresh Record</span>
+                          </button>
+                          <button mat-menu-item disabled>
+                            <mat-icon>no_encryption</mat-icon>
+                            <span>Disable</span>
+                          </button>
+                          <button mat-menu-item [matMenuTriggerFor]="nestedmenu">
+                            <mat-icon>list_alt</mat-icon>
+                            <span> Nested Menu</span>
+                          </button>
+                        </ng-template>
+                      </mat-menu>
+                      <mat-menu #nestedmenu="matMenu">
+                        <button mat-menu-item>
+                          <mat-icon>mail_outline</mat-icon>
+                          <span>Item 1</span>
+                        </button>
+                        <button mat-menu-item>
+                          <mat-icon>call</mat-icon>
+                          <span>Item 2</span>
+                        </button>
+                        <button mat-menu-item>
+                          <mat-icon>chat</mat-icon>
+                          <span>Item 3</span>
+                        </button>
+                      </mat-menu> -->
+                      <!-- context menu end -->
+                      <!-- <div *ngIf="!exampleDatabase?.isTblLoading" class="no-results"
+                        [style.display]="programData.filteredData.length === 0 ? '' : 'none'">
+                        No results
+                      </div> -->
+                      <mat-paginator class="paginator rounded-5" #paginator [length]="totalItems"
+                        (page)="pageSizeChange($event)" [pageSizeOptions]="pageSizeArr"
+                        aria-label="select pagination option">
+                      </mat-paginator>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab class="grid">
+            <ng-template mat-tab-label>
+              <i class="material-icons-two-tone psr-3">grid_on</i>
+              Grid View
+            </ng-template>
+            <div class="row mt-5">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="materialTableHeader">
+                    <div class="left">
+                      <ul class="header-buttons-left ms-0">
+                        <li class="tbl-title">
+                          <h2>All Courses</h2>
+                        </li>
+                        <li class="tbl-search-box">
+                          <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                          <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                            aria-label="Search box" [(ngModel)]="searchTerm" (input)="performSearch()" />
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="right">
+                      <ul class="tbl-export-btn">
+                        <!-- <li class="tbl-header-btn">
+                          <div class="m-l-10" matTooltip="ADD" [routerLink]="['/admin/courses/add-course']">
+                            <button mat-mini-fab color="primary">
+                              <mat-icon class="col-white">add</mat-icon>
+                            </button>
+                          </div>
+                        </li> -->
+                        <li>
+                          <div class="export-button m-l-10" matTooltip="XLSX" (click)="exportExcel()">
+                            <img src="assets/excel.svg" alt="" />
+                          </div>
+                        </li>
+                        <li>
+                          <div class="export-button m-l-10" matTooltip="PDF" (click)="generatePdf()">
+                            <img src="assets/pdf (1).svg" alt="" />
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="body">
+                    <div class="row">
+                      <div class="col-md-3" *ngFor="let data of courseData">
+                        <div class="course-card course-card-blog">
+                          <div class="course-card-image" style="cursor: pointer;"
+                            [routerLink]="['/admin/courses/view-course/',data.id]">
+                            <img class="img" src="{{data.image_link || 'assets/noimage.jpg'}}">
+                          </div>
+                          <div class="blog-table">
+                            <div class="post-user mt-3">
+                              <!-- <span class="float-start msr-3">
+                                <img class="img-circle" src="{{data.image_link}}" alt="...">
+                              </span> -->
+                              <h6 class="mb-xs mt-xs title"> {{data.title |truncate : 25}}</h6>
+                              <p class="text-muted"><time>{{data.training_hours}} Hours</time></p>
+                            </div>
+                            <!-- <h6>John Deo</h6> -->
+                            <!-- <p class="course-card-description">{{data.course_detailed_description |truncate : 30}}
+                            </p> -->
+                            <div class="col">
+                              <p class="course-card-description"
+                                [innerHTML]="data?.course_detailed_description | truncate:30">
+                            </div>
+                            <div class="text-center mb-3">
+                              <button mat-icon-button class="tbl-action-btn"
+                                [routerLink]="['/admin/courses/view-course/',data.id]">
+                                <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
+                              </button>
+                              <button mat-icon-button class="tbl-action-btn"
+                                [routerLink]="['/admin/courses/edit-course/',data.id]">
+                                <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                              </button>
+                              <button mat-icon-button class="tbl-action-btn" (click)="delete(data.id)">
+                                <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                              </button>
+
+                            </div>
+                            <!-- <div class="ftr">
+                              <div class="author">
+                                <a href="#"><span class="text-danger"><i class="fa fa-heart"></i>
+                                    368</span></a>
+                              </div>
+                              <div class="stats"> <a href="#"><i class="far fa-comment-dots"></i>48</a> </div>
+                            </div> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <mat-paginator class="paginator rounded-5" #paginator [length]="totalItems"
+                    (page)="pageSizeChange($event)" [pageSizeOptions]="pageSizeArr"
+                    aria-label="select pagination option">
+                  </mat-paginator>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="content">
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb --
+      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      </app-breadcrumb>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
         <div class="card">
           <div class="materialTableHeader">
             <div class="left">
@@ -38,7 +361,7 @@
                       <mat-icon class="col-white">add</mat-icon>
                     </button>
                   </div>
-                </li> -->
+                </li> --
                 <li>
                   <div class="export-button m-l-10" matTooltip="XLSX" (click)="exportExcel()">
                     <img src="assets/excel.svg" alt="" />
@@ -63,13 +386,13 @@
                     <div class="post-user mt-3">
                       <!-- <span class="float-start msr-3">
                         <img class="img-circle" src="{{data.image_link}}" alt="...">
-                      </span> -->
+                      </span> --
                       <h6 class="mb-xs mt-xs title"> {{data.title |truncate : 25}}</h6>
                       <p class="text-muted"><time>{{data.training_hours}} hours</time></p>
                     </div>
-                    <!-- <h6>John Deo</h6> -->
+                    <!-- <h6>John Deo</h6> --
                     <!-- <p class="course-card-description">{{data.course_detailed_description |truncate : 30}}
-                    </p> -->
+                    </p> --
                     <div class="col">
                       <p class="course-card-description" [innerHTML]="data?.course_detailed_description | truncate:30">
                     </div>
@@ -91,7 +414,7 @@
                             368</span></a>
                       </div>
                       <div class="stats"> <a href="#"><i class="far fa-comment-dots"></i>48</a> </div>
-                    </div> -->
+                    </div> --
                   </div>
                 </div>
               </div>
@@ -104,4 +427,4 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->

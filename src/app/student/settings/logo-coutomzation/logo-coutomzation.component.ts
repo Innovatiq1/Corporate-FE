@@ -105,8 +105,10 @@ export class LogoCoutomzationComponent {
       cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed) {
-        const formdata = new FormData();
-        formdata.append('files', this.logoFile);
+        let formdata = new FormData();
+        if(this.logoFile){
+          formdata.append('files', this.logoFile);
+        }
         formdata.append('title', this.LogoForm.value.title);
         formdata.append('filename', this.logoImg);
         this.logoService

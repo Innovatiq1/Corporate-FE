@@ -119,7 +119,29 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="row" style="float: right;">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button type="button"  class="btn-space" mat-raised-button color="warn" routerLink="/admin/budgets/budget">
+                      Cancel
+                    </button>
+                    <button  *ngIf="action !== 'edit'"
+                     
+                      mat-raised-button
+                      id="submit" (click)="onSubmit()"
+                    >
+                      Submit
+                    </button>
+                    <button *ngIf="action === 'edit'"
+                    mat-raised-button
+                   id="submit"
+                   (click)="updateRequest()"
+                  >
+                    Update
+                  </button>
+                    
+                  </div>
+                </div>
+                <!-- <div class="d-flex justify-content-between">
                   <button
                     class="btn btn-outline-primary"
                     routerLink="/admin/budgets/budget"
@@ -140,7 +162,7 @@
                   >
                     <span class="btn-txt">Update</span>
                   </button>
-                </div>
+                </div> -->
               </form>
             </div>
           </div>

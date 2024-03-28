@@ -179,7 +179,29 @@
   
                   </div>
                 </div>
-                <div class="d-flex justify-content-between">
+                <div class="row" style="float: right;">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <button type="button"  class="btn-space" mat-raised-button color="warn" routerLink="/admin/budgets/training-request">
+                      Cancel
+                    </button>
+                    <button  *ngIf="urlPath !== 'edit'"
+                     
+                      mat-raised-button
+                      id="submit" (click)="onSubmit()"
+                    >
+                    {{ urlPath === 'copy' ? 'Re-Submit' : 'Submit' }}
+                    </button>
+                    <button *ngIf="urlPath === 'edit'"
+                    mat-raised-button
+                   id="submit"
+                   (click)="save()"
+                  >
+                    Update
+                  </button>
+                    
+                  </div>
+                </div>
+                <!-- <div class="d-flex justify-content-between">
                   <button class="btn btn-outline-primary" routerLink="/admin/budgets/training-request">
                     <span class="btn-txt">Cancel</span>
                   </button>
@@ -187,7 +209,7 @@
                     <span class="btn-txt" *ngIf="urlPath !== 'edit'" (click)="onSubmit()">{{ urlPath === 'copy' ? 'Re-Submit' : 'Submit' }}</span>
                     <span class="btn-txt" *ngIf="urlPath === 'edit'" (click)="save()">Save</span>
                   </button>
-                </div>
+                </div> -->
               </form>
             </div>
           </div>

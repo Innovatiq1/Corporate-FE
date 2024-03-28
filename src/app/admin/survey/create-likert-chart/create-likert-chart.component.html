@@ -109,12 +109,12 @@
                         </div>
                     </form>
                     <div class="row body">
-                        <div class="col-md-9">
-                            <button mat-button id="back" [routerLink]="['/admin/survey/survey-questions']">Back</button>
+                        <div class="col-md-10">
+                            <button  mat-raised-button id="back" [routerLink]="['/admin/survey/survey-questions']">Back</button>
                         </div>
-                        <div class="col-md-3">
-                            <button *ngIf="!editUrl" class="btn-space" mat-raised-button color="primary" type="submit" id="submit" (click)="save()">Submit</button>
-                            <button *ngIf="editUrl" class="btn-space" mat-raised-button color="primary" (click)="update()">Update</button>
+                        <div class="col-md-2">
+                            <button *ngIf="!editUrl" class="btn-space" mat-raised-button id="submit" type="submit" id="submit" (click)="save()">Create</button>
+                            <button *ngIf="editUrl" class="btn-space" mat-raised-button id="submit" (click)="update()">Update</button>
                         </div>
                     </div>
                 </div>
