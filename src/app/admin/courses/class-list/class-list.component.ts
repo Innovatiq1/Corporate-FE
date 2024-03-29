@@ -25,11 +25,13 @@ import 'jspdf-autotable';
 export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
   displayedColumns = [
     // 'select',
-    'img',
-    'Course Name',
+    // 'Instructor',
+    'Course',
+    'Code',
+    'Price',
     'Start Date',
     'End Date',
-    'actions',
+    'Class'
   ];
 
   breadscrums = [
@@ -278,6 +280,8 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
     // Save or open the PDF
     doc.save('Class-list.pdf');
   }
-
+  getStatusClass(classDeliveryType: string): string {
+    return classDeliveryType === 'online' ? 'success' : 'fail';
+  }
 
 }

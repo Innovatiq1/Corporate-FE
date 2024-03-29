@@ -1,1 +1,169 @@
-<p>view-class works!</p>
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+
+
+
+        <div class="row clearfix p-2">
+
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="card">
+                    <div class="header ">
+                        <div class="d-flex justify-content-between w-100">
+                            <h2>All Classes</h2>
+                            <button type="button" class="btn btn-outline-danger btn-border-radius"
+                                routerLink="/admin/courses/class-list">Back</button>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="" [ngClass]="
+              row.id === classDataById ? ' sl-item sl-success ':'sl-item sl-danger'"
+                            *ngFor="let row of classData; let i = index">
+                            <div class="sl-content" style="cursor: pointer;" [ngClass]="
+                row.id === classDataById ? ' bg-c-green ' : 'border-class'
+              " (click)="getCategories(row.id)">
+                                <h6>{{row.courseId?.title}}</h6>
+                                <!-- <small class="text-muted">
+                    <i class="fa fa-play-circle-o"></i> </small> -->
+                                <!-- <span class="feedLblStyle1 lblCommentStyle">Program {{i+1}}</span> -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <div class="info-box7  order-info-box7 bg-white">
+                    <div class="info-box7-block">
+                        <div class="card-container">
+
+                            <button class="icons" alt="Edit" mat-menu-item (click)="editClass(response.id)">
+                                <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                            </button>
+                            <button class="icons" alt="Delete" mat-menu-item (click)="delete(response.id)">
+                                <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="px-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h6>Course</h6>
+                                        </div>
+                                        <div class="col-6">
+                                            <p>{{response?.courseId?.title}}</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="px-2">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h6>Course Code</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <p>{{response?.courseId?.courseCode}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="p-2">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h6>Class</h6>
+                                        </div>
+                                        <div class="col-6" [ngClass]="getStatusClass(response.classDeliveryType)">
+                                            <div class="status-container">
+                                                <span class="status-dot"></span>
+                                                <span class="status-text">{{response.classDeliveryType | titlecase}}</span>
+                                                </div>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="row pt-2">
+                                        <div class="col-6">
+                                            <h6>Class Type</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <p>{{response?.classType == '2'?'Private':'Public'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h6>Start Date</h6>
+                                        </div>
+                                        <div class="col-5">
+                                            <p>{{response.sessions[0]?.sessionStartDate | date }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h6>End Date</h6>
+                                        </div>
+                                        <div class="col-5">
+                                            <p>{{response.sessions[0]?.sessionEndDate | date }}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-2">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h6>Instructor</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <p>{{response.sessions[0]?.instructorId?.name | titlecase}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h6>Instructor Cost</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <p>$ {{response?.instructorCost}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h6>Minimum Enrollment</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <p>{{response?.minimumEnrollment}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <h6>Maximum Enrollment</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <p>{{response?.maximumEnrollment}}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <h2 class="text-end"><span></span></h2>
+                        <p class="m-b-0"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
