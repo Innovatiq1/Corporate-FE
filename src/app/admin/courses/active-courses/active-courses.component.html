@@ -7,7 +7,7 @@
                   <div class="left">
                     <ul class="header-buttons-left ms-0">
                       <li class="tbl-title">
-                        <h2>All Courses</h2>
+                        <h2> Active Courses</h2>
                       </li>
                       <li class="tbl-search-box">
                         <label for="search-input"><i class="material-icons search-icon">search</i></label>
@@ -97,7 +97,9 @@
                         <mat-header-cell *matHeaderCellDef mat-sort-header class="compulsory-count-header">Status
                         </mat-header-cell>
                         <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)> <span
-                            class="mobile-label">Status:</span><span class="badge badge-solid-green">{{row.status}}</span>
+                            class="mobile-label">Status:</span><span class="badge badge-solid-green">
+                              <span class="status-dot"></span>
+                              {{row.status | titlecase}}</span>
                         </mat-cell>
                       </ng-container>
                       <mat-header-row *matHeaderRowDef="displayedColumns">

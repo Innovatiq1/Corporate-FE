@@ -50,6 +50,8 @@ export class ActiveCoursesComponent {
 getAllCourse(){
   this._courseService.getAllCourses({ ...this.coursePaginationModel, status: 'active' }).subscribe(response =>{
    this.courseData = response.data.docs;
+   
+   console.log("dataSource: " , this.courseData)
    this.totalItems = response.data.totalDocs
    this.coursePaginationModel.docs = response.data.docs;
    this.coursePaginationModel.page = response.data.page;

@@ -5,7 +5,39 @@
       <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
       </app-breadcrumb>
     </div>
-    <div class="card" >
+    <div class="row">
+      <div class="col-md-12">
+        <mat-tab-group>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <i class="material-icons-two-tone psr-3">list_alt</i>
+              Active Course
+            </ng-template>
+            <div class="mt-4">
+              <app-active-courses></app-active-courses>
+            </div>
+            </mat-tab>
+
+            <!-- Tab-2 -->
+            <mat-tab class="grid">
+              <ng-template mat-tab-label>
+                <i class="material-icons-two-tone psr-3">list_alt</i>
+                In-active Course
+              </ng-template>
+              <div class="mt-4">
+                <app-in-active-courses></app-in-active-courses>
+              </div>
+              </mat-tab>
+            </mat-tab-group>
+            </div>
+            </div>
+
+
+
+
+
+
+    <!-- <div class="card" >
       <div class="card-header">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -20,9 +52,9 @@
           </li>
         </ul>
       </div>
-      </div>
+      </div> -->
       <!-- Course Completed  -->
-      <div class="card-body">
+      <!-- <div class="card-body">
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <app-active-courses></app-active-courses>
@@ -31,7 +63,7 @@
             <app-in-active-courses></app-in-active-courses>
           </div>
         </div>
-      </div>
+      </div> -->
   </div>
 </section>
 

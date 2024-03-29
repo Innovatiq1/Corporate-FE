@@ -22,10 +22,12 @@ export class InActiveCoursesComponent {
     'Course Name',
     'Course Code',
     'Main Category',
-    'Sub Category',
+    'days',
+    'hr',
+    'vendors',
     'Fees',
     'status',
-    'action'
+    // 'action'
   ];
   breadscrums = [
     {
@@ -107,6 +109,7 @@ export class InActiveCoursesComponent {
             this.coursePaginationModel.limit = response.data.limit;
             this.coursePaginationModel.totalDocs = response.data.totalDocs;
             this.dataSource=response.data.docs;
+            console.log("dta",this.dataSource)
             this.totalItems=response.data.totalDocs
             this.mapCategories();
                   }, (error) => {    
