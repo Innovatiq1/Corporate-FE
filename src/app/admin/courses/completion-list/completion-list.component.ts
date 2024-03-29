@@ -25,10 +25,11 @@ import { dA } from '@fullcalendar/core/internal-common';
 export class CompletionListComponent {
   displayedColumns = [
     // 'select',
-    'Course Name',
     'Student Name',
-    'Start Date',
-    'End Date',
+    'email',
+    'Course',
+    'Registered Date',
+    'Completed Date',
     'actions',
   ];
 

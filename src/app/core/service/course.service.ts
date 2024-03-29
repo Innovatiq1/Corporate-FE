@@ -425,7 +425,10 @@ export class CourseService {
         const apiUrl = `${this.prefix}admin/configuration/currency`;
         return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
       }
-    
+      getStudentClassById(id?: string) {
+        const apiUrl = `${this.prefix}admin/studentClasses/${id}`;
+        return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+      }
 }
 
 
