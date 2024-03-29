@@ -1,0 +1,50 @@
+.font-color {
+    color: #4f4f4f;
+}
+
+.size {
+    font-size: 16px;
+}
+$green--success: #4eb36c;
+
+.checkmark {
+    // background-color: $green--success;
+    .check {
+        border-width: 0px 3px 3px 0;
+        border-color: $green--success;
+        border-style: solid;
+        box-sizing: content-box;
+        display: block;
+        height: 24px;
+        margin: 0 auto;
+        transform: rotate(49deg) translateY(-1px) translateX(0px);
+        width: 8px;
+    
+      }
+  
+
+}
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #198754;
+    border-radius: 50%; // To make it a circle
+    display: inline-block;
+    margin-right: 5px; // Space between dot and text
+}
+.status-red {
+    width: 8px;
+    height: 8px;
+    background-color: #f11541;
+    border-radius: 50%; // To make it a circle
+    display: inline-block;
+    margin-right: 5px; // Space between dot and text
+}
+
+h5{
+    color:#575757
+}
+
+.btn-right{
+    margin-right: 53px;
+}

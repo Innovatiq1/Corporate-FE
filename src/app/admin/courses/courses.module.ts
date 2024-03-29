@@ -30,6 +30,9 @@ import { ViewCategoriesComponent } from './categories/view-categories/view-categ
 import { ViewClassComponent } from './class-list/view-class/view-class.component';
 import { ViewCompletionComponent } from './completion-list/view-completion/view-completion.component';
 import { ViewCourseKitComponent } from './course-kit/view-course-kit/view-course-kit.component';
+import { CourseViewComponent } from './all-course/course-view/course-view.component';
+import { ActiveCoursesComponent } from './active-courses/active-courses.component';
+import { InActiveCoursesComponent } from './in-active-courses/in-active-courses.component';
 
 
 
@@ -56,6 +59,9 @@ import { ViewCourseKitComponent } from './course-kit/view-course-kit/view-course
     ViewClassComponent,
     ViewCompletionComponent,
     ViewCourseKitComponent,
+    CourseViewComponent,
+    ActiveCoursesComponent,
+    InActiveCoursesComponent,
 
 
   ],
