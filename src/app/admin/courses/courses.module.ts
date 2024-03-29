@@ -26,6 +26,8 @@ import { ClassListComponent } from './class-list/class-list.component';
 import { CompletionListComponent } from './completion-list/completion-list.component';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ViewCategoriesComponent } from './categories/view-categories/view-categories.component';
+import { ViewClassComponent } from './class-list/view-class/view-class.component';
 
 
 
@@ -48,6 +50,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     ClassListComponent,
     CreateClassComponent,
     CompletionListComponent,
+    ViewCategoriesComponent,
+    ViewClassComponent,
 
 
   ],
