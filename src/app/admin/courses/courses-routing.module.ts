@@ -16,6 +16,7 @@ import { CreateClassComponent } from './create-class/create-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { ViewCategoriesComponent } from './categories/view-categories/view-categories.component';
 import { ViewClassComponent } from './class-list/view-class/view-class.component';
+import { CourseViewComponent } from './all-course/course-view/course-view.component';
 
 const routes: Routes = [
   {
@@ -98,6 +99,10 @@ const routes: Routes = [
     path:'view-class/:id',
     component:ViewClassComponent
   },
+  {
+    path:'course-view',
+    component:CourseViewComponent
+  }
 
 ];
 

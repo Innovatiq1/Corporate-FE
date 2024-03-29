@@ -28,6 +28,9 @@ import { CompletionListComponent } from './completion-list/completion-list.compo
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ViewCategoriesComponent } from './categories/view-categories/view-categories.component';
 import { ViewClassComponent } from './class-list/view-class/view-class.component';
+import { CourseViewComponent } from './all-course/course-view/course-view.component';
+import { ActiveCoursesComponent } from './active-courses/active-courses.component';
+import { InActiveCoursesComponent } from './in-active-courses/in-active-courses.component';
 
 
 
@@ -52,6 +55,9 @@ import { ViewClassComponent } from './class-list/view-class/view-class.component
     CompletionListComponent,
     ViewCategoriesComponent,
     ViewClassComponent,
+    CourseViewComponent,
+    ActiveCoursesComponent,
+    InActiveCoursesComponent,
 
 
   ],
