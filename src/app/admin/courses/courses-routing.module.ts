@@ -14,6 +14,8 @@ import { CreateTemplateComponent } from './course-kit/create-template/create-tem
 import { CompletionListComponent } from './completion-list/completion-list.component';
 import { CreateClassComponent } from './create-class/create-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
+import { ViewCategoriesComponent } from './categories/view-categories/view-categories.component';
+import { ViewClassComponent } from './class-list/view-class/view-class.component';
 
 const routes: Routes = [
   {
@@ -83,6 +85,18 @@ const routes: Routes = [
   {
     path:'completion-list',
     component:CompletionListComponent
+  },
+  {
+    path:'view-categories/:id',
+    component:ViewCategoriesComponent
+  },
+  {
+    path:'view-categories',
+    component:ViewCategoriesComponent
+  },
+  {
+    path:'view-class/:id',
+    component:ViewClassComponent
   },
 
 ];

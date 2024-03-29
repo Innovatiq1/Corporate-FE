@@ -37,7 +37,7 @@ export class CategoriesComponent implements OnInit {
     // 'select',
     'Main Category',
     'Sub Category',
-    'status',
+    // 'status',
   ];
   breadscrums = [
     {
