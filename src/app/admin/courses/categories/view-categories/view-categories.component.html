@@ -52,7 +52,7 @@
 
                         <div class="row">
                             <div class="col-3">
-                                <h6>Sub Categories: </h6>
+                               <h6>Sub Categories</h6>
                             </div>
                             <div class="col-3">
                                 <p class="badge bg-teal">{{response?.subCategories?.length}}</p>
@@ -61,17 +61,17 @@
                         <div class="row mt-2">
                             <div class="row mt-2 pb-3">
                                 <div class="col-4">
-                                    <h6>Main Category : </h6>
+                                    <h6>Main Category</h6>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-6 text-muted">
                                     {{response?.category_name}}
                                 </div>
                             </div>
                             <div class="row mt-2" *ngFor="let sub of subCategory; let i=index">
                                 <div class="col-4">
-                                    <h6>Sub Category {{i+1}} : </h6>
+                                    <h6>Sub Category {{i+1}}</h6>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-6 text-muted">
                                     {{ sub?.category_name }}
                                 </div>
                             </div>
