@@ -6,7 +6,7 @@
       </app-breadcrumb>
     </div>
     <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin: auto;">
         <div class="card">
           <div class="materialTableHeader">
             <div class="left">
@@ -67,32 +67,42 @@
                     </mat-checkbox>
                   </mat-cell>
                 </ng-container> -->
-                <ng-container matColumnDef="Course Name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row" >
-                    <span class="mobile-label">Course Name:</span>{{row.title}} </mat-cell>
-                </ng-container>
-                 <!-- Student Name -->
-                 <ng-container matColumnDef="Student Name">
+                <ng-container matColumnDef="Student Name">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Student Name
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" >
+                  <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/courses/view-completion-list/',row.id]">
                     <span class="mobile-label">Student Name:</span> {{row.studentId?.name }}</mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="email">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-completion-list/',row.id]">
+                    <span class="mobile-label">Email:</span>
+                    <img src="assets/images/gmail.png" alt="Email Icon" class="email-icon">
+                    <!-- Replace "email-icon.png" with the filename of your PNG icon -->
+                    <span class="email-address">{{row.studentId?.email}}</span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Course">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Course</mat-header-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-completion-list/',row.id]">
+                    <span class="mobile-label">Course:</span>{{row.title}} </mat-cell>
+                </ng-container>
+                 <!-- Student Name -->
+                
                 <!-- Start date -->
-                <ng-container matColumnDef="Start Date">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
+                <ng-container matColumnDef="Registered Date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Registered Date
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" >
-                    <span class="mobile-label">Start Date:</span>{{row.classStartDate}} </mat-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-completion-list/',row.id]">
+                    <span class="mobile-label">Registered Date:</span>{{row.registeredOn | date}} </mat-cell>
                 </ng-container>
 
                 <!-- Enddate -->
-                <ng-container matColumnDef="End Date">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
+                <ng-container matColumnDef="Completed Date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Completed Date
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" >
-                    <span class="mobile-label">End Date:</span>{{row.classEndDate}} </mat-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-completion-list/',row.id]">
+                    <span class="mobile-label">Completed Date:</span>{{row.updatedAt | date}} </mat-cell>
                 </ng-container>
                 <!-- actions -->
                 <ng-container matColumnDef="actions">

@@ -16,6 +16,7 @@ import { CreateClassComponent } from './create-class/create-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { ViewCategoriesComponent } from './categories/view-categories/view-categories.component';
 import { ViewClassComponent } from './class-list/view-class/view-class.component';
+import { ViewCompletionComponent } from './completion-list/view-completion/view-completion.component';
 
 const routes: Routes = [
   {
@@ -97,6 +98,10 @@ const routes: Routes = [
   {
     path:'view-class/:id',
     component:ViewClassComponent
+  },
+  {
+    path:'view-completion-list/:id',
+    component:ViewCompletionComponent
   },
 
 ];

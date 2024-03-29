@@ -1,8 +1,73 @@
 #submit {
-   
+   width: 140px;
     padding: 5px 13px 5px 13px;
   }
   #issued{
-    
+    width: 140px;
     padding: 5px 13px 5px 11px;
   }
+  svg {
+    position: absolute;
+    fill: #000;
+    background-color: #d3cdcd;
+    margin-top: -15px;
+    margin-left: -15px;
+    border-radius: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+// modal-box styling
+::ng-deep .mat-mdc-menu-content {
+    margin: 0;
+    padding: 8px 20px;
+    border-radius: 10px;
+    list-style-type: none;
+
+}
+
+// modal-box curving
+::ng-deep .mat-mdc-menu-panel {
+    --mat-menu-container-shape: 12px;
+}
+
+.menu-text {
+    padding-left: 20px;
+}
+
+.name {
+    color: deepskyblue;
+    font-weight: 500;
+}
+
+.email-address {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+  // .mat-cell {
+  //   width: fit-content;
+  //   height: 1px;
+  //   border-color: white;
+  //   align-self: stretch;
+  // }
+  // .mat-header-cell {
+  //   color: white;
+  //   background-color: #000046;
+  //   padding: 20px;
+  //   border-color: white;
+  //   align-self: stretch;
+  // }
+  .email-icon {
+    height: 10px;
+    margin-right: 8px; /* Adjust spacing as needed */
+    vertical-align: middle; /* Align icon vertically with text */
+  }
+  ::ng-deep .mat-sort-header-content {
+    text-align: center !important; 
+    display: flex !important;
+    align-items: center !important;
+    white-space: nowrap;
+  }
+  
