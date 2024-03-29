@@ -17,6 +17,7 @@ import { ClassListComponent } from './class-list/class-list.component';
 import { ViewCategoriesComponent } from './categories/view-categories/view-categories.component';
 import { ViewClassComponent } from './class-list/view-class/view-class.component';
 import { ViewCompletionComponent } from './completion-list/view-completion/view-completion.component';
+import { ViewCourseKitComponent } from './course-kit/view-course-kit/view-course-kit.component';
 
 const routes: Routes = [
   {
@@ -67,10 +68,10 @@ const routes: Routes = [
     path: 'edit-course-kit/:id',
     component:  EditCourseKitComponent
   },
-  {
-    path: 'view-course-kit/:id',
-    component:  EditCourseKitComponent
-  },
+  // {
+  //   path: 'view-course-kit/:id',
+  //   component:  EditCourseKitComponent
+  // },
   {
     path: 'create-template',
     component: CreateTemplateComponent
@@ -102,6 +103,10 @@ const routes: Routes = [
   {
     path:'view-completion-list/:id',
     component:ViewCompletionComponent
+  },
+  {
+    path:'view-course-kit/:id',
+    component:ViewCourseKitComponent
   },
 
 ];

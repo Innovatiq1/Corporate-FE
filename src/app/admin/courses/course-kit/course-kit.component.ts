@@ -26,8 +26,7 @@ export class CourseKitComponent implements OnInit{
     'Short Description',
     'Long Description',
     'Video Link',
-    'Document Link',
-    'status',
+    'Document Link'
   ];
 
   breadscrums = [

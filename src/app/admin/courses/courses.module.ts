@@ -29,6 +29,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ViewCategoriesComponent } from './categories/view-categories/view-categories.component';
 import { ViewClassComponent } from './class-list/view-class/view-class.component';
 import { ViewCompletionComponent } from './completion-list/view-completion/view-completion.component';
+import { ViewCourseKitComponent } from './course-kit/view-course-kit/view-course-kit.component';
 
 
 
@@ -54,6 +55,7 @@ import { ViewCompletionComponent } from './completion-list/view-completion/view-
     ViewCategoriesComponent,
     ViewClassComponent,
     ViewCompletionComponent,
+    ViewCourseKitComponent,
 
 
   ],
