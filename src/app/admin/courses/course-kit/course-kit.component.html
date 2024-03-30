@@ -78,9 +78,9 @@
                   </mat-cell>
                 </ng-container> -->
                  <!-- Course Name -->
-                <ng-container matColumnDef="Course Name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Course Kit Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-course-kit/',row.id]">
+                <ng-container matColumnDef="Course">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Course Kit</mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/courses/view-course-kit/',row.id]">
                     <span class="mobile-label">Course Name:</span>{{row.name}}</mat-cell>
                 </ng-container>
                 <!-- Short Description -->

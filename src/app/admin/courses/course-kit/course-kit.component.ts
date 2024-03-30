@@ -22,7 +22,7 @@ import 'jspdf-autotable';
 export class CourseKitComponent implements OnInit{
   displayedColumns: string[] = [
     // 'select',
-    'Course Name',
+    'Course',
     'Short Description',
     'Long Description',
     'Video Link',

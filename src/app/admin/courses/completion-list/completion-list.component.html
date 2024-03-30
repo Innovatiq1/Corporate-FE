@@ -67,11 +67,11 @@
                     </mat-checkbox>
                   </mat-cell>
                 </ng-container> -->
-                <ng-container matColumnDef="Student Name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Student Name
+                <ng-container matColumnDef="Student">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Student
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/courses/view-completion-list/',row.id]">
-                    <span class="mobile-label">Student Name:</span> {{row.studentId?.name }}</mat-cell>
+                    <span class="mobile-label">Student:</span> {{row.studentId?.name }}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="email">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>

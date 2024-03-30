@@ -25,7 +25,7 @@ import { dA } from '@fullcalendar/core/internal-common';
 export class CompletionListComponent {
   displayedColumns = [
     // 'select',
-    'Student Name',
+    'Student',
     'email',
     'Course',
     'Registered Date',
@@ -35,8 +35,8 @@ export class CompletionListComponent {
 
   breadscrums = [
     {
-      title: 'Class List',
-      items: ['Schedule Class'],
+      title: 'Completion List',
+      items: ['Course'],
       active: 'Completion List',
     },
   ];
