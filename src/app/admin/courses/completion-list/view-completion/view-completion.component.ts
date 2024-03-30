@@ -14,7 +14,7 @@ export class ViewCompletionComponent {
     {
       title: 'Blank',
       items: ['Courses'],
-      active: 'View Class',
+      active: 'View Completion List',
     },
   ];
 

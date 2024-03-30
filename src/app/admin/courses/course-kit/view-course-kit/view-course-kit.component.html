@@ -67,7 +67,7 @@
                                            <h6>Long Description</h6>
                                         </div>
                                         <div class="col-6">
-                                            <p class="text-muted">{{response.longDescription}}</p>
+                                            <h6 class="text-muted">{{response.longDescription}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                                            <h6>Short Description</h6>
                                         </div>
                                         <div class="col-6">
-                                            <p class="text-muted">{{response.shortDescription}}</p>
+                                            <h6 class="text-muted">{{response.shortDescription}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                            <h6>Document Link</h6>
                                         </div>
                                         <div class="col-6">
-                                            <p class="text-muted" style="cursor: pointer;"><a *ngFor="let doc of response.videoLink; let i = index" href="{{doc.document}}" target="_blank" class="dl-container">{{doc.doc_filename |filename}}</a></p>
+                                            <h6 class="text-muted" style="cursor: pointer;"><a *ngFor="let doc of response.videoLink; let i = index" href="{{doc.document}}" target="_blank" class="dl-container">{{doc.doc_filename |filename}}</a></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                            <h6>Video Link</h6>
                                         </div>
                                         <div class="col-7" (click)="playVideo(video)">
-                                            <p class="text-muted" style="cursor: pointer;"><a class="video">{{ video.video_filename}}</a></p>
+                                            <h6 class="text-muted" style="cursor: pointer;"><a class="video">{{ video.video_filename}}</a></h6>
                                         </div>
                                     </div>
                                 </div>

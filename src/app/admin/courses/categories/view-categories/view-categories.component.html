@@ -88,9 +88,9 @@
                   <h6>Sub Categories</h6>
                 </div>
                 <div class="col-3">
-                  <p class="badge bg-teal">
+                  <h6 class="badge bg-teal">
                     {{ response?.subCategories?.length }}
-                  </p>
+                  </h6>
                 </div>
               </div>
               <div class="row mt-2">
@@ -99,7 +99,7 @@
                     <h6>Main Category</h6>
                   </div>
                   <div class="col-6 text-muted">
-                    {{ response?.category_name }}
+                    <h6>{{ response?.category_name }}</h6>
                   </div>
                 </div>
                 <div
@@ -110,7 +110,7 @@
                     <h6>Sub Category {{ i + 1 }}</h6>
                   </div>
                   <div class="col-6 text-muted">
-                    {{ sub?.category_name }}
+                    <h6>{{ sub?.category_name }}</h6>
                   </div>
                 </div>
               </div>
