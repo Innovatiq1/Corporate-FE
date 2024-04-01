@@ -90,7 +90,7 @@
       </div>
               <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                 <div class="card p-3">
-                  <div class="d-flex justify-content-end">
+                  <div class="d-flex justify-content-end" *ngIf="button">
                     <div class="d-flex">
                       <button alt="Edit" mat-menu-item [routerLink]="['/admin/courses/edit-course/',sourceData.id]">
                         <app-feather-icons [icon]="'edit'" class="tbl-fav-edit"></app-feather-icons>
