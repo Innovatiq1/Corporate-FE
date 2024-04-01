@@ -53,9 +53,9 @@ export class LogoService {
           })
         );
       }
-      getSidemenuById(id: string){
+      getSidemenuById(id?: string){
         const apiUrl = `${this.defaultUrl}admin/sidemenu/${id}`;
-        return this.http.get<any>(apiUrl).pipe(map((response) => response.MENU_LIST));
+        return this.http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
       }
      
       updateSidemenu(sidemenu:any) {
