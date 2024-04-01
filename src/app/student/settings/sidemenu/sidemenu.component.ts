@@ -26,6 +26,8 @@ export class SidemenuComponent {
   uploadedImage: any;
   uploaded: any;
   thumbnail: any;
+  menulist: any;
+  menuItem: any;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -42,13 +44,10 @@ export class SidemenuComponent {
     
   ngOnInit() {
     this.sideMenuForm = this.formBuilder.group({
-      // title: ['', [Validators.required]],
-      sidemenu: this.formBuilder.array([
-        this.createSidemenu()
-      ])
+      sidemenu: this.formBuilder.array([]) // Initialize an empty array initially
     });
-    console.log("sidemenu",this.sideMenuForm)
     this.getData();
+ 
   }
   get sidemenu(): FormArray {
     return this.sideMenuForm.get('sidemenu') as FormArray;
@@ -151,37 +150,32 @@ export class SidemenuComponent {
   getData() {
     this.logoService.getSidemenuById(this.sidemenuId).subscribe((response: any) => {
       console.log("Received response:", response);
-        if (response && response.sidemenu) {
-            this.res = response;
-            this.sideMenuForm.patchValue({
-                title: response.title,
-            });
+      const sidemenuArray = this.sideMenuForm.get('sidemenu') as FormArray;
+      sidemenuArray.clear(); // Clear existing sidemenu items
+  
+      response.MENU_LIST.forEach((menuItem: any) => {
+       
+        if (menuItem.title.trim() !== '') {
+          const newSidemenuGroup = this.createSidemenu();
+          newSidemenuGroup.patchValue({
+            title: menuItem.title,
             
-            const sidemenuArray = this.sideMenuForm.get('MENU_LIST') as FormArray;
-            sidemenuArray.clear(); // Clear existing sidemenu items
-
-            response.sidemenu.forEach((res: any) => {
-                if (res.title.trim() !== '') {
-                    const newSidemenuGroup = this.createSidemenu();
-                    // Patch values for each sidemenu item
-                    newSidemenuGroup.patchValue({
-                        title: res.title,
-                        uploadedImage: res.iconsrc,
-                    });
-                    const submenuArray = newSidemenuGroup.get('children') as FormArray;
-                    submenuArray.clear(); // Clear existing submenu items
-                    res.submenu.forEach((submenus: any) => {
-                        submenuArray.push(
-                            this.formBuilder.group({
-                                title: submenus.title,
-                            })
-                        );
-                    });
-                    sidemenuArray.push(newSidemenuGroup);
-                }
-            });
+          });
+          
+  
+          const submenuArray = newSidemenuGroup.get('submenu') as FormArray;
+          submenuArray.clear(); // Clear existing submenu items
+          menuItem.children.forEach((submenu: any) => {
+            submenuArray.push(
+              this.formBuilder.group({
+                title: submenu.title
+              })
+            );
+          });
+          sidemenuArray.push(newSidemenuGroup);
         }
+      });
     });
-}
+  }
 
 }
