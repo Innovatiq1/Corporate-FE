@@ -15,6 +15,7 @@ import { EtmsService } from '@core/service/etms.service';
 import { StudentsService } from 'app/admin/students/all-students/students.service';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
+import { LogoService } from './logo.service';
 
 @Component({
   selector: 'app-settings',
@@ -64,6 +65,7 @@ export class SettingsComponent {
   lmsUrl: any;
   configUrl: any;
   formsUrl: any;
+  sidemenuUrl: any;
   showAccountSettings: boolean = false;
   showProfileSettings: boolean = false;
   showEmailConfig: boolean = false;
@@ -76,10 +78,12 @@ export class SettingsComponent {
   showLms: boolean = false;
   showConfig: boolean = false;
   showForms: boolean = false;
+  showSidemenu: boolean = false;
 
   currentContent: number = 1;
   currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
   selectedCurrency: string = "";
+  sidemenu: any;
   constructor(
     private studentService: StudentsService,
     private etmsService: EtmsService,
@@ -88,6 +92,7 @@ export class SettingsComponent {
     private router: Router,
     private authenservice: AuthenService,
     private courseService: CourseService,
+    private logoService: LogoService,
     public dialog: MatDialog
   ) {
     let urlPath = this.router.url.split('/');
@@ -110,6 +115,7 @@ export class SettingsComponent {
     this.lmsUrl = urlPath.includes('LMS-TAE');
     this.configUrl = urlPath.includes('configuration');
     this.formsUrl = urlPath.includes('forms');
+    this.sidemenuUrl = urlPath.includes('sidemenu');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -295,6 +301,16 @@ export class SettingsComponent {
       ];
       this.isAdmin = true;
     }
+    if (this.sidemenuUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Sidemenu',
+          items: ['Settings'],
+          active: 'Sidemenu',
+        },
+      ];
+      this.isAdmin = true;
+    }
     this.patchValues(),
       //this.patchValues1()
       (this.stdForm = this.fb.group({
@@ -334,6 +350,7 @@ export class SettingsComponent {
 
   ngOnInit() {
     this.getUserProfile();
+    this.getSidemenu();
     let role = localStorage.getItem('user_type')
     if(role == 'admin'){
       this.isAdmin = true
@@ -376,6 +393,9 @@ export class SettingsComponent {
     if(this.formsUrl){
       this.showForms = true;
     }
+    if(this.sidemenuUrl){
+      this.showSidemenu = true;
+    }
   }
   navigateToAccountSettings() {
    
@@ -417,10 +437,20 @@ export class SettingsComponent {
     this.router.navigate(['/student/customization-settings']);
     
   }
+  navigateToSidemenuSettings(){
+    this.router.navigate(['/student/sidemenu']);
+    
+  }
  
 
   showMainContent(contentId: number) {
     this.currentContent = contentId;
+  }
+ getSidemenu() {
+    /* get all logos **/
+    this.logoService.getSidemenu().subscribe((response) => {
+      this.sidemenu = response?.data?.docs;
+    });
   }
   patchValues() {
     this.studentId = localStorage.getItem('id');
