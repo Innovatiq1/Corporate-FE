@@ -21,6 +21,7 @@ import { FailureProgramComponent } from './failure-program/failure-program.compo
 import { QuestionComponent } from './question/question.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-coutomzation.component';
+import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
 
 
 const routes: Routes = [
@@ -146,6 +147,14 @@ const routes: Routes = [
   {
     path: 'logo-coutomization',
     component: LogoCoutomzationComponent,
+  },
+  {
+    path: 'sidemenu',
+    component: SettingsComponent,
+  },
+  {
+    path: 'side-menu/:id',
+    component: SidemenuComponent,
   },
 
 

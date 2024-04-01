@@ -43,6 +43,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ChangeBgDirective } from 'app/change-bg.directive';
 import { ExamScheduleService } from 'app/timetable/exam-schedule.service';
 import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-coutomzation.component';
+import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-cou
     QuestionComponent,
     WelcomeComponent,
     ChangeBgDirective,
-    LogoCoutomzationComponent
+    LogoCoutomzationComponent,
+    SidemenuComponent
 
   ],
   imports: [

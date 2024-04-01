@@ -1,5 +1,5 @@
 <section class="content"
-  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig &&!showForms">
+  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig &&!showForms  && !showSidemenu">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
@@ -240,7 +240,7 @@
     <!-- </div> -->
 
     <div class="card"
-      *ngIf="!showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig && !showForms">
+      *ngIf="!showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig && !showForms && !showSidemenu">
       <div class="header">
         <h2>Settings</h2>
       </div>
@@ -744,6 +744,12 @@
             <button id="saved" (click)="openDialog(currencyDialog)"> Currency </button>
           </div>
         </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" (click)="navigateToSidemenuSettings()" > Sidemenu </button>
+          </div>
+         
+        </div>
       </div>
     </div>
     <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showLms">
@@ -892,6 +898,46 @@
         </div>
 
       </div>
+    </div>
+    <div  *ngIf="showSidemenu">
+        <div class="content-block">
+          <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="card">
+                <div class="header">
+                  <h2>Sidemenu Customization</h2>
+                </div>
+                <div class="body">
+                  <div class="row">
+                      <!-- Logo List section -->
+                    <div class="col-md-4" >
+                      <ul
+                        class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder"
+                        *ngFor="let row of sidemenu"
+                      >
+                        <li class="lecture-list cursor-pointer" [routerLink]="['/student/side-menu',row.id]" >
+                          <div class="set-flex">
+                            <div class="media-title font-20">{{ row.name }}</div>
+                          </div>
+                          <div class="ms-auto">
+                              <div class="container">
+                                  <div class="checkmark  checkmark--inverted">
+                                      <div class="check">
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+   
     </div>
     <div class="card" *ngIf="showCustomSettings">
       <div class="header">

@@ -43,4 +43,25 @@ export class LogoService {
         const apiUrl = `${this.defaultUrl}admin/logo/${id}`;
         return this.http.put<any>(apiUrl, data).pipe(map((response) => response));
       }
+    // get all sidemenu
+      getSidemenu(): Observable<any> {
+        const apiUrl = `${this.defaultUrl}admin/sidemenu`;
+        return this.http.get(apiUrl).pipe(
+          map(response => {
+            this.updateData(response); // Pass the response to updateData
+            return response; 
+          })
+        );
+      }
+      getSidemenuById(id: string){
+        const apiUrl = `${this.defaultUrl}admin/sidemenu/${id}`;
+        return this.http.get<any>(apiUrl).pipe(map((response) => response.MENU_LIST));
+      }
+     
+      updateSidemenu(sidemenu:any) {
+        const apiUrl = `${this.defaultUrl}admin/sidemenu/${sidemenu.id}`;
+        return this.http
+          .put<any>(apiUrl, sidemenu)
+          .pipe(map((response) => {response }));
+      }
 }
