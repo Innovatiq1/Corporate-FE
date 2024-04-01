@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursePaginationModel, SubCategory } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
@@ -29,7 +30,7 @@ questionId!: string;
 editUrl: any;
 question: any;
 subscribeParams: any;
-
+selectedTabIndex = 0;
 
 constructor(private formBuilder: FormBuilder,private router: Router, private questionService: QuestionService, private cdr: ChangeDetectorRef,private activatedRoute: ActivatedRoute,) {
   
@@ -191,6 +192,7 @@ Swal.fire({
 }
 
 getData() {
+if (this.questionId) {
   this.questionService.getQuestionsById(this.questionId).subscribe((response: any) => {
     if (response && response.questions) {
       this.question = response;
@@ -228,6 +230,14 @@ getData() {
   });
 }
 
+}
 
+tabChanged(event: MatTabChangeEvent) {
+  console.log('Tab changed:', event.index);
+}
+
+selectTab(index: number) {
+  this.selectedTabIndex = index;
+}
 
 }

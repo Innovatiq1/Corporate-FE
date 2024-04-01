@@ -61,7 +61,7 @@ export class ScheduleClassComponent {
   pageSizeArr = [10, 20, 50, 100];
   searchTerm: string = '';
 
-  displayedColumns = ['courseName', 'startDate', 'endDate', 'Options'];
+  displayedColumns = ['courseName', 'startDate', 'endDate', 'Class'];
 
   breadscrums = [
     {
@@ -306,4 +306,9 @@ export class ScheduleClassComponent {
 
     }
   }
+
+  getStatusClass(classDeliveryType: string): string {
+    return classDeliveryType === 'online' ? 'success' : 'fail';
+  }
+
 }

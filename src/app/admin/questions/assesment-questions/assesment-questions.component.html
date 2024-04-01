@@ -1,0 +1,59 @@
+
+<section class="content">
+  <div class="content-block">
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="table-container">
+            <form [formGroup]="questionFormTab2">
+              <div class="name-container">
+                <h6>Name <span class="mandatory">&nbsp;*</span></h6>
+                <mat-form-field appearance="outline" style="width: 18%;">
+                  <input class="form-control" matInput type="text" formControlName="name" placeholder="Name" required>
+                </mat-form-field>
+              </div>
+              <table>
+                <tr>
+                  <th style="text-align:center;">Question</th>
+                  <th style="text-align:center;">Options</th>
+                </tr>
+              
+             <ng-container *ngFor="let question of questions.controls; let i = index" class="test">
+                  <tr>
+                    <td>
+                      <mat-form-field appearance="outline" style="width: 95%; margin-left:10px">
+                        <input matInput type="text" formControlName="questionText" placeholder="Enter question">
+                      </mat-form-field>
+                    </td>
+                    <td> 
+                      <ng-container *ngFor="let optionCtrl of getAnswers(i).controls; let j = index">
+                        <mat-checkbox formControlName="answer"></mat-checkbox>
+                        <mat-form-field appearance="outline" style="margin-left:10px; width:175px">
+                          <input matInput type="text" formControlName="option" placeholder="Enter option">
+                        </mat-form-field>
+                      </ng-container>
+                    </td>
+                  </tr>
+                </ng-container>
+              </table>
+              <div style="text-align: center; margin-top: 20px;">
+                <button mat-icon-button (click)="addRow()">
+                  <mat-icon style="color: black; font-size: 24px;">add</mat-icon>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="row body">
+            <div class="col-md-10">
+              <button mat-raised-button id="back" [routerLink]="['/admin/questions/all-questions']">Back</button>
+            </div>
+
+            <div class="col-md-2">
+              <button *ngIf="!editUrl" class="btn-space" mat-raised-button color="primary" type="submit" id="submit" (click)="save()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

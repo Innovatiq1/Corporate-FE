@@ -86,13 +86,12 @@
             <div class="card-container">
 
               <button class="icons" alt="Edit" mat-menu-item
-                [routerLink]="['/admin/program/edit-program/',response.id]">
+                [routerLink]="['/admin/program/edit-program/',courseId]">
                 <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                 <!-- <span class="menu-text px-3">Edit</span> -->
               </button>
-              <button class="icons" alt="Delete" mat-menu-item (click)="delete(response.id)">
+              <button class="icons" alt="Delete" mat-menu-item (click)="delete(courseId)">
                 <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                <!-- <span class="menu-text">Delete</span> -->
               </button>
             </div>
 
