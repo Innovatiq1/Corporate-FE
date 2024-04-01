@@ -8,6 +8,7 @@ import { MenuItemModel, UserType } from '@core/models/user.model';
 import { AdminService } from '@core/service/admin.service';
 import { UtilsService } from '@core/service/utils.service';
 import { MENU_LIST } from '@shared/menu-item';
+import { LogoService } from 'app/student/settings/logo.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -59,6 +60,7 @@ export class CreateUserTypeComponent {
 
   constructor(public router: ActivatedRoute, private fb: FormBuilder, private adminService: AdminService,
     private cd: ChangeDetectorRef, private route: Router, public utils: UtilsService, private formBuilder: FormBuilder,
+    private logoService: LogoService
   ) {
     this.router.queryParams.subscribe(params => {
       if (params['id']) {
@@ -253,6 +255,8 @@ export class CreateUserTypeComponent {
 
 
   initMenuItemsV2() {
+    this.logoService.getSidemenu().subscribe((response: any) => {
+    // let MENU_LIST = response.data.docs[0].MENU_LIST
     const items = this.convertToMenuV2(MENU_LIST, this.userType?.menuItems);
     items?.forEach((item, index) => {
       if (!this.dataSourceArray.some(v => v.id === item.id))
@@ -261,6 +265,7 @@ export class CreateUserTypeComponent {
 
     this.dataSource = new MatTableDataSource<MenuItemModel>(this.dataSourceArray);
     this.cd.detectChanges();
+  })
   }
 
   updateMenuItem(item: { checked: any; id: any; children: any[]; }) {

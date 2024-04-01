@@ -41,6 +41,7 @@ label{
   .submenu-container {
     display: flex;
     flex-wrap: nowrap; /* Ensure items stay in a single row */
+ 
 }
 
 .submenu {
@@ -48,7 +49,5 @@ label{
   margin-right: 20px;
   margin-bottom: 20px;
 }
-.new-row {
-  flex-basis: 100%;
-  margin-right: 0;
-}
+
+

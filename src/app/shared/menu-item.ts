@@ -6,7 +6,6 @@ MENU_LIST = [
     {
         id: "dashboard",
         title: "Dashboard",
-        selected: false,
         iconsrc: "/assets/announcement-icon.svg",
         icon: 'assessment',
         children:
@@ -65,82 +64,11 @@ MENU_LIST = [
               ]
     },
 
-//Etms
-//   {
-//         id: "admin/e-tms",
-//         title: "E-TMS",
-//         iconsrc: "/assets/course-icon.svg",
-//         icon: 'school',
-//         selected: true,
-//         children: [
-//             {
-//                 id: "etms-dashboard",
-//                 title: "E-TMS Dashboard",
-//                 type: "none",
-    
-//             },
-//             {
-//                 id: "employee-status",
-//                 title: "Employee Status",
-//                 type: "none",
-    
-//             },
-//             {
-//                 id: "new-course-request",
-//                 title: "New Course Request",
-//                 type: "none",
-    
-//             },
-//             {
-//                 id: "course-request",
-//                 title: "Course Request",
-//                 type: "none"
-//             },
-//             {
-//                 id: "all-requests",
-//                 title: "All Requests",
-//                 type:"none"
-//             },
-//             {
-//                 id: "new-course-approval",
-//                 title: "New Course Approval",
-//                 type: "none"
-//             },
-//             {
-//                 id: "overall-budget-list",
-//                 title: "Overall Budget List ",
-//                 type: "none"
-//             },
-//             {
-//                 id: "department-budget-allocation",
-//                 title: "Department Budget Allocation ",
-//                 type: "none"
-//             },
-//             {
-//                 id: "department-training-plan",
-//                 title: "Department Training Plan ",
-//                 type: "none"
-//             },
-//             {
-//                 id: "budget-request",
-//                 title: "Budget Request",
-//                 type: "none"
-//             },
-//             {
-//                 id: "dapartment-budget-request",
-//                 title: "Department Budget Request",
-//                 type: "none"
-//             },
-            
-        
-//         ]
-//     },
     {
         id:"admin/program",
         title: "Program",
         iconsrc:"/assets/fellowship-icon.svg",
         icon: 'school',
-        selected: false,
         children: [
             {
                 id:"program-list",
@@ -172,7 +100,6 @@ MENU_LIST = [
     title: "Course",
     iconsrc: "/assets/course-icon.svg",
     icon: 'import_contacts',
-    selected: true,
     children: [
         {
             id: "all-courses",
@@ -208,7 +135,6 @@ MENU_LIST = [
 {
     id: "admin/users",
     title: "Users",
-    selected: false,
     iconsrc: "/assets/users-icon.svg",
     icon: 'people',
     children:
@@ -248,7 +174,6 @@ MENU_LIST = [
     title: "Approval",
     iconsrc: "/assets/course-icon.svg",
     icon: 'verified_user',
-    selected: true,
     children: [
         {
             id: "program-approval",
@@ -284,7 +209,6 @@ MENU_LIST = [
     title: "Enrollment",
     iconsrc: "/assets/course-icon.svg",
     icon:'school',
-    selected: true,
     children: [
         {
             id: "programs",
@@ -302,7 +226,6 @@ MENU_LIST = [
 {
     id: "instructor",
     title: "Lectures",
-    selected: false,
     iconsrc: "/assets/announcement-icon.svg",
     icon: 'menu_book',
     children:
@@ -331,7 +254,6 @@ MENU_LIST = [
 {
     id: "timetable",
     title: "Timetable",
-    selected: false,
     iconsrc: "/assets/course-icon.svg",
     icon: 'date_range',
     children:
@@ -402,7 +324,6 @@ MENU_LIST = [
     title: "Finance",
     iconsrc: "/assets/course-icon.svg",
     icon: 'attach_money',
-    selected: true,
     children: [
         {
             id: "training-request",
@@ -444,7 +365,6 @@ MENU_LIST = [
     title: "Survey",
     iconsrc:"/assets/survey-icon.svg",
     icon: 'rate_review',
-    selected: false,
     children:
     [
         {
@@ -463,7 +383,6 @@ MENU_LIST = [
 {
     id: "admin/audit",
     title: "Logs",
-    selected: false,
     iconsrc: "/assets/audit-icon.svg",
     icon: 'find_in_page',
     children:
@@ -522,7 +441,6 @@ MENU_LIST = [
 {
     id: "admin/email-configuration",
     title: "Email Configuration",
-    selected: false,
     iconsrc:"/assets/email-icon.svg",
     icon: 'email',
     children:
@@ -653,7 +571,6 @@ MENU_LIST = [
     title: "Exams",
     iconsrc: "/assets/course-icon.svg",
     icon:'assignment',
-    selected: true,
     children: [
         {
             id: "programs",
@@ -702,18 +619,15 @@ MENU_LIST = [
     title: "Feedback",
     iconsrc: "/assets/course-icon.svg",
     icon:'rate_review',
-    selected: true,
     children: [
         {
             id: "programs",
             title: "Programs",
-            selected: false,
             iconsrc: "/assets/announcement-icon.svg",
         },
         {
             id: "courses",
             title: "Courses",
-            selected: false,
             iconsrc: "/assets/announcement-icon.svg",
         },
        
@@ -722,7 +636,6 @@ MENU_LIST = [
 {
     id: "leave-request",
     title: "Leave Request",
-    selected: false,
     iconsrc: "/assets/announcement-icon.svg",
     icon:'local_pharmacy',
     children:
@@ -743,7 +656,6 @@ MENU_LIST = [
 {
     id: "email",
     title: "Internal Email",
-    selected: false,
     iconsrc: "/assets/announcement-icon.svg",
     icon: 'email',
     children:
@@ -760,7 +672,6 @@ MENU_LIST = [
 {
     id: "settings",
     title: "Settings",
-    selected: false,
     iconsrc: "/assets/announcement-icon.svg",
     icon: 'settings',
     children:
@@ -811,7 +722,6 @@ MENU_LIST = [
 {
   id: "apps",
   title: "Support",
-  selected: false,
   iconsrc: "/assets/announcement-icon.svg",
   icon: 'chat',
   children:

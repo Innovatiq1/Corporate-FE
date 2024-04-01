@@ -26,8 +26,8 @@ export class SidemenuComponent {
   uploadedImage: any;
   uploaded: any;
   thumbnail: any;
-  menulist: any;
-  menuItem: any;
+  uploadedImages: string[] = [];  
+ 
   
   constructor(
     private formBuilder: FormBuilder,
@@ -44,10 +44,13 @@ export class SidemenuComponent {
     
   ngOnInit() {
     this.sideMenuForm = this.formBuilder.group({
-      sidemenu: this.formBuilder.array([]) // Initialize an empty array initially
+      // title: ['', [Validators.required]],
+      sidemenu: this.formBuilder.array([
+        // this.createSidemenu()
+      ])
     });
+    console.log("sidemenu",this.sideMenuForm)
     this.getData();
- 
   }
   get sidemenu(): FormArray {
     return this.sideMenuForm.get('sidemenu') as FormArray;
@@ -61,7 +64,7 @@ export class SidemenuComponent {
       title: ['', Validators.required],
       iconsrc: [''],
       submenu: this.formBuilder.array([
-        this.createSubmenu(),
+        // this.createSubmenu(),
         // this.createOption()
       ])
     });
@@ -81,21 +84,40 @@ export class SidemenuComponent {
   getSubmenu(submenuIndex: number): FormArray {
     return this.sidemenu.at(submenuIndex).get('submenu') as FormArray;
   }
-  onFileUpload(event:any) {
+ 
+  onFileUpload(event: any, menuItemIndex: number) {
     const file = event.target.files[0];
-    
-    this.thumbnail = file
     const formData = new FormData();
-    formData.append('files', this.thumbnail);
-  this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
-    this.iconsrc = data.data.thumbnail;
-    this.uploaded=this.iconsrc.split('/')
-    let image  = this.uploaded.pop();
-    this.uploaded= image.split('\\');
-    this.uploadedImage = this.uploaded.pop();
-  })
+    formData.append('files', file);
+    this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) => {
+        const uploadedImageLink = data?.data?.thumbnail;
+        const imageName = uploadedImageLink.split('/').pop()?.split('\\').pop();
+        this.uploadedImages[menuItemIndex] = imageName;
+        const menuItemControl = this.sidemenu?.at(menuItemIndex);
+        menuItemControl.patchValue({
+          iconsrc: uploadedImageLink,
+        });
+    })
+}
+
+  // onFileUpload(event:any,menuItemIndex:number) {
+  //   const file = event.target.files[0];
+  //   this.thumbnail = file
+  //   const formData = new FormData();
+  //   formData.append('files', this.thumbnail);
+  //   this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
+  //   const uploadedImageLink = data?.data?.thumbnail;
+  //   this.uploaded=uploadedImageLink.split('/')
+  //   let image  = this.uploaded.pop();
+  //   this.uploaded= image.split('\\');
+  //   this.uploadedImage = this.uploaded.pop();
+  //   const menuItemControl = this.sidemenu?.at(menuItemIndex);
+  //   menuItemControl.patchValue({
+  //       iconsrc: uploadedImageLink
+  //   });    
+  // })
   
-  }
+  // }
   update() {
     
     if (this.sideMenuForm.valid) {
@@ -146,36 +168,33 @@ export class SidemenuComponent {
     }
   }
   
-  
-  getData() {
+  getData(){
     this.logoService.getSidemenuById(this.sidemenuId).subscribe((response: any) => {
-      console.log("Received response:", response);
       const sidemenuArray = this.sideMenuForm.get('sidemenu') as FormArray;
-      sidemenuArray.clear(); // Clear existing sidemenu items
-  
-      response.MENU_LIST.forEach((menuItem: any) => {
-       
+      response.MENU_LIST.forEach((menuItem: any, i: number) => {
         if (menuItem.title.trim() !== '') {
-          const newSidemenuGroup = this.createSidemenu();
-          newSidemenuGroup.patchValue({
-            title: menuItem.title,
-            
-          });
-          
-  
-          const submenuArray = newSidemenuGroup.get('submenu') as FormArray;
-          submenuArray.clear(); // Clear existing submenu items
-          menuItem.children.forEach((submenu: any) => {
-            submenuArray.push(
-              this.formBuilder.group({
-                title: submenu.title
-              })
+        const newSidemenuGroup = this.createSidemenu(); 
+        const uploadedImageLink = menuItem.iconsrc; 
+        const imageName = uploadedImageLink ? uploadedImageLink.split('/').pop()?.split('\\').pop() : null;
+        this.uploadedImages[i] = imageName;
+        newSidemenuGroup.patchValue({
+        title: menuItem.title,
+        iconsrc: imageName,
+         });
+         const submenuArray = newSidemenuGroup.get('submenu') as FormArray;
+         menuItem.children.forEach((submenus: any) => {
+         submenuArray.push(
+          this.formBuilder.group({
+               title: submenus.title,
+               })
             );
-          });
-          sidemenuArray.push(newSidemenuGroup);
+           });
+         sidemenuArray.push(newSidemenuGroup);
         }
-      });
-    });
+      })
+    })
   }
+  
+
 
 }
