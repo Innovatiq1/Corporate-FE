@@ -26,8 +26,6 @@ export class SidemenuComponent {
   uploadedImage: any;
   uploaded: any;
   thumbnail: any;
-  menulist: any;
-  menuItem: any;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -44,10 +42,13 @@ export class SidemenuComponent {
     
   ngOnInit() {
     this.sideMenuForm = this.formBuilder.group({
-      sidemenu: this.formBuilder.array([]) // Initialize an empty array initially
+      // title: ['', [Validators.required]],
+      sidemenu: this.formBuilder.array([
+        this.createSidemenu()
+      ])
     });
+    console.log("sidemenu",this.sideMenuForm)
     this.getData();
- 
   }
   get sidemenu(): FormArray {
     return this.sideMenuForm.get('sidemenu') as FormArray;
@@ -81,18 +82,21 @@ export class SidemenuComponent {
   getSubmenu(submenuIndex: number): FormArray {
     return this.sidemenu.at(submenuIndex).get('submenu') as FormArray;
   }
-  onFileUpload(event:any) {
+  onFileUpload(event:any,menuItemIndex:number) {
     const file = event.target.files[0];
-    
     this.thumbnail = file
     const formData = new FormData();
     formData.append('files', this.thumbnail);
-  this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
-    this.iconsrc = data.data.thumbnail;
-    this.uploaded=this.iconsrc.split('/')
+    this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
+    const uploadedImageLink = data?.data?.thumbnail;
+    this.uploaded=uploadedImageLink.split('/')
     let image  = this.uploaded.pop();
     this.uploaded= image.split('\\');
     this.uploadedImage = this.uploaded.pop();
+    const menuItemControl = this.sidemenu?.at(menuItemIndex);
+    menuItemControl.patchValue({
+        iconsrc: uploadedImageLink
+    });    
   })
   
   }
@@ -150,32 +154,68 @@ export class SidemenuComponent {
   getData() {
     this.logoService.getSidemenuById(this.sidemenuId).subscribe((response: any) => {
       console.log("Received response:", response);
-      const sidemenuArray = this.sideMenuForm.get('sidemenu') as FormArray;
-      sidemenuArray.clear(); // Clear existing sidemenu items
-  
-      response.MENU_LIST.forEach((menuItem: any) => {
-       
-        if (menuItem.title.trim() !== '') {
-          const newSidemenuGroup = this.createSidemenu();
-          newSidemenuGroup.patchValue({
-            title: menuItem.title,
+        if (response && response.sidemenu) {
+            this.res = response;
+            this.sideMenuForm.patchValue({
+                title: response.title,
+            });
             
-          });
-          
-  
-          const submenuArray = newSidemenuGroup.get('submenu') as FormArray;
-          submenuArray.clear(); // Clear existing submenu items
-          menuItem.children.forEach((submenu: any) => {
-            submenuArray.push(
-              this.formBuilder.group({
-                title: submenu.title
-              })
-            );
-          });
-          sidemenuArray.push(newSidemenuGroup);
+            const sidemenuArray = this.sideMenuForm.get('MENU_LIST') as FormArray;
+            sidemenuArray.clear(); // Clear existing sidemenu items
+
+            response.sidemenu.forEach((res: any) => {
+                if (res.title.trim() !== '') {
+                    const newSidemenuGroup = this.createSidemenu();
+                    // Patch values for each sidemenu item
+                    newSidemenuGroup.patchValue({
+                        title: res.title,
+                        uploadedImage: res.iconsrc,
+                    });
+                    const submenuArray = newSidemenuGroup.get('children') as FormArray;
+                    submenuArray.clear(); // Clear existing submenu items
+                    res.submenu.forEach((submenus: any) => {
+                        submenuArray.push(
+                            this.formBuilder.group({
+                                title: submenus.title,
+                            })
+                        );
+                    });
+                    sidemenuArray.push(newSidemenuGroup);
+                }
+            });
         }
-      });
     });
-  }
+}
+// getData() {
+//   this.logoService.getSidemenuById(this.sidemenuId).subscribe((response: any) => {
+//     console.log("Received response:", response);
+//     const sidemenuArray = this.sideMenuForm.get('sidemenu') as FormArray;
+//     sidemenuArray.clear(); // Clear existing sidemenu items
+
+//     response.MENU_LIST.forEach((menuItem: any) => {
+      
+//       if (menuItem.title.trim() !== '') {
+//         const newSidemenuGroup = this.createSidemenu();
+//         newSidemenuGroup.patchValue({
+//           title: menuItem.title,
+         
+//         });
+       
+
+//         const submenuArray = newSidemenuGroup.get('submenu') as FormArray;
+//         submenuArray.clear(); // Clear existing submenu items
+//         menuItem.children.forEach((submenu: any) => {
+//           submenuArray.push(
+//             this.formBuilder.group({
+//               title: submenu.title
+//             })
+//           );
+//         });
+//         sidemenuArray.push(newSidemenuGroup);
+//       }
+//     });
+    
+//   });
+// }
 
 }

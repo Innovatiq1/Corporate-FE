@@ -34,7 +34,7 @@
                                                 <div class="file">
                                                     <button mat-raised-button color="primary">Choose file <input
                                                             class="file-input" formControlName="iconsrc"
-                                                            (change)="onFileUpload($event)" type="file"></button>
+                                                            (change)="onFileUpload($event,i)" type="file"></button>
                                                     <span class="file-msg mt-1">
                                                         <h5>{{uploadedImage ? uploadedImage : 'Drag and Drop File Here'
                                                             }}</h5>
