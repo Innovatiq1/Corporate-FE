@@ -31,6 +31,16 @@
                                         <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 mb-2">
                                             <label>Icon <span class="mandatory">&nbsp;*</span></label>
                                             <div class="file-drop-area">
+                                            <div class="file">
+                                                <button mat-raised-button color="primary">Choose file <input
+                                                    class="file-input" formControlName="iconsrc"
+                                                    (change)="onFileUpload($event, i)" type="file"></button>
+                                                <span class="file-msg mt-1">
+                                                    <h5>{{ uploadedImages[i] ? uploadedImages[i] : 'Drag and Drop File Here' }}</h5>
+                                                </span>
+                                            </div>
+                                            </div>
+                                            <!-- <div class="file-drop-area">
                                                 <div class="file">
                                                     <button mat-raised-button color="primary">Choose file <input
                                                             class="file-input" formControlName="iconsrc"
@@ -40,7 +50,7 @@
                                                             }}</h5>
                                                     </span>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div formArrayName="submenu">
