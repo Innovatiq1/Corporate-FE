@@ -1,182 +1,155 @@
 <section class="content">
   <div class="content-block">
-    <div class="block-header" *ngFor="let breadscrum of breadscrums">
-      <!-- breadcrumb -->
-      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
-      </app-breadcrumb>
-    </div>
-
-
-
-    <div class="row clearfix p-2">
-      <!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div class="row clearfix mt-5">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
-          <div class="header d-flex justify-content-between">
-            <h2>All Programs</h2>
-            <div class="badge col-cyan" routerLink="/admin/program/program-list">Back</div>
-          </div>
           <div class="body">
-            <div class="card-block">
-              <div
-                class="row m-b-20 border-bottom"
-                *ngFor="let program of programData; let i = index"
-              >
-                <div
-                  class="col mt-2"
-                  [ngClass]="
-                    program.id === programDataById ? ' bg-c-green ' : 'border-class'
-                  "
-                >
-                <span class="feedLblStyle1 lblCommentStyle">Program {{i+1}}</span>
-                  <h5>{{ program.title | titlecase }}</h5>
-                  <p
-                    [ngClass]="
-                      program.id === programDataById
-                        ? ' bg-c-green '
-                        : 'text-muted '
-                    "
-                  >
-                    <i class="fa fa-play-circle-o"></i> Course |
-                    {{ program.duration }} hours
-                  </p>
-                  <h6 [ngClass]="program.id === programDataById ? ' bg-c-green ':''"  >${{program.courseFee}}</h6>
+           <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-lg-8">
+              <div class="card p-3">
+ 
+                <div class="container mt-3">
+                  <div class="col-12">
+                    <img class="image-link" src="{{response?.image_link}}">
+                  </div>
+                  <div class="row mt-5 mx-auto">
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 ">
+                      <h6>Program Name</h6>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <h6 class="text-muted">{{response?.title}}</h6>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <h6> Program Code</h6>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <h6 class="text-muted">{{response?.courseCode}}</h6>
+                    </div>
+                  </div>
+                  <div class="row mt-3 mx-auto">
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <h6>Duration</h6>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <h6 class="text-muted">{{response?.duration ||0}} Hours</h6>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <h6>Course Fee</h6>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <h6 class="text-muted">$ {{response?.courseFee || 0}} </h6>
+                    </div>
+                  </div>
+
+                  <div class="row mt-3 mx-auto">
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <h6>Start Date</h6>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <h6 class="text-muted">{{response?.sessionStartDate | date}}</h6>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <h6>End Date</h6>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                      <h6 class="text-muted">{{response?.sessionEndDate | date}}</h6>
+                    </div>
+                  </div>
+                </div> 
+
+                <div class="col-12">
+                  <div class="row clearfix">
+                    <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="header mt-3">
+                          <h2>Compulsory Count</h2>
+                        </div>
+                        <div class="tableBody">
+                          <div class="table-responsive">
+                            <table class="table table-hover ">
+                              <thead>
+                                <tr>
+                                  <th>Course Name</th>
+                                  <th>Course Description</th>
+                                  <th>Course Fees</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr style="cursor: pointer;" *ngFor="let course of response.coreprogramCourse">
+                                  <td>{{ course.coreProgramName.title }}</td>
+                                  <td [innerHTML]="course?.coreProgramDescription | bulletPoints | truncate:150"></td>
+                                  <td>${{ course.coreProgramName.fee }}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                     
+                    </div>
+                    <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="header mt-3">
+                        <h2>Elective Count</h2>
+                      </div>
+                      <div class="tableBody">
+                        <div class="table-responsive">
+                          <table class="table table-hover ">
+                            <thead>
+                              <tr>
+                                <th>Course Name</th>
+                                <th>Course Description</th>
+                                <th>Course Fees</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr style="cursor: pointer;" *ngFor="let course of response.electiveprogramCourse">
+                                <td>{{ course.electiveProgramName.title }}</td>
+                                <td [innerHTML]="course?.electiveProgramDescription | bulletPoints | truncate:150"></td>
+                                <td>${{ course.electiveProgramName?.fee }}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                   
+                  </div>
+
+                  <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
+                    <!-- <div class="card" style="border-radius: 31px;"> -->
+                      <div class="header mt-3">
+                        <h2>CourseKit</h2>
+                      </div>
+                      <div class="tableBody">
+                        <div class="table-responsive">
+                          <table class="table table-hover ">
+                            <thead>
+                              <tr>
+                                <th>Course Kit</th>
+                                <th>Description</th>
+                                <th>Document Link</th>
+                                <th>Video Link</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    <!-- </div> -->
+                  </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="card">
-          <div class="header ">
-            <div class="d-flex justify-content-between w-100">
-              <h2>All Programs</h2>
-              <button type="button" class="btn btn-outline-danger btn-border-radius"
-                routerLink="/admin/program/program-list">Back</button>
-            </div>
-          </div>
-          <div class="body">
-            <div  [ngClass]="
-            program.id === programDataById ? ' sl-item sl-success ':'sl-item sl-danger'"
-              *ngFor="let program of programData; let i = index">
-              <div class="sl-content" style="cursor: pointer;" [ngClass]="
-              program.id === programDataById ? ' bg-c-green ' : 'border-class'
-            " (click)="getProgramKits(program.id)">
-                <h6>{{ program.title | titlecase }}</h6>
-                <small class="text-muted">
-                  <i class="fa fa-play-circle-o"></i> {{ program.duration }} hours</small>
-                <!-- <span class="feedLblStyle1 lblCommentStyle">Program {{i+1}}</span> -->
 
               </div>
             </div>
-            <!-- <div class="sl-item sl-success">
-              <div class="sl-content">
-                <small class="text-muted">
-                  <i class="fa fa-user position-left"></i> 10 mins ago</small>
-                <p>Lorem ipsum dolor sit amet cons the ecte tur and adip ascing elit users.</p>
-              </div>
-            </div> -->
+           </div>
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-        <div class="info-box7  order-info-box7 bg-white">
-          <div class="info-box7-block">
-            <div class="card-container">
 
-              <button class="icons" alt="Edit" mat-menu-item
-                [routerLink]="['/admin/program/edit-program/',courseId]">
-                <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                <!-- <span class="menu-text px-3">Edit</span> -->
-              </button>
-              <button class="icons" alt="Delete" mat-menu-item (click)="delete(courseId)">
-                <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-              </button>
-            </div>
-
-            <!-- <div class="card-container">
-            <button mat-button [matMenuTriggerFor]="menu">
-              <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-                xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
-                <path
-                  d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-              </svg>
-
-            </button>
-
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item [routerLink]="['/admin/program/edit-program/',response.id]">
-                <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                <span class="menu-text px-3">Edit</span>
-              </button>
-              <button mat-menu-item (click)="delete(response.id)">
-                <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                <span class="menu-text">Delete</span>
-              </button>
-
-            </mat-menu>
-          </div> -->
-            <!-- Program Period -->
-            <div class="row">
-              <img class="image-link" src="{{response?.image_link}}">
-              <!-- <div class="row mt-3">
-                    <div class="col-6">
-                      <span class="period ">Program Period</span>
-                    </div>
-                    <div class="col-6">
-                      <p>{{response?.sessionStartDate |date }} -
-                        {{response?.sessionEndDate |date }}</p>
-                    </div>
-                  </div> -->
-              <!-- Details of Program -->
-              <div class="col-6">
-                <div class="row">
-                  <div class="col-7">
-                    <h6>Compulsory Count</h6>
-                  </div>
-                  <div class="col-3">
-                    <p class="badge bg-teal">{{response?.coreCourseCount}}</p>
-                  </div>
-                </div>
-
-                <div class="p-2 info-box7  order-info-box7 bg-grey" *ngFor="let core of response?.coreprogramCourse">
-                  <h6>Compulsory Course</h6>
-                  <p>{{core?.coreProgramName?.title}}</p>
-                  <h6>Description</h6>
-                  <p [innerHTML]="core?.coreProgramDescription | bulletPoints | truncate:150"></p>
-                  <h6>Course Fees:</h6>
-                  <p>${{core?.coreProgramName?.fee}}</p>
-                </div>
-              </div>
-              <div class="col-6 ">
-                <div class="row">
-                  <div class="col-6">
-                    <h6>Elective Count</h6>
-                  </div>
-                  <div class="col-3">
-                    <p class="badge bg-purple">{{response?.electiveCourseCount}}</p>
-                  </div>
-                </div>
-
-                <div class=" p-2 info-box7  order-info-box7 bg-grey"
-                  *ngFor="let elactive of response?.electiveprogramCourse">
-                  <h6>Elective Course</h6>
-                  <p>{{elactive?.electiveProgramName?.title}}</p>
-                  <h6>Description</h6>
-                  <p [innerHTML]="elactive?.electiveProgramDescription | bulletPoints | truncate:150"></p>
-                  <h6>Course Fees:</h6>
-                  <p>${{elactive?.electiveProgramName?.fee}}</p>
-                </div>
-              </div>
-            </div>
-
-            <h2 class="text-end"><span></span></h2>
-            <p class="m-b-0"></p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
+
+
+

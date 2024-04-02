@@ -74,54 +74,48 @@
                         </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                      <label>Start Date</label>
-                      <input type="date" formControlName="sessionStartDate" id="date"
-                      class="form-control" />
-              </div>
-              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                      <label>End Date</label>
-                       <input type="date" formControlName="sessionEndDate"
-                                    class="form-control " id="date" />
 
-              </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                      <label>Funding/Grant <span class="mandatory">&nbsp;*</span></label>
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-select formControlName="funding_grant" required>
+                          <mat-option *ngFor="let item of fundingGrants" [value]="item.id" [disabled]="viewUrl == true">
+                            {{item.grant_type}}
+                          </mat-option>
+
+                        </mat-select>
+                        <mat-error *ngIf="
+                        firstFormGroup.get('funding_grant')?.hasError('required') ||
+                        firstFormGroup.get('funding_grant')?.touched
+                        ">
+                        Select Funding/Grant
+                      </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                      <label>Assign Feedback Questionnaire <span class="mandatory">&nbsp;*</span></label>
+                      <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <mat-select formControlName="survey" required>
+                          <mat-option *ngFor="let item of feedbacks" [value]="item.id" [disabled]="viewUrl == true">
+                            {{item.name}}
+                          </mat-option>
+
+                        </mat-select>
+                        <mat-error *ngIf="
+                        firstFormGroup.get('survey')?.hasError('required') ||
+                        firstFormGroup.get('survey')?.touched
+                        ">
+                        Select Feedback Questionnaire
+                      </mat-error>
+                      </mat-form-field>
+                    </div>
+
+
+
 
                     </div>
                     <div class="row">
-                      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                        <label>Funding/Grant <span class="mandatory">&nbsp;*</span></label>
-                        <mat-form-field class="example-full-width mb-3" appearance="outline">
-                          <mat-select formControlName="funding_grant" required>
-                            <mat-option *ngFor="let item of fundingGrants" [value]="item.id" [disabled]="viewUrl == true">
-                              {{item.grant_type}}
-                            </mat-option>
 
-                          </mat-select>
-                          <mat-error *ngIf="
-                          firstFormGroup.get('funding_grant')?.hasError('required') ||
-                          firstFormGroup.get('funding_grant')?.touched
-                          ">
-                          Select Funding/Grant
-                        </mat-error>
-                        </mat-form-field>
-                      </div>
-                      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                        <label>Assign Feedback Questionnaire <span class="mandatory">&nbsp;*</span></label>
-                        <mat-form-field class="example-full-width mb-3" appearance="outline">
-                          <mat-select formControlName="survey" required>
-                            <mat-option *ngFor="let item of feedbacks" [value]="item.id" [disabled]="viewUrl == true">
-                              {{item.name}}
-                            </mat-option>
-  
-                          </mat-select>
-                          <mat-error *ngIf="
-                          firstFormGroup.get('survey')?.hasError('required') ||
-                          firstFormGroup.get('survey')?.touched
-                          ">
-                          Select Feedback Questionnaire
-                        </mat-error>
-                        </mat-form-field>
-                      </div>
                       <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                         <label>Assign Coursekit <span class="mandatory">&nbsp;*</span></label>
                         <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -139,8 +133,6 @@
                         </mat-error>
                         </mat-form-field>
                       </div>
-                    </div>
-                    <div class="row">
                       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Days')">
                         <label>Days</label>
                         <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -174,6 +166,18 @@
                             </mat-error>
                         </mat-form-field>
                       </div>
+
+                      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Start Date')">
+                        <label>Start Date</label>
+                        <input type="date" formControlName="sessionStartDate" id="date"
+                        class="form-control" />
+                       </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('End Date')">
+                        <label>End Date</label>
+                         <input type="date" formControlName="sessionEndDate"
+                                      class="form-control " id="date" />
+  
+                </div>
                     
                   
                       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Currency')">

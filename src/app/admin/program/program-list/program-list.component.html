@@ -153,8 +153,8 @@
                         <ng-container matColumnDef="name" >
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Program Name
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" (click)="openModal(row)"><span
-                              class="mobile-label">Program Name:</span> {{row.title |titlecase}}
+                          <mat-cell class="name" *matCellDef="let row" [routerLink]="['/admin/program/view-program/',row.id]"><span
+                              class="mobile-label">Program Name:</span> <span class=" col-cyan">{{row.title |titlecase}}</span>
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="code">
