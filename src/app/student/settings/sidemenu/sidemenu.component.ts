@@ -62,6 +62,7 @@ export class SidemenuComponent {
   createSidemenu(): FormGroup {
     return this.formBuilder.group({
       title: ['', Validators.required],
+      id: [''],
       iconsrc: [''],
       submenu: this.formBuilder.array([
         this.createSubmenu(),
@@ -72,6 +73,7 @@ export class SidemenuComponent {
   createSidemenuwithoutSubmenu(): FormGroup {
     return this.formBuilder.group({
       title: ['', Validators.required],
+      id: [''],
       iconsrc: [''],
       submenu: this.formBuilder.array([
         // this.createSubmenu(),
@@ -134,6 +136,7 @@ export class SidemenuComponent {
       const payload = {
         MENU_LIST: this.sideMenuForm.value.sidemenu.map((menulist: any) => ({
           title: menulist.title,
+          id: menulist.id,
           iconsrc: menulist.iconsrc,
           children: menulist.submenu.map((submenus: any) => ({
             title: submenus.title,
@@ -189,7 +192,8 @@ export class SidemenuComponent {
         this.uploadedImages[i] = imageName;
         newSidemenuGroup.patchValue({
         title: menuItem.title,
-        // iconsrc: imageName,
+        id: menuItem.id,
+        iconsrc: imageName,
          });
          const submenuArray = newSidemenuGroup.get('submenu') as FormArray;
          menuItem.children.forEach((submenus: any) => {
