@@ -18,7 +18,7 @@
             </div>
           </li>
           <li *ngFor="let sidebarItem of menuitem"
-            [routerLinkActive]="sidebarItem.children.length !== 0 ? 'active' : 'active-top'">
+          [ngClass]="router.url.startsWith('/'+sidebarItem.id) ? (sidebarItem.children.length > 0 ? 'active':'active-top'): ''">
             <a
               (click)="callToggleMenu($event, sidebarItem.children.length)"
               class="menu-top menu-toggle">
