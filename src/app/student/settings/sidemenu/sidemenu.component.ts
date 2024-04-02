@@ -64,6 +64,16 @@ export class SidemenuComponent {
       title: ['', Validators.required],
       iconsrc: [''],
       submenu: this.formBuilder.array([
+        this.createSubmenu(),
+        // this.createOption()
+      ])
+    });
+  }
+  createSidemenuwithoutSubmenu(): FormGroup {
+    return this.formBuilder.group({
+      title: ['', Validators.required],
+      iconsrc: [''],
+      submenu: this.formBuilder.array([
         // this.createSubmenu(),
         // this.createOption()
       ])
@@ -173,7 +183,7 @@ export class SidemenuComponent {
       const sidemenuArray = this.sideMenuForm.get('sidemenu') as FormArray;
       response.MENU_LIST.forEach((menuItem: any, i: number) => {
         if (menuItem.title.trim() !== '') {
-        const newSidemenuGroup = this.createSidemenu(); 
+        const newSidemenuGroup = this.createSidemenuwithoutSubmenu(); 
         const uploadedImageLink = menuItem.iconsrc; 
         const imageName = uploadedImageLink ? uploadedImageLink.split('/').pop()?.split('\\').pop() : null;
         this.uploadedImages[i] = imageName;
