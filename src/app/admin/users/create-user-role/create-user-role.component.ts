@@ -18,6 +18,9 @@ export class CreateUserRoleComponent {
 
   constructor(private fb: FormBuilder, private adminService: AdminService){
 
+    this.userTypeFormGroup = this.fb.group({
+      typeName: ['', []],
+    });
   }
 
   breadscrums = [
