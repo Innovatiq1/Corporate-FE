@@ -3,7 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
+import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
+import { VideoPlayerComponent } from '../../course-kit/video-player/video-player.component';
 
 @Component({
   selector: 'app-course-view',
@@ -20,11 +22,13 @@ export class CourseViewComponent {
   checkId = '';
   status: any;
   button: boolean = false;
+  coursekitData: any;
 
   constructor(
     public _courseService: CourseService,
     private classService: ClassService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private modalServices: BsModalService,
   ) {
     // constructor
     this.coursePaginationModel = {};
@@ -76,6 +80,7 @@ getAllInActiveCourse() {
     this._courseService.getCourseById(id).subscribe((data) => {
       if (data) {
         this.sourceData = data;
+        this.coursekitData = data.course_kit;
         this.checkId = this.sourceData.id;
       }
     });
@@ -118,5 +123,42 @@ getAllInActiveCourse() {
           }
         });
       });
+  }
+  playVideo(video: { video_url: any; }): void {
+    console.log('Video',video)
+    if (video?.video_url) {
+      this.openVidePlayer(video);
+    } else {
+      console.error("Invalid video URL");
+    }
+  }
+   openVidePlayer(videoLink: { video_url?: any; id?: any; }): void {
+    // const { videoLink } = videoLink;
+    if (videoLink?.id) {
+      const videoURL = videoLink.video_url;
+      // this.courseService.getVideoById(videoId).subscribe((res) => {
+      //   const videoURL = res.data.videoUrl;
+        if (!videoURL) {
+          Swal.fire({
+            icon: "error",
+            title: "Video Convert is Pending",
+            text: "Please start convert this video",
+          });
+          return
+
+        }
+        // const videoType = "application/x-mpegURL";
+        if (videoURL) {
+          const initialState: ModalOptions = {
+            initialState: {
+              videoURL,
+              // videoType,
+            },
+            class: "videoPlayer-modal",
+          };
+          this.modalServices.show(VideoPlayerComponent, initialState);
+        }
+      // });
+    }
   }
 }
