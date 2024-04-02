@@ -25,7 +25,7 @@ export class AddQuestionsComponent implements OnInit {
     },
   ];
 
-questionForm!: FormGroup; 
+questionForm!: FormGroup;
 questionId!: string;
 editUrl: any;
 question: any;
@@ -33,7 +33,7 @@ subscribeParams: any;
 selectedTabIndex = 0;
 
 constructor(private formBuilder: FormBuilder,private router: Router, private questionService: QuestionService, private cdr: ChangeDetectorRef,private activatedRoute: ActivatedRoute,) {
-  
+
   let urlPath = this.router.url.split('/')
   this.editUrl = urlPath.includes('edit-questions');
 
@@ -142,7 +142,7 @@ Swal.fire({
     }
   });
   }
-  
+
 }
 update(){
   if (this.questionForm.valid) {
@@ -175,7 +175,7 @@ Swal.fire({
             icon: 'success',
           });
           this.router.navigate(['/admin/questions/all-questions'])
-        
+
         },
         (err: any) => {
           Swal.fire(
@@ -186,8 +186,8 @@ Swal.fire({
       );
     }
   });
-    
-    
+
+
   }
 }
 
@@ -206,14 +206,14 @@ if (this.questionId) {
       }
 
       response.questions.forEach((question: any) => {
-        if (question.questionText.trim() !== '') { 
+        if (question.questionText.trim() !== '') {
           const newQuestionGroup = this.createQuestion();
           newQuestionGroup.patchValue({
             questionText: question.questionText,
           });
 
           const optionsArray = newQuestionGroup.get('options') as FormArray;
-          optionsArray.clear(); 
+          optionsArray.clear();
           question.options.forEach((option: any) => {
             optionsArray.push(
               this.formBuilder.group({
@@ -225,16 +225,13 @@ if (this.questionId) {
           questionsArray.push(newQuestionGroup);
         }
       });
-     
+
     }
   });
 }
 
 }
 
-tabChanged(event: MatTabChangeEvent) {
-  console.log('Tab changed:', event.index);
-}
 
 selectTab(index: number) {
   this.selectedTabIndex = index;

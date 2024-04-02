@@ -125,37 +125,37 @@ export class CreateUserTypeComponent {
     }).catch((e: any) => {
     })
   }
-  createUserType(): any {
-    let formData = this.userTypeFormGroup.getRawValue();
-    let selectedMenuItems = []
-    selectedMenuItems = this.getCheckedItems(this.dataSourceArray).filter((v: any) => v);
-    formData.menuItems = selectedMenuItems;
+  // createUserType(): any {
+  //   let formData = this.userTypeFormGroup.getRawValue();
+  //   let selectedMenuItems = []
+  //   selectedMenuItems = this.getCheckedItems(this.dataSourceArray).filter((v: any) => v);
+  //   formData.menuItems = selectedMenuItems;
 
-    return new Promise((resolve, reject) => {
-      this.adminService.createUserType(formData).subscribe(
-        (response: unknown) => {
-          this.isLoading = false;
-          Swal.fire({
-            title: 'Successful',
-            text: 'User Type created succesfully.Add menu by selecting the user type from existing user types',
-            icon: 'success',
-          });
-          this.userTypeFormGroup.reset();
-          this.getAllUserTypes()
-          resolve(response)
-        },
-        (error: any) => {
-          this.isLoading = false;
-          Swal.fire(
-            error,
-            error.message || error.error,
-            'error'
-          );
-          reject(error)
-        }
-      );
-    })
-  }
+  //   return new Promise((resolve, reject) => {
+  //     this.adminService.createUserType(formData).subscribe(
+  //       (response: unknown) => {
+  //         this.isLoading = false;
+  //         Swal.fire({
+  //           title: 'Successful',
+  //           text: 'User Type created succesfully.Add menu by selecting the user type from existing user types',
+  //           icon: 'success',
+  //         });
+  //         this.userTypeFormGroup.reset();
+  //         this.getAllUserTypes()
+  //         resolve(response)
+  //       },
+  //       (error: any) => {
+  //         this.isLoading = false;
+  //         Swal.fire(
+  //           error,
+  //           error.message || error.error,
+  //           'error'
+  //         );
+  //         reject(error)
+  //       }
+  //     );
+  //   })
+  // }
 
 
   // addUserType(formObj: any): any {

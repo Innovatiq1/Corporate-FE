@@ -50,7 +50,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private renderer: Renderer2,
     public elementRef: ElementRef,
     private authService: AuthService,
-    private router: Router,
+    public router: Router,
     private authenService:AuthenService,
     private adminService: AdminService,
     private studentService:StudentsService,
@@ -203,7 +203,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   logout() {
     interface OuterObject {
       id: any;
-     
+
 }
 const storedDataString: string | null = localStorage.getItem('userLogs');
 const data: OuterObject = storedDataString !== null ? JSON.parse(storedDataString) : {};

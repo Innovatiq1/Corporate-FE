@@ -1,0 +1,59 @@
+
+
+
+<section class="content">
+    <div class="content-block">
+      <div class="block-header" *ngFor="let breadscrum of breadscrums">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <h2>Create User Role</h2>
+            </div>
+            <div class="body">
+                <!-- <div class="row">
+                  <form [formGroup]="userTypeFormGroup">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>User Role</label>
+                        <mat-form-field class="example-full-width " appearance="outline">
+                            <input matInput type="text" formControlName="typeName"
+                            class="form-control" placeholder="Enter New User Type"
+                            >                                      
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <div class="d-grid gap-3 d-md-flex">
+                        <button  mat-raised-button color="warn" [routerLink]="['/admin/users/user-type']"   > All User Role </button>
+                        </div>
+                      </div>
+                      </form>
+                </div> -->
+                <div class="row">
+                  <div class="col">
+                    <label>User Role</label>
+                        <mat-form-field class="example-full-width " appearance="outline">
+                            <input matInput type="text" formControlName="typeName"
+                            class="form-control" placeholder="Enter New User Type"
+                            >                                      
+                        </mat-form-field>
+                  </div>
+                  <div class="col mt-5 mx-5">
+                    <button  mat-raised-button color="warn" [routerLink]="['/admin/users/user-type']"   > All User Role </button>
+                  </div>
+                </div>
+                <hr/>
+                <div class="">
+                    <div class="d-grid gap-3 d-md-flex">
+                    <button  mat-raised-button (click)="createUserType()" color="primary" class="submit"  > Create </button>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

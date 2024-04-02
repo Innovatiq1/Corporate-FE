@@ -40,12 +40,16 @@ label{
     margin-top: -40px;
   }
 
-  section {
-    &.content {
-      margin: 35px 27px 0 260px;
-      min-height: calc(100vh - 76px);
-      .content-block {
-        padding: 5px 0px 0px 25px;
-      }
-    }
-  }
+  // section {
+  //   &.content {
+  //     margin: 35px 27px 0 260px;
+  //     min-height: calc(100vh - 76px);
+  //     .content-block {
+  //       padding: 5px 0px 0px 25px;
+  //     }
+  //   }
+  // }
+
+  .side-closed section.content {
+    margin-left: 43px;
+}
