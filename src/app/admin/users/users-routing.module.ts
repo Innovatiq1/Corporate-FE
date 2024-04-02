@@ -5,6 +5,7 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { CreateAllUsersComponent } from './create-all-users/create-all-users.component';
 import { CreateUserTypeComponent } from './create-user-type/create-user-type.component';
 import { CreateUserRoleComponent } from './create-user-role/create-user-role.component';
+import { ViewUsersComponent } from './view-users/view-users.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'edit-all-users/:id',
     component:  CreateAllUsersComponent
+  },
+  {
+    path: 'view-all-users/:id',
+    component:  ViewUsersComponent
   },
   {
     path: 'create-user-type',
