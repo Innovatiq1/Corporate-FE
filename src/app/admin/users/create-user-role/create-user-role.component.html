@@ -1,0 +1,45 @@
+
+
+
+<section class="content">
+    <div class="content-block">
+      <div class="block-header" *ngFor="let breadscrum of breadscrums">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="header">
+              <h2>Create User Role</h2>
+            </div>
+            <div class="body">
+  
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                        <label>User Role</label>
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <input matInput type="text" formControlName="typeName"
+                            class="form-control" placeholder="Enter New User Type"
+                            >                                      
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3 offset-3 mt-4 mx-auto">
+                        <div class="d-grid gap-3 d-md-flex">
+                        <button  mat-raised-button color="warn" [routerLink]="['/admin/users/user-type']"   > All User Role </button>
+                        </div>
+                      </div>
+                </div>
+                <hr/>
+                <div class="col-md-6">
+                    <div class="d-grid gap-3 d-md-flex">
+                    <button  mat-raised-button (click)="createUserType()" color="primary" class="submit"  > Create </button>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
