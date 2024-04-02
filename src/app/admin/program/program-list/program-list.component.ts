@@ -53,7 +53,6 @@ export class ProgramListComponent {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   @ViewChild('filter', { static: true }) filter!: ElementRef;
-  @ViewChild('modalContent') modalContent!: TemplateRef<any>;
 
   constructor(
   
@@ -256,15 +255,4 @@ performSearch() {
     //   'center'
     // );
   }
-
-  openModal(row: any): void {
-    const dialogRef = this.dialog.open(this.modalContent, {
-        width: '600px', 
-        data: { row: row } 
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-    });
-}
 }
