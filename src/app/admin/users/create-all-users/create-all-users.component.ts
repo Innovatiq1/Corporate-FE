@@ -8,6 +8,7 @@ import { UtilsService } from '@core/service/utils.service';
 import { StudentService } from '@core/service/student.service';
 import Swal from 'sweetalert2';
 import { CourseService } from '@core/service/course.service';
+import { StudentsService } from 'app/admin/students/all-students/students.service';
 
 @Component({
   selector: 'app-create-all-users',
@@ -33,6 +34,7 @@ export class CreateAllUsersComponent {
   hide = true;
   thumbnail: any;
   avatar: any;
+  dept: any;
 
   breadscrums = [
     {
@@ -49,6 +51,7 @@ export class CreateAllUsersComponent {
       if(this.editUrl){
         this.updateBlog(this.userForm.value)
       } else {
+        console.log("uuuuuu", this.userForm.value)
       this.addBlog(this.userForm.value)
       }     
         } else {
@@ -128,7 +131,7 @@ export class CreateAllUsersComponent {
 
   // }
   addBlog(formObj: any) {
-    console.log('Form Value', formObj.value);
+    console.log('Form Value',formObj);
     if (!formObj.invalid) {
       // Process form data without uploading anything
       // Additional logic can be added here as needed
@@ -143,46 +146,81 @@ export class CreateAllUsersComponent {
       // userData.avatar = 'your_avatar_url';
       // userData.filename = 'your_filename';
   
+      // this.createUser(userData);
       this.createUser(userData);
-  
-      Swal.close();
+    //   Swal.fire({
+    //     title: 'Are you sure?',
+    //     text: 'Do You want to create a student profile!',
+    //     icon: 'warning',
+    //     confirmButtonText: 'Yes',
+    //     showCancelButton: true,
+    //     cancelButtonColor: '#d33',
+    //   }).then((result) => {
+    //     if (result.isConfirmed){
+    //       this.createUser(userData);
+    //       Swal.close();
+    //     }
+    //   });
+    //   Swal.close();
     }
   }
-  createUser(userData:Users){
-
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do You want to create a user!',
-      icon: 'warning',
-      confirmButtonText: 'Yes',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed){
-        this.userService.saveUsers(userData).subscribe(
-          (response:any) => {
-            this.isLoading = false;
-            Swal.fire({
-              title: 'Successful',
-              text: 'User created succesfully',
-              icon: 'success',
-            });
-            this.router.navigate(['/admin/users/all-users'])
-           
-          },
-          (error:any) => {
-            this.isLoading = false;
-            Swal.fire(
-              'Failed to create user',
-              error.message || error.error,
-              'error'
-            );
-          }
+  private createUser(userData: Users): void {
+    this.userService.saveUsers(userData).subscribe(
+      () => {
+        Swal.fire({
+          title: 'Successful',
+          text: 'Users created successfully',
+          icon: 'success',
+        });
+        //this.fileDropEl.nativeElement.value = "";
+        this.userForm.reset();
+        //this.toggleList()
+        this.router.navigateByUrl('/admin/users/all-users');
+      },
+      (error) => {
+        Swal.fire(
+          'Failed to create user',
+          error.message || error.error,
+          'error'
         );
       }
-    });
-
+    );
   }
+//   createUser(userData:Users){
+// console.log("user", userData)
+//     Swal.fire({
+//       title: 'Are you sure?',
+//       text: 'Do You want to create a user!',
+//       icon: 'warning',
+//       confirmButtonText: 'Yes',
+//       showCancelButton: true,
+//       cancelButtonColor: '#d33',
+//     }).then((result) => {
+//       if (result.isConfirmed){
+//         this.userService.saveUsers(userData).subscribe(
+//           (response:any) => {
+//             this.isLoading = false;
+//             Swal.fire({
+//               title: 'Successful',
+//               text: 'User created succesfully',
+//               icon: 'success',
+//             });
+//             this.router.navigate(['/admin/users/all-users'])
+           
+//           },
+//           (error:any) => {
+//             this.isLoading = false;
+//             Swal.fire(
+//               'Failed to create user',
+//               error.message || error.error,
+//               'error'
+//             );
+//           }
+//         );
+//       }
+//     });
+
+//   }
   onFileUpload(event:any) {
     const file = event.target.files[0];
   
@@ -257,7 +295,7 @@ export class CreateAllUsersComponent {
 //   }
 // }
 updateBlog(formObj: any) {
-  console.log('Form Value', formObj.value);
+  console.log('Form Value', formObj);
   if (!formObj.invalid) {
     // Prepare user data for update
     formObj['Active'] = this.status;
@@ -316,7 +354,7 @@ updateBlog(formObj: any) {
   }
 
   constructor(private router: Router,    private fb: FormBuilder,public utils: UtilsService, private userService: UserService,
-    private adminService: AdminService,private studentService: StudentService, private activeRoute: ActivatedRoute,  private courseService: CourseService,) {
+    private adminService: AdminService,private StudentService: StudentsService, private activeRoute: ActivatedRoute,  private courseService: CourseService,) {
     let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-all-users'); 
     this.currentId = urlPath[urlPath.length - 1];
@@ -338,11 +376,23 @@ updateBlog(formObj: any) {
     }
 
     this.userForm= this.fb.group({
-      name: new FormControl('', [Validators.required,...this.utils.validators.name,...this.utils.validators.noLeadingSpace]),
+      name: new FormControl('', [Validators.required]),
+      last_name: new FormControl('', []),
+      rollNo: new FormControl('', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
+      mobile: new FormControl('', [Validators.required]),
+      qualification: new FormControl('', []),
+      department: new FormControl('', []),
+      address: new FormControl('', []),
       email: new FormControl('', [Validators.required,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)]),
-      password: new FormControl('', [Validators.required,...this.utils.validators.name,...this.utils.validators.noLeadingSpace]),
+      password: new FormControl('', [Validators.required]),
       education: new FormControl('', [Validators.required,Validators.minLength(2)]),
       type: new FormControl('', [Validators.required]),
+      parentsName: new FormControl('', []),
+      parentsPhone:new FormControl('', []),
+      dob: new FormControl('', []),
+      joiningDate: new FormControl('', [Validators.required]),
+      blood_group: new FormControl('', []),
       avatar: new FormControl('', []),
       status: [this.user ? (this.user.Active = this.user.Active === true ? true : false) : null],
     });
@@ -351,6 +401,11 @@ updateBlog(formObj: any) {
       console.log("params", params['id'],);
     });
 }
+
+ngOnInit(){
+  this.getDepartment();
+}
+
 getUserTypeList(filters?:any) {
   this.adminService.getUserTypeList({ allRows: true }).subscribe(
     (response: any) => {
@@ -359,6 +414,14 @@ getUserTypeList(filters?:any) {
     (error) => {
     }
   );
+}
+
+getDepartment(){
+  this.StudentService.getAllDepartments().subscribe((response: any) =>{
+    this.dept = response.data.docs;
+    console.log("dept",this.dept)
+   })
+
 }
 
 getBlogsList(filters?:any) {
@@ -398,6 +461,18 @@ getBlogsList(filters?:any) {
             education:  this.data?.education,
             type: this.data?.type,
             fileName: this.data?.avatar,
+            last_name: this.data?.last_name,
+            rollNo: this.data?.rollNo,
+            gender: this.data?.gender,
+            mobile: this.data?.mobile,
+            qualification: this.data?.qualification,
+            department: this.data?.department,
+            parentsName: this.data?.parentsName,
+            parentsPhone: this.data?.parentsPhone,
+            dob: this.data?.dob,
+            joiningDate: this.data?.joiningDate,
+            blood_group: this.data?.blood_group,
+            address: this.data?.address
           });
         }
       }, error => {

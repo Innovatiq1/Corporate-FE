@@ -617,7 +617,7 @@
 
       </div>
     </div>
-    <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showUsers">
+    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showUsers">
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Manage Users</label>
@@ -640,16 +640,31 @@
             <button id="saved" [routerLink]="['/admin/users/all-users']"> All Users </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/admin/departments/all-departments']"> Departments </button>
+            <button id="saved" [routerLink]="['/admin/users/all-students']"> Students</button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/admin/approval/program-approval']"> Approvals </button>
+            <button id="saved" [routerLink]="['/admin/users/all-instructors']"> Instructors </button>
           </div>
           <div class="col-md-5">
+            <button id="saved" [routerLink]="['/admin/users/all-staff']"> Staff </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/admin/departments/all-departments']"> Departments </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/admin/approval/program-approval']"> Approvals </button>
+          
+          </div>
+        </div>
+        <div class="row px-4">
+          <div class="col-md-6 banner">
             <button id="no-link"> Import/Export Users </button>
           </div>
+          
         </div>
 
       </div>
