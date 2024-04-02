@@ -10,9 +10,9 @@
       </app-breadcrumb>
     </div>
 
-    <div class="card">
+    <!-- <div class="card"> -->
       <div class="row clearfix p-2">
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
           <div class="card">
             <div class="header">
               <div class="d-flex justify-content-between w-100">
@@ -49,16 +49,19 @@
                   <h6>{{ row.category_name }}</h6>
                   <!-- <small class="text-muted">
                 <i class="fa fa-play-circle-o"></i> </small> -->
-                  <!-- <span class="feedLblStyle1 lblCommentStyle">Program {{i+1}}</span> -->
+                  <!-- <span class="feedLblStyle1 lblCommentStyle">Program {{i+1}}</span> --
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-          <div class="card">
+        </div> -->
+        <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card" style="margin: auto; height: 350px; width: 65%;">
             <div class="p-4">
               <div class="card-container">
+                <div class="header">
+                  <h6>Categories</h6>
+                </div>
                 <button
                   class="icons"
                   alt="Edit"
@@ -83,7 +86,7 @@
                 </button>
               </div>
 
-              <div class="row">
+              <div class="row m-2 pb-3">
                 <div class="col-3">
                   <h6>Sub Categories</h6>
                 </div>
@@ -93,8 +96,8 @@
                   </h6>
                 </div>
               </div>
-              <div class="row mt-2">
-                <div class="row mt-2 pb-3">
+              <div class="row">
+                <div class="row m-2 pb-3">
                   <div class="col-4">
                     <h6>Main Category</h6>
                   </div>
@@ -103,7 +106,7 @@
                   </div>
                 </div>
                 <div
-                  class="row mt-2"
+                  class="row m-2"
                   *ngFor="let sub of subCategory; let i = index"
                 >
                   <div class="col-4">
@@ -121,6 +124,6 @@
           </div>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
   </div>
 </section>
