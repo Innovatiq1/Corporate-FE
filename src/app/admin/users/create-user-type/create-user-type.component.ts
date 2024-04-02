@@ -20,9 +20,9 @@ export class CreateUserTypeComponent {
 
   breadscrums = [
     {
-      title: 'Create User Role',
+      title: 'Accessibility',
       items: ['Users'],
-      active: 'Create User Role',
+      active: 'Accessibility',
     },
   ];
 
@@ -77,9 +77,9 @@ export class CreateUserTypeComponent {
     if (this.isEdit === true) {
       this.breadscrums = [
         {
-          title: 'Edit User Type',
+          title: 'Accessibility',
           items: ['Users'],
-          active: 'Edit User Type',
+          active: 'Accessibility',
         },
       ];
     }

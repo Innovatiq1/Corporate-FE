@@ -317,7 +317,7 @@ export class AllStudentsComponent
   }
 
   aboutStudent(id:any){
-    this.router.navigate(['/admin/users/about-student'],{queryParams:{data:id}})
+    this.router.navigate(['/admin/users/view-student'],{queryParams:{data:id}})
 
   }
 

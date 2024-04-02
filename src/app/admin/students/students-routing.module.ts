@@ -20,7 +20,7 @@ const routes: Routes = [
     component: EditStudentComponent,
   },
   {
-    path: 'about-student',
+    path: 'view-student',
     component: AboutStudentComponent,
   },
   {

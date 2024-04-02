@@ -13,6 +13,7 @@ import { AllUsersComponent } from './all-users/all-users.component';
 import { CreateAllUsersComponent } from './create-all-users/create-all-users.component';
 import { CreateUserTypeComponent } from './create-user-type/create-user-type.component';
 import { CreateUserRoleComponent } from './create-user-role/create-user-role.component';
+import { ViewUsersComponent } from './view-users/view-users.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CreateUserRoleComponent } from './create-user-role/create-user-role.com
         AllUsersComponent,
         CreateAllUsersComponent,
         CreateUserTypeComponent,
-        CreateUserRoleComponent
+        CreateUserRoleComponent,
+        ViewUsersComponent
     ],
     imports: [
         CommonModule, UsersRoutingModule,
