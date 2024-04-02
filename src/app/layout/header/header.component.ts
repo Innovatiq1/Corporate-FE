@@ -91,8 +91,8 @@ export class HeaderComponent
 
     /* getting logo details from logoservice **/
     this.subscription = this.logoService.currentData.subscribe(data => {
-      this.logoTitle = data.data.docs[0].title;
-      this.logoImage = data.data.docs[0].image;
+      this.logoTitle = data?.data.docs[0].title;
+      this.logoImage = data?.data.docs[0].image;
     });
   }
   simpleDialog?: MatDialogRef<SimpleDialogComponent>;
