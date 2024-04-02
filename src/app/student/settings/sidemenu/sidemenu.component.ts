@@ -189,7 +189,7 @@ export class SidemenuComponent {
         this.uploadedImages[i] = imageName;
         newSidemenuGroup.patchValue({
         title: menuItem.title,
-        iconsrc: imageName,
+        // iconsrc: imageName,
          });
          const submenuArray = newSidemenuGroup.get('submenu') as FormArray;
          menuItem.children.forEach((submenus: any) => {

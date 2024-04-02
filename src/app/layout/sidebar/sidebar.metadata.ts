@@ -19,6 +19,7 @@ export class MenuItem {
   icon!: string;
   class!: string;
   badge!: string;
+  iconsrc!:string;
   badgeClass!: string;
   groupTitle!: boolean;
   open!: boolean;
