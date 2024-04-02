@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
@@ -13,6 +13,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { sort } from 'd3';
+import { MatDialog } from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-program-list',
@@ -51,6 +53,7 @@ export class ProgramListComponent {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   @ViewChild('filter', { static: true }) filter!: ElementRef;
+  @ViewChild('modalContent') modalContent!: TemplateRef<any>;
 
   constructor(
   
@@ -60,6 +63,7 @@ export class ProgramListComponent {
     private courseService: CourseService,
     private classService: ClassService,
     private route :Router,
+    private dialog: MatDialog
   ) { this.coursePaginationModel = {};
 
   // @ViewChild('filter', { static: true }) filter!: ElementRef;
@@ -71,7 +75,6 @@ export class ProgramListComponent {
     // let filterText = this.filterName
     this.courseService.getCourseProgram({...this.coursePaginationModel,status:'active'}).subscribe(
       (response: any) => {
-        console.log("page",response)
         this.isLoading = false;
         this.programData = response.docs;
         this.totalItems = response.totalDocs;
@@ -135,7 +138,6 @@ export class ProgramListComponent {
 performSearch() {
   if(this.searchTerm){
   this.programData = this.programData?.filter((item: any) =>{
-    console.log("data",item)
     const searchList = (item.title).toLowerCase();
     return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
   }
@@ -148,7 +150,6 @@ performSearch() {
   // export table data in excel file
   exportExcel() {
     // key name with space add in brackets
-    console.log("vv", this.programData);
     const exportData: Partial<TableElement>[] =
       this.programData.map((x: any) => ({
         'Program Name': x.title,
@@ -162,7 +163,6 @@ performSearch() {
   generatePdf() {
     const doc = new jsPDF();
     const headers = [[' Program Name','Duration', 'Compulsory Count', 'Elective Count']];
-    console.log(this.programData)
     const data = this.programData.map((x:any) =>
       [x.title,
         x.duration,
@@ -256,4 +256,15 @@ performSearch() {
     //   'center'
     // );
   }
+
+  openModal(row: any): void {
+    const dialogRef = this.dialog.open(this.modalContent, {
+        width: '600px', 
+        data: { row: row } 
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+    });
+}
 }

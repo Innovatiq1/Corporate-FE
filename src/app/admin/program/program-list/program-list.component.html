@@ -98,10 +98,62 @@
                               [routerLink]="['/admin/program/view-program/',row.id]" />
                           </mat-cell>
                         </ng-container> -->
-                        <ng-container matColumnDef="name">
+<ng-template #modalContent let-data>
+  <!-- Your modal content here -->
+  <div class="modal-content">
+    <h5>Compulsory Count</h5>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Program Name</th>
+          <th>Program Description</th>
+          <th>Course Fees</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of data.row.coreprogramCourse">
+          <td>{{ course.coreProgramName.title }}</td>
+          <td [innerHTML]="course?.coreProgramDescription | bulletPoints | truncate:150"></td>
+          <td>${{ course.coreProgramName.fee }}</td>
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal-content">
+    <h5>Elective Count</h5>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Program Name</th>
+          <th>Program Description</th>
+          <th>Course Fees</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of data.row.electiveprogramCourse">
+          <td>{{ course.electiveProgramName.title }}</td>
+          <td [innerHTML]="course?.electiveProgramDescription | bulletPoints | truncate:150"></td>
+          <td>${{ course.electiveProgramName?.fee }}</td>
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+  </mat-dialog-actions>
+</ng-template>
+                        <ng-container matColumnDef="name" >
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Program Name
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-program/',row.id]"><span
+                          <mat-cell *matCellDef="let row" (click)="openModal(row)"><span
                               class="mobile-label">Program Name:</span> {{row.title |titlecase}}
                           </mat-cell>
                         </ng-container>
@@ -478,7 +530,9 @@
   </div>
 </section>
 
-<!-- <section class="content">
+
+
+
   <div class="content-block">
       <div class="block-header" *ngFor="let breadscrum of breadscrums">
           <!-- breadcrumb --

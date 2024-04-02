@@ -22,6 +22,7 @@ import { QuestionComponent } from './question/question.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-coutomzation.component';
 import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
+import { FormCustomizationComponent } from './settings/form-customization/form-customization.component'
 
 
 const routes: Routes = [
@@ -155,6 +156,10 @@ const routes: Routes = [
   {
     path: 'side-menu/:id',
     component: SidemenuComponent,
+  },
+  {
+    path: 'form-customization',
+    component: FormCustomizationComponent,
   },
 
 
