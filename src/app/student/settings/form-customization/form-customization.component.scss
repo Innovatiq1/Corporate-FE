@@ -1,0 +1,49 @@
+label {
+    font-size: 20px;
+    font-weight: 500;
+}
+.menu{
+    font-size: 16px;
+    font-weight: 400;
+    padding-top: 15px;
+}
+.sub-menu{
+    margin-bottom: -15px;
+}
+// #cancel {
+//     margin-left: 35px;
+//     margin-bottom: 20px;
+//     background: #FFF;
+//     border: 1px solid #000000;
+//     width: 100px;
+//     height: 40px;
+//     border-radius: 10px;
+//     color: black;
+//     font-weight: 700;
+// }
+
+.sub{
+    width: 50%;
+    height: 55px;
+    text-align: center;
+    border: 1px solid #7A7A7A;
+    color: #526D82;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 28px;
+  }
+#submit {
+    margin-left: 50px;
+    
+}
+.submit{
+    margin-top: 35px;
+}
+.mandatory {
+    color: red;
+}
+::ng-deep .example-full-width .mdc-text-field--outlined {
+    --mdc-outlined-text-field-container-shape: 12px;
+    font-style: italic;
+}

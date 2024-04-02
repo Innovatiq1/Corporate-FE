@@ -44,6 +44,7 @@ import { ChangeBgDirective } from 'app/change-bg.directive';
 import { ExamScheduleService } from 'app/timetable/exam-schedule.service';
 import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-coutomzation.component';
 import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
+import { FormCustomizationComponent } from './settings/form-customization/form-customization.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
     WelcomeComponent,
     ChangeBgDirective,
     LogoCoutomzationComponent,
-    SidemenuComponent
+    SidemenuComponent,
+    FormCustomizationComponent
 
   ],
   imports: [

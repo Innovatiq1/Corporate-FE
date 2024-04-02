@@ -18,6 +18,8 @@ import * as moment from 'moment';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { QuestionService } from '@core/service/question.service';
 import { SurveyService } from 'app/admin/survey/survey.service';
+import { FormService  } from '@core/service/customization.service';
+
 @Component({
   selector: 'app-add-course',
   templateUrl: './add-course.component.html',
@@ -60,7 +62,6 @@ export class AddCourseComponent implements OnInit {
   courseAdded=false;
   disableNextBtn: any;
   firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
   isEditable = false;
   editUrl: any;
   viewUrl: any;
@@ -71,6 +72,8 @@ export class AddCourseComponent implements OnInit {
   public Editor: any = ClassicEditor;
   thumbnail: any;
   // instructorList: any = [];
+  forms!: any[];
+
 
   breadscrums = [
     {
@@ -116,6 +119,7 @@ export class AddCourseComponent implements OnInit {
     private instructorService: InstructorService,
     private questionService: QuestionService,
     public surveyService: SurveyService,
+    private formService: FormService
     ) {
       let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-course');
@@ -156,24 +160,25 @@ export class AddCourseComponent implements OnInit {
         sessionStartTime: new FormControl('',[]),
         sessionEndDate: new FormControl('',[]),
         sessionEndTime: new FormControl('',[]),
-      });
-      this.secondFormGroup = this._formBuilder.group({
         pdu_technical: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
-      pdu_leadership: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
-      pdu_strategic: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
-      image_link: new FormControl('', [Validators.maxLength(255)]),
-      website_link: new FormControl('', [Validators.pattern(/^(https?:\/\/)?(www\.)?[a-zA-Z0-9]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/)]),
-      funding_grant: new FormControl('',[Validators.required]),
-      // survey: new FormControl('',[Validators.required]),
-      id: new FormControl(''),
-      // course_instructor: new FormControl('', [Validators.required]),
-      // assign_exam: new FormControl('', []),
-      assessment: new FormControl('', [Validators.required]),
-      survey: new FormControl('', [Validators.required]),
-      course_kit: new FormControl('', [Validators.required]),
-      vendor: new FormControl('',[ Validators.maxLength(100)]),
-      // certificates: new FormControl('',[Validators.required]),
+        pdu_leadership: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
+        pdu_strategic: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
+        image_link: new FormControl('', [Validators.maxLength(255)]),
+        website_link: new FormControl('', [Validators.pattern(/^(https?:\/\/)?(www\.)?[a-zA-Z0-9]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/)]),
+        funding_grant: new FormControl('',[Validators.required]),
+        // survey: new FormControl('',[Validators.required]),
+        id: new FormControl(''),
+        // course_instructor: new FormControl('', [Validators.required]),
+        // assign_exam: new FormControl('', []),
+        assessment: new FormControl('', [Validators.required]),
+        survey: new FormControl('', [Validators.required]),
+        course_kit: new FormControl('', [Validators.required]),
+        vendor: new FormControl('',[ Validators.maxLength(100)]),
       });
+      // this.secondFormGroup = this._formBuilder.group({
+
+      // // certificates: new FormControl('',[Validators.required]),
+      // });
       this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
         this.courseId = params.id;
       });
@@ -189,12 +194,12 @@ export class AddCourseComponent implements OnInit {
     this.mainCategoryControl = this.firstFormGroup.get('main_category') as FormControl;
     this.subCategoryControl = this.firstFormGroup.get('sub_category') as FormControl;
     this.currencyControl = this.firstFormGroup.get('currency_code') as FormControl;
-    this.fundingGrant = this.secondFormGroup.get('funding_grant') as FormControl;
+    this.fundingGrant = this.firstFormGroup.get('funding_grant') as FormControl;
     // this.surveyCategoryControl = this.secondFormGroup.get('survey') as FormControl;
     // this.instuctorCategoryControl = this.secondFormGroup.get('course_instructor') as FormControl;
-    this.courseKitCategoryControl = this.secondFormGroup.get('course_kit') as FormControl;
-    this.assessmentControl = this.secondFormGroup.get('assessment') as FormControl;
-    this.feedbackControl = this.secondFormGroup.get('survey') as FormControl;
+    this.courseKitCategoryControl = this.firstFormGroup.get('course_kit') as FormControl;
+    this.assessmentControl = this.firstFormGroup.get('assessment') as FormControl;
+    this.feedbackControl = this.firstFormGroup.get('survey') as FormControl;
     // this.certificatesCategoryControl = this.secondFormGroup.get('certificates') as FormControl;
     // // this.setMainCategoryControlState();
     // this.setSubCategoryControlState();
@@ -204,6 +209,7 @@ export class AddCourseComponent implements OnInit {
     // this.setInstructorControlState();
     // this.setCourseKitControlState();
     // this.setCertificatesControlState();
+    this.getForms();
     if(!this.editUrl){
       this.setup();
     }
@@ -295,6 +301,12 @@ isInputDisabled(): boolean {
 //     this.certificatesCategoryControl.enable({ emitEvent: false }); // Enable the control for other modes.
 //   }
 // }
+
+getForms(): void {
+  this.formService.getAllForms().subscribe(forms => {
+    this.forms = forms;
+  });
+}
 
 mainCategoryChange(): void {
     this.subCategories = this.allSubCategories.filter(
@@ -483,9 +495,8 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
     fileReader.readAsArrayBuffer(file);
   }
   save() {
-    if(this.secondFormGroup.valid){
+    if(this.firstFormGroup.valid){
     const courseData = this.firstFormGroup.value;
-    const wbsData = this.secondFormGroup.value;
     let payload = {
       title: courseData?.title,
       courseCode: courseData?.courseCode,
@@ -502,24 +513,24 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       sessionStartTime: courseData?.sessionStartTime,
       sessionEndTime: courseData?.sessionEndTime,
       course_detailed_description:courseData?.course_detailed_description,
-      pdu_technical:wbsData?.pdu_technical,
-      pdu_leadership:wbsData?.pdu_leadership,
-      pdu_strategic:wbsData?.pdu_strategic,
-      funding_grant:wbsData?.funding_grant,
-      // survey:wbsData?.survey,
-      // course_instructor:wbsData?.course_instructor,
-      assessment:wbsData?.assessment,
-      survey:wbsData?.survey,
-      course_kit:wbsData?.course_kit,
-      vendor:wbsData?.vendor,
-      // certificates:wbsData?.certificates,
+      pdu_technical:courseData?.pdu_technical,
+      pdu_leadership:courseData?.pdu_leadership,
+      pdu_strategic:courseData?.pdu_strategic,
+      funding_grant:courseData?.funding_grant,
+      // survey:courseData?.survey,
+      // course_instructor:courseData?.course_instructor,
+      assessment:courseData?.assessment,
+      survey:courseData?.survey,
+      course_kit:courseData?.course_kit,
+      vendor:courseData?.vendor,
+      // certificates:courseData?.certificates,
       image_link:this.image_link,
       id:this.courseId,
 
     }
-    this.secondFormGroup.value.course_kit = this.firstFormGroup.value.course_kit?.map((item:any) => item.id);
-    this.secondFormGroup.value.assessment = this.firstFormGroup.value.assessment?.map((item:any) => item.id);
-    this.secondFormGroup.value.survey = this.firstFormGroup.value.survey?.map((item:any) => item.id);
+    this.firstFormGroup.value.course_kit?.map((item:any) => item.id);
+    this.firstFormGroup.value.assessment?.map((item:any) => item.id);
+    this.firstFormGroup.value.survey?.map((item:any) => item.id);
 
     Swal.fire({
       title: 'Are you sure?',
@@ -589,10 +600,8 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
 
   submit() {
 
-    if(this.secondFormGroup.valid){
+    if(this.firstFormGroup.valid){
       const courseData = this.firstFormGroup.value;
-      console.log("sss", courseData)
-      const wbsData = this.secondFormGroup.value;
 
       let payload = {
 
@@ -611,20 +620,19 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
         sessionStartTime: courseData?.sessionStartTime,
         sessionEndTime: courseData?.sessionEndTime,
         course_detailed_description:courseData?.course_detailed_description,
-        pdu_technical:wbsData?.pdu_technical,
-        pdu_leadership:wbsData?.pdu_leadership,
-        pdu_strategic:wbsData?.pdu_strategic,
-        funding_grant:wbsData?.funding_grant,
-        // survey:wbsData?.survey,
-        // course_instructor:wbsData?.course_instructor,
-        assessment:wbsData?.assessment,
-        survey:wbsData?.survey,
-        course_kit:wbsData?.course_kit,
-        // certificates:wbsData?.certificates,
+        pdu_technical:courseData?.pdu_technical,
+        pdu_leadership:courseData?.pdu_leadership,
+        pdu_strategic:courseData?.pdu_strategic,
+        funding_grant:courseData?.funding_grant,
+        // survey:courseData?.survey,
+        // course_instructor:courseData?.course_instructor,
+        assessment:courseData?.assessment,
+        survey:courseData?.survey,
+        course_kit:courseData?.course_kit,
+        // certificates:courseData?.certificates,
         image_link:this.image_link,
-        vendor: wbsData?.vendor,
-        website_link:wbsData?.website_link
-
+        vendor: courseData?.vendor,
+        website_link:courseData?.website_link
       }
 
       Swal.fire({
@@ -704,15 +712,11 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
         sessionStartTime: this.course?.sessionStartTime,
         sessionEndTime: this.course?.sessionEndTime,
         course_duration_in_days: this.course?.course_duration_in_days?.toString(),
-      });
-      this.secondFormGroup.patchValue({
         website_link: this.course?.website_link,
         funding_grant: fundingGrantId,
         // assign_exam: this.assign_exam?.assign_exam,
         // certificates: this.course?.certificates,
         // survey: this.course?.survey?.id,
-        course_description: this.course?.course_description,
-        course_detailed_description: this.course?.course_detailed_description,
         id: this.course?.id,
         pdu_technical: this.course?.pdu_technical?.toString(),
         pdu_leadership: this.course?.pdu_leadership?.toString(),
@@ -734,5 +738,13 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
 cancel() {
 
   window.history.back();
+}
+
+labelStatusCheck(labelName: string): any {
+  if (this.forms) {
+    const  status = this.forms[0]?.labels.filter((v : any) => v.name === labelName)
+    return status[0]?.checked
+  }
+
 }
 }
