@@ -17,7 +17,7 @@
                         </div> -->
                             <div formArrayName="sidemenu">
                                 <div *ngFor="let side of sidemenu.controls; let i=index" [formGroupName]="i">
-                                    <label>Menu <span class="mandatory">&nbsp;*</span></label>
+                                    <label>Menu {{i+1}}<span class="mandatory">&nbsp;*</span></label>
                                     <button class="btn" (click)="addSidemenu()"> <img src="/assets/Close.svg" alt="plus"
                                             style="display: inline;margin-bottom: 10px;"></button>
                                     <div class="row">
@@ -57,26 +57,16 @@
                                         <label>SubMenu <span class="mandatory">&nbsp;*</span></label>
                                         <button class="btn" (click)="addSubmenu(i)"><img src="/assets/Close.svg"
                                                 alt="plus" style="display: inline;margin-bottom: 10px;"></button>
-                                        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
-                                            <!-- Dynamic options -->
-                                            <label>Title <span class="mandatory">&nbsp;*</span></label>
-                                            <div class="submenu-container">
-                                                <div *ngFor="let sub of getSubmenu(i).controls; let j=index"
-                                                    [formGroupName]="j" class="submenu">
-                                                    <!-- Use [formControlName] with respect to 'option' FormGroup -->
-                                                    <!-- <div > -->
+                                                <div class="row">
+                                                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-2" *ngFor="let sub of getSubmenu(i).controls; let j=index" [formGroupName]="j">
+                                                        <!-- Use [formControlName] with respect to 'submenu' FormGroup -->
+                                                        <label class="mt-2">Title<span class="mandatory">&nbsp;*</span></label>
                                                        
-                                                        <mat-form-field class="example-full-width mb-3"
-                                                            appearance="outline">
-                                                            <input type="text" matInput [formControlName]="'title'"
-                                                                placeholder="Enter Title">
+                                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                                            <input type="text" matInput [formControlName]="'title'" placeholder="Enter Title">
                                                         </mat-form-field>
-                                                    <!-- </div> -->
-
-
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
 
 
 
