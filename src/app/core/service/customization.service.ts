@@ -21,6 +21,6 @@ export class FormService {
   }
 
   updateLabelStatus(formId: string, labelName: string, checked: boolean): Observable<any> {
-    return this.http.put<any>(`http://localhost:3001/api/admin/forms/${formId}`, { labelName, checked });
+    return this.http.put<any>(`${this.prefix}admin/forms/${formId}`, { labelName, checked });
   }
 }
