@@ -119,6 +119,11 @@ export class AssesmentQuestionsComponent {
     return questionGroup;
   }
 
+  addAdditionalQuestion(){
+    const question = this.addQuestion();
+    this.questions.push(question);
+  }
+
   deleteQuestion(questionIndex: number) {
     Swal.fire({
       title: 'Confirm Deletion',
