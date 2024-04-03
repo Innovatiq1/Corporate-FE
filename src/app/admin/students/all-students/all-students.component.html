@@ -97,17 +97,17 @@
                               class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"  (click)="editCall(row)"/>
                           </mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="rollNo">
+                        <!-- <ng-container matColumnDef="rollNo">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Roll No
                           </mat-header-cell>
                           <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Roll No:</span>{{row?.rollNo}}
                           </mat-cell>
-                        </ng-container>
+                        </ng-container> -->
                         <ng-container matColumnDef="name">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Name
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row"  (click)="aboutStudent(row.id)" (contextmenu)="onContextMenu($event, row)"> <span
+                          <mat-cell *matCellDef="let row" class="name" (click)="aboutStudent(row.id)" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Name:</span>{{row.name | titlecase}}   {{ row.last_name ? row.last_name : '' }}
                           </mat-cell>
                         </ng-container>
@@ -124,16 +124,23 @@
                             <span class="mobile-label">Gender:</span>
                             <div *ngIf="row.gender==='male'">
                               <span class="badge badge-solid-green">
-                                {{row.gender}}</span>
+                                {{row.gender | titlecase}}</span>
                             </div>
                             <div *ngIf="row.gender==='female'">
                               <span class="badge badge-solid-purple">
-                                {{row.gender}}</span>
+                                {{row.gender | titlecase}}</span>
                             </div>
                             <div *ngIf="row.gender==='other'">
                               <span class="badge badge-solid-orange">
-                                {{row.gender}}</span>
+                                {{row.gender | titlecase}}</span>
                             </div>
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="education">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Education
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)"> <span
+                              class="mobile-label">Mobile:</span>{{row?.education}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="mobile">
@@ -144,22 +151,42 @@
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="email">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                          <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                            <span class="mobile-label">Email:</span>
+                            <img src="assets/images/gmail.png" alt="Email Icon" class="email-icon">
+                            <!-- Replace "email-icon.png" with the filename of your PNG icon -->
+                            <span class="email-address"> {{row.email}}</span>
+                          </mat-cell>
+                        </ng-container>
+                        <!-- <ng-container matColumnDef="email">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Email
                           </mat-header-cell>
                           <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)"><span
                               class="mobile-label">Email:</span> {{row?.email}}
                           </mat-cell>
-                        </ng-container>
-                        <ng-container matColumnDef="date">
+                        </ng-container> -->
+                        <!-- <ng-container matColumnDef="date">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Admission
                             Date
                           </mat-header-cell>
                           <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                             <span class="mobile-label">Admission Date:</span>{{row?.joiningDate| date: 'MM/dd/yyyy'}}
                           </mat-cell>
+                        </ng-container> -->
+                        <ng-container matColumnDef="status">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Status
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (click)="editCall(row)"> <span
+                              class="mobile-label">Status:</span><span [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
+                                <span [class]="row?.Active ? 'status-dot' : 'status-red'"></span>
+                                {{row.Active ?  'Active': 'Inactive' }}
+                                <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                              </span>
+                          </mat-cell>
                         </ng-container>
                         <!-- actions -->
-                        <ng-container matColumnDef="actions">
+                        <!-- <ng-container matColumnDef="actions">
                           <mat-header-cell class="pr-0" *matHeaderCellDef>Actions
                           </mat-header-cell>
                           <!-- <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
@@ -171,7 +198,7 @@
                               class="tbl-action-btn">
                               <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                             </button>
-                          </mat-cell> -->
+                          </mat-cell> --
                           <mat-cell *matCellDef="let row" class="pr-0">
                             <button mat-button [matMenuTriggerFor]="menu" >
                               <svg class="dropdown-toggle border rounded-circle" data-bs-toggle="dropdown" aria-expanded="false"
@@ -189,7 +216,7 @@
                                       <!-- <button mat-menu-item [routerLink]="['/admin/courses/view-course-kit/',row.id]">
                                         <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
                                         <span class="menu-text">View</span>
-                                      </button> -->
+                                      </button> --
                                       <button mat-menu-item (click)="editCall(row)" >
                                         <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                                         <span class="menu-text px-3">Edit</span>
@@ -202,13 +229,13 @@
                                       <button mat-menu-item  (click)="confirmItem(row)" class="align-items-center">
                                         <img class="img-w" src="/assets/approve.svg" alt="approve">
 
-                                        <!-- <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons> -->
+                                        <!-- <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons> --
                                         <span class="menu-text px-3">Confirm</span>
                                       </button>
                                     </div>
                                     </mat-menu>
                           </mat-cell>
-                        </ng-container>
+                        </ng-container> -->
                         <mat-header-row *matHeaderRowDef="displayedColumns">
                         </mat-header-row>
                         <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
@@ -287,30 +314,34 @@
               Grid View
             </ng-template>
             <div class="row mt-5 ml-0 mr-0" >
-              <div class="col-md-4" *ngFor="let data of dataSource.filteredData">
-                <div class="card border-apply" (click)="aboutStudent(data.id)">
+              <div class="col-md-3" *ngFor="let data of dataSource.filteredData">
+                <div class="card border-apply" style="height: 300px;" (click)="aboutStudent(data.id)">
                   <div class="m-b-20">
                     <div class="contact-grid">
                       <div class="profile-header l-bg-purple-dark">
                         <div class="user-name"></div>
-                        <div class="name-center">{{data.department | uppercase}}</div>
+                        <div class="name-center">{{data.name |titlecase}} {{ data.last_name ? data.last_name : '' }}</div>
                       </div>
                       <img src="{{data.avatar || 'assets/profile.png'}}" class="user-img" alt="">
                       <p>
-                       {{data.address}}
-                        <br />Mumbai
+                        {{data.department | uppercase}}
+                        <br> {{data?.country_name}}
                       </p>
+                     
                       <div>
                         <span class="phone">
                           <i class="material-icons">phone</i>{{data.mobile}}</span>
                       </div>
-                      <div class="profile-userbuttons">
+                      <!-- <div class="profile-userbuttons">
                         <button mat-flat-button color="primary" (click)="aboutStudent(data.id)">Read More</button>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
               </div>
+              <mat-paginator class="paginator" #paginator [length]="dataSource.filteredData.length" [pageIndex]="0"
+              [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+            </mat-paginator>
             </div>
           </mat-tab>
         </mat-tab-group>

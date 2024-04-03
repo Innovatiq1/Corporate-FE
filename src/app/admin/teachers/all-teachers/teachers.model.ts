@@ -14,6 +14,7 @@ export class Teachers {
   qualification:string;
   joiningDate:string;
   data:any;
+  country_name!: string;
   constructor(teachers: Teachers) {
     {
       this.id = teachers.id || this.getRandomID();

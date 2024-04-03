@@ -79,9 +79,16 @@
                   </ng-container> -->
 
                    <!-- Course Name -->
+                   <ng-container matColumnDef="img">
+                    <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
+                    </mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <span
+                        class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"  [routerLink]="['/admin/users/edit-all-users',row.id]">
+                    </mat-cell>
+                  </ng-container>
                   <ng-container matColumnDef="Name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
+                    <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/users/view-all-users',row.id]">
                       <span class="mobile-label">Name:</span>{{row.name | capitalizeFirstLetter}}</mat-cell>
                   </ng-container>
                   <!-- Course Code -->
@@ -91,6 +98,25 @@
                     <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
                       <span class="mobile-label">User Type:</span>{{row.type}}</mat-cell>
                   </ng-container>
+                  <ng-container matColumnDef="gender">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Gender
+                    </mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
+                      <span class="mobile-label">Gender:</span>
+                      <div *ngIf="row.gender==='male'">
+                        <span class="badge badge-solid-green">
+                          {{row.gender | titlecase}}</span>
+                      </div>
+                      <div *ngIf="row.gender==='female'">
+                        <span class="badge badge-solid-purple">
+                          {{row.gender | titlecase}}</span>
+                      </div>
+                      <div *ngIf="row.gender==='other'">
+                        <span class="badge badge-solid-orange">
+                          {{row.gender | titlecase}}</span>
+                      </div>
+                    </mat-cell>
+                  </ng-container>
                   <!-- Main Category -->
                   <ng-container matColumnDef="Qualification">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Qualification
@@ -98,21 +124,47 @@
                     <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
                       <span class="mobile-label">Qualification:</span>{{row.education | capitalizeFirstLetter}}</mat-cell>
                   </ng-container>
+                  <ng-container matColumnDef="Mobile">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
+                      <span class="mobile-label">Mobile:</span>{{row.mobile}}</mat-cell>
+                  </ng-container>
                    <!-- Sub Category -->
-                  <ng-container matColumnDef="Email">
+                   <ng-container matColumnDef="Email">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
+                      <span class="mobile-label">Email:</span>
+                      <img src="assets/images/gmail.png" alt="Email Icon" class="email-icon">
+                      <!-- Replace "email-icon.png" with the filename of your PNG icon -->
+                      <span class="email-address"> {{row.email}}</span>
+                    </mat-cell>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="Email">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Email
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
                       <span class="mobile-label">Email:</span>{{row.email}}</mat-cell>
-                  </ng-container>
+                  </ng-container> -->
                    <!--Fees -->
-                  <ng-container matColumnDef="Status">
+                   <ng-container matColumnDef="Status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]"> <span
+                        class="mobile-label">Status:</span><span [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
+                          <span [class]="row?.Active ? 'status-dot' : 'status-red'"></span>
+                          {{row.Active ?  'Active': 'Inactive' }}
+                          <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                        </span>
+                    </mat-cell>
+                  </ng-container>
+                  <!-- <ng-container matColumnDef="Status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Status
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]" class="mt-4" [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
                       <span class="mobile-label">Status:</span>
                        {{row.Active ?  'Active': 'Inactive' }}</mat-cell>
-                  </ng-container>
+                  </ng-container> -->
                   <!-- actions -->
                   <ng-container matColumnDef="Actions">
                     <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>

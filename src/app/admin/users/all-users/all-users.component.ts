@@ -21,9 +21,12 @@ export class AllUsersComponent {
 
   displayedColumns: string[] = [
     // 'select',
+    'img',
     'Name',
     'User Type',
+    'gender',
     'Qualification',
+    'Mobile',
     'Email',
     'Status',
     'Actions'

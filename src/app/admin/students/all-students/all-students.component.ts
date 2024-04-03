@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { StudentsService } from './students.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Students } from './students.model';
 import { DataSource } from '@angular/cdk/collections';
@@ -42,14 +42,14 @@ export class AllStudentsComponent
   displayedColumns = [
     // 'select',
     'img',
-    'rollNo',
     'name',
     'department',
     'gender',
+    'education',
     'mobile',
     'email',
-    'date',
-    'actions',
+    // 'date',
+    'status'
   ];
   exampleDatabase?: StudentsService;
   dataSource!: ExampleDataSource;
@@ -78,11 +78,14 @@ export class AllStudentsComponent
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   @ViewChild(MatMenuTrigger)
   contextMenu?: MatMenuTrigger;
-  contextMenuPosition = { x: '0px', y: '0px' };
+  contextMenuPosition = { x: '0px', y: '0px'};
 
   ngOnInit() {
     this.loadData();
   }
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator;
+  // }
   refresh() {
     this.loadData();
   }
@@ -238,6 +241,7 @@ export class AllStudentsComponent
     //   'center'
     // );
   }
+  
   public loadData() {
     this.exampleDatabase = new StudentsService(this.httpClient);
     this.dataSource = new ExampleDataSource(
@@ -345,6 +349,16 @@ export class AllStudentsComponent
       this.contextMenu.openMenu();
     }
   }
+  onPageChange(event: any){
+    console.log("page", this.dataSource.filteredData)
+    const startIndex = event.pageIndex * event.pageSize
+    const endIndex = startIndex + event.pageSize;
+    this.paginator.pageIndex = event.pageIndex;
+ this.dataSource.filteredData = this.dataSource.filteredData.slice(startIndex, endIndex)
+//     this.dataSource.filteredData = this.dataSource.filteredData.slice(startIndex, endIndex)
+//     this.paginator.pageIndex = event.pageIndex;
+//  this.dataSource.filteredData = this.dataSource.originalData.slice(startIndex, endIndex); 
+  }
 }
 export class ExampleDataSource extends DataSource<Students> {
   filterChange = new BehaviorSubject('');
@@ -448,4 +462,5 @@ export class ExampleDataSource extends DataSource<Students> {
       );
     });
   }
+
 }
