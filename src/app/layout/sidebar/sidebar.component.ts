@@ -16,7 +16,7 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import { ROUTES } from './sidebar-items';
+import { ROUTES, SettingsMenu } from './sidebar-items';
 import { AuthService, Role } from '@core';
 import { MenuItem, RouteInfo } from './sidebar.metadata';
 import { AuthenService } from '@core/service/authen.service';
@@ -45,6 +45,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   url:any;
   userProfile: any;
   studentId: any;
+  orgMenuItems:MenuItem[] = [];
+  isSettings: boolean = false;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -56,10 +58,23 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private studentService:StudentsService,
   ) {
     this.elementRef.nativeElement.closest('body');
+
+    let urlPath = this.router.url.split('/')
+    this.isSettings = urlPath.includes('settings');
+
     this.routerObj = this.router.events.subscribe((event) => {
+
       if (event instanceof NavigationEnd) {
         // close sidebar on mobile screen after menu select
         this.renderer.removeClass(this.document.body, 'overlay-open');
+        if(!event.url.includes('settings')){
+          this.isSettings = false;
+          this.menuitem = this.orgMenuItems;
+        }else {
+          this.isSettings = true;
+          this.menuitem = SettingsMenu
+        }
+
       }
     });
   }
@@ -91,7 +106,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
       (response: any) => {
         let userType = localStorage.getItem('user_type')
         let data = response.filter((item:any) => item.typeName === userType);
-        this.menuitem = data[0].menuItems.filter((item: any) => item.title !== 'Support');
+        const items = data[0].menuItems.filter((item: any) => item.title !== 'Support');
+        this.orgMenuItems = items;
+        if(!this.isSettings){
+          this.menuitem = this.orgMenuItems;
+        }
         let limit = filters?.limit ? filters?.limit : 10;
         if (response.totalDocs <= limit || response.totalDocs <= 0) {
         }

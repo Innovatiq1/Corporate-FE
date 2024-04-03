@@ -158,7 +158,7 @@ export class HeaderComponent
   ngOnInit() {
     this.logoService.getLogo().subscribe(data => {
       // console.log("logo,title",data.data.docs[0].title);
-      
+
     });
     this.userProfile = this.authenService.getUserProfile();
 
@@ -211,25 +211,25 @@ export class HeaderComponent
   }
 
   navigateToUserSettings(){
-    this.router.navigate(['/student/users']);
+    this.router.navigate(['/student/settings/users']);
   }
   navigateToIntegrateSettings(){
-    this.router.navigate(['/student/integration']);
+    this.router.navigate(['/student/settings/integration']);
   }
   navigateToAutomateSettings(){
-    this.router.navigate(['/student/automation']);
+    this.router.navigate(['/student/settings/automation']);
   }
   navigateToCustomsSettings(){
-    this.router.navigate(['/student/customization']);
+    this.router.navigate(['/student/settings/customization']);
   }
   navigateToProfileSettings() {
-    this.router.navigate(['/student/security-settings']);
+    this.router.navigate(['/student/settings/security-settings']);
   }
   navigateToLmsSettings(){
-    this.router.navigate(['/student/LMS-TAE']);
+    this.router.navigate(['/student/settings/LMS-TAE']);
   }
   navigateToConfigSettings(){
-    this.router.navigate(['/student/configuration']);
+    this.router.navigate(['/student/settings/configuration']);
   }
 onClick(){
   let role = localStorage.getItem('user_type')
@@ -241,7 +241,7 @@ onClick(){
   else if (role == 'Instructor'){
     this.router.navigate(['/settings/instructor-settings']);
   }
-  
+
 }
 
   getAnnouncementForStudents(filter?: any) {
@@ -320,7 +320,7 @@ cancel(id:any){
   logout() {
     interface OuterObject {
             id: any;
-           
+
     }
     const storedDataString: string | null = localStorage.getItem('userLogs');
     const data: OuterObject = storedDataString !== null ? JSON.parse(storedDataString) : {};
