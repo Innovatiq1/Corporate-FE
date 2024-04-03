@@ -53,8 +53,9 @@ export class AllTeachersComponent
     'degree',
     'mobile',
     'email',
-    'date',
-    'actions',
+    'Status',
+    // 'date',
+    // 'actions',
   ];
   exampleDatabase?: TeachersService;
   dataSource!: ExampleDataSource;
@@ -108,7 +109,7 @@ export class AllTeachersComponent
 
   }
   aboutInstructor(id:any){
-    this.route.navigate(['/admin/teachers/about-teacher'],{queryParams:{data:id}})
+    this.route.navigate(['/admin/users/about-instructor'],{queryParams:{data:id}})
 
   }
   // performSearch() {

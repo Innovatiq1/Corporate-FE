@@ -19,3 +19,9 @@ svg {
   padding-left: 3px;
   padding-right: 3px;
 }
+::ng-deep .mat-sort-header-content {
+  text-align: center !important; 
+  display: flex !important;
+  align-items: center !important;
+  white-space: nowrap;
+}

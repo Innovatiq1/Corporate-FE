@@ -40,12 +40,15 @@ export class AllstaffComponent
 {
   displayedColumns = [
     // 'select',
+    'img',
     'name',
+    'User Type',
+    'gender',
     'designation',
     'mobile',
     'email',
-    'date',
-    'address',
+    // 'date',
+    'salary',
     'actions',
   ];
   exampleDatabase?: StaffService;

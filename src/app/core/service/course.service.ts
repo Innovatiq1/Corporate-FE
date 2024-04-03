@@ -429,6 +429,15 @@ export class CourseService {
         const apiUrl = `${this.prefix}admin/studentClasses/${id}`;
         return this._Http.get<any>(apiUrl).pipe(map((response) => response));
       }
+      getUserById(id: string) {
+        const apiUrl = `${this.prefix}auth/instructorListByID/${id}`;
+        return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+      }
+     
+      deleteUser(userId: string): Observable<ApiResponse> {
+        const apiUrl = `${this.prefix}auth/instructorDelete/${userId}`;
+        return this._Http.delete<ApiResponse>(apiUrl);
+      }
 }
 
 

@@ -16,6 +16,7 @@ export class Students {
   address:string;
   data:any;
   isLogin:boolean;
+  country_name!:string;
 
   constructor(students: Students) {
     {

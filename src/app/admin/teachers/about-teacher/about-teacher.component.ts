@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TeachersService } from '../all-teachers/teachers.service';
+import { CoursePaginationModel } from '@core/models/course.model';
+import { LecturesService } from 'app/teacher/lectures/lectures.service';
+import * as moment from 'moment';
+import { MatTableDataSource } from '@angular/material/table';
+import { SessionModel } from '@core/models/class.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-about-teacher',
@@ -17,7 +23,19 @@ export class AboutTeacherComponent {
   ];
   aboutDataId: any;
   aboutData:any
-  constructor(private activeRoute:ActivatedRoute, private StudentService:TeachersService,) {
+  coursePaginationModel!: Partial<CoursePaginationModel>;
+  dataSource1:any;
+  dataSource2: any;
+  dataSource: any[] = [];
+  filterName='';
+  myArray = new MatTableDataSource<SessionModel>([]);
+
+  constructor(private activeRoute:ActivatedRoute, 
+    private StudentService:TeachersService,
+    public lecturesService: LecturesService,
+   private cdr: ChangeDetectorRef,
+   public teachersService: TeachersService,) {
+    this.coursePaginationModel = {};
     this.activeRoute.queryParams.subscribe(param =>{
     console.log("params:",param['data'])
  
@@ -27,6 +45,8 @@ export class AboutTeacherComponent {
  
    ngOnInit() {
      this.loadData();
+   this.getClassList();
+   this.getProgramList();
    }
  
  
@@ -37,5 +57,83 @@ export class AboutTeacherComponent {
  
      })
  }
+ 
+
+
+
+ getClassList() {
+  //  let instructorId = localStorage.getItem('id')
+   this.lecturesService.getClassListWithPagination(this.aboutDataId, this.filterName,{ ...this.coursePaginationModel }).subscribe(
+     (response) => {
+       //console.log("this",response.data.ssions)
+  
+       this.dataSource1 = response.data.docs;
+       //this.mapClassList()
+       this.dataSource = [];
+       
+     },
+     (error) => {
+     }
+   );
+  
+   
+ }
+ getProgramList() {
+  // let instructorId = localStorage.getItem('id')
+  this.lecturesService.getClassListWithPagination1(this.aboutDataId, this.filterName,{ ...this.coursePaginationModel }).subscribe(
+    (response) => {
+      //console.log("this",response.data.ssions)
+ 
+      this.dataSource2 = response.data.docs;
+      //this.mapClassList()
+      this.dataSource = [];
+      
+    },
+    (error) => {
+    }
+  );
+ 
+  
+}
+deleteItem(row: any) {
+  // this.id = row.id;
+   Swal.fire({
+     title: "Confirm Deletion",
+     text: "Are you sure you want to delete this Instructor?",
+     icon: "warning",
+     showCancelButton: true,
+     confirmButtonColor: "#d33",
+     cancelButtonColor: "#3085d6",
+     confirmButtonText: "Delete",
+     cancelButtonText: "Cancel",
+   }).then((result) => {
+     if (result.isConfirmed) {
+       this.teachersService.deleteUser(row.id).subscribe(
+         () => {
+           Swal.fire({
+             title: "Deleted",
+             text: "Instructor deleted successfully",
+             icon: "success",
+           });
+           this.loadData()
+           //this.fetchCourseKits();
+           //this.instructorData()
+         },
+         (error: { message: any; error: any; }) => {
+           Swal.fire(
+             "Failed to delete  Instructor",
+             error.message || error.error,
+             "error"
+           );
+         }
+       );
+     }
+   });
+
+ }
+ getStatusClass(classDeliveryType: string): string {
+  return classDeliveryType === 'online' ? 'success' : 'fail';
+}
+
  }
 
