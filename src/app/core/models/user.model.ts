@@ -230,6 +230,7 @@ export interface Student {
     }
   export interface MenuItemModel {
     id: number;
+    _id: string;
     title: string;
     children: MenuItemModel[];
     checked:boolean;
