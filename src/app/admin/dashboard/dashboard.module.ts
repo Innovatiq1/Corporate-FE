@@ -19,9 +19,10 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
 import { SupportComponent } from '../../apps/support/support.component';
 import { EtmsDashboardComponent } from '../E-TMS/etms-dashboard/etms-dashboard.component';
 import { NgxGaugeModule } from 'ngx-gauge';
+import { TrainingApprovalTabComponent } from './training-approval-tab/training-approval-tab.component';
 
 @NgModule({
-  declarations: [MainComponent, Dashboard2Component, CmDashboardComponent, PmDashboardComponent, TrainingAdministratorComponent, HodDashboardComponent, TrainingCoordinatorDbComponent, SupervisorDashboardComponent, DashboardTabsComponent, StudentDashboardComponent, SupportComponent, EtmsDashboardComponent  
+  declarations: [MainComponent, Dashboard2Component, CmDashboardComponent, PmDashboardComponent, TrainingAdministratorComponent, HodDashboardComponent, TrainingCoordinatorDbComponent, SupervisorDashboardComponent, DashboardTabsComponent, StudentDashboardComponent, SupportComponent, EtmsDashboardComponent, TrainingApprovalTabComponent  
    
   ],
   imports: [

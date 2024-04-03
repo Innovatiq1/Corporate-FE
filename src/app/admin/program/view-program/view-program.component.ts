@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '@core/service/course.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import Swal from 'sweetalert2';
+import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { VideoPlayerComponent } from '../../../admin/courses/course-kit/video-player/video-player.component';
+
 
 @Component({
   selector: 'app-view-program',
@@ -24,7 +27,8 @@ export class ViewProgramComponent {
   response: any;
   image: any;
   constructor(private courseService: CourseService, private activatedRoute: ActivatedRoute,
-    private router: Router, private classService: ClassService
+    private router: Router, private classService: ClassService, 
+    private modalServices: BsModalService,
   ) {
     // constructor
 
@@ -64,14 +68,12 @@ export class ViewProgramComponent {
         this.response = response.data;
         this.programDataById = this.response.id;
       } else {
-       
       }
     });
   }
 
   
-  getProgramKits(id: string): void {
-    
+  getProgramKits(id: string): void { 
     this.getProgramByID(id);
   }
 
@@ -99,5 +101,62 @@ export class ViewProgramComponent {
         });
       });
     });
+  }
+  
+  getCourseKits() {
+    const rows = [];
+    for (const course of this.response?.coreprogramCourse) {
+      for (const kit of course.coreProgramName.course_kit) {
+        rows.push(kit);
+      }
+    }
+    return rows;
+  }
+  getElectiveCourseKits() {
+    const rows = [];
+    for (const course of this.response?.electiveprogramCourse) {
+      for (const kit of course.electiveProgramName.course_kit) {
+        rows.push(kit);
+      }
+    }
+    return rows;
+  }
+
+  playVideo(video: { video_url: any; }): void {
+    console.log('Video',video)
+    if (video?.video_url) {
+      this.openVidePlayer(video);
+    } else {
+      console.error("Invalid video URL");
+    }
+  }
+   openVidePlayer(videoLink: { video_url?: any; id?: any; }): void {
+    // const { videoLink } = videoLink;
+    if (videoLink?.id) {
+      const videoURL = videoLink.video_url;
+      // this.courseService.getVideoById(videoId).subscribe((res) => {
+      //   const videoURL = res.data.videoUrl;
+        if (!videoURL) {
+          Swal.fire({
+            icon: "error",
+            title: "Video Convert is Pending",
+            text: "Please start convert this video",
+          });
+          return
+
+        }
+        // const videoType = "application/x-mpegURL";
+        if (videoURL) {
+          const initialState: ModalOptions = {
+            initialState: {
+              videoURL,
+              // videoType,
+            },
+            class: "videoPlayer-modal",
+          };
+          this.modalServices.show(VideoPlayerComponent, initialState);
+        }
+      // });
+    }
   }
 }
