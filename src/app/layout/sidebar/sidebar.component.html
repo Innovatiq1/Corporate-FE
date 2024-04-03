@@ -20,10 +20,10 @@
           <li *ngFor="let sidebarItem of menuitem"
           [ngClass]="(isSettings ? router.url.includes(sidebarItem.id):router.url.startsWith('/'+sidebarItem.id)) ? (sidebarItem.children.length > 0 ? 'active':'active-top'): ''">
             <a
-              (click)="isSettings ? navigateTo('student/settings',sidebarItem.id):callToggleMenu($event, sidebarItem.children.length)"
-              class="menu-top" [ngClass]="{'menu-toggle': sidebarItem.children.length}">
-              <img *ngIf="sidebarItem.iconType === 'img'" [src]="sidebarItem.icon" class="img-icon"/>
-              <i *ngIf="sidebarItem.iconType !== 'img'" class="material-icons-two-tone">{{sidebarItem.icon}}</i>
+              (click)="callToggleMenu($event, sidebarItem.children.length)"
+              class="menu-top menu-toggle">
+              <!-- <i class="material-icons-two-tone">{{sidebarItem.icon}}</i> -->
+              <img src="{{sidebarItem.icon}}" class="rounded-circle" style="height: 23px; width:23px">
               <span class="hide-menu">{{sidebarItem.title | translate}}
               </span>
             </a>

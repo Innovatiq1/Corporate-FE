@@ -89,6 +89,7 @@ export class SidemenuComponent {
   createSubmenu(): FormGroup {
     return this.formBuilder.group({
       title: '',
+      id:'',
     });
   }
 
@@ -104,13 +105,25 @@ export class SidemenuComponent {
     this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) => {
         const uploadedImageLink = data?.data?.thumbnail;
         const imageName = uploadedImageLink.split('/').pop()?.split('\\').pop();
-        this.uploadedImages[menuItemIndex] = imageName;
         const menuItemControl = this.sidemenu?.at(menuItemIndex);
-        menuItemControl.patchValue({
-          iconsrc: uploadedImageLink,
-        });
-    })
-}
+    menuItemControl.setValue({
+      ...menuItemControl.value,
+      iconsrc: uploadedImageLink,
+    });
+    // Update the uploaded image name or URL for display
+    this.uploadedImages[menuItemIndex] = imageName;
+   
+    // this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) => {
+    //     const uploadedImageLink = data?.data?.thumbnail;
+    //     const imageName = uploadedImageLink.split('/').pop()?.split('\\').pop();
+    //     this.uploadedImages[menuItemIndex] = imageName;
+    //     const menuItemControl = this.sidemenu?.at(menuItemIndex);
+    //     menuItemControl.patchValue({
+    //       iconsrc: uploadedImageLink,
+    //     });
+    // })
+})
+  }
 
   // onFileUpload(event:any,menuItemIndex:number) {
   //   const file = event.target.files[0];
@@ -131,7 +144,7 @@ export class SidemenuComponent {
   
   // }
   update() {
-    
+    console.log("update",this.sideMenuForm.value)
     if (this.sideMenuForm.valid) {
       const payload = {
         MENU_LIST: this.sideMenuForm.value.sidemenu.map((menulist: any) => ({
@@ -140,6 +153,7 @@ export class SidemenuComponent {
           iconsrc: menulist.iconsrc,
           children: menulist.submenu.map((submenus: any) => ({
             title: submenus.title,
+            id: submenus.id,
           }))
         })),
         id: this.sidemenuId,
@@ -193,13 +207,14 @@ export class SidemenuComponent {
         newSidemenuGroup.patchValue({
         title: menuItem.title,
         id: menuItem.id,
-        iconsrc: imageName,
+        iconsrc: uploadedImageLink,
          });
          const submenuArray = newSidemenuGroup.get('submenu') as FormArray;
          menuItem.children.forEach((submenus: any) => {
          submenuArray.push(
           this.formBuilder.group({
                title: submenus.title,
+               id: submenus.id,
                })
             );
            });
@@ -208,7 +223,4 @@ export class SidemenuComponent {
       })
     })
   }
-  
-
-
 }
