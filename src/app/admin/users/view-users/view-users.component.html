@@ -68,14 +68,14 @@
                 </div>
               </mat-tab>
             </mat-tab-group>
-            <button type="button" mat-raised-button color="warn" [routerLink]="['/admin/users/all-students']">Back to all students</button>
+            <button type="button" mat-raised-button color="warn" [routerLink]="['/student/settings/all-users']">Back to all users</button>
           </div>
         </div>
   
         <div class="col-lg-8 col-md-12">
           <div class="card">
             <div class="card-container">
-              <button class="icons" alt="Edit" mat-menu-item (click)="editCall(aboutData)" >
+              <button class="icons" alt="Edit" mat-menu-item [routerLink]="['/admin/users/edit-all-users',aboutData1.id]" >
                   <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
               </button>
               <button class="icons" alt="Delete" mat-menu-item (click)="deleteItem(aboutData)">
@@ -133,7 +133,7 @@
                     <div class="header mt-3">
                       <h2>Enrolled Programs</h2>
                     </div>
-                    <div class="tableBody">
+                    <div class="table-wrapper">
                       <div class="table-responsive">
                         <table class="table table-hover ">
                           <thead>
@@ -165,7 +165,7 @@
                     <div class="header mt-3">
                       <h2>Enrolled Courses</h2>
                     </div>
-                    <div class="tableBody">
+                    <div class="table-wrapper">
                       <div class="table-responsive">
                         <table class="table table-hover ">
                           <thead>
@@ -308,14 +308,14 @@
                 </div>
               </mat-tab>
             </mat-tab-group>
-            <button type="button" mat-raised-button color="warn" [routerLink]="['/admin/users/all-instructors']">Back to all instructors</button>
+            <button type="button" mat-raised-button color="warn" [routerLink]="['/student/settings/all-users']">Back to all users</button>
           </div>
         </div>
   
         <div class="col-lg-8 col-md-12">
           <div class="card">
             <div class="card-container">
-              <button class="icons" alt="Edit" [routerLink]="['/admin/users/edit-instructor',aboutData1.id]" >
+              <button class="icons" alt="Edit" [routerLink]="['/admin/users/edit-all-users',aboutData1.id]"  >
                   <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
               </button>
               <button class="icons" alt="Delete" mat-menu-item (click)="deleteItem1(aboutData1)">

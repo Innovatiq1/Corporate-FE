@@ -100,10 +100,10 @@
                   </ng-container>
                   <!-- Course Code -->
                   <ng-container matColumnDef="User Type">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>User Type
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>User Role
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
-                      <span class="mobile-label">User Type:</span>{{row.type}}</mat-cell>
+                      <span class="mobile-label">User Role:</span>{{row.type}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="gender">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Gender
