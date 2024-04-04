@@ -5,7 +5,6 @@ import { StudentsRoutingModule } from './students-routing.module';
 import { AboutStudentComponent } from './about-student/about-student.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { EditStudentComponent } from './edit-student/edit-student.component';
-import { AllStudentsComponent } from './all-students/all-students.component';
 import { StudentAttendanceComponent } from './student-attendance/student-attendance.component';
 import { DeleteDialogComponent as StdDeleteDialogComponent } from './student-attendance/dialogs/delete/delete.component';
 import { FormDialogComponent as StdFormDialogComponent } from './student-attendance/dialogs/form-dialog/form-dialog.component';
@@ -19,7 +18,6 @@ import { StudentsService } from './students.service';
     AboutStudentComponent,
     AddStudentComponent,
     EditStudentComponent,
-    AllStudentsComponent,
     StudentAttendanceComponent,
     StdDeleteDialogComponent,
     StdFormDialogComponent,

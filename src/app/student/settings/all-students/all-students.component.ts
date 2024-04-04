@@ -1,4 +1,3 @@
-import { Department } from './../../departments/all-departments/department.model';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -26,8 +25,8 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import Swal from 'sweetalert2';
 import { Users } from '@core/models/user.model';
-import { Students } from '../students.model';
-import { StudentsService } from '../students.service';
+import { Students } from 'app/admin/students/students.model';
+import { StudentsService } from 'app/admin/students/students.service';
 @Component({
   selector: 'app-all-students',
   templateUrl: './all-students.component.html',

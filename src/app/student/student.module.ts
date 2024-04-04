@@ -46,6 +46,7 @@ import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
 import { FormCustomizationComponent } from './settings/form-customization/form-customization.component';
 import { AllUsersComponent } from './settings/all-users/all-users.component';
 import { StudentsService } from 'app/admin/students/students.service';
+import { AllStudentsComponent } from './settings/all-students/all-students.component';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { StudentsService } from 'app/admin/students/students.service';
     LogoCoutomzationComponent,
     SidemenuComponent,
     FormCustomizationComponent,
-    AllUsersComponent
+    AllUsersComponent,
+    AllStudentsComponent
 
   ],
   imports: [

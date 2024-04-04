@@ -24,6 +24,7 @@ import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-cou
 import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
 import { FormCustomizationComponent } from './settings/form-customization/form-customization.component'
 import { AllUsersComponent } from './settings/all-users/all-users.component';
+import { AllStudentsComponent } from './settings/all-students/all-students.component';
 
 
 const routes: Routes = [
@@ -158,6 +159,11 @@ const routes: Routes = [
     path: 'settings/all-users',
     component: AllUsersComponent,
   },
+  {
+    path: 'settings/all-students',
+    component: AllStudentsComponent,
+  },
+
 
 
   {
