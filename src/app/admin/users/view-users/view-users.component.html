@@ -450,7 +450,7 @@
     </div>
   </section>
 
-  <section class="content" *ngIf="!(userType == 'Instructor' && userType == 'Student')">
+  <section class="content" *ngIf="!isStudent && !isInstructor">
     <div class="content-block">
       <div class="block-header" *ngFor="let breadscrum of breadscrums">
         <!-- breadcrumb -->
