@@ -39,9 +39,15 @@ svg {
 .menu-text{
     padding-left: 20px;
 }
+.paginator{
+    background: none;
+  }
 ::ng-deep .mat-sort-header-content {
     text-align: center !important; 
     display: flex !important;
     align-items: center !important;
     white-space: nowrap;
 }
+::ng-deep .mat-mdc-tab-body-content{
+    overflow-x: hidden !important;
+  }

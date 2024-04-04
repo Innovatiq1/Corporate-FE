@@ -31,7 +31,7 @@ export class AboutTeacherComponent {
   myArray = new MatTableDataSource<SessionModel>([]);
 
   constructor(private activeRoute:ActivatedRoute, 
-    private StudentService:TeachersService,
+    // private StudentService:TeachersService,
     public lecturesService: LecturesService,
    private cdr: ChangeDetectorRef,
    public teachersService: TeachersService,) {
@@ -51,7 +51,7 @@ export class AboutTeacherComponent {
  
  
    loadData(){
-     this.StudentService.getUserById( this.aboutDataId).subscribe(res => {
+     this.teachersService.getUserById( this.aboutDataId).subscribe(res => {
        this.aboutData = res;
        console.log("edit",this.aboutData)
  

@@ -32,6 +32,7 @@ import jsPDF from 'jspdf';
 //import 'jspdf-autotable';
 import 'jspdf-autotable';
 import { Location } from '@angular/common';
+import { UtilsService } from '@core/service/utils.service';
 
 @Component({
   selector: 'app-all-teachers',
@@ -73,6 +74,7 @@ export class AllTeachersComponent
     },
   ];
   totalItems: any;
+  pageSizeArr = this.utils.pageSizeArr;
  // rowData:any
   constructor(
     public httpClient: HttpClient,
@@ -80,7 +82,8 @@ export class AllTeachersComponent
     public teachersService: TeachersService,
     private snackBar: MatSnackBar,
     private route :Router,
-    private location: Location
+    private location: Location,
+    public utils: UtilsService,
   ) {
     super();
     this.UsersModel = {};
@@ -252,6 +255,13 @@ export class AllTeachersComponent
     //   'center'
     // );
   }
+  
+  pageSizeChange($event: any) {
+    this.UsersModel.page = $event?.pageIndex + 1;
+    this.UsersModel.limit = $event?.pageSize;
+    this.instructorData()
+  }
+  
   public loadData() {
     this.exampleDatabase = new TeachersService(this.httpClient);
     this.dataSource = new ExampleDataSource(
@@ -268,6 +278,7 @@ export class AllTeachersComponent
       }
     );
   }
+  
   public instructorData() {
     this.teachersService.getInstructor({ ...this.UsersModel })
       .subscribe((response: {
@@ -365,11 +376,11 @@ export class AllTeachersComponent
       this.contextMenu.openMenu();
     }
   }
-  pageSizeChange($event: any) {
-    this.UsersModel.page = $event?.pageIndex + 1;
-    this.UsersModel.limit = $event?.pageSize;
-    this.instructorData();
-  }
+  // pageSizeChange($event: any) {
+  //   this.UsersModel.page = $event?.pageIndex + 1;
+  //   this.UsersModel.limit = $event?.pageSize;
+  //   this.instructorData();
+  // }
 }
 export class ExampleDataSource extends DataSource<Teachers> {
   rowData:any
