@@ -91,7 +91,10 @@ export class AllstaffComponent
     this.router.navigate(['/admin/users/add-staff']);
   }
 
+  aboutStaff(id:any){
+    this.router.navigate(['/admin/users/about-staff'],{queryParams:{data:id}})
 
+  }
 
   editCall(row: Staff) {
     console.log("rowEdit",row)

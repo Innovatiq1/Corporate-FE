@@ -25,3 +25,9 @@ svg {
   align-items: center !important;
   white-space: nowrap;
 }
+.paginator{
+  background: none;
+}
+::ng-deep .mat-mdc-tab-body-content{
+  overflow-x: hidden !important;
+}
