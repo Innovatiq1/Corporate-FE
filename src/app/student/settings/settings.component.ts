@@ -399,27 +399,27 @@ export class SettingsComponent {
   }
   navigateToAccountSettings() {
    
-    this.router.navigate(['/student/account-settings']);
+    this.router.navigate(['/student/settings/account-settings']);
   }
   navigateToProfileSettings() {
-    this.router.navigate(['/student/security-settings']);
+    this.router.navigate(['/student/settings/security-settings']);
   }
   navigateToEmailSettings(){
-    this.router.navigate(['/student/email-configuration']);
+    this.router.navigate(['/student/settings/email-configuration']);
    
   }
   navigateToBannerSettings(){
-    this.router.navigate(['/student/banners']);
+    this.router.navigate(['/student/settings/banners']);
     
   }
   navigateToUserSettings(){
-    this.router.navigate(['/student/users']);
+    this.router.navigate(['/student/settings/users']);
   }
   navigateToIntegrateSettings(){
-    this.router.navigate(['/student/integration']);
+    this.router.navigate(['/student/settings/integration']);
   }
   navigateToAutomateSettings(){
-    this.router.navigate(['/student/automation']);
+    this.router.navigate(['/student/settings/automation']);
   }
   navigateToCustomsSettings(){
     this.router.navigate(['/student/customization']);
@@ -438,7 +438,7 @@ export class SettingsComponent {
     
   }
   navigateToSidemenuSettings(){
-    this.router.navigate(['/student/sidemenu']);
+    this.router.navigate(['/student/settings/sidemenu']);
     
   }
  
