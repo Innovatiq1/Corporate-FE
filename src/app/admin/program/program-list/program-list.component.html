@@ -11,26 +11,25 @@
           <mat-tab>
             <ng-template mat-tab-label>
               <i class="material-icons-two-tone psr-3">list_alt</i>
-              List View
+              Approved Programs
             </ng-template>
-            <div class="mt-5">
+        <!-- <mat-tab-group> -->
+          <!-- <mat-tab> -->
+            <div class="mt-3">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                   <div class="materialTableHeader">
-                    <div class="left">
-                      <ul class="header-buttons-left ms-0">
-                        <li class="tbl-title">
-                          <h2>All Programs</h2>
-                        </li>
-                        <li class="tbl-search-box">
-                          <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                          <input placeholder="Search" type="text" #filter class="browser-default search-field"
-                            aria-label="Search box" [(ngModel)]="searchTerm" (input)="performSearch()">
-                        </li>
-                      </ul>
-                    </div>
                     <div class="right">
                       <ul class="tbl-export-btn">
+                        <li>
+                          <ul class="header-buttons-left ms-0">
+                            <li class="tbl-search-box">
+                              <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                              <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                                aria-label="Search box" [(ngModel)]="searchTerm" (input)="performSearch()">
+                            </li>
+                          </ul>
+                        </li>
                          <li class="tbl-header-btn">
                           <div class="m-l-10" matTooltip="ADD">
                             <button mat-mini-fab color="primary" (click)="addNew()">
@@ -95,34 +94,41 @@
                           </mat-header-cell>
                           <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"><span
                               class="mobile-label">Image:</span> <img [src]="row?.image_link || 'assets/profile.png'"
-                              [routerLink]="['/admin/program/view-program/',row.id]" />
+                              (click)="viewActiveProgram(row.id)" />
                           </mat-cell>
                         </ng-container> -->
                         <ng-container matColumnDef="name" >
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Program Name
                           </mat-header-cell>
-                          <mat-cell class="name" *matCellDef="let row" [routerLink]="['/admin/program/view-program/',row.id]"><span
+                          <mat-cell class="name" *matCellDef="let row" (click)="viewActiveProgram(row.id)"><span
                               class="mobile-label">Program Name:</span> <span class=" col-cyan">{{row.title |titlecase}}</span>
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="code">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Program Code
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-program/',row.id]"><span
+                          <mat-cell *matCellDef="let row" (click)="viewActiveProgram(row.id)"><span
                               class="mobile-label">Program Code:</span> {{row.courseCode}}
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="Creator">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Creator
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row" (click)="viewActiveProgram(row.id)"><span
+                              class="mobile-label">Creator:</span> {{row.creator}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="Duration">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Duration
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-program/',row.id]">
+                          <mat-cell *matCellDef="let row" (click)="viewActiveProgram(row.id)">
                             <span class="mobile-label">Duration:</span>{{row.duration}} Hours</mat-cell>
                         </ng-container>
 
                         <ng-container matColumnDef="Start Date">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-program/',row.id]"> <span
+                          <mat-cell *matCellDef="let row" (click)="viewActiveProgram(row.id)"> <span
                               class="mobile-label">Start Date:</span>{{row.sessionStartDate |date}}
                           </mat-cell>
                         </ng-container>
@@ -130,28 +136,28 @@
                         <ng-container matColumnDef="End Date">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-program/',row.id]"> <span
+                          <mat-cell *matCellDef="let row" (click)="viewActiveProgram(row.id)"> <span
                               class="mobile-label">End Date:</span>{{row.sessionEndDate |date}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="Payment">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Payment
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-program/',row.id]"> <span
+                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-program/',{id:row.id, status:'active'}]"> <span
                               class="mobile-label">Payment:</span>$ {{row.courseFee}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="Compulsory Count">
                           <mat-header-cell *matHeaderCellDef mat-sort-header class="compulsory-count-header">Compulsory Count
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-program/',row.id]"> <span
+                          <mat-cell *matCellDef="let row" (click)="viewActiveProgram(row.id)"> <span
                               class="mobile-label">Compulsory Count:</span>{{row.coreCourseCount}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="Elective Count">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Elective Count
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-program/',row.id]"> <span
+                          <mat-cell *matCellDef="let row" (click)="viewActiveProgram(row.id)"> <span
                               class="mobile-label">Elective Count:</span>{{row.electiveCourseCount}}
                           </mat-cell>
                         </ng-container>
@@ -276,8 +282,8 @@
                 </div>
               </div>
             </div>
-          </mat-tab>
-          <mat-tab class="grid">
+          <!-- </mat-tab> -->
+          <!-- <mat-tab class="grid">
             <ng-template mat-tab-label>
               <i class="material-icons-two-tone psr-3">grid_on</i>
               Grid View
@@ -301,13 +307,6 @@
                 </div>
                 <div class="right">
                   <ul class="tbl-export-btn">
-                    <!-- <li class="tbl-header-btn">
-                      <div class="m-l-10" matTooltip="ADD" [routerLink]="['/admin/program/create-program']">
-                        <button mat-mini-fab color="primary">
-                          <mat-icon class="col-white">add</mat-icon>
-                        </button>
-                      </div>
-                    </li> -->
                     <li>
                       <div class="export-button m-l-10" matTooltip="XLSX" (click)="exportExcel()">
                         <img src="assets/excel.svg" alt="" />
@@ -471,7 +470,17 @@
             </div>
           </div>
         </div>
-          </mat-tab>
+          </mat-tab> -->
+        <!-- </mat-tab-group> -->
+        </mat-tab>
+        
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <i class="material-icons-two-tone psr-3">list_alt</i>
+            Pending Programs
+          </ng-template>
+          <app-pending-programs></app-pending-programs>
+        </mat-tab>
         </mat-tab-group>
       </div>
     </div>
