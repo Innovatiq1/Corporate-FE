@@ -178,7 +178,7 @@ export class CreatAnnouncementComponent {
               text: "Announcement Created Successfully",
               icon: 'success',
             });
-            this.router.navigateByUrl('/admin/announcement/list')
+            this.router.navigateByUrl('/student/settings/announcement')
             // this.router.navigateByUrl(['/admin/announcement/list'])
           },
           (err) => {
@@ -224,7 +224,7 @@ export class CreatAnnouncementComponent {
               text: 'Updated Announcement Successfully',
               icon: 'success',
             });
-            this.router.navigateByUrl('/admin/announcement/list')
+            this.router.navigateByUrl('/student/settings/announcement')
 
           },
           (err) => {

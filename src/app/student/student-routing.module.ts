@@ -29,6 +29,8 @@ import { AllTeachersComponent } from './settings/all-teachers/all-teachers.compo
 import { AllstaffComponent } from './settings/all-staff/all-staff.component';
 import { AllDepartmentsComponent } from './settings/all-departments/all-departments.component';
 import { CertificateTemplateComponent } from './settings/certificate-template/certificate-template.component';
+import { ListComponent } from './settings/list/list.component';
+import { CreatAnnouncementComponent } from './settings/list/creat-announcement/creat-announcement.component';
 
 
 const routes: Routes = [
@@ -152,7 +154,7 @@ const routes: Routes = [
     component: SettingsComponent,
   },
   {
-    path: 'logo-coutomization',
+    path: 'settings/logo-customization',
     component: LogoCoutomzationComponent,
   },
   {
@@ -183,6 +185,23 @@ const routes: Routes = [
     path: 'settings/certificate/template',
     component: CertificateTemplateComponent
   },
+  {
+    path: 'settings/announcement',
+    component: ListComponent,
+  },
+  {
+    path: 'settings/create-announcement',
+    component: CreatAnnouncementComponent,
+  },
+  {
+    path: 'settings/edit-announcement/:id',
+    component: CreatAnnouncementComponent,
+  },
+  {
+    path: 'settings/view-announcement/:id',
+    component: CreatAnnouncementComponent,
+  },
+
 
   {
     path: 'side-menu/:id',

@@ -1765,6 +1765,54 @@ export const SettingsMenu: MenuItem[] = [
         role:[],
         children:[]
       },
+      {
+        path:'student/settings/logo-customization',
+        title:'Logo',
+        id:'logo',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/customization',
+        title:'Currency',
+        id:'currency',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/sidemenu',
+        title:'Side menu',
+        id:'sidemenu',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+
+
+
 
     
     ]
@@ -1782,7 +1830,24 @@ export const SettingsMenu: MenuItem[] = [
     groupTitle:false,
     open:false,
     role:[],
-    children:[]
+    children:[
+      {
+        path:'student/settings/announcement',
+        title:'Announcement',
+        id:'announcement',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      }
+
+    ]
   },
   {
     path:'student/settings/LMS-TAE',
@@ -1797,7 +1862,24 @@ export const SettingsMenu: MenuItem[] = [
     groupTitle:false,
     open:false,
     role:[],
-    children:[]
+    children:[
+      {
+        path:'student/settings/all-questions',
+        title:'Assessment Configuration',
+        id:'assessment',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      }
+
+    ]
   },
   {
     path:'student/settings/configuration',

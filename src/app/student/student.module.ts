@@ -54,6 +54,10 @@ import { AllstaffComponent } from './settings/all-staff/all-staff.component';
 import { AllDepartmentsComponent } from './settings/all-departments/all-departments.component';
 import { DepartmentService } from 'app/admin/departments/department.service';
 import { CertificateTemplateComponent } from './settings/certificate-template/certificate-template.component';
+import { ListComponent } from './settings/list/list.component';
+import { CreatAnnouncementComponent } from './settings/list/creat-announcement/creat-announcement.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({
@@ -90,7 +94,10 @@ import { CertificateTemplateComponent } from './settings/certificate-template/ce
     AllTeachersComponent,
     AllstaffComponent,
     AllDepartmentsComponent,
-    CertificateTemplateComponent
+    CertificateTemplateComponent,
+    ListComponent,
+    CreatAnnouncementComponent
+
 
   ],
   imports: [
@@ -112,6 +119,9 @@ import { CertificateTemplateComponent } from './settings/certificate-template/ce
     ComponentsModule,
     SharedModule,
     ModalModule.forRoot(),
+    CKEditorModule,
+    AngularEditorModule,
+
 
   ],
   providers: [    

@@ -217,10 +217,10 @@ export class HeaderComponent
     this.router.navigate(['/student/settings/email-configuration']);
   }
   navigateToAutomateSettings(){
-    this.router.navigate(['/student/settings/automation']);
+    this.router.navigate(['/student/settings/announcement']);
   }
   navigateToCustomsSettings(){
-    this.router.navigate(['/student/settings/customization']);
+    this.router.navigate(['/student/settings/form-customization']);
   }
   navigateToProfileSettings() {
     this.router.navigate(['/student/settings/security-settings']);
