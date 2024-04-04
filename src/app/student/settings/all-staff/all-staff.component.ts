@@ -1,13 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { StaffService } from './staff.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Staff } from './staff.model';
 import { DataSource } from '@angular/cdk/collections';
-import { FormDialogComponent } from './dialog/form-dialog/form-dialog.component';
-import { DeleteDialogComponent } from './dialog/delete/delete.component';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -28,6 +24,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { Staff } from 'app/admin/staff/staff.model';
+import { StaffService } from 'app/admin/staff/staff.service';
 
 @Component({
   selector: 'app-all-staff',

@@ -7,8 +7,8 @@ import { StudentService } from '@core/service/student.service';
 import { UserService } from '@core/service/user.service';
 import { Department } from 'app/admin/departments/all-departments/department.model';
 import { ClassService } from 'app/admin/schedule-class/class.service';
-import { Staff } from 'app/admin/staff/all-staff/staff.model';
-import { StaffService } from 'app/admin/staff/all-staff/staff.service';
+import { Staff } from 'app/admin/staff/staff.model';
+import { StaffService } from 'app/admin/staff/staff.service';
 import { ChartOptions } from 'chart.js';
 import {
   ChartComponent,

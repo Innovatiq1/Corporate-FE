@@ -49,6 +49,8 @@ import { StudentsService } from 'app/admin/students/students.service';
 import { AllStudentsComponent } from './settings/all-students/all-students.component';
 import { AllTeachersComponent } from './settings/all-teachers/all-teachers.component';
 import { TeachersService } from 'app/admin/teachers/teachers.service';
+import { StaffService } from 'app/admin/staff/staff.service';
+import { AllstaffComponent } from './settings/all-staff/all-staff.component';
 
 
 @NgModule({
@@ -82,7 +84,8 @@ import { TeachersService } from 'app/admin/teachers/teachers.service';
     FormCustomizationComponent,
     AllUsersComponent,
     AllStudentsComponent,
-    AllTeachersComponent
+    AllTeachersComponent,
+    AllstaffComponent
 
   ],
   imports: [
@@ -107,6 +110,6 @@ import { TeachersService } from 'app/admin/teachers/teachers.service';
 
   ],
   providers: [    
-HomeworkService, stdLeaveReqService,StudentsService,ExamScheduleService,TeachersService]
+HomeworkService, stdLeaveReqService,StudentsService,ExamScheduleService,TeachersService,StaffService]
 })
 export class StudentModule {}

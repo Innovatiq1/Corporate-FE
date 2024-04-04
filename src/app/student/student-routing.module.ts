@@ -26,6 +26,7 @@ import { FormCustomizationComponent } from './settings/form-customization/form-c
 import { AllUsersComponent } from './settings/all-users/all-users.component';
 import { AllStudentsComponent } from './settings/all-students/all-students.component';
 import { AllTeachersComponent } from './settings/all-teachers/all-teachers.component';
+import { AllstaffComponent } from './settings/all-staff/all-staff.component';
 
 
 const routes: Routes = [
@@ -168,6 +169,11 @@ const routes: Routes = [
     path: 'settings/all-instructors',
     component: AllTeachersComponent,
   },
+  {
+    path: 'settings/all-staff',
+    component: AllstaffComponent
+  },
+
 
 
 

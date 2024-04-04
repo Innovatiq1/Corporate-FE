@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { AdminService } from '@core/service/admin.service';
 import { CourseService } from '@core/service/course.service';
-import { Staff } from '../all-staff/staff.model';
 import Swal from 'sweetalert2';
-import { StaffService } from '../all-staff/staff.service';
+import { Staff } from '../staff.model';
+import { StaffService } from '../staff.service';
 
 @Component({
   selector: 'app-about-staff',
