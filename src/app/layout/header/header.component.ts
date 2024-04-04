@@ -226,7 +226,7 @@ export class HeaderComponent
     this.router.navigate(['/student/settings/security-settings']);
   }
   navigateToLmsSettings(){
-    this.router.navigate(['/student/settings/LMS-TAE']);
+    this.router.navigate(['/student/settings/all-questions']);
   }
   navigateToConfigSettings(){
     this.router.navigate(['/student/settings/configuration']);

@@ -130,7 +130,7 @@ Swal.fire({
             text: 'Question created successfully',
             icon: 'success',
           });
-          this.router.navigate(['/admin/questions/all-questions'])
+          this.router.navigate(['/student/settings/all-questions'])
         },
         (err: any) => {
           Swal.fire(
@@ -174,7 +174,7 @@ Swal.fire({
             text: 'Question Updated successfully',
             icon: 'success',
           });
-          this.router.navigate(['/admin/questions/all-questions'])
+          this.router.navigate(['/student/settings/all-questions'])
 
         },
         (err: any) => {

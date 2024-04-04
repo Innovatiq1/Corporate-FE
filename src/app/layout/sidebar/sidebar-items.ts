@@ -1877,7 +1877,39 @@ export const SettingsMenu: MenuItem[] = [
         open:false,
         role:[],
         children:[]
+      },
+      {
+        path:'student/settings/all-questions',
+        title:'Exam Configuration',
+        id:'assessment',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'',
+        title:'Tutorial Configuration',
+        id:'assessment',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
       }
+
+
 
     ]
   },
@@ -1894,6 +1926,40 @@ export const SettingsMenu: MenuItem[] = [
     groupTitle:false,
     open:false,
     role:[],
-    children:[]
+    children:[
+      {
+        path:'',
+        title:'Control Storage Usage',
+        id:'storage',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'',
+        title:'Managed Access Time',
+        id:'time',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+
+
+
+    ]
   }
 ]

@@ -209,7 +209,7 @@ export class AssesmentQuestionsComponent {
           text: 'Question created successfully',
           icon: 'success',
         });
-        this.router.navigate(['/admin/questions/all-questions']);
+        this.router.navigate(['/student/settings/all-questions']);
       },
       (err: any) => {
         Swal.fire('Failed to create Question', 'error');
@@ -245,7 +245,7 @@ export class AssesmentQuestionsComponent {
                 text: 'Question Updated successfully',
                 icon: 'success',
               });
-              this.router.navigate(['/admin/questions/all-questions']);
+              this.router.navigate(['/student/settings/all-questions']);
             },
             (err: any) => {
               Swal.fire('Failed to update Question', 'error');

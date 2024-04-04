@@ -58,6 +58,9 @@ import { ListComponent } from './settings/list/list.component';
 import { CreatAnnouncementComponent } from './settings/list/creat-announcement/creat-announcement.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AllQuestionsComponent } from './settings/all-questions/all-questions.component';
+import { AssesmentQuestionsComponent } from './settings/assesment-questions/assesment-questions.component';
+import { AddQuestionsComponent } from './settings/add-questions/add-questions.component';
 
 
 @NgModule({
@@ -96,7 +99,10 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     AllDepartmentsComponent,
     CertificateTemplateComponent,
     ListComponent,
-    CreatAnnouncementComponent
+    CreatAnnouncementComponent,
+    AllQuestionsComponent,
+    AssesmentQuestionsComponent,
+    AddQuestionsComponent
 
 
   ],
