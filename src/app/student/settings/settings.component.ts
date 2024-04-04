@@ -422,7 +422,7 @@ export class SettingsComponent {
     this.router.navigate(['/student/settings/automation']);
   }
   navigateToCustomsSettings(){
-    this.router.navigate(['/student/customization']);
+    this.router.navigate(['/student/settings/form-customization']);
   }
   navigateToLmsSettings(){
     this.router.navigate(['/student/LMS-TAE']);

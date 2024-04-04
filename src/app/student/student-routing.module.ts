@@ -28,6 +28,7 @@ import { AllStudentsComponent } from './settings/all-students/all-students.compo
 import { AllTeachersComponent } from './settings/all-teachers/all-teachers.component';
 import { AllstaffComponent } from './settings/all-staff/all-staff.component';
 import { AllDepartmentsComponent } from './settings/all-departments/all-departments.component';
+import { CertificateTemplateComponent } from './settings/certificate-template/certificate-template.component';
 
 
 const routes: Routes = [
@@ -178,18 +179,17 @@ const routes: Routes = [
     path: 'settings/all-departments',
     component: AllDepartmentsComponent
   },
-
-
-
-
-
+  {
+    path: 'settings/certificate/template',
+    component: CertificateTemplateComponent
+  },
 
   {
     path: 'side-menu/:id',
     component: SidemenuComponent,
   },
   {
-    path: 'form-customization',
+    path: 'settings/form-customization',
     component: FormCustomizationComponent,
   },
 

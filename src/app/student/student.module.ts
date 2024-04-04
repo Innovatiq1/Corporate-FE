@@ -53,6 +53,7 @@ import { StaffService } from 'app/admin/staff/staff.service';
 import { AllstaffComponent } from './settings/all-staff/all-staff.component';
 import { AllDepartmentsComponent } from './settings/all-departments/all-departments.component';
 import { DepartmentService } from 'app/admin/departments/department.service';
+import { CertificateTemplateComponent } from './settings/certificate-template/certificate-template.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { DepartmentService } from 'app/admin/departments/department.service';
     AllStudentsComponent,
     AllTeachersComponent,
     AllstaffComponent,
-    AllDepartmentsComponent
+    AllDepartmentsComponent,
+    CertificateTemplateComponent
 
   ],
   imports: [
