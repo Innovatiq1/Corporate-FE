@@ -1685,7 +1685,25 @@ export const SettingsMenu: MenuItem[] = [
     groupTitle:false,
     open:false,
     role:[],
-    children:[]
+    children:[
+      {
+        iconsrc:'',
+        path: 'student/settings/security-settings',
+        title: 'Password',
+        iconType: '',
+        icon: '',
+        id:'password',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        open:false,
+
+        children: [],
+      },
+
+    ]
   },
   {
     path:'student/settings/customization',
