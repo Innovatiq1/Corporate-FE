@@ -39,7 +39,7 @@
                   {{sidebarSubItem.title}}
                  </a>
  
-                  <a  *ngIf=isSettings (click)="navigateTo(sidebarSubItem.path)" [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarItem.id +'/'+sidebarSubItem.id]"
+                  <a  *ngIf=isSettings (click)="navigateTo(sidebarSubItem.path)" [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarSubItem.path]"
                    class="ml-menu">
   
                    {{sidebarSubItem.title}}
