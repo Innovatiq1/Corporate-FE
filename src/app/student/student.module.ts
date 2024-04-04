@@ -45,6 +45,7 @@ import { ExamScheduleService } from 'app/timetable/exam-schedule.service';
 import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-coutomzation.component';
 import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
 import { FormCustomizationComponent } from './settings/form-customization/form-customization.component';
+import { AllUsersComponent } from './settings/all-users/all-users.component';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { FormCustomizationComponent } from './settings/form-customization/form-c
     ChangeBgDirective,
     LogoCoutomzationComponent,
     SidemenuComponent,
-    FormCustomizationComponent
+    FormCustomizationComponent,
+    AllUsersComponent
 
   ],
   imports: [

@@ -119,13 +119,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     );
   }
-  navigateTo(menu:any,url:any) {
-    this.menuItemClick.emit();
-    let userType = localStorage.getItem('user_type')
-    this.router.navigateByUrl( menu +'/'+url);
+
+navigateTo(menu:any,url?:any) {
+  this.menuItemClick.emit();
+  let userType = localStorage.getItem('user_type')
+  if(this.isSettings){
+    this.router.navigateByUrl(menu);
+
+  } else {
+  this.router.navigateByUrl( menu +'/'+url);
+  }
 }
-
-
 
 
   ngOnInit() {

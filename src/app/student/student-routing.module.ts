@@ -23,6 +23,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-coutomzation.component';
 import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
 import { FormCustomizationComponent } from './settings/form-customization/form-customization.component'
+import { AllUsersComponent } from './settings/all-users/all-users.component';
 
 
 const routes: Routes = [
@@ -153,6 +154,16 @@ const routes: Routes = [
     path: 'settings/sidemenu',
     component: SettingsComponent,
   },
+  {
+    path: 'settings/all-users',
+    component: AllUsersComponent,
+  },
+  {
+    path: 'settings/all-students',
+    component:,
+  },
+
+
   {
     path: 'side-menu/:id',
     component: SidemenuComponent,
