@@ -98,6 +98,16 @@
                       <button alt="Delete" mat-menu-item (click)="delete(sourceData.id)">
                         <app-feather-icons [icon]="'trash-2'" class="tbl-fav-delete"></app-feather-icons>
                       </button>
+                      <!-- <div  *ngIf="!aboutData?.isLogin"> -->
+                        <button mat-menu-item (click)="approveCourse(sourceData)" class="align-items-center" >
+                          <img class="img-w" src="/assets/approve.svg" alt="approve">
+          
+                          <!-- <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons> -->
+                         
+                        </button>
+                        <!-- <button type="button"mat-raised-button id="submit" (click)="approveCourse(row)">
+                          Approve
+                        </button> -->
                     </div>
                   </div>
                   <div class="container mt-3">

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CoursePaginationModel } from '@core/models/course.model';
+import { CourseModel, CoursePaginationModel } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
@@ -160,5 +160,37 @@ getAllInActiveCourse() {
         }
       // });
     }
+  }
+  approveCourse(course: CourseModel): void {
+    course.status = 'active';
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to approve this course!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this._courseService.updateCourse(course).subscribe(() => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Course approved successfully.',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
+          this.getAllCourse();
+        }, (error) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Failed to approve course. Please try again.',
+            icon: 'error',
+            // confirmButtonColor: '#526D82',
+          });
+        });
+      }
+    });
+  
   }
 }
