@@ -211,10 +211,10 @@ export class HeaderComponent
   }
 
   navigateToUserSettings(){
-    this.router.navigate(['/student/settings/users']);
+    this.router.navigate(['/student/settings/all-users']);
   }
   navigateToIntegrateSettings(){
-    this.router.navigate(['/student/settings/integration']);
+    this.router.navigate(['/student/settings/email-configuration']);
   }
   navigateToAutomateSettings(){
     this.router.navigate(['/student/settings/automation']);

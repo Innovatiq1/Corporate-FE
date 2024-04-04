@@ -1652,7 +1652,25 @@ export const SettingsMenu: MenuItem[] = [
     groupTitle:false,
     open:false,
     role:[],
-    children:[]
+    children:[
+      {
+        iconsrc:'',
+        path: 'student/settings/email-configuration',
+        title: 'SMTP',
+        iconType: '',
+        icon: '',
+        id:'email-configuration',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        open:false,
+
+        children: [],
+      },
+
+    ]
   },
   {
     path:'student/settings/security-settings',
