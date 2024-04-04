@@ -1750,6 +1750,22 @@ export const SettingsMenu: MenuItem[] = [
         role:[],
         children:[]
       },
+      {
+        path:'student/settings/banners',
+        title:'Banners',
+        id:'forms',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+
     
     ]
   },
