@@ -161,4 +161,11 @@ svg{
   .table tbody tr:hover {
     background-color: #ddd;
   }
-  
+  .status-red {
+    width: 8px;
+    height: 8px;
+    background-color: #f11541;
+    border-radius: 50%; // To make it a circle
+    display: inline-block;
+    margin-right: 5px; // Space between dot and text
+}

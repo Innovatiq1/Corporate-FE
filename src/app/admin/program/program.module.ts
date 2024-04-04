@@ -21,6 +21,7 @@ import { CreateClassComponent } from './create-class/create-class.component';
 import { CreateTemplateComponent } from './program-kit/create-template/create-template.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ViewProgramComponent } from './view-program/view-program.component';
+import { PendingProgramsComponent } from './program-list/pending-programs/pending-programs.component';
 
 
 
@@ -35,7 +36,8 @@ import { ViewProgramComponent } from './view-program/view-program.component';
         EditProgramKitComponent,
         CreateClassComponent,
         CreateTemplateComponent,
-        ViewProgramComponent
+        ViewProgramComponent,
+        PendingProgramsComponent
          ],
     imports: [
         CommonModule,
