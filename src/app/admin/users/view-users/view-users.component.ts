@@ -112,6 +112,8 @@ console.log("vvvvv", this.userType)
     this.getClassList1();
     this.getProgramList1();
     this.isInstructor = true;
+    }else{
+      this.loadData1();
     }
     console.log("users", this.userType)
   })

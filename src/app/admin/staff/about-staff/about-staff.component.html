@@ -77,6 +77,14 @@
 
       <div class="col-lg-8 col-md-12">
         <div class="card">
+          <div class="card-container">
+            <button class="icons" alt="Edit" [routerLink]="['/admin/users/edit-all-users',aboutData.id]" >
+                <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+            </button>
+            <button class="icons" alt="Delete" mat-menu-item (click)="deleteItem(aboutData)">
+              <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+          </button>
+        </div>
           <mat-tab-group>
             <mat-tab>
               <ng-template mat-tab-label>
