@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsersModel } from '@core/models/user.model';
 import { InstructorService } from '@core/service/instructor.service';
-import { TeachersService } from 'app/admin/teachers/all-teachers/teachers.service';
 import {
   ChartComponent,
   ApexAxisChartSeries,

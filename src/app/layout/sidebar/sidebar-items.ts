@@ -1581,6 +1581,24 @@ export const SettingsMenu: MenuItem[] = [
 
         children: [],
       },
+      {
+        iconsrc:'',
+        path: 'student/settings/all-instructors',
+        title: 'Instructors',
+        iconType: '',
+        icon: '',
+        id:'users',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        open:false,
+
+        children: [],
+      },
+
+
 
     ],
 

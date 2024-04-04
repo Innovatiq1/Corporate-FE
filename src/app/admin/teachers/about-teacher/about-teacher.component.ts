@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TeachersService } from '../all-teachers/teachers.service';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { LecturesService } from 'app/teacher/lectures/lectures.service';
 import * as moment from 'moment';
 import { MatTableDataSource } from '@angular/material/table';
 import { SessionModel } from '@core/models/class.model';
 import Swal from 'sweetalert2';
+import { TeachersService } from '../teachers.service';
 
 @Component({
   selector: 'app-about-teacher',

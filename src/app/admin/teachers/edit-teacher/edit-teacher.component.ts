@@ -5,13 +5,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { forkJoin } from 'rxjs';
-import { TeachersService } from '../all-teachers/teachers.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InstructorService } from '@core/service/instructor.service';
 import { Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
 import { CourseService } from '@core/service/course.service';
 import { StudentsService } from 'app/admin/students/students.service';
+import { TeachersService } from '../teachers.service';
 
 @Component({
   selector: 'app-edit-teacher',

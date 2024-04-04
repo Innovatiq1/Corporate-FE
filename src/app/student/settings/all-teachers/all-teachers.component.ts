@@ -1,10 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { TeachersService } from './teachers.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Teachers } from './teachers.model';
 import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import {
   MatSnackBar,
@@ -13,8 +11,6 @@ import {
 } from '@angular/material/snack-bar';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FormDialogComponent } from './dialogs/form-dialog/form-dialog.component';
-import { DeleteDialogComponent } from './dialogs/delete/delete.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Direction } from '@angular/cdk/bidi';
@@ -33,6 +29,8 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Location } from '@angular/common';
 import { UtilsService } from '@core/service/utils.service';
+import { Teachers } from 'app/admin/teachers/teachers.model';
+import { TeachersService } from 'app/admin/teachers/teachers.service';
 
 @Component({
   selector: 'app-all-teachers',
@@ -131,52 +129,6 @@ export class AllTeachersComponent
   //   console.log("edit",row)
   //   this.router.navigate(['/admin/teachers/edit-teacher'],{queryParams:{id:row.id}})
   // }
-  editCall(row: Teachers) {
-    this.id = row.id;
-    let tempDirection: Direction;
-    if (localStorage.getItem('isRtl') === 'true') {
-      tempDirection = 'rtl';
-    } else {
-      tempDirection = 'ltr';
-    }
-    const dialogRef = this.dialog.open(FormDialogComponent, {
-      data: {
-        teachers: row,
-        action: 'edit',
-      },
-      direction: tempDirection,
-    });
-
-
-    
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        // When using an edit things are little different, firstly we find record inside DataService by id
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // Then you update that record using data from dialogData (values you enetered)
-        if (foundIndex != null && this.exampleDatabase) {
-          this.exampleDatabase.dataChange.value[foundIndex] =
-            this.teachersService.getDialogData();
-          // And lastly refresh table
-          this.refreshTable();
-          Swal.fire({
-            title: 'Success',
-            text: 'Edit Record Successfully...!!!',
-            icon: 'success',
-            // confirmButtonColor: '#526D82',
-          });
-          // this.showNotification(
-          //   'black',
-          //   'Edit Record Successfully...!!!',
-          //   'bottom',
-          //   'center'
-          // );
-        }
-      }
-    });
-  }
   deleteItem(row: any) {
    // this.id = row.id;
     Swal.fire({

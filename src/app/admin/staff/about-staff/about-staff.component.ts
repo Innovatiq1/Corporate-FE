@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { AdminService } from '@core/service/admin.service';
 import { CourseService } from '@core/service/course.service';
-import { TeachersService } from 'app/admin/teachers/all-teachers/teachers.service';
 import { Staff } from '../all-staff/staff.model';
 import Swal from 'sweetalert2';
 import { StaffService } from '../all-staff/staff.service';
