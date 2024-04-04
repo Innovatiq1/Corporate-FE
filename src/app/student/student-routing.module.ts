@@ -158,10 +158,6 @@ const routes: Routes = [
     path: 'settings/all-users',
     component: AllUsersComponent,
   },
-  {
-    path: 'settings/all-students',
-    component:,
-  },
 
 
   {
