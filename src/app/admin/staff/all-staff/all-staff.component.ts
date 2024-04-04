@@ -49,7 +49,7 @@ export class AllstaffComponent
     'email',
     // 'date',
     'salary',
-    'actions',
+    // 'actions',
   ];
   exampleDatabase?: StaffService;
   dataSource!: ExampleDataSource;

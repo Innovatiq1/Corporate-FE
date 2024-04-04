@@ -29,7 +29,7 @@ export class AllUsersComponent {
     'Mobile',
     'Email',
     'Status',
-    'Actions'
+    // 'Actions'
   ];
   breadscrums = [
     {
