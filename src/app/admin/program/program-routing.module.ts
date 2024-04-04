@@ -67,7 +67,7 @@ const routes: Routes = [
     component:CreateTemplateComponent
   },
   {
-    path:'view-program/:id', 
+    path:'view-program', 
     component:ViewProgramComponent
   }
   

@@ -208,6 +208,7 @@ export class CreateProgramComponent {
 
   save() {
     if (this.programFormGroup.valid) {
+      let creator = JSON.parse(localStorage.getItem('user_data')!).user.name;
       if (this.editPermission) {
         let payload = {
           title: this.programFormGroup.value.course,
@@ -282,11 +283,12 @@ export class CreateProgramComponent {
           coreprogramCourse: this.corePrograms.value,
           electiveprogramCourse: this.electivePrograms.value?this.electivePrograms.value: null,
           image_link: this.image_link,
+          creator:creator,
           id: this.courseId,
           // programKit: this.programFormGroup.value.programKit ? this.programFormGroup.value.programKit : null
         }
 
-
+console.log("payload", payload)
         Swal.fire({
           title: 'Are you sure?',
           text: 'You want to create a program!',
@@ -339,13 +341,15 @@ export class CreateProgramComponent {
     );
   }
   getData() {
+    console.log("courseID", this.courseId)
     this.courseService.getProgramById(this.courseId).subscribe((response: any) => {
       this.course = response.data;
+      console.log("course", this.course)
       this.image_link = this.course.image_link;
       this.uploaded = this.image_link?.split('/')
-      let image  = this.uploaded.pop();
-      this.uploaded= image.split('\\');
-      this.uploadedImage = this.uploaded.pop();
+      let image  = this.uploaded?.pop();
+      this.uploaded= image?.split('\\');
+      this.uploadedImage = this.uploaded?.pop();
       this.programFormGroup.patchValue({
         course: this.course?.title,
         programCode: this.course?.courseCode,
@@ -381,7 +385,7 @@ export class CreateProgramComponent {
         _id: any; electiveProgramName: any; electiveProgramDescription: any;
       }) => {
         return this.fb.group({
-          electiveProgramName: [item?.electiveProgramName.id],
+          electiveProgramName: [item?.electiveProgramName?.id],
           electiveProgramDescription: [item?.electiveProgramDescription],
         });
       });
