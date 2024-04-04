@@ -9,7 +9,6 @@ import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexGrid, Ape
 import Swal from 'sweetalert2';
 import { ChartOptions } from 'chart.js';
 import { DeptService } from '@core/service/dept.service';
-import { Department } from 'app/admin/departments/all-departments/department.model';
 import { CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 
 export type chartOptions = {

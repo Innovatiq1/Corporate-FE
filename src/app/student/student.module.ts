@@ -51,6 +51,8 @@ import { AllTeachersComponent } from './settings/all-teachers/all-teachers.compo
 import { TeachersService } from 'app/admin/teachers/teachers.service';
 import { StaffService } from 'app/admin/staff/staff.service';
 import { AllstaffComponent } from './settings/all-staff/all-staff.component';
+import { AllDepartmentsComponent } from './settings/all-departments/all-departments.component';
+import { DepartmentService } from 'app/admin/departments/department.service';
 
 
 @NgModule({
@@ -85,7 +87,8 @@ import { AllstaffComponent } from './settings/all-staff/all-staff.component';
     AllUsersComponent,
     AllStudentsComponent,
     AllTeachersComponent,
-    AllstaffComponent
+    AllstaffComponent,
+    AllDepartmentsComponent
 
   ],
   imports: [
@@ -110,6 +113,6 @@ import { AllstaffComponent } from './settings/all-staff/all-staff.component';
 
   ],
   providers: [    
-HomeworkService, stdLeaveReqService,StudentsService,ExamScheduleService,TeachersService,StaffService]
+HomeworkService, stdLeaveReqService,StudentsService,ExamScheduleService,TeachersService,StaffService,DepartmentService]
 })
 export class StudentModule {}

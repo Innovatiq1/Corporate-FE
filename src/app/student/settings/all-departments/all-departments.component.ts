@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Department } from './department.model';
 import { DataSource } from '@angular/cdk/collections';
 import {
   MatSnackBar,
@@ -12,8 +11,6 @@ import {
 } from '@angular/material/snack-bar';
 import { BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FormDialogComponent } from './dialogs/form-dialog/form-dialog.component';
-import { DeleteDialogComponent } from './dialogs/delete/delete.component';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Direction } from '@angular/cdk/bidi';
@@ -22,7 +19,6 @@ import {
   TableElement,
   UnsubscribeOnDestroyAdapter,
 } from '@shared';
-import { DepartmentService } from './department.service';
 import { DeptService } from '@core/service/dept.service';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { Router } from '@angular/router';
@@ -30,6 +26,8 @@ import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { formatDate } from '@angular/common';
+import { Department } from 'app/admin/departments/department.model';
+import { DepartmentService } from 'app/admin/departments/department.service';
 @Component({
   selector: 'app-all-departments',
   templateUrl: './all-departments.component.html',
@@ -153,37 +151,6 @@ export class AllDepartmentsComponent
     this.id = row.id;
     this.router.navigate(['/admin/departments/edit-department/' + this.id])
 
-  }
-  deleteItem(row: Department) {
-    this.id = row.id;
-    let tempDirection: Direction;
-    if (localStorage.getItem('isRtl') === 'true') {
-      tempDirection = 'rtl';
-    } else {
-      tempDirection = 'ltr';
-    }
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: row,
-      direction: tempDirection,
-    });
-    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-      if (result === 1) {
-        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
-        );
-        // for delete we use splice in order to remove single object from DataService
-        if (foundIndex != null && this.exampleDatabase) {
-          this.exampleDatabase.dataChange.value.splice(foundIndex, 1);
-          this.refreshTable();
-          Swal.fire({
-            title: 'Success',
-            text: 'Delete Record Successfully...!!!',
-            icon: 'success',
-            // confirmButtonColor: '#526D82',
-          });
-        }
-      }
-    });
   }
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);

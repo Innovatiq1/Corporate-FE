@@ -1613,6 +1613,23 @@ export const SettingsMenu: MenuItem[] = [
 
         children: [],
       },
+      {
+        iconsrc:'',
+        path: 'student/settings/all-departments',
+        title: 'Departments',
+        iconType: '',
+        icon: '',
+        id:'all-departments',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        open:false,
+
+        children: [],
+      },
+
 
 
 
