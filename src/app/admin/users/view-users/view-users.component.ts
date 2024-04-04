@@ -4,12 +4,12 @@ import { CourseService } from '@core/service/course.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { CoursePaginationModel } from '@core/models/course.model';
 import Swal from 'sweetalert2';
-import { Students } from 'app/admin/students/all-students/students.model';
-import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { SessionModel } from '@core/models/class.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { LecturesService } from 'app/teacher/lectures/lectures.service';
 import { UserService } from '@core/service/user.service';
+import { Students } from 'app/admin/students/students.model';
+import { StudentsService } from 'app/admin/students/students.service';
 
 @Component({
   selector: 'app-view-users',

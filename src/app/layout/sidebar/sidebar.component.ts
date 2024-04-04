@@ -21,7 +21,7 @@ import { AuthService, Role } from '@core';
 import { MenuItem, RouteInfo } from './sidebar.metadata';
 import { AuthenService } from '@core/service/authen.service';
 import { AdminService } from '@core/service/admin.service';
-import { StudentsService } from 'app/admin/students/all-students/students.service';
+import { StudentsService } from 'app/admin/students/students.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',

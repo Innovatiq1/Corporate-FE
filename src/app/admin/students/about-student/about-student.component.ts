@@ -1,11 +1,11 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { StudentsService } from '../all-students/students.service';
 import { CourseService } from '@core/service/course.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { CoursePaginationModel } from '@core/models/course.model';
-import { Students } from '../all-students/students.model';
 import Swal from 'sweetalert2';
+import { Students } from '../students.model';
+import { StudentsService } from '../students.service';
 
 @Component({
   selector: 'app-about-student',

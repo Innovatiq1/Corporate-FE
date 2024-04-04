@@ -8,7 +8,7 @@ import { UtilsService } from '@core/service/utils.service';
 import { StudentService } from '@core/service/student.service';
 import Swal from 'sweetalert2';
 import { CourseService } from '@core/service/course.service';
-import { StudentsService } from 'app/admin/students/all-students/students.service';
+import { StudentsService } from 'app/admin/students/students.service';
 
 @Component({
   selector: 'app-create-all-users',

@@ -1,4 +1,3 @@
-import { StudentsService } from './../all-students/students.service';
 import { Component } from '@angular/core';
 import {
   UntypedFormBuilder,
@@ -8,6 +7,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { Student } from '@core/models/user.model';
 import Swal from 'sweetalert2';
+import { StudentsService } from '../students.service';
 @Component({
   selector: 'app-edit-student',
   templateUrl: './edit-student.component.html',

@@ -12,10 +12,10 @@ import { CertificateService } from '@core/service/certificate.service';
 import { CourseService } from '@core/service/course.service';
 import { EtmsService } from '@core/service/etms.service';
 
-import { StudentsService } from 'app/admin/students/all-students/students.service';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoService } from './logo.service';
+import { StudentsService } from 'app/admin/students/students.service';
 
 @Component({
   selector: 'app-settings',

@@ -24,8 +24,6 @@ import {
   UnsubscribeOnDestroyAdapter,
 } from '@shared';
 import { formatDate } from '@angular/common';
-import { StudentsService } from 'app/admin/students/all-students/students.service';
-import { Students } from 'app/admin/students/all-students/students.model';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { CourseModel, CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 import { Router } from '@angular/router';

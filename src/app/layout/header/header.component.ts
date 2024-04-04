@@ -23,9 +23,9 @@ import Swal from 'sweetalert2';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SimpleDialogComponent } from 'app/ui/modal/simpleDialog.component';
 
-import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { LogoService } from 'app/student/settings/logo.service';
 import { Subscription } from 'rxjs';
+import { StudentsService } from 'app/admin/students/students.service';
 
 
 interface Notifications {

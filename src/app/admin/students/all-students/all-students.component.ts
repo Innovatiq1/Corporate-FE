@@ -1,11 +1,9 @@
 import { Department } from './../../departments/all-departments/department.model';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { StudentsService } from './students.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Students } from './students.model';
 import { DataSource } from '@angular/cdk/collections';
 import {
   MatSnackBar,
@@ -28,6 +26,8 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import Swal from 'sweetalert2';
 import { Users } from '@core/models/user.model';
+import { Students } from '../students.model';
+import { StudentsService } from '../students.service';
 @Component({
   selector: 'app-all-students',
   templateUrl: './all-students.component.html',

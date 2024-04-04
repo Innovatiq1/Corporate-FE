@@ -25,7 +25,6 @@ import { ViewCourseComponent } from './view-course/view-course.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProgramComponent } from './program/program.component';
 import { ViewProgramComponent } from './view-program/view-program.component';
-import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
@@ -46,6 +45,7 @@ import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-cou
 import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
 import { FormCustomizationComponent } from './settings/form-customization/form-customization.component';
 import { AllUsersComponent } from './settings/all-users/all-users.component';
+import { StudentsService } from 'app/admin/students/students.service';
 
 
 @NgModule({

@@ -10,8 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { InstructorService } from '@core/service/instructor.service';
 import { Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
-import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { CourseService } from '@core/service/course.service';
+import { StudentsService } from 'app/admin/students/students.service';
 
 @Component({
   selector: 'app-edit-teacher',
