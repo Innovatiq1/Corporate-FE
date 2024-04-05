@@ -33,6 +33,8 @@ import { ListComponent } from './settings/list/list.component';
 import { CreatAnnouncementComponent } from './settings/list/creat-announcement/creat-announcement.component';
 import { AddQuestionsComponent } from './settings/add-questions/add-questions.component';
 import { AllQuestionsComponent } from './settings/all-questions/all-questions.component';
+import { CreateUserRoleComponent } from './settings/create-user-role/create-user-role.component';
+import { UserTypeComponent } from './settings/user-type/user-type.component';
 
 
 const routes: Routes = [
@@ -215,8 +217,14 @@ const routes: Routes = [
     path: 'settings/edit-questions/:id',
     component: AddQuestionsComponent,
 },
-
-
+{
+  path: 'settings/create-user-role',
+  component: CreateUserRoleComponent
+},
+{
+  path: 'settings/user-type',
+  component: UserTypeComponent,
+},
 
   {
     path: 'side-menu/:id',

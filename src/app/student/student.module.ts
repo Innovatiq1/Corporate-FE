@@ -61,6 +61,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AllQuestionsComponent } from './settings/all-questions/all-questions.component';
 import { AssesmentQuestionsComponent } from './settings/assesment-questions/assesment-questions.component';
 import { AddQuestionsComponent } from './settings/add-questions/add-questions.component';
+import { CreateUserRoleComponent } from './settings/create-user-role/create-user-role.component';
+import { UserTypeComponent } from './settings/user-type/user-type.component';
 
 
 @NgModule({
@@ -102,7 +104,9 @@ import { AddQuestionsComponent } from './settings/add-questions/add-questions.co
     CreatAnnouncementComponent,
     AllQuestionsComponent,
     AssesmentQuestionsComponent,
-    AddQuestionsComponent
+    AddQuestionsComponent,
+    UserTypeComponent,
+    CreateUserRoleComponent
 
 
   ],

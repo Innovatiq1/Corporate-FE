@@ -1551,6 +1551,39 @@ export const SettingsMenu: MenuItem[] = [
     children: [
       {
         iconsrc:'',
+        path: 'student/settings/user-type',
+        title: 'User Access',
+        iconType: '',
+        icon: '',
+        id:'all-users',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        open:false,
+
+        children: [],
+      },
+      {
+        iconsrc:'',
+        path: 'student/settings/create-user-role',
+        title: 'Role',
+        iconType: '',
+        icon: '',
+        id:'all-users',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        open:false,
+
+        children: [],
+      },
+
+      {
+        iconsrc:'',
         path: 'student/settings/all-users',
         title: 'All Users',
         iconType: '',
