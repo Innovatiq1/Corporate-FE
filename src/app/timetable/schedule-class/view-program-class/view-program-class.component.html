@@ -41,32 +41,32 @@
                         <div class="header">
                             <h6>Schedule Class</h6>
                         </div>
-                        <button class="icons" alt="Edit" mat-menu-item (click)="editClass(response.id)">
+                        <button class="icons" alt="Edit" mat-menu-item [routerLink]="['/admin/program/edit-class',aboutData1.id]">
                             <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                         </button>
-                        <button class="icons" alt="Delete" mat-menu-item (click)="delete(response.id)">
+                        <button class="icons" (click)="delete(aboutData1.id)" alt="Delete" mat-menu-item >
                             <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                         </button>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <img class="image-link" src="{{response?.courseId?.image_link}}">
+                            <img class="image-link" src="{{aboutData1?.courseId?.image_link}}">
                           </div>
                         <div class="col-6">
                             <div class="row mt-3 mx-auto">
                                         <div class="col-6">
-                                           <h6>Course</h6>
+                                           <h6>Program</h6>
                                         </div>
                                         <div class="col-6">
-                                            <h6 class="text-muted">{{response?.courseId?.title}}</h6>
+                                            <h6 class="text-muted">{{aboutData1?.courseId?.title}}</h6>
                                         </div>
                             </div>
                             <div class="row mt-3 mx-auto">
                                 <div class="col-6">
-                                    <h6>Course Code</h6>
+                                    <h6>Program Code</h6>
                                 </div>
                                 <div class="col-6" style="width: 40%;display: flex;">
-                                    <h6 class="text-muted">{{response?.courseId?.courseCode}}</h6>
+                                    <h6 class="text-muted">{{aboutData1?.courseId?.courseCode}}</h6>
                                 </div>
                             </div>
                             <div class="row mt-3 mx-auto">
@@ -74,17 +74,17 @@
                                     <h6>Instructor</h6>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="text-muted">{{response.sessions[0]?.instructorId?.name | titlecase}}</h6>
+                                    <h6 class="text-muted">{{aboutData1.sessions[0]?.instructorId?.name | titlecase}}</h6>
                                 </div>
                             </div>
                             <div class="row mt-3 mx-auto">
                                 <div class="col-6">
                                     <h6>Class</h6>
                                 </div>
-                                <div class="col-6" [ngClass]="getStatusClass(response.classDeliveryType)">
+                                <div class="col-6" [ngClass]="getStatusClass(aboutData1.classDeliveryType)">
                                     <div class="status-container">
                                         <span class="status-dot"></span>
-                                        <span class="status-text">{{response.classDeliveryType | titlecase}}</span>
+                                        <span class="status-text">{{aboutData1.classDeliveryType | titlecase}}</span>
                                         </div>
                                    
                                 </div>
@@ -102,7 +102,7 @@
                                         <h6>Class Type</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">{{response?.classType == '2'?'Private':'Public'}}</h6>
+                                        <h6 class="text-muted">{{aboutData1?.classType == '2'?'Private':'Public'}}</h6>
                                     </div>
                                 </div>
                                 <div class="row pt-2">
@@ -110,7 +110,7 @@
                                         <h6>Start Date</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">{{response.sessions[0]?.sessionStartDate | date }}</h6>
+                                        <h6 class="text-muted">{{aboutData1.sessions[0]?.sessionStartDate | date }}</h6>
                                     </div>
                                 </div>
                                 <div class="row pt-2">
@@ -118,7 +118,7 @@
                                         <h6>Minimum Enrollment</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">{{response?.minimumEnrollment}}</h6>
+                                        <h6 class="text-muted">{{aboutData1?.minimumEnrollment}}</h6>
                                     </div>
                                    
                                 </div>
@@ -132,7 +132,7 @@
                                         <h6>Instructor Cost</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">$ {{response?.instructorCost}}</h6>
+                                        <h6 class="text-muted">$ {{aboutData1?.instructorCost}}</h6>
                                     </div>
                                 </div>
                                 <div class="row pt-2">
@@ -140,7 +140,7 @@
                                         <h6>End Date</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">{{response.sessions[0]?.sessionEndDate | date }}</h6>
+                                        <h6 class="text-muted">{{aboutData1.sessions[0]?.sessionEndDate | date }}</h6>
                                     </div>
                                 </div>
                                 <div class="row pt-2">
@@ -148,7 +148,7 @@
                                         <h6>Maximum Enrollment</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">{{response?.maximumEnrollment}}</h6>
+                                        <h6 class="text-muted">{{aboutData1?.maximumEnrollment}}</h6>
                                     </div>
                                 </div>
 
@@ -159,7 +159,7 @@
                     <p class="m-b-0"></p>
                 </div>
                 <div class="col-md-10 m-3">
-                    <button mat-raised-button id="back" [routerLink]="['timetable/class-list']">Back</button>
+                    <button mat-raised-button id="back" [routerLink]="['/timetable/schedule-class']">Back</button>
                   </div>
             </div>
         </div>

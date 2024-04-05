@@ -12,6 +12,7 @@ import { ScheduleClassComponent } from './schedule-class/schedule-class.componen
 import { ClassListComponent } from './class-list/class-list.component';
 import { ViewProgramScheduleComponent } from './program-exam-schedule/view-program-schedule/view-program-schedule.component';
 import { ViewCourseScheduleComponent } from './list/view-course-schedule/view-course-schedule.component';
+import { ViewProgramClassComponent } from './schedule-class/view-program-class/view-program-class.component';
 const routes: Routes = [
     {
         path: 'course-timetable',
@@ -52,6 +53,10 @@ const routes: Routes = [
       {
         path:'class-list',
         component:ClassListComponent
+      },
+      {
+        path:'view-schedule-class/:id', 
+        component:ViewProgramClassComponent
       },
       {
         path:'view-program-exam-schedule/:id',

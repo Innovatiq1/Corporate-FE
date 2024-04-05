@@ -24,7 +24,7 @@ export class ListComponent {
     'Title',
     'Decription',
     'User Role',
-    'Actions'
+    // 'Actions'
   ];
   dataSource: any;
   create = true;

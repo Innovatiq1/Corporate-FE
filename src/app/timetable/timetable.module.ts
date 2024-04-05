@@ -19,6 +19,7 @@ import { ScheduleClassComponent } from './schedule-class/schedule-class.componen
 import { ClassListComponent } from './class-list/class-list.component';
 import { ViewProgramScheduleComponent } from './program-exam-schedule/view-program-schedule/view-program-schedule.component';
 import { ViewCourseScheduleComponent } from './list/view-course-schedule/view-course-schedule.component';
+import { ViewProgramClassComponent } from './schedule-class/view-program-class/view-program-class.component';
 @NgModule({
   declarations: [
     CourseTimetableComponent,
@@ -32,7 +33,8 @@ import { ViewCourseScheduleComponent } from './list/view-course-schedule/view-co
     ScheduleClassComponent,
     ClassListComponent,
     ViewProgramScheduleComponent,
-    ViewCourseScheduleComponent
+    ViewCourseScheduleComponent,
+    ViewProgramClassComponent
 
   ],
   imports: [

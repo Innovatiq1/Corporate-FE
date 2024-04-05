@@ -64,6 +64,7 @@ import { AddQuestionsComponent } from './settings/add-questions/add-questions.co
 import { CreateUserRoleComponent } from './settings/create-user-role/create-user-role.component';
 import { UserTypeComponent } from './settings/user-type/user-type.component';
 import { ViewDepartmentComponent } from './settings/all-departments/view-department/view-department.component';
+import { ViewAnnouncementComponent } from './settings/list/view-announcement/view-announcement.component';
 
 
 @NgModule({
@@ -108,7 +109,8 @@ import { ViewDepartmentComponent } from './settings/all-departments/view-departm
     AddQuestionsComponent,
     UserTypeComponent,
     CreateUserRoleComponent,
-    ViewDepartmentComponent
+    ViewDepartmentComponent,
+    ViewAnnouncementComponent
 
 
   ],

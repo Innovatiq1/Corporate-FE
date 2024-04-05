@@ -111,24 +111,58 @@
                     </div>
                   </div>
                   <div class="container mt-3">
-                    <div class="col-12">
-                      <img class="image-link" src="{{sourceData?.image_link}}">
+                    <div class="row">
+                      <div class="col-6">
+                        <img class="image-link" src="{{sourceData?.image_link}}">
+                      </div>
+                      <div class="col-6">
+                        <div class="row mt-4 mx-auto">
+                          <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
+                            <h6>Course</h6>
+                          </div>
+                          <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
+                            <h6 class="text-muted">{{sourceData?.title}}</h6>
+                          </div>
+                        </div>
+                        <div class="row mt-3 mx-auto">
+                          <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
+                            <h6> Code</h6>
+                          </div>
+                          <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
+                            <h6 class="text-muted">{{sourceData?.courseCode}}</h6>
+                          </div>
+                        </div>
+                        <div class="row mt-3 mx-auto">
+                          <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
+                            <h6>Main Category</h6>
+                          </div>
+                          <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
+                            <h6 class="text-muted">{{sourceData?.main_category?.category_name }}</h6>
+                          </div>
+                        </div>
+                        <div class="row mt-3 mx-auto">
+                          <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
+                            <h6>Sub Category</h6>
+                          </div>
+                          <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
+                            <h6 class="text-muted">{{sourceData?.sub_category?.category_name}}</h6>
+                          </div>
+                        </div>
+                        <div class="row mt-3 mx-auto">
+                          <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
+                            <h6>Status</h6>
+                          </div>
+                          <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
+                            <h6 [ngClass]="status === 'active' ? 'badge badge-solid-green':'badge badge-solid-red'"><span
+                                [ngClass]="status === 'active' ? 'status-dot':'status-red'"></span>{{sourceData?.status |
+                              titlecase}}</h6>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  
+                    
                     <div class="row mt-5 mx-auto">
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 ">
-                        <h6>Course</h6>
-                      </div>
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6 class="text-muted">{{sourceData?.title}}</h6>
-                      </div>
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6> Code</h6>
-                      </div>
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6 class="text-muted">{{sourceData?.courseCode}}</h6>
-                      </div>
-                    </div>
-                    <div class="row mt-3 mx-auto">
                       <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                         <h6>Days</h6>
                       </div>
@@ -140,36 +174,6 @@
                       </div>
                       <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                         <h6 class="text-muted">{{sourceData?.training_hours ||0}}</h6>
-                      </div>
-                    </div>
-                    <div class="row mt-3 mx-auto">
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6>Vendor</h6>
-                      </div>
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6 class="text-muted">{{sourceData?.vendor}}</h6>
-                      </div>
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6>Status</h6>
-                      </div>
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6 [ngClass]="status === 'active' ? 'badge badge-solid-green':'badge badge-solid-red'"><span
-                            [ngClass]="status === 'active' ? 'status-dot':'status-red'"></span>{{sourceData?.status |
-                          titlecase}}</h6>
-                      </div>
-                    </div>
-                    <div class="row mt-3 mx-auto">
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6>Main Category</h6>
-                      </div>
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6 class="text-muted">{{sourceData?.main_category?.category_name }}</h6>
-                      </div>
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6>Sub Category</h6>
-                      </div>
-                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6 class="text-muted">{{sourceData?.sub_category?.category_name}}</h6>
                       </div>
                     </div>
                     <div class="row mt-3 mx-auto">
@@ -186,6 +190,15 @@
                         <h6 class="text-muted">{{sourceData?.sessionStartDate | date}}</h6>
                       </div>
                     </div>
+                    <div class="row mt-3 mx-auto">
+                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                        <h6>Vendor</h6>
+                      </div>
+                      <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                        <h6 class="text-muted">{{sourceData?.vendor}}</h6>
+                      </div>
+                    </div>
+                   
                     <div class="row mt-3 mx-auto">
                       <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
                         <h6>Description</h6>
