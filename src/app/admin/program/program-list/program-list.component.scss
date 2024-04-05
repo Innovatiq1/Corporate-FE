@@ -161,10 +161,10 @@ svg{
   .table tbody tr:hover {
     background-color: #ddd;
   }
-  .status-red {
+  .status-green {
     width: 8px;
     height: 8px;
-    background-color: #f11541;
+    background-color: #49925c;
     border-radius: 50%; // To make it a circle
     display: inline-block;
     margin-right: 5px; // Space between dot and text
