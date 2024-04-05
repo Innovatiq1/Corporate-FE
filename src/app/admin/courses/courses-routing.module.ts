@@ -13,7 +13,7 @@ import { EditCategoriesComponent } from './categories/edit-categories/edit-categ
 import { CreateTemplateComponent } from './course-kit/create-template/create-template.component';
 import { CompletionListComponent } from './completion-list/completion-list.component';
 import { CreateClassComponent } from './create-class/create-class.component';
-import { ClassListComponent } from './class-list/class-list.component';
+// import { ClassListComponent } from './class-list/class-list.component';
 import { ViewCategoriesComponent } from './categories/view-categories/view-categories.component';
 import { ViewClassComponent } from './class-list/view-class/view-class.component';
 import { ViewCompletionComponent } from './completion-list/view-completion/view-completion.component';
@@ -77,10 +77,10 @@ const routes: Routes = [
     path: 'create-template',
     component: CreateTemplateComponent
   },
-  {
-    path:'class-list',
-    component:ClassListComponent
-  },
+  // {
+  //   path:'class-list',
+  //   component:ClassListComponent
+  // },
   {
     path:'create-class',
     component:CreateClassComponent

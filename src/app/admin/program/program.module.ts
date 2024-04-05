@@ -5,7 +5,7 @@ import { ProgramKitComponent } from './program-kit/program-kit.component';
 import { ProgaramCompletionListComponent } from './progaram-completion-list/progaram-completion-list.component';
 import { ProgramListComponent } from './program-list/program-list.component';
 import { CreateProgramComponent } from './create-program/create-program.component';
-import { ScheduleClassComponent } from './schedule-class/schedule-class.component';
+// import { ScheduleClassComponent } from './schedule-class/schedule-class.component';
 import { ProgramRoutingModule } from './program-routing.module';
 import { ComponentsModule } from "../../shared/components/components.module";
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -29,7 +29,7 @@ import { PendingProgramsComponent } from './program-list/pending-programs/pendin
     declarations: [
         ProgramListComponent,
         CreateProgramComponent,
-        ScheduleClassComponent,
+        // ScheduleClassComponent,
         ProgramKitComponent,
         ProgaramCompletionListComponent,
         CreateProgramKitComponent,

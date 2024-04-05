@@ -1,4 +1,4 @@
-import { CourseId } from './../../../core/models/class.model';
+// import { CourseId } from './../../../core/models/class.model';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, ElementRef, ViewChild } from '@angular/core';
@@ -36,9 +36,9 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
 
   breadscrums = [
     {
-      title: 'Class List',
-      items: ['Schedule Class'],
-      active: 'Class List',
+      title: 'Course Class',
+      items: ['Timetable'],
+      active: 'Course Class',
     },
   ];
   coursePaginationModel!: Partial<CoursePaginationModel>;
