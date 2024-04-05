@@ -22,7 +22,7 @@ import { EditCourseKitComponent } from './course-kit/edit-course-kit/edit-course
 import { EditCategoriesComponent } from './categories/edit-categories/edit-categories.component';
 import { CreateTemplateComponent } from './course-kit/create-template/create-template.component';
 import { CreateClassComponent } from './create-class/create-class.component';
-import { ClassListComponent } from './class-list/class-list.component';
+// import { ClassListComponent } from './class-list/class-list.component';
 import { CompletionListComponent } from './completion-list/completion-list.component';
 
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -52,7 +52,7 @@ import { InActiveCoursesComponent } from './in-active-courses/in-active-courses.
     EditCourseKitComponent,
     EditCategoriesComponent,
     CreateTemplateComponent,
-    ClassListComponent,
+    // ClassListComponent,
     CreateClassComponent,
     CompletionListComponent,
     ViewCategoriesComponent,

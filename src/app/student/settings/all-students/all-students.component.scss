@@ -1,0 +1,43 @@
+.bg {
+  fill: #000;
+  background-color: #d3cdcd;
+}
+.color{
+  color:#6777ef
+}
+
+.img-w{
+width: 16%;
+}
+svg {
+  position: absolute;
+  fill: #000;
+  background-color: #d3cdcd;
+  margin-top: -15px;
+  margin-left: -15px;
+  border-radius: 10px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #198754;
+  border-radius: 50%; // To make it a circle
+  display: inline-block;
+  margin-right: 5px; // Space between dot and text
+}
+.status-red {
+  width: 8px;
+  height: 8px;
+  background-color: #f11541;
+  border-radius: 50%; // To make it a circle
+  display: inline-block;
+  margin-right: 5px; // Space between dot and text
+}
+.paginator{
+  background: none;
+}
+::ng-deep .mat-mdc-tab-body-content{
+  overflow-x: hidden !important;
+}

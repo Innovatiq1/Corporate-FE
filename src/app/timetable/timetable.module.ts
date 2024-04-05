@@ -15,6 +15,8 @@ import { ListComponent } from './list/list.component';
 import { ProgramExamScheduleComponent } from './program-exam-schedule/program-exam-schedule.component';
 import { ExamScheduleService } from './exam-schedule.service';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
+import { ScheduleClassComponent } from './schedule-class/schedule-class.component';
+import { ClassListComponent } from './class-list/class-list.component';
 @NgModule({
   declarations: [
     CourseTimetableComponent,
@@ -24,7 +26,9 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angul
     EditComponent,
     ProgramExamScheduleComponent,
     CreateProgramExamScheduleComponent,
-    EditProgramExamScheduleComponent
+    EditProgramExamScheduleComponent,
+    ScheduleClassComponent,
+    ClassListComponent
 
   ],
   imports: [

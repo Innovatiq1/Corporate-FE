@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AllTeachersComponent } from './all-teachers/all-teachers.component';
 import { AddTeacherComponent } from './add-teacher/add-teacher.component';
 import { EditTeacherComponent } from './edit-teacher/edit-teacher.component';
 import { AboutTeacherComponent } from './about-teacher/about-teacher.component';
@@ -9,10 +8,6 @@ import { ArticleComponent } from './article/article.component';
 import { AgreementTCComponent } from './agreement-t-c/agreement-t-c.component';
 
 const routes: Routes = [
-  {
-    path: 'all-instructors',
-    component: AllTeachersComponent,
-  },
   {
     path: 'add-instructor',
     component: AddTeacherComponent,

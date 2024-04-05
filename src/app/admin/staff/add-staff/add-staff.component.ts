@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { StaffService } from '../all-staff/staff.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { StudentService } from '@core/service/student.service';
@@ -10,6 +9,7 @@ import { AdminService } from '@core/service/admin.service';
 import { ConfirmedValidator } from '@shared/password.validator';
 import { CertificateService } from '@core/service/certificate.service';
 import { CourseService } from '@core/service/course.service';
+import { StaffService } from '../staff.service';
 @Component({
   selector: 'app-add-staff',
   templateUrl: './add-staff.component.html',

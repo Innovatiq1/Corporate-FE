@@ -9,7 +9,6 @@ import {
 import { CertificateRoutingModule } from './certificate-routing.module';
 import { CertificatesComponent } from './certificates/certificates.component';
 import { DesignComponent } from './design/design.component';
-import { CertificateTemplateComponent } from './certificate-template/certificate-template.component';
 
 
 
@@ -17,7 +16,6 @@ import { CertificateTemplateComponent } from './certificate-template/certificate
     declarations: [
         CertificatesComponent,
         DesignComponent,
-        CertificateTemplateComponent 
     ],
     imports: [
         CommonModule, CertificateRoutingModule,

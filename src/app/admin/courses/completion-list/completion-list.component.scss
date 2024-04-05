@@ -35,16 +35,16 @@
     padding-left: 20px;
 }
 
-.name {
-    color: deepskyblue;
-    font-weight: 500;
-}
+// .name {
+//     color: deepskyblue;
+//     font-weight: 500;
+// }
 
-.email-address {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+// .email-address {
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     white-space: nowrap;
+// }
 
   // .mat-cell {
   //   width: fit-content;
@@ -59,11 +59,11 @@
   //   border-color: white;
   //   align-self: stretch;
   // }
-  .email-icon {
-    height: 10px;
-    margin-right: 8px; /* Adjust spacing as needed */
-    vertical-align: middle; /* Align icon vertically with text */
-  }
+  // .email-icon {
+  //   height: 10px;
+  //   margin-right: 8px; /* Adjust spacing as needed */
+  //   vertical-align: middle; /* Align icon vertically with text */
+  // }
   ::ng-deep .mat-sort-header-content {
     text-align: center !important; 
     display: flex !important;

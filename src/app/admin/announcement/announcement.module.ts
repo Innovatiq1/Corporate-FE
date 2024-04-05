@@ -4,16 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared';
 import { ComponentsModule } from '@shared/components/components.module';
 import { AnnouncementRoutingModule } from './announcement-routing.module';
-import { ListComponent } from './list/list.component';
-import { CreatAnnouncementComponent } from './list/creat-announcement/creat-announcement.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
-    ListComponent,
-    CreatAnnouncementComponent
   ],
   imports: [
     CommonModule,

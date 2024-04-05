@@ -261,7 +261,7 @@
                 <div class="row">
                   <div class="col-3">
                     <!-- <a href="admin/users/all-users">All Users</a> -->
-                    <button id="saved" [routerLink]="['/admin/users/all-users']"> All Users </button>
+                    <button id="saved" [routerLink]="['/admin/settings/all-users']"> All Users </button>
                   </div>
                   <div class="col-3">
                     <button id="saved" [routerLink]="['/admin/users/all-students']"> Students</button>
@@ -611,9 +611,9 @@
           </div>
         </div>
 
-        <div class="col-md-12 px-4 py-5">
+        <!-- <div class="col-md-12 px-4 py-5">
           <button mat-raised-button id="back" [routerLink]="['/student/customization']">Back</button>
-        </div>
+        </div> -->
 
       </div>
     </div>
@@ -637,7 +637,7 @@
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/admin/users/all-users']"> All Users </button>
+            <button id="saved" [routerLink]="['/student/settings/all-users']"> All Users </button>
           </div>
           <div class="col-md-5">
             <button id="saved" [routerLink]="['/admin/users/all-students']"> Students</button>
@@ -736,34 +736,9 @@
       </div>
       <div class="body">
         <div class="row px-4">
-          <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/form-customization']"> Forms </button>
-          </div>
-          <div class="col-md-5">
-            <button id="saved" [routerLink]="['/admin/certificate/template']"> Certificates </button>
-          </div>
-        </div>
-        <div class="row px-4 py-4">
-          <div class="col-md-6 banner">
-            <button id="saved" (click)="navigateToBannerSettings()"> Banners </button>
-          </div>
-          <div class="col-md-5">
-            <button id="saved" [routerLink]="['/admin/survey/create-survey-questions']"> Survey </button>
-          </div>
-        </div>
-        <div class="row px-4">
-          <div class="col-md-6 banner">
-            <button id="saved" routerLink="/student/logo-coutomization"> Logo </button>
-          </div>
           <div class="col-md-5">
             <button id="saved" (click)="openDialog(currencyDialog)"> Currency </button>
           </div>
-        </div>
-        <div class="row px-4 py-4">
-          <div class="col-md-6 banner">
-            <button id="saved" (click)="navigateToSidemenuSettings()" > Sidemenu </button>
-          </div>
-         
         </div>
       </div>
     </div>

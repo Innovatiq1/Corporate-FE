@@ -8,6 +8,8 @@ import { EditProgramExamScheduleComponent } from './edit-program-exam-schedule/e
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import { ProgramExamScheduleComponent } from './program-exam-schedule/program-exam-schedule.component';
+import { ScheduleClassComponent } from './schedule-class/schedule-class.component';
+import { ClassListComponent } from './class-list/class-list.component';
 const routes: Routes = [
     {
         path: 'course-timetable',
@@ -40,7 +42,15 @@ const routes: Routes = [
       {
         path: 'program-exam-edit/:id',
         component: EditProgramExamScheduleComponent
-      }
+      },
+      {
+        path:'schedule-class', 
+        component:ScheduleClassComponent
+      },
+      {
+        path:'class-list',
+        component:ClassListComponent
+      },
     // {
     //     path: 'course-timetable/student',
     //     component: CourseTimetableComponent

@@ -23,9 +23,9 @@ import Swal from 'sweetalert2';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SimpleDialogComponent } from 'app/ui/modal/simpleDialog.component';
 
-import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { LogoService } from 'app/student/settings/logo.service';
 import { Subscription } from 'rxjs';
+import { StudentsService } from 'app/admin/students/students.service';
 
 
 interface Notifications {
@@ -211,22 +211,22 @@ export class HeaderComponent
   }
 
   navigateToUserSettings(){
-    this.router.navigate(['/student/settings/users']);
+    this.router.navigate(['/student/settings/all-users']);
   }
   navigateToIntegrateSettings(){
-    this.router.navigate(['/student/settings/integration']);
+    this.router.navigate(['/student/settings/email-configuration']);
   }
   navigateToAutomateSettings(){
-    this.router.navigate(['/student/settings/automation']);
+    this.router.navigate(['/student/settings/announcement']);
   }
   navigateToCustomsSettings(){
-    this.router.navigate(['/student/settings/customization']);
+    this.router.navigate(['/student/settings/form-customization']);
   }
   navigateToProfileSettings() {
     this.router.navigate(['/student/settings/security-settings']);
   }
   navigateToLmsSettings(){
-    this.router.navigate(['/student/settings/LMS-TAE']);
+    this.router.navigate(['/student/settings/all-questions']);
   }
   navigateToConfigSettings(){
     this.router.navigate(['/student/settings/configuration']);

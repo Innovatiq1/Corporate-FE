@@ -10,9 +10,9 @@ import { InstructorService } from '@core/service/instructor.service';
 import { Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { ConfirmedValidator } from '@shared/password.validator';
 import { CourseService } from '@core/service/course.service';
+import { StudentsService } from 'app/admin/students/students.service';
 
 @Component({
   selector: 'app-add-teacher',

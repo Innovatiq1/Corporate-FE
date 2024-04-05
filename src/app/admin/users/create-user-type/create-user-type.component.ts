@@ -256,7 +256,7 @@ export class CreateUserTypeComponent {
 
   initMenuItemsV2() {
     this.logoService.getSidemenu().subscribe((response: any) => {
-    // let MENU_LIST = response.data.docs[0].MENU_LIST
+    let MENU_LIST = response.data.docs[0].MENU_LIST
     const items = this.convertToMenuV2(MENU_LIST, this.userType?.menuItems);
     items?.forEach((item, index) => {
       if (!this.dataSourceArray.some(v => v.id === item.id))
@@ -295,7 +295,8 @@ export class CreateUserTypeComponent {
         children: [],
         checked: defaultCheck?.checked || false,
         indeterminate: defaultCheck?.indeterminate || false,
-        icon: v?.icon
+        icon: v?.iconsrc
+        // icon: v?.icon
 
       };
       if (children && children.length) {
@@ -319,7 +320,8 @@ export class CreateUserTypeComponent {
             isLeaf: true,
             checked: actionChecked?.checked || false,
             indeterminate: actionChecked?.indeterminate || false,
-            icon: actionChecked?.icon
+            icon: actionChecked?.iconsrc
+            // icon: actionChecked?.icon
           }
         })
         res = {
@@ -332,6 +334,7 @@ export class CreateUserTypeComponent {
   }
 
   changeMenuChecked(checked?: any, id?: any) {
+    console.log("id",id)
     this.dataSourceArray = this.setChecked(this.dataSourceArray, { menu_id: id, checked });
     const indeterminate = this.dataSourceArray.some(v => !v.checked);
     this.allMenus = {
@@ -343,6 +346,7 @@ export class CreateUserTypeComponent {
   }
 
   setChecked(obj: any[], data: { isAllCheck?: any; checked: any; menu_id?: any; }, parent?: { indeterminate: any; checked: boolean; } | undefined) {
+    console.log("data",data)
     const { menu_id, checked, isAllCheck } = data
     return obj.map(v => {
       let res: any = {
