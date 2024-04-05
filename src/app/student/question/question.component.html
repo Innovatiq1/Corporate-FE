@@ -1,76 +1,75 @@
 <section class="content">
     <div class="content-block">
-        <div class="container mt-5">
-            <div class="card">
-                <!-- <div class="d-flex justify-content-between p-3">
-                    <div class="image">
-                        <img src="https://img.icons8.com/color/96/000000/angularjs.png" width="90" alt="logo">
+        <div class="card border shadow card-height border-radius mb-5 mt-5">
+            <ng-container *ngIf="!isQuizCompleted">
+                <div class="row p-3 d-flex justify-content-between">
+                    <div class="col-lg-7 col-md-12 col-sm-12 col-12 flex-start">
+                        <div class="text-left font-weight-bold mt-3">
+                            <div class="text-primary mb-1">
+                                Total Questions: {{questionList?.length}}
+                            </div>
+                            <div>Attend Questions: {{attendedQuestions()}}</div>
+                            <div>Remaining Questions: {{questionList.length - attendedQuestions()}}</div>
+                        </div>
                     </div>
-                    <div class="quiz-header">
-                        <h4 style="font-family: cursive;">Angular & TypeScript Quiz!</h4>
-                        <span style="font-style: italic;">Welcome {{name}}</span>
-                    </div>
-                </div> -->
+                    <div class="col-lg-5 col-md-12 col-sm-12 col-12 flex-end mt-sm-5 mt-md-5">
+                        <div class="m-0 text-primary">
+                            {{user_name}}
+                        </div>
 
-                <ng-container *ngIf="!isQuizCompleted">
-                    <div class="d-flex justify-content-around py-3">
-                        <div class="score">
-                            <h5>{{points}} Points</h5>
-                        </div>
-                        <div class="question-remain">
-                            <span style="font-style: italic;">Question {{currentQuestion+1}} of
-                                {{questionList.length}}</span>
-                        </div>
-                        <div class="timer">
-                            <h5>{{counter}} sec ⏱</h5>
-                        </div>
                     </div>
-                    <div class="progress mb-3">
-                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
-                            [ngStyle]="{'width':progress+'%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                        </div>
-                    </div>
-                    <div class="question">
-                        <div class="card">
-                            <h3>{{questionList[currentQuestion]?.questionText}}</h3>
-                        </div>
-                    </div>
-                    <div class="options">
-                        <ol *ngFor="let option of questionList[currentQuestion]?.options">
-                            <li (click)="answer(currentQuestion+1,option)">
-                                <div appChangeBg [isCorrect]="option.correct" class="card">
-                                    {{option.text}}
+                </div>
+                <hr />
+
+                <div class="row p-3">
+                    <div class="col-lg-12">
+                        <div *ngFor="let question of questionList; let i=index">
+                            <div class="text-black p-3 rounded bg-light mb-4">
+                                <h6 class="ml-5">{{i+1}}.{{ question.questionText }}</h6>
+                                <div *ngFor="let option of question.options; let k=index">
+                                    <mat-radio-group [(ngModel)]="selectedOption" (change)="handleRadioChange(i)">
+                                        <mat-radio-button class="example-margin option-text" [ngClass]="{'bg-success': question.selectedOptionText === option.text}"
+                                            [value]="option.text">{{optionsLabel[k]}} {{ option.text
+                                            }}</mat-radio-button>
+                                            <span>
+                                                <i *ngIf="question.status && question.selectedOption === option.text" class="fa fa-check text-success"></i>
+                                                <i *ngIf="question.status === false && question.selectedOption === option.text" class="fa fa-times text-danger"></i>
+                                            </span>
+                                            <!-- <span *ngIf="!option.status" class="text-danger"><i class="fa fa-times"></i></span> -->
+                                    </mat-radio-group>
+
                                 </div>
-                            </li>
+                            </div>
+                        </div>
 
-                        </ol>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <button [disabled]="currentQuestion===0" class="btn" (click)="previousQuestion()"><i
-                                class="fa text-primary fa-chevron-left fa-3x" aria-hidden="true"></i></button>
-                        <button class="btn" (click)="resetQuiz()"><i class="fa fa-refresh text-primary fa-3x"
-                                aria-hidden="true"></i></button>
-                        <button class="btn" (click)="nextQuestion()"><i class="fa text-primary fa-chevron-right fa-3x"
-                                aria-hidden="true"></i></button>
-                    </div>
-                </ng-container>
+                        <div class="border-dotted-bottom mt-3 mb-3 text-center">
+                            <button mat-flat-button color="primary" (click)="confirmSubmit()" class="me-2">Submit</button>
+                            <button *ngIf="isanswersSubmitted" mat-flat-button color="accent"  class="mls-2" (click)="navigate()">Continue</button>
 
-                <ng-container *ngIf="isQuizCompleted">
-                    <div class="row d-flex justify-content-between">
-                        <img style="width: 50%;" class="img-fluid col-sm-12 mx-auto"
-                            src="https://icon-library.com/images/celebration-icon-png/celebration-icon-png-7.jpg"
-                            alt="">
-                        <div class="result text-center col-md-6 col-sm-12">
-                            <h3>Congratulations!! <br>You have completed the quiz. <br>Below is your result:</h3>
-                            <p>Total Question Attempted : {{questionList.length}} </p>
-                            <p>Total Correct Answered : {{correctAnswer}} </p>
-                            <p>Total Wrong Answered : {{inCorrectAnswer}} </p>
-                            <p>Your Score : {{points}} Points </p>
                         </div>
                     </div>
-                </ng-container>
+                </div>
+            </ng-container>
 
-            </div>
+            <ng-container *ngIf="isQuizCompleted">
+                <div class="row d-flex justify-content-between">
+                    <img style="width: 30%;" class="img-fluid col-sm-12 mx-auto"
+                        src="https://icon-library.com/images/celebration-icon-png/celebration-icon-png-7.jpg"
+                        alt="">
+                    <div class="result text-center col-md-6 col-sm-12 mt-3">
+                        <h3 class="mt-3">Congratulations!! <br>You have completed the quiz. <br>Below is your result:</h3>
+                        <p>Total Question Attempted : {{questionList.length}} </p>
+                        <p>Total Correct Answered : {{ correctAnswers(true) }} </p>
+                        <p>Total Wrong Answered : {{ correctAnswers(false) }} </p>
+                        <p>Your Score : {{ answerResult.score }} Points </p>
+                    </div>
+                    <div class="border-dotted-bottom mt-3 mb-3 text-center">
+                        <button mat-flat-button color="primary" (click)="submitFeedback()" class="mr-2">Submit Feedback</button>
+
+                    </div>
+                </div>
+            </ng-container>
+
         </div>
     </div>
 </section>

@@ -10,6 +10,8 @@ import { PmDashboardComponent } from './pm-dashboard/pm-dashboard.component';
 import { TrainingAdministratorComponent } from './training-administrator/training-administrator.component';
 import { HodDashboardComponent } from './hod-dashboard/hod-dashboard.component';
 import { TrainingCoordinatorDbComponent } from './training-coordinator-db/training-coordinator-db.component';
+import { TrainingApprovalTabComponent } from './training-approval-tab/training-approval-tab.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -55,6 +57,10 @@ const routes: Routes = [
   {
     path: 'trainingcoordinator-dashboard',
     component: TrainingCoordinatorDbComponent,
+  },
+  {
+    path: 'training-approval-tab',
+    component: TrainingApprovalTabComponent,
   },
 ];
 @NgModule({

@@ -108,6 +108,40 @@
                         </div>
                      
                     </div>
+
+                    <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
+                      <!-- <div class="card" style="border-radius: 31px;"> -->
+                        <div class="header mt-3">
+                          <h2>Coreprogram Course Kit</h2>
+                        </div>
+                        <div class="tableBody">
+                          <div class="table-responsive">
+                            <table class="table table-hover ">
+                              <thead>
+                                <tr>
+                                  <th>Course Kit</th>
+                                  <th>Description</th>
+                                  <th>Document Link</th>
+                                  <th>Video Link</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <ng-container *ngFor="let kit of getCourseKits()">
+                                  <tr *ngFor="let video of kit.videoLink">
+                                    <td>{{ kit.name }}</td>
+                                    <td>{{ kit.shortDescription }}</td>
+                                    <td>
+                                      <a href="{{ video.document }}" target="_blank">{{video.doc_filename |filename}}</a>
+                                    </td>
+                                    <td><a class="link" (click)="playVideo(video)">{{ video.video_filename}}</a></td>
+                                  </tr>
+                                </ng-container>
+                            </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      <!-- </div> -->
+                    </div>
                     <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
                       <div class="header mt-3">
                         <h2>Elective Count</h2>
@@ -137,7 +171,7 @@
                   <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
                     <!-- <div class="card" style="border-radius: 31px;"> -->
                       <div class="header mt-3">
-                        <h2>CourseKit</h2>
+                        <h2>Elective Program Course Kit</h2>
                       </div>
                       <div class="tableBody">
                         <div class="table-responsive">
@@ -151,13 +185,24 @@
                               </tr>
                             </thead>
                             <tbody>
-
-                            </tbody>
+                              <ng-container *ngFor="let kit of getElectiveCourseKits()">
+                                <tr *ngFor="let video of kit.videoLink">
+                                  <td>{{ kit.name }}</td>
+                                  <td>{{ kit.shortDescription }}</td>
+                                  <td>
+                                    <a href="{{ video.document }}" target="_blank">{{video.doc_filename |filename}}</a>
+                                  </td>
+                                  <td><a class="link" (click)="playVideo(video)">{{ video.video_filename}}</a></td>
+                                </tr>
+                              </ng-container>
+                          </tbody>
                           </table>
                         </div>
                       </div>
                     <!-- </div> -->
                   </div>
+
+
                   </div>
                 </div>
 
