@@ -36,6 +36,7 @@ import { AllQuestionsComponent } from './settings/all-questions/all-questions.co
 import { CreateUserRoleComponent } from './settings/create-user-role/create-user-role.component';
 import { UserTypeComponent } from './settings/user-type/user-type.component';
 import { ViewDepartmentComponent } from './settings/all-departments/view-department/view-department.component';
+import { ViewAnnouncementComponent } from './settings/list/view-announcement/view-announcement.component';
 
 
 const routes: Routes = [
@@ -204,7 +205,7 @@ const routes: Routes = [
   },
   {
     path: 'settings/view-announcement/:id',
-    component: CreatAnnouncementComponent,
+    component: ViewAnnouncementComponent,
   },
   {
     path: 'settings/all-questions',

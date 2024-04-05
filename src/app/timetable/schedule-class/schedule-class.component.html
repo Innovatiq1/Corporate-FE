@@ -100,7 +100,7 @@
                 </ng-container> -->
                 <ng-container matColumnDef="courseName">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Program</mat-header-cell>
-                  <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/program/edit-class',row.id]">
+                  <mat-cell *matCellDef="let row" class="name" [routerLink]="['/timetable/view-schedule-class',row.id]">
                     <span class="mobile-label">Program:</span> {{row.courseId?.title}}</mat-cell>
                 </ng-container>
                 <!-- student name  -->
