@@ -87,7 +87,7 @@
                 <!-- ID Column -->
                 <ng-container matColumnDef="id">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row)">{{row.id}}</mat-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/view-department',row.id]">{{row.id}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="dName">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
@@ -97,18 +97,18 @@
                 <ng-container matColumnDef="hod">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>HOD
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/view-department',row.id]" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Head Of Department:</span>{{row?.hod | capitalizeFirstLetter}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="phone">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Phone</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/view-department',row.id]" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Phone:</span> {{row?.mobile }}
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="email">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row)">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/view-department',row.id]">
                     <span class="mobile-label">Email:</span>
                     <img src="assets/images/gmail.png" alt="Email Icon" class="email-icon">
                     <!-- Replace "email-icon.png" with the filename of your PNG icon -->
@@ -122,13 +122,13 @@
                 </ng-container> -->
                 <ng-container matColumnDef="sYear">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Start Year</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/view-department',row.id]" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Start Year:</span>{{row.departmentStartDate | date}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="sCapacity">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Students Capacity
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/view-department',row.id]" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Students Capacity:</span>{{row?.studentCapacity}}</mat-cell>
                 </ng-container>
                 <!-- actions -->

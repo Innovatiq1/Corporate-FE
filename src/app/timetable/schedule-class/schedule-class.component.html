@@ -108,18 +108,18 @@
                 <!-- Class start date -->
                 <ng-container matColumnDef="Code">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Program Code</mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-class/',row.id]">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/timetable/view-schedule-class',row.id]">
                     <span class="mobile-label">Program Code:</span> {{row.courseId?.courseCode}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="Price">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-class/',row.id]">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/timetable/view-schedule-class',row.id]">
                     <span class="mobile-label">Amount:</span>$ {{row.instructorCost}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="startDate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Start
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/edit-class',row.id]">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/timetable/view-schedule-class',row.id]">
                     <span class="mobile-label">Start:</span>{{row.sessions[0]?.sessionStartDate | date}}
 
                   </mat-cell>
@@ -128,14 +128,14 @@
                 <ng-container matColumnDef="endDate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>End
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/edit-class',row.id]">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/timetable/view-schedule-class',row.id]">
                     <span class="mobile-label">End:</span>{{row.sessions[0]?.sessionEndDate | date}}
                   </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="Class">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Class</mat-header-cell>
-                  <mat-cell *matCellDef="let row" [ngClass]="getStatusClass(row.classDeliveryType)" [routerLink]="['/admin/program/view-class-program/',row.id]">
+                  <mat-cell *matCellDef="let row" [ngClass]="getStatusClass(row.classDeliveryType)" [routerLink]="['/timetable/view-schedule-class',row.id]">
                     <span class="mobile-label">Class:</span>
                     <div class="status-container">
                       <span class="status-dot"></span>

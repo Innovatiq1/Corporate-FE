@@ -201,12 +201,12 @@ export class CreateUserTypeComponent {
                   icon: 'success',
                 })
                 resolve(response);
-                this.route.navigate(['/admin/users/user-type']);
+                this.route.navigate(['/student/settings/user-type']);
               },
               (error: { message: any; error: any; }) => {
                 this.isLoading = false;
                 Swal.fire(
-                  'Failed to update user Type',
+                  'Failed to update Role',
                   error.message || error.error,
                   'error'
                 );
@@ -221,17 +221,17 @@ export class CreateUserTypeComponent {
             if (this.isEdit === true) {
               Swal.fire({
                 title: 'Successful',
-                text: 'User Type updated succesfully',
+                text: 'Role updated succesfully',
                 icon: 'success',
               })
             }
             resolve(response);
-            this.route.navigate(['/admin/users/user-type']);
+            this.route.navigate(['/student/settings/user-type']);
           },
           (error: { message: any; error: any; }) => {
             this.isLoading = false;
             Swal.fire(
-              'Failed to update user Type',
+              'Failed to update Role',
               error.message || error.error,
               'error'
             );
