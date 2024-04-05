@@ -22,12 +22,13 @@ import Swal from 'sweetalert2';
 export class CoursePaymentComponent {
   displayedColumns: string[] = [
     // 'select',
-    'Course Name',
-    'Payment Date',
-    'Amount',
     'Student Name',
+    'email',
+    'Course Name',
+    'Amount',
+    'Payment Date',
     'Payment Status',
-    'status',
+    // 'status',
   ];
   
   breadscrums = [
@@ -214,5 +215,8 @@ this.router.navigate(['/admin/budgets/view-course-payment/'], {queryParams:{id:i
 
     // Save or open the PDF
     doc.save('Course Payments.pdf');
+  }
+  getStatusClass(status: string): string {
+    return status === 'Success' ? 'success' : 'fail';
   }
 }

@@ -35,6 +35,7 @@ import { AddQuestionsComponent } from './settings/add-questions/add-questions.co
 import { AllQuestionsComponent } from './settings/all-questions/all-questions.component';
 import { CreateUserRoleComponent } from './settings/create-user-role/create-user-role.component';
 import { UserTypeComponent } from './settings/user-type/user-type.component';
+import { ViewDepartmentComponent } from './settings/all-departments/view-department/view-department.component';
 
 
 const routes: Routes = [
@@ -233,6 +234,10 @@ const routes: Routes = [
   {
     path: 'settings/form-customization',
     component: FormCustomizationComponent,
+  },
+  {
+    path: 'settings/view-department/:id',
+    component: ViewDepartmentComponent,
   },
 
 

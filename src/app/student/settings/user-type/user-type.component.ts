@@ -26,9 +26,9 @@ export class UserTypeComponent {
   ];
   breadscrums = [
     {
-      title: 'User Role',
+      title: 'Role',
       items: ['Users'],
-      active: 'User Role',
+      active: 'Role',
     },
   ];
   modal:boolean = false;

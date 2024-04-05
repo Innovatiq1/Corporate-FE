@@ -63,6 +63,7 @@ import { AssesmentQuestionsComponent } from './settings/assesment-questions/asse
 import { AddQuestionsComponent } from './settings/add-questions/add-questions.component';
 import { CreateUserRoleComponent } from './settings/create-user-role/create-user-role.component';
 import { UserTypeComponent } from './settings/user-type/user-type.component';
+import { ViewDepartmentComponent } from './settings/all-departments/view-department/view-department.component';
 
 
 @NgModule({
@@ -106,7 +107,8 @@ import { UserTypeComponent } from './settings/user-type/user-type.component';
     AssesmentQuestionsComponent,
     AddQuestionsComponent,
     UserTypeComponent,
-    CreateUserRoleComponent
+    CreateUserRoleComponent,
+    ViewDepartmentComponent
 
 
   ],
