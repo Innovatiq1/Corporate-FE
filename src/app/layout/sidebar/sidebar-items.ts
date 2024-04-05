@@ -1661,17 +1661,214 @@ export const SettingsMenu: MenuItem[] = [
         open:false,
 
         children: [],
-      },
-
-
-
-
-
+      }
 
     ],
 
     
   },
+  {
+    path:'student/settings/configuration',
+    title:'Configuration',
+    id:'configuration',
+    iconType:'img',
+    icon:'assets/images/settings/system-configuration1.png',
+    class:'',
+    badge:'',
+    iconsrc:'',
+    badgeClass:'',
+    groupTitle:false,
+    open:false,
+    role:[],
+    children:[
+      {
+        path:'student/settings/form-customization',
+        title:'Forms',
+        id:'forms',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/all-questions',
+        title:'Assessment Configuration',
+        id:'assessment',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      // {
+      //   path:'student/settings/all-questions',
+      //   title:'Exam Configuration',
+      //   id:'assessment',
+      //   iconType:'img',
+      //   icon:'',
+      //   class:'',
+      //   badge:'',
+      //   iconsrc:'',
+      //   badgeClass:'',
+      //   groupTitle:false,
+      //   open:false,
+      //   role:[],
+      //   children:[]
+      // },
+      {
+        path:'p',
+        title:'Tutorial Configuration',
+        id:'assessment',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+
+
+      {
+        path:'d',
+        title:'Control Storage Usage',
+        id:'storage',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'f',
+        title:'Managed Access Time',
+        id:'time',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      }
+    ]
+  },
+  {
+    path:'student/settings/customization',
+    title:'Customization',
+    id:'customization',
+    iconType:'img',
+    icon:'assets/images/settings/custom.png',
+    class:'',
+    badge:'',
+    iconsrc:'',
+    badgeClass:'',
+    groupTitle:false,
+    open:false,
+    role:[],
+    children:[
+      {
+        path:'student/settings/sidemenu',
+        title:'Side menu',
+        id:'sidemenu',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/certificate/template',
+        title:'Certificate',
+        id:'certificate',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/banners',
+        title:'Banners',
+        id:'forms',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/logo-customization',
+        title:'Logo',
+        id:'logo',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/customization',
+        title:'Currency',
+        id:'currency',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      }
+    
+    ]
+  },
+
+
   {
     path:'student/settings/integration',
     title:'Integration',
@@ -1739,118 +1936,6 @@ export const SettingsMenu: MenuItem[] = [
     ]
   },
   {
-    path:'student/settings/customization',
-    title:'Customization',
-    id:'customization',
-    iconType:'img',
-    icon:'assets/images/settings/custom.png',
-    class:'',
-    badge:'',
-    iconsrc:'',
-    badgeClass:'',
-    groupTitle:false,
-    open:false,
-    role:[],
-    children:[
-      {
-        path:'student/settings/form-customization',
-        title:'Forms',
-        id:'forms',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-
-      {
-        path:'student/settings/certificate/template',
-        title:'Certificate',
-        id:'certificate',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-      {
-        path:'student/settings/banners',
-        title:'Banners',
-        id:'forms',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-      {
-        path:'student/settings/logo-customization',
-        title:'Logo',
-        id:'logo',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-      {
-        path:'student/settings/customization',
-        title:'Currency',
-        id:'currency',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-      {
-        path:'student/settings/sidemenu',
-        title:'Side menu',
-        id:'sidemenu',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-
-
-
-
-    
-    ]
-  },
-  {
     path:'student/settings/automation',
     title:'Automation',
     id:'automation',
@@ -1882,117 +1967,68 @@ export const SettingsMenu: MenuItem[] = [
 
     ]
   },
-  {
-    path:'student/settings/LMS-TAE',
-    title:'LMS-TAE',
-    id:'LMS-TAE',
-    iconType:'img',
-    icon:'assets/images/settings/lms.png',
-    class:'',
-    badge:'',
-    iconsrc:'',
-    badgeClass:'',
-    groupTitle:false,
-    open:false,
-    role:[],
-    children:[
-      {
-        path:'student/settings/all-questions',
-        title:'Assessment Configuration',
-        id:'assessment',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-      {
-        path:'student/settings/all-questions',
-        title:'Exam Configuration',
-        id:'assessment',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-      {
-        path:'',
-        title:'Tutorial Configuration',
-        id:'assessment',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      }
+  // {
+  //   path:'student/settings/LMS-TAE',
+  //   title:'LMS-TAE',
+  //   id:'LMS-TAE',
+  //   iconType:'img',
+  //   icon:'assets/images/settings/lms.png',
+  //   class:'',
+  //   badge:'',
+  //   iconsrc:'',
+  //   badgeClass:'',
+  //   groupTitle:false,
+  //   open:false,
+  //   role:[],
+  //   children:[
+  //     {
+  //       path:'student/settings/all-questions',
+  //       title:'Assessment Configuration',
+  //       id:'assessment',
+  //       iconType:'img',
+  //       icon:'',
+  //       class:'',
+  //       badge:'',
+  //       iconsrc:'',
+  //       badgeClass:'',
+  //       groupTitle:false,
+  //       open:false,
+  //       role:[],
+  //       children:[]
+  //     },
+  //     {
+  //       path:'student/settings/all-questions',
+  //       title:'Exam Configuration',
+  //       id:'assessment',
+  //       iconType:'img',
+  //       icon:'',
+  //       class:'',
+  //       badge:'',
+  //       iconsrc:'',
+  //       badgeClass:'',
+  //       groupTitle:false,
+  //       open:false,
+  //       role:[],
+  //       children:[]
+  //     },
+  //     {
+  //       path:'',
+  //       title:'Tutorial Configuration',
+  //       id:'assessment',
+  //       iconType:'img',
+  //       icon:'',
+  //       class:'',
+  //       badge:'',
+  //       iconsrc:'',
+  //       badgeClass:'',
+  //       groupTitle:false,
+  //       open:false,
+  //       role:[],
+  //       children:[]
+  //     }
 
 
 
-    ]
-  },
-  {
-    path:'student/settings/configuration',
-    title:'Configuration',
-    id:'configuration',
-    iconType:'img',
-    icon:'assets/images/settings/system-configuration1.png',
-    class:'',
-    badge:'',
-    iconsrc:'',
-    badgeClass:'',
-    groupTitle:false,
-    open:false,
-    role:[],
-    children:[
-      {
-        path:'',
-        title:'Control Storage Usage',
-        id:'storage',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-      {
-        path:'',
-        title:'Managed Access Time',
-        id:'time',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-
-
-
-    ]
-  }
+  //   ]
+  // }
 ]

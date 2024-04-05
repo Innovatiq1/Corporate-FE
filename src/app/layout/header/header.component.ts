@@ -211,16 +211,16 @@ export class HeaderComponent
   }
 
   navigateToUserSettings(){
-    this.router.navigate(['/student/settings/all-users']);
-  }
+    this.router.navigate(['/student/settings/users']); 
+   }
   navigateToIntegrateSettings(){
-    this.router.navigate(['/student/settings/email-configuration']);
-  }
+    this.router.navigate(['/student/settings/integration']); 
+   }
   navigateToAutomateSettings(){
-    this.router.navigate(['/student/settings/announcement']);
+    this.router.navigate(['/student/settings/automation']);
   }
   navigateToCustomsSettings(){
-    this.router.navigate(['/student/settings/form-customization']);
+    this.router.navigate(['/student/settings/customization']);
   }
   navigateToProfileSettings() {
     this.router.navigate(['/student/settings/security-settings']);

@@ -583,7 +583,7 @@
           </div>
         </div>
         <div class="col-md-12 py-3">
-          <button mat-raised-button id="back" [routerLink]="['/student/integration']">Back</button>
+          <button mat-raised-button id="back" [routerLink]="['/student/settings/integration']">Back</button>
         </div>
 
       </div>
@@ -629,10 +629,10 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/admin/users/create-user-type']"> User Access </button>
+            <button id="saved" [routerLink]="['/student/settings/user-type']"> User Access </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/admin/users/create-user-role']"> Roles </button>
+            <button id="saved" [routerLink]="['/student/settings/create-user-role']"> Roles </button>
           </div>
         </div>
         <div class="row px-4 py-4">
@@ -640,32 +640,32 @@
             <button id="saved" [routerLink]="['/student/settings/all-users']"> All Users </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/admin/users/all-students']"> Students</button>
+            <button id="saved" [routerLink]="['/student/settings/all-students']"> Students</button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/admin/users/all-instructors']"> Instructors </button>
+            <button id="saved" [routerLink]="['/student/settings/all-instructors']"> Instructors </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/admin/users/all-staff']"> Staff </button>
+            <button id="saved" [routerLink]="['/student/settings/all-staff']"> Staff </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/admin/departments/all-departments']"> Departments </button>
+            <button id="saved" [routerLink]="['/student/settings/all-departments']"> Departments </button>
           </div>
-          <div class="col-md-5">
+          <!-- <div class="col-md-5">
             <button id="saved" [routerLink]="['/admin/approval/program-approval']"> Approvals </button>
           
-          </div>
+          </div> -->
         </div>
-        <div class="row px-4">
+        <!-- <div class="row px-4">
           <div class="col-md-6 banner">
             <button id="no-link"> Import/Export Users </button>
           </div>
           
-        </div>
+        </div> -->
 
       </div>
     </div>
@@ -716,7 +716,7 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/admin/announcement/list']"> Announcement </button>
+            <button id="saved" [routerLink]="['/student/settings/announcement']"> Announcement </button>
           </div>
           <div class="col-md-5">
             <button id="no-link"> Notification </button>
@@ -736,9 +736,34 @@
       </div>
       <div class="body">
         <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/student/settings/form-customization']"> Sidemenu </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/settings/certificate/template']"> Certificates </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" (click)="navigateToBannerSettings()"> Banners </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/admin/survey/create-survey-questions']"> Survey </button>
+          </div>
+        </div>
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" routerLink="/student/settings/logo-customization"> Logo </button>
+          </div>
           <div class="col-md-5">
             <button id="saved" (click)="openDialog(currencyDialog)"> Currency </button>
           </div>
+          <!-- <div class="row px-4 py-4">
+            <div class="col-md-5 banner">
+              <button id="saved" (click)="navigateToSidemenuSettings()" > Sidemenu </button>
+            </div> -->
+  
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -874,17 +899,20 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="no-link"> Control Storage Usage </button>
+            <button id="saved" [routerLink]="['/student/settings/form-customization']"> Forms </button>
           </div>
           <div class="col-md-5">
-            <button id="no-link"> Archived </button>
+            <button id="saved" [routerLink]="['/student/settings/all-questions']"> Assessment Configuration </button>
           </div>
+
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
             <button id="no-link"> Managed Access Time </button>  
           </div>
-
+          <div class="col-md-5">
+            <button id="no-link"> Control Storage Usage </button>
+          </div>
         </div>
 
       </div>
