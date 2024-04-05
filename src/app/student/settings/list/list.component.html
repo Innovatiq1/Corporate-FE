@@ -51,14 +51,14 @@
                 <ng-container matColumnDef="Decription">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Decription
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" class="mt-3" [routerLink]="['/student/settings/edit-announcement',row.id]">
+                  <mat-cell *matCellDef="let row" class="mt-3" [routerLink]="['/student/settings/view-announcement',row.id]">
                     <p [innerHTML]="row.details | bulletPoints"></p>
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="User Role">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Role
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/edit-announcement',row.id]">
+                  <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/view-announcement',row.id]">
                     <p [innerHTML]="row.announcementFor | bulletPoints"></p>
                   </mat-cell>
 

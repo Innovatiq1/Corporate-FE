@@ -68,7 +68,7 @@ export class UserTypeComponent {
         () => {
           Swal.fire({
             title: "Success",
-            text: "UserType moved to Inactive.",
+            text: "Role moved to Inactive.",
             icon: "success",
           });
           this.getUserTypeList({});
@@ -77,7 +77,7 @@ export class UserTypeComponent {
           console.error(error, "result_error");
           Swal.fire({
             title: "Error",
-            text: "UserType attached to  User. Cannot Make Inactive.",
+            text: "Role attached to  User. Cannot Make Inactive.",
             icon: "error",
           });
           this.getUserTypeList({});
@@ -91,7 +91,7 @@ export class UserTypeComponent {
         () => {
           Swal.fire({
             title: "Success",
-            text: "UserType moved to Active.",
+            text: "Role moved to Active.",
             icon: "success",
           });
           this.getUserTypeList({});
@@ -118,7 +118,7 @@ export class UserTypeComponent {
           this.userService.deleteUserType(data.id,data.typeName).subscribe(() => {
             Swal.fire({
               title: 'Success',
-              text: 'Usertype deleted successfully.',
+              text: 'Role deleted successfully.',
               icon: 'success',
             });
             this.getUserTypeList({});
@@ -127,7 +127,7 @@ export class UserTypeComponent {
           (error) => {
             Swal.fire({
               title: "Error",
-              text: "UserType attached to  User. Cannot Delete.",
+              text: "Role attached to  User. Cannot Delete.",
               icon: "error",
             });
             this.getUserTypeList({});
