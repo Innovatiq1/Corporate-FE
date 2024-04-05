@@ -45,7 +45,7 @@ export class AllDepartmentsComponent
     'email',
     'sYear',
     'sCapacity',
-    'status',
+    // 'status',
   ];
   exampleDatabase?: DepartmentService;
   dataSource!: any;
@@ -58,7 +58,7 @@ export class AllDepartmentsComponent
     {
       title: 'All Department',
       items: ['Department'],
-      active: 'All',
+      active: 'All Departments',
     },
   ];
   totalItems: any;
@@ -152,6 +152,7 @@ export class AllDepartmentsComponent
     this.router.navigate(['/admin/departments/edit-department/' + this.id])
 
   }
+
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
   }

@@ -9,7 +9,7 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="width: 86%;margin: auto;">
         <div class="card">
           <div class="materialTableHeader">
-            <div class="left">
+            <!-- <div class="left">
               <ul class="header-buttons-left ms-0">
                 <li class="tbl-title">
                   <h2>Classes</h2>
@@ -20,9 +20,18 @@
                     [(ngModel)]="searchTerm" (input)="performSearch()" aria-label="Search box" />
                 </li>
               </ul>
-            </div>
+            </div> -->
             <div class="right">
               <ul class="tbl-export-btn">
+                <li>
+                  <ul class="header-buttons-left ms-0">
+                    <li class="tbl-search-box">
+                      <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                      <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                        [(ngModel)]="searchTerm" (input)="performSearch()" aria-label="Search box" />
+                    </li>
+                  </ul>
+                </li>
                 <li class="tbl-header-btn">
                   <div class="m-l-10" matTooltip="ADD">
                     <button mat-mini-fab color="primary" [routerLink]="['/admin/program/create-class']">
@@ -90,28 +99,37 @@
                   </mat-cell>
                 </ng-container> -->
                 <ng-container matColumnDef="courseName">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Course</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Program</mat-header-cell>
                   <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/program/edit-class',row.id]">
-                    <span class="mobile-label">Course:</span> {{row.courseId?.title}}</mat-cell>
+                    <span class="mobile-label">Program:</span> {{row.courseId?.title}}</mat-cell>
                 </ng-container>
                 <!-- student name  -->
 
                 <!-- Class start date -->
-
+                <ng-container matColumnDef="Code">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Program Code</mat-header-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-class/',row.id]">
+                    <span class="mobile-label">Program Code:</span> {{row.courseId?.courseCode}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Price">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-class/',row.id]">
+                    <span class="mobile-label">Amount:</span>$ {{row.instructorCost}}</mat-cell>
+                </ng-container>
                 <ng-container matColumnDef="startDate">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Class Start Date
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/edit-class',row.id]">
-                    <span class="mobile-label">Start Date:</span>{{row.sessions[0]?.sessionStartDate | date}}
+                    <span class="mobile-label">Start:</span>{{row.sessions[0]?.sessionStartDate | date}}
 
                   </mat-cell>
                 </ng-container>
                 <!--Class Enddate -->
                 <ng-container matColumnDef="endDate">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Class End Date
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>End
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/edit-class',row.id]">
-                    <span class="mobile-label">End Date:</span>{{row.sessions[0]?.sessionEndDate | date}}
+                    <span class="mobile-label">End:</span>{{row.sessions[0]?.sessionEndDate | date}}
                   </mat-cell>
                 </ng-container>
 

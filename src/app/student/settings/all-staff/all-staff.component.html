@@ -109,7 +109,7 @@
                     <span class="mobile-label">Name:</span> {{row.name  | capitalizeFirstLetter}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="User Type">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>User Role
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Role
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">User Role:</span>{{row.type}}</mat-cell>
@@ -287,7 +287,7 @@
         </ng-template>
         <div class="row mt-5 ml-0 mr-0">
           <div class="col-md-3"  *ngFor="let row of dataSource.filteredData">
-            <div class="card border-apply"  style="height: 300px;" (click)="aboutStaff(row.id)">
+            <div class="card border-apply"  style="height: 300px;cursor: pointer;" (click)="aboutStaff(row.id)">
               <div class="m-b-20">
                 <div class="contact-grid">
                   <div class="profile-header l-bg-blue">

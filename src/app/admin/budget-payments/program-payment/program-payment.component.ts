@@ -36,7 +36,7 @@ export class ProgramPaymentComponent {
     {
       // title: 'Programs',
       items: ['Payments'],
-      active: '',
+      active: 'Program Payments',
     },
   ];
   

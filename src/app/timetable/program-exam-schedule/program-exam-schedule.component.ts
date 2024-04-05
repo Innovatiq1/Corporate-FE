@@ -25,7 +25,7 @@ displayedColumns = [
   'end Date',
   'time',
   'duration',
-  'actions'
+  // 'actions'
   
 ];
 exampleDatabase?: ExamScheduleService;
@@ -38,8 +38,8 @@ examSchedule?: ExamSchedule;
 breadscrums = [
   {
     title: 'Schedule',
-    items: ['Program'],
-    active: 'Exam Schedule',
+    items: ['Timetable'],
+    active: 'Program Exam Schedule',
   },
 ];
 
