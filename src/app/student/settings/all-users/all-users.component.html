@@ -232,14 +232,63 @@
           </ng-template>
           <div class="row mt-5 ml-0 mr-0">
             <div class="col-md-3"  *ngFor="let row of dataSource">
-              <div class="card border-apply"  style="height: 300px;cursor: pointer;" [routerLink]="['/admin/users/view-all-users',row.id]">
+              <div class="card border-apply" style="height: 265px; margin-top: 50px;cursor: pointer;" [routerLink]="['/admin/users/view-all-users',row.id]">
+                <!-- <div class="m-b-20"> -->
+                  <div class="contact-grid">
+                    <div class="profile-header">
+                      <img src="{{row.avatar || 'assets/profile.png'}}" class="user-img" alt="">
+                      <!-- <div class="user-name"></div> -->
+                      
+                    </div>
+                    <div class="user-name">{{row.name |titlecase}} {{ row.last_name ? row.last_name : '' }}</div>
+                    <div class="text-muted">{{row.role}}</div>
+                   <!-- <div class="mb-2">
+                    {{data.email}}
+                   </div> -->
+                    
+                   <div class="row mt-2" style="text-align: start;padding-left: 10px;">
+                    <div class="col-5">
+                      {{row.gender | titlecase}}
+                    </div>
+                    <div class="col-6">
+                      {{row?.joiningDate | date}}
+                      
+                    </div>
+                   </div>
+                   <div class="row" style="text-align: start;padding-left: 10px; white-space: nowrap;">
+                    <div class="col-5">
+                      {{row.department | titlecase}}
+                    </div>
+                    <div class="col-6">
+                      {{row?.qualification}}
+                    </div>
+                   </div>
+                   <div class="row" style="text-align: start;padding-left: 10px; white-space: nowrap;">
+                    <div class="col-5">
+                      {{row.country_name | titlecase}}
+                    </div>
+                    <div class="col-7">
+                      {{row?.mobile}}
+                    </div>
+                   </div>
+                    <!-- <div>
+                      <span class="phone">
+                        <i class="material-icons">phone</i>{{data.mobile}}</span>
+                    </div> -->
+                    <!-- <div class="profile-userbuttons">
+                      <button mat-flat-button color="primary" (click)="aboutStudent(data.id)">Read More</button>
+                    </div> -->
+                  </div>
+                <!-- </div> -->
+              </div>
+              <!-- <div class="card border-apply"  style="height: 300px;cursor: pointer;" [routerLink]="['/admin/users/view-all-users',row.id]">
                 <div class="m-b-20">
                   <div class="contact-grid">
                     <div class="profile-header l-bg-blue">
                       <div class="user-name">{{row.name}}</div>
-                      <!-- <div class="name-center">{{row.department}}</div> -->
+                      <!-- <div class="name-center">{{row.department}}</div> --
                     </div>
-                    <!-- <div class="course-card-image"> -->
+                    <!-- <div class="course-card-image"> --
                       <img src="{{row.avatar}}" class="user-img" >
                       <p>
                         {{row.type | uppercase}}
@@ -252,7 +301,7 @@
                       </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
           <mat-paginator class="paginator" #paginator [length]="totalItems" (page)="pageSizeChange($event)"

@@ -14,6 +14,11 @@ export class Staff {
   country_name!: string;
   type: any;
   avatar!: string;
+  education!: string;
+  department!: string;
+  gender: any;
+  last_name!: string;
+
   constructor(staff: Staff) {
     {
       this.id = staff.id || this.getRandomID();

@@ -17,6 +17,8 @@ export class Students {
   data:any;
   isLogin:boolean;
   country_name!:string;
+  education!: string;
+  role!: string;
 
   constructor(students: Students) {
     {
