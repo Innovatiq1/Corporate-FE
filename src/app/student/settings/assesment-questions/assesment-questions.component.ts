@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { QuestionService } from '@core/service/question.service';
+import { number } from 'echarts';
 
 @Component({
   selector: 'app-assesment-questions',
@@ -29,8 +30,6 @@ export class AssesmentQuestionsComponent {
   ) {
     let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit-questions');
-
-
 
     this.subscribeParams = this.activatedRoute.params.subscribe(
       (params: any) => {
@@ -95,8 +94,11 @@ export class AssesmentQuestionsComponent {
   }
 
   addQuestion() {
+    const newTempId = this.getLastQuestionId() + 1;
     const questionGroup = this.formBuilder.group({
-      questionText: [''],
+      tempId: newTempId,
+      questionText: ['', Validators.required],
+      isSelected: [false],
       options: this.formBuilder.array([
         this.formBuilder.group({
           text: ['', Validators.required],
@@ -119,9 +121,14 @@ export class AssesmentQuestionsComponent {
     return questionGroup;
   }
 
-  addAdditionalQuestion(){
+  addAdditionalQuestion() {
     const question = this.addQuestion();
     this.questions.push(question);
+  }
+
+  getLastQuestionId() {
+    const lastIndex = this.questions.controls.length - 1;
+    return lastIndex > -1 ? this.questions.at(lastIndex).value.tempId : 0;
   }
 
   deleteQuestion(questionIndex: number) {
@@ -136,7 +143,25 @@ export class AssesmentQuestionsComponent {
       cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.questions.removeAt(questionIndex);
+        const controls = (this.questions as FormArray).controls;
+        const filteredQuestions: number[] = [];
+        controls.forEach((control: any, index: number) => {
+          if (control.value.isSelected) {
+            filteredQuestions.push(control.value.tempId);
+          }
+        });
+        if (filteredQuestions.length) {
+          filteredQuestions.forEach((tempId: number) => {
+            const index = this.questions.controls.findIndex(
+              (c: any) => c.value.tempId === tempId
+            );
+            if (index != -1) {
+              this.questions.removeAt(index);
+            }
+          });
+        } else {
+          this.questions.removeAt(questionIndex);
+        }
       }
     });
   }
@@ -176,7 +201,15 @@ export class AssesmentQuestionsComponent {
 
   save() {
     if (this.questionFormTab2.valid) {
-      const payload = this.questionFormTab2.value;
+      const payload = this.questionFormTab2.value.questions.map((v: any) => ({
+        options: v.options,
+        questionText: v.questionText,
+      }));
+
+      if(!payload.length){
+        Swal.fire('At least Question needed', 'error');
+        return
+      }
 
       const isNoAnswer = payload.questions.some(
         (q: any) => !q.options.some((c: any) => c.correct)
@@ -198,6 +231,8 @@ export class AssesmentQuestionsComponent {
           this.createAssesment(payload);
         }
       });
+    }else{
+      Swal.fire('Please fill all mandatory fields', 'error');
     }
   }
 

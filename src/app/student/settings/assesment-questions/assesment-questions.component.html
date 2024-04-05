@@ -32,6 +32,10 @@
                 >
                   <td>
                     <div class="d-flex align-items-baseline">
+                      <mat-checkbox
+                        formControlName="isSelected"
+                        style="width: 35px"
+                      ></mat-checkbox>
                       Q{{ i + 1 }}.
                       <mat-form-field appearance="outline" style="width: 100%">
                         <input
@@ -44,7 +48,7 @@
                     </div>
                   </td>
                   <td formArrayName="options">
-                    <div class="d-flex">
+                    <div class="d-flex align-items-baseline">
                       <ng-container
                         *ngFor="
                           let optionCtrl of getAnswers(i).controls;
@@ -87,7 +91,11 @@
             </table>
           </div>
           <div style="text-align: center; margin-top: 20px">
-            <button mat-icon-button (click)="addAdditionalQuestion()" type="button">
+            <button
+              mat-icon-button
+              (click)="addAdditionalQuestion()"
+              type="button"
+            >
               <mat-icon style="color: black; font-size: 24px">add</mat-icon>
             </button>
           </div>
