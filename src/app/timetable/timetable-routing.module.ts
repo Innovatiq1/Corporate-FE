@@ -8,6 +8,11 @@ import { EditProgramExamScheduleComponent } from './edit-program-exam-schedule/e
 import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import { ProgramExamScheduleComponent } from './program-exam-schedule/program-exam-schedule.component';
+import { ScheduleClassComponent } from './schedule-class/schedule-class.component';
+import { ClassListComponent } from './class-list/class-list.component';
+import { ViewProgramScheduleComponent } from './program-exam-schedule/view-program-schedule/view-program-schedule.component';
+import { ViewCourseScheduleComponent } from './list/view-course-schedule/view-course-schedule.component';
+import { ViewProgramClassComponent } from './schedule-class/view-program-class/view-program-class.component';
 const routes: Routes = [
     {
         path: 'course-timetable',
@@ -40,7 +45,27 @@ const routes: Routes = [
       {
         path: 'program-exam-edit/:id',
         component: EditProgramExamScheduleComponent
-      }
+      },
+      {
+        path:'schedule-class', 
+        component:ScheduleClassComponent
+      },
+      {
+        path:'class-list',
+        component:ClassListComponent
+      },
+      {
+        path:'view-schedule-class/:id', 
+        component:ViewProgramClassComponent
+      },
+      {
+        path:'view-program-exam-schedule/:id',
+        component:ViewProgramScheduleComponent
+      },
+      {
+        path:'view-course-exam-schedule/:id',
+        component:ViewCourseScheduleComponent
+      },
     // {
     //     path: 'course-timetable/student',
     //     component: CourseTimetableComponent

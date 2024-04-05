@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProgramListComponent } from './program-list/program-list.component';
 import { CreateProgramComponent } from './create-program/create-program.component';
-import { ScheduleClassComponent } from './schedule-class/schedule-class.component'
+// import { ScheduleClassComponent } from './schedule-class/schedule-class.component'
 import { ProgaramCompletionListComponent } from './progaram-completion-list/progaram-completion-list.component';
 import { ProgramKitComponent } from './program-kit/program-kit.component';
 import { CreateClassComponent } from './create-class/create-class.component';
@@ -17,10 +17,7 @@ const routes: Routes = [
     path:'program-list', 
     component:ProgramListComponent
   },
-  {
-    path:'schedule-class', 
-    component:ScheduleClassComponent
-  },
+
   {
     path:'create-program', 
     component:CreateProgramComponent
@@ -67,7 +64,7 @@ const routes: Routes = [
     component:CreateTemplateComponent
   },
   {
-    path:'view-program/:id', 
+    path:'view-program', 
     component:ViewProgramComponent
   }
   

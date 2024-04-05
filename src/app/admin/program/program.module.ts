@@ -5,7 +5,7 @@ import { ProgramKitComponent } from './program-kit/program-kit.component';
 import { ProgaramCompletionListComponent } from './progaram-completion-list/progaram-completion-list.component';
 import { ProgramListComponent } from './program-list/program-list.component';
 import { CreateProgramComponent } from './create-program/create-program.component';
-import { ScheduleClassComponent } from './schedule-class/schedule-class.component';
+// import { ScheduleClassComponent } from './schedule-class/schedule-class.component';
 import { ProgramRoutingModule } from './program-routing.module';
 import { ComponentsModule } from "../../shared/components/components.module";
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -21,6 +21,7 @@ import { CreateClassComponent } from './create-class/create-class.component';
 import { CreateTemplateComponent } from './program-kit/create-template/create-template.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ViewProgramComponent } from './view-program/view-program.component';
+import { PendingProgramsComponent } from './program-list/pending-programs/pending-programs.component';
 
 
 
@@ -28,14 +29,15 @@ import { ViewProgramComponent } from './view-program/view-program.component';
     declarations: [
         ProgramListComponent,
         CreateProgramComponent,
-        ScheduleClassComponent,
+        // ScheduleClassComponent,
         ProgramKitComponent,
         ProgaramCompletionListComponent,
         CreateProgramKitComponent,
         EditProgramKitComponent,
         CreateClassComponent,
         CreateTemplateComponent,
-        ViewProgramComponent
+        ViewProgramComponent,
+        PendingProgramsComponent
          ],
     imports: [
         CommonModule,

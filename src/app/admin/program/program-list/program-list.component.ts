@@ -26,18 +26,20 @@ export class ProgramListComponent {
     {
       title: 'All Program',
       items: ['Program'],
-      active: 'All Program',
+      active: 'All Programs',
     },
   ];
   displayedColumns = [
     'name',
     'code',
+    'Creator',
     'Duration',
     'Start Date',
     'End Date',
     'Payment',
     'Compulsory Count',
     'Elective Count',
+    'status'
   ];
   isLoading = false;
   isNoMoreData = false;
@@ -145,6 +147,10 @@ performSearch() {
     this.getProgramList();
 
   }
+}
+
+viewActiveProgram(id:string):void {
+  this.route.navigate(['/admin/program/view-program'],{queryParams:{id:id, status:'active'}});
 }
   // export table data in excel file
   exportExcel() {

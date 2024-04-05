@@ -25,7 +25,6 @@ import { ViewCourseComponent } from './view-course/view-course.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProgramComponent } from './program/program.component';
 import { ViewProgramComponent } from './view-program/view-program.component';
-import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
@@ -45,6 +44,27 @@ import { ExamScheduleService } from 'app/timetable/exam-schedule.service';
 import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-coutomzation.component';
 import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
 import { FormCustomizationComponent } from './settings/form-customization/form-customization.component';
+import { AllUsersComponent } from './settings/all-users/all-users.component';
+import { StudentsService } from 'app/admin/students/students.service';
+import { AllStudentsComponent } from './settings/all-students/all-students.component';
+import { AllTeachersComponent } from './settings/all-teachers/all-teachers.component';
+import { TeachersService } from 'app/admin/teachers/teachers.service';
+import { StaffService } from 'app/admin/staff/staff.service';
+import { AllstaffComponent } from './settings/all-staff/all-staff.component';
+import { AllDepartmentsComponent } from './settings/all-departments/all-departments.component';
+import { DepartmentService } from 'app/admin/departments/department.service';
+import { CertificateTemplateComponent } from './settings/certificate-template/certificate-template.component';
+import { ListComponent } from './settings/list/list.component';
+import { CreatAnnouncementComponent } from './settings/list/creat-announcement/creat-announcement.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { AllQuestionsComponent } from './settings/all-questions/all-questions.component';
+import { AssesmentQuestionsComponent } from './settings/assesment-questions/assesment-questions.component';
+import { AddQuestionsComponent } from './settings/add-questions/add-questions.component';
+import { CreateUserRoleComponent } from './settings/create-user-role/create-user-role.component';
+import { UserTypeComponent } from './settings/user-type/user-type.component';
+import { ViewDepartmentComponent } from './settings/all-departments/view-department/view-department.component';
+import { ViewAnnouncementComponent } from './settings/list/view-announcement/view-announcement.component';
 
 
 @NgModule({
@@ -75,7 +95,23 @@ import { FormCustomizationComponent } from './settings/form-customization/form-c
     ChangeBgDirective,
     LogoCoutomzationComponent,
     SidemenuComponent,
-    FormCustomizationComponent
+    FormCustomizationComponent,
+    AllUsersComponent,
+    AllStudentsComponent,
+    AllTeachersComponent,
+    AllstaffComponent,
+    AllDepartmentsComponent,
+    CertificateTemplateComponent,
+    ListComponent,
+    CreatAnnouncementComponent,
+    AllQuestionsComponent,
+    AssesmentQuestionsComponent,
+    AddQuestionsComponent,
+    UserTypeComponent,
+    CreateUserRoleComponent,
+    ViewDepartmentComponent,
+    ViewAnnouncementComponent
+
 
   ],
   imports: [
@@ -97,9 +133,12 @@ import { FormCustomizationComponent } from './settings/form-customization/form-c
     ComponentsModule,
     SharedModule,
     ModalModule.forRoot(),
+    CKEditorModule,
+    AngularEditorModule,
+
 
   ],
   providers: [    
-HomeworkService, stdLeaveReqService,StudentsService,ExamScheduleService]
+HomeworkService, stdLeaveReqService,StudentsService,ExamScheduleService,TeachersService,StaffService,DepartmentService]
 })
 export class StudentModule {}

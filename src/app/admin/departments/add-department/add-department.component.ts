@@ -148,7 +148,7 @@ export class AddDepartmentComponent  implements OnInit {
             text: 'Department updated successfully',
             icon: 'success',
           });
-          this.router.navigate(['/admin/departments/all-departments'])
+          this.router.navigate(['/student/settings/all-departments'])
         });
       }
     });
@@ -172,7 +172,7 @@ export class AddDepartmentComponent  implements OnInit {
             text: 'Department created successfully',
             icon: 'success',
           });
-          this.router.navigate(['/admin/departments/all-departments'])
+          this.router.navigate(['/student/settings/all-departments'])
         });
       }
     });

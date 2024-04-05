@@ -28,7 +28,7 @@ import { CourseTitleModel, DataSourceModel, InstructorList, LabListModel } from 
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { Subscription } from 'rxjs';
-import { StudentsService } from '../../students/all-students/students.service';
+import { StudentsService } from 'app/admin/students/students.service';
 
 @Component({
   selector: 'app-create-class',

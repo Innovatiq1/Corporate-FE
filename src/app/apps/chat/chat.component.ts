@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StudentsService } from 'app/admin/students/all-students/students.service';
 import { SupportService } from '../support/support.service';
+import { StudentsService } from 'app/admin/students/students.service';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',

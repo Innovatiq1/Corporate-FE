@@ -6,7 +6,7 @@ import { DeptService } from '@core/service/dept.service';
 import { InstructorService } from '@core/service/instructor.service';
 import { StudentService } from '@core/service/student.service';
 import { UserService } from '@core/service/user.service';
-import { Department } from 'app/admin/departments/all-departments/department.model';
+import { Department } from 'app/admin/departments/department.model';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { ChartOptions } from 'chart.js';
 import {

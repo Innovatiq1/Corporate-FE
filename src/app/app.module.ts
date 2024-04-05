@@ -36,7 +36,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { ComponentsModule } from '@shared/components/components.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { StudentsService } from './admin/students/all-students/students.service';
 import { LeaveRequestComponent } from './student/leave-request/leave-request.component';
 import { LeaveRequestService as stdLeaveReqService } from './student/leave-request/leave-request.service';
 import { InstructorLeaveRequestService } from './teacher/leave-request/leave-request.service';
@@ -44,6 +43,7 @@ import { LecturesService } from './teacher/lectures/lectures.service';
 import { LoginGuard } from '@core/guard/login.guard';
 import { ChatbotComponent } from './apps/chatbot/chatbot.component';
 import { TicketComponent } from './ticket/ticket.component';
+import { StudentsService } from './admin/students/students.service';
 // import { ChangeBgDirective } from './change-bg.directive';
 
 export function createTranslateLoader(http: HttpClient) {

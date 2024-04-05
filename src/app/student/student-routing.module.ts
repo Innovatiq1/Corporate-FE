@@ -23,6 +23,20 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { LogoCoutomzationComponent } from './settings/logo-coutomzation/logo-coutomzation.component';
 import { SidemenuComponent } from './settings/sidemenu/sidemenu.component';
 import { FormCustomizationComponent } from './settings/form-customization/form-customization.component'
+import { AllUsersComponent } from './settings/all-users/all-users.component';
+import { AllStudentsComponent } from './settings/all-students/all-students.component';
+import { AllTeachersComponent } from './settings/all-teachers/all-teachers.component';
+import { AllstaffComponent } from './settings/all-staff/all-staff.component';
+import { AllDepartmentsComponent } from './settings/all-departments/all-departments.component';
+import { CertificateTemplateComponent } from './settings/certificate-template/certificate-template.component';
+import { ListComponent } from './settings/list/list.component';
+import { CreatAnnouncementComponent } from './settings/list/creat-announcement/creat-announcement.component';
+import { AddQuestionsComponent } from './settings/add-questions/add-questions.component';
+import { AllQuestionsComponent } from './settings/all-questions/all-questions.component';
+import { CreateUserRoleComponent } from './settings/create-user-role/create-user-role.component';
+import { UserTypeComponent } from './settings/user-type/user-type.component';
+import { ViewDepartmentComponent } from './settings/all-departments/view-department/view-department.component';
+import { ViewAnnouncementComponent } from './settings/list/view-announcement/view-announcement.component';
 
 
 const routes: Routes = [
@@ -146,7 +160,7 @@ const routes: Routes = [
     component: SettingsComponent,
   },
   {
-    path: 'logo-coutomization',
+    path: 'settings/logo-customization',
     component: LogoCoutomzationComponent,
   },
   {
@@ -154,12 +168,77 @@ const routes: Routes = [
     component: SettingsComponent,
   },
   {
+    path: 'settings/all-users',
+    component: AllUsersComponent,
+  },
+  {
+    path: 'settings/all-students',
+    component: AllStudentsComponent,
+  },
+  {
+    path: 'settings/all-instructors',
+    component: AllTeachersComponent,
+  },
+  {
+    path: 'settings/all-staff',
+    component: AllstaffComponent
+  },
+  {
+    path: 'settings/all-departments',
+    component: AllDepartmentsComponent
+  },
+  {
+    path: 'settings/certificate/template',
+    component: CertificateTemplateComponent
+  },
+  {
+    path: 'settings/announcement',
+    component: ListComponent,
+  },
+  {
+    path: 'settings/create-announcement',
+    component: CreatAnnouncementComponent,
+  },
+  {
+    path: 'settings/edit-announcement/:id',
+    component: CreatAnnouncementComponent,
+  },
+  {
+    path: 'settings/view-announcement/:id',
+    component: ViewAnnouncementComponent,
+  },
+  {
+    path: 'settings/all-questions',
+    component: AllQuestionsComponent,
+},
+{
+    path: 'settings/add-questions',
+    component: AddQuestionsComponent,
+},
+{
+    path: 'settings/edit-questions/:id',
+    component: AddQuestionsComponent,
+},
+{
+  path: 'settings/create-user-role',
+  component: CreateUserRoleComponent
+},
+{
+  path: 'settings/user-type',
+  component: UserTypeComponent,
+},
+
+  {
     path: 'side-menu/:id',
     component: SidemenuComponent,
   },
   {
-    path: 'form-customization',
+    path: 'settings/form-customization',
     component: FormCustomizationComponent,
+  },
+  {
+    path: 'settings/view-department/:id',
+    component: ViewDepartmentComponent,
   },
 
 

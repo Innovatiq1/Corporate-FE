@@ -21,7 +21,7 @@ import { AuthService, Role } from '@core';
 import { MenuItem, RouteInfo } from './sidebar.metadata';
 import { AuthenService } from '@core/service/authen.service';
 import { AdminService } from '@core/service/admin.service';
-import { StudentsService } from 'app/admin/students/all-students/students.service';
+import { StudentsService } from 'app/admin/students/students.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -119,13 +119,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
       }
     );
   }
-  navigateTo(menu:any,url:any) {
-    this.menuItemClick.emit();
-    let userType = localStorage.getItem('user_type')
-    this.router.navigateByUrl( menu +'/'+url);
+
+navigateTo(menu:any,url?:any) {
+  this.menuItemClick.emit();
+  let userType = localStorage.getItem('user_type')
+  if(this.isSettings){
+    this.router.navigateByUrl(menu);
+
+  } else {
+  this.router.navigateByUrl( menu +'/'+url);
+  }
 }
-
-
 
 
   ngOnInit() {

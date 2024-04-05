@@ -20,7 +20,6 @@ import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CourseService } from '@core/service/course.service';
 import { Subscription } from 'rxjs';
-import { StudentsService } from '../../students/all-students/students.service';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -28,6 +27,7 @@ import {
 } from '@angular/material/snack-bar';
 import { InstructorService } from '@core/service/instructor.service';
 import Swal from 'sweetalert2';
+import { StudentsService } from 'app/admin/students/students.service';
 // import * as moment from 'moment';
 
 @Component({

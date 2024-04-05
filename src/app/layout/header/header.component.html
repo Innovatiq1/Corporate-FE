@@ -125,41 +125,44 @@
                   <img src="assets/images/settings/role.png" alt="User" class="user-image">
                   <button mat-menu-item><h5>Manage Users</h5></button>
                 </div>
-                <div class="user-option" (click)="navigateToIntegrateSettings()">
-                  <img src="assets/images/settings/integrate.jpg" alt="Custom" class="user-image">
-                  <button mat-menu-item><h5>Integration</h5></button>
+                <div class="user-option" (click)="navigateToConfigSettings()">
+                  <img src="assets/images/settings/system-configuration1.png" alt="User" class="user-image">
+                  <button mat-menu-item><h5>Configuration</h5></button>
+
+                  <!-- <img src="assets/images/settings/lms.png" alt="Custom" class="user-image">
+                  <button mat-menu-item><h5>LMS TAE</h5></button> -->
                 </div>
-                <div class="user-option" (click)="navigateToProfileSettings()">
-                  <img src="assets/images/settings/security1.png" alt="User" class="user-image">
-                  <button mat-menu-item><h5>Security</h5></button>
+                <div class="user-container">
+                  <div class="user-option" (click)="navigateToCustomsSettings()">
+                    <img src="assets/images/settings/custom.png" alt="Custom" class="user-image">
+                    <button mat-menu-item><h5>Customization</h5></button>
+                  </div>
                 </div>
-              </div>
             </div>
+          </div>
+
             <div class="menu-row">
-              <div class="user-container">
-                <div class="user-option" (click)="navigateToCustomsSettings()">
-                  <img src="assets/images/settings/custom.png" alt="Custom" class="user-image">
-                  <button mat-menu-item><h5>Customization</h5></button>
-                </div>
-               
-                <div class="user-option" (click)="navigateToAutomateSettings()">
+              <div class="user-options" (click)="navigateToIntegrateSettings()">
+                <img src="assets/images/settings/integrate.jpg" alt="Custom" class="user-image">
+                <button mat-menu-item><h5>Integration</h5></button>
+              </div>
+              <div class="user-options" (click)="navigateToProfileSettings()">
+                <img src="assets/images/settings/security1.png" alt="User" class="user-image">
+                <button mat-menu-item><h5>Security</h5></button>
+              </div>
+                <div class="user-options" (click)="navigateToAutomateSettings()">
                   <img src="assets/images/settings/automate1.png" alt="User" class="user-image">
                   <button mat-menu-item><h5>Automation</h5></button>
                 </div>
-                <div class="user-option" (click)="navigateToLmsSettings()">
-                  <img src="assets/images/settings/lms.png" alt="Custom" class="user-image">
-                  <button mat-menu-item><h5>LMS TAE</h5></button>
-                </div>
               </div>
-            </div>
-            <div class="menu-row">
+            <!-- <div class="menu-row">
               <div class="user-container" (click)="navigateToConfigSettings()">
                 <div class="user-option">
                   <img src="assets/images/settings/system-configuration1.png" alt="User" class="user-image">
                   <button mat-menu-item><h5>Configuration</h5></button>
                 </div>
               </div>
-            </div>
+            </div> -->
           </mat-menu>
           <!-- <button mat-menu-item class="user-item-list" (click)="onClick()" >
             <app-feather-icons [icon]="'settings'" [class]="'user-menu-icons'"></app-feather-icons>
@@ -179,10 +182,10 @@
             <div class="noti-list">
               <div class="menu ">
                 <div class="user_dw_menu">
-                  <button mat-menu-item class="user-item-list" [routerLink]="['/student/account-settings']">
+                  <button mat-menu-item class="user-item-list" [routerLink]="['/student/settings/account-settings']">
                     <app-feather-icons [icon]="'user'" [class]="'user-menu-icons'"></app-feather-icons>User Information
                   </button>
-                  <button mat-menu-item class="user-item-list" [routerLink]="['/student/security-settings']">
+                  <button mat-menu-item class="user-item-list" [routerLink]="['/student/settings/security-settings']">
                     <app-feather-icons [icon]="'lock'" [class]="'user-menu-icons'"></app-feather-icons>Change Password
                   </button>
                   <!-- <button mat-menu-item class="user-item-list" (click)="onClick()" >
