@@ -1,6 +1,8 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
-import { CoursePaginationModel } from '@core/models/course.model';
+import { CourseModel, CoursePaginationModel } from '@core/models/course.model';
 import { UserType } from '@core/models/user.model';
 import { AdminService } from '@core/service/admin.service';
 import { UserService } from '@core/service/user.service';
@@ -14,6 +16,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./user-type.component.scss']
 })
 export class UserTypeComponent {
+
+  displayedColumns = [
+    
+    'User Role',
+    'Accessbility Module',
+    'Status',
+    'actions'
+  ];
   breadscrums = [
     {
       title: 'User Role',
@@ -31,6 +41,9 @@ export class UserTypeComponent {
   totalItems: any;
   pageSizeArr = this.utils.pageSizeArr;
   isLoading = true;
+  selection = new SelectionModel<UserType>(true, []);
+  
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   
   constructor(public router: Router,private adminService:AdminService,   private userService: UserService, 
     private ref: ChangeDetectorRef,
@@ -151,5 +164,47 @@ export class UserTypeComponent {
       (error) => {
       }
     );
+  }
+  private refreshTable() {
+    this.paginator._changePageSize(this.paginator.pageSize);
+  }
+  removeSelectedRows() {
+    const totalSelect = this.selection.selected.length;
+
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.selection.selected.forEach((item) => {
+          const index: number = this.typesList.renderedData.findIndex(
+            (d: UserType) => d === item
+          );
+          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          // this.exampleDatabase?.dataChange.value.splice(index, 1);
+          this.refreshTable();
+          this.selection = new SelectionModel<UserType>(true, []);
+        });
+        Swal.fire({
+          title: 'Success',
+          text: 'Record Deleted Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+      }
+    });
+   
+    // this.showNotification(
+    //   'snackbar-danger',
+    //   totalSelect + ' Record Delete Successfully...!!!',
+    //   'bottom',
+    //   'center'
+    // );
   }
 }

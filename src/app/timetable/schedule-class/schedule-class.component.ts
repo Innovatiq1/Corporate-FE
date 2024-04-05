@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
 import { CoursePaginationModel } from '@core/models/course.model';
-import { ProgramService } from '../program.service';
+// import { ProgramService } from '../program.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { forkJoin } from 'rxjs';
@@ -18,6 +18,7 @@ import {
   TableElement,
   UnsubscribeOnDestroyAdapter,
 } from '@shared';
+import { ProgramService } from 'app/admin/program/program.service';
 
 @Component({
   selector: 'app-schedule-class',
@@ -65,9 +66,9 @@ export class ScheduleClassComponent {
 
   breadscrums = [
     {
-      title: 'Schedule Class',
-      items: ['Program'],
-      active: 'Schedule Class',
+      title: 'Program Class',
+      items: ['Timetable'],
+      active: 'Program Class',
     },
   ];
   dataSource: any;

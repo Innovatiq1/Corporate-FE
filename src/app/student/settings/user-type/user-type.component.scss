@@ -8,6 +8,16 @@ svg {
     padding-left: 5px;
     padding-right: 5px;
 }
+.svg2 svg{
+    position: absolute;
+    fill: #000;
+    background-color: #d3cdcd;
+    margin-top: -15px;
+    margin-left: -15px;
+    border-radius: 10px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
 // modal-box styling
 ::ng-deep .mat-mdc-menu-content {
         margin: 0;
@@ -38,7 +48,8 @@ svg {
     background: #6777ef;
     border: none;
     width: fit-content;
-    height: 40px;
+    height: 50px;
+    padding-bottom: 10px;
     border-radius: 10px;
     color: #FFF;
     font-weight: 700;
@@ -47,3 +58,22 @@ svg {
     height:20px;
     width:20px;
 }
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #198754;
+    border-radius: 50%; // To make it a circle
+    display: inline-block;
+    margin-right: 5px; // Space between dot and text
+  }
+  .status-red {
+    width: 8px;
+    height: 8px;
+    background-color: #f11541;
+    border-radius: 50%; // To make it a circle
+    display: inline-block;
+    margin-right: 5px; // Space between dot and text
+  }
+  ::ng-deep .mat-mdc-tab-body-content{
+    overflow-x: hidden !important;
+  }
