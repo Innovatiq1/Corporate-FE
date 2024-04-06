@@ -4,7 +4,7 @@ import { ApiResponse } from '@core/models/response';
 import { CourseService } from '@core/service/course.service';
 import { QuestionService } from '@core/service/question.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
-import { StudentsService } from 'app/admin/students/all-students/students.service';
+import { StudentsService } from '../../admin/students/students.service';
 import { interval } from 'rxjs';
 import Swal from 'sweetalert2';
 @Component({
@@ -141,7 +141,7 @@ student(){
       this.answerId = response.response;
       this.getAnswerById()
       },
-      (error) => {
+      (error: any) => {
         console.error('Error:', error);
       }
     );
