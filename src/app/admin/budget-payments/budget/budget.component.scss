@@ -2,8 +2,8 @@ svg {
     position: absolute;
     fill: #000;
     background-color: #d3cdcd;
-    margin-left: -12px;
-    margin-top: -20px;
+    margin-left: -15px;
+    margin-top: -15px;
     border-radius: 10px;
     padding-left: 3px;
     padding-right: 3px;
@@ -41,4 +41,27 @@ svg {
   .height-select {
     height: 0px;
   }
-  
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #198754;
+  border-radius: 50%; // To make it a circle
+  display: inline-block;
+  margin-right: 5px; // Space between dot and text
+}
+.status-red {
+  width: 8px;
+  height: 8px;
+  background-color: #f11541;
+  border-radius: 50%; // To make it a circle
+  display: inline-block;
+  margin-right: 5px; // Space between dot and text
+}
+.status-orange {
+  width: 8px;
+  height: 8px;
+  background-color: #e9713d;
+  border-radius: 50%; // To make it a circle
+  display: inline-block;
+  margin-right: 5px; // Space between dot and text
+}

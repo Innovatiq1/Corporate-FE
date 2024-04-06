@@ -11,6 +11,7 @@ import { CreateBudgetComponent } from './budget/create-budget/create-budget.comp
 import { CreateDeptBudgetRequestComponent } from './allocation/create-dept-budget-request/create-dept-budget-request.component';
 import { ViewCoursePaymentComponent } from './course-payment/view-course-payment/view-course-payment.component';
 import { ViewProgramPaymentComponent } from './program-payment/view-program-payment/view-program-payment.component';
+import { EmployeeStatusComponent } from './employee-status/employee-status.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,7 @@ const routes: Routes = [
 
   {
     path: 'training-request',
-    component: TrainingReqestComponent
+    component: EmployeeStatusComponent
   },
   {
     path: 'course-payment',
@@ -40,6 +41,10 @@ const routes: Routes = [
     component: ProgramPaymentComponent
   },{
     path: 'create-dept-budget-request',
+    component: CreateDeptBudgetRequestComponent
+  },
+  {
+    path: 'edit-dept-budget-request',
     component: CreateDeptBudgetRequestComponent
   },
   {
