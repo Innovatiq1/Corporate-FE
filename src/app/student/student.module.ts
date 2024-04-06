@@ -65,6 +65,7 @@ import { CreateUserRoleComponent } from './settings/create-user-role/create-user
 import { UserTypeComponent } from './settings/user-type/user-type.component';
 import { ViewDepartmentComponent } from './settings/all-departments/view-department/view-department.component';
 import { ViewAnnouncementComponent } from './settings/list/view-announcement/view-announcement.component';
+import { RoleUserComponent } from './settings/role-user/role-user.component';
 
 
 @NgModule({
@@ -110,7 +111,8 @@ import { ViewAnnouncementComponent } from './settings/list/view-announcement/vie
     UserTypeComponent,
     CreateUserRoleComponent,
     ViewDepartmentComponent,
-    ViewAnnouncementComponent
+    ViewAnnouncementComponent,
+    RoleUserComponent
 
 
   ],

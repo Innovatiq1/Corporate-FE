@@ -75,7 +75,7 @@
                 
                   <ng-container matColumnDef="User Role">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="name" >
+                    <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/role-user/',row.typeName]" class="name" >
                       <span class="mobile-label">Role:</span>{{row?.typeName | capitalizeFirstLetter}}  </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="Accessbility Module">
@@ -172,7 +172,7 @@
                     <div class="materialTableHeader">
                         <div class="left" style="cursor: pointer;" (click)="edit(types.id)">
                             <ul class="header-buttons-left ms-0">
-                                <li class="tbl-title">
+                                <li class="tbl-title" [routerLink]="['/student/settings/role-user/',types.typeName]">
                                     <h2 style="font-weight: 600;">{{types?.typeName | capitalizeFirstLetter}} 
                                      <!-- <span *ngIf="types.isAdmin == true" class="admin border fw-normal bg-white text-success">Admin</span> -->
                                      <span  class="ms-2 border border-success fw-normal rounded-4 px-2 text-success">{{types.status == 'active'?'Active':'Inactive' }}</span>
