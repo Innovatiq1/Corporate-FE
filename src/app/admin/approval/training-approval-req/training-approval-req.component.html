@@ -90,10 +90,11 @@
                                         <th>Vendor Name</th>
                                         <th>Course Timeline</th>
                                        
-                                        <th *ngIf="!pendingCourses && approvedCourses || rejectedCourses">Status</th>
+                                        
                                         <th>Created At</th>
                                         <th *ngIf="!pendingCourses&&approvedCourses">Approved On</th>
                                         <th *ngIf="rejectedCourses">Rejected On</th>
+                                        <th *ngIf="!pendingCourses && approvedCourses || rejectedCourses">Status</th>
                                         <th *ngIf="pendingCourses">Actions</th>
                                     </tr>
                                 </thead>
@@ -102,25 +103,43 @@
                                         <td class="table-img">
                                             <img src="{{request?.employeeId?.avatar || '../../../assets/profile.png'}}" alt="">
                                         </td>
-                                        <td>{{request?.requestId}}</td>
+                                        <td class="name">{{request?.requestId}}</td>
                                         <td>{{request?.employeeId?.name}}</td>
                                         <td>{{request?.courseName | titlecase}}</td>
-                                        <td>{{request?.courseCost}}$</td>
+                                        <td>$ {{request?.courseCost}}</td>
                                         <td>{{request?.vendorName | titlecase}}</td>
                                         <td>{{request?.courseTimeline}}</td>
+                                      
                                         
-                                        <td *ngIf ="ro && !pendingCourses" [ngStyle]="{ 'color': request?.roApproval === 'Approved' ? 'green' : (request?.roApproval === 'Rejected' ? 'red' : '') }">{{request?.roApproval}}</td>
-                                        <td *ngIf ="director && !pendingCourses" [ngStyle]="{ 'color': request?.directorApproval === 'Approved' ? 'green' : (request?.directorApproval === 'Rejected' ? 'red' : '') }">{{request?.directorApproval  }}</td>
-                                        <td *ngIf ="trainingAdmin && !pendingCourses" [ngStyle]="{ 'color': request?.trainingAdminApproval === 'Approved' ? 'green' : (request?.trainingAdminApproval === 'Rejected' ? 'red' : '') }">{{request?.trainingAdminApproval  }}</td>
-                                        
-                                        <td>{{request?.createdAt | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
-                                        <td  *ngIf ="ro&& !pendingCourses">{{request?.roApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
-                                        <td  *ngIf ="director&& !pendingCourses">{{request?.directorApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
-                                        <td   *ngIf ="trainingAdmin&& !pendingCourses">{{request?.trainingadminApprovedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
-                                        <td  *ngIf ="ro&& rejectedCourses">{{request?.roRejectedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
-                                        <td  *ngIf ="director&& rejectedCourses">{{request?.directorRejectedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
-                                        <td   *ngIf ="trainingAdmin&& rejectedCourses">{{request?.trainingAdminRejectedOn | date:' MMM dd, yyyy hh:mm:ss a'  }}</td>
-
+                                        <td>{{request?.createdAt | date }}</td>
+                                        <td  *ngIf ="ro&& !pendingCourses">{{request?.roApprovedOn | date}}</td>
+                                        <td  *ngIf ="director&& !pendingCourses">{{request?.directorApprovedOn | date}}</td>
+                                        <td   *ngIf ="trainingAdmin&& !pendingCourses">{{request?.trainingadminApprovedOn | date}}</td>
+                                        <td  *ngIf ="ro&& rejectedCourses">{{request?.roRejectedOn | date }}</td>
+                                        <td  *ngIf ="director&& rejectedCourses">{{request?.directorRejectedOn | date}}</td>
+                                        <td   *ngIf ="trainingAdmin&& rejectedCourses">{{request?.trainingAdminRejectedOn | date }}</td>
+  
+                                        <td *ngIf ="ro && !pendingCourses">  <span
+                                            [class]="request?.roApproval === 'Approved' ? 'badge badge-solid-green' : request?.roApproval === 'Pending' ? 'badge badge-solid-orange' :  (request?.roApproval === 'Rejected' ? 'badge badge-solid-red' : '') ">
+                                            <span
+                                              [class]="request?.roApproval === 'Approved' ? 'status-dot' : request?.roApproval === 'Pending' ? 'status-orange' :  (request?.roApproval === 'Rejected' ? 'status-red' : '') "></span>
+                                            {{request.roApproval }}
+                                            <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                                          </span></td>
+                                        <td *ngIf ="director && !pendingCourses"><span
+                                            [class]="request?.directorApproval === 'Approved' ? 'badge badge-solid-green' : request?.directorApproval === 'Pending' ? 'badge badge-solid-orange' :  (request?.directorApproval === 'Rejected' ? 'badge badge-solid-red' : '') ">
+                                            <span
+                                              [class]="request?.directorApproval === 'Approved' ? 'status-dot' : request?.directorApproval === 'Pending' ? 'status-orange' :  (request?.directorApproval === 'Rejected' ? 'status-red' : '') "></span>
+                                            {{request.directorApproval }}
+                                            <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                                          </span></td>
+                                        <td *ngIf ="trainingAdmin && !pendingCourses" ><span
+                                            [class]="request?.trainingAdminApproval === 'Approved' ? 'badge badge-solid-green' : request?.trainingAdminApproval === 'Pending' ? 'badge badge-solid-orange' :  (request?.trainingAdminApproval === 'Rejected' ? 'badge badge-solid-red' : '') ">
+                                            <span
+                                              [class]="request?.trainingAdminApproval === 'Approved' ? 'status-dot' : request?.trainingAdminApproval === 'Pending' ? 'status-orange' :  (request?.trainingAdminApproval === 'Rejected' ? 'status-red' : '') "></span>
+                                            {{request.trainingAdminApproval }}
+                                            <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                                          </span></td>
                                         <!-- (click)="approve(request.id)" -->
                                         <td *ngIf="pendingCourses">
                                             <div class="d-flex gap-2 justify-content-between">

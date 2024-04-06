@@ -113,7 +113,6 @@ export class AddComponent {
       }else if(this.userType === 'Student'){
         this.router.navigate(['/student/exams/courses']);
       }
-      
       // this.router.navigate(['/student/exams/courses']);
 
     }
