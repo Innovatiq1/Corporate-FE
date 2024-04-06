@@ -9,7 +9,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="card">
             <div class="materialTableHeader">
-              <div class="left">
+              <!-- <div class="left">
                 <ul class="header-buttons-left ms-0">
                   <li class="tbl-title">
                     <h2>Lecture</h2>
@@ -19,24 +19,35 @@
                     <input placeholder="Search" type="text" #filter class="browser-default search-field" [(ngModel)]="filterName" (input)="performSearch()"
                       aria-label="Search box">
                   </li>
-                </ul>
-              </div>
+                </ul> 
+              </div>-->
               <div class="right">
                 <ul class="tbl-export-btn">
-                  <li class="tbl-header-btn">
-                    <div class="m-l-10" matTooltip="ADD">
-                      <button mat-mini-fab color="primary" (click)="addNew()">
-                        <mat-icon class="col-white">add</mat-icon>
-                      </button>
-                    </div>
+                  <li>
+                    <ul class="header-buttons-left ms-0">
+                      <li class="tbl-search-box">
+                        <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                        <input placeholder="Search" type="text" #filter class="browser-default search-field" [(ngModel)]="filterName" (input)="performSearch()"
+                          aria-label="Search box">
+                      </li>
+                    </ul> 
                   </li>
                   <li class="tbl-header-btn">
+                    <div class="m-l-10" matTooltip="ADD">
+                      <button mat-raised-button (click)="addNew()"
+                      id="submit">Create</button>
+                      <!-- <button mat-mini-fab color="primary" (click)="addNew()">
+                        <mat-icon class="col-white">add</mat-icon>
+                      </button> -->
+                    </div>
+                  </li>
+                  <!-- <li class="tbl-header-btn">
                     <div class="m-l-10" matTooltip="REFRESH">
                       <button mat-mini-fab color="primary" (click)="refresh()">
                         <mat-icon class="col-white">refresh</mat-icon>
                       </button>
                     </div>
-                  </li>
+                  </li> -->
                   <li class="tbl-header-btn">
                     <div class="m-l-10" [hidden]=!selection.hasValue() matTooltip="DELETE">
                       <button mat-mini-fab color="warn" (click)="removeSelectedRows()">
@@ -128,16 +139,28 @@
                     <mat-cell mat-cell *matCellDef="let row" (click)="editCall(row)">
                       <span class="mobile-label">Status:</span>
                       <div *ngIf="row.sessions[0].status==='Confirm'">
-                        <span class="badge badge-solid-green">
-                          {{row.sessions[0].status}}</span>
+                        <span
+                        [class]="'badge badge-solid-green'">
+                        <span
+                          [class]=" 'status-dot'"></span>
+                          {{row.sessions[0].status}}
+                      </span>
                       </div>
                       <div *ngIf="row.sessions[0].status==='Cancelled'">
-                        <span class="badge badge-solid-orange">
-                          {{row.sessions[0].status}}</span>
+                        <span
+                        [class]="'badge badge-solid-red'">
+                        <span
+                          [class]=" 'status-red'"></span>
+                          {{row.sessions[0].status}}
+                      </span>
                       </div>
                       <div *ngIf="row.sessions[0].status==='Pending'" >
-                        <span  class="badge badge-solid-orange">
-                          {{row.sessions[0].status}}</span>
+                        <span
+                        [class]="'badge badge-solid-orange'">
+                        <span
+                          [class]=" 'status-orange'"></span>
+                          {{row.sessions[0].status}}
+                      </span>
                       </div>
                     </mat-cell>
                   </ng-container>
