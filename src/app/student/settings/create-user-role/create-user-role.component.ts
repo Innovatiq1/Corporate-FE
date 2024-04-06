@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MenuItemModel } from '@core/models/user.model';
 import { AdminService } from '@core/service/admin.service';
 import Swal from 'sweetalert2';
@@ -16,7 +17,7 @@ export class CreateUserRoleComponent {
   userTypeNames: any;
   isEdit: boolean = false;
 
-  constructor(private fb: FormBuilder, private adminService: AdminService){
+  constructor(private fb: FormBuilder, private adminService: AdminService,private router:Router){
 
     this.userTypeFormGroup = this.fb.group({
       typeName: ['', []],
@@ -54,17 +55,20 @@ export class CreateUserRoleComponent {
           this.isLoading = false;
           Swal.fire({
             title: 'Successful',
-            text: 'User Type created succesfully.Add menu by selecting the user type from existing user types',
+            text: 'Role created succesfully.Add modules by selecting the role from existing roles',
             icon: 'success',
-          });
+          }).then((result) => {
+            this.router.navigate(['admin/users/create-user-type'])
+          }
+          );
           this.userTypeFormGroup.reset();
           this.getAllUserTypes()
           resolve(response)
         },
-        (error: any) => {
+        (error: { message: any; error: any; }) => {
           this.isLoading = false;
           Swal.fire(
-            error,
+            'Role Exists Already',
             error.message || error.error,
             'error'
           );
