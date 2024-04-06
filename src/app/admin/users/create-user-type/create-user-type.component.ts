@@ -39,7 +39,6 @@ export class CreateUserTypeComponent {
   isNext: boolean = false;
   isNext1: boolean = false;
   isEdit: boolean = false;
-  // createUser :boolean = false;
   dataSource!: MatTableDataSource<MenuItemModel>;
   dataSourceArray: MenuItemModel[] = [];
   chilData: any[] = [];
@@ -62,6 +61,7 @@ export class CreateUserTypeComponent {
     private cd: ChangeDetectorRef, private route: Router, public utils: UtilsService, private formBuilder: FormBuilder,
     private logoService: LogoService
   ) {
+    this.initMenuItemsV2();
     this.router.queryParams.subscribe(params => {
       if (params['id']) {
         this.paramId = params['id']
@@ -87,7 +87,6 @@ export class CreateUserTypeComponent {
   getUserTypeList(filters?: any) {
     this.adminService.getUserTypeList({ ...this.coursePaginationModel }).subscribe(
       (response: any) => {
-        console.log(response)
         this.typesList = response.docs;
         let data = this.typesList.find((id: any) => id._id === this.paramId);
         if (data) {
@@ -99,6 +98,7 @@ export class CreateUserTypeComponent {
           data.menuItems.map((res: { id: any; checked: any }) => {
             this.changeMenuChecked(res.checked, res.id)
           })
+          console.log('data',data)
         }
 
         this.cd.detectChanges();
@@ -111,7 +111,6 @@ export class CreateUserTypeComponent {
   ngOnInit() {
     this.dataSource = new MatTableDataSource<MenuItemModel>(this.dataSourceArray);
     this.getAllUserTypes();
-    this.initMenuItemsV2();
   }
   onSubmitForm() {
     this.submitted = true
@@ -125,64 +124,6 @@ export class CreateUserTypeComponent {
     }).catch((e: any) => {
     })
   }
-  // createUserType(): any {
-  //   let formData = this.userTypeFormGroup.getRawValue();
-  //   let selectedMenuItems = []
-  //   selectedMenuItems = this.getCheckedItems(this.dataSourceArray).filter((v: any) => v);
-  //   formData.menuItems = selectedMenuItems;
-
-  //   return new Promise((resolve, reject) => {
-  //     this.adminService.createUserType(formData).subscribe(
-  //       (response: unknown) => {
-  //         this.isLoading = false;
-  //         Swal.fire({
-  //           title: 'Successful',
-  //           text: 'User Type created succesfully.Add menu by selecting the user type from existing user types',
-  //           icon: 'success',
-  //         });
-  //         this.userTypeFormGroup.reset();
-  //         this.getAllUserTypes()
-  //         resolve(response)
-  //       },
-  //       (error: any) => {
-  //         this.isLoading = false;
-  //         Swal.fire(
-  //           error,
-  //           error.message || error.error,
-  //           'error'
-  //         );
-  //         reject(error)
-  //       }
-  //     );
-  //   })
-  // }
-
-
-  // addUserType(formObj: any): any {
-  //   return new Promise((resolve, reject) => {
-  //     this.adminService.createUserType(formObj).subscribe(
-  //       (response: unknown) => {
-  //         this.isLoading = false;
-  //         Swal.fire({
-  //           title: 'Successful',
-  //           text: 'User Type created succesfully',
-  //           icon: 'success',
-  //         });
-  //         resolve(response)
-  //         this.route.navigate(['/admin/users/user-type']);
-  //       },
-  //       (error: { message: any; error: any; }) => {
-  //         this.isLoading = false;
-  //         Swal.fire(
-  //           'Failed to create user Type',
-  //           error.message || error.error,
-  //           'error'
-  //         );
-  //         reject(error)
-  //       }
-  //     );
-  //   })
-  // }
 
   updateUserType(obj: any): any {
     return new Promise((resolve, reject) => {
@@ -262,8 +203,11 @@ export class CreateUserTypeComponent {
       if (!this.dataSourceArray.some(v => v.id === item.id))
         this.dataSourceArray.push(item);
     });
-
     this.dataSource = new MatTableDataSource<MenuItemModel>(this.dataSourceArray);
+    if(this.isEdit){
+      this.getUserTypeList();
+    }
+
     this.cd.detectChanges();
   })
   }
@@ -296,7 +240,6 @@ export class CreateUserTypeComponent {
         checked: defaultCheck?.checked || false,
         indeterminate: defaultCheck?.indeterminate || false,
         icon: v?.iconsrc
-        // icon: v?.icon
 
       };
       if (children && children.length) {
@@ -321,7 +264,6 @@ export class CreateUserTypeComponent {
             checked: actionChecked?.checked || false,
             indeterminate: actionChecked?.indeterminate || false,
             icon: actionChecked?.iconsrc
-            // icon: actionChecked?.icon
           }
         })
         res = {
@@ -334,7 +276,6 @@ export class CreateUserTypeComponent {
   }
 
   changeMenuChecked(checked?: any, id?: any) {
-    console.log("id",id)
     this.dataSourceArray = this.setChecked(this.dataSourceArray, { menu_id: id, checked });
     const indeterminate = this.dataSourceArray.some(v => !v.checked);
     this.allMenus = {
@@ -346,7 +287,6 @@ export class CreateUserTypeComponent {
   }
 
   setChecked(obj: any[], data: { isAllCheck?: any; checked: any; menu_id?: any; }, parent?: { indeterminate: any; checked: boolean; } | undefined) {
-    console.log("data",data)
     const { menu_id, checked, isAllCheck } = data
     return obj.map(v => {
       let res: any = {

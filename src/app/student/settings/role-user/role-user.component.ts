@@ -25,9 +25,9 @@ export class RoleUserComponent {
   ];
   breadscrums = [
     {
-      title: 'User Role',
-      items: ['User Access'],
-      active: 'User Role',
+      title: 'Users',
+      items: ['Role'],
+      active: 'Users',
     },
   ];
 
