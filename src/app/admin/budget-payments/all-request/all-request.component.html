@@ -44,7 +44,7 @@
                     (ngModelChange)="onRoChange()"
                     required
                   />
-                  <label>RO</label>
+                  <label>Approver 1</label>
                 </div>
                 <div class="city" id="input-city">
                   <input
@@ -56,7 +56,7 @@
                     [(ngModel)]="directorText"
                     (ngModelChange)="onDirectorChange()"
                   />
-                  <label>Director</label>
+                  <label>Approver 2</label>
                 </div>
                 <div class="city" id="input-city">
                   <input
@@ -68,7 +68,7 @@
                     [(ngModel)]="trainingadminText"
                     (ngModelChange)="onTrainingChange()"
                   />
-                  <label>Training Admin</label>
+                  <label>Approver 3</label>
                 </div>
               </div>
             </div>
@@ -99,9 +99,9 @@
                     <tr>
                       <th>Employee</th>
                       <th>Course</th>
-                      <th>RO</th>
-                      <th>Director</th>
-                      <th>Training Admin</th>
+                      <th>Approver 1</th>
+                      <th>Approver 2</th>
+                      <th>Approver 3</th>
                       <th>Vendor Name</th>
                       <th>Approval Stages</th>
                       <th>Status</th>
@@ -110,51 +110,54 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let row of SourceData" style="cursor: pointer;" (click)="viewReq(row?._id)">
-                      <td>{{ row?.employeeName }}</td>
+                      <td class="name">{{ row?.employeeName }}</td>
                       <td>{{ row?.courseName }}</td>
                       <td>{{ row?.roName }}</td>
                       <td>{{ row?.directorName }}</td>
                       <td>{{ row?.trainingAdminName }}</td>
                       <td>{{ row?.vendorName }}</td>
                       <td>
-                        <div class="approval-reason ">RO Approval</div>
+                        <div class="approval-reason mt-3">Approver 1</div>
                         <div class="approval-reason ">
-                          Director Approval
+                          Approver 2
                         </div>
                         <div class="approval-reason">
-                          Training Admin Approval
+                          Approver 3
                         </div>
                       </td>
                       <td>
                         <div
                           class="approval-reason"
-                          [ngClass]="{
-                            approved: row?.roApproval === 'Approved',
-                            rejected: row?.roApproval === 'Rejected',
-                            pending: row?.roApproval === 'Pending'
-                          }"
                         >
-                          {{ row?.roApproval }}
+                        <span
+                        [class]="row?.roApproval === 'Approved' ? 'badge badge-solid-green' : row?.roApproval === 'Pending' ? 'badge badge-solid-orange' :  (row?.roApproval === 'Rejected' ? 'badge badge-solid-red' : '') ">
+                        <span
+                          [class]="row?.roApproval === 'Approved' ? 'status-dot' : row?.roApproval === 'Pending' ? 'status-orange' :  (row?.roApproval === 'Rejected' ? 'status-red' : '') "></span>
+                        {{row.roApproval }}
+                        <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                      </span>
                         </div>
                         <div
                           class="approval-reason"
-                          [ngClass]="{
-                            approved: row?.directorApproval === 'Approved',
-                            rejected: row?.directorApproval === 'Rejected',
-                            pending: row?.directorApproval === 'Pending'
-                          }"
                         >
-                          {{ row?.directorApproval }}
+                        <span
+                        [class]="row?.directorApproval === 'Approved' ? 'badge badge-solid-green' : row?.directorApproval === 'Pending' ? 'badge badge-solid-orange' :  (row?.directorApproval === 'Rejected' ? 'badge badge-solid-red' : '') ">
+                        <span
+                          [class]="row?.directorApproval === 'Approved' ? 'status-dot' : row?.directorApproval === 'Pending' ? 'status-orange' :  (row?.directorApproval === 'Rejected' ? 'status-red' : '') "></span>
+                        {{row.directorApproval }}
+                        <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                      </span>
                         </div>
                         <div
-                          class="approval-reason"
-                          [ngClass]="{
-                            approved: row?.trainingAdminApproval === 'Approved',
-                            rejected: row?.trainingAdminApproval === 'Rejected',
-                            pending: row?.trainingAdminApproval === 'Pending'
-                          }"
+                        
                         >
-                          {{ row?.trainingAdminApproval }}
+                        <span
+                        [class]="row?.trainingAdminApproval === 'Approved' ? 'badge badge-solid-green' : row?.trainingAdminApproval === 'Pending' ? 'badge badge-solid-orange' :  (row?.trainingAdminApproval === 'Rejected' ? 'badge badge-solid-red' : '') ">
+                        <span
+                          [class]="row?.trainingAdminApproval === 'Approved' ? 'status-dot' : row?.trainingAdminApproval === 'Pending' ? 'status-orange' :  (row?.trainingAdminApproval === 'Rejected' ? 'status-red' : '') "></span>
+                        {{row.trainingAdminApproval }}
+                        <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                      </span>
                         </div>
                       </td>
                       <td>
@@ -162,7 +165,7 @@
                         class="badge badge-solid-purple"
                         (click)="viewReq(row?._id)"
                       >
-                        view
+                        View
                       </button>
                       </td>
                       

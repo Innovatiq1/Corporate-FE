@@ -76,7 +76,7 @@ export class AllocationComponent implements OnInit{
 
   // }
   edit(id: any) {
-    this.router.navigate(['/admin/e-tms/edit-department-budget'], {
+    this.router.navigate(['/admin/budgets/edit-dept-budget-request'], {
       queryParams: { id: id, action: 'edit' },
     });
   }
