@@ -12,6 +12,9 @@ import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import Swal from 'sweetalert2';
+import { RoleDailogComponent } from './role-dailog/role-dailog.component';
+import { Direction } from '@angular/cdk/bidi';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-all-users',
   templateUrl: './all-users.component.html',
@@ -55,7 +58,8 @@ export class AllUsersComponent {
     private activatedRoute: ActivatedRoute,
     private ref: ChangeDetectorRef,
     private courseService: CourseService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
 
   ) {
 
@@ -175,6 +179,19 @@ performSearch() {
 edit(row:any){
   console.log("row: " + row.id);
 this.router.navigate(['/admin/users/edit-all-users'], {queryParams:{row:row}})
+}
+addNew() {
+  let tempDirection: Direction;
+  if (localStorage.getItem('isRtl') === 'true') {
+    tempDirection = 'rtl';
+  } else {
+    tempDirection = 'ltr';
+  }
+  const dialogRef = this.dialog.open(RoleDailogComponent, {
+    
+    direction: tempDirection,
+   
+  });
 }
 exportExcel() {
   //k//ey name with space add in brackets
