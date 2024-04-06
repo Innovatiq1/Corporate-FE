@@ -197,7 +197,7 @@ export class CreateUserTypeComponent {
               (response: unknown) => {
                 Swal.fire({
                   title: 'Successful',
-                  text: 'Menu added succesfully',
+                  text: 'Module added succesfully',
                   icon: 'success',
                 })
                 resolve(response);
@@ -221,7 +221,7 @@ export class CreateUserTypeComponent {
             if (this.isEdit === true) {
               Swal.fire({
                 title: 'Successful',
-                text: 'Role updated succesfully',
+                text: 'Module updated succesfully',
                 icon: 'success',
               })
             }
