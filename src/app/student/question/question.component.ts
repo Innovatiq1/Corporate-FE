@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiResponse } from '@core/models/response';
 import { CourseService } from '@core/service/course.service';
 import { QuestionService } from '@core/service/question.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
+import { StudentsService } from '../../admin/students/students.service';
 import { interval } from 'rxjs';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -22,23 +24,59 @@ export class QuestionComponent implements OnInit {
   interval$: any;
   progress: string = "0";
   isQuizCompleted : boolean = false;
+  isanswersSubmitted : boolean = false;
+
   currentId!: string;
   courseId!: string;
   studentId!: string;
   classId!: string;
+  assesmentId! : string;
+  answerId! : string;
+  user_name! : string;
+  selectedOption: any = '';
+  optionsLabel: string[] = ['a)', 'b)', 'c)', 'd)'];
+  public answers: any = [];
+  answerResult! : any
+
   constructor(private questionService: QuestionService,private courseService:CourseService,private router: Router,
+    private studentService : StudentsService,
       ) { }
 
   ngOnInit(): void {
     this.name = localStorage.getItem("name")!;
     this.getAllQuestions();
-    this.startCounter();
     this.getCourseDetails();
+    this.student();
+  }
+
+  confirmSubmit() {
+    const nullOptionExists = this.answers.some((answer: any) => answer.selectedOptionText === null);
+    if (nullOptionExists) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please answer all questions before submitting.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+  
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to submit the answers?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, submit!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.submitAnswers();
+      }
+    });
   }
   getAllQuestions() {
     this.questionService.getQuestionJson()
       .subscribe(res => {
-        // this.questionList = res.data.docs[0].questions;
       })
   }
   getCourseDetails(){
@@ -49,85 +87,22 @@ export class QuestionComponent implements OnInit {
 
     this.courseService.getCourseById(this.courseId).subscribe((response) => {
     this.questionList = response?.assessment?.questions;
+    this.assesmentId = response?.assessment?.id;
+    this.answers = Array.from({ length: this.questionList.length }, () => ({
+      questionText: null,
+      selectedOptionText: null
+    }));
   })
 }
 
-  nextQuestion() {
-    this.currentQuestion++;
-  }
-  previousQuestion() {
-    this.currentQuestion--;
-  }
-  answer(currentQno: number, option: any) {
-
-    if(currentQno === this.questionList.length){
-      this.isQuizCompleted = true;
-      if(this.points >= 10){
-        // let payload = {
-        //   status: 'completed',
-        //   studentId: this.studentId,
-        //   playbackTime: 100,
-        // };
-        // this.classService
-        //   .saveApprovedClasses(this.classId, payload)
-        //   .subscribe((response) => {
-        //     setTimeout(() => {
-        //       this.router.navigate(['/student/view-course/'+ this.classId]);    
-        //     }, 7000);
-      
-        //   });
-
-        this.router.navigate(['/student/feedback/courses', this.classId, this.studentId, this.courseId]);
-      }
-
-      this.stopCounter();
-    }
-    if (option.correct) {
-      this.points += 10;
-      this.correctAnswer++;
-      setTimeout(() => {
-        this.currentQuestion++;
-        this.resetCounter();
-        this.getProgressPercent();
-      }, 1000);
+student(){
+  this.studentService.getStudentById(this.studentId).subscribe((res: any) => {
+    this.user_name = res.name
+  })
+}
 
 
-    } else {
-      setTimeout(() => {
-        this.currentQuestion++;
-        this.inCorrectAnswer++;
-        this.resetCounter();
-        this.getProgressPercent();
-      }, 1000);
-
-      this.points -= 10;
-    }
-  }
-  startCounter() {
-    this.interval$ = interval(1000)
-      .subscribe(val => {
-        this.counter--;
-        if (this.counter === 0) {
-          this.currentQuestion++;
-          this.counter = 60;
-          this.points -= 10;
-        }
-      });
-    setTimeout(() => {
-      this.interval$.unsubscribe();
-    }, 600000);
-  }
-  stopCounter() {
-    this.interval$.unsubscribe();
-    this.counter = 0;
-  }
-  resetCounter() {
-    this.stopCounter();
-    this.counter = 60;
-    this.startCounter();
-  }
   resetQuiz() {
-    this.resetCounter();
     this.getAllQuestions();
     this.points = 0;
     this.counter = 60;
@@ -140,4 +115,75 @@ export class QuestionComponent implements OnInit {
     return this.progress;
 
   }
+
+  handleRadioChange(index:any) {
+    this.answers[index].questionText = this.questionList[index]?.questionText
+    this.answers[index].selectedOptionText = this.selectedOption
+    this.selectedOption = ''
+  }
+
+
+
+  submitAnswers() {
+    const requestBody = {
+      studentId: this.studentId,
+      assessmentId: this.assesmentId,
+      answers: this.answers
+    };
+
+    this.studentService.submitAssessment(requestBody).subscribe(
+      (response: any) => {
+        Swal.fire({
+          title: "Submitted!",
+          text: "Your answers were submitted.",
+          icon: "success"
+        });
+      this.answerId = response.response;
+      this.getAnswerById()
+      },
+      (error: any) => {
+        console.error('Error:', error);
+      }
+    );
+  }
+
+correctAnswers(value:any) {
+  return this.questionList.filter((v: any) => v.status === value).length
+}
+
+getAnswerById() {
+ this.studentService.getAnswerById(this.answerId).subscribe((res: any) => {
+    this.answerResult  = res.assessmentAnswer;
+    const assessmentAnswer = res.assessmentAnswer;
+    const assessmentId = assessmentAnswer.assessmentId;
+    this.questionList = assessmentId.questions.map((question: any) => {
+      const answer = assessmentAnswer.answers.find((ans: any) => ans.questionText === question.questionText);
+      const correctOption = question.options.find((option: any) => option.correct);
+      const status = correctOption.text === answer.selectedOptionText
+      return {
+        _id: question._id,
+        questionText: question.questionText,
+        selectedOption: answer ? answer.selectedOptionText : 'No answer provided',
+        status: status,
+        options : question.options,
+        score : assessmentAnswer.score
+      };
+    });
+    this.isanswersSubmitted = true
+  });
+}
+
+submitFeedback(){
+  this.router.navigate(['/student/feedback/courses', this.classId, this.studentId, this.courseId]);
+}
+
+  attendedQuestions() {
+  return this.answers.filter((v: any) => v.selectedOptionText !== null).length
+  }
+  
+
+  navigate() {
+    this.isQuizCompleted = true;
+  }
+
 }

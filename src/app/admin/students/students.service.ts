@@ -194,6 +194,24 @@ export class StudentsService extends UnsubscribeOnDestroyAdapter {
       const apiUrl = this.defaultUrl+'admin/department';
       return this.httpClient.get<ApiResponse>(apiUrl);
     }
+
+
+    submitAssessment(data: any): Observable<ApiResponse> {
+      const apiUrl = this.defaultUrl + 'admin/assesment-answers';
+      return this.httpClient.post<ApiResponse>(apiUrl, data).pipe(
+        map(response => response)
+      );
+    }
+
+    getAnswerById(id: string): Observable<any> {
+      const apiUrl = `${this.defaultUrl}admin/assesment-answers/${id}`;
+      return this.httpClient.get<any>(apiUrl).pipe(
+        map(response => {
+          return response;
+        })
+      );
+    }
+
 }
 
 
