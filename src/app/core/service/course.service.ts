@@ -91,6 +91,26 @@ export class CourseService {
         })
       );
   }
+  getAllCoursesWithPagination(
+    filter?: Partial<CoursePaginationModel>
+  ): Observable<ApiResponse> {
+    const apiUrl = this.defaultUrl+'admin/courses-new?status=active&status=inactive';
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+  }
+
+  getAllPrograms(filter?: Partial<Program>): Observable<ApiResponse> {
+    const apiUrl = `${this.prefix}admin/courseprogram?status=active&status=inactive`;
+    return this._Http
+      .get<ApiResponse>(apiUrl, { params: this.buildParams(filter)})
+      .pipe(
+        map((response) => {
+          return response.data
+        })
+      );
+  }
+
   getPrograms(filter?: Partial<Program>): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}admin/courseprogram`;
     return this._Http
