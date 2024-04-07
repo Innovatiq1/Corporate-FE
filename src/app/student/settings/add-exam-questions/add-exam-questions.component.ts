@@ -12,12 +12,12 @@ import { QuestionService } from '@core/service/question.service';
 import { number } from 'echarts';
 
 @Component({
-  selector: 'app-assesment-questions',
-  templateUrl: './assesment-questions.component.html',
-  styleUrls: ['./assesment-questions.component.scss'],
+  selector: 'app-add-exam-questions',
+  templateUrl: './add-exam-questions.component.html',
+  styleUrls: ['./add-exam-questions.component.scss']
 })
-export class AssesmentQuestionsComponent {
-  questionFormTab3: FormGroup;
+export class AddExamQuestionsComponent {
+  questionFormTab2: FormGroup;
   editUrl: any;
   questionId!: string;
   subscribeParams: any;
@@ -37,7 +37,7 @@ export class AssesmentQuestionsComponent {
       }
     );
 
-    this.questionFormTab3 = this.formBuilder.group({
+    this.questionFormTab2 = this.formBuilder.group({
       name: ['', Validators.required],
       questions: this.formBuilder.array([]),
     });
@@ -54,14 +54,14 @@ export class AssesmentQuestionsComponent {
   getData() {
     if (this.questionId) {
       this.questionService
-        .getQuestionsById(this.questionId)
+        .getAnswerQuestionById(this.questionId)
         .subscribe((response: any) => {
           if (response && response.questions) {
-            this.questionFormTab3.patchValue({
+            this.questionFormTab2.patchValue({
               name: response.name,
             });
 
-            const questionsArray = this.questionFormTab3.get(
+            const questionsArray = this.questionFormTab2.get(
               'questions'
             ) as FormArray;
             while (questionsArray.length !== 0) {
@@ -167,7 +167,7 @@ export class AssesmentQuestionsComponent {
   }
 
   get questions(): FormArray {
-    return this.questionFormTab3.get('questions') as FormArray;
+    return this.questionFormTab2.get('questions') as FormArray;
   }
 
   getAnswers(questionIndex: number) {
@@ -188,7 +188,7 @@ export class AssesmentQuestionsComponent {
     for (let index = 0; index < 4; index++) {
       const option = (
         (
-          (this.questionFormTab3.get('questions') as FormArray)?.at(
+          (this.questionFormTab2.get('questions') as FormArray)?.at(
             questionIndex
           ) as FormGroup
         )?.get('options') as FormArray
@@ -200,10 +200,10 @@ export class AssesmentQuestionsComponent {
   }
 
   save() {
-    if (this.questionFormTab3.valid) {
+    if (this.questionFormTab2.valid) {
       const payload = {
-        name: this.questionFormTab3.value.name,
-        questions: this.questionFormTab3.value.questions.map((v: any) => ({
+        name: this.questionFormTab2.value.name,
+        questions: this.questionFormTab2.value.questions.map((v: any) => ({
           options: v.options,
           questionText: v.questionText,
         })),
@@ -240,14 +240,14 @@ export class AssesmentQuestionsComponent {
   }
 
   createAssesment(payload: any) {
-    this.questionService.createQuestion(payload).subscribe(
+    this.questionService.createAnswerQuestion(payload).subscribe(
       (res: any) => {
         Swal.fire({
           title: 'Successful',
           text: 'Question created successfully',
           icon: 'success',
         });
-        this.router.navigate(['/student/settings/all-questions']);
+        this.router.navigate(['/student/settings/all-exam-questions']);
       },
       (err: any) => {
         Swal.fire('Failed to create Question', 'error');
@@ -256,8 +256,8 @@ export class AssesmentQuestionsComponent {
   }
 
   update() {
-    if (this.questionFormTab3.valid) {
-      const formData = this.questionFormTab3.value;
+    if (this.questionFormTab2.valid) {
+      const formData = this.questionFormTab2.value;
       const isNoAnswer = formData.questions.some(
         (q: any) => !q.options.some((c: any) => c.correct)
       );
@@ -276,7 +276,7 @@ export class AssesmentQuestionsComponent {
         cancelButtonColor: '#d33',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.questionService.updateQuestions(payload).subscribe(
+          this.questionService.updateAnswerQuestions(payload).subscribe(
             (res: any) => {
               Swal.fire({
                 title: 'Successful',

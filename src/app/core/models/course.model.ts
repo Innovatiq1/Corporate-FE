@@ -53,6 +53,7 @@ export interface CourseUploadData {
    course_instructor?: string[];
    course_kit?: string[];
    assessment?: string[];
+   exam_assessment?: string[];
    survey?: string[];
  }
  export interface MainCategory {
@@ -131,6 +132,18 @@ export interface Assessment {
 	__v: number;
 	id: string;
 }
+
+export interface ExamAssessment {
+	_id: string;
+	docs: ExamAssessment[];
+	name: string;
+	createdAt: string;
+	updatedAt: string;
+	__v: number;
+	id: string;
+}
+
+
 export interface Feedback {
 	_id: string;
 	docs: Feedback[];

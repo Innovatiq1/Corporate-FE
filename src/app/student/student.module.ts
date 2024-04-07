@@ -65,9 +65,11 @@ import { CreateUserRoleComponent } from './settings/create-user-role/create-user
 import { UserTypeComponent } from './settings/user-type/user-type.component';
 import { ViewDepartmentComponent } from './settings/all-departments/view-department/view-department.component';
 import { ViewAnnouncementComponent } from './settings/list/view-announcement/view-announcement.component';
+import { ExamComponent } from './exam/exam.component';
+import { AddExamQuestionsComponent } from './settings/add-exam-questions/add-exam-questions.component';
 import { RoleUserComponent } from './settings/role-user/role-user.component';
 import { RoleDailogComponent } from './settings/all-users/role-dailog/role-dailog.component';
-
+import { AllExamQuestionsComponent } from './settings/all-exam-questions/all-exam-questions.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +116,10 @@ import { RoleDailogComponent } from './settings/all-users/role-dailog/role-dailo
     ViewDepartmentComponent,
     ViewAnnouncementComponent,
     RoleUserComponent,
-    RoleDailogComponent
+    RoleDailogComponent,
+    AddExamQuestionsComponent,
+    ExamComponent,
+    AllExamQuestionsComponent
 
 
   ],

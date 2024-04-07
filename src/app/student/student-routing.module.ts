@@ -32,17 +32,20 @@ import { CertificateTemplateComponent } from './settings/certificate-template/ce
 import { ListComponent } from './settings/list/list.component';
 import { CreatAnnouncementComponent } from './settings/list/creat-announcement/creat-announcement.component';
 import { AddQuestionsComponent } from './settings/add-questions/add-questions.component';
+import { AddExamQuestionsComponent } from './settings/add-exam-questions/add-exam-questions.component'
 import { AllQuestionsComponent } from './settings/all-questions/all-questions.component';
+import { AllExamQuestionsComponent } from './settings/all-exam-questions/all-exam-questions.component';
 import { CreateUserRoleComponent } from './settings/create-user-role/create-user-role.component';
 import { UserTypeComponent } from './settings/user-type/user-type.component';
 import { ViewDepartmentComponent } from './settings/all-departments/view-department/view-department.component';
 import { ViewAnnouncementComponent } from './settings/list/view-announcement/view-announcement.component';
+import { ExamComponent } from './exam/exam.component';
 import { RoleUserComponent } from './settings/role-user/role-user.component';
 
 
 const routes: Routes = [
   {
-    path: 'enrollment/courses',
+    path: 'enrollment/assessment',
     component: CourseComponent,
   },
   {
@@ -67,8 +70,12 @@ const routes: Routes = [
   },
 
   {
-    path: 'enrollment/programs',
+    path: 'enrollment/tutorial',
     component: ProgramComponent,
+  },
+  {
+    path: 'enrollment/exam',
+    component: ExamComponent,
   },
   {
     path: 'view-program/:id',
@@ -213,12 +220,24 @@ const routes: Routes = [
     component: AllQuestionsComponent,
 },
 {
+  path: 'settings/all-exam-questions',
+  component: AllExamQuestionsComponent,
+},
+{
     path: 'settings/add-questions',
     component: AddQuestionsComponent,
 },
 {
-    path: 'settings/edit-questions/:id',
-    component: AddQuestionsComponent,
+  path: 'settings/edit-questions/:id',
+  component: AddQuestionsComponent,
+},
+{
+  path: 'settings/add-exam-questions',
+  component: AddExamQuestionsComponent,
+},
+{
+  path: 'settings/edit-exam-questions/:id',
+  component: AddExamQuestionsComponent,
 },
 {
   path: 'settings/create-user-role',
