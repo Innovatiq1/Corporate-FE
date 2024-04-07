@@ -77,6 +77,26 @@ export class QuestionService {
     const apiUrl = `${this.defaultUrl}admin/assesment/${id}`;
     return this.http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
   }
+
+  createAnswerQuestion(request: any) {
+    const apiUrl = `${this.defaultUrl}admin/exam-assessment`;
+    return this.http
+      .post<ApiResponse>(apiUrl, request)
+      .pipe(map((response) => response));
+  }
+
+  getAnswerQuestionById(id?: string) {
+    const apiUrl = `${this.defaultUrl}admin/exam-assessment/${id}`;
+    return this.http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
+  }
+
+  updateAnswerQuestions(question:any) {
+    const apiUrl = `${this.defaultUrl}admin/exam-assessment/${question.id}`;
+    return this.http
+      .put<ApiResponse>(apiUrl, question)
+      .pipe(map((response) => { }));
+  }
+
   getQuestionJson( filter?: Partial<CoursePaginationModel>): Observable<ApiResponse> {
     const apiUrl = `${this.defaultUrl}admin/assesment`;
     return this.http.get<any>(apiUrl, {
@@ -84,7 +104,10 @@ export class QuestionService {
     });
   }
 
-//   getQuestionJson() {
-//     return this.http.get<any>('admin/assesment');
-//   }
+  getExamQuestionJson( filter?: Partial<CoursePaginationModel>): Observable<ApiResponse> {
+    const apiUrl = `${this.defaultUrl}admin/exam-assessment`;
+    return this.http.get<any>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+  }
 }

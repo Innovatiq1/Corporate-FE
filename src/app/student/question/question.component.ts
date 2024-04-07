@@ -25,7 +25,10 @@ export class QuestionComponent implements OnInit {
   progress: string = "0";
   isQuizCompleted : boolean = false;
   isanswersSubmitted : boolean = false;
-
+  totalTime: number = 0;
+  minutes: number = 0;
+  seconds: number = 0;
+  interval: any;
   currentId!: string;
   courseId!: string;
   studentId!: string;
@@ -88,6 +91,7 @@ export class QuestionComponent implements OnInit {
     this.courseService.getCourseById(this.courseId).subscribe((response) => {
     this.questionList = response?.assessment?.questions;
     this.assesmentId = response?.assessment?.id;
+    this.calculateTotalTime();  
     this.answers = Array.from({ length: this.questionList.length }, () => ({
       questionText: null,
       selectedOptionText: null
@@ -159,7 +163,8 @@ getAnswerById() {
     this.questionList = assessmentId.questions.map((question: any) => {
       const answer = assessmentAnswer.answers.find((ans: any) => ans.questionText === question.questionText);
       const correctOption = question.options.find((option: any) => option.correct);
-      const status = correctOption.text === answer.selectedOptionText
+      const selectedOption = answer ? answer.selectedOptionText : null;
+      const status = selectedOption ? correctOption.text === selectedOption : false;
       return {
         _id: question._id,
         questionText: question.questionText,
@@ -181,6 +186,31 @@ submitFeedback(){
   return this.answers.filter((v: any) => v.selectedOptionText !== null).length
   }
   
+  calculateTotalTime() {
+    // Calculate total time based on number of questions
+    this.totalTime = this.questionList.length * 60; // Assuming each question takes 60 seconds
+    console.log('this.totalTime: ', this.totalTime);
+    console.log('this.questionList: ', this.questionList);
+    this.startTimer();
+
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if (this.totalTime > 0) {
+        this.minutes = Math.floor(this.totalTime / 60);
+        this.seconds = this.totalTime % 60;
+        this.totalTime--;
+      } else {
+        clearInterval(this.interval);
+        this.submitAnswers(); 
+      }
+    }, 1000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.interval);
+  }
 
   navigate() {
     this.isQuizCompleted = true;
