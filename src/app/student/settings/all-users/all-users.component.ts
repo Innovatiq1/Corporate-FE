@@ -51,6 +51,7 @@ export class AllUsersComponent {
   totalItems: any;
   searchTerm:string = '';
   pageSizeArr = this.utils.pageSizeArr;
+  typeName?: any;
 
   constructor(private router: Router,
     public utils: UtilsService,
@@ -180,7 +181,7 @@ edit(row:any){
   console.log("row: " + row.id);
 this.router.navigate(['/admin/users/edit-all-users'], {queryParams:{row:row}})
 }
-addNew() {
+addNew(type: any) {
   let tempDirection: Direction;
   if (localStorage.getItem('isRtl') === 'true') {
     tempDirection = 'rtl';
@@ -188,7 +189,9 @@ addNew() {
     tempDirection = 'ltr';
   }
   const dialogRef = this.dialog.open(RoleDailogComponent, {
-    
+    data: {
+      typeName: type,
+    },
     direction: tempDirection,
    
   });

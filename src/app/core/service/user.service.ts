@@ -71,7 +71,14 @@ export class UserService {
       .pipe(map((response) => response));
   }
 
-
+  getUserRole(typeName:string,filter?: Partial<any>) {
+    const apiUrl = `${this.defaultUrl}userType?typeName=${typeName}`;
+    return this.http
+    .get<ApiResponse>(apiUrl, {
+      params: this.buildParams(filter),
+    })
+    .pipe(map((response) => response));
+  }
   getUserById(id: string) {
     const apiUrl = `${this.defaultUrl}admin/adminUserListing/${id}`;
     return this.http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
