@@ -9,7 +9,7 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
           <div class="materialTableHeader">
-            <div class="left">
+            <!-- <div class="left">
               <ul class="header-buttons-left ms-0">
                 <li class="tbl-title">
                   <h2>Completion List</h2>
@@ -20,7 +20,7 @@
                     aria-label="Search box" [(ngModel)]="searchTerm" class="browser-default search-field"  (keyup)="performSearch()">
                 </li>
               </ul>
-            </div>
+            </div> -->
             <div class="right">
               <ul class="tbl-export-btn">
                 <!-- <li class="tbl-header-btn">
@@ -37,6 +37,15 @@
                     </button>
                   </div>
                 </li> -->
+                <li>
+                  <ul class="header-buttons-left ms-0">
+                    <li class="tbl-search-box">
+                      <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                      <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                        aria-label="Search box" [(ngModel)]="searchTerm" class="browser-default search-field"  (keyup)="performSearch()">
+                    </li>
+                  </ul>
+                </li>
                 <li>
                   <div class="export-button m-l-10" matTooltip="XLSX">
                       <img src="assets/excel.svg" (click)="exportExcel()"alt="" />
@@ -67,23 +76,33 @@
                     </mat-checkbox>
                   </mat-cell>
                 </ng-container> -->
+                <ng-container matColumnDef="Student Name">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Student
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/program/view-completion-list/',row.id]">
+                    <span class="mobile-label">Student Name:</span> {{row.student_name | capitalizeFirstLetter}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="email">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-completion-list/',row.id]">
+                    <span class="mobile-label">Email:</span>
+                    <img src="assets/images/gmail.png" alt="Email Icon" class="email-icon">
+                    <!-- Replace "email-icon.png" with the filename of your PNG icon -->
+                    <span class="email-address">{{row?.email}}</span>
+                  </mat-cell>
+                </ng-container>
                 <ng-container matColumnDef="Program Name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Program Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row" >
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Program</mat-header-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-completion-list/',row.id]">
                     <span class="mobile-label">Program Name:</span>{{row.programTitle | capitalizeFirstLetter}} </mat-cell>
                 </ng-container>
                  <!-- Student Name -->
-                 <ng-container matColumnDef="Student Name">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Student Name
-                  </mat-header-cell>
-                  <mat-cell *matCellDef="let row" >
-                    <span class="mobile-label">Student Name:</span> {{row.student_name | capitalizeFirstLetter}}</mat-cell>
-                </ng-container>
+                
                 <!-- Start date -->
                 <ng-container matColumnDef="Class Start Date">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Class Start Date
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" >
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-completion-list/',row.id]">
                     <span class="mobile-label">Class Start Date:</span>{{row?.classId?.sessions[0]?.sessionStartDate |date}} </mat-cell>
                 </ng-container>
 
@@ -91,7 +110,7 @@
                 <ng-container matColumnDef="Class End Date">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Class End Date
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" >
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-completion-list/',row.id]">
                     <span class="mobile-label">Class End Date:</span>{{row?.classId?.sessions[0]?.sessionEndDate |date}} </mat-cell>
                 </ng-container>
                 <!-- actions -->

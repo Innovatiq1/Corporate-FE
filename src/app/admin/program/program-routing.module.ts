@@ -13,6 +13,10 @@ import { CreateTemplateComponent } from './program-kit/create-template/create-te
 import { ViewProgramComponent } from './view-program/view-program.component';
 import { PendingProgramsComponent } from './program-list/pending-programs/pending-programs.component';
 import { ApprovedProgramsComponent } from './program-list/approved-programs/approved-programs.component';
+import { StudentPendingListComponent } from './student-pending-list/student-pending-list.component';
+import { StudentApprovalListComponent } from './student-approval-list/student-approval-list.component';
+import { ViewCompletionComponent } from './view-completion/view-completion.component';
+// import { StudentApprovalListComponent } from './student-pending-list/student-pending-list.component';
 
 const routes: Routes = [
   {
@@ -31,6 +35,18 @@ const routes: Routes = [
     path:'submitted-program/pending-program', 
     component:PendingProgramsComponent
   },
+  {
+    path:'student-program/approved-program', 
+    component:StudentApprovalListComponent
+  },
+  {
+      path:'student-program/pending-program', 
+      component: StudentPendingListComponent
+    },
+    {
+      path:'view-completion-list/:id',
+      component:ViewCompletionComponent
+    },
   {
     path:'create-program', 
     component:CreateProgramComponent
@@ -53,7 +69,7 @@ const routes: Routes = [
   },
 
   {
-    path:'program-completion-list', 
+    path:'student-program/completed-program', 
     component:ProgaramCompletionListComponent
   },
   {

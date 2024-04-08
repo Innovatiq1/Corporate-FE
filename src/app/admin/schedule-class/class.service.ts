@@ -51,7 +51,7 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
 
     params = params.set("limit", limit.toString());
     params = params.set("page", page.toString());
-    params = params.set("status", "registered,withdraw");
+    // params = params.set("status", "registered,withdraw");
     if (filterText) {
       params = params.set("title", filterText);
     }
@@ -196,7 +196,13 @@ getProgramCompletedStudent(page: number, limit: number): Observable<any> {
 }
 
 getProgramRegisteredClasses(page: number, limit: number, filterText? : string): Observable<any> {
-  const apiUrl = `${this.prefix}admin/studentClasses/studentApproveList`;
+  const apiUrl = `${this.prefix}admin/studentClasses/studentApproveList?status=registered`;
+  return this.http.get<any>(apiUrl, { params: this.buildRegisteredClassesParams(page, limit, filterText) });
+}
+getApprovedProgramClasses(page: number, limit: number, filterText? : string): Observable<any> {
+  console.log("page", page)
+  console.log("lmit", limit)
+  const apiUrl = `${this.prefix}admin/studentClasses/studentApproveList?status=approved`;
   return this.http.get<any>(apiUrl, { params: this.buildRegisteredClassesParams(page, limit, filterText) });
 }
 getStudentsApprovedClasses(): Observable<any> {

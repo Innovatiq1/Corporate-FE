@@ -19,16 +19,17 @@ import Swal from 'sweetalert2';
 export class ProgaramCompletionListComponent {
   displayedColumns = [
     // 'select',
-    'Program Name',
     'Student Name',
+    'email',
+    'Program Name',
     'Class Start Date',
     'Class End Date',
     'actions',
   ];
   breadscrums = [
     {
-      items: ['Program'],
-      active: 'Program Completion List',
+      items: ['Student Program'],
+      active: 'Completed Program',
     },
   ];
   dataSource : any;

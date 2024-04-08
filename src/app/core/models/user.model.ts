@@ -2,6 +2,8 @@
 import { Pagination } from "./pagination.model";
 
 export interface Student {
+    studentId: any;
+    classId: any;
     docs: Users[];
     totalDocs: number;
   }
