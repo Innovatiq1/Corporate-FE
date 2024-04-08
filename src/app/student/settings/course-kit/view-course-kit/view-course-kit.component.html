@@ -42,7 +42,7 @@
                             <div class="header">
                                 <h6>CourseKit</h6>
                             </div>
-                            <button class="icons" alt="Edit" mat-menu-item [routerLink]="['/admin/courses/edit-course-kit/',response.id]" >
+                            <button class="icons" alt="Edit" mat-menu-item [routerLink]="['/student/settings/edit-course-kit/',response.id]" >
                                 <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                             </button>
                             <button class="icons" alt="Delete" mat-menu-item (click)="deleteItem(response)">
@@ -121,7 +121,7 @@
                         <p class="m-b-0"></p>
                     </div>
                     <div class="col-md-10 m-3">
-                        <button mat-raised-button id="back" [routerLink]="['/admin/courses/course-kit']">Back</button>
+                        <button mat-raised-button id="back" [routerLink]="['/student/settings/course-kit']">Back</button>
                       </div>
                 </div>
             </div>

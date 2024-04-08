@@ -10,7 +10,7 @@ import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
 import { TableElement } from '@shared/TableElement';
 import { TableExportUtil } from '@shared/tableExportUtil';
-import { VideoPlayerComponent } from 'app/admin/courses/course-kit/video-player/video-player.component';
+import { VideoPlayerComponent } from 'app/student/settings/course-kit/video-player/video-player.component';
 import jsPDF from 'jspdf';
 import {  BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';

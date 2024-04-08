@@ -1712,7 +1712,7 @@ export const SettingsMenu: MenuItem[] = [
         children:[]
       },
       {
-        path:'student/settings/coursekit',
+        path:'student/settings/course-kit',
         title:'Course Kit',
         id:'assessment',
         iconType:'img',

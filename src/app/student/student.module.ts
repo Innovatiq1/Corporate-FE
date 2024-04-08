@@ -74,6 +74,12 @@ import { CategoriesComponent } from './settings/categories/categories.component'
 import { CreateCategoriesComponent } from './settings/categories/create-categories/create-categories.component';
 import { EditCategoriesComponent } from './settings/categories/edit-categories/edit-categories.component';
 import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
+import { CourseKitComponent } from './settings/course-kit/course-kit.component';
+import { CreateCourseKitComponent } from './settings/course-kit/create-course-kit/create-course-kit.component';
+import { CreateTemplateComponent } from './settings/course-kit/create-template/create-template.component';
+import { EditCourseKitComponent } from './settings/course-kit/edit-course-kit/edit-course-kit.component';
+import { VideoPlayerComponent } from './settings/course-kit/video-player/video-player.component';
+import { ViewCourseKitComponent } from './settings/course-kit/view-course-kit/view-course-kit.component';
 
 @NgModule({
   declarations: [
@@ -128,9 +134,12 @@ import { ViewCategoriesComponent } from './settings/categories/view-categories/v
     CreateCategoriesComponent,
     ViewCategoriesComponent,
     EditCategoriesComponent,
-
-
-
+    CourseKitComponent,
+    VideoPlayerComponent,
+    CreateCourseKitComponent,
+    EditCourseKitComponent,
+    ViewCourseKitComponent,
+    CreateTemplateComponent
   ],
   imports: [
     CommonModule,

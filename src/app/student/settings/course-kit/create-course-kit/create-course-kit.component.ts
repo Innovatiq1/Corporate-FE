@@ -21,7 +21,7 @@ export class CreateCourseKitComponent implements OnInit{
   breadscrums = [
     {
       title: 'Create Course Kit',
-      items: ['Course'],
+      items: ['Settings'],
       active: 'Create Course Kit',
     },
   ];
@@ -146,7 +146,7 @@ private createCourseKit(courseKitData: CourseKit): void {
           // this.fileDropEl.nativeElement.value = "";
           this.courseKitForm.reset();
           // this.toggleList()
-          this.router.navigateByUrl("/admin/courses/course-kit");
+          this.router.navigateByUrl("/student/settings/course-kit");
         },
         (error) => {
           Swal.fire(

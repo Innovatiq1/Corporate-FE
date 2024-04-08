@@ -11,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CourseKitModel } from '@core/models/course.model';
 import { CommonService } from '@core/service/common.service';
 import { CourseService } from '@core/service/course.service';
-import { VideoPlayerComponent } from 'app/admin/courses/course-kit/video-player/video-player.component';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { local } from 'd3';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';

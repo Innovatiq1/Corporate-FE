@@ -32,7 +32,7 @@ export class CourseKitComponent implements OnInit{
   breadscrums = [
     {
       title: 'Course Kit',
-      items: ['Course'],
+      items: ['Settings'],
       active: 'Course Kit',
     },
   ];

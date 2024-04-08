@@ -3,12 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { CourseKitModel } from '@core/models/course.model';
 import { CommonService } from '@core/service/common.service';
 import { CourseService } from '@core/service/course.service';
-import { VideoPlayerComponent } from 'app/admin/courses/course-kit/video-player/video-player.component';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import {  BsModalService, ModalOptions} from "ngx-bootstrap/modal";
 import { DOCUMENT, isPlatformBrowser, DatePipe } from '@angular/common';
 
 import Swal from 'sweetalert2';
+import { VideoPlayerComponent } from '../settings/course-kit/video-player/video-player.component';
 export interface PeriodicElement {
   name: string;
   position: number;

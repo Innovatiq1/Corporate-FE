@@ -14,7 +14,7 @@ export class CreateTemplateComponent {
   breadscrums = [
     {
       title: 'Create Template',
-      items: ['Course'],
+      items: ['Settings'],
       active: 'Create Template',
     },
   ];
@@ -85,7 +85,7 @@ export class CreateTemplateComponent {
                 title: "Conversion Success",
                 text: "Video(s) converted successfully",
               }).then(() => {
-                this.router.navigate(['/admin/courses/course-kit'])
+                this.router.navigate(['/student/settings/course-kit'])
               });
               this.currentVideoId = "";
               this.currentStep = 1;

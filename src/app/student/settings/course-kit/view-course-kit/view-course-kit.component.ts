@@ -15,7 +15,7 @@ export class ViewCourseKitComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Courses'],
+      items: ['Settings'],
       active: 'View CourseKit',
     },
   ];
@@ -161,7 +161,7 @@ export class ViewCourseKitComponent {
               icon: "success",
             });
             this.fetchCourseKits();
-            this._router.navigateByUrl(`/admin/courses/course-kit`);
+            this._router.navigateByUrl(`/student/settings/course-kit`);
           },
           (error: { message: any; error: any; }) => {
             Swal.fire(

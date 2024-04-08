@@ -24,7 +24,7 @@ export class EditCourseKitComponent {
   breadscrums = [
     {
       title: 'Edit Course Kit',
-      items: ['Course'],
+      items: ['Settings'],
       active: 'Edit Course Kit',
     },
   ];
@@ -76,7 +76,7 @@ export class EditCourseKitComponent {
       this.breadscrums = [
         {
           title: 'View Course Kit',
-          items: ['Course'],
+          items: ['Settings'],
           active: 'View Course Kit',
         },
       ];
@@ -157,7 +157,7 @@ export class EditCourseKitComponent {
             // this.fileDropEl.nativeElement.value = "";
             this.courseKitForm.reset();
             // this.toggleList()
-            this.router.navigateByUrl('admin/courses/course-kit');
+            this.router.navigateByUrl('student/settings/course-kit');
           },
           (error) => {
             Swal.fire(
