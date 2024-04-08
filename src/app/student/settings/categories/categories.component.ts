@@ -42,7 +42,7 @@ export class CategoriesComponent implements OnInit {
   breadscrums = [
     {
       title: 'Categories',
-      items: ['Course'],
+      items: ['Settings'],
       active: 'Categories',
     },
   ];
@@ -106,7 +106,7 @@ export class CategoriesComponent implements OnInit {
   deleteItem(item: any) {
     Swal.fire({
       title: "Confirm Deletion",
-      text: "Are you sure you want to delete this course kit?",
+      text: "Are you sure you want to delete this category?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
@@ -178,7 +178,7 @@ export class CategoriesComponent implements OnInit {
     
     Swal.fire({
       title: "Confirm Deletion",
-      text: "Are you sure you want to delete this course kit?",
+      text: "Are you sure you want to delete this category?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
@@ -207,7 +207,7 @@ export class CategoriesComponent implements OnInit {
 
   }
 edit(id:any){
-  this.router.navigate(['/admin/courses/edit-categories/'+ id]);
+  this.router.navigate(['/student/settings/edit-categories/'+ id]);
 }
 
 //search functionality

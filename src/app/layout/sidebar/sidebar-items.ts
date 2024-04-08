@@ -1711,6 +1711,37 @@ export const SettingsMenu: MenuItem[] = [
         role:[],
         children:[]
       },
+      {
+        path:'student/settings/coursekit',
+        title:'Course Kit',
+        id:'assessment',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/categories',
+        title:'Categories',
+        id:'assessment',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+
       // {
       //   path:'student/settings/all-questions',
       //   title:'Exam Configuration',

@@ -34,7 +34,7 @@ export class CreateCategoriesComponent implements OnInit{
   breadscrums = [
     {
       title: 'Create Categories',
-      items: ['Course'],
+      items: ['Settings'],
       active: 'Create Categories',
     },
   ];
@@ -56,7 +56,7 @@ export class CreateCategoriesComponent implements OnInit{
       this.breadscrums = [
         {
           title:'Edit Categories',
-          items: ['Course'],
+          items: ['Settings'],
           active: 'Edit Categories',
         },
       ];
@@ -198,7 +198,7 @@ export class CreateCategoriesComponent implements OnInit{
             this.subCategoryForm.reset();
             this.initSubCategoryForm();
             this.addSubCategoryField();
-            this.router.navigate(['/admin/courses/categories'])
+            this.router.navigate(['/student/settings/categories'])
           },
           (error) => {
             Swal.fire('Error', 'Failed to create subcategories!', 'error');

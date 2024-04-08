@@ -70,6 +70,10 @@ import { AddExamQuestionsComponent } from './settings/add-exam-questions/add-exa
 import { RoleUserComponent } from './settings/role-user/role-user.component';
 import { RoleDailogComponent } from './settings/all-users/role-dailog/role-dailog.component';
 import { AllExamQuestionsComponent } from './settings/all-exam-questions/all-exam-questions.component';
+import { CategoriesComponent } from './settings/categories/categories.component';
+import { CreateCategoriesComponent } from './settings/categories/create-categories/create-categories.component';
+import { EditCategoriesComponent } from './settings/categories/edit-categories/edit-categories.component';
+import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
 
 @NgModule({
   declarations: [
@@ -119,7 +123,12 @@ import { AllExamQuestionsComponent } from './settings/all-exam-questions/all-exa
     RoleDailogComponent,
     AddExamQuestionsComponent,
     ExamComponent,
-    AllExamQuestionsComponent
+    AllExamQuestionsComponent,
+    CategoriesComponent,
+    CreateCategoriesComponent,
+    ViewCategoriesComponent,
+    EditCategoriesComponent,
+
 
 
   ],

@@ -41,6 +41,10 @@ import { ViewDepartmentComponent } from './settings/all-departments/view-departm
 import { ViewAnnouncementComponent } from './settings/list/view-announcement/view-announcement.component';
 import { ExamComponent } from './exam/exam.component';
 import { RoleUserComponent } from './settings/role-user/role-user.component';
+import { CategoriesComponent } from './settings/categories/categories.component';
+import { CreateCategoriesComponent } from './settings/categories/create-categories/create-categories.component';
+import { EditCategoriesComponent } from './settings/categories/edit-categories/edit-categories.component';
+import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
 
 
 const routes: Routes = [
@@ -247,6 +251,28 @@ const routes: Routes = [
   path: 'settings/user-type',
   component: UserTypeComponent,
 },
+{
+  path: 'settings/categories',
+  component: CategoriesComponent
+},
+{
+  path: 'settings/create-categories',
+  component:  CreateCategoriesComponent
+},
+{
+  path: 'settings/edit-categories/:id',
+  component:  EditCategoriesComponent
+},
+{
+  path:'settings/view-categories/:id',
+  component:ViewCategoriesComponent
+},
+{
+  path:'settings/view-categories',
+  component:ViewCategoriesComponent
+},
+
+
 
   {
     path: 'side-menu/:id',

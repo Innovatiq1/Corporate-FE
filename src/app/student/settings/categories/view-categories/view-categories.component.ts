@@ -14,7 +14,7 @@ export class ViewCategoriesComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Courses'],
+      items: ['Settings'],
       active: 'View Category',
     },
   ];
@@ -81,13 +81,13 @@ export class ViewCategoriesComponent {
     });
   }
   edit(id:any){
-    this.router.navigate(['/admin/courses/edit-categories/'+ id]);
+    this.router.navigate(['/student/settings/edit-categories/'+ id]);
   }
 
   deleteItem(item: any) {
     Swal.fire({
       title: "Confirm Deletion",
-      text: "Are you sure you want to delete this course kit?",
+      text: "Are you sure you want to delete this category?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
@@ -105,7 +105,7 @@ export class ViewCategoriesComponent {
             });
             
             this.fetchSubCategories();
-            this.router.navigateByUrl("/admin/courses/categories") 
+            this.router.navigateByUrl("/student/settings/categories") 
             // this.getCategoryByID(id);
           },
           (error: { message: any; error: any; }) => {

@@ -27,7 +27,7 @@ export class EditCategoriesComponent {
   breadscrums = [
     {
       title: 'Edit Categories',
-      items: ['Course'],
+      items: ['Settings'],
       active: 'Edit Categories',
     },
   ];
@@ -156,7 +156,7 @@ Swal.fire({
         this.subCategoryForm.reset();
         this.initSubCategoryForm();
         this.addSubCategoryField();
-        this.router.navigateByUrl("/admin/courses/categories")  
+        this.router.navigateByUrl("/student/settings/categories")  
           //this.list = !this.list;
           //this.create = !this.create;
         // this.list = !this.list;
