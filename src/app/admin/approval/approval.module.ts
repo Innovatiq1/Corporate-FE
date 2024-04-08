@@ -12,7 +12,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { StudentApprovalListComponent } from './student-approval-list/student-approval-list.component';
+// import { StudentApprovalListComponent } from './student-approval-list/student-approval-list.component';
 import { ProgramApprovalListComponent } from './program-approval-list/program-approval-list.component';
 import { TrainingApprovalReqComponent } from './training-approval-req/training-approval-req.component';
 import { EditRequestComponent } from './training-approval-req/edit-request/edit-request.component';
@@ -24,7 +24,6 @@ import { EditRequestComponent } from './training-approval-req/edit-request/edit-
   declarations: [
     CourseApprovalComponent,
     ApproveListComponent,
-    StudentApprovalListComponent,
     ProgramApprovalListComponent,
     TrainingApprovalReqComponent,
     EditRequestComponent,

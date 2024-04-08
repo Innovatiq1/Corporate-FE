@@ -23,6 +23,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ViewProgramComponent } from './view-program/view-program.component';
 import { PendingProgramsComponent } from './program-list/pending-programs/pending-programs.component';
 import { ApprovedProgramsComponent } from './program-list/approved-programs/approved-programs.component';
+import { StudentPendingListComponent } from './student-pending-list/student-pending-list.component';
+import { StudentApprovalListComponent } from './student-approval-list/student-approval-list.component';
+import { ViewCompletionComponent } from './view-completion/view-completion.component';
 
 
 
@@ -39,7 +42,10 @@ import { ApprovedProgramsComponent } from './program-list/approved-programs/appr
         CreateTemplateComponent,
         ViewProgramComponent,
         PendingProgramsComponent,
-        ApprovedProgramsComponent
+        ApprovedProgramsComponent,
+        StudentPendingListComponent,
+        StudentApprovalListComponent,
+        ViewCompletionComponent
          ],
     imports: [
         CommonModule,

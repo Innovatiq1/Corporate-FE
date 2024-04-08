@@ -2,7 +2,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { formatDate } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarVerticalPosition, MatSnackBarHorizontalPosition } from '@angular/material/snack-bar';
 import { StudentPaginationModel, StudentApproval, Session } from '@core/models/class.model';
 import { CourseModel, CoursePaginationModel } from '@core/models/course.model';
 import { Student } from '@core/models/user.model';
@@ -12,7 +12,6 @@ import { TableElement, TableExportUtil } from '@shared';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import jsPDF from 'jspdf';
 import * as moment from 'moment';
-
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,17 +22,17 @@ import Swal from 'sweetalert2';
 export class StudentApprovalListComponent {
   displayedColumns: string[] = [
     // 'select',
-    'Program Name',
     'Student Name',
+    'Program Name',
     'Class Start Date',
     'Class End Date',
     'Registered Date',
-    'actions'
+    'status'
   ];
   breadscrums = [
     {
-      items: ['Approval'],
-      active: 'Registered Programs',
+      items: ['Student Program'],
+      active: 'Approved Programs',
     },
   ];
 
@@ -67,7 +66,7 @@ export class StudentApprovalListComponent {
 
   getRegisteredClasses() {
     this.classService
-      .getProgramRegisteredClasses(this.studentPaginationModel.page, this.studentPaginationModel.limit, this.studentPaginationModel.filterText)
+      .getApprovedProgramClasses(this.studentPaginationModel.page, this.studentPaginationModel.limit)
       .subscribe((response: { data: StudentPaginationModel; }) => {
         this.isLoading = false;
         // console.log(response.data.docs)
@@ -341,5 +340,4 @@ export class StudentApprovalListComponent {
     //   'right'
     // );
   }
-
 }
