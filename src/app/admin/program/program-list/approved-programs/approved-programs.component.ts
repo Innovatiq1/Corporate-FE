@@ -19,16 +19,16 @@ import 'jspdf-autotable';
 import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-pending-programs',
-  templateUrl: './pending-programs.component.html',
-  styleUrls: ['./pending-programs.component.scss']
+  selector: 'app-approved-programs',
+  templateUrl: './approved-programs.component.html',
+  styleUrls: ['./approved-programs.component.scss']
 })
-export class PendingProgramsComponent {
+export class ApprovedProgramsComponent {
   breadscrums = [
     {
-      title: 'Pending Programs',
+      title: 'Approved Programs',
       items: ['Submitted Programs'],
-      active: 'Pending Programs',
+      active: 'Approved Programs',
     },
   ];
 
@@ -96,7 +96,7 @@ export class PendingProgramsComponent {
    }
 
   getProgramList(filters?: any) {
-    this.courseService.getCourseProgram({...this.coursePaginationModel,status:'inactive'}).subscribe(
+    this.courseService.getCourseProgram({...this.coursePaginationModel,status:'active'}).subscribe(
       (response: any) => {
         console.log("page",response)
         this.totalItems = response.totalDocs;
@@ -225,7 +225,7 @@ export class PendingProgramsComponent {
     });
   }
   viewInActiveProgram(id:string){
-    this.route.navigate(['/admin/program/view-program'],{queryParams:{id:id, status:'inactive'}});
+    this.route.navigate(['/admin/program/view-program'],{queryParams:{id:id, status:'active'}});
   }
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;

@@ -132,7 +132,7 @@ export class ViewProgramComponent {
               text: 'Program deleted successfully.',
               icon: 'success',
             }).then(() => {
-              window.location.reload();
+              this.router.navigate(['/admin/program/program-list/program'])
             });
           });
         });
@@ -140,7 +140,10 @@ export class ViewProgramComponent {
     });
     
   }
+  back() {
 
+    window.history.back();
+  }
   approveProgram(id:any,program: any): void {
     program.status = 'active';
 

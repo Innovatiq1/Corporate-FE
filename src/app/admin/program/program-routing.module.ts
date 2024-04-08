@@ -11,13 +11,26 @@ import { CreateProgramKitComponent } from './program-kit/create-program-kit/crea
 import { EditProgramKitComponent } from './program-kit/edit-program-kit/edit-program-kit.component';
 import { CreateTemplateComponent } from './program-kit/create-template/create-template.component';
 import { ViewProgramComponent } from './view-program/view-program.component';
+import { PendingProgramsComponent } from './program-list/pending-programs/pending-programs.component';
+import { ApprovedProgramsComponent } from './program-list/approved-programs/approved-programs.component';
 
 const routes: Routes = [
   {
-    path:'program-list', 
+    path:'program-list/program', 
     component:ProgramListComponent
   },
-
+  {
+    path:'program-list/creator', 
+    component:ProgramListComponent
+  },
+  {
+    path:'submitted-program/approved-program', 
+    component:ApprovedProgramsComponent
+  },
+  {
+    path:'submitted-program/pending-program', 
+    component:PendingProgramsComponent
+  },
   {
     path:'create-program', 
     component:CreateProgramComponent

@@ -130,6 +130,14 @@ navigateTo(menu:any,url?:any) {
   this.router.navigateByUrl( menu +'/'+url);
   }
 }
+navigateToSubItem2(menu:any,url?:any,subUrl?: any) {
+  this.menuItemClick.emit();
+  let userType = localStorage.getItem('user_type')
+    console.log(menu +'/'+url)
+  this.router.navigateByUrl( menu +'/'+url +'/'+subUrl);
+  
+}
+
 
 
   ngOnInit() {
