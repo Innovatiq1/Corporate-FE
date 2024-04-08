@@ -87,6 +87,14 @@ export class ProgramListComponent {
       'Elective Count',
       'status'
     ];
+
+    this.breadscrums = [
+      {
+        title: 'Program Name',
+        items: ['Program List'],
+        active: 'Program Name',
+      },
+    ];
   }
   if (this.path == 'creator'){
     this.isCreator = true;
@@ -101,6 +109,13 @@ export class ProgramListComponent {
       'Compulsory Count',
       'Elective Count',
       'status'
+    ];
+    this.breadscrums = [
+      {
+        title: 'Creator',
+        items: ['Program List'],
+        active: 'Creator',
+      },
     ];
   }
  }
