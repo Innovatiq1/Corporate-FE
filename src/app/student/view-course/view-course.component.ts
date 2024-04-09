@@ -21,7 +21,14 @@ import { StudentVideoPlayerComponent } from './student-video-player/student-vide
 import { Subject, takeUntil } from 'rxjs';
 import * as Plyr from 'plyr';
 import { T } from '@angular/cdk/keycodes';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { StudentsService } from 'app/admin/students/students.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -97,6 +104,10 @@ export class ViewCourseComponent implements OnDestroy {
   sdiscrption!: string;
   url: any;
   longDescription: any;
+  assessmentInfo!: any;
+  isAnswersSubmitted: boolean = false;
+  questionList: any = []
+  answersResult!: any
   constructor(
     private classService: ClassService,
     private activatedRoute: ActivatedRoute,
@@ -105,7 +116,8 @@ export class ViewCourseComponent implements OnDestroy {
     @Inject(DOCUMENT) private document: any,
     private commonService: CommonService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private studentService: StudentsService
   ) {
     this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
       this.classId = params['id'];
@@ -116,7 +128,6 @@ export class ViewCourseComponent implements OnDestroy {
       .subscribe(() => {
         this.getRegisteredClassDetails();
       });
-      console.log("classid", this.classId);
     this.getRegisteredClassDetails();
     this.getClassDetails();
   }
@@ -193,19 +204,21 @@ export class ViewCourseComponent implements OnDestroy {
                     );
                     // console.log("reached",allUnmatchedCompleted);
                     if (allUnmatchedCompleted) {
-                    
                       this.courseService
-                      .getStudentClass(studentId, this.classId)
-                      .subscribe((response) => {
-                        this.studentClassDetails = response.data.docs[0]
-                        // console.log("enterd", this.studentClassDetails);
-                        if(this.studentClassDetails.status == 'approved'){
-                          this.router.navigate(['/student/questions/', classId, studentId, this.courseId]);    
-                        } else {
-
-                        }
-
-                      })                
+                        .getStudentClass(studentId, this.classId)
+                        .subscribe((response) => {
+                          this.studentClassDetails = response.data.docs[0];
+                          // console.log("enterd", this.studentClassDetails);
+                          if (this.studentClassDetails.status == 'approved') {
+                            this.router.navigate([
+                              '/student/questions/',
+                              classId,
+                              studentId,
+                              this.courseId,
+                            ]);
+                          } else {
+                          }
+                        });
                     } else {
                       let payload = {
                         status: 'notCompleted',
@@ -235,8 +248,7 @@ export class ViewCourseComponent implements OnDestroy {
     id: any;
     playbackTime: any;
   }) {
-    console.log(video?.playbackTime,"--0-0")
-    this.videoPlayer.nativeElement.currentTime =video?.playbackTime;
+    this.videoPlayer.nativeElement.currentTime = video?.playbackTime;
     this.commonService.setPlayBackTime(video?.playbackTime);
 
     this.courseService.getCoursekitVideoById(video.id).subscribe((data) => {
@@ -269,19 +281,15 @@ export class ViewCourseComponent implements OnDestroy {
     });
   }
   getCourseKitDetails() {
-    // console.log("getCourseKitDetails",this.courseId)
     this.courseService.getCourseById(this.courseId).subscribe((response) => {
       this.courseKitDetails = response?.course_kit;
-      console.log(this.courseKitDetails,"++testing")
       // if (Array.isArray(this.courseKitDetails)) {
 
       this.courseKitDetails.map((item: any) => {
         this.url = item?.videoLink[0]?.video_url;
-        console.log('url', this.url);
       });
 
-      this.courseKit = this.courseKitDetails.map((kit:any) => (
-        {
+      this.courseKit = this.courseKitDetails.map((kit: any) => ({
         shortDescription: kit.shortDescription,
         longDescription: kit.longDescription,
         documentLink: kit.documentLink,
@@ -290,28 +298,28 @@ export class ViewCourseComponent implements OnDestroy {
         videoId: kit?.videoLink[0]?.id,
         inputUrl: kit?.videoLink[0]?.video_url,
         url: kit?.videoLink[0]?.url,
-        playbackTime: 0
-      }
+        playbackTime: 0,
+      }));
 
-      ));
-      
       this.documentLink = this.courseKitDetails[0].documentLink;
-      let uploadedDocument = this.documentLink?.split('/');
+      const uploadedDocument = this.documentLink?.split('/');
       this.uploadedDoc = uploadedDocument?.pop();
       this.title = response?.title;
+      this.assessmentInfo = response?.assessment;
+      this.questionList =response?.assessment?.questions || []
     });
   }
 
+
+
   getRegisteredClassDetails() {
-    let studentId = localStorage.getItem('id');
-    console.log("studentId: " + studentId);
+    const studentId = localStorage.getItem('id');
     this.courseService
       .getStudentClass(studentId, this.classId)
       .subscribe((response) => {
         this.studentClassDetails = response?.data?.docs[0];
         this.coursekitDetails = response?.data?.docs[0]?.coursekit;
         this.longDescription = this?.coursekitDetails[0]?.longDescription;
-        console.log('student', this.studentClassDetails);
         let totalPlaybackTime = 0;
         let documentCount = 0;
         this.coursekitDetails.forEach(
@@ -321,7 +329,7 @@ export class ViewCourseComponent implements OnDestroy {
             documentCount++;
           }
         );
-        let time = totalPlaybackTime / documentCount;
+        const time = totalPlaybackTime / documentCount;
         this.playBackTime = time;
         this.commonService.setCompletedPercentage(this.playBackTime);
         if (this.studentClassDetails.status == 'registered') {
@@ -465,11 +473,67 @@ export class ViewCourseComponent implements OnDestroy {
   // feedback(){
   //   let classId = localStorage.getItem('classId');
   //   let studentId = localStorage.getItem('id');
-  //   this.router.navigate(['/student/feedback/courses', classId, studentId, this.courseId]);    
+  //   this.router.navigate(['/student/feedback/courses', classId, studentId, this.courseId]);
   // }
-  
+
   ngOnDestroy() {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  submitAnswers(payload: any = []) {
+    const studentId = localStorage.getItem('id');
+    const assesmentId = this.assessmentInfo?.id;
+    const requestBody = {
+      studentId,
+      assessmentId: assesmentId,
+      answers: payload,
+    };
+
+    this.studentService.submitAssessment(requestBody).subscribe(
+      (response: any) => {
+        Swal.fire({
+          title: 'Submitted!',
+          text: 'Your answers were submitted.',
+          icon: 'success',
+        });
+        this.getAnswerById(response.response);
+      },
+      (error: any) => {
+        console.error('Error:', error);
+      }
+    );
+  }
+
+  getAnswerById(answerId: string) {
+    this.studentService.getAnswerById(answerId).subscribe((res: any) => {
+    this.isAnswersSubmitted = true;
+      this.answersResult = res.assessmentAnswer
+      const assessmentAnswer = res.assessmentAnswer;
+      const assessmentId = assessmentAnswer.assessmentId;
+      this.questionList = assessmentId.questions.map((question: any) => {
+        const answer = assessmentAnswer.answers.find(
+          (ans: any) => ans.questionText === question.questionText
+        );
+        const correctOption = question.options.find(
+          (option: any) => option.correct
+        );
+        const selectedOption = answer ? answer.selectedOptionText : null;
+        const status = selectedOption
+          ? correctOption.text === selectedOption
+          : false;
+        return {
+          _id: question._id,
+          questionText: question.questionText,
+          selectedOption: answer
+            ? answer.selectedOptionText
+            : 'No answer provided',
+          status: status,
+          options: question.options,
+          score: assessmentAnswer.score,
+        };
+      });
+      this.isAnswersSubmitted = true;
+    });
   }
 }

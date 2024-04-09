@@ -70,6 +70,7 @@ import { AddExamQuestionsComponent } from './settings/add-exam-questions/add-exa
 import { RoleUserComponent } from './settings/role-user/role-user.component';
 import { RoleDailogComponent } from './settings/all-users/role-dailog/role-dailog.component';
 import { AllExamQuestionsComponent } from './settings/all-exam-questions/all-exam-questions.component';
+import { QuestionTestComponent } from 'app/ui/questionTest/questionTest.component';
 
 @NgModule({
   declarations: [
@@ -119,8 +120,8 @@ import { AllExamQuestionsComponent } from './settings/all-exam-questions/all-exa
     RoleDailogComponent,
     AddExamQuestionsComponent,
     ExamComponent,
-    AllExamQuestionsComponent
-
+    AllExamQuestionsComponent,
+    QuestionTestComponent
 
   ],
   imports: [
@@ -128,7 +129,7 @@ import { AllExamQuestionsComponent } from './settings/all-exam-questions/all-exa
     StudentRoutingModule,
     NgChartsModule,
     FullCalendarModule,
-   
+
 
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
@@ -147,7 +148,7 @@ import { AllExamQuestionsComponent } from './settings/all-exam-questions/all-exa
 
 
   ],
-  providers: [    
+  providers: [
 HomeworkService, stdLeaveReqService,StudentsService,ExamScheduleService,TeachersService,StaffService,DepartmentService]
 })
 export class StudentModule {}
