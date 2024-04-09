@@ -24,7 +24,13 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./pending-programs.component.scss']
 })
 export class PendingProgramsComponent {
-
+  breadscrums = [
+    {
+      title: 'Pending Programs',
+      items: ['Submitted Programs'],
+      active: 'Pending Programs',
+    },
+  ];
 
   displayedColumns: string[] = [
     // 'select',

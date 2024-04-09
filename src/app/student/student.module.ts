@@ -71,6 +71,16 @@ import { RoleUserComponent } from './settings/role-user/role-user.component';
 import { RoleDailogComponent } from './settings/all-users/role-dailog/role-dailog.component';
 import { AllExamQuestionsComponent } from './settings/all-exam-questions/all-exam-questions.component';
 import { QuestionTestComponent } from 'app/ui/questionTest/questionTest.component';
+import { CategoriesComponent } from './settings/categories/categories.component';
+import { CreateCategoriesComponent } from './settings/categories/create-categories/create-categories.component';
+import { EditCategoriesComponent } from './settings/categories/edit-categories/edit-categories.component';
+import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
+import { CourseKitComponent } from './settings/course-kit/course-kit.component';
+import { CreateCourseKitComponent } from './settings/course-kit/create-course-kit/create-course-kit.component';
+import { CreateTemplateComponent } from './settings/course-kit/create-template/create-template.component';
+import { EditCourseKitComponent } from './settings/course-kit/edit-course-kit/edit-course-kit.component';
+import { VideoPlayerComponent } from './settings/course-kit/video-player/video-player.component';
+import { ViewCourseKitComponent } from './settings/course-kit/view-course-kit/view-course-kit.component';
 
 @NgModule({
   declarations: [
@@ -121,8 +131,17 @@ import { QuestionTestComponent } from 'app/ui/questionTest/questionTest.componen
     AddExamQuestionsComponent,
     ExamComponent,
     AllExamQuestionsComponent,
-    QuestionTestComponent
-
+    QuestionTestComponent,
+    CategoriesComponent,
+    CreateCategoriesComponent,
+    ViewCategoriesComponent,
+    EditCategoriesComponent,
+    CourseKitComponent,
+    VideoPlayerComponent,
+    CreateCourseKitComponent,
+    EditCourseKitComponent,
+    ViewCourseKitComponent,
+    CreateTemplateComponent
   ],
   imports: [
     CommonModule,

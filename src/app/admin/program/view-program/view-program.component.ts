@@ -5,7 +5,7 @@ import { ClassService } from 'app/admin/schedule-class/class.service';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { VideoPlayerComponent } from '../../../admin/courses/course-kit/video-player/video-player.component';
+import { VideoPlayerComponent } from 'app/student/settings/course-kit/video-player/video-player.component';
 
 
 @Component({
@@ -132,7 +132,7 @@ export class ViewProgramComponent {
               text: 'Program deleted successfully.',
               icon: 'success',
             }).then(() => {
-              window.location.reload();
+              this.router.navigate(['/admin/program/program-list/program'])
             });
           });
         });
@@ -140,7 +140,10 @@ export class ViewProgramComponent {
     });
     
   }
+  back() {
 
+    window.history.back();
+  }
   approveProgram(id:any,program: any): void {
     program.status = 'active';
 

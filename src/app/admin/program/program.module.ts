@@ -22,6 +22,10 @@ import { CreateTemplateComponent } from './program-kit/create-template/create-te
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { ViewProgramComponent } from './view-program/view-program.component';
 import { PendingProgramsComponent } from './program-list/pending-programs/pending-programs.component';
+import { ApprovedProgramsComponent } from './program-list/approved-programs/approved-programs.component';
+import { StudentPendingListComponent } from './student-pending-list/student-pending-list.component';
+import { StudentApprovalListComponent } from './student-approval-list/student-approval-list.component';
+import { ViewCompletionComponent } from './view-completion/view-completion.component';
 
 
 
@@ -37,7 +41,11 @@ import { PendingProgramsComponent } from './program-list/pending-programs/pendin
         CreateClassComponent,
         CreateTemplateComponent,
         ViewProgramComponent,
-        PendingProgramsComponent
+        PendingProgramsComponent,
+        ApprovedProgramsComponent,
+        StudentPendingListComponent,
+        StudentApprovalListComponent,
+        ViewCompletionComponent
          ],
     imports: [
         CommonModule,

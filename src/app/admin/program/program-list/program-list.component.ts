@@ -30,7 +30,7 @@ export class ProgramListComponent {
     },
   ];
   displayedColumns = [
-    'name',
+    'program',
     'code',
     'Creator',
     'Duration',
@@ -55,6 +55,10 @@ export class ProgramListComponent {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
   @ViewChild('filter', { static: true }) filter!: ElementRef;
+  subscribeParams: any;
+  path: any;
+  isProgram = false;
+  isCreator = false;
 
   constructor(
   
@@ -66,15 +70,61 @@ export class ProgramListComponent {
     private route :Router,
     private dialog: MatDialog
   ) { this.coursePaginationModel = {};
+  let urlPath = this.route.url.split('/')
+  // this.editUrl = urlPath.includes('edit-program');
+  this.path = urlPath[urlPath.length - 1];
+  if (this.path == 'program'){
+    this.isProgram = true;
+    this.displayedColumns = [
+      'program',
+      'code',
+      'Creator',
+      'Duration',
+      'Start Date',
+      'End Date',
+      'Payment',
+      'Compulsory Count',
+      'Elective Count',
+      'status'
+    ];
 
-  // @ViewChild('filter', { static: true }) filter!: ElementRef;
+    this.breadscrums = [
+      {
+        title: 'Program Name',
+        items: ['Program List'],
+        active: 'Program Name',
+      },
+    ];
+  }
+  if (this.path == 'creator'){
+    this.isCreator = true;
+    this.displayedColumns = [
+      'Creator',
+      'program',
+      'code',
+      'Duration',
+      'Start Date',
+      'End Date',
+      'Payment',
+      'Compulsory Count',
+      'Elective Count',
+      'status'
+    ];
+    this.breadscrums = [
+      {
+        title: 'Creator',
+        items: ['Program List'],
+        active: 'Creator',
+      },
+    ];
+  }
  }
 
   getProgramList(filters?: any) {
     this.isLoading = true;
     this.isNoMoreData = false;
     // let filterText = this.filterName
-    this.courseService.getCourseProgram({...this.coursePaginationModel,status:'active'}).subscribe(
+    this.courseService.getAllPrograms({...this.coursePaginationModel}).subscribe(
       (response: any) => {
         this.isLoading = false;
         this.programData = response.docs;
@@ -149,8 +199,8 @@ performSearch() {
   }
 }
 
-viewActiveProgram(id:string):void {
-  this.route.navigate(['/admin/program/view-program'],{queryParams:{id:id, status:'active'}});
+viewActiveProgram(id:string, status: string):void {
+  this.route.navigate(['/admin/program/view-program'],{queryParams:{id:id, status: status}});
 }
   // export table data in excel file
   exportExcel() {

@@ -180,7 +180,10 @@ export class CreateProgramComponent {
       this.files.push(item);
     }
   }
+  back() {
 
+    window.history.back();
+  }
   fileBrowseHandler(event: any) {
     const files = event.target.files;
     this.onFileDropped(files);
@@ -249,7 +252,8 @@ export class CreateProgramComponent {
                   text: 'Program updated succesfully',
                   icon: 'success',
                 });
-                this.router.navigate(['/admin/program/program-list'])
+                window.history.back();
+                // this.router.navigate(['/admin/program/program-list'])
               },
               (err: any) => {
                 Swal.fire(

@@ -887,7 +887,7 @@
 
       </div>
     </div>
-    <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showConfig">
+    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showConfig">
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Configuration</label>
@@ -897,6 +897,14 @@
         </div>
       </div>
       <div class="body">
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button  id="saved" [routerLink]="['/student/settings/course-kit']"> Course Kit </button>  
+          </div>
+          <div class="col-md-5">
+            <button  id="saved" [routerLink]="['/student/settings/categories']"> Categories </button>
+          </div>
+        </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
             <button id="saved" [routerLink]="['/student/settings/form-customization']"> Forms </button>
@@ -904,16 +912,20 @@
           <div class="col-md-5">
             <button id="saved" [routerLink]="['/student/settings/all-questions']"> Assessment Configuration </button>
           </div>
-
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="no-link"> Managed Access Time </button>  
+            <button id="no-link" > Tutorial Configuration </button>
           </div>
           <div class="col-md-5">
             <button id="no-link"> Control Storage Usage </button>
           </div>
         </div>
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="no-link"> Managed Access Time </button>  
+          </div>
+                </div>
 
       </div>
     </div>

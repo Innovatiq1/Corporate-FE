@@ -113,7 +113,7 @@
                   <ng-container matColumnDef="User Type">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Role
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" (click)="addNew()">
+                    <mat-cell *matCellDef="let row" (click)="addNew(row.type)">
                       <span class="mobile-label">User Role:</span>{{row.type| titlecase}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="gender">

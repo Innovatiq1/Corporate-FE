@@ -41,6 +41,15 @@ import { ViewDepartmentComponent } from './settings/all-departments/view-departm
 import { ViewAnnouncementComponent } from './settings/list/view-announcement/view-announcement.component';
 import { ExamComponent } from './exam/exam.component';
 import { RoleUserComponent } from './settings/role-user/role-user.component';
+import { CategoriesComponent } from './settings/categories/categories.component';
+import { CreateCategoriesComponent } from './settings/categories/create-categories/create-categories.component';
+import { EditCategoriesComponent } from './settings/categories/edit-categories/edit-categories.component';
+import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
+import { CourseKitComponent } from './settings/course-kit/course-kit.component';
+import { CreateCourseKitComponent } from './settings/course-kit/create-course-kit/create-course-kit.component';
+import { CreateTemplateComponent } from './settings/course-kit/create-template/create-template.component';
+import { EditCourseKitComponent } from './settings/course-kit/edit-course-kit/edit-course-kit.component';
+import { ViewCourseKitComponent } from './settings/course-kit/view-course-kit/view-course-kit.component';
 
 
 const routes: Routes = [
@@ -247,6 +256,49 @@ const routes: Routes = [
   path: 'settings/user-type',
   component: UserTypeComponent,
 },
+{
+  path: 'settings/categories',
+  component: CategoriesComponent
+},
+{
+  path: 'settings/create-categories',
+  component:  CreateCategoriesComponent
+},
+{
+  path: 'settings/edit-categories/:id',
+  component:  EditCategoriesComponent
+},
+{
+  path:'settings/view-categories/:id',
+  component:ViewCategoriesComponent
+},
+{
+  path:'settings/view-categories',
+  component:ViewCategoriesComponent
+},
+{
+  path: 'settings/course-kit',
+  component: CourseKitComponent
+},
+{
+  path: 'settings/create-course-kit',
+  component: CreateCourseKitComponent
+},
+{
+  path: 'settings/edit-course-kit/:id',
+  component:  EditCourseKitComponent
+},
+{
+  path: 'settings/create-template',
+  component: CreateTemplateComponent
+},
+{
+  path:'settings/view-course-kit/:id',
+  component:ViewCourseKitComponent
+},
+
+
+
 
   {
     path: 'side-menu/:id',
