@@ -1,0 +1,136 @@
+<div class="content-block">
+  <div class="card border shadow card-height border-radius mb-1 mt-1 p-2">
+    <ng-container *ngIf="!isQuizCompleted">
+      <div class="row p-3 d-flex justify-content-between">
+        <div class="col-lg-7 col-md-12 col-sm-12 col-12 flex-start">
+          <div class="text-left font-weight-bold mt-3">
+            <div class="text-primary mb-1">
+              {{ user_name }}
+            </div>
+            <div class="text-primary">
+              Total Questions: {{ questionList?.length }}
+            </div>
+            <div>Attend Questions: {{ attendedQuestions() }}</div>
+            <div>
+              Remaining Questions:
+              {{ questionList.length - attendedQuestions() }}
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="!isAnswersSubmitted && isExamStarted"
+          class="col-lg-5 col-md-12 col-sm-12 col-12 flex-end mt-sm-5 mt-md-5 mt-5"
+        >
+          <mat-icon
+            class="material-icons text-primary me-2"
+            style="font-size: 25px; margin-top: 5px"
+            >schedule</mat-icon
+          >
+          <span class="m-0 h3" [style.color]="totalTime <= 10 ? 'red' : ''">
+            {{ minutes > 9 ? minutes : "0" + minutes }} :
+            {{ seconds > 9 ? seconds : "0" + seconds }}
+          </span>
+        </div>
+      </div>
+      <hr />
+
+      <div class="row p-3">
+        <div class="col-lg-12">
+          <div *ngFor="let question of questionList; let i = index">
+            <div class="text-black p-3 rounded bg-light mb-4">
+              <h6 class="ml-5">{{ i + 1 }}.{{ question.questionText }}</h6>
+              <mat-radio-group
+                [(ngModel)]="answers[i].selectedOptionText"
+                (change)="handleRadioChange(i)"
+              >
+                <div *ngFor="let option of question.options; let k = index">
+                  <mat-radio-button
+                    class="example-margin option-text"
+                    [ngClass]="{
+                      'bg-success': question.selectedOptionText === option.text
+                    }"
+                    [value]="option.text"
+                    >{{ optionsLabel[k] }} {{ option.text }}</mat-radio-button
+                  >
+                  <span>
+                    <i
+                      *ngIf="
+                        question.status &&
+                        question.selectedOption === option.text
+                      "
+                      class="fa fa-check text-success"
+                    ></i>
+                    <i
+                      *ngIf="
+                        question.status === false &&
+                        question.selectedOption === option.text
+                      "
+                      class="fa fa-times text-danger"
+                    ></i>
+                  </span>
+                </div>
+              </mat-radio-group>
+            </div>
+          </div>
+
+          <div
+            class="border-dotted-bottom mt-3 mb-3 text-center"
+            *ngIf="!isAnswersSubmitted"
+          >
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="confirmSubmit()"
+              class="me-2"
+            >
+              Submit
+            </button>
+          </div>
+          <div
+            class="border-dotted-bottom mt-3 mb-3 text-center"
+            *ngIf="isAnswersSubmitted"
+          >
+            <button
+              mat-flat-button
+              color="accent"
+              class="mls-2"
+              (click)="navigate()"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="isQuizCompleted">
+      <div class="row d-flex justify-content-between align-items-center">
+        <img
+          style="width: 150px; height: 150px"
+          class="img-fluid col-sm-12 mx-auto"
+          src="https://icon-library.com/images/celebration-icon-png/celebration-icon-png-7.jpg"
+          alt=""
+        />
+        <div class="result text-center col-md-6 col-sm-12 mt-3">
+          <h5 class="mb-5">
+            Congratulations!!
+            <span class="d-block">You have completed the quiz. </span
+            ><span class="d-block">Below is your result:</span>
+          </h5>
+          <p class="mb-1">
+            Total Question Attempted : <b>{{ questionList.length }}</b>
+          </p>
+          <p class="mb-1">
+            Total Correct Answered : <b>{{ correctAnswers(true) }}</b>
+          </p>
+          <p class="mb-1">
+            Total Wrong Answered : <b>{{ correctAnswers(false) }}</b>
+          </p>
+          <p class="mb-1">
+            Your Score : <b>{{ answersResult.score }} Points </b>
+          </p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
