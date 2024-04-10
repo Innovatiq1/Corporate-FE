@@ -13,8 +13,8 @@ export class ViewCompletionComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Courses'],
-      active: 'View Completion List',
+      items: ['Completed Program'],
+      active: 'View Completed Program',
     },
   ];
   classDataById: any;
@@ -22,6 +22,9 @@ export class ViewCompletionComponent {
   studentPaginationModel: StudentPaginationModel;
   courseId: any;
   response: any;
+  isApproved: any;
+  approvedUrl: any;
+
   constructor(private classService: ClassService,private courseService: CourseService,private _router: Router, private activatedRoute: ActivatedRoute,) {
 
     this.studentPaginationModel = {} as StudentPaginationModel;
@@ -33,6 +36,18 @@ export class ViewCompletionComponent {
       // }
 
     });
+    let urlPath = this._router.url.split('/');
+    this.approvedUrl = urlPath.includes('view-approved-program');
+    if (this.approvedUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Blank',
+          items: ['Approved Program'],
+          active: 'View Approved Program',
+        },
+      ];
+      this.isApproved = true;
+    }
   }
 
     ngOnInit(): void {
@@ -41,7 +56,7 @@ export class ViewCompletionComponent {
         this.activatedRoute.params.subscribe((params: any) => {
           
           this.courseId = params.id;
-          // this.getCategoryByID(this.courseId);
+          this.getCategoryByID(this.courseId);
         });
       }
     }
@@ -53,21 +68,21 @@ export class ViewCompletionComponent {
         this.completedData = response.docs;
       })
   }
-  // getCategories(id: string): void {
+  getCategories(id: string): void {
     
-  //   this.getCategoryByID(id);
-  // }
-  // getCategoryByID(id: string) {
-  //    this.classService.getProgramClassById(this.courseId).subscribe((response: any) => {
-  //     this.classDataById = response?._id;
-  //     this.response = response;
-  //     // this.subCategory = response.subCategories;
-  //     // if (response && response.data && response.data._id) {
-  //     //   this.classDataById = response?._id;
-  //     //   this.response = response.data;
-  //     // } else {
-       
-  //     // }
-  //   });
-  // }
+    this.getCategoryByID(id);
+  }
+  getCategoryByID(id: string) {
+    this.courseService.getStudentProgramClassById(id).subscribe((response: any) => {
+     this.classDataById = response?._id;
+     this.response = response;
+     // this.subCategory = response.subCategories;
+     // if (response && response.data && response.data._id) {
+     //   this.classDataById = response?._id;
+     //   this.response = response.data;
+     // } else {
+      
+     // }
+   });
+ }
 }

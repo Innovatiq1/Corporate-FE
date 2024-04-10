@@ -26,6 +26,7 @@ import { ApprovedProgramsComponent } from './program-list/approved-programs/appr
 import { StudentPendingListComponent } from './student-pending-list/student-pending-list.component';
 import { StudentApprovalListComponent } from './student-approval-list/student-approval-list.component';
 import { ViewCompletionComponent } from './view-completion/view-completion.component';
+import { ViewStudentPendingListComponent } from './view-student-pending-list/view-student-pending-list.component';
 
 
 
@@ -45,7 +46,8 @@ import { ViewCompletionComponent } from './view-completion/view-completion.compo
         ApprovedProgramsComponent,
         StudentPendingListComponent,
         StudentApprovalListComponent,
-        ViewCompletionComponent
+        ViewCompletionComponent,
+        ViewStudentPendingListComponent,
          ],
     imports: [
         CommonModule,
