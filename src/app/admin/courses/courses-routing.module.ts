@@ -15,31 +15,32 @@ import { CreateCourseKitComponent } from './course-kit/create-course-kit/create-
 import { CreateTemplateComponent } from './course-kit/create-template/create-template.component';
 import { EditCourseKitComponent } from './course-kit/edit-course-kit/edit-course-kit.component';
 import { ViewCourseKitComponent } from './course-kit/view-course-kit/view-course-kit.component';
+import { ApproveListComponent } from '../approval/approve-list/approve-list.component';
 
 const routes: Routes = [
   {
     path: 'all-courses',
-    component: AllCourseComponent
+    component: AllCourseComponent,
   },
   {
     path: 'add-course',
-    component: AddCourseComponent
+    component: AddCourseComponent,
   },
   {
     path: 'edit-course/:id',
-    component: AddCourseComponent
+    component: AddCourseComponent,
   },
   {
     path: 'view-course/:id',
-    component: AddCourseComponent
+    component: AddCourseComponent,
   },
   {
     path: 'edit-course',
-    component: EditCourseComponent
+    component: EditCourseComponent,
   },
   {
     path: 'about-course',
-    component: AboutCourseComponent
+    component: AboutCourseComponent,
   },
 
   // {
@@ -47,50 +48,53 @@ const routes: Routes = [
   //   component:ClassListComponent
   // },
   {
-    path:'create-class',
-    component:CreateClassComponent
+    path: 'create-class',
+    component: CreateClassComponent,
   },
   {
-    path:'completion-list',
-    component:CompletionListComponent
+    path: 'completion-list',
+    component: CompletionListComponent,
   },
   {
-    path:'view-class/:id',
-    component:ViewClassComponent
+    path: 'view-class/:id',
+    component: ViewClassComponent,
   },
   {
-    path:'view-completion-list/:id',
-    component:ViewCompletionComponent
+    path: 'view-completion-list/:id',
+    component: ViewCompletionComponent,
   },
   {
-    path:'course-view',
-    component:CourseViewComponent
+    path: 'course-view',
+    component: CourseViewComponent,
   },
   {
     path: 'course-kit',
-    component: CourseKitComponent
+    component: CourseKitComponent,
   },
   {
     path: 'create-course-kit',
-    component: CreateCourseKitComponent
+    component: CreateCourseKitComponent,
   },
   {
     path: 'edit-course-kit/:id',
-    component:  EditCourseKitComponent
+    component: EditCourseKitComponent,
   },
   {
     path: 'create-template',
-    component: CreateTemplateComponent
+    component: CreateTemplateComponent,
   },
   {
-    path:'view-course-kit/:id',
-    component:ViewCourseKitComponent
+    path: 'view-course-kit/:id',
+    component: ViewCourseKitComponent,
   },
-
+  {
+    path: 'courses-registered',
+    component: ApproveListComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class CoursesRoutingModule {}

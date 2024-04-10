@@ -303,6 +303,18 @@
                         </mat-error>
                         </mat-form-field>
                       </div>
+
+                      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf=!viewUrl>
+                        <label>Thumbnail</label>
+                        <div class="file-drop-area">
+                          <div class="file">
+                          <button mat-raised-button color="primary" class="btn">Choose file <input formControlName="image_link" (change)="onFileUpload($event)" [readonly]="isInputReadonly()" class="file-input" type="file"></button>
+                          <span class="file-msg"><h6>{{uploadedImage ? uploadedImage : 'Drag and Drop File Here' }}</h6></span>
+
+                          </div>
+                        </div>
+                        <!-- <app-file-upload formControlName="image_link" (change)="onFileUpload($event)"></app-file-upload> -->
+                      </div>
                     </div>
                     <div class="row">
                       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
@@ -343,7 +355,7 @@
                     <!-- <div class="row">
 
                     </div> -->
-                    <div class="row" *ngIf=!viewUrl>
+                    <!-- <div class="row" >
                       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
                         <label>Thumbnail</label>
                         <div class="file-drop-area">
@@ -353,13 +365,9 @@
 
                           </div>
                         </div>
-                        <!-- <app-file-upload formControlName="image_link" (change)="onFileUpload($event)"></app-file-upload> -->
                       </div>
-                    </div>
-                    <div *ngIf="viewUrl" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
-                      <label>Thumbnail</label><br>
-                      <img *ngIf="uploadedImage"   class="thumbnail-img" src="{{image_link}}" >
-                  </div>
+                    </div> -->
+                   
                   <!-- <div class="row">
 
                   </div> -->
