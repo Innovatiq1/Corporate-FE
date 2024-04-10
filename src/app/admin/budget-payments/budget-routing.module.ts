@@ -12,6 +12,7 @@ import { CreateDeptBudgetRequestComponent } from './allocation/create-dept-budge
 import { ViewCoursePaymentComponent } from './course-payment/view-course-payment/view-course-payment.component';
 import { ViewProgramPaymentComponent } from './program-payment/view-program-payment/view-program-payment.component';
 import { EmployeeStatusComponent } from './employee-status/employee-status.component';
+import { TrainingApprovalReqComponent } from '../approval/training-approval-req/training-approval-req.component';
 
 
 const routes: Routes = [
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path: 'view-program-payment',
     component: ViewProgramPaymentComponent
+  },
+  {
+    path:'training-approval-req', 
+    component:TrainingApprovalReqComponent
   }
 ];
 

@@ -28,7 +28,7 @@ export class StudentPendingListComponent {
     'Class Start Date',
     'Class End Date',
     'Registered Date',
-    'actions'
+    // 'actions'
   ];
   breadscrums = [
     {

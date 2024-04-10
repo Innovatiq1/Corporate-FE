@@ -449,6 +449,10 @@ export class CourseService {
         const apiUrl = `${this.prefix}admin/studentClasses/${id}`;
         return this._Http.get<any>(apiUrl).pipe(map((response) => response));
       }
+      getStudentProgramClassById(id?: string) {
+        const apiUrl = `${this.prefix}admin/studentClasses/programs/${id}`;
+        return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+      }
       getUserById(id: string) {
         const apiUrl = `${this.prefix}auth/instructorListByID/${id}`;
         return this._Http.get<any>(apiUrl).pipe(map((response) => response));

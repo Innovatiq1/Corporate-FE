@@ -127,7 +127,12 @@ MENU_LIST = [
             id: "completion-list",
             title:"Completion List",
             type:"none"
-        }
+        },
+        {
+            id: "courses-registered",
+            title:"Registered Courses",
+            type: "none"
+        },
 
 
     ]
@@ -189,16 +194,6 @@ MENU_LIST = [
             id: "course-approval",
             title: "Course Approval",
             type:"none"
-        },
-        {
-            id: "courses-registered",
-            title:"Registered Courses",
-            type: "none"
-        },
-        {
-            id: "training-approval-req",
-            title:"Training Approval Request",
-            type: "none"
         },
       
     ]
@@ -330,6 +325,11 @@ MENU_LIST = [
             title: "Training Request",
             type: "none",
 
+        },
+        {
+            id: "training-approval-req",
+            title:"Training Approval Request",
+            type: "none"
         },
         {
             id: "all-requests",
