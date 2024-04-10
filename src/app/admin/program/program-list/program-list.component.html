@@ -21,6 +21,12 @@
                   <div class="materialTableHeader">
                     <div class="right">
                       <ul class="tbl-export-btn">
+                        <li class="tbl-header-btn">
+                          <div class="m-l-10" (click)="openFilterPopup($event,programData)" matTooltip="Filters">
+                            <i id="filterIcon" class="material-icons" style="color: red;">filter_list</i>
+                          </div>
+                        </li>
+
                         <li>
                           <ul class="header-buttons-left ms-0">
                             <li class="tbl-search-box">
@@ -99,7 +105,7 @@
                           </mat-cell>
                         </ng-container> -->
                         <ng-container matColumnDef="program">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>Program
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Program Name
                           </mat-header-cell>
                           <mat-cell [class.name]="isProgram" *matCellDef="let row"
                             (click)="viewActiveProgram(row.id, row.status)"><span class="mobile-label">Program Name:</span>

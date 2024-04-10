@@ -15,6 +15,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { sort } from 'd3';
 import { MatDialog } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { FilterPopupComponent } from './filter-popup/filter-popup.component';
 
 @Component({
   selector: 'app-program-list',
@@ -119,6 +120,16 @@ export class ProgramListComponent {
     ];
   }
  }
+
+ openFilterPopup(event:MouseEvent,data:any): void {
+  const dialogRef = this.dialog.open(FilterPopupComponent, {
+    hasBackdrop: true,
+    backdropClass: 'filter-popup-backdrop',
+    position: { top: `${event.clientY}px`, left: `${event.clientX}px` },
+    width: '500px',
+    maxHeight: '65vh', 
+  });
+}
 
   getProgramList(filters?: any) {
     this.isLoading = true;
