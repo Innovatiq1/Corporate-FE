@@ -19,6 +19,15 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li class="gmail">
+          <a routerLink="/email/inbox" title="Inbox" routerLinkActive="active">
+            <button mat-button class="nav-notification-icons" style="margin-top: 6px;
+          margin-bottom: -8px;"> <i class="material-icons-outlined icon-color">
+                email
+              </i></button>
+          </a>
+
+        </li>
         <!-- Full Screen Button -->
         <li class="fullscreen">
           <button mat-button class="nav-notification-icons" (click)="callFullscreen()"> <i
@@ -83,14 +92,15 @@
                     <div>
                       <button class="mat-list" *ngFor="let notification of announcements">
                         <span class="table-img msg-user ">
-                          <i class="material-icons-two-tone nfc-type-icon"
-                          [ngClass]="[color]">{{icon}}</i>
+                          <i class="material-icons-two-tone nfc-type-icon" [ngClass]="[color]">{{icon}}</i>
                         </span>
-                        <span class="menu-info "  >
-                          <span class="menu-title mt-1" (click)="showCustomHtml(notification)">{{notification.subject}}</span>
+                        <span class="menu-info ">
+                          <span class="menu-title mt-1"
+                            (click)="showCustomHtml(notification)">{{notification.subject}}</span>
                         </span>
-                        <span class="nfc-close " >
-                          <app-feather-icons [icon]="'x'" [class]="'user-menu-icons'" (click)="cancel(notification.id)"></app-feather-icons>
+                        <span class="nfc-close ">
+                          <app-feather-icons [icon]="'x'" [class]="'user-menu-icons'"
+                            (click)="cancel(notification.id)"></app-feather-icons>
                         </span>
                       </button>
                     </div>
@@ -107,15 +117,15 @@
         <li>
 
           <select (change)="setLanguage($event)">
-            <option  *ngFor="let item of listLang" [value]="item.lang">
+            <option *ngFor="let item of listLang" [value]="item.lang">
               {{item.text}}
             </option>
           </select>
 
         </li>
         <li>
-        
-          <button mat-button [matMenuTriggerFor]="menu">  
+
+          <button mat-button [matMenuTriggerFor]="menu">
             <app-feather-icons [icon]="'settings'" [class]="'user-menu-icons'"></app-feather-icons>
           </button>
           <mat-menu #menu="matMenu" class="horizontal-menu">
@@ -123,11 +133,15 @@
               <div class="user-container">
                 <div class="user-option" (click)="navigateToUserSettings()">
                   <img src="assets/images/settings/role.png" alt="User" class="user-image">
-                  <button mat-menu-item><h5>Manage Users</h5></button>
+                  <button mat-menu-item>
+                    <h5>Manage Users</h5>
+                  </button>
                 </div>
                 <div class="user-option" (click)="navigateToConfigSettings()">
                   <img src="assets/images/settings/system-configuration1.png" alt="User" class="user-image">
-                  <button mat-menu-item><h5>Configuration</h5></button>
+                  <button mat-menu-item>
+                    <h5>Configuration</h5>
+                  </button>
 
                   <!-- <img src="assets/images/settings/lms.png" alt="Custom" class="user-image">
                   <button mat-menu-item><h5>LMS TAE</h5></button> -->
@@ -135,26 +149,34 @@
                 <div class="user-container">
                   <div class="user-option" (click)="navigateToCustomsSettings()">
                     <img src="assets/images/settings/custom.png" alt="Custom" class="user-image">
-                    <button mat-menu-item><h5>Customization</h5></button>
+                    <button mat-menu-item>
+                      <h5>Customization</h5>
+                    </button>
                   </div>
                 </div>
+              </div>
             </div>
-          </div>
 
             <div class="menu-row">
               <div class="user-options" (click)="navigateToIntegrateSettings()">
                 <img src="assets/images/settings/integrate.jpg" alt="Custom" class="user-image">
-                <button mat-menu-item><h5>Integration</h5></button>
+                <button mat-menu-item>
+                  <h5>Integration</h5>
+                </button>
               </div>
               <div class="user-options" (click)="navigateToProfileSettings()">
                 <img src="assets/images/settings/security1.png" alt="User" class="user-image">
-                <button mat-menu-item><h5>Security</h5></button>
+                <button mat-menu-item>
+                  <h5>Security</h5>
+                </button>
               </div>
-                <div class="user-options" (click)="navigateToAutomateSettings()">
-                  <img src="assets/images/settings/automate1.png" alt="User" class="user-image">
-                  <button mat-menu-item><h5>Automation</h5></button>
-                </div>
+              <div class="user-options" (click)="navigateToAutomateSettings()">
+                <img src="assets/images/settings/automate1.png" alt="User" class="user-image">
+                <button mat-menu-item>
+                  <h5>Automation</h5>
+                </button>
               </div>
+            </div>
             <!-- <div class="menu-row">
               <div class="user-container" (click)="navigateToConfigSettings()">
                 <div class="user-option">
@@ -172,7 +194,8 @@
           <button mat-button [matMenuTriggerFor]="profilemenu">
             <div class="chip dropdown-toggle" ngbDropdownToggle class="pt-0">
               <!-- <img [src]="userImg || '../../../assets/profile.png'" class="user_img" width="32" height="32" alt="User Image" /> -->
-              <img [src]="userProfile || '../../../assets/profile.png'" class="user_img" width="32" height="32"  alt="User Image" />
+              <img [src]="userProfile || '../../../assets/profile.png'" class="user_img" width="32" height="32"
+                alt="User Image" />
 
               <span>{{userFullName}}</span>
 
