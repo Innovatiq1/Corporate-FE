@@ -16,7 +16,7 @@ import { ApprovedProgramsComponent } from './program-list/approved-programs/appr
 import { StudentPendingListComponent } from './student-pending-list/student-pending-list.component';
 import { StudentApprovalListComponent } from './student-approval-list/student-approval-list.component';
 import { ViewCompletionComponent } from './view-completion/view-completion.component';
-// import { StudentApprovalListComponent } from './student-pending-list/student-pending-list.component';
+import { ViewStudentPendingListComponent } from './view-student-pending-list/view-student-pending-list.component';
 
 const routes: Routes = [
   {
@@ -46,6 +46,14 @@ const routes: Routes = [
     {
       path:'view-completion-list/:id',
       component:ViewCompletionComponent
+    },
+    {
+      path:'view-approved-program/:id',
+      component:ViewCompletionComponent
+    },
+    {
+      path:'view-pending-program/:id',
+      component:ViewStudentPendingListComponent
     },
   {
     path:'create-program', 

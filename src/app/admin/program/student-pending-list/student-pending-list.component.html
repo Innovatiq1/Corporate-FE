@@ -85,13 +85,13 @@
                                 <ng-container matColumnDef="Student Name">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Student
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let row" class="name">
+                                    <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/program/view-pending-program/',row.id]">
                                         <span class="mobile-label">Student Name:</span>{{row.student_name |
                                         capitalizeFirstLetter }} </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="Program Name">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Program</mat-header-cell>
-                                    <mat-cell *matCellDef="let row">
+                                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-pending-program/',row.id]">
                                         <span class="mobile-label">Program Name:</span> {{row.programTitle |
                                         capitalizeFirstLetter}}</mat-cell>
                                 </ng-container>
@@ -101,7 +101,7 @@
                                 <ng-container matColumnDef="Class Start Date">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Class Start Date
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let row">
+                                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-pending-program/',row.id]">
                                         <span class="mobile-label">Class Start Date:</span>{{row?.classId?.sessions[0]?.sessionStartDate |
                                         date}}</mat-cell>
                                 </ng-container>
@@ -109,7 +109,7 @@
                                 <ng-container matColumnDef="Class End Date">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Class End Date
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let row">
+                                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-pending-program/',row.id]">
                                         <span class="mobile-label">Class End Date:</span>{{row?.classId?.sessions[0]?.sessionEndDate  |
                                         date}}</mat-cell>
                                 </ng-container>
@@ -117,7 +117,7 @@
                                 <ng-container matColumnDef="Registered Date">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Registered Date
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let row">
+                                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-pending-program/',row.id]">
                                         <span class="mobile-label">Fees:</span>{{row.registeredOn | date}}</mat-cell>
                                 </ng-container>
                                 <!-- <ng-container matColumnDef="status">
@@ -131,7 +131,7 @@
                                     </mat-cell>
                                   </ng-container> -->
                                 <!-- actions -->
-                                <ng-container matColumnDef="actions">
+                                <!-- <ng-container matColumnDef="actions">
                                     <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                                        <mat-cell *matCellDef="let row" class="pr-0">
                                         <button mat-button [matMenuTriggerFor]="menu">
@@ -155,7 +155,7 @@
                                             </button>
                                         </mat-menu>
                                     </mat-cell>
-                                </ng-container>
+                                </ng-container> -->
                                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                                 <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
                                 <mat-row *matRowDef="let row; columns: displayedColumns;" [style.cursor]="'pointer'"
