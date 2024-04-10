@@ -8,7 +8,7 @@ import { ClassService } from 'app/admin/schedule-class/class.service';
 import {  BsModalService, ModalOptions} from "ngx-bootstrap/modal";
 
 import Swal from 'sweetalert2';
-import { VideoPlayerComponent } from '../settings/course-kit/video-player/video-player.component';
+import { VideoPlayerComponent } from 'app/admin/courses/course-kit/video-player/video-player.component';
 
 @Component({
   selector: 'app-success-program',

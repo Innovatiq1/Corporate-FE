@@ -8,7 +8,7 @@ import {  BsModalService, ModalOptions} from "ngx-bootstrap/modal";
 import { DOCUMENT, isPlatformBrowser, DatePipe } from '@angular/common';
 
 import Swal from 'sweetalert2';
-import { VideoPlayerComponent } from '../settings/course-kit/video-player/video-player.component';
+import { VideoPlayerComponent } from 'app/admin/courses/course-kit/video-player/video-player.component';
 export interface PeriodicElement {
   name: string;
   position: number;

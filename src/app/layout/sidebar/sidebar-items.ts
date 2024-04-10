@@ -1681,21 +1681,21 @@ export const SettingsMenu: MenuItem[] = [
     open:false,
     role:[],
     children:[
-      {
-        path:'student/settings/course-kit',
-        title:'Course Kit',
-        id:'assessment',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
+      // {
+      //   path:'student/settings/course-kit',
+      //   title:'Course Kit',
+      //   id:'assessment',
+      //   iconType:'img',
+      //   icon:'',
+      //   class:'',
+      //   badge:'',
+      //   iconsrc:'',
+      //   badgeClass:'',
+      //   groupTitle:false,
+      //   open:false,
+      //   role:[],
+      //   children:[]
+      // },
       {
         path:'student/settings/categories',
         title:'Categories',
