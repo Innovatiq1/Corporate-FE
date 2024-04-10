@@ -39,6 +39,7 @@ export class AddExamQuestionsComponent {
 
     this.questionFormTab2 = this.formBuilder.group({
       name: ['', Validators.required],
+      timer: ['60'], 
       questions: this.formBuilder.array([]),
     });
     if (!this.editUrl) {
@@ -203,6 +204,7 @@ export class AddExamQuestionsComponent {
     if (this.questionFormTab2.valid) {
       const payload = {
         name: this.questionFormTab2.value.name,
+        timer: this.questionFormTab2.value.timer,
         questions: this.questionFormTab2.value.questions.map((v: any) => ({
           options: v.options,
           questionText: v.questionText,

@@ -12,9 +12,9 @@
                     </div>
                 
                     <!-- Right side div -->
-                    <div class="col-lg-5 col-md-12 col-sm-12 col-12 d-flex justify-content-end align-items-end mt-sm-5 mt-md-5 mt-5">
+                    <div class="col-lg-5 col-md-12 col-sm-12 col-12 d-flex justify-content-end align-items-center">
                         <mat-icon class="material-icons text-primary me-2" style="font-size: 25px; margin-top:2px">schedule</mat-icon>
-                        <span class="m-0 h3 mt-5" [style.color]="totalTime  <= 10 ? 'red' : ''">
+                        <span class="m-0 h3" [style.color]="totalTime  <= 10 ? 'red' : ''">
                             {{ minutes > 9 ? minutes : '0' + minutes }} :
                             {{ seconds > 9 ? seconds : '0' + seconds }}
                         </span>
@@ -85,9 +85,9 @@
                         <p>Total Wrong Answered : {{ correctAnswers(false) }} </p>
                         <p>Your Score : {{ answerResult.score }} Points </p>
                     </div>
-                    <div class="border-dotted-bottom mt-3 mb-3 text-center">
+                    <!-- <div class="border-dotted-bottom mt-3 mb-3 text-center">
                         <button mat-flat-button color="primary" (click)="submitFeedback()" class="mr-2">Submit Feedback</button>
-                    </div>
+                    </div> -->
                 </div>
             </ng-container>
         </div>

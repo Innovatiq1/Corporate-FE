@@ -48,6 +48,11 @@ export class QuestionService {
       }
       if (filter.status && filter.status === 'active') {
         params = params.set('status', 'active');
+      }else if (filter.status && filter.status === 'approved')  {
+        params = params.set('status', 'approved')
+      }
+      if (filter.status && filter.status === 'active') {
+        params = params.set('status', 'active');
       } else if (filter.status && filter.status === 'inactive') {
         params = params.set('status', 'inactive');
       }
@@ -57,7 +62,6 @@ export class QuestionService {
 
   getQuestionById(Id: any): Observable<ApiResponse> {
     const apiUrl = this.defaultUrl + `admin/assesment/${Id}`;
-    console.log('==new=', apiUrl);
     return this.http.get<ApiResponse>(apiUrl);
   }
 

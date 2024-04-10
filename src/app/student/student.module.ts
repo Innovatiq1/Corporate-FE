@@ -75,6 +75,7 @@ import { CategoriesComponent } from './settings/categories/categories.component'
 import { CreateCategoriesComponent } from './settings/categories/create-categories/create-categories.component';
 import { EditCategoriesComponent } from './settings/categories/edit-categories/edit-categories.component';
 import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
+import { ExamQuestionsComponent } from './exam-questions/exam-questions.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { ViewCategoriesComponent } from './settings/categories/view-categories/v
     AddExamQuestionsComponent,
     ExamComponent,
     AllExamQuestionsComponent,
+    ExamQuestionsComponent,
     QuestionTestComponent,
     CategoriesComponent,
     CreateCategoriesComponent,

@@ -15,6 +15,15 @@
                 required
               />
             </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 18%; margin-left: 20px">
+              <mat-label>Time</mat-label>
+              <mat-select formControlName="timer">
+                <mat-option value="30">30 seconds</mat-option>
+                <mat-option value="45">45 seconds</mat-option>
+                <mat-option value="60">60 seconds</mat-option>
+                <mat-option value="90">90 seconds</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
           <div class="table-responsive">
             <table class="table">
@@ -112,7 +121,11 @@
           </button>
         </div>
 
+
+        
         <div class="col-md-2">
+          <div class="d-flex justify-content-between">
+   
           <button
             *ngIf="!editUrl"
             class="btn-space"
@@ -126,6 +139,17 @@
           </button>
 
           <button
+          *ngIf="editUrl && approved"
+          class="btn-space"
+          mat-raised-button
+          color="success"
+          type="submit"
+          (click)="approve()"
+        >
+          Approve
+         </button>
+
+          <button
             *ngIf="editUrl"
             class="btn-space"
             mat-raised-button
@@ -135,6 +159,7 @@
           >
             Update
           </button>
+        </div>
         </div>
       </div>
     </div>
