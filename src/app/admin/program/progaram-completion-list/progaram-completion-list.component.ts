@@ -28,7 +28,7 @@ export class ProgaramCompletionListComponent {
   ];
   breadscrums = [
     {
-      items: ['Student Program'],
+      items: ['Registered Program'],
       active: 'Completed Program',
     },
   ];

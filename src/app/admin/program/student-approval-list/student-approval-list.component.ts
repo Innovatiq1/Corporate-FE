@@ -24,6 +24,8 @@ export class StudentApprovalListComponent {
     // 'select',
     'Student Name',
     'Program Name',
+    'Program Fee',
+    'Instructor Fee',
     'Class Start Date',
     'Class End Date',
     'Registered Date',
@@ -31,7 +33,7 @@ export class StudentApprovalListComponent {
   ];
   breadscrums = [
     {
-      items: ['Student Program'],
+      items: ['Registered Program'],
       active: 'Approved Programs',
     },
   ];
