@@ -35,13 +35,13 @@
                   {{sidebarSubItem.title}}
                 </a> -->
                 <a  *ngIf=!isSettings (click)="callToggleMenu($event, sidebarItem.children.length)"  (click)="navigateTo(sidebarItem.id,sidebarSubItem.id)"  [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarItem.id +'/'+sidebarSubItem.id]"
-                  class="ml-menu">
+                  [ngClass]="sidebarSubItem.class">
                   {{sidebarSubItem.title}}
                  </a>
 
  
-                  <a  *ngIf=isSettings (click)="navigateTo(sidebarSubItem.path)" [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarSubItem.path]"
-                   class="ml-menu">
+                  <a  *ngIf=isSettings (click)="callToggleMenu($event, sidebarItem.children.length)" (click)="navigateTo(sidebarSubItem.path)" [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarSubItem.path]"
+                    [ngClass]="sidebarSubItem.class">
   
                    {{sidebarSubItem.title}}
                  </a>
@@ -49,9 +49,7 @@
                   <li *ngFor="let sidebarSubItem2 of sidebarSubItem.children"
                     [routerLinkActive]="sidebarSubItem2.children.length > 0 ? '' : 'active'">
                     <a 
-                      (click)="callToggleMenu($event,sidebarSubItem2.children.length)" 
-                      (click)="navigateToSubItem2(sidebarItem.id,sidebarSubItem.id,sidebarSubItem2.id)" 
-                      [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarItem.id +'/'+sidebarSubItem.id +'/'+sidebarSubItem2.id]"
+                      (click)="callToggleMenu($event,sidebarSubItem2.children.length)"  (click)="navigateToSubItem2(sidebarItem.id,sidebarSubItem.id,sidebarSubItem2.id)" 
                       [ngClass]="sidebarSubItem2.class">
                       {{sidebarSubItem2.title | translate}}
                     </a>
