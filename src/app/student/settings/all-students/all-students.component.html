@@ -326,19 +326,20 @@
             </ng-template>
             <div class="row mt-5 ml-0 mr-0" >
               <div class="col-md-3" *ngFor="let data of dataSource.filteredData">
-                <div class="card border-apply" style="height: 265px; margin-top: 50px;cursor: pointer;" (click)="aboutStudent(data.id)">
+                <div class="card border-apply" style="height: 220px; margin-top: 20px;cursor: pointer;" (click)="aboutStudent(data.id)">
                   <!-- <div class="m-b-20"> -->
                     <div class="contact-grid">
-                      <div class="profile-header">
-                        <img src="{{data.avatar || 'assets/profile.png'}}" class="user-img1" alt="">
-                        <!-- <div class="user-name"></div> -->
-                        
+                      <div class="row">
+                        <div class="col-5">
+                          <img src="{{data.avatar || 'assets/profile.png'}}" class="user-img1" alt="">
+                        </div>
+                        <div class="col-7">
+                          <div class="user-name1">{{data.name |titlecase}} {{ data.last_name ? data.last_name : '' }}</div>
+                          <div class="text-muted">{{data.role}}</div>
+                          <div> <span class="phone">
+                            <i class="material-icons">phone</i>{{data.mobile}}</span></div>
+                        </div>
                       </div>
-                      <div class="user-name1">{{data.name |titlecase}} {{ data.last_name ? data.last_name : '' }}</div>
-                      <div class="text-muted">{{data.role}}</div>
-                     <!-- <div class="mb-2">
-                      {{data.email}}
-                     </div> -->
                       
                      <div class="row mt-2" style="text-align: start;padding-left: 10px;">
                       <div class="col-5">
@@ -361,9 +362,9 @@
                       <div class="col-5">
                         {{data.country_name | titlecase}}
                       </div>
-                      <div class="col-7">
+                      <!-- <div class="col-7">
                         {{data?.mobile}}
-                      </div>
+                      </div> -->
                      </div>
                       <!-- <div>
                         <span class="phone">

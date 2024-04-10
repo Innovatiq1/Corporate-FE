@@ -10,6 +10,11 @@ import { CreateClassComponent } from './create-class/create-class.component';
 import { ViewClassComponent } from './class-list/view-class/view-class.component';
 import { ViewCompletionComponent } from './completion-list/view-completion/view-completion.component';
 import { CourseViewComponent } from './all-course/course-view/course-view.component';
+import { CourseKitComponent } from './course-kit/course-kit.component';
+import { CreateCourseKitComponent } from './course-kit/create-course-kit/create-course-kit.component';
+import { CreateTemplateComponent } from './course-kit/create-template/create-template.component';
+import { EditCourseKitComponent } from './course-kit/edit-course-kit/edit-course-kit.component';
+import { ViewCourseKitComponent } from './course-kit/view-course-kit/view-course-kit.component';
 
 const routes: Routes = [
   {
@@ -60,7 +65,27 @@ const routes: Routes = [
   {
     path:'course-view',
     component:CourseViewComponent
-  }
+  },
+  {
+    path: 'course-kit',
+    component: CourseKitComponent
+  },
+  {
+    path: 'create-course-kit',
+    component: CreateCourseKitComponent
+  },
+  {
+    path: 'edit-course-kit/:id',
+    component:  EditCourseKitComponent
+  },
+  {
+    path: 'create-template',
+    component: CreateTemplateComponent
+  },
+  {
+    path:'view-course-kit/:id',
+    component:ViewCourseKitComponent
+  },
 
 ];
 

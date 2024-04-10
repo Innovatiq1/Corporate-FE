@@ -5,7 +5,7 @@ import { ClassService } from 'app/admin/schedule-class/class.service';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { VideoPlayerComponent } from 'app/student/settings/course-kit/video-player/video-player.component';
+import { VideoPlayerComponent } from 'app/admin/courses/course-kit/video-player/video-player.component';
 
 
 @Component({

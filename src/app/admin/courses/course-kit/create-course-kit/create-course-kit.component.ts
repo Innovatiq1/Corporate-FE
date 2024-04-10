@@ -146,7 +146,7 @@ private createCourseKit(courseKitData: CourseKit): void {
           // this.fileDropEl.nativeElement.value = "";
           this.courseKitForm.reset();
           // this.toggleList()
-          this.router.navigateByUrl("/student/settings/course-kit");
+          this.router.navigateByUrl("/admin/courses/course-kit");
         },
         (error) => {
           Swal.fire(

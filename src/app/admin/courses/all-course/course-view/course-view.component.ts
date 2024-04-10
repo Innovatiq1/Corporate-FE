@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CourseModel, CoursePaginationModel } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
-import { VideoPlayerComponent } from 'app/student/settings/course-kit/video-player/video-player.component';
+import { VideoPlayerComponent } from '../../course-kit/video-player/video-player.component';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
 
