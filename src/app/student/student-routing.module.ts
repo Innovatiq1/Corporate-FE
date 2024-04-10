@@ -45,6 +45,7 @@ import { CategoriesComponent } from './settings/categories/categories.component'
 import { CreateCategoriesComponent } from './settings/categories/create-categories/create-categories.component';
 import { EditCategoriesComponent } from './settings/categories/edit-categories/edit-categories.component';
 import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
+import { ExamQuestionsComponent } from './exam-questions/exam-questions.component';
 
 
 const routes: Routes = [
@@ -118,6 +119,10 @@ const routes: Routes = [
   {
     path: 'questions/:id/:id/:id',
     component: QuestionComponent,
+  },
+  {
+    path: 'exam-questions/:id/:id/:id/:id',
+    component: ExamQuestionsComponent,
   },
   {
     path: 'welcome',

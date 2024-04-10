@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./add-questions.component.scss']
 })
 export class AddQuestionsComponent implements OnInit {
-
+  @Input() approved: boolean = false;
 
   breadscrums = [
     {
@@ -50,7 +50,12 @@ constructor(private formBuilder: FormBuilder,private router: Router, private que
 
   this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
     this.questionId = params.id;
-    //console.log("=Id===",params.id)
+  });
+
+  this.activatedRoute.queryParams.subscribe(params => {
+    if (params['approved'] && params['approved'] === 'true') {
+      this.approved = true; 
+    }
   });
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -17,6 +17,7 @@ import { number } from 'echarts';
   styleUrls: ['./assesment-questions.component.scss'],
 })
 export class AssesmentQuestionsComponent {
+  @Input() approved: boolean = false;
   questionFormTab3: FormGroup;
   editUrl: any;
   questionId!: string;
@@ -39,6 +40,7 @@ export class AssesmentQuestionsComponent {
 
     this.questionFormTab3 = this.formBuilder.group({
       name: ['', Validators.required],
+      timer: ['60'], 
       questions: this.formBuilder.array([]),
     });
     if (!this.editUrl) {
@@ -203,6 +205,8 @@ export class AssesmentQuestionsComponent {
     if (this.questionFormTab3.valid) {
       const payload = {
         name: this.questionFormTab3.value.name,
+        timer: this.questionFormTab3.value.timer,
+        status: 'open',
         questions: this.questionFormTab3.value.questions.map((v: any) => ({
           options: v.options,
           questionText: v.questionText,
@@ -283,7 +287,9 @@ export class AssesmentQuestionsComponent {
                 text: 'Question Updated successfully',
                 icon: 'success',
               });
-              this.router.navigate(['/student/settings/all-questions']);
+              if (!this.approved) {
+                this.router.navigate(['/student/settings/all-questions']);
+              }
             },
             (err: any) => {
               Swal.fire('Failed to update Question', 'error');
@@ -292,5 +298,25 @@ export class AssesmentQuestionsComponent {
         }
       });
     }
+  }
+
+  approve() {
+    const payload = {
+      status : 'approved',
+      id: this.questionId,
+    } 
+    this.questionService.updateQuestions(payload).subscribe(
+      (res: any) => {
+        Swal.fire({
+          title: 'Successful',
+          text: 'Assessment approved successfully',
+          icon: 'success',
+        });
+        this.router.navigate(['/student/settings/all-questions']);
+      },
+      (err: any) => {
+        Swal.fire('Failed to update Question', 'error');
+      }
+    );
   }
 }

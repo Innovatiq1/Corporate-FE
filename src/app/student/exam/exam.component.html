@@ -1,1 +1,76 @@
-<p>exam works!</p>
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <app-breadcrumb [title]="breadscrum.title"  [active_item]="breadscrum.active">
+            </app-breadcrumb>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="materialTableHeader">
+                    <div class="right">
+                      <ul class="tbl-export-btn">
+                        <li>
+                          <ul class="header-buttons-left ms-0">
+                            <li class="tbl-search-box">
+                              <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                              <input placeholder="Search" type="text" #filter class="browser-default search-field"
+                                aria-label="Search box">
+                            </li>
+                          </ul>
+                        </li>       
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="body overflow-auto">
+                    <div class="responsive_table">
+                        <table mat-table [dataSource]="dataSource" matSort class="mat-cell advance-table">
+                 
+                            <ng-container matColumnDef="Assessment Name">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>Assessment Name
+                              </mat-header-cell>
+                              <mat-cell *matCellDef="let row"><span class="mobile-label">Name:</span> {{row.assessmentId?.name }}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="Course Name">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name</mat-header-cell>
+                              <mat-cell *matCellDef="let row"><span class="mobile-label">Course Name:</span>{{row.courseId?.title}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="Submitted Date">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>Submitted Date</mat-header-cell>
+                              <mat-cell *matCellDef="let row"><span class="mobile-label">Submitted Date:</span>{{row?.submittedAt | date: 'MM/dd/yyyy'}}
+                              </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="Score">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Score</mat-header-cell>
+                                <mat-cell *matCellDef="let row"><span class="mobile-label">Score:</span>{{row.score}}
+                                </mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="Exam">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Exam</mat-header-cell>
+                                <mat-cell *matCellDef="let row">
+                                  <button [routerLink]="['/student/exam-questions/',  row.id, row?.studentId?.id, row?.courseId?._id, row?.courseId?.exam_assessment?.id]" mat-flat-button color="{{ row.is_course_completed ? 'primary' : 'warn' }}">
+                                    {{ row.is_course_completed ? 'Take Exam Test' : 'Approval Pending' }}
+                                  </button>
+                                </mat-cell>
+                              </ng-container>
+                           
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;" [style.cursor]="'pointer'" matRipple>
+                            </mat-row>
+                          </table>
+                          <mat-paginator #paginator [length]="totalItems" (page)="pageSizeChange($event)"
+                          [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">
+                      </mat-paginator>
+                        </div>
+                        </div>
+
+
+                </div>
+                </div>
+                </div>
+
+
+        </div>
+        </section>

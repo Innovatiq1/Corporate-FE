@@ -29,6 +29,7 @@ import { CreateTemplateComponent } from './course-kit/create-template/create-tem
 import { EditCourseKitComponent } from './course-kit/edit-course-kit/edit-course-kit.component';
 import { VideoPlayerComponent } from './course-kit/video-player/video-player.component';
 import { ViewCourseKitComponent } from './course-kit/view-course-kit/view-course-kit.component';
+import { ExamScoresComponent } from './exam-scores/exam-scores.component';
 
 
 
@@ -51,7 +52,8 @@ import { ViewCourseKitComponent } from './course-kit/view-course-kit/view-course
     CreateCourseKitComponent,
     EditCourseKitComponent,
     ViewCourseKitComponent,
-    CreateTemplateComponent
+    CreateTemplateComponent,
+    ExamScoresComponent
 
   ],
   imports: [

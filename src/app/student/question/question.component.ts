@@ -7,6 +7,7 @@ import { ClassService } from 'app/admin/schedule-class/class.service';
 import { StudentsService } from '../../admin/students/students.service';
 import { interval } from 'rxjs';
 import Swal from 'sweetalert2';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -40,6 +41,11 @@ export class QuestionComponent implements OnInit {
   optionsLabel: string[] = ['a)', 'b)', 'c)', 'd)'];
   public answers: any = [];
   answerResult! : any
+  timerInSeconds: number = 0;
+  pageSize: number = 10;
+  currentPage: number = 0;
+  totalQuestions: number = 0;
+  skip: number = 0;
 
   constructor(private questionService: QuestionService,private courseService:CourseService,private router: Router,
     private studentService : StudentsService,
@@ -47,9 +53,35 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.name = localStorage.getItem("name")!;
-    this.getAllQuestions();
     this.getCourseDetails();
     this.student();
+  }
+
+  onPageChange(event: PageEvent): void {
+    const pageCount = event.pageIndex
+    if(this.currentPage < event.pageIndex) {
+      this.skip += 10
+    } else if (this.currentPage > event.pageIndex) {
+      if (pageCount == 0) {
+        this.skip = 0   
+      } else {
+        this.skip -= 10
+      } 
+    }
+    this.currentPage = event.pageIndex;
+  }
+
+  getStartingIndex(): number {
+    return this.currentPage * this.pageSize;
+    
+  }
+
+  getEndingIndex(): number {
+    return Math.min((this.currentPage + 1) * this.pageSize, this.totalQuestions);
+  }
+
+  getPaginatedQuestions(): any[] {
+    return this.questionList.slice(this.getStartingIndex(), this.getEndingIndex());
   }
 
   confirmSubmit() {
@@ -77,27 +109,26 @@ export class QuestionComponent implements OnInit {
       }
     });
   }
-  getAllQuestions() {
-    this.questionService.getQuestionJson()
-      .subscribe(res => {
-      })
-  }
-  getCourseDetails(){
-    let urlPath = this.router.url.split('/')
+  getCourseDetails(): void {
+    let urlPath = this.router.url.split('/');
     this.courseId = urlPath[urlPath.length - 1];
     this.studentId = urlPath[urlPath.length - 2];
     this.classId = urlPath[urlPath.length - 3];
 
     this.courseService.getCourseById(this.courseId).subscribe((response) => {
-    this.questionList = response?.assessment?.questions;
-    this.assesmentId = response?.assessment?.id;
-    this.calculateTotalTime();  
-    this.answers = Array.from({ length: this.questionList.length }, () => ({
-      questionText: null,
-      selectedOptionText: null
-    }));
-  })
-}
+      this.questionList = response?.assessment?.questions;
+      this.assesmentId = response?.assessment?.id;
+      this.timerInSeconds = response?.assessment?.timer;
+      this.calculateTotalTime();  
+      this.answers = Array.from({ length: this.questionList.length }, () => ({
+        questionText: null,
+        selectedOptionText: null
+      }));
+      this.totalQuestions = this.questionList.length;
+      this.goToPage(0);
+    });
+  }
+  
 
 student(){
   this.studentService.getStudentById(this.studentId).subscribe((res: any) => {
@@ -105,9 +136,7 @@ student(){
   })
 }
 
-
   resetQuiz() {
-    this.getAllQuestions();
     this.points = 0;
     this.counter = 60;
     this.currentQuestion = 0;
@@ -117,22 +146,21 @@ student(){
   getProgressPercent() {
     this.progress = ((this.currentQuestion / this.questionList.length) * 100).toString();
     return this.progress;
-
   }
 
   handleRadioChange(index:any) {
     this.answers[index].questionText = this.questionList[index]?.questionText
-    this.answers[index].selectedOptionText = this.selectedOption
+    // this.answers[index].selectedOptionText = this.selectedOption
     this.selectedOption = ''
   }
-
-
 
   submitAnswers() {
     const requestBody = {
       studentId: this.studentId,
       assessmentId: this.assesmentId,
-      answers: this.answers
+      answers: this.answers,
+      courseId: this.courseId,
+      is_course_completed: true,
     };
 
     this.studentService.submitAssessment(requestBody).subscribe(
@@ -187,10 +215,7 @@ submitFeedback(){
   }
   
   calculateTotalTime() {
-    // Calculate total time based on number of questions
-    this.totalTime = this.questionList.length * 60; // Assuming each question takes 60 seconds
-    console.log('this.totalTime: ', this.totalTime);
-    console.log('this.questionList: ', this.questionList);
+    this.totalTime = this.questionList.length * this.timerInSeconds;
     this.startTimer();
 
   }
@@ -216,4 +241,12 @@ submitFeedback(){
     this.isQuizCompleted = true;
   }
 
+  getTotalPages(): number {
+    return Math.ceil(this.totalQuestions / this.pageSize);
+  }
+
+  goToPage(pageNumber: number): void {
+    this.currentPage = pageNumber;
+  }
+  
 }

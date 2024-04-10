@@ -1,25 +1,37 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { SelectionModel } from '@angular/cdk/collections';
 import { AssessmentQuestionsPaginationModel } from '@core/models/assessment-answer.model'
-import { MatPaginator } from '@angular/material/paginator';
-import { Router } from '@angular/router';
-import { AssessmentService } from '@core/service/assessment.service';
 import { UtilsService } from '@core/service/utils.service';
-
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
+import { AssessmentService } from '@core/service/assessment.service';
 
 @Component({
-  selector: 'app-exam',
-  templateUrl: './exam.component.html',
-  styleUrls: ['./exam.component.scss']
+  selector: 'app-exam-scores',
+  templateUrl: './exam-scores.component.html',
+  styleUrls: ['./exam-scores.component.scss']
 })
-export class ExamComponent {
+export class ExamScoresComponent {
+
   displayedColumns: string[] = [
-    'Assessment Name',
-    'Course Name',
-    'Submitted Date',
-    'Score',
-    'Exam'
-   ];
+    // 'select',
+    'img',
+    'Student Name',
+    'Email',
+    'Course Title',
+    'Exam Name',
+    'Assessment Score',
+    'Exam Assessment Score',
+    // 'Actions'
+  ];
+
+  breadscrums = [
+    {
+      title: 'Exam Scores',
+      items: ['Exam Scores'],
+      active: 'exam scores',
+    },
+  ];
+
   assessmentPaginationModel!: Partial<AssessmentQuestionsPaginationModel>;
   totalItems: any;
   pageSizeArr = this.utils.pageSizeArr;
@@ -29,25 +41,17 @@ export class ExamComponent {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild('filter', { static: true }) filter!: ElementRef;
 
-  breadscrums = [
-    {
-      title: 'Assesment Answer List',
-      // items: ['Extra'],
-      active: 'Assesment Answer',
-    },
-  ];
-
-  constructor(private router:Router,public utils: UtilsService, private assessmentService: AssessmentService){
+  constructor(public utils: UtilsService, private assessmentService: AssessmentService){
     this.assessmentPaginationModel = {};
-  
   }
 
   ngOnInit() {
     this.getAllAnswers()
    }
 
+
    getAllAnswers() {
-    this.assessmentService.getExamQuestionJson({ ...this.assessmentPaginationModel})
+    this.assessmentService.getExamAnswers({ ...this.assessmentPaginationModel})
       .subscribe(res => {
         this.dataSource = res.data.docs;
         this.totalItems = res.data.totalDocs;
@@ -57,6 +61,7 @@ export class ExamComponent {
       })
   }
 
+  
   pageSizeChange($event: any) {
     this.assessmentPaginationModel.page = $event?.pageIndex + 1;
     this.assessmentPaginationModel.limit = $event?.pageSize;
