@@ -510,7 +510,8 @@
                     <div>
                       <app-feedbackcommon
                         [feedbackInfo]="feedbackInfo"
-                        [isPreview]="true"
+                        [isPreview]="false"
+                        (submitAnswers)="submitFeedback($event)"
                       ></app-feedbackcommon>
                     </div>
                   </div>

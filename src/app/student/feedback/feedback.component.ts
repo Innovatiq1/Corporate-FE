@@ -91,8 +91,8 @@ export class FeedbackComponent {
       question2:['',[] ],
       question3: ['',[] ],
       question4: ['',[] ],
-      question5: [null], 
-      question6: [null], 
+      question5: [null],
+      question6: [null],
       question7: ['',[] ],
 
     });
@@ -152,7 +152,7 @@ export class FeedbackComponent {
         option.studentLastName = this.userDetails.user.last_name;
     });
     let selectedOptions = {
-      selectedOptions: this.selectedOptions, 
+      selectedOptions: this.selectedOptions,
       studentFirstName: this.userDetails.user.name,
       studentLastName: this.userDetails.user.last_name,
       courseName: this.courseName
@@ -175,9 +175,9 @@ export class FeedbackComponent {
               .saveApprovedClasses(this.classId, payload)
               .subscribe((response) => {
                 setTimeout(() => {
-                  this.router.navigate(['/student/view-course/'+ this.classId]);    
+                  this.router.navigate(['/student/view-course/'+ this.classId]);
                 }, 4000);
-          
+
               });
         },
         (err) => {
@@ -196,7 +196,7 @@ skip(){
     .saveApprovedClasses(this.classId, payload)
     .subscribe((response) => {
       setTimeout(() => {
-        this.router.navigate(['/student/view-course/'+ this.classId]);    
+        this.router.navigate(['/student/view-course/'+ this.classId]);
       }, 4000);
 
     });
@@ -210,7 +210,7 @@ skip(){
       this.selectedOptions.push({ questionText: questionId, selectedOption: selectedOption});
     }
   }
-  
+
   // submit(){
   //   // this.feedbackForm.patchValue({
   //   //   question5: this.selectedIndex,

@@ -1,7 +1,9 @@
-
 <div>
-  <div class="row" >
-    <div *ngFor="let question of questions(); let i = index" [class]="isPreview?'col-md-12':'col-md-4'">
+  <div class="row">
+    <div
+      *ngFor="let question of questionsList; let i = index"
+      [class]="col === 1 ? 'col-md-12' : 'col-md-4'"
+    >
       <label>
         <span class="text-muted"> Q{{ i + 1 }}. </span>
         <span class="question h6">
@@ -13,6 +15,7 @@
         <mat-form-field class="example-full-width" appearance="outline">
           <input
             class="form-control"
+            [(ngModel)]="question.answer"
             matInput
             [type]="question.type === 'numeric' ? 'numeric' : 'text'"
           />
@@ -25,14 +28,20 @@
             class="form-control"
             matInput
             cdkAutosizeMinRows="1"
+            [(ngModel)]="question.answer"
             cdkAutosizeMaxRows="5"
           ></textarea>
         </mat-form-field>
       </ng-container>
       <ng-container *ngIf="['select'].includes(question.type)">
         <mat-form-field class="example-full-width" appearance="outline">
-          <mat-select>
-            <mat-option *ngFor="let option of question.options" [value]="option">
+          <mat-select
+            [(ngModel)]="question.answer"
+          >
+            <mat-option
+              *ngFor="let option of question.options"
+              [value]="option"
+            >
               {{ option }}
             </mat-option>
           </mat-select>
@@ -42,7 +51,10 @@
       <ng-container *ngIf="['radio'].includes(question.type)">
         <!-- <mat-form-field class="example-full-width" appearance="outline"> -->
         <div class="example-full-width">
-          <mat-radio-group aria-label="Select an option">
+          <mat-radio-group
+            aria-label="Select an option"
+            [(ngModel)]="question.answer"
+          >
             <mat-radio-button
               *ngFor="let option of question.options"
               [value]="option"
@@ -55,7 +67,12 @@
 
       <ng-container *ngIf="['datePicker'].includes(question.type)">
         <mat-form-field class="example-full-width" appearance="outline">
-          <input matInput [matDatepicker]="picker" />
+          <input
+            matInput
+            [matDatepicker]="picker"
+            (dateInput)="handleDatePickerInput($event, question, i)"
+            (dateChange)="handleDatePickerInput($event, question, i)"
+          />
           <mat-datepicker-toggle
             matIconSuffix
             [for]="picker"
@@ -65,8 +82,22 @@
       </ng-container>
 
       <ng-container *ngIf="['rating'].includes(question.type)">
-        <app-star-rating [maxRating]="question.maxRating"></app-star-rating>
+        <app-star-rating
+          [maxRating]="question.maxRating"
+          [value]="question.value"
+          (changeEvent)="handleRatingInput($event, question, i)"
+        ></app-star-rating>
       </ng-container>
     </div>
+  </div>
+  <div class="border-dotted-bottom mt-3 mb-3 text-center" *ngIf="!isPreview">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="confirmSubmit()"
+      class="me-2"
+    >
+      Submit
+    </button>
   </div>
 </div>

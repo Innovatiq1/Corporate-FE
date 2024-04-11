@@ -28,6 +28,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { StudentsService } from 'app/admin/students/students.service';
+import { SurveyService } from 'app/admin/survey/survey.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -117,7 +118,8 @@ export class ViewCourseComponent implements OnDestroy {
     private commonService: CommonService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private studentService: StudentsService
+    private studentService: StudentsService,
+    private surveyService: SurveyService
   ) {
     this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
       this.classId = params['id'];
@@ -306,25 +308,24 @@ export class ViewCourseComponent implements OnDestroy {
       this.uploadedDoc = uploadedDocument?.pop();
       this.title = response?.title;
       this.assessmentInfo = response?.assessment;
-      this.questionList =response?.assessment?.questions || [];
-      const survey = response?.survey
-      this.feedbackInfo = survey? {
-        name: survey?.name,
-        id: survey?.id,
-        questions: survey?.questions?.map((question:any)=>({
-          questionText: question?.questionText,
-          type: question?.type,
-          isMandatory: question?.isMandatory,
-          maxRating: question?.maxRating,
-          options: question?.options?.map((option:any)=>
-            option.text
-          )
-        }))
-      }: null
+      this.questionList = response?.assessment?.questions || [];
+      const survey = response?.survey;
+      this.feedbackInfo = survey
+        ? {
+            name: survey?.name,
+            id: survey?.id,
+            questions: survey?.questions?.map((question: any) => ({
+              questionText: question?.questionText,
+              type: question?.type,
+              isMandatory: question?.isMandatory,
+              maxRating: question?.maxRating,
+              options:
+                question?.options?.map((option: any) => option.text) || null,
+            })),
+          }
+        : null;
     });
   }
-
-
 
   getRegisteredClassDetails() {
     const studentId = localStorage.getItem('id');
@@ -521,8 +522,8 @@ export class ViewCourseComponent implements OnDestroy {
 
   getAnswerById(answerId: string) {
     this.studentService.getAnswerById(answerId).subscribe((res: any) => {
-    this.isAnswersSubmitted = true;
-      this.answersResult = res.assessmentAnswer
+      this.isAnswersSubmitted = true;
+      this.answersResult = res.assessmentAnswer;
       const assessmentAnswer = res.assessmentAnswer;
       const assessmentId = assessmentAnswer.assessmentId;
       this.questionList = assessmentId.questions.map((question: any) => {
@@ -549,5 +550,38 @@ export class ViewCourseComponent implements OnDestroy {
       });
       this.isAnswersSubmitted = true;
     });
+  }
+
+  submitFeedback(event: any) {
+    const studentId = localStorage.getItem('id');
+    const userData = JSON.parse(localStorage.getItem('user_data')||"");
+    const studentFirstName = userData?.user?.name;
+    const studentLastName = userData?.user?.last_name;
+    const payload = {
+      ...event,
+      studentId,
+      courseId: this.courseId,
+      studentFirstName,
+      studentLastName,
+      courseName:this.title
+    };
+    this.surveyService.addSurveyBuilder(payload).subscribe(
+      (response) => {
+        Swal.fire({
+          title: 'Successful',
+          text: 'Feedback submitted successfully',
+          icon: 'success',
+        });
+        const feedbackInfo = { ...this.feedbackInfo };
+        this.feedbackInfo = feedbackInfo;
+      },
+      (error) => {
+        Swal.fire({
+          title: 'Failed to submit Feedback',
+          text: error.message || error.error,
+          icon: 'error',
+        });
+      }
+    );
   }
 }
