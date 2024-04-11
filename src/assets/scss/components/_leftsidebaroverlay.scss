@@ -208,18 +208,20 @@
           position: absolute;
           top: calc(50% - 13px);
           right: 17px;
-          font-size: 19px;
+          font-size: 16px;
           // @include transform(scale(0));
           @include transition(all 0.3s);
         }
 
         &:before {
           content: "+";
+          color: #ff3665;
           // @include transform(scale(1));
         }
 
         &:after {
           content: "\2013";
+          color: #ff3665;
           // @include transform(scale(0));
         }
       }
@@ -296,7 +298,7 @@
           margin: 7px 0 7px 12px;
           color: #333;
           // font-weight: bold;
-          font-size: 18px;
+          font-size: 16px;
           overflow: hidden;
           font-weight: 500;
           // font-family: 'Nunito';
@@ -421,6 +423,7 @@
           left: 20%;
           font-weight: 900;
           top: calc(50% - 15px);
+          color: #ff3665;
         }
       }
       .ml-menu-3 {

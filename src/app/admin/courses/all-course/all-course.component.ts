@@ -9,6 +9,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-all-course',
   templateUrl: './all-course.component.html',
@@ -21,6 +22,16 @@ export class AllCourseComponent {
       items: ['Course'],
       active: 'All Course',
     },
+  ];
+  displayedColumns = [
+    'name',
+    'code',
+    'creator',
+    'Days',
+    'Training Hours',
+    'Fees',
+    'Vendor',
+    'status'
   ];
   // displayedColumns = [
   //   'name',
@@ -41,16 +52,174 @@ export class AllCourseComponent {
   allSubCategories!: SubCategory[];
   dataSource: any;
   searchTerm: string = '';
+  path: any;
+  isCourse = false;
+  isCreator = false;
   selection = new SelectionModel<MainCategory>(true, []);
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   
-  constructor(public _courseService:CourseService,  private classService: ClassService) {
+  constructor(public _courseService:CourseService, private route :Router, private classService: ClassService) {
     // constructor
     this.coursePaginationModel = {};
+    let urlPath = this.route.url.split('/')
+    // this.editUrl = urlPath.includes('edit-program');
+    this.path = urlPath[urlPath.length - 1];
+    if (this.path == 'course'){
+      this.isCourse = true;
+      this.displayedColumns = [
+        'name',
+      'code',
+      'creator',
+      'Days',
+      'Training Hours',
+      'Fees',
+      'Vendor',
+      'status'
+      ];
+  
+    }
+    if (this.path == 'creator'){
+      this.isCreator = true;
+      this.displayedColumns = [
+        'creator',
+        'name',
+      'code',
+      'Days',
+      'Training Hours',
+      'Fees',
+      'Vendor',
+      'status'
+      ];
+    }
   }
 
   ngOnInit(){
-    // this.getAllCourse();
+    this.getAllCourses();
+  }
+
+   // export table data in excel file
+   exportExcel() {
+    // key name with space add in brackets
+    console.log("vv", this.courseData);
+    const exportData: Partial<TableElement>[] =
+      this.courseData.map((x: any) => ({
+        'Course Name': x.title,
+        'Course Code':x.courseCode,
+        
+        'Duration': x.training_hours,
+      }));
+
+    TableExportUtil.exportToExcel(exportData, 'excel');
+  }
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [[' Course Name','Duration']];
+    console.log(this.courseData)
+    const data = this.courseData.map((x:any) =>
+      [x.title,
+        x.training_hours,
+    ] );
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+  
+    // Add a page to the document (optional)
+    //doc.addPage();
+  
+    // Generate the table using jspdf-autotable
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+  
+  
+  
+    });
+  
+    // Save or open the PDF
+    doc.save('AllCourses-list.pdf');
+  }
+  performSearch() {
+    if(this.searchTerm){
+    this.courseData = this.courseData?.filter((item: any) =>{
+      console.log("data",item)
+      const searchList = (item.title).toLowerCase();
+      return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
+    }
+
+
+    // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    } else {
+      this.getAllCourses();
+
+    }
+  }
+  delete(id: string) {
+    this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
+      const matchingClasses = classList.docs.filter((classItem: any) => {
+        return classItem.courseId && classItem.courseId.id === id;
+      });
+      if (matchingClasses.length > 0) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Classes have been registered with this course. Cannot delete.',
+          icon: 'error',
+        });
+        return;
+      }
+      Swal.fire({
+        title: "Confirm Deletion",
+        text: "Are you sure you want to delete this  Course?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+      this._courseService.deleteCourse(id).subscribe(() => {
+        this.getAllCourses();
+        Swal.fire({
+          title: 'Success',
+          text: 'Course deleted successfully.',
+          icon: 'success',
+        });
+      });
+    }
+    });
+  
+  });
+    
+  }
+  pageSizeChange($event: any) {
+    this.coursePaginationModel.page = $event?.pageIndex + 1;
+    this.coursePaginationModel.limit = $event?.pageSize;
+    this.getAllCourses();
+  }
+  private mapCategories(): void {
+    this.coursePaginationModel.docs?.forEach((item) => {
+      item.main_category_text = this.mainCategories.find((x) => x.id === item.main_category)?.category_name;
+    });
+  
+    this.coursePaginationModel.docs?.forEach((item) => {
+      item.sub_category_text = this.allSubCategories.find((x) => x.id === item.sub_category)?.category_name;
+    });
+  
+  }
+  getAllCourses(){
+    this._courseService.getAllCoursesWithPagination().subscribe(response =>{
+      console.log(response);
+      this.courseData = response.data.docs;
+      this.totalItems = response.data.totalDocs
+      this.coursePaginationModel.docs = response.data.docs;
+      this.coursePaginationModel.page = response.data.page;
+      this.coursePaginationModel.limit = response.data.limit;
+      this.coursePaginationModel.totalDocs = response.data.totalDocs;
+    })
+  }
+  viewCourse(id:string) {
+    this.route.navigate(['/admin/courses/course-view/'],{queryParams: {id:id,status:'active'}});
   }
 // getAllCourse(){
 //   this._courseService.getAllCourses({ ...this.coursePaginationModel, status: 'active' }).subscribe(response =>{

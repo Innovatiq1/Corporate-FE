@@ -32,8 +32,8 @@ export class InActiveCoursesComponent {
   breadscrums = [
     {
       title: 'Course Approval',
-      items: ['Approval'],
-      active: 'Course Approval',
+      items: ['Submitted Course'],
+      active: 'Pending Courses',
     },
   ];
   edit :boolean = false;

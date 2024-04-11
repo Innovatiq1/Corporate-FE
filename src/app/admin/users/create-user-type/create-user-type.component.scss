@@ -29,3 +29,19 @@
 .mandatory {
     color: red;
 }
+.card-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    float: right;
+    width: 50%;
+    margin-top: 30px;
+    // margin-left: 50px;
+  }
+  
+ 
+  .img-w{
+    height: 20px;
+    margin-right: 25px;
+    margin-top: 20px;
+    }

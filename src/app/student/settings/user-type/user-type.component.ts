@@ -23,7 +23,7 @@ export class UserTypeComponent {
     'Accessbility Module',
     'Sub Module',
     'Status',
-    'actions'
+    // 'actions'
   ];
   breadscrums = [
     {

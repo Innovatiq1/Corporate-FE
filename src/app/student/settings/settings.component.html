@@ -1,5 +1,5 @@
 <section class="content"
-  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig &&!showForms  && !showSidemenu">
+  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showAllUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig &&!showForms  && !showSidemenu">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
@@ -240,7 +240,7 @@
     <!-- </div> -->
 
     <div class="card"
-      *ngIf="!showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig && !showForms && !showSidemenu">
+      *ngIf="!showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers &&!showAllUsers && !showIntegration && !showAutomation && !showCustoms && !showLms && !showConfig && !showForms && !showSidemenu">
       <div class="header">
         <h2>Settings</h2>
       </div>
@@ -629,12 +629,67 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/user-type']"> Role Access </button>
+            <button id="saved" [routerLink]="['/student/settings/user-type']"> Module Access </button>
           </div>
           <div class="col-md-5">
             <button id="saved" [routerLink]="['/student/settings/create-user-role']"> Roles </button>
           </div>
         </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" (click)="navigateToAllUserSettings()"> Users </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/settings/all-departments']"> Department Profile  </button>
+          </div>
+        </div>
+
+        <!-- <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/student/settings/all-users']"> All Users </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/settings/all-students']"> Students</button>
+          </div>
+        </div>
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/student/settings/all-instructors']"> Instructors </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/settings/all-staff']"> Staff </button>
+          </div>
+        </div> -->
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="no-link"> Role type Name </button>
+          </div>
+          <div class="col-md-5">
+            <button id="no-link"> User type Name </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="no-link"> Department Name </button>
+          </div>
+          <!-- <div class="col-md-5">
+            <button id="no-link"> Department Name </button>
+          </div> -->
+          
+        </div>
+
+      </div>
+    </div>
+    <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showAllUsers">
+      <div class="row">
+        <div class="col-md-8">
+          <label class="py-4 px-5">Users</label>
+        </div>
+        <div class="col-md-2 my-3 mx-auto">
+          <img src="assets/images/settings/role.png" style="width: 80px; height: 80px;">
+        </div>
+      </div>
+      <div class="body">
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
             <button id="saved" [routerLink]="['/student/settings/all-users']"> All Users </button>
@@ -655,10 +710,10 @@
           <div class="col-md-6 banner">
             <button id="saved" [routerLink]="['/student/settings/all-departments']"> Departments </button>
           </div>
-          <!-- <div class="col-md-5">
-            <button id="saved" [routerLink]="['/admin/approval/program-approval']"> Approvals </button>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/settings/user-group']"> User Group </button>
           
-          </div> -->
+          </div>
         </div>
         <!-- <div class="row px-4">
           <div class="col-md-6 banner">
@@ -748,7 +803,7 @@
             <button id="saved" (click)="navigateToBannerSettings()"> Banners </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/admin/survey/create-survey-questions']"> Survey </button>
+            <button id="saved" [routerLink]="['/student/settings/create-feedback']"> Survey </button>
           </div>
         </div>
         <div class="row px-4">

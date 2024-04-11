@@ -90,11 +90,11 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
   callToggleMenu(event: Event, length: number) {
-    console.log('Toggle menu',length);
+    
     if (length > 0) {
       const parentElement = (event.target as HTMLInputElement).closest('li');
       const activeClass = parentElement?.classList.contains('active');
-
+      console.log('Toggle menu',activeClass, length);
       if (activeClass) {
         this.renderer.removeClass(parentElement, 'active');
       } else {
@@ -134,7 +134,6 @@ navigateTo(menu:any,url?:any) {
 navigateToSubItem2(menu:any,url?:any,subUrl?: any) {
   this.menuItemClick.emit();
   let userType = localStorage.getItem('user_type')
-    console.log(menu +'/'+url)
   this.router.navigateByUrl( menu +'/'+url +'/'+subUrl);
   
 }

@@ -27,16 +27,20 @@ export class CreateUserRoleComponent {
   breadscrums = [
     {
       title: 'Admin',
-      items: ['Admin'],
+      items: ['Manage Users'],
       active: ' ',
     },
   ];
+  ngOnInit() {
+    this.getAllUserTypes();
+  }
 
 
   getAllUserTypes(filters?: any) {
     this.adminService.getUserTypeList({ 'allRows':true }).subscribe(
       (response: any) => {
         this.userTypeNames = response;
+        console.log("types", this.userTypeNames)
       },
       (error) => {
       }
