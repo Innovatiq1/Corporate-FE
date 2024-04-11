@@ -1,0 +1,304 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb
+        [title]="breadscrum.title"
+        [items]="breadscrum.items"
+        [active_item]="breadscrum.active"
+      >
+      </app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="body">
+            <div class="m-2">
+              <div class="row clearfix">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                  <form [formGroup]="feedbackForm">
+                    <div class="name-container">
+                      <label>Name <span class="mandatory">&nbsp;*</span></label>
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <input
+                          class="form-control"
+                          matInput
+                          type="text"
+                          formControlName="name"
+                          placeholder="Name"
+                          required
+                        />
+                      </mat-form-field>
+                    </div>
+                    <div class="questions-container" formArrayName="questions">
+                      <h5>Questions</h5>
+                      <div
+                        class="row"
+                        *ngFor="
+                          let question of questions.controls;
+                          let i = index
+                        "
+                        [formGroupName]="i"
+                      >
+                        <div class="col-lg-5 col-md-5">
+                          <div class="d-flex">
+                            <div class="my-auto">
+                              <label
+                                class="d-flex align-items-baseline handle text-muted text-nowrap"
+                              >
+                                Q{{ i + 1 }}.</label
+                              >
+                              <div class="text-center">
+                                <mat-icon
+                                  *ngIf="questions.length > 1"
+                                  style="
+                                    color: black;
+                                    font-size: 24px;
+                                    width: 25px;
+                                    cursor: pointer;
+                                  "
+                                  (click)="deleteQuestion(i)"
+                                  >delete</mat-icon
+                                >
+                              </div>
+                            </div>
+                            <div class="w-100 me-1">
+                              <div class="type-container">
+                                <label
+                                  >Type<span class="mandatory"
+                                    >&nbsp;*</span
+                                  ></label
+                                >
+                                <mat-form-field
+                                  class="mb-2 w-100"
+                                  appearance="outline"
+                                >
+                                  <mat-select
+                                    required
+                                    formControlName="type"
+                                    (selectionChange)="onSelectChange($event, i)"
+                                  >
+                                    <mat-option
+                                      *ngFor="let questionType of questionTypes"
+                                      [value]="questionType.id"
+                                    >
+                                      {{ questionType.label }}
+                                    </mat-option>
+                                  </mat-select>
+                                  <mat-error
+                                    *ngIf="
+                                      question
+                                        .get('type')
+                                        ?.hasError('required') ||
+                                      question.get('type')?.touched
+                                    "
+                                  >
+                                    Type is required.
+                                  </mat-error>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-7 col-lg-7">
+                          <div class="question-container">
+                            <label
+                              >Question<span class="mandatory"
+                                >&nbsp;*</span
+                              ></label
+                            >
+                            <mat-form-field
+                              class="example-full-width mb-2"
+                              appearance="outline"
+                            >
+                              <input
+                                matInput
+                                formControlName="questionText"
+                                required
+                                type="text"
+                                placeholder="Enter question"
+                              />
+                              <mat-error
+                                *ngIf="
+                                  question
+                                    .get('questionText')
+                                    ?.hasError('required') ||
+                                  question.get('questionText')?.touched
+                                "
+                              >
+                                Question is required.
+                              </mat-error>
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                          <div
+                            class="mandatory-container d-flex align-items-center"
+                          >
+                            <mat-slide-toggle formControlName="isMandatory"
+                              >Mandatory</mat-slide-toggle
+                            >
+                          </div>
+                        </div>
+                        <ng-container *ngIf="checkIsRatingInput(question)">
+                          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+                            <div class="max-rating">
+                              <label
+                                >Max Rating<span class="mandatory"
+                                  >&nbsp;*</span
+                                ></label
+                              >
+                              <mat-form-field
+                                class="example-full-width mb-2"
+                                appearance="outline"
+                              >
+                                <input
+                                  matInput
+                                  formControlName="maxRating"
+                                  required
+                                  type="number"
+                                  min="3"
+                                  placeholder="Enter Max Rating"
+                                />
+                                <mat-error
+                                  *ngIf="
+                                    question
+                                      .get('maxRating')
+                                      ?.hasError('required') ||
+                                    question.get('maxRating')?.touched
+                                  "
+                                >
+                                  Max Rating is required.
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </ng-container>
+                        <ng-container *ngIf="checkIsOptionQA(question)">
+                          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+                            <label
+                              >Options<span class="mandatory"
+                                >&nbsp;*</span
+                              ></label
+                            >
+                            <mat-form-field
+                              class="example-full-width mb-2"
+                              appearance="outline"
+                            >
+                              <mat-chip-grid
+                                #chipGrid
+                                aria-label="Enter Options"
+                              >
+                                <mat-chip-row
+                                  *ngFor="
+                                    let option of getOptions(question);
+                                    let j = index
+                                  "
+                                  (removed)="remove(j, i)"
+                                  [editable]="true"
+                                  (edited)="edit($event, j, i)"
+                                  [aria-description]="
+                                    'press enter to edit ' + option
+                                  "
+                                >
+                                  {{ option }}
+                                  <button
+                                    matChipRemove
+                                    [attr.aria-label]="'remove ' + option"
+                                  >
+                                    <mat-icon>cancel</mat-icon>
+                                  </button>
+                                </mat-chip-row>
+
+                                <input
+                                  placeholder="New option..."
+                                  [matChipInputFor]="chipGrid"
+                                  [matChipInputSeparatorKeyCodes]="
+                                    separatorKeysCodes
+                                  "
+                                  [matChipInputAddOnBlur]="true"
+                                  (matChipInputTokenEnd)="add($event, i)"
+                                />
+                              </mat-chip-grid>
+                            </mat-form-field>
+                          </div>
+                        </ng-container>
+                        <div class="d-flex w-100">
+                          <hr class="w-45" />
+                          <div>
+                            <a
+                              *ngIf="questions.controls.length === i + 1"
+                              title="Add"
+                              class="btn px-0 mx-1 text-success"
+                              (click)="addAdditionalQuestion()"
+                              ><i class="material-icons-two-tone fs-20">
+                                add_circle
+                              </i></a
+                            >
+                          </div>
+                          <hr class="w-45" />
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div
+                  class="col-xl-6 col-lg-6 col-md-6 col-sm-12"
+                  *ngIf="questionsList()?.questions?.length"
+                >
+                  <h6 class="text-muted">Preview:</h6>
+                  <div class="shadow p-3 mb-5 bg-white rounded">
+                    <app-feedbackcommon [feedbackInfo]="questionsList()" [isPreview]="true"></app-feedbackcommon>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row body">
+      <div class="col-md-10">
+        <button
+          mat-raised-button
+          id="back"
+          [routerLink]="['/student/settings/all-questions']"
+        >
+          Back
+        </button>
+      </div>
+
+      <div class="col-md-2">
+        <button
+          *ngIf="!editUrl"
+          class="btn-space"
+          mat-raised-button
+          color="primary"
+          type="submit"
+          id="submit"
+          (click)="save()"
+        >
+          Save
+        </button>
+
+        <button
+          *ngIf="editUrl"
+          class="btn-space"
+          mat-raised-button
+          color="primary"
+          type="submit"
+          (click)="update()"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

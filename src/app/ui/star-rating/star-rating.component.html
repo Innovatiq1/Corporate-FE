@@ -1,0 +1,24 @@
+<div class="star-rating">
+  <label
+    class="star-rating__star"
+    *ngFor="let rating of customRating(maxRating); let index = index"
+    [class.is-selected]="temp_value >= rating && temp_value !== null"
+    [class.is-disabled]="disabled"
+    [class.position-absolute.half]="checkHalfStar(rating)"
+    (mouseover)="star_over(rating)"
+    (mouseout)="star_out()">
+    <input
+      class="star-rating star-rating__checkbox"
+      type="radio"
+      [value]="rating"
+      [(ngModel)]="value"
+      [disabled]="disabled"
+      (click)="setStar(rating)">
+    <div *ngIf="!isNumberRating">
+      <i class="fas fa-star" *ngIf="!checkHalfStar(rating)"></i>
+      <i class="fas fa-star-half" *ngIf="checkHalfStar(rating)"></i>
+      <!-- ★ -->
+    </div>
+    <div class="numberCircle" *ngIf="isNumberRating">{{ rating }}</div>
+  </label>
+</div>

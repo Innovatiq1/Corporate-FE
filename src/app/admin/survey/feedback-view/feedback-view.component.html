@@ -1,0 +1,52 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb
+        [title]="breadscrum.title"
+        [items]="breadscrum.items"
+        [active_item]="breadscrum.active"
+      >
+      </app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="body">
+            <div class="m-2">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-2">{{ questionsList.name }}</h5>
+
+                <div class="d-flex">
+                  <button
+                    alt="Edit"
+                    mat-menu-item
+                    [routerLink]="['/admin/survey/edit-feedback/', surveyId]"
+                    matTooltip="Edit"
+                  >
+                    <app-feather-icons
+                      [icon]="'edit'"
+                      class="tbl-fav-edit"
+                    ></app-feather-icons>
+                  </button>
+                  <button
+                    alt="Delete"
+                    mat-menu-item
+                    (click)="delete()"
+                    matTooltip="Delete"
+                  >
+                    <app-feather-icons
+                      [icon]="'trash-2'"
+                      class="tbl-fav-delete"
+                    ></app-feather-icons>
+                  </button>
+                </div>
+              </div>
+              <app-feedbackcommon [feedbackInfo]="questionsList"></app-feedbackcommon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

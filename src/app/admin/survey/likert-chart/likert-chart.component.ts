@@ -48,7 +48,6 @@ export class LikertChartComponent {
     'Name',
     'Count',
     'Created At',
-    'status'
    ];
   dataSource: any;
   coursePaginationModel!: Partial<CoursePaginationModel>;

@@ -1,0 +1,49 @@
+.star-rating__checkbox {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+.half {
+  width: 12px;
+}
+
+.fa-star-half {
+  width: 12px;
+  overflow: hidden;
+}
+
+.star-rating__star {
+  display: inline-block;
+  padding: 3px;
+  vertical-align: middle;
+  line-height: 1;
+  font-size: 1.5em;
+  color: #ababab;
+  -webkit-transition: color 0.2s ease-out;
+  transition: color 0.2s ease-out;
+}
+.star-rating__star:hover {
+  cursor: pointer;
+}
+.star-rating__star.is-selected {
+  color: #ffd700;
+}
+.star-rating__star.is-disabled:hover {
+  cursor: default;
+}
+.numberCircle {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 8px;
+  background: #fff;
+  border: 2px solid #666;
+  color: #666;
+  text-align: center;
+  font-size: 11px;
+}
