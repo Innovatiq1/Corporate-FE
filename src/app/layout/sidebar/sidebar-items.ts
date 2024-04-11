@@ -1718,7 +1718,7 @@ export const SettingsMenu: MenuItem[] = [
       },
 
       {
-        path:'student/settings/form-customization',
+        path:'student/settings/forms',
         title:'Forms',
         id:'forms',
         iconType:'img',
