@@ -9,13 +9,14 @@ import { Users } from '@core/models/user.model';
 import { DeptService } from '@core/service/dept.service';
 import { UserService } from '@core/service/user.service';
 import Swal from 'sweetalert2';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-add-department',
-  templateUrl: './add-department.component.html',
-  styleUrls: ['./add-department.component.scss'],
+  selector: 'app-department-modal',
+  templateUrl: './department-modal.component.html',
+  styleUrls: ['./department-modal.component.scss']
 })
-export class AddDepartmentComponent  implements OnInit {
+export class DepartmentModalComponent {
   departmentForm: UntypedFormGroup;
   breadscrums = [
     {
@@ -31,7 +32,7 @@ export class AddDepartmentComponent  implements OnInit {
   hod: any;
   hodName: any;
   constructor(private fb: UntypedFormBuilder,private deptService: DeptService,private router:Router,private userService: UserService,
-    private activatedRoute:ActivatedRoute) {
+    private activatedRoute:ActivatedRoute, public dialogRef: MatDialogRef<DepartmentModalComponent>) {
     let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-department'); 
     if(this.editUrl===true){
@@ -73,38 +74,11 @@ export class AddDepartmentComponent  implements OnInit {
     console.log(userfindEmail)
     this.hod=selectedValue
     this.hodName=userfindEmail[0].name + " "+ (userfindEmail[0].last_name?userfindEmail[0].last_name:'')
-    
-    // if (userfindEmail && userfindEmail.length > 0 && userfindEmail[0]?.name) {
-    //   this.ro=userfindEmail[0]?._id
-    //   console.log("====",userfindEmail[0]?.name +" " + userfindEmail[0]?.last_name)
-    //   this.roName=userfindEmail[0]?.name +" " + userfindEmail[0]?.last_name
-      
-    // } else {
-    //   // Handle the case where userfindEmail is null, empty, or userfindEmail[0].email is undefined
-    //   console.error('userfindEmail or email property is null or undefined');
-    // }
-    // console.log('Selected Value:', userfindEmail[0].email);
   }
   
   userList(){
   this.userService.getUserList1().subscribe((response: any) => {
-    console.log('res',response);
     this.users=response.data
-    //response.data.data;
-    console.log("=Users=====",response.data)
-    // let data=this.blogsList.find((id:any)=>id._id === this.currentId);
-    // console.log('data',data)
-    // this.fileName = data.filename
-    // if(data){
-    //   this.userForm.patchValue({
-    //     name: data?.name,
-    //     email:data?.email,
-    //     password: data?.password,
-    //     qualification: data?.qualification,
-    //     type:data?.type,
-    //     avatar:data?.avatar,
-    //   });
-    // }
   }, error => {
   });
   }
@@ -126,33 +100,6 @@ export class AddDepartmentComponent  implements OnInit {
   }
 
   onSubmit() {
-    if(this.editUrl){
-    const department= this.departmentForm.value
-    department['hod']= this.hodName
-    department['hodId']= this.hod
-
-    
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to update department!',
-      icon: 'warning',
-      confirmButtonText: 'Yes',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed){
-        this.deptService.updateDepartment(this.departmentForm.value,this.departmentId).subscribe((response:any) => {
-          Swal.fire({
-            title: 'Successful',
-            text: 'Department updated successfully',
-            icon: 'success',
-          });
-          this.router.navigate(['/student/settings/all-departments'])
-        });
-      }
-    });
-      
-    } else {
     const department= this.departmentForm.value
     department['hod']= this.hodName
     department['hodId']= this.hod
@@ -171,16 +118,14 @@ export class AddDepartmentComponent  implements OnInit {
             text: 'Department created successfully',
             icon: 'success',
           });
-          this.router.navigate(['/student/settings/all-departments'])
+          this.dialogRef.close();
         });
       }
     });
      
-    }
- 
   }
-  cancel() {
-  
-    window.history.back();
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 }

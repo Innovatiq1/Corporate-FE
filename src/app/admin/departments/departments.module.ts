@@ -7,11 +7,13 @@ import { EditDepartmentComponent } from './edit-department/edit-department.compo
 import { SharedModule } from '@shared';
 import { ComponentsModule } from '@shared/components/components.module';
 import { DepartmentService } from './department.service';
+import { DepartmentModalComponent } from './department-modal/department-modal.component';
 
 @NgModule({
   declarations: [
     AddDepartmentComponent,
     EditDepartmentComponent,
+    DepartmentModalComponent,
   ],
   imports: [
     CommonModule,
