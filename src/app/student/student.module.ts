@@ -76,6 +76,7 @@ import { CreateCategoriesComponent } from './settings/categories/create-categori
 import { EditCategoriesComponent } from './settings/categories/edit-categories/edit-categories.component';
 import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
 import { ExamQuestionsComponent } from './exam-questions/exam-questions.component';
+import { SurveyModule } from 'app/admin/survey/survey.module';
 
 @NgModule({
   declarations: [
@@ -160,6 +161,7 @@ import { ExamQuestionsComponent } from './exam-questions/exam-questions.componen
     ModalModule.forRoot(),
     CKEditorModule,
     AngularEditorModule,
+    SurveyModule
 
 
   ],

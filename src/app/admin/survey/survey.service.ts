@@ -38,7 +38,6 @@ export class SurveyService extends UnsubscribeOnDestroyAdapter {
       if (filter.page) {
         params = params.set("page", filter.page?.toString());
       }
-  
       if (filter.filterText) {
         params = params.set("title", filter.filterText?.toString());
       }
@@ -117,6 +116,12 @@ export class SurveyService extends UnsubscribeOnDestroyAdapter {
     const apiUrl = `${this.prefix}admin/survey/${question.id}`;
     return this.httpClient
       .put<ApiResponse>(apiUrl, question)
+      .pipe(map((response) => { }));
+  }
+  deleteSurveyQuestions(questionId:string) {
+    const apiUrl = `${this.prefix}admin/survey/${questionId}`;
+    return this.httpClient
+      .delete<ApiResponse>(apiUrl)
       .pipe(map((response) => { }));
   }
   // getSurveyBuilders(filter?: Partial<SurveyBuilderPaginationModel>): Observable<ApiResponse> {

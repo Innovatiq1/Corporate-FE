@@ -105,8 +105,9 @@ export class ViewCourseComponent implements OnDestroy {
   longDescription: any;
   assessmentInfo!: any;
   isAnswersSubmitted: boolean = false;
-  questionList: any = []
-  answersResult!: any
+  questionList: any = [];
+  answersResult!: any;
+  feedbackInfo!: any;
   constructor(
     private classService: ClassService,
     private activatedRoute: ActivatedRoute,
@@ -305,7 +306,21 @@ export class ViewCourseComponent implements OnDestroy {
       this.uploadedDoc = uploadedDocument?.pop();
       this.title = response?.title;
       this.assessmentInfo = response?.assessment;
-      this.questionList =response?.assessment?.questions || []
+      this.questionList =response?.assessment?.questions || [];
+      const survey = response?.survey
+      this.feedbackInfo = survey? {
+        name: survey?.name,
+        id: survey?.id,
+        questions: survey?.questions?.map((question:any)=>({
+          questionText: question?.questionText,
+          type: question?.type,
+          isMandatory: question?.isMandatory,
+          maxRating: question?.maxRating,
+          options: question?.options?.map((option:any)=>
+            option.text
+          )
+        }))
+      }: null
     });
   }
 

@@ -501,6 +501,19 @@
                       [isAnswersSubmitted]="isAnswersSubmitted"
                     ></app-questions>
                   </div>
+                  <div
+                    class="tab-pane fade"
+                    id="feedback"
+                    role="tabpanel"
+                    aria-labelledby="feedback"
+                  >
+                    <div>
+                      <app-feedbackcommon
+                        [feedbackInfo]="feedbackInfo"
+                        [isPreview]="true"
+                      ></app-feedbackcommon>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
