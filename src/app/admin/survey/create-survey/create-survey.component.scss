@@ -1,16 +1,9 @@
-label {
-    font-size: 20px;
-    font-weight: 500;
-}
+
 .example-radio-button {
     background-color: transparent;
     pointer-events: none;
   }
 
-::ng-deep .example-full-width .mdc-text-field--outlined {
-    --mdc-outlined-text-field-container-shape: 12px;
-    font-style: italic;
-}
 
 
 .mandatory {
@@ -40,15 +33,8 @@ p {
     overflow: hidden;
     color: #FDCC0D;
   }
-  label {
-    font-size: 20px;
-    font-weight: 500;
-  }
+ 
 
-  ::ng-deep .example-full-width .mdc-text-field--outlined {
-    --mdc-outlined-text-field-container-shape: 12px;
-    font-style: italic;
-  }
 
   .mandatory {
     color: red;
