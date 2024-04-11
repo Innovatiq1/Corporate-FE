@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '@shared';
+import { MaterialModule, SharedModule } from '@shared';
 import { ProgramKitComponent } from './program-kit/program-kit.component';
 import { ProgaramCompletionListComponent } from './progaram-completion-list/progaram-completion-list.component';
 import { ProgramListComponent } from './program-list/program-list.component';
 import { CreateProgramComponent } from './create-program/create-program.component';
 // import { ScheduleClassComponent } from './schedule-class/schedule-class.component';
 import { ProgramRoutingModule } from './program-routing.module';
-import { ComponentsModule } from "../../shared/components/components.module";
+import { ComponentsModule } from '../../shared/components/components.module';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import {
   OwlDateTimeModule,
@@ -26,7 +26,9 @@ import { ApprovedProgramsComponent } from './program-list/approved-programs/appr
 import { StudentPendingListComponent } from './student-pending-list/student-pending-list.component';
 import { StudentApprovalListComponent } from './student-approval-list/student-approval-list.component';
 import { ViewCompletionComponent } from './view-completion/view-completion.component';
-
+import { ViewStudentPendingListComponent } from './view-student-pending-list/view-student-pending-list.component';
+import { FilterPopupComponent } from './program-list/filter-popup/filter-popup.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { ViewCompletionComponent } from './view-completion/view-completion.compo
         ApprovedProgramsComponent,
         StudentPendingListComponent,
         StudentApprovalListComponent,
-        ViewCompletionComponent
+        ViewCompletionComponent,
+        ViewStudentPendingListComponent,
+        FilterPopupComponent,
          ],
     imports: [
         CommonModule,
@@ -57,5 +61,8 @@ import { ViewCompletionComponent } from './view-completion/view-completion.compo
 
 
     ]
+
+
+
 })
-export class ProgramModule { }
+export class ProgramModule {}

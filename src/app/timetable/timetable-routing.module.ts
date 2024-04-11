@@ -13,6 +13,7 @@ import { ClassListComponent } from './class-list/class-list.component';
 import { ViewProgramScheduleComponent } from './program-exam-schedule/view-program-schedule/view-program-schedule.component';
 import { ViewCourseScheduleComponent } from './list/view-course-schedule/view-course-schedule.component';
 import { ViewProgramClassComponent } from './schedule-class/view-program-class/view-program-class.component';
+import { EAttendanceComponent } from './e-attendance/e-attendance.component';
 const routes: Routes = [
     {
         path: 'course-timetable',
@@ -65,6 +66,10 @@ const routes: Routes = [
       {
         path:'view-course-exam-schedule/:id',
         component:ViewCourseScheduleComponent
+      },
+      {
+        path:'e-attendance',
+        component:EAttendanceComponent
       },
     // {
     //     path: 'course-timetable/student',

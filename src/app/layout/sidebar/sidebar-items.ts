@@ -1538,7 +1538,7 @@ export const SettingsMenu: MenuItem[] = [
   {
     path:'student/settings/users',
     title:'Manage Users',
-    id:'users',
+    id:'student',
     iconType:'img',
     icon:'assets/images/settings/role.png',
     class:'',
@@ -1581,71 +1581,6 @@ export const SettingsMenu: MenuItem[] = [
 
         children: [],
       },
-
-      {
-        iconsrc:'',
-        path: 'student/settings/all-users',
-        title: 'All Users',
-        iconType: '',
-        icon: '',
-        id:'all-users',
-        class: 'ml-menu',
-        groupTitle: false,
-        badge: '',
-        badgeClass: '',
-        role: [''],
-        open:false,
-
-        children: [],
-      },
-      {
-        iconsrc:'',
-        path: 'student/settings/all-students',
-        title: 'Students',
-        iconType: '',
-        icon: '',
-        id:'all-students',
-        class: 'ml-menu',
-        groupTitle: false,
-        badge: '',
-        badgeClass: '',
-        role: [''],
-        open:false,
-
-        children: [],
-      },
-      {
-        iconsrc:'',
-        path: 'student/settings/all-instructors',
-        title: 'Instructors',
-        iconType: '',
-        icon: '',
-        id:'all-instructors',
-        class: 'ml-menu',
-        groupTitle: false,
-        badge: '',
-        badgeClass: '',
-        role: [''],
-        open:false,
-
-        children: [],
-      },
-      {
-        iconsrc:'',
-        path: 'student/settings/all-staff',
-        title: 'Staff',
-        iconType: '',
-        icon: '',
-        id:'all-staff',
-        class: 'ml-menu',
-        groupTitle: false,
-        badge: '',
-        badgeClass: '',
-        role: [''],
-        open:false,
-
-        children: [],
-      },
       {
         iconsrc:'',
         path: 'student/settings/all-departments',
@@ -1660,8 +1595,78 @@ export const SettingsMenu: MenuItem[] = [
         role: [''],
         open:false,
 
-        children: [],
-      }
+        children: [
+         
+        ],
+      },
+
+      {
+        iconsrc:'',
+        path: 'student/settings/all-users',
+        title: 'All Users',
+        iconType: '',
+        icon: '',
+        id:'settings',
+        class: 'ml-sub-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        open:false,
+
+        children: [
+          {
+            iconsrc:'',
+            path: 'student/settings/all-students',
+            title: 'Students',
+            iconType: '',
+            icon: '',
+            id:'all-students',
+            class: 'ml-menu2',
+            groupTitle: false,
+            badge: '',
+            badgeClass: '',
+            role: [''],
+            open:false,
+    
+            children: [],
+          },
+          {
+            iconsrc:'',
+            path: 'student/settings/all-instructors',
+            title: 'Instructors',
+            iconType: '',
+            icon: '',
+            id:'all-instructors',
+            class: 'ml-menu2',
+            groupTitle: false,
+            badge: '',
+            badgeClass: '',
+            role: [''],
+            open:false,
+    
+            children: [],
+          },
+          {
+            iconsrc:'',
+            path: 'student/settings/all-staff',
+            title: 'Staff',
+            iconType: '',
+            icon: '',
+            id:'all-staff',
+            class: 'ml-menu2',
+            groupTitle: false,
+            badge: '',
+            badgeClass: '',
+            role: [''],
+            open:false,
+    
+            children: [],
+          },
+        ],
+      },
+     
+      
 
     ],
 
@@ -1681,21 +1686,21 @@ export const SettingsMenu: MenuItem[] = [
     open:false,
     role:[],
     children:[
-      {
-        path:'student/settings/course-kit',
-        title:'Course Kit',
-        id:'assessment',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
+      // {
+      //   path:'student/settings/course-kit',
+      //   title:'Course Kit',
+      //   id:'assessment',
+      //   iconType:'img',
+      //   icon:'',
+      //   class:'',
+      //   badge:'',
+      //   iconsrc:'',
+      //   badgeClass:'',
+      //   groupTitle:false,
+      //   open:false,
+      //   role:[],
+      //   children:[]
+      // },
       {
         path:'student/settings/categories',
         title:'Categories',

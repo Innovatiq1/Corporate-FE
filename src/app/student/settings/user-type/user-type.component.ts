@@ -21,6 +21,7 @@ export class UserTypeComponent {
     
     'User Role',
     'Accessbility Module',
+    'Sub Module',
     'Status',
     'actions'
   ];
@@ -44,6 +45,8 @@ export class UserTypeComponent {
   selection = new SelectionModel<UserType>(true, []);
   
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+menu: any;
+last: any;
   
   constructor(public router: Router,private adminService:AdminService,   private userService: UserService, 
     private ref: ChangeDetectorRef,

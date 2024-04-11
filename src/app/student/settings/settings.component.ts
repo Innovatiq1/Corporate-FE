@@ -431,7 +431,7 @@ export class SettingsComponent {
     this.router.navigate(['/student/configuration']);
   }
   navigateToFormSettings(){
-    this.router.navigate(['/student/forms']);
+    this.router.navigate(['/student/settings/forms']);
   }
   navigateToCustomSettings(){
     this.router.navigate(['/student/customization-settings']);

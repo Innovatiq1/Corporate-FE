@@ -15,7 +15,7 @@
                     <form [formGroup]="courseKitForm" >
                         <div class="body m-4">
                             <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                                     <label>Course Kit Name <span class="mandatory">&nbsp;*</span></label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                                         <!-- <mat-label>Course Name</mat-label> -->
@@ -27,19 +27,17 @@
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                                     <label>Document<span class="mandatory">&nbsp;*</span></label>              
                                     <div class="file-drop-area1">
                                         <div class="file1">
-                                        <button mat-raised-button color="primary">Choose file <input formControlName="documentLink" (change)="onFileUpload($event)" class="file-input" type="file"></button>
-                                        <span class="file-msg"><h5>{{uploadedDocument ? uploadedDocument : 'Drag and Drop File Here' }}</h5></span>
+                                        <button mat-raised-button color="primary" class="btn">Choose file <input formControlName="documentLink" (change)="onFileUpload($event)" class="file-input" type="file"></button>
+                                        <span class="file-msg"><h6>{{uploadedDocument ? uploadedDocument : 'Drag and Drop File Here' }}</h6></span>
                                      </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                                     <label>Short Description</label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                                         <!-- <mat-label>Course Name</mat-label> -->
@@ -51,7 +49,11 @@
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            </div>
+
+                            <div class="row">
+                            
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                                     <label>Long Description</label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                                         <!-- <mat-label>Course Name</mat-label> -->
@@ -63,39 +65,36 @@
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
-                            </div>
 
-                            <div class="row" >
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
-                                  <label>Upload Video</label>
-                                  <div class="file-drop-area">
-                                    <div class="file">
-                                    <button mat-raised-button color="primary">Choose file  <input formControlName="videoLink" (fileDropped)="onFileDropped($event)" (change)="fileBrowseHandler($event)"  class="file-input" type="file"></button>
-                                    <span class="file-msg"><h5>{{videoSrc ? videoSrc : 'Drag and Drop File Here' }}</h5></span>
-                                   
-                                    <div class="files-list">
-                                        <div class="single-file" *ngFor="let file of files; let i = index">
-                                            <img src="../../assets/images/dnd/ic-file.svg" alt="" class="file-icon" />
-                                            <div class="infos">
-                                                <p class="name">{{ file?.name }}</p>
-                                                <!-- <p class="size">{{ formatBytes(file?.size) }}</p> -->
-                                                <!-- <app-progress [progress]="file?.progress"></app-progress> -->
-                                            </div>
-                                            <!-- <img
-                                            src="../../assets/images/dnd/ic-delete-file.svg"
-                                            class="delete"
-                                            width="20px"
-                                            alt="file"
-                                            
-                                          /> -->
-                                        </div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-5">
+                                    <label>Upload Video</label>
+                                    <div class="file-drop-area">
+                                      <div class="file">
+                                      <button mat-raised-button color="primary" class="btn">Choose file  <input formControlName="videoLink" (fileDropped)="onFileDropped($event)" (change)="fileBrowseHandler($event)"  class="file-input" type="file"></button>
+                                      <span class="file-msg"><h6>{{videoSrc ? videoSrc : 'Drag and Drop File Here' }}</h6></span>
+                                     
+                                      <div class="files-list">
+                                          <div class="single-file" *ngFor="let file of files; let i = index">
+                                              <img src="../../assets/images/dnd/ic-file.svg" alt="" class="file-icon" />
+                                              <div class="infos">
+                                                  <p class="name">{{ file?.name }}</p>
+                                                  <!-- <p class="size">{{ formatBytes(file?.size) }}</p> -->
+                                                  <!-- <app-progress [progress]="file?.progress"></app-progress> -->
+                                              </div>
+                                              <!-- <img
+                                              src="../../assets/images/dnd/ic-delete-file.svg"
+                                              class="delete"
+                                              width="20px"
+                                              alt="file"
+                                              
+                                            /> -->
+                                          </div>
+                                      </div>
+                                      </div>
                                     </div>
-                                    </div>
+                                    <!-- <app-file-upload formControlName="videoLink" (fileDropped)="onFileDropped($event)" (change)="fileBrowseHandler($event)"></app-file-upload> -->
                                   </div>
-                                  <!-- <app-file-upload formControlName="videoLink" (fileDropped)="onFileDropped($event)" (change)="fileBrowseHandler($event)"></app-file-upload> -->
-                                </div>
-                              </div>
-
+                            </div>
                               <!-- <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                                     <label>Video Start Date</label>
@@ -146,7 +145,7 @@
                     </form>
                     <div class="row body">
                         <div class="col-md-10">
-                          <button mat-raised-button id="back" [routerLink]="['/student/settings/course-kit']">Back</button>
+                          <button mat-raised-button id="back" [routerLink]="['/admin/courses/course-kit']">Back</button>
                         </div>
                         <div class="col-md-2">
                           <!-- <div class="d-grid d-md-flex"> -->

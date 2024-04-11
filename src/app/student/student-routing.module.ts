@@ -45,11 +45,7 @@ import { CategoriesComponent } from './settings/categories/categories.component'
 import { CreateCategoriesComponent } from './settings/categories/create-categories/create-categories.component';
 import { EditCategoriesComponent } from './settings/categories/edit-categories/edit-categories.component';
 import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
-import { CourseKitComponent } from './settings/course-kit/course-kit.component';
-import { CreateCourseKitComponent } from './settings/course-kit/create-course-kit/create-course-kit.component';
-import { CreateTemplateComponent } from './settings/course-kit/create-template/create-template.component';
-import { EditCourseKitComponent } from './settings/course-kit/edit-course-kit/edit-course-kit.component';
-import { ViewCourseKitComponent } from './settings/course-kit/view-course-kit/view-course-kit.component';
+import { ExamQuestionsComponent } from './exam-questions/exam-questions.component';
 
 
 const routes: Routes = [
@@ -123,6 +119,10 @@ const routes: Routes = [
   {
     path: 'questions/:id/:id/:id',
     component: QuestionComponent,
+  },
+  {
+    path: 'exam-questions/:id/:id/:id/:id',
+    component: ExamQuestionsComponent,
   },
   {
     path: 'welcome',
@@ -276,26 +276,26 @@ const routes: Routes = [
   path:'settings/view-categories',
   component:ViewCategoriesComponent
 },
-{
-  path: 'settings/course-kit',
-  component: CourseKitComponent
-},
-{
-  path: 'settings/create-course-kit',
-  component: CreateCourseKitComponent
-},
-{
-  path: 'settings/edit-course-kit/:id',
-  component:  EditCourseKitComponent
-},
-{
-  path: 'settings/create-template',
-  component: CreateTemplateComponent
-},
-{
-  path:'settings/view-course-kit/:id',
-  component:ViewCourseKitComponent
-},
+// {
+//   path: 'settings/course-kit',
+//   component: CourseKitComponent
+// },
+// {
+//   path: 'settings/create-course-kit',
+//   component: CreateCourseKitComponent
+// },
+// {
+//   path: 'settings/edit-course-kit/:id',
+//   component:  EditCourseKitComponent
+// },
+// {
+//   path: 'settings/create-template',
+//   component: CreateTemplateComponent
+// },
+// {
+//   path:'settings/view-course-kit/:id',
+//   component:ViewCourseKitComponent
+// },
 
 
 

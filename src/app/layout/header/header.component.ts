@@ -67,6 +67,7 @@ export class HeaderComponent
   logoTitle: any;
   logoImage: any;
   data: any;
+  totalItems:any;
   subscription!: Subscription;
   constructor(
     @Inject(DOCUMENT) private document: Document,

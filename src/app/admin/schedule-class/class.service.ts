@@ -71,7 +71,7 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
   }
 
   getRegisteredClasses(page: number, limit: number, filterText? : string): Observable<any> {
-    const apiUrl = `${this.prefix}admin/studentClasses`;
+    const apiUrl = `${this.prefix}admin/studentClasses?status=registered`;
     return this.http.get<any>(apiUrl, { params: this.buildRegisteredClassesParams(page, limit, filterText) });
   }
   getStudentRegisteredClasses(data:any) {

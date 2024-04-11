@@ -1,0 +1,330 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+
+
+
+        <div class="row clearfix p-2">
+
+            <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="info-box7  order-info-box7 bg-white">
+                    <div class="info-box7-block">
+                        <div class="card-container">
+                            <div class="card">
+                               
+                                
+                                <mat-tab-group>
+                                    <mat-tab>
+                                        <ng-template mat-tab-label>
+                                                Details
+                                          </ng-template>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="project_widget">
+                                                <div class="header">
+                                                        <h2>Student Details</h2>
+                                                        <div class="buttons">
+                                                            <button alt="Edit" mat-menu-item (click)="changeStatus(response,'approved')">
+                                                                <img class="img-w" src="/assets/approve.svg" alt="approve">
+                                                            </button>
+                                                            <button alt="Withdraw" mat-menu-item (click)="Status(response,'cancel')">
+                                                                <img class="img-w" src="/assets/archive.svg" alt="approve">
+                                                            </button>
+                                                        </div>
+                                                </div>
+                                                
+                                              
+                                                <div class="body">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                       <h6>Student</h6>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <h6 class="text-muted">{{response.studentId?.name | titlecase}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-5">
+                                                                        <h6>Gender</h6>
+                                                                    </div>
+                                                                    <div class="col-7">
+                                                                        <h6 class="text-muted">{{response.studentId?.gender | titlecase}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                       <h6>Mobile</h6>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <h6 class="text-muted">{{response.studentId?.mobile}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-5">
+                                                                        <h6>Email</h6>
+                                                                    </div>
+                                                                    <div class="col-7">
+                                                                        <h6 class="text-muted">{{response.studentId?.email}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                       <h6>City</h6>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <h6 class="text-muted">{{response.studentId?.city_name | titlecase}}</h6>
+                                                                    </div>
+                                                                </div>
+                            
+                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-5">
+                                                                        <h6>Country</h6>
+                                                                    </div>
+                                                                    <div class="col-7">
+                                                                        <h6 class="text-muted">{{response.studentId?.country_name | titlecase}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                       <h6>Qualification</h6>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <h6 class="text-muted">{{response.studentId?.qualification }}</h6>
+                                                                    </div>
+                                                                </div>
+                            
+                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-5">
+                                                                        <h6>Department</h6>
+                                                                    </div>
+                                                                    <div class="col-7">
+                                                                        <h6 class="text-muted">{{response.studentId?.department | titlecase}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="header">
+                                                    <h2>Program Details</h2>
+                                                </div>
+                                                <div class="body">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                       <h6>Program</h6>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <h6 class="text-muted">{{response.programId.title | titlecase}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <h6>Program Code</h6>
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <h6 class="text-muted">{{response.programId?.courseCode}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                       <h6>Duration</h6>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <h6 class="text-muted">{{response.programId?.duration }} Days</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <h6>Program Fee</h6>
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <h6 class="text-muted"> $ {{response.programId?.courseFee}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                       <h6>Instructor Fee</h6>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <h6 class="text-muted">$ {{response.classId?.instructorCost }}</h6>
+                                                                    </div>
+                                                                </div>
+                            
+                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <h6>Registered</h6>
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <h6 class="text-muted">{{response.registeredOn | date}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                       <h6>Completed</h6>
+                                                                    </div>
+                                                                    <div class="col-5 ">
+                                                                        <h6 class="text-muted">{{response.updatedAt | date }}</h6>
+                                                                    </div>
+                                                                </div>
+                            
+                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <h6>Learning Outcomes</h6>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <h6 class="text-muted" [innerHTML]="response.programId?.learningOutcomes | bulletPoints"></h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                       <h6>Who Should Attend</h6>
+                                                                    </div>
+                                                                    <div class="col-5">
+                                                                        <h6 class="text-muted" [innerHTML]="response.programId?.attendees | bulletPoints"></h6>
+                                                                    </div>
+                                                                </div>
+                            
+                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="px-2">
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <h6>Prerequisites</h6>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <h6 class="text-muted" [innerHTML]="response.programId?.prerequisites | bulletPoints"></h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="row m-t-30 px-2">
+                                                        <h6>Description</h6>
+                                                        <!-- <p  [innerHTML]="response?.courseId?.course_detailed_description | bulletPoints"></p> -->
+                                                        <!-- <p>[innerHTML]="
+                                                            response.courseId?.course_detailed_description | bulletPoints
+                                                         "</p> --
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </mat-tab>
+
+                                    <!-- <mat-tab *ngIf="!isApproved">
+                                        <ng-template mat-tab-label>
+                                            <!-- <mat-icon class="example-tab-icon msr-2">settings</mat-icon> --
+                                            Score Card
+                                        </ng-template>
+                                    </mat-tab> -->
+                                </mat-tab-group>
+                            </div>
+
+                        </div>
+
+
+
+                        <h2 class="text-end"><span></span></h2>
+                        <p class="m-b-0"></p>
+                    </div>
+                    <div class="row mx-3">
+                    <div class="col-md-10 mb-3">
+                        <button mat-raised-button id="back" [routerLink]="['/admin/program/student-program/pending-program']">Back</button>
+                       
+                      </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

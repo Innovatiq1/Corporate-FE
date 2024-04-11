@@ -157,7 +157,8 @@ export class EditCourseKitComponent {
             // this.fileDropEl.nativeElement.value = "";
             this.courseKitForm.reset();
             // this.toggleList()
-            this.router.navigateByUrl('student/settings/course-kit');
+            window.history.back();
+            // this.router.navigateByUrl('/admin/courses/course-kit');
           },
           (error) => {
             Swal.fire(
@@ -253,7 +254,10 @@ export class EditCourseKitComponent {
   //   this.router.navigateByUrl("Course/Course Kit")
 
   // }
+  cancel() {
 
+    window.history.back();
+  }
   getData() {
     forkJoin({
       course: this.courseService.getCourseKitById(this.courseId),

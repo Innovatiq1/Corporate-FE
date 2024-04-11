@@ -17,7 +17,7 @@ export class AllQuestionsComponent {
     'Name',
     'Count',
     'Created At',
-    'status'
+    'Approval Status'
    ];
   coursePaginationModel!: Partial<CoursePaginationModel>;
   totalItems: any;
@@ -72,6 +72,10 @@ constructor(private router:Router,public utils: UtilsService, private questionSe
       : this.dataSource.forEach((row: any) =>
           this.selection.select(row)
         );
+  }
+
+  getStatusClass(status: string): string {
+    return status === 'approved' ? 'success' : 'fail';
   }
  
 }

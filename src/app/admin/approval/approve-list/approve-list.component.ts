@@ -46,7 +46,7 @@ export class ApproveListComponent  {
   breadscrums = [
     {
       title: 'Registered Courses',
-      items: ['Approval'],
+      items: ['Course'],
       active: 'Registered Courses',
     },
   ];

@@ -23,6 +23,13 @@ import { ViewCompletionComponent } from './completion-list/view-completion/view-
 import { CourseViewComponent } from './all-course/course-view/course-view.component';
 import { ActiveCoursesComponent } from './active-courses/active-courses.component';
 import { InActiveCoursesComponent } from './in-active-courses/in-active-courses.component';
+import { CourseKitComponent } from './course-kit/course-kit.component';
+import { CreateCourseKitComponent } from './course-kit/create-course-kit/create-course-kit.component';
+import { CreateTemplateComponent } from './course-kit/create-template/create-template.component';
+import { EditCourseKitComponent } from './course-kit/edit-course-kit/edit-course-kit.component';
+import { VideoPlayerComponent } from './course-kit/video-player/video-player.component';
+import { ViewCourseKitComponent } from './course-kit/view-course-kit/view-course-kit.component';
+import { ExamScoresComponent } from './exam-scores/exam-scores.component';
 
 
 
@@ -40,7 +47,13 @@ import { InActiveCoursesComponent } from './in-active-courses/in-active-courses.
     CourseViewComponent,
     ActiveCoursesComponent,
     InActiveCoursesComponent,
-
+    CourseKitComponent,
+    VideoPlayerComponent,
+    CreateCourseKitComponent,
+    EditCourseKitComponent,
+    ViewCourseKitComponent,
+    CreateTemplateComponent,
+    ExamScoresComponent
 
   ],
   imports: [
