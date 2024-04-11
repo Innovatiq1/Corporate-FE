@@ -27,7 +27,7 @@ export class CreateUserRoleComponent {
   breadscrums = [
     {
       title: 'Admin',
-      items: ['Admin'],
+      items: ['Manage Users'],
       active: ' ',
     },
   ];

@@ -78,6 +78,7 @@ import { ViewCategoriesComponent } from './settings/categories/view-categories/v
 import { ExamQuestionsComponent } from './exam-questions/exam-questions.component';
 import { SurveyModule } from 'app/admin/survey/survey.module';
 import { CreateFeedbackComponent } from './settings/create-feedback/create-feedback.component';
+import { UserGroupComponent } from './settings/user-group/user-group.component';
 
 @NgModule({
   declarations: [
@@ -134,7 +135,8 @@ import { CreateFeedbackComponent } from './settings/create-feedback/create-feedb
     CreateCategoriesComponent,
     ViewCategoriesComponent,
     EditCategoriesComponent,
-    CreateFeedbackComponent
+    CreateFeedbackComponent,
+    UserGroupComponent,
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,

@@ -94,7 +94,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (length > 0) {
       const parentElement = (event.target as HTMLInputElement).closest('li');
       const activeClass = parentElement?.classList.contains('active');
-      console.log('Toggle menu',parentElement, length);
+      console.log('Toggle menu',activeClass, length);
       if (activeClass) {
         this.renderer.removeClass(parentElement, 'active');
       } else {
@@ -134,9 +134,6 @@ navigateTo(menu:any,url?:any) {
 navigateToSubItem2(menu:any,url?:any,subUrl?: any) {
   this.menuItemClick.emit();
   let userType = localStorage.getItem('user_type')
-  console.log(menu)
-    console.log(url)
-    console.log(subUrl)
   this.router.navigateByUrl( menu +'/'+url +'/'+subUrl);
   
 }
