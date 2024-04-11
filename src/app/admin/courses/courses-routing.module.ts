@@ -17,11 +17,24 @@ import { EditCourseKitComponent } from './course-kit/edit-course-kit/edit-course
 import { ViewCourseKitComponent } from './course-kit/view-course-kit/view-course-kit.component';
 import { ApproveListComponent } from '../approval/approve-list/approve-list.component';
 import { ExamScoresComponent } from './exam-scores/exam-scores.component';
-
+import { ActiveCoursesComponent } from './active-courses/active-courses.component';
+import { InActiveCoursesComponent } from './in-active-courses/in-active-courses.component';
 const routes: Routes = [
   {
-    path: 'all-courses',
+    path: 'all-courses/course',
     component: AllCourseComponent,
+  },
+  {
+    path: 'all-courses/creator',
+    component: AllCourseComponent,
+  },
+  {
+    path: 'submitted-courses/approved-courses',
+    component: ActiveCoursesComponent,
+  },
+  {
+    path: 'submitted-courses/pending-courses',
+    component: InActiveCoursesComponent,
   },
   {
     path: 'add-course',
@@ -53,7 +66,7 @@ const routes: Routes = [
     component: CreateClassComponent,
   },
   {
-    path: 'completion-list',
+    path: 'student-courses/completed-courses',
     component: CompletionListComponent,
   },
   {
@@ -89,8 +102,12 @@ const routes: Routes = [
     component: ViewCourseKitComponent,
   },
   {
-    path: 'courses-registered',
+    path: 'student-courses/registered-courses',
     component: ApproveListComponent,
+  },
+  {
+    path: 'student-courses/pending-courses',
+    component: InActiveCoursesComponent,
   },
   {
     path: 'exam-scores',

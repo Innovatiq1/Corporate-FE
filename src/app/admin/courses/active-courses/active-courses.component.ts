@@ -16,7 +16,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./active-courses.component.scss']
 })
 export class ActiveCoursesComponent {
-
+  breadscrums = [
+    {
+      title: 'Blank',
+      items: ['Submitted Courses'],
+      active: 'Approved Courses',
+    },
+  ];
   displayedColumns = [
     'name',
     'code',
