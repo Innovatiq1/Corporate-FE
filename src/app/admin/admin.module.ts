@@ -9,11 +9,10 @@ import { StudentsService } from './students/students.service';
 @NgModule({
   declarations: [
 
-  
+
    // ExamschduleComponent,
-        
-  
-    
+
+
   ],
   imports: [CommonModule, AdminRoutingModule],
   providers: [StudentsService],

@@ -81,6 +81,7 @@ import { CreateTemplateComponent } from './settings/course-kit/create-template/c
 import { EditCourseKitComponent } from './settings/course-kit/edit-course-kit/edit-course-kit.component';
 import { VideoPlayerComponent } from './settings/course-kit/video-player/video-player.component';
 import { ViewCourseKitComponent } from './settings/course-kit/view-course-kit/view-course-kit.component';
+import { SurveyModule } from 'app/admin/survey/survey.module';
 
 @NgModule({
   declarations: [
@@ -141,7 +142,7 @@ import { ViewCourseKitComponent } from './settings/course-kit/view-course-kit/vi
     CreateCourseKitComponent,
     EditCourseKitComponent,
     ViewCourseKitComponent,
-    CreateTemplateComponent
+    CreateTemplateComponent,
   ],
   imports: [
     CommonModule,
@@ -164,6 +165,7 @@ import { ViewCourseKitComponent } from './settings/course-kit/view-course-kit/vi
     ModalModule.forRoot(),
     CKEditorModule,
     AngularEditorModule,
+    SurveyModule
 
 
   ],
