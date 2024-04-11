@@ -27,3 +27,19 @@ ngx-intl-tel-input input {
 	width: fit-content;
   
   }
+
+
+  label {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.example-full-width .mdc-text-field--outlined{
+	--mdc-outlined-text-field-container-shape : 8px;
+	font-style: italic;
+  }
+
+  :host ::ng-deep .ck-editor__editable_inline {
+	--mdc-outlined-text-field-container-shape : 8px;
+	min-height: 150px;
+  }

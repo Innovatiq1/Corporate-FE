@@ -9,10 +9,7 @@
 ::ng-deep .mat-stepper-horizontal-line {
 flex: none !important;
 }
-label{
-font-size: 16px;
-font-weight: 500;
-}
+
 // .thumbnail-img{
 //   height:250px;
 //   width:600px;
@@ -88,10 +85,7 @@ font-weight: 500;
 //   font-weight: 700;
 // }
 
-::ng-deep .example-full-width .mdc-text-field--outlined{
-  --mdc-outlined-text-field-container-shape : 12px;
-  font-style: italic;
-}
+
 
 .mandatory{
   color: red;
