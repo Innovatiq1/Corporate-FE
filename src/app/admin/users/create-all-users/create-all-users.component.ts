@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component,TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Student, UserType, Users } from '@core/models/user.model';
@@ -9,7 +10,8 @@ import { StudentService } from '@core/service/student.service';
 import Swal from 'sweetalert2';
 import { CourseService } from '@core/service/course.service';
 import { StudentsService } from 'app/admin/students/students.service';
-
+import { DepartmentModalComponent } from '../../../admin/departments/department-modal/department-modal.component'
+ 
 @Component({
   selector: 'app-create-all-users',
   templateUrl: './create-all-users.component.html',
@@ -354,7 +356,7 @@ updateBlog(formObj: any) {
   }
 
   constructor(private router: Router,    private fb: FormBuilder,public utils: UtilsService, private userService: UserService,
-    private adminService: AdminService,private StudentService: StudentsService, private activeRoute: ActivatedRoute,  private courseService: CourseService,) {
+    private adminService: AdminService,private StudentService: StudentsService, private activeRoute: ActivatedRoute,  private courseService: CourseService,public dialog: MatDialog) {
     let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-all-users'); 
     this.currentId = urlPath[urlPath.length - 1];
@@ -419,7 +421,6 @@ getUserTypeList(filters?:any) {
 getDepartment(){
   this.StudentService.getAllDepartments().subscribe((response: any) =>{
     this.dept = response.data.docs;
-    console.log("dept",this.dept)
    })
 
 }
@@ -477,6 +478,24 @@ getBlogsList(filters?:any) {
         }
       }, error => {
       });
+}
+
+openDialog(): void {
+    const dialogRef = this.dialog.open(DepartmentModalComponent, {
+      width: '50%', 
+      height: '80%',
+      maxHeight: '95vh',
+      autoFocus: false,
+      disableClose: true,
+    });
+
+  dialogRef.afterClosed().subscribe(result => {
+    this.getDepartment();
+  });
+}
+
+closeDialog(): void {
+  this.dialog.closeAll();
 }
 
 }
