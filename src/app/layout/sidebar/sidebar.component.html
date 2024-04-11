@@ -34,12 +34,12 @@
                  class="ml-menu">
                   {{sidebarSubItem.title}}
                 </a> -->
-                <a  *ngIf=!isSettings (click)="callToggleMenu($event, sidebarItem.children.length)"  (click)="navigateTo(sidebarItem.id,sidebarSubItem.id)"  [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarItem.id +'/'+sidebarSubItem.id]"
+                <a  *ngIf=!isSettings (click)="callToggleMenu($event, sidebarItem.children.length)"  (click)="navigateTo(sidebarItem.id,sidebarSubItem.id)"  
+                [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarItem.id +'/'+sidebarSubItem.id]"
                   [ngClass]="sidebarSubItem.class">
                   {{sidebarSubItem.title}}
                  </a>
 
- 
                   <a  *ngIf=isSettings (click)="callToggleMenu($event, sidebarItem.children.length)" (click)="navigateTo(sidebarSubItem.path)" [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarSubItem.path]"
                     [ngClass]="sidebarSubItem.class">
   
@@ -51,6 +51,7 @@
                     <a 
                       (click)="callToggleMenu($event,sidebarSubItem.children.length)" 
                        (click)="navigateToSubItem2(sidebarItem.id,sidebarSubItem.id,sidebarSubItem2.id)" 
+                       [routerLink]="sidebarSubItem2.children.length > 0 ? null :[sidebarItem.id +'/'+sidebarSubItem.id+'/'+sidebarSubItem2.id]"
                       [ngClass]="sidebarSubItem2.class">
                       {{sidebarSubItem2.title | translate}}
                     </a>

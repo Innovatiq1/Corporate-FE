@@ -47,6 +47,7 @@ import { EditCategoriesComponent } from './settings/categories/edit-categories/e
 import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
 import { ExamQuestionsComponent } from './exam-questions/exam-questions.component';
 import { CreateFeedbackComponent } from './settings/create-feedback/create-feedback.component';
+import { UserGroupComponent } from './settings/user-group/user-group.component';
 
 
 const routes: Routes = [
@@ -329,6 +330,11 @@ const routes: Routes = [
     path: 'settings/role-user/:typeName',
     component: RoleUserComponent,
   },
+  {
+    path: 'settings/user-group',
+    component: UserGroupComponent,
+  },
+
 
 
   { path: '**', component: Page404Component },

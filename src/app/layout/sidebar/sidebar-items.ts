@@ -1665,8 +1665,22 @@ export const SettingsMenu: MenuItem[] = [
           },
         ],
       },
-     
-      
+      {
+        iconsrc:'',
+        path: 'student/settings/user-group',
+        title: 'User Group',
+        iconType: '',
+        icon: '',
+        id:'user-group',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        open:false,
+
+        children: [],
+      },
 
     ],
 
