@@ -674,7 +674,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
               icon: 'success',
             });
             this.courseAdded=true;
-            this.router.navigate(['/admin/approval/course-approval'])
+            this.router.navigate(['/admin/courses/submitted-courses/pending-courses'])
     
           });
         }
@@ -768,10 +768,17 @@ cancel() {
 }
 
 labelStatusCheck(labelName: string): any {
-  if (this.forms) {
-    const  status = this.forms[0]?.labels.filter((v : any) => v.name === labelName)
-    return status[0]?.checked
+  // if (this.forms) {
+  //   const  status = this.forms[0]?.labels?.filter((v : any) => v?.name === labelName)
+  //   return status[0]?.checked
+  // }
+  if (this.forms && this.forms.length > 0) {
+    const status = this.forms[0]?.labels?.filter((v:any) => v?.name === labelName);
+    if (status && status.length > 0) {
+      return status[0]?.checked;
+    }
   }
-
+  return false;
 }
+
 }

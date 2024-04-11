@@ -42,13 +42,40 @@
                                     </div>
                                   </div>
                             </div> -->
-                            <div *ngIf ="isEdit === true" class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-2">
-                                <label>Role</label>
-                                <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                    <input matInput type="text" formControlName="typeName"
-                                    class="form-control" placeholder="Enter New User Role"
-                                    >                                      
-                                </mat-form-field>
+                            <div *ngIf ="isEdit === true" >
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                        <label>Role</label>
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                            <input matInput type="text" formControlName="typeName"
+                                            class="form-control" placeholder="Enter New User Role"
+                                            >                                      
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-8">
+                                        <!-- <div class="card bg-none"> -->
+                                            <div class="card-container">
+                                              <button *ngIf="this.data?.status == 'active'"  mat-menu-item (click)="changeInActive(this.data)">
+                                                <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                                <span class="menu-text px-3">Inactive</span>
+                                              </button>
+                                              <button class="align-items-center" alt="Delete" *ngIf="this.data?.status == 'inactive'" mat-menu-item (click)="changeActive(this.data)">
+                                                <img class="img-w" src="/assets/approve.svg" alt="approve">
+                                                <span class="menu-text">Active</span>
+                                              </button>
+                                                <button mat-menu-item (click)="delete(this.data)"  >
+                                                    <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                                    <span class="menu-text px-3">Delete</span>
+                                  
+                                                  <!-- <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons> -->
+                                                 
+                                                </button>
+                                          </div>
+                                          </div>
+                                    <!-- </div> -->
+                                </div>
+                               
+
                             </div>
                         </div>
                     </form>

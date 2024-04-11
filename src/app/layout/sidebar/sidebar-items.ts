@@ -1552,7 +1552,7 @@ export const SettingsMenu: MenuItem[] = [
       {
         iconsrc:'',
         path: 'student/settings/user-type',
-        title: 'Role Access',
+        title: 'Module Access',
         iconType: '',
         icon: '',
         id:'all-users',
@@ -1584,7 +1584,7 @@ export const SettingsMenu: MenuItem[] = [
       {
         iconsrc:'',
         path: 'student/settings/all-departments',
-        title: 'Departments',
+        title: 'Department Profile',
         iconType: '',
         icon: '',
         id:'all-departments',
@@ -1671,6 +1671,98 @@ export const SettingsMenu: MenuItem[] = [
     ],
 
     
+  },
+  {
+    path:'student/settings/customization',
+    title:'Customization',
+    id:'customization',
+    iconType:'img',
+    icon:'assets/images/settings/custom.png',
+    class:'',
+    badge:'',
+    iconsrc:'',
+    badgeClass:'',
+    groupTitle:false,
+    open:false,
+    role:[],
+    children:[
+      {
+        path:'student/settings/sidemenu',
+        title:'Side menu',
+        id:'sidemenu',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/certificate/template',
+        title:'Certificate',
+        id:'certificate',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/banners',
+        title:'Banners',
+        id:'forms',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/logo-customization',
+        title:'Logo',
+        id:'logo',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/customization',
+        title:'Currency',
+        id:'currency',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      }
+    
+    ]
   },
   {
     path:'student/settings/configuration',
@@ -1812,98 +1904,7 @@ export const SettingsMenu: MenuItem[] = [
       }
     ]
   },
-  {
-    path:'student/settings/customization',
-    title:'Customization',
-    id:'customization',
-    iconType:'img',
-    icon:'assets/images/settings/custom.png',
-    class:'',
-    badge:'',
-    iconsrc:'',
-    badgeClass:'',
-    groupTitle:false,
-    open:false,
-    role:[],
-    children:[
-      {
-        path:'student/settings/sidemenu',
-        title:'Side menu',
-        id:'sidemenu',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-      {
-        path:'student/settings/certificate/template',
-        title:'Certificate',
-        id:'certificate',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-      {
-        path:'student/settings/banners',
-        title:'Banners',
-        id:'forms',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-      {
-        path:'student/settings/logo-customization',
-        title:'Logo',
-        id:'logo',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      },
-      {
-        path:'student/settings/customization',
-        title:'Currency',
-        id:'currency',
-        iconType:'img',
-        icon:'',
-        class:'',
-        badge:'',
-        iconsrc:'',
-        badgeClass:'',
-        groupTitle:false,
-        open:false,
-        role:[],
-        children:[]
-      }
-    
-    ]
-  },
+ 
 
 
   {

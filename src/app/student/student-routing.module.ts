@@ -46,6 +46,7 @@ import { CreateCategoriesComponent } from './settings/categories/create-categori
 import { EditCategoriesComponent } from './settings/categories/edit-categories/edit-categories.component';
 import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
 import { ExamQuestionsComponent } from './exam-questions/exam-questions.component';
+import { CreateFeedbackComponent } from './settings/create-feedback/create-feedback.component';
 
 
 const routes: Routes = [
@@ -142,6 +143,10 @@ const routes: Routes = [
   },
   {
     path: 'settings/users',
+    component: SettingsComponent,
+  },
+  {
+    path: 'settings/all-user',
     component: SettingsComponent,
   },
   {
@@ -276,6 +281,14 @@ const routes: Routes = [
   path:'settings/view-categories',
   component:ViewCategoriesComponent
 },
+ {
+    path:"settings/create-feedback",
+    component: CreateFeedbackComponent
+  },
+  {
+    path:"settings/edit-feedback/:id",
+    component: CreateFeedbackComponent
+  },
 // {
 //   path: 'settings/course-kit',
 //   component: CourseKitComponent

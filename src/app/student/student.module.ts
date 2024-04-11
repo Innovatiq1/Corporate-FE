@@ -77,6 +77,7 @@ import { EditCategoriesComponent } from './settings/categories/edit-categories/e
 import { ViewCategoriesComponent } from './settings/categories/view-categories/view-categories.component';
 import { ExamQuestionsComponent } from './exam-questions/exam-questions.component';
 import { SurveyModule } from 'app/admin/survey/survey.module';
+import { CreateFeedbackComponent } from './settings/create-feedback/create-feedback.component';
 
 @NgModule({
   declarations: [
@@ -133,6 +134,7 @@ import { SurveyModule } from 'app/admin/survey/survey.module';
     CreateCategoriesComponent,
     ViewCategoriesComponent,
     EditCategoriesComponent,
+    CreateFeedbackComponent
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,

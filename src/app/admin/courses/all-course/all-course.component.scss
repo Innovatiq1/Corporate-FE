@@ -319,3 +319,7 @@ footer p a:hover{
         margin-bottom: 5px;
     }
 }
+::ng-deep .mat-mdc-tab-body-content{
+    overflow-x: hidden !important;
+  }
+  
