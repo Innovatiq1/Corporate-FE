@@ -57,10 +57,7 @@
     margin-top: -3px;
 }
 
-label {
-    font-size: 20px;
-    font-weight: 500;
-}
+
 
 
 #preview {
@@ -186,7 +183,3 @@ label {
     margin-top: -20px;
 }
 
-::ng-deep .example-full-width .mdc-text-field--outlined {
-    --mdc-outlined-text-field-container-shape: 12px;
-    font-style: italic;
-}

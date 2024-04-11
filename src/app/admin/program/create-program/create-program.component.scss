@@ -96,10 +96,10 @@ h5 {
     color: red;
 }
 
-::ng-deep .example-full-width .mdc-text-field--outlined {
-    --mdc-outlined-text-field-container-shape: 12px;
-    font-style: italic;
-}
+// ::ng-deep .example-full-width .mdc-text-field--outlined {
+//     --mdc-outlined-text-field-container-shape: px;
+//     font-style: italic;
+// }
 
 label {
     font-size: 16px;

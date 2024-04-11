@@ -1,7 +1,4 @@
-label {
-    font-size: 20px;
-    font-weight: 500;
-}
+
 
 .thumbnail-img {
     height: 250px;
@@ -53,10 +50,6 @@ label {
     margin-left: 50px;
 }
 
-::ng-deep .example-full-width .mdc-text-field--outlined {
-    --mdc-outlined-text-field-container-shape: 12px;
-    font-style: italic;
-}
 
 .mandatory {
     color: red;

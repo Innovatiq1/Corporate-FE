@@ -1,7 +1,4 @@
-label {
-    font-size: 20px;
-    font-weight: 500;
-}
+
 .menu{
     font-size: 16px;
     font-weight: 400;
@@ -31,8 +28,4 @@ label {
 }
 .mandatory {
     color: red;
-}
-::ng-deep .example-full-width .mdc-text-field--outlined {
-    --mdc-outlined-text-field-container-shape: 12px;
-    font-style: italic;
 }

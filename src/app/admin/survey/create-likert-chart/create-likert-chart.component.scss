@@ -20,15 +20,8 @@
     margin-bottom: 20px;
     border-radius: 10px;
   }
-::ng-deep .example-full-width .mdc-text-field--outlined{
-    --mdc-outlined-text-field-container-shape : 12px;
-    font-style: italic;
-}
 
-label{
-    font-size: 20px;
-    font-weight: 500;
-}
+
 .mandatory{
      color: red;
 }
