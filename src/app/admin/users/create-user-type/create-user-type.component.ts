@@ -6,6 +6,7 @@ import { ImageSource } from '@core/enums/image-upload-source.enum';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { MenuItemModel, UserType } from '@core/models/user.model';
 import { AdminService } from '@core/service/admin.service';
+import { UserService } from '@core/service/user.service';
 import { UtilsService } from '@core/service/utils.service';
 import { MENU_LIST } from '@shared/menu-item';
 import { LogoService } from 'app/student/settings/logo.service';
@@ -54,6 +55,7 @@ export class CreateUserTypeComponent {
   type: any;
   admin: any;
   userTypeNames: any;
+  data: any;
 
   constructor(
     public router: ActivatedRoute,
@@ -63,7 +65,7 @@ export class CreateUserTypeComponent {
     private route: Router,
     public utils: UtilsService,
     private formBuilder: FormBuilder,
-    private logoService: LogoService
+    private logoService: LogoService, private userService: UserService,
   ) {
     this.initMenuItemsV2();
     this.router.queryParams.subscribe((params) => {
@@ -94,9 +96,9 @@ export class CreateUserTypeComponent {
       .subscribe(
         (response: any) => {
           this.typesList = response.docs;
-          let data = this.typesList.find((id: any) => id._id === this.paramId);
-          if (data) {
-            this.type = data.typeName;
+          this. data = this.typesList.find((id: any) => id._id === this.paramId);
+          if (this.data) {
+            this.type = this.data.typeName;
             this.userTypeFormGroup = this.fb.group({
               typeName: [
                 { value: this.type ? this.type : null, disabled: !this.isEdit },
@@ -108,10 +110,10 @@ export class CreateUserTypeComponent {
               ],
             });
 
-            data.menuItems.map((res: { id: any; checked: any }) => {
+            this.data.menuItems.map((res: { id: any; checked: any }) => {
               this.changeMenuChecked(res.checked, res.id);
             });
-            console.log('data', data);
+            console.log('data',this. data);
           }
 
           this.cd.detectChanges();
@@ -390,4 +392,84 @@ export class CreateUserTypeComponent {
   get subcategories(): FormArray {
     return this.userTypeFormGroup.get('subcategories') as FormArray;
   }
+  changeInActive(dataDetails: UserType): void {
+    dataDetails.status = "inactive";
+    this.userService.updateUserType(dataDetails).subscribe(
+      () => {
+        Swal.fire({
+          title: "Success",
+          text: "Role moved to Inactive.",
+          icon: "success",
+        });
+        this.getUserTypeList({});
+        window.history.back();
+      },
+      (error) => {
+        console.error(error, "result_error");
+        Swal.fire({
+          title: "Error",
+          text: "Role attached to  User. Cannot Make Inactive.",
+          icon: "error",
+        });
+        this.getUserTypeList({});
+
+      }
+    );
+  }
+  changeActive(dataDetails: UserType): void {
+    dataDetails.status = "active";
+    this.userService.updateUserType(dataDetails).subscribe(
+      () => {
+        Swal.fire({
+          title: "Success",
+          text: "Role moved to Active.",
+          icon: "success",
+        });
+        this.getUserTypeList({});
+        window.history.back();
+      },
+      (error) => {
+        console.error(error, "result_error");
+      }
+    );
+  }
+  delete(data: any) {
+    console.log('data',data)
+
+    Swal.fire({
+      title: "Confirm Deletion",
+      text: "Are you sure you want to delete?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Delete",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.userService.deleteUserType(data.id,data.typeName).subscribe(() => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Role deleted successfully.',
+            icon: 'success',
+          });
+          this.getUserTypeList({});
+          window.history.back();
+        },
+        (error) => {
+          Swal.fire({
+            title: "Error",
+            text: "Role attached to  User. Cannot Delete.",
+            icon: "error",
+          });
+          this.getUserTypeList({});
+
+        }
+);
+      }
+    });
+      
+  }
+  
+
 }

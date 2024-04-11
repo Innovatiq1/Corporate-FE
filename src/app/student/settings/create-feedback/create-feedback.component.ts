@@ -3,8 +3,9 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SurveyService } from 'app/admin/survey/survey.service';
 import Swal from 'sweetalert2';
-import { SurveyService } from '../survey.service';
+// import { SurveyService } from '../survey.service';
 
 @Component({
   selector: 'app-create-feedback',

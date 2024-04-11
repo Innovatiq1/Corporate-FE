@@ -31,12 +31,16 @@ export class CreateUserRoleComponent {
       active: ' ',
     },
   ];
+  ngOnInit() {
+    this.getAllUserTypes();
+  }
 
 
   getAllUserTypes(filters?: any) {
     this.adminService.getUserTypeList({ 'allRows':true }).subscribe(
       (response: any) => {
         this.userTypeNames = response;
+        console.log("types", this.userTypeNames)
       },
       (error) => {
       }

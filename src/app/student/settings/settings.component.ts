@@ -66,6 +66,7 @@ export class SettingsComponent {
   configUrl: any;
   formsUrl: any;
   sidemenuUrl: any;
+  allUsersUrl: any;
   showAccountSettings: boolean = false;
   showProfileSettings: boolean = false;
   showEmailConfig: boolean = false;
@@ -73,6 +74,7 @@ export class SettingsComponent {
   showIntegration: boolean = false;
   showAutomation: boolean = false;
   showUsers: boolean = false;
+  showAllUsers: boolean = false;
   showCustomSettings: boolean = false;
   showCustoms:boolean = false;
   showLms: boolean = false;
@@ -116,6 +118,7 @@ export class SettingsComponent {
     this.configUrl = urlPath.includes('configuration');
     this.formsUrl = urlPath.includes('forms');
     this.sidemenuUrl = urlPath.includes('sidemenu');
+    this.allUsersUrl = urlPath.includes('all-user');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -311,6 +314,16 @@ export class SettingsComponent {
       ];
       this.isAdmin = true;
     }
+    if (this.allUsersUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
     this.patchValues(),
       //this.patchValues1()
       (this.stdForm = this.fb.group({
@@ -396,6 +409,9 @@ export class SettingsComponent {
     if(this.sidemenuUrl){
       this.showSidemenu = true;
     }
+    if(this.allUsersUrl){
+      this.showAllUsers = true;
+    }
   }
   navigateToAccountSettings() {
    
@@ -414,6 +430,9 @@ export class SettingsComponent {
   }
   navigateToUserSettings(){
     this.router.navigate(['/student/settings/users']);
+  }
+  navigateToAllUserSettings(){
+    this.router.navigate(['/student/settings/all-user']);
   }
   navigateToIntegrateSettings(){
     this.router.navigate(['/student/settings/integration']);

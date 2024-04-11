@@ -4,7 +4,7 @@ import { SurveyListComponent } from './survey-list/survey-list.component';
 import { LikertChartComponent } from './likert-chart/likert-chart.component';
 import { CreateSurveyComponent } from './create-survey/create-survey.component';
 import { CreateLikertChartComponent } from './create-likert-chart/create-likert-chart.component';
-import { CreateFeedbackComponent } from './create-feedback/create-feedback.component';
+// import { CreateFeedbackComponent } from './create-feedback/create-feedback.component';
 import { FeedbackViewComponent } from './feedback-view/feedback-view.component';
 
 const routes: Routes = [
@@ -30,14 +30,14 @@ const routes: Routes = [
     path:"edit-survey-questions/:id",
     component: CreateLikertChartComponent
   },
-  {
-    path:"create-feedback",
-    component: CreateFeedbackComponent
-  },
-  {
-    path:"edit-feedback/:id",
-    component: CreateFeedbackComponent
-  },
+  // {
+  //   path:"create-feedback",
+  //   component: CreateFeedbackComponent
+  // },
+  // {
+  //   path:"edit-feedback/:id",
+  //   component: CreateFeedbackComponent
+  // },
   {
     path:"view-feedback/:id",
     component: FeedbackViewComponent
