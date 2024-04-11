@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { SurveyService } from '../survey.service';
   templateUrl: './create-feedback.component.html',
   styleUrls: ['./create-feedback.component.scss'],
 })
-export class CreateFeedbackComponent {
+export class CreateFeedbackComponent  {
   breadscrums = [
     {
       title: 'Feedback',
@@ -50,6 +50,7 @@ export class CreateFeedbackComponent {
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   editUrl: boolean = false;
   surveyId!: string;
+  questionsList: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -79,7 +80,11 @@ export class CreateFeedbackComponent {
       const question = this.addQuestion();
       this.questions.push(question);
     }
+    this.feedbackForm.controls['questions'].valueChanges.subscribe(value=>{
+      this.getQuestionsList();
+    })
   }
+
 
   addQuestion() {
     const questionGroup = this.formBuilder.group({
@@ -202,12 +207,12 @@ export class CreateFeedbackComponent {
     this.updateOptions(value, optionIndex, questionIndex);
   }
 
-  questionsList() {
+  getQuestionsList() {
     let value = this.questions.value;
     value = value.length === 1
       ? value.filter((v: any) => v.questionText)
       : value || [];
-    return {
+   this.questionsList =  {
       name: this.feedbackForm.get("name")?.value,
       questions: value
     }

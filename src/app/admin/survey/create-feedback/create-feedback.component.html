@@ -250,11 +250,11 @@
 
                 <div
                   class="col-xl-6 col-lg-6 col-md-6 col-sm-12"
-                  *ngIf="questionsList()?.questions?.length"
+                  *ngIf="questionsList?.questions?.length"
                 >
                   <h6 class="text-muted">Preview:</h6>
                   <div class="shadow p-3 mb-5 bg-white rounded">
-                    <app-feedbackcommon [feedbackInfo]="questionsList()" [isPreview]="true"></app-feedbackcommon>
+                    <app-feedbackcommon [feedbackInfo]="questionsList" [isPreview]="true" [col]="1"></app-feedbackcommon>
                   </div>
                 </div>
               </div>
