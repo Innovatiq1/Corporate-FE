@@ -11,29 +11,20 @@ import * as moment from 'moment';
 import { DataSource, SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { TableElement, TableExportUtil, UnsubscribeOnDestroyAdapter } from '@shared';
-import { formatDate } from '@angular/common';
 import jsPDF from 'jspdf';
-//import 'jspdf-autotable';
 import 'jspdf-autotable';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { HttpClient } from '@angular/common/http';
-import { MatDialog } from '@angular/material/dialog';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { Direction } from '@angular/cdk/bidi';
-import { BehaviorSubject, Observable, fromEvent, map, merge } from 'rxjs';
 import { ClassModel, Session, Student, StudentApproval, StudentPaginationModel } from 'app/admin/schedule-class/class.model';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import Swal from 'sweetalert2';
-import { id } from '@swimlane/ngx-charts';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-approve-list',
-  templateUrl: './approve-list.component.html',
-  styleUrls: ['./approve-list.component.scss'],
+  selector: 'app-student-pending-courses',
+  templateUrl: './student-pending-courses.component.html',
+  styleUrls: ['./student-pending-courses.component.scss']
 })
-export class ApproveListComponent  {
+export class StudentPendingCoursesComponent {
   displayedColumns = [
     // 'select',
     
@@ -51,7 +42,7 @@ export class ApproveListComponent  {
     {
       title: 'Registered Courses',
       items: ['Registered Courses'],
-      active: 'Approved Courses',
+      active: 'Pending Courses',
     },
   ];
   searchTerm: string = '';
@@ -97,7 +88,7 @@ export class ApproveListComponent  {
 
   getRegisteredClasses() {
     this._classService
-      .getApprovedClasses(this.studentPaginationModel.page, this.studentPaginationModel.limit, this.studentPaginationModel.filterText)
+      .getRegisteredClasses(this.studentPaginationModel.page, this.studentPaginationModel.limit, this.studentPaginationModel.filterText)
       .subscribe((response: { data: StudentPaginationModel; }) => {
       console.log(response.data.docs)
       this.isLoading = false;
@@ -117,8 +108,9 @@ export class ApproveListComponent  {
   }
 
   view(id:string){
-    this.router.navigate(['/admin/courses/view-completion-list'],{queryParams: {id:id, status:'approved'}});
+    this.router.navigate(['/admin/courses/view-completion-list'],{queryParams: {id:id, status:'pending'}});
   }
+
   mapClassList() {
     this.studentPaginationModel.docs.forEach((item: Student) => {
       const startDateArr: any = [];
@@ -310,7 +302,5 @@ export class ApproveListComponent  {
     // Save or open the PDF
     doc.save('approve-list.pdf');
   }
-
-
 
 }

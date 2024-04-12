@@ -49,6 +49,7 @@ import { ExamQuestionsComponent } from './exam-questions/exam-questions.componen
 import { CreateFeedbackComponent } from './settings/create-feedback/create-feedback.component';
 import { UserGroupComponent } from './settings/user-group/user-group.component';
 import { UserGroupListComponent } from './settings/user-group-list/user-group-list.component';
+import { CreateDepartmentComponent } from './settings/create-department/create-department.component';
 
 
 const routes: Routes = [
@@ -184,6 +185,10 @@ const routes: Routes = [
     component: SettingsComponent,
   },
   {
+    path: 'settings/customization-forms',
+    component: SettingsComponent,
+  },
+  {
     path: 'settings/logo-customization',
     component: LogoCoutomzationComponent,
   },
@@ -290,6 +295,10 @@ const routes: Routes = [
   {
     path:"settings/edit-feedback/:id",
     component: CreateFeedbackComponent
+  },
+  {
+    path:"settings/create-department",
+    component: CreateDepartmentComponent
   },
 // {
 //   path: 'settings/course-kit',

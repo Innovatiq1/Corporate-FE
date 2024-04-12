@@ -1,0 +1,98 @@
+
+
+
+<section class="content">
+    <div class="content-block">
+      <div class="block-header" *ngFor="let breadscrum of breadscrums">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      <div class="row clearfix">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="card" style="height: fit-content;">
+            <div class="header">
+              <h2>Create Role</h2>
+            </div>
+            <div class="body">
+                <!-- <div class="row">
+                  <form [formGroup]="userTypeFormGroup">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>User Role</label>
+                        <mat-form-field class="example-full-width " appearance="outline">
+                            <input matInput type="text" formControlName="typeName"
+                            class="form-control" placeholder="Enter New User Type"
+                            >                                      
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <div class="d-grid gap-3 d-md-flex">
+                        <button  mat-raised-button color="warn" [routerLink]="['/admin/users/user-type']"   > All User Role </button>
+                        </div>
+                      </div>
+                      </form>
+                </div> -->
+                <form [formGroup]="departmentForm">
+
+                <div class="row">
+                  <div class="col-4">
+                    <label>Departments</label>
+                        <mat-form-field class="example-full-width " appearance="outline">
+                            <input matInput type="text" formControlName="department"
+                            class="form-control" placeholder="Enter New Department"
+                            >                                      
+                        </mat-form-field>
+                  </div>
+                  <!-- <div class="col mt-5 mx-5">
+                    <button  mat-flat-button color="accent" [routerLink]="['/student/settings/user-type']"   > All Roles </button>
+                  </div> -->
+                </div>
+                </form>
+                <hr/>
+                <div class="float-end">
+                    <div class="d-grid gap-3 d-md-flex">
+                    <button  mat-raised-button  id="submit" (click)="onSubmit()" > Create </button>
+                    </div>
+                  </div>
+                  <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
+                    <!-- <div class="card" style="border-radius: 31px;"> -->
+                      <div class="header mt-3">
+                        <h2>Existing Departments</h2>
+                      </div>
+                      <div class="table-wrapper">
+                        <div class="table-responsive">
+                          <table class="table table-hover ">
+                            <thead>
+                              <tr>
+                                <th>Department</th>
+                                <th>Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr style="cursor: pointer;" *ngFor="let row of dataSource">
+                                <td>{{row.department | capitalizeFirstLetter}}</td>
+                                <td>
+                                    <span
+                                    [class]="row?.status === 'active' ? 'badge badge-solid-green' : row?.status === 'inactive' ? 'badge badge-solid-red' : '' ">
+                                    <span [class]="row?.status === 'active'  ? 'status-dot' :  row?.status === 'inactive' ? 'status-red' : ''"></span>
+                                    {{row?.status | titlecase}}
+                                  </span>
+                                </td>
+                               
+    
+    
+                              </tr>
+    
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    <!-- </div> -->
+                  </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

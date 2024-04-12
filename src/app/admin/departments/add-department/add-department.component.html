@@ -9,7 +9,7 @@
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
-            <h2>{{editUrl?'Edit':'Add'}} Department</h2>
+            <h2>{{editUrl?'Edit':'Add'}} Department Profile</h2>
           </div>
           <div class="body">
             <form class="m-4" [formGroup]="departmentForm" (ngSubmit)="onSubmit()">
@@ -17,6 +17,11 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Department<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <!-- <mat-select formControlName="department" required>
+                      <mat-option *ngFor="let items of depts" [value]="items.id">
+                        {{items.department | capitalizeFirstLetter}}
+                      </mat-option>
+                    </mat-select> -->
                     <input matInput formControlName="department" required>
                     <mat-error *ngIf="departmentForm.get('department')?.hasError('required')">
                       Department is required

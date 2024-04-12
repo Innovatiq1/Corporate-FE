@@ -80,6 +80,7 @@ import { SurveyModule } from 'app/admin/survey/survey.module';
 import { CreateFeedbackComponent } from './settings/create-feedback/create-feedback.component';
 import { UserGroupComponent } from './settings/user-group/user-group.component';
 import { UserGroupListComponent } from './settings/user-group-list/user-group-list.component';
+import { CreateDepartmentComponent } from './settings/create-department/create-department.component';
 
 @NgModule({
   declarations: [
@@ -139,6 +140,7 @@ import { UserGroupListComponent } from './settings/user-group-list/user-group-li
     CreateFeedbackComponent,
     UserGroupComponent,
     UserGroupListComponent,
+    CreateDepartmentComponent,
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,

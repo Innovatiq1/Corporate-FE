@@ -72,7 +72,7 @@
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Course
                                     </mat-header-cell>
                                     <mat-cell class="name" *matCellDef="let row" (click)=viewCourse(row.id)><span
-                                        class="mobile-label">Course:</span> <span class=" col-cyan">{{row.title |titlecase}}</span>
+                                        class="mobile-label">Course:</span> <span class="col-cyan">{{row.title |titlecase}}</span>
                                     </mat-cell>
                                   </ng-container>
                                   <ng-container matColumnDef="code">
@@ -82,7 +82,13 @@
                                         class="mobile-label">Course Code:</span> {{row.courseCode}}
                                     </mat-cell>
                                   </ng-container>
-            
+                                  <ng-container matColumnDef="creator">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Creator
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)><span
+                                        class="mobile-label">Creator:</span> {{row.Creator}}
+                                    </mat-cell>
+                                  </ng-container>
                                   <ng-container matColumnDef="Days">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Days
                                     </mat-header-cell>
@@ -99,10 +105,24 @@
                                     </mat-cell>
                                   </ng-container>
                                   <ng-container matColumnDef="Fees">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Fees
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Payment
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)> <span
-                                        class="mobile-label">Fees:</span><span >$</span> {{row.fee ||0}}
+                                        class="mobile-label">Payment:</span><span >$</span> {{row.fee ||0}}
+                                    </mat-cell>
+                                  </ng-container>
+                                  <ng-container matColumnDef="startDate">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)> <span
+                                        class="mobile-label">Start Date:</span><span >$</span> {{row.sessionStartDate | date}}
+                                    </mat-cell>
+                                  </ng-container>
+                                  <ng-container matColumnDef="endDate">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)> <span
+                                        class="mobile-label">Start Date:</span><span >$</span> {{row.sessionEndDate | date}}
                                     </mat-cell>
                                   </ng-container>
                                   <ng-container matColumnDef="Vendor">
