@@ -67,6 +67,7 @@ export class SettingsComponent {
   formsUrl: any;
   sidemenuUrl: any;
   allUsersUrl: any;
+  customFormsUrl: any;
   showAccountSettings: boolean = false;
   showProfileSettings: boolean = false;
   showEmailConfig: boolean = false;
@@ -81,6 +82,7 @@ export class SettingsComponent {
   showConfig: boolean = false;
   showForms: boolean = false;
   showSidemenu: boolean = false;
+  showCustomForms: boolean = false;
 
   currentContent: number = 1;
   currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
@@ -119,6 +121,7 @@ export class SettingsComponent {
     this.formsUrl = urlPath.includes('forms');
     this.sidemenuUrl = urlPath.includes('sidemenu');
     this.allUsersUrl = urlPath.includes('all-user');
+    this.customFormsUrl = urlPath.includes('customization-forms');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -225,6 +228,16 @@ export class SettingsComponent {
       this.isAdmin = true;
     }
     if (this.customUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Admin'],
+          active: 'Settings',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.customFormsUrl === true) {
       this.breadscrums = [
         {
           title: 'Settings',
@@ -412,6 +425,9 @@ export class SettingsComponent {
     if(this.allUsersUrl){
       this.showAllUsers = true;
     }
+    if(this.customFormsUrl){
+      this.showCustomForms = true;
+    }
   }
   navigateToAccountSettings() {
    
@@ -436,6 +452,9 @@ export class SettingsComponent {
   }
   navigateToIntegrateSettings(){
     this.router.navigate(['/student/settings/integration']);
+  }
+  navigateToCustomFormsSettings(){
+    this.router.navigate(['/student/settings/customization-forms']);
   }
   navigateToAutomateSettings(){
     this.router.navigate(['/student/settings/automation']);
