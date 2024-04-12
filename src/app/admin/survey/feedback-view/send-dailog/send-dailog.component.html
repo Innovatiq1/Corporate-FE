@@ -1,0 +1,42 @@
+
+
+  <div class="body overflow-auto" style="cursor: pointer;">
+    <div class="responsive_table">
+        <ng-container>
+            <div class="card m-4">
+                <div class="card-body">
+                    <table mat-table [dataSource]="usersList" matSort style="width:70%;height:700px"class="mat-cell advance-table">
+                        <ng-container matColumnDef="select">
+                          <mat-header-cell *matHeaderCellDef >
+                            <mat-checkbox 
+                             [ngClass]="'tbl-checkbox'">
+                            </mat-checkbox>
+                          </mat-header-cell>
+                          <mat-cell *matCellDef="let row"  >
+                            <mat-checkbox   (change)="logSelectedEmails($event, row)"
+                            [ngClass]="'tbl-checkbox'">
+                            </mat-checkbox>
+                          </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="User">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>User</mat-header-cell>
+                          <mat-cell *matCellDef="let row" >{{row?.name}}</mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="Email">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+                            <mat-cell *matCellDef="let row" >{{row?.email}}</mat-cell>
+                          </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"
+                          [style.cursor]="'pointer'" matRipple>
+                        </mat-row>
+                      </table>
+
+                      <button  color="blue"(click)="sendEmail()">Send</button>
+              </div>
+              
+              </div>
+        </ng-container>
+    </div>
+</div>
+

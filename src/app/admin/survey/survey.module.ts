@@ -11,13 +11,15 @@ import { CreateLikertChartComponent } from './create-likert-chart/create-likert-
 import { StarRatingComponent } from 'app/ui/star-rating/star-rating.component';
 import { FeedbackCommonComponent } from './feedback-common/feedbackCommon.component';
 import { FeedbackViewComponent } from './feedback-view/feedback-view.component';
+import { SendDailogComponent } from './feedback-view/send-dailog/send-dailog.component';
 
 
 
 
 @NgModule({
   declarations: [
-    SurveyListComponent,LikertChartComponent, CreateSurveyComponent, CreateLikertChartComponent, StarRatingComponent, FeedbackCommonComponent, FeedbackViewComponent
+    SurveyListComponent,LikertChartComponent, CreateSurveyComponent, CreateLikertChartComponent, StarRatingComponent, FeedbackCommonComponent, FeedbackViewComponent,
+    SendDailogComponent
   ],
   imports: [
     CommonModule,SurveyRoutingModule,

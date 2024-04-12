@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SurveyService } from '../survey.service';
 import Swal from 'sweetalert2';
+import { SendDailogComponent } from './send-dailog/send-dailog.component';
+import { Direction } from '@angular/cdk/bidi';
+import { MatDialog } from '@angular/material/dialog';
+import { UserService } from '@core/service/user.service';
 
 @Component({
   selector: 'app-feedback-view',
@@ -18,11 +22,17 @@ export class FeedbackViewComponent {
   ];
   surveyId!: string;
   questionsList: any = [];
+  allUsers: any;
+  surveyName: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private surveyService: SurveyService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog,
+       private alluserService: UserService,
+
+
   ) {
     this.activatedRoute.params.subscribe((params: any) => {
       this.surveyId = params.id;
@@ -35,6 +45,7 @@ export class FeedbackViewComponent {
       .getSurveyQuestionsById(this.surveyId)
       .subscribe((response: any) => {
         if (response && response.questions) {
+          this.surveyName = response.name
           this.questionsList = {
             name: response.name,
             questions: response.questions.map((question: any) => {
@@ -49,6 +60,27 @@ export class FeedbackViewComponent {
           };
         }
       });
+  }
+  sendSurvey(){
+      let tempDirection: Direction;
+      if (localStorage.getItem('isRtl') === 'true') {
+        tempDirection = 'rtl';
+      } else {
+        tempDirection = 'ltr';
+      }
+      this.alluserService.getAllUsers().subscribe((response: any) => {
+        this.allUsers = response.results;
+        const dialogRef = this.dialog.open(SendDailogComponent, {
+          data: {
+            users:this.allUsers,
+            surveyId:this.surveyId,
+            surveyName:this.surveyName
+          },
+          direction: tempDirection,
+         
+        });
+  
+      })    
   }
   delete(){
     Swal.fire({

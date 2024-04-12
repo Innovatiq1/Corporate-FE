@@ -61,6 +61,15 @@ export class UserService {
       })
       .pipe(map((response) => response));
   }
+  getAllUsers(filter?: Partial<CoursePaginationModel>): Observable<any> {
+    const apiUrl = this.defaultUrl + 'admin/adminUserListing?isAll=true';
+    return this.http
+      .get<ApiResponse>(apiUrl, {
+        params: this.buildParams(filter),
+      })
+      .pipe(map((response) => response));
+  }
+
 
   getUsersListByRole(type:any,filter?: Partial<any>): Observable<any> {
     const apiUrl = `${this.defaultUrl}admin/adminUserListing/user/role?type=${type}`;
