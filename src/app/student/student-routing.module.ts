@@ -48,6 +48,7 @@ import { ViewCategoriesComponent } from './settings/categories/view-categories/v
 import { ExamQuestionsComponent } from './exam-questions/exam-questions.component';
 import { CreateFeedbackComponent } from './settings/create-feedback/create-feedback.component';
 import { UserGroupComponent } from './settings/user-group/user-group.component';
+import { UserGroupListComponent } from './settings/user-group-list/user-group-list.component';
 
 
 const routes: Routes = [
@@ -333,6 +334,10 @@ const routes: Routes = [
   {
     path: 'settings/user-group',
     component: UserGroupComponent,
+  },
+  {
+    path: 'settings/user-list-group',
+    component: UserGroupListComponent
   },
 
 
