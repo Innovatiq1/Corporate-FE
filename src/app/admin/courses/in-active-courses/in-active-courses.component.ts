@@ -26,6 +26,8 @@ export class InActiveCoursesComponent {
     'hr',
     'vendors',
     'Fees',
+    'startDate',
+    'endDate',
     'status',
     // 'action'
   ];

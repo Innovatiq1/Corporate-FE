@@ -26,9 +26,12 @@ export class ActiveCoursesComponent {
   displayedColumns = [
     'name',
     'code',
+    'creator',
     'Days',
     'Training Hours',
     'Fees',
+    'startDate',
+    'endDate',
     'Vendor',
     'status'
   ];

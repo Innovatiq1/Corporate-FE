@@ -292,7 +292,6 @@ export class CreateProgramComponent {
           // programKit: this.programFormGroup.value.programKit ? this.programFormGroup.value.programKit : null
         }
 
-console.log("payload", payload)
         Swal.fire({
           title: 'Are you sure?',
           text: 'You want to create a program!',

@@ -30,6 +30,8 @@ export class AllCourseComponent {
     'Days',
     'Training Hours',
     'Fees',
+    'startDate',
+      'endDate',
     'Vendor',
     'status'
   ];
@@ -73,6 +75,8 @@ export class AllCourseComponent {
       'Days',
       'Training Hours',
       'Fees',
+      'startDate',
+      'endDate',
       'Vendor',
       'status'
       ];
@@ -87,6 +91,8 @@ export class AllCourseComponent {
       'Days',
       'Training Hours',
       'Fees',
+      'startDate',
+      'endDate',
       'Vendor',
       'status'
       ];
@@ -191,6 +197,24 @@ export class AllCourseComponent {
   
   });
     
+  }
+  private refreshTable() {
+    this.paginator._changePageSize(this.paginator.pageSize);
+  }
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.courseData.renderedData.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.courseData.renderedData.forEach((row: any) =>
+          this.selection.select(row)
+        );
   }
   pageSizeChange($event: any) {
     this.coursePaginationModel.page = $event?.pageIndex + 1;

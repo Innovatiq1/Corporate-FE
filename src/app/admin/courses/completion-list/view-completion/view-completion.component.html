@@ -52,7 +52,17 @@
                                             <div class="project_widget">
                                                 <div class="header">
                                                     <h2>Student Details</h2>
-                                                </div>
+                                                    <div class="buttons" *ngIf="this.status">
+                                                        <button mat-icon-button matTooltip="approve" 
+                        class="tbl-action-btn">
+                       <img class="img-w" src="/assets/approve.svg" alt="approve">
+                      </button>
+                      <button mat-icon-button matTooltip="Withdraw" 
+                        class="tbl-action-btn">
+                       <img class="img-w" src="/assets/archive.svg" alt="approve">
+                      </button>
+                                                    </div>
+                                            </div>
                                                 <div class="body">
                                                     <div class="row">
                                                         <div class="col-6">
@@ -74,7 +84,7 @@
                                                                         <h6>Gender</h6>
                                                                     </div>
                                                                     <div class="col-7">
-                                                                        <h6 class="text-muted">{{response.studentId?.gender | titlecase}}</h6>
+                                                                        <h6 class="text-muted">{{response?.studentId?.gender | titlecase}}</h6>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -88,7 +98,7 @@
                                                                        <h6>Mobile</h6>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="text-muted">{{response.studentId?.mobile}}</h6>
+                                                                        <h6 class="text-muted">{{response?.studentId?.mobile}}</h6>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -289,7 +299,7 @@
 
                                     </mat-tab>
 
-                                    <mat-tab>
+                                    <mat-tab *ngIf="showTab">
                                         <ng-template mat-tab-label>
                                             <!-- <mat-icon class="example-tab-icon msr-2">settings</mat-icon> -->
                                             Score Card
@@ -306,7 +316,13 @@
                         <p class="m-b-0"></p>
                     </div>
                     <div class="row mx-3">
-                    <div class="col-md-10 mb-3">
+                    <div class="col-md-10 mb-3" *ngIf="paramStatus === 'pending'">
+                        <button mat-raised-button id="back" [routerLink]="['/admin/courses/student-courses/pending-courses']">Back</button>
+                      </div>
+                      <div class="col-md-10 mb-3" *ngIf="paramStatus === 'approved'">
+                        <button mat-raised-button id="back" [routerLink]="['/admin/courses/student-courses/approved-courses']">Back</button>
+                      </div>
+                      <div class="col-md-10 mb-3" *ngIf="paramStatus === 'completed'">
                         <button mat-raised-button id="back" [routerLink]="['/admin/courses/student-courses/completed-courses']">Back</button>
                       </div>
                       </div>
