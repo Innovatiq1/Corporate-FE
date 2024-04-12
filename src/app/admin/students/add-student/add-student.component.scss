@@ -2,9 +2,9 @@
   border: 1px dashed #7c7db3;
   border-radius: 15px;
   position: relative;
-  max-width: 100%;
+  // max-width: 100%;
   margin-top: 5px;
-  padding: 26px 20px 30px;
+  // padding: 26px 20px 30px;
   transition: 0.2s;
 }
 .file-drop-area button{
@@ -12,6 +12,10 @@
 }
 .file{
  text-align: center;
+}
+.btn{
+  margin-top: 6px;
+  height: 22px;
 }
 .file-input {
   position: absolute;
