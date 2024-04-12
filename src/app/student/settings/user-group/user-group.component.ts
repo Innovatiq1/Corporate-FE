@@ -5,6 +5,7 @@ import { UserService } from '@core/service/user.service';
 import { Users } from '@core/models/user.model';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
+import { CoursePaginationModel } from '@core/models/course.model';
 
 @Component({
   selector: 'app-user-group',
@@ -14,6 +15,9 @@ import Swal from 'sweetalert2';
 export class UserGroupComponent {
   userTypeFormGroup!: FormGroup;
   users!: Users[];
+  searchTerm:string = '';
+  dataSource: any;
+  coursePaginationModel!: Partial<CoursePaginationModel>;
 
   breadscrums = [
     {
@@ -29,10 +33,20 @@ export class UserGroupComponent {
       userId: new FormControl('', []),
 
     });
+    this.coursePaginationModel = {};
   }
 
   ngOnInit(): void {
     this.setup();
+    this.getUserGroups();
+}
+
+getUserGroups(filters?:any) {
+  this.userService.getUserGroups({...this.coursePaginationModel}).subscribe((response: any) => {
+    this.dataSource = response.data.docs;
+
+  }, error => {
+  });
 }
 
 setup() {

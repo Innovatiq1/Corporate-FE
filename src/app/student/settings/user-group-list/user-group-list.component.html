@@ -39,7 +39,7 @@
                                 <span class="mobile-label">Group Name:</span>{{row.group_name | capitalizeFirstLetter}}</mat-cell>
                             </ng-container>
                             <ng-container matColumnDef="User Type">
-                              <mat-header-cell *matHeaderCellDef mat-sort-header>User Type</mat-header-cell>
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>Users</mat-header-cell>
                               <mat-cell *matCellDef="let row">
                                 <span class="mobile-label">User Type:</span>
                                 <ng-container *ngFor="let user of row.userId; let i = index; let last = last">
