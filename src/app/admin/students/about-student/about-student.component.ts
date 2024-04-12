@@ -157,7 +157,8 @@ deleteItem(row: any) {
            });
            //this.fetchCourseKits();
            this.loadData()
-           this.router.navigate(['/admin/users/all-students'])
+           window.history.back();
+          //  this.router.navigate(['/admin/users/all-students'])
          },
          (error: { message: any; error: any; }) => {
            Swal.fire(
@@ -194,7 +195,8 @@ deleteItem(row: any) {
              icon: "success",
            });
            //this.fetchCourseKits();
-           this.loadData()
+           this.loadData();
+           window.history.back();
          },
          (error: { message: any; error: any; }) => {
            Swal.fire(

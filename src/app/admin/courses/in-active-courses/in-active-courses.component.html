@@ -79,8 +79,8 @@
                        <!-- Course Name -->
                       <ng-container matColumnDef="Course Name">
                         <mat-header-cell *matHeaderCellDef mat-sort-header>Course</mat-header-cell>
-                        <mat-cell *matCellDef="let row" >
-                          <span class="mobile-label">Course Name:</span> <span class="col-cyan">{{row.title}}</span></mat-cell>
+                        <mat-cell *matCellDef="let row" class="name">
+                          <span class="mobile-label">Course Name:</span> <span>{{row.title}}</span></mat-cell>
                       </ng-container>
                       <!-- Course Code -->
                       <ng-container matColumnDef="Course Code" >

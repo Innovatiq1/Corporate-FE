@@ -224,8 +224,11 @@
                   (click)="cancel()">
                  Cancel
                </button>
-                  <button  mat-raised-button id="submit" (click)="saveProgramClass()">
+                  <button *ngIf="!editUrl" mat-raised-button id="submit" (click)="saveProgramClass()">
                     Submit
+                  </button>
+                  <button *ngIf="editUrl" mat-raised-button id="submit" (click)="saveProgramClass()">
+                    Update
                   </button>
                   <!-- <button mat-raised-button color="warn" matStepperPrevious >Back</button> -->
                 </div>

@@ -71,7 +71,10 @@ getAllInActiveCourse() {
       }
     });
 }
+back() {
 
+  window.history.back();
+}
   getDataByClick(row_id: string) {
     this.getCourseByCourseId(row_id);
   }
@@ -114,6 +117,7 @@ getAllInActiveCourse() {
           if (result.isConfirmed) {
             this._courseService.deleteCourse(id).subscribe(() => {
               this.getAllCourse();
+              window.history.back();
               Swal.fire({
                 title: 'Success',
                 text: 'Course deleted successfully.',
@@ -181,6 +185,7 @@ getAllInActiveCourse() {
             // confirmButtonColor: '#526D82',
           });
           this.getAllCourse();
+          window.history.back();
         }, (error) => {
           Swal.fire({
             title: 'Error',

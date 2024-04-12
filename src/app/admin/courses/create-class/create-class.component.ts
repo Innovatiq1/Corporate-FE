@@ -403,7 +403,8 @@ console.log('sessions',sessions)
                 //   'top',
                 //   'right'
                 // );
-                this.router.navigateByUrl(`/admin/courses/class-list`);
+                // this.router.navigateByUrl(`/timetable/class-list`);
+                window.history.back();
               }
   
               // this.router.navigateByUrl(`Schedule Class/List`);
@@ -439,7 +440,7 @@ console.log('sessions',sessions)
                   icon: 'success',
                 });
               }
-              this.router.navigateByUrl(`/admin/courses/class-list`);
+              this.router.navigateByUrl(`/timetable/class-list`);
             });
           }
         }); 

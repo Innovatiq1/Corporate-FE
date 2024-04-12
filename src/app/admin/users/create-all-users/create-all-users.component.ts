@@ -187,7 +187,7 @@ export class CreateAllUsersComponent {
         //this.fileDropEl.nativeElement.value = "";
         this.userForm.reset();
         //this.toggleList()
-        this.router.navigateByUrl('/admin/users/all-users');
+        this.router.navigateByUrl('/student/settings/all-users');
       },
       (error) => {
         Swal.fire(
@@ -329,6 +329,7 @@ export class CreateAllUsersComponent {
         if (result.isConfirmed) {
           this.updateUser(userData);
           Swal.close();
+        window.history.back();
         }
       });
       // this.updateUser(userData);
@@ -348,7 +349,7 @@ export class CreateAllUsersComponent {
           }).then(() => {
             resolve(response);
           });
-          this.router.navigate(['/admin/users/all-users']);
+          this.router.navigate(['/student/settings/all-users']);
         },
         (error) => {
           this.isLoading = false;
@@ -530,6 +531,9 @@ export class CreateAllUsersComponent {
   closeDialog(): void {
     this.dialog.closeAll();
   }
+back(){
+  window.history.back();
+}
 
   openRoleModal() {
     this.logoService.getSidemenu().subscribe((response: any) => {

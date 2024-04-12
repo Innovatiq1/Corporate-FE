@@ -176,7 +176,7 @@ export class EditTeacherComponent {
         //this.fileDropEl.nativeElement.value = "";
         this.proForm.reset();
         //this.toggleList()
-        this.router.navigateByUrl('/admin/users/all-instructors');
+        this.router.navigateByUrl('/student/settings/all-instructors');
       },
       (error: { message: any; error: any }) => {
         Swal.fire(
@@ -205,9 +205,9 @@ export class EditTeacherComponent {
         // this.fileName =response?.course?.filename
         this.avatar = response.course?.avatar;
         this.uploaded = this.avatar?.split('/');
-        let image = this.uploaded.pop();
-        this.uploaded = image.split('\\');
-        this.fileName = this.uploaded.pop();
+        let image = this.uploaded?.pop();
+        this.uploaded = image?.split('\\');
+        this.fileName = this.uploaded?.pop();
 
         // this.fileName=response?.course?.videoLink?response?.course?.videoLink[0].filename:null
         // let startingDate=response?.course?.startDate;
@@ -246,10 +246,10 @@ export class EditTeacherComponent {
       .uploadCourseThumbnail(formData)
       .subscribe((data: any) => {
         this.avatar = data.data.thumbnail;
-        this.uploaded = this.avatar.split('/');
-        let image = this.uploaded.pop();
-        this.uploaded = image.split('\\');
-        this.fileName = this.uploaded.pop();
+        this.uploaded = this.avatar?.split('/');
+        let image = this.uploaded?.pop();
+        this.uploaded = image?.split('\\');
+        this.fileName = this.uploaded?.pop();
       });
     // this.fileName = event.target.files[0].name;
     // this.files=event.target.files[0]

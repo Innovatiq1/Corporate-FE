@@ -183,7 +183,8 @@ export class EditProgramExamScheduleComponent {
             //this.fileDropEl.nativeElement.value = "";
           this.examsheduleForm.reset();
           //this.toggleList()
-          this.router.navigateByUrl('/timetable/program-exam');
+          // this.router.navigateByUrl('/timetable/program-exam');
+          window.history.back();
           },
           (error: { message: any; error: any; }) => {
             Swal.fire(
