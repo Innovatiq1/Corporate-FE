@@ -95,10 +95,12 @@ export class CreateUserTypeComponent {
       .getUserTypeList({ ...this.coursePaginationModel })
       .subscribe(
         (response: any) => {
+          
           this.typesList = response.docs;
           this. data = this.typesList.find((id: any) => id._id === this.paramId);
           if (this.data) {
             this.type = this.data.typeName;
+            console.log(this.type,"+++++++++");
             this.userTypeFormGroup = this.fb.group({
               typeName: [
                 { value: this.type ? this.type : null, disabled: !this.isEdit },
@@ -132,12 +134,14 @@ export class CreateUserTypeComponent {
     this.submitted = true;
     this.userTypeFormGroup.markAllAsTouched();
     let formData = this.userTypeFormGroup.getRawValue();
+    console.log("selectedMenuItems",formData)
     this.isLoading = true;
     let selectedMenuItems = [];
     selectedMenuItems = this.getCheckedItems(this.dataSourceArray).filter(
       (v: any) => v
     );
     formData.menuItems = selectedMenuItems;
+  
     this.updateUserType(formData)
       .then((response: any) => {})
       .catch((e: any) => {});
