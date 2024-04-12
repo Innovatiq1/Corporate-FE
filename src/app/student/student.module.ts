@@ -79,6 +79,7 @@ import { ExamQuestionsComponent } from './exam-questions/exam-questions.componen
 import { SurveyModule } from 'app/admin/survey/survey.module';
 import { CreateFeedbackComponent } from './settings/create-feedback/create-feedback.component';
 import { UserGroupComponent } from './settings/user-group/user-group.component';
+import { UserGroupListComponent } from './settings/user-group-list/user-group-list.component';
 
 @NgModule({
   declarations: [
@@ -137,6 +138,7 @@ import { UserGroupComponent } from './settings/user-group/user-group.component';
     EditCategoriesComponent,
     CreateFeedbackComponent,
     UserGroupComponent,
+    UserGroupListComponent,
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,

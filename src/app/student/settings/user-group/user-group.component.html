@@ -12,40 +12,34 @@
               <h2>Create User Group</h2>
             </div>
             <div class="body">
-                <!-- <div class="row">
-                  <form [formGroup]="userTypeFormGroup">
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                        <label>User Role</label>
-                        <mat-form-field class="example-full-width " appearance="outline">
-                            <input matInput type="text" formControlName="typeName"
-                            class="form-control" placeholder="Enter New User Type"
-                            >                                      
-                        </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                        <div class="d-grid gap-3 d-md-flex">
-                        <button  mat-raised-button color="warn" [routerLink]="['/admin/users/user-type']"   > All User Role </button>
-                        </div>
-                      </div>
-                      </form>
-                </div> -->
                 <form [formGroup]="userTypeFormGroup">
-
                 <div class="row">
-                  <div class="col">
-                    <label>Group</label>
+                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <label>Group Name</label>
                         <mat-form-field class="example-full-width " appearance="outline">
                             <input matInput type="text" formControlName="typeName"
                             class="form-control" placeholder="Enter New Group"
                             >                                      
                         </mat-form-field>
                   </div>
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <label>User List</label>
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                      <mat-select formControlName="userId" required multiple>
+                        <mat-option *ngFor="let item of users" [value]="item.id">
+                          {{item?.name}}
+                        </mat-option>
+  
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+  
                 </div>
                 </form>
                 <hr/>
                 <div class="float-end">
                     <div class="d-grid gap-3 d-md-flex">
-                    <button  mat-raised-button  id="submit"  > Create </button>
+                    <button  mat-raised-button id="submit" (click)="submit()"> Create </button>
                     </div>
                   </div>
             </div>

@@ -178,7 +178,6 @@ performSearch() {
   }
 }
 edit(row:any){
-  console.log("row: " + row.id);
 this.router.navigate(['/admin/users/edit-all-users'], {queryParams:{row:row}})
 }
 addNew(type: any) {
@@ -213,7 +212,6 @@ exportExcel() {
 generatePdf() {
   const doc = new jsPDF();
   const headers = [['Name','User Type','Qualification','Email','Status']];
-  console.log(this.dataSource)
   const data = this.dataSource.map((user:any) =>
     [user.name,
       user.type,
@@ -240,4 +238,5 @@ generatePdf() {
   // Save or open the PDF
   doc.save('AllUsers-list.pdf');
 }
+
 }

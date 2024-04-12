@@ -197,4 +197,19 @@ export class UserService {
     );
   }
 
+  saveGroups(users: any) {
+    const apiUrl = `${this.defaultUrl}admin/user-group/`;
+    return this.http
+      .post<ApiResponse>(apiUrl, users)
+      .pipe(map((response) => { }));
+  }
+
+  getUserGroups(filter?: Partial<CoursePaginationModel>): Observable<any> {
+    const apiUrl = this.defaultUrl + 'admin/user-group';
+    return this.http
+      .get<ApiResponse>(apiUrl, {
+        params: this.buildParams(filter),
+      })
+      .pipe(map((response) => response));
+  }
 }
