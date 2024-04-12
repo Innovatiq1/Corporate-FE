@@ -11,13 +11,15 @@ import { UsersRoutingModule } from './users-routing.module';
 import { CreateAllUsersComponent } from './create-all-users/create-all-users.component';
 import { CreateUserTypeComponent } from './create-user-type/create-user-type.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
+import { CreateRoleTypeComponent } from './create-role-type/create-role-type.component';
 
 
 @NgModule({
     declarations: [
         CreateAllUsersComponent,
         CreateUserTypeComponent,
-        ViewUsersComponent
+        ViewUsersComponent,
+        CreateRoleTypeComponent,
     ],
     imports: [
         CommonModule, UsersRoutingModule,
