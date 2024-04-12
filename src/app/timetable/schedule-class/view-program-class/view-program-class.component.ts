@@ -78,6 +78,7 @@ delete(id: string) {
               icon: 'success',
             });
             this.loadData();
+            window.history.back();
           });
     }
     });

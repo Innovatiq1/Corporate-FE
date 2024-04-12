@@ -309,7 +309,7 @@ console.log("payload", payload)
                   text: 'Program created succesfully',
                   icon: 'success',
                 });
-                this.router.navigate(['/admin/approval/program-approval'])
+                this.router.navigate(['/admin/program/submitted-program/pending-program'])
               },
               (err: any) => {
                 Swal.fire(

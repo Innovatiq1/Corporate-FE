@@ -172,7 +172,7 @@ export class AddTeacherComponent {
             //this.fileDropEl.nativeElement.value = "";
           this.proForm.reset();
           //this.toggleList()
-          this.router.navigateByUrl('/admin/users/all-instructors');
+          this.router.navigateByUrl('/student/settings/all-instructors');
           },
           (error) => {
             Swal.fire(
@@ -187,7 +187,7 @@ export class AddTeacherComponent {
    
   }
   cancel(){
-    this.router.navigateByUrl('/admin/users/all-instructors');
-
+    // this.router.navigateByUrl('/admin/users/all-instructors');
+window.history.back();
   }
 }

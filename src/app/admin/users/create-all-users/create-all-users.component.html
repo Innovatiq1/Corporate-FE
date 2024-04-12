@@ -300,7 +300,7 @@
                     </form>
                     <div class="row body">
                         <div class="col-md-10">
-                          <button  mat-raised-button id="back" [routerLink]="['/admin/users/all-users']">Back</button>
+                          <button  mat-raised-button id="back" (click)="back()">Back</button>
                         </div>
                         <div class="col-md-2">
                           <button mat-raised-button id="submit" (click)="update()">{{editUrl? 'Update': 'Create'}}</button>

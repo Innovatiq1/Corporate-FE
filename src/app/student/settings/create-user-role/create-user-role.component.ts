@@ -35,7 +35,10 @@ export class CreateUserRoleComponent {
     this.getAllUserTypes();
   }
 
-
+  edit(id:any){
+    this.router.navigate(['/admin/users/edit-user-type'],{queryParams:{id:id}});
+  // this.router.navigate(['/Users/Type/edit'],{queryParams:{id:id}});
+  }
   getAllUserTypes(filters?: any) {
     this.adminService.getUserTypeList({ 'allRows':true }).subscribe(
       (response: any) => {

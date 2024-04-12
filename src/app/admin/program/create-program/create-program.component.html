@@ -180,14 +180,14 @@
                   >
                     <input
                       matInput
-                      [matDatepicker]="picker"
+                      [matDatepicker]="startPicker"
                       formControlName="sessionStartDate" placeholder="DD/MM/YYYY"
                     />
                     <mat-datepicker-toggle
                       matSuffix
-                      [for]="picker"
+                      [for]="startPicker"
                     ></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-datepicker #startPicker></mat-datepicker>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
@@ -198,14 +198,14 @@
                   >
                     <input
                       matInput
-                      [matDatepicker]="picker"
+                      [matDatepicker]="endPicker"
                       formControlName="sessionEndDate" placeholder="DD/MM/YYYY"
                     />
                     <mat-datepicker-toggle
                       matSuffix
-                      [for]="picker"
+                      [for]="endPicker"
                     ></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-datepicker #endPicker></mat-datepicker>
                   </mat-form-field>
                 </div>
                 <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
@@ -613,7 +613,7 @@
                   <button mat-button id="back" (click)="back()">Back</button>
                 </div>
                 <div class="col-md-2">
-                  <button
+                  <button *ngIf="!editPermission"
                     mat-raised-button
                     type="button"
                     color="primary"
@@ -622,6 +622,15 @@
                   >
                     Submit
                   </button>
+                  <button *ngIf="editPermission"
+                  mat-raised-button
+                  type="button"
+                  color="primary"
+                  id="submit"
+                  (click)="save()"
+                >
+                  Update
+                </button>
                 </div>
               </div>
             </div>

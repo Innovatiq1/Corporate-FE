@@ -69,6 +69,7 @@ deleteAnnouncement(announcementId: any) {
   
         this.activatedRoute.queryParams.subscribe(params => {
           this.loadData();
+          window.history.back();
         });
         this.cdr.detectChanges();
       });

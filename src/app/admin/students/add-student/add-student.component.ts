@@ -162,6 +162,7 @@ export class AddStudentComponent {
         }).then((result) => {
           if (result.isConfirmed){
             this.createInstructor(userData);
+            this.router.navigate(['/student/settings/all-students'])
             Swal.close();
           }
         });
@@ -181,7 +182,7 @@ export class AddStudentComponent {
         //this.fileDropEl.nativeElement.value = "";
         this.stdForm.reset();
         //this.toggleList()
-        this.router.navigateByUrl('/admin/students/all-students');
+        this.router.navigateByUrl('/student/settings/all-students');
       },
       (error) => {
         Swal.fire(
@@ -362,6 +363,7 @@ getDepartment(){
         if (result.isConfirmed){
           this.updateInstructor(userData);
           Swal.close();
+          // window.history.back();
         }
       });
      

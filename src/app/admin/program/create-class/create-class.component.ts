@@ -370,7 +370,7 @@ export class CreateClassComponent {
                 icon: 'success',
                 // confirmButtonColor: '#d33',
               });
-              this.router.navigateByUrl(`admin/program/schedule-class`);
+              this.router.navigateByUrl(`/timetable/schedule-class`);
                });
           }
         });

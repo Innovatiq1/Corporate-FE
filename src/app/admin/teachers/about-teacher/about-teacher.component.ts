@@ -116,6 +116,7 @@ deleteItem(row: any) {
              icon: "success",
            });
            this.loadData()
+           window.history.back();
            //this.fetchCourseKits();
            //this.instructorData()
          },

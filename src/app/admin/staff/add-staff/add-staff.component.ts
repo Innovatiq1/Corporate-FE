@@ -190,7 +190,7 @@ export class AddStaffComponent {
           text: 'User created succesfully',
           icon: 'success',
         });
-        this.router.navigate(['/admin/staff/all-staff']);
+        this.router.navigate(['/student/settings/all-staff']);
       },
       (error: any) => {
         this.isLoading = false;
@@ -222,10 +222,10 @@ export class AddStaffComponent {
       .uploadCourseThumbnail(formData)
       .subscribe((data: any) => {
         this.avatar = data.data.thumbnail;
-        this.uploaded = this.avatar.split('/');
-        let image = this.uploaded.pop();
-        this.uploaded = image.split('\\');
-        this.fileName = this.uploaded.pop();
+        this.uploaded = this.avatar?.split('/');
+        let image = this.uploaded?.pop();
+        this.uploaded = image?.split('\\');
+        this.fileName = this.uploaded?.pop();
       });
     // this.fileName = event.target.files[0].name;
     // this.files=event.target.files[0];
@@ -326,7 +326,8 @@ export class AddStaffComponent {
           }).then(() => {
             resolve(response);
           });
-          this.router.navigate(['/admin/users/all-staff']);
+          window.history.back();
+          // this.router.navigate(['/admin/users/all-staff']);
         },
         (error) => {
           this.isLoading = false;

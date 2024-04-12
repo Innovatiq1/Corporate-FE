@@ -117,7 +117,8 @@ export class ViewClassComponent {
               icon: 'success',
             });
             this.getClassList();
-            this._router.navigateByUrl(`/admin/courses/class-list`);
+            window.history.back();
+            // this._router.navigateByUrl(`/admin/courses/class-list`);
           });
     }
     });

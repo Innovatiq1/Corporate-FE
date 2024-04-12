@@ -71,6 +71,7 @@ export class AboutStaffComponent implements OnInit{
             });
             //this.fetchCourseKits();
             this.loadData()
+            window.history.back();
           },
           (error: { message: any; error: any; }) => {
             Swal.fire(

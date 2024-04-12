@@ -180,8 +180,9 @@ export class EditComponent {
             });
             //this.fileDropEl.nativeElement.value = "";
           this.examsheduleForm.reset();
+          window.history.back();
           //this.toggleList()
-          this.router.navigateByUrl('/admin/exam/exam-schedule');
+          // this.router.navigateByUrl('/admin/exam/exam-schedule');
           },
           (error: { message: any; error: any; }) => {
             Swal.fire(

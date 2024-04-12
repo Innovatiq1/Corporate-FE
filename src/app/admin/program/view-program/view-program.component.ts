@@ -164,7 +164,7 @@ export class ViewProgramComponent {
             // confirmButtonColor: '#d33',
           });
           this.getPendingProgramLists();
-          this.router.navigate(['/admin/program/program-list'])
+          this.router.navigate(['/admin/program/program-list/program'])
         }, (error) => {
           Swal.fire({
             title: 'Error',

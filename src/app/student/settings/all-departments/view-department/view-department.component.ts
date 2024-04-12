@@ -62,6 +62,7 @@ delete(id: string) {
     // }
     this.deptService.deleteDepartment(id).subscribe(() => {
       this.loadData();
+      this.router.navigate(['/student/settings/all-departments'])
       Swal.fire({
         title: 'Success',
         text: 'Department deleted successfully.',

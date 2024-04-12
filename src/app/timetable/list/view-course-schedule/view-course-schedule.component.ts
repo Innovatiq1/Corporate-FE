@@ -67,6 +67,7 @@ delete(row: ExamSchedule) {
              icon: "success",
            });
            this.loadData()
+           window.history.back();
          },
          (error: { message: any; error: any; }) => {
            Swal.fire(

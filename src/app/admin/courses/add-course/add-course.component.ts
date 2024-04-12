@@ -326,10 +326,10 @@ onFileUpload(event:any) {
   formData.append('files', this.thumbnail);
 this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
   this.image_link = data.data.thumbnail;
-  this.uploaded=this.image_link.split('/')
-  let image  = this.uploaded.pop();
-  this.uploaded= image.split('\\');
-  this.uploadedImage = this.uploaded.pop();
+  this.uploaded=this.image_link?.split('/')
+  let image  = this.uploaded?.pop();
+  this.uploaded= image?.split('\\');
+  this.uploadedImage = this.uploaded?.pop();
   
 })
   // this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
@@ -547,10 +547,10 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       id:this.courseId,
 
     }
-    this.firstFormGroup.value.course_kit?.map((item:any) => item.id);
-    this.firstFormGroup.value.assessment?.map((item:any) => item.id);
-    this.firstFormGroup.value.exam_assessment?.map((item:any) => item.id);
-    this.firstFormGroup.value.survey?.map((item:any) => item.id);
+    this.firstFormGroup.value?.course_kit?.map((item:any) => item.id);
+    this.firstFormGroup.value?.assessment?.map((item:any) => item.id);
+    this.firstFormGroup.value?.exam_assessment?.map((item:any) => item.id);
+    this.firstFormGroup.value?.survey?.map((item:any) => item.id);
 
     Swal.fire({
       title: 'Are you sure?',
@@ -567,7 +567,8 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
             text: 'Course saved successfully',
             icon: 'success',
           });
-          this.router.navigate(['/admin/courses/all-courses'])
+          window.history.back();
+          // this.router.navigate(['/admin/courses/all-courses'])
         });
       }
     });
@@ -712,9 +713,9 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       // this.certificates = response.certificates.data.docs;
       this.image_link = this.course.image_link;
       this.uploaded=this.image_link?.split('/')
-      let image  = this.uploaded.pop();
-      this.uploaded= image.split('\\');
-      this.uploadedImage = this.uploaded.pop();
+      let image  = this.uploaded?.pop();
+      this.uploaded= image?.split('\\');
+      this.uploadedImage = this.uploaded?.pop();
       let sub_categoryId = this.course?.sub_category?.id;
       let categoryId = this.course?.main_category?.id;
       let fundingGrantId = this.course?.funding_grant?.id;
