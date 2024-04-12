@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>Create Role</h2>
+<mat-dialog-content>
+  <form [formGroup]="userTypeFormGroup">
+    <div class="row">
+      <div class="col-md-4 min-w-300">
+        <label>Role <span class="mandatory">&nbsp;*</span></label>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <input
+            matInput
+            type="text"
+            formControlName="typeName"
+            class="form-control"
+            placeholder="Enter New Role"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <hr />
+  <div *ngIf="dataSource.data.length">
+  <div class="row ms-5">
+    <div class="col fs-5 fw-semibold">Module</div>
+    <div class="col fs-5 fw-semibold">Sub Module</div>
+  </div>
+  <div class="row border-bottom p-4" *ngFor="let menu of dataSource.data">
+    <div class="col-md ">
+        <mat-checkbox class="example-margin mt-1" [(ngModel)]="menu.checked"
+            (change)="changeMenuChecked(menu.checked, menu?.id)"
+            [indeterminate]="menu.indeterminate">
+            <h6 style="padding-top: 10px;font-weight: bolder;">{{menu?.title}}</h6>
+        </mat-checkbox>
+
+    </div>
+
+    <div class="col-md d-flex flex-wrap">
+        <div *ngFor="let submenu of menu.children" class="sub-menu">
+            <mat-checkbox class="example-margin" [(ngModel)]="submenu.checked"
+                (change)="changeMenuChecked(submenu.checked, submenu.id)"
+                [indeterminate]="submenu.indeterminate">
+                <p class="menu">{{submenu?.title}}</p>
+            </mat-checkbox>
+
+        </div>
+    </div>
+</div>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="m-auto">
+    <button mat-raised-button id="back" (click)="onNoClick()">Cancel</button>
+    <button
+      mat-button
+      cdkFocusInitial
+      mat-flat-button
+      color="primary"
+      (click)="confirmSubmit()"
+      class="me-2"
+    >
+      Save
+    </button>
+  </div>
+</mat-dialog-actions>
