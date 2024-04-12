@@ -515,6 +515,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
   save() {
     if(this.firstFormGroup.valid){
     const courseData = this.firstFormGroup.value;
+    let creator = JSON.parse(localStorage.getItem('user_data')!).user.name;
     let payload = {
       title: courseData?.title,
       courseCode: courseData?.courseCode,
@@ -544,6 +545,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       vendor:courseData?.vendor,
       // certificates:courseData?.certificates,
       image_link:this.image_link,
+      creator:creator,
       id:this.courseId,
 
     }
@@ -625,7 +627,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
 
     if(this.firstFormGroup.valid){
       const courseData = this.firstFormGroup.value;
-
+      let creator = JSON.parse(localStorage.getItem('user_data')!).user.name;
       let payload = {
 
         title: courseData.title,
@@ -656,6 +658,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
         // certificates:courseData?.certificates,
         image_link:this.image_link,
         vendor: courseData?.vendor,
+        creator:creator,
         website_link:courseData?.website_link
       }
 

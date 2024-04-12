@@ -15,6 +15,7 @@ import DomToImage from 'dom-to-image';
 import { number } from 'echarts';
 import { StudentService } from '@core/service/student.service';
 import { dA } from '@fullcalendar/core/internal-common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -36,8 +37,8 @@ export class CompletionListComponent {
   breadscrums = [
     {
       title: 'Completion List',
-      items: ['Course'],
-      active: 'Completion List',
+      items: ['Registered Course'],
+      active: 'Completion Course',
     },
   ];
 pdfData: any = [];
@@ -60,7 +61,7 @@ certifiacteUrl:boolean = false;
     document.getElementById('input')?.click();
   }
 
-  constructor(private classService: ClassService) {
+  constructor(private classService: ClassService, public router: Router) {
 
     this.studentPaginationModel = {} as StudentPaginationModel;
   }
@@ -120,6 +121,9 @@ certifiacteUrl:boolean = false;
         })
     }
 
+    view(id:string){
+      this.router.navigate(['/admin/courses/view-completion-list'],{queryParams: {id:id, status:'completed'}});
+    }
     mapClassList() {
       this.studentPaginationModel.docs.forEach((item: Student) => {
         const startDateArr: any = [];

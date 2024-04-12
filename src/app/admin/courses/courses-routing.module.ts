@@ -19,6 +19,7 @@ import { ApproveListComponent } from '../approval/approve-list/approve-list.comp
 import { ExamScoresComponent } from './exam-scores/exam-scores.component';
 import { ActiveCoursesComponent } from './active-courses/active-courses.component';
 import { InActiveCoursesComponent } from './in-active-courses/in-active-courses.component';
+import { StudentPendingCoursesComponent } from './student-pending-courses/student-pending-courses.component';
 const routes: Routes = [
   {
     path: 'all-courses/course',
@@ -74,7 +75,7 @@ const routes: Routes = [
     component: ViewClassComponent,
   },
   {
-    path: 'view-completion-list/:id',
+    path: 'view-completion-list',
     component: ViewCompletionComponent,
   },
   {
@@ -102,17 +103,19 @@ const routes: Routes = [
     component: ViewCourseKitComponent,
   },
   {
-    path: 'student-courses/registered-courses',
+    path: 'student-courses/approved-courses',
     component: ApproveListComponent,
   },
-  {
-    path: 'student-courses/pending-courses',
-    component: InActiveCoursesComponent,
-  },
+  
   {
     path: 'exam-scores',
     component: ExamScoresComponent,
   },
+  {
+    path:'student-courses/pending-courses',
+    component: StudentPendingCoursesComponent,
+  }
+ 
 ];
 
 @NgModule({

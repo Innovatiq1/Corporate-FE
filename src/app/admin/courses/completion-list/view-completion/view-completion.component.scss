@@ -29,8 +29,20 @@
       border: none;
       background: transparent;
   }
+  .img-w{
+    height: 20px;
+    margin-right: 25px;
+    // margin-top: 20px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
   
-  
+  .buttons {
+      display: flex;
+  }
   // .selected {
   //   background: linear-gradient(to right, rgb(97, 156, 137), rgb(25, 80, 33));
   //   color: #fdfdfd;
