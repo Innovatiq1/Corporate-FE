@@ -48,6 +48,8 @@ export class SidemenuComponent {
       sidemenu: this.formBuilder.array([
         // this.createSidemenu()
       ])
+      
+      
     });
     console.log("sidemenu",this.sideMenuForm)
     this.getData();
@@ -59,18 +61,8 @@ export class SidemenuComponent {
     this.sidemenu.push(this.createSidemenu());
     this.cdr.detectChanges();
   }
+
   createSidemenu(): FormGroup {
-    return this.formBuilder.group({
-      title: ['', Validators.required],
-      id: [''],
-      iconsrc: [''],
-      submenu: this.formBuilder.array([
-        this.createSubmenu(),
-        // this.createOption()
-      ])
-    });
-  }
-  createSidemenuwithoutSubmenu(): FormGroup {
     return this.formBuilder.group({
       title: ['', Validators.required],
       id: [''],
@@ -81,15 +73,32 @@ export class SidemenuComponent {
       ])
     });
   }
-  addSubmenu(submenuIndex: number) {
-    const submenu = this.getSubmenu(submenuIndex);
-    submenu.push(this.createSubmenu());
+  createSidemenuwithoutSubmenu(): FormGroup {
+    return this.formBuilder.group({
+      title: ['', Validators.required],
+      id: [''],
+      iconsrc: [''],
+      submenu: this.formBuilder.array([
+       
+        // this.createOption()
+        
+      ])
+    });
   }
+
+  get sidemenu1(): FormArray {
+    return this.sideMenuForm.get('sidemenu1') as FormArray;
+  }
+  // addSubmenu(submenuIndex: number) {
+  //   const submenu = this.getSubmenu(submenuIndex);
+  //   submenu.push(this.createSubmenu());
+  // }
   
   createSubmenu(): FormGroup {
     return this.formBuilder.group({
       title: '',
       id:'',
+      class:'',
     });
   }
 
@@ -97,7 +106,56 @@ export class SidemenuComponent {
   getSubmenu(submenuIndex: number): FormArray {
     return this.sidemenu.at(submenuIndex).get('submenu') as FormArray;
   }
- 
+
+  getData(){
+    this.logoService.getSidemenuById(this.sidemenuId).subscribe((response: any) => {
+      const sidemenuArray = this.sideMenuForm.get('sidemenu') as FormArray;
+      response.MENU_LIST.forEach((menuItem: any, i: number) => {
+        if (menuItem.title.trim() !== '') {
+        const newSidemenuGroup = this.createSidemenuwithoutSubmenu(); 
+        const uploadedImageLink = menuItem.iconsrc; 
+        const imageName = uploadedImageLink ? uploadedImageLink.split('/').pop()?.split('\\').pop() : null;
+        this.uploadedImages[i] = imageName;
+        newSidemenuGroup.patchValue({
+        title: menuItem.title,
+        id: menuItem.id,
+        iconsrc: uploadedImageLink,
+        class:menuItem.class
+         });
+         const submenuArray = newSidemenuGroup.get('submenu') as FormArray;
+         menuItem.children.forEach((submenus: any) => {
+             const submenuGroup = this.formBuilder.group({
+                 title: submenus.title,
+                 id: submenus.id,
+                 class:submenus.class,
+                 submenu: this.formBuilder.array([]) 
+             });
+         
+             if (submenus.children && submenus.children.length > 0) {
+                 submenus.children.forEach((submenu: any) => {
+                     const subSubmenuGroup = this.formBuilder.group({
+                         title: submenu.title,
+                         id: submenu.id,
+                         class:submenu.class
+                     });
+                     (submenuGroup.get('submenu') as FormArray).push(subSubmenuGroup);
+                 });
+             }
+         
+             submenuArray.push(submenuGroup);
+         });
+         
+         sidemenuArray.push(newSidemenuGroup);
+        }
+      })
+    })
+  }
+  // submenuArray1?.push(
+  //   this.formBuilder.group({
+  //        title: submenus.title,
+  //        id: submenus.id,
+  //        })
+  //     );
   onFileUpload(event: any, menuItemIndex: number) {
     const file = event.target.files[0];
     const formData = new FormData();
@@ -151,9 +209,16 @@ export class SidemenuComponent {
           title: menulist.title,
           id: menulist.id,
           iconsrc: menulist.iconsrc,
+          class:menulist.class,
           children: menulist.submenu.map((submenus: any) => ({
             title: submenus.title,
             id: submenus.id,
+            class:submenus.class,
+            children: submenus.submenu.map((submenu: any) => ({
+              title: submenu.title,
+              id: submenu.id,
+              class:submenu.class
+            }))
           }))
         })),
         id: this.sidemenuId,
@@ -195,32 +260,5 @@ export class SidemenuComponent {
     }
   }
   
-  getData(){
-    this.logoService.getSidemenuById(this.sidemenuId).subscribe((response: any) => {
-      const sidemenuArray = this.sideMenuForm.get('sidemenu') as FormArray;
-      response.MENU_LIST.forEach((menuItem: any, i: number) => {
-        if (menuItem.title.trim() !== '') {
-        const newSidemenuGroup = this.createSidemenuwithoutSubmenu(); 
-        const uploadedImageLink = menuItem.iconsrc; 
-        const imageName = uploadedImageLink ? uploadedImageLink.split('/').pop()?.split('\\').pop() : null;
-        this.uploadedImages[i] = imageName;
-        newSidemenuGroup.patchValue({
-        title: menuItem.title,
-        id: menuItem.id,
-        iconsrc: uploadedImageLink,
-         });
-         const submenuArray = newSidemenuGroup.get('submenu') as FormArray;
-         menuItem.children.forEach((submenus: any) => {
-         submenuArray.push(
-          this.formBuilder.group({
-               title: submenus.title,
-               id: submenus.id,
-               })
-            );
-           });
-         sidemenuArray.push(newSidemenuGroup);
-        }
-      })
-    })
-  }
+ 
 }
