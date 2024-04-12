@@ -5,6 +5,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CoursePaginationModel } from '@core/models/course.model';
 import { Users } from '@core/models/user.model';
 import { DeptService } from '@core/service/dept.service';
 import { UserService } from '@core/service/user.service';
@@ -30,6 +31,10 @@ export class AddDepartmentComponent  implements OnInit {
   departmentId: any;
   hod: any;
   hodName: any;
+  depts: any;
+  departmentPaginationModel!: Partial<CoursePaginationModel>;
+  deptName: any;
+
   constructor(private fb: UntypedFormBuilder,private deptService: DeptService,private router:Router,private userService: UserService,
     private activatedRoute:ActivatedRoute) {
     let urlPath = this.router.url.split('/')
@@ -59,12 +64,22 @@ export class AddDepartmentComponent  implements OnInit {
     this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
       this.departmentId = params.id;
     });
-    if(this.editUrl){
-      this.getDepartmentById();
-    }
+   
+    this.departmentPaginationModel = {};
   }
   ngOnInit(): void {
-  this.userList()
+  this.userList();
+  this.getAllDepartments()
+  }
+  getAllDepartments(){
+    this.deptService.getAllDepartments({ ...this.departmentPaginationModel, status: 'active' }).subscribe((response: { data: { docs: any; totalDocs: any; page: any; limit: any; }; }) =>{
+     this.depts = response.data.docs;
+     if(this.editUrl){
+      this.getDepartmentById();
+    }
+     console.log("pv", response)
+    })
+    
   }
   onSelectChange1(event: any) {
     const selectedValue = event.value;
@@ -111,9 +126,12 @@ export class AddDepartmentComponent  implements OnInit {
   getDepartmentById(){
     this.deptService.getDepartmentById(this.departmentId).subscribe((response:any)=>{
       let details = response;
-      console.log('res',response)
+      console.log('resss',this.depts)
+      this.deptName = this.depts.find((department: any) => department.department === response.department).department;
+      console.log('premv',this.deptName)
       this.departmentForm.patchValue({
         department:response?.department,
+        // department:this.deptName,
         hod:response?.hodId,
         mobile:response?.mobile,
         email:response?.email,
