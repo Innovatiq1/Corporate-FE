@@ -115,14 +115,14 @@
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)> <span
-                                        class="mobile-label">Start Date:</span><span >$</span> {{row.sessionStartDate | date}}
+                                        class="mobile-label">Start Date:</span> {{row.sessionStartDate | date}}
                                     </mat-cell>
                                   </ng-container>
                                   <ng-container matColumnDef="endDate">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)> <span
-                                        class="mobile-label">Start Date:</span><span >$</span> {{row.sessionEndDate | date}}
+                                        class="mobile-label">End Date:</span>{{row.sessionEndDate | date}}
                                     </mat-cell>
                                   </ng-container>
                                   <ng-container matColumnDef="Vendor">
