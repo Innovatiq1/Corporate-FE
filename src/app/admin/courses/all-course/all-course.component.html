@@ -71,10 +71,10 @@
                               <div class="responsive_table">
                                 <table mat-table [dataSource]="courseData" matSort class="mat-cell advance-table">
                                   <ng-container matColumnDef="name">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Course Name
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Course
                                     </mat-header-cell>
                                     <mat-cell class="name" [class.name]="isCourse" *matCellDef="let row" (click)=viewCourse(row.id)><span
-                                        class="mobile-label">Course Name:</span> <span class=" col-cyan">{{row.title |titlecase}}</span>
+                                        class="mobile-label">Course Name:</span> <span >{{row.title |titlecase}}</span>
                                     </mat-cell>
                                   </ng-container>
                                   <ng-container matColumnDef="code">
