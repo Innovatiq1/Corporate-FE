@@ -38,7 +38,7 @@ export class EmployeeStatusComponent {
     {
       title: 'Approval Work Flow ',
       // items: ['Extra'],
-      active: 'Employee Status',
+      active: 'Training Request',
     },
   ];
 

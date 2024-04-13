@@ -13,6 +13,8 @@ import { ViewCoursePaymentComponent } from './course-payment/view-course-payment
 import { ViewProgramPaymentComponent } from './program-payment/view-program-payment/view-program-payment.component';
 import { EmployeeStatusComponent } from './employee-status/employee-status.component';
 import { TrainingApprovalReqComponent } from '../approval/training-approval-req/training-approval-req.component';
+import { BudgetRequestComponent } from './budget-request/budget-request.component';
+import { DeptBudgetRequestComponent } from './dept-budget-request/dept-budget-request.component';
 
 
 const routes: Routes = [
@@ -67,7 +69,16 @@ const routes: Routes = [
   {
     path:'training-approval-req', 
     component:TrainingApprovalReqComponent
-  }
+  },
+  {
+    path: 'budget-request',
+    component: BudgetRequestComponent,
+  },
+  {
+    path: 'department-budget-request',
+    component: DeptBudgetRequestComponent,
+  },
+
 ];
 
 @NgModule({

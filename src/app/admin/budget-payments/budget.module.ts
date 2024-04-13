@@ -22,6 +22,10 @@ import { CreateRequestComponent } from './create-request/create-request.componen
 import { CreateBudgetComponent } from './budget/create-budget/create-budget.component';
 import { ViewCoursePaymentComponent } from './course-payment/view-course-payment/view-course-payment.component';
 import { ViewProgramPaymentComponent } from './program-payment/view-program-payment/view-program-payment.component';
+import { BudgetRequestComponent } from './budget-request/budget-request.component';
+import { EditBudgetRequestComponent } from './budget-request/edit-budget-request/edit-budget-request.component';
+import { DeptBudgetRequestComponent } from './dept-budget-request/dept-budget-request.component';
+import { EditDeptBudgetRequestComponent } from './dept-budget-request/edit-dept-budget-request/edit-dept-budget-request.component';
 
 
 @NgModule({
@@ -40,6 +44,11 @@ import { ViewProgramPaymentComponent } from './program-payment/view-program-paym
     CreateBudgetComponent,
     ViewCoursePaymentComponent,
     ViewProgramPaymentComponent,
+    BudgetRequestComponent,
+    EditBudgetRequestComponent,
+    DeptBudgetRequestComponent,
+    EditDeptBudgetRequestComponent,
+
   ],
   imports: [
     CommonModule,

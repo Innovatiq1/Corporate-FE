@@ -18,10 +18,6 @@ import { DeptTrainingPlanComponent } from './dept-training-plan/dept-training-pl
 import { CreateBudgetComponent } from './overall-budget-list/create-budget/create-budget.component';
 import { CreateDepartmentBudgetComponent } from './dept-budget-allocation/create-department-budget/create-department-budget.component';
 import { CreateDeptTrainingComponent } from './dept-training-plan/create-dept-training/create-dept-training.component';
-import { BudgetRequestComponent } from './budget-request/budget-request.component';
-import { EditBudgetRequestComponent } from './budget-request/edit-budget-request/edit-budget-request.component';
-import { DeptBudgetRequestComponent } from './dept-budget-request/dept-budget-request.component';
-import { EditDeptBudgetRequestComponent } from './dept-budget-request/edit-dept-budget-request/edit-dept-budget-request.component';
 import { NewCourseApprovalComponent } from './new-course-approval/new-course-approval.component';
 import { NewCourseRequestComponent } from './new-course-request/new-course-request.component';
 import { EditNewCourseComponent } from './new-course-approval/edit-new-course/edit-new-course.component';
@@ -42,10 +38,6 @@ import { EditNewCourseComponent } from './new-course-approval/edit-new-course/ed
     CreateBudgetComponent,
     CreateDepartmentBudgetComponent,
     CreateDeptTrainingComponent,
-    BudgetRequestComponent,
-    EditBudgetRequestComponent,
-    DeptBudgetRequestComponent,
-    EditDeptBudgetRequestComponent,
     NewCourseApprovalComponent,
     NewCourseRequestComponent,
     EditNewCourseComponent
