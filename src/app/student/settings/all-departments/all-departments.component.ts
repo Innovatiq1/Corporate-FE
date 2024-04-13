@@ -42,7 +42,7 @@ export class AllDepartmentsComponent
     'dName',
     'hod',
     'phone',
-    'email',
+    // 'email',
     'sYear',
     'sCapacity',
     // 'status',
@@ -56,9 +56,9 @@ export class AllDepartmentsComponent
 
   breadscrums = [
     {
-      title: 'All Department',
-      items: ['Department'],
-      active: 'All Departments',
+      title: 'All Department Profiles',
+      items: ['Department Profile'],
+      active: 'All Department Profiles',
     },
   ];
   totalItems: any;

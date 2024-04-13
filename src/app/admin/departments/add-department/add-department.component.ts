@@ -53,10 +53,10 @@ export class AddDepartmentComponent  implements OnInit {
       department: ['', [Validators.required]],
       hod: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
-      email: [
-        '',
-        [Validators.required, Validators.email, Validators.minLength(5)],
-      ],
+      // email: [
+      //   '',
+      //   [Validators.required, Validators.email, Validators.minLength(5)],
+      // ],
       departmentStartDate: [''],
       studentCapacity: ['', [Validators.required]],
       details: [''],
@@ -125,16 +125,12 @@ export class AddDepartmentComponent  implements OnInit {
   }
   getDepartmentById(){
     this.deptService.getDepartmentById(this.departmentId).subscribe((response:any)=>{
-      let details = response;
-      console.log('resss',this.depts)
       this.deptName = this.depts.find((department: any) => department.department === response.department).department;
-      console.log('premv',this.deptName)
       this.departmentForm.patchValue({
-        department:response?.department,
-        // department:this.deptName,
+        department:this.deptName,
         hod:response?.hodId,
         mobile:response?.mobile,
-        email:response?.email,
+        // email:response?.email,
         departmentStartDate:response?.departmentStartDate,
         studentCapacity:response?.studentCapacity,
         details:response?.details
@@ -152,7 +148,7 @@ export class AddDepartmentComponent  implements OnInit {
     
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Do you want to update department!',
+      text: 'Do you want to update department profile!',
       icon: 'warning',
       confirmButtonText: 'Yes',
       showCancelButton: true,
@@ -162,7 +158,7 @@ export class AddDepartmentComponent  implements OnInit {
         this.deptService.updateDepartment(this.departmentForm.value,this.departmentId).subscribe((response:any) => {
           Swal.fire({
             title: 'Successful',
-            text: 'Department updated successfully',
+            text: 'Department Profile updated successfully',
             icon: 'success',
           });
           this.router.navigate(['/student/settings/all-departments'])

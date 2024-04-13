@@ -17,12 +17,12 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Department<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <!-- <mat-select formControlName="department" required>
-                      <mat-option *ngFor="let items of depts" [value]="items.id">
+                    <mat-select formControlName="department" required>
+                      <mat-option *ngFor="let items of depts" [value]="items.department">
                         {{items.department | capitalizeFirstLetter}}
                       </mat-option>
-                    </mat-select> -->
-                    <input matInput formControlName="department" required>
+                    </mat-select>
+                    <!-- <input matInput formControlName="department" required> -->
                     <mat-error *ngIf="departmentForm.get('department')?.hasError('required')">
                       Department is required
                     </mat-error>
@@ -54,7 +54,7 @@
                 </div>
                 <!-- </div> -->
                 <!-- <div class="row"> -->
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Email<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="email" required>
@@ -64,7 +64,7 @@
                       Please enter a valid email address
                     </mat-error>
                   </mat-form-field>
-                </div>
+                </div> -->
                 <!-- </div> -->
                 <!-- <div class="row"> -->
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">

@@ -632,15 +632,17 @@
             <button id="saved" [routerLink]="['/student/settings/user-type']"> Module Access </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/create-user-role']"> Roles </button>
+            <button id="saved" [routerLink]="['/student/settings/create-user-role']"> Role </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" (click)="navigateToAllUserSettings()"> Users </button>
+            <button id="saved" [routerLink]="['/student/settings/all-departments']"> Department Profile  </button>
+
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/all-departments']"> Department Profile  </button>
+            <button id="saved" [routerLink]="['/student/settings/create-department']"> Department </button>
+
           </div>
         </div>
 
@@ -662,13 +664,18 @@
         </div> -->
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="no-link"> Role type Name </button>
+            <button id="saved" (click)="navigateToAllUserSettings()"> Users </button>
+
           </div>
           <div class="col-md-5">
-            <button id="no-link"> User type Name </button>
+            <button id="saved" [routerLink]="['/student/settings/user-group']"> User Group  </button>
+
+            <!-- <button id="no-link"> Role type Name </button> -->
+
+            <!-- <button id="no-link"> User type Name </button> -->
           </div>
         </div>
-        <div class="row px-4 py-4">
+        <!-- <div class="row px-4 py-4">
           <div class="col-md-6 banner">
             <button id="saved" [routerLink]="['/student/settings/create-department']"> Department </button>
           </div>
@@ -676,11 +683,8 @@
           <div class="col-md-5">
             <button id="saved" [routerLink]="['/student/settings/user-list-group']"> Group Profile  </button>
           </div>
-          <!-- <div class="col-md-5">
-            <button id="no-link"> Department Name </button>
-          </div> -->
           
-        </div>
+        </div> -->
 
       </div>
     </div>
@@ -710,7 +714,7 @@
             <button id="saved" [routerLink]="['/student/settings/all-staff']"> Staff </button>
           </div>
         </div>
-        <div class="row px-4 py-4">
+        <!-- <div class="row px-4 py-4">
           <div class="col-md-6 banner">
             <button id="saved" [routerLink]="['/student/settings/all-departments']"> Departments </button>
           </div>
@@ -718,7 +722,7 @@
             <button id="saved" [routerLink]="['/student/settings/user-group']"> User Group </button>
           
           </div>
-        </div>
+        </div> -->
         <!-- <div class="row px-4">
           <div class="col-md-6 banner">
             <button id="no-link"> Import/Export Users </button>

@@ -1599,6 +1599,25 @@ export const SettingsMenu: MenuItem[] = [
          
         ],
       },
+      {
+        iconsrc:'',
+        path: 'student/settings/create-department',
+        title: 'Department',
+        iconType: '',
+        icon: '',
+        id:'all-departments',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        open:false,
+
+        children: [
+         
+        ],
+      },
+
 
       {
         iconsrc:'',
