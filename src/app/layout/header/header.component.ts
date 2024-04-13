@@ -69,6 +69,7 @@ export class HeaderComponent
   data: any;
   totalItems:any;
   subscription!: Subscription;
+  role: string | null;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -89,6 +90,8 @@ export class HeaderComponent
 
   ) {
     super();
+    this.role = localStorage.getItem('user_type')
+
 
     /* getting logo details from logoservice **/
     this.subscription = this.logoService.currentData.subscribe(data => {
