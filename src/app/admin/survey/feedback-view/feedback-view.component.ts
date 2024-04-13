@@ -68,7 +68,7 @@ export class FeedbackViewComponent {
       } else {
         tempDirection = 'ltr';
       }
-      this.alluserService.getAllUsers().subscribe((response: any) => {
+      this.alluserService.getAllStudents().subscribe((response: any) => {
         this.allUsers = response.results;
         const dialogRef = this.dialog.open(SendDailogComponent, {
           data: {

@@ -23,7 +23,7 @@ export class UserGroupComponent {
     {
       title: 'Admin',
       items: ['Manage Users'],
-      active: '',
+      active: 'User Group',
     },
   ];
   constructor(private fb: FormBuilder, private router:Router, private userService: UserService,){
@@ -50,14 +50,9 @@ getUserGroups(filters?:any) {
 }
 
 setup() {
-  forkJoin({
-    users_fork : this.userService.getUserList()
-  }).subscribe((response: {
-     users_fork: { data: any; }; 
-}) => {
-    this.users = response.users_fork?.data?.data;
-    console.log('this.users: ', this.users); 
-  });
+  this.userService.getAllUsers().subscribe((response: any) => {
+    this.users = response?.results;
+  })
 }
 
 submit() {
@@ -88,6 +83,8 @@ submit() {
             text: 'Group created successfully',
             icon: 'success',
           });
+          this.getUserGroups();
+
           // this.courseAdded=true;
           // this.router.navigate(['/admin/courses/submitted-courses/pending-courses'])
   
