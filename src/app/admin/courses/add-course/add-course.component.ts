@@ -549,10 +549,10 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       id:this.courseId,
 
     }
-    this.firstFormGroup.value?.course_kit?.map((item:any) => item.id);
-    this.firstFormGroup.value?.assessment?.map((item:any) => item.id);
-    this.firstFormGroup.value?.exam_assessment?.map((item:any) => item.id);
-    this.firstFormGroup.value?.survey?.map((item:any) => item.id);
+        this.firstFormGroup.value?.course_kit?.map((item:any) => item.id);
+    this.firstFormGroup.value?.assessment
+    this.firstFormGroup.value?.exam_assessment
+    this.firstFormGroup.value?.survey
 
     Swal.fire({
       title: 'Are you sure?',
