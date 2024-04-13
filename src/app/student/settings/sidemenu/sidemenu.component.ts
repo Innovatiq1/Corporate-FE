@@ -67,6 +67,7 @@ export class SidemenuComponent {
       title: ['', Validators.required],
       id: [''],
       iconsrc: [''],
+      class: [''],
       submenu: this.formBuilder.array([
         // this.createSubmenu(),
         // this.createOption()
@@ -77,6 +78,7 @@ export class SidemenuComponent {
     return this.formBuilder.group({
       title: ['', Validators.required],
       id: [''],
+      class:[],
       iconsrc: [''],
       submenu: this.formBuilder.array([
        

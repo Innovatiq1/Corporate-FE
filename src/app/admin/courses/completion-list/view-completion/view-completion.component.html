@@ -53,7 +53,7 @@
                                                 <div class="header">
                                                     <h2>Student Details</h2>
                                                     <div class="buttons" *ngIf="this.status">
-                                                        <button mat-icon-button matTooltip="approve" 
+                                                        <button  (click)="changeStatus(response,'approved')"mat-icon-button matTooltip="approve" 
                         class="tbl-action-btn">
                        <img class="img-w" src="/assets/approve.svg" alt="approve">
                       </button>

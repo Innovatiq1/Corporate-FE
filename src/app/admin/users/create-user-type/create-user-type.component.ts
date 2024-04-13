@@ -267,7 +267,6 @@ export class CreateUserTypeComponent {
         indeterminate: defaultCheck?.indeterminate || false,
         icon: v?.iconsrc,
         class: v?.class,
-        badgeClass: v?.badgeClass,
       };
       if (children && children.length) {
         res = {
@@ -294,8 +293,7 @@ export class CreateUserTypeComponent {
             checked: actionChecked?.checked || false,
             indeterminate: actionChecked?.indeterminate || false,
             icon: actionChecked?.iconsrc,
-            class: v?.class,
-            badgeClass: v?.badgeClass,
+            class: actionChecked?.class,
           };
         });
         res = {

@@ -117,7 +117,7 @@ export class ViewCompletionComponent {
             icon: 'success',
             // confirmButtonColor: '#526D82',
           });
-          // this.getRegisteredClasses();
+          window.history.back();
         }, (error) => {
               Swal.fire({
                 title: 'Error',

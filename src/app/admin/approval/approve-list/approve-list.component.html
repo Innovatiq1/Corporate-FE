@@ -122,7 +122,7 @@
                  <!-- student name  -->
                  <ng-container matColumnDef="studentname">
                   <mat-header-cell *matHeaderCellDef mat-sort-header
-                    >Student Name</mat-header-cell
+                    >Student</mat-header-cell
                   >
                   <mat-cell *matCellDef="let row" (click)="view(row.id)">
                     <span class="mobile-label">Student Name:</span>
@@ -131,7 +131,7 @@
                 </ng-container>
                 <ng-container matColumnDef="coursename">
                   <mat-header-cell *matHeaderCellDef mat-sort-header
-                    >Course Name</mat-header-cell
+                    >Course</mat-header-cell
                   >
                   <mat-cell *matCellDef="let row" (click)="view(row.id)">
                     <span class="mobile-label">Course Name:</span>{{row.classId?.courseId?.title }}
