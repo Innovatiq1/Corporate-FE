@@ -48,18 +48,17 @@
                         class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"  [routerLink]="['/admin/users/edit-all-users',row.id]">
                     </mat-cell>
                   </ng-container>
-                  <ng-container matColumnDef="Name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/users/view-all-users',row.id]">
-                      <span class="mobile-label">Name:</span>{{row.name | capitalizeFirstLetter}}</mat-cell>
-                  </ng-container>
-                  <!-- Course Code -->
                   <ng-container matColumnDef="User Type">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Role
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
+                    <mat-cell *matCellDef="let row" class="name"[routerLink]="['/admin/users/edit-all-users',row.id]">
                       <span class="mobile-label">User Role:</span>{{row.type | titlecase}}</mat-cell>
                   </ng-container>
+                  <ng-container matColumnDef="Name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                    <mat-cell *matCellDef="let row"  [routerLink]="['/admin/users/view-all-users',row.id]">
+                      <span class="mobile-label">Name:</span>{{row.name | capitalizeFirstLetter}}</mat-cell>
+                  </ng-container>             
                   <ng-container matColumnDef="gender">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Gender
                     </mat-header-cell>

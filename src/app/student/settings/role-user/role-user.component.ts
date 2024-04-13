@@ -14,8 +14,8 @@ export class RoleUserComponent {
   displayedColumns: string[] = [
     // 'select',
     'img',
-    'Name',
     'User Type',
+    'Name',
     'gender',
     'Qualification',
     'Mobile',
@@ -48,6 +48,15 @@ export class RoleUserComponent {
 
     this.subscribeParams = this.activatedRoute.params.subscribe((params:any) => {
       this.type = params.typeName;
+      this.breadscrums = [
+        {
+          title: this.type,
+          items: ['Role'],
+          active: this.type,
+        },
+      ];
+    
+    
     });
     this.coursePaginationModel = {};
    
