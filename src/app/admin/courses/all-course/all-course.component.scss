@@ -61,12 +61,12 @@ svg{
   width: 16%;
   }
 
-@media (min-width: 768px) {
-    .col-md-3 {
-        flex: 0 0 auto;
-        width: 100%;
-    }
-}
+// @media (min-width: 768px) {
+//     .col-md-3 {
+//         flex: 0 0 auto;
+//         width: 100%;
+//     }
+// }
 
 .ccount {
     background: rgba(45, 67, 86, 0.90);
@@ -91,10 +91,10 @@ svg{
     // height: 240px;
 }
 
-.title {
-    text-align: right;
-    margin-top: -120px;
-}
+// .title {
+//     text-align: right;
+//     margin-top: -120px;
+// }
 .text {
     padding-left:50px;
     padding-top: 20px;
