@@ -26,6 +26,10 @@ const routes: Routes = [
     component: AllCourseComponent,
   },
   {
+    path: 'all-courses',
+    component: AllCourseComponent,
+  },
+  {
     path: 'all-courses/creator',
     component: AllCourseComponent,
   },

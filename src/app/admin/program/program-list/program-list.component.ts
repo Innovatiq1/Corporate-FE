@@ -125,9 +125,9 @@ export class ProgramListComponent {
   const dialogRef = this.dialog.open(FilterPopupComponent, {
     hasBackdrop: true,
     backdropClass: 'filter-popup-backdrop',
-    position: { top: `${event.clientY}px`, left: `${event.clientX}px` },
-    width: '500px',
-    maxHeight: '65vh', 
+    position: { top: `65px`, left: `650px` },
+    width: '600px',
+    maxHeight: '90vh',
   });
 }
 

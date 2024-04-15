@@ -14,7 +14,7 @@
             <div class="body">
                 <form [formGroup]="userTypeFormGroup">
                 <div class="row">
-                  <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                     <label>Group Name</label>
                         <mat-form-field class="example-full-width " appearance="outline">
                             <input matInput type="text" formControlName="typeName"
@@ -33,7 +33,14 @@
                       </mat-select>
                     </mat-form-field>
                   </div>
-  
+                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <label>Short Description</label>
+                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                        <input matInput type="text" formControlName="shortDes"
+                        class="form-control" placeholder="Enter New Group"
+                        >             
+                    </mat-form-field>
+                  </div>
                 </div>
                 
                 </form>
@@ -55,6 +62,7 @@
                               <tr>
                                 <th>Group Name</th>
                                 <th>Users</th>
+                                <th>Short Description</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -69,7 +77,7 @@
 
                                 </td>
                                
-    
+                                <td>{{row.shortDes | capitalizeFirstLetter}}</td>
     
                               </tr>
     

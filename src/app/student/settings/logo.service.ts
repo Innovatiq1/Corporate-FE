@@ -48,7 +48,7 @@ export class LogoService {
         const apiUrl = `${this.defaultUrl}admin/sidemenu`;
         return this.http.get(apiUrl).pipe(
           map(response => {
-            this.updateData(response); // Pass the response to updateData
+             // Pass the response to updateData
             return response; 
           })
         );
