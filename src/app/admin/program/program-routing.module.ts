@@ -24,6 +24,10 @@ const routes: Routes = [
     component:ProgramListComponent
   },
   {
+    path:'program-list', 
+    component:ProgramListComponent
+  },
+  {
     path:'program-list/creator', 
     component:ProgramListComponent
   },

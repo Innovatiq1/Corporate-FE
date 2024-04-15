@@ -129,7 +129,7 @@
                                     <mat-header-cell *matHeaderCellDef mat-sort-header class="compulsory-count-header">Vendor
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)> <span
-                                        class="mobile-label">Vendor:</span><span class="badge col-purple">{{row.vendor}}</span>
+                                        class="mobile-label">Vendor:</span>{{row.vendor}}
                                     </mat-cell>
                                   </ng-container>
                                   <ng-container matColumnDef="status">

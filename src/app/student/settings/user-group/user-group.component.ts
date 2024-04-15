@@ -30,6 +30,7 @@ export class UserGroupComponent {
 
     this.userTypeFormGroup = this.fb.group({
       typeName: ['', []],
+      shortDes:[''],
       userId: new FormControl('', []),
 
     });
@@ -63,6 +64,7 @@ submit() {
     let payload = {
 
       group_name: courseData?.typeName,
+      shortDes:courseData?.shortDes,
       userId: courseData?.userId
     }
 

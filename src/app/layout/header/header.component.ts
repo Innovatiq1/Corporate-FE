@@ -27,7 +27,6 @@ import { LogoService } from 'app/student/settings/logo.service';
 import { Subscription } from 'rxjs';
 import { StudentsService } from 'app/admin/students/students.service';
 
-
 interface Notifications {
   message: string;
   time: string;
@@ -59,15 +58,15 @@ export class HeaderComponent
   userFullName: any;
   userType!: Role;
   announcements: any;
-  icon = 'announcement'
-  color = 'nfc-green'
+  icon = 'announcement';
+  color = 'nfc-green';
   userProfile: any;
   studentId: any;
   isAdmin: boolean = false;
   logoTitle: any;
   logoImage: any;
   data: any;
-  totalItems:any;
+  totalItems: any;
   subscription!: Subscription;
   role: string | null;
   constructor(
@@ -79,25 +78,17 @@ export class HeaderComponent
     private authService: AuthService,
     private router: Router,
     public languageService: LanguageService,
-    private authenService:AuthenService,
+    private authenService: AuthenService,
     private translate: LanguageService,
     private logoService: LogoService,
 
-    private announcementService:AnnouncementService,
+    private announcementService: AnnouncementService,
     private dialogModel: MatDialog,
 
-    private studentService:StudentsService,
-
+    private studentService: StudentsService
   ) {
     super();
-    this.role = localStorage.getItem('user_type')
-
-
-    /* getting logo details from logoservice **/
-    this.subscription = this.logoService.currentData.subscribe(data => {
-      this.logoTitle = data?.data.docs[0].title;
-      this.logoImage = data?.data.docs[0].image;
-    });
+    this.role = localStorage.getItem('user_type');
   }
   simpleDialog?: MatDialogRef<SimpleDialogComponent>;
   listLang = [
@@ -156,13 +147,23 @@ export class HeaderComponent
   //     status: 'msg-read',
   //   },
   // ];
-
-
+  callLogo() {
+    this.logoService.getLogo().subscribe((data) => {
+      this.logoTitle = data?.data.docs[0].title;
+      this.logoImage = data?.data.docs[0].image;
+    });
+  }
 
   ngOnInit() {
-    this.logoService.getLogo().subscribe(data => {
-      // console.log("logo,title",data.data.docs[0].title);
-
+    /* getting logo details from logoservice **/
+    this.subscription = this.logoService.currentData.subscribe((data) => {
+      console.log("data",data);
+      if (data) {
+        this.logoTitle = data?.data.docs[0].title;
+        this.logoImage = data?.data.docs[0].image;
+      } else {
+        this.callLogo();
+      }
     });
     this.userProfile = this.authenService.getUserProfile();
 
@@ -172,9 +173,9 @@ export class HeaderComponent
     });
     if (this.authenService.currentUserValue) {
       const userRole = this.authenService.currentUserValue.user.role;
-      this.userFullName = this.authenService.currentUserValue.user.name
+      this.userFullName = this.authenService.currentUserValue.user.name;
       this.userImg = this.authenService.currentUserValue.user.avatar;
-      this.student()
+      this.student();
       if (userRole === Role.Admin) {
         this.userType = Role.Admin;
       } else if (userRole === Role.Instructor) {
@@ -214,52 +215,52 @@ export class HeaderComponent
     this.getAnnouncementForStudents();
   }
 
-  navigateToUserSettings(){
-    this.router.navigate(['/student/settings/users']); 
-   }
-  navigateToIntegrateSettings(){
-    this.router.navigate(['/student/settings/integration']); 
-   }
-  navigateToAutomateSettings(){
+  navigateToUserSettings() {
+    this.router.navigate(['/student/settings/users']);
+  }
+  navigateToIntegrateSettings() {
+    this.router.navigate(['/student/settings/integration']);
+  }
+  navigateToAutomateSettings() {
     this.router.navigate(['/student/settings/automation']);
   }
-  navigateToCustomsSettings(){
+  navigateToCustomsSettings() {
     this.router.navigate(['/student/settings/customization']);
   }
   navigateToProfileSettings() {
     this.router.navigate(['/student/settings/security-settings']);
   }
-  navigateToLmsSettings(){
+  navigateToLmsSettings() {
     this.router.navigate(['/student/settings/all-questions']);
   }
-  navigateToConfigSettings(){
+  navigateToConfigSettings() {
     this.router.navigate(['/student/settings/configuration']);
   }
-onClick(){
-  let role = localStorage.getItem('user_type')
-  if(role == 'admin'){
-    this.router.navigate(['/settings/admin-settings']);
-  }else if (role == 'Student'){
-    this.router.navigate(['/settings/student-settings']);
+  onClick() {
+    let role = localStorage.getItem('user_type');
+    if (role == 'admin') {
+      this.router.navigate(['/settings/admin-settings']);
+    } else if (role == 'Student') {
+      this.router.navigate(['/settings/student-settings']);
+    } else if (role == 'Instructor') {
+      this.router.navigate(['/settings/instructor-settings']);
+    }
   }
-  else if (role == 'Instructor'){
-    this.router.navigate(['/settings/instructor-settings']);
-  }
-
-}
 
   getAnnouncementForStudents(filter?: any) {
-    let payload ={
-      announcementFor:'Student'
-    }
-    this.announcementService.getAnnouncementsForStudents(payload).subscribe((res: { data: { data: any[]; }; totalRecords: number; }) => {
-      const announcementsData:any = res.data;
-      this.announcements = announcementsData.reverse();
-    })
+    let payload = {
+      announcementFor: 'Student',
+    };
+    this.announcementService
+      .getAnnouncementsForStudents(payload)
+      .subscribe((res: { data: { data: any[] }; totalRecords: number }) => {
+        const announcementsData: any = res.data;
+        this.announcements = announcementsData.reverse();
+      });
   }
-  showCustomHtml(data:any) {
+  showCustomHtml(data: any) {
     Swal.fire({
-      position: "top-end",
+      position: 'top-end',
       title: 'Notification',
       html:
         `<div class="align-left"><h4>Title </h4> <p>${data.subject}</p> </div>` +
@@ -270,19 +271,19 @@ onClick(){
     });
   }
 
-cancel(id:any){
-  this.announcements = this.announcements.filter((res: { id: any; }) => res.id !== id);
-}
+  cancel(id: any) {
+    this.announcements = this.announcements.filter(
+      (res: { id: any }) => res.id !== id
+    );
+  }
 
-
-  student(){
-    this.studentId = localStorage.getItem('id')
-   // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
+  student() {
+    this.studentId = localStorage.getItem('id');
+    // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
     this.studentService.getStudentById(this.studentId).subscribe((res: any) => {
-     // this.editData = res;
+      // this.editData = res;
       this.userProfile = res?.avatar;
-    })
-
+    });
   }
 
   callFullscreen() {
@@ -323,26 +324,25 @@ cancel(id:any){
   }
   logout() {
     interface OuterObject {
-            id: any;
-
+      id: any;
     }
     const storedDataString: string | null = localStorage.getItem('userLogs');
-    const data: OuterObject = storedDataString !== null ? JSON.parse(storedDataString) : {};
-    let data1 ={
-  id:data.id
-}
+    const data: OuterObject =
+      storedDataString !== null ? JSON.parse(storedDataString) : {};
+    let data1 = {
+      id: data.id,
+    };
 
-
-this.authService.logout1(data1).subscribe((res) => {
-  if (res) {
-  }
-});
-  this.subs.sink = this.authService.logout().subscribe((res) => {
+    this.authService.logout1(data1).subscribe((res) => {
+      if (res) {
+      }
+    });
+    this.subs.sink = this.authService.logout().subscribe((res) => {
       if (!res.success) {
         let userType = JSON.parse(localStorage.getItem('user_data')!).user.type;
-        if(userType == 'admin' || userType =='Instructor'){
-        this.router.navigate(['/authentication/TMS/signin']);
-        } else if(userType == 'Student'){
+        if (userType == 'admin' || userType == 'Instructor') {
+          this.router.navigate(['/authentication/TMS/signin']);
+        } else if (userType == 'Student') {
           this.router.navigate(['/authentication/LMS/signin']);
         } else {
           this.router.navigate(['/authentication/TMS/signin']);
@@ -365,5 +365,5 @@ this.authService.logout1(data1).subscribe((res) => {
         logoSpan.textContent = 'LMS';
       }
     }
-}
+  }
 }
