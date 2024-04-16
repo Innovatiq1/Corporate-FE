@@ -331,8 +331,8 @@ export class SettingsComponent {
       this.breadscrums = [
         {
           title: 'Settings',
-          items: ['Admin'],
-          active: 'Settings',
+          items: ['Manage Users'],
+          active: 'User Profile',
         },
       ];
       this.isAdmin = true;

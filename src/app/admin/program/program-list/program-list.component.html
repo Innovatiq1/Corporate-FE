@@ -105,11 +105,11 @@
                           </mat-cell>
                         </ng-container> -->
                         <ng-container matColumnDef="program">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>Program Name
+                          <mat-header-cell *matHeaderCellDef mat-sort-header >Program Name
                           </mat-header-cell>
                           <mat-cell [class.name]="isProgram" *matCellDef="let row"
                             (click)="viewActiveProgram(row.id, row.status)"><span class="mobile-label">Program Name:</span>
-                            <span>{{row.title |titlecase}}</span>
+                            <span class="col-cyan">{{row.title |titlecase}}</span>
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="code">

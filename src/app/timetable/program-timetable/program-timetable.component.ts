@@ -4,7 +4,8 @@ import { ClassService } from 'app/admin/schedule-class/class.service';
 import dayGridPlugin from '@fullcalendar/daygrid'
 import { Router } from '@angular/router';
 import { LecturesService } from 'app/teacher/lectures/lectures.service';
-
+import { EventDetailDialogComponent } from './event-detail-dialog/event-detail-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-program-timetable',
   templateUrl: './program-timetable.component.html',
@@ -30,7 +31,7 @@ export class ProgramTimetableComponent implements OnInit {
   upcomingCoursesLength: any;
   allProgramClasses: any;
 
-  constructor(private classService: ClassService, private router: Router,public lecturesService: LecturesService) {
+  constructor(private classService: ClassService, private router: Router,public lecturesService: LecturesService,public dialog: MatDialog) {
     let userType = localStorage.getItem("user_type")
     if(userType == "Student"){
       this.getApprovedCourse();
@@ -111,6 +112,7 @@ export class ProgramTimetableComponent implements OnInit {
       plugins: [dayGridPlugin],
       events: filteredEvents,
       eventContent: function(arg, createElement) {
+       
         const title = arg.event.title;
         const sessionStartTime = arg.event.extendedProps['sessionStartTime'];
         const sessionEndTime = arg.event.extendedProps['sessionEndTime'];
@@ -156,11 +158,16 @@ export class ProgramTimetableComponent implements OnInit {
       );
     });
     const events = this.allProgramClasses.flatMap((courseClass: any,classId:any) => {
+      console.log("arg",courseClass)
       const startDate = new Date(courseClass.sessions[0].sessionStartDate);
       const endDate = new Date(courseClass.sessions[0].sessionEndDate);
       const sessionStartTime = courseClass.sessions[0].sessionStartTime;
       const sessionEndTime = courseClass.sessions[0].sessionEndTime;
       const title = courseClass.courseId.title;
+      const courseCode = courseClass.sessions[0].courseCode;
+      const status = courseClass.sessions[0].status;
+      const deliveryType = courseClass.classDeliveryType;
+      const instructorCost = courseClass.instructorCost;
       const datesArray = [];
       let currentDate = startDate;
           while (currentDate <= endDate) {
@@ -169,7 +176,13 @@ export class ProgramTimetableComponent implements OnInit {
           date: new Date(currentDate),
           extendedProps: {
             sessionStartTime: sessionStartTime,
-            sessionEndTime: sessionEndTime
+            sessionEndTime: sessionEndTime,
+            courseCode: courseCode,
+            status: status,
+            sessionStartDate:startDate,
+            sessionEndDate:endDate,
+            instructorCost:instructorCost,
+            deliveryType:deliveryType
           }
         });
         currentDate.setDate(currentDate.getDate() + 1); 
@@ -186,22 +199,25 @@ export class ProgramTimetableComponent implements OnInit {
       plugins: [dayGridPlugin],
       events: filteredEvents,
       eventContent: function(arg, createElement) {
+        
         const title = arg.event.title;
         const sessionStartTime = arg.event.extendedProps['sessionStartTime'];
         const sessionEndTime = arg.event.extendedProps['sessionEndTime'];
+        
         return {
           html: `
-            <div style=" font-size:10px; color: white; white-space: normal; word-wrap: break-word;">
+            <div  style=" font-size:10px; color: white; white-space: normal; word-wrap: break-word;">
               ${title}<br>
                <span style ="color:white">${sessionStartTime} - ${sessionEndTime}</span>
             </div>`
         };
       }  , 
-      eventDisplay: 'block' 
+      eventDisplay: 'block' ,
+      eventClick: (clickInfo) => this.openDialog(clickInfo.event)
    
     };
 
-
+  
     // this.upcomingProgramClasses.sort((a:any,b:any) => {
     //   const startDateA = a.classId.sessions[0].sessionStartDate;
     //   const startDateB = b.classId.sessions[0].sessionEndDate;
@@ -214,6 +230,24 @@ export class ProgramTimetableComponent implements OnInit {
 
     })
   }
+
+  openDialog(event: { title: any; extendedProps: { [x: string]: any; }; }) {
+    this.dialog.open(EventDetailDialogComponent, {
+      width: '700px',
+      data: {
+        title: event.title,
+        sessionStartTime: event.extendedProps['sessionStartTime'],
+        sessionEndTime: event.extendedProps['sessionEndTime'],
+        courseCode: event.extendedProps['courseCode'],
+        status: event.extendedProps['status'],
+        sessionStartDate: event.extendedProps['sessionStartDate'],
+        sessionEndDate: event.extendedProps['sessionEndDate'],
+        deliveryType: event.extendedProps['deliveryType'],
+        instructorCost: event.extendedProps['instructorCost']
+      }
+    });
+  }
+
   getApprovedCourse(){
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved' ,isAll:true};
@@ -275,8 +309,7 @@ export class ProgramTimetableComponent implements OnInit {
           };
         }  ,    
       };
-    });
-        
+    });   
   }
   getApprovedProgram(){
     let studentId=localStorage.getItem('id')
