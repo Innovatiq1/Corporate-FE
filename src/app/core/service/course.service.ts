@@ -138,10 +138,23 @@ export class CourseService {
     const apiUrl = `${this.prefix}admin/sub-category/`;
     return this._Http.get<any>(apiUrl).pipe(map((response:any) => response.docs));
   }
+  createFundingGrant(payload:any) {
+    const apiUrl = `${this.prefix}admin/funding-grant`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+  updateFundingGrant(payload:any,id:string) {
+    const apiUrl = `${this.prefix}admin/funding-grant/${id}`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
   getFundingGrant(): Observable<FundingGrant[]> {
     const apiUrl = `${this.prefix}admin/funding-grant/`;
     return this._Http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }
+  getFundingGrantById(id:string): Observable<FundingGrant[]> {
+    const apiUrl = `${this.prefix}admin/funding-grant/${id}`;
+    return this._Http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }
+
   getSurvey(): Observable<Survey[]> {
     const apiUrl = `${this.prefix}admin/survey/`;
     return this._Http

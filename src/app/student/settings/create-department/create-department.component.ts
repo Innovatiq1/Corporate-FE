@@ -31,6 +31,7 @@ export class CreateDepartmentComponent {
 
     this.departmentForm = this.fb.group({
       department: ['', [Validators.required]],
+      description: ['', [Validators.required]],
       hod: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
       email: [

@@ -1622,7 +1622,7 @@ export const SettingsMenu: MenuItem[] = [
       {
         iconsrc:'',
         path: 'student/settings/all-user',
-        title: 'Users',
+        title: 'User Profile',
         iconType: '',
         icon: '',
         id:'settings',
@@ -1903,6 +1903,22 @@ export const SettingsMenu: MenuItem[] = [
         role:[],
         children:[]
       },
+      {
+        path:'student/settings/funding-grant',
+        title:'Funding/Grant',
+        id:'funding-grant',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+
 
       // {
       //   path:'student/settings/all-questions',

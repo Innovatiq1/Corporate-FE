@@ -35,14 +35,31 @@
                 <form [formGroup]="fundingForm">
 
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-3">
                     <label>Funding/Grant</label>
                         <mat-form-field class="example-full-width " appearance="outline">
-                            <input matInput type="text" formControlName="department"
+                            <input matInput type="text" formControlName="grant_type"
                             class="form-control" placeholder="Enter New Funding/Grant"
-                            >                                      
+                            >      
+                            <mat-error *ngIf="fundingForm.get('grant_type')?.invalid ||fundingForm.get('grant_type')?.touched">
+                              {{ utils.getErrorMessage1(fundingForm.get('grant_type'), 'grant_type') }}
+                            </mat-error>
+                                      
                         </mat-form-field>
                   </div>
+                  <div class="col-3">
+                    <label>Description</label>
+                        <mat-form-field class="example-full-width " appearance="outline">
+                            <input matInput type="text" formControlName="description"
+                            class="form-control" placeholder="Enter Description"
+                            >      
+                            <mat-error *ngIf="fundingForm.get('description')?.invalid ||fundingForm.get('description')?.touched">
+                              {{ utils.getErrorMessage1(fundingForm.get('description'), 'description') }}
+                            </mat-error>
+                                      
+                        </mat-form-field>
+                  </div>
+
                   <!-- <div class="col mt-5 mx-5">
                     <button  mat-flat-button color="accent" [routerLink]="['/student/settings/user-type']"   > All Roles </button>
                   </div> -->
@@ -57,7 +74,7 @@
                   <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
                     <!-- <div class="card" style="border-radius: 31px;"> -->
                       <div class="header mt-3">
-                        <h2>Existing Funding/Grant</h2>
+                        <h2>Funding/Grant Listing</h2>
                       </div>
                       <div class="table-wrapper">
                         <div class="table-responsive">
@@ -65,14 +82,13 @@
                             <thead>
                               <tr>
                                 <th>Funding/grant</th>
+                                <th>Description</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr style="cursor: pointer;" *ngFor="let row of dataSource">
-                                <td>{{row.department | capitalizeFirstLetter}}</td>
-                               
-    
-    
+                                <td>{{row.grant_type | capitalizeFirstLetter}}</td>                         
+                                <td>{{row.description | capitalizeFirstLetter}}</td>   
                               </tr>
     
                             </tbody>
