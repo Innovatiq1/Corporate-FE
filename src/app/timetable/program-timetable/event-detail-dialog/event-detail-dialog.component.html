@@ -1,0 +1,59 @@
+<!-- <div class="event-details">
+    <h1 class="event-title">{{ data.title }}</h1>
+    <div class="date-time">
+      <div class="date">
+        <i class="material-icons">event</i>
+        <span>Date: {{ data.sessionStartDate | date }} - {{ data.sessionEndDate | date}}</span>
+      </div>
+      <div class="time">
+        <i class="material-icons">access_time</i>
+        <span>Time: {{ data.sessionStartTime }} - {{ data.sessionEndTime }}</span>
+      </div>
+    </div>
+    <div class="additional-details">
+      <div class="detail-item">
+        <i class="material-icons">code</i>
+        <span>Course Code: {{ data.courseCode }}</span>
+      </div>
+      <div class="detail-item">
+        <i class="material-icons">check_circle</i>
+        <span>Status: {{ data.status }}</span>
+      </div>
+    </div>
+    <button class="close-button" mat-button mat-dialog-close>Close</button>
+  </div> -->
+
+  <div class="container fade-in">
+    <h1 class="text-capitalize">{{ data.title }}</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <p class="info-text">Date: <span class="highlight">{{ data.sessionStartDate | date }} - {{ data.sessionEndDate | date }}</span></p>
+        </div>
+        <div class="col-md-6">
+            <p class="info-text">Time: <span class="highlight">{{ data.sessionStartTime }} - {{ data.sessionEndTime }}</span></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <p class="info-text">Course Code: <span class="highlight">{{ data.courseCode }}</span></p>
+        </div>
+        <div class="col-md-6">
+            <p class="info-text">Status: <span class="highlight">{{ data.status }}</span></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <p class="info-text">Delivery Type: <span class="highlight">{{ data.deliveryType }}</span></p>
+        </div>
+        <div class="col-md-6">
+            <p class="info-text">Instructor Cost: <span class="highlight">{{ data.instructorCost }}</span></p>
+        </div>
+    </div>
+
+    <div class="text-right mt-4">
+        <button type="button" class="btn"  mat-button mat-dialog-close>Close</button>
+    </div>
+</div>

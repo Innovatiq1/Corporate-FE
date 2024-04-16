@@ -74,7 +74,7 @@
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Course
                                     </mat-header-cell>
                                     <mat-cell class="name" [class.name]="isCourse" *matCellDef="let row" (click)=viewCourse(row.id)><span
-                                        class="mobile-label">Course Name:</span> <span >{{row.title |titlecase}}</span>
+                                        class="mobile-label">Course Name:</span> <span class="col-cyan">{{row.title |titlecase}}</span>
                                     </mat-cell>
                                   </ng-container>
                                   <ng-container matColumnDef="code">

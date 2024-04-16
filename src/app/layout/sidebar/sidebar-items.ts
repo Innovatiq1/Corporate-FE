@@ -1622,7 +1622,7 @@ export const SettingsMenu: MenuItem[] = [
       {
         iconsrc:'',
         path: 'student/settings/all-user',
-        title: 'Users',
+        title: 'User Profile',
         iconType: '',
         icon: '',
         id:'settings',

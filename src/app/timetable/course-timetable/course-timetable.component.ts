@@ -4,6 +4,8 @@ import { ClassService } from 'app/admin/schedule-class/class.service';
 import dayGridPlugin from '@fullcalendar/daygrid'
 import { Router } from '@angular/router';
 import { LecturesService } from 'app/teacher/lectures/lectures.service';
+import { EventDetailDialogComponent } from '../program-timetable/event-detail-dialog/event-detail-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-course-timetable',
@@ -31,7 +33,7 @@ export class CourseTimetableComponent implements OnInit {
   allClasses: any;
 
 
-  constructor(private classService: ClassService, private router: Router,public lecturesService: LecturesService) {
+  constructor(private classService: ClassService, private router: Router,public lecturesService: LecturesService,public dialog: MatDialog) {
     let userType = localStorage.getItem("user_type")
     if(userType == "Student"){
       this.getApprovedCourse();
@@ -89,6 +91,7 @@ export class CourseTimetableComponent implements OnInit {
         const sessionStartTime = courseClass?.sessions[0]?.sessionStartTime;
         const sessionEndTime = courseClass?.sessions[0]?.sessionEndTime;
         const title = courseClass?.sessions[0]?.courseName;
+       
         const datesArray = [];
         let currentDate = startDate;
             while (currentDate <= endDate) {
@@ -97,7 +100,8 @@ export class CourseTimetableComponent implements OnInit {
             date: new Date(currentDate),
             extendedProps: {
               sessionStartTime: sessionStartTime,
-              sessionEndTime: sessionEndTime
+              sessionEndTime: sessionEndTime,
+            
             }
           });
           currentDate.setDate(currentDate.getDate() + 1); 
@@ -114,7 +118,6 @@ export class CourseTimetableComponent implements OnInit {
         plugins: [dayGridPlugin],
         events: filteredEvents,
         eventContent: function(arg, createElement) {
-          console.log("arg", arg);
           const title = arg.event.title;
           const sessionStartTime = arg.event.extendedProps['sessionStartTime'];
           const sessionEndTime = arg.event.extendedProps['sessionEndTime'];
@@ -127,12 +130,28 @@ export class CourseTimetableComponent implements OnInit {
             </div>`
           };
         }  ,  
-        eventDisplay: 'block' 
+        eventDisplay: 'block' ,
+        
       };
     });
         
   }
-
+  openDialog(event: { title: any; extendedProps: { [x: string]: any; }; }) {
+    this.dialog.open(EventDetailDialogComponent, {
+      width: '700px',
+      data: {
+        title: event.title,
+        sessionStartTime: event.extendedProps['sessionStartTime'],
+        sessionEndTime: event.extendedProps['sessionEndTime'],
+        courseCode: event.extendedProps['courseCode'],
+        status: event.extendedProps['status'],
+        sessionStartDate: event.extendedProps['sessionStartDate'],
+        sessionEndDate: event.extendedProps['sessionEndDate'],
+        deliveryType: event.extendedProps['deliveryType'],
+        instructorCost: event.extendedProps['instructorCost']
+      }
+    });
+  }
 
   getClassList(){
     // let studentId=localStorage.getItem('id')
@@ -158,6 +177,10 @@ export class CourseTimetableComponent implements OnInit {
         const sessionStartTime = courseClass?.sessions[0]?.sessionStartTime;
         const sessionEndTime = courseClass?.sessions[0]?.sessionEndTime;
         const title = courseClass?.courseId?.title;
+        const courseCode = courseClass.sessions[0].courseCode;
+        const status = courseClass.sessions[0].status;
+        const deliveryType = courseClass.classDeliveryType;
+        const instructorCost = courseClass.instructorCost;
         const datesArray = [];
         let currentDate = startDate;
             while (currentDate <= endDate) {
@@ -166,7 +189,13 @@ export class CourseTimetableComponent implements OnInit {
             date: new Date(currentDate),
             extendedProps: {
               sessionStartTime: sessionStartTime,
-              sessionEndTime: sessionEndTime
+              sessionEndTime: sessionEndTime,
+              courseCode: courseCode,
+              status: status,
+              sessionStartDate:startDate,
+              sessionEndDate:endDate,
+              instructorCost:instructorCost,
+              deliveryType:deliveryType
             }
           });
           currentDate.setDate(currentDate.getDate() + 1); 
@@ -189,13 +218,14 @@ export class CourseTimetableComponent implements OnInit {
           return {
             html: `
             <div style=" font-size:10px; color: white
-            ; white-space: normal; word-wrap: break-word;">
+            ; white-space: normal; word-wrap: break-word;cursor: pointer;">
               ${title}<br>
                <span style ="color:white">${sessionStartTime} - ${sessionEndTime}</span>
             </div>`
           };
         }  ,  
-        eventDisplay: 'block' 
+        eventDisplay: 'block' ,
+        eventClick: (clickInfo) => this.openDialog(clickInfo.event)
       };
     });
         
@@ -205,7 +235,6 @@ export class CourseTimetableComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload).subscribe(response => {
-      console.log('re',response)
 
       this.studentApprovedClasses = response.data.docs.slice(0, 5);
       const currentDate = new Date();
