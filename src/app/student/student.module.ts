@@ -81,6 +81,7 @@ import { CreateFeedbackComponent } from './settings/create-feedback/create-feedb
 import { UserGroupComponent } from './settings/user-group/user-group.component';
 import { UserGroupListComponent } from './settings/user-group-list/user-group-list.component';
 import { CreateDepartmentComponent } from './settings/create-department/create-department.component';
+import { FundingComponent } from './settings/funding/funding.component';
 
 @NgModule({
   declarations: [
@@ -141,6 +142,7 @@ import { CreateDepartmentComponent } from './settings/create-department/create-d
     UserGroupComponent,
     UserGroupListComponent,
     CreateDepartmentComponent,
+    FundingComponent,
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,

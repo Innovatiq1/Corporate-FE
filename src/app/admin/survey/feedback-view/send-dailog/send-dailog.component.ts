@@ -94,5 +94,8 @@ sendEmail() {
   });
 
 }
+closeDialog(): void {
+  this.dialogRef.close();
+}
 
 }
