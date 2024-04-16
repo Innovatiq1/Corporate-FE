@@ -89,16 +89,17 @@
                       class="mobile-label">Image:</span> <img [src]="row.img" />
                   </mat-cell>
                 </ng-container> -->
-                <ng-container matColumnDef="courseName">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Course/Program Name</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row.id)" (contextmenu)="onContextMenu($event, row)">
-                    <span class="mobile-label">Course Name:</span> {{row?.courseName}}</mat-cell>
-                </ng-container>
                 <ng-container matColumnDef="studentName">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Student Name</mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Student </mat-header-cell>
                   <mat-cell *matCellDef="let row" (click)="editCall(row.id)" (contextmenu)="onContextMenu($event, row)">
-                    <span class="mobile-label">Student Name:</span> {{row?.studentFirstName}} {{row?.studentLastName}}</mat-cell>
+                    <span class="mobile-label">Student :</span> {{row?.studentFirstName}} {{row?.studentLastName}}</mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="courseName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Course/Program </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (click)="editCall(row.id)" (contextmenu)="onContextMenu($event, row)">
+                    <span class="mobile-label">Course :</span> {{row?.courseName}}</mat-cell>
+                </ng-container>
+                
 
                 <!-- actions -->
                 <ng-container matColumnDef="actions">

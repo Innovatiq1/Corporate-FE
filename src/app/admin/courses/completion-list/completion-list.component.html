@@ -96,6 +96,25 @@
                   <mat-cell *matCellDef="let row" (click)="view(row.id)">
                     <span class="mobile-label">Course:</span>{{row.title}} </mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="Instructorfee">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Instructor Fee</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (click)="view(row.id)">
+                    <span class="mobile-label">Instructor Fee:</span>
+                    <span *ngIf="row.classId?.instructorCost !== null && row.classId?.instructorCost !== undefined">
+                      ${{ row.classId?.instructorCost }}
+                    </span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Classstart">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Class Start</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (click)="view(row.id)">
+                    <span class="mobile-label">Class Start:</span>{{row.classId?.sessions[0]?.sessionStartDate | date}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Classend">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Class End</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (click)="view(row.id)">
+                    <span class="mobile-label">Class End:</span>{{row.classId?.sessions[0]?.sessionEndDate | date}} </mat-cell>
+                </ng-container>
                  <!-- Student Name -->
                 
                 <!-- Start date -->

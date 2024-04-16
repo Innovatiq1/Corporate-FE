@@ -4,6 +4,10 @@ import Swal from 'sweetalert2';
 import { SurveyService } from '../survey.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseTitleModel } from '@core/models/class.model';
+import { SurveyBuilderModel } from '../survey.model';
+import { HttpClient } from '@angular/common/http';
+import { fromEvent } from 'rxjs';
+import { ExampleDataSource } from '../survey-list/survey-list.component';
 
 @Component({
   selector: 'app-create-survey',
@@ -68,12 +72,19 @@ export class CreateSurveyComponent {
   studentFirstName: any;
   studentLastName!:string;
   questionList: any;
-
+  dataSource: any;
+  sort: any;
+  paginator: any;
+  filter: any;
+  subs: any;
+  // exampleDatabase?: SurveyService;
   constructor(
     private fb: FormBuilder,
     private surveyService: SurveyService,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    public httpClient: HttpClient,
+    public exampleDatabase: SurveyService,
   ) {
     this.activeRoute.queryParams.subscribe((param) => {
 
@@ -98,6 +109,47 @@ export class CreateSurveyComponent {
     public setRow(_index: number) {
 
     this.selectedIndex = _index;
+  }
+  deleteItem(id: SurveyBuilderModel) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this survey entry!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this.surveyService.deleteSurveyBuilders(id).subscribe(response => {
+          console.log(response);
+          if (response.success){
+            Swal.fire(
+              'Deleted!',
+              'Survey entry has been deleted.',
+              'success'
+            );
+            this.loadData();
+          }
+        });
+      }
+    });
+
+  }
+  public loadData() {
+    this.exampleDatabase = new SurveyService(this.httpClient);
+    this.dataSource = new ExampleDataSource(
+      this.exampleDatabase,
+      this.paginator,
+      this.sort
+    );
+    this.subs.sink = fromEvent(this.filter.nativeElement, 'keyup').subscribe(
+      () => {
+        if (!this.dataSource) {
+          return;
+        }
+        this.dataSource.filter = this.filter.nativeElement.value;
+      }
+    );
   }
 
   getSurveyById(id:any){

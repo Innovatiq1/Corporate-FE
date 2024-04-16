@@ -1811,7 +1811,7 @@ export const SettingsMenu: MenuItem[] = [
         children:[]
       },
       {
-        path:'student/settings/customization',
+        path:'student/settings/currency',
         title:'Currency',
         id:'currency',
         iconType:'img',

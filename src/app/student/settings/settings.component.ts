@@ -681,6 +681,7 @@ export class SettingsComponent {
   }
 
   updateCurrency(dialogRef: any) {
+    console.log("currency",dialogRef);
     const selectedCurrency = this.selectedCurrency;
     this.courseService.createCurrency({ value: selectedCurrency }).subscribe(
       response => {
@@ -700,6 +701,7 @@ export class SettingsComponent {
       }
     );
   }
+
 
   openDialog(templateRef: any): void {
     const dialogRef = this.dialog.open(templateRef, {

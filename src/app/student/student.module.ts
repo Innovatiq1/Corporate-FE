@@ -82,6 +82,7 @@ import { UserGroupComponent } from './settings/user-group/user-group.component';
 import { UserGroupListComponent } from './settings/user-group-list/user-group-list.component';
 import { CreateDepartmentComponent } from './settings/create-department/create-department.component';
 import { FundingComponent } from './settings/funding/funding.component';
+import { CustomizationCurrencyComponent } from './settings/customization-currency/customization-currency.component';
 
 @NgModule({
   declarations: [
@@ -143,6 +144,7 @@ import { FundingComponent } from './settings/funding/funding.component';
     UserGroupListComponent,
     CreateDepartmentComponent,
     FundingComponent,
+    CustomizationCurrencyComponent,
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,

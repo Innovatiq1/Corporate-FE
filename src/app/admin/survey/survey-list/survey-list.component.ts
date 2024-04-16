@@ -34,9 +34,10 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
 {
   displayedColumns = [
     // 'select',
-    'courseName',
+    
     'studentName',
-    'actions',
+    'courseName',
+    // 'actions',
   ];
   exampleDatabase?: SurveyService;
   dataSource!: ExampleDataSource;

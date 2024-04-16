@@ -51,6 +51,7 @@ import { UserGroupComponent } from './settings/user-group/user-group.component';
 import { UserGroupListComponent } from './settings/user-group-list/user-group-list.component';
 import { CreateDepartmentComponent } from './settings/create-department/create-department.component';
 import { FundingComponent } from './settings/funding/funding.component';
+import { CustomizationCurrencyComponent } from './settings/customization-currency/customization-currency.component';
 
 
 const routes: Routes = [
@@ -185,6 +186,8 @@ const routes: Routes = [
     path: 'settings/customization-settings',
     component: SettingsComponent,
   },
+  {path: 'settings/currency',
+  component: CustomizationCurrencyComponent},
   {
     path: 'settings/customization-forms',
     component: SettingsComponent,
