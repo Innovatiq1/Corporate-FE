@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItemModel } from '@core/models/user.model';
 import { AdminService } from '@core/service/admin.service';
@@ -21,6 +21,8 @@ export class CreateUserRoleComponent {
 
     this.userTypeFormGroup = this.fb.group({
       typeName: ['', []],
+      description: ['', [Validators.required]],
+
     });
   }
 

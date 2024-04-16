@@ -35,7 +35,7 @@
                 <form [formGroup]="userTypeFormGroup">
 
                 <div class="row">
-                  <div class="col">
+                  <div class="col-3">
                     <label>Role</label>
                         <mat-form-field class="example-full-width " appearance="outline">
                             <input matInput type="text" formControlName="typeName"
@@ -43,9 +43,18 @@
                             >                                      
                         </mat-form-field>
                   </div>
-                  <div class="col mt-5 mx-5">
-                    <button  mat-flat-button color="accent" [routerLink]="['/student/settings/user-type']"   > All Roles </button>
+                  <div class="col-3">
+                    <label>Description</label>
+                        <mat-form-field class="example-full-width " appearance="outline">
+                            <input matInput type="text" formControlName="description"
+                            class="form-control" placeholder="Enter Description"
+                            >                                      
+                        </mat-form-field>
                   </div>
+
+                  <!-- <div class="col mt-5 mx-5">
+                    <button  mat-flat-button color="accent" [routerLink]="['/student/settings/user-type']"   > All Roles </button>
+                  </div> -->
                 </div>
                 </form>
                 <hr/>
@@ -57,7 +66,7 @@
                   <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
                     <!-- <div class="card" style="border-radius: 31px;"> -->
                       <div class="header mt-3">
-                        <h2>Existing Roles</h2>
+                        <h2>Roles Listing</h2>
                       </div>
                       <div class="table-wrapper">
                         <div class="table-responsive">
@@ -65,18 +74,14 @@
                             <thead>
                               <tr>
                                 <th>Role</th>
-                                <th>Status</th>
+                                <th>Description</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr style="cursor: pointer;" *ngFor="let type of userTypeNames" (click)="edit(type.id)">
                                 <td>{{ type?.typeName | titlecase }}</td>
                                 <td>
-                                  <span
-                                    [class]="type?.status === 'active' ? 'badge badge-solid-green' : type?.status === 'inactive' ? 'badge badge-solid-red' : '' ">
-                                    <span [class]="type?.status === 'active'  ? 'status-dot' :  type?.status === 'inactive' ? 'status-red' : ''"></span>
-                                    {{type?.status | titlecase}}
-                                  </span>
+                                    {{type?.description | titlecase}}
 
                                 </td>
                                

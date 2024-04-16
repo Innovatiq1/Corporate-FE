@@ -23,6 +23,12 @@ export class UtilsService {
       { type: 'minlength', message: 'Enter minimum 2 characters' },
       { type: 'maxlength', message: 'Enter maximum 255 characters' },
     ],
+    grant_type: [
+      { type: 'required', message: 'Enter Funding Grant' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+
     budget: [
       { type: 'required', message: 'Enter Budget' },
       { type: 'min', message: 'Enter Budget between 1-999999' },
