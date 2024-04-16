@@ -12,6 +12,7 @@ import { CreateAllUsersComponent } from './create-all-users/create-all-users.com
 import { CreateUserTypeComponent } from './create-user-type/create-user-type.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
 import { CreateRoleTypeComponent } from './create-role-type/create-role-type.component';
+import { ArrayFilterPipe } from './create-user-type/create-user.pipe';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { CreateRoleTypeComponent } from './create-role-type/create-role-type.com
         CreateUserTypeComponent,
         ViewUsersComponent,
         CreateRoleTypeComponent,
+        ArrayFilterPipe
     ],
     imports: [
         CommonModule, UsersRoutingModule,

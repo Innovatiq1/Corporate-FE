@@ -230,13 +230,15 @@ export interface Student {
       createdAt?: Date;
       updatedAt?: Date;
     }
-  export interface MenuItemModel {
-    id: number;
-    _id: string;
-    class: string;
-    title: string;
-    children: MenuItemModel[];
-    checked:boolean;
-    indeterminate:boolean;
-    iconsrc:string;
-  }
+
+    export interface MenuItemModel {
+      id: number;
+      _id: string;
+      class: string;
+      title: string;
+      children: MenuItemModel[];
+      actionModules: MenuItemModel[];
+      checked: boolean;
+      indeterminate: boolean;
+      iconsrc: string;
+    }

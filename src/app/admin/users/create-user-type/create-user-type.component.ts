@@ -11,6 +11,7 @@ import { UtilsService } from '@core/service/utils.service';
 import { MENU_LIST } from '@shared/menu-item';
 import { LogoService } from 'app/student/settings/logo.service';
 import Swal from 'sweetalert2';
+import { ArrayFilterPipe } from './create-user.pipe';
 
 @Component({
   selector: 'app-create-user-type',
@@ -56,7 +57,7 @@ export class CreateUserTypeComponent {
   admin: any;
   userTypeNames: any;
   data: any;
-
+  submenuchildren: any[] = [];
   constructor(
     public router: ActivatedRoute,
     private fb: FormBuilder,
@@ -126,11 +127,19 @@ export class CreateUserTypeComponent {
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<MenuItemModel>(
+      
+
       this.dataSourceArray
     );
+    console.log('this.dataSource: ', this.dataSource)
+
+    console.log('this.dataSource: ', this.dataSourceArray)
+
+
     this.getAllUserTypes();
   }
   onSubmitForm() {
+    console.log('this.isEdit', this.isEdit)
     this.submitted = true;
     this.userTypeFormGroup.markAllAsTouched();
     let formData = this.userTypeFormGroup.getRawValue();
@@ -152,6 +161,7 @@ export class CreateUserTypeComponent {
       if (this.isEdit === false) {
         let formData = this.userTypeFormGroup.getRawValue();
         let typeName = formData.typeName;
+
         this.adminService
           .getUserTypeList({ ...this.coursePaginationModel })
           .subscribe((response: any) => {
@@ -159,26 +169,28 @@ export class CreateUserTypeComponent {
               (item: { typeName: any }) => item.typeName === typeName
             );
             this.paramId = userTypes[0].id;
-            this.adminService.updateUserType(obj, this.paramId).subscribe(
-              (response: unknown) => {
-                Swal.fire({
-                  title: 'Successful',
-                  text: 'Module added succesfully',
-                  icon: 'success',
-                });
-                resolve(response);
-                this.route.navigate(['/student/settings/user-type']);
-              },
-              (error: { message: any; error: any }) => {
-                this.isLoading = false;
-                Swal.fire(
-                  'Failed to update Role',
-                  error.message || error.error,
-                  'error'
-                );
-                reject(error);
-              }
-            );
+
+            console.log('obj', obj)
+            // this.adminService.updateUserType(obj, this.paramId).subscribe(
+            //   (response: unknown) => {
+            //     Swal.fire({
+            //       title: 'Successful',
+            //       text: 'Module added succesfully',
+            //       icon: 'success',
+            //     });
+            //     resolve(response);
+            //     this.route.navigate(['/student/settings/user-type']);
+            //   },
+            //   (error: { message: any; error: any }) => {
+            //     this.isLoading = false;
+            //     Swal.fire(
+            //       'Failed to update Role',
+            //       error.message || error.error,
+            //       'error'
+            //     );
+            //     reject(error);
+            //   }
+            // );
           });
       } else if (this.isEdit === true) {
         console.log('obg', obj);
@@ -221,6 +233,7 @@ export class CreateUserTypeComponent {
     this.logoService.getSidemenu().subscribe((response: any) => {
       let MENU_LIST = response.data.docs[0].MENU_LIST;
       const items = this.convertToMenuV2(MENU_LIST, this.userType?.menuItems);
+      console.log('items: ', items);
       items?.forEach((item, index) => {
         if (!this.dataSourceArray.some((v) => v.id === item.id))
           this.dataSourceArray.push(item);
@@ -234,6 +247,10 @@ export class CreateUserTypeComponent {
 
       this.cd.detectChanges();
     });
+  }
+
+  clicked(item:any) {
+    console.log('testinggg', item)
   }
 
   updateMenuItem(item: { checked: any; id: any; children: any[] }) {
@@ -282,13 +299,13 @@ export class CreateUserTypeComponent {
         const actionChild = v?.actions.map((action: any) => {
           const actionChecked = this.checkChecked(
             menu_item?.children,
-            `${v.id}__${action}`
+            `${v.id}__${action.id}`
           );
           return {
-            title: action,
-            id: `${v.id}__${action}`,
+            title: action.action_name,
+            id: `${v.id}__${action.id}`,
             isAction: true,
-            _id: action,
+            _id: action.id,
             isLeaf: true,
             checked: actionChecked?.checked || false,
             indeterminate: actionChecked?.indeterminate || false,
@@ -321,6 +338,17 @@ export class CreateUserTypeComponent {
     this.cd.detectChanges();
   }
 
+
+  // changeMenuCheckedSub(checked: boolean, id: number) {
+  //   // Find the submenu item with the given ID
+  //   const submenu = this.subMenuItems.find(item => item.id === id);
+  //   if (submenu) {
+  //     // Update the checked state of the submenu item
+  //     submenu.checked = checked;
+  //     // Implement your logic here to handle the checked state change
+  //     console.log(`Submenu ${id} checked: ${checked}`);
+  //   }
+  // }
   setChecked(
     obj: any[],
     data: { isAllCheck?: any; checked: any; menu_id?: any },
