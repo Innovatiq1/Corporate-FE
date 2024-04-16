@@ -16,11 +16,11 @@ export class RoleUserComponent {
     'img',
     'User Type',
     'Name',
-    'gender',
-    'Qualification',
-    'Mobile',
-    'Email',
-    'Status',
+    // 'gender',
+    // 'Qualification',
+    // 'Mobile',
+    // 'Email',
+    // 'Status',
     // 'Actions'
   ];
   breadscrums = [
