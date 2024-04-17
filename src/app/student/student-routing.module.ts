@@ -333,7 +333,7 @@ const routes: Routes = [
 
 
   {
-    path: 'side-menu/:id',
+    path: 'settings/side-menu/:id',
     component: SidemenuComponent,
   },
   {
