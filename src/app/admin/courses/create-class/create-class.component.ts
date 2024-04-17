@@ -37,6 +37,7 @@ import { StudentsService } from 'app/admin/students/students.service';
 })
 export class CreateClassComponent {
   item: any;
+  dept: any;
   @HostListener('document:keypress', ['$event'])
   keyPressNumbers(event: KeyboardEvent) {
     const charCode = event.which ? event.which : event.keyCode;
@@ -169,7 +170,8 @@ export class CreateClassComponent {
         })
       }
     });
-    this.loadData()
+    this.loadData();
+   this.getDepartments()
   }
 
   loadData(){
@@ -185,6 +187,7 @@ export class CreateClassComponent {
       classDeliveryType: ['', Validators.required],
       instructorCost: ['', Validators.required],
       instructorCostCurrency: ['USD'],
+      department:['',Validators.required],
       currency: [''],
       isGuaranteedToRun: [false, Validators.required],
       externalRoom: [false],
@@ -199,6 +202,12 @@ export class CreateClassComponent {
       sessions: ['', Validators.required],
     })
   }
+  getDepartments() {
+    this.studentsService.getAllDepartments().subscribe((response: any) => {
+      this.dept = response.data.docs;
+    });
+  }
+
 
   loadClassList(id: string) {
     this._classService.getClassById(id).subscribe((response) => {
@@ -214,6 +223,7 @@ export class CreateClassComponent {
         externalRoom: item?.externalRoom,
         minimumEnrollment: item?.minimumEnrollment,
         maximumEnrollment: item?.maximumEnrollment,
+        department:item?.department,
         // status: item?.status,
         sessions: item?.sessions,
       });
