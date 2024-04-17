@@ -54,8 +54,8 @@ export class CreateAllUsersComponent {
   breadscrums = [
     {
       title: 'Create All Users',
-      items: ['Users'],
-      active: 'Create All Users',
+      items: ['All Users'],
+      active: 'Create User',
     },
   ];
   data: any;
@@ -386,8 +386,8 @@ export class CreateAllUsersComponent {
       this.breadscrums = [
         {
           title: 'Edit All Users',
-          items: ['Users'],
-          active: 'Edit All Users',
+          items: ['All Users'],
+          active: 'Edit User',
         },
       ];
     }

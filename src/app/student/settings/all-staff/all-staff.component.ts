@@ -59,7 +59,7 @@ export class AllstaffComponent
   breadscrums = [
     {
       title: 'Staff',
-      items: ['Users'],
+      items: ['User Profile'],
       active: 'Staff',
     },
   ];

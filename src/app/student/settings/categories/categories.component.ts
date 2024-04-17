@@ -42,7 +42,7 @@ export class CategoriesComponent implements OnInit {
   breadscrums = [
     {
       title: 'Categories',
-      items: ['Settings'],
+      items: ['Configuration'],
       active: 'Categories',
     },
   ];

@@ -34,7 +34,7 @@ export class CreateCategoriesComponent implements OnInit{
   breadscrums = [
     {
       title: 'Create Categories',
-      items: ['Settings'],
+      items: ['Categories'],
       active: 'Create Categories',
     },
   ];

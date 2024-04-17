@@ -15,7 +15,7 @@ export class ViewStudentPendingListComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Pending Program'],
+      items: ['Pending Programs'],
       active: 'View Pending Program',
     },
   ];

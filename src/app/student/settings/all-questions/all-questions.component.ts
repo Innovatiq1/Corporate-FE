@@ -32,8 +32,8 @@ export class AllQuestionsComponent {
   breadscrums = [
     {
       title: 'Questions',
-      // items: ['Extra'],
-      active: 'All Questions',
+      items: ['Configuration'],
+      active: 'Assessment Configuration',
     },
   ];
 

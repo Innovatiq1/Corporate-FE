@@ -14,7 +14,7 @@ export class ViewCategoriesComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Settings'],
+      items: ['Categories'],
       active: 'View Category',
     },
   ];

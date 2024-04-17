@@ -12,8 +12,8 @@ export class LogoCoutomzationComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Logo'],
-      active: 'Cutomization',
+      items: ['Customize'],
+      active: 'Logo',
     },
   ];
   displayedColumns1: string[] = ['logo'];

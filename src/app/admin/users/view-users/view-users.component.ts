@@ -20,7 +20,7 @@ export class ViewUsersComponent implements OnInit{
   breadscrums = [
     {
       title: 'Profile',
-      items: ['Users'],
+      items: ['All Users'],
       active: 'Profile',
     },
   ];

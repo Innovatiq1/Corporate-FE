@@ -201,8 +201,8 @@ export class SettingsComponent {
       this.breadscrums = [
         {
           title: 'Settings',
-          items: ['Admin'],
-          active: 'Settings',
+          items: ['Security'],
+          active: 'Password',
         },
       ];
       this.isAdmin = true;
@@ -211,8 +211,8 @@ export class SettingsComponent {
       this.breadscrums = [
         {
           title: 'Settings',
-          items: ['Admin'],
-          active: 'Settings',
+          items: ['Customize'],
+          active: 'Banners',
         },
       ];
       this.isAdmin = true;
@@ -221,8 +221,8 @@ export class SettingsComponent {
       this.breadscrums = [
         {
           title: 'Settings',
-          items: ['Admin'],
-          active: 'Settings',
+          items: ['Integration'],
+          active: 'SMTP',
         },
       ];
       this.isAdmin = true;
@@ -241,8 +241,8 @@ export class SettingsComponent {
       this.breadscrums = [
         {
           title: 'Settings',
-          items: ['Admin'],
-          active: 'Settings',
+          items: ['Customize'],
+          active: 'Forms',
         },
       ];
       this.isAdmin = true;
@@ -311,8 +311,8 @@ export class SettingsComponent {
       this.breadscrums = [
         {
           title: 'Settings',
-          items: ['Admin'],
-          active: 'Settings',
+          items: ['Configuration'],
+          active: 'Forms',
         },
       ];
       this.isAdmin = true;
@@ -321,7 +321,7 @@ export class SettingsComponent {
       this.breadscrums = [
         {
           title: 'Sidemenu',
-          items: ['Settings'],
+          items: ['Customize'],
           active: 'Sidemenu',
         },
       ];

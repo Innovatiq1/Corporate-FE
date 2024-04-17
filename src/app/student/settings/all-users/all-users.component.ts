@@ -37,8 +37,8 @@ export class AllUsersComponent {
   breadscrums = [
     {
       title: 'All User',
-      items: ['Users'],
-      active: 'All User',
+      items: ['User Profile'],
+      active: 'All Users',
     },
   ];
   create = true;

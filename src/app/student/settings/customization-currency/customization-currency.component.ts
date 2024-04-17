@@ -12,7 +12,7 @@ export class CustomizationCurrencyComponent {
   breadscrums = [
     {
       title: 'Customization',
-      items: ['Student'],
+      items: ['Customize'],
       active: 'Currency',
     },
   ];

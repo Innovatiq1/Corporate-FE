@@ -28,8 +28,8 @@ export class UserTypeComponent {
   breadscrums = [
     {
       title: 'Role',
-      items: ['Users'],
-      active: 'Role',
+      items: ['Manage Users'],
+      active: 'Module Access',
     },
   ];
   modal:boolean = false;
