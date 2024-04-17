@@ -158,13 +158,12 @@ export class ProgramTimetableComponent implements OnInit {
       );
     });
     const events = this.allProgramClasses.flatMap((courseClass: any,classId:any) => {
-      console.log("arg",courseClass)
       const startDate = new Date(courseClass.sessions[0].sessionStartDate);
       const endDate = new Date(courseClass.sessions[0].sessionEndDate);
       const sessionStartTime = courseClass.sessions[0].sessionStartTime;
       const sessionEndTime = courseClass.sessions[0].sessionEndTime;
       const title = courseClass.courseId.title;
-      const courseCode = courseClass.sessions[0].courseCode;
+      const programCode = courseClass.sessions[0].courseCode;
       const status = courseClass.sessions[0].status;
       const deliveryType = courseClass.classDeliveryType;
       const instructorCost = courseClass.instructorCost;
@@ -177,7 +176,7 @@ export class ProgramTimetableComponent implements OnInit {
           extendedProps: {
             sessionStartTime: sessionStartTime,
             sessionEndTime: sessionEndTime,
-            courseCode: courseCode,
+            programCode: programCode,
             status: status,
             sessionStartDate:startDate,
             sessionEndDate:endDate,
@@ -238,7 +237,7 @@ export class ProgramTimetableComponent implements OnInit {
         title: event.title,
         sessionStartTime: event.extendedProps['sessionStartTime'],
         sessionEndTime: event.extendedProps['sessionEndTime'],
-        courseCode: event.extendedProps['courseCode'],
+        programCode: event.extendedProps['programCode'],
         status: event.extendedProps['status'],
         sessionStartDate: event.extendedProps['sessionStartDate'],
         sessionEndDate: event.extendedProps['sessionEndDate'],

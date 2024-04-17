@@ -1,0 +1,196 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      </app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Edit Instructor</h2>
+
+          </div>
+          <div class="body">
+            <form class="m-4" [formGroup]="proForm" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>First Name<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="name" required>
+                    <mat-error *ngIf="proForm.get('name')?.hasError('required')">
+                      First name is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Last Name</label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="last_name">
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Designation<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="qualification">
+                  </mat-form-field>
+                </div>
+              <!-- </div>
+              <div class="row"> -->
+              
+              <!-- </div>
+              <div class="row"> -->
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Email<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="email" required>
+                    <mat-error *ngIf="proForm.get('email')?.hasError('email') && proForm.get('email')?.touched">
+                      Please enter a valid email address
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Password<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="password" type="password" required>
+                    <mat-error *ngIf="proForm.get('password')?.hasError('required')">
+                      password is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Re-Enter Password<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="conformPassword" type="password" required>
+                    <mat-error *ngIf="proForm.get('conformPassword')?.hasError('required')">
+                      Re-Enter password is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              <!-- </div>
+              <div class="row"> -->
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Gender<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-select formControlName="gender" required>
+                      <mat-option [value]="'male'">
+                        Male
+                      </mat-option>
+                      <mat-option [value]="'female'">
+                        Female
+                      </mat-option>
+                      <mat-option [value]="'other'">
+                        Other
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="proForm.get('gender')?.hasError('required')">
+                      Gender is required
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Mobile<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="mobile" type="number" required>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Select Department <span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline">
+                    <mat-select formControlName="department" required >
+                      <mat-option [value]="dept.department" *ngFor="let dept of dept">
+                       {{dept.department }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="proForm.get('department')?.hasError('required')">
+                      Select Any Department
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              <!-- </div>
+              <div class="row"> -->
+             
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Joining Date<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput [matDatepicker]="picker1" formControlName="joiningDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                    <mat-error *ngIf="proForm.get('joiningDate')?.hasError('required')">
+                      Please select date
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              <!-- </div>
+              <div class="row"> -->
+             
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Date Of Birth<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput [matDatepicker]="picker" formControlName="dob" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="proForm.get('dob')?.hasError('required')">
+                      Please select date
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Address</label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <textarea matInput formControlName="address"></textarea>
+                  </mat-form-field>
+                </div>
+              <!-- </div>
+              <div class="row"> -->
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Education</label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <textarea matInput formControlName="education"></textarea>
+                  </mat-form-field>
+                </div>
+              <!-- </div> -->
+              <!-- <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-label>Education</mat-label>
+                    <textarea matInput formControlName="education"></textarea>
+                  </mat-form-field>
+                </div>
+              </div> -->
+              <!-- <div class="row"> -->
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-5">
+                  <label>Upload</label>
+                  <div class="file-drop-area">
+                    <div class="file">
+                    <button mat-raised-button color="primary" class="btn">Choose file <input
+                      formControlName="avatar"
+                      (change)="onFileUpload($event)"
+                      class="file-input"
+                      type="file"
+                    /></button>
+                    <span class="file-msg"><h5>{{fileName ? fileName : 'Drag and Drop File Here' }}</h5></span>
+                    
+                    </div>
+                  </div>
+                  <!-- <app-file-upload formControlName="image_link" (change)="onFileUpload($event)"></app-file-upload> -->
+                </div>
+              </div>
+              <div class="row" style="float: right;">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button class="btn-space" type="button" (click)="cancel()" mat-raised-button color="warn">Cancel</button>
+                  <button   mat-raised-button
+                   id="submit">Update</button>
+                 
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

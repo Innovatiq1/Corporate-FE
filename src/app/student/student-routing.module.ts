@@ -52,6 +52,17 @@ import { UserGroupListComponent } from './settings/user-group-list/user-group-li
 import { CreateDepartmentComponent } from './settings/create-department/create-department.component';
 import { FundingComponent } from './settings/funding/funding.component';
 import { CustomizationCurrencyComponent } from './settings/customization-currency/customization-currency.component';
+import { CreateUserTypeComponent } from './settings/create-user-type/create-user-type.component';
+import { AddDepartmentComponent } from './settings/add-department/add-department.component';
+import { CreateAllUsersComponent } from './settings/create-all-users/create-all-users.component';
+import { ViewUsersComponent } from './settings/view-users/view-users.component';
+import { AddStudentComponent } from './settings/add-student/add-student.component';
+import { AboutStudentComponent } from './settings/about-student/about-student.component';
+import { AddTeacherComponent } from './settings/add-teacher/add-teacher.component';
+import { AboutTeacherComponent } from './settings/about-teacher/about-teacher.component';
+import { EditTeacherComponent } from './settings/edit-teacher/edit-teacher.component';
+import { AddStaffComponent } from './settings/add-staff/add-staff.component';
+import { AboutStaffComponent } from './settings/about-staff/about-staff.component';
 
 
 const routes: Routes = [
@@ -356,9 +367,57 @@ const routes: Routes = [
     path: 'settings/user-list-group',
     component: UserGroupListComponent
   },
-
-
-
+  {
+    path: 'settings/create-user-type',
+    component: CreateUserTypeComponent
+  },
+  
+  {
+    path: 'settings/edit-department/:id',
+    component: AddDepartmentComponent
+  },
+  {
+    path: 'settings/create-all-users',
+    component: CreateAllUsersComponent
+  },
+  {
+    path: 'settings/edit-all-users/:id',
+    component: CreateAllUsersComponent
+  },
+  {
+    path: 'settings/view-all-users/:id',
+    component: ViewUsersComponent
+  },
+  {
+    path: 'settings/add-student',
+    component: AddStudentComponent
+  },
+  
+  {
+    path: 'settings/view-student',
+    component: AboutStudentComponent
+  },
+  {
+    path: 'settings/add-instructor',
+    component: AddTeacherComponent
+  },
+  {
+    path: 'settings/edit-instructor/:id',
+    component: EditTeacherComponent
+  },
+  {
+    path: 'settings/view-instructor',
+    component: AboutTeacherComponent
+  },
+  {
+    path: 'settings/add-staff',
+    component: AddStaffComponent
+  },
+  {
+    path: 'settings/about-staff',
+    component: AboutStaffComponent
+  },
+  
   { path: '**', component: Page404Component },
 ];
 
