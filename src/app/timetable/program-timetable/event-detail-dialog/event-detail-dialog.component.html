@@ -40,10 +40,10 @@
   <p class="info-text"> <span class="highlight">{{ data.courseCode }}</span></p>
 </div>
 
-  <div class="col-md-2">
+  <div class="col-md-3">
     <p class="info-text">Time </p>
 </div>
-<div class="col-md-5">
+<div class="col-md-3">
   <p class="info-text"><span class="highlight">{{ data.sessionStartTime  }} - {{data.sessionEndTime}}</span></p>
 </div>
         <!-- <div class="col-md-6">
@@ -52,15 +52,15 @@
     </div>
     <div class="row">
       <div class="col-md-3">
-        <p class="info-text">Class Type</p>
+        <p class="info-text">Class</p>
     </div>
     <div class="col-md-2">
-      <p class="info-text"> <span class="highlight">{{ data.deliveryType }}</span></p>
+      <p class="info-text"> <span class="highlight">{{ data.deliveryType | titlecase}}</span></p>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-3">
     <p class="info-text">Instructor Cost </p>
 </div>
-<div class="col-md-5">
+<div class="col-md-4">
   <p class="info-text"><span class="highlight">$ {{ data.instructorCost  }}</span></p>
 </div>
     </div>
