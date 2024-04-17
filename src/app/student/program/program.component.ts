@@ -43,12 +43,15 @@ export class ProgramComponent {
   filterRegistered='';
   filterApproved='';
   filterCompleted='';
+  department: any;
 
   constructor(public _courseService:CourseService,  private classService: ClassService) {
     this.coursePaginationModel = {};
     this.studentRegisteredModel = {};
     this.studentApprovedModel = {};
     this.studentCompletedModel = {};
+    this.department= JSON.parse(localStorage.getItem('user_data')!).user.department;
+
   }
 
   ngOnInit(){
@@ -73,7 +76,7 @@ export class ProgramComponent {
 
 getClassList() {
   let filterProgram = this.filterName
-  this.classService.getProgramClassListWithPagination({ filterProgram,...this.coursePaginationModel, status: 'open' }).subscribe(
+  this.classService.getProgramClassListWithPagination({ filterProgram,...this.coursePaginationModel, status: 'open' ,department:this.department}).subscribe(
     (response) => {
       this.dataSource = response.data.docs;
       this.totalItems = response.data.totalDocs

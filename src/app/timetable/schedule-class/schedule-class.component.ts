@@ -62,7 +62,7 @@ export class ScheduleClassComponent {
   pageSizeArr = [10, 20, 50, 100];
   searchTerm: string = '';
 
-  displayedColumns = ['courseName','Code', 'Price', 'startDate', 'endDate', 'Class'];
+  displayedColumns = ['courseName','Code', 'Price','Department', 'startDate', 'endDate', 'Class'];
 
   breadscrums = [
     {
