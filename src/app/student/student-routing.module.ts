@@ -371,7 +371,10 @@ const routes: Routes = [
     path: 'settings/create-user-type',
     component: CreateUserTypeComponent
   },
-  
+  {
+    path: 'settings/edit-user-type',
+    component: CreateUserTypeComponent
+  },
   {
     path: 'settings/edit-department/:id',
     component: AddDepartmentComponent

@@ -61,7 +61,7 @@ last: any;
       this.modal = false;
     }
     edit(id:any){
-      this.router.navigate(['/admin/users/edit-user-type'],{queryParams:{id:id}});
+      this.router.navigate(['/student/settings/edit-user-type'],{queryParams:{id:id}});
     // this.router.navigate(['/Users/Type/edit'],{queryParams:{id:id}});
     }
   
