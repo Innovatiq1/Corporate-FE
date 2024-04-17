@@ -42,9 +42,9 @@
                   </li>
                      <li class="tbl-header-btn">
                         <div class="m-l-10" matTooltip="ADD">
-                          <button mat-raised-button [routerLink]="['/admin/users/create-all-users']"
+                          <button mat-raised-button [routerLink]="['/student/settings/create-all-users']"
                           id="submit">Create</button>
-                          <!-- <button mat-mini-fab color="primary"  [routerLink]="['/admin/users/create-all-users']">
+                          <!-- <button mat-mini-fab color="primary"  [routerLink]="['/student/settings/create-all-users']">
                             <mat-icon class="col-white">add</mat-icon>
                           </button> -->
                         </div>
@@ -89,7 +89,7 @@
                         [indeterminate]="selection.hasValue() && !isAllSelected()" [ngClass]="'tbl-checkbox'">
                       </mat-checkbox>
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]" [ngClass]="'tbl-col-width-per-6'">
+                    <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/edit-all-users',row.id]" [ngClass]="'tbl-col-width-per-6'">
                       <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
                         [checked]="selection.isSelected(row)" [ngClass]="'tbl-checkbox'">
                       </mat-checkbox>
@@ -101,12 +101,12 @@
                     <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
                     </mat-header-cell>
                     <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <span
-                        class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"  [routerLink]="['/admin/users/edit-all-users',row.id]">
+                        class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"  [routerLink]="['/student/settings/edit-all-users',row.id]">
                     </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="Name">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/users/view-all-users',row.id]">
+                    <mat-cell *matCellDef="let row" class="name" [routerLink]="['/student/settings/view-all-users',row.id]">
                       <span class="mobile-label">Name:</span>{{row.name | capitalizeFirstLetter}}</mat-cell>
                   </ng-container>
                   <!-- Course Code -->
@@ -119,7 +119,7 @@
                   <ng-container matColumnDef="gender">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Gender
                     </mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
+                    <mat-cell mat-cell *matCellDef="let row" [routerLink]="['/student/settings/edit-all-users',row.id]">
                       <span class="mobile-label">Gender:</span>
                       <div *ngIf="row.gender==='male'">
                         <span class="badge badge-solid-green">
@@ -139,19 +139,19 @@
                   <ng-container matColumnDef="Qualification">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Qualification
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
+                    <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/edit-all-users',row.id]">
                       <span class="mobile-label">Qualification:</span>{{row.education | capitalizeFirstLetter}}</mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="Mobile">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
+                    <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/edit-all-users',row.id]">
                       <span class="mobile-label">Mobile:</span>{{row.mobile}}</mat-cell>
                   </ng-container>
                    <!-- Sub Category -->
                    <ng-container matColumnDef="Email">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
+                    <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/edit-all-users',row.id]">
                       <span class="mobile-label">Email:</span>
                       <img src="assets/images/gmail.png" alt="Email Icon" class="email-icon">
                       <!-- Replace "email-icon.png" with the filename of your PNG icon -->
@@ -161,14 +161,14 @@
                   <!-- <ng-container matColumnDef="Email">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Email
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
+                    <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/edit-all-users',row.id]">
                       <span class="mobile-label">Email:</span>{{row.email}}</mat-cell>
                   </ng-container> -->
                    <!--Fees -->
                    <ng-container matColumnDef="Status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Status
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]"> <span
+                    <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/edit-all-users',row.id]"> <span
                         class="mobile-label">Status:</span><span [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
                           <span [class]="row?.Active ? 'status-dot' : 'status-red'"></span>
                           {{row.Active ?  'Active': 'Inactive' }}
@@ -179,7 +179,7 @@
                   <!-- <ng-container matColumnDef="Status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Status
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]" class="mt-4" [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
+                    <mat-cell *matCellDef="let row" [routerLink]="['/student/settings/edit-all-users',row.id]" class="mt-4" [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
                       <span class="mobile-label">Status:</span>
                        {{row.Active ?  'Active': 'Inactive' }}</mat-cell>
                   </ng-container> -->
@@ -198,7 +198,7 @@
                         </button>
 
                                 <mat-menu #menu="matMenu" xPosition="before">
-                                  <button mat-menu-item [routerLink]="['/admin/users/edit-all-users',row.id]" >
+                                  <button mat-menu-item [routerLink]="['/student/settings/edit-all-users',row.id]" >
                                     <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                                     <span class="menu-text">Edit</span>
                                   </button>
@@ -234,7 +234,7 @@
           </ng-template>
           <div class="row mt-5 ml-0 mr-0">
             <div class="col-md-3"  *ngFor="let row of dataSource">
-              <div class="card border-apply" style="height: 220px; margin-top: 20px;cursor: pointer;" [routerLink]="['/admin/users/view-all-users',row.id]">
+              <div class="card border-apply" style="height: 220px; margin-top: 20px;cursor: pointer;" [routerLink]="['/student/settings/view-all-users',row.id]">
                 <!-- <div class="m-b-20"> -->
                   <div class="contact-grid">
                     <div class="row">
@@ -280,7 +280,7 @@
                   </div>
                 <!-- </div> -->
               </div>
-              <!-- <div class="card border-apply"  style="height: 300px;cursor: pointer;" [routerLink]="['/admin/users/view-all-users',row.id]">
+              <!-- <div class="card border-apply"  style="height: 300px;cursor: pointer;" [routerLink]="['/student/settings/view-all-users',row.id]">
                 <div class="m-b-20">
                   <div class="contact-grid">
                     <div class="profile-header l-bg-blue">

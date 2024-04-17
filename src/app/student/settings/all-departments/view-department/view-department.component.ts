@@ -73,7 +73,7 @@ delete(id: string) {
 }
 editCall(row: Department) {
   this.id = row.id;
-  this.router.navigate(['/admin/departments/edit-department/' + this.id])
+  this.router.navigate(['/student/settings/edit-department/' + this.id])
 
 }
 

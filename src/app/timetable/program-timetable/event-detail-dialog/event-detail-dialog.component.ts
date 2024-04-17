@@ -7,5 +7,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./event-detail-dialog.component.scss']
 })
 export class EventDetailDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  code: boolean = false;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { 
+  "programCode" in data ? this.code = true : this.code = false;
+    
+  }
+
+ 
 }

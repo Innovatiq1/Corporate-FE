@@ -1,0 +1,176 @@
+<section class="content">
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      </app-breadcrumb>
+    </div>
+    <!-- Your content goes here  -->
+    <div class="row clearfix">
+      <div class="col-lg-4 col-md-12">
+        <div class="card">
+          <div class="m-b-20">
+            <div class="contact-grid">
+              <div class="profile-header bg-dark">
+                <div class="user-name">{{aboutData.name}}</div>
+                <div class="name-center">{{aboutData.type | titlecase}}</div>
+              </div>
+              <img src="{{aboutData.avatar}}" class="user-img" alt="">
+              <p>
+               {{aboutData.country_name}}
+              </p>
+              <div>
+                <span class="phone">
+                  <i class="material-icons">phone</i>{{aboutData.mobile}}</span>
+              </div>
+              <!-- <div class="row">
+                <div class="col-4">
+                  <h5>564</h5>
+                  <small>Following</small>
+                </div>
+                <div class="col-4">
+                  <h5>18k</h5>
+                  <small>Followers</small>
+                </div>
+                <div class="col-4">
+                  <h5>565</h5>
+                  <small>Post</small>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card">
+          <mat-tab-group mat-align-tabs="start">
+            <mat-tab label="About">
+              <div class="p-4">
+                <!-- <p class="text-default">Hello I am Sarah Smith a student in Sanjivni College Surat. I love
+                  to study with all my class friends and professors.</p> --
+                <ul class="list-group list-group-unbordered">
+                  <li class="list-group-item">
+                    <b>Gender </b>
+                    <div class="profile-desc-item float-end">{{aboutData?.gender | titlecase}}</div>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Date of birth</b>
+                    <div class="profile-desc-item float-end">{{aboutData?.dob | date}}</div>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Department</b>
+                    <div class="profile-desc-item float-end">{{aboutData?.department}}</div>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Education</b>
+                    <div class="profile-desc-item float-end">{{aboutData?.qualification}}</div>
+                  </li>
+                  <li class="list-group-item">
+                    <b>Joining Date</b>
+                    <div class="profile-desc-item float-end">{{aboutData?.joiningDate | date}}</div>
+                  </li>
+                </ul>
+              </div>
+            </mat-tab>
+            <button type="button" mat-raised-button color="warn" [routerLink]="['/admin/users/all-staff']">Back to all students</button>
+          </mat-tab-group>
+        </div> -->
+      </div>
+
+      <div class="col-lg-8 col-md-12">
+        <div class="card">
+          <div class="card-container">
+            <button class="icons" alt="Edit" [routerLink]="['/student/settings/edit-all-users',aboutData.id]" >
+                <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+            </button>
+            <button class="icons" alt="Delete" mat-menu-item (click)="deleteItem(aboutData)">
+              <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+          </button>
+        </div>
+          <mat-tab-group>
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
+                Details
+              </ng-template>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="project_widget">
+                  <!-- <div class="header">
+                    <h2><strong>About</strong></h2>
+                  </div> -->
+                  <div class="body">
+                    <div class="row">
+                      <div class="col-md-4 col-6 b-r">
+                        <strong>Full Name</strong>
+                        <br>
+                        <p class="text-muted">{{aboutData.name}}</p>
+                      </div>
+                      <div class="col-md-4 col-6 b-r">
+                        <strong>Mobile</strong>
+                        <br>
+                        <p class="text-muted">{{aboutData.mobile}}</p>
+                      </div>
+                      <div class="col-md-4 col-6 b-r">
+                        <strong>Email</strong>
+                        <br>
+                        <p class="text-muted">{{aboutData.email}}</p>
+                      </div>
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="project_widget">
+                  <!-- <div class="header">
+                    <h2><strong>About</strong></h2>
+                  </div> -->
+                  <div class="body">
+                    <div class="row">
+                      <div class="col-md-4 col-6">
+                        <strong>Education</strong>
+                        <br>
+                        <p class="text-muted">{{aboutData?.qualification}}</p>
+                      </div>
+                      <div class="col-md-4 col-6 b-r">
+                        <strong>Gender</strong>
+                        <br>
+                        <p class="text-muted">{{aboutData?.gender | titlecase}}</p>
+                      </div>
+                      <div class="col-md-4 col-6 b-r">
+                        <strong>Date of birth</strong>
+                        <br>
+                        <p class="text-muted">{{aboutData?.dob | date}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="project_widget">
+                  <!-- <div class="header">
+                    <h2><strong>About</strong></h2>
+                  </div> -->
+                  <div class="body">
+                    <div class="row">
+                    
+                      <div class="col-md-4 col-6 b-r">
+                        <strong>Department</strong>
+                        <br>
+                        <p class="text-muted">{{aboutData?.department}}</p>
+                      </div>
+                      <div class="col-md-4 col-6">
+                        <strong>Joining Date</strong>
+                        <br>
+                        <p class="text-muted">{{aboutData?.joiningDate | date}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

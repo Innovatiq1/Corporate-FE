@@ -137,6 +137,7 @@ export class CourseTimetableComponent implements OnInit {
         
   }
   openDialog(event: { title: any; extendedProps: { [x: string]: any; }; }) {
+    console.log("Open",event)
     this.dialog.open(EventDetailDialogComponent, {
       width: '700px',
       data: {
@@ -171,13 +172,14 @@ export class CourseTimetableComponent implements OnInit {
       //   const startDateB = new Date(b.classId.sessions[0].sessionStartDate);
       //   return startDateA > startDateB ? 1 : startDateA < startDateB ? -1 : 0;
       // });
-          const events = this.allClasses.flatMap((courseClass: any,classId:any) => {
+        const events = this.allClasses.flatMap((courseClass: any,classId:any) => {
+          console.log("clss",courseClass)
         const startDate = new Date(courseClass.sessions[0].sessionStartDate);
         const endDate = new Date(courseClass?.sessions[0]?.sessionEndDate);
         const sessionStartTime = courseClass?.sessions[0]?.sessionStartTime;
         const sessionEndTime = courseClass?.sessions[0]?.sessionEndTime;
         const title = courseClass?.courseId?.title;
-        const courseCode = courseClass.sessions[0].courseCode;
+        const courseCode = courseClass.courseId.courseCode;
         const status = courseClass.sessions[0].status;
         const deliveryType = courseClass.classDeliveryType;
         const instructorCost = courseClass.instructorCost;

@@ -87,11 +87,11 @@ export class AllStudentsComponent
     this.loadData();
   }
   addNew() {
-   this.router.navigate(['/admin/users/add-student'])
+   this.router.navigate(['/student/settings/add-student'])
   }
   editCall(row: Students) {
     console.log("edit",row)
-    this.router.navigate(['/admin/users/add-student'],{queryParams:{id:row.id}})
+    this.router.navigate(['/student/settings/add-student'],{queryParams:{id:row.id}})
   }
   // deleteItem(row: Students) {
   //   this.id = row.id;
@@ -318,7 +318,7 @@ export class AllStudentsComponent
   }
 
   aboutStudent(id:any){
-    this.router.navigate(['/admin/users/view-student'],{queryParams:{data:id}})
+    this.router.navigate(['/student/settings/view-student'],{queryParams:{data:id}})
 
   }
 

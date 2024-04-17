@@ -83,6 +83,17 @@ import { UserGroupListComponent } from './settings/user-group-list/user-group-li
 import { CreateDepartmentComponent } from './settings/create-department/create-department.component';
 import { FundingComponent } from './settings/funding/funding.component';
 import { CustomizationCurrencyComponent } from './settings/customization-currency/customization-currency.component';
+import { CreateUserTypeComponent } from './settings/create-user-type/create-user-type.component';
+import { AddDepartmentComponent } from './settings/add-department/add-department.component';
+import { CreateAllUsersComponent } from './settings/create-all-users/create-all-users.component';
+import { ViewUsersComponent } from './settings/view-users/view-users.component';
+import { AddStudentComponent } from './settings/add-student/add-student.component';
+import { AboutStudentComponent } from './settings/about-student/about-student.component';
+import { AddTeacherComponent } from './settings/add-teacher/add-teacher.component';
+import { AboutTeacherComponent } from './settings/about-teacher/about-teacher.component';
+import { EditTeacherComponent } from './settings/edit-teacher/edit-teacher.component';
+import { AddStaffComponent } from './settings/add-staff/add-staff.component';
+import { AboutStaffComponent } from './settings/about-staff/about-staff.component';
 
 @NgModule({
   declarations: [
@@ -145,6 +156,16 @@ import { CustomizationCurrencyComponent } from './settings/customization-currenc
     CreateDepartmentComponent,
     FundingComponent,
     CustomizationCurrencyComponent,
+    CreateUserTypeComponent,
+    AddDepartmentComponent,
+    CreateAllUsersComponent,
+    ViewUsersComponent,
+    AddStudentComponent,
+    AboutStudentComponent,
+    AddTeacherComponent,AboutTeacherComponent,
+    EditTeacherComponent,
+    AddStaffComponent,
+    AboutStaffComponent
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,
