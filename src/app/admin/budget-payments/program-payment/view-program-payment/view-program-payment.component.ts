@@ -14,8 +14,8 @@ export class ViewProgramPaymentComponent {
   breadscrums = [
     {
       title: 'Payments',
-      items: ['Payments'],
-      active: 'View Program Payments',
+      items: ['Program Payment'],
+      active: 'View Program Payment',
     },
   ];
   displayedColumns: string[] = ['position', ' Class Start Date ', ' Class End Date ', 'action'];

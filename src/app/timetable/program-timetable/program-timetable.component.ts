@@ -18,9 +18,9 @@ export class ProgramTimetableComponent implements OnInit {
 
   breadscrums = [
     {
-      title: 'Program-Timetable',
+      title: 'Program Timetable',
       items: ['Timetable'],
-      active: 'Program-Timetable',
+      active: 'Program Timetable',
     },
   ];
   studentApprovedClasses: any;

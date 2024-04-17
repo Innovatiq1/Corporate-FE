@@ -21,8 +21,8 @@ export class CreateUserTypeComponent {
   breadscrums = [
     {
       title: 'Accessibility',
-      items: ['Users'],
-      active: 'Accessibility',
+      items: ['Module Access'],
+      active: 'Create Module Access',
     },
   ];
 
@@ -84,8 +84,8 @@ export class CreateUserTypeComponent {
       this.breadscrums = [
         {
           title: 'Accessibility',
-          items: ['Users'],
-          active: 'Accessibility',
+          items: ['Module Access'],
+          active: 'Edit Module Access',
         },
       ];
     }

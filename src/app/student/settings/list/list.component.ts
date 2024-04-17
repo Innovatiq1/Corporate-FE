@@ -16,7 +16,7 @@ export class ListComponent {
   breadscrums = [
     {
       title: 'Announcement',
-      items: ['List'],
+      items: ['Automation'],
       active: 'Announcement',
     },
   ];

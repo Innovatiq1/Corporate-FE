@@ -27,7 +27,7 @@ export class EditCategoriesComponent {
   breadscrums = [
     {
       title: 'Edit Categories',
-      items: ['Settings'],
+      items: ['Categories'],
       active: 'Edit Categories',
     },
   ];

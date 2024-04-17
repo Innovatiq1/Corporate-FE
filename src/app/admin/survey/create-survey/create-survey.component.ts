@@ -24,8 +24,8 @@ export class CreateSurveyComponent {
   breadscrums = [
     {
       title: 'View Survey',
-      items: ['Survey'],
-      active: 'View Survey',
+      items: ['Feedbacks List'],
+      active: 'View Feedback',
     },
   ];
   selected = false;

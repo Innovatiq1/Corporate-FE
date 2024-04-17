@@ -30,7 +30,7 @@ export class CreateUserRoleComponent {
     {
       title: 'Admin',
       items: ['Manage Users'],
-      active: ' ',
+      active: 'Role ',
     },
   ];
   ngOnInit() {

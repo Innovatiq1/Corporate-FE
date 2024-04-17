@@ -35,8 +35,8 @@ export class ProgramPaymentComponent {
   breadscrums = [
     {
       // title: 'Programs',
-      items: ['Payments'],
-      active: 'Program Payments',
+      items: ['Finance'],
+      active: 'Program Payment',
     },
   ];
   

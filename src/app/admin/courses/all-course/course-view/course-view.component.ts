@@ -13,6 +13,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./course-view.component.scss'],
 })
 export class CourseViewComponent {
+
+  breadscrums = [
+    {
+      title: 'Blank',
+      items: ['Course'],
+      active: 'View Course',
+    },
+  ];
   displayedColumns1: string[] = ['video'];
   coursePaginationModel: Partial<CoursePaginationModel>;
   courseData: any;

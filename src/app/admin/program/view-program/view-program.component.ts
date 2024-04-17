@@ -80,6 +80,13 @@ export class ViewProgramComponent {
       this.getProgramLists();
     } else if(this.status === 'inactive') {
       this.getPendingProgramLists();
+      this.breadscrums = [
+        {
+          title: 'Blank',
+          items: ['Pending Program'],
+          active: 'View Pending Program',
+        },
+      ];
     }
 
   }

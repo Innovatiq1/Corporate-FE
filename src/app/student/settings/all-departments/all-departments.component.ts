@@ -57,8 +57,8 @@ export class AllDepartmentsComponent
   breadscrums = [
     {
       title: 'All Department Profiles',
-      items: ['Department Profile'],
-      active: 'All Department Profiles',
+      items: ['Manage Users'],
+      active: 'Department Profile',
     },
   ];
   totalItems: any;

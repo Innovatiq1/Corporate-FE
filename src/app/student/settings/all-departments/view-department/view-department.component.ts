@@ -14,8 +14,8 @@ export class ViewDepartmentComponent implements OnInit{
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Users'],
-      active: 'View Departments',
+      items: ['Department Profile'],
+      active: 'View Department Profile',
     },
   ];
 

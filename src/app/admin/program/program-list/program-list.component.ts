@@ -25,9 +25,9 @@ import { FilterPopupComponent } from './filter-popup/filter-popup.component';
 export class ProgramListComponent {
   breadscrums = [
     {
-      title: 'All Program',
+      title: 'Program List',
       items: ['Program'],
-      active: 'All Programs',
+      active: 'Program List',
     },
   ];
   displayedColumns = [

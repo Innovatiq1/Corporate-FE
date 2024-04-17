@@ -67,7 +67,7 @@ export class AllTeachersComponent
   breadscrums = [
     {
       title: 'Instructors',
-      items: ['Users'],
+      items: ['User Profile'],
       active: 'Instructors',
     },
   ];

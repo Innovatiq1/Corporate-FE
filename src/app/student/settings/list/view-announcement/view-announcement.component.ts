@@ -12,7 +12,7 @@ export class ViewAnnouncementComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Automation'],
+      items: ['Announcement'],
       active: 'View Announcement',
     },
   ];

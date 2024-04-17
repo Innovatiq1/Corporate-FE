@@ -25,8 +25,8 @@ export class AddStudentComponent {
   breadscrums = [
     {
       title: 'Add Student',
-      items: ['Users'],
-      active: 'Add Student',
+      items: ['Students'],
+      active: 'Create Student',
     },
   ];
   editData: any;
@@ -73,6 +73,15 @@ export class AddStudentComponent {
     },{
       validator: ConfirmedValidator('password', 'conformPassword')
     });
+    if(this.edit == true){
+      this.breadscrums = [
+        {
+          title: 'Add Student',
+          items: ['Students'],
+          active: 'Edit Student',
+        },
+      ];
+    }
   }
 
   ngOnInit(){
