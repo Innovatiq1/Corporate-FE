@@ -32,7 +32,9 @@ export class EAttendanceComponent {
      
   ];
   dataSource = [
-    { employeeName: 'Chung' },
+    { studentId:{
+      name: 'Chung' }
+    },
    
      
   ];
@@ -113,8 +115,9 @@ export class EAttendanceComponent {
       this._classService
         .getAttendedStudents(body)
         .subscribe((response: any) => {
-        console.log(response.data.docs)
-        this.courseData = response.data.data
+        this.courseData = response.data.data;
+        this.dataSource=response.data.data;
+        console.log('dataaa',this.dataSource)
           this.totalItems = response.data.totalDocs;
   
         })

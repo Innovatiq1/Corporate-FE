@@ -254,7 +254,7 @@
                                                         <mat-select  formControlName="course"
                                                             (selectionChange)="onSelectChange($event)">
                                                             <mat-option *ngFor="let course of courseList"
-                                                                [value]="course.id">
+                                                                [value]="course.title">
                                                                 {{ course.title }}
                                                             </mat-option>
                                                         </mat-select>
@@ -273,7 +273,7 @@
                                                         <mat-select  formControlName="program"
                                                             (selectionChange)="onSelectChange1($event)">
                                                             <mat-option *ngFor="let program of programList"
-                                                                [value]="program.id">
+                                                                [value]="program.title">
                                                                 {{ program.title }}
                                                             </mat-option>
                                                         </mat-select>
@@ -326,11 +326,9 @@
                                         <tbody>
                                             <tr *ngFor="let item of dataSource; index as index">
                                                 <td>
-                                                    <div class="d-flex"> <span class="attnd-user"> <img alt="image"
-                                                                class="msr-2 rounded-circle"
-                                                                src="assets/images/user/user8.jpg"></span>
+                                                    <div class="d-flex"> 
                                                         <div class="mt-sm-2">
-                                                            <h6>{{item?.employeeName}}</h6>
+                                                            <h6>{{item?.studentId?.name}}</h6>
                                                         </div>
                                                     </div>
                                                 </td>
