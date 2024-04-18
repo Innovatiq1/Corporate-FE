@@ -50,7 +50,7 @@ export class SBannerCreateListComponent {
   }
 
   addBanner(){
-    this.router.navigate(['/admin/banners/create-student-banner'])
+    this.router.navigate(['/student/banners/settings/create-student-banner'])
   }
 
   onChange(id: any, activeStatus: any){
