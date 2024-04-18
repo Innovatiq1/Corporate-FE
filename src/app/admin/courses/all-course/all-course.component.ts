@@ -59,6 +59,15 @@ export class AllCourseComponent {
   isCreator = false;
   selection = new SelectionModel<MainCategory>(true, []);
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  isFilter = false;
+  // programData: any;
+  titles: string[] = []; 
+  codes: string[] = []; 
+  creator: string[] = [];
+  duration: string[] = [];
+  startDate: string[] = [];
+  endDate: string[] = [];
+  status: string[] = [];
   
   constructor(public _courseService:CourseService, private route :Router, private classService: ClassService) {
     // constructor
@@ -102,7 +111,27 @@ export class AllCourseComponent {
   ngOnInit(){
     this.getAllCourses();
   }
-
+  openFilterCard(){
+    this.isFilter = !this.isFilter;
+     }
+     getFilterData(filters?: any) {
+      // let filterText = this.filterName
+      this._courseService.getAllCourses().subscribe(
+        (response: any) => {
+          this.courseData = response.docs;
+          console.log(this.courseData);
+          this.titles = this.courseData.map((doc: any) => doc.title);
+          this.codes = this.courseData.map((doc: any) => doc.courseCode);
+          this.creator = this.courseData.map((doc: any) => doc.creator);
+          this.duration = this.courseData.map((doc: any) => doc.duration);
+          this.startDate = this.courseData.map((doc: any) => doc.sessionStartDate);
+          this.endDate = this.courseData.map((doc: any) => doc.sessionEndDate);
+          this.status = this.courseData.map((doc: any) => doc.status);
+        },
+        (error) => {
+        }
+      );
+    }
    // export table data in excel file
    exportExcel() {
     // key name with space add in brackets

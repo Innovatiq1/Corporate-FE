@@ -60,6 +60,15 @@ export class ProgramListComponent {
   path: any;
   isProgram = false;
   isCreator = false;
+  isFilter = false;
+  // programData: any;
+  titles: string[] = []; 
+  codes: string[] = []; 
+  creator: string[] = [];
+  duration: string[] = [];
+  startDate: string[] = [];
+  endDate: string[] = [];
+  status: string[] = [];
 
   constructor(
   
@@ -120,6 +129,9 @@ export class ProgramListComponent {
     ];
   }
  }
+ openFilterCard(){
+this.isFilter = !this.isFilter;
+ }
 
  openFilterPopup(event:MouseEvent,data:any): void {
   const dialogRef = this.dialog.open(FilterPopupComponent, {
@@ -129,6 +141,24 @@ export class ProgramListComponent {
     width: '600px',
     maxHeight: '90vh',
   });
+}
+getFilterData(filters?: any) {
+  // let filterText = this.filterName
+  this.courseService.getAllPrograms().subscribe(
+    (response: any) => {
+      this.programData = response.docs;
+      console.log(this.programData);
+      this.titles = this.programData.map((doc: any) => doc.title);
+      this.codes = this.programData.map((doc: any) => doc.courseCode);
+      this.creator = this.programData.map((doc: any) => doc.creator);
+      this.duration = this.programData.map((doc: any) => doc.duration);
+      this.startDate = this.programData.map((doc: any) => doc.sessionStartDate);
+      this.endDate = this.programData.map((doc: any) => doc.sessionEndDate);
+      this.status = this.programData.map((doc: any) => doc.status);
+    },
+    (error) => {
+    }
+  );
 }
 
   getProgramList(filters?: any) {
@@ -195,6 +225,7 @@ export class ProgramListComponent {
   }
   ngOnInit(): void {
     this.getProgramList();
+    this.getFilterData();
   }
 
 performSearch() {

@@ -32,6 +32,11 @@
                               </div> -->
                               <div class="right">
                                 <ul class="tbl-export-btn">
+                                  <li class="tbl-header-btn">
+                                    <div class="m-l-10" (click)="openFilterCard();" matTooltip="Filters">
+                                      <i id="filterIcon" class="material-icons" style="color: red; cursor: pointer;">filter_list</i>
+                                    </div>
+                                  </li>
                                   <li>
                                     <ul class="header-buttons-left ms-0">
                                       <li class="tbl-search-box">
@@ -68,6 +73,80 @@
                               </div>
                             </div>
                             <div class="body overflow-auto">
+                              <div class="card" *ngIf="isFilter">
+                                <div class="row m-3">
+                                  <div class="col-3">
+                                    <img src="assets/images/icons/filter.png" style="height: 80px; width: 80px;margin-top: 30px;">
+                                  </div>
+                                  <div class="col-9">
+                                    <div class="row">
+                                      <div class="col-4">
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <mat-label>Course Name</mat-label>
+                                          <mat-select>
+                                            <mat-option *ngFor="let title of titles" [value]="title"> {{title}} </mat-option>
+                                          </mat-select>
+                                        </mat-form-field>
+                                      </div>
+                                      <!-- <div class="col-4">
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <mat-label>Code</mat-label>
+                                          <mat-select >
+                                            <mat-option *ngFor="let code of codes" [value]="code"> {{code}} </mat-option>
+                                          </mat-select>
+                                        </mat-form-field>
+                                      </div> -->
+                                      <div class="col-4">
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <mat-label>Creator</mat-label>
+                                          <mat-select >
+                                            <mat-option *ngFor="let creator of creator" [value]="creator"> {{creator}} </mat-option>
+                                          </mat-select>
+                                        </mat-form-field>
+                                      </div>
+                                      <!-- <div class="col-4">
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <mat-label>Duration</mat-label>
+                                          <mat-select >
+                                            <mat-option *ngFor="let duration of duration" [value]="duration"> {{duration}} </mat-option>
+                                          </mat-select>
+                                        </mat-form-field>
+                                      </div> -->
+                                      <div class="col-4">
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <mat-label>Start Date</mat-label>
+                                          <mat-select >
+                                            <mat-option *ngFor="let sdate of startDate" [value]="sdate"> {{sdate | date}} </mat-option>
+                                          </mat-select>
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="col-4">
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <mat-label>End Date</mat-label>
+                                          <mat-select >
+                                            <mat-option *ngFor="let edate of endDate" [value]="edate"> {{edate | date}} </mat-option>
+                                          </mat-select>
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="col-4">
+                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <mat-label>Status</mat-label>
+                                          <mat-select >
+                                            <mat-option *ngFor="let status of status" [value]="status"> {{status}} </mat-option>
+                                          </mat-select>
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="col-2 mt-2">
+                                        <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2"> -->
+                                          <button mat-raised-button id="submit">Apply</button>
+                                        <!-- </div> -->
+                                      </div>
+                                    </div>
+                                   
+                                  </div>
+                                 
+                                </div>
+                              </div>
                               <div class="responsive_table">
                                 <table mat-table [dataSource]="courseData" matSort class="mat-cell advance-table">
                                   <ng-container matColumnDef="name">
