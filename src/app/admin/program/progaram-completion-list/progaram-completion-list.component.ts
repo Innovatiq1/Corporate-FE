@@ -24,6 +24,8 @@ export class ProgaramCompletionListComponent {
     'Program Name',
     'Class Start Date',
     'Class End Date',
+    'Registered Date',
+    'Completed Date',
     'actions',
   ];
   breadscrums = [

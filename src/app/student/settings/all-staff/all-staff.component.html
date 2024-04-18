@@ -102,7 +102,7 @@
                   <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
                   </mat-header-cell>
                   <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <span
-                      class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"  (click)="editCall(row)"/>
+                      class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"  (click)="aboutStaff(row.id)"/>
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="name">
@@ -113,13 +113,13 @@
                 <ng-container matColumnDef="User Type">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> Role
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="aboutStaff(row.id)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">User Role:</span>{{row.type}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="gender">
                   <mat-header-cell *matHeaderCellDef mat-sort-header> Gender
                   </mat-header-cell>
-                  <mat-cell mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell mat-cell *matCellDef="let row" (click)="aboutStaff(row.id)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Gender:</span>
                     <div *ngIf="row.gender==='male'">
                       <span class="badge badge-solid-green">
@@ -137,17 +137,17 @@
                 </ng-container>
                 <ng-container matColumnDef="designation">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Designation</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="aboutStaff(row.id)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Designation:</span>{{row.role}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="mobile">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="aboutStaff(row.id)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Mobile:</span> {{row.mobile}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="email">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="aboutStaff(row.id)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Email:</span>
                     <img src="assets/images/gmail.png" alt="Email Icon" class="email-icon">
                     <!-- Replace "email-icon.png" with the filename of your PNG icon -->
@@ -168,7 +168,7 @@
                 <ng-container matColumnDef="salary">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Salary
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                  <mat-cell *matCellDef="let row" (click)="aboutStaff(row.id)" (contextmenu)="onContextMenu($event, row)">
                     <span class="truncate-text"><span class="mobile-label">Salary:</span>{{row.salary}}</span>
                   </mat-cell>
                 </ng-container>

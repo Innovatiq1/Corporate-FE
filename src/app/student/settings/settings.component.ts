@@ -88,6 +88,8 @@ export class SettingsComponent {
   currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
   selectedCurrency: string = "";
   sidemenu: any;
+  dept: any;
+  
   constructor(
     private studentService: StudentsService,
     private etmsService: EtmsService,
@@ -348,7 +350,7 @@ export class SettingsComponent {
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
 
       last_name: [''],
-
+      department: ['', Validators.required],
       mobile: [''],
       city_name: ['', [Validators.required]],
       country_name: ['', [Validators.required]],
@@ -428,6 +430,7 @@ export class SettingsComponent {
     if(this.customFormsUrl){
       this.showCustomForms = true;
     }
+    this.getDepartments();
   }
   navigateToAccountSettings() {
    
@@ -490,6 +493,11 @@ export class SettingsComponent {
       this.sidemenu = response?.data?.docs;
     });
   }
+  getDepartments() {
+    this.studentService.getAllDepartments().subscribe((response: any) => {
+      this.dept = response.data.docs;
+    });
+  }
   patchValues() {
     this.studentId = localStorage.getItem('id');
     // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
@@ -514,7 +522,7 @@ export class SettingsComponent {
         rollNo: this.editData.rollNo,
         gender: this.editData.gender,
         mobile: this.editData.mobile,
-
+        department:this.editData.department,
         email: this.editData.email,
         country_name: this.editData.country_name,
         city_name: this.editData.city_name,
@@ -617,31 +625,41 @@ export class SettingsComponent {
       // No need to call uploadVideo() here since it's not needed
         const userData: Student = this.stdForm1.value;
         userData.avatar = this.avatar; // Assuming this.avatar contains the URL of the uploaded thumbnail
-        userData.type = this.editData.role;
-        userData.role = this.editData.type;
-
+        userData.type = this.editData.type;
+        userData.role = this.editData.role;
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'Do you want to update!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed){
+            
         this.updateInstructor(userData);
-
         Swal.close();
+      }
+    });
     }
    
 }
 
   private updateInstructor(userData: Student): void {
-    Swal.fire({
-    title: 'Are you sure?',
-    text: 'Do you want to update!',
-    icon: 'warning',
-    confirmButtonText: 'Yes',
-    showCancelButton: true,
-    cancelButtonColor: '#d33',
-  }).then((result) => {
-    if (result.isConfirmed){
+  //   Swal.fire({
+  //   title: 'Are you sure?',
+  //   text: 'Do you want to update!',
+  //   icon: 'warning',
+  //   confirmButtonText: 'Yes',
+  //   showCancelButton: true,
+  //   cancelButtonColor: '#d33',
+  // }).then((result) => {
+  //   if (result.isConfirmed){
       this.studentService.updateStudent(this.studentId, userData).subscribe(
         () => {
           Swal.fire({
             title: 'Successful',
-            text: 'Student data update successfully',
+            text: 'User data update successfully',
             icon: 'success',
           });
           //this.fileDropEl.nativeElement.value = "";
@@ -651,14 +669,14 @@ export class SettingsComponent {
         },
         (error: { message: any; error: any }) => {
           Swal.fire(
-            'Failed to create course kit',
+            'Failed to update user data',
             error.message || error.error,
             'error'
           );
         }
       );
-    }
-  });
+  //   }
+  // });
    
   }
 
