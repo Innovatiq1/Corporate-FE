@@ -9,7 +9,7 @@ export class ReportsComponent {
   breadscrums = [
     {
       title: 'Reoprts',
-      items: ['Reoprts'],
+      items: ['Reports'],
       active: 'Report',
     },
   ];
