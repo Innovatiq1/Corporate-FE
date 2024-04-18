@@ -130,7 +130,12 @@ const routes: Routes = [
     path:'budgets',
     loadChildren: () =>
     import('./budget-payments/budget.module').then((m) => m.BudgetModule)
-  }
+  },
+  {
+    path: 'reports',
+    loadChildren: () =>
+      import('./reports/reports.module').then((m) => m.ReportsModule),
+  },
 ];
 
 @NgModule({
