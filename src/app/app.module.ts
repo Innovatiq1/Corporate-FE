@@ -44,6 +44,7 @@ import { LoginGuard } from '@core/guard/login.guard';
 import { ChatbotComponent } from './apps/chatbot/chatbot.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { StudentsService } from './admin/students/students.service';
+import { SideMenuFilterPipe } from './layout/sidebar/sidemenu.pipe';
 // import { ChangeBgDirective } from './change-bg.directive';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -63,6 +64,7 @@ export function createTranslateLoader(http: HttpClient) {
     LeaveRequestComponent,
     ChatbotComponent,
     TicketComponent,
+    SideMenuFilterPipe
     // ChangeBgDirective
 
   ],

@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'arrayFilter'
+  name: 'sideMenuFilter'
 })
-export class ArrayFilterPipe implements PipeTransform {
+export class SideMenuFilterPipe implements PipeTransform {
   transform(array: any[], filterBy: boolean): any[] {
     // if (!array || !filterBy) {
     //   return array;

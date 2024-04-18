@@ -96,7 +96,7 @@ export class CreateUserTypeComponent {
       .getUserTypeList({ ...this.coursePaginationModel })
       .subscribe(
         (response: any) => {
-          
+
           this.typesList = response.docs;
           this. data = this.typesList.find((id: any) => id._id === this.paramId);
           if (this.data) {
@@ -127,7 +127,7 @@ export class CreateUserTypeComponent {
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<MenuItemModel>(
-      
+
 
       this.dataSourceArray
     );
@@ -150,7 +150,7 @@ export class CreateUserTypeComponent {
       (v: any) => v
     );
     formData.menuItems = selectedMenuItems;
-  
+
     this.updateUserType(formData)
       .then((response: any) => {})
       .catch((e: any) => {});
@@ -241,6 +241,8 @@ export class CreateUserTypeComponent {
       this.dataSource = new MatTableDataSource<MenuItemModel>(
         this.dataSourceArray
       );
+
+      console.log(this.dataSourceArray)
       if (this.isEdit) {
         this.getUserTypeList();
       }
@@ -284,15 +286,18 @@ export class CreateUserTypeComponent {
         indeterminate: defaultCheck?.indeterminate || false,
         icon: v?.iconsrc,
         class: v?.class,
+        isAction: false,
       };
       if (children && children.length) {
         res = {
           ...res,
           children,
+          isAction: false,
         };
         res.children = res.children.map((c: any) => ({
           ...c,
           isLeaf: true,
+          isAction: false,
         }));
       }
       if (v?.actions && v?.actions?.length) {
@@ -498,8 +503,8 @@ export class CreateUserTypeComponent {
 );
       }
     });
-      
+
   }
-  
+
 
 }
