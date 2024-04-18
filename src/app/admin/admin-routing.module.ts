@@ -53,16 +53,16 @@ const routes: Routes = [
     loadChildren: () =>
       import('./survey/survey.module').then((m) => m.SurveyModule),
   },
-  {
-    path: 'email-configuration',
-    loadChildren: () =>
-      import('./email-configuration/email-configuration.module').then((m) => m.EmailConfigurationModule),
-  },
-  {
-    path: 'banners',
-    loadChildren: () =>
-      import('./banners/banner.module').then((m) => m.BannerModule),
-  },
+  // {
+  //   path: 'email-configuration',
+  //   loadChildren: () =>
+  //     import('./email-configuration/email-configuration.module').then((m) => m.EmailConfigurationModule),
+  // },
+  // {
+  //   path: 'banners',
+  //   loadChildren: () =>
+  //     import('./banners/banner.module').then((m) => m.BannerModule),
+  // },
   {
     path: 'audit',
     loadChildren: () =>

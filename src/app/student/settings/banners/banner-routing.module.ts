@@ -6,10 +6,10 @@ import { SBannerCreateComponent } from './s-banner-create/s-banner-create.compon
 import { SBannerCreateListComponent } from './s-banner-create-list/s-banner-create-list.component';
 
 const routes: Routes = [
-  {path:'instructor-banner-list', component:IBannerListComponent},
-  {path:'create-instructor-banner', component:IBannerCreateComponent},
-  {path:'student-banner-list', component:SBannerCreateListComponent},
-  {path:'create-student-banner', component:SBannerCreateComponent}
+  {path:'settings/instructor-banner-list', component:IBannerListComponent},
+  {path:'settings/create-instructor-banner', component:IBannerCreateComponent},
+  {path:'settings/student-banner-list', component:SBannerCreateListComponent},
+  {path:'settings/create-student-banner', component:SBannerCreateComponent}
 ];
 
 @NgModule({

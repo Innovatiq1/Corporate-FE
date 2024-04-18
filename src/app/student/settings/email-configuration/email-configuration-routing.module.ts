@@ -18,59 +18,59 @@ import { DirectorCourseNotificationComponent } from './director-course-notificat
 
 const routes: Routes = [
     {
-        path: 'forgot-password',
+        path: 'settings/forgot-password',
         component: ForgotPasswordComponent
       },
       {
-        path: 'welcome-mail',
+        path: 'settings/welcome-mail',
         component: WelcomeMailComponent
       },
       {
-        path: 'instructor-request',
+        path: 'settings/instructor-request',
         component: InstructorRequestComponent
       },
       {
-        path: 'invite-user-reject',
+        path: 'settings/invite-user-reject',
         component: InviteUserRejectComponent
       },
       {
-        path: 'director-course-notification',
+        path: 'settings/director-course-notification',
         component: DirectorCourseNotificationComponent
       },
       {
-        path: 'course-referral-invite',
+        path: 'settings/course-referral-invite',
         component: CourseReferralInviteComponent
       },
       {
-        path: 'completed-course',
+        path: 'settings/completed-course',
         component: CompletedCourseComponent
       },
       {
-        path: 'course-registered-email',
+        path: 'settings/course-registered-email',
         component: InstructorCourseInviteComponent
       },
       {
-        path: 'course-approval-email',
+        path: 'settings/course-approval-email',
         component: InstructorAcceptCourseInviteComponent
       },
       {
-        path: 'send-course-invoice',
+        path: 'settings/send-course-invoice',
         component: SendCourseInvoiceComponent
       },
       {
-        path: 'admin-new-email',
+        path: 'settings/admin-new-email',
         component: AdminNewEmailComponent
       },
       {
-        path: 'program-registration-email',
+        path: 'settings/program-registration-email',
         component: ProgramRegistrationComponent
       },
       {
-        path: 'program-approval-email',
+        path: 'settings/program-approval-email',
         component: ProgramApprovalComponent
       },
       {
-        path: 'program-completion-email',
+        path: 'settings/program-completion-email',
         component: ProgramCompletionComponent
       }
 
