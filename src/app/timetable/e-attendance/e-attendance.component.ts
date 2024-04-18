@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component} from '@angular/core';
-import { FormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { CourseTitleModel } from '@core/models/class.model';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
@@ -13,7 +13,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./e-attendance.component.scss']
 })
 export class EAttendanceComponent {
-  attendanceForm: UntypedFormGroup;
+  attendanceForm!:FormGroup
   displayedColumns = [
     'Student',
     'name',
@@ -23,7 +23,6 @@ export class EAttendanceComponent {
   ];
   headeritems: string[] = ['Employee Name', ...Array.from({ length: 31 }, (_, i) => (i + 1).toString())];
   courseData = [
-    { student: 'Chung', course: 'Test', start: '17-3-24', end: '21-3-24', registered: '25-3-24' },
    
      
   ];
@@ -34,10 +33,6 @@ export class EAttendanceComponent {
   ];
   dataSource = [
     { employeeName: 'Chung' },
-    { employeeName: 'Thomas'},
-    { employeeName: 'Bolin' },
-    { employeeName: 'Yichen' },
-    { employeeName: 'Jun Hi'},
    
      
   ];
@@ -61,15 +56,11 @@ export class EAttendanceComponent {
     private cd: ChangeDetectorRef,
     private courseService: CourseService,
   ) {
-    // this.attendanceForm = new UntypedFormGroup({
-    //   fromDate: new UntypedFormControl(),
-    //   toDate: new UntypedFormControl(),
-    // });
     this.attendanceForm = this.fb.group({
-      courseName: ['',[] ],
-      programName: ['',[] ],
-      fromDate: new UntypedFormControl(),
-      toDate: new UntypedFormControl(),
+      course: ['',[] ],
+      program: ['',[] ],
+      fromDate: [''],
+      toDate: [''],
     });
     this.coursePaginationModel = {};
   }
@@ -85,6 +76,51 @@ export class EAttendanceComponent {
     });
  
   }
+  search() {
+    var startdateObj = new Date(this.attendanceForm.value.fromDate);
+    var startyear = startdateObj.getFullYear();
+    var startmonth = ("0" + (startdateObj.getMonth() + 1)).slice(-2);
+    var startday = ("0" + startdateObj.getDate()).slice(-2);
+    var starthours = ("0" + startdateObj.getHours()).slice(-2);
+    var startminutes = ("0" + startdateObj.getMinutes()).slice(-2);
+    var startseconds = ("0" + startdateObj.getSeconds()).slice(-2);
+    var startmilliseconds = ("00" + startdateObj.getMilliseconds()).slice(-3);
+    var starttimezoneOffsetMinutes = startdateObj.getTimezoneOffset();
+    var timezoneOffsetHours = Math.abs(Math.floor(starttimezoneOffsetMinutes / 60));
+    var timezoneOffsetMinutesPart = Math.abs(starttimezoneOffsetMinutes % 60);
+    // var timezoneOffset = (timezoneOffsetMinutes >= 0 ? "-" : "+") + ("0" + timezoneOffsetHours).slice(-2) + ":" + ("0" + timezoneOffsetMinutesPart).slice(-2);
+    var startDate = startyear + "-" + startmonth + "-" + startday + "T" + starthours + ":" + startminutes + ":" + startseconds + "." + startmilliseconds + '00:00';
+    
+    var enddateObj = new Date(this.attendanceForm.value.toDate);
+    var endyear = enddateObj.getFullYear();
+    var endmonth = ("0" + (enddateObj.getMonth() + 1)).slice(-2);
+    var endday = ("0" + enddateObj.getDate()).slice(-2);
+    var endhours = ("0" + enddateObj.getHours()).slice(-2);
+    var endminutes = ("0" + enddateObj.getMinutes()).slice(-2);
+    var endseconds = ("0" + enddateObj.getSeconds()).slice(-2);
+    var endmilliseconds = ("00" + enddateObj.getMilliseconds()).slice(-3);
+    var endtimezoneOffsetMinutes = enddateObj.getTimezoneOffset();
+    var endtimezoneOffsetHours = Math.abs(Math.floor(endtimezoneOffsetMinutes / 60));
+    var endtimezoneOffsetMinutesPart = Math.abs(endtimezoneOffsetMinutes % 60);
+    // var timezoneOffset = (timezoneOffsetMinutes >= 0 ? "-" : "+") + ("0" + timezoneOffsetHours).slice(-2) + ":" + ("0" + timezoneOffsetMinutesPart).slice(-2);
+    var endDate = endyear + "-" + endmonth + "-" + endday + "T" + endhours + ":" + endminutes + ":" + endseconds + "." + endmilliseconds + '00:00';
+    let body ={
+      course:this.attendanceForm.value.course,
+      program:this.attendanceForm.value.program,
+      startDate:startDate,
+      endDate:endDate
+    }
+      this._classService
+        .getAttendedStudents(body)
+        .subscribe((response: any) => {
+        console.log(response.data.docs)
+        this.courseData = response.data.data
+          this.totalItems = response.data.totalDocs;
+  
+        })
+    
+  
+      }
   onSelectCourse(event: any){
    console.log("event", event)
    if(event.value == 'course'){

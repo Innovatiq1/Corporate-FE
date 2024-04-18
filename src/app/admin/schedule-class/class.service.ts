@@ -79,6 +79,11 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
     const apiUrl = `${this.prefix}admin/studentClasses?status=approved`;
     return this.http.get<any>(apiUrl, { params: this.buildRegisteredClassesParams(page, limit, filterText) });
   }
+  getAttendedStudents(body:any): Observable<any> {
+    const apiUrl = `${this.prefix}admin/studentClasses?status=approved&course=${body.course}`;
+    return this.http.get<any>(apiUrl);
+  }
+
   getStudentRegisteredClasses(data:any) {
     return this.http.get(`${this.prefix}admin/studentClasses/`,{ params: this.buildParams(data) }).pipe(
       map((response:any) => {

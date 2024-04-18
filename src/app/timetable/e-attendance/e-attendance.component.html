@@ -27,7 +27,7 @@
                                                     <label>Select Course/Program</label>
                                                     <mat-form-field class="example-full-width mb-3"
                                                         appearance="outline">
-                                                        <mat-select required formControlName="course"
+                                                        <mat-select  formControlName="course"
                                                             (selectionChange)="onSelectCourse($event)">
                                                             <mat-option value="course">
                                                                 Course
@@ -41,16 +41,16 @@
                                                     <label>Course</label>
                                                     <mat-form-field class="example-full-width mb-3"
                                                         appearance="outline">
-                                                        <mat-select required formControlName="courseName"
+                                                        <mat-select  formControlName="course"
                                                             (selectionChange)="onSelectChange($event)">
                                                             <mat-option *ngFor="let course of courseList"
-                                                                [value]="course.id">
+                                                                [value]="course.title">
                                                                 {{ course.title }}
                                                             </mat-option>
                                                         </mat-select>
                                                         <mat-error *ngIf="
-                                                        attendanceForm.get('courseName')?.hasError('required') ||
-                                                        attendanceForm.get('courseName')?.touched
+                                                        attendanceForm.get('course')?.hasError('required') ||
+                                                        attendanceForm.get('course')?.touched
                                                             ">
                                                             Course Name is required.
                                                         </mat-error>
@@ -60,16 +60,16 @@
                                                     <label>Program</label>
                                                     <mat-form-field class="example-full-width mb-3"
                                                         appearance="outline">
-                                                        <mat-select required formControlName="programName"
+                                                        <mat-select  formControlName="program"
                                                             (selectionChange)="onSelectChange1($event)">
                                                             <mat-option *ngFor="let program of programList"
-                                                                [value]="program.id">
+                                                                [value]="program.title">
                                                                 {{ program.title }}
                                                             </mat-option>
                                                         </mat-select>
                                                         <mat-error *ngIf="
-                                                        attendanceForm.get('programName')?.hasError('required') ||
-                                                        attendanceForm.get('programName')?.touched
+                                                        attendanceForm.get('program')?.hasError('required') ||
+                                                        attendanceForm.get('program')?.touched
                                                               ">
                                                             Program Name is required.
                                                         </mat-error>
@@ -99,7 +99,7 @@
                                                 </div>
                                                 <div class="col-2 mt-4">
                                                     <button mat-raised-button id="submit"
-                                                        class="big-button mt-2">Search</button>
+                                                        class="big-button mt-2"  (click)="search()">Search</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -112,14 +112,14 @@
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Student
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row" class="name"> <span
-                                                        class="mobile-label">Student:</span>{{row.student}}
+                                                        class="mobile-label">Student:</span>{{row?.studentId?.name}}
                                                 </mat-cell>
                                             </ng-container>
                                             <ng-container matColumnDef="name">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Course
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row"><span class="mobile-label">Course
-                                                        Name:</span> <span>{{row.course |titlecase}}</span>
+                                                        Name:</span> <span>{{row?.title |titlecase}}</span>
                                                 </mat-cell>
                                             </ng-container>
 
@@ -127,21 +127,21 @@
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row"> <span class="mobile-label">Start
-                                                        Date:</span><span>{{row.start}}</span>
+                                                        Date:</span><span>{{row?.classId?.sessions[0]?.sessionStartDate|date}}</span>
                                                 </mat-cell>
                                             </ng-container>
                                             <ng-container matColumnDef="endDate">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row"> <span class="mobile-label">End
-                                                        date:</span><span>{{row.end}}</span>
+                                                        date:</span><span>{{row?.classId?.sessions[0]?.sessionEndDate|date}}</span>
                                                 </mat-cell>
                                             </ng-container>
                                             <ng-container matColumnDef="registeredDate">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Registered Date
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row"> <span class="mobile-label">Registered
-                                                        date:</span><span>{{row.registered}}</span>
+                                                        date:</span><span>{{row.registeredOn|date}}</span>
                                                 </mat-cell>
                                             </ng-container>
 
@@ -237,7 +237,7 @@
                                                     <label>Select Course/Program</label>
                                                     <mat-form-field class="example-full-width mb-3"
                                                         appearance="outline">
-                                                        <mat-select required formControlName="course"
+                                                        <mat-select  formControlName="course"
                                                             (selectionChange)="onSelectCourse($event)">
                                                             <mat-option value="course">
                                                                 Course
@@ -251,38 +251,38 @@
                                                     <label>Course</label>
                                                     <mat-form-field class="example-full-width mb-3"
                                                         appearance="outline">
-                                                        <mat-select required formControlName="courseName"
+                                                        <mat-select  formControlName="course"
                                                             (selectionChange)="onSelectChange($event)">
                                                             <mat-option *ngFor="let course of courseList"
                                                                 [value]="course.id">
                                                                 {{ course.title }}
                                                             </mat-option>
                                                         </mat-select>
-                                                        <mat-error *ngIf="
+                                                        <!-- <mat-error *ngIf="
                                                         attendanceForm.get('courseName')?.hasError('required') ||
                                                         attendanceForm.get('courseName')?.touched
                                                             ">
                                                             Course Name is required.
-                                                        </mat-error>
+                                                        </mat-error> -->
                                                     </mat-form-field>
                                                 </div>
                                                 <div class="col-3" *ngIf="isProgram && !isCourse">
                                                     <label>Program</label>
                                                     <mat-form-field class="example-full-width mb-3"
                                                         appearance="outline">
-                                                        <mat-select required formControlName="programName"
+                                                        <mat-select  formControlName="program"
                                                             (selectionChange)="onSelectChange1($event)">
                                                             <mat-option *ngFor="let program of programList"
                                                                 [value]="program.id">
                                                                 {{ program.title }}
                                                             </mat-option>
                                                         </mat-select>
-                                                        <mat-error *ngIf="
+                                                        <!-- <mat-error *ngIf="
                                                         attendanceForm.get('programName')?.hasError('required') ||
                                                         attendanceForm.get('programName')?.touched
                                                               ">
                                                             Program Name is required.
-                                                        </mat-error>
+                                                        </mat-error> -->
                                                     </mat-form-field>
                                                 </div>
                                                 <div class="col-2">
@@ -309,7 +309,7 @@
                                                 </div>
                                                 <div class="col-2 mt-4">
                                                     <button mat-raised-button id="submit"
-                                                        class="big-button mt-2">Search</button>
+                                                        class="big-button mt-2" (click)="search()">Search</button>
                                                 </div>
                                             </div>
                                         </form>
