@@ -60,7 +60,7 @@ export class MainComponent implements OnInit {
   breadscrums = [
     {
       title: 'Dashboad',
-      items: [],
+      items: ['Dashboad'],
       active: 'Analytics',
     },
   ];

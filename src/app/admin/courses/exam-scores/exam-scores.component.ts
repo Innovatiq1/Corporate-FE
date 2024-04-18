@@ -27,8 +27,8 @@ export class ExamScoresComponent {
   breadscrums = [
     {
       title: 'Exam Scores',
-      items: ['Exam Scores'],
-      active: 'exam scores',
+      items: ['Course'],
+      active: 'Exam Scores',
     },
   ];
 

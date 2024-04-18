@@ -16,7 +16,7 @@ export class CreateFeedbackComponent  {
   breadscrums = [
     {
       title: 'Feedback',
-      items: ['Feedback'],
+      items: ['Customize'],
       active: 'Create Feedback Form',
     },
   ];

@@ -14,8 +14,8 @@ export class ViewDepartmentComponent implements OnInit{
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Users'],
-      active: 'View Departments',
+      items: ['Department Profile'],
+      active: 'View Department Profile',
     },
   ];
 
@@ -73,7 +73,7 @@ delete(id: string) {
 }
 editCall(row: Department) {
   this.id = row.id;
-  this.router.navigate(['/admin/departments/edit-department/' + this.id])
+  this.router.navigate(['/student/settings/edit-department/' + this.id])
 
 }
 

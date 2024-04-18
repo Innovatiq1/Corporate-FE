@@ -16,8 +16,8 @@ export class FeedbackViewComponent {
   breadscrums = [
     {
       title: 'Feedback',
-      items: ['Feedback'],
-      active: 'View Feedback Form',
+      items: ['Survey List'],
+      active: 'View Survey',
     },
   ];
   surveyId!: string;

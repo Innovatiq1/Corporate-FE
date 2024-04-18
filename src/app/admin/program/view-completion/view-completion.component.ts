@@ -13,7 +13,7 @@ export class ViewCompletionComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Completed Program'],
+      items: ['Completed Programs'],
       active: 'View Completed Program',
     },
   ];
@@ -42,7 +42,7 @@ export class ViewCompletionComponent {
       this.breadscrums = [
         {
           title: 'Blank',
-          items: ['Approved Program'],
+          items: ['Approved Programs'],
           active: 'View Approved Program',
         },
       ];

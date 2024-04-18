@@ -15,7 +15,7 @@ export class ViewCourseKitComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Settings'],
+      items: ['Course Kit'],
       active: 'View CourseKit',
     },
   ];

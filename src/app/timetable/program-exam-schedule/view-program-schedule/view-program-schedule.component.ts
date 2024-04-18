@@ -14,8 +14,8 @@ export class ViewProgramScheduleComponent {
   breadscrums = [
     {
       title: 'Edit Exam-Schedule',
-      items: ['ExamSchedule'],
-      active: 'View',
+      items: ['Program Exam Schedule'],
+      active: 'View Program Exam Schedule',
     },
   ];
   

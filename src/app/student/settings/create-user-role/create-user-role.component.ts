@@ -30,7 +30,7 @@ export class CreateUserRoleComponent {
     {
       title: 'Admin',
       items: ['Manage Users'],
-      active: ' ',
+      active: 'Role ',
     },
   ];
   ngOnInit() {
@@ -38,7 +38,7 @@ export class CreateUserRoleComponent {
   }
 
   edit(id:any){
-    this.router.navigate(['/admin/users/edit-user-type'],{queryParams:{id:id}});
+    this.router.navigate(['/student/settings/create-user-type'],{queryParams:{id:id}});
   // this.router.navigate(['/Users/Type/edit'],{queryParams:{id:id}});
   }
   getAllUserTypes(filters?: any) {
@@ -67,7 +67,7 @@ export class CreateUserRoleComponent {
             text: 'Role created succesfully.Add modules by selecting the role from existing roles',
             icon: 'success',
           }).then((result) => {
-            this.router.navigate(['admin/users/create-user-type'])
+            this.router.navigate(['student/settings/create-user-type'])
           }
           );
           this.userTypeFormGroup.reset();

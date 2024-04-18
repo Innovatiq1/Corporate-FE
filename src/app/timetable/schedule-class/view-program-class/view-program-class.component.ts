@@ -13,8 +13,8 @@ export class ViewProgramClassComponent {
   breadscrums = [
     {
       title: 'Schedule Class',
-      items: ['Schedule Class'],
-      active: 'View',
+      items: ['Program Class'],
+      active: 'View Program Class',
     },
   ];
   

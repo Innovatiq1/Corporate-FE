@@ -59,7 +59,7 @@ export class AllstaffComponent
   breadscrums = [
     {
       title: 'Staff',
-      items: ['Users'],
+      items: ['User Profile'],
       active: 'Staff',
     },
   ];
@@ -86,17 +86,17 @@ export class AllstaffComponent
     this.loadData();
   }
   addNew() {
-    this.router.navigate(['/admin/users/add-staff']);
+    this.router.navigate(['/student/settings/add-staff']);
   }
 
   aboutStaff(id:any){
-    this.router.navigate(['/admin/users/about-staff'],{queryParams:{data:id}})
+    this.router.navigate(['/student/settings/about-staff'],{queryParams:{data:id}})
 
   }
 
   editCall(row: Staff) {
     console.log("rowEdit",row)
-    this.router.navigate(['/admin/users/add-staff'],{queryParams:row});
+    this.router.navigate(['/student/settings/add-staff'],{queryParams:row});
   }
 
 

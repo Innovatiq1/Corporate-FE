@@ -117,6 +117,11 @@
                   <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-class/',row.id]">
                     <span class="mobile-label">Amount:</span>$ {{row.instructorCost}}</mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="Department">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-class/',row.id]">
+                    <span class="mobile-label">Department:</span> {{row.department}}</mat-cell>
+                </ng-container>
                 <!-- Start date -->
                 <ng-container matColumnDef="Start Date">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Start

@@ -18,9 +18,9 @@ import { Router } from '@angular/router';
 export class AllCourseComponent {
   breadscrums = [
     {
-      title: 'All Course',
+      title: 'Course List',
       items: ['Course'],
-      active: 'All Course',
+      active: 'Course List',
     },
   ];
   displayedColumns = [

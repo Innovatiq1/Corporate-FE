@@ -15,8 +15,8 @@ export class ViewCompletionComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Courses'],
-      active: 'View Completion List',
+      items: ['Completed Courses'],
+      active: 'View Completion Course',
     },
   ];
 
@@ -38,9 +38,23 @@ export class ViewCompletionComponent {
   if(params['status'] === 'pending') {
     this.status = true;
     this.showTab = false;
+    this.breadscrums = [
+      {
+        title: 'Blank',
+        items: ['Pending Courses'],
+        active: 'View Pending Courses',
+      },
+    ];
   } else if(params['status'] === 'approved') {
     this.status = false;
     this.showTab = false;
+    this.breadscrums = [
+      {
+        title: 'Blank',
+        items: ['Approved Courses'],
+        active: 'View Approved Courses',
+      },
+    ];
   }
   this.paramStatus =  params['status'];
       // if(this.courseId){

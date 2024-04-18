@@ -43,8 +43,8 @@ export class AddDepartmentComponent  implements OnInit {
       this.breadscrums = [
         {
           title:'Edit Department',
-          items: ['Department'],
-          active: 'Edit',
+          items: ['Department Profile'],
+          active: 'Edit Department Profile',
         },
       ];
     }

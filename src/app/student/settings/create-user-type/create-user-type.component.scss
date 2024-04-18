@@ -1,0 +1,47 @@
+
+.menu{
+    font-size: 16px;
+    font-weight: 400;
+    padding-top: 15px;
+}
+.sub-menu{
+    margin-bottom: -15px;
+}
+
+.sub{
+    width: 50%;
+    height: 55px;
+    text-align: center;
+    border: 1px solid #7A7A7A;
+    color: #526D82;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    margin-top: 28px;
+  }
+#submit {
+    margin-left: 50px;
+    
+}
+.submit{
+    margin-top: 35px;
+}
+.mandatory {
+    color: red;
+}
+.card-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    float: right;
+    width: 50%;
+    margin-top: 30px;
+    // margin-left: 50px;
+  }
+  
+ 
+  .img-w{
+    height: 20px;
+    margin-right: 25px;
+    margin-top: 20px;
+    }

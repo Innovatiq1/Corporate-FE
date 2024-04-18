@@ -29,6 +29,7 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
     'Course',
     'Code',
     'Price',
+    'Department',
     'Start Date',
     'End Date',
     'Class'

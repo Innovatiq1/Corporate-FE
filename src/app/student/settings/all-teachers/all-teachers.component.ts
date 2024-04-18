@@ -67,7 +67,7 @@ export class AllTeachersComponent
   breadscrums = [
     {
       title: 'Instructors',
-      items: ['Users'],
+      items: ['User Profile'],
       active: 'Instructors',
     },
   ];
@@ -105,12 +105,12 @@ export class AllTeachersComponent
     //this.location.re
   }
   addNew() {
-    this.route.navigateByUrl("/admin/users/add-instructor")
+    this.route.navigateByUrl("/student/settings/add-instructor")
 
 
   }
   aboutInstructor(id:any){
-    this.route.navigate(['/admin/users/about-instructor'],{queryParams:{data:id}})
+    this.route.navigate(['/student/settings/view-instructor'],{queryParams:{data:id}})
 
   }
   // performSearch() {

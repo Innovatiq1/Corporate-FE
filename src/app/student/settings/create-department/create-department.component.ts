@@ -16,7 +16,7 @@ export class CreateDepartmentComponent {
   breadscrums = [
     {
       title: 'Department',
-      items: ['Department'],
+      items: ['Manage Users'],
       active: 'Department',
     },
   ];

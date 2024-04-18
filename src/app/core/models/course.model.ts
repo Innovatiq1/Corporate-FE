@@ -248,6 +248,7 @@ export interface CoursePaginationModel extends Pagination {
 	sortByDirection: string;
 	status: string;
 	studentId: any;
+	department:string;
 }
 
 export interface ProgramCourse {

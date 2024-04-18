@@ -34,8 +34,8 @@ export class CoursePaymentComponent {
   breadscrums = [
     {
       // title: 'Programs',
-      items: ['Payments'],
-      active: 'Course Payments',
+      items: ['Finance'],
+      active: 'Course Payment',
     },
   ];
   courseKitModel!: Partial<CourseKitModel>;

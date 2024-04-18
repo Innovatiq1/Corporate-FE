@@ -39,6 +39,7 @@ export class CreateClassComponent {
   item: any;
   editUrl!: boolean;
   subscribeParams: any;
+  dept: any;
   @HostListener('document:keypress', ['$event'])
   keyPressNumbers(event: KeyboardEvent) {
     const charCode = event.which ? event.which : event.keyCode;
@@ -162,6 +163,7 @@ export class CreateClassComponent {
     this.subscribeParams = this._activeRoute.params.subscribe((params:any) => {
       this.classId = params.id;
     });
+    this.getDepartments();
 
     this.loadForm();
     if(!this.editUrl){
@@ -204,6 +206,7 @@ export class CreateClassComponent {
         instructorCostCurrency: item?.instructorCostCurrency,
         isGuaranteedToRun:item?.isGuaranteedToRun,
         externalRoom:item?.externalRoom,
+        department:item?.department,
         minimumEnrollment: item?.minimumEnrollment,
         maximumEnrollment: item?.maximumEnrollment,
         // status: item?.status,
@@ -245,6 +248,11 @@ export class CreateClassComponent {
     this.studentsService.getStudentById(this.studentId).subscribe(res => {
     })
 }
+getDepartments() {
+  this.studentsService.getAllDepartments().subscribe((response: any) => {
+    this.dept = response.data.docs;
+  });
+}
   loadForm() {
     this.classForm = this._fb.group({
       courseId: ['', [Validators.required]],
@@ -253,6 +261,7 @@ export class CreateClassComponent {
       instructorCost: ['', Validators.required],
       instructorCostCurrency: ['USD'],
       currency: [''],
+      department:['',Validators.required],
       isGuaranteedToRun: [false, Validators.required],
       externalRoom: [false],
       minimumEnrollment: ['', Validators.required],

@@ -13,8 +13,8 @@ export class ViewClassComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Courses'],
-      active: 'View Class',
+      items: ['Course Class'],
+      active: 'View Course Class',
     },
   ];
   classDataById: any;

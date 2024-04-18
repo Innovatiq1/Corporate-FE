@@ -37,7 +37,7 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
       if (filter.filterCompletedCourse) params = params.set("title", filter.filterCompletedCourse?.toString());
       if (filter.studentId) params = params.set("studentId", filter.studentId);
       if (filter.status) params = params.set("status", filter.status);
-
+      if (filter.department) params = params.set("department", filter.department);
     }
     return params;
   }

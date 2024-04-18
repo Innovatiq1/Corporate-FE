@@ -45,6 +45,7 @@ export class CourseComponent {
 
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   tab: number = 0;
+  department: any;
 
 
   constructor(public _courseService:CourseService,  private classService: ClassService) {
@@ -52,7 +53,7 @@ export class CourseComponent {
     this.studentRegisteredModel = {};
     this.studentApprovedModel = {};
     this.studentCompletedModel = {};
-
+    this.department= JSON.parse(localStorage.getItem('user_data')!).user.department;
   }
 
   ngOnInit(){
@@ -75,9 +76,8 @@ export class CourseComponent {
   }
 getAllCourse(){
   let filterText = this.filterName
-  this.classService.getClassListWithPagination({ filterText,...this.coursePaginationModel, status: 'open' }).subscribe(response =>{
+  this.classService.getClassListWithPagination({ filterText,...this.coursePaginationModel, status: 'open' ,department:this.department}).subscribe(response =>{
    this.classesData = response.data.docs;
-   console.log(this.classesData,"====++");
    this.totalItems = response.data.totalDocs
    this.coursePaginationModel.docs = response.data.docs;
    this.coursePaginationModel.page = response.data.page;

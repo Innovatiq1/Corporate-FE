@@ -25,35 +25,46 @@
 
   <div class="container fade-in">
     <h1 class="text-capitalize">{{ data.title }}</h1>
-
     <div class="row">
-        <div class="col-md-6">
-            <p class="info-text">Date: <span class="highlight">{{ data.sessionStartDate | date }} - {{ data.sessionEndDate | date }}</span></p>
-        </div>
-        <div class="col-md-6">
-            <p class="info-text">Time: <span class="highlight">{{ data.sessionStartTime }} - {{ data.sessionEndTime }}</span></p>
-        </div>
+      <div class="col-md-3" *ngIf="code">
+        <p class="info-text">Program Code</p>
     </div>
+    <div class="col-md-2" *ngIf="code">
+      <p class="info-text"> <span class="highlight">{{ data.programCode }}</span></p>
+  </div>
 
+  <div class="col-md-3" *ngIf="!code">
+    <p class="info-text">Course Code</p>
+</div>
+<div class="col-md-2" *ngIf="!code">
+  <p class="info-text"> <span class="highlight">{{ data.courseCode }}</span></p>
+</div>
+
+  <div class="col-md-3">
+    <p class="info-text">Time </p>
+</div>
+<div class="col-md-3">
+  <p class="info-text"><span class="highlight">{{ data.sessionStartTime  }} - {{data.sessionEndTime}}</span></p>
+</div>
+        <!-- <div class="col-md-6">
+            <p class="info-text">Time <span class="highlight">{{ data.sessionStartTime }} - {{ data.sessionEndTime }}</span></p>
+        </div> -->
+    </div>
     <div class="row">
-        <div class="col-md-6">
-            <p class="info-text">Course Code: <span class="highlight">{{ data.courseCode }}</span></p>
-        </div>
-        <div class="col-md-6">
-            <p class="info-text">Status: <span class="highlight">{{ data.status }}</span></p>
-        </div>
+      <div class="col-md-3">
+        <p class="info-text">Class</p>
     </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <p class="info-text">Delivery Type: <span class="highlight">{{ data.deliveryType }}</span></p>
-        </div>
-        <div class="col-md-6">
-            <p class="info-text">Instructor Cost: <span class="highlight">{{ data.instructorCost }}</span></p>
-        </div>
+    <div class="col-md-2">
+      <p class="info-text"> <span class="highlight">{{ data.deliveryType | titlecase}}</span></p>
+  </div>
+  <div class="col-md-3">
+    <p class="info-text">Instructor Cost </p>
+</div>
+<div class="col-md-4">
+  <p class="info-text"><span class="highlight">$ {{ data.instructorCost  }}</span></p>
+</div>
     </div>
-
     <div class="text-right mt-4">
-        <button type="button" class="btn"  mat-button mat-dialog-close>Close</button>
+        <button type="button" mat-raised-button color="warn"  mat-button mat-dialog-close>Close</button>
     </div>
 </div>
