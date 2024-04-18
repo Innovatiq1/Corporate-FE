@@ -4,22 +4,9 @@
     padding: 1.5rem;
     width: 400px; 
     margin: 0 auto;
-    background-color: #f9f9f9;
+    background-color: white;
 
-    .caution-icon {
-        background-color: #f6c343;
-        color: #fff;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        font-size: 1.2rem;
-        font-weight: bold;
-        position: absolute;
-        top: -15px;
-        left: 15px;
-    }
+    
   
     .summary-heading {
         font-size: 1.5rem;
@@ -36,17 +23,17 @@
         margin-bottom: 1rem;
         
         label {
-            display: block;
-            position: relative;
-            color: #999; /* Lighter color for labels */
+            font-size: 16px;
+            font-weight: 500;
+            font-family: sans-serif;
         }
   
         input, select {
-            width: calc(100% - 30px);
+            width: 100%;
             padding: 0.5rem;
-            border: 1px solid black;
+            // border: 1px solid black;
             border-radius: 13px;
-            background-color: #f6f6f6;
+            background-color: transparent;
             color: black;
         }
 
@@ -99,3 +86,36 @@
     height: auto;
     min-height: 3rem;
 }
+.custom-field {
+    width: 100%;
+}
+
+.mat-form-field-underline {
+    display: none;
+}
+.date-input {
+    border: none;
+    outline: none; /* Optional: removes focus outline */
+}
+#date{
+    width: 53rem;
+    height: 56px;
+    margin-bottom: 20px;
+    border: 1px solid rgb(173, 177, 177);
+    border-radius: 12px;
+    font-size: 16px;
+    font-style: italic;
+    padding: 10px;
+
+  }
+  .submit{
+    // margin-left: -10px;
+      margin-bottom: 20px;
+      background: #6777ef;
+      border: none;
+      width: 25%;
+      height: 45px;
+      border-radius: 10px;
+      color: #FFF;
+      font-weight: 700;
+  }
