@@ -1,1 +1,44 @@
-<p>reports works!</p>
+
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+        <div class="payroll-summary-card" style="width: 95%;">
+            <form (ngSubmit)="generateReport()">
+                <div class="form-group">
+                    <label for="payRunDate">Date:</label>
+                    <div class="input-with-icon">
+                        <input type="date" id="payRunDate" [(ngModel)]="payRunDate" name="payRunDate" class="form-control">
+                        
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="position">Users:</label>
+                    <div class="input-with-icon">
+                        <select id="position" [(ngModel)]="position" name="position" class="form-control">
+                            <option value="server">Server</option>
+                            <option value="bartender">Bartender</option>
+                        </select>
+                        <i class="fas fa-user icon" style="margin-right: 32px;"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="department">Departments:</label>
+                    <div class="input-with-icon">
+                        <select id="department" [(ngModel)]="department" name="department" class="form-control">
+                            <option value="frontOfHouse">Front of House</option>
+                        </select>
+                        <i class="fas fa-building icon" style="margin-right: 32px;"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-report">Generate Report <i class="fas fa-arrow-right"></i></button>
+            </form>
+        </div>
+    </div>
+</section>
