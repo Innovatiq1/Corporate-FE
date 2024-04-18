@@ -100,7 +100,7 @@
                 
                 <!-- Start date -->
                 <ng-container matColumnDef="Class Start Date">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Class Start
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-completion-list/',row.id]">
                     <span class="mobile-label">Class Start Date:</span>{{row?.classId?.sessions[0]?.sessionStartDate |date}} </mat-cell>
@@ -108,15 +108,31 @@
 
                 <!-- Enddate -->
                 <ng-container matColumnDef="Class End Date">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header> End Date
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Class End
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-completion-list/',row.id]">
                     <span class="mobile-label">Class End Date:</span>{{row?.classId?.sessions[0]?.sessionEndDate |date}} </mat-cell>
                 </ng-container>
+
+                <ng-container matColumnDef="Registered Date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Registered Date
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-completion-list/',row.id]">
+                    <span class="mobile-label">Registered Date:</span>{{row.registeredOn | date}} </mat-cell>
+                </ng-container>
+
+                <!-- Enddate -->
+                <ng-container matColumnDef="Completed Date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Completed Date
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-completion-list/',row.id]">
+                    <span class="mobile-label">Completed Date:</span>{{row.updatedAt | date}} </mat-cell>
+                </ng-container>
+
                 <!-- actions -->
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
-                  <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                  <mat-cell *matCellDef="let row; let i=index;" class="mat-column-actions pr-0">
                     <div *ngIf="row.certificate">
                       <span class="label l-bg-green shadow-style" mat-raised-button id="issued" >Certificate issued</span>
                     

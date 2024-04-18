@@ -105,7 +105,7 @@
                           <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
                           </mat-header-cell>
                           <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <span
-                              class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"  (click)="editCall(row)"/>
+                              class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"  (click)="aboutStudent(row.id)"/>
                           </mat-cell>
                         </ng-container>
                         <!-- <ng-container matColumnDef="rollNo">
@@ -125,13 +125,13 @@
                         <ng-container matColumnDef="department">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Department
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                          <mat-cell *matCellDef="let row"  (click)="aboutStudent(row.id)" (contextmenu)="onContextMenu($event, row)">
                             <span class="mobile-label">Department:</span> {{row?.department}}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="gender">
                           <mat-header-cell *matHeaderCellDef mat-sort-header> Gender
                           </mat-header-cell>
-                          <mat-cell mat-cell *matCellDef="let row"  (click)="editCall(row)">
+                          <mat-cell mat-cell *matCellDef="let row"  (click)="aboutStudent(row.id)">
                             <span class="mobile-label">Gender:</span>
                             <div *ngIf="row.gender==='male'">
                               <span class="badge badge-solid-green">
@@ -150,20 +150,20 @@
                         <ng-container matColumnDef="education">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Education
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)"> <span
+                          <mat-cell *matCellDef="let row"  (click)="aboutStudent(row.id)" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Mobile:</span>{{row?.education}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="mobile">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row"  (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)"> <span
+                          <mat-cell *matCellDef="let row"  (click)="aboutStudent(row.id)" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Mobile:</span>{{row?.mobile}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="email">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                          <mat-cell *matCellDef="let row" (click)="editCall(row)" (contextmenu)="onContextMenu($event, row)">
+                          <mat-cell *matCellDef="let row" (click)="aboutStudent(row.id)" (contextmenu)="onContextMenu($event, row)">
                             <span class="mobile-label">Email:</span>
                             <img src="assets/images/gmail.png" alt="Email Icon" class="email-icon">
                             <!-- Replace "email-icon.png" with the filename of your PNG icon -->
@@ -188,7 +188,7 @@
                         <ng-container matColumnDef="status">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Status
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" (click)="editCall(row)"> <span
+                          <mat-cell *matCellDef="let row" (click)="aboutStudent(row.id)"> <span
                               class="mobile-label">Status:</span><span [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
                                 <span [class]="row?.Active ? 'status-dot' : 'status-red'"></span>
                                 {{row.Active ?  'Active': 'Inactive' }}
