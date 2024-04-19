@@ -63,6 +63,7 @@ import { AboutTeacherComponent } from './settings/about-teacher/about-teacher.co
 import { EditTeacherComponent } from './settings/edit-teacher/edit-teacher.component';
 import { AddStaffComponent } from './settings/add-staff/add-staff.component';
 import { AboutStaffComponent } from './settings/about-staff/about-staff.component';
+import { ExamResultsComponent } from './exam-results/exam-results.component';
 
 
 const routes: Routes = [
@@ -99,6 +100,11 @@ const routes: Routes = [
     path: 'enrollment/exam',
     component: ExamComponent,
   },
+  {
+    path: 'enrollment/exam-results',
+    component: ExamResultsComponent,
+  },
+
   {
     path: 'view-program/:id',
     component: ViewProgramComponent,

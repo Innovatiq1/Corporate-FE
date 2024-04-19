@@ -96,5 +96,19 @@ import { ApiResponse } from '@core/models/general.response';
     }
 
 
+    updateAssessment(data: any): Observable<any> {
+      const apiUrl = `${this.defaultUrl}admin/exam-assesment-answers/${data.id}`;
+      return this.http.put<ApiResponse>(apiUrl, data).pipe(
+        map(response => response)
+      );
+    }
+
+    updateExamStatus(examId: string): Observable<any> {
+      const url = `${this.defaultUrl}admin/assesment-answers/${examId}`;
+      return this.http.put(url, {});
+    }
+
+
+
   }
   

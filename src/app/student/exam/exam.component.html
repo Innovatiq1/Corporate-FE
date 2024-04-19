@@ -44,13 +44,13 @@
                             </ng-container>
                             <ng-container matColumnDef="Score">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Score</mat-header-cell>
-                                <mat-cell *matCellDef="let row"><span class="mobile-label">Score:</span>{{row.score}}
+                                <mat-cell *matCellDef="let row"><span class="mobile-label">Score:</span>{{row.score}} / {{row?.courseId?.exam_assessment?.questions?.length}}
                                 </mat-cell>
                               </ng-container>
                               <ng-container matColumnDef="Exam">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Exam</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                  <button [routerLink]="['/student/exam-questions/',  row.id, row?.studentId?.id, row?.courseId?._id, row?.courseId?.exam_assessment?.id]" mat-flat-button color="{{ row.is_course_completed ? 'primary' : 'warn' }}">
+                                  <button [disabled]="row.is_exam_completed" [routerLink]="['/student/exam-questions/',  row.id, row?.studentId?.id, row?.courseId?._id, row?.courseId?.exam_assessment?.id]" mat-flat-button color="{{ row.is_course_completed ? 'primary' : 'warn' }}">
                                     {{ row.is_course_completed ? 'Take Exam Test' : 'Approval Pending' }}
                                   </button>
                                 </mat-cell>
