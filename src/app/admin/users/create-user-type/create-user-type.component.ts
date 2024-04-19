@@ -11,7 +11,6 @@ import { UtilsService } from '@core/service/utils.service';
 import { MENU_LIST } from '@shared/menu-item';
 import { LogoService } from 'app/student/settings/logo.service';
 import Swal from 'sweetalert2';
-import { ArrayFilterPipe } from './create-user.pipe';
 
 @Component({
   selector: 'app-create-user-type',

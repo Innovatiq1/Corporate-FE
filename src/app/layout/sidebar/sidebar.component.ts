@@ -90,7 +90,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
   callToggleMenu(event: Event, length: number) {
-    
+
     if (length > 0) {
       const parentElement = (event.target as HTMLInputElement).closest('li');
       const activeClass = parentElement?.classList.contains('active');
@@ -135,11 +135,8 @@ navigateToSubItem2(menu:any,url?:any,subUrl?: any) {
   this.menuItemClick.emit();
   let userType = localStorage.getItem('user_type')
   this.router.navigateByUrl( menu +'/'+url +'/'+subUrl);
-  
+
 }
-
-
-
   ngOnInit() {
     this.userProfile = this.authenService.getUserProfile();
 
