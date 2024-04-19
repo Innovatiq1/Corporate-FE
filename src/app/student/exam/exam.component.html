@@ -44,7 +44,7 @@
                             </ng-container>
                             <ng-container matColumnDef="Score">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Score</mat-header-cell>
-                                <mat-cell *matCellDef="let row"><span class="mobile-label">Score:</span>{{row.score}}
+                                <mat-cell *matCellDef="let row"><span class="mobile-label">Score:</span>{{row.score}} / {{row?.courseId?.exam_assessment?.questions?.length}}
                                 </mat-cell>
                               </ng-container>
                               <ng-container matColumnDef="Exam">
