@@ -50,7 +50,7 @@
                               <ng-container matColumnDef="Exam">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Exam</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                  <button [routerLink]="['/student/exam-questions/',  row.id, row?.studentId?.id, row?.courseId?._id, row?.courseId?.exam_assessment?.id]" mat-flat-button color="{{ row.is_course_completed ? 'primary' : 'warn' }}">
+                                  <button [disabled]="row.is_exam_completed" [routerLink]="['/student/exam-questions/',  row.id, row?.studentId?.id, row?.courseId?._id, row?.courseId?.exam_assessment?.id]" mat-flat-button color="{{ row.is_course_completed ? 'primary' : 'warn' }}">
                                     {{ row.is_course_completed ? 'Take Exam Test' : 'Approval Pending' }}
                                   </button>
                                 </mat-cell>
