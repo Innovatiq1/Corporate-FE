@@ -21,7 +21,7 @@ export class ViewUsersComponent implements OnInit{
     {
       title: 'Profile',
       items: ['Users'],
-      active: 'Profile2',
+      active: 'Profile',
     },
   ];
   aboutDataId:any;

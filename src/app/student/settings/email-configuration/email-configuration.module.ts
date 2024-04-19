@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ComponentsModule } from "../../shared/components/components.module";
+import { ComponentsModule } from '@shared/components/components.module';
 import { SharedModule } from '@shared';
 import { EmailConfigurationRoutingModule } from './email-configuration-routing.module';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';

@@ -5,7 +5,7 @@ import { IBannerCreateComponent } from './i-banner-create/i-banner-create.compon
 import { SBannerCreateComponent } from './s-banner-create/s-banner-create.component';
 import { SBannerCreateListComponent } from './s-banner-create-list/s-banner-create-list.component';
 import { BannerRoutingModule } from './banner-routing.module';
-import { ComponentsModule } from "../../shared/components/components.module";
+import { ComponentsModule } from '@shared/components/components.module';
 import { SharedModule } from '@shared';
 
 

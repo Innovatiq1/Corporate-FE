@@ -105,7 +105,7 @@
                           <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
                           </mat-header-cell>
                           <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"><span
-                              class="mobile-label">Image:</span> <img [src]="row.avatar || 'assets/profile.png'" [routerLink]="['/admin/users/edit-instructor',row.id]"/>
+                              class="mobile-label">Image:</span> <img [src]="row.avatar || 'assets/profile.png'" (click)="aboutInstructor(row.id)"/>
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="name">
@@ -118,13 +118,13 @@
                         <ng-container matColumnDef="department">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Department
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)">
+                          <mat-cell *matCellDef="let row" (click)="aboutInstructor(row.id)" (contextmenu)="onContextMenu($event, row)">
                             <span class="mobile-label">Department:</span>{{row.department}}</mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="gender">
                           <mat-header-cell *matHeaderCellDef mat-sort-header> Gender
                           </mat-header-cell>
-                          <mat-cell mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]">
+                          <mat-cell mat-cell *matCellDef="let row" (click)="aboutInstructor(row.id)">
                             <span class="mobile-label">Gender:</span>
                             <div *ngIf="row.gender==='male'">
                               <span class="badge badge-solid-green">
@@ -143,20 +143,20 @@
                         <ng-container matColumnDef="degree">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Education
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)"> <span
+                          <mat-cell *matCellDef="let row" (click)="aboutInstructor(row.id)" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Education:</span>{{row.qualification}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="mobile">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)"> <span
+                          <mat-cell *matCellDef="let row" (click)="aboutInstructor(row.id)" (contextmenu)="onContextMenu($event, row)"> <span
                               class="mobile-label">Mobile:</span>{{row.mobile}}
                           </mat-cell>
                         </ng-container>
                         <ng-container matColumnDef="email">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                          <mat-cell *matCellDef="let row"  [routerLink]="['/admin/users/edit-instructor',row.id]" (contextmenu)="onContextMenu($event, row)">
+                          <mat-cell *matCellDef="let row"  (click)="aboutInstructor(row.id)" (contextmenu)="onContextMenu($event, row)">
                             <span class="mobile-label">Email:</span>
                             <img src="assets/images/gmail.png" alt="Email Icon" class="email-icon">
                             <!-- Replace "email-icon.png" with the filename of your PNG icon -->
@@ -173,7 +173,7 @@
                         <ng-container matColumnDef="Status">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Status
                           </mat-header-cell>
-                          <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-instructor',row.id]"> <span
+                          <mat-cell *matCellDef="let row" (click)="aboutInstructor(row.id)"> <span
                               class="mobile-label">Status:</span><span [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
                                 <span [class]="row?.Active ? 'status-dot' : 'status-red'"></span>
                                 {{row.Active ?  'Active': 'Inactive' }}

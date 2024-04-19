@@ -1,0 +1,41 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+        <div class="payroll-summary-card" style="width: 95%;">
+            <form (ngSubmit)="generateReport()">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" >
+                    <label>Date</label>
+                    <input type="date" formControlName="sessionStartDate" id="date" class="form-control" />
+                  </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                    <label>Users <span class="mandatory"></span></label>
+                    <mat-form-field class="example-full-width mb-3" appearance="outline" style="width: 53rem;">
+                        <mat-select required>
+                            <mat-option value="server">Bartender </mat-option>
+                            <mat-option value="bartender">Server</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" style="margin-top: -25px;">
+                    <label>Department <span class="mandatory"></span></label>
+                    <mat-form-field class="example-full-width mb-3" appearance="outline" style="width: 53rem;">
+                        <mat-select required>
+                            <mat-option value="server">frontOfHouse </mat-option>
+                            <mat-option value="bartender">backofhouse</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button type="submit" class="submit"
+                    >Generate Report <i class="fas fa-arrow-right"></i></button>
+
+                
+            </form>
+        </div>
+    </div>
+</section>

@@ -420,6 +420,18 @@ const routes: Routes = [
     path: 'settings/about-staff',
     component: AboutStaffComponent
   },
+
+    {
+    path: 'banners',
+    loadChildren: () =>
+      import('../student/settings/banners/banner.module').then((m) => m.BannerModule),
+  },
+
+  {
+    path: 'email-configuration',
+    loadChildren: () =>
+      import('./settings/email-configuration/email-configuration.module').then((m) => m.EmailConfigurationModule),
+  },
   
   { path: '**', component: Page404Component },
 ];

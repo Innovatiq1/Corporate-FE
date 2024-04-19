@@ -7,119 +7,428 @@
         </div>
         <div class="row clearfix">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="card">
-                    <div class="header">
-                        <h2>Attendance Sheet</h2>
-                    </div>
-                    <div class="body overflow-auto">
-                        <div class="example-container">
-                            <form [formGroup]="attendanceForm">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <mat-form-field class="example-full-width" appearance="outline">
-                                            <mat-label>Choose start date</mat-label>
-                                            <input matInput [matDatepicker]="picker" formControlName="fromDate">
-                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                            <mat-datepicker #picker></mat-datepicker>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="col-4">
-                                        <mat-form-field class="example-full-width" appearance="outline">
-                                            <mat-label>Choose end date</mat-label>
-                                            <input matInput [matDatepicker]="picker2" formControlName="toDate">
-                                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                            <mat-datepicker #picker2></mat-datepicker>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="col-4">
-                                        <button mat-raised-button color="primary" class="big-button mt-2">Search</button>
-                                    </div>
+                <mat-tab-group>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <i class="material-icons-two-tone psr-3">list_alt</i>
+                            List View
+                        </ng-template>
+                        <div class="mt-5">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>Attendance Sheet</h2>
                                 </div>
-                            </form>
-                        </div>
-                        <table class="table table-bordered border-bottom">
-                            <thead>
-                                <tr role="row">
-                                    <th class="border-bottom-0" *ngFor="let header of headeritems">
-                                        {{header}}</th>
-                                    <!-- <th class="border-bottom-0 cell-dimention">1</th> -->
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let item of dataSource; index as index">
-                                    <td>
-                                        <div class="d-flex"> <span class="attnd-user"> <img alt="image"
-                                                    class="msr-2 rounded-circle"
-                                                    src="assets/images/user/user8.jpg"></span>
-                                            <div class="mt-sm-2">
-                                                <h6>{{item?.employeeName}}</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="fa fa-star text-warning"></span></td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-times-circle text-danger"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="fa fa-star text-warning"></span></td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-times-circle text-danger"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-times-circle text-danger"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-times-circle text-danger"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-times-circle text-danger"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="fa fa-star text-warning"></span></td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-times-circle text-danger"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-times-circle text-danger"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-times-circle text-danger"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="fa fa-star text-warning"></span></td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="fa fa-star text-warning"></span></td>
-                                    <td class="attendance-icon"><span class="far fa-times-circle text-danger"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-times-circle text-danger"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                    <td class="attendance-icon"><span class="far fa-check-circle text-success"></span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                <div class="body overflow-auto">
+                                    <div class="example-container">
+                                        <form [formGroup]="attendanceForm">
 
-                    </div>
-                </div>
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <label>Select Course/Program</label>
+                                                    <mat-form-field class="example-full-width mb-3"
+                                                        appearance="outline">
+                                                        <mat-select  formControlName="course"
+                                                            (selectionChange)="onSelectCourse($event)">
+                                                            <mat-option value="course">
+                                                                Course
+                                                            </mat-option>
+                                                            <mat-option value="program">Program</mat-option>
+                                                        </mat-select>
+
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-3" *ngIf="isCourse && !isProgram">
+                                                    <label>Course</label>
+                                                    <mat-form-field class="example-full-width mb-3"
+                                                        appearance="outline">
+                                                        <mat-select  formControlName="course"
+                                                            (selectionChange)="onSelectChange($event)">
+                                                            <mat-option *ngFor="let course of courseList"
+                                                                [value]="course.title">
+                                                                {{ course.title }}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                        <mat-error *ngIf="
+                                                        attendanceForm.get('course')?.hasError('required') ||
+                                                        attendanceForm.get('course')?.touched
+                                                            ">
+                                                            Course Name is required.
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-3" *ngIf="isProgram && !isCourse">
+                                                    <label>Program</label>
+                                                    <mat-form-field class="example-full-width mb-3"
+                                                        appearance="outline">
+                                                        <mat-select  formControlName="program"
+                                                            (selectionChange)="onSelectChange1($event)">
+                                                            <mat-option *ngFor="let program of programList"
+                                                                [value]="program.title">
+                                                                {{ program.title }}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                        <mat-error *ngIf="
+                                                        attendanceForm.get('program')?.hasError('required') ||
+                                                        attendanceForm.get('program')?.touched
+                                                              ">
+                                                            Program Name is required.
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-2">
+                                                    <label>Start date</label>
+                                                    <mat-form-field class="example-full-width" appearance="outline">
+                                                        <!-- <mat-label>Start date</mat-label> -->
+                                                        <input matInput [matDatepicker]="picker"
+                                                            formControlName="fromDate">
+                                                        <mat-datepicker-toggle matSuffix
+                                                            [for]="picker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-2">
+                                                    <label>End date</label>
+                                                    <mat-form-field class="example-full-width" appearance="outline">
+                                                        <!-- <mat-label>End date</mat-label> -->
+                                                        <input matInput [matDatepicker]="picker2"
+                                                            formControlName="toDate">
+                                                        <mat-datepicker-toggle matSuffix
+                                                            [for]="picker2"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker2></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-2 mt-4">
+                                                    <button mat-raised-button id="submit"
+                                                        class="big-button mt-2"  (click)="search()">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="responsive_table" *ngIf="isCourse && !isProgram">
+                                        <table mat-table [dataSource]="courseData" matSort
+                                            class="mat-cell advance-table">
+
+                                            <ng-container matColumnDef="Student">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Student
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row" class="name"> <span
+                                                        class="mobile-label">Student:</span>{{row?.studentId?.name}}
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="name">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Course
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"><span class="mobile-label">Course
+                                                        Name:</span> <span>{{row?.title |titlecase}}</span>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="startDate">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> <span class="mobile-label">Start
+                                                        Date:</span><span>{{row?.classId?.sessions[0]?.sessionStartDate|date}}</span>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="endDate">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> <span class="mobile-label">End
+                                                        date:</span><span>{{row?.classId?.sessions[0]?.sessionEndDate|date}}</span>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="registeredDate">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Registered Date
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> <span class="mobile-label">Registered
+                                                        date:</span><span>{{row.registeredOn|date}}</span>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <mat-header-row *matHeaderRowDef="displayedColumns">
+                                            </mat-header-row>
+                                            <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+                                            <mat-row *matRowDef="let row; columns: displayedColumns;"
+                                                [style.cursor]="'pointer'" matRipple>
+                                            </mat-row>
+                                        </table>
+
+                                        <mat-paginator class="paginator rounded-5" #paginator [length]="totalItems"
+                                            (page)="pageSizeChange($event)" [pageSizeOptions]="pageSizeArr"
+                                            aria-label="select pagination option">
+                                        </mat-paginator>
+                                    </div>
+                                    <div class="responsive_table" *ngIf="isProgram && !isCourse">
+                                        <table mat-table [dataSource]="programData" matSort
+                                            class="mat-cell advance-table">
+
+                                            <ng-container matColumnDef="Student">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Student
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row" class="name"> <span
+                                                        class="mobile-label">Student:</span>{{row.student}}
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="name">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Program
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"><span class="mobile-label">Course
+                                                        Name:</span> <span>{{row.program |titlecase}}</span>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="startDate">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> <span class="mobile-label">Start
+                                                        Date:</span><span>{{row.start}}</span>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="endDate">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> <span class="mobile-label">End
+                                                        date:</span><span>{{row.end}}</span>
+                                                </mat-cell>
+                                            </ng-container>
+                                            <ng-container matColumnDef="registeredDate">
+                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Registered Date
+                                                </mat-header-cell>
+                                                <mat-cell *matCellDef="let row"> <span class="mobile-label">Registered
+                                                        date:</span><span>{{row.registered}}</span>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <mat-header-row *matHeaderRowDef="displayedColumns">
+                                            </mat-header-row>
+                                            <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+                                            <mat-row *matRowDef="let row; columns: displayedColumns;"
+                                                [style.cursor]="'pointer'" matRipple>
+                                            </mat-row>
+                                        </table>
+
+                                        <mat-paginator class="paginator rounded-5" #paginator [length]="totalItems"
+                                            (page)="pageSizeChange($event)" [pageSizeOptions]="pageSizeArr"
+                                            aria-label="select pagination option">
+                                        </mat-paginator>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <i class="material-icons-two-tone psr-3">list_alt</i>
+                            Calendar View
+                        </ng-template>
+                        <div class="mt-5">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>Attendance Sheet</h2>
+                                </div>
+                                <div class="body overflow-auto">
+                                    <div class="example-container">
+                                        <form [formGroup]="attendanceForm">
+
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <label>Select Course/Program</label>
+                                                    <mat-form-field class="example-full-width mb-3"
+                                                        appearance="outline">
+                                                        <mat-select  formControlName="course"
+                                                            (selectionChange)="onSelectCourse($event)">
+                                                            <mat-option value="course">
+                                                                Course
+                                                            </mat-option>
+                                                            <mat-option value="program">Program</mat-option>
+                                                        </mat-select>
+
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-3" *ngIf="isCourse && !isProgram">
+                                                    <label>Course</label>
+                                                    <mat-form-field class="example-full-width mb-3"
+                                                        appearance="outline">
+                                                        <mat-select  formControlName="course"
+                                                            (selectionChange)="onSelectChange($event)">
+                                                            <mat-option *ngFor="let course of courseList"
+                                                                [value]="course.title">
+                                                                {{ course.title }}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                        <!-- <mat-error *ngIf="
+                                                        attendanceForm.get('courseName')?.hasError('required') ||
+                                                        attendanceForm.get('courseName')?.touched
+                                                            ">
+                                                            Course Name is required.
+                                                        </mat-error> -->
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-3" *ngIf="isProgram && !isCourse">
+                                                    <label>Program</label>
+                                                    <mat-form-field class="example-full-width mb-3"
+                                                        appearance="outline">
+                                                        <mat-select  formControlName="program"
+                                                            (selectionChange)="onSelectChange1($event)">
+                                                            <mat-option *ngFor="let program of programList"
+                                                                [value]="program.title">
+                                                                {{ program.title }}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                        <!-- <mat-error *ngIf="
+                                                        attendanceForm.get('programName')?.hasError('required') ||
+                                                        attendanceForm.get('programName')?.touched
+                                                              ">
+                                                            Program Name is required.
+                                                        </mat-error> -->
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-2">
+                                                    <label>Start date</label>
+                                                    <mat-form-field class="example-full-width" appearance="outline">
+                                                        <!-- <mat-label>Start date</mat-label> -->
+                                                        <input matInput [matDatepicker]="picker"
+                                                            formControlName="fromDate">
+                                                        <mat-datepicker-toggle matSuffix
+                                                            [for]="picker"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-2">
+                                                    <label>End date</label>
+                                                    <mat-form-field class="example-full-width" appearance="outline">
+                                                        <!-- <mat-label>End date</mat-label> -->
+                                                        <input matInput [matDatepicker]="picker2"
+                                                            formControlName="toDate">
+                                                        <mat-datepicker-toggle matSuffix
+                                                            [for]="picker2"></mat-datepicker-toggle>
+                                                        <mat-datepicker #picker2></mat-datepicker>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="col-2 mt-4">
+                                                    <button mat-raised-button id="submit"
+                                                        class="big-button mt-2" (click)="search()">Search</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <table class="table table-bordered border-bottom">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="border-bottom-0" *ngFor="let header of headeritems">
+                                                    {{header}}</th>
+                                                <!-- <th class="border-bottom-0 cell-dimention">1</th> -->
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of dataSource; index as index">
+                                                <td>
+                                                    <div class="d-flex"> 
+                                                        <div class="mt-sm-2">
+                                                            <h6>{{item?.studentId?.name}}</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="fa fa-star text-warning"></span></td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-times-circle text-danger"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="fa fa-star text-warning"></span></td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-times-circle text-danger"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-times-circle text-danger"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-times-circle text-danger"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-times-circle text-danger"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="fa fa-star text-warning"></span></td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-times-circle text-danger"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-times-circle text-danger"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-times-circle text-danger"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="fa fa-star text-warning"></span></td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="fa fa-star text-warning"></span></td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-times-circle text-danger"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-times-circle text-danger"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                                <td class="attendance-icon"><span
+                                                        class="far fa-check-circle text-success"></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
             </div>
         </div>
     </div>

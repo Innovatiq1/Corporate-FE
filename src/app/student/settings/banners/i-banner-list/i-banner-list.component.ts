@@ -55,7 +55,7 @@ export class IBannerListComponent {
   }
 
   addBanner(){
-    this.router.navigate(['/admin/banners/create-instructor-banner'])
+    this.router.navigate(['/student/banners/settings/create-instructor-banner'])
   }
 
   onChange(id: any, activeStatus: any){
