@@ -37,15 +37,15 @@
             <div class="card">
                     <div class="p-4">
                         <!-- <div class="row"> -->
-                           
+
                         <div class="card-container">
                             <div class="header">
                                 <h6>CourseKit</h6>
                             </div>
-                            <button class="icons" alt="Edit" mat-menu-item [routerLink]="['/admin/courses/edit-course-kit/',response.id]" >
+                            <button class="icons" *ngIf="checkActionAccess('edit')" alt="Edit" mat-menu-item [routerLink]="['/admin/courses/edit-course-kit/',response.id]" >
                                 <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
                             </button>
-                            <button class="icons" alt="Delete" mat-menu-item (click)="deleteItem(response)">
+                            <button class="icons"  *ngIf="checkActionAccess('edit')" alt="Delete" mat-menu-item (click)="deleteItem(response)">
                                 <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                             </button>
                         </div>
@@ -101,7 +101,7 @@
                                         </div>
                                     </div>
                                 </div>
-                           
+
                         </div>
                         <div class="row" *ngFor="let video of response.videoLink; let i = index">
                             <div class="col-6">
@@ -115,8 +115,8 @@
                                     </div>
                             </div>
                         </div>
-                      
-    
+
+
                         <h2 class="text-end"><span></span></h2>
                         <p class="m-b-0"></p>
                     </div>
@@ -125,7 +125,7 @@
                       </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

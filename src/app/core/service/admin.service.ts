@@ -140,9 +140,9 @@ export class AdminService {
     );
   }
 
-  private findUserTypeMenuItems(data:any[]):any[]{
+  private findUserTypeMenuItems(data:any):any[]{
     let userType = localStorage.getItem('user_type');
-    let menuItems = data?.find((item:any) => item.typeName === userType);
+    let menuItems = (data?.docs || data)?.find((item:any) => item.typeName === userType);
     return menuItems?.menuItems || []
   }
 

@@ -62,11 +62,8 @@ export class CourseKitComponent implements OnInit{
     this.currentDate = new Date();
     this.courseKitModel = {};
      this.adminService.filterAndReturnValue("course-kit").subscribe(value=>{
-      this.actionItems = value;
-      console.log('v',value);
+      this.actionItems = value?.map((action:any)=>action.id.split("__")[1]) || []
      });
-    // console.log(this.actionItems);
-
   }
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -75,6 +72,10 @@ export class CourseKitComponent implements OnInit{
   ngOnInit(){
     this.fetchCourseKits();
     this.getJobTemplates();
+  }
+
+  checkActionAccess(action:string):boolean{
+    return this.actionItems?.length ? this.actionItems.includes(action): true
   }
 
   fetchCourseKits() {
