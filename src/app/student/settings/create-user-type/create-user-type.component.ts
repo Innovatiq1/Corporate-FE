@@ -95,12 +95,11 @@ export class CreateUserTypeComponent {
       .getUserTypeList({ ...this.coursePaginationModel })
       .subscribe(
         (response: any) => {
-          
+
           this.typesList = response.docs;
           this. data = this.typesList.find((id: any) => id._id === this.paramId);
           if (this.data) {
             this.type = this.data.typeName;
-            console.log(this.type,"+++++++++");
             this.userTypeFormGroup = this.fb.group({
               typeName: [
                 { value: this.type ? this.type : null, disabled: !this.isEdit },
@@ -112,16 +111,26 @@ export class CreateUserTypeComponent {
               ],
             });
 
-            this.data.menuItems.map((res: { id: any; checked: any }) => {
-              this.changeMenuChecked(res.checked, res.id);
-            });
-            console.log('data',this. data);
+            // this.data.menuItems.map((res: { id: any; checked: any }) => {
+            //   this.changeMenuChecked(res.checked, res.id);
+            // });
+            this.populateCheckbox(this.data.menuItems)
           }
 
           this.cd.detectChanges();
         },
         (error) => {}
       );
+  }
+
+  populateCheckbox(menuItems: any[]){
+   menuItems.forEach((element:any) => {
+    if(element.checked){
+      this.changeMenuChecked(element.checked, element.id);
+    }else if(element.indeterminate&& element.children){
+      this.populateCheckbox(element.children);
+    }
+   });
   }
 
   ngOnInit() {
@@ -134,14 +143,13 @@ export class CreateUserTypeComponent {
     this.submitted = true;
     this.userTypeFormGroup.markAllAsTouched();
     let formData = this.userTypeFormGroup.getRawValue();
-    console.log("selectedMenuItems",formData)
     this.isLoading = true;
     let selectedMenuItems = [];
     selectedMenuItems = this.getCheckedItems(this.dataSourceArray).filter(
       (v: any) => v
     );
     formData.menuItems = selectedMenuItems;
-  
+
     this.updateUserType(formData)
       .then((response: any) => {})
       .catch((e: any) => {});
@@ -181,7 +189,6 @@ export class CreateUserTypeComponent {
             );
           });
       } else if (this.isEdit === true) {
-        console.log('obg', obj);
         this.adminService.updateUserType(obj, this.paramId).subscribe(
           (response: unknown) => {
             this.isLoading = false;
@@ -263,6 +270,7 @@ export class CreateUserTypeComponent {
         title: v?.title,
         id: v?.id,
         children: [],
+        isAction: false,
         checked: defaultCheck?.checked || false,
         indeterminate: defaultCheck?.indeterminate || false,
         icon: v?.iconsrc,
@@ -272,23 +280,24 @@ export class CreateUserTypeComponent {
         res = {
           ...res,
           children,
+          isAction: false,
         };
         res.children = res.children.map((c: any) => ({
           ...c,
           isLeaf: true,
+          isAction: false,
         }));
       }
       if (v?.actions && v?.actions?.length) {
         const actionChild = v?.actions.map((action: any) => {
           const actionChecked = this.checkChecked(
             menu_item?.children,
-            `${v.id}__${action}`
+            `${v.id}__${action.id}`
           );
           return {
-            title: action,
-            id: `${v.id}__${action}`,
+            title: action.action_name,
+            id: `${v.id}__${action.id}`,
             isAction: true,
-            _id: action,
             isLeaf: true,
             checked: actionChecked?.checked || false,
             indeterminate: actionChecked?.indeterminate || false,
@@ -375,7 +384,7 @@ export class CreateUserTypeComponent {
   }
 
   getCheckedItems(obj: any) {
-    return obj.map((item: { checked: any; children: string | any[] }) => {
+    return obj.map((item: { checked: any; children: string | any[], isAction: boolean }) => {
       if (item.checked) return item;
       if (item?.children?.length) {
         const children = this.getCheckedItems(item.children).filter(
@@ -436,8 +445,6 @@ export class CreateUserTypeComponent {
     );
   }
   delete(data: any) {
-    console.log('data',data)
-
     Swal.fire({
       title: "Confirm Deletion",
       text: "Are you sure you want to delete?",
@@ -470,8 +477,8 @@ export class CreateUserTypeComponent {
 );
       }
     });
-      
+
   }
-  
+
 
 }

@@ -13,6 +13,7 @@ import { VideoPlayerComponent } from './video-player/video-player.component';
 import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { AdminService } from '@core/service/admin.service';
 
 @Component({
   selector: 'app-course-kit',
@@ -47,6 +48,7 @@ export class CourseKitComponent implements OnInit{
   templates: any[] = [];
   currentDate: Date;
   searchTerm: string = '';
+  actionItems: any[] = [];
 
   constructor(
     private router: Router,
@@ -55,9 +57,16 @@ export class CourseKitComponent implements OnInit{
     private snackBar: MatSnackBar,
     private courseService: CourseService,
     private modalServices: BsModalService,
+    private adminService: AdminService
   ) {
     this.currentDate = new Date();
     this.courseKitModel = {};
+     this.adminService.filterAndReturnValue("course-kit").subscribe(value=>{
+      this.actionItems = value;
+      console.log('v',value);
+     });
+    // console.log(this.actionItems);
+
   }
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -265,7 +274,7 @@ export class CourseKitComponent implements OnInit{
       }
     });
 
-    
+
   }
   //serach functionality
   performSearch() {
