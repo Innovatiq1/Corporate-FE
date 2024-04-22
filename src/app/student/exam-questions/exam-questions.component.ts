@@ -45,6 +45,7 @@ export class ExamQuestionsComponent {
   currentPage: number = 0;
   totalQuestions: number = 0;
   skip: number = 0;
+  retake: boolean = false;
   public examAssessmentId!: any;
   public answerAssessmentId!: any;
 
@@ -58,7 +59,10 @@ export class ExamQuestionsComponent {
 
       ngOnInit(): void {
           this.fetchAssessmentDetails();
-          this.student();                           
+          this.student();
+          this.route.queryParams.subscribe(params => {
+            this.retake = params['retake'] === 'true'; 
+          });                          
       }
 
       onPageChange(event: PageEvent): void {
@@ -145,9 +149,11 @@ export class ExamQuestionsComponent {
           confirmButtonText: 'Yes, submit!',
           cancelButtonText: 'Cancel'
         }).then((result) => {
-          if (result.isConfirmed) {
+          if (this.retake && result.isConfirmed) {
+            this.updateAnswers();
+        } else if (result.isConfirmed) {
             this.submitAnswers();
-          }
+        }
         });
       }
 
@@ -167,11 +173,46 @@ export class ExamQuestionsComponent {
               text: "Your answers were submitted.",
               icon: "success"
             });
+            if (!this.retake) {
+              this.updateExamStatus();
+            }
           this.answerId = response.response;
           this.getAnswerById()
           },
           (error: any) => {
             console.error('Error:', error);
+          }
+        );
+      }
+
+      updateAnswers() {
+        const requestBody = {
+          answers: this.answers,
+          id: this.answerAssessmentId
+        };
+        this.assessmentService.updateAssessment(requestBody).subscribe(
+          (response: any) => {
+            Swal.fire({
+              title: "Submitted!",
+              text: "Your answers were submitted.",
+              icon: "success"
+            });
+          this.answerId = this.answerAssessmentId;
+          this.getAnswerById()
+          },
+          (error: any) => {
+            console.error('Error:', error);
+          }
+        );
+      }
+
+      updateExamStatus(): void {
+        this.assessmentService.updateExamStatus(this.answerAssessmentId).subscribe(
+          () => {
+            console.log('Exam status updated successfully');
+          },
+          error => {
+            console.error('Error updating exam status:', error);
           }
         );
       }
@@ -236,6 +277,22 @@ export class ExamQuestionsComponent {
       
         goToPage(pageNumber: number): void {
           this.currentPage = pageNumber;
+        }
+
+        routingButton(){
+          if(this.retake) {
+            this.router.navigate(['student/enrollment/exam-results']);
+          } else {
+            this.router.navigate(['student/enrollment/exam']);
+          }
+        }
+
+        titleRoute() {
+          if(this.retake) {
+            return 'Results'
+          } else {
+            return 'Continue'
+          }
         }
 
 }

@@ -25,33 +25,11 @@
                     <div class="body overflow-auto">
                         <div class="responsive_table">
                           <table mat-table matSort [dataSource]="dataSource" class="mat-cell advance-table">
-                             <ng-container matColumnDef="img">
-                              <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
-                              </mat-header-cell>
-                              <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <span
-                                  class="mobile-label">Image:</span><img [src]="row.studentId.avatar || 'assets/profile.png'">
-                              </mat-cell>
-                            </ng-container>
-                            <ng-container matColumnDef="Student Name">
-                              <mat-header-cell *matHeaderCellDef mat-sort-header>Student</mat-header-cell>
-                              <mat-cell *matCellDef="let row" class="name">
-                                <span class="mobile-label">Name:</span>{{ row?.studentId.name | capitalizeFirstLetter }} {{ row?.studentId?.last_name | capitalizeFirstLetter }}
-                              </mat-cell>
-                            </ng-container>
-
-                            <ng-container matColumnDef="Email">
-                                <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                                <mat-cell *matCellDef="let row">
-                                  <span class="mobile-label">Email:</span>
-                                  <img src="assets/images/gmail.png" alt="Email Icon" class="email-icon">
-                                  <span class="email-address"> {{row?.studentId?.email}}</span>
-                                </mat-cell>
-                              </ng-container>
                             <!-- Course Code -->
                             <ng-container matColumnDef="Course Title">
                               <mat-header-cell *matHeaderCellDef mat-sort-header>Course
                               </mat-header-cell>
-                              <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
+                              <mat-cell *matCellDef="let row">
                                 <span class="mobile-label">Course Title:</span>{{row?.courseId?.title | titlecase}}</mat-cell>
                             </ng-container>
 
@@ -63,19 +41,29 @@
                                 </mat-cell>
                               </ng-container>
 
-                            <ng-container matColumnDef="Assessment Score">
+                            <!-- <ng-container matColumnDef="Assessment Score">
                               <mat-header-cell *matHeaderCellDef mat-sort-header> Assessment Score
                               </mat-header-cell>
                               <mat-cell *matCellDef="let row">
                                 <span class="mobile-label">Assessment Score:</span>{{ row?.assessmentAnswerId?.score }}
                               </mat-cell>
-                            </ng-container>
+                            </ng-container> -->
 
                             <ng-container matColumnDef="Exam Assessment Score">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Exam Assessment Score
                                 </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                  <span class="mobile-label">Exam Assessment Score:</span>{{ row?.score }}
+                                  <span class="mobile-label">Exam Assessment Score:</span>{{ row?.score }} / {{row?.courseId?.exam_assessment?.questions?.length}}
+                                </mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="Exam">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Exam</mat-header-cell>
+                                <mat-cell *matCellDef="let row">
+                                  <button 
+                                  [disabled]="row.score === row.courseId.exam_assessment.questions.length"
+                                  [routerLink]="['/student/exam-questions/',  row.id, row?.studentId?.id, row?.courseId?._id, row?.courseId?.exam_assessment?.id]" [queryParams]="{ retake: true }" mat-flat-button color="primary" >
+                                    Retake Test
+                                  </button>
                                 </mat-cell>
                               </ng-container>
 
@@ -84,11 +72,6 @@
                               <mat-row *matRowDef="let row; columns: displayedColumns;" [style.cursor]="'pointer'" matRipple>
                               </mat-row>
                           </table>
-                          <!-- Loading spinner -->
-                          <!-- <div  class="tbl-spinner">
-                            <mat-progress-spinner *ngIf="isLoading" color="primary" [diameter]="40" mode="indeterminate">
-                            </mat-progress-spinner>
-                          </div> -->
           
                           <mat-paginator #paginator [length]="totalItems" (page)="pageSizeChange($event)"
                           [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">

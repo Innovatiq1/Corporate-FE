@@ -85,9 +85,9 @@
                         <p>Total Wrong Answered : {{ correctAnswers(false) }} </p>
                         <p>Your Score : {{ answerResult.score }} Points </p>
                     </div>
-                    <!-- <div class="border-dotted-bottom mt-3 mb-3 text-center">
-                        <button mat-flat-button color="primary" (click)="submitFeedback()" class="mr-2">Submit Feedback</button>
-                    </div> -->
+                    <div class="border-dotted-bottom mt-3 mb-3 text-center">
+                        <button mat-flat-button color="primary" (click)="routingButton()" class="mr-2">{{ titleRoute() }}</button>
+                    </div>
                 </div>
             </ng-container>
         </div>

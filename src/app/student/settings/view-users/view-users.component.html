@@ -15,7 +15,7 @@
                   <div class="user-name">{{aboutData?.name}}</div>
                   <div class="name-center">{{aboutData?.department}} Department</div>
                 </div>
-                <img src="{{aboutData?.avatar}}" class="user-img" alt="">
+                <img src="{{aboutData?.avatar || 'assets/profile.png'}}" class="user-img" alt="">
                 <p>
                  {{aboutData?.country_name}}
                 </p>
@@ -253,7 +253,7 @@
                   <div class="user-name">{{aboutData1?.name}}</div>
                   <div class="name-center">{{aboutData1?.department}} Department</div>
                 </div>
-                <img src="{{aboutData1?.avatar}}" class="user-img" alt="">
+                <img src="{{aboutData1?.avatar || 'assets/profile.png'}}" class="user-img" alt="">
                 <p>
                   {{aboutData1?.country_name}}
                   
@@ -467,7 +467,7 @@
                   <div class="user-name">{{aboutData1.name}}</div>
                   <div class="name-center">{{aboutData1.type | titlecase}}</div>
                 </div>
-                <img src="{{aboutData1.avatar}}" class="user-img" alt="">
+                <img src="{{aboutData1.avatar || 'assets/profile.png'}}" class="user-img" alt="">
                 <p>
                  {{aboutData1.country_name}}
                 </p>

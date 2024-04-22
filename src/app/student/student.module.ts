@@ -94,7 +94,7 @@ import { AboutTeacherComponent } from './settings/about-teacher/about-teacher.co
 import { EditTeacherComponent } from './settings/edit-teacher/edit-teacher.component';
 import { AddStaffComponent } from './settings/add-staff/add-staff.component';
 import { AboutStaffComponent } from './settings/about-staff/about-staff.component';
-
+import { ExamResultsComponent } from './exam-results/exam-results.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -165,7 +165,8 @@ import { AboutStaffComponent } from './settings/about-staff/about-staff.componen
     AddTeacherComponent,AboutTeacherComponent,
     EditTeacherComponent,
     AddStaffComponent,
-    AboutStaffComponent
+    AboutStaffComponent,
+    ExamResultsComponent
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,
@@ -194,7 +195,7 @@ import { AboutStaffComponent } from './settings/about-staff/about-staff.componen
     ModalModule.forRoot(),
     CKEditorModule,
     AngularEditorModule,
-    SurveyModule
+    SurveyModule,
 
 
   ],

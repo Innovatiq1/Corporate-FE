@@ -15,7 +15,7 @@
                 <div class="user-name">{{aboutData?.name}}</div>
                 <div class="name-center">{{aboutData?.department}} Department</div>
               </div>
-              <img src="{{aboutData?.avatar}}" class="user-img" alt="">
+              <img src="{{aboutData?.avatar || 'assets/profile.png'}}" class="user-img" alt="">
               <p>
                {{aboutData?.country_name}}
               </p>

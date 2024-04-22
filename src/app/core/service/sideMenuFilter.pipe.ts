@@ -1,14 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'arrayFilter'
+  name: 'sideMenuFilter'
 })
-export class ArrayFilterPipe implements PipeTransform {
+export class SideMenuFilterPipe implements PipeTransform {
   transform(array: any[], filterBy: boolean): any[] {
     // if (!array || !filterBy) {
     //   return array;
     // }
-    return array.filter(item =>   item?.isAction === filterBy );
+    return array.filter(item =>   Object.hasOwn(item, "isAction") ? item?.isAction === filterBy:true );
     // return array.filter(item => item.title.toLowerCase().includes(filterBy()));
   }
 }

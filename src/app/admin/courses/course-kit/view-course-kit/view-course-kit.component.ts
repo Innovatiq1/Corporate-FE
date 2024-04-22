@@ -5,6 +5,7 @@ import { CourseService } from '@core/service/course.service';
 import { VideoPlayerComponent } from '../video-player/video-player.component';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
+import { AdminService } from '@core/service/admin.service';
 
 @Component({
   selector: 'app-view-course-kit',
@@ -28,6 +29,7 @@ export class ViewCourseKitComponent {
   courseKitModel!: Partial<CourseKitModel>;
   templates: any[] = [];
   course: any;
+  actionItems: any[] = [];
 
 
   constructor(
@@ -35,29 +37,38 @@ export class ViewCourseKitComponent {
     private courseService: CourseService,
     private activatedRoute: ActivatedRoute,
     private modalServices: BsModalService,
+    private adminService: AdminService
   ) {
     this.currentDate = new Date();
     this.courseKitModel = {};
     this.activatedRoute.params.subscribe((params: any) => {
-      
+
       this.courseId = params.id;
       // if(this.courseId){
       //   this.getProgramByID(this.courseId);
       // }
 
     });
+
+    this.adminService.filterAndReturnValue("course-kit").subscribe(value=>{
+      this.actionItems = value?.map((action:any)=>action.id.split("__")[1]) || []
+     });
   }
-  
+
   ngOnInit(){
     this.fetchCourseKits();
     this.getJobTemplates();
     if (this.courseId) {
       this.activatedRoute.params.subscribe((params: any) => {
-        
+
         this.courseId = params.id;
         this.getCategoryByID(this.courseId);
       });
     }
+  }
+
+  checkActionAccess(action:string):boolean{
+    return this.actionItems?.length ? this.actionItems.includes(action): true
   }
 
   fetchCourseKits() {
@@ -86,7 +97,7 @@ export class ViewCourseKitComponent {
   }
 
   getCategories(id: string): void {
-    
+
     this.getCategoryByID(id);
   }
   getCategoryByID(id: string) {
@@ -99,7 +110,7 @@ export class ViewCourseKitComponent {
       //   this.classDataById = response?._id;
       //   this.response = response.data;
       // } else {
-       
+
       // }
     });
   }
@@ -140,7 +151,7 @@ export class ViewCourseKitComponent {
       // });
     }
   }
-  
+
   deleteItem(item: any) {
     Swal.fire({
       title: "Confirm Deletion",

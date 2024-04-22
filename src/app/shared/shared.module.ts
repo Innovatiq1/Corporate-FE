@@ -11,8 +11,9 @@ import { BulletPointsPipe } from '@core/service/content.pipe';
 import { CapitalizeFirstLetterPipe } from '@core/service/capitalizeFirstletter.pipe';
 import { NgbRatingModule} from '@ng-bootstrap/ng-bootstrap';
 import { FileNamePipe } from '@core/service/filename.pipe';
+import { SideMenuFilterPipe } from '@core/service/sideMenuFilter.pipe';
 @NgModule({
-  declarations: [TruncatePipe,BulletPointsPipe,CapitalizeFirstLetterPipe,FileNamePipe],
+  declarations: [TruncatePipe,BulletPointsPipe,CapitalizeFirstLetterPipe,FileNamePipe, SideMenuFilterPipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -34,6 +35,7 @@ import { FileNamePipe } from '@core/service/filename.pipe';
     FileNamePipe,
     CapitalizeFirstLetterPipe,
     NgbRatingModule,
+    SideMenuFilterPipe
   ],
 })
 export class SharedModule {}
