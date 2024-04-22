@@ -481,16 +481,18 @@
               <div class="col-md-9">
                 <!-- <button mat-raised-button matStepperPrevious id="back">Back</button> -->
               </div>
-              <div class="col-md-3 mb-5">
-                <div class="d-grid d-md-flex">
-                  <button mat-raised-button class="btn-space" *ngIf="editUrl || viewUrl" type="button" 
-                    id="back" (click)="cancel()">Back</button>
-                  <button mat-raised-button (click)="submit()" *ngIf="!editUrl  && !viewUrl" id="submit"
-                    [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null">Save</button>
-                  <button mat-raised-button *ngIf="editUrl  && !viewUrl" id="save"
-                    [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null" (click)="save()"> Submit </button>
+              <div class="col-md-3 mb-5 ">
+                <div class="d-grid d-md-flex ">
+                    <div style="margin-left: -44.5rem;margin-right: 43.5rem;">
+                        <button mat-raised-button class="btn-space" *ngIf="editUrl || viewUrl" type="button" id="back" (click)="cancel()">Back</button>
+                    </div>
+                    <div>
+                        <button mat-raised-button (click)="submit()" *ngIf="!editUrl && !viewUrl" id="submit" [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null">Save</button>
+                        <button mat-raised-button *ngIf="editUrl && !viewUrl" id="save" [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null" (click)="save()">Submit</button>
+                    </div>
                 </div>
-              </div>
+            </div>
+          
             </div>
           </form>
 
