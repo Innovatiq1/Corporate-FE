@@ -44,6 +44,9 @@ export class CourseService {
       if (filter.filterText) {
         params = params.set("title", filter.filterText?.toString());
       }
+      if (filter.feeType) {
+        params = params.set("feeType", filter.feeType);
+      }
       if (filter.status && filter.status === "active") {
         params = params.set("status", "active");
       } else if (filter.status && filter.status === "inactive") {
