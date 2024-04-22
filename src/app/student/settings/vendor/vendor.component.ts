@@ -64,4 +64,11 @@ getAllVendors(){
    this.dataSource = response;
   })
 }
+update(id: string){
+  this.router.navigate(['/student/settings/update-vendor'], {
+    queryParams: {
+      id: id
+    }
+  });
+}
 }

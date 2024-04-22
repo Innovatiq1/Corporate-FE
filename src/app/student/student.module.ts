@@ -96,6 +96,10 @@ import { AddStaffComponent } from './settings/add-staff/add-staff.component';
 import { AboutStaffComponent } from './settings/about-staff/about-staff.component';
 import { ExamResultsComponent } from './exam-results/exam-results.component';
 import { VendorComponent } from './settings/vendor/vendor.component';
+import { UpdateFundingComponent } from './settings/funding/update-funding/update-funding.component';
+import { UpdateDeptComponent } from './settings/create-department/update-dept/update-dept.component';
+import { UpdateUsergroupComponent } from './settings/user-group/update-usergroup/update-usergroup.component';
+import { UpdateVendorComponent } from './settings/vendor/update-vendor/update-vendor.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -169,7 +173,11 @@ import { VendorComponent } from './settings/vendor/vendor.component';
     AddStaffComponent,
     AboutStaffComponent,
     ExamResultsComponent,
-    VendorComponent
+    VendorComponent,
+    UpdateFundingComponent,
+    UpdateDeptComponent,
+    UpdateUsergroupComponent,
+    UpdateVendorComponent
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,
