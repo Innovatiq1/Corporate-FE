@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-update-vendor',
@@ -24,7 +25,7 @@ export class UpdateVendorComponent {
 
   
   constructor(private fb: FormBuilder,private router:Router,
-    private activatedRoute:ActivatedRoute,private courseService:CourseService,public utils:UtilsService) {
+    private activatedRoute:ActivatedRoute,private courseService:CourseService,public utils:UtilsService,  private location: Location) {
       this.vendorForm = this.fb.group({
         vendor: ['', [Validators.required,...this.utils.validators.name]],
         description: ['', [Validators.required,...this.utils.validators.name]]
@@ -83,7 +84,7 @@ export class UpdateVendorComponent {
   deleteVendor(id:string){
         Swal.fire({
       title: "Confirm Deletion",
-      text: "Are you sure you want to delete this course kit?",
+      text: "Are you sure you want to delete this?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
@@ -103,6 +104,8 @@ export class UpdateVendorComponent {
         });
       }
     });
-
+  }
+  goBack(): void {
+    this.location.back();
   }
 }
