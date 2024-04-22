@@ -64,6 +64,7 @@ import { EditTeacherComponent } from './settings/edit-teacher/edit-teacher.compo
 import { AddStaffComponent } from './settings/add-staff/add-staff.component';
 import { AboutStaffComponent } from './settings/about-staff/about-staff.component';
 import { ExamResultsComponent } from './exam-results/exam-results.component';
+import { VendorComponent } from './settings/vendor/vendor.component';
 
 
 const routes: Routes = [
@@ -241,6 +242,11 @@ const routes: Routes = [
     path: 'settings/funding-grant',
     component: FundingComponent
   },
+  {
+    path: 'settings/vendor',
+    component: VendorComponent
+  },
+
   {
     path: 'settings/certificate/template',
     component: CertificateTemplateComponent
