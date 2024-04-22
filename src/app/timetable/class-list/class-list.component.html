@@ -124,14 +124,14 @@
                 </ng-container>
                 <!-- Start date -->
                 <ng-container matColumnDef="Start Date">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-class/',row.id]">
                     <span class="mobile-label">Start:</span>{{row.sessions[0]?.sessionStartDate | date }} </mat-cell>
                 </ng-container>
                 <!-- Enddate -->
                 <ng-container matColumnDef="End Date">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>End
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row"  [routerLink]="['/admin/courses/view-class/',row.id]">
                     <span class="mobile-label">End:</span>{{row.sessions[0]?.sessionEndDate | date }} </mat-cell>

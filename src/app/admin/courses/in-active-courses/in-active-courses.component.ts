@@ -20,6 +20,7 @@ export class InActiveCoursesComponent {
   displayedColumns: string[] = [
     // 'select',
     'Course Name',
+    'status',
     'Course Code',
     'Main Category',
     'days',
@@ -28,7 +29,7 @@ export class InActiveCoursesComponent {
     'Fees',
     'startDate',
     'endDate',
-    'status',
+    
     // 'action'
   ];
   breadscrums = [

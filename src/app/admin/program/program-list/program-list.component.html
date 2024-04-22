@@ -186,6 +186,16 @@
                             <span>{{row.title |titlecase}}</span>
                           </mat-cell>
                         </ng-container>
+                        <ng-container matColumnDef="status">
+                          <mat-header-cell *matHeaderCellDef class="pr-0">Status</mat-header-cell>
+                          <mat-cell *matCellDef="let row" class="pr-0">
+                            <span
+                              [class]="row?.status === 'active' ? 'badge badge-solid-green' : row?.status === 'inactive' ? 'badge badge-solid-red' : ''">
+                              <span
+                                [class]="row?.status === 'active' ? 'status-dot' : row?.status === 'inactive' ? 'status-red' : ''"></span>
+                              {{row.status ==='active'? 'Approved':' Pending' | titlecase}}</span>
+                          </mat-cell>
+                        </ng-container>
                         <ng-container matColumnDef="code">
                           <mat-header-cell *matHeaderCellDef mat-sort-header>Program Code
                           </mat-header-cell>
@@ -244,16 +254,7 @@
                               class="mobile-label">Elective Count:</span>{{row.electiveCourseCount}}
                           </mat-cell>
                         </ng-container>
-                        <ng-container matColumnDef="status">
-                          <mat-header-cell *matHeaderCellDef class="pr-0">Status</mat-header-cell>
-                          <mat-cell *matCellDef="let row" class="pr-0">
-                            <span
-                              [class]="row?.status === 'active' ? 'badge badge-solid-green' : row?.status === 'inactive' ? 'badge badge-solid-red' : ''">
-                              <span
-                                [class]="row?.status === 'active' ? 'status-dot' : row?.status === 'inactive' ? 'status-red' : ''"></span>
-                              {{row.status ==='active'? 'Approved':' Pending' | titlecase}}</span>
-                          </mat-cell>
-                        </ng-container>
+                        
 
                         <!-- actions -->
                         <!-- <ng-container matColumnDef="actions">

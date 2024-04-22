@@ -109,7 +109,7 @@
                             .
                                 <!-- Class Start Date -->
                                 <ng-container matColumnDef="Class Start Date">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Class Start Date
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-approved-program/',row.id]">
                                         <span class="mobile-label">Class Start Date:</span>{{row?.classId?.sessions[0]?.sessionStartDate |
@@ -117,7 +117,7 @@
                                 </ng-container>
                                 <!-- Class End Date -->
                                 <ng-container matColumnDef="Class End Date">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Class End Date
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row" [routerLink]="['/admin/program/view-approved-program/',row.id]">
                                         <span class="mobile-label">Class End Date:</span>{{row?.classId?.sessions[0]?.sessionEndDate  |

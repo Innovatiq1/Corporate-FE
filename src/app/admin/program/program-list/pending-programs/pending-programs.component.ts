@@ -35,6 +35,7 @@ export class PendingProgramsComponent {
   displayedColumns: string[] = [
     // 'select',
     'name',
+    'status',
     'code',
     'Creator',
     'Duration',
@@ -43,7 +44,7 @@ export class PendingProgramsComponent {
     'Payment',
     'Compulsory Count',
     'Elective Count',
-    'status'
+    
   ];
 
   
