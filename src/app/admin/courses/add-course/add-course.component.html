@@ -483,12 +483,12 @@
               </div>
               <div class="col-md-3 mb-5">
                 <div class="d-grid d-md-flex">
-                  <button mat-raised-button class="btn-space" *ngIf="editUrl || viewUrl" type="button" color="warn"
-                    id="cancel" (click)="cancel()">Cancel</button>
+                  <button mat-raised-button class="btn-space" *ngIf="editUrl || viewUrl" type="button" 
+                    id="back" (click)="cancel()">Back</button>
                   <button mat-raised-button (click)="submit()" *ngIf="!editUrl  && !viewUrl" id="submit"
-                    [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null">Submit</button>
+                    [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null">Save</button>
                   <button mat-raised-button *ngIf="editUrl  && !viewUrl" id="save"
-                    [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null" (click)="save()"> Update </button>
+                    [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null" (click)="save()"> Submit </button>
                 </div>
               </div>
             </div>
