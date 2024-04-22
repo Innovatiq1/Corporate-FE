@@ -70,6 +70,7 @@ export class ProgramListComponent {
   startDate: string[] = [];
   endDate: string[] = [];
   status: string[] = [];
+row: any;
 
   constructor(
   
