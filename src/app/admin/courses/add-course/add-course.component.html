@@ -198,7 +198,27 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Fees')">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Fee Type')">
+                  <label>Fee Type</label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-select formControlName="feeType" (selectionChange)="onSelect($event)">
+                      <mat-option  value="paid">
+                        Paid
+                      </mat-option>
+                      <mat-option  value="free">
+                        Free
+                      </mat-option>
+                    </mat-select>                    
+                    <mat-error *ngIf="
+                    firstFormGroup.get('feeType')?.hasError('required') ||
+                    firstFormGroup.get('feeType')?.touched
+                    ">
+                Select Currency
+              </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Fees') && isPaid">
                   <label>Fees</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="fee" type="number" [readonly]="isInputReadonly()"
