@@ -23,6 +23,7 @@ export class CourseComponent {
   studentRegisteredModel!: Partial<CoursePaginationModel>;
   studentApprovedModel!: Partial<CoursePaginationModel>;
   studentCompletedModel!: Partial<CoursePaginationModel>;
+  freeCourseModel!: Partial<CoursePaginationModel>;
 
   filterName='';
   filterRegistered='';
@@ -46,6 +47,7 @@ export class CourseComponent {
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   tab: number = 0;
   department: any;
+  totalFreeItems: any;
 
 
   constructor(public _courseService:CourseService,  private classService: ClassService) {
@@ -53,10 +55,12 @@ export class CourseComponent {
     this.studentRegisteredModel = {};
     this.studentApprovedModel = {};
     this.studentCompletedModel = {};
+    this.freeCourseModel = {};
     this.department= JSON.parse(localStorage.getItem('user_data')!).user.department;
   }
 
   ngOnInit(){
+    this.getFreeCoursesList();
     this.getAllCourse();
     this.getRegisteredCourse();
     this.getApprovedCourse();
@@ -87,6 +91,8 @@ getAllCourse(){
 
   })
 }
+
+
 getRegisteredCourse(){
   let studentId=localStorage.getItem('id')
   let filterRegisteredCourse = this.filterRegistered
@@ -151,6 +157,12 @@ pageStudentCompletedSizeChange($event: any) {
   this.studentCompletedModel.limit = $event?.pageSize;
   this.getCompletedCourse();
 }
+pagefreeCourseSizeChange($event: any) {
+  this.freeCourseModel.page = $event?.pageIndex + 1;
+  this.freeCourseModel.limit = $event?.pageSize;
+  this.getFreeCoursesList();
+}
+
 
 
 
@@ -164,15 +176,15 @@ private mapCategories(): void {
   });
 
 }
-getCoursesList() {
-  this._courseService.getAllCourses({ ...this.coursePaginationModel, status: 'active' })
+getFreeCoursesList() {
+  this._courseService.getAllCourses({ ...this.coursePaginationModel, status: 'active' ,feeType:'free'})
     .subscribe(response => {
       this.dataSource = response.data.docs;
-      this.totalItems = response.data.totalDocs
-      this.coursePaginationModel.docs = response.data.docs;
-      this.coursePaginationModel.page = response.data.page;
-      this.coursePaginationModel.limit = response.data.limit;
-      this.coursePaginationModel.totalDocs = response.data.totalDocs;
+      this.totalFreeItems = response.data.totalDocs
+      this.freeCourseModel.docs = response.data.docs;
+      this.freeCourseModel.page = response.data.page;
+      this.freeCourseModel.limit = response.data.limit;
+      this.freeCourseModel.totalDocs = response.data.totalDocs;
       this.mapCategories();
     }, (error) => {
     }
@@ -204,7 +216,7 @@ delete(id: string) {
     }).then((result) => {
       if (result.isConfirmed){
         this._courseService.deleteCourse(id).subscribe(() => {
-          this.getCoursesList();
+          this.getFreeCoursesList();
           Swal.fire({
             title: 'Success',
             text: 'Course deleted successfully.',
