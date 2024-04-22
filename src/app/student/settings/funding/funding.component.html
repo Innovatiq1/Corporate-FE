@@ -87,8 +87,8 @@
                             </thead>
                             <tbody>
                               <tr style="cursor: pointer;" *ngFor="let row of dataSource">
-                                <td>{{row.grant_type | capitalizeFirstLetter}}</td>                         
-                                <td>{{row.description | capitalizeFirstLetter}}</td>   
+                                <td (click)="update(row)">{{row.grant_type | capitalizeFirstLetter}}</td>                         
+                                <td (click)="update(row)">{{row.description | capitalizeFirstLetter}}</td>   
                               </tr>
     
                             </tbody>

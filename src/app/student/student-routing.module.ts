@@ -65,6 +65,10 @@ import { AddStaffComponent } from './settings/add-staff/add-staff.component';
 import { AboutStaffComponent } from './settings/about-staff/about-staff.component';
 import { ExamResultsComponent } from './exam-results/exam-results.component';
 import { VendorComponent } from './settings/vendor/vendor.component';
+import { UpdateFundingComponent } from './settings/funding/update-funding/update-funding.component';
+import { UpdateDeptComponent } from './settings/create-department/update-dept/update-dept.component';
+import { UpdateUsergroupComponent } from './settings/user-group/update-usergroup/update-usergroup.component';
+import { UpdateVendorComponent } from './settings/vendor/update-vendor/update-vendor.component';
 
 
 const routes: Routes = [
@@ -432,7 +436,7 @@ const routes: Routes = [
     path: 'settings/about-staff',
     component: AboutStaffComponent
   },
-
+  
     {
     path: 'banners',
     loadChildren: () =>
@@ -444,7 +448,24 @@ const routes: Routes = [
     loadChildren: () =>
       import('./settings/email-configuration/email-configuration.module').then((m) => m.EmailConfigurationModule),
   },
+  {
+    path: 'settings/update-funding',
+    component: UpdateFundingComponent
+  },
+  {
+    path: 'settings/update-department',
+    component: UpdateDeptComponent
+  },
+  {
+    path: 'settings/update-user-group',
+    component: UpdateUsergroupComponent
+  },
+  {
+    path: 'settings/update-vendor',
+    component: UpdateVendorComponent
+  },
   
+
   { path: '**', component: Page404Component },
 ];
 

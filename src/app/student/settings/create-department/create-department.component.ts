@@ -84,4 +84,13 @@ export class CreateDepartmentComponent {
      this.dataSource = response.data.docs;
     })
   }
+
+
+  update(id: string) {
+    this.router.navigate(['/student/settings/update-department'], {
+      queryParams: {
+        id: id
+      }
+    });
+  }
 }

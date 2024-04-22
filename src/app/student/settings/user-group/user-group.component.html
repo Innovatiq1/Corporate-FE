@@ -65,8 +65,8 @@
                     </thead>
                     <tbody>
                       <tr style="cursor: pointer;" *ngFor="let row of dataSource">
-                        <td>{{row.group_name | capitalizeFirstLetter}}</td>
-                        <td>
+                        <td (click)="update(row.id)">{{row.group_name | capitalizeFirstLetter}}</td>
+                        <td (click)="update(row.id)">
                           <div style="display: inline-block;"
                             *ngFor="let user of row.userId; let i = index; let last = last">
                             {{ user.name }}{{ !last ? ',' : '' }}
@@ -76,7 +76,7 @@
 
                         </td>
 
-                        <td>{{row.shortDes | capitalizeFirstLetter}}</td>
+                        <td (click)="update(row.id)">{{row.shortDes | capitalizeFirstLetter}}</td>
 
                       </tr>
 
