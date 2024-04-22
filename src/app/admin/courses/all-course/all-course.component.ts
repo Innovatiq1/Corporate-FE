@@ -192,6 +192,9 @@ export class AllCourseComponent {
 
     }
   }
+  viewActiveProgram(id:string, status: string):void {
+    this.route.navigate(['/admin/courses/view-course/',"data.id"]);
+  }
   delete(id: string) {
     this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
       const matchingClasses = classList.docs.filter((classItem: any) => {
