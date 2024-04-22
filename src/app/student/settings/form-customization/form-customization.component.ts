@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormService  } from '@core/service/customization.service';
 import Swal from 'sweetalert2';
 
@@ -22,14 +23,21 @@ export class FormCustomizationComponent {
     },
   ];
 
-  constructor(private formService: FormService) { }
-  
+  formName!:String
+
+  constructor(private formService: FormService, private  activatedRoute: ActivatedRoute) { }
+
   ngOnInit(): void {
-    this.getForms();
+    this.activatedRoute.queryParams.subscribe(params=>{
+      const formName = params['name'];
+      this.formName = formName;
+      this.getForms();
+    })
   }
 
   getForms(): void {
-    this.formService.getAllForms().subscribe(forms => {
+    const formName = this.formName;
+    this.formService.getAllForms(formName).subscribe(forms => {
       this.forms = forms;
     });
   }
@@ -59,7 +67,7 @@ export class FormCustomizationComponent {
           text: error,
           icon: 'error',
         });
-  
+
       });
     });
   }

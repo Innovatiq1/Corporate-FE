@@ -450,7 +450,7 @@
                 </mat-form-field>
               </div>
             </div>
-           
+
             <div class="col-lg-4 col-md-4">
               <div class="form-group">
                 <label>Email<span class="mandatory">&nbsp;*</span></label>
@@ -712,7 +712,7 @@
           <div class="col-md-5">
             <button id="saved" [routerLink]="['/student/settings/user-list-group']"> Group Profile  </button>
           </div>
-          
+
         </div> -->
 
       </div>
@@ -749,14 +749,14 @@
           </div>
           <div class="col-md-5">
             <button id="saved" [routerLink]="['/student/settings/user-group']"> User Group </button>
-          
+
           </div>
         </div> -->
         <!-- <div class="row px-4">
           <div class="col-md-6 banner">
             <button id="no-link"> Import/Export Users </button>
           </div>
-          
+
         </div> -->
 
       </div>
@@ -834,7 +834,7 @@
           <div class="col-md-5">
             <button id="saved" (click)="navigateToCustomFormsSettings()"> Forms </button>
           </div>
-          
+
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
@@ -856,12 +856,12 @@
           <div class="col-md-6 banner">
             <button id="saved" (click)="openDialog(currencyDialog)"> Currency </button>
           </div>
-          
+
           <!-- <div class="row px-4 py-4">
             <div class="col-md-5 banner">
               <button id="saved" (click)="navigateToSidemenuSettings()" > Sidemenu </button>
             </div> -->
-  
+
           <!-- </div> -->
         </div>
 
@@ -982,7 +982,7 @@
             <!-- <button id="no-link">Course Kit </button> -->
           </div>
         </div>
-       
+
         <div class="col-md-12 py-3">
           <button mat-raised-button id="back" [routerLink]="['/student/settings/configuration']">Back</button>
         </div>
@@ -1001,26 +1001,26 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/form-customization']">Course Creation </button>
+            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Course Creation Form'}">Course Creation </button>
           </div>
           <div class="col-md-5">
-            <button id="no-link" > Program Creation </button>
+            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Program Creation Form'}"> Program Creation </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="no-link" >Course Class Creation  </button>
+            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Course Class Creation Form'}">Course Class Creation  </button>
           </div>
           <div class="col-md-5">
-            <button id="no-link" >Program Class Creation</button>
+            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Course Class Creation Form'}">Program Class Creation</button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="no-link">Course Kit </button>
+            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Course Kit Creation Form'}">Course Kit </button>
           </div>
         </div>
-       
+
         <div class="col-md-12 py-3">
           <button mat-raised-button id="back" [routerLink]="['/student/settings/configuration']">Back</button>
         </div>
@@ -1059,20 +1059,20 @@
             <button id="no-link" > Tutorial Configuration </button>
           </div>
           <div class="col-md-5">
-            <button id="no-link"> Control Storage Usage </button> 
+            <button id="no-link"> Control Storage Usage </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="no-link"> Managed Access Time </button>  
+            <button id="no-link"> Managed Access Time </button>
           </div>
           <!-- <div class="col-md-5">
-            <button id="no-link"> Managed Access Time </button>  
+            <button id="no-link"> Managed Access Time </button>
           </div> -->
         </div>
         <!-- <div class="row px-4">
           <div class="col-md-6 banner">
-           
+
           </div>
                 </div> -->
 
@@ -1115,8 +1115,8 @@
             </div>
           </div>
         </div>
-      
-   
+
+
     </div>
     <div class="card" *ngIf="showCustomSettings">
       <div class="header">

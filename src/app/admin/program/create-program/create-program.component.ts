@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { FormService } from '@core/service/customization.service';
 
 @Component({
   selector: 'app-create-program',
@@ -71,6 +72,7 @@ export class CreateProgramComponent {
   isEditable = false;
   public Editor: any = ClassicEditor;
   thumbnail: any;
+  forms!: any[];
 
 
   constructor(private route: ActivatedRoute,
@@ -81,7 +83,9 @@ export class CreateProgramComponent {
     private router: Router,
     private classService: ClassService,
     private activatedRoute: ActivatedRoute,
-    private cd: ChangeDetectorRef) {
+    private cd: ChangeDetectorRef,
+    private formService: FormService
+  ) {
     let urlPath = this.router.url.split('/')
     this.editPermission = urlPath.includes('edit-program');
     this.subscribeParams = this.activatedRoute.params.subscribe((params: any) => {
@@ -134,7 +138,28 @@ export class CreateProgramComponent {
     this.addCoreCard();
     this.addElectiveCard();
     this.getProgramList();
+    this.getForms();
   }
+  getForms(): void {
+    this.formService
+      .getAllForms('Program Creation Form')
+      .subscribe((forms) => {
+        this.forms = forms;
+      });
+  }
+
+  labelStatusCheck(labelName: string): any {
+    if (this.forms && this.forms.length > 0) {
+      const status = this.forms[0]?.labels?.filter(
+        (v: any) => v?.name === labelName
+      );
+      if (status && status.length > 0) {
+        return status[0]?.checked;
+      }
+    }
+    return false;
+  }
+
   addCoreCard(): void {
     this.corePrograms.push(
       this.fb.group({
@@ -195,7 +220,7 @@ export class CreateProgramComponent {
     const formData = new FormData();
     formData.append('files', this.thumbnail);
   this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
-    
+
     this.image_link = data.data.thumbnail;
       this.uploaded=this.image_link.split('/')
       let image  = this.uploaded.pop();
@@ -265,7 +290,7 @@ export class CreateProgramComponent {
           }
         });
 
-       
+
       }
       else {
         let payload = {

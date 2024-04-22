@@ -307,7 +307,7 @@ isInputDisabled(): boolean {
 // }
 
 getForms(): void {
-  this.formService.getAllForms().subscribe(forms => {
+  this.formService.getAllForms('Course Creation Form').subscribe(forms => {
     this.forms = forms;
   });
 }
@@ -320,7 +320,7 @@ mainCategoryChange(): void {
 
 onFileUpload(event:any) {
   const file = event.target.files[0];
-  
+
   this.thumbnail = file
   const formData = new FormData();
   formData.append('files', this.thumbnail);
@@ -330,7 +330,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
   let image  = this.uploaded?.pop();
   this.uploaded= image?.split('\\');
   this.uploadedImage = this.uploaded?.pop();
-  
+
 })
   // this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
   //   this.image_link = response.image_link;
@@ -593,7 +593,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       // certificates: this.certificateService.getcertificateBuilders(),
 
     }).subscribe((response: {
-      assessment: any; exam_assessment:any; survey: any; mainCategory: any; subCategory: any; fundingGrant: any; courseKit: { docs: any; }; 
+      assessment: any; exam_assessment:any; survey: any; mainCategory: any; subCategory: any; fundingGrant: any; courseKit: { docs: any; };
 }) => {
       this.mainCategories = response.mainCategory;
       this.allSubCategories = response.subCategory;
@@ -606,7 +606,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       this.feedbacks = response.survey.data.docs;
       // this.certificates = response.certificates.data.docs;
     });
-    
+
   }
 
 // getCourseKits(){
@@ -679,7 +679,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
             });
             this.courseAdded=true;
             this.router.navigate(['/admin/courses/submitted-courses/pending-courses'])
-    
+
           });
         }
       });
