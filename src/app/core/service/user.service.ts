@@ -80,7 +80,7 @@ export class UserService {
   }
 
 
-
+  
   getUsersListByRole(type:any,filter?: Partial<any>): Observable<any> {
     const apiUrl = `${this.defaultUrl}admin/adminUserListing/user/role?type=${type}`;
     return this.http
@@ -231,4 +231,32 @@ export class UserService {
       })
       .pipe(map((response) => response));
   }
+
+  getUserGroupById(id: string) {
+    const apiUrl = `${this.defaultUrl}admin/user-group/${id}`;
+    return this.http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
+  }
+
+
+  updateUserGroup(id:string, data:any){
+    console.log("userIDservice",id)
+    const apiUrl = `${this.defaultUrl}admin/user-group/${id}`;
+    return this.http.put<ApiResponse>(apiUrl, data).pipe(
+      map((response) => {
+        return response.data;
+      })
+    );
+  }
+
+  deleteUserGroup(id: string) {
+    const apiUrl = `${this.defaultUrl}admin/user-group/${id}`;
+    return this.http.delete<ApiResponse>(apiUrl).pipe(
+      map((response) => {
+        return response
+      })
+    );
+  }
 }
+
+
+

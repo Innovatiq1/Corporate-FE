@@ -11,8 +11,12 @@
       <div class="row clearfix">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div class="card" style="height: fit-content;">
-            <div class="header">
-              <h2>Create Funding/Grant</h2>
+            <div class="header d-flex justify-content-between">
+              <h2>Update Vendor</h2>
+              <button mat-mini-fab color="warn" matTooltip="Delete" (click)="deleteVendor(id)">
+                <mat-icon class="col-white">delete
+                </mat-icon>
+              </button>
             </div>
             <div class="body">
                 <!-- <div class="row">
@@ -32,17 +36,17 @@
                       </div>
                       </form>
                 </div> -->
-                <form [formGroup]="fundingForm">
+                <form [formGroup]="vendorForm">
 
                 <div class="row">
                   <div class="col-3">
-                    <label>Funding/Grant</label>
+                    <label>Vendor</label>
                         <mat-form-field class="example-full-width " appearance="outline">
-                            <input matInput type="text" formControlName="grant_type"
-                            class="form-control" placeholder="Enter New Funding/Grant"
+                            <input matInput type="text" formControlName="vendor"
+                            class="form-control" placeholder="Enter New Vendor"
                             >      
-                            <mat-error *ngIf="fundingForm.get('grant_type')?.invalid ||fundingForm.get('grant_type')?.touched">
-                              {{ utils.getErrorMessage1(fundingForm.get('grant_type'), 'grant_type') }}
+                            <mat-error *ngIf="vendorForm.get('vendor')?.invalid ||vendorForm.get('vendor')?.touched">
+                              {{ utils.getErrorMessage1(vendorForm.get('vendor'), 'vendor') }}
                             </mat-error>
                                       
                         </mat-form-field>
@@ -53,8 +57,8 @@
                             <input matInput type="text" formControlName="description"
                             class="form-control" placeholder="Enter Description"
                             >      
-                            <mat-error *ngIf="fundingForm.get('description')?.invalid ||fundingForm.get('description')?.touched">
-                              {{ utils.getErrorMessage1(fundingForm.get('description'), 'description') }}
+                            <mat-error *ngIf="vendorForm.get('description')?.invalid ||vendorForm.get('description')?.touched">
+                              {{ utils.getErrorMessage1(vendorForm.get('description'), 'description') }}
                             </mat-error>
                                       
                         </mat-form-field>
@@ -68,36 +72,12 @@
                 <hr/>
                 <div class="float-end">
                     <div class="d-grid gap-3 d-md-flex">
-                    <button  mat-raised-button  id="submit" (click)="onSubmit()" > Create </button>
+                      <button type="button" mat-raised-button  (click)="goBack()">
+                        Back
+                      </button>
+                    <button  mat-raised-button  id="submit" (click)="onUpdate()" > Update </button>
                     </div>
                   </div>
-                  <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
-                    <!-- <div class="card" style="border-radius: 31px;"> -->
-                      <div class="header mt-3">
-                        <h2>Funding/Grant Listing</h2>
-                      </div>
-                      <div class="table-wrapper">
-                        <div class="table-responsive">
-                          <table class="table table-hover ">
-                            <thead>
-                              <tr>
-                                <th>Funding/grant</th>
-                                <th>Description</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr style="cursor: pointer;" *ngFor="let row of dataSource">
-                                <td (click)="update(row)">{{row.grant_type | capitalizeFirstLetter}}</td>                         
-                                <td (click)="update(row)">{{row.description | capitalizeFirstLetter}}</td>   
-                              </tr>
-    
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    <!-- </div> -->
-                  </div>
-
             </div>
           </div>
         </div>

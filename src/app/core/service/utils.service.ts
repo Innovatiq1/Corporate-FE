@@ -28,6 +28,12 @@ export class UtilsService {
       { type: 'minlength', message: 'Enter minimum 2 characters' },
       { type: 'maxlength', message: 'Enter maximum 255 characters' },
     ],
+    vendor: [
+      { type: 'required', message: 'Enter Vendor' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+
 
     budget: [
       { type: 'required', message: 'Enter Budget' },

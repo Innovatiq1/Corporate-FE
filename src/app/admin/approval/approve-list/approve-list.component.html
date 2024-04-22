@@ -151,16 +151,16 @@
 
                 <ng-container matColumnDef="classstartDate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header
-                    >Class Start Date
+                    >Start Date
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (click)="view(row.id)">
-                    <span class="mobile-label">Class Start Date:</span>{{row?.classStartDate | date}}
+                    <span class="mobile-label">Start Date:</span>{{row?.classStartDate | date}}
                   </mat-cell>
                 </ng-container>
                 <!--Class Enddate -->
                 <ng-container matColumnDef="classendDate">
                   <mat-header-cell *matHeaderCellDef mat-sort-header
-                    >Class End Date
+                    >End Date
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" (click)="view(row.id)">
                     <span class="mobile-label">Class End Date:</span>{{row?.classEndDate | date}}

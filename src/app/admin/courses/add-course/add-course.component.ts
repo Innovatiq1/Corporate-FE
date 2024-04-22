@@ -75,6 +75,7 @@ export class AddCourseComponent implements OnInit {
   thumbnail: any;
   // instructorList: any = [];
   forms!: any[];
+  isPaid = false;
 
 
   breadscrums = [
@@ -170,6 +171,8 @@ export class AddCourseComponent implements OnInit {
         funding_grant: new FormControl('',[Validators.required]),
         // survey: new FormControl('',[Validators.required]),
         id: new FormControl(''),
+        feeType: new FormControl('',[]),
+
         // course_instructor: new FormControl('', [Validators.required]),
         // assign_exam: new FormControl('', []),
         assessment: new FormControl('', [Validators.required]),
@@ -536,6 +539,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       pdu_leadership:courseData?.pdu_leadership,
       pdu_strategic:courseData?.pdu_strategic,
       funding_grant:courseData?.funding_grant,
+      feeType:courseData?.feeType,
       // survey:courseData?.survey,
       // course_instructor:courseData?.course_instructor,
       assessment:courseData?.assessment,
@@ -578,7 +582,13 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
     this.isWbsSubmitted = true;
   }
   }
-
+  onSelect(event: any){
+    if(event.value == 'paid'){
+     this.isPaid = true;
+    }else if (event.value == 'free'){
+     this.isPaid = false;
+    }
+   }
   setup() {
     forkJoin({
       mainCategory: this.courseService.getMainCategories(),
@@ -659,7 +669,8 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
         image_link:this.image_link,
         vendor: courseData?.vendor,
         creator:creator,
-        website_link:courseData?.website_link
+        website_link:courseData?.website_link,
+        feeType:courseData?.feeType
       }
 
       Swal.fire({
@@ -726,10 +737,14 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       let assessmentId = this.course?.assessment?.id;
       let exam_assessmentId = this.course?.exam_assessment?.id;
       let feedbackId = this.course?.survey?.id;
+      if(this.course?.feeType == 'paid'){
+        this.isPaid = true;
+      }
       this.firstFormGroup.patchValue({
         currency_code: this.course.currency_code ? this.course.currency_code: null,
         training_hours: this.course?.training_hours?.toString(),
         title: this.course?.title,
+        feeType:this.course?.feeType,
         courseCode: this.course?.courseCode,
         main_category: categoryId,
         sub_category: sub_categoryId,

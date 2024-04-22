@@ -429,16 +429,16 @@
                       <div class="col-md-3" *ngFor="let program of programData">
                         <div class="program-card">
                           <div class="cards" style="display: flex;">
-                            <div style="cursor: pointer;" [routerLink]="['/admin/program/view-program/',program.id]">
+                            <div style="cursor: pointer;" (click)="viewActiveProgram(program.id, program.status)">
                               <img class="img mb-3" src="{{program?.image_link}}" height="200" width="400">
                             </div>
 
-                            <span class="text" style="cursor: pointer;"
-                              [routerLink]="['/admin/program/edit-program/',program.id]">
+                            <span class="text" style="cursor: pointer;"(click)="viewActiveProgram(program.id, program.status)"
+                            >
                               <h5>{{program?.title | truncate:35}}
                               </h5>
                               <div class="row">
-                                <div class="col-7">
+                                <div class="col-7" (click)="viewActiveProgram(program.id, program.status)" >
                                   <h6>Program Period</h6>
                                 </div>
                                 <div class="col-5">
@@ -479,7 +479,7 @@
                                 </div>
                               </div>
                             </span>
-                            <span class="ms-4">
+                            <!-- <span class="ms-4">
                               <button mat-button [matMenuTriggerFor]="menu">
                                 <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
                                   xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -499,10 +499,10 @@
                                   <span class="menu-text">Delete</span>
                                 </button>
                               </mat-menu>
-                            </span>
+                            </span> -->
                           </div>
                           <div class="row" style="cursor: pointer;"
-                            [routerLink]="['/admin/program/edit-program/',program.id]">
+                          (click)="viewActiveProgram(program.id, program.status)">
                             <div class="col">
                               <div class="m-4">
                                 <div class="d-flex justify-content-between mt-3">

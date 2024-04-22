@@ -123,6 +123,17 @@ export interface FundingGrant {
 	__v: number;
 	id: string;
 }
+
+
+export interface Vendor {
+	_id: string;
+	vendor: string;
+	description: string;
+	createdAt: string;
+	updatedAt: string;
+	__v: number;
+	id: string;
+}
 export interface Assessment {
 	_id: string;
 	docs: Assessment[];
@@ -249,6 +260,7 @@ export interface CoursePaginationModel extends Pagination {
 	status: string;
 	studentId: any;
 	department:string;
+	feeType:string;
 }
 
 export interface ProgramCourse {
@@ -278,6 +290,7 @@ export interface Program {
 }
 
 export interface DepartmentModel {
+  description: any;
 	category_name: string ;
 	  status: string;
 	  slug: string;

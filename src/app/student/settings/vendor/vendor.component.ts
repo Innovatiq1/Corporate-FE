@@ -1,57 +1,57 @@
 import { Component } from '@angular/core';
-import { FormBuilder, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-funding',
-  templateUrl: './funding.component.html',
-  styleUrls: ['./funding.component.scss']
+  selector: 'app-vendor',
+  templateUrl: './vendor.component.html',
+  styleUrls: ['./vendor.component.scss']
 })
-export class FundingComponent {
-  fundingForm!: UntypedFormGroup;
+export class VendorComponent {
+  vendorForm!: FormGroup;
   breadscrums = [
     {
-      title: 'Funding/Grant',
+      title: 'Vendor',
       items: ['Configuration'],
-      active: 'Funding/Grant',
+      active: 'Vendor',
     },
   ];
   dataSource :any;
 
   constructor(private fb: FormBuilder,private router:Router,
     private activatedRoute:ActivatedRoute,private courseService:CourseService,public utils:UtilsService) {
-      this.fundingForm = this.fb.group({
-        grant_type: ['', [Validators.required,...this.utils.validators.name]],
+      this.vendorForm = this.fb.group({
+        vendor: ['', [Validators.required,...this.utils.validators.name]],
         description: ['', [Validators.required,...this.utils.validators.name]]
 
       })
   }
 
   ngOnInit() {
-    this.getAllFundingGrants();
+    this.getAllVendors();
   }
 
   onSubmit() {
-    if(this.fundingForm.valid){
+    if(this.vendorForm.valid){
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Do you want to create funding grant!',
+      text: 'Do you want to create Vendor!',
       icon: 'warning',
       confirmButtonText: 'Yes',
       showCancelButton: true,
       cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed){
-        this.courseService.createFundingGrant(this.fundingForm.value).subscribe((response: any) => {
+        this.courseService.createVendor(this.vendorForm.value).subscribe((response: any) => {
           Swal.fire({
             title: 'Successful',
-            text: 'Funding Grant created successfully',
+            text: 'Vendor created successfully',
             icon: 'success',
           });
-          this.getAllFundingGrants();
+          this.getAllVendors();
           // this.router.navigate(['/student/settings/create-department'])
         });
       }
@@ -59,18 +59,15 @@ export class FundingComponent {
   } else {
   }
 }
-getAllFundingGrants(){
-  this.courseService.getFundingGrant().subscribe((response:any) =>{
+getAllVendors(){
+  this.courseService.getVendor().subscribe((response:any) =>{
    this.dataSource = response;
   })
 }
-update(data: any) {
-  console.log(data);
-  this.router.navigate(['/student/settings/update-funding'], {
+update(id: string){
+  this.router.navigate(['/student/settings/update-vendor'], {
     queryParams: {
-      funding: data.grant_type,
-      description: data.description,
-      id: data.id
+      id: id
     }
   });
 }

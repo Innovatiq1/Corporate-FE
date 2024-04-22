@@ -11,8 +11,12 @@
       <div class="row clearfix">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div class="card" style="height: fit-content;">
-            <div class="header">
-              <h2>Create Department</h2>
+            <div class="header d-flex justify-content-between">
+              <h2>Update Funding/Grant</h2>
+              <button mat-mini-fab color="warn" matTooltip="Delete" (click)="deleteFunding(id)">
+                <mat-icon class="col-white">delete
+                </mat-icon>
+              </button>
             </div>
             <div class="body">
                 <!-- <div class="row">
@@ -32,26 +36,34 @@
                       </div>
                       </form>
                 </div> -->
-                <form [formGroup]="departmentForm">
+                <form [formGroup]="fundingForm">
 
                 <div class="row">
                   <div class="col-3">
-                    <label>Department</label>
+                    <label>Funding/Grant</label>
                         <mat-form-field class="example-full-width " appearance="outline">
-                            <input matInput type="text" formControlName="department"
-                            class="form-control" placeholder="Enter New Department"
-                            >                                      
+                            <input matInput type="text" formControlName="grant_type"
+                            class="form-control" placeholder="Enter New Funding/Grant"
+                            >      
+                            <mat-error *ngIf="fundingForm.get('grant_type')?.invalid ||fundingForm.get('grant_type')?.touched">
+                              {{ utils.getErrorMessage1(fundingForm.get('grant_type'), 'grant_type') }}
+                            </mat-error>
+                                      
                         </mat-form-field>
                   </div>
-                    <div class="col-3">
-                      <label>Description</label>
-                          <mat-form-field class="example-full-width " appearance="outline">
-                              <input matInput type="text" formControlName="description"
-                              class="form-control" placeholder="Enter Description"
-                              >                                      
-                          </mat-form-field>
-                    </div>
-  
+                  <div class="col-3">
+                    <label>Description</label>
+                        <mat-form-field class="example-full-width " appearance="outline">
+                            <input matInput type="text" formControlName="description"
+                            class="form-control" placeholder="Enter Description"
+                            >      
+                            <mat-error *ngIf="fundingForm.get('description')?.invalid ||fundingForm.get('description')?.touched">
+                              {{ utils.getErrorMessage1(fundingForm.get('description'), 'description') }}
+                            </mat-error>
+                                      
+                        </mat-form-field>
+                  </div>
+
                   <!-- <div class="col mt-5 mx-5">
                     <button  mat-flat-button color="accent" [routerLink]="['/student/settings/user-type']"   > All Roles </button>
                   </div> -->
@@ -60,36 +72,36 @@
                 <hr/>
                 <div class="float-end">
                     <div class="d-grid gap-3 d-md-flex">
-                    <button  mat-raised-button  id="submit" (click)="onSubmit()" > Create </button>
+                    <button type="button" mat-raised-button  (click)="goBack()">
+                      Back
+                    </button>
+                    <button  mat-raised-button  id="submit" (click)="onUpdate()" > Update </button>
                     </div>
                   </div>
-                  <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
-                    <!-- <div class="card" style="border-radius: 31px;"> -->
+                  <!-- <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
                       <div class="header mt-3">
-                        <h2>Departments Listing</h2>
+                        <h2>Funding/Grant Listing</h2>
                       </div>
                       <div class="table-wrapper">
                         <div class="table-responsive">
                           <table class="table table-hover ">
                             <thead>
                               <tr>
-                                <th>Department</th>
+                                <th>Funding/grant</th>
                                 <th>Description</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr style="cursor: pointer;" *ngFor="let row of dataSource">
-                                <td (click)="update(row.id)">{{row.department | capitalizeFirstLetter}}</td>
-                                <td (click)="update(row.id)">
-                                    {{row?.description | titlecase}}
-                                </td>
+                                <td>{{row.grant_type | capitalizeFirstLetter}}</td>                         
+                                <td>{{row.description | capitalizeFirstLetter}}</td>   
                               </tr>
+    
                             </tbody>
                           </table>
                         </div>
                       </div>
-                    <!-- </div> -->
-                  </div>
+                  </div> -->
 
             </div>
           </div>

@@ -95,6 +95,11 @@ import { EditTeacherComponent } from './settings/edit-teacher/edit-teacher.compo
 import { AddStaffComponent } from './settings/add-staff/add-staff.component';
 import { AboutStaffComponent } from './settings/about-staff/about-staff.component';
 import { ExamResultsComponent } from './exam-results/exam-results.component';
+import { VendorComponent } from './settings/vendor/vendor.component';
+import { UpdateFundingComponent } from './settings/funding/update-funding/update-funding.component';
+import { UpdateDeptComponent } from './settings/create-department/update-dept/update-dept.component';
+import { UpdateUsergroupComponent } from './settings/user-group/update-usergroup/update-usergroup.component';
+import { UpdateVendorComponent } from './settings/vendor/update-vendor/update-vendor.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -155,6 +160,7 @@ import { ExamResultsComponent } from './exam-results/exam-results.component';
     UserGroupListComponent,
     CreateDepartmentComponent,
     FundingComponent,
+    VendorComponent,
     CustomizationCurrencyComponent,
     CreateUserTypeComponent,
     AddDepartmentComponent,
@@ -166,7 +172,12 @@ import { ExamResultsComponent } from './exam-results/exam-results.component';
     EditTeacherComponent,
     AddStaffComponent,
     AboutStaffComponent,
-    ExamResultsComponent
+    ExamResultsComponent,
+    VendorComponent,
+    UpdateFundingComponent,
+    UpdateDeptComponent,
+    UpdateUsergroupComponent,
+    UpdateVendorComponent
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,

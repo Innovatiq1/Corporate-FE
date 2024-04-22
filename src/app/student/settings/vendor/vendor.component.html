@@ -12,7 +12,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div class="card" style="height: fit-content;">
             <div class="header">
-              <h2>Create Department</h2>
+              <h2>Create Vendor</h2>
             </div>
             <div class="body">
                 <!-- <div class="row">
@@ -32,26 +32,34 @@
                       </div>
                       </form>
                 </div> -->
-                <form [formGroup]="departmentForm">
+                <form [formGroup]="vendorForm">
 
                 <div class="row">
                   <div class="col-3">
-                    <label>Department</label>
+                    <label>Vendor</label>
                         <mat-form-field class="example-full-width " appearance="outline">
-                            <input matInput type="text" formControlName="department"
-                            class="form-control" placeholder="Enter New Department"
-                            >                                      
+                            <input matInput type="text" formControlName="vendor"
+                            class="form-control" placeholder="Enter New Vendor"
+                            >      
+                            <mat-error *ngIf="vendorForm.get('vendor')?.invalid ||vendorForm.get('vendor')?.touched">
+                              {{ utils.getErrorMessage1(vendorForm.get('vendor'), 'vendor') }}
+                            </mat-error>
+                                      
                         </mat-form-field>
                   </div>
-                    <div class="col-3">
-                      <label>Description</label>
-                          <mat-form-field class="example-full-width " appearance="outline">
-                              <input matInput type="text" formControlName="description"
-                              class="form-control" placeholder="Enter Description"
-                              >                                      
-                          </mat-form-field>
-                    </div>
-  
+                  <div class="col-3">
+                    <label>Description</label>
+                        <mat-form-field class="example-full-width " appearance="outline">
+                            <input matInput type="text" formControlName="description"
+                            class="form-control" placeholder="Enter Description"
+                            >      
+                            <mat-error *ngIf="vendorForm.get('description')?.invalid ||vendorForm.get('description')?.touched">
+                              {{ utils.getErrorMessage1(vendorForm.get('description'), 'description') }}
+                            </mat-error>
+                                      
+                        </mat-form-field>
+                  </div>
+
                   <!-- <div class="col mt-5 mx-5">
                     <button  mat-flat-button color="accent" [routerLink]="['/student/settings/user-type']"   > All Roles </button>
                   </div> -->
@@ -66,24 +74,23 @@
                   <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
                     <!-- <div class="card" style="border-radius: 31px;"> -->
                       <div class="header mt-3">
-                        <h2>Departments Listing</h2>
+                        <h2>Vendor Listing</h2>
                       </div>
                       <div class="table-wrapper">
                         <div class="table-responsive">
                           <table class="table table-hover ">
                             <thead>
                               <tr>
-                                <th>Department</th>
+                                <th>Vendor</th>
                                 <th>Description</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr style="cursor: pointer;" *ngFor="let row of dataSource">
-                                <td (click)="update(row.id)">{{row.department | capitalizeFirstLetter}}</td>
-                                <td (click)="update(row.id)">
-                                    {{row?.description | titlecase}}
-                                </td>
+                                <td (click)="update(row.id)">{{row?.vendor | capitalizeFirstLetter}}</td>                         
+                                <td (click)="update(row.id)">{{row?.description }}</td>   
                               </tr>
+    
                             </tbody>
                           </table>
                         </div>

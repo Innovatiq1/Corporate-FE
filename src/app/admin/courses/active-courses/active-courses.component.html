@@ -133,14 +133,18 @@
                                     </mat-cell>
                                   </ng-container>
                                   <ng-container matColumnDef="status">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="compulsory-count-header">Status
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="compulsory-count-header" style="width: 400px;"> <!-- Adjust the width as needed -->
+                                      Status
                                     </mat-header-cell>
-                                    <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)> <span
-                                        class="mobile-label">Status:</span><span class="badge badge-solid-green">
-                                          <span class="status-dot"></span>
-                                          {{ row.status == 'active' ? 'Approved' : 'Pending'}}</span>
+                                    <mat-cell *matCellDef="let row" (click)="viewCourse(row.id)" >
+                                      <span class="mobile-label">Status:</span>
+                                      <span class="badge badge-solid-green">
+                                        <span class="status-dot"></span>
+                                        {{ row.status == 'active' ? 'Approved' : 'Pending'}}
+                                      </span>
                                     </mat-cell>
                                   </ng-container>
+                                  
                                   <mat-header-row *matHeaderRowDef="displayedColumns">
                                   </mat-header-row>
                                   <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->

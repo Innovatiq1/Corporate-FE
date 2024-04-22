@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { BehaviorSubject, Observable, map } from "rxjs";
 import { ApiResponse } from "@core/models/response";
 import { environment } from "environments/environment";
-import { CourseKit, CourseModel, CoursePaginationModel, Program } from "@core/models/course.model";
+import { CourseKit, CourseModel, CoursePaginationModel, Program, Vendor } from "@core/models/course.model";
 import { FundingGrant, Instructor, MainCategory, SubCategory, Survey } from "@core/models/course.model";
 
 @Injectable({
@@ -44,6 +44,9 @@ export class CourseService {
       if (filter.filterText) {
         params = params.set("title", filter.filterText?.toString());
       }
+      if (filter.feeType) {
+        params = params.set("feeType", filter.feeType);
+      }
       if (filter.status && filter.status === "active") {
         params = params.set("status", "active");
       } else if (filter.status && filter.status === "inactive") {
@@ -76,7 +79,6 @@ export class CourseService {
     filter?: Partial<CoursePaginationModel>
   ): Observable<ApiResponse> {
     const apiUrl = this.defaultUrl+'admin/courses-new';
-    console.log("==new=",apiUrl)
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(filter),
     });
@@ -126,7 +128,6 @@ export class CourseService {
     filter?: Partial<CoursePaginationModel>
   ): Observable<ApiResponse> {
     const apiUrl = this.defaultUrl+'admin/courses-new/count';
-    console.log("==new=",apiUrl)
     return this._Http.get<ApiResponse>(apiUrl);
   }
   getMainCategories(): Observable<MainCategory[]> {
@@ -142,9 +143,9 @@ export class CourseService {
     const apiUrl = `${this.prefix}admin/funding-grant`;
     return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
   }
-  updateFundingGrant(payload:any,id:string) {
+  updateFundingGrant(id:string,payload:any) {
     const apiUrl = `${this.prefix}admin/funding-grant/${id}`;
-    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+    return this._Http.put<any>(apiUrl, payload).pipe(map((response) => response));
   }
   getFundingGrant(): Observable<FundingGrant[]> {
     const apiUrl = `${this.prefix}admin/funding-grant/`;
@@ -153,6 +154,34 @@ export class CourseService {
   getFundingGrantById(id:string): Observable<FundingGrant[]> {
     const apiUrl = `${this.prefix}admin/funding-grant/${id}`;
     return this._Http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }
+  deleteFundingGrant(id: string) {
+    const apiUrl = `${this.prefix}admin/funding-grant/${id}`;
+    return this._Http
+      .delete<FundingGrant[]>(apiUrl)
+      .pipe(map((response) => response));
+  }
+  createVendor(payload:any) {
+    const apiUrl = `${this.prefix}admin/vendor`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+  updateVendor(id:string, payload:any) {
+    const apiUrl = `${this.prefix}admin/vendor/${id}`;
+    return this._Http.put<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+  getVendor(): Observable<FundingGrant[]> {
+    const apiUrl = `${this.prefix}admin/vendor/`;
+    return this._Http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }
+  getVendorById(id:string): Observable<Vendor> {
+    const apiUrl = `${this.prefix}admin/vendor/${id}`;
+    return this._Http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }
+  deleteVendor(id: string) {
+    const apiUrl = `${this.prefix}admin/vendor/${id}`;
+    return this._Http
+      .delete<Vendor>(apiUrl)
+      .pipe(map((response) => response));
   }
 
   getSurvey(): Observable<Survey[]> {
@@ -372,7 +401,6 @@ export class CourseService {
     filter?: Partial<CoursePaginationModel>
   ): Observable<ApiResponse> {
     const apiUrl = this.defaultUrl+'paymentHistory/userPaymentHistory';
-    console.log("==new=",apiUrl)
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(filter),
     });
@@ -381,7 +409,6 @@ export class CourseService {
     filter?: Partial<CoursePaginationModel>
   ): Observable<ApiResponse> {
     const apiUrl = this.defaultUrl+'paymentHistory/programsPaymentHistory';
-    console.log("==new=",apiUrl)
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(filter),
     });
@@ -390,13 +417,11 @@ export class CourseService {
   getAllPaymentsById(Id:any
   ): Observable<ApiResponse> {
     const apiUrl = this.defaultUrl+`paymentHistory/userPaymentHistory/${Id}`;
-    console.log("==new=",apiUrl)
     return this._Http.get<ApiResponse>(apiUrl);
   }
   getAllProgramsPaymentsById(Id:any
     ): Observable<ApiResponse> {
       const apiUrl = this.defaultUrl+`paymentHistory/programsPaymentHistory/${Id}`;
-      console.log("==new=",apiUrl)
       return this._Http.get<ApiResponse>(apiUrl);
     }
     getAllChats(
@@ -436,7 +461,6 @@ export class CourseService {
 
 
     updateVideo(id:string,payload: any){
-      console.log("payload",payload);
         const apiUrl = `${this.prefix}uploadVideo/${id}`;
         return this._Http.put<ApiResponse>(apiUrl, payload);
       }
