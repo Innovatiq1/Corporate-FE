@@ -8,8 +8,12 @@
       <div class="row clearfix">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div class="card" style=" height: fit-content; ">
-            <div class="header">
+            <div class="header d-flex justify-content-between">
               <h2>Update User Group</h2>
+              <button mat-mini-fab color="warn" matTooltip="Delete" (click)="deleteUserGroup(id)">
+                <mat-icon class="col-white">delete
+                </mat-icon>
+              </button>
             </div>
             <div class="body">
                 <form [formGroup]="userTypeFormGroup">
@@ -47,8 +51,8 @@
                 <hr/>
                 <div class="float-end">
                     <div class="d-grid gap-3 d-md-flex">
-                      <button type="button" mat-raised-button color="warn" (click)="deleteUserGroup(id)">
-                        Delete
+                      <button type="button" mat-raised-button (click)="goBack()">
+                        Back
                       </button>
                     <button  mat-raised-button id="submit" (click)="onUpdate()"> Update </button>
                     </div>

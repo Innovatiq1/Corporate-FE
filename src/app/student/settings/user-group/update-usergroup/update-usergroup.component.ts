@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { UserService } from '@core/service/user.service';
 import Swal from 'sweetalert2';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-update-usergroup',
@@ -28,7 +29,8 @@ export class UpdateUsergroupComponent {
     private fb: FormBuilder,
     private router: Router,
     private userService: UserService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private location: Location
   ) {
     this.userTypeFormGroup = this.fb.group({
       typeName: ['', []],
@@ -49,7 +51,6 @@ export class UpdateUsergroupComponent {
     this.userService.getUserGroupById(id).subscribe(
       (response: any) => {
         this.response = response?.data;
-        console.log(this.response.userId);
         let userId = this.response?.userId?.map((item: { id: any; }) => item) || [];
         this.userTypeFormGroup.patchValue({
           typeName: this.response.group_name,
@@ -70,7 +71,11 @@ export class UpdateUsergroupComponent {
 
 
   onUpdate() {
-    const userData = this.userTypeFormGroup.value;
+    const userData ={
+      group_name: this.userTypeFormGroup.value.typeName,
+      shortDes: this.userTypeFormGroup.value.shortDes,
+      userId: this.userTypeFormGroup.value.userId
+    };
     Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to update this!',
@@ -107,7 +112,7 @@ export class UpdateUsergroupComponent {
   deleteUserGroup(id:string){
     Swal.fire({
   title: "Confirm Deletion",
-  text: "Are you sure you want to delete this course kit?",
+  text: "Are you sure you want to delete this?",
   icon: "warning",
   showCancelButton: true,
   confirmButtonColor: "#d33",
@@ -127,7 +132,9 @@ export class UpdateUsergroupComponent {
     });
   }
 });
-
+}
+goBack(): void {
+  this.location.back();
 }
 }
  
