@@ -155,6 +155,24 @@ export class CourseService {
     return this._Http.get<any>(apiUrl).pipe(map((response:any) => response.data));
   }
 
+  createVendor(payload:any) {
+    const apiUrl = `${this.prefix}admin/vendor`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+  updateVendor(payload:any,id:string) {
+    const apiUrl = `${this.prefix}admin/vendor/${id}`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+  getVendor(): Observable<FundingGrant[]> {
+    const apiUrl = `${this.prefix}admin/vendor/`;
+    return this._Http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }
+  getVendorById(id:string): Observable<FundingGrant[]> {
+    const apiUrl = `${this.prefix}admin/vendor/${id}`;
+    return this._Http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }
+
+
   getSurvey(): Observable<Survey[]> {
     const apiUrl = `${this.prefix}admin/survey/`;
     return this._Http
