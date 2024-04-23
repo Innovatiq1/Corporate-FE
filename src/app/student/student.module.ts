@@ -100,6 +100,7 @@ import { UpdateFundingComponent } from './settings/funding/update-funding/update
 import { UpdateDeptComponent } from './settings/create-department/update-dept/update-dept.component';
 import { UpdateUsergroupComponent } from './settings/user-group/update-usergroup/update-usergroup.component';
 import { UpdateVendorComponent } from './settings/vendor/update-vendor/update-vendor.component';
+import { EditStaffComponent } from './settings/about-staff/edit-staff/edit-staff.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -177,7 +178,8 @@ import { UpdateVendorComponent } from './settings/vendor/update-vendor/update-ve
     UpdateFundingComponent,
     UpdateDeptComponent,
     UpdateUsergroupComponent,
-    UpdateVendorComponent
+    UpdateVendorComponent,
+    EditStaffComponent
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,

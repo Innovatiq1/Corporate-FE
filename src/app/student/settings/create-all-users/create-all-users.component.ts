@@ -399,7 +399,7 @@ export class CreateAllUsersComponent {
     this.userForm = this.fb.group({
       name: new FormControl('', [Validators.required]),
       last_name: new FormControl('', []),
-      rollNo: new FormControl('', [Validators.required]),
+      rollNo: new FormControl('', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.roll_no]),
       gender: new FormControl('', [Validators.required]),
       mobile: new FormControl('', [Validators.required]),
       qualification: new FormControl('', []),

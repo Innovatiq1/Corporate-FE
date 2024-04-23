@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { ConfirmedValidator } from '@shared/password.validator';
 import { CourseService } from '@core/service/course.service';
 import { StudentsService } from 'app/admin/students/students.service';
+import { UtilsService } from '@core/service/utils.service';
 @Component({
   selector: 'app-add-student',
   templateUrl: './add-student.component.html',
@@ -26,7 +27,7 @@ export class AddStudentComponent {
     {
       title: 'Add Student',
       items: ['Users'],
-      active: 'Add Student',
+      active: 'Add Student1',
     },
   ];
   editData: any;
@@ -42,6 +43,7 @@ export class AddStudentComponent {
     private StudentService: StudentsService,
     private router: Router,
     private courseService: CourseService,
+    public utils: UtilsService
   ) {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       console.log('id', params);
@@ -65,7 +67,7 @@ export class AddStudentComponent {
       ],
       parentsName: [''],
       parentsPhone: [''],
-      dob: [''],
+      dob: ['', [Validators.required,...this.utils.validators.dob]],
       joiningDate: ['', [Validators.required]],
       education: [''],
       avatar: [''],
