@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, NgZone, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -32,7 +32,7 @@ question: any;
 subscribeParams: any;
 selectedTabIndex = 0;
 
-constructor(private formBuilder: FormBuilder,private router: Router, private questionService: QuestionService, private cdr: ChangeDetectorRef,private activatedRoute: ActivatedRoute,) {
+constructor(private formBuilder: FormBuilder,private router: Router, private questionService: QuestionService, private cdr: ChangeDetectorRef,private activatedRoute: ActivatedRoute,private ngZone: NgZone) {
 
   let urlPath = this.router.url.split('/')
   this.editUrl = urlPath.includes('edit-questions');
@@ -149,7 +149,8 @@ Swal.fire({
   }
 
 }
-update(){
+
+update() {
   if (this.questionForm.valid) {
     const payload = {
       name: this.questionForm.value.name,
@@ -160,41 +161,41 @@ update(){
           correct: option.correct
         }))
       })),
-      id:this.questionId,
-
+      id: this.questionId,
     };
-Swal.fire({
-    title: 'Are you sure?',
-    text: 'Do you want to update!',
-    icon: 'warning',
-    confirmButtonText: 'Yes',
-    showCancelButton: true,
-    cancelButtonColor: '#d33',
-  }).then((result) => {
-    if (result.isConfirmed){
-      this.questionService.updateQuestions(payload).subscribe(
-        (res: any) => {
-          Swal.fire({
-            title: 'Successful',
-            text: 'Question Updated successfully',
-            icon: 'success',
-          });
-          this.router.navigate(['/student/settings/all-questions'])
 
-        },
-        (err: any) => {
-          Swal.fire(
-            'Failed to update Question',
-            'error'
-          );
-        }
-      );
-    }
-  });
-
-
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to update!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.questionService.updateQuestions(payload).subscribe(
+          (res: any) => {
+            Swal.fire({
+              title: 'Successful',
+              text: 'Question Updated successfully',
+              icon: 'success',
+            });
+            this.ngZone.run(() => {
+              this.router.navigate(['/student/settings/all-questions']);
+            });
+          },
+          (err: any) => {
+            Swal.fire(
+              'Failed to update Question',
+              'error'
+            );
+          }
+        );
+      }
+    });
   }
 }
+
 
 getData() {
 if (this.questionId) {

@@ -139,7 +139,7 @@
                   </ng-container>
                   <ng-container matColumnDef="programFee">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Course Fee</mat-header-cell>
-                    <mat-cell *matCellDef="let row" (click)="view(row.id)">
+                    <mat-cell *matCellDef="let row" (click)="view(row.id)" >
                         <span class="mobile-label">Program Fee:</span> $ {{row.classId.courseId.fee}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="instructorFee">

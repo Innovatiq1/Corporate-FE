@@ -31,6 +31,8 @@ export class EditCategoriesComponent {
       active: 'Edit Categories',
     },
   ];
+row: any;
+
 
   constructor(private router: Router,
     

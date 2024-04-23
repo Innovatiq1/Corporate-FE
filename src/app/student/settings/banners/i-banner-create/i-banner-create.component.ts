@@ -37,7 +37,7 @@ export class IBannerCreateComponent {
     });
   }
   closeDialog(): void {
-    this.router.navigate(['/admin/banners/instructor-banner-list'])
+    this.router.navigate(['/student/banners/settings/instructor-banner-list'])
   }
   onSubmitClick():void {
     this.banner_for = this.addCusForm.value.bannerFor;
