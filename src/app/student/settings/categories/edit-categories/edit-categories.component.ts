@@ -64,7 +64,7 @@ this.initMainCategoryForm();
 addSubCategoryField(): void {
   this.subcategories.push(
     this.formBuilder.group({
-      category_name: ['', Validators.required]
+      category_name: ['', Validators.required,...this.utils.validators.sub_category,...this.utils.validators.noLeadingSpace]
     })
   );
 }

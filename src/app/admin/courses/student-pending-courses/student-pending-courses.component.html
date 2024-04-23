@@ -126,7 +126,7 @@
                     >
                     <mat-cell *matCellDef="let row" (click)="view(row.id)">
                       <span class="mobile-label">Student Name:</span>
-                      <span class="col-cyan">{{row.studentId?.last_name?row.studentId?.name + " " + row.studentId?.last_name:row.studentId?.name}}</span>
+                      <span class="col-cyan">{{row?.studentId?.last_name?row.studentId?.name + " " + row.studentId?.last_name:row.studentId?.name}}</span>
                     </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="coursename">
@@ -134,18 +134,18 @@
                       >Course</mat-header-cell
                     >
                     <mat-cell *matCellDef="let row" (click)="view(row.id)">
-                      <span class="mobile-label">Course Name:</span>{{row.classId?.courseId?.title }}
+                      <span class="mobile-label">Course Name:</span>{{row?.title }}
                     </mat-cell>
                   </ng-container>
                   <ng-container matColumnDef="programFee">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Course Fee</mat-header-cell>
-                    <mat-cell *matCellDef="let row" (click)="view(row.id)" >
-                        <span class="mobile-label">Program Fee:</span> $ {{row.classId.courseId.fee}}</mat-cell>
+                    <mat-cell *matCellDef="let row" (click)="view(row.id)">
+                        <span class="mobile-label">Program Fee:</span> $ {{row?.classId?.courseId?.fee || 0}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="instructorFee">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Instructor Fee</mat-header-cell>
                     <mat-cell *matCellDef="let row" (click)="view(row.id)">
-                        <span class="mobile-label">Instructor Fee:</span> $ {{row.classId.instructorCost }}</mat-cell>
+                        <span class="mobile-label">Instructor Fee:</span> $ {{row?.classId?.instructorCost  || 0}}</mat-cell>
                 </ng-container>
                   <!-- Class start date -->
   
@@ -154,7 +154,7 @@
                       >Start Date
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" (click)="view(row.id)">
-                      <span class="mobile-label">Class Start Date:</span>{{row?.classStartDate | date}}
+                      <span class="mobile-label">Class Start Date:</span>{{row.classStartDate | date }}
                     </mat-cell>
                   </ng-container>
                   <!--Class Enddate -->
@@ -163,7 +163,7 @@
                       >End Date
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" (click)="view(row.id)">
-                      <span class="mobile-label">Class End Date:</span>{{row?.classEndDate | date}}
+                      <span class="mobile-label">Class End Date:</span>{{row?.classEndDate | date }}
                     </mat-cell>
                   </ng-container>
                   <!--Registered date -->

@@ -15,14 +15,18 @@
             <form [formGroup]="userTypeFormGroup">
               <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Group Name</label>
+                  <label>Group Name<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width " appearance="outline">
                     <input matInput type="text" formControlName="typeName" class="form-control"
                       placeholder="Enter New Group">
+                      <mat-error *ngIf="userTypeFormGroup.get('typeName')?.invalid ||userTypeFormGroup.get('typeName')?.touched">
+                        {{ utils.getErrorMessage1(userTypeFormGroup.get('typeName'), 'userGroup') }}
+                      </mat-error>
                   </mat-form-field>
+                  
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>User List</label>
+                  <label>User List<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-select formControlName="userId" required multiple>
                       <mat-option *ngFor="let item of users" [value]="item.id">
@@ -30,13 +34,19 @@
                       </mat-option>
 
                     </mat-select>
+                    <mat-error *ngIf="userTypeFormGroup.get('userId')?.invalid ||userTypeFormGroup.get('userId')?.touched">
+                      {{ utils.getErrorMessage1(userTypeFormGroup.get('userId'), 'user') }}
+                    </mat-error> 
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Description</label>
+                  <label>Description<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput type="text" formControlName="shortDes" class="form-control"
                       placeholder="Enter Description">
+                      <mat-error *ngIf="userTypeFormGroup.get('shortDes')?.invalid ||userTypeFormGroup.get('shortDes')?.touched">
+                        {{ utils.getErrorMessage1(userTypeFormGroup.get('shortDes'), 'descripton') }}
+                      </mat-error>   
                   </mat-form-field>
                 </div>
               </div>

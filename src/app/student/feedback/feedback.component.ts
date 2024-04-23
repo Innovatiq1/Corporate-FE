@@ -75,6 +75,10 @@ export class FeedbackComponent {
   selectedOptions: any[] = [];
   courseName: any;
   options: any;
+  freeCourse: boolean;
+  isFree = false;
+  isPaid = false;
+  path: string;
   constructor(
     private _classService: ClassService,
     private courseService: CourseService,
@@ -84,6 +88,14 @@ export class FeedbackComponent {
     private surveyService: SurveyService,
     private classService: ClassService
   ) {
+    let Path = this.router.url.split('/');
+    this.freeCourse = Path.includes('freecourse');
+    if(this.freeCourse){
+      this.isFree = true;
+    } else {
+      this.isPaid = true;
+    }
+
     this.feedbackForm = this.fb.group({
       courseName: ['',[] ],
       programName: ['',[] ],
@@ -98,9 +110,11 @@ export class FeedbackComponent {
     });
 
     let urlPath = this.router.url.split('/')
+    this.path = urlPath[urlPath.length - 1];
+
     this.programsUrl = urlPath.includes('programs');
     this.coursesUrl = urlPath.includes('courses');
-    if(this.coursesUrl){
+    if(this.coursesUrl || this.freeCourse){
       this.breadscrums = [
         {
           title: 'Courses',
@@ -166,19 +180,41 @@ export class FeedbackComponent {
             ).then((r) => {
                 this.feedbackForm.reset();
             });
-            let payload = {
-              status: 'completed',
-              studentId: this.studentId,
-              playbackTime: 100,
-            };
-            this.classService
-              .saveApprovedClasses(this.classId, payload)
-              .subscribe((response) => {
-                setTimeout(() => {
-                  this.router.navigate(['/student/view-course/'+ this.classId]);
-                }, 4000);
+            if(this.isPaid){
+              let payload = {
+                status: 'completed',
+                studentId: this.studentId,
+                playbackTime: 100,
+                classId:this.path
 
-              });
+              
+              };
+              this.classService
+                .saveApprovedClasses(this.classId, payload)
+                .subscribe((response) => {
+                  setTimeout(() => {
+                    this.router.navigate(['/student/view-course/'+ this.classId]);
+                  }, 4000);
+  
+                });
+            } else if(this.isFree){
+              let payload = {
+                status: 'completed',
+                studentId: this.studentId,
+                playbackTime: 100,
+                courseId:this.path
+              
+              };
+              this.classService
+                .saveApprovedClasses(this.classId, payload)
+                .subscribe((response) => {
+                  setTimeout(() => {
+                    this.router.navigate(['/student/view-freecourse/'+ this.courseId]);
+                  }, 4000);
+  
+                });
+            }
+            
         },
         (err) => {
             console.log(err);

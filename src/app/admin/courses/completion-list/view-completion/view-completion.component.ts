@@ -104,12 +104,14 @@ export class ViewCompletionComponent {
     return JSON.parse(localStorage.getItem('user_data')!).user.id;
   }
   changeStatus(element: Student, status: string) {
+    console.log('ele',element)
     const item: StudentApproval = {
       approvedBy: this.getCurrentUserId(),
       approvedOn: moment().format('YYYY-MM-DD'),
-      classId: element.classId._id,
+      classId: element?.classId?._id || null,
       status,
       studentId: element.studentId.id,
+      courseId:element.courseId._id,
       session: this.getSessions(element),
     };
 

@@ -242,6 +242,7 @@ export interface StudentApproval {
   studentId: string;
   classId: String;
   status: string;
+  courseId?: string;
   approvedOn: string;
   approvedBy: string;
   session: Session[];

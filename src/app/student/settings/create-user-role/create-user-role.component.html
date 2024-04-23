@@ -36,19 +36,25 @@
 
                 <div class="row">
                   <div class="col-3">
-                    <label>Role</label>
+                    <label>Role <span class="mandatory">&nbsp;*</span></label>
                         <mat-form-field class="example-full-width " appearance="outline">
                             <input matInput type="text" formControlName="typeName"
                             class="form-control" placeholder="Enter New Role"
-                            >                                      
+                            >           
+                            <mat-error *ngIf="userTypeFormGroup.get('typeName')?.invalid ||userTypeFormGroup.get('typeName')?.touched">
+                              {{ utils.getErrorMessage1(userTypeFormGroup.get('typeName'), 'role') }}
+                            </mat-error>                                 
                         </mat-form-field>
                   </div>
                   <div class="col-3">
-                    <label>Description</label>
+                    <label>Description <span class="mandatory">&nbsp;*</span></label>
                         <mat-form-field class="example-full-width " appearance="outline">
                             <input matInput type="text" formControlName="description"
                             class="form-control" placeholder="Enter Description"
-                            >                                      
+                            >  
+                            <mat-error *ngIf="userTypeFormGroup.get('description')?.invalid ||userTypeFormGroup.get('description')?.touched">
+                              {{ utils.getErrorMessage1(userTypeFormGroup.get('description'), 'description') }}
+                            </mat-error>                                    
                         </mat-form-field>
                   </div>
 

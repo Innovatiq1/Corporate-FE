@@ -69,6 +69,7 @@ import { UpdateFundingComponent } from './settings/funding/update-funding/update
 import { UpdateDeptComponent } from './settings/create-department/update-dept/update-dept.component';
 import { UpdateUsergroupComponent } from './settings/user-group/update-usergroup/update-usergroup.component';
 import { UpdateVendorComponent } from './settings/vendor/update-vendor/update-vendor.component';
+import { EditStaffComponent } from './settings/about-staff/edit-staff/edit-staff.component';
 
 
 const routes: Routes = [
@@ -80,6 +81,11 @@ const routes: Routes = [
     path: 'view-course/:id',
     component: ViewCourseComponent,
   },
+  {
+    path: 'view-freecourse/:id',
+    component: ViewCourseComponent,
+  },
+
   {
     path: 'sucess-course/:id',
     component: SucessCourseComponent,
@@ -133,6 +139,11 @@ const routes: Routes = [
     component: FeedbackComponent,
   },
   {
+    path: 'feedback/freecourse/:id/:id/:id',
+    component: FeedbackComponent,
+  },
+
+  {
     path: 'feedback/programs',
     component: FeedbackComponent,
   },
@@ -148,6 +159,11 @@ const routes: Routes = [
     path: 'questions/:id/:id/:id',
     component: QuestionComponent,
   },
+  {
+    path: 'questions/freecourse/:id/:id/:id',
+    component: QuestionComponent,
+  },
+
   {
     path: 'exam-questions/:id/:id/:id/:id',
     component: ExamQuestionsComponent,
@@ -436,6 +452,11 @@ const routes: Routes = [
     path: 'settings/about-staff',
     component: AboutStaffComponent
   },
+  {
+    path: 'settings/edit-staff',
+    component: EditStaffComponent
+  },
+
   
     {
     path: 'banners',

@@ -46,10 +46,10 @@ export class AboutStaffComponent implements OnInit{
   
     })
   }
-  editCall(row: Staff) {
-    console.log("rowEdit",row)
-    this.router.navigate(['/admin/users/add-staff'],{queryParams:row});
+  editCall(row: string) {
+    this.router.navigate(['/student/settings/edit-staff'],{queryParams:{id:row}});
   }
+
   deleteItem(id:any) {
 
     Swal.fire({

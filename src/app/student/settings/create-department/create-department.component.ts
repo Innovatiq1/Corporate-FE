@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { DeptService } from '@core/service/dept.service';
 import { UserService } from '@core/service/user.service';
+import { UtilsService } from '@core/service/utils.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -26,12 +27,12 @@ export class CreateDepartmentComponent {
   departmentPaginationModel!: Partial<CoursePaginationModel>;
   
   constructor(private fb: UntypedFormBuilder,private deptService: DeptService,private router:Router,private userService: UserService,
-    private activatedRoute:ActivatedRoute) {
+   public utils: UtilsService) {
     
 
     this.departmentForm = this.fb.group({
-      department: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      department: ['', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.dname]],
+      description: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.name]],
       hod: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
       email: [
@@ -70,6 +71,13 @@ export class CreateDepartmentComponent {
           });
           this.getAllDepartments();
           this.router.navigate(['/student/settings/create-department'])
+        },(error) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Department already exists',
+            icon: 'error',
+          });
+
         });
       }
     });

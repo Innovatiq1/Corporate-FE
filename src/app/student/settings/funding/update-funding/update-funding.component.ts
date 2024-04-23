@@ -70,6 +70,7 @@ export class UpdateFundingComponent {
               icon: 'success',
               // confirmButtonColor: '#d33',
             });
+            this.fundingForm.reset();
             () => {
               Swal.fire({
                 title: 'Error',

@@ -24,8 +24,8 @@ export class VendorComponent {
   constructor(private fb: FormBuilder,private router:Router,
     private activatedRoute:ActivatedRoute,private courseService:CourseService,public utils:UtilsService) {
       this.vendorForm = this.fb.group({
-        vendor: ['', [Validators.required,...this.utils.validators.name]],
-        description: ['', [Validators.required,...this.utils.validators.name]]
+        vendor: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.name]],
+        description: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.name]]
 
       })
   }
@@ -50,9 +50,18 @@ export class VendorComponent {
             title: 'Successful',
             text: 'Vendor created successfully',
             icon: 'success',
-          });
+          },);
           this.getAllVendors();
+          this.vendorForm.reset();
           // this.router.navigate(['/student/settings/create-department'])
+        },
+        (error) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Vendor already exists',
+            icon: 'error',
+          });
+
         });
       }
     });
@@ -61,7 +70,7 @@ export class VendorComponent {
 }
 getAllVendors(){
   this.courseService.getVendor().subscribe((response:any) =>{
-   this.dataSource = response;
+   this.dataSource = response.reverse();
   })
 }
 update(id: string){

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '@core/service/user.service';
 import { Users } from '@core/models/user.model';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import { CoursePaginationModel } from '@core/models/course.model';
+import { UtilsService } from '@core/service/utils.service';
 
 @Component({
   selector: 'app-user-group',
@@ -29,12 +30,13 @@ export class UserGroupComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    public utils: UtilsService
   ) {
     this.userTypeFormGroup = this.fb.group({
-      typeName: ['', []],
-      shortDes: [''],
-      userId: new FormControl('', []),
+      typeName: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.userGroup]],
+      shortDes: ['',[Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.name]],
+      userId: new FormControl('', [Validators.required,...this.utils.validators.user]),
     });
     this.coursePaginationModel = {};
   }
@@ -87,13 +89,22 @@ export class UserGroupComponent {
               icon: 'success',
             });
             this.getUserGroups();
-
+            this.userTypeFormGroup.reset();
             // this.courseAdded=true;
             // this.router.navigate(['/admin/courses/submitted-courses/pending-courses'])
+          },
+          (error) => {
+            Swal.fire({
+              title: 'Error',
+              text: 'User Group already exists',
+              icon: 'error',
+            });
+  
           });
         }
       });
-    }
+    } 
+    
   }
   update(id: any) {
     this.router.navigate(['/student/settings/update-user-group'], {
