@@ -25,6 +25,7 @@ export class ActiveCoursesComponent {
   ];
   displayedColumns = [
     'name',
+    'status',
     'code',
     'creator',
     'Days',
@@ -33,7 +34,7 @@ export class ActiveCoursesComponent {
     'startDate',
     'endDate',
     'Vendor',
-    'status'
+    
   ];
   coursePaginationModel: Partial<CoursePaginationModel>;
   courseData: any;

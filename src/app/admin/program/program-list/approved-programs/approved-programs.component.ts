@@ -35,6 +35,7 @@ export class ApprovedProgramsComponent {
   displayedColumns: string[] = [
     // 'select',
     'name',
+    'status',
     'code',
     'Creator',
     'Duration',
@@ -43,7 +44,7 @@ export class ApprovedProgramsComponent {
     'Payment',
     'Compulsory Count',
     'Elective Count',
-    'status'
+    
   ];
 
   

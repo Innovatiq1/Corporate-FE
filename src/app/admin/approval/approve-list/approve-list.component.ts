@@ -38,13 +38,14 @@ export class ApproveListComponent  {
     // 'select',
     
     'studentname',
+    'status',
     'coursename',
     'programFee',
     'instructorFee',
     'classstartDate',
     'classendDate',
     'registeredDate',
-    'status',
+    
   ];
 
   breadscrums = [

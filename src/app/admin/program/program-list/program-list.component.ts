@@ -32,6 +32,7 @@ export class ProgramListComponent {
   ];
   displayedColumns = [
     'program',
+    'status',
     'code',
     'Creator',
     'Duration',
@@ -40,7 +41,7 @@ export class ProgramListComponent {
     'Payment',
     'Compulsory Count',
     'Elective Count',
-    'status'
+    
   ];
   isLoading = false;
   isNoMoreData = false;
@@ -69,6 +70,7 @@ export class ProgramListComponent {
   startDate: string[] = [];
   endDate: string[] = [];
   status: string[] = [];
+row: any;
 
   constructor(
   
@@ -87,6 +89,7 @@ export class ProgramListComponent {
     this.isProgram = true;
     this.displayedColumns = [
       'program',
+      'status',
       'code',
       'Creator',
       'Duration',
@@ -95,7 +98,7 @@ export class ProgramListComponent {
       'Payment',
       'Compulsory Count',
       'Elective Count',
-      'status'
+      
     ];
 
     this.breadscrums = [
@@ -110,6 +113,7 @@ export class ProgramListComponent {
     this.isCreator = true;
     this.displayedColumns = [
       'Creator',
+      'status',
       'program',
       'code',
       'Duration',
@@ -118,7 +122,7 @@ export class ProgramListComponent {
       'Payment',
       'Compulsory Count',
       'Elective Count',
-      'status'
+      
     ];
     this.breadscrums = [
       {

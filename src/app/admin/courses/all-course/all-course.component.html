@@ -213,7 +213,7 @@
                                     </mat-cell>
                                   </ng-container>
                                   <ng-container matColumnDef="status">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="compulsory-count-header">Status
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header class="compulsory-count-header" style="width: 400px;">Status
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row" class="pr-0">
                                       <span
@@ -294,10 +294,10 @@
                       </div>
                     </div>
                     <div class="body">
-                      <div class="row" >
-                        <div class="col-md-3" *ngFor="let data of courseData">
-                          <div class="course-card course-card-blog">
-                            <div class="course-card-image">
+                      <div class="row"  >
+                        <div class="col-md-3" *ngFor="let data of courseData" >
+                          <div class="course-card course-card-blog" style="cursor: pointer; height: 300px;" [routerLink]="['/admin/courses/view-course/',data.id]">
+                            <div class="course-card-image" style="height: 125px;">
                               <img class="img" src="{{data.image_link || 'assets/noimage.jpg'}}">
                             </div>
                             <div class="blog-table">
@@ -314,7 +314,7 @@
                               <div class="col">
                                 <p class="course-card-description" [innerHTML]="data?.course_detailed_description | truncate:30">
                               </div>
-                              <div class="text-center mb-3">
+                              <!-- <div class="text-center mb-3">
                                 <button mat-icon-button class="tbl-action-btn" [routerLink]="['/admin/courses/view-course/',data.id]">
                                   <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
                                 </button>
@@ -325,7 +325,7 @@
                                   <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                                 </button>
                                
-                              </div>
+                              </div> -->
                               <!-- <div class="ftr">
                                 <div class="author">
                                   <a href="#"><span class="text-danger"><i class="fa fa-heart"></i>

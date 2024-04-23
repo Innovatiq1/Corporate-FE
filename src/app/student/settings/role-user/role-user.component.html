@@ -7,174 +7,36 @@
         </app-breadcrumb>
       </div>
       <div class="row">
-       
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="card" >
-            <div class="row">
-              <div class="col-3">
-                <div class="header mt-5">
-                  <h2>Role: <span class="col-green">{{ dataSource[0].type | titlecase  }}</span></h2> 
-                </div>
-              </div>
-              <div class="col-9 mt-4">
-  
-                <div class="table-wrapper">
-                  <div class="table-responsive">
-                    <table class="table table-hover ">
-                      <thead> 
-                        <tr>
-                          <th>Users</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr style="cursor: pointer;">
-                          <td>
-                            <div style="white-space: nowrap;">
-                              <span *ngFor="let row of dataSource; let last = last">
-                                {{ row.name | titlecase}}{{ !last ? ', ' : '' }}
-                              </span>
-                            </div>
-                          </td>
-                         
-
-
-                        </tr>
-
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+          <div class="card">
+            <div class="header mt-3" style="padding-left: 30px;"> 
+              <h2>Role: <span class="col-green">{{ dataSource[0].type | titlecase }}</span></h2>
+            </div>
+            <hr style="width: 92.7%; margin-left: 20px;">
+            <div class="table-wrapper">
+              <div class="table-responsive">
+                <table class="table table-hover mt-3" style="max-width: 95%; margin-left: 20px;"> 
+                  <thead>
+                    <tr>
+                      <th>Users</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="cursor: pointer;">
+                      <td style="padding-left: 10px;"> 
+                        <div style="white-space: nowrap;">
+                          <span *ngFor="let row of dataSource; let last = last">
+                            {{ row.name | titlecase}}{{ !last ? ', ' : '' }}
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-            <!-- <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12"> -->
-              <!-- <div class="card" style="border-radius: 31px;"> -->
-            
-              <!-- </div> -->
-            <!-- </div> -->
-            <!-- <div class="materialTableHeader"> -->
-              <!-- <div class="left">
-                <ul class="header-buttons-left ms-0">
-                  <li class="tbl-title">
-                    <h2>All User</h2>
-                  </li>
-                  <li class="tbl-search-box">
-                    <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                    <input placeholder="Search" type="text" #filter class="browser-default search-field"
-                      aria-label="Search box" [(ngModel)]="searchTerm" class="browser-default search-field"  (keyup)="performSearch()">
-                  </li>
-                </ul>
-              </div> -->
-              <!-- <div class="right">
-                <ul class="tbl-export-btn"> -->
-                 
-                     <!-- <li class="tbl-header-btn">
-                        <div class="m-l-10" matTooltip="ADD">
-                          <button mat-raised-button [routerLink]="['/admin/users/create-all-users']"
-                          id="submit">Create</button>
-                        </div>
-                      </li> -->
-                      
-                 
-                <!-- </ul>
-              </div> -->
-            <!-- </div> -->
-            <!-- <div class="body overflow-auto"> -->
-              <!-- <div class="responsive_table">
-                <table mat-table matSort [dataSource]="dataSource" class="mat-cell advance-table">
-                  <h4>Role: </h4> -->
-                   <!-- Course Name -->
-                   <!-- <ng-container matColumnDef="img">
-                    <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Image
-                    </mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let row" class="table-img tbl-col-width-per-6"> <span
-                        class="mobile-label">Image:</span><img [src]="row.avatar || 'assets/profile.png'"  [routerLink]="['/admin/users/edit-all-users',row.id]">
-                    </mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="User Type">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Role
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="name"[routerLink]="['/admin/users/edit-all-users',row.id]">
-                      <span class="mobile-label">User Role:</span>{{row.type | titlecase}}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="Name">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-                    <mat-cell *matCellDef="let row "  [routerLink]="['/admin/users/view-all-users',row.id]">
-                      <span class="mobile-label">Name:</span>{{row.name | capitalizeFirstLetter}}</mat-cell>
-                  </ng-container>        -->
-                  <!-- <ng-container matColumnDef="gender">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> Gender
-                    </mat-header-cell>
-                    <mat-cell mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
-                      <span class="mobile-label">Gender:</span>
-                      <div *ngIf="row.gender==='male'">
-                        <span class="badge badge-solid-green">
-                          {{row.gender | titlecase}}</span>
-                      </div>
-                      <div *ngIf="row.gender==='female'">
-                        <span class="badge badge-solid-purple">
-                          {{row.gender | titlecase}}</span>
-                      </div>
-                      <div *ngIf="row.gender==='other'">
-                        <span class="badge badge-solid-orange">
-                          {{row.gender | titlecase}}</span>
-                      </div>
-                    </mat-cell>
-                  </ng-container> -->
-                  <!-- Main Category -->
-                  <!-- <ng-container matColumnDef="Qualification">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Qualification
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
-                      <span class="mobile-label">Qualification:</span>{{row.qualification | capitalizeFirstLetter}}</mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="Mobile">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
-                      <span class="mobile-label">Mobile:</span>{{row.mobile}}</mat-cell>
-                  </ng-container> -->
-                   <!-- Sub Category -->
-                   <!-- <ng-container matColumnDef="Email">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]">
-                      <span class="mobile-label">Email:</span>
-                      <img src="assets/images/gmail.png" alt="Email Icon" class="email-icon">
-                      <span class="email-address"> {{row.email}}</span>
-                    </mat-cell>
-                  </ng-container>
-              
-                   <ng-container matColumnDef="Status">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let row" [routerLink]="['/admin/users/edit-all-users',row.id]"> <span
-                        class="mobile-label">Status:</span><span [class]="row?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
-                          <span [class]="row?.Active ? 'status-dot' : 'status-red'"></span>
-                          {{row.Active ?  'Active': 'Inactive' }}
-                        </span>
-                    </mat-cell>
-                  </ng-container> -->
-                  
-                  <!-- <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row> -->
-                  <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
-                  <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"
-                    [style.cursor]="'pointer'" matRipple>
-                  </mat-row> -->
-                <!-- </table> -->
-                <!-- Loading spinner -->
-                <!-- <div  class="tbl-spinner">
-                  <mat-progress-spinner *ngIf="isLoading" color="primary" [diameter]="40" mode="indeterminate">
-                  </mat-progress-spinner>
-                </div> -->
-
-                <!-- <mat-paginator #paginator [length]="totalItems" (page)="pageSizeChange($event)"
-                [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">
-            </mat-paginator> -->
-
-              <!-- </div> -->
-            <!-- </div> -->
           </div>
         </div>
-        
       </div>
     </div>
   </section>

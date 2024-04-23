@@ -124,7 +124,7 @@
                     <span class="mobile-label">Department:</span>{{row.department}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="startDate">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" [routerLink]="['/timetable/view-schedule-class',row.id]">
                     <span class="mobile-label">Start:</span>{{row.sessions[0]?.sessionStartDate | date}}
@@ -133,7 +133,7 @@
                 </ng-container>
                 <!--Class Enddate -->
                 <ng-container matColumnDef="endDate">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>End
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" [routerLink]="['/timetable/view-schedule-class',row.id]">
                     <span class="mobile-label">End:</span>{{row.sessions[0]?.sessionEndDate | date}}

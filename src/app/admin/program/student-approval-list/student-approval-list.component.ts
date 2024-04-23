@@ -23,13 +23,14 @@ export class StudentApprovalListComponent {
   displayedColumns: string[] = [
     // 'select',
     'Student Name',
+    'status',
     'Program Name',
     'Program Fee',
     'Instructor Fee',
     'Class Start Date',
     'Class End Date',
     'Registered Date',
-    'status'
+    
   ];
   breadscrums = [
     {

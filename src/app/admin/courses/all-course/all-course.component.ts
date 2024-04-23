@@ -25,6 +25,7 @@ export class AllCourseComponent {
   ];
   displayedColumns = [
     'name',
+    'status',
     'code',
     'creator',
     'Days',
@@ -33,7 +34,7 @@ export class AllCourseComponent {
     'startDate',
       'endDate',
     'Vendor',
-    'status'
+    
   ];
   // displayedColumns = [
   //   'name',
@@ -79,6 +80,7 @@ export class AllCourseComponent {
       this.isCourse = true;
       this.displayedColumns = [
         'name',
+        'status',
       'code',
       'creator',
       'Days',
@@ -87,7 +89,7 @@ export class AllCourseComponent {
       'startDate',
       'endDate',
       'Vendor',
-      'status'
+      
       ];
   
     }
@@ -95,6 +97,7 @@ export class AllCourseComponent {
       this.isCreator = true;
       this.displayedColumns = [
         'creator',
+        'status',
         'name',
       'code',
       'Days',
@@ -103,7 +106,7 @@ export class AllCourseComponent {
       'startDate',
       'endDate',
       'Vendor',
-      'status'
+      
       ];
     }
   }
@@ -188,6 +191,9 @@ export class AllCourseComponent {
       this.getAllCourses();
 
     }
+  }
+  viewActiveProgram(id:string, status: string):void {
+    this.route.navigate(['/admin/courses/view-course/',"data.id"]);
   }
   delete(id: string) {
     this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {

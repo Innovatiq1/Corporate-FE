@@ -198,7 +198,27 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Fees')">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Fee Type')">
+                  <label>Fee Type</label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-select formControlName="feeType" (selectionChange)="onSelect($event)">
+                      <mat-option  value="paid">
+                        Paid
+                      </mat-option>
+                      <mat-option  value="free">
+                        Free
+                      </mat-option>
+                    </mat-select>                    
+                    <mat-error *ngIf="
+                    firstFormGroup.get('feeType')?.hasError('required') ||
+                    firstFormGroup.get('feeType')?.touched
+                    ">
+                Select Currency
+              </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Fees') && isPaid">
                   <label>Fees</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="fee" type="number" [readonly]="isInputReadonly()"
@@ -461,16 +481,18 @@
               <div class="col-md-9">
                 <!-- <button mat-raised-button matStepperPrevious id="back">Back</button> -->
               </div>
-              <div class="col-md-3 mb-5">
-                <div class="d-grid d-md-flex">
-                  <button mat-raised-button class="btn-space" *ngIf="editUrl || viewUrl" type="button" color="warn"
-                    id="cancel" (click)="cancel()">Cancel</button>
-                  <button mat-raised-button (click)="submit()" *ngIf="!editUrl  && !viewUrl" id="submit"
-                    [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null">Submit</button>
-                  <button mat-raised-button *ngIf="editUrl  && !viewUrl" id="save"
-                    [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null" (click)="save()"> Update </button>
+              <div class="col-md-3 mb-5 ">
+                <div class="d-grid d-md-flex ">
+                    <div style="margin-left: -44.5rem;margin-right: 43.5rem;">
+                        <button mat-raised-button class="btn-space" *ngIf="editUrl || viewUrl" type="button" id="back" (click)="cancel()">Back</button>
+                    </div>
+                    <div>
+                        <button mat-raised-button (click)="submit()" *ngIf="!editUrl && !viewUrl" id="submit" [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null">Save</button>
+                        <button mat-raised-button *ngIf="editUrl && !viewUrl" id="save" [attr.data-bs-toggle]="firstFormGroup.valid ? 'modal' : null" (click)="save()">Submit</button>
+                    </div>
                 </div>
-              </div>
+            </div>
+          
             </div>
           </form>
 

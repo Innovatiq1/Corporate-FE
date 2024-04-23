@@ -67,7 +67,7 @@ export class CreateUserRoleComponent {
             text: 'Role created succesfully.Add modules by selecting the role from existing roles',
             icon: 'success',
           }).then((result) => {
-            this.router.navigate(['student/settings/create-user-type'])
+            // this.router.navigate(['student/settings/create-user-type'])
           }
           );
           this.userTypeFormGroup.reset();
