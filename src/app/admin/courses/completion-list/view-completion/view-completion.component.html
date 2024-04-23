@@ -223,7 +223,7 @@
                                                                         <h6>Course Fee</h6>
                                                                     </div>
                                                                     <div class="col-5">
-                                                                        <h6 class="text-muted"> $ {{response.courseId?.fee}}</h6>
+                                                                        <h6 class="text-muted"> $ {{response.courseId?.fee || 0}}</h6>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -237,7 +237,7 @@
                                                                        <h6>Instructor Fee</h6>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="text-muted">$ {{response.classId?.instructorCost }}</h6>
+                                                                        <h6 class="text-muted">$ {{response.classId?.instructorCost || 0  }}</h6>
                                                                     </div>
                                                                 </div>
                             

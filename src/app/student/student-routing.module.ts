@@ -81,6 +81,11 @@ const routes: Routes = [
     component: ViewCourseComponent,
   },
   {
+    path: 'view-freecourse/:id',
+    component: ViewCourseComponent,
+  },
+
+  {
     path: 'sucess-course/:id',
     component: SucessCourseComponent,
   },
