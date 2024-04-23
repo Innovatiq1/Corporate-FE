@@ -105,6 +105,9 @@
                                     appearance="outline"
                                   >
                                     <input matInput formControlName="rollNo" />
+                                    <mat-error *ngIf="userForm.get('rollNo')?.invalid ||userForm.get('rollNo')?.touched">
+                                      {{ utils.getErrorMessage1(userForm.get('rollNo'), 'roll_no') }}
+                                    </mat-error> 
                                   </mat-form-field>
                                 </div>
                             

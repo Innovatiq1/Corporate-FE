@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItemModel } from '@core/models/user.model';
 import { AdminService } from '@core/service/admin.service';
+import { UtilsService } from '@core/service/utils.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,11 +18,11 @@ export class CreateUserRoleComponent {
   userTypeNames: any;
   isEdit: boolean = false;
 
-  constructor(private fb: FormBuilder, private adminService: AdminService,private router:Router){
+  constructor(private fb: FormBuilder, private adminService: AdminService,private router:Router, public utils: UtilsService,){
 
     this.userTypeFormGroup = this.fb.group({
-      typeName: ['', []],
-      description: ['', [Validators.required]],
+      typeName: ['', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.name]],
+      description: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name]],
 
     });
   }

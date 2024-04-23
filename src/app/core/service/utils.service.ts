@@ -33,8 +33,18 @@ export class UtilsService {
       { type: 'minlength', message: 'Enter minimum 2 characters' },
       { type: 'maxlength', message: 'Enter maximum 255 characters' },
     ],
+    role: [
+      { type: 'required', message: 'Enter Role' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
 
-
+    roll_no: [
+      { type: 'required', message: 'Enter Roll No' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+  
     budget: [
       { type: 'required', message: 'Enter Budget' },
       { type: 'min', message: 'Enter Budget between 1-999999' },
@@ -350,6 +360,8 @@ export class UtilsService {
         return null;
       }
     }],
+    dob:[Validators.required],
+    roll_no:[Validators.required, Validators.minLength(2), Validators.maxLength(150)],
     name: [Validators.required, Validators.minLength(2), Validators.maxLength(150)],
     documentLink: [Validators.required, Validators.minLength(2), Validators.maxLength(255)],
     course_duration_in_days: [ Validators.min(1), Validators.pattern(/^\d+(\.\d+)?$/)],
