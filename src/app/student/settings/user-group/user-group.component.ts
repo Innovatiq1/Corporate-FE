@@ -90,6 +90,14 @@ export class UserGroupComponent {
 
             // this.courseAdded=true;
             // this.router.navigate(['/admin/courses/submitted-courses/pending-courses'])
+          },
+          (error) => {
+            Swal.fire({
+              title: 'Error',
+              text: 'User Group already exists',
+              icon: 'error',
+            });
+  
           });
         }
       });

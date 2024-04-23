@@ -70,6 +70,13 @@ export class CreateDepartmentComponent {
           });
           this.getAllDepartments();
           this.router.navigate(['/student/settings/create-department'])
+        },(error) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Department already exists',
+            icon: 'error',
+          });
+
         });
       }
     });

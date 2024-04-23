@@ -53,6 +53,14 @@ export class FundingComponent {
           });
           this.getAllFundingGrants();
           // this.router.navigate(['/student/settings/create-department'])
+        },
+        (error) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Funding/Grant already exists',
+            icon: 'error',
+          });
+
         });
       }
     });
