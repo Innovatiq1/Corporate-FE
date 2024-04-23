@@ -10,6 +10,8 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { Subscription } from 'rxjs';
+import { StudentsService } from 'app/admin/students/students.service';
 
 @Component({
   selector: 'app-create-program',
@@ -71,6 +73,10 @@ export class CreateProgramComponent {
   isEditable = false;
   public Editor: any = ClassicEditor;
   thumbnail: any;
+  studentId: any;
+  configuration: any;
+  configurationSubscription!: Subscription;
+  defaultCurrency: string = '';
 
 
   constructor(private route: ActivatedRoute,
@@ -81,6 +87,7 @@ export class CreateProgramComponent {
     private router: Router,
     private classService: ClassService,
     private activatedRoute: ActivatedRoute,
+    private studentsService: StudentsService,
     private cd: ChangeDetectorRef) {
     let urlPath = this.router.url.split('/')
     this.editPermission = urlPath.includes('edit-program');
@@ -128,12 +135,16 @@ export class CreateProgramComponent {
 
   ngOnInit() {
     this.getProgramKits();
+    this.getCurrency()
+
     if (this.editPermission) {
       this.getData()
     }
     this.addCoreCard();
     this.addElectiveCard();
     this.getProgramList();
+    this.loadData();
+
   }
   addCoreCard(): void {
     this.corePrograms.push(
@@ -143,6 +154,24 @@ export class CreateProgramComponent {
         coreProgramDescription: ["", []],
       })
     );
+  }
+
+  loadData(){
+    this.studentId = localStorage.getItem('id')
+    this.studentsService.getStudentById(this.studentId).subscribe(res => {
+    })
+  }
+
+  getCurrency() : any {
+    this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
+      this.configuration = configuration;
+      if (this.configuration?.length > 0) {
+        this.defaultCurrency = this.configuration[0].value;
+        this.programFormGroup.patchValue({
+          currency: this.defaultCurrency,
+        })
+      }
+    });
   }
 
   addElectiveCard(): void {

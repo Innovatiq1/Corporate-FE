@@ -10,6 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { QuestionService } from '@core/service/question.service';
 import { number } from 'echarts';
+import { Subscription } from 'rxjs';
+import { StudentsService } from 'app/admin/students/students.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-assesment-questions',
@@ -22,12 +25,18 @@ export class AssesmentQuestionsComponent {
   editUrl: any;
   questionId!: string;
   subscribeParams: any;
+  studentId: any;
+  configuration: any;
+  configurationSubscription!: Subscription;
+  defaultTimer: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private studentsService: StudentsService
+
   ) {
     let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit-questions');
@@ -40,7 +49,7 @@ export class AssesmentQuestionsComponent {
 
     this.questionFormTab3 = this.formBuilder.group({
       name: ['', Validators.required],
-      timer: ['60'], 
+      timer: [''], 
       questions: this.formBuilder.array([]),
     });
     if (!this.editUrl) {
@@ -51,6 +60,29 @@ export class AssesmentQuestionsComponent {
     } else {
       this.getData();
     }
+  }
+
+  ngOnInit(): void { 
+    this.getTimer()
+    this.loadData()
+   }
+
+   loadData(){
+    this.studentId = localStorage.getItem('id')
+    this.studentsService.getStudentById(this.studentId).subscribe(res => {
+    })
+  }
+  
+  getTimer() : any {
+    this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
+      this.configuration = configuration;
+      if (this.configuration?.length > 0) {
+        this.defaultTimer = this.configuration[1].value;
+        this.questionFormTab3.patchValue({
+          timer: this.defaultTimer,
+        })
+      }
+    });
   }
 
   getData() {
@@ -318,5 +350,72 @@ export class AssesmentQuestionsComponent {
         Swal.fire('Failed to update Question', 'error');
       }
     );
+  }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    if (file && !this.isValidExcelFile(file)) {
+      Swal.fire({
+        title: 'Invalid File',
+        text: 'Please select a valid Excel file with .xlsx or .xls extension.',
+        icon: 'error',
+      });
+      return;
+    }
+    const reader: FileReader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const data: string = e.target.result;
+      const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
+
+      const worksheet: XLSX.WorkSheet = workbook.Sheets[workbook.SheetNames[0]];
+      
+      const excelData: any[] = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+      this.processExcelData(excelData);
+    };
+
+    reader.readAsBinaryString(file);
+  }
+
+  isValidExcelFile(file: File): boolean {
+    const allowedExtensions = ['.xlsx', '.xls'];
+    const fileName = file.name.toLowerCase();
+    return allowedExtensions.some(ext => fileName.endsWith(ext));
+  }
+  
+  processExcelData(data: any[]) {
+    while (this.questions.length !== 0) {
+      this.questions.removeAt(0);
+    }
+
+    data.forEach((row: any, index: number) => {
+      const question = this.addQuestion();
+      question.patchValue({
+        questionText: row["Question Text"],
+      });
+  
+      const optionsArray = question.get('options') as FormArray;
+      while (optionsArray.length !== 0) {
+        optionsArray.removeAt(0);
+      }
+      for (let i = 1; i <= 4; i++) {
+        const optionText = row[`Option ${i} Text`];
+        const optionCorrect = row[`Option ${i} Correct`];
+        if (optionText.trim() !== '') {
+          optionsArray.push(
+            this.formBuilder.group({
+              text: optionText,
+              correct: optionCorrect,
+            })
+          );
+        }
+        if (optionText.trim() === '' || i === 4) {
+          break;
+        }
+      }
+  
+      this.questions.push(question);
+    });
   }
 }
