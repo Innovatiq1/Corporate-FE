@@ -10,6 +10,7 @@ import { ConfirmedValidator } from '@shared/password.validator';
 import { CertificateService } from '@core/service/certificate.service';
 import { CourseService } from '@core/service/course.service';
 import { StaffService } from 'app/admin/staff/staff.service';
+import { UtilsService } from '@core/service/utils.service';
 @Component({
   selector: 'app-add-staff',
   templateUrl: './add-staff.component.html',
@@ -43,25 +44,25 @@ export class AddStaffComponent {
     private adminService: AdminService,
     private userService: UserService,
     public active: ActivatedRoute,
-    public router: Router,
+    public router: Router,public utils: UtilsService,
     private studentService: StudentService,
     private certificateService: CertificateService
   ) {
     this.staffForm = this.fb.group(
       {
-        name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+        name: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+'),...this.utils.validators.noLeadingSpace,...this.utils.validators.fname]],
         last_name: [''],
-        gender: ['', [Validators.required]],
-        mobile: ['', [Validators.required]],
+        gender: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.gender]],
+        mobile: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],
         type: [''],
         joiningDate: [''],
         address: [''],
         email: [
           '',
-          [Validators.required, Validators.email, Validators.minLength(5)],
+          [Validators.required, Validators.email, Validators.minLength(5),...this.utils.validators.noLeadingSpace,...this.utils.validators.email],
         ],
         dob: ['', [Validators.required]],
-        qualification: [''],
+        qualification: ['',[Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.edu]],
         avatar: [''],
         salary: [''],
         password: ['', [Validators.required]],
@@ -286,7 +287,6 @@ export class AddStaffComponent {
   //   }
   // }
   updateBlog(formObj: any) {
-    console.log('Form Value', formObj.value);
     if (!formObj.invalid) {
       // Prepare user data for update
       formObj['Active'] = this.status;
@@ -342,10 +342,18 @@ export class AddStaffComponent {
     });
   }
   submit() {
-    this.addBlog(this.staffForm.value);
+    if(this.staffForm.valid){
+      this.addBlog(this.staffForm.value);
+    }else{this.staffForm.markAllAsTouched();}
+    
   }
   update() {
-    this.updateBlog(this.staffForm.value);
+    if(this.staffForm.valid){
+      this.updateBlog(this.staffForm.value);
+    }else{
+      this.staffForm.markAllAsTouched();
+    }
+   
   }
   cancel() {
     window.history.back();

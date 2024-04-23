@@ -73,6 +73,7 @@ export class UpdateUsergroupComponent {
 
 
   onUpdate() {
+    if (this.userTypeFormGroup.valid) {
     const userData ={
       group_name: this.userTypeFormGroup.value.typeName,
       shortDes: this.userTypeFormGroup.value.shortDes,
@@ -109,6 +110,9 @@ export class UpdateUsergroupComponent {
         this.router.navigate(['/student/settings/user-group']);
       }
     });
+  }else{
+    this.userTypeFormGroup.markAllAsTouched();
+  }
   }
 
   deleteUserGroup(id:string){

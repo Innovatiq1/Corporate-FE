@@ -73,6 +73,11 @@ export class UtilsService {
       { type: 'minlength', message: 'Enter minimum 2 characters' },
       { type: 'maxlength', message: 'Enter maximum 255 characters' },
     ],
+    fname: [
+      { type: 'required', message: 'Enter First Name' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
     designation: [
       { type: 'required', message: 'Enter Designation' },
       { type: 'min', message: 'Total must be at least 2' },
@@ -106,6 +111,11 @@ export class UtilsService {
       { type: 'minlength', message: 'Enter minimum 2 characters' },
       { type: 'maxlength', message: 'Enter maximum 255 characters' },
     ],
+    gender: [
+      { type: 'required', message: 'Select Gender' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
     uname: [
       { type: 'required', message: 'Enter Username' },
       { type: 'minlength', message: 'Enter minimum 2 characters' },
@@ -128,6 +138,15 @@ export class UtilsService {
       { type: 'required', message: 'Select User' },
       { type: 'minlength', message: 'Enter minimum 2 characters' },
       { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+    edu: [
+      { type: 'required', message: 'Enter Education' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
+    mobile: [
+      { type: 'required', message: 'Enter Mobile Number' },
+      
     ],
     'title': [
       { type: 'required', message: 'Enter Course Name' },
@@ -291,7 +310,7 @@ export class UtilsService {
     ],
 
     'email':[
-      {type:'required', message: 'Email is required'},
+      {type:'required', message: 'Enter Email Id'},
       {type:'pattern', message: 'Enter a Valid email'}
     ],
     'password':[
@@ -351,6 +370,12 @@ export class UtilsService {
       Validators.minLength(2),
       Validators.maxLength(150),
     ],
+    fname: [
+      // Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(150),
+    ],
+    gender:[Validators.required,Validators.minLength(2), Validators.maxLength(150)],
     budget: [Validators.required, Validators.min(1), Validators.max(99999999)],
     percentage: [Validators.required, Validators.min(1), Validators.max(100)],
     value: [Validators.required, Validators.min(1)],
@@ -374,6 +399,8 @@ export class UtilsService {
       }
     }],
     dob:[Validators.required],
+    edu:[Validators.required,Validators.minLength(2), Validators.maxLength(150)],
+    mobile:[Validators.required, Validators.pattern('[0-9]+')],
     roll_no:[Validators.required, Validators.minLength(2), Validators.maxLength(150)],
     name: [Validators.required, Validators.minLength(2), Validators.maxLength(150)],
     documentLink: [Validators.required, Validators.minLength(2), Validators.maxLength(255)],

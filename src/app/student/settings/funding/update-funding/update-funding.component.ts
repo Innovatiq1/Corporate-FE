@@ -48,6 +48,7 @@ export class UpdateFundingComponent {
   }
 
   onUpdate(): void {
+    if(this.fundingForm.valid) {
     const payload = {
       grant_type: this.fundingForm.value.grant_type,
       description: this.fundingForm.value.description
@@ -84,6 +85,9 @@ export class UpdateFundingComponent {
         this.router.navigate(['student/settings/funding-grant'])
       }
     });
+  }else{
+    this.fundingForm.markAllAsTouched(); 
+  }
     
   }
 

@@ -103,7 +103,9 @@ export class UserGroupComponent {
           });
         }
       });
-    } 
+    } else{
+      this.userTypeFormGroup.markAllAsTouched(); 
+    }
     
   }
   update(id: any) {

@@ -68,6 +68,7 @@ export class CreateAllUsersComponent {
         this.addBlog(this.userForm.value);
       }
     } else {
+      this.userForm.markAllAsTouched(); 
       this.isSubmitted = true;
     }
   }
@@ -143,6 +144,8 @@ export class CreateAllUsersComponent {
   // }
   addBlog(formObj: any) {
     console.log('Form Value', formObj);
+
+
     if (!formObj.invalid) {
       // Process form data without uploading anything
       // Additional logic can be added here as needed

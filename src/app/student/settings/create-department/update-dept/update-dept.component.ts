@@ -37,8 +37,8 @@ export class UpdateDeptComponent {
     public utils: UtilsService
   ) {
     this.departmentForm = this.fb.group({
-      department: ['', [Validators.required,...this.utils.validators.noLeadingSpace,]],
-      description: ['', [Validators.required,...this.utils.validators.noLeadingSpace,]],
+      department: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.dname]],
+      description: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.name]],
     });
   }
 
@@ -58,36 +58,41 @@ export class UpdateDeptComponent {
     });
   }
   onUpdate() {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to update this!',
-      icon: 'warning',
-      confirmButtonText: 'Yes',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.deptService
-          .updateDepartment(this.id, this.departmentForm.value)
-          .subscribe((res) => {
-            Swal.fire({
-              title: 'Success',
-              text: 'Department updated successfully.',
-              icon: 'success',
-              // confirmButtonColor: '#d33',
-            });
-            () => {
+    if(this.departmentForm.valid) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to update this!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.deptService
+            .updateDepartment(this.id, this.departmentForm.value)
+            .subscribe((res) => {
               Swal.fire({
-                title: 'Error',
-                text: 'Failed to update. Please try again.',
-                icon: 'error',
+                title: 'Success',
+                text: 'Department updated successfully.',
+                icon: 'success',
                 // confirmButtonColor: '#d33',
               });
-            };
-          });
-        this.router.navigate(['/student/settings/create-department']);
-      }
-    });
+              () => {
+                Swal.fire({
+                  title: 'Error',
+                  text: 'Failed to update. Please try again.',
+                  icon: 'error',
+                  // confirmButtonColor: '#d33',
+                });
+              };
+            });
+          this.router.navigate(['/student/settings/create-department']);
+        }
+      });
+    }else{
+      this.departmentForm.markAllAsTouched
+    }
+   
   }
 
   deleteDept(id: string) {

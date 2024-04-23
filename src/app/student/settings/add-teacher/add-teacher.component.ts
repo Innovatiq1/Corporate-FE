@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { ConfirmedValidator } from '@shared/password.validator';
 import { CourseService } from '@core/service/course.service';
 import { StudentsService } from 'app/admin/students/students.service';
+import { UtilsService } from '@core/service/utils.service';
 
 @Component({
   selector: 'app-add-teacher',
@@ -38,21 +39,21 @@ export class AddTeacherComponent {
   constructor(private fb: UntypedFormBuilder,
     private instructor: InstructorService,
     private StudentService: StudentsService,
-    private courseService: CourseService,
+    private courseService: CourseService,  public utils: UtilsService,
     private router:Router) {
     this.proForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+      name: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
       last_name: [''],
       gender: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
+      mobile: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],
       password: ['', [Validators.required]],
       conformPassword: ['', [Validators.required]],
-      qualification: [''],
+      qualification: ['',[Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.designation]],
       department: [''],
       address: [''],
       email: [
         '',
-        [Validators.required, Validators.email, Validators.minLength(5)],
+        [Validators.required, Validators.email, Validators.minLength(5),...this.utils.validators.noLeadingSpace,...this.utils.validators.email],
       ],
       dob: ['', [Validators.required]],
       joiningDate:['', [Validators.required]],
@@ -144,6 +145,8 @@ export class AddTeacherComponent {
         userData.isLogin = true;
 
         this.createInstructor(userData);
+    }else{
+      this.proForm.markAllAsTouched(); 
     }
 }
 
