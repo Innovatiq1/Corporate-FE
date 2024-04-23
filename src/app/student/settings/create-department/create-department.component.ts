@@ -33,15 +33,15 @@ export class CreateDepartmentComponent {
     this.departmentForm = this.fb.group({
       department: ['', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.dname]],
       description: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.name]],
-      hod: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
-      email: [
-        '',
-        [Validators.required, Validators.email, Validators.minLength(5)],
-      ],
-      departmentStartDate: [''],
-      studentCapacity: ['', [Validators.required]],
-      details: [''],
+      // hod: ['', [Validators.required]],
+      // mobile: ['', [Validators.required]],
+      // email: [
+      //   '',
+      //   [Validators.required, Validators.email, Validators.minLength(5)],
+      // ],
+      // departmentStartDate: [''],
+      // studentCapacity: ['', [Validators.required]],
+      // details: [''],
     });
   
     this.departmentPaginationModel = {};
@@ -52,35 +52,38 @@ export class CreateDepartmentComponent {
   }
 
   onSubmit() {
- 
-    
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to create department!',
-      icon: 'warning',
-      confirmButtonText: 'Yes',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed){
-        this.deptService.saveDepartment(this.departmentForm.value).subscribe((response: any) => {
-          Swal.fire({
-            title: 'Successful',
-            text: 'Department created successfully',
-            icon: 'success',
+    if (this.departmentForm.valid) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to create department!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed){
+          this.deptService.saveDepartment(this.departmentForm.value).subscribe((response: any) => {
+            Swal.fire({
+              title: 'Successful',
+              text: 'Department created successfully',
+              icon: 'success',
+            });
+            this.getAllDepartments();
+            this.router.navigate(['/student/settings/create-department'])
+          },(error) => {
+            Swal.fire({
+              title: 'Error',
+              text: 'Department already exists',
+              icon: 'error',
+            });
+  
           });
-          this.getAllDepartments();
-          this.router.navigate(['/student/settings/create-department'])
-        },(error) => {
-          Swal.fire({
-            title: 'Error',
-            text: 'Department already exists',
-            icon: 'error',
-          });
-
-        });
-      }
-    });
+        }
+      });
+    }else{
+      this.departmentForm.markAllAsTouched(); 
+    }
+   
      
     // }
  
