@@ -53,9 +53,9 @@ export class AddStudentComponent {
     this.stdForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
       last_name: [''],
-      rollNo: ['', [Validators.required]],
+      rollNo: ['', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.roll_no]],
       gender: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
+      mobile: ['', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],
       password: [''],
       conformPassword: [''],
       qualification: [''],
@@ -63,13 +63,13 @@ export class AddStudentComponent {
       address: [''],
       email: [
         '',
-        [Validators.required, Validators.email, Validators.minLength(5)],
+        [Validators.required, Validators.email, Validators.minLength(5),...this.utils.validators.noLeadingSpace,...this.utils.validators.email],
       ],
       parentsName: [''],
       parentsPhone: [''],
       dob: ['', [Validators.required,...this.utils.validators.dob]],
       joiningDate: ['', [Validators.required]],
-      education: [''],
+      education: ['',[Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.edu]],
       avatar: [''],
       blood_group: [''],
     },{
@@ -169,6 +169,8 @@ export class AddStudentComponent {
           }
         });
        
+    }else{
+      this.stdForm.markAllAsTouched();
     }
 }
 

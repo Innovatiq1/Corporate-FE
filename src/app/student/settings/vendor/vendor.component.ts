@@ -66,6 +66,7 @@ export class VendorComponent {
       }
     });
   } else {
+    this.vendorForm.markAllAsTouched();
   }
 }
 getAllVendors(){

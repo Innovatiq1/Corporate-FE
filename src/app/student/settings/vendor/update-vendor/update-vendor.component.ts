@@ -39,6 +39,7 @@ export class UpdateVendorComponent {
   }
 
   onUpdate(){
+    if(this.vendorForm.valid){
     const userData = this.vendorForm.value;
     Swal.fire({
       title: 'Are you sure?',
@@ -71,6 +72,10 @@ export class UpdateVendorComponent {
         this.router.navigate(['/student/settings/vendor']);
       }
     });
+  }
+  else{
+    this.vendorForm.markAllAsTouched();
+  }
   }
   getVendorById(id:string) {
     this.courseService.getVendorById(id).subscribe(res => {

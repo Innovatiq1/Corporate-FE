@@ -66,6 +66,7 @@ export class FundingComponent {
       }
     });
   } else {
+    this.fundingForm.markAllAsTouched();
   }
 }
 getAllFundingGrants(){

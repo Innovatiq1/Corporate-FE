@@ -267,6 +267,11 @@
                                     appearance="outline"
                                   >
                                     <textarea matInput formControlName="education"></textarea>
+                                    <mat-error
+                                    *ngIf="userForm.get('education')?.hasError('required')"
+                                  >
+                                    Education is required
+                                  </mat-error>
                                   </mat-form-field>
                                 </div>
 

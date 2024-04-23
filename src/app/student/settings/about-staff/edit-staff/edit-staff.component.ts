@@ -11,6 +11,7 @@ import { StaffService } from 'app/admin/staff/staff.service';
 import Swal from 'sweetalert2';
 
 import { Users } from '@core/models/user.model';
+import { UtilsService } from '@core/service/utils.service';
 @Component({
   selector: 'app-edit-staff',
   templateUrl: './edit-staff.component.html',
@@ -21,7 +22,7 @@ export class EditStaffComponent {
     {
       title: 'Add Staff',
       items: ['Users'],
-      active: 'Edit Staff',
+      active: 'Edit Staff1',
     },
   ];
   staffForm: FormGroup;
@@ -48,23 +49,23 @@ export class EditStaffComponent {
     public active: ActivatedRoute,
     public router: Router,
     private studentService: StudentService,
-    private certificateService: CertificateService
+    private certificateService: CertificateService,public utils: UtilsService
   ) {
     this.staffForm = this.fb.group(
       {
-        name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+        name: ['',  [Validators.required, Validators.pattern('[a-zA-Z0-9]+'),...this.utils.validators.noLeadingSpace,...this.utils.validators.fname]],
         last_name: [''],
-        gender: ['', [Validators.required]],
-        mobile: ['', [Validators.required]],
+        gender: ['',  [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.gender]],
+        mobile: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],
         type: [''],
         joiningDate: [''],
         address: [''],
         email: [
           '',
-          [Validators.required, Validators.email, Validators.minLength(5)],
+          [Validators.required, Validators.email, Validators.minLength(5),...this.utils.validators.noLeadingSpace,...this.utils.validators.email],
         ],
         dob: ['', [Validators.required]],
-        qualification: [''],
+        qualification: ['',[Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.edu]],
         avatar: [''],
         salary: [''],
         password: ['', [Validators.required]],
@@ -164,7 +165,12 @@ ngOnInit(){
     });
   }
   update(){
-    this.updateBlog(this.staffForm.value);
+    if(this.staffForm.valid){
+      this.updateBlog(this.staffForm.value);
+    }else{
+      this.staffForm.markAllAsTouched();
+    }
+    
   }
   cancel(){
     this.router.navigate(['student/settings/all-staff']);

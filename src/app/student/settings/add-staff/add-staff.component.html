@@ -19,9 +19,16 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <!-- <mat-label>First name</mat-label> -->
                     <input matInput formControlName="name" required>
-                    <mat-error *ngIf="staffForm.get('first')?.hasError('required')">
-                      First name is required
-                    </mat-error>
+                    <mat-error
+                    *ngIf="
+                      staffForm.get('name')?.invalid &&
+                      staffForm.get('name')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(staffForm.get("name"), "fname")
+                    }}
+                  </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -45,9 +52,16 @@
                         Female
                       </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="staffForm.get('gender')?.hasError('required')">
-                      Gender is required
-                    </mat-error>
+                    <mat-error
+                    *ngIf="
+                      staffForm.get('gender')?.invalid &&
+                      staffForm.get('gender')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(staffForm.get("gender"), "gender")
+                    }}
+                  </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -60,7 +74,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="staffForm.get('type')?.hasError('required')">
-                      User Type is required
+                      Select User Type 
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -72,7 +86,7 @@
                     <!-- <mat-label>Password</mat-label> -->
                     <input matInput formControlName="password" type="password" required>
                     <mat-error *ngIf="staffForm.get('password')?.hasError('required')">
-                      password is required
+                     Enter Password 
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -96,6 +110,16 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <!-- <mat-label>Mobile</mat-label> -->
                     <input matInput formControlName="mobile" type="number" required>
+                    <mat-error
+                    *ngIf="
+                      staffForm.get('mobile')?.invalid &&
+                      staffForm.get('mobile')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(staffForm.get("mobile"), "mobile")
+                    }}
+                  </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -117,9 +141,16 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <!-- <mat-label>Email</mat-label> -->
                     <input matInput formControlName="email" required>
-                    <mat-error *ngIf="staffForm.get('email')?.hasError('email') && staffForm.get('email')?.touched">
-                      Please enter a valid email address
-                    </mat-error>
+                    <mat-error
+                    *ngIf="
+                      staffForm.get('email')?.invalid &&
+                      staffForm.get('email')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(staffForm.get("email"), "email")
+                    }}
+                  </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -142,6 +173,16 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <!-- <mat-label>Education</mat-label> -->
                     <input matInput formControlName="qualification" required>
+                    <mat-error
+                    *ngIf="
+                      staffForm.get('qualification')?.invalid &&
+                      staffForm.get('qualification')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(staffForm.get("qualification"), "edu")
+                    }}
+                  </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
@@ -218,7 +259,7 @@
               <div class="row" style="float: right;">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <button type="button" class="btn-space" mat-raised-button color="warn" (click)="cancel()">Cancel</button>
-                  <button *ngIf="!updateBtn" [disabled]="!staffForm.valid " mat-raised-button
+                  <button *ngIf="!updateBtn"  mat-raised-button
                     id="submit" (click)="submit()">Create</button>
                     <button *ngIf="updateBtn" class="btn-space" mat-raised-button
                     id="submit" (click)="update()">Update</button>
