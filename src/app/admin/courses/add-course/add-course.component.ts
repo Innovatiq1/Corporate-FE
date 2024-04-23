@@ -19,6 +19,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { QuestionService } from '@core/service/question.service';
 import { SurveyService } from 'app/admin/survey/survey.service';
 import { FormService  } from '@core/service/customization.service';
+import { Subscription } from 'rxjs';
+import { StudentsService } from 'app/admin/students/students.service';
 
 @Component({
   selector: 'app-add-course',
@@ -76,6 +78,10 @@ export class AddCourseComponent implements OnInit {
   // instructorList: any = [];
   forms!: any[];
   isPaid = false;
+  studentId: any;
+  configuration: any;
+  configurationSubscription!: Subscription;
+  defaultCurrency: string = '';
 
 
   breadscrums = [
@@ -122,7 +128,8 @@ export class AddCourseComponent implements OnInit {
     private instructorService: InstructorService,
     private questionService: QuestionService,
     public surveyService: SurveyService,
-    private formService: FormService
+    private formService: FormService,
+    private studentsService: StudentsService
     ) {
       let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-course');
@@ -197,6 +204,7 @@ export class AddCourseComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getCurrency()
     this.mainCategoryControl = this.firstFormGroup.get('main_category') as FormControl;
     this.subCategoryControl = this.firstFormGroup.get('sub_category') as FormControl;
     this.currencyControl = this.firstFormGroup.get('currency_code') as FormControl;
@@ -232,6 +240,8 @@ export class AddCourseComponent implements OnInit {
     let payload = {
       type: 'Instructor',
     };
+
+    this.loadData();
 
     // this.instructorService.getInstructor(payload).subscribe((res) => {
     //   this.instructorList = res;
@@ -312,6 +322,24 @@ isInputDisabled(): boolean {
 getForms(): void {
   this.formService.getAllForms().subscribe(forms => {
     this.forms = forms;
+  });
+}
+
+loadData(){
+  this.studentId = localStorage.getItem('id')
+  this.studentsService.getStudentById(this.studentId).subscribe(res => {
+  })
+}
+
+getCurrency() : any {
+  this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
+    this.configuration = configuration;
+    if (this.configuration?.length > 0) {
+      this.defaultCurrency = this.configuration[0].value;
+      this.firstFormGroup.patchValue({
+        currency_code: this.defaultCurrency,
+      })
+    }
   });
 }
 
