@@ -27,7 +27,7 @@ export class AddStudentComponent {
     {
       title: 'Add Student',
       items: ['Users'],
-      active: 'Add Student1',
+      active: 'Add Student',
     },
   ];
   editData: any;
@@ -51,7 +51,7 @@ export class AddStudentComponent {
       this.patchValues(this.StudentId);
     });
     this.stdForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+      name: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
       last_name: [''],
       rollNo: ['', [Validators.required]],
       gender: ['', [Validators.required]],
@@ -199,7 +199,6 @@ export class AddStudentComponent {
 getDepartment(){
   this.StudentService.getAllDepartments().subscribe((response: any) =>{
     this.dept = response.data.docs;
-    console.log("dept",this.dept)
    })
 
 }
@@ -214,7 +213,6 @@ getDepartment(){
 
 
   patchValues(id: string) {
-    console.log('ids', id);
     if (id != undefined) {
       this.viewUrl = true;
       this.edit = true;
@@ -226,7 +224,6 @@ getDepartment(){
       let image  = this.uploaded?.pop();
       this.uploaded= image?.split('\\');
       this.fileName = this.uploaded?.pop();
-        console.log('editdata', this.editData);
         // this.stdForm.get('department')?.setValue(this.editData.department);
         this.stdForm.patchValue({
           name: this.editData.name,
@@ -381,7 +378,7 @@ getDepartment(){
           icon: 'success',
         });
         //this.fileDropEl.nativeElement.value = "";
-        this.stdForm.reset();
+        // this.stdForm.reset();
         window.history.back();
         //this.toggleList()
         // this.router.navigateByUrl('/admin/students/all-students');

@@ -55,7 +55,10 @@ export class EditTeacherComponent {
       }
     );
     this.proForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+      name: [
+        '', 
+        [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]
+      ],
       last_name: [''],
       gender: ['', [Validators.required]],
       mobile: ['', [Validators.required]],

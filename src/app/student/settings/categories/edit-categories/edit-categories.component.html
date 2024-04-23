@@ -22,7 +22,7 @@
 
                                         <input matInput type="text" id="category_name" formControlName="category_name"
                                             class="form-control" required>
-                                            <mat-error *ngIf="mainCategoryForm.get('category_name')?.hasError('required')">
+                                            <mat-error  *ngIf="mainCategoryForm.get('category_name')?.hasError('required')">
                                                 Enter Main Category
                                               </mat-error>
                                               <mat-error  *ngIf="mainCategoryForm.get('category_name')?.hasError('pattern') && mainCategoryForm.get('category_name')?.touched">
@@ -42,6 +42,35 @@
                     </form>
                     <form [formGroup]="subCategoryForm" (ngSubmit)="createSubCategory()">
                         <div class="body">
+                          <input type="hidden" formControlName="main_category_id" [value]="mainCategoryId">
+                          <div class="row cat" formArrayName="subcategories">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" *ngFor="let subcategory of subcategories.controls; let i = index"
+                              [formGroupName]="i">
+                              <label for="subcategory_name_{{i}}">Sub Category Name <span class="mandatory">&nbsp;*</span></label>
+                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                <input matInput type="text" id="subcategory_name_{{i}}" formControlName="category_name" required>
+                                <mat-error *ngIf="subcategory.get('category_name')?.hasError('required')">
+                                  Enter Sub Category
+                                </mat-error>
+                                <mat-error *ngIf="subcategory.get('category_name')?.hasError('pattern') && subcategory.get('category_name')?.touched">
+                                  Enter a valid Sub Category
+                                </mat-error>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                              <button mat-button type="submit" class="btn crt-color">Update Sub Categories</button>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                              <button class="btn sub" (click)="addSubCategoryField()">
+                                <img src="/assets/Close.svg" alt="plus" style="display: inline;margin-top: -3px;">
+                                Add Sub Categories
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    <!-- <form [formGroup]="subCategoryForm" (ngSubmit)="createSubCategory()">
+                        <div class="body">
                             <input type="hidden" formControlName="main_category_id" [value]="mainCategoryId">
                             <div class="row cat" formArrayName="subcategories">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12"
@@ -50,12 +79,9 @@
                                     <label for="subcategory_name_{{i}}">Sub Category Name <span class="mandatory">&nbsp;*</span></label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                                         <input matInput type="text" id="subcategory_name_{{i}}"
-                                            formControlName="category_name">
-                                            <!-- <mat-error *ngIf="subCategoryForm.get('category_name')?.hasError('required')">
+                                            formControlName="category_name" required>
+                                            <mat-error *ngIf="subCategoryForm.get('category_name')?.hasError('required')">
                                                 Enter Sub Category
-                                              </mat-error> -->
-                                              <mat-error *ngIf="subCategoryForm.get('category_name')?.invalid ||subCategoryForm.get('category_name')?.touched">
-                                                {{ utils.getErrorMessage1(subCategoryForm.get('category_name'), 'sub_category') }}
                                               </mat-error>
                                               <mat-error  *ngIf="subCategoryForm.get('category_name')?.hasError('pattern') && subCategoryForm.get('category_name')?.touched">
                                                 Enter a valid Sub Category
@@ -73,7 +99,7 @@
                                     </div>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
 
                     <div class="row body">
                         <div class="col-md-8">
