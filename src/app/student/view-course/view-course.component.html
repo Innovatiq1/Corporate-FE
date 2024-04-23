@@ -149,7 +149,7 @@
                       Description
                     </button>
                   </li>
-                  <li class="nav-item" role="presentation">
+                  <!-- <li class="nav-item" role="presentation">
                     <button
                       class="nav-link"
                       id="profile-tab"
@@ -160,10 +160,9 @@
                       aria-controls="profile"
                       aria-selected="false"
                     >
-                      <!-- <i class="now-ui-icons ui-2_settings-90"></i> -->
                       Classes
                     </button>
-                  </li>
+                  </li> -->
                   <li class="nav-item" role="presentation">
                     <button
                       class="nav-link"
@@ -223,23 +222,25 @@
                     <span class="font-bold">Course Description:</span>
                     <p
                       [innerHTML]="
-                        classDetails?.courseId?.course_description
+                        courseDetails?.course_description
                           | bulletPoints
                       "
                     ></p>
                     <div class="row p-2 bg-light" style="border-radius: 5px">
                       <div class="col-6">
+                     
                         <span class="font-bold"
                           >Title:
                           <p class="font-">
-                            {{ classDetails?.courseId?.title }}
+                            {{ courseDetails?.title }}
                           </p></span
                         >
                         <span class="font-bold"
                           >Course Code:
-                          <p>{{ classDetails?.courseId?.courseCode }}</p></span
+                          <p>{{ courseDetails?.courseCode }}</p></span
                         >
                       </div>
+            
                       <div class="col-6">
                         <label class="font-bold">About</label>
                         <div
@@ -247,37 +248,76 @@
                         >
                           <div>
                             <span class="day_font">{{
-                              classDetails?.courseId?.course_duration_in_days
+                              courseDetails?.course_duration_in_days
                             }}</span>
                             <span class="dis_font">Days</span>
                           </div>
                           <div>
                             <span class="day_font">{{
-                              classDetails?.courseId?.training_hours
+                              courseDetails?.training_hours
                             }}</span>
                             <span class="dis_font">Hours</span>
                           </div>
                           <div>
                             <span class="day_font"
-                              >{{ classDetails?.courseId?.fee }}$</span
+                              >${{ courseDetails?.fee  || 0}}</span
                             >
                             <span class="dis_font">Fee</span>
                           </div>
                         </div>
                       </div>
+                      <div class="col-6">
+                        <span class="font-bold"
+                        >Status:
+                        <button
+                        *ngIf="
+                          !isRegistered &&
+                          !isStatus &&
+                          !isApproved &&
+                          !isCancelled &&
+                          !isCompleted
+                        "
+                        class="btn btn-primary"
+                        (click)="registerClass(courseDetails._id)"
+                      >
+                        Register
+                      </button>
+  
+                      <span
+                        class="badge badge-solid-orange mx-2"
+                        *ngIf="isRegistered || isStatus"
+                        >Registered</span
+                      >
+                      <span
+                        class="badge badge-solid-green mx-2"
+                        *ngIf="isApproved"
+                        >Approved</span
+                      >
+                      <span
+                        class="badge badge-solid-red mx-2"
+                        *ngIf="isCancelled"
+                        >Cancelled</span
+                      >
+                      <span
+                        class="badge badge-solid-green mx-2"
+                        *ngIf="isCompleted"
+                        >Completed</span
+                      >
+                      </span>
+  </div>
                     </div>
 
                     <ul class="m-2 list-group-unbordered">
-                      <li class="list-group-item">
+                      <!-- <li class="list-group-item">
                         <b>Delivery </b>
                         <div class="profile-desc-item float-end">
                           {{ classDetails?.classDeliveryType | titlecase }}
                         </div>
-                      </li>
+                      </li> -->
                       <li class="list-group-item">
                         <b>Course Created </b>
                         <div class="profile-desc-item float-end">
-                          {{ classDetails?.createdAt | date }}
+                          {{ courseDetails?.updatedAt | date }}
                         </div>
                       </li>
                       <li class="list-group-item">
@@ -405,76 +445,27 @@
                     role="tabpanel"
                     aria-labelledby="contact-tab"
                   >
-                    <table mat-table [dataSource]="dataSource">
-                      <!--- Note that these columns can be defined in any order.
-                                        The actual rendered columns are set as a property on the row definition" -->
+                  <div *ngIf="!certificateIssued">
+                    <h5 class="bg-light p-2">Certificate:
+                      <span class="badge badge-solid-green">
+                        Certificate will be available</span
+                      >
+                      </h5>
+                  </div>
 
-                      <ng-container matColumnDef="position">
-                        <th mat-header-cell *matHeaderCellDef>Instructor</th>
-                        <td mat-cell *matCellDef="let element">
-                          {{ element?.instructorId?.name }}
-                          {{
-                            element?.instructorId?.last_name
-                              ? element?.instructorId?.last_name
-                              : ""
-                          }}
-                        </td>
-                      </ng-container>
+                  <div *ngIf="certificateIssued">
+                    <div class="col-6">
+                      <h5 class="bg-light p-2">Certificate:
 
-                      <ng-container matColumnDef=" Class Start Date ">
-                        <th mat-header-cell *matHeaderCellDef>
-                          Class Start Date
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                          {{ element?.sessionStartDate | date }}
-                        </td>
-                      </ng-container>
-                      <ng-container matColumnDef=" Class End Date ">
-                        <th mat-header-cell *matHeaderCellDef>
-                          Class End Date
-                        </th>
-                        <td mat-cell *matCellDef="let element">
-                          {{ element?.sessionEndDate | date }}
-                        </td>
-                      </ng-container>
-                      <!-- <ng-container matColumnDef="action">
-                              <th mat-header-cell *matHeaderCellDef> Completed </th>
-                              <td mat-cell *matCellDef="let element">
-                                <a href="{{studentClassDetails?.certifiacteUrl}}" target="_blank"><mat-icon>download</mat-icon></a>
-                              </td>
-                            </ng-container> -->
-                      <ng-container matColumnDef="action">
-                        <th mat-header-cell *matHeaderCellDef>
-                          Download Certificate
-                        </th>
-                        <div *ngIf="!certificateIssued">
-                          <td mat-cell *matCellDef="let element">
-                            <span class="badge badge-solid-green">
-                              Certificate will be available</span
-                            >
-                          </td>
-                        </div>
-
-                        <div *ngIf="certificateIssued">
-                          <td mat-cell *matCellDef="let element">
-                            <a
-                              href="{{ studentClassDetails?.certifiacteUrl }}"
-                              target="_blank"
-                            >
-                              <mat-icon>download</mat-icon></a
-                            >
-                          </td>
-                        </div>
-                      </ng-container>
-                      <tr
-                        mat-header-row
-                        *matHeaderRowDef="displayedColumns"
-                      ></tr>
-                      <tr
-                        mat-row
-                        *matRowDef="let row; columns: displayedColumns"
-                      ></tr>
-                    </table>
+                      <a
+                        href="{{ studentClassDetails?.certifiacteUrl }}"
+                        target="_blank"
+                      >
+                        <mat-icon>download</mat-icon></a
+                      >
+                      </h5>
+                      </div>
+                  </div>
                   </div>
                   <div
                     class="tab-pane fade"

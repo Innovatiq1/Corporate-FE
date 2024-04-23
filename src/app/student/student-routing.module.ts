@@ -138,6 +138,11 @@ const routes: Routes = [
     component: FeedbackComponent,
   },
   {
+    path: 'feedback/freecourse/:id/:id/:id',
+    component: FeedbackComponent,
+  },
+
+  {
     path: 'feedback/programs',
     component: FeedbackComponent,
   },
@@ -153,6 +158,11 @@ const routes: Routes = [
     path: 'questions/:id/:id/:id',
     component: QuestionComponent,
   },
+  {
+    path: 'questions/freecourse/:id/:id/:id',
+    component: QuestionComponent,
+  },
+
   {
     path: 'exam-questions/:id/:id/:id/:id',
     component: ExamQuestionsComponent,

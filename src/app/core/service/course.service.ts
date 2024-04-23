@@ -65,6 +65,11 @@ export class CourseService {
     return this._Http.get<any>(apiUrl).pipe(map((response) => response));
   }
 
+  getCourseVideoPlayedById(studentId:any,courseId: any,videoId:any) {
+    const apiUrl = `${this.prefix}admin/video-played/${studentId}/${courseId}/${videoId}`;
+    return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+  }
+
 
   saveRegisterClass(payload:any) {
     const apiUrl = `${this.prefix}admin/studentClasses`;
@@ -310,6 +315,7 @@ export class CourseService {
     const apiUrl = `${this.prefix}admin/studentClasses?classId=${classId}&studentId=${studentId}`;
     return this._Http.get<any>(apiUrl);
   }
+  
   getStudentFreeCourse( studentId: any,courseId:any): Observable<any> {
     const apiUrl = `${this.prefix}admin/studentClasses?courseId=${courseId}&studentId=${studentId}`;
     return this._Http.get<any>(apiUrl);

@@ -46,10 +46,22 @@ export class QuestionComponent implements OnInit {
   currentPage: number = 0;
   totalQuestions: number = 0;
   skip: number = 0;
+  freeCourse: boolean;
+  isFree = false;
+  isPaid = false;
 
   constructor(private questionService: QuestionService,private courseService:CourseService,private router: Router,
     private studentService : StudentsService,
-      ) { }
+      ) {
+        let urlPath = this.router.url.split('/');
+        this.freeCourse = urlPath.includes('freecourse');
+        if(this.freeCourse){
+          this.isFree = true;
+        } else {
+          this.isPaid = true;
+        }
+    
+       }
 
   ngOnInit(): void {
     this.name = localStorage.getItem("name")!;
@@ -207,7 +219,12 @@ getAnswerById() {
 }
 
 submitFeedback(){
-  this.router.navigate(['/student/feedback/courses', this.classId, this.studentId, this.courseId]);
+  if(this.isPaid){
+    this.router.navigate(['/student/feedback/courses', this.classId, this.studentId, this.courseId]);
+  } else if(this.isFree){
+    this.router.navigate(['/student/feedback/freecourse', this.classId, this.studentId, this.courseId]);
+
+  }
 }
 
   attendedQuestions() {
