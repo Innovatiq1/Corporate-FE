@@ -9,6 +9,7 @@ import { DeptService } from '@core/service/dept.service';
 import { UserService } from '@core/service/user.service';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
+import { UtilsService } from '@core/service/utils.service';
 
 @Component({
   selector: 'app-update-dept',
@@ -32,11 +33,12 @@ export class UpdateDeptComponent {
     private router: Router,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    public utils: UtilsService
   ) {
     this.departmentForm = this.fb.group({
-      department: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      department: ['', [Validators.required,...this.utils.validators.noLeadingSpace,]],
+      description: ['', [Validators.required,...this.utils.validators.noLeadingSpace,]],
     });
   }
 

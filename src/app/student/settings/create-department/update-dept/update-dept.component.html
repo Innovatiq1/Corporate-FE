@@ -13,28 +13,33 @@
           <div class="card" style="height: fit-content;">
             <div class="header d-flex justify-content-between">
               <h2>Update Department</h2>
-              <button mat-mini-fab color="warn" matTooltip="Delete" (click)="deleteDept(id)">
-                <mat-icon class="col-white">delete
-                </mat-icon>
-              </button>
+              <button class="icons" (click)="deleteDept(id)" alt="Delete" matTooltip="Delete" mat-menu-item>
+                <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+            </button>
             </div>
             <div class="body">
                 <form [formGroup]="departmentForm">
                 <div class="row">
                   <div class="col-3">
-                    <label>Department</label>
+                    <label>Department<span class="mandatory ">&nbsp;*</span></label>
                         <mat-form-field class="example-full-width " appearance="outline">
                             <input matInput type="text" formControlName="department"
                             class="form-control" placeholder="Enter New Department"
-                            >                                      
+                            >           
+                            <mat-error *ngIf="departmentForm.get('department')?.invalid ||departmentForm.get('department')?.touched">
+                              {{ utils.getErrorMessage1(departmentForm.get('department'), 'department') }}
+                            </mat-error>                           
                         </mat-form-field>
                   </div>
                     <div class="col-3">
-                      <label>Description</label>
+                      <label>Description<span class="mandatory ">&nbsp;*</span></label>
                           <mat-form-field class="example-full-width " appearance="outline">
                               <input matInput type="text" formControlName="description"
                               class="form-control" placeholder="Enter Description"
-                              >                                      
+                              >     
+                              <mat-error *ngIf="departmentForm.get('description')?.invalid ||departmentForm.get('description')?.touched">
+                                {{ utils.getErrorMessage1(departmentForm.get('description'), 'description') }}
+                              </mat-error>                                 
                           </mat-form-field>
                     </div>
                 </div>

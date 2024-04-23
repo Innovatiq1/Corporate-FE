@@ -24,8 +24,8 @@ export class FundingComponent {
   constructor(private fb: FormBuilder,private router:Router,
     private activatedRoute:ActivatedRoute,private courseService:CourseService,public utils:UtilsService) {
       this.fundingForm = this.fb.group({
-        grant_type: ['', [Validators.required,...this.utils.validators.name]],
-        description: ['', [Validators.required,...this.utils.validators.name]]
+        grant_type: ['', [Validators.required,...this.utils.validators.name,...this.utils.validators.noLeadingSpace]],
+        description: ['', [Validators.required,...this.utils.validators.name, ...this.utils.validators.noLeadingSpace]]
 
       })
   }
@@ -52,6 +52,7 @@ export class FundingComponent {
             icon: 'success',
           });
           this.getAllFundingGrants();
+          this.fundingForm.reset();
           // this.router.navigate(['/student/settings/create-department'])
         },
         (error) => {
@@ -69,7 +70,7 @@ export class FundingComponent {
 }
 getAllFundingGrants(){
   this.courseService.getFundingGrant().subscribe((response:any) =>{
-   this.dataSource = response;
+   this.dataSource = response.reverse();
   })
 }
 update(data: any) {
