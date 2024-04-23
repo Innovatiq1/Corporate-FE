@@ -287,9 +287,9 @@ export class AssesmentQuestionsComponent {
                 text: 'Question Updated successfully',
                 icon: 'success',
               });
-              if (!this.approved) {
+              // if (this.approved) {
                 this.router.navigate(['/student/settings/all-questions']);
-              }
+              // }
             },
             (err: any) => {
               Swal.fire('Failed to update Question', 'error');
