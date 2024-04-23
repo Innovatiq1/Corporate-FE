@@ -854,15 +854,11 @@
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" (click)="openDialog(currencyDialog)"> Currency </button>
+            <button id="saved" (click)="openDialog(currencyDialog, 'currency')"> Currency </button>
           </div>
-          
-          <!-- <div class="row px-4 py-4">
-            <div class="col-md-5 banner">
-              <button id="saved" (click)="navigateToSidemenuSettings()" > Sidemenu </button>
-            </div> -->
-  
-          <!-- </div> -->
+          <div class="col-md-5">
+            <button id="saved" (click)="openDialog(timerDialog, 'timer')"> Assessment Timer </button>
+          </div>
         </div>
 
       </div>
@@ -1252,7 +1248,23 @@
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="dialogRef.close()">Cancel</button>
-      <button mat-button (click)="updateCurrency(dialogRef)">Update Currency</button>
+      <button mat-button (click)="updateCurrency(dialogRef, 'currency')">Update Currency</button>
+    </div>
+  </ng-template>
+
+  <ng-template #timerDialog let-dialogRef="dialogRef" let-data>
+    <h2 mat-dialog-title>Select Seconds Per Question</h2>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Set timer</mat-label>
+        <mat-select [(ngModel)]="selectedTimer">
+          <mat-option *ngFor="let code of timerValues" [value]="code">{{code}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="dialogRef.close()">Cancel</button>
+      <button mat-button (click)="updateCurrency(dialogRef, 'timer')">Update Timer</button>
     </div>
   </ng-template>
 </section>

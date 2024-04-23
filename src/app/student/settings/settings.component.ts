@@ -86,7 +86,9 @@ export class SettingsComponent {
 
   currentContent: number = 1;
   currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
+  timerValues: string[] = ['15', '30', '45', '60', '90', '120', '150'];
   selectedCurrency: string = "";
+  selectedTimer: string = "";
   sidemenu: any;
   dept: any;
   
@@ -508,8 +510,10 @@ export class SettingsComponent {
       let image  = this.uploaded.pop();
       this.uploaded= image.split('\\');
       this.uploadedImage = this.uploaded.pop();
-      const currencyConfig = this.editData.configuration.find((config: any) => config.value);
+      const currencyConfig = this.editData.configuration.find((config: any) => config.field === 'currency');
       const selectedCurrency = currencyConfig ? currencyConfig.value : null;
+      const timerConfig = this.editData.configuration.find((config: any) => config.field === 'timer');
+      const selectedTimer = timerConfig ? timerConfig.value : null;
 
       this.stdForm.patchValue({
         name: this.editData.name,
@@ -531,6 +535,7 @@ export class SettingsComponent {
         uploadedImage: this.editData.avatar,
       });
       this.selectedCurrency = selectedCurrency;
+      this.selectedTimer = selectedTimer;
     });
   }
   onFileUpload(event: any) {
@@ -698,40 +703,76 @@ export class SettingsComponent {
     });
   }
 
-  updateCurrency(dialogRef: any) {
-    console.log("currency",dialogRef);
-    const selectedCurrency = this.selectedCurrency;
-    this.courseService.createCurrency({ value: selectedCurrency }).subscribe(
-      response => {
-        Swal.fire({
-          title: 'Successful',
-          text: 'Currency Configuration Success',
-          icon: 'success'
-        });
-        dialogRef.close(selectedCurrency);
-      },
-      error => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: error,
-        });
-      }
-    );
+  updateCurrency(dialogRef: any, value: any) {
+    if (value === 'currency') {
+      const selectedCurrency = this.selectedCurrency;
+      this.courseService.createCurrency({ value: selectedCurrency }).subscribe(
+        response => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Currency Configuration Success',
+            icon: 'success'
+          });
+          dialogRef.close(selectedCurrency);
+        },
+        error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error,
+          });
+        }
+      );
+    } else {
+      const selectedTimer = this.selectedTimer;
+      console.log('selectedTimer: ', selectedTimer);
+      this.courseService.createTimer({ value: selectedTimer }).subscribe(
+        response => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Timer Configuration Success',
+            icon: 'success'
+          });
+          dialogRef.close(selectedTimer);
+        },
+        error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error,
+          });
+        }
+      );
+    }
+   
   }
 
 
-  openDialog(templateRef: any): void {
-    const dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
-      data: { selectedCurrency: this.selectedCurrency }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.selectedCurrency = result;
-      }
-    });
+  openDialog(templateRef: any, value:any): void {
+    if (value === 'currency') {
+      const dialogRef = this.dialog.open(templateRef, {
+        width: '500px',
+        data: { selectedCurrency: this.selectedCurrency }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.selectedCurrency = result;
+        }
+      });
+    } else {
+      const dialogRef = this.dialog.open(templateRef, {
+        width: '500px',
+        data: { selectedTimer: this.selectedTimer }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.selectedTimer = result;
+        }
+      });
+    }
+
   }
+  
 
   onSelect(currencyCode: string, dialogRef: any) {
     dialogRef.close(currencyCode);
