@@ -69,6 +69,7 @@ import { UpdateFundingComponent } from './settings/funding/update-funding/update
 import { UpdateDeptComponent } from './settings/create-department/update-dept/update-dept.component';
 import { UpdateUsergroupComponent } from './settings/user-group/update-usergroup/update-usergroup.component';
 import { UpdateVendorComponent } from './settings/vendor/update-vendor/update-vendor.component';
+import { EditStaffComponent } from './settings/about-staff/edit-staff/edit-staff.component';
 
 
 const routes: Routes = [
@@ -451,6 +452,11 @@ const routes: Routes = [
     path: 'settings/about-staff',
     component: AboutStaffComponent
   },
+  {
+    path: 'settings/edit-staff',
+    component: EditStaffComponent
+  },
+
   
     {
     path: 'banners',

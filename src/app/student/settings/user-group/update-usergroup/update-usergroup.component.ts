@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { UserService } from '@core/service/user.service';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
+import { UtilsService } from '@core/service/utils.service';
 
 @Component({
   selector: 'app-update-usergroup',
@@ -30,12 +31,13 @@ export class UpdateUsergroupComponent {
     private router: Router,
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    public utils: UtilsService
   ) {
     this.userTypeFormGroup = this.fb.group({
-      typeName: ['', []],
-      shortDes: [''],
-      userId: new FormControl('', []),
+      typeName: ['', [Validators.required,...this.utils.validators.noLeadingSpace]],
+      shortDes: ['',[Validators.required,...this.utils.validators.noLeadingSpace]],
+      userId: new FormControl('', [Validators.required,...this.utils.validators.noLeadingSpace]),
     });
   }
 
