@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { CourseService } from '@core/service/course.service';
 import { CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 import Swal from 'sweetalert2';
@@ -9,6 +9,7 @@ import 'jspdf-autotable';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-active-courses',
@@ -51,13 +52,16 @@ export class ActiveCoursesComponent {
   selection = new SelectionModel<MainCategory>(true, []);
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   
-  constructor(public _courseService:CourseService,  private classService: ClassService, private router: Router) {
+  constructor(public _courseService:CourseService,  private classService: ClassService,private cd: ChangeDetectorRef, private router: Router) {
     // constructor
     this.coursePaginationModel = {};
+    this.coursePaginationModel.main_category = '0';
+    this.coursePaginationModel.sub_category = '0';
   }
 
   ngOnInit(){
     this.getAllCourse();
+    this.setup()
   }
 getAllCourse(){
   this._courseService.getAllCourses({ ...this.coursePaginationModel, status: 'active' }).subscribe(response =>{
@@ -69,12 +73,30 @@ getAllCourse(){
    this.coursePaginationModel.page = response.data.page;
    this.coursePaginationModel.limit = response.data.limit;
    this.coursePaginationModel.totalDocs = response.data.totalDocs;
+   this.mapCategories();
   })
 }
 pageSizeChange($event: any) {
   this.coursePaginationModel.page = $event?.pageIndex + 1;
   this.coursePaginationModel.limit = $event?.pageSize;
   this.getAllCourse();
+}
+private setup(): void {
+  forkJoin({
+    mainCategory: this._courseService.getMainCategories(),
+    subCategory: this._courseService.getSubCategories(),
+  }).subscribe((response:any) => {
+    this.mainCategories = response.mainCategory;
+    this.allSubCategories = response.subCategory;
+    this.getAllCourse();
+    this.cd.detectChanges();
+  });
+}
+mainCategoryChange(): void {
+  this.coursePaginationModel.sub_category = (0).toString();
+  this.subCategories =this.coursePaginationModel.main_category
+      ? this.allSubCategories.filter((item) => item.main_category_id === this.coursePaginationModel.main_category):[]
+      this.getAllCourse()
 }
 private mapCategories(): void {
   this.coursePaginationModel.docs?.forEach((item) => {
