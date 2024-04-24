@@ -52,7 +52,7 @@ export class ProgramComponent {
     this.studentApprovedModel = {};
     this.studentCompletedModel = {};
     this.department= JSON.parse(localStorage.getItem('user_data')!).user.department;
-    this.userGroupIds = (JSON.parse(localStorage.getItem('user_data')!).user.userGroupId.map((v:any)=>v.id) || []).join()
+    this.userGroupIds = (JSON.parse(localStorage.getItem('user_data')!).user.userGroup.map((v:any)=>v.id) || []).join()
   }
 
   ngOnInit(){

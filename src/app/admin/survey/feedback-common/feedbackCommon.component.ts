@@ -11,7 +11,9 @@ export class FeedbackCommonComponent implements OnChanges {
   @Input() feedbackInfo: any;
   @Input() isPreview: boolean = false;
   @Input() col: number = 1;
+  @Input() showSkip: boolean = false;
   @Output() submitAnswers: EventEmitter<any> = new EventEmitter<any>();
+  @Output() skip: EventEmitter<any> = new EventEmitter<any>();
   questionsList: any = [];
   constructor(private formBuilder: FormBuilder) {
     this.questionsList = this.getQuestions();
@@ -72,5 +74,9 @@ export class FeedbackCommonComponent implements OnChanges {
         this.submitAnswers.next(payload);
       }
     });
+  }
+
+  skipCallback(){
+    this.skip.next(false);
   }
 }
