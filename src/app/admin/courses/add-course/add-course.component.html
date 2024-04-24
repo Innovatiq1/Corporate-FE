@@ -355,7 +355,7 @@
                   <label>Vendor</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-select formControlName="vendor">
-                      <mat-option *ngFor="let item of vendors" [value]="item.id" [disabled]="viewUrl == true">
+                      <mat-option *ngFor="let item of vendors" [value]="item.vendor" [disabled]="viewUrl == true">
                         {{item.vendor}}
                       </mat-option>
                     </mat-select>

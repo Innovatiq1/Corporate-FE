@@ -50,7 +50,7 @@ export class AddStaffComponent {
   ) {
     this.staffForm = this.fb.group(
       {
-        name: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+'),...this.utils.validators.noLeadingSpace,...this.utils.validators.fname]],
+        name: ['', [Validators.required, Validators.pattern(/[a-zA-Z0-9]+/),...this.utils.validators.noLeadingSpace,...this.utils.validators.fname]],
         last_name: [''],
         gender: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.gender]],
         mobile: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],

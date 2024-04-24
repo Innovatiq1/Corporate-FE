@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { CourseService } from '@core/service/course.service';
 import { StudentsService } from 'app/admin/students/students.service';
 import { TeachersService } from 'app/admin/teachers/teachers.service';
+import { UtilsService } from '@core/service/utils.service';
 
 @Component({
   selector: 'app-edit-teacher',
@@ -44,7 +45,7 @@ export class EditTeacherComponent {
     public teachersService: TeachersService,
     private activatedRoute: ActivatedRoute,
     private StudentService: StudentsService,
-
+    public utils: UtilsService,
     private instructor: InstructorService,
     private router: Router
   ) {
@@ -57,7 +58,7 @@ export class EditTeacherComponent {
     this.proForm = this.fb.group({
       name: [
         '', 
-        [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]
+        [Validators.required, Validators.pattern(/[a-zA-Z0-9]+/),...this.utils.validators.noLeadingSpace]
       ],
       last_name: [''],
       gender: ['', [Validators.required]],
