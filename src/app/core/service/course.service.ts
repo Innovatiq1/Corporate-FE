@@ -105,6 +105,13 @@ export class CourseService {
         })
       );
   }
+
+  getFilteredProgramData(payload:any, filter:any
+    ):Observable<any> {
+    const apiUrl = `${this.prefix}admin/courseprogram/filter?limit=${filter.limit}&page=${filter.page}`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+
   getAllCoursesWithPagination(
     filter?: Partial<CoursePaginationModel>
   ): Observable<ApiResponse> {
