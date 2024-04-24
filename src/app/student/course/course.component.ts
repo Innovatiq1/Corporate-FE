@@ -48,6 +48,7 @@ export class CourseComponent {
   tab: number = 0;
   department: any;
   totalFreeItems: any;
+  userGroupIds: string = '';
 
 
   constructor(public _courseService:CourseService,  private classService: ClassService) {
@@ -57,6 +58,8 @@ export class CourseComponent {
     this.studentCompletedModel = {};
     this.freeCourseModel = {};
     this.department= JSON.parse(localStorage.getItem('user_data')!).user.department;
+    this.userGroupIds = (JSON.parse(localStorage.getItem('user_data')!).user.userGroupId.map((v:any)=>v.id) || []).join()
+
   }
 
   ngOnInit(){
@@ -80,7 +83,11 @@ export class CourseComponent {
   }
 getAllCourse(){
   let filterText = this.filterName
-  this.classService.getClassListWithPagination({ filterText,...this.coursePaginationModel, status: 'open' ,department:this.department}).subscribe(response =>{
+  const payload = { filterText,...this.coursePaginationModel, status: 'open' ,department:this.department, userGroupId: this.userGroupIds}
+  if(this.userGroupIds){
+    payload.userGroupId=this.userGroupIds
+  }
+  this.classService.getClassListWithPagination(payload).subscribe(response =>{
    this.classesData = response.data.docs;
    this.totalItems = response.data.totalDocs
    this.coursePaginationModel.docs = response.data.docs;
@@ -225,7 +232,7 @@ delete(id: string) {
         });
       }
     });
-   
+
   });
 }
 

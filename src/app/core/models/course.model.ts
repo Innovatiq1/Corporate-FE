@@ -261,6 +261,7 @@ export interface CoursePaginationModel extends Pagination {
 	studentId: any;
 	department:string;
 	feeType:string;
+  userGroupId:string
 }
 
 export interface ProgramCourse {
