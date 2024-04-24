@@ -231,9 +231,15 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="fee" type="number" [readonly]="isInputReadonly()"
                       placeholder="Enter Fees">
-                    <mat-error
-                      *ngIf="firstFormGroup.get('fee')?.hasError('pattern') && firstFormGroup.get('fee')?.touched">
-                      Enter Valid Digits
+                      <mat-error
+                      *ngIf="
+                        firstFormGroup.get('fee')?.invalid &&
+                        firstFormGroup.get('fee')?.touched
+                      "
+                    >
+                      {{
+                        utils.getErrorMessage1(firstFormGroup.get("fee"), "fee")
+                      }}
                     </mat-error>
                   </mat-form-field>
                 </div>
