@@ -120,6 +120,7 @@ export class AddCourseComponent implements OnInit {
       },
     ]
   };
+  vendors: any;
 
   constructor(private router: Router,private fb: FormBuilder, private _formBuilder: FormBuilder,
     private courseService: CourseService,
@@ -161,7 +162,7 @@ export class AddCourseComponent implements OnInit {
         courseCode: ['', [Validators.required,Validators.pattern(/^[a-zA-Z0-9]/)]],
         main_category: ['', [Validators.required]],
         sub_category: ['', [Validators.required]],
-        fee: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
+        fee: new FormControl('',[Validators.required,Validators.pattern(/^\d+(\.\d+)?$/),...this.utils.validators.fee]),
         currency_code: new FormControl('',[]),
         course_duration_in_days: new FormControl('',[Validators.min(1),Validators.pattern(/^\d+(\.\d+)?$/)]),
         training_hours: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
@@ -180,7 +181,7 @@ export class AddCourseComponent implements OnInit {
         funding_grant: new FormControl('',[Validators.required]),
         // survey: new FormControl('',[Validators.required]),
         id: new FormControl(''),
-        feeType: new FormControl('',[]),
+        feeType: new FormControl('',[Validators.required]),
 
         // course_instructor: new FormControl('', [Validators.required]),
         // assign_exam: new FormControl('', []),
@@ -203,10 +204,16 @@ export class AddCourseComponent implements OnInit {
 
 
   }
-
+  getAllVendors(){
+    this.courseService.getVendor().subscribe((response:any) =>{
+     this.vendors = response.reverse();
+     
+    })
+  }
 
   ngOnInit(): void {
-    this.getCurrency()
+    this.getCurrency();
+    this. getAllVendors();
     this.mainCategoryControl = this.firstFormGroup.get('main_category') as FormControl;
     this.subCategoryControl = this.firstFormGroup.get('sub_category') as FormControl;
     this.currencyControl = this.firstFormGroup.get('currency_code') as FormControl;
@@ -322,7 +329,7 @@ isInputDisabled(): boolean {
 // }
 
 getForms(): void {
-  this.formService.getAllForms().subscribe(forms => {
+  this.formService.getAllForms('Course Creation Form').subscribe(forms => {
     this.forms = forms;
   });
 }
@@ -353,7 +360,7 @@ mainCategoryChange(): void {
 
 onFileUpload(event:any) {
   const file = event.target.files[0];
-  
+
   this.thumbnail = file
   const formData = new FormData();
   formData.append('files', this.thumbnail);
@@ -363,7 +370,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
   let image  = this.uploaded?.pop();
   this.uploaded= image?.split('\\');
   this.uploadedImage = this.uploaded?.pop();
-  
+
 })
   // this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
   //   this.image_link = response.image_link;
@@ -634,11 +641,11 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       // certificates: this.certificateService.getcertificateBuilders(),
 
     }).subscribe((response: {
-      assessment: any; exam_assessment:any; survey: any; mainCategory: any; subCategory: any; fundingGrant: any; courseKit: { docs: any; }; 
+      assessment: any; exam_assessment:any; survey: any; mainCategory: any; subCategory: any; fundingGrant: any; courseKit: { docs: any; };
 }) => {
       this.mainCategories = response.mainCategory;
       this.allSubCategories = response.subCategory;
-      this.fundingGrants = response.fundingGrant;
+      this.fundingGrants = response.fundingGrant.reverse();
       // this.survey = response.survey;
       // this.instructors = response.instructor;
       this.courseKits = response.courseKit?.docs;
@@ -647,7 +654,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       this.feedbacks = response.survey.data.docs;
       // this.certificates = response.certificates.data.docs;
     });
-    
+
   }
 
 // getCourseKits(){
@@ -721,7 +728,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
             });
             this.courseAdded=true;
             this.router.navigate(['/admin/courses/submitted-courses/pending-courses'])
-    
+
           });
         }
       });

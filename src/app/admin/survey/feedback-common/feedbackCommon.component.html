@@ -90,8 +90,12 @@
       </ng-container>
     </div>
   </div>
-  <div class="border-dotted-bottom mt-3 mb-3 text-center" *ngIf="!isPreview">
+  <div class="border-dotted-bottom mt-3 mb-3 text-center"  >
+    <button class="btn-space" mat-raised-button color="warn" id="skip" *ngIf="showSkip" (click)="skipCallback()">
+      Skip
+    </button>
     <button
+    *ngIf="!isPreview"
       mat-flat-button
       color="primary"
       (click)="confirmSubmit()"

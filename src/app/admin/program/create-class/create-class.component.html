@@ -73,8 +73,6 @@
                         </mat-error>
                       </mat-form-field>
                     </div>
-                  </div>
-                  <div class="row">
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
                       <label>Minimum students<span class="mandatory">&nbsp;*</span></label>
                       <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -100,7 +98,7 @@
                         </mat-error>
                       </mat-form-field>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2" *ngIf="labelStatusCheck('Class Type')">
                       <label>Class Type</label>
                       <mat-form-field class="example-full-width mb-3" appearance="outline">
                         <mat-select formControlName="classType">
@@ -109,9 +107,7 @@
                         </mat-select>
                       </mat-form-field>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2"  *ngIf="labelStatusCheck('Select Currency Type')">
                       <label>Select Currency Type</label>
                       <mat-form-field class="example-full-width mb-3" appearance="outline">
                         <mat-select formControlName="currency">
@@ -148,19 +144,34 @@
                         </mat-error>
                       </mat-form-field>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-3">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                      <div class="button-container">
+                        <label>Select User Group </label>
+                      </div>
+                      <mat-form-field
+                        class="example-full-width mb-3"
+                        appearance="outline">
+                        <mat-select formControlName="userGroupId" multiple>
+                          <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">All</mat-option>
+                          <mat-option [value]="userGroup.id" *ngFor="let userGroup of userGroups">
+                           {{userGroup.group_name }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-3" *ngIf="labelStatusCheck('Is Guaranteed To Run')">
                       <section class="example-section">
                         <mat-checkbox class="example-margin" formControlName="isGuaranteedToRun"><span class="fs-6">Is
                             Guaranteed To Run</span></mat-checkbox>
                       </section>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-3">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-3" *ngIf="labelStatusCheck('External Room')">
                       <section class="example-section">
                         <mat-checkbox class="example-margin" formControlName="externalRoom"><span class="fs-6">External
                             Room</span></mat-checkbox>
                       </section>
                     </div>
-                   
+
                   </div>
                   <!-- </form> -->
                 </div>
@@ -169,7 +180,7 @@
                     <button class="btn-space" mat-raised-button color="primary" matStepperNext>
                       Next
                     </button>
-                   
+
                   </div>
                 </div> -->
                 <!-- </div> -->
@@ -187,7 +198,7 @@
                 <!-- <form class="m-4" [formGroup]="secondFormGroup" (ngSubmit)="onSubmit()"> -->
                 <div class="row " *ngFor="let element of dataSource; index as index">
                   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
-                    <h6>Start Date</h6>
+                    <h6>Start Date<span class="mandatory">&nbsp;*</span></h6>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <mat-label>Choose a date</mat-label>
                       <input matInput [owlDateTimeTrigger]="date" [owlDateTime]="date" [(ngModel)]="element.start"
@@ -197,7 +208,7 @@
                     </mat-form-field>
                   </div>
                   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                    <h6>End Date</h6>
+                    <h6>End Date<span class="mandatory">&nbsp;*</span></h6>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <mat-label>Choose a date</mat-label>
                       <input matInput [owlDateTimeTrigger]="date2" [owlDateTime]="date2" [(ngModel)]="element.end"
@@ -207,7 +218,7 @@
                     </mat-form-field>
                   </div>
                   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
-                    <h6>Select Instructor</h6>
+                    <h6>Select Instructor<span class="mandatory">&nbsp;*</span></h6>
                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                       <mat-label>Choose Instructor</mat-label>
                       <mat-select [(ngModel)]="element.instructor" name="instructor" (selectionChange)="onSelectChange1($event,element)"

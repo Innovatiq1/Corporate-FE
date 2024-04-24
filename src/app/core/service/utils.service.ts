@@ -157,6 +157,10 @@ export class UtilsService {
       { type: 'required', message: 'Enter Mobile Number' },
       
     ],
+    dob: [
+      { type: 'required', message: 'Select Date Of Birth' },
+      
+    ],
     'title': [
       { type: 'required', message: 'Enter Course Name' },
       { type: 'minlength', message: 'Enter minimum 2 characters' },

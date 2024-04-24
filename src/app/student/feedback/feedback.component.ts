@@ -79,6 +79,7 @@ export class FeedbackComponent {
   isFree = false;
   isPaid = false;
   path: string;
+  feedbackInfo!: any;
   constructor(
     private _classService: ClassService,
     private courseService: CourseService,
@@ -160,18 +161,23 @@ export class FeedbackComponent {
      this.studentApprovedPrograms = response.data.docs;
     })
   }
-  submit() {
-  this.selectedOptions.forEach(option => {
-        option.studentFirstName = this.userDetails.user.name;
-        option.studentLastName = this.userDetails.user.last_name;
-    });
-    let selectedOptions = {
-      selectedOptions: this.selectedOptions,
-      studentFirstName: this.userDetails.user.name,
-      studentLastName: this.userDetails.user.last_name,
-      courseName: this.courseName
+  submitFeedback(event:any){
+    const studentId = localStorage.getItem('id');
+    const userData = this.userDetails.user.name;
+    const studentFirstName = userData?.user?.name;
+    const studentLastName = userData?.user?.last_name;
+    const payload = {
+      ...event,
+      studentId,
+      courseId: this.courseId,
+      studentFirstName,
+      studentLastName,
+      courseName:this.courseName
     };
-    this.surveyService.addSurveyBuilder(selectedOptions).subscribe(
+    this.submit(payload)
+  }
+  submit(payload:any) {
+    this.surveyService.addSurveyBuilder(payload).subscribe(
         (response) => {
             Swal.fire(
                 'Successful',
@@ -187,7 +193,7 @@ export class FeedbackComponent {
                 playbackTime: 100,
                 classId:this.path
 
-              
+
               };
               this.classService
                 .saveApprovedClasses(this.classId, payload)
@@ -195,7 +201,7 @@ export class FeedbackComponent {
                   setTimeout(() => {
                     this.router.navigate(['/student/view-course/'+ this.classId]);
                   }, 4000);
-  
+
                 });
             } else if(this.isFree){
               let payload = {
@@ -203,7 +209,7 @@ export class FeedbackComponent {
                 studentId: this.studentId,
                 playbackTime: 100,
                 courseId:this.path
-              
+
               };
               this.classService
                 .saveApprovedClasses(this.classId, payload)
@@ -211,10 +217,10 @@ export class FeedbackComponent {
                   setTimeout(() => {
                     this.router.navigate(['/student/view-freecourse/'+ this.courseId]);
                   }, 4000);
-  
+
                 });
             }
-            
+
         },
         (err) => {
             console.log(err);
@@ -222,7 +228,7 @@ export class FeedbackComponent {
     );
 }
 
-skip(){
+skipCallback(){
   let payload = {
     status: 'completed',
     studentId: this.studentId,
@@ -312,8 +318,10 @@ skip(){
     this.classId = urlPath[urlPath.length - 3];
 
     this.courseService.getCourseById(this.courseId).subscribe((response) => {
+
     this.questionList = response?.survey?.questions;
-    console.log("ques", this.questionList)
+    const survey = response?.survey;
+      this.feedbackInfo = survey
     this.courseName = response?.title
   })
 }

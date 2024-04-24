@@ -42,7 +42,7 @@ export class AddTeacherComponent {
     private courseService: CourseService,  public utils: UtilsService,
     private router:Router) {
     this.proForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+      name: ['', [Validators.required,Validators.pattern(/[a-zA-Z0-9]+/),...this.utils.validators.noLeadingSpace]],
       last_name: [''],
       gender: ['', [Validators.required]],
       mobile: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],

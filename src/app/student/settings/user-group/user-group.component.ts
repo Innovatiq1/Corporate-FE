@@ -71,8 +71,6 @@ export class UserGroupComponent {
         userId: courseData?.userId,
       };
 
-      console.log(payload, 'payload');
-
       Swal.fire({
         title: 'Are you sure?',
         text: 'You want to create a user group!',
