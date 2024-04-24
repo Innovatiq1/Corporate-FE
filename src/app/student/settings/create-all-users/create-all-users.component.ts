@@ -381,7 +381,6 @@ export class CreateAllUsersComponent {
     let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit-all-users');
     this.currentId = urlPath[urlPath.length - 1];
-    console.log(this.currentId, '+++++++++++');
     this.getUserTypeList();
 
     if (this.editUrl === true) {
@@ -399,11 +398,11 @@ export class CreateAllUsersComponent {
     }
 
     this.userForm = this.fb.group({
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.pattern(/[a-zA-Z0-9]+/),...this.utils.validators.noLeadingSpace]),
       last_name: new FormControl('', []),
       rollNo: new FormControl('', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.roll_no]),
       gender: new FormControl('', [Validators.required]),
-      mobile: new FormControl('', [Validators.required]),
+      mobile: new FormControl('', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]),
       qualification: new FormControl('', []),
       department: new FormControl('', []),
       address: new FormControl('', []),
@@ -419,7 +418,7 @@ export class CreateAllUsersComponent {
       type: new FormControl('', [Validators.required]),
       parentsName: new FormControl('', []),
       parentsPhone: new FormControl('', []),
-      dob: new FormControl('', []),
+      dob: new FormControl('', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.dob]),
       joiningDate: new FormControl('', [Validators.required]),
       blood_group: new FormControl('', []),
       avatar: new FormControl('', []),

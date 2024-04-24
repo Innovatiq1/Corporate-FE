@@ -128,9 +128,9 @@
                                       [for]="picker"
                                     ></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
-                                    <mat-error *ngIf="userForm.get('dob')?.hasError('required')">
-                                      Please select date
-                                    </mat-error>
+                                    <mat-error *ngIf="userForm.get('dob')?.invalid ||userForm.get('dob')?.touched">
+                                      {{ utils.getErrorMessage1(userForm.get('dob'), 'dob') }}
+                                    </mat-error> 
                                   </mat-form-field>
                                 </div>
                             <!-- </div>
@@ -216,6 +216,9 @@
                                     type="number"
                                     required
                                   />
+                                  <mat-error *ngIf="userForm.get('mobile')?.invalid ||userForm.get('mobile')?.touched">
+                                    {{ utils.getErrorMessage1(userForm.get('mobile'), 'mobile') }}
+                                  </mat-error>
                                 </mat-form-field>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">

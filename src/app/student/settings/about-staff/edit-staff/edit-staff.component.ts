@@ -22,7 +22,7 @@ export class EditStaffComponent {
     {
       title: 'Add Staff',
       items: ['Users'],
-      active: 'Edit Staff1',
+      active: 'Edit Staff',
     },
   ];
   staffForm: FormGroup;
@@ -53,7 +53,7 @@ export class EditStaffComponent {
   ) {
     this.staffForm = this.fb.group(
       {
-        name: ['',  [Validators.required, Validators.pattern('[a-zA-Z0-9]+'),...this.utils.validators.noLeadingSpace,...this.utils.validators.fname]],
+        name: ['',  [Validators.required, Validators.pattern(/[a-zA-Z0-9]+/),...this.utils.validators.noLeadingSpace,...this.utils.validators.fname]],
         last_name: [''],
         gender: ['',  [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.gender]],
         mobile: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],
@@ -100,7 +100,8 @@ export class EditStaffComponent {
         avatar: this.aboutData?.avatar,
         salary: this.aboutData?.salary,
         password: this.aboutData?.password,
-        confirmPassword: this.aboutData?.confirmPassword
+        conformPassword: this.aboutData?.conformPassword
+
   
     })
 

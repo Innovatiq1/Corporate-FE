@@ -51,7 +51,7 @@ export class AddStudentComponent {
       this.patchValues(this.StudentId);
     });
     this.stdForm = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+      name: ['', [Validators.required, Validators.pattern(/[a-zA-Z0-9]+/),...this.utils.validators.noLeadingSpace]],
       last_name: [''],
       rollNo: ['', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.roll_no]],
       gender: ['', [Validators.required]],
