@@ -68,8 +68,10 @@ export class SettingsComponent {
   sidemenuUrl: any;
   allUsersUrl: any;
   customFormsUrl: any;
+  faUrl: any;
   showAccountSettings: boolean = false;
   showProfileSettings: boolean = false;
+  show2FaSettings: boolean = false;
   showEmailConfig: boolean = false;
   showBanners: boolean = false;
   showIntegration: boolean = false;
@@ -126,6 +128,7 @@ export class SettingsComponent {
     this.sidemenuUrl = urlPath.includes('sidemenu');
     this.allUsersUrl = urlPath.includes('all-user');
     this.customFormsUrl = urlPath.includes('customization-forms');
+    this.faUrl = urlPath.includes('2-factor-authentication');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -341,6 +344,16 @@ export class SettingsComponent {
       ];
       this.isAdmin = true;
     }
+    if (this.faUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Security'],
+          active: '2FA',
+        },
+      ];
+      this.isAdmin = true;
+    }
     this.patchValues(),
       //this.patchValues1()
       (this.stdForm = this.fb.group({
@@ -431,6 +444,9 @@ export class SettingsComponent {
     }
     if(this.customFormsUrl){
       this.showCustomForms = true;
+    }
+    if(this.faUrl){
+      this.show2FaSettings = true;
     }
     this.getDepartments();
   }

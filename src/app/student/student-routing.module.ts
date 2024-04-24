@@ -181,6 +181,10 @@ const routes: Routes = [
     component: SettingsComponent,
   },
   {
+    path: 'settings/2-factor-authentication',
+    component: SettingsComponent,
+  },
+  {
     path: 'settings/banners',
     component: SettingsComponent,
   },
