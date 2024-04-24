@@ -16,6 +16,9 @@ import { sort } from 'd3';
 import { MatDialog } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { FilterPopupComponent } from './filter-popup/filter-popup.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { forkJoin } from 'rxjs';
+import { UserService } from '@core/service/user.service';
 
 @Component({
   selector: 'app-program-list',
@@ -70,7 +73,19 @@ export class ProgramListComponent {
   startDate: string[] = [];
   endDate: string[] = [];
   status: string[] = [];
+  programList: any;
+  selectedPrograms: any = [];
+  limit: any = 10
+  isFiltered = false;
+  vendors: any;
+  selectedVendors: any = [];
+  selectedStatus: any = [];
+  users: any;
+  selectedCreators: any = [];
+  filterForm!: FormGroup
+
 row: any;
+  programsData: any;
 
   constructor(
   
@@ -80,11 +95,24 @@ row: any;
     private courseService: CourseService,
     private classService: ClassService,
     private route :Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private fb: FormBuilder,
+    private userService: UserService
   ) { this.coursePaginationModel = {};
   let urlPath = this.route.url.split('/')
   // this.editUrl = urlPath.includes('edit-program');
   this.path = urlPath[urlPath.length - 1];
+  
+  this.filterForm = this.fb.group({
+    program: ['', []],
+    creator: ['', []],
+    // startDate: ['', []],
+    // endDate: ['', []],
+    status: ['', []],
+    vendor: ['', []]
+
+  })
+
   if (this.path == 'program'){
     this.isProgram = true;
     this.displayedColumns = [
@@ -146,6 +174,59 @@ this.isFilter = !this.isFilter;
     maxHeight: '90vh',
   });
 }
+
+onSelectionChange(event: any, field: any) {
+  if (field == 'program') {
+    this.selectedPrograms = event.value;
+  }
+  if (field == 'vendor') {
+    // this.selectedVendors = event.value;
+  }
+  if (field == 'status') {
+    this.selectedStatus = event.value;
+  }
+  if (field == 'creator') {
+    this.selectedCreators = event.value;
+  }
+  if (field == 'startDate') {
+    this.selectedCreators = event.value;
+  }
+
+
+
+}
+clearFilter() {
+  this.filterForm.reset()
+  this.getProgramList()
+}
+applyFilter() {
+  let body: any = {};
+  if (this.selectedPrograms.length > 0) {
+    body.title = this.selectedPrograms
+  }
+  if (this.selectedVendors.length > 0) {
+    body.vendor = this.selectedVendors
+  }
+  if (this.selectedStatus.length > 0) {
+    body.status = this.selectedStatus
+  }
+  if (this.selectedCreators.length > 0) {
+    body.creator = this.selectedCreators
+  }
+
+  this.courseService.getFilteredProgramData(body, { ...this.coursePaginationModel }).subscribe(response => {
+    this.programData = response.data.docs;
+    this.totalItems = response.data.totalDocs
+    this.isFiltered = true;
+    this.coursePaginationModel.docs = response.data.docs;
+    this.coursePaginationModel.page = response.data.page;
+    this.coursePaginationModel.limit = response.data.limit;
+    this.coursePaginationModel.totalDocs = response.data.totalDocs;
+
+  })
+
+}
+
 getFilterData(filters?: any) {
   // let filterText = this.filterName
   this.courseService.getAllPrograms().subscribe(
@@ -225,12 +306,35 @@ getFilterData(filters?: any) {
   pageSizeChange($event: any) {
     this.coursePaginationModel.page = $event?.pageIndex + 1;
     this.coursePaginationModel.limit = $event?.pageSize;
-    this.getProgramList()
+    if (this.isFiltered) {
+      this.applyFilter()
+    } else {
+      this.getProgramList();
+    }
   }
+
   ngOnInit(): void {
     this.getProgramList();
     this.getFilterData();
+    this.getAllVendorsAndUsers();
+    forkJoin({
+      courses: this.courseService.getPrograms({ ...this.coursePaginationModel,status: 'active'}),
+    }).subscribe((response) => {
+      this.programList = response.courses;
+    });
+
   }
+
+  getAllVendorsAndUsers() {
+    this.courseService.getVendor().subscribe((response: any) => {
+      this.vendors = response.reverse();
+    })
+    this.userService.getAllUsers().subscribe((response: any) => {
+      this.users = response?.results;
+    });
+
+  }
+
 
 performSearch() {
   if(this.searchTerm){
