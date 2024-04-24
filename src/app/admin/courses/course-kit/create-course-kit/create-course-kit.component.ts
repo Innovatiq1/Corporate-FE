@@ -10,6 +10,7 @@ import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { CertificateService } from '@core/service/certificate.service';
+import { FormService } from '@core/service/customization.service';
 
 @Component({
   selector: 'app-create-course-kit',
@@ -17,7 +18,7 @@ import { CertificateService } from '@core/service/certificate.service';
   styleUrls: ['./create-course-kit.component.scss']
 })
 export class CreateCourseKitComponent implements OnInit{
-  
+
   breadscrums = [
     {
       title: 'Create Course Kit',
@@ -38,10 +39,10 @@ export class CreateCourseKitComponent implements OnInit{
   pageSizeArr = this.utils.pageSizeArr;
   dataSource: any;
   displayedColumns!: string[];
-  
+
   isSubmitted = false;
-  
-  
+
+
   totalItems: any;
   currentDate: Date;
   model = { coursename: "", sd: "", ld: "", dl: "", vltitle: "", selectopt: false };
@@ -56,7 +57,7 @@ export class CreateCourseKitComponent implements OnInit{
   docs: any;
   videoLink: any;
   videoSrc: any;
-
+  forms!: any[];
 
   constructor(private router: Router,
 
@@ -66,13 +67,14 @@ export class CreateCourseKitComponent implements OnInit{
     private courseService: CourseService,
     private commonService: CommonService,
     private activatedRoute: ActivatedRoute,
-    private certificateService: CertificateService
+    private certificateService: CertificateService,
+    private formService: FormService
   ) {
     this.currentDate = new Date();
     this.courseKitModel = {};
-   
 
-    
+
+
 
     this.courseKitForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required, ...this.utils.validators.title, ...this.utils.validators.noLeadingSpace]),
@@ -91,14 +93,14 @@ export class CreateCourseKitComponent implements OnInit{
 
   }
   dateValidator(group: FormGroup) {
-    const startDate = group.get('startDate')?.value; 
-    const endDate = group.get('endDate')?.value;       
+    const startDate = group.get('startDate')?.value;
+    const endDate = group.get('endDate')?.value;
 
     if (startDate && endDate) {
       if (startDate > endDate) {
-        group.get('endDate')?.setErrors({ dateError: true }); 
+        group.get('endDate')?.setErrors({ dateError: true });
       } else {
-        group.get('endDate')?.setErrors(null); 
+        group.get('endDate')?.setErrors(null);
       }
     }
   }
@@ -115,13 +117,14 @@ export class CreateCourseKitComponent implements OnInit{
     element.end = element.start;
   }
 ngOnInit(): void {
- this.courseService.getAllCourseKit().subscribe(data => {
+    this.getForms();
+    this.courseService.getAllCourseKit().subscribe(data => {
   console.log("allData",data)
  })
 
 }
 private createCourseKit(courseKitData: CourseKit): void {
-  
+
   // courseKitData.documentLink=this.documentLink;
   console.log("createCourseKit",courseKitData);
 
@@ -159,6 +162,22 @@ private createCourseKit(courseKitData: CourseKit): void {
 }
 });
 
+}
+
+getForms(): void {
+  this.formService.getAllForms('Course Kit Creation Form').subscribe(forms => {
+    this.forms = forms;
+  });
+}
+
+labelStatusCheck(labelName: string): any {
+  if (this.forms && this.forms.length > 0) {
+    const status = this.forms[0]?.labels?.filter((v:any) => v?.name === labelName);
+    if (status && status.length > 0) {
+      return status[0]?.checked;
+    }
+  }
+  return false;
 }
 
 //videoUpload
@@ -247,7 +266,7 @@ fileBrowseHandler(event: any) {
           //   // //   Swal.showLoading();
           //   //  },
           // })
-        
+
 
           // this.courseService.uploadVideo(this.files).subscribe(
           //   (response: any) => {
@@ -278,19 +297,19 @@ fileBrowseHandler(event: any) {
         //     text: 'Please upload video files',
         //   });
         // }
-      } 
-      
+      }
+
       else {
         //this.createCourseKit(courseKitData);
         // this.isSubmitted=false
       }
     }
-    
+
 
     // getData(){
     //   forkJoin({
     //     course: this.courseService.getCourseKitById(this.courseId),
-        
+
     //   }).subscribe((response: any) => {
     //     if(response){
     //       this.course = response.course;
@@ -301,7 +320,7 @@ fileBrowseHandler(event: any) {
     //       let startingTime=startTime?.split(".")[0];
     //       let endTime=response?.course?.endDate.split("T")[1];
     //       let endingTime=endTime?.split(".")[0];
-  
+
     //       this.courseKitForm.patchValue({
     //         name: response?.course?.name,
     //         documentLink: response?.course?.documentLink,
@@ -310,17 +329,17 @@ fileBrowseHandler(event: any) {
     //         videoLink: response?.course?.videoLink?response?.course?.videoLink[0]._id:null,
     //         startDate:`${moment(startingDate).format("YYYY-MM-DD")}T${startingTime}`,
     //         endDate:`${moment(endingDate).format("YYYY-MM-DD")}T${endingTime}`
-            
+
     //       });
-  
+
     //     }
-       
-        
-        
-        
+
+
+
+
     //   });
-    
-  
+
+
     // }
 
 }
