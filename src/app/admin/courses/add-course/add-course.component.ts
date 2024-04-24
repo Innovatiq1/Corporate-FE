@@ -120,6 +120,7 @@ export class AddCourseComponent implements OnInit {
       },
     ]
   };
+  vendors: any;
 
   constructor(private router: Router,private fb: FormBuilder, private _formBuilder: FormBuilder,
     private courseService: CourseService,
@@ -203,10 +204,16 @@ export class AddCourseComponent implements OnInit {
 
 
   }
-
+  getAllVendors(){
+    this.courseService.getVendor().subscribe((response:any) =>{
+     this.vendors = response.reverse();
+     
+    })
+  }
 
   ngOnInit(): void {
-    this.getCurrency()
+    this.getCurrency();
+    this. getAllVendors();
     this.mainCategoryControl = this.firstFormGroup.get('main_category') as FormControl;
     this.subCategoryControl = this.firstFormGroup.get('sub_category') as FormControl;
     this.currencyControl = this.firstFormGroup.get('currency_code') as FormControl;

@@ -25,10 +25,10 @@ const routes: Routes = [
     path: 'all-courses/course',
     component: AllCourseComponent,
   },
-  {
-    path: 'all-courses',
-    component: AllCourseComponent,
-  },
+  // {
+  //   path: 'all-courses',
+  //   component: AllCourseComponent,
+  // },
   {
     path: 'all-courses/creator',
     component: AllCourseComponent,
