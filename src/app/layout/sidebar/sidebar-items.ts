@@ -2064,11 +2064,11 @@ export const SettingsMenu: MenuItem[] = [
     children:[
       {
         iconsrc:'',
-        path: 'student/settings/security-settings',
-        title: 'Password',
+        path: 'student/settings/2-factor-authentication',
+        title: '2FA',
         iconType: '',
         icon: '',
-        id:'password',
+        id:'2FA',
         class: 'ml-menu',
         groupTitle: false,
         badge: '',

@@ -1,5 +1,5 @@
 <section class="content"
-  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig &&!showForms  && !showSidemenu">
+  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !show2FaSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig &&!showForms  && !showSidemenu">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
@@ -240,7 +240,7 @@
     <!-- </div> -->
 
     <div class="card"
-      *ngIf="!showAccountSettings && !showProfileSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers &&!showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig && !showForms && !showSidemenu">
+      *ngIf="!showAccountSettings && !showProfileSettings && !show2FaSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers &&!showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig && !showForms && !showSidemenu">
       <div class="header">
         <h2>Settings</h2>
       </div>
@@ -546,6 +546,50 @@
           </div>
 
           <button mat-raised-button id="submit" style="float: right;">Update</button>
+        </form>
+      </div>
+    </div>
+    <div class="card" *ngIf="show2FaSettings">
+      <div class="header">
+        <h2 class="mx-auto mt-3">Two-Factor Authentication</h2>
+      </div>
+      <div class="body">
+        <form [formGroup]="stdForm">
+          <div class="example-container">
+            <div class="row clearfix justify-content-center">
+              <img src="assets/images/icons/2fa.jpg" alt="" class="factor mx-auto"/>
+              <p class="para">Please enter OTP (one time password) to verify your account. <br> A code has been sent to +91 ********88</p>
+            
+             <div class="row clearfix justify-content-center">
+              <div class="col-1">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput required />
+                </mat-form-field>
+              </div>
+              <div class="col-1">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput required />
+                </mat-form-field>
+              </div>
+              <div class="col-1">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput  required />
+                </mat-form-field>
+              </div>
+              <div class="col-1">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input matInput required />
+                </mat-form-field>
+              </div>
+             </div>
+                  <button mat-raised-button id="verify">Verify</button>
+                  <p class="para">Not received your code ? <a href="">Resend code</a></p>
+                  <a class="text-center mb-3" href="">Call me</a>
+               
+            </div>
+          </div>
+
+         
         </form>
       </div>
     </div>
