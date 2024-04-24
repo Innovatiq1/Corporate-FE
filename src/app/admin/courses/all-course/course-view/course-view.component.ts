@@ -17,8 +17,8 @@ export class CourseViewComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Course'],
-      active: 'View Course1',
+      items: ['Approved Course'],
+      active: 'View Approved Course',
     },
   ];
   displayedColumns1: string[] = ['video'];
@@ -47,6 +47,21 @@ export class CourseViewComponent {
     });
     if(this.status === 'in-active'){
       this.button = true;
+      this.breadscrums = [
+        {
+          title: 'Blank',
+          items: ['Pending Course'],
+          active: 'View Pending Course',
+        },
+      ];
+    }else{
+      this.breadscrums = [
+        {
+          title: 'Blank',
+          items: ['Approved Course'],
+          active: 'View Approved Course',
+        },
+      ];
     }
   }
 
