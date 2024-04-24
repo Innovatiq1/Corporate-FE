@@ -162,7 +162,7 @@ export class AddCourseComponent implements OnInit {
         courseCode: ['', [Validators.required,Validators.pattern(/^[a-zA-Z0-9]/)]],
         main_category: ['', [Validators.required]],
         sub_category: ['', [Validators.required]],
-        fee: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
+        fee: new FormControl('',[Validators.required,Validators.pattern(/^\d+(\.\d+)?$/)]),
         currency_code: new FormControl('',[]),
         course_duration_in_days: new FormControl('',[Validators.min(1),Validators.pattern(/^\d+(\.\d+)?$/)]),
         training_hours: new FormControl('',[Validators.pattern(/^\d+(\.\d+)?$/)]),
@@ -181,7 +181,7 @@ export class AddCourseComponent implements OnInit {
         funding_grant: new FormControl('',[Validators.required]),
         // survey: new FormControl('',[Validators.required]),
         id: new FormControl(''),
-        feeType: new FormControl('',[]),
+        feeType: new FormControl('',[Validators.required]),
 
         // course_instructor: new FormControl('', [Validators.required]),
         // assign_exam: new FormControl('', []),
@@ -645,7 +645,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
 }) => {
       this.mainCategories = response.mainCategory;
       this.allSubCategories = response.subCategory;
-      this.fundingGrants = response.fundingGrant;
+      this.fundingGrants = response.fundingGrant.reverse();
       // this.survey = response.survey;
       // this.instructors = response.instructor;
       this.courseKits = response.courseKit?.docs;
