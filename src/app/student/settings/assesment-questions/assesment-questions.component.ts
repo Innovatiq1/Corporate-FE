@@ -260,7 +260,7 @@ export class AssesmentQuestionsComponent {
 
       Swal.fire({
         title: 'Are you sure?',
-        text: 'Do you want to create announcement!',
+        text: 'Do you want to create Assessment!',
         icon: 'warning',
         confirmButtonText: 'Yes',
         showCancelButton: true,

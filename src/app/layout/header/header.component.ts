@@ -228,7 +228,7 @@ export class HeaderComponent
     this.router.navigate(['/student/settings/customization']);
   }
   navigateToProfileSettings() {
-    this.router.navigate(['/student/settings/security-settings']);
+    this.router.navigate(['/student/settings/2-factor-authentication']);
   }
   navigateToLmsSettings() {
     this.router.navigate(['/student/settings/all-questions']);
