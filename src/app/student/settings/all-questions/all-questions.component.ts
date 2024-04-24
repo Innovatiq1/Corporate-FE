@@ -17,6 +17,7 @@ export class AllQuestionsComponent {
     'Name',
     'Count',
     'Created At',
+    'Assessment Type',
     'Approval Status'
    ];
   coursePaginationModel!: Partial<CoursePaginationModel>;
@@ -45,7 +46,7 @@ constructor(private router:Router,public utils: UtilsService, private questionSe
    this.getAllQuestions()
   }
   getAllQuestions() {
-    this.questionService.getQuestionJson({ ...this.coursePaginationModel})
+    this.questionService.getExamAssessmentsAndAssesments({ ...this.coursePaginationModel})
       .subscribe(res => {
         this.dataSource = res.data.docs;
         this.totalItems = res.data.totalDocs;
@@ -65,6 +66,14 @@ constructor(private router:Router,public utils: UtilsService, private questionSe
     return numSelected === numRows;
   }
 
+  assessmentType(row : any) {
+    if(row.collectionName === "assesmentquestions") {
+      return "Assessment"
+    } else {
+      return "Exam"
+    }
+  }
+
    /** Selects all rows if they are not all selected; otherwise clear selection. */
    masterToggle() {
     this.isAllSelected()
@@ -77,5 +86,4 @@ constructor(private router:Router,public utils: UtilsService, private questionSe
   getStatusClass(status: string): string {
     return status === 'approved' ? 'success' : 'fail';
   }
- 
 }

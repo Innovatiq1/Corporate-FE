@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,7 +9,10 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { QuestionService } from '@core/service/question.service';
-import { number } from 'echarts';
+import { Subscription } from 'rxjs';
+import * as XLSX from 'xlsx';
+import { StudentsService } from 'app/admin/students/students.service';
+
 
 @Component({
   selector: 'app-add-exam-questions',
@@ -17,16 +20,24 @@ import { number } from 'echarts';
   styleUrls: ['./add-exam-questions.component.scss']
 })
 export class AddExamQuestionsComponent {
+  @Input() approved: boolean = false;
+
   questionFormTab2: FormGroup;
   editUrl: any;
   questionId!: string;
   subscribeParams: any;
+  studentId: any;
+  configuration: any;
+  configurationSubscription!: Subscription;
+  defaultTimer: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private studentsService: StudentsService
+
   ) {
     let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit-questions');
@@ -50,6 +61,29 @@ export class AddExamQuestionsComponent {
     } else {
       this.getData();
     }
+  }
+
+  ngOnInit(): void { 
+    this.getTimer()
+    this.loadData()
+   }
+
+   loadData(){
+    this.studentId = localStorage.getItem('id')
+    this.studentsService.getStudentById(this.studentId).subscribe(res => {
+    })
+  }
+  
+  getTimer() : any {
+    this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
+      this.configuration = configuration;
+      if (this.configuration?.length > 0) {
+        this.defaultTimer = this.configuration[1].value;
+        this.questionFormTab2.patchValue({
+          timer: this.defaultTimer,
+        })
+      }
+    });
   }
 
   getData() {
@@ -205,6 +239,7 @@ export class AddExamQuestionsComponent {
       const payload = {
         name: this.questionFormTab2.value.name,
         timer: this.questionFormTab2.value.timer,
+        status: 'open',
         questions: this.questionFormTab2.value.questions.map((v: any) => ({
           options: v.options,
           questionText: v.questionText,
@@ -249,7 +284,7 @@ export class AddExamQuestionsComponent {
           text: 'Question created successfully',
           icon: 'success',
         });
-        this.router.navigate(['/student/settings/all-exam-questions']);
+        this.router.navigate(['/student/settings/all-questions']);
       },
       (err: any) => {
         Swal.fire('Failed to create Question', 'error');
@@ -267,7 +302,6 @@ export class AddExamQuestionsComponent {
         Swal.fire('Select at least one option is correct', 'error');
         return;
       }
-
       const payload = { ...formData, id: this.questionId };
       Swal.fire({
         title: 'Are you sure?',
@@ -285,7 +319,9 @@ export class AddExamQuestionsComponent {
                 text: 'Question Updated successfully',
                 icon: 'success',
               });
-              this.router.navigate(['/student/settings/all-questions']);
+              if (!this.approved) {
+                this.router.navigate(['/student/settings/all-questions']);
+              }
             },
             (err: any) => {
               Swal.fire('Failed to update Question', 'error');
@@ -294,5 +330,92 @@ export class AddExamQuestionsComponent {
         }
       });
     }
+  }
+
+  approve() {
+    const payload = {
+      status : 'approved',
+      id: this.questionId,
+    } 
+    this.questionService.updateExamQuestions(payload).subscribe(
+      (res: any) => {
+        Swal.fire({
+          title: 'Successful',
+          text: 'Exam Assessment approved successfully',
+          icon: 'success',
+        });
+        this.router.navigate(['/student/settings/all-questions']);
+      },
+      (err: any) => {
+        Swal.fire('Failed to update Question', 'error');
+      }
+    );
+  }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    if (file && !this.isValidExcelFile(file)) {
+      Swal.fire({
+        title: 'Invalid File',
+        text: 'Please select a valid Excel file with .xlsx or .xls extension.',
+        icon: 'error',
+      });
+      return;
+    }
+    const reader: FileReader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const data: string = e.target.result;
+      const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
+
+      const worksheet: XLSX.WorkSheet = workbook.Sheets[workbook.SheetNames[0]];
+      
+      const excelData: any[] = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+      this.processExcelData(excelData);
+    };
+
+    reader.readAsBinaryString(file);
+  }
+
+  isValidExcelFile(file: File): boolean {
+    const allowedExtensions = ['.xlsx', '.xls'];
+    const fileName = file.name.toLowerCase();
+    return allowedExtensions.some(ext => fileName.endsWith(ext));
+  }
+
+  processExcelData(data: any[]) {
+    while (this.questions.length !== 0) {
+      this.questions.removeAt(0);
+    }
+
+    data.forEach((row: any, index: number) => {
+      const question = this.addQuestion();
+      question.patchValue({
+        questionText: row["Question Text"],
+      });
+  
+      const optionsArray = question.get('options') as FormArray;
+      while (optionsArray.length !== 0) {
+        optionsArray.removeAt(0);
+      }
+      for (let i = 1; i <= 4; i++) {
+        const optionText = row[`Option ${i} Text`];
+        const optionCorrect = row[`Option ${i} Correct`];
+        if (optionText.trim() !== '') {
+          optionsArray.push(
+            this.formBuilder.group({
+              text: optionText,
+              correct: optionCorrect,
+            })
+          );
+        }
+        if (optionText.trim() === '' || i === 4) {
+          break;
+        }
+      }
+  
+      this.questions.push(question);
+    });
   }
 }

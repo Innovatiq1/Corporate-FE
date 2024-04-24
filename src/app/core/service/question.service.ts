@@ -77,6 +77,13 @@ export class QuestionService {
       .put<ApiResponse>(apiUrl, question)
       .pipe(map((response) => { }));
   }
+
+  updateExamQuestions(question:any) {
+    const apiUrl = `${this.defaultUrl}admin/exam-assessment/${question.id}`;
+    return this.http
+      .put<ApiResponse>(apiUrl, question)
+      .pipe(map((response) => { }));
+  }
   getQuestionsById(id?: string) {
     const apiUrl = `${this.defaultUrl}admin/assesment/${id}`;
     return this.http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
@@ -110,6 +117,13 @@ export class QuestionService {
 
   getExamQuestionJson( filter?: Partial<CoursePaginationModel>): Observable<ApiResponse> {
     const apiUrl = `${this.defaultUrl}admin/exam-assessment`;
+    return this.http.get<any>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+  }
+
+  getExamAssessmentsAndAssesments( filter?: Partial<CoursePaginationModel>): Observable<ApiResponse> {
+    const apiUrl = `${this.defaultUrl}admin/exam-assessment/assessments`;
     return this.http.get<any>(apiUrl, {
       params: this.buildParams(filter),
     });
