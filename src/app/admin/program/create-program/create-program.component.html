@@ -116,8 +116,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-              </div>
-              <div class="row">
+
                 <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                                 <label class="form-label ">Program Kit<span
                                         class="mandatory">&nbsp;*</span></label>
@@ -133,7 +132,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div> -->
-              </div>
+              <!-- </div> -->
               <!-- <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
                   <label>Thumbnail</label>
@@ -171,8 +170,7 @@
                 </div>
               </div> -->
 
-              <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="labelStatusCheck('Start Date')">
                   <label class="form-label">Start Date</label>
                   <mat-form-field
                     class="example-full-width mb-3"
@@ -190,7 +188,7 @@
                     <mat-datepicker #startPicker></mat-datepicker>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="labelStatusCheck('End Date')">
                   <label class="form-label">End Date</label>
                   <mat-form-field
                     class="example-full-width mb-3"
@@ -250,7 +248,7 @@
                                   <mat-datepicker #picker></mat-datepicker>
                                 </mat-form-field>
                               </div> -->
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="labelStatusCheck('Duration')">
                   <label class="form-label">Duration</label>
                   <mat-form-field
                     class="example-full-width mb-3"
@@ -264,9 +262,7 @@
                     />
                   </mat-form-field>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="labelStatusCheck('Program Fees')">
                   <label class="form-label">Program Fees</label>
                   <mat-form-field
                     class="example-full-width mb-3"
@@ -281,7 +277,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="labelStatusCheck('Currency')">
                   <label class="form-label"
                     >Currency</label
                   >
@@ -289,7 +285,7 @@
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <mat-select formControlName="currency" required>
+                    <mat-select formControlName="currency">
                       <mat-option disabled>Choose...</mat-option>
                       <mat-option value="USD">USD</mat-option>
                       <mat-option value="SGD">SGD</mat-option>
@@ -303,7 +299,7 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
-                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="labelStatusCheck('Thumbnail')">
                     <label>Thumbnail</label>
                     <div class="file-drop-area">
                       <div class="file">

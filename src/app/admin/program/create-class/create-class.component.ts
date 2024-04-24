@@ -3,7 +3,7 @@ import { map } from 'rxjs';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -24,11 +24,19 @@ import {
 } from '@angular/material/snack-bar';
 import { InstructorService } from '@core/service/instructor.service';
 import Swal from 'sweetalert2';
-import { CourseTitleModel, DataSourceModel, InstructorList, LabListModel } from 'app/admin/schedule-class/class.model';
+import {
+  CourseTitleModel,
+  DataSourceModel,
+  InstructorList,
+  LabListModel,
+} from 'app/admin/schedule-class/class.model';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { Subscription } from 'rxjs';
 import { StudentsService } from 'app/admin/students/students.service';
+import { FormService } from '@core/service/customization.service';
+import { UserService } from '@core/service/user.service';
+import { MatOption } from '@angular/material/core';
 
 @Component({
   selector: 'app-create-class',
@@ -65,14 +73,14 @@ export class CreateClassComponent {
   classId!: string;
   title: boolean = false;
   studentId: any;
-  breadscrums :any[];
+  breadscrums: any[];
   startDate = new Date(1990, 0, 1);
   date = new UntypedFormControl(new Date());
   serializedDate = new UntypedFormControl(new Date().toISOString());
   minDate: Date | undefined;
   maxDate!: Date;
   // status = true;
-  programList!: any
+  programList!: any;
   instructorList: any = [];
   // labList: any = [];
   selectedPosition: number = 0;
@@ -92,9 +100,13 @@ export class CreateClassComponent {
   configuration: any;
   configurationSubscription!: Subscription;
   defaultCurrency: string = '';
+  forms!: any[];
+  userGroups!: any[];
+
+  @ViewChild('allSelected') private allSelected!: MatOption;
 
   addNewRow() {
-    if (this.isInstructorFailed != 1 ) {
+    if (this.isInstructorFailed != 1) {
       this.isInstructorFailed = 0;
       // this.isLabFailed = 0;
       const currentYear = new Date().getFullYear();
@@ -102,7 +114,6 @@ export class CreateClassComponent {
         start: moment().set({ hour: 8, minute: 0 }).format('YYYY-MM-DD HH:mm'),
         end: moment().set({ hour: 8, minute: 0 }).format('YYYY-MM-DD HH:mm'),
         instructor: '0',
-        
       });
       this.dataSource = this.dataSourceArray;
     }
@@ -116,7 +127,9 @@ export class CreateClassComponent {
     private snackBar: MatSnackBar,
     private courseService: CourseService,
     private instructorService: InstructorService,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
+    private formService: FormService,
+    private userService: UserService
   ) {
     this._activeRoute.queryParams.subscribe((params) => {
       this.classId = params['id'];
@@ -124,56 +137,56 @@ export class CreateClassComponent {
         this.title = true;
       }
     });
-    let urlPath = this.router.url.split('/')
+    let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit-class');
 
-    if(this.editUrl){
-    this.breadscrums = [
-      {
-        title: 'Edit Class',
-        items: ['Schedule Class'],
-        active: 'Edit Class',
-      },
-    ];
-  } else {
-    this.breadscrums = [
-      {
-        title: 'Create Class',
-        items: ['Schedule Class'],
-        active: 'Create Class',
-      },
-    ];
-
-  }
+    if (this.editUrl) {
+      this.breadscrums = [
+        {
+          title: 'Edit Class',
+          items: ['Schedule Class'],
+          active: 'Edit Class',
+        },
+      ];
+    } else {
+      this.breadscrums = [
+        {
+          title: 'Create Class',
+          items: ['Schedule Class'],
+          active: 'Create Class',
+        },
+      ];
+    }
 
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 5, 0, 1);
     this.maxDate = new Date(currentYear + 1, 11, 31);
     this.coursePaginationModel = {};
-
   }
 
   // toggleStatus() {
   //   this.status = !this.status;
   // }
 
-
-
   ngOnInit(): void {
-    this.subscribeParams = this._activeRoute.params.subscribe((params:any) => {
+    this.subscribeParams = this._activeRoute.params.subscribe((params: any) => {
       this.classId = params.id;
     });
     this.getDepartments();
+    this.getForms();
+    this.getUserGroups();
 
     this.loadForm();
-    if(!this.editUrl){
+    if (!this.editUrl) {
       forkJoin({
-        courses: this.courseService.getPrograms({...this.coursePaginationModel,status:'active'}),
-        instructors: this.instructorService.getInstructor( {
+        courses: this.courseService.getPrograms({
+          ...this.coursePaginationModel,
+          status: 'active',
+        }),
+        instructors: this.instructorService.getInstructor({
           type: 'Instructor',
         }),
         // labs: this._classService.getAllLaboratory(),
-
       }).subscribe((response) => {
         this.programList = response.courses;
         this.instructorList = response.instructors;
@@ -181,78 +194,116 @@ export class CreateClassComponent {
 
         this.cd.detectChanges();
       });
-        this.dataSource = this.dataSourceArray;
+      this.dataSource = this.dataSourceArray;
     }
 
-  if(this.editUrl ){
-    forkJoin({
-      courses: this.courseService.getCourseProgram({...this.coursePaginationModel,status:'active'}),
-      instructors: this.instructorService.getInstructor( {
-        type: 'Instructor',
-      }),
-      // labs: this._classService.getAllLaboratory(),
-    class: this._classService.getProgramClassById(this.classId),
-    }).subscribe((response) => {
-      this.programList = response.courses.docs;
-      this.instructorList = response.instructors;
-      // this.labList = response.labs;
-      let item = response.class;
-      this.classForm.patchValue({
-        courseId: item.courseId?.id,
-        classType: item?.classType,
-        classDeliveryType: item?.classDeliveryType,
-        instructorCost: item?.instructorCost,
-        currency:item?.currency,
-        instructorCostCurrency: item?.instructorCostCurrency,
-        isGuaranteedToRun:item?.isGuaranteedToRun,
-        externalRoom:item?.externalRoom,
-        department:item?.department,
-        minimumEnrollment: item?.minimumEnrollment,
-        maximumEnrollment: item?.maximumEnrollment,
-        // status: item?.status,
-        sessions: item?.sessions
-      });
-      item.sessions.forEach((item:any) => {
-      let sessionStartDate=item.sessionStartDate.split('T')[0]
-      let sessionEndDate=item.sessionEndDate.split('T')[0]
-
-        this.dataSourceArray.push({
-          start: sessionStartDate,
-          end: sessionEndDate,
-          instructor: item.instructorId?.id,
-         
+    if (this.editUrl) {
+      forkJoin({
+        courses: this.courseService.getCourseProgram({
+          ...this.coursePaginationModel,
+          status: 'active',
+        }),
+        instructors: this.instructorService.getInstructor({
+          type: 'Instructor',
+        }),
+        // labs: this._classService.getAllLaboratory(),
+        class: this._classService.getProgramClassById(this.classId),
+      }).subscribe((response) => {
+        this.programList = response.courses.docs;
+        this.instructorList = response.instructors;
+        // this.labList = response.labs;
+        let item = response.class;
+        this.classForm.patchValue({
+          courseId: item.courseId?.id,
+          classType: item?.classType,
+          classDeliveryType: item?.classDeliveryType,
+          instructorCost: item?.instructorCost,
+          currency: item?.currency,
+          instructorCostCurrency: item?.instructorCostCurrency,
+          isGuaranteedToRun: item?.isGuaranteedToRun,
+          externalRoom: item?.externalRoom,
+          department: item?.department,
+          minimumEnrollment: item?.minimumEnrollment,
+          maximumEnrollment: item?.maximumEnrollment,
+          // status: item?.status,
+          sessions: item?.sessions,
+          userGroupId: item?.userGroupId
         });
+        item.sessions.forEach((item: any) => {
+          let sessionStartDate = item.sessionStartDate.split('T')[0];
+          let sessionEndDate = item.sessionEndDate.split('T')[0];
 
+          this.dataSourceArray.push({
+            start: sessionStartDate,
+            end: sessionEndDate,
+            instructor: item.instructorId?.id,
+          });
+        });
+        this.dataSource = this.dataSourceArray;
+        this.cd.detectChanges();
       });
-      this.dataSource = this.dataSourceArray;
-      this.cd.detectChanges();
-    });
-  }
-   if(this.classId == undefined){
+    }
+    if (this.classId == undefined) {
       this.addNewRow();
     }
-    this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
-      this.configuration = configuration;
-      if (this.configuration?.length > 0) {
-        this.defaultCurrency = this.configuration[0].value;
-        this.classForm.patchValue({
-        currency: this.defaultCurrency,
-        })
-      }
-    });
-    this.loadData()
+    this.configurationSubscription =
+      this.studentsService.configuration$.subscribe((configuration) => {
+        this.configuration = configuration;
+        if (this.configuration?.length > 0) {
+          this.defaultCurrency = this.configuration[0].value;
+          this.classForm.patchValue({
+            currency: this.defaultCurrency,
+          });
+        }
+      });
+    this.loadData();
   }
 
-  loadData(){
-    this.studentId = localStorage.getItem('id')
-    this.studentsService.getStudentById(this.studentId).subscribe(res => {
-    })
-}
-getDepartments() {
-  this.studentsService.getAllDepartments().subscribe((response: any) => {
-    this.dept = response.data.docs;
-  });
-}
+  toggleAllSelection() {
+    if (this.allSelected.selected) {
+      this.classForm.controls['userGroupId']
+        .patchValue([...this.userGroups.map(item => item.id)]);
+    } else {
+      this.classForm.controls['userGroupId'].patchValue([]);
+    }
+  }
+
+  loadData() {
+    this.studentId = localStorage.getItem('id');
+    this.studentsService.getStudentById(this.studentId).subscribe((res) => {});
+  }
+
+  getUserGroups() {
+    this.userService.getUserGroups().subscribe((response: any) => {
+      this.userGroups = response.data.docs;
+    });
+  }
+
+  getForms(): void {
+    this.formService
+      .getAllForms('Course Class Creation Form')
+      .subscribe((forms) => {
+        this.forms = forms;
+      });
+  }
+
+  labelStatusCheck(labelName: string): any {
+    if (this.forms && this.forms.length > 0) {
+      const status = this.forms[0]?.labels?.filter(
+        (v: any) => v?.name === labelName
+      );
+      if (status && status.length > 0) {
+        return status[0]?.checked;
+      }
+    }
+    return false;
+  }
+
+  getDepartments() {
+    this.studentsService.getAllDepartments().subscribe((response: any) => {
+      this.dept = response.data.docs;
+    });
+  }
   loadForm() {
     this.classForm = this._fb.group({
       courseId: ['', [Validators.required]],
@@ -261,7 +312,7 @@ getDepartments() {
       instructorCost: ['', Validators.required],
       instructorCostCurrency: ['USD'],
       currency: [''],
-      department:['',Validators.required],
+      department: ['', Validators.required],
       isGuaranteedToRun: [false, Validators.required],
       externalRoom: [false],
       minimumEnrollment: ['', Validators.required],
@@ -269,11 +320,11 @@ getDepartments() {
       // status: ['open'],
       classStartDate: ['2023-05-20'],
       classEndDate: ['2023-06-10'],
-
+      userGroupId: [null]
     });
     this.secondFormGroup = this._fb.group({
       sessions: ['', Validators.required],
-    })
+    });
   }
 
   nextBtn() {
@@ -337,30 +388,29 @@ getDepartments() {
     return sessions;
   }
 
-
   onSelectChange(event: any) {
     const filteredData = this.programList.filter(
       (item: { _id: string }) =>
         item._id === this.classForm.controls['courseId'].value
     );
-    this.courseTitle=filteredData[0].title
-      this.courseCode=filteredData[0].courseCode
-
+    this.courseTitle = filteredData[0].title;
+    this.courseCode = filteredData[0].courseCode;
   }
 
-  onSelectChange1(event :any,element:any) {
-        const filteredData = this.instructorList.filter((item: { _id: string; }) => item._id===element.instructor);
-        console.log("filteredData",filteredData)
-        this.user_id=filteredData[0]._id
-
+  onSelectChange1(event: any, element: any) {
+    const filteredData = this.instructorList.filter(
+      (item: { _id: string }) => item._id === element.instructor
+    );
+    console.log('filteredData', filteredData);
+    this.user_id = filteredData[0]._id;
   }
 
   saveProgramClass() {
-    if(!this.editUrl){
+    if (!this.editUrl) {
       let sessions = this.getSession();
       if (sessions) {
         this.classForm.value.sessions = sessions;
-        this.classForm.value.programName = this.courseTitle
+        this.classForm.value.programName = this.courseTitle;
         this.isSubmitted = true;
 
         Swal.fire({
@@ -371,21 +421,23 @@ getDepartments() {
           showCancelButton: true,
           cancelButtonColor: '#d33',
         }).then((result) => {
-          if (result.isConfirmed){
-            this._classService.saveProgramClass(this.classForm.value).subscribe((response:any) => {
-              Swal.fire({
-                title: 'Success',
-                text: 'Class Created successfully.',
-                icon: 'success',
-                // confirmButtonColor: '#d33',
+          if (result.isConfirmed) {
+            this._classService
+              .saveProgramClass(this.classForm.value)
+              .subscribe((response: any) => {
+                Swal.fire({
+                  title: 'Success',
+                  text: 'Class Created successfully.',
+                  icon: 'success',
+                  // confirmButtonColor: '#d33',
+                });
+                this.router.navigateByUrl(`/timetable/schedule-class`);
               });
-              this.router.navigateByUrl(`/timetable/schedule-class`);
-               });
           }
         });
       }
     }
-    if(this.editUrl){
+    if (this.editUrl) {
       let sessions = this.getSession();
       if (sessions) {
         this.classForm.value.sessions = sessions;
@@ -398,23 +450,23 @@ getDepartments() {
           showCancelButton: true,
           cancelButtonColor: '#d33',
         }).then((result) => {
-          if (result.isConfirmed){ 
-          this._classService.updateProgramClass(this.classId, this.classForm.value).subscribe((response:any) => {
-          Swal.fire({
-            title: 'Success',
-            text: 'Class updated successfully.',
-            icon: 'success',
-            // confirmButtonColor: '#d33',
-          });
-          window.history.back();
-        });
+          if (result.isConfirmed) {
+            this._classService
+              .updateProgramClass(this.classId, this.classForm.value)
+              .subscribe((response: any) => {
+                Swal.fire({
+                  title: 'Success',
+                  text: 'Class updated successfully.',
+                  icon: 'success',
+                  // confirmButtonColor: '#d33',
+                });
+                window.history.back();
+              });
           }
         });
-      
       }
+    }
   }
-  }
-
 
   startDateChange(element: { end: any; start: any }) {
     element.end = element.start;
@@ -456,8 +508,7 @@ getDepartments() {
         new DatePipe('en-US').transform(new Date(element.start), 'HH:MM')!,
         new DatePipe('en-US').transform(new Date(element.end), 'HH:MM')!
       )
-      .subscribe((response) => {
-      });
+      .subscribe((response) => {});
   }
 
   setCourseNameControlState(): void {
@@ -518,7 +569,6 @@ getDepartments() {
   //   });
   // }
   cancel() {
-  
     window.history.back();
   }
 }

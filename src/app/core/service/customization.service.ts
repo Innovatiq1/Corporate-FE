@@ -15,8 +15,8 @@ export class FormService {
 
   constructor(private http: HttpClient) { }
 
-  getAllForms(): Observable<any[]> {
-    const apiUrl = `${this.prefix}admin/forms/`;
+  getAllForms(name?:String): Observable<any[]> {
+    const apiUrl = `${this.prefix}admin/forms/`+(name? `?name=${name}`:'');
     return this.http.get<any>(apiUrl).pipe(map((response) => response));
   }
 
