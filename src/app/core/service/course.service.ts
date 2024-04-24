@@ -142,6 +142,17 @@ export class CourseService {
         })
       );
   }
+  getAllProgramsWithoutPagination(filter?: Partial<Program>): Observable<ApiResponse> {
+    const apiUrl = `${this.prefix}admin/courseprogram?status=active&status=inactive`;
+    return this._Http
+      .get<ApiResponse>(apiUrl, { params: this.buildParams(filter)})
+      .pipe(
+        map((response) => {
+          return response.data.docs
+        })
+      );
+  }
+
 
   getCount(
     filter?: Partial<CoursePaginationModel>

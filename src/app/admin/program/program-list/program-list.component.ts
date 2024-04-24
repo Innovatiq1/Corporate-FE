@@ -318,7 +318,7 @@ getFilterData(filters?: any) {
     this.getFilterData();
     this.getAllVendorsAndUsers();
     forkJoin({
-      courses: this.courseService.getPrograms({ ...this.coursePaginationModel,status: 'active'}),
+      courses: this.courseService.getAllProgramsWithoutPagination({ ...this.coursePaginationModel}),
     }).subscribe((response) => {
       this.programList = response.courses;
     });
