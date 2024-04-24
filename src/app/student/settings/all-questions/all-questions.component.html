@@ -50,6 +50,15 @@
                       <span class="mobile-label">Created At:</span>{{row.createdAt | date: 'MM/dd/yyyy' }}
                     </mat-cell>
                   </ng-container>
+
+                  <ng-container matColumnDef="Assessment Type">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Approval Status</mat-header-cell>
+                    <mat-cell *matCellDef="let row" [routerLink]="row.status !== 'approved' ? ['/student/settings/edit-questions', row.id] : null">
+                      <div class="status-container">
+                        <span class="status-text">{{ assessmentType(row) }}</span>
+                        </div>
+                    </mat-cell>
+                  </ng-container>
                  
                 <ng-container matColumnDef="Approval Status">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Approval Status</mat-header-cell>
