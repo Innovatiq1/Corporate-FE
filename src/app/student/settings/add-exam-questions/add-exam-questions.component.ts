@@ -261,7 +261,7 @@ export class AddExamQuestionsComponent {
 
       Swal.fire({
         title: 'Are you sure?',
-        text: 'Do you want to create Assessment!',
+        text: 'Do you want to create Exam Assessment!',
         icon: 'warning',
         confirmButtonText: 'Yes',
         showCancelButton: true,

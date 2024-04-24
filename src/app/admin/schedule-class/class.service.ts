@@ -38,6 +38,8 @@ export class ClassService extends UnsubscribeOnDestroyAdapter {
       if (filter.studentId) params = params.set("studentId", filter.studentId);
       if (filter.status) params = params.set("status", filter.status);
       if (filter.department) params = params.set("department", filter.department);
+      if (filter.userGroupId) params = params.set("userGroupId", filter.userGroupId);
+
     }
     return params;
   }

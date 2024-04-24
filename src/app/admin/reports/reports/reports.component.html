@@ -7,34 +7,86 @@
         </div>
         <div class="payroll-summary-card" style="width: 95%;">
             <form (ngSubmit)="generateReport()">
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                    <label>Start Date</label>
-                    <input type="date" formControlName="sessionStartDate" id="date" class="form-control" />
+                
+                <!-- Row 1 -->
+                
+    
+             
+                <div class="row mb-2">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>User Name <span class="mandatory">*</span></label>
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select required>
+                                <mat-option value="bartender">Bartender</mat-option>
+                                <mat-option value="server">Server</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>Program name <span class="mandatory">*</span></label>
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select required>
+                                <mat-option value="bartender">Bartender</mat-option>
+                                <mat-option value="server">Server</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label> Course name <span class="mandatory">*</span></label>
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select required>
+                                <mat-option value="bartender">Bartender</mat-option>
+                                <mat-option value="server">Server</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <!-- Add other columns as needed -->
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                    <label>End Date</label>
-                    <input type="date" formControlName="sessionStartDate" id="date" class="form-control" />
+                <div class="row mb-2">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>Department <span class="mandatory">*</span></label>
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select required>
+                                <mat-option value="bartender">Bartender</mat-option>
+                                <mat-option value="server">Server</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>User group <span class="mandatory">*</span></label>
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select required>
+                                <mat-option value="bartender">Bartender</mat-option>
+                                <mat-option value="server">Server</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>Role<span class="mandatory">*</span></label>
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select required>
+                                <mat-option value="bartender">Bartender</mat-option>
+                                <mat-option value="server">Server</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <!-- Add other columns as needed -->
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                    <label>Users <span class="mandatory"></span></label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline" style="width: 53rem;">
-                        <mat-select required>
-                            <mat-option value="server">Bartender </mat-option>
-                            <mat-option value="bartender">Server</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <div class="row mb-2">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>Start Date<span class="mandatory">*</span></label>
+                        <input type="date" formControlName="sessionStartDate" id="date" class="form-control" />
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>End Date <span class="mandatory">*</span></label>
+                        <input type="date" formControlName="sessionEndDate" id="date" class="form-control" />
+                    </div>
+                    <!-- Add other columns as needed -->
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" style="margin-top: -25px;">
-                    <label>Department <span class="mandatory"></span></label>
-                    <mat-form-field class="example-full-width mb-3" appearance="outline" style="width: 53rem;">
-                        <mat-select required>
-                            <mat-option value="server">frontOfHouse </mat-option>
-                            <mat-option value="bartender">backofhouse</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <button mat-raised-button type="submit" class="submit">Generate Report <i
-                        class="fas fa-arrow-right"></i></button>
+    
+                <!-- Add more rows as needed -->
+    
+                <button mat-raised-button type="submit" class="submit">Generate Report <i class="fas fa-arrow-right"></i></button>
             </form>
         </div>
     </div>
