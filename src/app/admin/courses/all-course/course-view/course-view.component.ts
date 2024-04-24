@@ -18,7 +18,7 @@ export class CourseViewComponent {
     {
       title: 'Blank',
       items: ['Course'],
-      active: 'View Course',
+      active: 'View Course1',
     },
   ];
   displayedColumns1: string[] = ['video'];

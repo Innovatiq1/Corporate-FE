@@ -21,6 +21,7 @@ import { SurveyService } from 'app/admin/survey/survey.service';
 import { FormService  } from '@core/service/customization.service';
 import { Subscription } from 'rxjs';
 import { StudentsService } from 'app/admin/students/students.service';
+import { UtilsService } from '@core/service/utils.service';
 
 @Component({
   selector: 'app-add-course',
@@ -129,7 +130,8 @@ export class AddCourseComponent implements OnInit {
     private questionService: QuestionService,
     public surveyService: SurveyService,
     private formService: FormService,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
+    public utils: UtilsService
     ) {
       let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-course');
@@ -182,8 +184,8 @@ export class AddCourseComponent implements OnInit {
 
         // course_instructor: new FormControl('', [Validators.required]),
         // assign_exam: new FormControl('', []),
-        assessment: new FormControl('', [Validators.required]),
-        exam_assessment: new FormControl('', [Validators.required]),
+        assessment: new FormControl('', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.assessment]),
+        exam_assessment: new FormControl('', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.e_assessment]),
         survey: new FormControl('', [Validators.required]),
         course_kit: new FormControl('', [Validators.required]),
         vendor: new FormControl('',[ Validators.maxLength(100)]),
@@ -607,6 +609,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       }
     });
   }  else {
+    this.firstFormGroup.markAsUntouched();
     this.isWbsSubmitted = true;
   }
   }
@@ -723,6 +726,7 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
         }
       });
   } else {
+    this.firstFormGroup.markAllAsTouched(); 
     this.isWbsSubmitted = true;
   }
   }

@@ -8,8 +8,11 @@
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card" style=" height: fit-content; ">
-          <div class="header">
-            <h2>Create User Group</h2>
+          <div class="header d-flex justify-content-between">
+            <h2>Update User Group</h2>
+            <button class="icons" (click)="deleteUserGroup(id)" alt="Delete" matTooltip="Delete" mat-menu-item>
+              <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+          </button>
           </div>
           <div class="body">
             <form [formGroup]="userTypeFormGroup">
