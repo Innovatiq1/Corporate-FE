@@ -88,6 +88,13 @@ export class CourseService {
       params: this.buildParams(filter),
     });
   }
+
+  getFilteredCourseData(payload:any, filter:any
+    ):Observable<any> {
+    const apiUrl = `${this.prefix}admin/courses-new/filter?limit=${filter.limit}&page=${filter.page}`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+
   getCourseProgram(filter?: Partial<Program>): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}admin/courseprogram`;
     return this._Http
