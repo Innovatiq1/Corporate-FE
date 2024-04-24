@@ -75,72 +75,68 @@
                             <div class="body overflow-auto">
                               <div class="card" *ngIf="isFilter">
                                 <div class="row m-3">
-                                  <div class="col-3">
+                                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
                                     <img src="assets/images/icons/filter.png" style="height: 80px; width: 80px;margin-top: 30px;">
                                   </div>
-                                  <div class="col-9">
+                                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                                     <div class="row">
-                                      <div class="col-4">
-                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                          <mat-label>Course Name</mat-label>
-                                          <mat-select>
-                                            <mat-option *ngFor="let title of titles" [value]="title"> {{title}} </mat-option>
+                                        <form [formGroup]="filterForm">
+                                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                        <mat-form-field class="example-full-width mb-3"  appearance="outline">
+                                          <mat-label>Course</mat-label>
+                                          <mat-select (selectionChange)="onSelectionChange($event,'course')" formControlName ="course" multiple>
+                                            <mat-option *ngFor="let title of courseList" [value]="title.title"> {{title.title | titlecase}} </mat-option>
                                           </mat-select>
                                         </mat-form-field>
                                       </div>
-                                      <!-- <div class="col-4">
-                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                          <mat-label>Code</mat-label>
-                                          <mat-select >
-                                            <mat-option *ngFor="let code of codes" [value]="code"> {{code}} </mat-option>
-                                          </mat-select>
-                                        </mat-form-field>
-                                      </div> -->
-                                      <div class="col-4">
-                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                        <mat-form-field class="example-full-width mb-3"  appearance="outline">
                                           <mat-label>Creator</mat-label>
-                                          <mat-select >
-                                            <mat-option *ngFor="let creator of creator" [value]="creator"> {{creator}} </mat-option>
+                                          <mat-select (selectionChange)="onSelectionChange($event,'creator')"  formControlName ="creator" multiple>
+                                            <mat-option *ngFor="let user of users" [value]="user.name"> {{user.name | titlecase}} </mat-option>
                                           </mat-select>
                                         </mat-form-field>
                                       </div>
-                                      <!-- <div class="col-4">
-                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                          <mat-label>Duration</mat-label>
-                                          <mat-select >
-                                            <mat-option *ngFor="let duration of duration" [value]="duration"> {{duration}} </mat-option>
-                                          </mat-select>
-                                        </mat-form-field>
-                                      </div> -->
-                                      <div class="col-4">
+                                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                      <mat-form-field class="example-full-width mb-3"   appearance="outline">
+                                        <mat-label>Vendor</mat-label>
+                                        <mat-select (selectionChange)="onSelectionChange($event,'vendor')" formControlName ="vendor"  multiple>
+                                          <mat-option *ngFor="let vendor of vendors" [value]="vendor.vendor"> {{vendor.vendor | titlecase}} </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                      </div>
+                                      <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                         <mat-form-field class="example-full-width mb-3" appearance="outline">
                                           <mat-label>Start Date</mat-label>
-                                          <mat-select >
-                                            <mat-option *ngFor="let sdate of startDate" [value]="sdate"> {{sdate | date}} </mat-option>
-                                          </mat-select>
-                                        </mat-form-field>
-                                      </div>
-                                      <div class="col-4">
-                                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                          <input matInput [owlDateTimeTrigger]="date" (change)="onSelectionChange($event, 'startDate')" formControlName="startDate" [owlDateTime]="date" name="start"/>
+                                          <mat-icon matSuffix [owlDateTimeTrigger]="date" class="date-icon">today</mat-icon>
+                                          <owl-date-time #date></owl-date-time>
+                                        </mat-form-field>                                                          </div>
+                                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
+                                        <mat-form-field class="example-full-width mb-3"  appearance="outline">
                                           <mat-label>End Date</mat-label>
-                                          <mat-select >
+                                          <mat-select formControlName ="endDate" >
                                             <mat-option *ngFor="let edate of endDate" [value]="edate"> {{edate | date}} </mat-option>
                                           </mat-select>
                                         </mat-form-field>
-                                      </div>
-                                      <div class="col-4">
+                                      </div> -->
+                                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                         <mat-form-field class="example-full-width mb-3" appearance="outline">
                                           <mat-label>Status</mat-label>
-                                          <mat-select >
-                                            <mat-option *ngFor="let status of status" [value]="status"> {{status}} </mat-option>
+                                          <mat-select (selectionChange)="onSelectionChange($event,'status')"  formControlName ="status"  multiple>
+                                            <mat-option value="active"> Approved</mat-option>
+                                            <mat-option value="inactive"> Pending</mat-option>
                                           </mat-select>
                                         </mat-form-field>
-                                      </div>
-                                      <div class="col-2 mt-2">
+                                        </div>
+                                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4" >
                                         <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2"> -->
-                                          <button mat-raised-button id="submit">Apply</button>
+                                          <button mat-raised-button id="submit"(click)="applyFilter()">Apply</button>
+                                          <button mat-raised-button id="submit"(click)="clearFilter()">Clear</button>
+
                                         <!-- </div> -->
                                       </div>
+                                    </form>
                                     </div>
                                    
                                   </div>
