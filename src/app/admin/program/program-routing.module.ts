@@ -23,10 +23,10 @@ const routes: Routes = [
     path:'program-list/program', 
     component:ProgramListComponent
   },
-  {
-    path:'program-list', 
-    component:ProgramListComponent
-  },
+  // {
+  //   path:'program-list', 
+  //   component:ProgramListComponent
+  // },
   {
     path:'program-list/creator', 
     component:ProgramListComponent
