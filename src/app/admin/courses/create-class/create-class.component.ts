@@ -3,7 +3,7 @@ import { map } from 'rxjs';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ChangeDetectorRef, Component, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -28,6 +28,8 @@ import {
 import { InstructorService } from '@core/service/instructor.service';
 import Swal from 'sweetalert2';
 import { StudentsService } from 'app/admin/students/students.service';
+import { UserService } from '@core/service/user.service';
+import { MatOption } from '@angular/material/core';
 // import * as moment from 'moment';
 
 @Component({
@@ -38,6 +40,7 @@ import { StudentsService } from 'app/admin/students/students.service';
 export class CreateClassComponent {
   item: any;
   dept: any;
+  @ViewChild('allSelected') private allSelected!: MatOption;
   @HostListener('document:keypress', ['$event'])
   keyPressNumbers(event: KeyboardEvent) {
     const charCode = event.which ? event.which : event.keyCode;
@@ -95,7 +98,8 @@ export class CreateClassComponent {
   configuration: any;
   configurationSubscription!: Subscription;
   defaultCurrency: string = '';
-  
+  userGroups!: any[];
+
 
   addNewRow() {
     if (this.isInstructorFailed != 1) {
@@ -120,7 +124,8 @@ export class CreateClassComponent {
     private snackBar: MatSnackBar,
     private courseService: CourseService,
     private instructorService: InstructorService,
-    private studentsService: StudentsService
+    private studentsService: StudentsService,
+    private userService: UserService
   ) {
     this._activeRoute.queryParams.subscribe((params) => {
       this.classId = params['id'];
@@ -160,7 +165,7 @@ export class CreateClassComponent {
       this.courseList = response.courses.reverse();
       this.cd.detectChanges();
     });
- 
+
     this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
       this.configuration = configuration;
       if (this.configuration?.length > 0) {
@@ -171,7 +176,14 @@ export class CreateClassComponent {
       }
     });
     this.loadData();
-   this.getDepartments()
+   this.getDepartments();
+   this.getUserGroups()
+  }
+
+  getUserGroups() {
+    this.userService.getUserGroups().subscribe((response: any) => {
+      this.userGroups = response.data.docs;
+    });
   }
 
   loadData(){
@@ -196,7 +208,7 @@ export class CreateClassComponent {
       // status: ['open'],
       classStartDate: ['2023-05-20'],
       classEndDate: ['2023-06-10'],
-
+      userGroupId: [null]
     });
     this.secondFormGroup = this._fb.group({
       sessions: ['', Validators.required],
@@ -226,6 +238,7 @@ export class CreateClassComponent {
         department:item?.department,
         // status: item?.status,
         sessions: item?.sessions,
+        userGroupId: item?.userGroupId
       });
          console.log( item.sessions, "++")
       item.sessions.forEach((item: any) => {
@@ -234,7 +247,7 @@ export class CreateClassComponent {
           start: `${moment(item.sessionStartDate).format('YYYY-MM-DD')}`,
           end: `${moment(item.sessionEndDate).format('YYYY-MM-DD')}`,
           instructor: item.instructorId?.id,
-          
+
           // lab: item.laboratoryId?.id,
         });
       });
@@ -318,7 +331,7 @@ export class CreateClassComponent {
       console.log("items", item)
       if (
         this.isInstructorFailed == 0 &&
-        item.instructor != '0' 
+        item.instructor != '0'
         // item.lab != '0'
       ) {
         sessions.push({
@@ -341,7 +354,14 @@ export class CreateClassComponent {
     });
     return sessions;
   }
- 
+  toggleAllSelection() {
+    if (this.allSelected.selected) {
+      this.classForm.controls['userGroupId']
+        .patchValue([...this.userGroups.map(item => item.id)]);
+    } else {
+      this.classForm.controls['userGroupId'].patchValue([]);
+    }
+  }
   onSelectChange(event: any) {
     const filteredData = this.courseList.filter(
       (item: { _id: string }) =>
@@ -416,7 +436,7 @@ console.log('sessions',sessions)
                 // this.router.navigateByUrl(`/timetable/class-list`);
                 window.history.back();
               }
-  
+
               // this.router.navigateByUrl(`Schedule Class/List`);
             });
           }
@@ -453,7 +473,7 @@ console.log('sessions',sessions)
               this.router.navigateByUrl(`/timetable/class-list`);
             });
           }
-        }); 
+        });
       }
     }
   }
