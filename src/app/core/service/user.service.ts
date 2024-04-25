@@ -256,6 +256,15 @@ export class UserService {
       })
     );
   }
+  getAllUsersByRole(type:any,filter?: Partial<any>): Observable<any> {
+    const apiUrl = `${this.defaultUrl}admin/adminUserListing/user/role?type=${type}&isAll=true`;
+    return this.http
+      .get<ApiResponse>(apiUrl, {
+        params: this.buildParams(filter),
+      })
+      .pipe(map((response) => response));
+  }
+ 
 }
 
 

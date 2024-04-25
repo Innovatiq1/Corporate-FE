@@ -468,10 +468,10 @@
                 class="example-full-width mb-3"
                 appearance="outline">
                 <mat-select (selectionChange)="onSelectionChange($event,'approver1')"  formControlName ="approver1" required >
-                  <mat-option *ngFor="let user of users" [value]="user.name"> {{user.name | titlecase}} </mat-option>
+                  <mat-option *ngFor="let user of roUsers" [value]="user.id"> {{user.name | titlecase}} </mat-option>
                 </mat-select>
                 <mat-error
-                  *ngIf="stdForm1.get('creator')?.hasError('required')"
+                  *ngIf="stdForm1.get('approver1')?.hasError('required')"
                 >
                   Select Any User
                 </mat-error>
@@ -486,10 +486,10 @@
                 class="example-full-width mb-3"
                 appearance="outline">
                 <mat-select (selectionChange)="onSelectionChange($event,'approver2')"  formControlName ="approver2" required >
-                  <mat-option *ngFor="let user of users" [value]="user.name"> {{user.name | titlecase}} </mat-option>
+                  <mat-option *ngFor="let user of directorUsers" [value]="user.id"> {{user.name | titlecase}} </mat-option>
                 </mat-select>
                 <mat-error
-                  *ngIf="stdForm1.get('creator')?.hasError('required')"
+                  *ngIf="stdForm1.get('approver2')?.hasError('required')"
                 >
                   Select Any User
                 </mat-error>
@@ -504,10 +504,10 @@
                 class="example-full-width mb-3"
                 appearance="outline">
                 <mat-select (selectionChange)="onSelectionChange($event,'approver3')"  formControlName ="approver3" required >
-                  <mat-option *ngFor="let user of users" [value]="user.name"> {{user.name | titlecase}} </mat-option>
+                  <mat-option *ngFor="let user of trainingAdminUsers" [value]="user.id"> {{user.name | titlecase}} </mat-option>
                 </mat-select>
                 <mat-error
-                  *ngIf="stdForm1.get('creator')?.hasError('required')"
+                  *ngIf="stdForm1.get('approver3')?.hasError('required')"
                 >
                   Select Any User
                 </mat-error>
