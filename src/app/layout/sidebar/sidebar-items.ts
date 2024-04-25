@@ -1839,8 +1839,22 @@ export const SettingsMenu: MenuItem[] = [
         open:false,
         role:[],
         children:[]
+      },
+      {
+        path:'student/settings/timer',
+        title:'Timer',
+        id:'timer',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
       }
-    
     ]
   },
   {
