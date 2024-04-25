@@ -98,6 +98,15 @@ export class SettingsComponent {
   selectedTimer: string = "";
   sidemenu: any;
   dept: any;
+  ro: any;
+  roName: any;
+  director: any;
+  directorName: any;
+  trainingAdmin: any;
+  trainingAdminName: any;
+  roUsers: any;
+  directorUsers: any;
+  trainingAdminUsers: any;
   
   constructor(
     private studentService: StudentsService,
@@ -403,7 +412,7 @@ export class SettingsComponent {
   ngOnInit() {
     this.getUserProfile();
     this.getSidemenu();
-    this.getAllVendorsAndUsers();
+    this.getAllUsers();
     let role = localStorage.getItem('user_type')
     if(role == 'admin'){
       this.isAdmin = true
@@ -529,18 +538,42 @@ export class SettingsComponent {
     });
   }
   onSelectionChange(event: any, field: any) {
-  
-    if (field == 'creator') {
-      this.selectedCreators = event.value;
+   
+    if (field == 'approver1') {
+      const selectedApprover1Id = event.value;
+      const selectedApprover1 = this.roUsers.find((user: { id: any; }) => user.id === selectedApprover1Id);
+      if (selectedApprover1) {
+        this.ro = selectedApprover1Id;
+        this.roName = selectedApprover1.name
+      }
+    }
+    if (field == 'approver2') {
+      const selectedApprover2Id = event.value;
+      const selectedApprover2 = this.directorUsers.find((user: { id: any; }) => user.id === selectedApprover2Id);
+      if (selectedApprover2) {
+        this.director = selectedApprover2Id;
+        this.directorName = selectedApprover2.name
+      }
+    }
+    if (field == 'approver3') {
+      const selectedApprover3Id = event.value;
+      const selectedApprover3 = this.trainingAdminUsers.find((user: { id: any; }) => user.id === selectedApprover3Id);
+      if (selectedApprover3) {
+        this.trainingAdmin = selectedApprover3Id;
+        this.trainingAdminName = selectedApprover3.name
+      }
     }
   
   }
-  getAllVendorsAndUsers() {
-    this.courseService.getVendor().subscribe((response: any) => {
-      this.vendors = response.reverse();
-    })
-    this.userService.getAllUsers().subscribe((response: any) => {
-      this.users = response?.results;
+  getAllUsers() {
+    this.userService.getAllUsersByRole('RO').subscribe((response: any) => {
+      this.roUsers = response?.results;
+    });
+    this.userService.getAllUsersByRole('Director').subscribe((response: any) => {
+      this.directorUsers = response?.results;
+    });
+    this.userService.getAllUsersByRole('Training Administrator').subscribe((response: any) => {
+      this.trainingAdminUsers = response?.results;
     });
 
   }
@@ -571,6 +604,9 @@ export class SettingsComponent {
         gender: this.editData.gender,
         mobile: this.editData.mobile,
         department:this.editData.department,
+        approver1: this.editData.ro,
+        approver2: this.editData.director,
+        approver3: this.editData.trainingAdmin,
         email: this.editData.email,
         country_name: this.editData.country_name,
         city_name: this.editData.city_name,
@@ -672,11 +708,16 @@ export class SettingsComponent {
   onSubmit1() {
     if (!this.stdForm1.invalid) {
       // No need to call uploadVideo() here since it's not needed
-        const userData: Student = this.stdForm1.value;
+        const userData: any = this.stdForm1.value;
         userData.avatar = this.avatar; // Assuming this.avatar contains the URL of the uploaded thumbnail
         userData.type = this.editData.type;
         userData.role = this.editData.role;
-        // userData.RO = 
+        userData.ro = this.ro;
+        userData.roName = this.roName;
+        userData.director = this.director;
+        userData.directorName = this.directorName;
+        userData.trainingAdmin = this.trainingAdmin;
+        userData.trainingAdminName = this.trainingAdminName
         Swal.fire({
           title: 'Are you sure?',
           text: 'Do you want to update!',
