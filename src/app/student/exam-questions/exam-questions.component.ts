@@ -46,6 +46,7 @@ export class ExamQuestionsComponent {
   totalQuestions: number = 0;
   skip: number = 0;
   retake: boolean = false;
+  retakeNo: number = 0;
   public examAssessmentId!: any;
   public answerAssessmentId!: any;
 
@@ -96,7 +97,8 @@ export class ExamQuestionsComponent {
 
       fetchAssessmentDetails(): void {
         let urlPath = this.router.url.split('/');
-        this.examAssessmentId = urlPath[urlPath.length - 1];
+        const examId = urlPath[urlPath.length - 1];
+        this.examAssessmentId = examId.split('?')[0]; 
         this.courseId = urlPath[urlPath.length - 2];
         this.studentId = urlPath[urlPath.length - 3];
         this.answerAssessmentId = urlPath[urlPath.length - 4];
@@ -104,6 +106,7 @@ export class ExamQuestionsComponent {
         this.assessmentService.getAnswerQuestionById(this.examAssessmentId).subscribe((response) => {
           this.questionList = response?.questions;
           this.timerInSeconds = response?.timer;
+          this.retakeNo = response?.retake
           this.calculateTotalTime();
           this.answers = Array.from({ length: this.questionList.length }, () => ({
             questionText: null,
@@ -199,6 +202,9 @@ export class ExamQuestionsComponent {
             });
           this.answerId = this.answerAssessmentId;
           this.getAnswerById()
+          if(this.retake) {
+            this.updateRetakes()
+          }
           },
           (error: any) => {
             console.error('Error:', error);
@@ -217,6 +223,28 @@ export class ExamQuestionsComponent {
         );
       }
 
+      updateRetakes() {
+        if (this.retakeNo >= 1) {
+          const newRetakeNo = this.retakeNo - 1;
+          const requestBody = {
+            id: this.examAssessmentId,
+            retake: newRetakeNo
+          };
+          this.assessmentService.updateRetakes(requestBody).subscribe(
+            (response: any) => {
+            },
+            (error: any) => {
+              console.error('Error:', error);
+            }
+          );
+        } else {
+          Swal.fire({
+            title: "Cannot Update!",
+            text: "You have already reached the minimum retake number.",
+            icon: "error"
+          });
+        }
+      }
       getAnswerById() {
         this.assessmentService.getAnswerById(this.answerId).subscribe((res: any) => {
            this.answerResult  = res.assessmentAnswer;

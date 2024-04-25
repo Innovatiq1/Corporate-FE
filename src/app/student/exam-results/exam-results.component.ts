@@ -16,6 +16,7 @@ export class ExamResultsComponent {
     'Course Title',
     'Exam Name',
     'Exam Assessment Score',
+    'Retakes left',
     'Exam'
   ];
 

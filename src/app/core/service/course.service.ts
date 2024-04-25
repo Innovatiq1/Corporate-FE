@@ -522,6 +522,14 @@ export class CourseService {
         const apiUrl = `${this.prefix}admin/configuration/timer`;
         return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
       }
+      createAssessment(currencyData: any): Observable<any> {
+        const apiUrl = `${this.prefix}admin/configuration/assessment`;
+        return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
+      }
+      createExamAssessment(currencyData: any): Observable<any> {
+        const apiUrl = `${this.prefix}admin/configuration/examAssessment`;
+        return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
+      }
       getStudentClassById(id?: string) {
         const apiUrl = `${this.prefix}admin/studentClasses/${id}`;
         return this._Http.get<any>(apiUrl).pipe(map((response) => response));
