@@ -134,15 +134,15 @@ export class EditBudgetRequestComponent {
 
     if (this.empRequestForm.valid) {
 
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'Do you want to approve!',
-        icon: 'warning',
-        confirmButtonText: 'Yes',
-        showCancelButton: true,
-        cancelButtonColor: '#d33',
-      }).then((result) => {
-        if (result.isConfirmed){
+      // Swal.fire({
+      //   title: 'Are you sure?',
+      //   text: 'Do you want to approve!',
+      //   icon: 'warning',
+      //   confirmButtonText: 'Yes',
+      //   showCancelButton: true,
+      //   cancelButtonColor: '#d33',
+      // }).then((result) => {
+      //   if (result.isConfirmed){
           this.etmsService
           .updateBudgetStatus(this.payload, this._id)
           .subscribe((response: any) => {
@@ -153,11 +153,14 @@ export class EditBudgetRequestComponent {
                 icon: 'success',
               });
               this.getAllRequestsByDirector();
+              
             }
           });
+          this.empRequestForm.reset();
         }
-      });
+    //   });
       
-    }
+    // }
+    
   }
 }

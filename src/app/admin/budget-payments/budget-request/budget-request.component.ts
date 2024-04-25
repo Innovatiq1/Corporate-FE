@@ -12,254 +12,265 @@ import { UnsubscribeOnDestroyAdapter } from '@shared';
 import Swal from 'sweetalert2';
 import { EditBudgetRequestComponent } from './edit-budget-request/edit-budget-request.component';
 
-
 @Component({
   selector: 'app-budget-request',
   templateUrl: './budget-request.component.html',
-  styleUrls: ['./budget-request.component.scss']
+  styleUrls: ['./budget-request.component.scss'],
 })
-export class BudgetRequestComponent extends UnsubscribeOnDestroyAdapter
-implements OnInit
+export class BudgetRequestComponent
+  extends UnsubscribeOnDestroyAdapter
+  implements OnInit
 {
-breadscrums = [
-  {
-    title: 'ETMS',
-    items: [''],
-    active: 'Budget Request ',
-  },
-];
-ro = false;
-payload = {};
-director = false;
-trainingAdmin = false;
-dataSource: any;
-id?: number;
-coursePaginationModel!: Partial<CoursePaginationModel>;
-totalItems: any;
-pageSizeArr = this.utils.pageSizeArr;
-approvedCourses = false;
-rejectedCourses = false;
-pendingCourses = false;
+  breadscrums = [
+    {
+      title: 'ETMS',
+      items: [''],
+      active: 'Budget Request ',
+    },
+  ];
+  ro = false;
+  payload = {};
+  director = false;
+  trainingAdmin = false;
+  dataSource: any;
+  id?: number;
+  coursePaginationModel!: Partial<CoursePaginationModel>;
+  totalItems: any;
+  pageSizeArr = this.utils.pageSizeArr;
+  approvedCourses = false;
+  rejectedCourses = false;
+  pendingCourses = false;
 
+  approved = 0;
+  pending = 0;
+  rejected = 0;
 
-approved = 0;
-pending = 0;
-rejected = 0;
+  classesList = [
+    {
+      name: 'Michael John',
+      course: 'Marketing Strategy',
+      payment: '120',
+      level: 'Beginner',
+      date: '27/11/2023',
+    },
+  ];
 
-classesList = [
-  {
-    name: 'Michael John',
-    course: 'Marketing Strategy',
-    payment: '120',
-    level: 'Beginner',
-    date: '27/11/2023',
-  },
-];
-
-constructor(
-  private etmsService: EtmsService,
-  private router: Router,
-  public dialog: MatDialog,
-  private snackBar: MatSnackBar,
-  public httpClient: HttpClient,
-  public utils: UtilsService,
-  public exampleDatabase: EtmsService
-) {
-  super();
-  this.coursePaginationModel = {};
-  let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
-  if (user.user.type == 'RO') {
-    this.ro = true;
-  } else if (user.user.type == 'Director') {
-    this.director = true;
-  } else if (user.user.type == 'Training Administrator') {
-    console.log('user',user.user.type);
-    this.trainingAdmin = true;
-
-    
+  constructor(
+    private etmsService: EtmsService,
+    private router: Router,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    public httpClient: HttpClient,
+    public utils: UtilsService,
+    public exampleDatabase: EtmsService
+  ) {
+    super();
+    this.coursePaginationModel = {};
+    let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    if (user.user.type == 'RO') {
+      this.ro = true;
+    } else if (user.user.type == 'Director') {
+      this.director = true;
+    } else if (user.user.type == 'Training Administrator') {
+      console.log('user', user.user.type);
+      this.trainingAdmin = true;
+    }
   }
-}
 
-ngOnInit() {
-  this.pendingCourses =true;
-  if (this.director) {
-    this.getAllRequestsByDirector();
-  }
- 
-  this.getCount();
-}
-
-onPendingClick(){
-  this.pendingCourses = true;
-  this.approvedCourses = false;
-  this.rejectedCourses = false;
-  if (this.director) {
+  ngOnInit() {
+    this.pendingCourses = true;
+    if (this.director) {
       this.getAllRequestsByDirector();
     }
-}
-onApprovedClick(){
-  this.pendingCourses = false;
-  this.approvedCourses = true;
-  this.rejectedCourses = false;
-  if (this.director) {
+
+    this.getCount();
+  }
+
+  onPendingClick() {
+    this.pendingCourses = true;
+    this.approvedCourses = false;
+    this.rejectedCourses = false;
+    if (this.director) {
+      this.getAllRequestsByDirector();
+    }
+  }
+  onApprovedClick() {
+    this.pendingCourses = false;
+    this.approvedCourses = true;
+    this.rejectedCourses = false;
+    if (this.director) {
       this.getAllApprovedRequestsByDirector();
     }
-}
-onRejectedClick(){
-  this.pendingCourses = false;
-  this.approvedCourses = false;
-  this.rejectedCourses = true;
-  if (this.director) {
+  }
+  onRejectedClick() {
+    this.pendingCourses = false;
+    this.approvedCourses = false;
+    this.rejectedCourses = true;
+    if (this.director) {
       this.getAllRejectedRequestsByDirector();
     }
+  }
 
-}
-
-pageSizeChange($event: any) {
-  this.coursePaginationModel.page = $event?.pageIndex + 1;
-  this.coursePaginationModel.limit = $event?.pageSize;
-  if(this.director){
-      if(this.pendingCourses){
+  pageSizeChange($event: any) {
+    this.coursePaginationModel.page = $event?.pageIndex + 1;
+    this.coursePaginationModel.limit = $event?.pageSize;
+    if (this.director) {
+      if (this.pendingCourses) {
         this.getAllRequestsByDirector();
-      } else if(this.approvedCourses){
+      } else if (this.approvedCourses) {
         this.getAllApprovedRequestsByDirector();
-      } else if(this.rejectedCourses){
-        this.getAllRejectedRequestsByDirector()
+      } else if (this.rejectedCourses) {
+        this.getAllRejectedRequestsByDirector();
       }
     }
-  
-  console.log("pagination", this.coursePaginationModel.page)
-}
 
-
-getAllRequestsByDirector() {
-  let directorId = localStorage.getItem('id');
-  this.etmsService.getBudgetRequestsByDirector({...this.coursePaginationModel,directorId,directorApproval:"Pending"}).subscribe(
-    (response) => {
-      this.dataSource = response.docs;
-      this.totalItems = response.totalDocs;
-      this.coursePaginationModel.docs = response.docs;
-      this.coursePaginationModel.page = response.page;
-      this.coursePaginationModel.limit = response.limit;
-    },
-    (error) => {}
-  );
-}
-
-getAllApprovedRequestsByDirector() {
-  let directorId = localStorage.getItem('id');
-  this.etmsService.getBudgetRequestsByDirector({...this.coursePaginationModel,directorId,directorApproval:"Approved"}).subscribe(
-    (response) => {
-      this.dataSource = response.docs;
-      this.totalItems = response.totalDocs;
-      this.coursePaginationModel.docs = response.docs;
-      this.coursePaginationModel.page = response.page;
-      this.coursePaginationModel.limit = response.limit;
-    },
-    (error) => {}
-  );
-}
-
-getAllRejectedRequestsByDirector() {
-  let directorId = localStorage.getItem('id');
-  this.etmsService.getBudgetRequestsByDirector({...this.coursePaginationModel,directorId,directorApproval:"Rejected"}).subscribe(
-    (response) => {
-      this.dataSource = response.docs;
-      this.totalItems = response.totalDocs;
-      this.coursePaginationModel.docs = response.docs;
-      this.coursePaginationModel.page = response.page;
-      this.coursePaginationModel.limit = response.limit;
-    },
-    (error) => {}
-  );
-}
-
-approve(req: any) {
-  console.log("id",req.director.id);
-  this.id = req.director.id;
-  let tempDirection: Direction;
-  if (localStorage.getItem('isRtl') === 'true') {
-    tempDirection = 'rtl';
-  } else {
-    tempDirection = 'ltr';
+    console.log('pagination', this.coursePaginationModel.page);
   }
-  const dialogRef = this.dialog.open(EditBudgetRequestComponent, {
-    data: {
-      empRequest: req,
-      action: 'approve',
-    },
-    direction: tempDirection,
-  });
-  
-  this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-    if (result === 1) {
-      const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-        (x) => x.id === this.id
+
+  getAllRequestsByDirector() {
+    let directorId = localStorage.getItem('id');
+    this.etmsService
+      .getBudgetRequestsByDirector({
+        ...this.coursePaginationModel,
+        directorId,
+        directorApproval: 'Pending',
+      })
+      .subscribe(
+        (response) => {
+          this.dataSource = response.docs;
+          this.totalItems = response.totalDocs;
+          this.coursePaginationModel.docs = response.docs;
+          this.coursePaginationModel.page = response.page;
+          this.coursePaginationModel.limit = response.limit;
+        },
+        (error) => {}
       );
-
-      if (foundIndex != null && this.exampleDatabase) {
-        this.exampleDatabase.dataChange.value[foundIndex] =
-          this.etmsService.getDialogData();
-      }
-      this.getAllRequestsByDirector();
-      this.getCount();
-    }
-  });
-
-
-}
-
-
-reject(row: any) {
-  this.id = row.director.id;
-  let tempDirection: Direction;
-  if (localStorage.getItem('isRtl') === 'true') {
-    tempDirection = 'rtl';
-  } else {
-    tempDirection = 'ltr';
   }
-  const dialogRef = this.dialog.open(EditBudgetRequestComponent, {
-    data: {
-      empRequest: row,
-      action: 'reject',
-    },
-    direction: tempDirection,
-  });
 
-  this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-    if (result === 1) {
-      const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-        (x) => x.id === this.id
+  getAllApprovedRequestsByDirector() {
+    let directorId = localStorage.getItem('id');
+    this.etmsService
+      .getBudgetRequestsByDirector({
+        ...this.coursePaginationModel,
+        directorId,
+        directorApproval: 'Approved',
+      })
+      .subscribe(
+        (response) => {
+          this.dataSource = response.docs;
+          this.totalItems = response.totalDocs;
+          this.coursePaginationModel.docs = response.docs;
+          this.coursePaginationModel.page = response.page;
+          this.coursePaginationModel.limit = response.limit;
+        },
+        (error) => {}
       );
-
-      if (foundIndex != null && this.exampleDatabase) {
-        this.exampleDatabase.dataChange.value[foundIndex] =
-          this.etmsService.getDialogData();
-      }
-      if (this.director) {
-        this.getAllRequestsByDirector();
-      }
-      this.getCount();
-     
-    }
-  });
-}
-
-getCount(){
-  let userId = localStorage.getItem('id');
-  let userRole = localStorage.getItem('user_type');
-console.log("userId = " + userId);
-console.log("userRole = " + userRole);
-if(userRole == "Director"){
-  this.etmsService.getBudgetRequestDirectorCount(userId).subscribe(res =>{
-    this.approved = res.data.docs.budgetRequestApproved;
-    this.rejected = res.data.docs.budgetRequestRejected;
-    this.pending = res.data.docs.budgetRequestPending;
-  
-  })
   }
 
- 
-}
+  getAllRejectedRequestsByDirector() {
+    let directorId = localStorage.getItem('id');
+    this.etmsService
+      .getBudgetRequestsByDirector({
+        ...this.coursePaginationModel,
+        directorId,
+        directorApproval: 'Rejected',
+      })
+      .subscribe(
+        (response) => {
+          this.dataSource = response.docs;
+          this.totalItems = response.totalDocs;
+          this.coursePaginationModel.docs = response.docs;
+          this.coursePaginationModel.page = response.page;
+          this.coursePaginationModel.limit = response.limit;
+        },
+        (error) => {}
+      );
+  }
 
+  approve(req: any) {
+    this.id = req.director.id;
+    let tempDirection: Direction;
+    if (localStorage.getItem('isRtl') === 'true') {
+      tempDirection = 'rtl';
+    } else {
+      tempDirection = 'ltr';
+    }
+    const dialogRef = this.dialog.open(EditBudgetRequestComponent, {
+      data: {
+        empRequest: req,
+        action: 'approve',
+      },
+      direction: tempDirection,
+    });
+
+    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+          (x) => x.id === this.id
+        );
+
+        if (foundIndex != null && this.exampleDatabase) {
+          this.exampleDatabase.dataChange.value[foundIndex] =
+            this.etmsService.getDialogData();
+        }
+        if (this.director) {
+          this.getAllRequestsByDirector();
+          this.getCount();
+          
+        }
+      this.getCount();
+      }
+    });
+  }
+
+  reject(row: any) {
+    this.id = row.director.id;
+    let tempDirection: Direction;
+    if (localStorage.getItem('isRtl') === 'true') {
+      tempDirection = 'rtl';
+    } else {
+      tempDirection = 'ltr';
+    }
+    const dialogRef = this.dialog.open(EditBudgetRequestComponent, {
+      data: {
+        empRequest: row,
+        action: 'reject',
+      },
+      direction: tempDirection,
+    });
+
+    this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+      if (result === 1) {
+        const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+          (x) => x.id === this.id
+        );
+
+        if (foundIndex != null && this.exampleDatabase) {
+          this.exampleDatabase.dataChange.value[foundIndex] =
+            this.etmsService.getDialogData();
+        }
+        if (this.director) {
+          this.getAllRequestsByDirector();
+          this.getCount();
+        }
+        this.getCount();
+      }
+    });
+  }
+
+  getCount() {
+    let userId = localStorage.getItem('id');
+    let userRole = localStorage.getItem('user_type');
+    console.log('userId = ' + userId);
+    console.log('userRole = ' + userRole);
+    if (userRole == 'Director') {
+      this.etmsService
+        .getBudgetRequestDirectorCount(userId)
+        .subscribe((res) => {
+          this.approved = res.data.docs.budgetRequestApproved;
+          this.rejected = res.data.docs.budgetRequestRejected;
+          this.pending = res.data.docs.budgetRequestPending;
+        });
+    }
+  }
 }
