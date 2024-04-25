@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoService } from './logo.service';
 import { StudentsService } from 'app/admin/students/students.service';
+import { UserService } from '@core/service/user.service';
 
 @Component({
   selector: 'app-settings',
@@ -85,6 +86,10 @@ export class SettingsComponent {
   showForms: boolean = false;
   showSidemenu: boolean = false;
   showCustomForms: boolean = false;
+  isApprovers: boolean = false;
+  selectedCreators: any = [];
+  users: any;
+  vendors: any;
 
   currentContent: number = 1;
   currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
@@ -103,6 +108,7 @@ export class SettingsComponent {
     private authenservice: AuthenService,
     private courseService: CourseService,
     private logoService: LogoService,
+    private userService: UserService,
     public dialog: MatDialog
   ) {
     let urlPath = this.router.url.split('/');
@@ -366,6 +372,9 @@ export class SettingsComponent {
 
       last_name: [''],
       department: ['', Validators.required],
+      approver1: ['', Validators.required],
+      approver2: ['', Validators.required],
+      approver3: ['', Validators.required],
       mobile: [''],
       city_name: ['', [Validators.required]],
       country_name: ['', [Validators.required]],
@@ -394,11 +403,14 @@ export class SettingsComponent {
   ngOnInit() {
     this.getUserProfile();
     this.getSidemenu();
+    this.getAllVendorsAndUsers();
     let role = localStorage.getItem('user_type')
     if(role == 'admin'){
       this.isAdmin = true
     }else if (role == 'student'){
       this.isAdmin = false;
+    }else if( !(role == 'admin' || role == 'Student' || role == 'Instructor')){
+      this.isApprovers = true;
     }
     if(this.accountUrl){
       this.showAccountSettings = true;
@@ -516,6 +528,22 @@ export class SettingsComponent {
       this.dept = response.data.docs;
     });
   }
+  onSelectionChange(event: any, field: any) {
+  
+    if (field == 'creator') {
+      this.selectedCreators = event.value;
+    }
+  
+  }
+  getAllVendorsAndUsers() {
+    this.courseService.getVendor().subscribe((response: any) => {
+      this.vendors = response.reverse();
+    })
+    this.userService.getAllUsers().subscribe((response: any) => {
+      this.users = response?.results;
+    });
+
+  }
   patchValues() {
     this.studentId = localStorage.getItem('id');
     // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
@@ -523,9 +551,9 @@ export class SettingsComponent {
       this.editData = res;
       this.avatar = this.editData.avatar;
       this.uploaded = this.avatar?.split('/');
-      let image  = this.uploaded.pop();
-      this.uploaded= image.split('\\');
-      this.uploadedImage = this.uploaded.pop();
+      let image  = this.uploaded?.pop();
+      this.uploaded= image?.split('\\');
+      this.uploadedImage = this.uploaded?.pop();
       const currencyConfig = this.editData.configuration.find((config: any) => config.field === 'currency');
       const selectedCurrency = currencyConfig ? currencyConfig.value : null;
       const timerConfig = this.editData.configuration.find((config: any) => config.field === 'timer');
@@ -648,6 +676,7 @@ export class SettingsComponent {
         userData.avatar = this.avatar; // Assuming this.avatar contains the URL of the uploaded thumbnail
         userData.type = this.editData.type;
         userData.role = this.editData.role;
+        // userData.RO = 
         Swal.fire({
           title: 'Are you sure?',
           text: 'Do you want to update!',
