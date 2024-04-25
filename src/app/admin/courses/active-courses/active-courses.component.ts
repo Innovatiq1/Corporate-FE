@@ -124,7 +124,7 @@ getCoursesList() {
 }
 
 viewCourse(id:string) {
-  this.router.navigate(['/admin/courses/course-view/'],{queryParams: {id:id,status:'active'}});
+  this.router.navigate(['/admin/courses/course-view/'],{queryParams: {id:id,status:'approved'}});
 }
 // delete(id: string) {
 //   this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
