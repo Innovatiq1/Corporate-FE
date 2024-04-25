@@ -459,6 +459,60 @@
                 </mat-form-field>
               </div>
             </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="isApprovers">
+              <div class="button-container">
+                <label>Approver 1<span class="mandatory">&nbsp;*</span></label>
+                <!-- <mat-icon class="cursor-pointer" (click)="openDialog()">add</mat-icon> -->
+              </div>
+              <mat-form-field
+                class="example-full-width mb-3"
+                appearance="outline">
+                <mat-select (selectionChange)="onSelectionChange($event,'approver1')"  formControlName ="approver1" required >
+                  <mat-option *ngFor="let user of users" [value]="user.name"> {{user.name | titlecase}} </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="stdForm1.get('creator')?.hasError('required')"
+                >
+                  Select Any User
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="isApprovers">
+              <div class="button-container">
+                <label>Approver 2 <span class="mandatory">&nbsp;*</span></label>
+                <!-- <mat-icon class="cursor-pointer" (click)="openDialog()">add</mat-icon> -->
+              </div>
+              <mat-form-field
+                class="example-full-width mb-3"
+                appearance="outline">
+                <mat-select (selectionChange)="onSelectionChange($event,'approver2')"  formControlName ="approver2" required >
+                  <mat-option *ngFor="let user of users" [value]="user.name"> {{user.name | titlecase}} </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="stdForm1.get('creator')?.hasError('required')"
+                >
+                  Select Any User
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="isApprovers">
+              <div class="button-container">
+                <label>Approver 3 <span class="mandatory">&nbsp;*</span></label>
+                <!-- <mat-icon class="cursor-pointer" (click)="openDialog()">add</mat-icon> -->
+              </div>
+              <mat-form-field
+                class="example-full-width mb-3"
+                appearance="outline">
+                <mat-select (selectionChange)="onSelectionChange($event,'approver3')"  formControlName ="approver3" required >
+                  <mat-option *ngFor="let user of users" [value]="user.name"> {{user.name | titlecase}} </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="stdForm1.get('creator')?.hasError('required')"
+                >
+                  Select Any User
+                </mat-error>
+              </mat-form-field>
+            </div>
             <div class="col-lg-4 col-md-4">
               <div class="form-group">
                 <label>City<span class="mandatory">&nbsp;*</span></label>
