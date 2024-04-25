@@ -131,10 +131,10 @@ export class CreateCourseKitComponent implements OnInit {
   initCourseKitForm(): void {
     this.courseKitForm = this.formBuilder.group({
       name: ['', Validators.required],
-      shortDescription: [''],
-      longDescription: [''],
-      videoLink: [''],
-      documentLink: [''],
+      shortDescription: ['',Validators.required],
+      longDescription: ['',Validators.required],
+      videoLink: ['',Validators.required],
+      documentLink: ['',Validators.required],
     });
   }
   startDateChange(element: { end: any; start: any }) {
@@ -146,31 +146,40 @@ export class CreateCourseKitComponent implements OnInit {
     });
   }
   submitCourseKit1() {
-    const formdata = new FormData();
-    formdata.append('files', this.docs);
-    formdata.append('files', this.videoLink);
-    formdata.append('video_filename', this.videoSrc);
-    formdata.append('doc_filename', this.uploadedDocument);
-    this.courseService.saveVideo(formdata).subscribe((data) => {
-      const courseKitData: CourseKit = this.courseKitForm.value;
-      courseKitData.videoLink = data.data._id;
-      courseKitData.documentLink = data.data.document;
-      if (courseKitData) {
-        Swal.fire({
-          title: 'Uploading...',
-          text: 'Please wait...',
-          allowOutsideClick: false,
-          timer: 30000,
-          timerProgressBar: true,
-          // onBeforeOpen: () => {
-          //   Swal.showLoading();
-          //  },
-        });
-        setTimeout(() => {
-          this.createCourseKit(courseKitData);
-        }, 5000);
-      }
-    });
+    if(this.courseKitForm.valid) {
+      const formdata = new FormData();
+      formdata.append('files', this.docs);
+      formdata.append('files', this.videoLink);
+      formdata.append('video_filename', this.videoSrc);
+      formdata.append('doc_filename', this.uploadedDocument);
+      Swal.fire({
+        title: 'Uploading...',
+        text: 'Please wait...',
+        allowOutsideClick: false,
+        timer: 30000,
+        timerProgressBar: true,
+        // onBeforeOpen: () => {
+        //   Swal.showLoading();
+        //  },
+      });
+      setTimeout(() => {
+        if(formdata){
+          this.courseService.saveVideo(formdata).subscribe((data) => {
+            const courseKitData: CourseKit = this.courseKitForm.value;
+            courseKitData.videoLink = data.data._id;
+            courseKitData.documentLink = data.data.document;
+            if(courseKitData){
+              this.createCourseKit(courseKitData);
+            }
+          });
+        }
+      }, 5000);
+    }else{
+      this.courseKitForm.markAllAsTouched();
+    }
+  
+   
+    
   }
   private createCourseKit(courseKitData: CourseKit): void {
     Swal.fire({

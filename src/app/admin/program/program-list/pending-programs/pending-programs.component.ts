@@ -226,7 +226,7 @@ export class PendingProgramsComponent {
     });
   }
   viewInActiveProgram(id:string){
-    this.route.navigate(['/admin/program/view-program'],{queryParams:{id:id, status:'inactive'}});
+    this.route.navigate(['/admin/program/view-program'],{queryParams:{id:id, status:'pending'}});
   }
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;

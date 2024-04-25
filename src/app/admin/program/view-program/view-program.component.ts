@@ -46,8 +46,24 @@ export class ViewProgramComponent {
       // }
 
     });
-    if(this.status === 'inactive'){
+    if(this.status === 'pending'){
       this.button = true;
+      this.breadscrums = [
+        {
+          title: 'Blank',
+          items: ['Pending Program'],
+          active: 'View Pending Program',
+        },
+      ];
+    }
+    else if(this.status === 'approved'){
+      this.breadscrums = [
+        {
+          title: 'Blank',
+          items: ['Approved Programs'],
+          active: 'View Approved Program',
+        },
+      ];
     }
   }
 
@@ -78,15 +94,9 @@ export class ViewProgramComponent {
   ngOnInit() {
     if(this.status === 'active') { 
       this.getProgramLists();
-    } else if(this.status === 'inactive') {
+    } else if(this.status === 'pending') {
       this.getPendingProgramLists();
-      this.breadscrums = [
-        {
-          title: 'Blank',
-          items: ['Pending Program'],
-          active: 'View Pending Program',
-        },
-      ];
+    
     }
 
   }
