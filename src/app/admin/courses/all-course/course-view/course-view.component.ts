@@ -190,7 +190,6 @@ back() {
   }
   approveCourse(course: CourseModel): void {
     course.status = 'active';
-
     Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to approve this course!',

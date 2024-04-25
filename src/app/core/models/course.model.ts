@@ -96,6 +96,7 @@ export interface CourseModel {
 	course_detailed_description: string;
 	banner_image_link: string;
 	course_instructor: string;
+	vendor: string;
 	createdAt: string;
 	updatedAt: string;
 	__v: number;
