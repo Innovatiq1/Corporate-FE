@@ -44,14 +44,19 @@
                             </ng-container>
                             <ng-container matColumnDef="Score">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Score</mat-header-cell>
-                                <mat-cell *matCellDef="let row"><span class="mobile-label">Score:</span>{{row.score}} / {{row?.courseId?.exam_assessment?.questions?.length}}
+                                <mat-cell *matCellDef="let row"><span class="mobile-label">Score:</span>{{row.score}} / {{row?.assessmentId?.questions?.length }}
+                                </mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="Exam Type">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Exam Type</mat-header-cell>
+                                <mat-cell *matCellDef="let row"><span class="mobile-label">Exam Type:</span> {{ examType(row) }}
                                 </mat-cell>
                               </ng-container>
                               <ng-container matColumnDef="Exam">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Exam</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                  <button [disabled]="row.is_exam_completed" [routerLink]="['/student/exam-questions/',  row.id, row?.studentId?.id, row?.courseId?._id, row?.courseId?.exam_assessment?.id]" mat-flat-button color="{{ row.is_course_completed ? 'primary' : 'warn' }}">
-                                    {{ row.is_course_completed ? 'Take Exam Test' : 'Approval Pending' }}
+                                  <button [disabled]="row.is_exam_completed || row.is_tutorial"  [routerLink]="['/student/exam-questions/',  row.id, row?.studentId?.id, row?.courseId?._id, row?.courseId?.exam_assessment?.id]" mat-flat-button color="primary">
+                                    Take Exam Test
                                   </button>
                                 </mat-cell>
                               </ng-container>

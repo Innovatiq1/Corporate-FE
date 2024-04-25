@@ -18,6 +18,7 @@ export class ExamComponent {
     'Course Name',
     'Submitted Date',
     'Score',
+    'Exam Type',
     'Exam'
    ];
   assessmentPaginationModel!: Partial<AssessmentQuestionsPaginationModel>;
@@ -76,5 +77,13 @@ export class ExamComponent {
           this.selection.select(row)
         );
   }
+
+examType(data:any) {
+  if(data.is_tutorial) {
+    return "Tutorial"
+  } else {
+    return "Assessment"
+  }
+}
 
 }

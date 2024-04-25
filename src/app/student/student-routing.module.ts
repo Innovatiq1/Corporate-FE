@@ -70,6 +70,7 @@ import { UpdateDeptComponent } from './settings/create-department/update-dept/up
 import { UpdateUsergroupComponent } from './settings/user-group/update-usergroup/update-usergroup.component';
 import { UpdateVendorComponent } from './settings/vendor/update-vendor/update-vendor.component';
 import { EditStaffComponent } from './settings/about-staff/edit-staff/edit-staff.component';
+import { CustomizationTimerComponent } from './settings/customization-timer/customization-timer.component';
 
 
 const routes: Routes = [
@@ -230,6 +231,10 @@ const routes: Routes = [
   },
   {path: 'settings/currency',
   component: CustomizationCurrencyComponent},
+  {
+    path: 'settings/timer',
+    component: CustomizationTimerComponent
+},
   {
     path: 'settings/customization-forms',
     component: SettingsComponent,
