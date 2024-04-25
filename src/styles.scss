@@ -63,3 +63,28 @@ ngx-intl-tel-input input {
     color: black;
     font-weight: 700;
 }
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #198754;
+  border-radius: 50%; // To make it a circle
+  display: inline-block;
+  margin-right: 5px; // Space between dot and text
+}
+.status-red {
+  width: 8px;
+  height: 8px;
+  background-color: #f11541;
+  border-radius: 50%; // To make it a circle
+  display: inline-block;
+  margin-right: 5px; // Space between dot and text
+}
+.status-orange {
+  width: 8px;
+  height: 8px;
+  background-color: #e9713d;
+  border-radius: 50%; // To make it a circle
+  display: inline-block;
+  margin-right: 5px; // Space between dot and text
+}
