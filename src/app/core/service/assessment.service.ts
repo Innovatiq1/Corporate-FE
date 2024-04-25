@@ -103,11 +103,22 @@ import { ApiResponse } from '@core/models/general.response';
       );
     }
 
+    updateRetakes(data: any): Observable<any> {
+      const apiUrl = `${this.defaultUrl}admin/exam-assessment/retake/${data.id}`;
+      return this.http.put<ApiResponse>(apiUrl, data).pipe(
+        map(response => response)
+      );
+    }
+
     updateExamStatus(examId: string): Observable<any> {
       const url = `${this.defaultUrl}admin/assesment-answers/${examId}`;
       return this.http.put(url, {});
     }
 
+    deleteTutorial(id: string): Observable<void> {
+      const url = `${this.defaultUrl}admin/assesment-answers/${id}`;
+      return this.http.delete<void>(url);
+    }
 
 
   }

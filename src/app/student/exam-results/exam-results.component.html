@@ -56,11 +56,19 @@
                                   <span class="mobile-label">Exam Assessment Score:</span>{{ row?.score }} / {{row?.courseId?.exam_assessment?.questions?.length}}
                                 </mat-cell>
                               </ng-container>
+
+                              <ng-container matColumnDef="Retakes left">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Retakes left
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let row">
+                                  <span class="mobile-label">Retakes left:</span>{{ row?.examAssessmentId?.retake }}
+                                </mat-cell>
+                              </ng-container>
                               <ng-container matColumnDef="Exam">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Exam</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
                                   <button 
-                                  [disabled]="row.score === row.courseId.exam_assessment.questions.length"
+                                  [disabled]="row?.examAssessmentId?.retake <= 0"
                                   [routerLink]="['/student/exam-questions/',  row.id, row?.studentId?.id, row?.courseId?._id, row?.courseId?.exam_assessment?.id]" [queryParams]="{ retake: true }" mat-flat-button color="primary" >
                                     Retake Test
                                   </button>

@@ -959,6 +959,15 @@
           </div>
         </div>
 
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" (click)="openDialog(assessmentDialog, 'assessment')"> Assessment Retake </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" (click)="openDialog(examAssessmentDialog, 'examAssessment')">Exam Assessment Retake </button>
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showLms">
@@ -1367,6 +1376,38 @@
     <div mat-dialog-actions>
       <button mat-button (click)="dialogRef.close()">Cancel</button>
       <button mat-button (click)="updateCurrency(dialogRef, 'timer')">Update Timer</button>
+    </div>
+  </ng-template>
+
+  <ng-template #assessmentDialog let-dialogRef="dialogRef" let-data>
+    <h2 mat-dialog-title>Select No of Assessment Retakes</h2>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Set Retakes</mat-label>
+        <mat-select [(ngModel)]="selectedAssessmentRetake">
+          <mat-option *ngFor="let code of retakeCodesAssessment" [value]="code">{{code}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="dialogRef.close()">Cancel</button>
+      <button mat-button (click)="updateCurrency(dialogRef, 'assessment')">Update Retake</button>
+    </div>
+  </ng-template>
+
+  <ng-template #examAssessmentDialog let-dialogRef="dialogRef" let-data>
+    <h2 mat-dialog-title>Select No of Exam Assessment Retakes</h2>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Set Retakes</mat-label>
+        <mat-select [(ngModel)]="selectedExamAssessmentRetake">
+          <mat-option *ngFor="let code of retakeCodesAssessment" [value]="code">{{code}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="dialogRef.close()">Cancel</button>
+      <button mat-button (click)="updateCurrency(dialogRef, 'examAssessment')">Update Retake</button>
     </div>
   </ng-template>
 </section>

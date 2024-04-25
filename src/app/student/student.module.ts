@@ -102,6 +102,8 @@ import { UpdateUsergroupComponent } from './settings/user-group/update-usergroup
 import { UpdateVendorComponent } from './settings/vendor/update-vendor/update-vendor.component';
 import { EditStaffComponent } from './settings/about-staff/edit-staff/edit-staff.component';
 import { CustomizationTimerComponent } from './settings/customization-timer/customization-timer.component';
+import { CustomizationAssessmentRetakeComponent } from './settings/customization-assessment-retake/customization-assessment-retake.component';
+import { CustomizationExamAssessmentRetakeComponent } from './settings/customization-exam-assessment-retake/customization-exam-assessment-retake.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -181,7 +183,9 @@ import { CustomizationTimerComponent } from './settings/customization-timer/cust
     UpdateUsergroupComponent,
     UpdateVendorComponent,
     EditStaffComponent,
-    CustomizationTimerComponent
+    CustomizationTimerComponent,
+    CustomizationAssessmentRetakeComponent,
+    CustomizationExamAssessmentRetakeComponent
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,

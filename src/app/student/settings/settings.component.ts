@@ -94,8 +94,11 @@ export class SettingsComponent {
   currentContent: number = 1;
   currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
   timerValues: string[] = ['15', '30', '45', '60', '90', '120', '150'];
+  retakeCodesAssessment: string[] = ['1', '2', '3', '4', '5'];
   selectedCurrency: string = "";
   selectedTimer: string = "";
+  selectedAssessmentRetake: string = "";
+  selectedExamAssessmentRetake: string = "";
   sidemenu: any;
   dept: any;
   ro: any;
@@ -591,6 +594,10 @@ export class SettingsComponent {
       const selectedCurrency = currencyConfig ? currencyConfig.value : null;
       const timerConfig = this.editData.configuration.find((config: any) => config.field === 'timer');
       const selectedTimer = timerConfig ? timerConfig.value : null;
+      const assessmentConfig = this.editData.configuration.find((config: any) => config.field === 'assessment');
+      const selectedAssessmentRetake = assessmentConfig ? assessmentConfig.value : null;
+      const examassessmentConfig = this.editData.configuration.find((config: any) => config.field === 'examAssessment');
+      const selectedExamAssessmentRetake = examassessmentConfig ? examassessmentConfig.value : null;
 
       this.stdForm.patchValue({
         name: this.editData.name,
@@ -616,6 +623,9 @@ export class SettingsComponent {
       });
       this.selectedCurrency = selectedCurrency;
       this.selectedTimer = selectedTimer;
+      this.selectedAssessmentRetake = selectedAssessmentRetake
+      this.selectedExamAssessmentRetake = selectedExamAssessmentRetake
+
     });
   }
   onFileUpload(event: any) {
@@ -809,9 +819,8 @@ export class SettingsComponent {
           });
         }
       );
-    } else {
+    } else if (value === "timer") {
       const selectedTimer = this.selectedTimer;
-      console.log('selectedTimer: ', selectedTimer);
       this.courseService.createTimer({ value: selectedTimer }).subscribe(
         response => {
           Swal.fire({
@@ -820,6 +829,44 @@ export class SettingsComponent {
             icon: 'success'
           });
           dialogRef.close(selectedTimer);
+        },
+        error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error,
+          });
+        }
+      );
+    } else if (value === "assessment") {
+      const selectedAssessmentRetake = this.selectedAssessmentRetake;
+      this.courseService.createAssessment({ value: selectedAssessmentRetake }).subscribe(
+        response => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Assessment Configuration Success',
+            icon: 'success'
+          });
+          dialogRef.close(selectedAssessmentRetake);
+        },
+        error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error,
+          });
+        }
+      );
+    } else if (value === "examAssessment") {
+      const selectedExamAssessmentRetake = this.selectedExamAssessmentRetake;
+      this.courseService.createExamAssessment({ value: selectedExamAssessmentRetake }).subscribe(
+        response => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Assessment Configuration Success',
+            icon: 'success'
+          });
+          dialogRef.close(selectedExamAssessmentRetake);
         },
         error => {
           Swal.fire({
@@ -845,7 +892,7 @@ export class SettingsComponent {
           this.selectedCurrency = result;
         }
       });
-    } else {
+    } else if(value === 'timer') {
       const dialogRef = this.dialog.open(templateRef, {
         width: '500px',
         data: { selectedTimer: this.selectedTimer }
@@ -853,6 +900,26 @@ export class SettingsComponent {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.selectedTimer = result;
+        }
+      });
+    } else if(value === 'assessment') {
+      const dialogRef = this.dialog.open(templateRef, {
+        width: '500px',
+        data: { selectedAssessmentRetake: this.selectedAssessmentRetake }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.selectedAssessmentRetake = result;
+        }
+      });
+    } else if(value === 'examAssessment') {
+      const dialogRef = this.dialog.open(templateRef, {
+        width: '500px',
+        data: { selectedExamAssessmentRetake: this.selectedExamAssessmentRetake }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.selectedExamAssessmentRetake = result;
         }
       });
     }
