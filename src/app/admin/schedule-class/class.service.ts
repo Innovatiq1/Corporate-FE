@@ -140,6 +140,11 @@ getAllCoursesTitle(status: string): Observable<CourseTitleModel[]> {
   const apiUrl = `${this.prefix}admin/courses-new/title?status=${status}`;
   return this.http.get<ApiResponse>(apiUrl).pipe(map((response) => response.data));
 }
+getAllCourses(): Observable<CourseTitleModel[]> {
+  const apiUrl = `${this.prefix}admin/courses-new/title`;
+  return this.http.get<ApiResponse>(apiUrl).pipe(map((response) => response.data));
+}
+
 getAllProgramesTitle(status: string): Observable<CourseTitleModel[]> {
   const apiUrl = `${this.prefix}admin/courses-new/programes?status=${status}`;
   return this.http.get<ApiResponse>(apiUrl).pipe(map((response) => response.data));

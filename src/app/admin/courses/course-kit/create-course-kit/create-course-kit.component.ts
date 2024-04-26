@@ -131,10 +131,10 @@ export class CreateCourseKitComponent implements OnInit {
   initCourseKitForm(): void {
     this.courseKitForm = this.formBuilder.group({
       name: ['', Validators.required],
-      shortDescription: [''],
-      longDescription: [''],
-      videoLink: [''],
-      documentLink: [''],
+      shortDescription: ['',Validators.required],
+      longDescription: ['',Validators.required],
+      videoLink: ['',Validators.required],
+      documentLink: ['',Validators.required],
     });
   }
   startDateChange(element: { end: any; start: any }) {
@@ -143,99 +143,105 @@ export class CreateCourseKitComponent implements OnInit {
   ngOnInit(): void {
     this.getForms();
     this.courseService.getAllCourseKit().subscribe((data) => {
-      console.log('allData', data);
     });
   }
   submitCourseKit1() {
-    const formdata = new FormData();
-    formdata.append('files', this.docs);
-    formdata.append('files', this.videoLink);
-    formdata.append('video_filename', this.videoSrc);
-    formdata.append('doc_filename', this.uploadedDocument);
-    this.courseService.saveVideo(formdata).subscribe((data) => {
-      console.log('data', data.data);
-
-      const courseKitData: CourseKit = this.courseKitForm.value;
-      courseKitData.videoLink = data.data._id;
-      courseKitData.documentLink = data.data.document;
-
+    if(this.courseKitForm.valid) {
+      const formdata = new FormData();
+      formdata.append('files', this.docs);
+      formdata.append('files', this.videoLink);
+      formdata.append('video_filename', this.videoSrc);
+      formdata.append('doc_filename', this.uploadedDocument);
       Swal.fire({
-        title: 'Are you sure?',
-        text: 'You want to create a course kit!',
-        icon: 'warning',
-        confirmButtonText: 'Yes',
-        showCancelButton: true,
-        cancelButtonColor: '#d33',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: 'Uploading...',
-            text: 'Please wait...',
-            allowOutsideClick: false,
-            timer: 30000,
-            timerProgressBar: true,
-            // onBeforeOpen: () => {
-            //   Swal.showLoading();
-            //  },
-          });
-          setTimeout(() => {
-            this.createCourseKit(courseKitData);
-          }, 5000 )
-        }
+        title: 'Uploading...',
+        text: 'Please wait...',
+        allowOutsideClick: false,
+        timer: 30000,
+        timerProgressBar: true,
+        // onBeforeOpen: () => {
+        //   Swal.showLoading();
+        //  },
       });
-    });
+      setTimeout(() => {
+        if(formdata){
+          this.courseService.saveVideo(formdata).subscribe((data) => {
+            const courseKitData: CourseKit = this.courseKitForm.value;
+            courseKitData.videoLink = data.data._id;
+            courseKitData.documentLink = data.data.document;
+            if(courseKitData){
+              this.createCourseKit(courseKitData);
+            }
+          });
+        }
+      }, 5000);
+    }else{
+      this.courseKitForm.markAllAsTouched();
+    }
+  
+   
+    
   }
   private createCourseKit(courseKitData: CourseKit): void {
-    // courseKitData.documentLink=this.documentLink;
-    console.log('createCourseKit', courseKitData);
-    this.courseService.createCourseKit(courseKitData).subscribe(
-      (res) => {
-        console.log('res', res);
-        Swal.fire({
-          title: 'Successful',
-          text: 'Course Kit created successfully',
-          icon: 'success',
-        });
-        // this.fileDropEl.nativeElement.value = "";
-        this.courseKitForm.reset();
-        // this.toggleList()
-        this.router.navigateByUrl('/admin/courses/course-kit');
-      },
-      (error) => {
-        Swal.fire(
-          'Failed to create course kit',
-          error.message || error.error,
-          'error'
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to create a course kit!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.courseService.createCourseKit(courseKitData).subscribe(
+          (res) => {
+            console.log('res', res);
+            Swal.fire({
+              title: 'Successful',
+              text: 'Course Kit created successfully',
+              icon: 'success',
+            });
+            // this.fileDropEl.nativeElement.value = "";
+            this.courseKitForm.reset();
+            // this.toggleList()
+            this.router.navigateByUrl('/admin/courses/course-kit');
+          },
+          (error) => {
+            Swal.fire(
+              'Failed to create course kit',
+              error.message || error.error,
+              'error'
+            );
+          }
         );
       }
-    );
+    });
   }
 
-  
+  getForms(): void {
+    this.formService
+      .getAllForms('Course Kit Creation Form')
+      .subscribe((forms) => {
+        this.forms = forms;
+      });
+  }
 
-getForms(): void {
-  this.formService.getAllForms('Course Kit Creation Form').subscribe(forms => {
-    this.forms = forms;
-  });
-}
-
-labelStatusCheck(labelName: string): any {
-  if (this.forms && this.forms.length > 0) {
-    const status = this.forms[0]?.labels?.filter((v:any) => v?.name === labelName);
-    if (status && status.length > 0) {
-      return status[0]?.checked;
+  labelStatusCheck(labelName: string): any {
+    if (this.forms && this.forms.length > 0) {
+      const status = this.forms[0]?.labels?.filter(
+        (v: any) => v?.name === labelName
+      );
+      if (status && status.length > 0) {
+        return status[0]?.checked;
+      }
     }
+    return false;
   }
-  return false;
-}
 
-//videoUpload
-fileBrowseHandler(event: any) {
-  const file = event.target.files[0];
-  this.videoLink = file;
-  this.videoSrc = this.videoLink.name
-}
-
+  //videoUpload
+  fileBrowseHandler(event: any) {
+    const file = event.target.files[0];
+    this.videoLink = file;
+    this.videoSrc = this.videoLink.name;
+  }
 
   // fileBrowseHandler(event: any) {
   //   const files = event.target.files;

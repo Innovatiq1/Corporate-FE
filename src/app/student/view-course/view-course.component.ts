@@ -718,7 +718,10 @@ if(this.paid){
     const requestBody = {
       studentId,
       assessmentId: assesmentId,
-      answers: payload,
+      courseId: payload.courseId,
+      answers: payload.answers,
+      is_tutorial : payload.is_tutorial   
+
     };
 
     this.studentService.submitAssessment(requestBody).subscribe(

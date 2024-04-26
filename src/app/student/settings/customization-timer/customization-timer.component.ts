@@ -5,28 +5,28 @@ import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { StudentsService } from 'app/admin/students/students.service';
 
-
 @Component({
-  selector: 'app-customization-currency',
-  templateUrl: './customization-currency.component.html',
-  styleUrls: ['./customization-currency.component.scss']
+  selector: 'app-customization-timer',
+  templateUrl: './customization-timer.component.html',
+  styleUrls: ['./customization-timer.component.scss']
 })
-export class CustomizationCurrencyComponent {
+export class CustomizationTimerComponent {
   breadscrums = [
     {
       title: 'Customization',
       items: ['Customize'],
-      active: 'Currency',
+      active: 'Timer',
     },
   ];
-  currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
+  timerValues: string[] = ['15', '30', '45', '60', '90', '120', '150'];
+  
 
-  selectedCurrency: string = "";
+  selectedTimer: string = "";
   dialogRef: any;
   studentId: any;
   configuration: any;
   configurationSubscription!: Subscription;
-  defaultCurrency: string = '';
+  defaultTimer: string = '';
  
   constructor(
     
@@ -50,22 +50,22 @@ export class CustomizationCurrencyComponent {
     this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
       this.configuration = configuration;
       if (this.configuration?.length > 0) {
-        this.defaultCurrency = this.configuration[0].value;
-        this.selectedCurrency = this.defaultCurrency
+        this.defaultTimer = this.configuration[1].value;
+        this.selectedTimer = this.defaultTimer
       }
     });
   }
 
   updateCurrency() {
-    const selectedCurrency = this.selectedCurrency;
-    this.courseService.createCurrency({ value: selectedCurrency }).subscribe(
+    const selectedTimer = this.selectedTimer;
+    this.courseService.createTimer({ value: selectedTimer }).subscribe(
       response => {
         Swal.fire({
           title: 'Successful',
-          text: 'Currency Configuration Success',
+          text: 'Timer Configuration Success',
           icon: 'success'
         });
-        // dialogRef.close(selectedCurrency);
+        // dialogRef.close(selectedTimer);
       },
       error => {
         Swal.fire({
@@ -78,18 +78,19 @@ export class CustomizationCurrencyComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(CustomizationCurrencyComponent, {
+    const dialogRef = this.dialog.open(CustomizationTimerComponent, {
       width: '500px',
-      data: { selectedCurrency: this.selectedCurrency }
+      data: { selectedTimer: this.selectedTimer }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('result: ', result);
 
-        this.selectedCurrency = result;
+        this.selectedTimer = result;
       }
     });
   }
-  
 }
+
+

@@ -196,6 +196,50 @@
               </mat-error>
                   </mat-form-field>
                 </div>
+               
+              
+
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Fees') && isPaid">
+                  <label>Fees <span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="fee" type="number" [readonly]="isInputReadonly()"
+                      placeholder="Enter Fees">
+                      <mat-error
+                      *ngIf="
+                        firstFormGroup.get('fee')?.invalid &&
+                        firstFormGroup.get('fee')?.touched
+                      "
+                    >
+                      {{
+                        utils.getErrorMessage1(firstFormGroup.get("fee"), "fee")
+                      }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Currency') && isPaid">
+                  <label>Currency <span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-select formControlName="currency_code">
+                      <mat-option value="USD" [disabled]="viewUrl == true">USD</mat-option>
+                      <mat-option value="SGD" [disabled]="viewUrl == true">SGD</mat-option>
+                      <mat-option value="NZD" [disabled]="viewUrl == true">NZD</mat-option>
+                      <mat-option value="YEN" [disabled]="viewUrl == true">YEN</mat-option>
+                      <mat-option value="GBP" [disabled]="viewUrl == true">GBP</mat-option>
+                      <mat-option value="KWN" [disabled]="viewUrl == true">KWN</mat-option>
+                      <mat-option value="IDR" [disabled]="viewUrl == true">IDR</mat-option>
+                      <mat-option value="TWD" [disabled]="viewUrl == true">TWD</mat-option>
+                      <mat-option value="MYR" [disabled]="viewUrl == true">MYR</mat-option>
+                      <mat-option value="AUD" [disabled]="viewUrl == true">AUD</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="
+                          firstFormGroup.get('currency_code')?.hasError('required') ||
+                          firstFormGroup.get('currency_code')?.touched
+                          ">
+                      Select Currency
+                    </mat-error>
+                  </mat-form-field>
+                </div>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Days')">
                   <label>Days</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -221,49 +265,6 @@
                     <mat-error
                       *ngIf="firstFormGroup.get('training_hours')?.hasError('pattern') && firstFormGroup.get('training_hours')?.touched">
                       Enter Valid Digits
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              
-
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Fees') && isPaid">
-                  <label>Fees</label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput formControlName="fee" type="number" [readonly]="isInputReadonly()"
-                      placeholder="Enter Fees">
-                      <mat-error
-                      *ngIf="
-                        firstFormGroup.get('fee')?.invalid &&
-                        firstFormGroup.get('fee')?.touched
-                      "
-                    >
-                      {{
-                        utils.getErrorMessage1(firstFormGroup.get("fee"), "fee")
-                      }}
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Currency')">
-                  <label>Currency</label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-select formControlName="currency_code">
-                      <mat-option value="USD" [disabled]="viewUrl == true">USD</mat-option>
-                      <mat-option value="SGD" [disabled]="viewUrl == true">SGD</mat-option>
-                      <mat-option value="NZD" [disabled]="viewUrl == true">NZD</mat-option>
-                      <mat-option value="YEN" [disabled]="viewUrl == true">YEN</mat-option>
-                      <mat-option value="GBP" [disabled]="viewUrl == true">GBP</mat-option>
-                      <mat-option value="KWN" [disabled]="viewUrl == true">KWN</mat-option>
-                      <mat-option value="IDR" [disabled]="viewUrl == true">IDR</mat-option>
-                      <mat-option value="TWD" [disabled]="viewUrl == true">TWD</mat-option>
-                      <mat-option value="MYR" [disabled]="viewUrl == true">MYR</mat-option>
-                      <mat-option value="AUD" [disabled]="viewUrl == true">AUD</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="
-                          firstFormGroup.get('currency_code')?.hasError('required') ||
-                          firstFormGroup.get('currency_code')?.touched
-                          ">
-                      Select Currency
                     </mat-error>
                   </mat-form-field>
                 </div>

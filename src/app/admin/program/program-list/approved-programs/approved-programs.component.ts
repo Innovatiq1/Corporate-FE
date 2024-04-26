@@ -226,7 +226,7 @@ export class ApprovedProgramsComponent {
     });
   }
   viewInActiveProgram(id:string){
-    this.route.navigate(['/admin/program/view-program'],{queryParams:{id:id, status:'active'}});
+    this.route.navigate(['/admin/program/view-program'],{queryParams:{id:id, status:'approved'}});
   }
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;

@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { StudentsService } from 'app/admin/students/students.service';
 import Swal from 'sweetalert2';
 import { AuthenService } from '@core/service/authen.service';
+import { Router } from '@angular/router';
+import { ClassService } from 'app/admin/schedule-class/class.service';
 
 @Component({
   selector: 'app-questions',
@@ -14,6 +16,7 @@ export class QuestionTestComponent implements OnInit, OnDestroy {
   @Input() totalTime!: number;
   @Input() isAnswersSubmitted:boolean = false;
   @Output() submitAnswers: EventEmitter<any> = new EventEmitter<any>();
+  
 
 
   public answers: any = [];
@@ -30,8 +33,19 @@ export class QuestionTestComponent implements OnInit, OnDestroy {
   answerId!: string;
   answerResult!: any;
   isExamStarted:boolean=false;
+  courseId!: string;
 
-  constructor(private studentService: StudentsService, private authenService:AuthenService) {}
+
+  constructor(
+    private studentService: StudentsService,
+    private authenService:AuthenService,
+    private router: Router,
+    private classService : ClassService
+    
+  )  {
+    let urlPath = this.router.url.split('/');
+
+  }
 
   ngOnInit() {
     this.answers = Array.from({ length: this.questionList.length }, () => ({
@@ -39,6 +53,9 @@ export class QuestionTestComponent implements OnInit, OnDestroy {
       selectedOptionText: null,
     }));
     this.user_name = this.authenService.currentUserValue.user.name
+    let urlPath = this.router.url.split('/');
+    this.classId = urlPath[urlPath.length - 1];
+    this.getClassDetails()
   }
 
   startTimer() {
@@ -99,11 +116,22 @@ export class QuestionTestComponent implements OnInit, OnDestroy {
       cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.submitAnswers.next(this.answers)
-    clearInterval(this.interval);
+        const submissionPayload = {
+          answers: this.answers,
+          courseId: this.courseId,
+          is_tutorial: true,
+        };
+        this.submitAnswers.next(submissionPayload);
+        clearInterval(this.interval);
 
       }
     });
+  }
+
+  getClassDetails(){
+    this.classService.getClassById(this.classId).subscribe((response)=>{
+      this.courseId=response.courseId.id
+    })
   }
 
 

@@ -34,6 +34,13 @@
               <!-- <h6>Bulk Upload</h6>
               <input type="file" (change)="onFileSelected($event)" accept=".xlsx, .xls"> -->
             </div>
+            <div class="input-container">
+              <h6 style="margin-left: 25px;">No of Retake's <span class="mandatory">&nbsp;*</span></h6>
+              <mat-form-field appearance="outline" style="width: 100%; margin-left: 30px;">
+                <input matInput formControlName="retake" type="number" placeholder="Enter No of Retakes"
+                [readonly]="true">
+              </mat-form-field>
+            </div>
            
  
           </div>

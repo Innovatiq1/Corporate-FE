@@ -105,6 +105,13 @@ export class CourseService {
         })
       );
   }
+
+  getFilteredProgramData(payload:any, filter:any
+    ):Observable<any> {
+    const apiUrl = `${this.prefix}admin/courseprogram/filter?limit=${filter.limit}&page=${filter.page}`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+
   getAllCoursesWithPagination(
     filter?: Partial<CoursePaginationModel>
   ): Observable<ApiResponse> {
@@ -135,6 +142,17 @@ export class CourseService {
         })
       );
   }
+  getAllProgramsWithoutPagination(filter?: Partial<Program>): Observable<ApiResponse> {
+    const apiUrl = `${this.prefix}admin/courseprogram?status=active&status=inactive`;
+    return this._Http
+      .get<ApiResponse>(apiUrl, { params: this.buildParams(filter)})
+      .pipe(
+        map((response) => {
+          return response.data.docs
+        })
+      );
+  }
+
 
   getCount(
     filter?: Partial<CoursePaginationModel>
@@ -502,6 +520,14 @@ export class CourseService {
       }
       createTimer(currencyData: any): Observable<any> {
         const apiUrl = `${this.prefix}admin/configuration/timer`;
+        return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
+      }
+      createAssessment(currencyData: any): Observable<any> {
+        const apiUrl = `${this.prefix}admin/configuration/assessment`;
+        return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
+      }
+      createExamAssessment(currencyData: any): Observable<any> {
+        const apiUrl = `${this.prefix}admin/configuration/examAssessment`;
         return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
       }
       getStudentClassById(id?: string) {

@@ -139,7 +139,7 @@ export class AllCourseComponent {
     this.getAllCourses();
     this.getAllVendorsAndUsers();
     forkJoin({
-      courses: this.classService.getAllCoursesTitle('active'),
+      courses: this.classService.getAllCourses(),
     }).subscribe((response) => {
       this.courseList = response.courses.reverse();
     });

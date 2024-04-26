@@ -78,9 +78,9 @@
                                   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
                                     <img src="assets/images/icons/filter.png" style="height: 80px; width: 80px;margin-top: 30px;">
                                   </div>
-                                  <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                                    <form [formGroup]="filterForm">
                                     <div class="row">
-                                        <form [formGroup]="filterForm">
                                       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                         <mat-form-field class="example-full-width mb-3"  appearance="outline">
                                           <mat-label>Course</mat-label>
@@ -129,15 +129,14 @@
                                           </mat-select>
                                         </mat-form-field>
                                         </div>
-                                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4" >
-                                        <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2"> -->
-                                          <button mat-raised-button id="submit"(click)="applyFilter()">Apply</button>
-                                          <button mat-raised-button id="submit"(click)="clearFilter()">Clear</button>
-
-                                        <!-- </div> -->
+                                        <div class="col-8 mt-2 d-flex justify-content-end">
+                                          <button mat-raised-button id="submit" (click)="applyFilter()">Apply</button>
+                                          <button mat-raised-button id="back" (click)="clearFilter()">Clear</button>
+                                          
                                       </div>
-                                    </form>
+                                    
                                     </div>
+                                  </form>
                                    
                                   </div>
                                  

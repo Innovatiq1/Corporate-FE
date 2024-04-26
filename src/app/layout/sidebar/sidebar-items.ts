@@ -1839,8 +1839,52 @@ export const SettingsMenu: MenuItem[] = [
         open:false,
         role:[],
         children:[]
+      },
+      {
+        path:'student/settings/timer',
+        title:'Assessment Timer',
+        id:'timer',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/assessment-retake',
+        title:'Assessment Retake',
+        id:'assessment-retake',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
+      },
+      {
+        path:'student/settings/exam-assessment-retake',
+        title:'Exam Assessment Retake',
+        id:'exam-assessment-retake',
+        iconType:'img',
+        icon:'',
+        class:'',
+        badge:'',
+        iconsrc:'',
+        badgeClass:'',
+        groupTitle:false,
+        open:false,
+        role:[],
+        children:[]
       }
-    
     ]
   },
   {

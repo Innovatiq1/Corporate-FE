@@ -17,7 +17,7 @@ export class CreateBudgetComponent {
     {
       title: 'Over All Budget',
       // items: ['Extra'],
-      active: 'Create New Budget',
+      active: 'Create New Budget1',
     },
   ];
   breadscrumsEdit = [
@@ -146,7 +146,7 @@ updateRequest(){
             showConfirmButton: false,
             timer: 1500,
           });
-          this.router.navigate(['/admin/e-tms/overall-budget-list']);
+          this.router.navigate(['/admin/budgets/budget']);
         })
       }
     });
@@ -180,7 +180,7 @@ onSubmit(){
                   text: 'Request created successfully',
                   icon: 'success',
                 });
-                this.router.navigate(['/admin/e-tms/overall-budget-list']);
+                this.router.navigate(['/admin/budgets/budget']);
               }); 
       }
     });

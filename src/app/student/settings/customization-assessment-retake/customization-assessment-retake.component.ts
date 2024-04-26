@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CourseService } from '@core/service/course.service';
@@ -5,28 +6,27 @@ import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { StudentsService } from 'app/admin/students/students.service';
 
-
 @Component({
-  selector: 'app-customization-currency',
-  templateUrl: './customization-currency.component.html',
-  styleUrls: ['./customization-currency.component.scss']
+  selector: 'app-customization-assessment-retake',
+  templateUrl: './customization-assessment-retake.component.html',
+  styleUrls: ['./customization-assessment-retake.component.scss']
 })
-export class CustomizationCurrencyComponent {
+export class CustomizationAssessmentRetakeComponent {
   breadscrums = [
     {
       title: 'Customization',
       items: ['Customize'],
-      active: 'Currency',
+      active: 'Assessment Retake',
     },
   ];
-  currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
+  retakeCodes: string[] = ['1', '2', '3', '4', '5'];
 
-  selectedCurrency: string = "";
+  selectedRetake: string = "";
   dialogRef: any;
   studentId: any;
   configuration: any;
   configurationSubscription!: Subscription;
-  defaultCurrency: string = '';
+  defaultRetake: string = '';
  
   constructor(
     
@@ -50,22 +50,22 @@ export class CustomizationCurrencyComponent {
     this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
       this.configuration = configuration;
       if (this.configuration?.length > 0) {
-        this.defaultCurrency = this.configuration[0].value;
-        this.selectedCurrency = this.defaultCurrency
+        this.defaultRetake = this.configuration[2].value;
+        this.selectedRetake = this.defaultRetake
       }
     });
   }
 
-  updateCurrency() {
-    const selectedCurrency = this.selectedCurrency;
-    this.courseService.createCurrency({ value: selectedCurrency }).subscribe(
+  updateRetake() {
+    const selectedRetake = this.selectedRetake;
+    this.courseService.createAssessment({ value: selectedRetake }).subscribe(
       response => {
         Swal.fire({
           title: 'Successful',
-          text: 'Currency Configuration Success',
+          text: 'Assessment Configuration Success',
           icon: 'success'
         });
-        // dialogRef.close(selectedCurrency);
+        // dialogRef.close(selectedRetake);
       },
       error => {
         Swal.fire({
@@ -78,18 +78,16 @@ export class CustomizationCurrencyComponent {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(CustomizationCurrencyComponent, {
+    const dialogRef = this.dialog.open(CustomizationAssessmentRetakeComponent, {
       width: '500px',
-      data: { selectedCurrency: this.selectedCurrency }
+      data: { selectedRetake: this.selectedRetake }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('result: ', result);
-
-        this.selectedCurrency = result;
+        this.selectedRetake = result;
       }
     });
   }
-  
 }
+

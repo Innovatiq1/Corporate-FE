@@ -34,11 +34,12 @@
                                         <button mat-raised-button color="primary" class="btn">Choose file <input formControlName="documentLink" (change)="onFileUpload($event)" class="file-input" type="file"></button>
                                         <span class="file-msg"><h6>{{uploadedDocument ? uploadedDocument : 'Drag and Drop File Here' }}</h6></span>
                                      </div>
+                                     
                                     </div>
                                 </div>
 
                                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Short Description')">
-                                    <label>Short Description</label>
+                                    <label>Short Description<span class="mandatory">&nbsp;*</span></label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                                         <!-- <mat-label>Course Name</mat-label> -->
 
@@ -51,7 +52,7 @@
                                 </div>
 
                                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Long Description')">
-                                    <label>Long Description</label>
+                                    <label>Long Description<span class="mandatory">&nbsp;*</span></label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                                         <!-- <mat-label>Course Name</mat-label> -->
 
@@ -88,6 +89,9 @@
                                           </div>
                                       </div>
                                       </div>
+                                      <mat-error *ngIf="courseKitForm.get('videoLink')?.hasError('required')">
+                                        Select Vide File
+                                     </mat-error>
                                     </div>
                                     <!-- <app-file-upload formControlName="videoLink" (fileDropped)="onFileDropped($event)" (change)="fileBrowseHandler($event)"></app-file-upload> -->
                                   </div>

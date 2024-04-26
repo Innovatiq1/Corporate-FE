@@ -82,12 +82,18 @@
                                         class="mobile-label">Course Code:</span> {{row.courseCode}}
                                     </mat-cell>
                                   </ng-container>
-                                  <ng-container matColumnDef="creator">
+                                  <!-- <ng-container matColumnDef="creator">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Creator
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)><span
                                         class="mobile-label">Creator:</span> {{row.Creator}}
                                     </mat-cell>
+                                  </ng-container> -->
+                                  <ng-container matColumnDef="Main Category">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Main Category
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)>
+                                      <span class="mobile-label">Main Category:</span>{{row.main_category_text}}</mat-cell>
                                   </ng-container>
                                   <ng-container matColumnDef="Days">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Days

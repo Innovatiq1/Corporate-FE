@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { AssessmentService } from '@core/service/assessment.service';
 import { UtilsService } from '@core/service/utils.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class ExamComponent {
     'Course Name',
     'Submitted Date',
     'Score',
+    'Exam Type',
     'Exam'
    ];
   assessmentPaginationModel!: Partial<AssessmentQuestionsPaginationModel>;
@@ -76,5 +78,44 @@ export class ExamComponent {
           this.selection.select(row)
         );
   }
+
+examType(data:any) {
+  if(data.is_tutorial) {
+    return "Tutorial"
+  } else {
+    return "Assessment"
+  }
+}
+
+onDelete(id: string) {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You are about to delete this tutorial. This action cannot be undone.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.assessmentService.deleteTutorial(id)
+        .subscribe(() => {
+          Swal.fire(
+            'Deleted!',
+            'The tutorial has been deleted successfully.',
+            'success'
+          );
+          this.getAllAnswers();
+        }, (error: any) => {
+          console.error('Error deleting tutorial:', error);
+          Swal.fire(
+            'Error!',
+            'An error occurred while deleting the tutorial.',
+            'error'
+          );
+        });
+    }
+  });
+}
+
 
 }
