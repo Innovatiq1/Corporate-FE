@@ -15,6 +15,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { formatDate } from '@angular/common';
+import { O } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-active-courses',
@@ -189,19 +190,19 @@ export class ActiveCoursesComponent {
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] = this.courseData.map(
       (x: any) => ({
-        'Course Name': x.title,
-        'Course Code': x.courseCode,
+        'Course': x.title,
+        Status: x.status,
+        'Code': x.courseCode,
         'Main Category': x.main_category_text,
-        Duration: x.training_hours,
-        Creator: x.creator,
-        Code: x.courseCode,
-        Days: x.course_duration_in_days,
-        Payment: x.fee + '$',
+        Days: x.course_duration_in_days || 0,
+        Hours: x.training_hours || 0,
+        Vendor: x.vendor,
+        Payment: '$'+x.fee === null ? 0 :x.fee,
         'Start Date':
           formatDate(new Date(x.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
         'End Date':
           formatDate(new Date(x.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
-        Status: x.status,
+       
       })
     );
 
@@ -211,29 +212,32 @@ export class ActiveCoursesComponent {
     const doc = new jsPDF();
     const headers = [
       [
-        ' Course Name',
-        'Duration',
-        'Main Category',
-        'Creator',
+        'Course',
+        'Status     ',
         'Code',
+        'Main Category',
         'Days',
+        'Hours',
+        'Vendor',
         'Payment',
-        'Start Date',
-        'End Date',
-        'Status',
+        'Start Date   ',
+        'End Date    ',
+        
+        
       ],
     ];
     const data = this.courseData.map((x: any) => [
       x.title,
-      x.training_hours,
-      x.main_category_text,
-      x.creator,
+      x.status === 'active' ? 'Approved' : 'Pending',
       x.courseCode,
+      x.main_category_text,
       x.course_duration_in_days,
-      x.fee + '$',
+      x.training_hours,
+      x.vendor,
+      '$'+x.fee === null ? '0' : x.fee,
       formatDate(new Date(x.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
       formatDate(new Date(x.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
-      x.status,
+      
     ]);
     //const columnWidths = [60, 80, 40];
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];

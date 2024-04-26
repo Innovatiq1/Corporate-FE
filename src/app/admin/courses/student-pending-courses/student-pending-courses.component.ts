@@ -261,14 +261,15 @@ export class StudentPendingCoursesComponent {
     //k//ey name with space add in brackets
    const exportData: Partial<TableElement>[] =
       this.dataSource.map((user:any) => ({
-        'Student Name': user.studentId?.name,
-        'Course Name': user.classId?.courseId?.title,
+        'Student': user.studentId?.name,
+        Status:  user.status === 'inactive' ? 'Pending' : '',
+        'Course': user.classId?.courseId?.title,
         'Course Fee': user.classId?.courseId?.fee,
         'Instructor Fee': user.classId?.instructorCost,
         'Start Date': user.classStartDate,
         'End Date': user.classEndDate,
-        'Registered On': user.registeredOn,
-        Status: user.status,
+        'Registered On':  formatDate(new Date(user.registeredOn), 'yyyy-MM-dd', 'en') || '',
+        
       }));
     TableExportUtil.exportToExcel(exportData, 'excel');
   }
@@ -277,17 +278,19 @@ export class StudentPendingCoursesComponent {
     const doc = new jsPDF();
     const headers = [
       [
-        'Student Name',
-        'Course Name',
+        'Student',
+        'Status',
+        'Course',
         'Course Fee',
         'Instructor Fee',
-        'Start Date',
-        'End date',
+        'Start Date  ',
+        'End date  ',
         'Registered Date',
       ],
     ];
     const data = this.dataSource.map((user: any) => [
       user.studentId?.name,
+      user.status === 'inactive' ? 'Pending' : '',
       user.classId?.courseId?.title,
       user.classId?.courseId?.fee,
       user.classId?.instructorCost,

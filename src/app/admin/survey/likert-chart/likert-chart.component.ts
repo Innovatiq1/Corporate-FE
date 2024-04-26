@@ -23,6 +23,7 @@ import Swal from 'sweetalert2';
 import { SurveyService } from '../survey.service';
 import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-likert-chart',
@@ -143,7 +144,7 @@ export class LikertChartComponent {
       this.dataSource.map((x:any) => ({
         'Name': x.name,
         'No.of Questions': x.questions.length,
-        'Created At': x.createdAt,
+        'Created At': formatDate(new Date( x.createdAt), 'yyyy-MM-dd', 'en') || '',
        
       }));
 
@@ -158,7 +159,7 @@ export class LikertChartComponent {
     const data = this.dataSource.map((user: any) => [
       user.name,
       user.questions.length,
-      user.createdAt,
+      formatDate(new Date( user.createdAt), 'yyyy-MM-dd', 'en') || '',
     ]);
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
     (doc as any).autoTable({
