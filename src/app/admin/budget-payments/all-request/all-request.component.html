@@ -2,12 +2,9 @@
     <div class="content-block">
       <div class="block-header" *ngFor="let breadscrum of breadscrums">
         <!-- breadcrumb -->
-        <app-breadcrumb
-          [title]="breadscrum.title"
-          [active_item]="breadscrum.active"
-        >
-        </app-breadcrumb>
-      </div>
+       <app-breadcrumb [items]="breadscrum.items" [active_item]="breadscrum.active">
+       </app-breadcrumb> 
+     </div>
   
       <!-- Search-btns -->
       <div>

@@ -21,7 +21,8 @@ export class AllRequestComponent {
 
   breadscrums = [
     {
-      title: 'Approval Work Flow',
+      title: 'ETMS',
+      items: ['Finance'],
       active: 'All Requests',
     },
   ];

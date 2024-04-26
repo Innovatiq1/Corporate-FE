@@ -24,7 +24,7 @@ implements OnInit
     {
       title: 'Budget',
       items: ['Finance'],
-      active: 'Department Budget Request',
+      active: 'Department Budget Approval',
     },
   ];
 ro = false;
