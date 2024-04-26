@@ -166,19 +166,18 @@ export class AllCourseComponent {
   exportExcel() {
     const exportData: Partial<TableElement>[] = this.courseData.map(
       (x: any) => ({
-        'Course Name': x.title,
+        'Course': x.title,
+        Status: x.status=== 'active' ? 'Approved' : 'Pending',
         'Course Code': x.courseCode,
-        Duration: x.training_hours,
         Creator: x.creator,
-        Code: x.courseCode,
-        Days: x.course_duration_in_days,
-        Payment: x.fee + '$',
+        Days: x.course_duration_in_days || 0,
+        Hours: x.training_hours || 0,
+        Payment:'$'+x.fee === null ? 0 : x.fee,
         'Start Date':
           formatDate(new Date(x.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
         'End Date':
           formatDate(new Date(x.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
         Vendor: x.vendor,
-        Status: x.status,
       })
     );
 
@@ -236,29 +235,31 @@ export class AllCourseComponent {
     const doc = new jsPDF();
     const headers = [
       [
-        ' Course Name',
-        'Duration',
+        'Course',
+        'Status     ',
+        'Course Code',
         'Creator',
-        'Code',
         'Days',
+        'Hours',
         'Payment',
-        'Start Date',
-        'End Date',
-        'Vendor',
-        'Status',
+        'Start Date ',
+        'End Date   ',
+        'Vendor  ',
+        
       ],
     ];
     const data = this.courseData.map((x: any) => [
       x.title,
-      x.training_hours,
-      x.creator,
+      x.status === 'active' ? 'Approved' : 'Pending',
       x.courseCode,
-      x.course_duration_in_days,
-      x.fee + '$',
+      x.creator,
+      x.course_duration_in_days ||0,
+      x.training_hours ||0,
+      '$'+x.fee === null ? '0' : x.fee,
       formatDate(new Date(x.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
       formatDate(new Date(x.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
       x.vendor,
-      x.status,
+      
     ]);
     //const columnWidths = [60, 80, 40];
     const columnWidths = [50, 20, 30, 20, 20, 20, 30, 30, 30, 20];
