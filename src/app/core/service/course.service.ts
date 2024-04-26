@@ -554,6 +554,22 @@ export class CourseService {
         const apiUrl = `${this.prefix}auth/instructorDelete/${userId}`;
         return this._Http.delete<ApiResponse>(apiUrl);
       }
+
+      saveReport(formData:any): Observable<ApiResponse> {
+        const apiUrl = `${this.prefix}admin/reports`;
+        return this._Http.post<ApiResponse>(apiUrl, formData);
+      }
+
+      getAllSavedReports(
+        filter?: Partial<any>
+      ): Observable<ApiResponse> {
+        const apiUrl = `${this.prefix}admin/reports`;
+        return this._Http.get<ApiResponse>(apiUrl, {
+          params: this.buildParams(filter),
+        });
+      }
+  
+    
 }
 
 

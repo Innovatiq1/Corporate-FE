@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
+import { Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { AdminService } from '@core/service/admin.service';
 import { CourseService } from '@core/service/course.service';
@@ -13,6 +14,7 @@ import 'jspdf-autotable';
 
 
 import { forkJoin } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-genereate-report',
@@ -59,6 +61,7 @@ export class GenereateReportComponent {
     private classService: ClassService,
     private adminService: AdminService,
     public utils: UtilsService,
+    private router: Router,
     private fb: FormBuilder,) {
       this.coursePaginationModel = {};
       this.reportForm = this.fb.group({
@@ -171,20 +174,37 @@ export class GenereateReportComponent {
         startY: 20,
       });
       doc.save('Report.pdf');
-      const blob = doc.output('blob'); // Convert PDF to Blob
-      const formData = new FormData();
-      formData.append('file', blob, 'Report.pdf');
-      console.log('formData',formData)
-        this.courseService.saveVideo(formData).subscribe((data) => {
-          console.log('reportdata',data)
-        })
-
-      
+      const blob = doc.output('blob');
+      const file = new File([blob], 'Report.pdf', { type: 'application/pdf' });
+      const event = { target: { files: [file] } };
+      this.onFileUpload(event);      
     })
 
   }
   
+  onFileUpload(event: any) {
+    const file = event.target.files[0];
+    const formdata = new FormData();
+    formdata.append('doc_filename', file.name);
+    formdata.append('files',file);
+      this.courseService.saveVideo(formdata).subscribe((data) => {
+        let payload ={
+          report:data?.data?.document,
+          reportName:data?.data?.doc_filename,
+        }
 
+        this.courseService.saveReport(payload).subscribe((data) => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Report saved successfully.',
+            icon: 'success',
+          });
+          this.router.navigate(['/admin/reports/report'])
+
+        })
+      })
+
+  }
   toggleAllSelection() {
     if (this.allSelected.selected) {
       this.reportForm.controls['userGroupId']
