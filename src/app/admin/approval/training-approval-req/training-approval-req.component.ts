@@ -20,9 +20,9 @@ export class TrainingApprovalReqComponent extends UnsubscribeOnDestroyAdapter
 implements OnInit{
   breadscrums = [
     {
-      title: 'ETMS',
-      items: [''],
-      active: 'Training Approval Request ',
+      title: 'TMS',
+      items: ['Finance'],
+      active: 'Training Approval Request',
     },
   ];
   ro = false;

@@ -20,13 +20,13 @@ import { EditDeptBudgetRequestComponent } from './edit-dept-budget-request/edit-
 export class DeptBudgetRequestComponent extends UnsubscribeOnDestroyAdapter
 implements OnInit
 {
-breadscrums = [
-  {
-    title: 'ETMS',
-    items: [''],
-    active: 'Department Budget Request ',
-  },
-];
+  breadscrums = [
+    {
+      title: 'Budget',
+      items: ['Finance'],
+      active: 'Department Budget Request',
+    },
+  ];
 ro = false;
 payload = {};
 director = false;

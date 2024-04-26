@@ -8,7 +8,7 @@ export class TrainingReqestComponent {
   breadscrums = [
     {
       title: 'Blank',
-      // items: ['Extra'],
+      items: ['Finance'],
       active: 'Training Request',
     },
   ];

@@ -36,8 +36,8 @@ export class EmployeeStatusComponent {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   breadscrums = [
     {
-      title: 'Approval Work Flow ',
-      // items: ['Extra'],
+      title: 'Programs',
+      items: ['Finance'],
       active: 'Training Request',
     },
   ];

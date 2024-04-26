@@ -124,7 +124,7 @@ export class BudgetComponent {
   breadscrums = [
     {
       title: 'Over All Budget',
-      // items: ['Extra'],
+       items: ['Finance'],
       active: 'Over All Budget List',
     },
   ];
