@@ -145,7 +145,7 @@ export class DeptBudgetAllocationComponent implements OnInit{
           const index: number = this.dataSource.findIndex(
             (d: CourseModel) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          
           this.courseService?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<CourseModel>(true, []);
@@ -186,7 +186,7 @@ export class DeptBudgetAllocationComponent implements OnInit{
   generatePdf() {
     const doc = new jsPDF();
     const headers = [[' Department Name','Percentage Allocated', 'By Value', 'Budget Allocated']];
-    console.log(this.dataSource)
+    
     const data = this.dataSource.map((x:any) =>
       [x.department,
         x.percentage,

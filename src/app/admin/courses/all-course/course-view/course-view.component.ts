@@ -152,7 +152,7 @@ back() {
       });
   }
   playVideo(video: { video_url: any; }): void {
-    console.log('Video',video)
+    
     if (video?.video_url) {
       this.openVidePlayer(video);
     } else {

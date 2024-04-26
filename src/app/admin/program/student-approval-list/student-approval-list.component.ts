@@ -72,7 +72,7 @@ export class StudentApprovalListComponent {
       .getApprovedProgramClasses(this.studentPaginationModel.page, this.studentPaginationModel.limit)
       .subscribe((response: { data: StudentPaginationModel; }) => {
         this.isLoading = false;
-        // console.log(response.data.docs)
+        // 
         this.studentPaginationModel = response.data;
       this.dataSource = response.data.docs;
       this.totalPages = response.data.totalDocs;
@@ -417,7 +417,7 @@ export class StudentApprovalListComponent {
           const index: number = this.dataSource.findIndex(
             (d: CourseModel) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          
           this.courseService?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<CourseModel>(true, []);

@@ -8,6 +8,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { ReportsRoutingModule } from './reports-routing.module';
 import { ReportsComponent } from './reports/reports.component';
+import { GenereateReportComponent } from './genereate-report/genereate-report.component';
 
 
 
@@ -18,7 +19,8 @@ import { ReportsComponent } from './reports/reports.component';
     
 
   
-    ReportsComponent
+    ReportsComponent,
+                     GenereateReportComponent
   ],
   imports: [
     CommonModule,

@@ -53,14 +53,13 @@ export class AddComponent {
   
   ngOnInit(): void {
      this.userType = localStorage.getItem('user_type');
-    console.log("userType: " + this.userType);
     forkJoin({
       courses: this._classService.getAllCoursesTitle('active'),
       // instructors: this.instructorService.getInstructor(),
       //labs: this._classService.getAllLaboratory(),
     }).subscribe((response) => {
       this.courseList = response.courses.reverse();
-      console.log(this.courseList, 'cList');
+      
       // this.instructorList = response.instructors;
       //this.labList = response.labs;
 
@@ -71,19 +70,15 @@ export class AddComponent {
     onEndTimeChange(event: any) {
       this.startTime=event.value
       // Handle the end time change event
-      console.log('End Time Changed:', event.value);
       // You can perform additional actions based on the selected end time
     }
     onEndTimeChange1(event: any) {
       this.endTime=event.value
-      // Handle the end time change event
-      console.log('End Time Changed:', event);
-      console.log("==test=",this.examsheduleForm.get('startDate')?.value)
       const startTime = this.examsheduleForm.get('startDate')?.value;
       const endTime = this.examsheduleForm?.get('endDate')?.value;
   
       if (startTime && endTime) {
-        console.log("==startTime=",startTime)
+        
         const timeDifference= this.calculateTimeDifference(startTime, endTime);
         console.log("timeDifference",timeDifference)
         this.examsheduleForm.get('duration')?.setValue(timeDifference);
@@ -117,15 +112,10 @@ export class AddComponent {
 
     }
     onSelectChange(event :any) {
-      // console.log("this.classForm.controls['instructor'].value",this.classForm.controls['courseId'].value)
       this.courseService.getCourseById(this.examsheduleForm.controls['courseId'].value).subscribe((response) => {
-         console.log("-==========",response)
         // this.router.navigateByUrl(`Schedule Class/List`);
         this.courseTitle=response.title
         this.courseCode=response.courseCode
-  
-  
-        // console.log(response)
        });
   
      }
@@ -143,7 +133,6 @@ export class AddComponent {
      fomdata['endDate']=fomdata.endDate,
      fomdata['startTime']= start,
      fomdata['endTime']= end,
-    //  console.log()
 
     Swal.fire({
       title: 'Are you sure?',

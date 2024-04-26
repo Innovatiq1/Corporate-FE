@@ -58,9 +58,6 @@ export class ForgotPasswordComponent {
   getForgetPasswordTemplate() {
     this.emailConfigurationService.getForgetPasswordTemplate().subscribe( response =>{
       this.assignData  = response?.data?.docs[0]?.forget_password_template;
-
-      console.log(this.assignData,"dataofEmail")
-      // this.ref.detectChanges();
      
     }, error => {
       // this.isLoading = false;

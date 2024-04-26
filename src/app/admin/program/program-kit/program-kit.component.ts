@@ -200,7 +200,7 @@ export class ProgramKitComponent {
   }
   submitCourseKit(): void {
     this.isSubmitted = true
-    console.log("=========", this.courseKitForm)
+    
     if (this.courseKitForm.valid) {
       const courseKitData: CourseKit = this.courseKitForm.value;
       const loader = Swal.fire({
@@ -426,7 +426,7 @@ export class ProgramKitComponent {
       const index: number = this.dataSource.findIndex(
         (d: CourseModel) => d === item
       );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+      
       this.courseService?.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<CourseModel>(true, []);

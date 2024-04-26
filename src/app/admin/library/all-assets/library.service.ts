@@ -59,12 +59,12 @@ export class LibraryService extends UnsubscribeOnDestroyAdapter {
     //     });
   }
   deleteLibrary(id: number): void {
-    console.log(id);
+    
 
     // this.httpClient.delete(this.API_URL + id)
     //     .subscribe({
     //       next: (data) => {
-    //         console.log(id);
+    //         
     //       },
     //       error: (error: HttpErrorResponse) => {
     //          // error code here

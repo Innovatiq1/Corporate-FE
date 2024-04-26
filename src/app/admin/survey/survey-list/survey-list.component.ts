@@ -130,7 +130,7 @@ export class SurveyListComponent
     }).then((result) => {
       if (result.isConfirmed) {
         this.surveyService.deleteSurveyBuilders(id).subscribe((response) => {
-          console.log(response);
+          
           if (response.success) {
             Swal.fire('Deleted!', 'Survey entry has been deleted.', 'success');
             this.loadData();
@@ -142,7 +142,7 @@ export class SurveyListComponent
   generatePdf() {
     const doc = new jsPDF();
     const headers = [['Student Name','Course/Program Name' ]];
-    console.log(this.dataSource);
+    ;
     const data = this.dataSource.filteredData.map((user: any) => [
       user.studentFirstName,
       user.courseName,
@@ -183,7 +183,7 @@ export class SurveyListComponent
       const index: number = this.dataSource.renderedData.findIndex(
         (d) => d === item
       );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+      
       this.exampleDatabase?.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<SurveyBuilderModel>(true, []);

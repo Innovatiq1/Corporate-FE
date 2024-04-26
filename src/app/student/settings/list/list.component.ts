@@ -134,7 +134,7 @@ export class ListComponent {
   generatePdf() {
     const doc = new jsPDF();
     const headers = [[' Title','User Role']];
-    console.log(this.dataSource)
+    
     const data = this.dataSource.map((x:any) =>
       [x.subject,
         x.announcementFor,

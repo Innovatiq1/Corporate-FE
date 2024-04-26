@@ -168,7 +168,6 @@ ngOnInit(): void {
   }
   submitCourseKit(): void {
     this.isSubmitted = true
-    console.log("=========", this.courseKitForm)
     if (this.courseKitForm.valid) {
       const courseKitData: CourseKit = this.courseKitForm.value;
       const loader = Swal.fire({

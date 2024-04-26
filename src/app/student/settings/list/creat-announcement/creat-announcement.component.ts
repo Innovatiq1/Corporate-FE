@@ -163,7 +163,7 @@ cancel(){
           announcementFor: formData?.announcementFor.toString().replace(',',' / '),
           isActive: formData?.isActive,
         }
-        // console.log(payload)
+        // 
         Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to create announcement!',

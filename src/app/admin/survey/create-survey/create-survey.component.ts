@@ -121,7 +121,7 @@ export class CreateSurveyComponent {
     }).then((result) => {
       if (result.isConfirmed){
         this.surveyService.deleteSurveyBuilders(id).subscribe(response => {
-          console.log(response);
+          
           if (response.success){
             Swal.fire(
               'Deleted!',

@@ -302,11 +302,8 @@ export class ScheduleClassComponent {
   }
 
   performSearch() {
-    console.log(this.dataSource)
-    console.log(this.searchTerm)
     if(this.searchTerm){
     this.dataSource = this.dataSource?.filter((item: any) =>{
-      console.log("vv", item)
       const search = (item.courseId?.title).toLowerCase()
       return search.indexOf(this.searchTerm.toLowerCase())!== -1;
 

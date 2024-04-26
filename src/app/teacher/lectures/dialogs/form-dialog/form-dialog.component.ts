@@ -40,7 +40,6 @@ export class FormDialogComponent {
     private fb: UntypedFormBuilder
   ) {
     // Set the defaults
-    console.log("Setting defaults",data.lectures.sessions[0]._id)
     this.action = data.action;
     this.program = data.program
     if (this.action === "edit") {
@@ -77,7 +76,6 @@ export class FormDialogComponent {
     });
   }
   submit() {
-    console.log("====gopal====")
     // emppty stuff
   }
   onNoClick(): void {
@@ -88,15 +86,12 @@ export class FormDialogComponent {
     let data=this.lecturesForm.value
     data['classId']=this.classId
     data['_id']=this._id
-    
-    console.log("====fopa====",data);
     if(this.program){
       this.lecturesService.updateProgramLectures(data);
     }else {
       this.lecturesService.updateLectures(data);
 
     }
-    //console.log("==data1=",data1)
     //this.lecturesService.addLectures(this.lecturesForm.getRawValue());
   }
 }

@@ -106,9 +106,6 @@ export class DashboardComponent implements OnInit {
     let instructorId = localStorage.getItem('id');
     this.lecturesService.getClassListWithPagination(instructorId, '').subscribe(
       (response) => {
-        //console.log("this",response.data.ssions)
-        console.log('=======');
-
         this.dataSource1 = response.data.docs;
         //this.dataSource1 = response.data.sessions;
         // this.totalItems = response.data.totalDocs
@@ -129,9 +126,6 @@ export class DashboardComponent implements OnInit {
       .getClassListWithPagination1(instructorId, '')
       .subscribe(
         (response) => {
-          //console.log("this",response.data.ssions)
-          console.log('=======');
-
           this.programData = response.data.docs;
           //this.dataSource1 = response.data.sessions;
           // this.totalItems = response.data.totalDocs
@@ -147,32 +141,24 @@ export class DashboardComponent implements OnInit {
       );
   }
   getSession() {
-    console.log('Session', this.dataSource1);
     if (this.dataSource1) {
       this.dataSource1 &&
         this.dataSource1?.forEach((item: any, index: any) => {
-          console.log('item', item.sessions);
-          //console.log("====seession====",item.sessions[0].instructorId)
-
           if (
             item.sessions[0] &&
             item.sessions[0]?.courseName 
           ) {
-            // console.log("=======gopal=")
             let starttimeObject = moment(
               item.sessions[0].sessionStartTime,
               'HH:mm'
             );
             let endtimeObject = moment(item.sessions[0].sessionEndTime, "HH:mm");
-            console.log(starttimeObject,"++++");
             const duration = moment.duration(
               moment(item.sessions[0].sessionEndDate).diff(
                 moment(item.sessions[0].sessionStartDate)
               )
             );
             let daysDifference = duration.asDays() + 1;
-            // console.log("items",item)
-            //console.log("====item.sessions[0].courseName=====",item.sessions[0].courseName)
             this.labels.push(item.sessions[0].courseName);
             this.series?.push(daysDifference);
             this.dataSource?.push({
@@ -194,7 +180,6 @@ export class DashboardComponent implements OnInit {
           this.weekLecture();
         });
       //this.cdr.detectChanges();
-      //console.log("ssssssssssss",this.dataSource)
       //this.myArray.push(newItem);
       //this.myArray.data = this.dataSource;
     }
@@ -202,7 +187,6 @@ export class DashboardComponent implements OnInit {
   }
   getSession1() {
     if (this.programData) {
-      // console.log('========');
       this.programData &&
         this.programData?.forEach((item: any, index: any) => {
           if (
@@ -210,7 +194,6 @@ export class DashboardComponent implements OnInit {
             item.sessions[0]?.courseName &&
             item.sessions[0]?.courseCode
           ) {
-            // console.log("=======gopal=")
             let starttimeObject = moment(
               item.sessions[0].sessionStartTime,
               'HH:mm'
@@ -223,7 +206,6 @@ export class DashboardComponent implements OnInit {
               )
             );
             let daysDifference = duration.asDays() + 1;
-            //console.log("====item.sessions[0].courseName=====",item.sessions[0].courseName)
             this.programLabels.push(item.sessions[0].courseName);
             this.programSeries?.push(daysDifference);
             this.programFilterData?.push({
@@ -246,7 +228,6 @@ export class DashboardComponent implements OnInit {
           this.weekProgramLecture();
         });
       //this.cdr.detectChanges();
-      //console.log("ssssssssssss",this.dataSource)
       //this.myArray.push(newItem);
       //this.myArray.data = this.dataSource;
     }
@@ -257,11 +238,6 @@ export class DashboardComponent implements OnInit {
       this.currentProgramRecords = this.filterRecordsByCurrentDate(
         this.programFilterData
       );
-      // console.log(
-      //   '=testGopal=',
-      //   this.filterRecordsByCurrentDate(this.programFilterData)
-      // );
-      // console.log("====currentRecords==",currentRecords)
     }
   }
   weekProgramLecture() {
@@ -275,7 +251,6 @@ export class DashboardComponent implements OnInit {
   todayLecture() {
     if (this.dataSource) {
       this.currentRecords = this.filterRecordsByCurrentDate(this.dataSource);
-      // console.log("====currentRecords==",currentRecords)
     }
   }
   weekLecture() {
@@ -286,13 +261,10 @@ export class DashboardComponent implements OnInit {
     }
   }
   filterRecordsForCurrentWeek(records: any[]) {
-    // console.log('====recordshao===', records);
     const { startOfWeek, endOfWeek } = this.getCurrentWeekDates();
     return records.filter((record) => {
       const recordStartDate = new Date(record.sessionStartDate);
       const recordEndDate = new Date(record.sessionEndDate);
-
-      // Check if there's any overlap between the current week and the record's start and end dates
       return recordStartDate <= endOfWeek && recordEndDate >= startOfWeek;
     });
   }
@@ -420,9 +392,6 @@ export class DashboardComponent implements OnInit {
     };
   }
   private chart2() {
-    console.log('===datasorce==', this.dataSource);
-    console.log('series', this.series);
-    console.log('labels', this.labels);
     this.pieChartOptions = {
       series: this.series,
       chart: {
@@ -445,9 +414,6 @@ export class DashboardComponent implements OnInit {
     };
   }
   private chart3() {
-    //console.log("===datasorce==",this.dataSource)
-    console.log('series', this.series);
-    console.log('labels', this.labels);
     this.pieChartOptions1 = {
       series: this.programSeries,
       chart: {

@@ -117,7 +117,6 @@ export class EAttendanceComponent {
         .subscribe((response: any) => {
         this.courseData = response.data.data;
         this.dataSource=response.data.data;
-        console.log('dataaa',this.dataSource)
           this.totalItems = response.data.totalDocs;
   
         })

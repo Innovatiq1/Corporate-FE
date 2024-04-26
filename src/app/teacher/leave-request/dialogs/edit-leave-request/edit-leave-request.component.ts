@@ -85,13 +85,11 @@ export class EditLeaveRequestComponent {
     this.dialogRef.close();
   }
   public confirmAdd(): void {
-    console.log("====fopa====")
     let data=this.leaveRequestForm.value
     //data['classId']=this.classId
     //data['_id']=this.id
     //this.lecturesService.updateLectures(data);
     this.leaveRequestService.updateLeaveRequest(data,this._id)
-    //console.log("==data1=",data1)
     //this.lecturesService.addLectures(this.lectuthisresForm.getRawValue());
   }
   // public confirmAdd(): void {

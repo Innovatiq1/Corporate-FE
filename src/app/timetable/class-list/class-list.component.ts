@@ -168,7 +168,6 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
           const index: number = this.dataSource.findIndex(
             (d: ClassModel) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
           this._classService?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<ClassModel>(true, []);
@@ -190,7 +189,7 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
   }
   //delete
   delete(id: string) {
-    console.log(id)
+    
     this._classService.getClassList({ courseId: id }).subscribe((classList: any) => {
       const matchingClasses = classList.docs.filter((classItem: any) => {
         return classItem.courseId && classItem.courseId.id === id;
@@ -229,8 +228,8 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
     });
   }
   performSearch() {
-    console.log(this.dataSource)
-    console.log(this.searchTerm)
+    
+    
     if(this.searchTerm){
     this.dataSource = this.dataSource?.filter((item: any) =>
     // console.log(item.courseId?.title)

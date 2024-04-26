@@ -52,7 +52,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((params) => {
       this._id = params['id'];
       this.action = params['action'];
-      console.log(this.action);
+      
     });
 
     let urlPath = this.router.url.split('/');
@@ -126,7 +126,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
       .getAllDepartments({ status: 'active' })
       .subscribe((data: any) => {
         this.department = data.data.docs;
-        console.log('data.data.docs,', this.department);
+        
       });
   }
 
@@ -173,7 +173,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
     let userId = localStorage.getItem('id');
 
     this.etmsService.getUserId(userId).subscribe((response: any) => {
-      console.log("response", response)
+      
       this.directorId = response.director,
         this.employeName = response?.name +
         ' ' +
@@ -215,7 +215,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
 
 
     }
-    console.log(payload)
+    
     Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to create department!',
@@ -228,7 +228,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
 
 
         this.etmsService.createDept(payload).subscribe(data => {
-          console.log(data);
+          
           if (data) {
             Swal.fire({
               icon: 'success',
@@ -269,7 +269,7 @@ export class CreateDepartmentBudgetComponent implements OnInit {
   
   editRequest() {
     this.etmsService.getDeptBudgetById(this._id).subscribe((res: any) => {
-      console.log("data", res);
+      
   
       this.departmentForm.patchValue({
         department: res.departmentName,
@@ -302,7 +302,7 @@ updateRequest(){
   }).then((result) => {
     if (result.isConfirmed){
       this.etmsService.updateBudget(this._id,payload).subscribe(data =>{
-        console.log(data);
+        
         if(data){
           Swal.fire({
             icon:'success',

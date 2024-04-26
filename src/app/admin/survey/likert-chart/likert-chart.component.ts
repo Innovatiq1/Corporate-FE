@@ -154,7 +154,7 @@ export class LikertChartComponent {
   generatePdf() {
     const doc = new jsPDF();
     const headers = [['Name','No.of Questions','Created At' ]];
-    console.log(this.dataSource);
+    ;
     const data = this.dataSource.map((user: any) => [
       user.name,
       user.questions.length,

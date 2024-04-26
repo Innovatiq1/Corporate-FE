@@ -106,7 +106,6 @@ export class CourseApprovalComponent {
             this.coursePaginationModel.limit = response.data.limit;
             this.coursePaginationModel.totalDocs = response.data.totalDocs;
             this.dataSource=response.data.docs;
-            console.log("submit",this.dataSource);
             this.totalItems=response.data.totalDocs
             this.mapCategories();
                   }, (error) => {    
@@ -195,7 +194,6 @@ export class CourseApprovalComponent {
           const index: number = this.dataSource.findIndex(
             (d: CourseModel) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
           this.courseService?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<CourseModel>(true, []);
@@ -213,11 +211,8 @@ export class CourseApprovalComponent {
   }
   //search functinality
   performSearch() {
-    console.log(this.dataSource)
-    console.log(this.searchTerm)
     if(this.searchTerm){
     this.dataSource = this.dataSource?.filter((item: any) =>{   
-      console.log("vv", item)
       const search = (item.main_category_text + item.sub_category_text + item.title).toLowerCase()
       return search.indexOf(this.searchTerm.toLowerCase())!== -1;
       
@@ -246,7 +241,6 @@ export class CourseApprovalComponent {
   generatePdf() {
     const doc = new jsPDF();
     const headers = [['Course Name','Course Code','Main Category','Sub Category','Fees']];
-    console.log(this.dataSource)
     const data = this.dataSource.map((user:any) =>
       [user.title,
         user.courseCode,

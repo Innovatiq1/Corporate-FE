@@ -341,7 +341,6 @@ export class CreateClassComponent {
   getSession() {
     let sessions: any = [];
     this.dataSource.forEach((item: any, index: any) => {
-      console.log("items", item)
       if (
         this.isInstructorFailed == 0 &&
         item.instructor != '0'

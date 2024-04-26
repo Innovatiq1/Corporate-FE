@@ -129,7 +129,7 @@ export class SigninComponent
           )
   }
   setLanguage(event: any) {  
-    console.log("=======",event)
+    
     // this.countryName = text;
     // this.flagvalue = flag;
     this.langStoreValue = event.target.value;

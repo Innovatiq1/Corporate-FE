@@ -40,7 +40,7 @@ export class ViewCoursePaymentComponent {
   ) {
     this.activeRoute.queryParams.subscribe(id => {
   this.paymentid = id['id'] 
-  console.log('id', this.paymentid)})
+})
   }
 
   ngOnInit():void{
@@ -50,7 +50,6 @@ export class ViewCoursePaymentComponent {
   getAllCourse(){
     this.courseService.getAllPaymentsById(this.paymentid).subscribe(response =>{
     this.dataSource = response;
-    console.log("res", this.dataSource.course)
     this.course = this.dataSource.course;
     this.createdAt = this.dataSource.createdAt;
     this.paymentType = this.dataSource.paymentType;

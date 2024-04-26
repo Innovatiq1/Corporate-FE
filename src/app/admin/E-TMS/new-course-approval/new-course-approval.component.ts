@@ -72,7 +72,7 @@ constructor(
   } else if (user.user.type == 'Director') {
     this.director = true;
   } else if (user.user.type == 'Training Administrator') {
-    console.log('user',user.user.type);
+    
     this.trainingAdmin = true;
 
     
@@ -257,8 +257,8 @@ reject(row: any) {
 // getCount(){
 //   let userId = localStorage.getItem('id');
 //   let userRole = localStorage.getItem('user_type');
-// console.log("userId = " + userId);
-// console.log("userRole = " + userRole);
+// 
+// 
 // if(userRole == "Director"){
 //   this.etmsService.getDeptBudgetRequestDirectorCount(userId).subscribe(res =>{
 //     this.approved = res.data.docs.budgetRequestApproved;
