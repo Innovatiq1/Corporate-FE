@@ -155,8 +155,13 @@ export class CreateSurveyComponent {
   getSurveyById(id:any){
     this.surveyService.getSurveyBuildersById(id).subscribe((response:any) => {
       this.courseName = response.data.courseName;
-      this.studentFirstName = response.data.studentFirstName;
-      this.studentLastName = response.data.studentLastName
+      if(response.data.studentId){
+        this.studentFirstName = response.data.studentId.name;
+        this.studentLastName = response.data.studentId.last_name;
+      }else{
+        this.studentFirstName = response.data.studentFirstName;
+        this.studentLastName = response.data.studentLastName;
+      }
       // this.selectedIndex = response.data.question5;
       // this.question6 = response.data.question6;
       this.questionList = response?.data?.selectedOptions;

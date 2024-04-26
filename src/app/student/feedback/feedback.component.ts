@@ -163,7 +163,7 @@ export class FeedbackComponent {
   }
   submitFeedback(event:any){
     const studentId = localStorage.getItem('id');
-    const userData = this.userDetails.user.name;
+    const userData = this.userDetails;
     const studentFirstName = userData?.user?.name;
     const studentLastName = userData?.user?.last_name;
     const payload = {
@@ -322,6 +322,19 @@ skipCallback(){
     this.questionList = response?.survey?.questions;
     const survey = response?.survey;
       this.feedbackInfo = survey
+      ? {
+          name: survey?.name,
+          id: survey?.id,
+          questions: survey?.questions?.map((question: any) => ({
+            questionText: question?.questionText,
+            type: question?.type,
+            isMandatory: question?.isMandatory,
+            maxRating: question?.maxRating,
+            options:
+              question?.options?.map((option: any) => option.text) || null,
+          })),
+        }
+      : null;
     this.courseName = response?.title
   })
 }
