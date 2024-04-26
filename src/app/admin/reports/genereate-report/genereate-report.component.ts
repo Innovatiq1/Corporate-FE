@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
@@ -163,8 +164,8 @@ export class GenereateReportComponent {
         x.studentId.name,
         x.studentId.role,
         x.studentId.department,
-        x.classId?.courseId?.sessionStartDate,
-        x.classId?.courseId?.sessionEndDate,
+        formatDate(new Date(x.classId?.courseId?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
+        formatDate(new Date(x.classId?.courseId?.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
         x.status
         ]);
       const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
