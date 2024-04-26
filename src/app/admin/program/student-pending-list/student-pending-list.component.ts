@@ -185,39 +185,65 @@ export class StudentPendingListComponent {
 
    
   }
+  generatePdf() {
+    const doc = new jsPDF();
+ const headers = [['Student', 'Status', 'Program','Program Fee','Instructor Fee', 'Start Date', 'End Date','Registered Date']];
+    // Map status values to desired strings
+   const mapStatus = (status: string): string => {
+       if (status === 'active') {
+           return 'approved';
+       } else if (status === 'inactive') {
+           return 'pending';
+       } else {
+           return status; 
+       }
+   };
+ const data = this.dataSource.map((user:any) =>
+      [
+       user?.student_name,
+       mapStatus(user?.status), 
+       user?.programTitle, 
+       user?.classId?.courseId?.courseFee,
+       user?.classId?.instructorCost,
+       formatDate(new Date(user?.classId?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
+       formatDate(new Date(user?.classId?.sessions[0]?.sessionEndDate ), 'yyyy-MM-dd', 'en') || '',
+       formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
+       
+
+    ] );
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+    });
+    doc.save('Student-Approve-list.pdf');
+  }
   exportExcel() {
-    const exportData: Partial<TableElement>[] =
-       this.dataSource.map((user:any) => ({
-         'Program Name':user?.program_name,
-         'Student Name': user?.student_name,
-         'Class Start Date': formatDate(new Date(user?.classId?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
-         'Class End Date': formatDate(new Date(user?.classId?.sessions[0]?.sessionEndDate ), 'yyyy-MM-dd', 'en') || '',
-         'Registered Date': formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
-        
-       }));
-     TableExportUtil.exportToExcel(exportData, 'excel');
-   }
-   generatePdf() {
-     const doc = new jsPDF();
-     const headers = [['Program Name','Student Name','Class Start Date',  'Class End Date', 'Registered Date']];
-     const data = this.dataSource.map((user:any) =>
-       [user?.program_name,
-        user?.student_name,
-        formatDate(new Date(user?.classId?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
-        formatDate(new Date(user?.classId?.sessions[0]?.sessionEndDate ), 'yyyy-MM-dd', 'en') || '',
-        formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
-        
- 
-     ] );
-     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
-     (doc as any).autoTable({
-       head: headers,
-       body: data,
-       startY: 20,
-     });
-     doc.save('Student-Approve-list.pdf');
-   }
- 
+   const mapStatus = (status: string): string => {
+     if (status === 'active') {
+         return 'approved';
+     } else if (status === 'inactive') {
+         return 'pending';
+     } else {
+         return status; // Handle other cases if needed
+     }
+ };
+   // key name with space add in brackets
+   const exportData: Partial<TableElement>[] =
+     this.dataSource.map((user: any) => ({
+       'Student': user?.student_name,
+       'Status':mapStatus(user.status),  
+       'Program':user?.programTitle,
+       'Program Fee': '$ ' + user?.classId?.courseId?.courseFee,
+       'Instructor Fee': '$ ' + user?.classId?.instructorCost,
+       'Start Date': formatDate(new Date(user?.classId?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
+       'End Date': formatDate(new Date(user?.classId?.sessions[0]?.sessionEndDate ), 'yyyy-MM-dd', 'en') || '',
+       'Registered Date': formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
+     }));
+
+   TableExportUtil.exportToExcel(exportData, 'excel');
+ }
   // exportExcel() {
   //   //k//ey name with space add in brackets
   //  const exportData: Partial<TableElement>[] =

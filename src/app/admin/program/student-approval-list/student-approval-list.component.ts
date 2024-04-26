@@ -184,24 +184,38 @@ export class StudentApprovalListComponent {
 
    
   }
-  exportExcel() {
-    const exportData: Partial<TableElement>[] =
-       this.dataSource.map((user:any) => ({
-         'Program Name':user?.program_name,
-         'Student Name': user?.student_name,
-         'Class Start Date': formatDate(new Date(user?.classId?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
-         'Class End Date': formatDate(new Date(user?.classId?.sessions[0]?.sessionEndDate ), 'yyyy-MM-dd', 'en') || '',
-         'Registered Date': formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
+  // exportExcel() {
+  //   const exportData: Partial<TableElement>[] =
+  //      this.dataSource.map((user:any) => ({
+  //        'Program Name':user?.program_name,
+  //        'Student Name': user?.student_name,
+  //        'Class Start Date': formatDate(new Date(user?.classId?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
+  //        'Class End Date': formatDate(new Date(user?.classId?.sessions[0]?.sessionEndDate ), 'yyyy-MM-dd', 'en') || '',
+  //        'Registered Date': formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
         
-       }));
-     TableExportUtil.exportToExcel(exportData, 'excel');
-   }
+  //      }));
+  //    TableExportUtil.exportToExcel(exportData, 'excel');
+  //  }
    generatePdf() {
      const doc = new jsPDF();
-     const headers = [['Program Name','Student Name','Class Start Date',  'Class End Date', 'Registered Date']];
-     const data = this.dataSource.map((user:any) =>
-       [user?.program_name,
+  const headers = [['Student', 'Status', 'Program ','Program Fee','Instructor Fee', 'Start Date', 'End Date','Registered Date']];
+     // Map status values to desired strings
+    const mapStatus = (status: string): string => {
+        if (status === 'active') {
+            return 'approved';
+        } else if (status === 'inactive') {
+            return 'pending';
+        } else {
+            return status; 
+        }
+    };
+  const data = this.dataSource.map((user:any) =>
+       [
         user?.student_name,
+        mapStatus(user?.status), 
+        user?.programTitle, 
+        user?.classId?.courseId?.courseFee,
+        user?.classId?.instructorCost,
         formatDate(new Date(user?.classId?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
         formatDate(new Date(user?.classId?.sessions[0]?.sessionEndDate ), 'yyyy-MM-dd', 'en') || '',
         formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
@@ -216,6 +230,87 @@ export class StudentApprovalListComponent {
      });
      doc.save('Student-Approve-list.pdf');
    }
+   exportExcel() {
+    const mapStatus = (status: string): string => {
+      if (status === 'active') {
+          return 'approved';
+      } else if (status === 'inactive') {
+          return 'pending';
+      } else {
+          return status; // Handle other cases if needed
+      }
+  };
+    // key name with space add in brackets
+    const exportData: Partial<TableElement>[] =
+      this.dataSource.map((user: any) => ({
+        'Student Name': user?.student_name,
+        'Status':mapStatus(user.status),  
+        'Program Name':user?.programTitle,
+        'Program Fee': '$ ' + user?.classId?.courseId?.courseFee,
+        'Instructor Fee': '$ ' + user?.classId?.instructorCost,
+        'Start Date': formatDate(new Date(user?.classId?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
+        'End Date': formatDate(new Date(user?.classId?.sessions[0]?.sessionEndDate ), 'yyyy-MM-dd', 'en') || '',
+        'Registered Date': formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
+      }));
+
+    TableExportUtil.exportToExcel(exportData, 'excel');
+  }
+//   generatePdf() {
+//     const doc = new jsPDF();
+//     const headers = [['Program Name', 'Status', 'Program Name','Program Fee','Instructor Fee', 'Start Date', 'End Date','Registered Date']];
+    
+//     // Map status values to desired strings
+//     const mapStatus = (status: string): string => {
+//         if (status === 'active') {
+//             return 'approved';
+//         } else if (status === 'inactive') {
+//             return 'pending';
+//         } else {
+//             return status; 
+//         }
+//     };
+
+//     const data = this.dataSource.map((user: any) =>
+//         [user?.title,
+//         mapStatus(user?.status), 
+//         user?.courseCode,
+//         user?.creator,
+//         user?.duration +' Hours',
+//         formatDate(new Date(user?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
+//         formatDate(new Date(user?.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
+//         formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
+//         '$ ' + user?.courseFee,
+
+//     ]);
+
+//     // Adjust column widths
+//     const columnWidths = [30, 30, 25, 25, 20, 25, 25, 25, 25, 25];
+
+//     // Generate the table using jspdf-autotable
+//     (doc as any).autoTable({
+//         head: headers,
+//         body: data,
+//         startY: 20,
+//         columnStyles: {
+//             0: { cellWidth: 20 }, // Adjust cell width for each column
+//             1: { cellWidth: 20 },
+//             2: { cellWidth: 20 },
+//             3: { cellWidth: 17 },
+//             4: { cellWidth: 17 },
+//             5: { cellWidth: 20 },
+//             6: { cellWidth: 20 },
+//             7: { cellWidth: 20 },
+//             8: { cellWidth: 20 },
+//             9: { cellWidth: 20 }
+//         },
+//         margin: { top: 20, bottom: 20, left: 10, right: 10 }, // Adjust margins if needed
+//         pageBreak: 'auto' // Enable automatic page breaks
+//     });
+
+//     // Save or open the PDF
+//     doc.save('Program Approve-list.pdf');
+// }
+
  
   // exportExcel() {
   //   //k//ey name with space add in brackets

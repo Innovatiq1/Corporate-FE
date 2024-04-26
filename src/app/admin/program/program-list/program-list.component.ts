@@ -19,6 +19,8 @@ import { FilterPopupComponent } from './filter-popup/filter-popup.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { UserService } from '@core/service/user.service';
+import { DatePipe } from '@core/service/date.pipe';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-program-list',
@@ -354,11 +356,28 @@ viewActiveProgram(id:string, status: string):void {
 }
   // export table data in excel file
   exportExcel() {
+    const mapStatus = (status: string): string => {
+      if (status === 'active') {
+          return 'approved';
+      } else if (status === 'inactive') {
+          return 'pending';
+      } else {
+          return status; // Handle other cases if needed
+      }
+  };
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.programData.map((x: any) => ({
         'Program Name': x.title,
-        'Duration': x.duration,
+        'Status':mapStatus(x.status),
+        'Program Code': x.courseCode,
+        'Creator':x.creator,
+        'Duration': x.duration + ' Hours',
+        'Payment': '$ ' + x.courseFee,
+        'Start Date':
+          formatDate(new Date(x.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
+        'End Date':
+          formatDate(new Date(x.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
         'Compulsory Count' : x.coreCourseCount,
         'Elective Count': x.electiveCourseCount
       }));
@@ -367,32 +386,59 @@ viewActiveProgram(id:string, status: string):void {
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [[' Program Name','Duration', 'Compulsory Count', 'Elective Count']];
-    const data = this.programData.map((x:any) =>
-      [x.title,
+    const headers = [['Program Name', 'Status', 'Program Code', 'Creator', 'Duration', 'Payment', 'Start Date', 'End Date', 'Compulsory Count', 'Elective Count']];
+    
+    // Map status values to desired strings
+    const mapStatus = (status: string): string => {
+        if (status === 'active') {
+            return 'approved';
+        } else if (status === 'inactive') {
+            return 'pending';
+        } else {
+            return status; 
+        }
+    };
+
+    const data = this.programData.map((x: any) =>
+        [x.title,
+        mapStatus(x.status), 
+        x.courseCode,
+        x.creator,
         x.duration,
+        '$ ' + x.courseFee,
+        formatDate(new Date(x.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
+        formatDate(new Date(x.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
         x.coreCourseCount,
         x.electiveCourseCount
-    ] );
-    //const columnWidths = [60, 80, 40];
-    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
-  
-    // Add a page to the document (optional)
-    //doc.addPage();
-  
+    ]);
+
+    // Adjust column widths
+    const columnWidths = [30, 30, 25, 25, 20, 25, 25, 25, 25, 25];
+
     // Generate the table using jspdf-autotable
     (doc as any).autoTable({
-      head: headers,
-      body: data,
-      startY: 20,
-  
-  
-  
+        head: headers,
+        body: data,
+        startY: 20,
+        columnStyles: {
+            0: { cellWidth: 20 }, // Adjust cell width for each column
+            1: { cellWidth: 20 },
+            2: { cellWidth: 20 },
+            3: { cellWidth: 17 },
+            4: { cellWidth: 17 },
+            5: { cellWidth: 20 },
+            6: { cellWidth: 20 },
+            7: { cellWidth: 20 },
+            8: { cellWidth: 20 },
+            9: { cellWidth: 20 }
+        },
+        margin: { top: 20, bottom: 20, left: 10, right: 10 }, // Adjust margins if needed
+        pageBreak: 'auto' // Enable automatic page breaks
     });
-  
+
     // Save or open the PDF
     doc.save('AllPrograms-list.pdf');
-  }
+}
   refresh() {
     //this.loadData();
     window.location.reload();

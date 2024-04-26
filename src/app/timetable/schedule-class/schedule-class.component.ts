@@ -127,21 +127,31 @@ export class ScheduleClassComponent {
     this.next = false;
   }
   exportExcel() {
+    
     const exportData: Partial<TableElement>[] =
       this.dataSource.map((user: any) => ({
-        ProgramName: user?.courseId?.title,
-        StartDate: formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
-        EndDate: formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
+        'Program': user?.courseId?.title,
+        'Program Code':user?.courseId?.courseCode,
+        'Amount':user?.instructorCost,
+        'Department':user?.department,
+        'StartDate': formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
+        'EndDate': formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
+        'Class':user?.classDeliveryType,
       }));
     TableExportUtil.exportToExcel(exportData, 'excel');
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Program Name', 'Start Date', 'End Date']];
+    const headers = [['Program', 'Program Code','Amount','Department','Start Date', 'End Date','Class']];
     const data = this.dataSource.map((user: any) =>
-      [user?.courseId?.title,
-        formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '', 
-        formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' 
+      [
+       user?.courseId?.title,
+       user?.courseId?.courseCode,
+       user?.instructorCost,
+       user?.department,
+       formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
+       formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
+       user?.classDeliveryType,
       ]);
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
     (doc as any).autoTable({

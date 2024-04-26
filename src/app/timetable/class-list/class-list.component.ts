@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-class-list',
@@ -242,45 +243,41 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
     }
   }
   exportExcel() {
-    //k//ey name with space add in brackets
-   const exportData: Partial<TableElement>[] =
-      this.dataSource.map((user:any) => ({
-        CourseName:user.courseId?.title,
-        StartDate: user.classStartDate,
-        EndDate: user.classEndDate,
+    
+    const exportData: Partial<TableElement>[] =
+      this.dataSource.map((user: any) => ({
+        'Course': user?.courseId?.title,
+        'Course Code':user?.courseId?.courseCode,
+        'Amount':user?.instructorCost,
+        'Department':user?.department,
+        'StartDate': formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
+        'EndDate': formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
+        'Class':user?.classDeliveryType,
       }));
     TableExportUtil.exportToExcel(exportData, 'excel');
   }
-  // pdf
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Course Name','Start Date','End date']];
-    console.log(this.dataSource)
-    const data = this.dataSource.map((user:any) =>
-      [user.courseId?.title,
-        user.classStartDate,
-       user.classEndDate,
-
-    ] );
-    //const columnWidths = [60, 80, 40];
+    const headers = [['Course', 'Course Code','Amount','Department','Start Date', 'End Date','Class']];
+    const data = this.dataSource.map((user: any) =>
+      [
+       user?.courseId?.title,
+       user?.courseId?.courseCode,
+       user?.instructorCost,
+       user?.department,
+       formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
+       formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
+       user?.classDeliveryType,
+      ]);
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
-
-    // Add a page to the document (optional)
-    //doc.addPage();
-
-    // Generate the table using jspdf-autotable
     (doc as any).autoTable({
       head: headers,
       body: data,
       startY: 20,
-
-
-
     });
-
-    // Save or open the PDF
-    doc.save('Class-list.pdf');
+    doc.save('Course Class-list.pdf');
   }
+
   getStatusClass(classDeliveryType: string): string {
     return classDeliveryType === 'online' ? 'success' : 'fail';
   }
