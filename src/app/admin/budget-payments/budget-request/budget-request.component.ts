@@ -24,8 +24,8 @@ export class BudgetRequestComponent
   breadscrums = [
     {
       title: 'ETMS',
-      items: [''],
-      active: 'Budget Request ',
+      items: ['Finance'],
+      active: 'Budget Approval Request',
     },
   ];
   ro = false;

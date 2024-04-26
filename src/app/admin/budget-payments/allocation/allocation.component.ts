@@ -33,8 +33,8 @@ export class AllocationComponent implements OnInit{
   breadscrums = [
     {
       title: 'Over All Budget',
-      // items: ['Extra'],
-      active: 'Department Budget Allocation',
+      items: ['Finance'],
+      active: 'Allocation',
     },
   ];
   courseKitModel!: Partial<CourseKitModel>;

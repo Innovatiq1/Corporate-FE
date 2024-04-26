@@ -133,12 +133,12 @@
                     <td *ngIf="trainingAdmin && !pendingCourses">
                       {{ request?.trainingadminApprovedOn | date }}
                     </td>
-                    <td *ngIf="ro && rejectedCourses">
+                    <!-- <td *ngIf="ro && rejectedCourses">
                       {{ request?.roRejectedOn | date }}
-                    </td>
+                    </td> -->
                     <td *ngIf="director && rejectedCourses">
                       {{ request?.directorRejectedOn | date }}
-                    </td>
+                    </td> 
                     <td *ngIf="trainingAdmin && rejectedCourses">
                       {{ request?.trainingAdminRejectedOn | date }}
                     </td>

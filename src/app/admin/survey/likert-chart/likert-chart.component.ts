@@ -21,6 +21,8 @@ import { UtilsService } from '@core/service/utils.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import Swal from 'sweetalert2';
 import { SurveyService } from '../survey.service';
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-likert-chart',
@@ -132,6 +134,43 @@ export class LikertChartComponent {
       : this.dataSource.forEach((row: any) =>
           this.selection.select(row)
         );
+  }
+
+   // export table data in excel file
+   exportExcel() {
+    // key name with space add in brackets
+    const exportData: Partial<TableElement>[] =
+      this.dataSource.map((x:any) => ({
+        'Name': x.name,
+        'No.of Questions': x.questions.length,
+        'Created At': x.createdAt,
+       
+      }));
+
+    TableExportUtil.exportToExcel(exportData, 'excel');
+  }
+
+
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [['Name','No.of Questions','Created At' ]];
+    console.log(this.dataSource);
+    const data = this.dataSource.map((user: any) => [
+      user.name,
+      user.questions.length,
+      user.createdAt,
+    ]);
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+      headStyles: {
+        fontSize: 10,
+        cellWidth: 'wrap',
+      },
+    });
+    doc.save('SurveyList.pdf');
   }
 }
   //   this.instructorService.getInstructor(payload).subscribe((res) => {

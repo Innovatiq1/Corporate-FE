@@ -18,6 +18,7 @@ import { ClassModel, Session, Student, StudentApproval, StudentPaginationModel }
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-student-pending-courses',
@@ -264,26 +265,40 @@ export class StudentPendingCoursesComponent {
     //k//ey name with space add in brackets
    const exportData: Partial<TableElement>[] =
       this.dataSource.map((user:any) => ({
-        CourseName:user.classId?.courseId?.title,
-        StudentName:  user.studentId?.name,
-        StartDate: user.classStartDate,
-        EndDate: user.classEndDate,
-        RegisteredOn: user.registeredOn,
+        'Student Name': user.studentId?.name,
+        'Course Name': user.classId?.courseId?.title,
+        'Course Fee': user.classId?.courseId?.fee,
+        'Instructor Fee': user.classId?.instructorCost,
+        'Start Date': user.classStartDate,
+        'End Date': user.classEndDate,
+        'Registered On': user.registeredOn,
+        Status: user.status,
       }));
     TableExportUtil.exportToExcel(exportData, 'excel');
   }
   // pdf
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Course Name', 'Student Name', 'Start Date','End date', 'Registered Date']];
-    const data = this.dataSource.map((user:any) =>
-      [user.classId?.courseId?.title,
-        user.studentId?.name,
-        user.classStartDate,
-       user.classEndDate,
-     user.registeredOn,
-
-    ] );
+    const headers = [
+      [
+        'Student Name',
+        'Course Name',
+        'Course Fee',
+        'Instructor Fee',
+        'Start Date',
+        'End date',
+        'Registered Date',
+      ],
+    ];
+    const data = this.dataSource.map((user: any) => [
+      user.studentId?.name,
+      user.classId?.courseId?.title,
+      user.classId?.courseId?.fee,
+      user.classId?.instructorCost,
+      user.classStartDate,
+      user.classEndDate,
+      formatDate(new Date(user.registeredOn), 'yyyy-MM-dd', 'en') || '',
+    ]);
     //const columnWidths = [60, 80, 40];
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
 
@@ -295,7 +310,10 @@ export class StudentPendingCoursesComponent {
       head: headers,
       body: data,
       startY: 20,
-
+      headStyles: {
+        fontSize: 10,
+        cellWidth: 'wrap',
+      },
 
 
     });

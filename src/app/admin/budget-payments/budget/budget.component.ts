@@ -125,7 +125,7 @@ export class BudgetComponent {
     {
       title: 'Over All Budget',
        items: ['Finance'],
-      active: 'Over All Budget List',
+      active: 'Budget',
     },
   ];
   constructor(public router: Router, private etmsService: EtmsService) {

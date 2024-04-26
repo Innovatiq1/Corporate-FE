@@ -30,6 +30,7 @@ import Swal from 'sweetalert2';
 import { StudentsService } from 'app/admin/students/students.service';
 import { UserService } from '@core/service/user.service';
 import { MatOption } from '@angular/material/core';
+import { FormService } from '@core/service/customization.service';
 // import * as moment from 'moment';
 
 @Component({
@@ -63,6 +64,7 @@ export class CreateClassComponent {
   user_id: any;
   courseCode: any;
   classId!: string;
+  forms!: any[];
   title: boolean = false;
 
   breadscrums = [
@@ -125,7 +127,9 @@ export class CreateClassComponent {
     private courseService: CourseService,
     private instructorService: InstructorService,
     private studentsService: StudentsService,
-    private userService: UserService
+    private userService: UserService,
+    private formService: FormService,
+
   ) {
     this._activeRoute.queryParams.subscribe((params) => {
       this.classId = params['id'];
@@ -175,7 +179,8 @@ export class CreateClassComponent {
         })
       }
     });
-    this.loadData();
+   this.loadData();
+   this.getForms();
    this.getDepartments();
    this.getUserGroups()
   }
@@ -184,6 +189,14 @@ export class CreateClassComponent {
     this.userService.getUserGroups().subscribe((response: any) => {
       this.userGroups = response.data.docs;
     });
+  }
+
+  getForms(): void {
+    this.formService
+      .getAllForms('Course Class Creation Form')
+      .subscribe((forms) => {
+        this.forms = forms;
+      });
   }
 
   loadData(){
@@ -594,5 +607,16 @@ console.log('sessions',sessions)
   cancel() {
 
     window.history.back();
+  }
+  labelStatusCheck(labelName: string): any {
+    if (this.forms && this.forms.length > 0) {
+      const status = this.forms[0]?.labels?.filter(
+        (v: any) => v?.name === labelName
+      );
+      if (status && status.length > 0) {
+        return status[0]?.checked;
+      }
+    }
+    return false;
   }
 }

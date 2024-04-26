@@ -281,7 +281,7 @@ export class CreateClassComponent {
 
   getForms(): void {
     this.formService
-      .getAllForms('Course Class Creation Form')
+      .getAllForms('Program Class Creation Form')
       .subscribe((forms) => {
         this.forms = forms;
       });
