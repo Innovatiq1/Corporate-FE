@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-in-active-courses',
@@ -235,26 +236,48 @@ export class InActiveCoursesComponent {
   exportExcel() {
     //k//ey name with space add in brackets
    const exportData: Partial<TableElement>[] = this.dataSource.map(
-     (user: any) => ({
-       'Course Name': user.title,
-       'Course Code': user.courseCode,
-       'Main Category': user.main_category_text,
-       'Sub Category': user.sub_category_text,
-       'Fees': user.fee,
+     (x: any) => ({
+      'Course Name': x.title,
+      'Course Code': x.courseCode,
+      'Main Category': x.main_category_text,
+      Duration: x.training_hours,
+      Creator: x.creator,
+      Code: x.courseCode,
+      Days: x.course_duration_in_days,
+      Payment: x.fee + '$',
+      'Start Date':
+        formatDate(new Date(x.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
+      'End Date':
+        formatDate(new Date(x.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
+      Status: x.status === 'inactive' ? 'Pending' : '',
      })
    );
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Pending Course List');
   }
 
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Course Name','Course Code','Main Category','Sub Category','Fees']];
-    const data = this.dataSource.map((user:any) =>
-      [user.title,
-        user.courseCode,
-       user.main_category_text,
-       user.sub_category_text,
-       user.fee
+    const headers = [[' Course Name',
+    'Duration',
+    'Main Category',
+    'Creator',
+    'Code',
+    'Days',
+    'Payment',
+    'Start Date',
+    'End Date',
+    'Status',]];
+    const data = this.dataSource.map((x:any) =>
+      [ x.title,
+        x.training_hours,
+        x.main_category_text,
+        x.creator,
+        x.courseCode,
+        x.course_duration_in_days,
+        x.fee + '$',
+        formatDate(new Date(x.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
+        formatDate(new Date(x.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
+        x.status === 'inactive' ? 'Pending' : '',
     ] );
     //const columnWidths = [60, 80, 40];
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
@@ -273,7 +296,7 @@ export class InActiveCoursesComponent {
     });
 
     // Save or open the PDF
-    doc.save('Course-approve-list.pdf');
+    doc.save('Pending Course List.pdf');
   }
   viewCourse(id:string) {
     this.router.navigate(['/admin/courses/course-view/'],{queryParams: {id:id,status:'in-active'}});
