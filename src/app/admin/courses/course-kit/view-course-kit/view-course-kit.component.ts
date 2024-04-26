@@ -74,12 +74,8 @@ export class ViewCourseKitComponent {
   fetchCourseKits() {
     this.courseService.getCourseKit({ ...this.courseKitModel })
       .subscribe(response => {
-        console.log("===response==",response)
-
         this.courseKitData = response.docs;
-
         this.getJobTemplates();
-
       }, (error) => {
 
       });
@@ -115,7 +111,7 @@ export class ViewCourseKitComponent {
     });
   }
   playVideo(video: { video_url: any; }): void {
-    console.log('Video',video)
+    
     if (video?.video_url) {
       this.openVidePlayer(video);
     } else {

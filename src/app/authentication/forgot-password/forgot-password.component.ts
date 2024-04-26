@@ -46,7 +46,7 @@ export class ForgotPasswordComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   setLanguage(event: any) {  
-    console.log("=======",event)
+    
     // this.countryName = text;
     // this.flagvalue = flag;
     this.langStoreValue = event.target.value;

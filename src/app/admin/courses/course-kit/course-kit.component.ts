@@ -82,7 +82,6 @@ export class CourseKitComponent implements OnInit{
     this.courseService.getCourseKit({ ...this.courseKitModel })
       .subscribe(response => {
         this.isLoading = false;
-        console.log("===response==",response)
         this.totalItems = response.totalDocs
 
         this.dataSource = response.docs;
@@ -133,7 +132,6 @@ export class CourseKitComponent implements OnInit{
   }
 
   playVideo(video: { video_url: any; }): void {
-    console.log('Video',video)
     if (video?.video_url) {
       this.openVidePlayer(video);
     } else {
@@ -261,7 +259,7 @@ export class CourseKitComponent implements OnInit{
           const index: number = this.dataSource.findIndex(
             (d: CourseModel) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          
           this.courseService?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<CourseModel>(true, []);
@@ -308,7 +306,7 @@ export class CourseKitComponent implements OnInit{
   generatePdf() {
     const doc = new jsPDF();
     const headers = [['Course Name','Short Description','Long Description','Document Link']];
-    console.log(this.dataSource)
+    
     const data = this.dataSource.map((user:any) =>
       [user.name,
         user.shortDescription,

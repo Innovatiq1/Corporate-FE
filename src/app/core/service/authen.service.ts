@@ -90,7 +90,6 @@ export class AuthenService {
     filter?: Partial<CoursePaginationModel>
   ): Observable<ApiResponse> {
     const apiUrl =this.defaultUrl+'admin/courses-new';
-    console.log("==new=",apiUrl)
     return this.http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(filter),
     });

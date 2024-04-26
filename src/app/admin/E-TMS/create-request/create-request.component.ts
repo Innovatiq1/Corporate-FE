@@ -136,7 +136,7 @@ export class CreateRequestComponent implements OnInit {
     this.getCourseList();
   }
   getUserId() {
-    //sconsole.log("======trrrr")
+    
     let userId = localStorage.getItem('id');
     this.etmsService.getUserId(userId).subscribe(
       (response: any) => {

@@ -46,7 +46,6 @@ export class AllRequestComponent {
   getAllRequests(){
     this.empService.getAllRequests(this.searchValue,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
       this.SourceData = res.data.docs.docs;
-      console.log(this.SourceData)
       this.totalItems = res.data.totalDocs;
       this.coursePaginationModel.docs = res.data.docs;
       this.coursePaginationModel.page = res.data.page;
@@ -70,19 +69,12 @@ export class AllRequestComponent {
         
         this.SourceData = res.data.docs.docs;
         this.totalItems = res.data.totalDocs;
-        console.log('response',this.SourceData);
-        
-  
       })
       this.pageSizeChange({
         pageIndex: this.coursePaginationModel?.page ? this.coursePaginationModel.page - 1 : 0,
         pageSize: this.coursePaginationModel?.limit || 10 // Provide a default pageSize if limit is undefined
       });
-      // You can perform actions with the search texts here
-      console.log('Search Text 1:', this.employeeText);
-     // this.searchType=""
-     
-  
+
      } 
     } else if(this.employeeText.length===0){
        this.searchType=""
@@ -96,30 +88,20 @@ export class AllRequestComponent {
   
   }
   onRoChange() {
-   console.log("===Tst==")
-   
        if(this.roText.length>2){
         if(this.roText){
-        console.log("sssssssssss",this.roText)
       this.searchType="RO"
       this.searchValue=this.roText;
       this.empService.getAllRequests(this.searchValue,this.searchType,{...this.coursePaginationModel}).subscribe((res) => {
         
         this.SourceData = res.data.docs.docs;
         this.totalItems = res.data.totalDocs;
-        console.log('response',this.SourceData);
   
       })
       this.pageSizeChange({
         pageIndex: this.coursePaginationModel?.page ? this.coursePaginationModel.page - 1 : 0,
         pageSize: this.coursePaginationModel?.limit || 10 // Provide a default pageSize if limit is undefined
       });
-      // You can perform actions with the search texts here
-      console.log('Search Text 1:', this.roText);
-     // this.searchType=""
-     
-  
-  
     }
       } else if(this.roText.length===0){
         this.searchType=""
@@ -138,7 +120,6 @@ export class AllRequestComponent {
         
         this.SourceData = res.data.docs.docs;
         this.totalItems = res.data.totalDocs;
-        console.log('response',this.SourceData);
   
       })
       // You can perform actions with the search texts here
@@ -146,7 +127,6 @@ export class AllRequestComponent {
         pageIndex: this.coursePaginationModel?.page ? this.coursePaginationModel.page - 1 : 0,
         pageSize: this.coursePaginationModel?.limit || 10 // Provide a default pageSize if limit is undefined
       });
-      console.log('Search Text 1:', this.directorText);
 
      // this.searchType=""
      
@@ -168,15 +148,12 @@ export class AllRequestComponent {
         
         this.SourceData = res.data.docs.docs;
         this.totalItems = res.data.totalDocs;
-        console.log('response',this.SourceData);
-  
       })
       // You can perform actions with the search texts here
       this.pageSizeChange({
         pageIndex: this.coursePaginationModel?.page ? this.coursePaginationModel.page - 1 : 0,
         pageSize: this.coursePaginationModel?.limit || 10 // Provide a default pageSize if limit is undefined
       });
-      console.log('Search Text 1:', this.trainingadminText);
 
       //this.searchType=""
      
@@ -192,7 +169,6 @@ export class AllRequestComponent {
    * navigates to the view request page
    */
   viewReq(id: string) {
-    console.log('viewReq', id);
     this.router.navigate(['/admin/e-tms/view-request'], { queryParams: {id: id} });
   }
 }

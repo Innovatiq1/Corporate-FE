@@ -52,7 +52,6 @@ export class CreateDeptBudgetRequestComponent {
     this.activatedRoute.queryParams.subscribe((params) => {
       this._id = params['id'];
       this.action = params['action'];
-      console.log(this.action);
     });
 
     let urlPath = this.router.url.split('/');
@@ -126,12 +125,11 @@ export class CreateDeptBudgetRequestComponent {
       .getAllDepartments({ status: 'active' })
       .subscribe((data: any) => {
         this.department = data.data.docs;
-        console.log('data.data.docs,', this.department);
+        
       });
   }
 
   onSelectDept(event: any) {
-    console.log('onSelectDept', event.target.innerText);
     const data = event.target.innerText;
 
     this.department
@@ -173,7 +171,7 @@ export class CreateDeptBudgetRequestComponent {
     let userId = localStorage.getItem('id');
 
     this.etmsService.getUserId(userId).subscribe((response: any) => {
-      console.log("response", response)
+      
       this.directorId = response.director,
         this.employeName = response?.name +
         ' ' +
@@ -201,7 +199,6 @@ export class CreateDeptBudgetRequestComponent {
   onSubmit() {
     let userName = JSON.parse(localStorage.getItem('user_data')!).user.name;
     let dirID = JSON.parse(localStorage.getItem('user_data')!).user.director;
-    console.log("userName: " + dirID);
     let payload = {
       departmentName: this.departmentForm.value.department,
       hod: this.departmentForm.value.hod,
@@ -215,7 +212,7 @@ export class CreateDeptBudgetRequestComponent {
 
 
     }
-    console.log(payload)
+    
     
     Swal.fire({
       title: 'Are you sure?',
@@ -227,7 +224,7 @@ export class CreateDeptBudgetRequestComponent {
     }).then((result) => {
       if (result.isConfirmed){
         this.etmsService.createDept(payload).subscribe(data => {
-          console.log(data);
+          
           if (data) {
             Swal.fire({
               icon: 'success',
@@ -269,7 +266,7 @@ export class CreateDeptBudgetRequestComponent {
   
   editRequest() {
     this.etmsService.getDeptBudgetById(this._id).subscribe((res: any) => {
-      console.log("data", res);
+      
   
       this.departmentForm.patchValue({
         department: res.departmentName,
@@ -304,7 +301,7 @@ updateRequest(){
     }).then((result) => {
       if (result.isConfirmed){
         this.etmsService.updateBudget(this._id,payload).subscribe(data =>{
-          console.log(data);
+          
           if(data){
             Swal.fire({
               icon:'success',

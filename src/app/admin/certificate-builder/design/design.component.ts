@@ -90,7 +90,7 @@ export class DesignComponent {
       const formData = new FormData();
       formData.append('files', this.selectedFile);
       this.certificateService.uploadImage(formData).subscribe((response) => {
-        console.log(response);
+        
         Swal.fire('Successful', 'certificate design created succesfully', 'success')
         this.getCertificateDesigns();
         this.uploadedFile = response;

@@ -71,7 +71,7 @@ export class ProgramPaymentsComponent implements OnInit {
      });
   }
   view(id:any){
-    console.log("id", id)
+    
     this.router.navigate(['/admin/payment/view-program-payment/'], {queryParams:{id:id}})
     // [routerLink]="['/admin/payment/view-payments/']"
     }
@@ -128,7 +128,7 @@ export class ProgramPaymentsComponent implements OnInit {
           const index: number = this.dataSource.findIndex(
             (d: CourseModel) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          
           this.courseService?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<CourseModel>(true, []);

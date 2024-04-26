@@ -58,10 +58,6 @@ export class CourseReferralInviteComponent {
   getForgetPasswordTemplate() {
     this.emailConfigurationService.getForgetPasswordTemplate().subscribe( response =>{
       this.assignData  = response?.data?.docs[0]?.project_refferal_Invite_template;
-
-      console.log(this.assignData,"ofEmail967978")
-      // this.ref.detectChanges();
-     
     }, error => {
       // this.isLoading = false;
     }); 

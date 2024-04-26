@@ -59,7 +59,6 @@ constructor(
 
 ngOnInit() {
   this.userType = localStorage.getItem('user_type');
-  console.log('user type'+this.userType);
   if(this.userType ==='admin') { 
     this.student = true;
   }

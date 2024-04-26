@@ -147,7 +147,7 @@ removeSelectedRows() {
         const index: number = this.dataSource.findIndex(
           (d: CourseModel) => d === item
         );
-        // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+        
         this.courseService?.dataChange.value.splice(index, 1);
         this.refreshTable();
         this.selection = new SelectionModel<CourseModel>(true, []);

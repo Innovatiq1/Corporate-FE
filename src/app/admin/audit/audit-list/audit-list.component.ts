@@ -81,7 +81,6 @@ export class AuditListComponent {
     let payload = { ...this.AuditPaginationModel};
     if (filter) payload = { ...payload, filter };
     this.auditService.getAuditList(payload).subscribe((response: any) => {
-      console.log("=====ress",response.docs)
       this.dataSource = response.docs;
       this.isLoading = false;
       this.totalItems = response.totalDocs
@@ -138,7 +137,7 @@ export class AuditListComponent {
           const index: number = this.dataSource.findIndex(
             (d: CourseModel) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          
           this.courseService?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<CourseModel>(true, []);
@@ -173,7 +172,6 @@ export class AuditListComponent {
     const headers = [
       ['Name', 'Email', 'User Type', 'Login Time', 'Logout Time'],
     ];
-    console.log(this.dataSource);
     const data = this.dataSource.map((user: any) => [
       user.name,
       user?.email,

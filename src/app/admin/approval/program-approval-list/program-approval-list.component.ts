@@ -105,7 +105,6 @@ implements OnInit{
   getProgramList(filters?: any) {
     this.courseService.getCourseProgram({...this.coursePaginationModel,status:'inactive'}).subscribe(
       (response: any) => {
-        console.log("page",response)
         this.totalItems = response.totalDocs;
         this.dataSource = response.docs;
         this.coursePaginationModel.docs = response.docs;
@@ -118,10 +117,8 @@ implements OnInit{
     );
   }
   performSearch() {
-    console.log("ps")
     if(this.searchTerm){
     this.dataSource = this.dataSource?.filter((item: any) =>{
-      console.log("ps",item)
       const searchList = (item?.title).toLowerCase()
       return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
     }
@@ -245,7 +242,6 @@ implements OnInit{
           const index: number = this.dataSource.findIndex(
             (d: CourseModel) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
           this.courseService?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<CourseModel>(true, []);

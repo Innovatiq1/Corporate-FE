@@ -59,8 +59,6 @@ export class IBannerListComponent {
   }
 
   onChange(id: any, activeStatus: any){
-    console.log("=======",id+"sssssss",activeStatus)
-
     this.bannerService.editBanner(id, activeStatus).subscribe(
       (response) => {
         Swal.fire({
@@ -88,7 +86,7 @@ export class IBannerListComponent {
     }).then((result) => {
       if (result.isConfirmed){
         this.bannerService.removeBannerImage(obj).subscribe(response => {
-          console.log(response);
+          
           if (response){
             Swal.fire(
               'Deleted!',

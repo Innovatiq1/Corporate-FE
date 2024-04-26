@@ -78,7 +78,6 @@ export class CreateTemplateComponent {
           allowOutsideClick: false,
         });
        let videoId= this.commonService.getVideoId();
-       console.log("----",videoId[0],)
         this.courseService
           .convertMediaAws(videoId[0], this.selectedTemplateName)
           .subscribe(

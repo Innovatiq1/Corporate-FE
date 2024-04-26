@@ -94,7 +94,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     if (length > 0) {
       const parentElement = (event.target as HTMLInputElement).closest('li');
       const activeClass = parentElement?.classList.contains('active');
-      console.log('Toggle menu',activeClass, length);
       if (activeClass) {
         this.renderer.removeClass(parentElement, 'active');
       } else {

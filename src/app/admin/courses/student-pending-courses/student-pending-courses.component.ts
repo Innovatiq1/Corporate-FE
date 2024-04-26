@@ -92,19 +92,16 @@ export class StudentPendingCoursesComponent {
     this._classService
       .getRegisteredClasses(this.studentPaginationModel.page, this.studentPaginationModel.limit, this.studentPaginationModel.filterText)
       .subscribe((response: { data: StudentPaginationModel; }) => {
-      console.log(response.data.docs)
       this.isLoading = false;
         this.studentPaginationModel = response.data;
         this.dataSource = response.data.docs;
         this.dataSource.sort = this.matSort;
-        console.log(this.dataSource)
         this.totalItems = response.data.totalDocs;
         this.mapClassList();
 
       })
   }
   filterData($event:any){
-    console.log($event.target.value)
     this.dataSource.filter = $event.target.value;
 
   }
@@ -221,7 +218,6 @@ export class StudentPendingCoursesComponent {
   performSearch() {
     if(this.searchTerm){
     this.dataSource = this.dataSource?.filter((item: any) =>{
-      console.log("data",item)
       const searchList = (item.classId?.courseId?.title + item.studentId?.name + item.studentId?.last_name).toLowerCase();
       return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
     }

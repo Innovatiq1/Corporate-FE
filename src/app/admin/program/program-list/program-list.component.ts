@@ -440,7 +440,7 @@ viewActiveProgram(id:string, status: string):void {
           const index: number = this.programData.renderedData.findIndex(
             (d: ProgramCourse) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          
           // this.exampleDatabase?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<ProgramCourse>(true, []);

@@ -253,7 +253,7 @@ export class CreateAllUsersComponent {
     // this.authenticationService.uploadVideo(event.target.files[0]).subscribe(
     //   (response: any) => {
     //             //Swal.close();
-    //             console.log("--------",response)
+    //             
     //   },
     //   (error:any) => {
 
@@ -379,7 +379,6 @@ export class CreateAllUsersComponent {
     let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit-all-users');
     this.currentId = urlPath[urlPath.length - 1];
-    console.log(this.currentId, '+++++++++++');
     this.getUserTypeList();
 
     if (this.editUrl === true) {

@@ -44,7 +44,6 @@ export class ExamScheduleService extends UnsubscribeOnDestroyAdapter {
       });
   }
   getAllProgramExams(id:any): void {
-    console.log("======get")
     const apiUrl = `${this.prefix}admin/studentClasses/students/Program/Exams/${id}`;
     this.subs.sink = this.httpClient
       .get<ExamSchedule>(apiUrl)
@@ -60,7 +59,7 @@ export class ExamScheduleService extends UnsubscribeOnDestroyAdapter {
       });
   }
   getAllExams(id:any): void {
-    console.log("======get")
+    
     const apiUrl = `${this.prefix}admin/studentClasses/students/Exams/${id}`;
     this.subs.sink = this.httpClient
       .get<ExamSchedule>(apiUrl)
@@ -160,14 +159,14 @@ export class ExamScheduleService extends UnsubscribeOnDestroyAdapter {
   //   //     });
   // }
   deleteExam(id: number){
-    console.log(id);
+    
     const apiUrl = `${this.prefix}admin/examShedule/${id}`;
     return this.httpClient
       .delete<ApiResponse>(apiUrl)
       .pipe(map((response) => { }));
   }
   deleteprogramExam(id: number){
-    console.log(id);
+    
     const apiUrl = `${this.prefix}admin/examShedule/programExamDelete/${id}`;
     return this.httpClient
       .delete<ApiResponse>(apiUrl)

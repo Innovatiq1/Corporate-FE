@@ -37,7 +37,6 @@ user!:string;
   ngOnInit(){
 this.getAllStudents();
 this.formatAMPM(new Date)
-console.log(this.currentTime);
 this. getDetailedAboutTickets();
   }
 

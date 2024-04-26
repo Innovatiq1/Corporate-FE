@@ -163,7 +163,6 @@ export class InstructorLeaveRequestComponent
           const index: number = this.dataSource.renderedData.findIndex(
             (d) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
           this.exampleDatabase?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<LeaveRequest>(true, []);
@@ -270,7 +269,7 @@ export class InstructorLeaveRequestComponent
   generatePdf() {
     const doc = new jsPDF();
     const headers = [[' Class Name','Roll No', 'Student Name','Apply Date','From Date','To Date','Status','Reason']];
-    console.log(this.dataSource)
+    
     const data = this.dataSource.filteredData.map((user:any) =>
       [user.className,
         user.studentId?.rollNo, 

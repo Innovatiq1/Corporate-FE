@@ -95,7 +95,7 @@ export class CoursePaymentsComponent {
   }
 
 view(id:any){
-console.log("id", id)
+
 this.router.navigate(['/admin/payment/view-payments/'], {queryParams:{id:id}})
 // [routerLink]="['/admin/payment/view-payments/']"
 }
@@ -132,7 +132,7 @@ this.router.navigate(['/admin/payment/view-payments/'], {queryParams:{id:id}})
           const index: number = this.dataSource.findIndex(
             (d: CourseModel) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          
           this.courseService?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<CourseModel>(true, []);
@@ -155,8 +155,8 @@ this.router.navigate(['/admin/payment/view-payments/'], {queryParams:{id:id}})
   }
    //search functinality
    performSearch() {
-    console.log(this.dataSource)
-    console.log(this.searchTerm)
+    
+    
     if(this.searchTerm){
     this.dataSource = this.dataSource?.filter((item: any) =>{   
       console.log("vv", item)
@@ -186,7 +186,7 @@ this.router.navigate(['/admin/payment/view-payments/'], {queryParams:{id:id}})
   generatePdf() {
     const doc = new jsPDF();
     const headers = [['Course Name','Payment Date','Amount', 'Student Name', 'Status']];
-    console.log(this.dataSource)
+    
     const data = this.dataSource.map((user:any) =>
       [user.course,
       formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',

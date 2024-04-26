@@ -247,14 +247,14 @@ export class MainComponent implements OnInit {
     });
   }
   editCall(student: any) {
-    console.log('hi',student)
+    
     this.router.navigate(['/admin/students/add-student'],{queryParams:{id:student.id}})
   }
   editClass(id:string){
     this.router.navigate(['/admin/courses/create-class'], { queryParams: {id: id}});
   }
   delete(id: string) {
-    console.log(id)
+    
     this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
       const matchingClasses = classList.docs.filter((classItem: any) => {
         return classItem.courseId && classItem.courseId.id === id;

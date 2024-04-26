@@ -143,12 +143,12 @@ export class StudentsService extends UnsubscribeOnDestroyAdapter {
         });
   }
   deleteStudents(id: number): void {
-    console.log(id);
+    
 
     // this.httpClient.delete(this.API_URL + id)
     //     .subscribe({
     //       next: (data) => {
-    //         console.log(id);
+    //         
     //       },
     //       error: (error: HttpErrorResponse) => {
     //          // error code here

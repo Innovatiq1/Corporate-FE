@@ -63,7 +63,6 @@ export class CoursePaymentComponent {
   }
   getAllCourse(){
     this.courseService.getAllPayments({ ...this.coursePaginationModel}).subscribe(response =>{
-      console.log("res",response)
      this.dataSource = response.data.docs;
      this.ref.detectChanges();
      this.totalItems = response.data.totalDocs;
@@ -97,7 +96,7 @@ export class CoursePaymentComponent {
   }
 
 view(id:any){
-console.log("id", id)
+
 this.router.navigate(['/admin/budgets/view-course-payment/'], {queryParams:{id:id}})
 // [routerLink]="['/admin/payment/view-payments/']"
 }
@@ -134,7 +133,7 @@ this.router.navigate(['/admin/budgets/view-course-payment/'], {queryParams:{id:i
           const index: number = this.dataSource.findIndex(
             (d: CourseModel) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          
           this.courseService?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<CourseModel>(true, []);
@@ -157,11 +156,10 @@ this.router.navigate(['/admin/budgets/view-course-payment/'], {queryParams:{id:i
   }
    //search functinality
    performSearch() {
-    console.log(this.dataSource)
-    console.log(this.searchTerm)
+    
+    
     if(this.searchTerm){
     this.dataSource = this.dataSource?.filter((item: any) =>{   
-      console.log("vv", item)
       const search = (item.course + item.name).toLowerCase()
       return search.indexOf(this.searchTerm.toLowerCase())!== -1;
       
@@ -188,7 +186,7 @@ this.router.navigate(['/admin/budgets/view-course-payment/'], {queryParams:{id:i
   generatePdf() {
     const doc = new jsPDF();
     const headers = [['Course Name','Payment Date','Amount', 'Student Name', 'Status']];
-    console.log(this.dataSource)
+    
     const data = this.dataSource.map((user:any) =>
       [user.course,
       formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',

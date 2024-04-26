@@ -26,14 +26,13 @@ export class LecturesService extends UnsubscribeOnDestroyAdapter {
     return this.dialogData;
   }
   getClassListWithPagination(id: any,filterName:any,filter?:Partial<CoursePaginationModel>) {
-    console.log("sssssssss",id)
     const apiUrl = `${this.prefix}admin/class/getSession/${id}?filterName=${filterName}`;
     return this.httpClient.get<ApiResponse>(apiUrl,{ params: this.buildParams(filter) })
     
     //return this.httpClient.get<ApiResponse>(apiUrl, { params: this.buildParams(filter) })
   }
   getClassListWithPagination1(id: any,filterName:any,filter?:Partial<CoursePaginationModel>) {
-    console.log("sssssssss",id)
+    
     const apiUrl = `${this.prefix}admin/class/getProgramSession/${id}?filterName=${filterName}`;
     return this.httpClient.get<ApiResponse>(apiUrl,{ params: this.buildParams(filter) })
     
@@ -129,12 +128,12 @@ export class LecturesService extends UnsubscribeOnDestroyAdapter {
         });
   }
   deleteLectures(id: number): void {
-    console.log(id);
+    
 
     // this.httpClient.delete(this.API_URL + id)
     //     .subscribe({
     //       next: (data) => {
-    //         console.log(id);
+    //         
     //       },
     //       error: (error: HttpErrorResponse) => {
     //          // error code here

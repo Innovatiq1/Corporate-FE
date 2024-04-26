@@ -206,7 +206,7 @@ export class AddStaffComponent {
     this.adminService.getUserTypeList({ allRows: true }).subscribe(
       (response: any) => {
         this.userTypes = response;
-        console.log('userT', this.userTypes);
+        
       },
       (error) => {}
     );
