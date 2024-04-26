@@ -8,6 +8,10 @@ import { UserService } from '@core/service/user.service';
 import { UtilsService } from '@core/service/utils.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { StudentsService } from 'app/admin/students/students.service';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
+
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -37,10 +41,15 @@ export class ReportsComponent {
   courseList: any;
   selectedPrograms: any = [];
   selectedCourses: any = [];
-  selectedUserGroups: any = [];
+  selectedUserGroups: any = []
+  selectedDepartments: any = [];
+  selectedRoles: any = [];
+
   coursePaginationModel!: Partial<CoursePaginationModel>;
   userGroups!: any[];
   roleNames: any;
+  isCourse = true;
+  isProgram = false;
   
   @ViewChild('allSelected') private allSelected!: MatOption;
   constructor(
@@ -80,25 +89,17 @@ export class ReportsComponent {
       this.courseList = response.courses.reverse();
     });
   }
-  generateReport(): void {
-    const reportData = {
-      payRunDate: this.payRunDate,
-      position: this.position,
-      department: this.department
-    };
-    const csvContent = this.convertToCSV(reportData);
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'report.csv'; 
-    document.body.appendChild(a);
-    a.click();
 
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
-  }
-
+  onSelectCourse(event: any){
+    if(event.value == 'course'){
+     this.isCourse = true;
+     this.isProgram = false;
+    }else if (event.value == 'program'){
+     this.isProgram = true;
+     this.isCourse = false;
+    }
+   }
+ 
   private convertToCSV(data: any): string {
     let csv = 'Pay Run Date,Position,Department\n';
     csv += `${data.payRunDate},${data.position},${data.department}\n`;
@@ -114,8 +115,68 @@ export class ReportsComponent {
     if (field == 'users') {
       this.selectedUsers = event.value;
     }
-    
+    if (field == 'department') {
+      this.selectedDepartments = event.value;
+    }
+    if (field == 'usergroup') {
+      this.selectedUserGroups = event.value;
+    }
+    if (field == 'user') {
+      this.selectedUsers = event.value;
+    }
+    if (field == 'role') {
+      this.selectedRoles = event.value;
+    }  
   }
+
+  generateReports() {
+    let body: any = {};
+    if (this.selectedCourses.length > 0) {
+      body.reportCourse = this.selectedCourses
+    }
+    if (this.selectedPrograms.length > 0) {
+      body.reportProgram = this.selectedPrograms
+    }
+    if (this.selectedUsers.length > 0) {
+      body.reportUser = this.selectedUsers
+    }
+    if (this.selectedDepartments.length > 0) {
+      body.reportDepartment = this.selectedDepartments
+    }
+    if (this.selectedRoles.length > 0) {
+      body.reportType = this.selectedRoles
+    }
+    if (this.selectedUsers.length > 0) {
+      body.reportUser = this.selectedUsers
+    }
+
+
+    this.courseService.getCourseReports(body).subscribe(response => {
+      this.courseData = response.data.filteredData
+      const doc = new jsPDF();
+      const headers = [[' Course', 'User', 'Role','Department','Start Date','End Date','Status']];
+      const data = this.courseData.map((x: any) =>
+        [x.title,
+        x.studentId.name,
+        x.studentId.role,
+        x.studentId.department,
+        x.classId?.courseId?.sessionStartDate,
+        x.classId?.courseId?.sessionEndDate,
+        x.status
+        ]);
+      const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+      (doc as any)?.autoTable({
+        head: headers,
+        body: data,
+        startY: 20,
+      });
+      doc.save('Report.pdf');
+      
+    })
+
+  }
+  
+
   toggleAllSelection() {
     if (this.allSelected.selected) {
       this.reportForm.controls['userGroupId']

@@ -336,6 +336,13 @@ export class CourseService {
     return this._Http.get<any>(apiUrl);
   }
 
+  getCourseReports(payload:any
+    ):Observable<any> {
+    const apiUrl = `${this.prefix}admin/studentClasses/reports`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+
+
   getStudentClass( studentId: any,classId:any): Observable<any> {
     const apiUrl = `${this.prefix}admin/studentClasses?classId=${classId}&studentId=${studentId}`;
     return this._Http.get<any>(apiUrl);
