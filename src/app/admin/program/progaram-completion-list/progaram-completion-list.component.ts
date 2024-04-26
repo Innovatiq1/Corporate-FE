@@ -319,7 +319,7 @@ export class ProgaramCompletionListComponent {
       body: data,
       startY: 20,
     });
-    doc.save('Student-Approve-list.pdf');
+    doc.save('Student-Completed programs-list.pdf');
   }
   exportExcel() {
     

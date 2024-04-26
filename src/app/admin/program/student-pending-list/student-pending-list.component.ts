@@ -203,8 +203,8 @@ export class StudentPendingListComponent {
        user?.student_name,
        mapStatus(user?.status), 
        user?.programTitle, 
-       user?.classId?.courseId?.courseFee,
-       user?.classId?.instructorCost,
+       '$ '+user?.classId?.courseId?.courseFee,
+       '$ '+user?.classId?.instructorCost,
        formatDate(new Date(user?.classId?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
        formatDate(new Date(user?.classId?.sessions[0]?.sessionEndDate ), 'yyyy-MM-dd', 'en') || '',
        formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
@@ -217,7 +217,7 @@ export class StudentPendingListComponent {
       body: data,
       startY: 20,
     });
-    doc.save('Student-Approve-list.pdf');
+    doc.save('Student-Pending Programs-list.pdf');
   }
   exportExcel() {
    const mapStatus = (status: string): string => {
