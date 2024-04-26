@@ -34,7 +34,7 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
 {
   displayedColumns = [
     // 'select',
-    
+
     'studentName',
     'courseName',
     // 'actions',
@@ -110,6 +110,9 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
     //     }
     //   }
     // });
+  }
+  getStudentName(data:any){
+    return  data.studentId ? `${data?.studentId?.name} ${data?.studentId?.last_name}` : `${data?.studentFirstName} ${data?.studentLastName}`
   }
   deleteItem(id: SurveyBuilderModel) {
     Swal.fire({
