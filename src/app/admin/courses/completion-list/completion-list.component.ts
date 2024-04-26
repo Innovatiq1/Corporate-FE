@@ -218,7 +218,7 @@ export class CompletionListComponent {
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Student Name','Emai','Course', 'Instructor Fee', 'Start Date', 'End date','Completed Date']];
+    const headers = [['Student','Email','Course', 'Instructor Fee', 'Start Date', 'End date','Registered Date','Completed Date']];
     const data = this.dataSource.map((user: any) => [
       user.studentId?.name,
       user.studentId?.email,
@@ -226,6 +226,7 @@ export class CompletionListComponent {
       user.classId?.instructorCost,
       user.classStartDate,
       user.classEndDate,
+      user.registeredOn ,
      formatDate(new Date( user.updatedAt), 'yyyy-MM-dd', 'en') || '',
     ]);
     //const columnWidths = [60, 80, 40];
@@ -253,8 +254,16 @@ export class CompletionListComponent {
     //k//ey name with space add in brackets
     const exportData: Partial<TableElement>[] = this.dataSource.map(
       (user: any) => ({
-        CourseName: user.courseId?.title,
-        StudentName: user.studentId?.name,
+        Student: user.studentId?.name,
+        Email: user.studentId?.email,
+        Course: user.courseId?.title,
+        'Instructor Fee': user.classId?.instructorCost,
+        'Start Date': user.classStartDate,
+        'End date': user.classEndDate,
+        'Registered Date': user.registeredOn,
+        'Completed Date': user.updatedAt,
+        
+
         StartDate: user.classStartDate,
         EndDate: user.classEndDate,
       })

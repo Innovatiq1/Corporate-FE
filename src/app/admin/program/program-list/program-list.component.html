@@ -435,7 +435,7 @@
                         <div class="program-card">
                           <div class="cards" style="display: flex;">
                             <div style="cursor: pointer;" (click)="viewActiveProgram(program.id, program.status)">
-                              <img class="img mb-3" src="{{program?.image_link}}" height="200" width="400">
+                              <img class="img mb-3" src="{{program?.image_link || 'assets/noimage.jpg'}}" height="200" width="400">
                             </div>
 
                             <span class="text" style="cursor: pointer;"(click)="viewActiveProgram(program.id, program.status)"
