@@ -10,7 +10,11 @@ import {
 import * as moment from 'moment';
 import { DataSource, SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
-import { TableElement, TableExportUtil, UnsubscribeOnDestroyAdapter } from '@shared';
+import {
+  TableElement,
+  TableExportUtil,
+  UnsubscribeOnDestroyAdapter,
+} from '@shared';
 import { formatDate } from '@angular/common';
 import jsPDF from 'jspdf';
 //import 'jspdf-autotable';
@@ -22,7 +26,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Direction } from '@angular/cdk/bidi';
 import { BehaviorSubject, Observable, fromEvent, map, merge } from 'rxjs';
-import { ClassModel, Session, Student, StudentApproval, StudentPaginationModel } from 'app/admin/schedule-class/class.model';
+import {
+  ClassModel,
+  Session,
+  Student,
+  StudentApproval,
+  StudentPaginationModel,
+} from 'app/admin/schedule-class/class.model';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import Swal from 'sweetalert2';
 import { id } from '@swimlane/ngx-charts';
@@ -33,10 +43,10 @@ import { Router } from '@angular/router';
   templateUrl: './approve-list.component.html',
   styleUrls: ['./approve-list.component.scss'],
 })
-export class ApproveListComponent  {
+export class ApproveListComponent {
   displayedColumns = [
     // 'select',
-    
+
     'studentname',
     'status',
     'coursename',
@@ -45,7 +55,6 @@ export class ApproveListComponent  {
     'classstartDate',
     'classendDate',
     'registeredDate',
-    
   ];
 
   breadscrums = [
@@ -59,7 +68,7 @@ export class ApproveListComponent  {
   studentPaginationModel: StudentPaginationModel;
   selection = new SelectionModel<ClassModel>(true, []);
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort) matSort! : MatSort;
+  @ViewChild(MatSort) matSort!: MatSort;
   totalItems: any;
   approveData: any;
   pageSizeArr = [10, 20, 30, 50, 100];
@@ -98,27 +107,31 @@ export class ApproveListComponent  {
 
   getRegisteredClasses() {
     this._classService
-      .getApprovedClasses(this.studentPaginationModel.page, this.studentPaginationModel.limit, this.studentPaginationModel.filterText)
-      .subscribe((response: { data: StudentPaginationModel; }) => {
-      console.log(response.data.docs)
-      this.isLoading = false;
+      .getApprovedClasses(
+        this.studentPaginationModel.page,
+        this.studentPaginationModel.limit,
+        this.studentPaginationModel.filterText
+      )
+      .subscribe((response: { data: StudentPaginationModel }) => {
+        console.log(response.data.docs);
+        this.isLoading = false;
         this.studentPaginationModel = response.data;
         this.dataSource = response.data.docs;
         this.dataSource.sort = this.matSort;
-        console.log(this.dataSource)
+        console.log(this.dataSource);
         this.totalItems = response.data.totalDocs;
         this.mapClassList();
-
-      })
+      });
   }
-  filterData($event:any){
-    console.log($event.target.value)
+  filterData($event: any) {
+    console.log($event.target.value);
     this.dataSource.filter = $event.target.value;
-
   }
 
-  view(id:string){
-    this.router.navigate(['/admin/courses/view-completion-list'],{queryParams: {id:id, status:'approved'}});
+  view(id: string) {
+    this.router.navigate(['/admin/courses/view-completion-list'], {
+      queryParams: { id: id, status: 'approved' },
+    });
   }
   mapClassList() {
     this.studentPaginationModel.docs.forEach((item: Student) => {
@@ -131,13 +144,16 @@ export class ApproveListComponent  {
       const minStartDate = new Date(Math.min.apply(null, startDateArr));
       const maxEndDate = new Date(Math.max.apply(null, endDateArr));
 
-      item.classStartDate = !isNaN(minStartDate.valueOf()) ? moment(minStartDate).format("YYYY-DD-MM") : "";
-      item.classEndDate = !isNaN(maxEndDate.valueOf()) ? moment(maxEndDate).format("YYYY-DD-MM") : "";
+      item.classStartDate = !isNaN(minStartDate.valueOf())
+        ? moment(minStartDate).format('YYYY-DD-MM')
+        : '';
+      item.classEndDate = !isNaN(maxEndDate.valueOf())
+        ? moment(maxEndDate).format('YYYY-DD-MM')
+        : '';
       // item.registeredOn = item?.registeredOn ? moment(item.registeredOn).format("YYYY-DD-MM") : "";
       item.studentId.name = `${item?.studentId?.name}`;
     });
   }
-
 
   getCurrentUserId(): string {
     return JSON.parse(localStorage.getItem('user_data')!).user.id;
@@ -161,28 +177,28 @@ export class ApproveListComponent  {
       showCancelButton: true,
       cancelButtonColor: '#d33',
     }).then((result) => {
-      if (result.isConfirmed){
-        this._classService
-        .saveApprovedClasses(element.id, item)
-        .subscribe((_response: any) => {
-          Swal.fire({
-            title: 'Success',
-            text: 'Course approved successfully.',
-            icon: 'success',
-            // confirmButtonColor: '#526D82',
-          });
-          this.getRegisteredClasses();
-        }, (error) => {
-              Swal.fire({
-                title: 'Error',
-                text: 'Failed to approve course. Please try again.',
-                icon: 'error',
-                // confirmButtonColor: '#526D82',
-              });
+      if (result.isConfirmed) {
+        this._classService.saveApprovedClasses(element.id, item).subscribe(
+          (_response: any) => {
+            Swal.fire({
+              title: 'Success',
+              text: 'Course approved successfully.',
+              icon: 'success',
+              // confirmButtonColor: '#526D82',
             });
+            this.getRegisteredClasses();
+          },
+          (error) => {
+            Swal.fire({
+              title: 'Error',
+              text: 'Failed to approve course. Please try again.',
+              icon: 'error',
+              // confirmButtonColor: '#526D82',
+            });
+          }
+        );
       }
     });
- 
   }
 
   Status(element: Student, status: string) {
@@ -202,43 +218,46 @@ export class ApproveListComponent  {
       showCancelButton: true,
       cancelButtonColor: '#d33',
     }).then((result) => {
-      if (result.isConfirmed){
-        this._classService
-        .saveApprovedClasses(element.id, item)
-        .subscribe((response: any) => {
-          Swal.fire({
-            title: 'Success',
-            text: 'Course Withdraw successfully.',
-            icon: 'success',
-            // confirmButtonColor: '#526D82',
-          });
-          this.getRegisteredClasses();
-        }, (error) => {
-          Swal.fire({
-            title: 'Error',
-            text: 'Failed to approve course. Please try again.',
-            icon: 'error',
-            // confirmButtonColor: '#526D82',
-          });
-        });
+      if (result.isConfirmed) {
+        this._classService.saveApprovedClasses(element.id, item).subscribe(
+          (response: any) => {
+            Swal.fire({
+              title: 'Success',
+              text: 'Course Withdraw successfully.',
+              icon: 'success',
+              // confirmButtonColor: '#526D82',
+            });
+            this.getRegisteredClasses();
+          },
+          (error) => {
+            Swal.fire({
+              title: 'Error',
+              text: 'Failed to approve course. Please try again.',
+              icon: 'error',
+              // confirmButtonColor: '#526D82',
+            });
+          }
+        );
       }
     });
-  
   }
   performSearch() {
-    if(this.searchTerm){
-    this.dataSource = this.dataSource?.filter((item: any) =>{
-      console.log("data",item)
-      const searchList = (item.classId?.courseId?.title + item.studentId?.name + item.studentId?.last_name).toLowerCase();
-      return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
-    }
+    if (this.searchTerm) {
+      this.dataSource = this.dataSource?.filter(
+        (item: any) => {
+          console.log('data', item);
+          const searchList = (
+            item.classId?.courseId?.title +
+            item.studentId?.name +
+            item.studentId?.last_name
+          ).toLowerCase();
+          return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1;
+        }
 
-
-    // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+        // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
     } else {
       this.getRegisteredClasses();
-
     }
   }
   private refreshTable() {
@@ -250,13 +269,11 @@ export class ApproveListComponent  {
     return numSelected === numRows;
   }
 
-   /** Selects all rows if they are not all selected; otherwise clear selection. */
-   masterToggle() {
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.dataSource.forEach((row: any) =>
-          this.selection.select(row)
-        );
+      : this.dataSource.forEach((row: any) => this.selection.select(row));
   }
 
   getSessions(element: { classId: { sessions: any[] } }) {
@@ -270,48 +287,60 @@ export class ApproveListComponent  {
 
   exportExcel() {
     //k//ey name with space add in brackets
-   const exportData: Partial<TableElement>[] =
-      this.dataSource.map((user:any) => ({
-        CourseName:user.classId?.courseId?.title,
-        StudentName:  user.studentId?.name,
-        StartDate: user.classStartDate,
-        EndDate: user.classEndDate,
-        RegisteredOn: user.registeredOn,
-      }));
+    const exportData: Partial<TableElement>[] = this.dataSource.map(
+      (user: any) => ({
+        'Student Name': user.studentId?.name,
+        'Course Name': user.classId?.courseId?.title,
+        'Course Fee': user.classId?.courseId?.fee,
+        'Instructor Fee': user.classId?.instructorCost,
+        'Start Date': user.classStartDate,
+        'End Date': user.classEndDate,
+        'Registered On': user.registeredOn,
+        Status: user.status,
+      })
+    );
     TableExportUtil.exportToExcel(exportData, 'excel');
   }
   // pdf
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Course Name', 'Student Name', 'Start Date','End date', 'Registered Date']];
-    const data = this.dataSource.map((user:any) =>
-      [user.classId?.courseId?.title,
-        user.studentId?.name,
-        user.classStartDate,
-       user.classEndDate,
-     user.registeredOn,
-
-    ] );
+    const headers = [
+      [
+        'Student Name',
+        'Course Name',
+        'Course Fee',
+        'Instructor Fee',
+        'Start Date',
+        'End date',
+        'Registered Date',
+      ],
+    ];
+    const data = this.dataSource.map((user: any) => [
+      user.studentId?.name,
+      user.classId?.courseId?.title,
+      user.classId?.courseId?.fee,
+      user.classId?.instructorCost,
+      user.classStartDate,
+      user.classEndDate,
+      formatDate(new Date(user.registeredOn), 'yyyy-MM-dd', 'en') || '',
+    ]);
     //const columnWidths = [60, 80, 40];
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
 
-    // Add a page to the document (optional)
-    //doc.addPage();
+
 
     // Generate the table using jspdf-autotable
     (doc as any).autoTable({
       head: headers,
       body: data,
       startY: 20,
-
-
-
+      headStyles: {
+        fontSize: 10,
+        cellWidth: 'wrap',
+      },
     });
 
     // Save or open the PDF
     doc.save('approve-list.pdf');
   }
-
-
-
 }
