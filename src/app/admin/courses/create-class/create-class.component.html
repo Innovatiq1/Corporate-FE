@@ -18,7 +18,10 @@
                 <ng-template matSteplabel>{{classId? "Edit Class" :"Create Class" }}</ng-template>
                 <div class="body">
                   <!-- <form class="m-4" [formGroup]="firstFormGroup" (ngSubmit)="onSubmit()"> -->
+                  <!-- <div class="row"> -->
+                    <!-- <div class="row"> -->
                   <div class="row">
+
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
                       <label>Course Name<span class="mandatory">&nbsp;*</span></label>
                       <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -74,9 +77,9 @@
                         </mat-select>
                       </mat-form-field>
                     </div> -->
-                  </div>
+                  <!-- </div> -->
 
-                  <div class="row">
+                
                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
                       <label>Minimum students<span class="mandatory">&nbsp;*</span></label>
                       <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -102,7 +105,7 @@
                         </mat-error>
                       </mat-form-field>
                     </div>
-                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2">
+                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-2" *ngIf="labelStatusCheck('Class Type')">
                       <label>Class Type</label>
                       <mat-form-field class="example-full-width mb-3" appearance="outline">
                         <mat-select formControlName="classType">
@@ -111,11 +114,10 @@
                         </mat-select>
                       </mat-form-field>
                     </div>
-                  </div>
+                  <!-- </div> -->
 
 
-                  <div class="row">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Select Currency Type')">
                       <label>Select Currency</label>
                       <mat-form-field class="example-full-width mb-3" appearance="outline">
                         <mat-select formControlName="currency">
@@ -168,13 +170,13 @@
                     </mat-form-field>
                   </div>
 
-                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-3">
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-3" *ngIf="labelStatusCheck('Is Guaranteed To Run')">
                     <section class="example-section">
                       <mat-checkbox class="example-margin" formControlName="isGuaranteedToRun"><span class="fs-6">Is
                           Guaranteed To Run</span></mat-checkbox>
                     </section>
                   </div>
-                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-3">
+                  <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mt-3" *ngIf="labelStatusCheck('External Room')">
                     <section class="example-section">
                       <mat-checkbox class="example-margin" formControlName="externalRoom"><span class="fs-6">External
                           Room</span></mat-checkbox>
