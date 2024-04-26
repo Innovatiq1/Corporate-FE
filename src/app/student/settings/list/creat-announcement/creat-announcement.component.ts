@@ -101,7 +101,9 @@ export class CreatAnnouncementComponent {
   }
   test(event: any) {
   }
-
+cancel(){
+  window.history.back();
+}
 
 
   constructor(private router: Router, public classService: ClassService, public utils: UtilsService, private formBuilder: FormBuilder,
