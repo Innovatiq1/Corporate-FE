@@ -29,6 +29,7 @@ export class AssesmentQuestionsComponent {
   configuration: any;
   configurationSubscription!: Subscription;
   defaultTimer: string = '';
+  defaultRetake: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,7 +50,8 @@ export class AssesmentQuestionsComponent {
 
     this.questionFormTab3 = this.formBuilder.group({
       name: ['', Validators.required],
-      timer: [''], 
+      timer: [''],
+      retake:[''], 
       questions: this.formBuilder.array([]),
     });
     if (!this.editUrl) {
@@ -64,6 +66,7 @@ export class AssesmentQuestionsComponent {
 
   ngOnInit(): void { 
     this.getTimer()
+    this.getRetakes()
     this.loadData()
    }
 
@@ -80,6 +83,18 @@ export class AssesmentQuestionsComponent {
         this.defaultTimer = this.configuration[1].value;
         this.questionFormTab3.patchValue({
           timer: this.defaultTimer,
+        })
+      }
+    });
+  }
+
+  getRetakes() : any {
+    this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
+      this.configuration = configuration;
+      if (this.configuration?.length > 0) {
+        this.defaultRetake = this.configuration[2].value;
+        this.questionFormTab3.patchValue({
+          retake: this.defaultRetake,
         })
       }
     });
@@ -238,6 +253,7 @@ export class AssesmentQuestionsComponent {
       const payload = {
         name: this.questionFormTab3.value.name,
         timer: this.questionFormTab3.value.timer,
+        retake: this.questionFormTab3.value.retake,
         status: 'open',
         questions: this.questionFormTab3.value.questions.map((v: any) => ({
           options: v.options,

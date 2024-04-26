@@ -55,8 +55,18 @@
                               <ng-container matColumnDef="Exam">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Exam</mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                  <button [disabled]="row.is_exam_completed || row.is_tutorial"  [routerLink]="['/student/exam-questions/',  row.id, row?.studentId?.id, row?.courseId?._id, row?.courseId?.exam_assessment?.id]" mat-flat-button color="primary">
-                                    Take Exam Test
+                                  <button *ngIf="row.is_tutorial" 
+                                  (click)="onDelete(row.id)" 
+                                  mat-flat-button 
+                                  color="warn">
+                                  Delete Tutorial
+                                  </button>
+                                  <button *ngIf="!row.is_tutorial"
+                                  [disabled]="row.is_exam_completed" 
+                                  [routerLink]="['/student/exam-questions/',  row.id, row?.studentId?.id, row?.courseId?._id, row?.courseId?.exam_assessment?.id]" 
+                                  mat-flat-button 
+                                  color="primary">
+                                   Take Exam Test
                                   </button>
                                 </mat-cell>
                               </ng-container>

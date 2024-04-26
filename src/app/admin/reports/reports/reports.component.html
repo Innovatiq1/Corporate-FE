@@ -6,7 +6,7 @@
             </app-breadcrumb>
         </div>
         <div class="payroll-summary-card" style="width: 95%;">
-            <form (ngSubmit)="generateReport()">
+            <form [formGroup]="reportForm" (ngSubmit)="generateReport()">
                 
                 <!-- Row 1 -->
                 
@@ -14,29 +14,59 @@
              
                 <div class="row mb-2">
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                        <label>User Name <span class="mandatory">*</span></label>
+                        <label>Users </label>
                         <mat-form-field class="example-full-width mb-3" appearance="outline">
-                            <mat-select required>
-                                <mat-option value="bartender">Bartender</mat-option>
-                                <mat-option value="server">Server</mat-option>
+                            <mat-select (selectionChange)="onSelectionChange($event,'users')"  formControlName ="users" multiple>
+                                <mat-option *ngFor="let user of users" [value]="user.name">{{ user.name }}</mat-option>
+                                <!-- <mat-option value="server">Server</mat-option> -->
                             </mat-select>
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                        <label>Program name <span class="mandatory">*</span></label>
+                        <label>Program name </label>
                         <mat-form-field class="example-full-width mb-3" appearance="outline">
-                            <mat-select required>
-                                <mat-option value="bartender">Bartender</mat-option>
-                                <mat-option value="server">Server</mat-option>
-                            </mat-select>
+                            <mat-select (selectionChange)="onSelectionChange($event,'program')" formControlName ="program" multiple>
+                                <mat-option *ngFor="let title of programList" [value]="title.title"> {{title.title | titlecase}} </mat-option>
+                              </mat-select>
                         </mat-form-field>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                        <label> Course name <span class="mandatory">*</span></label>
+                        <label> Course name </label>
                         <mat-form-field class="example-full-width mb-3" appearance="outline">
-                            <mat-select required>
-                                <mat-option value="bartender">Bartender</mat-option>
-                                <mat-option value="server">Server</mat-option>
+                            <mat-select (selectionChange)="onSelectionChange($event,'course')" formControlName ="course" multiple>
+                                <mat-option *ngFor="let title of courseList" [value]="title.title"> {{title.title | titlecase}} </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <!-- Add other columns as needed -->
+                </div>
+                <div class="row mb-2">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>Department </label>
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select formControlName="department" multiple >
+                                <mat-option [value]="dept.department" *ngFor="let dept of dept">
+                                 {{dept.department }}
+                                </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>User group </label>
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select formControlName="userGroupId" multiple>
+                                <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">All</mat-option>
+                                <mat-option [value]="userGroup.id" *ngFor="let userGroup of userGroups">
+                                 {{userGroup.group_name }}
+                                </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+                        <label>Role</label>
+                        <mat-form-field class="example-full-width mb-3" appearance="outline">
+                            <mat-select formControlName="role" multiple>
+                                <mat-option *ngFor="let type of roleNames" [value]="type.roleNames">{{ type?.typeName | titlecase }}</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -44,41 +74,11 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                        <label>Department <span class="mandatory">*</span></label>
-                        <mat-form-field class="example-full-width mb-3" appearance="outline">
-                            <mat-select required>
-                                <mat-option value="bartender">Bartender</mat-option>
-                                <mat-option value="server">Server</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                        <label>User group <span class="mandatory">*</span></label>
-                        <mat-form-field class="example-full-width mb-3" appearance="outline">
-                            <mat-select required>
-                                <mat-option value="bartender">Bartender</mat-option>
-                                <mat-option value="server">Server</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                        <label>Role<span class="mandatory">*</span></label>
-                        <mat-form-field class="example-full-width mb-3" appearance="outline">
-                            <mat-select required>
-                                <mat-option value="bartender">Bartender</mat-option>
-                                <mat-option value="server">Server</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <!-- Add other columns as needed -->
-                </div>
-                <div class="row mb-2">
-                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                        <label>Start Date<span class="mandatory">*</span></label>
+                        <label>Start Date</label>
                         <input type="date" formControlName="sessionStartDate" id="date" class="form-control" />
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-                        <label>End Date <span class="mandatory">*</span></label>
+                        <label>End Date </label>
                         <input type="date" formControlName="sessionEndDate" id="date" class="form-control" />
                     </div>
                     <!-- Add other columns as needed -->

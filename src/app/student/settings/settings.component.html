@@ -459,6 +459,60 @@
                 </mat-form-field>
               </div>
             </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="isApprovers">
+              <div class="button-container">
+                <label>Approver 1<span class="mandatory">&nbsp;*</span></label>
+                <!-- <mat-icon class="cursor-pointer" (click)="openDialog()">add</mat-icon> -->
+              </div>
+              <mat-form-field
+                class="example-full-width mb-3"
+                appearance="outline">
+                <mat-select (selectionChange)="onSelectionChange($event,'approver1')"  formControlName ="approver1" required >
+                  <mat-option *ngFor="let user of roUsers" [value]="user.id"> {{user.name | titlecase}} </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="stdForm1.get('approver1')?.hasError('required')"
+                >
+                  Select Any User
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="isApprovers">
+              <div class="button-container">
+                <label>Approver 2 <span class="mandatory">&nbsp;*</span></label>
+                <!-- <mat-icon class="cursor-pointer" (click)="openDialog()">add</mat-icon> -->
+              </div>
+              <mat-form-field
+                class="example-full-width mb-3"
+                appearance="outline">
+                <mat-select (selectionChange)="onSelectionChange($event,'approver2')"  formControlName ="approver2" required >
+                  <mat-option *ngFor="let user of directorUsers" [value]="user.id"> {{user.name | titlecase}} </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="stdForm1.get('approver2')?.hasError('required')"
+                >
+                  Select Any User
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="isApprovers">
+              <div class="button-container">
+                <label>Approver 3 <span class="mandatory">&nbsp;*</span></label>
+                <!-- <mat-icon class="cursor-pointer" (click)="openDialog()">add</mat-icon> -->
+              </div>
+              <mat-form-field
+                class="example-full-width mb-3"
+                appearance="outline">
+                <mat-select (selectionChange)="onSelectionChange($event,'approver3')"  formControlName ="approver3" required >
+                  <mat-option *ngFor="let user of trainingAdminUsers" [value]="user.id"> {{user.name | titlecase}} </mat-option>
+                </mat-select>
+                <mat-error
+                  *ngIf="stdForm1.get('approver3')?.hasError('required')"
+                >
+                  Select Any User
+                </mat-error>
+              </mat-form-field>
+            </div>
             <div class="col-lg-4 col-md-4">
               <div class="form-group">
                 <label>City<span class="mandatory">&nbsp;*</span></label>
@@ -905,6 +959,15 @@
           </div>
         </div>
 
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" (click)="openDialog(assessmentDialog, 'assessment')"> Assessment Retake </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" (click)="openDialog(examAssessmentDialog, 'examAssessment')">Exam Assessment Retake </button>
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showLms">
@@ -1313,6 +1376,38 @@
     <div mat-dialog-actions>
       <button mat-button (click)="dialogRef.close()">Cancel</button>
       <button mat-button (click)="updateCurrency(dialogRef, 'timer')">Update Timer</button>
+    </div>
+  </ng-template>
+
+  <ng-template #assessmentDialog let-dialogRef="dialogRef" let-data>
+    <h2 mat-dialog-title>Select No of Assessment Retakes</h2>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Set Retakes</mat-label>
+        <mat-select [(ngModel)]="selectedAssessmentRetake">
+          <mat-option *ngFor="let code of retakeCodesAssessment" [value]="code">{{code}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="dialogRef.close()">Cancel</button>
+      <button mat-button (click)="updateCurrency(dialogRef, 'assessment')">Update Retake</button>
+    </div>
+  </ng-template>
+
+  <ng-template #examAssessmentDialog let-dialogRef="dialogRef" let-data>
+    <h2 mat-dialog-title>Select No of Exam Assessment Retakes</h2>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <mat-label>Set Retakes</mat-label>
+        <mat-select [(ngModel)]="selectedExamAssessmentRetake">
+          <mat-option *ngFor="let code of retakeCodesAssessment" [value]="code">{{code}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="dialogRef.close()">Cancel</button>
+      <button mat-button (click)="updateCurrency(dialogRef, 'examAssessment')">Update Retake</button>
     </div>
   </ng-template>
 </section>

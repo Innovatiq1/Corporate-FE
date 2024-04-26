@@ -132,6 +132,7 @@ pageSizeChange($event: any) {
 
 
 getAllRequestsByDirector() {
+  console.log("pagination")
   let directorId = localStorage.getItem('id');
   this.etmsService.getDeptBudgetRequestsByDirector({...this.coursePaginationModel,directorId,directorApproval:"Pending"}).subscribe(
     (response) => {

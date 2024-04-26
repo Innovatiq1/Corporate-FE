@@ -3,6 +3,7 @@ import { StudentsService } from 'app/admin/students/students.service';
 import Swal from 'sweetalert2';
 import { AuthenService } from '@core/service/authen.service';
 import { Router } from '@angular/router';
+import { ClassService } from 'app/admin/schedule-class/class.service';
 
 @Component({
   selector: 'app-questions',
@@ -35,7 +36,13 @@ export class QuestionTestComponent implements OnInit, OnDestroy {
   courseId!: string;
 
 
-  constructor(private studentService: StudentsService, private authenService:AuthenService,private router: Router) {
+  constructor(
+    private studentService: StudentsService,
+    private authenService:AuthenService,
+    private router: Router,
+    private classService : ClassService
+    
+  )  {
     let urlPath = this.router.url.split('/');
 
   }
@@ -47,7 +54,8 @@ export class QuestionTestComponent implements OnInit, OnDestroy {
     }));
     this.user_name = this.authenService.currentUserValue.user.name
     let urlPath = this.router.url.split('/');
-    this.courseId = urlPath[urlPath.length - 1];
+    this.classId = urlPath[urlPath.length - 1];
+    this.getClassDetails()
   }
 
   startTimer() {
@@ -118,6 +126,12 @@ export class QuestionTestComponent implements OnInit, OnDestroy {
 
       }
     });
+  }
+
+  getClassDetails(){
+    this.classService.getClassById(this.classId).subscribe((response)=>{
+      this.courseId=response.courseId.id
+    })
   }
 
 

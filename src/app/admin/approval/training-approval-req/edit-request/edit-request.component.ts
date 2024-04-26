@@ -101,6 +101,7 @@ export class EditRequestComponent {
     let roId = localStorage.getItem('id')
     this.etmsService.getAllRequestsByRo(roId).subscribe(response => {
       this.dataSource = response.data.docs;
+      console.log("dataS",this.dataSource)
     }, () => {
     });
   }

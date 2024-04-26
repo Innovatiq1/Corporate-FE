@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoService } from './logo.service';
 import { StudentsService } from 'app/admin/students/students.service';
+import { UserService } from '@core/service/user.service';
 
 @Component({
   selector: 'app-settings',
@@ -85,14 +86,30 @@ export class SettingsComponent {
   showForms: boolean = false;
   showSidemenu: boolean = false;
   showCustomForms: boolean = false;
+  isApprovers: boolean = false;
+  selectedCreators: any = [];
+  users: any;
+  vendors: any;
 
   currentContent: number = 1;
   currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
   timerValues: string[] = ['15', '30', '45', '60', '90', '120', '150'];
+  retakeCodesAssessment: string[] = ['1', '2', '3', '4', '5'];
   selectedCurrency: string = "";
   selectedTimer: string = "";
+  selectedAssessmentRetake: string = "";
+  selectedExamAssessmentRetake: string = "";
   sidemenu: any;
   dept: any;
+  ro: any;
+  roName: any;
+  director: any;
+  directorName: any;
+  trainingAdmin: any;
+  trainingAdminName: any;
+  roUsers: any;
+  directorUsers: any;
+  trainingAdminUsers: any;
   
   constructor(
     private studentService: StudentsService,
@@ -103,6 +120,7 @@ export class SettingsComponent {
     private authenservice: AuthenService,
     private courseService: CourseService,
     private logoService: LogoService,
+    private userService: UserService,
     public dialog: MatDialog
   ) {
     let urlPath = this.router.url.split('/');
@@ -366,6 +384,9 @@ export class SettingsComponent {
 
       last_name: [''],
       department: ['', Validators.required],
+      approver1: ['', Validators.required],
+      approver2: ['', Validators.required],
+      approver3: ['', Validators.required],
       mobile: [''],
       city_name: ['', [Validators.required]],
       country_name: ['', [Validators.required]],
@@ -394,11 +415,14 @@ export class SettingsComponent {
   ngOnInit() {
     this.getUserProfile();
     this.getSidemenu();
+    this.getAllUsers();
     let role = localStorage.getItem('user_type')
     if(role == 'admin'){
       this.isAdmin = true
     }else if (role == 'student'){
       this.isAdmin = false;
+    }else if( !(role == 'admin' || role == 'Student' || role == 'Instructor')){
+      this.isApprovers = true;
     }
     if(this.accountUrl){
       this.showAccountSettings = true;
@@ -516,6 +540,46 @@ export class SettingsComponent {
       this.dept = response.data.docs;
     });
   }
+  onSelectionChange(event: any, field: any) {
+   
+    if (field == 'approver1') {
+      const selectedApprover1Id = event.value;
+      const selectedApprover1 = this.roUsers.find((user: { id: any; }) => user.id === selectedApprover1Id);
+      if (selectedApprover1) {
+        this.ro = selectedApprover1Id;
+        this.roName = selectedApprover1.name
+      }
+    }
+    if (field == 'approver2') {
+      const selectedApprover2Id = event.value;
+      const selectedApprover2 = this.directorUsers.find((user: { id: any; }) => user.id === selectedApprover2Id);
+      if (selectedApprover2) {
+        this.director = selectedApprover2Id;
+        this.directorName = selectedApprover2.name
+      }
+    }
+    if (field == 'approver3') {
+      const selectedApprover3Id = event.value;
+      const selectedApprover3 = this.trainingAdminUsers.find((user: { id: any; }) => user.id === selectedApprover3Id);
+      if (selectedApprover3) {
+        this.trainingAdmin = selectedApprover3Id;
+        this.trainingAdminName = selectedApprover3.name
+      }
+    }
+  
+  }
+  getAllUsers() {
+    this.userService.getAllUsersByRole('RO').subscribe((response: any) => {
+      this.roUsers = response?.results;
+    });
+    this.userService.getAllUsersByRole('Director').subscribe((response: any) => {
+      this.directorUsers = response?.results;
+    });
+    this.userService.getAllUsersByRole('Training Administrator').subscribe((response: any) => {
+      this.trainingAdminUsers = response?.results;
+    });
+
+  }
   patchValues() {
     this.studentId = localStorage.getItem('id');
     // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
@@ -523,13 +587,17 @@ export class SettingsComponent {
       this.editData = res;
       this.avatar = this.editData.avatar;
       this.uploaded = this.avatar?.split('/');
-      let image  = this.uploaded.pop();
-      this.uploaded= image.split('\\');
-      this.uploadedImage = this.uploaded.pop();
+      let image  = this.uploaded?.pop();
+      this.uploaded= image?.split('\\');
+      this.uploadedImage = this.uploaded?.pop();
       const currencyConfig = this.editData.configuration.find((config: any) => config.field === 'currency');
       const selectedCurrency = currencyConfig ? currencyConfig.value : null;
       const timerConfig = this.editData.configuration.find((config: any) => config.field === 'timer');
       const selectedTimer = timerConfig ? timerConfig.value : null;
+      const assessmentConfig = this.editData.configuration.find((config: any) => config.field === 'assessment');
+      const selectedAssessmentRetake = assessmentConfig ? assessmentConfig.value : null;
+      const examassessmentConfig = this.editData.configuration.find((config: any) => config.field === 'examAssessment');
+      const selectedExamAssessmentRetake = examassessmentConfig ? examassessmentConfig.value : null;
 
       this.stdForm.patchValue({
         name: this.editData.name,
@@ -543,6 +611,9 @@ export class SettingsComponent {
         gender: this.editData.gender,
         mobile: this.editData.mobile,
         department:this.editData.department,
+        approver1: this.editData.ro,
+        approver2: this.editData.director,
+        approver3: this.editData.trainingAdmin,
         email: this.editData.email,
         country_name: this.editData.country_name,
         city_name: this.editData.city_name,
@@ -552,6 +623,9 @@ export class SettingsComponent {
       });
       this.selectedCurrency = selectedCurrency;
       this.selectedTimer = selectedTimer;
+      this.selectedAssessmentRetake = selectedAssessmentRetake
+      this.selectedExamAssessmentRetake = selectedExamAssessmentRetake
+
     });
   }
   onFileUpload(event: any) {
@@ -644,10 +718,16 @@ export class SettingsComponent {
   onSubmit1() {
     if (!this.stdForm1.invalid) {
       // No need to call uploadVideo() here since it's not needed
-        const userData: Student = this.stdForm1.value;
+        const userData: any = this.stdForm1.value;
         userData.avatar = this.avatar; // Assuming this.avatar contains the URL of the uploaded thumbnail
         userData.type = this.editData.type;
         userData.role = this.editData.role;
+        userData.ro = this.ro;
+        userData.roName = this.roName;
+        userData.director = this.director;
+        userData.directorName = this.directorName;
+        userData.trainingAdmin = this.trainingAdmin;
+        userData.trainingAdminName = this.trainingAdminName
         Swal.fire({
           title: 'Are you sure?',
           text: 'Do you want to update!',
@@ -739,9 +819,8 @@ export class SettingsComponent {
           });
         }
       );
-    } else {
+    } else if (value === "timer") {
       const selectedTimer = this.selectedTimer;
-      console.log('selectedTimer: ', selectedTimer);
       this.courseService.createTimer({ value: selectedTimer }).subscribe(
         response => {
           Swal.fire({
@@ -750,6 +829,44 @@ export class SettingsComponent {
             icon: 'success'
           });
           dialogRef.close(selectedTimer);
+        },
+        error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error,
+          });
+        }
+      );
+    } else if (value === "assessment") {
+      const selectedAssessmentRetake = this.selectedAssessmentRetake;
+      this.courseService.createAssessment({ value: selectedAssessmentRetake }).subscribe(
+        response => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Assessment Configuration Success',
+            icon: 'success'
+          });
+          dialogRef.close(selectedAssessmentRetake);
+        },
+        error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error,
+          });
+        }
+      );
+    } else if (value === "examAssessment") {
+      const selectedExamAssessmentRetake = this.selectedExamAssessmentRetake;
+      this.courseService.createExamAssessment({ value: selectedExamAssessmentRetake }).subscribe(
+        response => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Assessment Configuration Success',
+            icon: 'success'
+          });
+          dialogRef.close(selectedExamAssessmentRetake);
         },
         error => {
           Swal.fire({
@@ -775,7 +892,7 @@ export class SettingsComponent {
           this.selectedCurrency = result;
         }
       });
-    } else {
+    } else if(value === 'timer') {
       const dialogRef = this.dialog.open(templateRef, {
         width: '500px',
         data: { selectedTimer: this.selectedTimer }
@@ -783,6 +900,26 @@ export class SettingsComponent {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.selectedTimer = result;
+        }
+      });
+    } else if(value === 'assessment') {
+      const dialogRef = this.dialog.open(templateRef, {
+        width: '500px',
+        data: { selectedAssessmentRetake: this.selectedAssessmentRetake }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.selectedAssessmentRetake = result;
+        }
+      });
+    } else if(value === 'examAssessment') {
+      const dialogRef = this.dialog.open(templateRef, {
+        width: '500px',
+        data: { selectedExamAssessmentRetake: this.selectedExamAssessmentRetake }
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.selectedExamAssessmentRetake = result;
         }
       });
     }

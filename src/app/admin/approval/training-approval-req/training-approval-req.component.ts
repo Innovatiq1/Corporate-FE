@@ -319,10 +319,12 @@ implements OnInit{
         }
         if (this.ro) {
           this.getAllRequestsByRo();
+          this.getCount();
         } else if (this.director) {
           this.getAllRequestsByDirector();
+          this.getCount();
         } else if (this.trainingAdmin) {
-          this.getAllRequestsByTrainingAdmin();
+          this.getAllRequestsByTrainingAdmin();this.getCount();
         }
       }
     });
@@ -397,10 +399,14 @@ implements OnInit{
         }
         if (this.ro) {
           this.getAllRequestsByRo();
+          console.log("rejected")
+          this.getCount();
         } else if (this.director) {
           this.getAllRequestsByDirector();
+          this.getCount();
         } else if (this.trainingAdmin) {
           this.getAllRequestsByTrainingAdmin();
+          this.getCount();
         }
       }
     });
