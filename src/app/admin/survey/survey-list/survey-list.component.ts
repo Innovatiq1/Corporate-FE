@@ -27,9 +27,10 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-survey-list',
   templateUrl: './survey-list.component.html',
-  styleUrls: ['./survey-list.component.scss']
+  styleUrls: ['./survey-list.component.scss'],
 })
-export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
+export class SurveyListComponent
+  extends UnsubscribeOnDestroyAdapter
   implements OnInit
 {
   displayedColumns = [
@@ -56,7 +57,7 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
     public dialog: MatDialog,
     public surveyService: SurveyService,
     private snackBar: MatSnackBar,
-    private router : Router
+    private router: Router
   ) {
     super();
   }
@@ -74,7 +75,9 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
     this.loadData();
   }
   editCall(row: SurveyBuilderModel) {
-    this.router.navigate(['/admin/survey/view-survey'], {queryParams: {id : row}})
+    this.router.navigate(['/admin/survey/view-survey'], {
+      queryParams: { id: row },
+    });
     // this.id = row.id;
     // let tempDirection: Direction;
     // if (localStorage.getItem('isRtl') === 'true') {
@@ -111,8 +114,10 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
     //   }
     // });
   }
-  getStudentName(data:any){
-    return  data.studentId ? `${data?.studentId?.name} ${data?.studentId?.last_name}` : `${data?.studentFirstName} ${data?.studentLastName}`
+  getStudentName(data: any) {
+    return data.studentId
+      ? `${data?.studentId?.name} ${data?.studentId?.last_name}`
+      : `${data?.studentFirstName} ${data?.studentLastName}`;
   }
   deleteItem(id: SurveyBuilderModel) {
     Swal.fire({
@@ -123,33 +128,34 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
       showCancelButton: true,
       cancelButtonColor: '#d33',
     }).then((result) => {
-      if (result.isConfirmed){
-        this.surveyService.deleteSurveyBuilders(id).subscribe(response => {
+      if (result.isConfirmed) {
+        this.surveyService.deleteSurveyBuilders(id).subscribe((response) => {
           console.log(response);
-          if (response.success){
-            Swal.fire(
-              'Deleted!',
-              'Survey entry has been deleted.',
-              'success'
-            );
+          if (response.success) {
+            Swal.fire('Deleted!', 'Survey entry has been deleted.', 'success');
             this.loadData();
           }
         });
       }
     });
-
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Course Name','Student Name']];
-    console.log(this.dataSource)
-    const data = this.dataSource.filteredData.map((user:any) =>
-      [user.courseName,user.studentFirstName] );
+    const headers = [['Student Name','Course/Program Name' ]];
+    console.log(this.dataSource);
+    const data = this.dataSource.filteredData.map((user: any) => [
+      user.studentFirstName,
+      user.courseName,
+    ]);
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
     (doc as any).autoTable({
       head: headers,
       body: data,
       startY: 20,
+      headStyles: {
+        fontSize: 10,
+        cellWidth: 'wrap',
+      },
     });
     doc.save('SurveyList.pdf');
   }
@@ -217,8 +223,9 @@ export class SurveyListComponent extends UnsubscribeOnDestroyAdapter
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
-        CourseName: x.courseName,
-        StudentName:x.studentFirstName,
+        'Student Name': x.studentFirstName,
+        'Course Name': x.courseName,
+       
       }));
 
     TableExportUtil.exportToExcel(exportData, 'excel');
@@ -284,7 +291,9 @@ export class ExampleDataSource extends DataSource<SurveyBuilderModel> {
         this.filteredData = this.exampleDatabase.data
           .slice()
           .filter((staff: SurveyBuilderModel) => {
-            const searchStr = (staff.courseName + staff.studentFirstName)?.toLowerCase();
+            const searchStr = (
+              staff.courseName + staff.studentFirstName
+            )?.toLowerCase();
             return searchStr?.indexOf(this.filter?.toLowerCase()) !== -1;
           });
         // Sort filtered data
@@ -317,7 +326,6 @@ export class ExampleDataSource extends DataSource<SurveyBuilderModel> {
         case 'name':
           [propertyA, propertyB] = [a.title, b.title];
           break;
-
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
       const valueB = isNaN(+propertyB) ? propertyB : +propertyB;

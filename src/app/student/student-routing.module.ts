@@ -475,7 +475,26 @@ const routes: Routes = [
     path: 'settings/edit-staff',
     component: EditStaffComponent
   },
-
+  {
+    path: 'settings/course-forms',
+    component: SettingsComponent,
+  },
+  {
+    path: 'settings/program-forms',
+    component: SettingsComponent,
+  },
+  {
+    path: 'settings/users-forms',
+    component: SettingsComponent,
+  },
+  {
+    path: 'settings/finance-forms',
+    component: SettingsComponent,
+  },
+  {
+    path: 'settings/banner-forms',
+    component: SettingsComponent,
+  },
   
     {
     path: 'banners',

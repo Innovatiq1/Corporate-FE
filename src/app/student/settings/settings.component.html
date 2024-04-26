@@ -1,5 +1,5 @@
 <section class="content"
-  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !show2FaSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig &&!showForms  && !showSidemenu">
+  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !show2FaSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig &&!showForms  && !showSidemenu && !showCourseForms && !showProgramForms && !showUsersForms && !showFinanceForms && !showBannerForms">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
@@ -240,7 +240,7 @@
     <!-- </div> -->
 
     <div class="card"
-      *ngIf="!showAccountSettings && !showProfileSettings && !show2FaSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers &&!showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig && !showForms && !showSidemenu">
+      *ngIf="!showAccountSettings && !showProfileSettings && !show2FaSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers &&!showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig && !showForms && !showSidemenu && !showCourseForms && !showProgramForms && !showUsersForms && !showFinanceForms && !showBannerForms">
       <div class="header">
         <h2>Settings</h2>
       </div>
@@ -1009,6 +1009,31 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
+            <button id="saved" (click)="navigateToCourseFormsSettings()">Course </button>
+          </div>
+          <div class="col-md-5" >
+            <button id="saved" (click)="navigateToProgramFormsSettings()">Program </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" (click)="navigateToUsersFormsSettings()">Users </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" (click)="navigateToFinanceFormsSettings()">Finance </button>
+          </div>
+        </div>
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" (click)="navigateToBannerFormsSettings()">Banners </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/settings/create-announcement']">Announcement </button>
+          </div>
+        
+        </div>
+        <!-- <div class="row px-4">
+          <div class="col-md-6 banner">
             <button id="saved" [routerLink]="['/admin/courses/add-course']">Course Creation </button>
           </div>
           <div class="col-md-5">
@@ -1082,12 +1107,172 @@
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
             <button id="saved" [routerLink]="['/admin/banners/create-student-banner']">Student Banner </button>
-            <!-- <button id="no-link">Course Kit </button> -->
+            <!-- <button id="no-link">Course Kit </button> --
+          </div>
+        </div> -->
+
+        <div class="col-md-12 py-3">
+          <button mat-raised-button id="back" [routerLink]="['/student/settings/configuration']">Back</button>
+        </div>
+
+      </div>
+    </div>
+    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showCourseForms">
+      <div class="row">
+        <div class="col-md-8">
+          <label class="py-4 px-5">Course Forms</label>
+        </div>
+        <div class="col-md-2 my-3 mx-auto">
+          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+        </div>
+      </div>
+      <div class="body">
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/admin/courses/add-course']">Course Creation </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved"  [routerLink]="['/admin/program/create-class']">Course Class Creation  </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/admin/courses/create-course-kit']">Course Kit </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/settings/create-categories']">Categories </button>
+          </div>
+        </div>
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/timetable/course-exam-add']">Course Exam Schedule </button>
           </div>
         </div>
 
         <div class="col-md-12 py-3">
-          <button mat-raised-button id="back" [routerLink]="['/student/settings/configuration']">Back</button>
+          <button mat-raised-button id="back" [routerLink]="['/student/settings/customization-forms']">Back</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showProgramForms">
+      <div class="row">
+        <div class="col-md-8">
+          <label class="py-4 px-5">Program Forms</label>
+        </div>
+        <div class="col-md-2 my-3 mx-auto">
+          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+        </div>
+      </div>
+      <div class="body">
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/admin/program/create-program']"> Program Creation </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved"  [routerLink]="['/admin/program/create-class']">Program Class Creation</button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/timetable/program-exam-add']">Program Exam Schedule </button>
+          </div>
+         
+        </div>
+
+        <div class="col-md-12 py-3">
+          <button mat-raised-button id="back" [routerLink]="['/student/settings/customization-forms']">Back</button>
+        </div>
+
+      </div>
+    </div>
+    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showUsersForms">
+      <div class="row">
+        <div class="col-md-8">
+          <label class="py-4 px-5">Users Forms</label>
+        </div>
+        <div class="col-md-2 my-3 mx-auto">
+          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+        </div>
+      </div>
+      <div class="body">
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/admin/users/create-all-users']">User </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/admin/users/add-student']">Student </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/admin/users/add-instructor']">Instructor </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/admin/users/add-staff']">Staff </button>
+          </div>
+        </div>
+
+        <div class="col-md-12 py-3">
+          <button mat-raised-button id="back" [routerLink]="['/student/settings/customization-forms']">Back</button>
+        </div>
+
+      </div>
+    </div>
+    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showFinanceForms">
+      <div class="row">
+        <div class="col-md-8">
+          <label class="py-4 px-5">Finance Forms</label>
+        </div>
+        <div class="col-md-2 my-3 mx-auto">
+          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+        </div>
+      </div>
+      <div class="body">
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/admin/budgets/create-budget']">Budget Creation</button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/admin/budgets/create-dept-budget-request']">Department Budget Creation</button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/admin/budgets/create-request']">Training Request Creation</button>
+          </div>
+        
+        </div>
+
+        <div class="col-md-12 py-3">
+          <button mat-raised-button id="back" [routerLink]="['/student/settings/customization-forms']">Back</button>
+        </div>
+
+      </div>
+    </div>
+    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showBannerForms">
+      <div class="row">
+        <div class="col-md-8">
+          <label class="py-4 px-5">Banner Forms</label>
+        </div>
+        <div class="col-md-2 my-3 mx-auto">
+          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+        </div>
+      </div>
+      <div class="body">
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/student/banners/settings/create-instructor-banner']">Instructor Banners </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/banners/settings/create-student-banner']">Student Banner </button>
+          </div>
+        </div>
+       
+
+        <div class="col-md-12 py-3">
+          <button mat-raised-button id="back" [routerLink]="['/student/settings/customization-forms']">Back</button>
         </div>
 
       </div>
@@ -1115,7 +1300,7 @@
             <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Course Class Creation Form'}">Course Class Creation  </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Course Class Creation Form'}">Program Class Creation</button>
+            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Program Class Creation Form'}">Program Class Creation</button>
           </div>
         </div>
         <div class="row px-4">
@@ -1346,6 +1531,7 @@
 
     </div>
 
+ 
   </div>
   <ng-template #currencyDialog let-dialogRef="dialogRef" let-data>
     <h2 mat-dialog-title>Select Currency</h2>

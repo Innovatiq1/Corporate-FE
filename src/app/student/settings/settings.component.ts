@@ -69,6 +69,11 @@ export class SettingsComponent {
   sidemenuUrl: any;
   allUsersUrl: any;
   customFormsUrl: any;
+  courseFormsUrl: any;
+  programFormsUrl: any;
+  usersFormsUrl: any;
+  financeFormsUrl: any;
+  bannerFormsUrl: any;
   faUrl: any;
   showAccountSettings: boolean = false;
   showProfileSettings: boolean = false;
@@ -86,6 +91,11 @@ export class SettingsComponent {
   showForms: boolean = false;
   showSidemenu: boolean = false;
   showCustomForms: boolean = false;
+  showCourseForms: boolean = false;
+  showProgramForms: boolean = false;
+  showUsersForms: boolean = false;
+  showFinanceForms: boolean = false;
+  showBannerForms: boolean = false;
   isApprovers: boolean = false;
   selectedCreators: any = [];
   users: any;
@@ -147,6 +157,11 @@ export class SettingsComponent {
     this.allUsersUrl = urlPath.includes('all-user');
     this.customFormsUrl = urlPath.includes('customization-forms');
     this.faUrl = urlPath.includes('2-factor-authentication');
+    this.courseFormsUrl = urlPath.includes('course-forms');
+    this.programFormsUrl = urlPath.includes('program-forms');
+    this.usersFormsUrl = urlPath.includes('users-forms');
+    this.financeFormsUrl = urlPath.includes('finance-forms');
+    this.bannerFormsUrl = urlPath.includes('banner-forms');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -372,6 +387,56 @@ export class SettingsComponent {
       ];
       this.isAdmin = true;
     }
+    if (this.courseFormsUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Customize'],
+          active: 'Course Forms',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.programFormsUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Customize'],
+          active: 'Program Forms',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.usersFormsUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Customize'],
+          active: 'Users Forms',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.financeFormsUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Customize'],
+          active: 'Finance Forms',
+        },
+      ];
+      this.isAdmin = true;
+    }
+    if (this.bannerFormsUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Customize'],
+          active: 'Banner Forms',
+        },
+      ];
+      this.isAdmin = true;
+    }
     this.patchValues(),
       //this.patchValues1()
       (this.stdForm = this.fb.group({
@@ -472,6 +537,21 @@ export class SettingsComponent {
     if(this.faUrl){
       this.show2FaSettings = true;
     }
+    if(this.courseFormsUrl){
+      this.showCourseForms = true;
+    }
+    if(this.programFormsUrl){
+      this.showProgramForms = true;
+    }
+    if(this.usersFormsUrl){
+      this.showUsersForms = true;
+    }
+    if(this.financeFormsUrl){
+      this.showFinanceForms = true;
+    }
+    if(this.bannerFormsUrl){
+      this.showBannerForms = true;
+    }
     this.getDepartments();
   }
   navigateToAccountSettings() {
@@ -523,6 +603,22 @@ export class SettingsComponent {
   navigateToSidemenuSettings(){
     this.router.navigate(['/student/settings/sidemenu']);
     
+  }
+  navigateToCourseFormsSettings(){
+    console.log("course")
+    this.router.navigate(['/student/settings/course-forms']);
+  }
+  navigateToProgramFormsSettings(){
+    this.router.navigate(['/student/settings/program-forms']);
+  }
+  navigateToUsersFormsSettings(){
+    this.router.navigate(['/student/settings/users-forms']);
+  }
+  navigateToFinanceFormsSettings(){
+    this.router.navigate(['/student/settings/finance-forms']);
+  }
+  navigateToBannerFormsSettings(){
+    this.router.navigate(['/student/settings/banner-forms']);
   }
  
 
