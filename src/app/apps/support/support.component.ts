@@ -58,15 +58,12 @@ export class SupportComponent implements OnInit {
 
   listOfTicket() {
     this.ticketService.getAllTickets().subscribe((res) => {
-      console.log('tickets', res.data.docs);
       this.dataSource = res.data.docs;
       this.totalTickets = this.dataSource.length;
-      console.log('tickets12', this.totalTickets);
     });
   }
 
   view(id: any) {
-    console.log('id', id);
     this.router.navigate(['apps/inbox'],{queryParams:{id:id}});
   }
 

@@ -142,7 +142,7 @@ export class WelcomeMailComponent {
         obj.insertaction = 'welcome_mail_template';
         this.emailConfigurationService.updateForgetPasswordTemplate(obj, this.id).subscribe(
           (res) => {
-            console.log(res);
+            
             Swal.fire({
               title: 'Successful',
               text: 'Update data Succesfully',

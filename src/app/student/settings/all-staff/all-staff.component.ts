@@ -157,7 +157,7 @@ export class AllstaffComponent
       const index: number = this.dataSource.renderedData.findIndex(
         (d) => d === item
       );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+      
       this.exampleDatabase?.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<Staff>(true, []);
@@ -212,7 +212,7 @@ export class AllstaffComponent
   generatePdf() {
     const doc = new jsPDF();
     const headers = [['Name','Designation','Mobile','Email','Joining Date','Salary']];
-    console.log(this.dataSource)
+    
     const data = this.dataSource.filteredData.map((x:any) =>
       [x.name,
         x.role,

@@ -220,7 +220,7 @@ export class AllStudentsComponent
       const index: number = this.dataSource.renderedData.findIndex(
         (d) => d === item
       );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+      
       this.exampleDatabase?.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<Students>(true, []);
@@ -286,7 +286,7 @@ export class AllStudentsComponent
   generatePdf() {
     const doc = new jsPDF();
     const headers = [['Roll No','Name','Department','Gender', 'Mobile', 'Email','Admission Date']];
-    console.log(this.dataSource)
+    
     const data = this.dataSource.filteredData.map((user:any) =>
       [user.rollNo,
         user.name,

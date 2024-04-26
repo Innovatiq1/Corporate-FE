@@ -69,7 +69,7 @@ export class DepartmentModalComponent {
   }
   onSelectChange1(event: any) {
     const selectedValue = event.value;
-    console.log(event)
+    
     let userfindEmail:Users[]=this.users.filter(event=>event.id===selectedValue)
     console.log(userfindEmail)
     this.hod=selectedValue

@@ -43,7 +43,7 @@ export class CreateBudgetComponent {
       this.activeRoute.queryParams.subscribe((params) => {
         this._id = params['id'];
         this.action = params['action'];
-        console.log(this.action);
+        
       });
 
     this.requestForm = this.fb.group({
@@ -71,7 +71,7 @@ export class CreateBudgetComponent {
 
   ngOnInit() {
     const employeeEmail = JSON.parse(localStorage.getItem('user_data')!).user.email;
-    console.log("employeeEmail" , employeeEmail);
+    
     if (this.action === 'edit') {
       this.editRequest();
     }else{
@@ -81,7 +81,7 @@ export class CreateBudgetComponent {
 getUserId() {
   let userId = localStorage.getItem('id');
   this.etmsService.getUserId(userId).subscribe((response: any) => {
-    console.log("response",response)
+    
     this.directorId = response.director,
     this.employeName=response?.name +
               ' ' +
@@ -101,14 +101,14 @@ getUserId() {
         
       });
     });
-  //sconsole.log("======trrrr")
+  
  
 });
 }
 
 editRequest(){
   this.etmsService.getBudgetById(this._id).subscribe((res: any) => {
-    console.log("data", res);
+    
 
     this.requestForm.patchValue({
       trainingBudget: res.trainingBudget,
@@ -139,7 +139,7 @@ updateRequest(){
     }).then((result) => {
       if (result.isConfirmed){
         this.etmsService.updateTrainingBudget(this._id, payload).subscribe((res: any) => {
-          console.log("data", res);
+          
           Swal.fire({
             icon:'success',
             title: 'Budget Updated Successfully',

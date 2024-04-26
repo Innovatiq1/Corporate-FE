@@ -114,8 +114,8 @@ export class AllTeachersComponent
 
   }
   // performSearch() {
-  //   console.log(this.dataSource)
-  //   console.log(this.searchTerm)
+  //   
+  //   
   //   if(this.searchTerm){
   //   this.dataSource = this.dataSource?.filter((item: { name: string; }) =>
   //     item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
@@ -189,7 +189,7 @@ export class AllTeachersComponent
       const index: number = this.dataSource.renderedData.findIndex(
         (d) => d === item
       );
-      // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+      
       this.exampleDatabase?.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<Teachers>(true, []);
@@ -238,9 +238,7 @@ export class AllTeachersComponent
         totalDocs: any; data: any; page: any; limit: any;
 }) => {
  // this.isTblLoading=false;
-        console.log("===response==",response)
         this.totalItems = response.totalDocs
-
         this.dataSource = response?.docs
         this.UsersModel.docs = response?.docs;
         this.UsersModel.page = response?.page;

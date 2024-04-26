@@ -657,15 +657,6 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
 
   }
 
-// getCourseKits(){
-//   this.courseService.getAllCourseKit().subscribe(response => {
-//     this.courseKits = response.data.docs;
-//     console.log(this.courseKits);
-//   })
-// }
-
-
-
   onSubmit() {
     console.log('Form Value', this.firstFormGroup.value);
   }

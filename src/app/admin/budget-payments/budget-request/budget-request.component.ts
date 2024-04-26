@@ -72,7 +72,6 @@ export class BudgetRequestComponent
     } else if (user.user.type == 'Director') {
       this.director = true;
     } else if (user.user.type == 'Training Administrator') {
-      console.log('user', user.user.type);
       this.trainingAdmin = true;
     }
   }
@@ -123,8 +122,6 @@ export class BudgetRequestComponent
         this.getAllRejectedRequestsByDirector();
       }
     }
-
-    console.log('pagination', this.coursePaginationModel.page);
   }
 
   getAllRequestsByDirector() {
@@ -261,8 +258,6 @@ export class BudgetRequestComponent
   getCount() {
     let userId = localStorage.getItem('id');
     let userRole = localStorage.getItem('user_type');
-    console.log('userId = ' + userId);
-    console.log('userRole = ' + userRole);
     if (userRole == 'Director') {
       this.etmsService
         .getBudgetRequestDirectorCount(userId)

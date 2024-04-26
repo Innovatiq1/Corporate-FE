@@ -85,7 +85,7 @@ export class ViewClassComponent {
     return classDeliveryType === 'online' ? 'success' : 'fail';
   }
   delete(id: string) {
-    console.log(id)
+    
     this._classService.getClassList({ courseId: id }).subscribe((classList: any) => {
       const matchingClasses = classList.docs.filter((classItem: any) => {
         return classItem.courseId && classItem.courseId.id === id;

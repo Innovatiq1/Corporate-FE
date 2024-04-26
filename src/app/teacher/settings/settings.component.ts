@@ -94,7 +94,6 @@ export class InstructorSettingsComponent {
      })
   }
   onSubmit() {
-    console.log('Form Value', this.stdForm.value);
     if(this.stdForm.valid){
       // this.instructor.uploadVideo(this.files).subscribe(
       //   (response: any) => {
@@ -118,9 +117,7 @@ export class InstructorSettingsComponent {
     }
   }
   onSubmit1(){
-    console.log("========",this.stdForm1)
     if (!this.stdForm1.invalid) {
-      console.log("====Test123===",)
       if(this.files){
 
       this.studentService.uploadVideo(this.files).subscribe(

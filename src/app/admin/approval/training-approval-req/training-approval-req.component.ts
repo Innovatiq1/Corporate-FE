@@ -70,7 +70,6 @@ implements OnInit{
     } else if (user.user.type == 'Director') {
       this.director = true;
     } else if (user.user.type == 'Training Administrator') {
-      console.log('user',user.user.type);
       this.trainingAdmin = true;
 
       
@@ -182,7 +181,6 @@ implements OnInit{
       }
     }
     // this.getAllRequestsByTrainingAdmin();
-    console.log("pagination", this.coursePaginationModel.page)
   }
 
 
@@ -292,7 +290,6 @@ implements OnInit{
 
 
   approve(req: any) {
-    console.log(req._id);
     this.id = req._id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -399,7 +396,6 @@ implements OnInit{
         }
         if (this.ro) {
           this.getAllRequestsByRo();
-          console.log("rejected")
           this.getCount();
         } else if (this.director) {
           this.getAllRequestsByDirector();
@@ -415,31 +411,23 @@ implements OnInit{
   getCount(){
     let userId = localStorage.getItem('id');
     let userRole = localStorage.getItem('user_type');
-console.log("userId = " + userId);
-console.log("userRole = " + userRole);
 if(userRole === "RO"){
   this.etmsService.getRequestRoCount(userId).subscribe(res =>{
     this.approved = res.data.docs.courseRequestApproved;
     this.rejected = res.data.docs.courseRequestRejected;
     this.pending = res.data.docs.courseRequestPending;
-
-console.log(res);
   })
 }else if(userRole == "Director"){
   this.etmsService.getRequestDirectorCount(userId).subscribe(res =>{
     this.approved = res.data.docs.courseRequestApproved;
     this.rejected = res.data.docs.courseRequestRejected;
     this.pending = res.data.docs.courseRequestPending;
-
-console.log(res);
   })
 }else if(userRole === "Training Administrator"){
   this.etmsService.getRequestTrainingAdminCount(userId).subscribe(res =>{
     this.approved = res.data.docs.courseRequestApproved;
     this.rejected = res.data.docs.courseRequestRejected;
     this.pending = res.data.docs.courseRequestPending;
-
-console.log(res);
   })
 }
    

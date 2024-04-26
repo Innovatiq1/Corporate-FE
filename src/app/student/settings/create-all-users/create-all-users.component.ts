@@ -255,7 +255,7 @@ export class CreateAllUsersComponent {
     // this.authenticationService.uploadVideo(event.target.files[0]).subscribe(
     //   (response: any) => {
     //             //Swal.close();
-    //             console.log("--------",response)
+    //             
     //   },
     //   (error:any) => {
 

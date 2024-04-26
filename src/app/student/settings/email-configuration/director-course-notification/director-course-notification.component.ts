@@ -56,9 +56,6 @@ export class DirectorCourseNotificationComponent {
   getForgetPasswordTemplate() {
     this.emailConfigurationService.getForgetPasswordTemplate().subscribe( response =>{
       this.assignData  = response?.data?.docs[0]?.director_course_notification;
-
-      console.log(this.assignData,"ofEmail967978")
-      // this.ref.detectChanges();
      
     }, error => {
       // this.isLoading = false;

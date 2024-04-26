@@ -94,7 +94,6 @@ getClassList() {
   let instructorId = localStorage.getItem('id')
   this.lecturesService.getClassListWithPagination1(instructorId, this.filterName,{ ...this.coursePaginationModel }).subscribe(
     (response) => {
-      //console.log("this",response.data.ssions)
  
       this.dataSource1 = response.data.docs;
       //this.dataSource1 = response.data.sessions;
@@ -114,16 +113,9 @@ getClassList() {
   
 }
 getSession() {
- 
-  console.log("ssssssssssss",this.dataSource1)
   if(this.dataSource1){
-    console.log("========")
   this.dataSource1&&this.dataSource1?.forEach((item: any, index: any) => {
-    //console.log(index)
-    //console.log("====seession====",item.sessions[0].instructorId)
-   
     if (item.sessions[0]&& item.sessions[0]?.courseName&&item.sessions[0]?.courseCode) {
-     // console.log("=======gopal=")
       let starttimeObject = moment(item.sessions[0].sessionStartTime, "HH:mm");
       
       const duration = moment.duration(moment(item.sessions[0].sessionEndDate).diff(moment(item.sessions[0].sessionStartDate)));
@@ -155,7 +147,6 @@ getSession() {
     
   });
   this.cdr.detectChanges();
-  //console.log("ssssssssssss",this.dataSource)
   //this.myArray.push(newItem);
   this.myArray.data = this.dataSource1; 
 }
@@ -211,8 +202,6 @@ addNew() {
  
 }
 performSearch() {
-  //console.log(this.dataSource)
-  console.log(this.filterName)
   if(this.filterName){
     this.getClassList()
   } else {
@@ -228,7 +217,6 @@ performSearch() {
   // }
 }
 editCall(row: Lectures) {
-  console.log("==========",row)
   this.id = row.id;
   let tempDirection: Direction;
   if (localStorage.getItem('isRtl') === 'true') {
@@ -255,7 +243,6 @@ editCall(row: Lectures) {
   }).then((result) => {
     if (result.isConfirmed){
       this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-        console.log("========",result)
         if (result === 1) {
           this.getClassList()
           // When using an edit things are little different, firstly we find record inside DataService by id
@@ -340,15 +327,6 @@ masterToggle() {
 }
 removeSelectedRows() {
   const totalSelect = this.selection.selected.length;
-  // this.selection.selected.forEach((item) => {
-  //   const index: number = this.dataSource.renderedData.findIndex(
-  //     (d) => d === item
-  //   );
-  //   // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
-  //   this.exampleDatabase?.dataChange.value.splice(index, 1);
-  //   this.refreshTable();
-  //   this.selection = new SelectionModel<Lectures>(true, []);
-  // });
   Swal.fire({
     title: 'Success',
     text: 'Record Deleted Successfully...!!!',

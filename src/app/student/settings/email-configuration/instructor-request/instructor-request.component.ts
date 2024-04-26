@@ -59,9 +59,6 @@ export class InstructorRequestComponent {
   getForgetPasswordTemplate() {
     this.emailConfigurationService.getForgetPasswordTemplate().subscribe( response =>{
       this.assignData  = response?.data?.docs[0]?.new_mentor_request_template;
-
-      console.log(this.assignData,"dataofEmail")
-      // this.ref.detectChanges();
      
     }, error => {
       // this.isLoading = false;

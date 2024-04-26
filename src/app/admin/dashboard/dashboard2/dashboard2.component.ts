@@ -290,12 +290,10 @@ export class Dashboard2Component implements OnInit {
         const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
         this.upcomingPrograms = this.programList.filter((item: { sessionStartDate: string | number | Date; }) => {
           const sessionStartDate = new Date(item.sessionStartDate);
-          console.log("sss",sessionStartDate >= tomorrow )
           return (
             sessionStartDate >= tomorrow 
           );
         });
-        console.log("ssss",this.upcomingPrograms )
       },
       (error) => {
       }
@@ -303,7 +301,6 @@ export class Dashboard2Component implements OnInit {
   }
   getAllCourse(){
     this.courseService.getAllCourses({status:'active'}).subscribe(response =>{
-      console.log("res",response)
      this.courseData = response.data.docs.slice(0,5);
      const currentDate = new Date();
         const currentMonth = currentDate.getMonth();

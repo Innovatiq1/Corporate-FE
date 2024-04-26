@@ -43,7 +43,6 @@ export class CourseTimetableComponent implements OnInit {
       this.getClassList();
     }
     if(userType == "Instructor"){
-     // console.log("test")
       this.getInstructorApprovedCourse();
       //this.getApprovedProgram();
     }
@@ -76,7 +75,6 @@ export class CourseTimetableComponent implements OnInit {
     let instructorId = localStorage.getItem('id')
     this.lecturesService.getClassListWithPagination(instructorId, this.filterName,).subscribe(
       (response: { data: { docs: string | any[]; }; }) => {
-     // console.log('re',response)
 
       this.studentApprovedClasses = response.data.docs.slice(0, 5);
       const currentDate = new Date();
@@ -137,7 +135,6 @@ export class CourseTimetableComponent implements OnInit {
         
   }
   openDialog(event: { title: any; extendedProps: { [x: string]: any; }; }) {
-    console.log("Open",event)
     this.dialog.open(EventDetailDialogComponent, {
       width: '700px',
       data: {
@@ -173,7 +170,6 @@ export class CourseTimetableComponent implements OnInit {
       //   return startDateA > startDateB ? 1 : startDateA < startDateB ? -1 : 0;
       // });
         const events = this.allClasses.flatMap((courseClass: any,classId:any) => {
-          console.log("clss",courseClass)
         const startDate = new Date(courseClass.sessions[0].sessionStartDate);
         const endDate = new Date(courseClass?.sessions[0]?.sessionEndDate);
         const sessionStartTime = courseClass?.sessions[0]?.sessionStartTime;

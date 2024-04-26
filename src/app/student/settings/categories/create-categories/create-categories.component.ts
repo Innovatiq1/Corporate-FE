@@ -223,21 +223,16 @@ export class CreateCategoriesComponent implements OnInit{
     document.getElementById('input')?.click();
   }
   getData(){
-    console.log("=======test")
-    
-    
     this.courseService.getcategoryById(this.categoryId).subscribe((response: any) => {
       if(response){
         this.mainCategoryId=response?._id
         this.mainCategoryForm.patchValue({
           category_name: response?.category_name,
               });
-      console.log("sssssssssssssss",response?.subCategories[0]._id)
         
         const itemControls = response?.subCategories.map((item: {
           _id: any; main_category_id: any; category_name: any; 
   } ) => {
-    console.log("=====item====",item)
     
           this.subcategoryId =item._id
           return this.formBuilder.group({
@@ -246,7 +241,6 @@ export class CreateCategoriesComponent implements OnInit{
             category_name: [item.category_name],
           });
         });
-       // console.log("itemControls",itemControls)
         this.subCategoryForm = this.formBuilder.group({
           subcategories: this.formBuilder.array(itemControls),
         });

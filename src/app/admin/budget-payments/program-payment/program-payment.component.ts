@@ -63,7 +63,6 @@ export class ProgramPaymentComponent {
   }
   getAllPrograms(){
     this.courseService.getAllProgramsPayments({ ...this.coursePaginationModel}).subscribe(response =>{
-      console.log("res",response)
      this.dataSource = response.data.docs;
      this.ref.detectChanges();
      this.totalItems = response.data.totalDocs;
@@ -74,7 +73,7 @@ export class ProgramPaymentComponent {
      });
   }
   view(id:any){
-    console.log("id", id)
+    
     this.router.navigate(['/admin/budgets/view-program-payment/'], {queryParams:{id:id}})
     // [routerLink]="['/admin/payment/view-payments/']"
     }
@@ -131,7 +130,7 @@ export class ProgramPaymentComponent {
           const index: number = this.dataSource.findIndex(
             (d: CourseModel) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          
           this.courseService?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<CourseModel>(true, []);

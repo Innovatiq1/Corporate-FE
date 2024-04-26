@@ -95,8 +95,6 @@ export class AllRequestComponent {
   
   }
   onRoChange() {
-   console.log("===Tst==")
-   
        if(this.roText.length>2){
         if(this.roText){
         console.log("sssssssssss",this.roText)

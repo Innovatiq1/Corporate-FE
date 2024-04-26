@@ -189,8 +189,6 @@ last: any;
           const index: number = this.typesList.renderedData.findIndex(
             (d: UserType) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
-          // this.exampleDatabase?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<UserType>(true, []);
         });

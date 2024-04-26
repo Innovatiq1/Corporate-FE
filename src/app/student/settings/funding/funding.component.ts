@@ -75,7 +75,7 @@ getAllFundingGrants(){
   })
 }
 update(data: any) {
-  console.log(data);
+  
   this.router.navigate(['/student/settings/update-funding'], {
     queryParams: {
       funding: data.grant_type,

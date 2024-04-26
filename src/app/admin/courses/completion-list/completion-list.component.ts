@@ -82,7 +82,6 @@ export class CompletionListComponent {
   }
 
   filterData() {
-    console.log('data', this.dataSource);
     if (this.searchTerm) {
       this.dataSource = this.dataSource?.filter(
         (item: any) => console.log(item.courseId?.title)
@@ -117,14 +116,12 @@ export class CompletionListComponent {
       )
       .subscribe(
         (response: { docs: any; page: any; limit: any; totalDocs: any }) => {
-          // console.log("data",response)
           this.isLoading = false;
           this.studentPaginationModel.docs = response.docs;
           this.studentPaginationModel.page = response.page;
           this.studentPaginationModel.limit = response.limit;
           this.totalItems = response.totalDocs;
           this.dataSource = response.docs;
-          console.log('dataSource', this.dataSource);
           this.dataSource.sort = this.matSort;
           this.mapClassList();
         }
@@ -283,10 +280,8 @@ export class CompletionListComponent {
       //project_week: project_week,
       completdDate: moment().format('DD ddd MMM YYYY'),
     };
-    console.log('pdf', pdfObj);
     this.pdfData.push(pdfObj);
     var convertIdDynamic = 'contentToConvert';
-    console.log(convertIdDynamic);
     const dashboard = document.getElementById('contentToConvert');
     //this.generatePdf1(dashboard, element?.studentId._id, element?.courseId._id,"course");
     this.genratePdf3(
@@ -324,10 +319,6 @@ export class CompletionListComponent {
           const currentDateTime = moment();
           const randomString = this.generateRandomString(10);
 
-          // Format the date and time
-          // let currentDate = currentDateTime.format('MMMM Do YYYY, h:mm:ss a');
-          // console.log("=======",currentDate)
-          //         //doc.save('Dashboard for hyperpanels.pdf');
 
           const pdfData = new File(
             [doc.output('blob')],
@@ -336,7 +327,6 @@ export class CompletionListComponent {
               type: 'application/pdf',
             }
           );
-          console.log('pdf123', pdfData);
           this.classService.uploadFileApi(pdfData).subscribe(
             (data: any) => {
               let objpdf = {
@@ -344,7 +334,6 @@ export class CompletionListComponent {
                 memberId: memberId,
                 CourseId: memberProgrmId,
               };
-              console.log('pdf1235464', objpdf);
               this.updateCertificte(objpdf);
             },
             (err) => {}
@@ -387,8 +376,6 @@ export class CompletionListComponent {
 
             this.getCompletedClasses();
             //let certifiacteUrl =response.data.certifiacteUrl
-
-            console.log();
             Swal.fire({
               title: 'Updated',
               text: 'Certificate Created successfully',

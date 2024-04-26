@@ -76,8 +76,6 @@ export class ActiveCoursesComponent {
       .getAllCourses({ ...this.coursePaginationModel, status: 'active' })
       .subscribe((response) => {
         this.courseData = response.data.docs;
-
-        console.log('dataSource: ', this.courseData);
         this.totalItems = response.data.totalDocs;
         this.coursePaginationModel.docs = response.data.docs;
         this.coursePaginationModel.page = response.data.page;
@@ -291,7 +289,7 @@ export class ActiveCoursesComponent {
           const index: number = this.courseData.renderedData.findIndex(
             (d: MainCategory) => d === item
           );
-          // console.log(this.dataSource.renderedData.findIndex((d) => d === item));
+          
           // this.exampleDatabase?.dataChange.value.splice(index, 1);
           this.refreshTable();
           this.selection = new SelectionModel<MainCategory>(true, []);

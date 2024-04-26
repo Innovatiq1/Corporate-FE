@@ -91,10 +91,8 @@ export class DeptTrainingPlanComponent implements OnInit{
     // constructor
   }
   ngOnInit() {
-    console.log('userrole')
     this.dataSource2.paginator = this.paginator;
     // const userRole = this.authService.currentUserValue.user.role;
-    // console.log('userrole',userRole)
     //  if(userRole === 'RO' ){
     //   this.titles = ' Training Plan';
     // } else if(userRole === 'Training Adminstrator'){

@@ -248,7 +248,6 @@ export class AllCourseComponent {
         'Status',
       ],
     ];
-    console.log(this.courseData);
     const data = this.courseData.map((x: any) => [
       x.title,
       x.training_hours,
@@ -286,7 +285,6 @@ export class AllCourseComponent {
     if (this.searchTerm) {
       this.courseData = this.courseData?.filter(
         (item: any) => {
-          console.log('data', item);
           const searchList = item.title.toLowerCase();
           return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1;
         }

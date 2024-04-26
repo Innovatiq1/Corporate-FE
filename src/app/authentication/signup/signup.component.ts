@@ -121,7 +121,6 @@ export class SignupComponent implements OnInit {
         (error: any) => {
           this.submitted = true;
           this.email=error
-          console.log("=====",error)
         }
       );
     }
@@ -131,7 +130,6 @@ export class SignupComponent implements OnInit {
   
 
   setLanguage(event: any) {
-    console.log("=======", event)
     // this.countryName = text;
     // this.flagvalue = flag;
     this.langStoreValue = event.target.value;

@@ -134,7 +134,7 @@ export class CreateRequestComponent {
     this.getCourseList();
   }
   getUserId() {
-    //sconsole.log("======trrrr")
+    
     let userId = localStorage.getItem('id');
     this.etmsService.getUserId(userId).subscribe(
       (response: any) => {
@@ -185,7 +185,6 @@ export class CreateRequestComponent {
   getCourseList() {
     this.etmsService.getAllCoursesTitle('active').subscribe((courses) => {
       this.sourceData = courses.reverse();
-      console.log('courses', this.sourceData);
     });
   }
 

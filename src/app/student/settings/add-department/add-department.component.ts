@@ -83,7 +83,7 @@ export class AddDepartmentComponent  implements OnInit {
   }
   onSelectChange1(event: any) {
     const selectedValue = event.value;
-    console.log(event)
+    
     let userfindEmail:Users[]=this.users.filter(event=>event.id===selectedValue)
     console.log(userfindEmail)
     this.hod=selectedValue
@@ -103,10 +103,9 @@ export class AddDepartmentComponent  implements OnInit {
   
   userList(){
   this.userService.getUserList1().subscribe((response: any) => {
-    console.log('res',response);
     this.users=response.data
     //response.data.data;
-    console.log("=Users=====",response.data)
+    
     // let data=this.blogsList.find((id:any)=>id._id === this.currentId);
     // console.log('data',data)
     // this.fileName = data.filename
