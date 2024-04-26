@@ -26,10 +26,9 @@
                         <div class="responsive_table">
                             <table mat-table matSort [dataSource]="dataSource" class="mat-cell advance-table">
 
-                                <ng-container matColumnDef="name">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Report</mat-header-cell>
-                                    <mat-cell class="name" *matCellDef="let row"><span class="mobile-label">Report
-                                            Name:</span>{{row.reportName}}
+                                <ng-container matColumnDef="Report Generated">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Report Generated</mat-header-cell>
+                                    <mat-cell *matCellDef="let row"><span class="mobile-label">Report Generated:</span>{{row.createdAt | date}}
                                     </mat-cell>
                                 </ng-container>
 
@@ -39,7 +38,7 @@
                                     <mat-cell *matCellDef="let row">
                                         <button id="download">
                                             <!-- <app-feather-icons [icon]="'download'" [class]="'tbl-fav-download'"></app-feather-icons> -->
-                                            <a href="" target="_blank">
+                                            <a href="{{row.report}}" target="_blank">
                                                 <mat-icon id="icon">download</mat-icon></a>
                                         </button>
                                     </mat-cell>
@@ -52,9 +51,9 @@
                                 </mat-row>
                             </table>
 
-                            <!-- <mat-paginator #paginator [length]="totalItems" (page)="pageSizeChange($event)"
+                            <mat-paginator #paginator [length]="totalItems" (page)="pageSizeChange($event)"
                 [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">
-              </mat-paginator> -->
+              </mat-paginator>
 
                         </div>
                     </div>
