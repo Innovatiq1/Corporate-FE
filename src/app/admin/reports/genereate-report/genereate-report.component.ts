@@ -157,28 +157,38 @@ export class GenereateReportComponent {
 
     this.courseService.getCourseReports(body).subscribe(response => {
       this.courseData = response.data.filteredData
-      const doc = new jsPDF();
-      const headers = [[' Course', 'User', 'Role','Department','Start Date','End Date','Status']];
-      const data = this.courseData.map((x: any) =>
-        [x.title,
-        x.studentId.name,
-        x.studentId.role,
-        x.studentId.department,
-        formatDate(new Date(x.classId?.courseId?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
-        formatDate(new Date(x.classId?.courseId?.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
-        x.status
-        ]);
-      const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
-      (doc as any)?.autoTable({
-        head: headers,
-        body: data,
-        startY: 20,
-      });
-      doc.save('Report.pdf');
-      const blob = doc.output('blob');
-      const file = new File([blob], 'Report.pdf', { type: 'application/pdf' });
-      const event = { target: { files: [file] } };
-      this.onFileUpload(event);      
+      if(response.data.filteredData > 0){
+        const doc = new jsPDF();
+        const headers = [[' Course', 'User', 'Role','Department','Start Date','End Date','Status']];
+        const data = this.courseData.map((x: any) =>
+          [x.title,
+          x.studentId.name,
+          x.studentId.role,
+          x.studentId.department,
+          formatDate(new Date(x.classId?.courseId?.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
+          formatDate(new Date(x.classId?.courseId?.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
+          x.status
+          ]);
+        const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+        (doc as any)?.autoTable({
+          head: headers,
+          body: data,
+          startY: 20,
+        });
+        doc.save('Report.pdf');
+        const blob = doc.output('blob');
+        const file = new File([blob], 'Report.pdf', { type: 'application/pdf' });
+        const event = { target: { files: [file] } };
+        this.onFileUpload(event);
+      }else{
+          Swal.fire({
+            title: 'Error',
+            text: 'Data not matched.',
+            icon: 'error',
+            // confirmButtonColor: '#526D82',
+          });
+      }
+           
     })
 
   }
