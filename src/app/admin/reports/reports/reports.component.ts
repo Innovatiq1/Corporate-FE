@@ -171,6 +171,14 @@ export class ReportsComponent {
         startY: 20,
       });
       doc.save('Report.pdf');
+      const blob = doc.output('blob'); // Convert PDF to Blob
+      const formData = new FormData();
+      formData.append('file', blob, 'Report.pdf');
+      console.log('formData',formData)
+        this.courseService.saveVideo(formData).subscribe((data) => {
+          console.log('reportdata',data)
+        })
+
       
     })
 
