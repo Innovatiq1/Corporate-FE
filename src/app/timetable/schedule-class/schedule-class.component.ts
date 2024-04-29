@@ -132,7 +132,7 @@ export class ScheduleClassComponent {
       this.dataSource.map((user: any) => ({
         'Program': user?.courseId?.title,
         'Program Code':user?.courseId?.courseCode,
-        'Amount':user?.instructorCost,
+        'Amount':'$ '+user?.instructorCost,
         'Department':user?.department,
         'StartDate': formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
         'EndDate': formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
@@ -147,7 +147,7 @@ export class ScheduleClassComponent {
       [
        user?.courseId?.title,
        user?.courseId?.courseCode,
-       user?.instructorCost,
+       '$ '+user?.instructorCost,
        user?.department,
        formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
        formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,

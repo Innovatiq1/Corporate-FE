@@ -247,7 +247,7 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
       this.dataSource.map((user: any) => ({
         'Course': user?.courseId?.title,
         'Course Code':user?.courseId?.courseCode,
-        'Amount':user?.instructorCost,
+        'Amount':'$ '+user?.instructorCost,
         'Department':user?.department,
         'StartDate': formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
         'EndDate': formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
@@ -262,7 +262,7 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
       [
        user?.courseId?.title,
        user?.courseId?.courseCode,
-       user?.instructorCost,
+       '$ '+user?.instructorCost,
        user?.department,
        formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
        formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
