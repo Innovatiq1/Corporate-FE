@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { OverallBuget } from '@core/models/overall-budget.model';
 import { EtmsService } from '@core/service/etms.service';
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
 import {
   ChartComponent,
   ApexAxisChartSeries,
@@ -312,5 +314,42 @@ export class BudgetComponent {
         });
       }
     });
+  }
+
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [['Year','Overall Budget','Training Type','Status']];
+    const data = this.SourceData.map((user:any) =>
+      [user.year,
+        user.trainingBudget,
+       user.trainingType,
+       user.approval
+    ] );
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+      headStyles: {
+        fontSize: 10,
+        cellWidth: 'wrap',
+      },
+    });
+
+    // Save or open the PDF
+    doc.save('budget-list.pdf');
+  }
+  exportExcel() {
+    //k//ey name with space add in brackets
+   const exportData: Partial<TableElement>[] = this.SourceData.map(
+     (user: any) => ({
+       'Year': user.year,
+       'Overall Budget': user.trainingBudget,
+       'Training Type': user.trainingType,
+       'Status': user.approval,
+     })
+   );
+    TableExportUtil.exportToExcel(exportData, 'budget-list');
   }
 }

@@ -294,23 +294,25 @@ export class CourseKitComponent implements OnInit{
     //k//ey name with space add in brackets
    const exportData: Partial<TableElement>[] = this.dataSource.map(
      (user: any) => ({
-       'Course Name': user.name,
+       'Course Kit': user.name,
        'Short Description': user.shortDescription,
        'Long Description': user.longDescription,
+       'Video Link': user.videoLink[0].video_url,
        'Document Link': user.documentLink,
      })
    );
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'courseKit-list');
   }
 
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Course Name','Short Description','Long Description','Document Link']];
+    const headers = [['Course Kit','Short Description','Long Description','Video Link           ','Document Link']];
     
     const data = this.dataSource.map((user:any) =>
       [user.name,
         user.shortDescription,
        user.longDescription,
+       user.videoLink[0].video_url,
        user.documentLink
     ] );
     //const columnWidths = [60, 80, 40];
@@ -324,6 +326,10 @@ export class CourseKitComponent implements OnInit{
       head: headers,
       body: data,
       startY: 20,
+      headStyles: {
+        fontSize: 10,
+        cellWidth: 'wrap',
+      },
 
 
 

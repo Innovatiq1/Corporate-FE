@@ -247,7 +247,7 @@ export class CompletionListComponent {
     });
 
     // Save or open the PDF
-    doc.save('completion-list.pdf');
+    doc.save('student-completed-list.pdf');
   }
 
   exportExcel() {
@@ -268,7 +268,7 @@ export class CompletionListComponent {
         EndDate: user.classEndDate,
       })
     );
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'student-completed-list');
   }
   generateCertificate(element: Student) {
     Swal.fire({
