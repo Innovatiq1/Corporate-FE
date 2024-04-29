@@ -20,7 +20,7 @@
                     <mat-label>First name</mat-label>
                     <input matInput formControlName="first" required>
                     <mat-error *ngIf="staffForm.get('first')?.hasError('required')">
-                      First name is required
+                      Enter First Name
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -44,7 +44,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="staffForm.get('gender')?.hasError('required')">
-                      Gender is required
+                      Enter Gender 
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -61,7 +61,7 @@
                     <mat-label>Password</mat-label>
                     <input matInput formControlName="password" type="password" required>
                     <mat-error *ngIf="staffForm.get('password')?.hasError('required')">
-                      password is required
+                      Enter Password 
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -70,7 +70,7 @@
                     <mat-label>Re-Enter Password</mat-label>
                     <input matInput formControlName="conformPassword" type="password" required>
                     <mat-error *ngIf="staffForm.get('conformPassword')?.hasError('required')">
-                      Re-Enter password is required
+                      Enter Re-Enter Password
                     </mat-error>
                   </mat-form-field>
                 </div>

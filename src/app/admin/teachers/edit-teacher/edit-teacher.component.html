@@ -20,7 +20,7 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="name" required>
                     <mat-error *ngIf="proForm.get('name')?.hasError('required')">
-                      First name is required
+                      Enter First Name
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -55,7 +55,7 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="password" type="password" required>
                     <mat-error *ngIf="proForm.get('password')?.hasError('required')">
-                      password is required
+                      Enter Password
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -64,7 +64,7 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="conformPassword" type="password" required>
                     <mat-error *ngIf="proForm.get('conformPassword')?.hasError('required')">
-                      Re-Enter password is required
+                      Re-Enter Password
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -85,7 +85,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="proForm.get('gender')?.hasError('required')">
-                      Gender is required
+                      Enter Gender 
                     </mat-error>
                   </mat-form-field>
                 </div>

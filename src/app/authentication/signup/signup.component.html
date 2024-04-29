@@ -39,7 +39,7 @@
                   <input matInput formControlName="name" required>
                   <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>face</mat-icon>
                   <mat-error *ngIf="authForm.get('name')?.hasError('required')">
-                    {{"Name is required" | translate}}
+                    {{"Enter Name " | translate}}
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -81,7 +81,7 @@
                 <mat-error
                   *ngIf="authForm.get('gender')?.hasError('required')"
                 >
-                  {{"Gender is required" | translate}}
+                  {{"Enter Gender" | translate}}
                 </mat-error>
               </mat-form-field>
             </div>
@@ -94,7 +94,7 @@
                   <mat-icon matSuffix (click)="hide = !hide">
                     {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   <mat-error *ngIf="authForm.get('password')?.hasError('required')">
-                    {{"Password is required" | translate}}
+                    {{"Enter Password" | translate}}
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -107,7 +107,7 @@
                   <mat-icon matSuffix (click)="chide = !chide">
                     {{chide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   <mat-error *ngIf="authForm.get('cpassword')?.hasError('required')">
-                    {{"Confirm Password is required" | translate}}
+                    {{"Confirm Enter Password" | translate}}
                   </mat-error>
                   <mat-error *ngIf="authForm.get('cpassword')?.hasError('confirmedValidator')">
                     Password and Re-Enter Password must be match

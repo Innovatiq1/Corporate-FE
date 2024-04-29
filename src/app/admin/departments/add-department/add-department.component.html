@@ -24,7 +24,7 @@
                     </mat-select>
                     <!-- <input matInput formControlName="department" required> -->
                     <mat-error *ngIf="departmentForm.get('department')?.hasError('required')">
-                      Department is required
+                      Enter Department
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -48,7 +48,7 @@
                     <input matInput formControlName="mobile">
                     <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>phone</mat-icon>
                     <mat-error *ngIf="departmentForm.get('mobile')?.hasError('required')">
-                      Mobile is required
+                      Enter Mobile Number
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -86,7 +86,7 @@
                     <input matInput formControlName="studentCapacity" required>
                     <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>group</mat-icon>
                     <mat-error *ngIf="departmentForm.get('studentCapacity')?.hasError('required')">
-                      Student Capacity is required
+                      Enter Student Capacity 
                     </mat-error>
                   </mat-form-field>
                 </div>

@@ -20,7 +20,7 @@
                                   >
                                     <input matInput formControlName="name" required />
                                     <mat-error *ngIf="userForm.get('name')?.hasError('required')">
-                                      First name is required
+                                      Enter First Name
                                     </mat-error>
                                   </mat-form-field>
                                 </div>
@@ -93,7 +93,7 @@
                                         <mat-option [value]="'other'"> Other </mat-option>
                                     </mat-select>
                                     <mat-error *ngIf="userForm.get('gender')?.hasError('required')">
-                                        Gender is required
+                                       Enter Gender 
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -225,7 +225,7 @@
                                 <mat-error
                                   *ngIf="userForm.get('parentsName')?.hasError('required')"
                                 >
-                                  Parents name is required
+                                 Enter Parents name 
                                 </mat-error>
                               </mat-form-field>
                             </div>
