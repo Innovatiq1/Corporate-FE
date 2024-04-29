@@ -50,7 +50,7 @@
                   <input matInput formControlName="email" />
                   <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>face</mat-icon>
                   <mat-error *ngIf="authForm.get('email')?.hasError('required')">
-                    {{"Email is required" | translate}}
+                    {{"Enter Email " | translate}}
                   </mat-error>
                   <mat-error  *ngIf="authForm.get('email')?.hasError('pattern') && authForm.get('email')?.touched">
                     {{"Enter a valid email" | translate}}
@@ -70,7 +70,7 @@
                       {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                   </a>
                   <mat-error *ngIf="authForm.get('password')?.hasError('required')">
-                    {{"Password is required" | translate}}
+                    {{"Enter Password" | translate}}
                   </mat-error>
                 </mat-form-field>
                 <div  class="invalid-text"*ngIf="isSubmitted" >

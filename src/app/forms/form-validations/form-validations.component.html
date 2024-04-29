@@ -21,7 +21,7 @@
                     <input matInput formControlName="first" required>
                     <mat-icon matSuffix>face</mat-icon>
                     <mat-error *ngIf="register.get('first')?.hasError('required')">
-                      First name is required
+                      Enter First Name
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -41,7 +41,7 @@
                     <mat-icon matSuffix (click)="hide = !hide">
                       {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     <mat-error *ngIf="register.get('password')?.hasError('required')">
-                      Password is required
+                      Enter Password
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -73,7 +73,7 @@
                     <input matInput formControlName="city" required>
                     <mat-icon matSuffix>location_city</mat-icon>
                     <mat-error *ngIf="register.get('city')?.hasError('required')">
-                      City name is required
+                     Enter City Name
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -83,7 +83,7 @@
                     <input matInput formControlName="state" required>
                     <mat-icon matSuffix>business</mat-icon>
                     <mat-error *ngIf="register.get('state')?.hasError('required')">
-                      State name is required
+                      Enter State Name
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -117,7 +117,7 @@
                     </mat-select>
                     <mat-icon matSuffix>flag</mat-icon>
                     <mat-error *ngIf="register.get('country')?.hasError('required')">
-                      Country is required
+                      Enter Country
                     </mat-error>
                   </mat-form-field>
                 </div>

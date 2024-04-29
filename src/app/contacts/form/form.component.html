@@ -22,7 +22,7 @@
               <input matInput formControlName="name" required>
               <i class="material-icons-two-tone color-icon p-3" matSuffix>face</i>
               <mat-error *ngIf="contactsForm?.get('name')?.hasError('required')">
-                Name is required
+                Enter Name 
               </mat-error>
             </mat-form-field>
           </div>
@@ -45,7 +45,7 @@
               <input matInput formControlName="mobile" type="number">
               <i class="material-icons-two-tone color-icon p-3" matSuffix>smartphone</i>
               <mat-error *ngIf="contactsForm?.get('mobile')?.hasError('required')">
-                Mobile is required
+                Enter Mobile 
               </mat-error>
             </mat-form-field>
           </div>

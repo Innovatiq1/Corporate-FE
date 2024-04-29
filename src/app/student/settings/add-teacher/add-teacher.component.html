@@ -81,7 +81,7 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="conformPassword" type="password" required>
                     <mat-error *ngIf="proForm.get('conformPassword')?.hasError('required')">
-                      Re-Enter password is required
+                      Re-Enter Password
                     </mat-error>
                     <mat-error *ngIf="proForm.get('conformPassword')?.hasError('confirmedValidator')">
                       Password and Re-Enter Password must be match

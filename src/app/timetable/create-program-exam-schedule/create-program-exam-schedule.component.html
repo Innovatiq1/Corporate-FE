@@ -28,7 +28,7 @@
                         examsheduleForm.get('programId')?.hasError('required') ||
                         examsheduleForm.get('programId')?.touched
                             ">
-                          Program Name is required.
+                          Enter Program Name.
                         </mat-error>
                       </mat-form-field>
                     
@@ -95,7 +95,7 @@
 
                           <input matInput formControlName="duration" placeholder="Enter Duration Hours"  required>
                           <mat-error *ngIf="examsheduleForm.get('duration')?.hasError('required')">
-                            Course name is required
+                           Enter Course Name
                           </mat-error>
                           <mat-error  *ngIf="examsheduleForm.get('duration')?.hasError('pattern') && examsheduleForm.get('duration')?.touched">
                             Enter a valid Course name

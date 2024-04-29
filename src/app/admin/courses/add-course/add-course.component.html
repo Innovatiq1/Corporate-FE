@@ -21,7 +21,7 @@
                     <input matInput formControlName="title" placeholder="Enter Course Name"
                       [readonly]="isInputReadonly()" required>
                     <mat-error *ngIf="firstFormGroup.get('title')?.hasError('required')">
-                      Course name is required
+                     Enter  Course Name
                     </mat-error>
                     <mat-error
                       *ngIf="firstFormGroup.get('title')?.hasError('pattern') && firstFormGroup.get('title')?.touched">
@@ -35,7 +35,7 @@
                     <input matInput formControlName="courseCode" placeholder="Enter Course Code"
                       [readonly]="isInputReadonly()" required>
                     <mat-error *ngIf="firstFormGroup.get('courseCode')?.hasError('required')">
-                      Course code is required
+                     Enter Course Code
                     </mat-error>
                     <mat-error
                       *ngIf="firstFormGroup.get('courseCode')?.hasError('pattern') && firstFormGroup.get('courseCode')?.touched">

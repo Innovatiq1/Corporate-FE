@@ -321,7 +321,7 @@ export class BudgetComponent {
     const headers = [['Year','Overall Budget','Training Type','Status']];
     const data = this.SourceData.map((user:any) =>
       [user.year,
-        user.trainingBudget,
+        '$'+user.trainingBudget,
        user.trainingType,
        user.approval
     ] );
@@ -345,7 +345,7 @@ export class BudgetComponent {
    const exportData: Partial<TableElement>[] = this.SourceData.map(
      (user: any) => ({
        'Year': user.year,
-       'Overall Budget': user.trainingBudget,
+       'Overall Budget': '$'+user.trainingBudget,
        'Training Type': user.trainingType,
        'Status': user.approval,
      })
