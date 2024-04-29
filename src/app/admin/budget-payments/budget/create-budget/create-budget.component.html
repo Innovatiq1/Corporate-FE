@@ -7,27 +7,22 @@
         >
         </app-breadcrumb>
       </div> -->
-      <div *ngIf="action === 'edit'">
-        <div class="block-header" *ngFor="let breadscrum of breadscrumsEdit">
-          <!-- breadcrumb -->
-          <app-breadcrumb
-            [title]="breadscrum.title"
-            [active_item]="breadscrum.active"
-          >
-          </app-breadcrumb>
-        </div>
-      </div>
+      <div class="block-header" *ngFor="let breadscrum of breadscrums">
+        <!-- breadcrumb -->
+       <app-breadcrumb [items]="breadscrum.items" [active_item]="breadscrum.active">
+       </app-breadcrumb> 
+     </div>
   
-      <div *ngIf="action !== 'edit'">
+      <!-- <div *ngIf="action !== 'edit'">
         <div class="block-header" *ngFor="let breadscrum of breadscrums">
-          <!-- breadcrumb -->
+           breadcrumb
           <app-breadcrumb
             [title]="breadscrum.title"
             [active_item]="breadscrum.active"
           >
           </app-breadcrumb>
         </div>
-      </div>
+      </div> -->
   
       <div class="row clearfix">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

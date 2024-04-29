@@ -22,7 +22,7 @@ export class CreateDeptBudgetRequestComponent {
   breadscrums = [
     {
       title: 'Over All Budget',
-      // items: ['Extra'],
+      items: ['Finance'],
       active: 'Allocate Department Budget',
     },
   ];
@@ -60,7 +60,7 @@ export class CreateDeptBudgetRequestComponent {
       this.breadscrums = [
         {
           title: 'Overall Budget',
-          // items: ['Department'],
+           items: ['Finance'],
           active: 'Allocate Department Budget',
         },
       ];
