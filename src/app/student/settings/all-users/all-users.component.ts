@@ -200,8 +200,10 @@ exportExcel() {
  const exportData: Partial<TableElement>[] = this.dataSource.map(
    (user: any) => ({
      'Name': user.name,
-     'User Type': user.type,
+     'Role': user.type,
+     'Gender':  user.gender,
      'Qualification': user.qualification,
+     'Mobile': user.mobile,
      'Email': user.email,
      'Status' : user.Active ?  'Active': 'Inactive' 
    })
@@ -211,11 +213,13 @@ exportExcel() {
 
 generatePdf() {
   const doc = new jsPDF();
-  const headers = [['Name','User Type','Qualification','Email','Status']];
+  const headers = [['Name','Role','Gender','Qualification','Mobile','Email','Status']];
   const data = this.dataSource.map((user:any) =>
     [user.name,
       user.type,
+      user.gender,
      user.qualification,
+     user.mobile,
      user.email,
      user.Active ? 'Active': 'Inactive'
   ] );

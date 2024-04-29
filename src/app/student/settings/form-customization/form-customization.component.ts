@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormService  } from '@core/service/customization.service';
+import { FormService } from '@core/service/customization.service';
 import Swal from 'sweetalert2';
-
-
 
 @Component({
   selector: 'app-form-customization',
@@ -13,22 +11,19 @@ import Swal from 'sweetalert2';
 export class FormCustomizationComponent {
   forms!: any[];
   labelChanges: { formId: string, labelName: string, checked: boolean }[] = [];
-
   breadscrums = [
     {
       title: 'Form Customization',
       items: ['student'],
       active: 'Form Customization',
-
     },
   ];
+  formName!: string;
 
-  formName!:String
-
-  constructor(private formService: FormService, private  activatedRoute: ActivatedRoute) { }
+  constructor(private formService: FormService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params=>{
+    this.activatedRoute.queryParams.subscribe(params => {
       const formName = params['name'];
       this.formName = formName;
       this.getForms();
@@ -51,25 +46,27 @@ export class FormCustomizationComponent {
     }
   }
 
+  openModalPopup(): void {
+    Swal.fire({
+      title: 'Success',
+      text: 'Label updated successfully.',
+      icon: 'success'
+    }).then(() => {
+      this.router.navigate(['/student/settings/forms']); // Navigate to the forms page after closing the modal
+    });
+  }
 
   updateLabels(): void {
     this.labelChanges.forEach(change => {
       this.formService.updateLabelStatus(change.formId, change.labelName, change.checked).subscribe(updatedForm => {
-        Swal.fire({
-          title: 'Success',
-          text: 'Label updated successfully.',
-          icon: 'success'
-        });
-        this.getForms()
+        this.openModalPopup();
       }, error => {
         Swal.fire({
           title: 'Error',
           text: error,
           icon: 'error',
         });
-
       });
     });
   }
-
 }

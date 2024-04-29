@@ -60,14 +60,16 @@
                     </mat-cell>
                   </ng-container>
                  
-                <ng-container matColumnDef="Approval Status">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Approval Status</mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="row.status !== 'approved' ? ['/student/settings/edit-questions', row.id] : null" [ngClass]="getStatusClass(row.status)">
-                    <div class="status-container">
-                      <span class="status-text"> {{row.status | titlecase}}</span>
+                  <ng-container matColumnDef="Approval Status">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Approval Status</mat-header-cell>
+                    <mat-cell *matCellDef="let row" [routerLink]="row.status !== 'approved' ? ['/student/settings/edit-questions', row.id] : null" [ngClass]="getStatusClass(row.status)">
+                      <div class="status-container">
+                        <span class="dot" [ngClass]="getDotClass(row.status)"></span> <!-- Dynamic class for dot -->
+                        <span class="status-text"><b style="font-weight: 500;">{{row.status | titlecase}}</b></span>
                       </div>
-                  </mat-cell>
-                </ng-container>
+                    </mat-cell>
+                  </ng-container>
+                  
                   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                   <mat-row *matRowDef="let row; columns: displayedColumns;" [style.cursor]="'pointer'" matRipple>
                   </mat-row>

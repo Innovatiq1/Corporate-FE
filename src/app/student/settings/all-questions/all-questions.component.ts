@@ -86,4 +86,8 @@ constructor(private router:Router,public utils: UtilsService, private questionSe
   getStatusClass(status: string): string {
     return status === 'approved' ? 'success' : 'fail';
   }
+  getDotClass(status: string): string {
+    return status === 'approved' ? 'green' : 'red';
+  }
+  
 }

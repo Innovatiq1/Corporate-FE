@@ -1,4 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { formatDate } from '@angular/common';
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
@@ -7,6 +8,8 @@ import { UserType } from '@core/models/user.model';
 import { AdminService } from '@core/service/admin.service';
 import { UserService } from '@core/service/user.service';
 import { UtilsService } from '@core/service/utils.service';
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
 import Swal from 'sweetalert2';
 
 
@@ -43,6 +46,8 @@ export class UserTypeComponent {
   pageSizeArr = this.utils.pageSizeArr;
   isLoading = true;
   selection = new SelectionModel<UserType>(true, []);
+  dataSource: any[] = [];
+
   
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 menu: any;
@@ -207,5 +212,53 @@ last: any;
     //   'bottom',
     //   'center'
     // );
+  }
+  exportExcel() {
+    // key name with space add in brackets
+    if (!this.dataSource) {
+      console.error('Data source is undefined.');
+      return;
+    }
+    const exportData: Partial<TableElement>[] =
+      this.dataSource.map((x: any) => ({
+        'Department': x.typeName,
+        'HOD': x.hod,
+        Phone: x.menu.children[0]?.title,
+        'Students Capacity': x.status,
+      }));
+
+    TableExportUtil.exportToExcel(exportData, 'excel');
+  }
+  generatePdf() {
+    console.log("PDF");
+    const doc = new jsPDF();
+    const headers = [[' Role','Module', 'Sub Module', 'Status']];
+    
+    const data = this.dataSource.map((x:any) =>
+      [x?.typeName,
+        x.title,
+        x.menu.children[0]?.title ,
+        x.status,
+        formatDate(new Date(x?.departmentStartDate), 'yyyy-MM-dd', 'en') || '',
+        x.studentCapacity
+    ] );
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+  
+    // Add a page to the document (optional)
+    //doc.addPage();
+  
+    // Generate the table using jspdf-autotable
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+  
+  
+  
+    });
+  
+    // Save or open the PDF
+    doc.save('Module Access-list.pdf');
   }
 }

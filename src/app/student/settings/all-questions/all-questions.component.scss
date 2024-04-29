@@ -8,22 +8,53 @@ svg {
     padding-left: 3px;
     padding-right: 3px;
 }
+
 // modal-box styling
 ::ng-deep .mat-mdc-menu-content {
-        margin: 0;
-        padding: 8px 20px;
-        border-radius: 10px;
-        list-style-type: none;
-       
+    margin: 0;
+    padding: 8px 20px;
+    border-radius: 10px;
+    list-style-type: none;
+
 }
+
 // modal-box curving
-::ng-deep .mat-mdc-menu-panel{
+::ng-deep .mat-mdc-menu-panel {
     --mat-menu-container-shape: 12px;
 }
-.menu-text{
+
+.menu-text {
     padding-left: 20px;
 }
 
-.img-w{
+.img-w {
     width: 16%;
-    }
+}
+
+.dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.green {
+    background-color: green;
+}
+
+.green-text {
+    background-color: rgba(25, 135, 84, 0.15);
+}
+
+.red-text {
+    background-color: rgba(241, 21, 65, 0.15);
+}
+
+.red {
+    background-color: red;
+}
+
+.status-text {
+    font-weight: 400;
+}

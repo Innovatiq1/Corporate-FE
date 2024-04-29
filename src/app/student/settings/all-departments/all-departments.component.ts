@@ -225,10 +225,9 @@ export class AllDepartmentsComponent
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.map((x: any) => ({
-        'Department Name': x.department,
-        'Head Of Department': x.hod,
+        'Department': x.department,
+        'HOD': x.hod,
         Phone: x.mobile,
-        Email: x.email,
         'Start Year':  formatDate(new Date(x?.departmentStartDate), 'yyyy-MM-dd', 'en') || '',
         'Students Capacity': x.studentCapacity,
       }));
@@ -237,13 +236,12 @@ export class AllDepartmentsComponent
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [[' Department Name','Head Of Department', 'Phone', 'Email', 'Start Year','Students Capacity']];
+    const headers = [[' Department','HOD', 'Phone', 'Start Year','Students Capacity']];
     
     const data = this.dataSource.map((x:any) =>
       [x.department,
         x.hod,
         x.mobile,
-        x.email,
         formatDate(new Date(x?.departmentStartDate), 'yyyy-MM-dd', 'en') || '',
         x.studentCapacity
     ] );

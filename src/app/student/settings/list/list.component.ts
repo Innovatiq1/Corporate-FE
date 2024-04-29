@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { BulletPointsPipe } from '@core/service/content.pipe';
 
 @Component({
   selector: 'app-list',
@@ -121,41 +122,45 @@ export class ListComponent {
   }
    // export table data in excel file
    exportExcel() {
-    // key name with space add in brackets
-    console.log("vv", this.dataSource);
-    const exportData: Partial<TableElement>[] =
-      this.dataSource.map((x: any) => ({
+    const exportData: Partial<TableElement>[] = this.dataSource.map((x: any) => ({
         'Title': x.subject,
-        'User Role': x.announcementFor,
-      }));
+        'Description': this.removeHtmlTags(x.details), // Remove HTML tags from description
+        'Role': x.announcementFor,
+    }));
 
     TableExportUtil.exportToExcel(exportData, 'excel');
-  }
+}
+
+removeHtmlTags(html: string) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+}
+
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [[' Title','User Role']];
-    
-    const data = this.dataSource.map((x:any) =>
-      [x.subject,
+    const headers = [['Title', 'Description', 'Role']];
+
+    // Function to remove HTML tags from a string
+    const removeHtmlTags = (html: string) => {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        return doc.body.textContent || "";
+    };
+
+    const data = this.dataSource.map((x: { subject: any; details: string; announcementFor: any; }) => [
+        x.subject,
+        removeHtmlTags(x.details), // Remove HTML tags from description
         x.announcementFor,
-    ] );
-    //const columnWidths = [60, 80, 40];
+    ]);
+
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
-  
-    // Add a page to the document (optional)
-    //doc.addPage();
-  
-    // Generate the table using jspdf-autotable
+
     (doc as any).autoTable({
-      head: headers,
-      body: data,
-      startY: 20,
-  
-  
-  
+        head: headers,
+        body: data,
+        startY: 20,
     });
-  
-    // Save or open the PDF
+
     doc.save('Announcement-list.pdf');
-  }
+}
+
 }
