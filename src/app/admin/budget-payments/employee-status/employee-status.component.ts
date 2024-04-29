@@ -1,18 +1,20 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { formatDate } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { CoursePaginationModel } from '@core/models/course.model';
 import { EtmsService } from '@core/service/etms.service';
 import { UtilsService } from '@core/service/utils.service';
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-employee-status',
   templateUrl: './employee-status.component.html',
-  styleUrls: ['./employee-status.component.scss']
+  styleUrls: ['./employee-status.component.scss'],
 })
 export class EmployeeStatusComponent {
-
   displayedColumns: string[] = [
     'ID',
     'course',
@@ -24,15 +26,15 @@ export class EmployeeStatusComponent {
     'approval stage',
     'status',
     'reason',
-    'actions'];
+    'actions',
+  ];
   coursePaginationModel!: Partial<CoursePaginationModel>;
   totalItems: any;
   pageSizeArr = this.utils.pageSizeArr;
 
-
   id: any;
   selection = new SelectionModel<any>(true, []);
-  dataSource :any;
+  dataSource: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   breadscrums = [
     {
@@ -42,23 +44,24 @@ export class EmployeeStatusComponent {
     },
   ];
 
-constructor(private router:Router,private etmsService: EtmsService,public utils: UtilsService){
-  this.coursePaginationModel = {};
-
-}
+  constructor(
+    private router: Router,
+    private etmsService: EtmsService,
+    public utils: UtilsService
+  ) {
+    this.coursePaginationModel = {};
+  }
   ngOnInit() {
-    this.getAllRequestsByEmployeeId()  
+    this.getAllRequestsByEmployeeId();
   }
 
-
-  createReq(){
-this.router.navigate(['/admin/budgets/create-request'])
+  createReq() {
+    this.router.navigate(['/admin/budgets/create-request']);
   }
 
   // createCourseReq(){
   //   this.router.navigate(['/admin/e-tms/create-course-request'])
   //     }
-    
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -66,26 +69,27 @@ this.router.navigate(['/admin/budgets/create-request'])
     return numSelected === numRows;
   }
 
-   /** Selects all rows if they are not all selected; otherwise clear selection. */
-   masterToggle() {
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.dataSource.forEach((row: any) =>
-          this.selection.select(row)
-        );
+      : this.dataSource.forEach((row: any) => this.selection.select(row));
   }
-  
 
-  getAllRequestsByEmployeeId(){
-    let employeeId = localStorage.getItem('id')
-    this.etmsService.getAllRequestsByEmployeeId({...this.coursePaginationModel,employeeId}).subscribe(response =>{
-     this.dataSource = response.data.docs;
-     this.totalItems = response.data.totalDocs;
-     this.coursePaginationModel.docs = response.docs;
-    this.coursePaginationModel.page = response.page;
-    this.coursePaginationModel.limit = response.limit;
-    }, error => {
-    });
+  getAllRequestsByEmployeeId() {
+    let employeeId = localStorage.getItem('id');
+    this.etmsService
+      .getAllRequestsByEmployeeId({ ...this.coursePaginationModel, employeeId })
+      .subscribe(
+        (response) => {
+          this.dataSource = response.data.docs;
+          this.totalItems = response.data.totalDocs;
+          this.coursePaginationModel.docs = response.docs;
+          this.coursePaginationModel.page = response.page;
+          this.coursePaginationModel.limit = response.limit;
+        },
+        (error) => {}
+      );
   }
 
   pageSizeChange($event: any) {
@@ -93,10 +97,106 @@ this.router.navigate(['/admin/budgets/create-request'])
     this.coursePaginationModel.limit = $event?.pageSize;
     this.getAllRequestsByEmployeeId();
   }
-copy(id: string){
-  this.router.navigate(['/admin/e-tms/copy-request'],{queryParams:{id : id, action : "copy"}})
+  copy(id: string) {
+    this.router.navigate(['/admin/e-tms/copy-request'], {
+      queryParams: { id: id, action: 'copy' },
+    });
+  }
+  edit(id: string) {
+    this.router.navigate(['/admin/e-tms/edit-request'], {
+      queryParams: { id: id, action: 'edit' },
+    });
+  }
+
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [
+      [
+        'REQUEST-ID ',
+        'Course',
+        'Payment',
+        'Created At',
+        'Approver 1',
+        'Approver 2',
+        'Approver 3',
+        'Approval Stage',
+        'Status',
+        'Reason',
+      ],
+    ];
+    const data = this.dataSource.map((user: { requestId: any; courseName: any; courseCost: string; createdAt: string | number | Date; roApprovedOn: any; directorApprovedOn: any; trainingadminApprovedOn: any; roApproval: any; directorApproval: any; trainingAdminApproval: any; reason: any; }) => [
+      user.requestId,
+      user.courseName,
+      '$' + user.courseCost,
+      formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
+      user.roApprovedOn,
+      user.directorApprovedOn,
+      user.trainingadminApprovedOn,
+      `Approver 1
+  Approver 2
+  Approver 3`,
+  `${user.roApproval}
+  ${user.directorApproval}
+  ${user.trainingAdminApproval}`,
+      user.reason,
+    ]);
+
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+    const margin = 10;
+    const pageHeight = doc.internal.pageSize.height;
+
+    let startY = margin;
+    let remainingData = data.slice(); // Copy the data array
+
+    while (remainingData.length > 0) {
+        const currentData = remainingData.splice(0, 25); // Adjust 25 to the number of rows per page you want
+
+        (doc as any).autoTable({
+            head: headers,
+            body: currentData,
+            startY: startY,
+            headStyles: {
+                fontSize: 10,
+                cellWidth: 'wrap',
+            },
+            columnStyles: {
+                0: { columnWidth: columnWidths[0] },
+                1: { columnWidth: columnWidths[1] },
+                2: { columnWidth: columnWidths[2] },
+                3: { columnWidth: columnWidths[3] },
+                4: { columnWidth: columnWidths[4] },
+                5: { columnWidth: columnWidths[5] },
+                6: { columnWidth: columnWidths[6] },
+                7: { columnWidth: columnWidths[7] },
+                8: { columnWidth: columnWidths[8] },
+                9: { columnWidth: columnWidths[9] },
+            },
+        });
+
+        if (remainingData.length > 0) {
+            doc.addPage(); // Add a new page if there's remaining data
+            startY = margin; // Reset startY for the new page
+        }
+    }
+
+    // Save or open the PDF
+    doc.save('program-payment.pdf');
 }
-edit(id: string){
-  this.router.navigate(['/admin/e-tms/edit-request'],{queryParams:{id : id, action : "edit"}})
-}
+
+
+  exportExcel() {
+    //k//ey name with space add in brackets
+    const exportData: Partial<TableElement>[] = this.dataSource.map(
+      (user: any) => ({
+        Student: user.name,
+        Email: user.email,
+        Program: user.program,
+        'Payment Date':
+          formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
+        Amount: '$' + user.price,
+        Status: user.status,
+      })
+    );
+    TableExportUtil.exportToExcel(exportData, 'program-payment');
+  }
 }

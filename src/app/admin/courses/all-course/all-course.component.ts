@@ -255,7 +255,7 @@ export class AllCourseComponent {
       x.creator,
       x.course_duration_in_days ||0,
       x.training_hours ||0,
-      '$'+x.fee === null ? '0' : x.fee,
+      x.fee === null ? '0' : '$'+x.fee,
       formatDate(new Date(x.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
       formatDate(new Date(x.sessionEndDate), 'yyyy-MM-dd', 'en') || '',
       x.vendor,

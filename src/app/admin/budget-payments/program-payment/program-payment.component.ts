@@ -1,4 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { formatDate } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder} from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -7,6 +8,8 @@ import { Router } from '@angular/router';
 import {CourseKitModel, CourseModel, CoursePaginationModel } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { UtilsService } from '@core/service/utils.service';
+import { TableElement, TableExportUtil } from '@shared';
+import jsPDF from 'jspdf';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -152,7 +155,56 @@ export class ProgramPaymentComponent {
     //   'right'
     // );
   }
+
+  generatePdf() {
+    const doc = new jsPDF();
+    const headers = [['Student','Email','Program', 'Payment Date', 'Amount', 'Status']];
+    const data = this.dataSource.map((user: any) => [
+      user.name,
+      user.email,
+      user.program,
+      formatDate(new Date( user.createdAt), 'yyyy-MM-dd', 'en') || '',
+      '$'+user.price,
+      user.status,
+    
+    ]);
+    //const columnWidths = [60, 80, 40];
+    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
+
+    // Add a page to the document (optional)
+    //doc.addPage();
+
+    // Generate the table using jspdf-autotable
+    (doc as any).autoTable({
+      head: headers,
+      body: data,
+      startY: 20,
+      headStyles: {
+        fontSize: 10,
+        cellWidth: 'wrap',
+      },
+    });
+
+    // Save or open the PDF
+    doc.save('program-payment.pdf');
+  }
+
+  exportExcel() {
+    //k//ey name with space add in brackets
+    const exportData: Partial<TableElement>[] = this.dataSource.map(
+      (user: any) => ({
+        Student: user.name,
+        Email: user.email,
+        Program: user.program,
+        'Payment Date':  formatDate(new Date( user.createdAt), 'yyyy-MM-dd', 'en') || '',
+        'Amount':'$'+user.price,
+        'Status': user.status,
+      })
+    );
+    TableExportUtil.exportToExcel(exportData, 'program-payment');
+  }
   getStatusClass(status: string): string {
     return status === 'success' ? 'success' : 'fail';
   }
+  
 }
