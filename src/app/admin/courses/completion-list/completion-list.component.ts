@@ -223,7 +223,7 @@ export class CompletionListComponent {
       user.studentId?.name,
       user.studentId?.email,
       user.courseId?.title,
-      user.classId?.instructorCost,
+      '$'+user.classId?.instructorCost,
       user.classStartDate,
       user.classEndDate,
       user.registeredOn ,
@@ -247,7 +247,7 @@ export class CompletionListComponent {
     });
 
     // Save or open the PDF
-    doc.save('completion-list.pdf');
+    doc.save('student-completed-list.pdf');
   }
 
   exportExcel() {
@@ -257,7 +257,7 @@ export class CompletionListComponent {
         Student: user.studentId?.name,
         Email: user.studentId?.email,
         Course: user.courseId?.title,
-        'Instructor Fee': user.classId?.instructorCost,
+        'Instructor Fee': '$'+user.classId?.instructorCost,
         'Start Date': user.classStartDate,
         'End date': user.classEndDate,
         'Registered Date': user.registeredOn,
@@ -268,7 +268,7 @@ export class CompletionListComponent {
         EndDate: user.classEndDate,
       })
     );
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'student-completed-list');
   }
   generateCertificate(element: Student) {
     Swal.fire({

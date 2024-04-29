@@ -191,23 +191,26 @@ export class AllocationComponent implements OnInit{
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.map((x: any) => ({
-        'Department Name': x.department,
-        'Percentage Allocated': x.percentage,
-        'By Value': x.value,
-        'Budget Allocated': x.value,
+        'Department': x.departmentName,
+        HOD: x.hod,
+        Year: x.year,
+        'Budget Allocated':  '$'+x.trainingBudget,
+        'Status': x.approval,
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Department-budget-allocation');
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [[' Department Name','Percentage Allocated', 'By Value', 'Budget Allocated']];
+    const headers = [[' Department','HOD','Year','Budget Allocated', 'Status']];
     
     const data = this.dataSource.map((x:any) =>
-      [x.department,
-        x.percentage,
-        x.value,
-        x.value
+      [x.departmentName,
+        x.hod,
+        x.year,
+        '$'+x.trainingBudget,
+        x.approval,
+  
     ] );
     //const columnWidths = [60, 80, 40];
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
@@ -252,4 +255,6 @@ export class AllocationComponent implements OnInit{
       }
     })
   }
+
+  
 }

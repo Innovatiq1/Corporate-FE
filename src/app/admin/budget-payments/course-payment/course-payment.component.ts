@@ -174,24 +174,26 @@ this.router.navigate(['/admin/budgets/view-course-payment/'], {queryParams:{id:i
     //k//ey name with space add in brackets
    const exportData: Partial<TableElement>[] =
       this.dataSource.map((user:any) => ({
-        CourseName:user.course,
-        PaymentDate: formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
+        Student:user.name,
+        Email:user.email,
+        Course:user.course,
         Amount: user.price,
-        StudentName: user.name,
+        PaymentDate: formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
         Status: user.status
       }));
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Course Payments');
   }
   // pdf
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Course Name','Payment Date','Amount', 'Student Name', 'Status']];
+    const headers = [['Student','Email','Course','Amount', 'Payment Date', 'Status']];
     
     const data = this.dataSource.map((user:any) =>
-      [user.course,
-      formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
+      [user.name,
+       user.email,
+       user.course,
        user.price,
-       user.name,
+       formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
        user.status
 
     ] );

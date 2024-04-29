@@ -264,14 +264,14 @@ export class StudentPendingCoursesComponent {
         'Student': user.studentId?.name,
         Status:  user.status === 'inactive' ? 'Pending' : '',
         'Course': user.classId?.courseId?.title,
-        'Course Fee': user.classId?.courseId?.fee,
-        'Instructor Fee': user.classId?.instructorCost,
+        'Course Fee': '$'+user.classId?.courseId?.fee,
+        'Instructor Fee': '$'+user.classId?.instructorCost,
         'Start Date': user.classStartDate,
         'End Date': user.classEndDate,
         'Registered On':  formatDate(new Date(user.registeredOn), 'yyyy-MM-dd', 'en') || '',
         
       }));
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'student-pending-list');
   }
   // pdf
   generatePdf() {
@@ -292,8 +292,8 @@ export class StudentPendingCoursesComponent {
       user.studentId?.name,
       user.status === 'inactive' ? 'Pending' : '',
       user.classId?.courseId?.title,
-      user.classId?.courseId?.fee,
-      user.classId?.instructorCost,
+      '$'+user.classId?.courseId?.fee,
+      '$'+user.classId?.instructorCost,
       user.classStartDate,
       user.classEndDate,
       formatDate(new Date(user.registeredOn), 'yyyy-MM-dd', 'en') || '',
@@ -318,7 +318,7 @@ export class StudentPendingCoursesComponent {
     });
 
     // Save or open the PDF
-    doc.save('approve-list.pdf');
+    doc.save('student-pending-list.pdf');
   }
 
 }
