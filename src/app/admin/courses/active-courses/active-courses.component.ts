@@ -197,7 +197,7 @@ export class ActiveCoursesComponent {
         Days: x.course_duration_in_days || 0,
         Hours: x.training_hours || 0,
         Vendor: x.vendor,
-        Payment: '$'+x.fee === null ? 0 :x.fee,
+        Payment: x.fee === null ? 0 :'$'+x.fee,
         'Start Date':
           formatDate(new Date(x.sessionStartDate), 'yyyy-MM-dd', 'en') || '',
         'End Date':
