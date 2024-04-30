@@ -221,7 +221,7 @@ export class PendingProgramsComponent {
         'Elective Count': user.electiveCourseCount
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Program Pending-list');
   }
  
   generatePdf() {

@@ -206,7 +206,7 @@ export class ActiveCoursesComponent {
       })
     );
 
-    TableExportUtil.exportToExcel(exportData, 'Approved Course List');
+    TableExportUtil.exportToExcel(exportData, 'Approved Courses-list');
   }
   generatePdf() {
     const doc = new jsPDF();

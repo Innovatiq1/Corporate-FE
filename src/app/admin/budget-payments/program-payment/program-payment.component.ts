@@ -186,7 +186,7 @@ export class ProgramPaymentComponent {
     });
 
     // Save or open the PDF
-    doc.save('program-payment.pdf');
+    doc.save('Program Payments.pdf');
   }
 
   exportExcel() {
@@ -201,7 +201,7 @@ export class ProgramPaymentComponent {
         'Status': user.status,
       })
     );
-    TableExportUtil.exportToExcel(exportData, 'program-payment');
+    TableExportUtil.exportToExcel(exportData, 'Program Payments');
   }
   getStatusClass(status: string): string {
     return status === 'success' ? 'success' : 'fail';

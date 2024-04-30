@@ -382,7 +382,7 @@ viewActiveProgram(id:string, status: string):void {
         'Elective Count': x.electiveCourseCount
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'AllPrograms-list.pdf');
   }
   generatePdf() {
     const doc = new jsPDF();

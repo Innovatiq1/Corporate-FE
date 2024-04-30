@@ -191,7 +191,7 @@ export class StudentApprovalListComponent {
          'Registered Date': formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
         
        }));
-     TableExportUtil.exportToExcel(exportData, 'excel');
+     TableExportUtil.exportToExcel(exportData, 'Student-Approve-list');
    }
    generatePdf() {
      const doc = new jsPDF();

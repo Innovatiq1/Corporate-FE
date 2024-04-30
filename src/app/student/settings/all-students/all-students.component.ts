@@ -278,7 +278,7 @@ export class AllStudentsComponent
           x.joiningDate || '',
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'StudentList');
   }
 
 

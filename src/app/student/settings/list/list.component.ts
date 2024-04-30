@@ -128,7 +128,7 @@ export class ListComponent {
         'Role': x.announcementFor,
     }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Announcement-list');
 }
 
 removeHtmlTags(html: string) {

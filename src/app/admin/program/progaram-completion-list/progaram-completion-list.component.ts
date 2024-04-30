@@ -319,7 +319,7 @@ export class ProgaramCompletionListComponent {
       body: data,
       startY: 20,
     });
-    doc.save('Student-Completed programs-list.pdf');
+    doc.save('Student Completed-programs-list.pdf');
   }
   exportExcel() {
     
@@ -335,7 +335,7 @@ export class ProgaramCompletionListComponent {
         'Actions': 'Certificate Issued'
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Student Completed-programs-list');
   }
 
 

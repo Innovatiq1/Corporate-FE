@@ -296,7 +296,7 @@ export class ApproveListComponent {
         
       })
     );
-    TableExportUtil.exportToExcel(exportData, 'student-approve-list');
+    TableExportUtil.exportToExcel(exportData, 'Student-Approve-list');
   }
   // pdf
   generatePdf() {
@@ -340,6 +340,6 @@ export class ApproveListComponent {
     });
 
     // Save or open the PDF
-    doc.save('student-approve-list.pdf');
+    doc.save('Student-Approve-list.pdf');
   }
 }

@@ -235,7 +235,7 @@ exportExcel() {
      'Sub Category': user?.subCategories[0]?.category_name,
    })
  );
-  TableExportUtil.exportToExcel(exportData, 'excel');
+  TableExportUtil.exportToExcel(exportData, 'Categories-list');
 }
 
 generatePdf() {

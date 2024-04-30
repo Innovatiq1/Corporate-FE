@@ -164,7 +164,7 @@ export class AuditListComponent {
         'Logout Time': user.logoutTime?formatDate(new Date(user.logoutTime), 'yyyy-MM-dd hh:mm:ss a', 'en') :''
       })
     );
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Audit-list');
   }
 
   generatePdf() {
