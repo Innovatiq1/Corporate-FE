@@ -22,13 +22,13 @@ export class TrainingAprovalReqComponent   extends UnsubscribeOnDestroyAdapter
 implements OnInit{
 
 
-  // breadscrums = [
-  //   {
-  //     title: 'ETMS',
-  //     items: [''],
-  //     active: 'Training Approval Request ',
-  //   },
-  // ];
+  breadscrums = [
+    {
+      title: 'TMS',
+      items: ['Finance'],
+      active: 'Training Approval Request',
+    },
+  ];
   ro = false;
   payload = {};
   director = false;
@@ -74,7 +74,6 @@ implements OnInit{
     } else if (user.user.type == 'Director') {
       this.director = true;
     } else if (user.user.type == 'Training Administrator') {
-      
       this.trainingAdmin = true;
 
       
@@ -185,6 +184,7 @@ implements OnInit{
         this.getAllRejectedRequestsByTrainingAdmin()
       }
     }
+    // this.getAllRequestsByTrainingAdmin();
   }
 
 
@@ -294,7 +294,6 @@ implements OnInit{
 
 
   approve(req: any) {
-    
     this.id = req._id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
@@ -321,10 +320,12 @@ implements OnInit{
         }
         if (this.ro) {
           this.getAllRequestsByRo();
+          this.getCount();
         } else if (this.director) {
           this.getAllRequestsByDirector();
+          this.getCount();
         } else if (this.trainingAdmin) {
-          this.getAllRequestsByTrainingAdmin();
+          this.getAllRequestsByTrainingAdmin();this.getCount();
         }
       }
     });
@@ -399,10 +400,13 @@ implements OnInit{
         }
         if (this.ro) {
           this.getAllRequestsByRo();
+          this.getCount();
         } else if (this.director) {
           this.getAllRequestsByDirector();
+          this.getCount();
         } else if (this.trainingAdmin) {
           this.getAllRequestsByTrainingAdmin();
+          this.getCount();
         }
       }
     });
@@ -411,31 +415,23 @@ implements OnInit{
   getCount(){
     let userId = localStorage.getItem('id');
     let userRole = localStorage.getItem('user_type');
-
-
 if(userRole === "RO"){
   this.etmsService.getRequestRoCount(userId).subscribe(res =>{
     this.approved = res.data.docs.courseRequestApproved;
     this.rejected = res.data.docs.courseRequestRejected;
     this.pending = res.data.docs.courseRequestPending;
-
-
   })
 }else if(userRole == "Director"){
   this.etmsService.getRequestDirectorCount(userId).subscribe(res =>{
     this.approved = res.data.docs.courseRequestApproved;
     this.rejected = res.data.docs.courseRequestRejected;
     this.pending = res.data.docs.courseRequestPending;
-
-
   })
 }else if(userRole === "Training Administrator"){
   this.etmsService.getRequestTrainingAdminCount(userId).subscribe(res =>{
     this.approved = res.data.docs.courseRequestApproved;
     this.rejected = res.data.docs.courseRequestRejected;
     this.pending = res.data.docs.courseRequestPending;
-
-
   })
 }
    

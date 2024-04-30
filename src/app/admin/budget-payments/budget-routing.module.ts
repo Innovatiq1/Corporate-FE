@@ -12,9 +12,10 @@ import { CreateDeptBudgetRequestComponent } from './allocation/create-dept-budge
 import { ViewCoursePaymentComponent } from './course-payment/view-course-payment/view-course-payment.component';
 import { ViewProgramPaymentComponent } from './program-payment/view-program-payment/view-program-payment.component';
 import { EmployeeStatusComponent } from './employee-status/employee-status.component';
-import { TrainingApprovalReqComponent } from '../approval/training-approval-req/training-approval-req.component';
+// import { TrainingApprovalReqComponent } from '../approval/training-approval-req/training-approval-req.component';
 import { BudgetRequestComponent } from './budget-request/budget-request.component';
 import { DeptBudgetRequestComponent } from './dept-budget-request/dept-budget-request.component';
+import { TrainingAprovalReqComponent } from './training-aproval-req/training-aproval-req.component';
 
 
 const routes: Routes = [
@@ -68,7 +69,7 @@ const routes: Routes = [
   },
   {
     path:'training-approval-req', 
-    component:TrainingApprovalReqComponent
+    component:TrainingAprovalReqComponent
   },
   {
     path: 'budget-request',
