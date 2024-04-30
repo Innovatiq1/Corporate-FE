@@ -271,7 +271,7 @@ export class StudentPendingCoursesComponent {
         'Registered On':  formatDate(new Date(user.registeredOn), 'yyyy-MM-dd', 'en') || '',
         
       }));
-    TableExportUtil.exportToExcel(exportData, 'student-pending-list');
+    TableExportUtil.exportToExcel(exportData, 'Student Pending-list');
   }
   // pdf
   generatePdf() {
@@ -318,7 +318,7 @@ export class StudentPendingCoursesComponent {
     });
 
     // Save or open the PDF
-    doc.save('student-pending-list.pdf');
+    doc.save('Student Pending-list.pdf');
   }
 
 }

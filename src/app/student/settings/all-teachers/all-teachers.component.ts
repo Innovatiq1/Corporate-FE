@@ -266,7 +266,7 @@ export class AllTeachersComponent
         'Joining Date': formatDate(new Date(x.joiningDate), 'yyyy-MM-dd', 'en') || '',
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Instrucor-list');
   }
   generatePdf() {
     const doc = new jsPDF();
@@ -299,7 +299,7 @@ export class AllTeachersComponent
     });
 
     // Save or open the PDF
-    doc.save('instrucor-list.pdf');
+    doc.save('Instrucor-list.pdf');
   }
 
   showNotification(

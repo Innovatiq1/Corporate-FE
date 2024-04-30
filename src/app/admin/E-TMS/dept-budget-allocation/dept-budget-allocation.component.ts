@@ -181,7 +181,7 @@ export class DeptBudgetAllocationComponent implements OnInit{
         'Budget Allocated': x.value,
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Department-budget-allocation');
   }
   generatePdf() {
     const doc = new jsPDF();
@@ -210,7 +210,7 @@ export class DeptBudgetAllocationComponent implements OnInit{
     });
   
     // Save or open the PDF
-    doc.save('Department-budget-allocation-list.pdf');
+    doc.save('Department-budget-allocation.pdf');
   }
 
 

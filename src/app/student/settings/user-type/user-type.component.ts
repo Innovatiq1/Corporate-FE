@@ -227,7 +227,7 @@ last: any;
         'Students Capacity': x.status,
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Module Access-list');
   }
   generatePdf() {
     console.log("PDF");

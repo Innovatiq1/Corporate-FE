@@ -171,7 +171,7 @@ implements OnInit{
         ElectiveCount: user?.electiveCourseCount
        
       }));
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Program Approve-list');
   }
   generatePdf() {
     const doc = new jsPDF();

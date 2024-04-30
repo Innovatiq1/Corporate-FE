@@ -235,7 +235,7 @@ export class CourseApprovalComponent {
        'Fees': user.fee,
      })
    );
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Course-approve-list');
   }
 
   generatePdf() {

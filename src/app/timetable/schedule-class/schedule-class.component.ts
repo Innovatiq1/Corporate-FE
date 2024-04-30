@@ -138,7 +138,7 @@ export class ScheduleClassComponent {
         'EndDate': formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
         'Class':user?.classDeliveryType,
       }));
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'Program Class-list');
   }
   generatePdf() {
     const doc = new jsPDF();

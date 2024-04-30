@@ -228,7 +228,7 @@ export class SurveyListComponent
        
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'SurveyList');
   }
 
   showNotification(

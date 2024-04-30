@@ -229,7 +229,7 @@ export class AllocationComponent implements OnInit{
     });
   
     // Save or open the PDF
-    doc.save('Department-budget-allocation-list.pdf');
+    doc.save('Department-budget-allocation.pdf');
   }
 
 

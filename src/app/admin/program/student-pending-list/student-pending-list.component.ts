@@ -217,7 +217,7 @@ export class StudentPendingListComponent {
       body: data,
       startY: 20,
     });
-    doc.save('Student-Pending Programs-list.pdf');
+    doc.save('Student Pending-Programs-list.pdf');
   }
   exportExcel() {
    const mapStatus = (status: string): string => {
@@ -242,7 +242,7 @@ export class StudentPendingListComponent {
        'Registered Date': formatDate(new Date(user?.registeredOn), 'yyyy-MM-dd', 'en') || '',
      }));
 
-   TableExportUtil.exportToExcel(exportData, 'excel');
+   TableExportUtil.exportToExcel(exportData, 'Student Pending-Programs-list');
  }
   // exportExcel() {
   //   //k//ey name with space add in brackets

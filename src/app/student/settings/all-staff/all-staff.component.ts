@@ -207,7 +207,7 @@ export class AllstaffComponent
         Salary: x.salary,
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'AllStaff-list');
   }
   generatePdf() {
     const doc = new jsPDF();

@@ -232,7 +232,7 @@ export class AllDepartmentsComponent
         'Students Capacity': x.studentCapacity,
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'AllDepartments-list');
   }
   generatePdf() {
     const doc = new jsPDF();

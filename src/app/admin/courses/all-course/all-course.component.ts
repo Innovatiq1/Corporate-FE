@@ -181,7 +181,7 @@ export class AllCourseComponent {
       })
     );
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'AllCourses-list');
   }
   onSelectionChange(event: any, field: any) {
     if (field == 'course') {

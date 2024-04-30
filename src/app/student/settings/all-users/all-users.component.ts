@@ -208,7 +208,7 @@ exportExcel() {
      'Status' : user.Active ?  'Active': 'Inactive' 
    })
  );
-  TableExportUtil.exportToExcel(exportData, 'excel');
+  TableExportUtil.exportToExcel(exportData, 'AllUsers-list');
 }
 
 generatePdf() {

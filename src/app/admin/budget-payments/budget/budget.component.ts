@@ -338,7 +338,7 @@ export class BudgetComponent {
     });
 
     // Save or open the PDF
-    doc.save('budget-list.pdf');
+    doc.save('Budget-list.pdf');
   }
   exportExcel() {
     //k//ey name with space add in brackets
@@ -350,6 +350,6 @@ export class BudgetComponent {
        'Status': user.approval,
      })
    );
-    TableExportUtil.exportToExcel(exportData, 'budget-list');
+    TableExportUtil.exportToExcel(exportData, 'Budget-list');
   }
 }

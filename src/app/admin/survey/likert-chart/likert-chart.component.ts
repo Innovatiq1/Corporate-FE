@@ -148,7 +148,7 @@ export class LikertChartComponent {
        
       }));
 
-    TableExportUtil.exportToExcel(exportData, 'excel');
+    TableExportUtil.exportToExcel(exportData, 'SurveyList');
   }
 
 
