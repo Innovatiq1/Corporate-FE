@@ -177,7 +177,7 @@ this.router.navigate(['/admin/budgets/view-course-payment/'], {queryParams:{id:i
         Student:user.name,
         Email:user.email,
         Course:user.course,
-        Amount: user.price,
+        Amount: '$'+user.price,
         PaymentDate: formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
         Status: user.status
       }));
@@ -192,7 +192,7 @@ this.router.navigate(['/admin/budgets/view-course-payment/'], {queryParams:{id:i
       [user.name,
        user.email,
        user.course,
-       user.price,
+       '$'+user.price,
        formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
        user.status
 

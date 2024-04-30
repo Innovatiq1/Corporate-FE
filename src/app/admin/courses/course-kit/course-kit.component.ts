@@ -291,14 +291,13 @@ export class CourseKitComponent implements OnInit{
   }
   // export table data in excel file
   exportExcel() {
-    //k//ey name with space add in brackets
    const exportData: Partial<TableElement>[] = this.dataSource.map(
      (user: any) => ({
        'Course Kit': user.name,
        'Short Description': user.shortDescription,
        'Long Description': user.longDescription,
-       'Video Link': user.videoLink[0].video_url,
-       'Document Link': user.documentLink,
+       'Video Link': user.videoLink[0].video_filename,
+       'Document Link': user.videoLink[0].doc_filename,
      })
    );
     TableExportUtil.exportToExcel(exportData, 'courseKit-list');
@@ -307,20 +306,13 @@ export class CourseKitComponent implements OnInit{
   generatePdf() {
     const doc = new jsPDF();
     const headers = [['Course Kit','Short Description','Long Description','Video Link           ','Document Link']];
-    
     const data = this.dataSource.map((user:any) =>
       [user.name,
         user.shortDescription,
        user.longDescription,
-       user.videoLink[0].video_url,
-       user.documentLink
+       user.videoLink[0].video_filename,
+       user.videoLink[0].doc_filename
     ] );
-    //const columnWidths = [60, 80, 40];
-    const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
-
-    // Add a page to the document (optional)
-    //doc.addPage();
-
     // Generate the table using jspdf-autotable
     (doc as any).autoTable({
       head: headers,
