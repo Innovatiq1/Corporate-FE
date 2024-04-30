@@ -124,7 +124,7 @@ export class EmployeeStatusComponent {
         'Reason',
       ],
     ];
-    const data = this.dataSource.map((user: { requestId: any; courseName: any; courseCost: string; createdAt: string | number | Date; roApprovedOn: any; directorApprovedOn: any; trainingadminApprovedOn: any; roApproval: any; directorApproval: any; trainingAdminApproval: any; reason: any; }) => [
+    const data = this.dataSource.map((user: { requestId: any; courseName: any; courseCost: string; createdAt: string | number | Date; roApprovedOn: any; directorApprovedOn: any; trainingadminApprovedOn: any; roApproval: any; directorApproval: any; trainingAdminApproval: any;roReason: any; directorReason: any; trainingAdminReason: any; }) => [
       user.requestId,
       user.courseName,
       '$' + user.courseCost,
@@ -138,7 +138,9 @@ export class EmployeeStatusComponent {
   `${user.roApproval}
   ${user.directorApproval}
   ${user.trainingAdminApproval}`,
-      user.reason,
+     `${user.roReason} 
+     ${user.directorReason} 
+     ${user.trainingAdminReason}`,
     ]);
 
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
@@ -180,7 +182,7 @@ export class EmployeeStatusComponent {
     }
 
     // Save or open the PDF
-    doc.save('program-payment.pdf');
+    doc.save('Training-request.pdf');
 }
 
 
@@ -188,15 +190,32 @@ export class EmployeeStatusComponent {
     //k//ey name with space add in brackets
     const exportData: Partial<TableElement>[] = this.dataSource.map(
       (user: any) => ({
-        Student: user.name,
-        Email: user.email,
-        Program: user.program,
-        'Payment Date':
-          formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
-        Amount: '$' + user.price,
-        Status: user.status,
+        'REQUEST-ID': user.requestId,
+        'Course': user.courseName,
+        'Payment': '$' + user.courseCost,
+        'Created At':  formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
+        'Approver 1':   user.roApprovedOn,
+        'Approver 2' :  user.directorApprovedOn,
+        'Approver 3' :  user.trainingadminApprovedOn,
+        'Approval Stage' : `Approver 1 
+                            Approver 2 
+                            Approver 3`,
+        'Status' :  `${user.roApproval} 
+                      ${user.directorApproval} 
+                      ${user.trainingAdminApproval}`,
+        'Reason' :  `${user.roReason} 
+                     ${user.directorReason} 
+                     ${user.trainingAdminReason}`,
+   
+        // Student: user.name,
+        // Email: user.email,
+        // Program: user.program,
+        // 'Payment Date':
+        //   formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
+        // Amount: '$' + user.price,
+        // Status: user.status,
       })
     );
-    TableExportUtil.exportToExcel(exportData, 'program-payment');
+    TableExportUtil.exportToExcel(exportData, 'Training-request');
   }
 }
