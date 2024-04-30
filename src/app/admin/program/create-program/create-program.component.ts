@@ -376,6 +376,7 @@ export class CreateProgramComponent {
       }
     }
     else {
+      this.programFormGroup.markAllAsTouched();
       this.isSubmitted = true;
     }
   }

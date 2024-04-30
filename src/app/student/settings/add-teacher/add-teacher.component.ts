@@ -26,7 +26,7 @@ export class AddTeacherComponent {
   uploaded: any;
   thumbnail: any;
   avatar: any;
-
+  submitClicked: boolean = false;
   breadscrums = [
     {
       title: 'Add Instructor',
@@ -58,7 +58,7 @@ export class AddTeacherComponent {
       dob: ['', [Validators.required]],
       joiningDate:['', [Validators.required]],
       education: [''],
-      avatar: [''],
+      avatar: ['',[Validators.required]],
     },{
       validator: ConfirmedValidator('password', 'conformPassword')
     });
@@ -147,6 +147,7 @@ export class AddTeacherComponent {
         this.createInstructor(userData);
     }else{
       this.proForm.markAllAsTouched(); 
+      this.submitClicked = true;
     }
 }
 

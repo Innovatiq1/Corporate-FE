@@ -102,6 +102,7 @@ export class CreateClassComponent {
   defaultCurrency: string = '';
   forms!: any[];
   userGroups!: any[];
+  submitted : boolean = false;
 
   @ViewChild('allSelected') private allSelected!: MatOption;
 
@@ -307,23 +308,24 @@ export class CreateClassComponent {
   loadForm() {
     this.classForm = this._fb.group({
       courseId: ['', [Validators.required]],
-      classType: ['public'],
-      classDeliveryType: ['', Validators.required],
-      instructorCost: ['', Validators.required],
+      classType: ['', [Validators.required]],
+      classDeliveryType: ['', [Validators.required]],
+      instructorCost: ['', [Validators.required]],
       instructorCostCurrency: ['USD'],
       currency: [''],
-      department: ['', Validators.required],
-      isGuaranteedToRun: [false, Validators.required],
+      department: ['', [Validators.required]],
+      isGuaranteedToRun: [false, [Validators.required]],
       externalRoom: [false],
-      minimumEnrollment: ['', Validators.required],
-      maximumEnrollment: ['', Validators.required],
+      minimumEnrollment: ['', [Validators.required]],
+      maximumEnrollment: ['', [Validators.required]],
       // status: ['open'],
-      classStartDate: ['2023-05-20'],
-      classEndDate: ['2023-06-10'],
+      classStartDate: ['',[Validators.required]],
+      classEndDate: ['',[Validators.required]],
+      instructor: ['', [Validators.required]],
       userGroupId: [null]
     });
     this.secondFormGroup = this._fb.group({
-      sessions: ['', Validators.required],
+      sessions: ['', [Validators.required]],
     });
   }
 
@@ -406,10 +408,15 @@ export class CreateClassComponent {
   }
 
   saveProgramClass() {
+    if(this.classForm.valid) {
     if (!this.editUrl) {
+      
       let sessions = this.getSession();
       if (sessions) {
+        console.log("sessionBF",sessions);
         this.classForm.value.sessions = sessions;
+
+        console.log("sessionAF",this.classForm.value.sessions)
         this.classForm.value.programName = this.courseTitle;
         this.isSubmitted = true;
 
@@ -466,6 +473,10 @@ export class CreateClassComponent {
         });
       }
     }
+  }else{
+    this.classForm.markAllAsTouched();
+    this.submitted = true;
+  }
   }
 
   startDateChange(element: { end: any; start: any }) {

@@ -120,46 +120,48 @@ export class AddComponent {
   
      }
      onSubmit(){
-      
-     const fomdata= this.examsheduleForm.value
+      if(this.examsheduleForm.valid){
+        const fomdata= this.examsheduleForm.value
 
-     let startTime=moment(fomdata.startDate).format('HH:mm a')
-     let start=moment(startTime, 'HH:mm:ss').format('h:mm A');
-     let endTime=moment(fomdata.endDate).format('HH:mm')
-     let end=moment(endTime, 'HH:mm:ss').format('h:mm A');
-    fomdata['courseCode']=this.courseCode,
-     fomdata['courseName']=this.courseTitle,
-     fomdata['startDate']=fomdata.startDate,
-     fomdata['endDate']=fomdata.endDate,
-     fomdata['startTime']= start,
-     fomdata['endTime']= end,
-
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to create exam schedule!',
-      icon: 'warning',
-      confirmButtonText: 'Yes',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed){
-        this.examSchedule.addExamSchedule(fomdata).subscribe((response:any) => {
-          Swal.fire({
-            title: 'Successful',
-            text: 'Exam schdeule add successfully',
-            icon: 'success',
-          });
-          if(this.userType === 'admin' || this.userType === 'Instructor'){
-            this.router.navigate(['/timetable/course-exam']);
-          }else if(this.userType === 'Student'){
-            this.router.navigate(['/student/exams/courses']);
-          }
-          
-        });
+        let startTime=moment(fomdata.startDate).format('HH:mm a')
+        let start=moment(startTime, 'HH:mm:ss').format('h:mm A');
+        let endTime=moment(fomdata.endDate).format('HH:mm')
+        let end=moment(endTime, 'HH:mm:ss').format('h:mm A');
+       fomdata['courseCode']=this.courseCode,
+        fomdata['courseName']=this.courseTitle,
+        fomdata['startDate']=fomdata.startDate,
+        fomdata['endDate']=fomdata.endDate,
+        fomdata['startTime']= start,
+        fomdata['endTime']= end,
+   
+       Swal.fire({
+         title: 'Are you sure?',
+         text: 'Do you want to create exam schedule!',
+         icon: 'warning',
+         confirmButtonText: 'Yes',
+         showCancelButton: true,
+         cancelButtonColor: '#d33',
+       }).then((result) => {
+         if (result.isConfirmed){
+           this.examSchedule.addExamSchedule(fomdata).subscribe((response:any) => {
+             Swal.fire({
+               title: 'Successful',
+               text: 'Exam schdeule add successfully',
+               icon: 'success',
+             });
+             if(this.userType === 'admin' || this.userType === 'Instructor'){
+               this.router.navigate(['/timetable/course-exam']);
+             }else if(this.userType === 'Student'){
+               this.router.navigate(['/student/exams/courses']);
+             }
+             
+           });
+         }
+       });
       }
-    });
-  
-
+      else {
+        this.examsheduleForm.markAllAsTouched();
+      }
   } 
 
      }

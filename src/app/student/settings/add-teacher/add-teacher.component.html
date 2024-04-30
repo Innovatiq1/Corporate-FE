@@ -223,15 +223,18 @@
                     
                     </div>
                   </div>
+                  <mat-error *ngIf="submitClicked && proForm.get('avatar')?.hasError('required')">
+                   Upload a file
+                  </mat-error>
                   <!-- <app-file-upload formControlName="image_link" (change)="onFileUpload($event)"></app-file-upload> -->
                 </div>
+               
               </div>
               <div class="row" style="float: right;">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <button class="btn-space" type="button" (click)="cancel()" mat-raised-button color="warn">Cancel</button>
                   <button  mat-raised-button
                    id="submit">Create</button>
-                  
                 </div>
               </div>
             </form>
