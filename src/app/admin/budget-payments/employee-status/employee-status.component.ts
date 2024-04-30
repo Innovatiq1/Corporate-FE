@@ -197,23 +197,11 @@ export class EmployeeStatusComponent {
         'Approver 1':   user.roApprovedOn,
         'Approver 2' :  user.directorApprovedOn,
         'Approver 3' :  user.trainingadminApprovedOn,
-        'Approval Stage' : `Approver 1 
-                            Approver 2 
-                            Approver 3`,
-        'Status' :  `${user.roApproval} 
-                      ${user.directorApproval} 
-                      ${user.trainingAdminApproval}`,
-        'Reason' :  `${user.roReason} 
-                     ${user.directorReason} 
-                     ${user.trainingAdminReason}`,
+        'Approval Stage' : `Approver 1\nApprover 2\nApprover 3`,
+        'Status' :  `${user.roApproval}\n${user.directorApproval}\n${user.trainingAdminApproval}`,
+        'Reason' :  `${user.roReason}\n${user.directorReason}\n${user.trainingAdminReason}`,
    
-        // Student: user.name,
-        // Email: user.email,
-        // Program: user.program,
-        // 'Payment Date':
-        //   formatDate(new Date(user.createdAt), 'yyyy-MM-dd', 'en') || '',
-        // Amount: '$' + user.price,
-        // Status: user.status,
+      
       })
     );
     TableExportUtil.exportToExcel(exportData, 'Training-request');
