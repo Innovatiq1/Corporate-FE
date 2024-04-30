@@ -35,7 +35,7 @@
                               classForm.get('courseId')?.hasError('required') ||
                               classForm.get('courseId')?.touched
                             ">
-                          Enter Course Name.
+                          Select Course Name
                         </mat-error>
                       </mat-form-field>
                     </div>
@@ -51,7 +51,7 @@
                             classForm.get('classDeliveryType')?.hasError('required') ||
                             classForm.get('classDeliveryType')?.touched
                           ">
-                          Enter Class Delivery Type .
+                          Select Class Delivery Type
                         </mat-error>
                       </mat-form-field>
                     </div>
@@ -209,6 +209,7 @@
                         (change)="startDateChange(element)" [value]="element.start" name="start"/>
                       <mat-icon matSuffix [owlDateTimeTrigger]="date" class="date-icon">today</mat-icon>
                       <owl-date-time #date></owl-date-time>
+                      <mat-error *ngIf="!element.start">enter</mat-error>
                     </mat-form-field>
                   </div>
                   <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">

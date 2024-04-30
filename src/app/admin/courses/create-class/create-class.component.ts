@@ -411,6 +411,7 @@ export class CreateClassComponent {
   }
 
   submit() {
+    if(this.classForm.valid){
     // if(!this.viewUrl&&!this.editUrl){
     const sessions = this.getSession();
 console.log('sessions',sessions)
@@ -488,6 +489,9 @@ console.log('sessions',sessions)
         });
       }
     }
+  }else{
+    this.classForm.markAllAsTouched();
+  }
   }
   startDateChange(element: { end: any; start: any }) {
     element.end = element.start;

@@ -112,7 +112,9 @@ export class CreateProgramExamScheduleComponent {
   
      }
     onSubmit(){
-      
+      if(this.examsheduleForm.valid){
+
+     
      const fomdata= this.examsheduleForm.value
 
      let startTime=moment(fomdata.startDate).format('HH:mm a')
@@ -147,8 +149,10 @@ export class CreateProgramExamScheduleComponent {
     });
      
 
-    } 
-
+    } else{
+      this.examsheduleForm.markAllAsTouched();
+    }
+  }
 }
 
     
