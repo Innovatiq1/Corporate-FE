@@ -29,7 +29,7 @@ export class AddStaffComponent {
     {
       title: 'Add Staff',
       items: ['Users'],
-      active: 'Add Staff',
+      active: 'Create Staff',
     },
   ];
   userTypes: any;

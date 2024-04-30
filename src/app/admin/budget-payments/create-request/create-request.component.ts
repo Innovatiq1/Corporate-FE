@@ -21,7 +21,7 @@ export class CreateRequestComponent {
   breadscrums = [
     {
       title: 'Employee Request',
-      items: ['Finance'],
+      items: ['Training Request'],
       active: 'Create Request',
     },
   ];

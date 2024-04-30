@@ -16,7 +16,7 @@ export class CreateBudgetComponent {
   breadscrums = [
     {
       title: 'Employee Request',
-      items: ['Finance'],
+      items: ['Budget'],
       active: 'Create New Budget',
     },
   ];
