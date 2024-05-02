@@ -55,7 +55,7 @@ export class CreateAllUsersComponent {
     {
       title: 'Create All Users',
       items: ['Users'],
-      active: 'Create All Users',
+      active: 'Create User',
     },
   ];
   data: any;
@@ -500,7 +500,6 @@ export class CreateAllUsersComponent {
             rollNo: this.data?.rollNo,
             gender: this.data?.gender,
             mobile: this.data?.mobile,
-            qualification: this.data?.qualification,
             department: this.data?.department,
             parentsName: this.data?.parentsName,
             parentsPhone: this.data?.parentsPhone,
