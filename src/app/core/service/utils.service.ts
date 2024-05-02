@@ -158,7 +158,7 @@ export class UtilsService {
       
     ],
     dob: [
-      { type: 'required', message: 'Select Date Of Birth' },
+      { type: 'required', message: 'Select Date' },
       
     ],
     'title': [
