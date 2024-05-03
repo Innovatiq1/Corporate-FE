@@ -77,7 +77,7 @@ export class AddDepartmentComponent  implements OnInit {
      if(this.editUrl){
       this.getDepartmentById();
     }
-     console.log("pv", response)
+     console.log("pv", this.depts)
     })
     
   }
@@ -154,7 +154,7 @@ export class AddDepartmentComponent  implements OnInit {
       cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.isConfirmed){
-        this.deptService.updateDepartment(this.departmentForm.value,this.departmentId).subscribe((response:any) => {
+        this.deptService.updateDepartment(this.departmentId,this.departmentForm.value).subscribe((response:any) => {
           Swal.fire({
             title: 'Successful',
             text: 'Department Profile updated successfully',

@@ -13,8 +13,8 @@ export class CustomizationExamAssessmentRetakeComponent {
   breadscrums = [
     {
       title: 'Customization',
-      items: ['Customize'],
-      active: 'Exam Assessment Retake',
+      items: ['Configuration'],
+      active: 'Exam Retake',
     },
   ];
   retakeCodes: string[] = ['1', '2', '3', '4', '5'];

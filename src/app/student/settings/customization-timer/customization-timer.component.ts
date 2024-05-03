@@ -14,7 +14,7 @@ export class CustomizationTimerComponent {
   breadscrums = [
     {
       title: 'Customization',
-      items: ['Customize'],
+      items: ['Configuration'],
       active: 'Timer',
     },
   ];
