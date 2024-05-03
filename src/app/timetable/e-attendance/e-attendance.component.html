@@ -27,7 +27,7 @@
                                                     <label>Select Course/Program</label>
                                                     <mat-form-field class="example-full-width mb-3"
                                                         appearance="outline">
-                                                        <mat-select  formControlName="course"
+                                                        <mat-select  formControlName="cp"
                                                             (selectionChange)="onSelectCourse($event)">
                                                             <mat-option value="course">
                                                                 Course
@@ -166,14 +166,14 @@
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Student
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row" class="name"> <span
-                                                        class="mobile-label">Student:</span>{{row.student}}
+                                                        class="mobile-label">Student:</span>{{row?.studentId?.name}}
                                                 </mat-cell>
                                             </ng-container>
                                             <ng-container matColumnDef="name">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Program
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row"><span class="mobile-label">Course
-                                                        Name:</span> <span>{{row.program |titlecase}}</span>
+                                                        Name:</span> <span>{{row.programTitle |titlecase}}</span>
                                                 </mat-cell>
                                             </ng-container>
 
@@ -181,21 +181,21 @@
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row"> <span class="mobile-label">Start
-                                                        Date:</span><span>{{row.start}}</span>
+                                                        Date:</span><span>{{row?.classId?.sessions[0]?.sessionStartDate|date}}</span>
                                                 </mat-cell>
                                             </ng-container>
                                             <ng-container matColumnDef="endDate">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row"> <span class="mobile-label">End
-                                                        date:</span><span>{{row.end}}</span>
+                                                        date:</span><span>{{row?.classId?.sessions[0]?.sessionEndDate|date}}</span>
                                                 </mat-cell>
                                             </ng-container>
                                             <ng-container matColumnDef="registeredDate">
                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Registered Date
                                                 </mat-header-cell>
                                                 <mat-cell *matCellDef="let row"> <span class="mobile-label">Registered
-                                                        date:</span><span>{{row.registered}}</span>
+                                                        date:</span><span>{{row.registeredOn | date}}</span>
                                                 </mat-cell>
                                             </ng-container>
 

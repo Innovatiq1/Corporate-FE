@@ -27,7 +27,6 @@ export class EAttendanceComponent {
      
   ];
   programData = [
-    { student: 'Zheng Luo', program: 'Testing', start: '14-2-24', end: '16-8-24', registered: '23-5-24' },
    
      
   ];
@@ -60,6 +59,7 @@ export class EAttendanceComponent {
   ) {
     this.attendanceForm = this.fb.group({
       course: ['',[] ],
+      cp:['',[]],
       program: ['',[] ],
       fromDate: [''],
       toDate: [''],
@@ -106,7 +106,9 @@ export class EAttendanceComponent {
     var endtimezoneOffsetMinutesPart = Math.abs(endtimezoneOffsetMinutes % 60);
     // var timezoneOffset = (timezoneOffsetMinutes >= 0 ? "-" : "+") + ("0" + timezoneOffsetHours).slice(-2) + ":" + ("0" + timezoneOffsetMinutesPart).slice(-2);
     var endDate = endyear + "-" + endmonth + "-" + endday + "T" + endhours + ":" + endminutes + ":" + endseconds + "." + endmilliseconds + '00:00';
-    let body ={
+console.log('valiueee',this.attendanceForm.value)
+if (this.attendanceForm.value.course !== '') {
+  let body ={
       course:this.attendanceForm.value.course,
       program:this.attendanceForm.value.program,
       startDate:startDate,
@@ -120,6 +122,25 @@ export class EAttendanceComponent {
           this.totalItems = response.data.totalDocs;
   
         })
+      } else if(this.attendanceForm.value.program){
+        if(this.attendanceForm.value.program){
+          let body ={
+            program:this.attendanceForm.value.program,
+            programStartDate:startDate,
+            programEndDate:endDate
+          }
+            this._classService
+              .getProgramAttendedStudents(body)
+              .subscribe((response: any) => {
+              this.programData = response.data.data;
+              this.dataSource=response.data.data;
+              console.log('dat',this.dataSource)
+                this.totalItems = response.data.totalDocs;
+        
+              })
+            }
+      
+      }
     
   
       }
@@ -134,24 +155,22 @@ export class EAttendanceComponent {
    }
   }
   onSelectChange(event: any) {
-    const filteredData = this.courseList.filter(
-      (item: { _id: string }) =>
-        item._id === this.attendanceForm.controls['courseId'].value
-    );
+    const filteredData = this.courseList
     this.courseTitle=filteredData[0].title
     this.courseCode=filteredData[0].courseCode
     this.isCourse = true;
     this.isProgram = false;
+    this.attendanceForm.value.program = '';
+
   }
   onSelectChange1(event: any) {
-    const filteredData = this.programList.filter(
-      (item: { _id: string }) =>
-        item._id === this.attendanceForm.controls['courseId'].value
-    );
+    const filteredData = this.programList
     this.programTitle=filteredData[0].title
       this.programCode=filteredData[0].courseCode
       this.isProgram = true;
       this.isCourse = false;
+      this.attendanceForm.value.course = '';
+
   }
   pageSizeChange($event: any) {
     this.coursePaginationModel.page = $event?.pageIndex + 1;

@@ -157,7 +157,7 @@ export class GenereateReportComponent {
 
     this.courseService.getCourseReports(body).subscribe(response => {
       this.courseData = response.data.filteredData
-      if(response.data.filteredData > 0){
+      if(response.data.filteredData.length > 0){
         const doc = new jsPDF();
         const headers = [[' Course', 'User', 'Role','Department','Start Date','End Date','Status']];
         const data = this.courseData.map((x: any) =>
