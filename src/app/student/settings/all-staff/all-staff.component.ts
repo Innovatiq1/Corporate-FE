@@ -200,10 +200,10 @@ export class AllstaffComponent
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
         Name: x.name,
+        Role:x.type,
         Designation: x.role,
         Mobile: x.mobile,
         Email: x.email,
-        'Joining Date': formatDate(new Date(x?.joiningDate), 'yyyy-MM-dd', 'en') || '',
         Salary: x.salary,
       }));
 
@@ -211,14 +211,15 @@ export class AllstaffComponent
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Name','Designation','Mobile','Email','Joining Date','Salary']];
+    const headers = [['Name','Role','Gender','Designation','Mobile','Email','Salary']];
     
     const data = this.dataSource.filteredData.map((x:any) =>
       [x.name,
+        x.type,
+        x.gender,
         x.role,
         x.mobile,
         x.email,
-        formatDate(new Date(x?.joiningDate), 'yyyy-MM-dd', 'en') || '',
         x.salary
     ] );
     //const columnWidths = [60, 80, 40];
@@ -232,6 +233,10 @@ export class AllstaffComponent
       head: headers,
       body: data,
       startY: 20,
+      headStyles: {
+        fontSize: 10,
+        cellWidth: 'wrap',
+      },
   
   
   

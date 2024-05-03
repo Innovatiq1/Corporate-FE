@@ -46,14 +46,14 @@ export class AllStudentsComponent
     'mobile',
     'email',
     // 'date',
-    'status'
+    'status',
   ];
   exampleDatabase?: StudentsService;
   dataSource!: ExampleDataSource;
   selection = new SelectionModel<Students>(true, []);
   id?: number;
   students?: Students;
-  rowData:any;
+  rowData: any;
   breadscrums = [
     {
       title: 'Students',
@@ -66,7 +66,7 @@ export class AllStudentsComponent
     public dialog: MatDialog,
     public studentsService: StudentsService,
     private snackBar: MatSnackBar,
-    private router : Router
+    private router: Router
   ) {
     super();
   }
@@ -75,7 +75,7 @@ export class AllStudentsComponent
   @ViewChild('filter', { static: true }) filter!: ElementRef;
   @ViewChild(MatMenuTrigger)
   contextMenu?: MatMenuTrigger;
-  contextMenuPosition = { x: '0px', y: '0px'};
+  contextMenuPosition = { x: '0px', y: '0px' };
 
   ngOnInit() {
     this.loadData();
@@ -87,11 +87,13 @@ export class AllStudentsComponent
     this.loadData();
   }
   addNew() {
-   this.router.navigate(['/student/settings/add-student'])
+    this.router.navigate(['/student/settings/add-student']);
   }
   editCall(row: Students) {
-    console.log("edit",row)
-    this.router.navigate(['/student/settings/add-student'],{queryParams:{id:row.id}})
+    console.log('edit', row);
+    this.router.navigate(['/student/settings/add-student'], {
+      queryParams: { id: row.id },
+    });
   }
   // deleteItem(row: Students) {
   //   this.id = row.id;
@@ -126,76 +128,72 @@ export class AllStudentsComponent
   // }
   deleteItem(row: any) {
     // this.id = row.id;
-     Swal.fire({
-       title: "Confirm Deletion",
-       text: "Are you sure you want to delete this Student?",
-       icon: "warning",
-       showCancelButton: true,
-       confirmButtonColor: "#d33",
-       cancelButtonColor: "#3085d6",
-       confirmButtonText: "Delete",
-       cancelButtonText: "Cancel",
-     }).then((result) => {
-       if (result.isConfirmed) {
-         this.studentsService.deleteUser(row.id).subscribe(
-           () => {
-             Swal.fire({
-               title: "Deleted",
-               text: "Student deleted successfully",
-               icon: "success",
-             });
-             //this.fetchCourseKits();
-             this.loadData()
-           },
-           (error: { message: any; error: any; }) => {
-             Swal.fire(
-               "Failed to delete Student",
-               error.message || error.error,
-               "error"
-             );
-           }
-         );
-       }
-     });
-
-   }
-   confirmItem(row: any) {
-
-
+    Swal.fire({
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete this Student?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.studentsService.deleteUser(row.id).subscribe(
+          () => {
+            Swal.fire({
+              title: 'Deleted',
+              text: 'Student deleted successfully',
+              icon: 'success',
+            });
+            //this.fetchCourseKits();
+            this.loadData();
+          },
+          (error: { message: any; error: any }) => {
+            Swal.fire(
+              'Failed to delete Student',
+              error.message || error.error,
+              'error'
+            );
+          }
+        );
+      }
+    });
+  }
+  confirmItem(row: any) {
     // this.id = row.id;
-     Swal.fire({
-       title: "Confirm Active",
-       text: "Are you sure you want to active this Student?",
-       icon: "warning",
-       showCancelButton: true,
-       confirmButtonColor: "#d33",
-       cancelButtonColor: "#3085d6",
-       confirmButtonText: "Active",
-       cancelButtonText: "Cancel",
-     }).then((result) => {
-       if (result.isConfirmed) {
-         this.studentsService.confrim(row.id).subscribe(
-           () => {
-             Swal.fire({
-               title: "Active",
-               text: "Student Active successfully",
-               icon: "success",
-             });
-             //this.fetchCourseKits();
-             this.loadData()
-           },
-           (error: { message: any; error: any; }) => {
-             Swal.fire(
-               "Failed to Active Student",
-               error.message || error.error,
-               "error"
-             );
-           }
-         );
-       }
-     });
-
-   }
+    Swal.fire({
+      title: 'Confirm Active',
+      text: 'Are you sure you want to active this Student?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Active',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.studentsService.confrim(row.id).subscribe(
+          () => {
+            Swal.fire({
+              title: 'Active',
+              text: 'Student Active successfully',
+              icon: 'success',
+            });
+            //this.fetchCourseKits();
+            this.loadData();
+          },
+          (error: { message: any; error: any }) => {
+            Swal.fire(
+              'Failed to Active Student',
+              error.message || error.error,
+              'error'
+            );
+          }
+        );
+      }
+    });
+  }
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
   }
@@ -220,7 +218,7 @@ export class AllStudentsComponent
       const index: number = this.dataSource.renderedData.findIndex(
         (d) => d === item
       );
-      
+
       this.exampleDatabase?.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<Students>(true, []);
@@ -238,7 +236,7 @@ export class AllStudentsComponent
     //   'center'
     // );
   }
-  
+
   public loadData() {
     this.exampleDatabase = new StudentsService(this.httpClient);
     this.dataSource = new ExampleDataSource(
@@ -261,42 +259,47 @@ export class AllStudentsComponent
     // })
 
     //girdView
-
   }
   // export table data in excel file
   exportExcel() {
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
-        'Roll No': x.rollNo,
         Name: x.name,
         Department: x.department,
         Gender: x.gender,
+        Education: x.education,
         Mobile: x.mobile,
         Email: x.email,
-        'Admission Date':
-          x.joiningDate || '',
+        Status: x.Active ? 'Active' : 'Inactive',
       }));
 
     TableExportUtil.exportToExcel(exportData, 'StudentList');
   }
 
-
-
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Roll No','Name','Department','Gender', 'Mobile', 'Email','Admission Date']];
-    
-    const data = this.dataSource.filteredData.map((user:any) =>
-      [user.rollNo,
-        user.name,
-       user.department,
-       user.gender,
-       user.mobile,
-       user.email,
-       user.joiningDate
+    const headers = [
+      [
+        'Name',
+        'Department',
+        'Gender',
+        'Education',
+        'Mobile',
+        'Email',
+        'Status',
+      ],
+    ];
 
-    ] );
+    const data = this.dataSource.filteredData.map((user: any) => [
+      user.name,
+      user.department,
+      user.gender,
+      user.education,
+      user.mobile,
+      user.email,
+      user.Active ? 'Active' : 'Inactive',
+    ]);
     //const columnWidths = [60, 80, 40];
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
 
@@ -309,17 +312,20 @@ export class AllStudentsComponent
       body: data,
       startY: 20,
 
-
-
+      headStyles: {
+        fontSize: 10,
+        cellWidth: 'wrap',
+      },
     });
 
     // Save or open the PDF
     doc.save('StudentList.pdf');
   }
 
-  aboutStudent(id:any){
-    this.router.navigate(['/student/settings/view-student'],{queryParams:{data:id}})
-
+  aboutStudent(id: any) {
+    this.router.navigate(['/student/settings/view-student'], {
+      queryParams: { data: id },
+    });
   }
 
   showNotification(
@@ -346,15 +352,18 @@ export class AllStudentsComponent
       this.contextMenu.openMenu();
     }
   }
-  onPageChange(event: any){
-    console.log("page", this.dataSource.filteredData)
-    const startIndex = event.pageIndex * event.pageSize
+  onPageChange(event: any) {
+    console.log('page', this.dataSource.filteredData);
+    const startIndex = event.pageIndex * event.pageSize;
     const endIndex = startIndex + event.pageSize;
     this.paginator.pageIndex = event.pageIndex;
- this.dataSource.filteredData = this.dataSource.filteredData.slice(startIndex, endIndex)
-//     this.dataSource.filteredData = this.dataSource.filteredData.slice(startIndex, endIndex)
-//     this.paginator.pageIndex = event.pageIndex;
-//  this.dataSource.filteredData = this.dataSource.originalData.slice(startIndex, endIndex); 
+    this.dataSource.filteredData = this.dataSource.filteredData.slice(
+      startIndex,
+      endIndex
+    );
+    //     this.dataSource.filteredData = this.dataSource.filteredData.slice(startIndex, endIndex)
+    //     this.paginator.pageIndex = event.pageIndex;
+    //  this.dataSource.filteredData = this.dataSource.originalData.slice(startIndex, endIndex);
   }
 }
 export class ExampleDataSource extends DataSource<Students> {
@@ -367,7 +376,7 @@ export class ExampleDataSource extends DataSource<Students> {
   }
   filteredData: Students[] = [];
   renderedData: Students[] = [];
-  rowData:any
+  rowData: any;
   constructor(
     public exampleDatabase: StudentsService,
     public paginator: MatPaginator,
@@ -387,8 +396,8 @@ export class ExampleDataSource extends DataSource<Students> {
       this.paginator.page,
     ];
     let payload = {
-      type: "Student"
-    }
+      type: 'Student',
+    };
     this.exampleDatabase.getAllStudentss(payload);
 
     this.rowData = this.exampleDatabase.data;
@@ -416,7 +425,7 @@ export class ExampleDataSource extends DataSource<Students> {
           startIndex,
           this.paginator.pageSize
         );
-        console.log("filted",this.renderedData)
+        console.log('filted', this.renderedData);
         return this.renderedData;
       })
     );
@@ -459,5 +468,4 @@ export class ExampleDataSource extends DataSource<Students> {
       );
     });
   }
-
 }

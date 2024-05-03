@@ -19,6 +19,7 @@ export class Students {
   country_name!:string;
   education!: string;
   role!: string;
+  Active!:string;
 
   constructor(students: Students) {
     {

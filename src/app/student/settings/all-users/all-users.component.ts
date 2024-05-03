@@ -213,7 +213,7 @@ exportExcel() {
 
 generatePdf() {
   const doc = new jsPDF();
-  const headers = [['Name','Role','Gender','Qualification','Mobile','Email','Status']];
+  const headers = [['Name       ','Role       ','Gender','Qualification','Mobile','Email','Status']];
   const data = this.dataSource.map((user:any) =>
     [user.name,
       user.type,
@@ -234,7 +234,10 @@ generatePdf() {
     head: headers,
     body: data,
     startY: 20,
-
+    headStyles: {
+      fontSize: 10,
+      cellWidth: 'wrap',
+    },
 
 
   });

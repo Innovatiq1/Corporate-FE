@@ -63,10 +63,15 @@
                   <ng-container matColumnDef="Approval Status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Approval Status</mat-header-cell>
                     <mat-cell *matCellDef="let row" [routerLink]="row.status !== 'approved' ? ['/student/settings/edit-questions', row.id] : null" [ngClass]="getStatusClass(row.status)">
-                      <div class="status-container">
-                        <span class="dot" [ngClass]="getDotClass(row.status)"></span> <!-- Dynamic class for dot -->
-                        <span class="status-text"><b style="font-weight: 500;">{{row.status | titlecase}}</b></span>
-                      </div>
+                      <!-- <div class="status-container">
+                        <span class="dot" [ngClass]="getDotClass(row.status)"></span> 
+                        <span class="status-text">{{row.status | titlecase}}</span>
+                      </div> -->
+                      <span
+                            [class]="row?.status === 'approved' ? 'badge badge-solid-green' : row?.status === 'open' ? 'badge badge-solid-red' : ''">
+                            <span
+                              [class]="row?.status === 'approved' ? 'status-dot' : row?.status === 'open' ? 'status-red' : ''"></span>
+                            {{row.status ==='approved'? 'Approved':' Open' | titlecase}}</span>
                     </mat-cell>
                   </ng-container>
                   

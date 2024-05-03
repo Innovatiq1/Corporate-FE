@@ -28,7 +28,7 @@ export class AllCourseComponent {
     {
       title: 'Course List',
       items: ['Course'],
-      active: 'Course List',
+      active: 'Course List12  ',
     },
   ];
   displayedColumns = [
