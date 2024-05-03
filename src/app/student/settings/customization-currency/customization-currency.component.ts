@@ -15,7 +15,7 @@ export class CustomizationCurrencyComponent {
   breadscrums = [
     {
       title: 'Customization',
-      items: ['Customize'],
+      items: ['Configuration'],
       active: 'Currency',
     },
   ];

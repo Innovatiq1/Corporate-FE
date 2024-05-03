@@ -875,7 +875,7 @@
           </div>
           <div class="col-md-5">
             <button id="saved" [routerLink]="['/student/settings/smtp']"> SMTP </button>
-            <!-- <button id="saved" (click)="navigateToEmailSettings()"> SMTP </button> -->
+            <button id="saved" (click)="navigateToEmailSettings()"> Email Templates </button>
           </div>
         </div>
         <div class="row px-4 py-4">
@@ -951,23 +951,7 @@
             <button id="saved" routerLink="/student/settings/logo-customization"> Logo </button>
           </div>
         </div>
-        <div class="row px-4 py-4">
-          <div class="col-md-6 banner">
-            <button id="saved" (click)="openDialog(currencyDialog, 'currency')"> Currency </button>
-          </div>
-          <div class="col-md-5">
-            <button id="saved" (click)="openDialog(timerDialog, 'timer')"> Assessment Timer </button>
-          </div>
-        </div>
-
-        <div class="row px-4">
-          <div class="col-md-6 banner">
-            <button id="saved" (click)="openDialog(assessmentDialog, 'assessment')"> Assessment Retake </button>
-          </div>
-          <div class="col-md-5">
-            <button id="saved" (click)="openDialog(examAssessmentDialog, 'examAssessment')">Exam Assessment Retake </button>
-          </div>
-        </div>
+        
 
       </div>
     </div>
@@ -1368,7 +1352,23 @@
 
           </div>
                 </div> -->
-
+                <div class="row px-4 py-4">
+                  <div class="col-md-6 banner">
+                    <button id="saved" (click)="openDialog(currencyDialog, 'currency')"> Currency</button>
+                  </div>
+                  <div class="col-md-5">
+                    <button id="saved" (click)="openDialog(timerDialog, 'timer')"> Assessment Timer </button>
+                  </div>
+                </div>
+        
+                <div class="row px-4">
+                  <div class="col-md-6 banner">
+                    <button id="saved" (click)="openDialog(assessmentDialog, 'assessment')"> Assessment Retake </button>
+                  </div>
+                  <div class="col-md-5">
+                    <button id="saved" (click)="openDialog(examAssessmentDialog, 'examAssessment')">Exam Retake </button>
+                  </div>
+                </div>
       </div>
     </div>
     <div  *ngIf="showSidemenu">

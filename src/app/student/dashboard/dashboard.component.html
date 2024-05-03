@@ -369,7 +369,7 @@
           <div class="body">
             <ng-scrollbar style="height: 350px" visibility="hover">
               <div class="recent-comment">
-                <div *ngFor ="let announcement of announcements" class="notice-board">
+                <div *ngFor ="let announcement of announcements.reverse()" class="notice-board">
                   <div class="notice-body">
                     <h5 class="notice-heading col-green">{{announcement?.announcementBy?.name}}</h5>
                     <p [innerHTML]="announcement?.details | truncate:150"></p>

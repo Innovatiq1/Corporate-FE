@@ -15,7 +15,7 @@ export class CustomizationAssessmentRetakeComponent {
   breadscrums = [
     {
       title: 'Customization',
-      items: ['Customize'],
+      items: ['Configuration'],
       active: 'Assessment Retake',
     },
   ];
