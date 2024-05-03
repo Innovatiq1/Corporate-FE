@@ -1,0 +1,69 @@
+<section class="content">
+    <div class="content-block">
+      <div class="block-header" *ngFor="let breadscrum of breadscrums">
+        <!-- breadcrumb -->
+        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+        </app-breadcrumb>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+         
+              <div class="mt-4">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="card">
+                    <div class="materialTableHeader">
+                     
+                      <div class="right">
+                        <ul class="tbl-export-btn">
+                         
+                         
+                          <!--<li class="tbl-header-btn">
+                            <div class="m-l-10" matTooltip="REFRESH">
+                              <button mat-mini-fab color="primary" (click)="refresh()">
+                                <mat-icon class="col-white">refresh</mat-icon>
+                              </button>
+                            </div>
+                          </li> -->
+                         
+                         
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="body overflow-auto">
+                      <div class="responsive_table">
+                        <table mat-table [dataSource]="dataSource" matSort class="mat-cell advance-table">
+                         
+                          
+                         
+                          <ng-container matColumnDef="Title">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Title
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row" class="name"><span
+                                class="mobile-label">Title:</span> {{row.title}}
+                            </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Level">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Level
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row" >
+                              <span class="mobile-label">Level:</span>{{row.level}}</mat-cell>
+                          </ng-container>
+                         
+                          <mat-header-row *matHeaderRowDef="displayedColumns">
+                          </mat-header-row>
+                          <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+                          <mat-row *matRowDef="let row; columns: displayedColumns;"
+                          [style.cursor]="'pointer'" matRipple>
+                        </mat-row>
+                        </table>
+                     
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

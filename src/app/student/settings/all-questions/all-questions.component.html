@@ -52,7 +52,7 @@
                   </ng-container>
 
                   <ng-container matColumnDef="Assessment Type">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Exam Type</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Form Type</mat-header-cell>
                     <mat-cell *matCellDef="let row" [routerLink]="row.status !== 'approved' ? ['/student/settings/edit-questions', row.id] : null">
                       <div class="status-container">
                         <span class="status-text">{{ assessmentType(row) }}</span>
@@ -61,7 +61,7 @@
                   </ng-container>
                  
                   <ng-container matColumnDef="Approval Status">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Approval Status</mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
                     <mat-cell *matCellDef="let row" [routerLink]="row.status !== 'approved' ? ['/student/settings/edit-questions', row.id] : null" [ngClass]="getStatusClass(row.status)">
                       <!-- <div class="status-container">
                         <span class="dot" [ngClass]="getDotClass(row.status)"></span> 

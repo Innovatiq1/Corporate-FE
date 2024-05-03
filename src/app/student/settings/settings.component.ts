@@ -100,6 +100,7 @@ export class SettingsComponent {
   selectedCreators: any = [];
   users: any;
   vendors: any;
+  toggleValue: boolean = false;
 
   currentContent: number = 1;
   currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
@@ -120,6 +121,7 @@ export class SettingsComponent {
   roUsers: any;
   directorUsers: any;
   trainingAdminUsers: any;
+  showBodyContent: boolean = false; 
   
   constructor(
     private studentService: StudentsService,
@@ -620,7 +622,9 @@ export class SettingsComponent {
   navigateToBannerFormsSettings(){
     this.router.navigate(['/student/settings/banner-forms']);
   }
- 
+  onToggleChange(event: any) {
+    this.showBodyContent = event.checked;
+}
 
   showMainContent(contentId: number) {
     this.currentContent = contentId;
