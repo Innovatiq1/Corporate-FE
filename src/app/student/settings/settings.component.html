@@ -871,25 +871,26 @@
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="no-link"> 3rd Party Tools </button>
+            <button id="saved" [routerLink]="['/student/settings/3rd-party-integrations']"> Third Party Integration </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" (click)="navigateToEmailSettings()"> SMTP </button>
+            <button id="saved" [routerLink]="['/student/settings/smtp']"> SMTP </button>
+            <!-- <button id="saved" (click)="navigateToEmailSettings()"> SMTP </button> -->
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="no-link"> SingPass </button>
+            <button id="saved" [routerLink]="['/student/settings/singpass']"> SingPass </button>
           </div>
           <div class="col-md-5">
-            <button id="no-link"> Card Payment </button>
+            <button id="saved" [routerLink]="['/student/settings/payment-gateway']">Payment Gateway </button>
           </div>
         </div>
-        <div class="row px-4">
+        <!-- <div class="row px-4">
           <div class="col-md-6 banner">
             <button id="no-link"> Storage </button>
           </div>
-        </div>
+        </div> -->
 
 
       </div>
