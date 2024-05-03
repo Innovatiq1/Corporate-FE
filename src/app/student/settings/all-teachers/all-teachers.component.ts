@@ -39,8 +39,6 @@ import { TeachersService } from 'app/admin/teachers/teachers.service';
 })
 export class AllTeachersComponent
   extends UnsubscribeOnDestroyAdapter
-
-
   implements OnInit
 {
   displayedColumns = [
@@ -61,7 +59,7 @@ export class AllTeachersComponent
   selection = new SelectionModel<Teachers>(true, []);
   id?: number;
   teachers?: Teachers;
-  UsersModel!: Partial<UsersModel>
+  UsersModel!: Partial<UsersModel>;
   //dataSource!: any;
   //isTblLoading = true;
   breadscrums = [
@@ -73,15 +71,15 @@ export class AllTeachersComponent
   ];
   totalItems: any;
   pageSizeArr = this.utils.pageSizeArr;
- // rowData:any
+  // rowData:any
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public teachersService: TeachersService,
     private snackBar: MatSnackBar,
-    private route :Router,
+    private route: Router,
     private location: Location,
-    public utils: UtilsService,
+    public utils: UtilsService
   ) {
     super();
     this.UsersModel = {};
@@ -105,17 +103,16 @@ export class AllTeachersComponent
     //this.location.re
   }
   addNew() {
-    this.route.navigateByUrl("/student/settings/add-instructor")
-
-
+    this.route.navigateByUrl('/student/settings/add-instructor');
   }
-  aboutInstructor(id:any){
-    this.route.navigate(['/student/settings/view-instructor'],{queryParams:{data:id}})
-
+  aboutInstructor(id: any) {
+    this.route.navigate(['/student/settings/view-instructor'], {
+      queryParams: { data: id },
+    });
   }
   // performSearch() {
-  //   
-  //   
+  //
+  //
   //   if(this.searchTerm){
   //   this.dataSource = this.dataSource?.filter((item: { name: string; }) =>
   //     item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
@@ -130,40 +127,39 @@ export class AllTeachersComponent
   //   this.router.navigate(['/admin/teachers/edit-teacher'],{queryParams:{id:row.id}})
   // }
   deleteItem(row: any) {
-   // this.id = row.id;
+    // this.id = row.id;
     Swal.fire({
-      title: "Confirm Deletion",
-      text: "Are you sure you want to delete this Instructor?",
-      icon: "warning",
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete this Instructor?',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Delete",
-      cancelButtonText: "Cancel",
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
         this.teachersService.deleteUser(row.id).subscribe(
           () => {
             Swal.fire({
-              title: "Deleted",
-              text: "Instructor deleted successfully",
-              icon: "success",
+              title: 'Deleted',
+              text: 'Instructor deleted successfully',
+              icon: 'success',
             });
-            this.loadData()
+            this.loadData();
             //this.fetchCourseKits();
             //this.instructorData()
           },
-          (error: { message: any; error: any; }) => {
+          (error: { message: any; error: any }) => {
             Swal.fire(
-              "Failed to delete  Instructor",
+              'Failed to delete  Instructor',
               error.message || error.error,
-              "error"
+              'error'
             );
           }
         );
       }
     });
-
   }
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
@@ -189,7 +185,7 @@ export class AllTeachersComponent
       const index: number = this.dataSource.renderedData.findIndex(
         (d) => d === item
       );
-      
+
       this.exampleDatabase?.dataChange.value.splice(index, 1);
       this.refreshTable();
       this.selection = new SelectionModel<Teachers>(true, []);
@@ -207,13 +203,13 @@ export class AllTeachersComponent
     //   'center'
     // );
   }
-  
+
   pageSizeChange($event: any) {
     this.UsersModel.page = $event?.pageIndex + 1;
     this.UsersModel.limit = $event?.pageSize;
-    this.instructorData()
+    this.instructorData();
   }
-  
+
   public loadData() {
     this.exampleDatabase = new TeachersService(this.httpClient);
     this.dataSource = new ExampleDataSource(
@@ -230,58 +226,69 @@ export class AllTeachersComponent
       }
     );
   }
-  
+
   public instructorData() {
-    this.teachersService.getInstructor({ ...this.UsersModel })
-      .subscribe((response: {
+    this.teachersService.getInstructor({ ...this.UsersModel }).subscribe(
+      (response: {
         docs: any;
-        totalDocs: any; data: any; page: any; limit: any;
-}) => {
- // this.isTblLoading=false;
-        this.totalItems = response.totalDocs
-        this.dataSource = response?.docs
+        totalDocs: any;
+        data: any;
+        page: any;
+        limit: any;
+      }) => {
+        // this.isTblLoading=false;
+        this.totalItems = response.totalDocs;
+        this.dataSource = response?.docs;
         this.UsersModel.docs = response?.docs;
         this.UsersModel.page = response?.page;
         this.UsersModel.limit = response?.limit;
         this.UsersModel.totalDocs = response?.totalDocs;
 
         //this.getJobTemplates();
-
-      }, (error) => {
-
-      });
-
+      },
+      (error) => {}
+    );
   }
   // export table data in excel file
   exportExcel() {
     //k//ey name with space add in brackets
-   const exportData: Partial<TableElement>[] =
-      this.dataSource.filteredData.map((x)=>({
+    const exportData: Partial<TableElement>[] =
+      this.dataSource.filteredData.map((x) => ({
         Name: x.name,
         Department: x.department,
         Gender: x.gender,
         Degree: x.qualification,
         Mobile: x.mobile,
         Email: x.email,
-        'Joining Date': formatDate(new Date(x.joiningDate), 'yyyy-MM-dd', 'en') || '',
+        Status:x.Active ? 'Active' : 'Inactive',
       }));
 
     TableExportUtil.exportToExcel(exportData, 'Instrucor-list');
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Name', 'Department', 'Gender','Degree','Mobile','Email','Joining Date']];
-    const data = this.dataSource.filteredData.map((user: {
-      //formatDate(arg0: Date, arg1: string, arg2: string): unknown;
-
-      name: any; department: any; gender: any; qualification: any; mobile: any; email: any; joiningDate: string | number | Date;
-    }, index: any) => [user.name, user.department, user.gender,user.qualification,
-      user.mobile,
-      user.email,
-      formatDate(new Date(user.joiningDate), 'yyyy-MM-dd', 'en') || '',
-
-
-    ]);
+    const headers = [
+      [
+        'Name',
+        'Department',
+        'Gender',
+        'Education',
+        'Mobile',
+        'Email',
+        'Status',
+      ],
+    ];
+    const data = this.dataSource.filteredData.map(
+      (user: any) => [
+        user.name,
+        user.department,
+        user.gender,
+        user.qualification,
+        user.mobile,
+        user.email,
+        user.Active ? 'Active' : 'Inactive',,
+      ]
+    );
     //const columnWidths = [60, 80, 40];
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
 
@@ -293,9 +300,10 @@ export class AllTeachersComponent
       head: headers,
       body: data,
       startY: 20,
-
-
-
+      headStyles: {
+        fontSize: 10,
+        cellWidth: 'wrap',
+      },
     });
 
     // Save or open the PDF
@@ -333,8 +341,8 @@ export class AllTeachersComponent
   // }
 }
 export class ExampleDataSource extends DataSource<Teachers> {
-  rowData:any
- 
+  rowData: any;
+
   filterChange = new BehaviorSubject('');
   get filter(): string {
     return this.filterChange.value;
@@ -363,8 +371,8 @@ export class ExampleDataSource extends DataSource<Teachers> {
       this.paginator.page,
     ];
     let payload = {
-      type: "Instructor"
-    }
+      type: 'Instructor',
+    };
     this.exampleDatabase.getAllTeacherss(payload);
     this.rowData = this.exampleDatabase.data;
     return merge(...displayDataChanges).pipe(

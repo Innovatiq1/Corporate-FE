@@ -200,25 +200,15 @@
               
 
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Fees') && isPaid">
-                  <label>Fees <span class="mandatory">&nbsp;*</span></label>
+                  <label>Fees </label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="fee" type="number" [readonly]="isInputReadonly()"
                       placeholder="Enter Fees">
-                      <mat-error
-                      *ngIf="
-                        firstFormGroup.get('fee')?.invalid &&
-                        firstFormGroup.get('fee')?.touched
-                      "
-                    >
-                      {{
-                        utils.getErrorMessage1(firstFormGroup.get("fee"), "fee")
-                      }}
-                    </mat-error>
                   </mat-form-field>
                 </div>
 
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Currency') && isPaid">
-                  <label>Currency <span class="mandatory">&nbsp;*</span></label>
+                  <label>Currency</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-select formControlName="currency_code">
                       <mat-option value="USD" [disabled]="viewUrl == true">USD</mat-option>
@@ -232,12 +222,6 @@
                       <mat-option value="MYR" [disabled]="viewUrl == true">MYR</mat-option>
                       <mat-option value="AUD" [disabled]="viewUrl == true">AUD</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="
-                          firstFormGroup.get('currency_code')?.hasError('required') ||
-                          firstFormGroup.get('currency_code')?.touched
-                          ">
-                      Select Currency
-                    </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-2" *ngIf="labelStatusCheck('Days')">

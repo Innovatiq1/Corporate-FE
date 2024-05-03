@@ -321,7 +321,6 @@ export class CreateClassComponent {
       // status: ['open'],
       classStartDate: ['2023-05-20'],
       classEndDate: ['2023-06-10'],
-      // instructor: ['', [Validators.required]],
       userGroupId: [null]
     });
     this.secondFormGroup = this._fb.group({
@@ -408,15 +407,13 @@ export class CreateClassComponent {
   }
 
   saveProgramClass() {
+    console.log(this.classForm)
     if(this.classForm.valid) {
     if (!this.editUrl) {
       
       let sessions = this.getSession();
       if (sessions) {
-        console.log("sessionBF",sessions);
         this.classForm.value.sessions = sessions;
-
-        console.log("sessionAF",this.classForm.value.sessions)
         this.classForm.value.programName = this.courseTitle;
         this.isSubmitted = true;
 

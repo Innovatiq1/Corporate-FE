@@ -18,6 +18,7 @@ export class Teachers {
   education!: string;
   role: any;
   last_name!: string;
+  Active!:string;
   constructor(teachers: Teachers) {
     {
       this.id = teachers.id || this.getRandomID();
@@ -31,6 +32,7 @@ export class Teachers {
       this.degree = teachers.degree || '';
       this.qualification = teachers.qualification || '';
       this.joiningDate = teachers.joiningDate || '';
+      this.Active = teachers.Active || '';
     }
   }
   public getRandomID(): number {
