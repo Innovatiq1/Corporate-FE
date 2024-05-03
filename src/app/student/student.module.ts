@@ -104,6 +104,10 @@ import { EditStaffComponent } from './settings/about-staff/edit-staff/edit-staff
 import { CustomizationTimerComponent } from './settings/customization-timer/customization-timer.component';
 import { CustomizationAssessmentRetakeComponent } from './settings/customization-assessment-retake/customization-assessment-retake.component';
 import { CustomizationExamAssessmentRetakeComponent } from './settings/customization-exam-assessment-retake/customization-exam-assessment-retake.component';
+import { SmtpComponent } from './settings/smtp/smtp.component';
+import { ThirdPartyToolsComponent } from './settings/third-party-tools/third-party-tools.component';
+import { SingpassComponent } from './settings/singpass/singpass.component';
+import { PaymentGatewayComponent } from './settings/payment-gateway/payment-gateway.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -185,7 +189,11 @@ import { CustomizationExamAssessmentRetakeComponent } from './settings/customiza
     EditStaffComponent,
     CustomizationTimerComponent,
     CustomizationAssessmentRetakeComponent,
-    CustomizationExamAssessmentRetakeComponent
+    CustomizationExamAssessmentRetakeComponent,
+    SmtpComponent,
+    ThirdPartyToolsComponent,
+    SingpassComponent,
+    PaymentGatewayComponent,
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,

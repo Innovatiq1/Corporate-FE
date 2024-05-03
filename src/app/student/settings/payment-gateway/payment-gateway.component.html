@@ -1,0 +1,93 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card m-auto">
+                    <div class="header">
+                        <h2>Payment Gateway</h2>
+                    </div>
+                    <div class="body">
+                        <mat-tab-group>
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    Stripe
+                                </ng-template>
+                                <div class="card mt-3">
+
+                                    <div class="body overflow-auto">
+                                        <form [formGroup]="paymentForm">
+                                            <div class="example-container mt-3">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <mat-radio-group formControlName="test" required>
+                                                            <mat-radio-button value="test">Test Mode</mat-radio-button>
+                                                        </mat-radio-group>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <mat-radio-group formControlName="live" required>
+                                                            <mat-radio-button value="live">Live Mode</mat-radio-button>
+                                                        </mat-radio-group>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix mt-3">
+                                                    <div class="col-4">
+                                                        <label>Test public key</label>
+                                                        <mat-form-field class="example-full-width" appearance="outline">
+                                                            <input matInput formControlName="public" required />
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <label>Test Secret Key</label>
+                                                        <mat-form-field class="example-full-width" appearance="outline">
+                                                            <input matInput formControlName="secret" required />
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <label>Company Name</label>
+                                                        <mat-form-field class="example-full-width" appearance="outline">
+                                                            <input matInput formControlName="company" required />
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                                <div class="row clearfix mt-2">
+
+                                                    <div class="col-6">
+                                                        <label>Stripe Meta data</label>
+                                                        <p><mat-checkbox class="example-margin mt-1"></mat-checkbox>
+                                                            <span>Send form input data to stripe metadata</span></p>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row" style="float: right;">
+                                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+
+                                                    <button class="btn-space" type="button" mat-raised-button
+                                                        color="warn" (click)="cancel()">Cancel</button>
+                                                    <button mat-raised-button id="submit">Update</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    Paypal
+                                </ng-template>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
