@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./certificate-template.component.scss']
 })
 export class CertificateTemplateComponent {
-
+  breadscrums = [
+    {
+      title: 'Certificate',
+      items: ['Customize'],
+      active: 'Certificate',
+    },
+  ];
 }

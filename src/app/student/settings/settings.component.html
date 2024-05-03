@@ -604,11 +604,39 @@
       </div>
     </div>
     <div class="card" *ngIf="show2FaSettings">
-      <div class="header">
-        <h2 class="mx-auto mt-3">Two-Factor Authentication</h2>
-      </div>
-      <div class="body">
-        <form [formGroup]="stdForm">
+      <div class="header" style="display: flex; justify-content: space-between;">
+        <h2 class="mt-3">Two-Factor Authentication</h2>
+        <mat-slide-toggle class="mt-3" (change)="onToggleChange($event)"></mat-slide-toggle>
+    </div>
+      <div class="body" *ngIf="showBodyContent">
+        <div class="row">
+          <div class="col-4">
+            <mat-radio-group required>
+              <mat-radio-button value="test">Email</mat-radio-button>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input matInput required />
+              </mat-form-field>
+          </mat-radio-group>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <mat-radio-group required>
+              <mat-radio-button value="test">SMS</mat-radio-button>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <input matInput required />
+              </mat-form-field>
+          </mat-radio-group>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-12">
+            <img src="/assets/images/icons/2faa.png" style="width: 103.4%; height: 400px;margin-top: -17px; margin-bottom: -15px; margin-left: -15px;">
+          </div>
+        </div>
+       
+        <!-- <form [formGroup]="stdForm">
           <div class="example-container">
             <div class="row clearfix justify-content-center">
               <img src="assets/images/icons/2fa.jpg" alt="" class="factor mx-auto"/>
@@ -644,7 +672,7 @@
           </div>
 
          
-        </form>
+        </form> -->
       </div>
     </div>
     <div class="card" style="margin: auto; height: 500px; width: 70%" *ngIf="showEmailConfig">
@@ -875,7 +903,6 @@
           </div>
           <div class="col-md-5">
             <button id="saved" [routerLink]="['/student/settings/smtp']"> SMTP </button>
-            <button id="saved" (click)="navigateToEmailSettings()"> Email Templates </button>
           </div>
         </div>
         <div class="row px-4 py-4">
@@ -913,8 +940,15 @@
             <button id="no-link"> Notification </button>
           </div>
         </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/student/settings/approval-workflow']"> Approval Workflow </button>
+          </div>
+        </div>
+        
 
       </div>
+      
     </div>
     <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showCustoms">
       <div class="row">
@@ -949,6 +983,11 @@
           </div>
           <div class="col-md-5">
             <button id="saved" routerLink="/student/settings/logo-customization"> Logo </button>
+          </div>
+        </div>
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" (click)="navigateToEmailSettings()"> Email Templates </button>
           </div>
         </div>
         

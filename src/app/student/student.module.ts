@@ -108,6 +108,7 @@ import { SmtpComponent } from './settings/smtp/smtp.component';
 import { ThirdPartyToolsComponent } from './settings/third-party-tools/third-party-tools.component';
 import { SingpassComponent } from './settings/singpass/singpass.component';
 import { PaymentGatewayComponent } from './settings/payment-gateway/payment-gateway.component';
+import { ApprovalWorkflowComponent } from './settings/approval-workflow/approval-workflow.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -194,6 +195,7 @@ import { PaymentGatewayComponent } from './settings/payment-gateway/payment-gate
     ThirdPartyToolsComponent,
     SingpassComponent,
     PaymentGatewayComponent,
+    ApprovalWorkflowComponent,
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,
