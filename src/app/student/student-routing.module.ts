@@ -78,6 +78,7 @@ import { ThirdPartyToolsComponent } from './settings/third-party-tools/third-par
 import { SingpassComponent } from './settings/singpass/singpass.component';
 import { PaymentGatewayComponent } from './settings/payment-gateway/payment-gateway.component';
 import { ApprovalWorkflowComponent } from './settings/approval-workflow/approval-workflow.component';
+import { StudentDbComponent } from './settings/student-db/student-db.component';
 
 
 const routes: Routes = [
@@ -499,6 +500,14 @@ const routes: Routes = [
   {
     path: 'settings/banner-forms',
     component: SettingsComponent,
+  },
+  {
+    path: 'settings/dashboards',
+    component: SettingsComponent,
+  },
+  {
+    path: 'settings/student-dashboard',
+    component: StudentDbComponent,
   },
 
   {

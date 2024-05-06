@@ -1,5 +1,5 @@
 <section class="content"
-  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !show2FaSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig &&!showForms  && !showSidemenu && !showCourseForms && !showProgramForms && !showUsersForms && !showFinanceForms && !showBannerForms">
+  *ngIf="!isAdmin && !showAccountSettings && !showProfileSettings && !show2FaSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers && !showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig &&!showForms  && !showSidemenu && !showCourseForms && !showProgramForms && !showUsersForms && !showFinanceForms && !showBannerForms && !showDashboards">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
@@ -240,7 +240,7 @@
     <!-- </div> -->
 
     <div class="card"
-      *ngIf="!showAccountSettings && !showProfileSettings && !show2FaSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers &&!showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig && !showForms && !showSidemenu && !showCourseForms && !showProgramForms && !showUsersForms && !showFinanceForms && !showBannerForms">
+      *ngIf="!showAccountSettings && !showProfileSettings && !show2FaSettings && !showEmailConfig && !showBanners && !showCustomSettings && !showUsers &&!showAllUsers && !showIntegration && !showAutomation && !showCustoms &&!showCustomForms && !showLms && !showConfig && !showForms && !showSidemenu && !showCourseForms && !showProgramForms && !showUsersForms && !showFinanceForms && !showBannerForms && !showDashboards">
       <div class="header">
         <h2>Settings</h2>
       </div>
@@ -989,6 +989,9 @@
           <div class="col-md-6 banner">
             <button id="saved" (click)="navigateToEmailSettings()"> Email Templates </button>
           </div>
+          <div class="col-md-5">
+            <button id="saved" (click)="navigateToDashboardSettings()">Dashboards</button>
+          </div>
         </div>
         
 
@@ -1298,6 +1301,41 @@
         <div class="col-md-12 py-3">
           <button mat-raised-button id="back" [routerLink]="['/student/settings/customization-forms']">Back</button>
         </div>
+
+      </div>
+    </div>
+    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showDashboards">
+      <div class="row">
+        <div class="col-md-8">
+          <label class="py-4 px-5">Dashboards</label>
+        </div>
+        <div class="col-md-2 my-3 mx-auto">
+          <img src="assets/images/settings/dashboard.png" style="width: 80px; height: 80px;">
+        </div>
+      </div>
+      <div class="body">
+        <div class="row px-4">
+          <div class="col-md-6 banner">
+            <button id="saved" [routerLink]="['/student/settings/student-dashboard']">Student Dashboard </button>
+          </div>
+          <div class="col-md-5">
+            <button id="saved" >Instructor Dashboard </button>
+          </div>
+        </div>
+
+        <div class="row px-4 py-4">
+          <div class="col-md-6 banner">
+            <button id="saved" >Admin Dashboard </button>
+          </div>
+          <!-- <div class="col-md-5">
+            <button id="no-link" >Admin Dashboard </button>
+          </div> -->
+        </div>
+       
+
+        <!-- <div class="col-md-12 py-3">
+          <button mat-raised-button id="back" [routerLink]="['/student/settings/dashboards']">Back</button>
+        </div> -->
 
       </div>
     </div>
