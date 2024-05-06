@@ -332,6 +332,9 @@ export class ProgramTimetableComponent implements OnInit {
       const sessionStartTime = courseClass.classId.sessions[0].sessionStartTime;
       const sessionEndTime = courseClass.classId.sessions[0].sessionEndTime;
       const title = courseClass.classId.courseId.title;
+      const programCode = courseClass.classId?.sessions[0].courseCode;
+      const deliveryType = courseClass.classId?.classDeliveryType;
+      const instructorCost = courseClass.classId?.instructorCost;
       const datesArray = [];
       let currentDate = startDate;
           while (currentDate <= endDate) {
@@ -340,7 +343,12 @@ export class ProgramTimetableComponent implements OnInit {
           date: new Date(currentDate),
           extendedProps: {
             sessionStartTime: sessionStartTime,
-            sessionEndTime: sessionEndTime
+            sessionEndTime: sessionEndTime,
+            programCode: programCode,
+            sessionStartDate:startDate,
+            sessionEndDate:endDate,
+            instructorCost:instructorCost,
+            deliveryType:deliveryType
           }
         });
         currentDate.setDate(currentDate.getDate() + 1); 
@@ -368,7 +376,10 @@ export class ProgramTimetableComponent implements OnInit {
             </div>`
         };
       }  , 
-      eventDisplay: 'block' 
+      eventDisplay: 'block' ,
+      eventClick: (clickInfo) => this.openDialog(clickInfo.event)
+
+
    
     };
 
