@@ -43,7 +43,8 @@ export class ProgramTimetableComponent implements OnInit {
     if(userType == "Instructor"){
       console.log("test")
       //this.getApprovedCourse();
-      this.getInstructorApprovedProgram();
+      // this.getInstructorApprovedProgram();
+      this.getClassesList()
     }
   }
 
