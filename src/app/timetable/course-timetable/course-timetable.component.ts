@@ -129,6 +129,7 @@ export class CourseTimetableComponent implements OnInit {
           };
         }  ,  
         eventDisplay: 'block' ,
+        eventClick: (clickInfo) => this.openDialog(clickInfo.event)
         
       };
     });
@@ -254,6 +255,9 @@ export class CourseTimetableComponent implements OnInit {
         const sessionStartTime = courseClass?.classId?.sessions[0]?.sessionStartTime;
         const sessionEndTime = courseClass?.classId?.sessions[0]?.sessionEndTime;
         const title = courseClass?.classId?.courseId?.title;
+        const courseCode = courseClass.courseId.courseCode;
+        const deliveryType = courseClass.classId?.classDeliveryType;
+        const instructorCost = courseClass.classId?.instructorCost;
         const datesArray = [];
         let currentDate = startDate;
             while (currentDate <= endDate) {
@@ -262,7 +266,10 @@ export class CourseTimetableComponent implements OnInit {
             date: new Date(currentDate),
             extendedProps: {
               sessionStartTime: sessionStartTime,
-              sessionEndTime: sessionEndTime
+              sessionEndTime: sessionEndTime,
+              courseCode: courseCode,
+              instructorCost:instructorCost,
+              deliveryType:deliveryType
             }
           });
           currentDate.setDate(currentDate.getDate() + 1); 
@@ -291,7 +298,8 @@ export class CourseTimetableComponent implements OnInit {
             </div>`
           };
         }  ,  
-        eventDisplay: 'block' 
+        eventDisplay: 'block' ,
+        eventClick: (clickInfo) => this.openDialog(clickInfo.event)
       };
     });
         

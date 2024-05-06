@@ -142,6 +142,15 @@
                   </div>                 
                   </mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="view">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>View Certificate</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (click)="openCertificateInNewTab(row.certificateUrl)">
+                    <span class="mobile-label">View Certificate</span>
+                    <div class="center-icon">
+                      <app-feather-icons *ngIf="row.certificate" [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
+                    </div>
+                  </mat-cell>
+                </ng-container>
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;"
                   [style.cursor]="'pointer'" matRipple>
@@ -152,6 +161,7 @@
                 <mat-progress-spinner color="primary" [diameter]="40" mode="indeterminate">
                 </mat-progress-spinner>
               </div>
+            
               <!-- context menu start -->
               <!-- <div style="visibility: hidden; position: fixed" [style.left]="contextMenuPosition.x"
                 [style.top]="contextMenuPosition.y" [matMenuTriggerFor]="contextMenu">

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { CoursePaginationModel } from '@core/models/course.model';
@@ -32,7 +32,7 @@ export class CreateRoleTypeComponent {
     @Inject(MAT_DIALOG_DATA) public data: MenuItemModel[]
   ) {
     this.userTypeFormGroup = this.fb.group({
-      typeName: ['', []],
+      typeName: ['', [Validators.required]],
     });
     this.dataSourceArray = this.data;
     this.dataSource = new MatTableDataSource<MenuItemModel>(this.data);
@@ -112,18 +112,22 @@ export class CreateRoleTypeComponent {
   }
 
   confirmSubmit() {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to create Role Type!',
-      icon: 'warning',
-      confirmButtonText: 'Yes',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.createUserType();
-      }
-    });
+    if(this.userTypeFormGroup.valid){
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to create Role Type!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.createUserType();
+        }
+      });
+    }else{this.userTypeFormGroup.markAllAsTouched();}
+    
+  
   }
 
   createUserType() {

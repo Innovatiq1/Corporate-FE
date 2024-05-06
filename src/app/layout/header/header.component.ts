@@ -360,9 +360,9 @@ export class HeaderComponent
       }
     } else if (userType === 'Student') {
       const logoSpan = document.querySelector('.logo-name');
-      if (logoSpan) {
-        logoSpan.textContent = 'LMS';
-      }
+      // if (logoSpan) {
+      //   logoSpan.textContent = 'LMS';
+      // }
     }
   }
 }

@@ -61,11 +61,39 @@ export class CreateAllUsersComponent {
   data: any;
 
   update() {
+  
+   
+
+
     if (this.userForm.valid) {
       if (this.editUrl) {
-        this.updateBlog(this.userForm.value);
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'Do you want to update user!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.updateBlog(this.userForm.value);
+          }
+        });
+        
       } else {
-        this.addBlog(this.userForm.value);
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'Do you want to create user!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.addBlog(this.userForm.value);
+          }
+        });
+        
       }
     } else {
       this.userForm.markAllAsTouched(); 
@@ -237,30 +265,27 @@ export class CreateAllUsersComponent {
   //   }
   onFileUpload(event: any) {
     const file = event.target.files[0];
-
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/jfif'];
+    if (!allowedTypes.includes(file.type)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Invalid file type. Only JPEG, PNG, JPG, and JFIF formats are allowed.!',
+      });
+      return;
+    }
+  
     this.thumbnail = file;
     const formData = new FormData();
     formData.append('files', this.thumbnail);
-    this.courseService
-      .uploadCourseThumbnail(formData)
-      .subscribe((data: any) => {
-        this.avatar = data.data?.thumbnail;
-        this.uploaded = this.avatar?.split('/');
-        let image = this.uploaded?.pop();
-        this.uploaded = image?.split('\\');
-        this.fileName = this.uploaded?.pop();
-      });
-    // this.fileName = event.target.files[0].name;
-    // this.files=event.target.files[0]
-    // this.authenticationService.uploadVideo(event.target.files[0]).subscribe(
-    //   (response: any) => {
-    //             //Swal.close();
-    //             
-    //   },
-    //   (error:any) => {
-
-    //   }
-    // );
+  
+    this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) => {
+      this.avatar = data.data?.thumbnail;
+      this.uploaded = this.avatar?.split('/');
+      let image = this.uploaded?.pop();
+      this.uploaded = image?.split('\\');
+      this.fileName = this.uploaded?.pop();
+    });
   }
 
   //   updateBlog(formObj:any) {
@@ -388,7 +413,7 @@ export class CreateAllUsersComponent {
         {
           title: 'Edit All Users',
           items: ['Users'],
-          active: 'Edit All Users',
+          active: 'Edit User',
         },
       ];
     }
@@ -411,6 +436,7 @@ export class CreateAllUsersComponent {
         Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/),
       ]),
       password: new FormControl('', [Validators.required]),
+      re_passwords: new FormControl('', [Validators.required]),
       education: new FormControl('', [
         Validators.required,
         Validators.minLength(2),
@@ -418,7 +444,7 @@ export class CreateAllUsersComponent {
       type: new FormControl('', [Validators.required]),
       parentsName: new FormControl('', []),
       parentsPhone: new FormControl('', []),
-      dob: new FormControl('', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.dob]),
+      dob: new FormControl('', [Validators.required,...this.utils.validators.dob]),
       joiningDate: new FormControl('', [Validators.required]),
       blood_group: new FormControl('', []),
       avatar: new FormControl('', []),
@@ -493,6 +519,7 @@ export class CreateAllUsersComponent {
             name: this.data?.name,
             email: this.data?.email,
             password: this.data?.password,
+            re_passwords: this.data.conformPassword,
             education: this.data?.education,
             type: this.data?.type,
             fileName: this.data?.avatar,

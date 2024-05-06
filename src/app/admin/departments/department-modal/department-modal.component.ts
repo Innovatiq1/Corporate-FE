@@ -53,7 +53,7 @@ export class DepartmentModalComponent {
         '',
         [Validators.required, Validators.email, Validators.minLength(5)],
       ],
-      departmentStartDate: [''],
+      departmentStartDate: ['',[Validators.required]],
       studentCapacity: ['', [Validators.required]],
       details: [''],
     });
@@ -100,6 +100,7 @@ export class DepartmentModalComponent {
   }
 
   onSubmit() {
+  if(this.departmentForm.valid){
     const department= this.departmentForm.value
     department['hod']= this.hodName
     department['hodId']= this.hod
@@ -122,6 +123,9 @@ export class DepartmentModalComponent {
         });
       }
     });
+  }else{
+    this.departmentForm.markAllAsTouched();
+  }
      
   }
 
