@@ -223,13 +223,16 @@ body {
 }
 
 .nav-tabs>.nav-item>.nav-link {
-    color: #888888;
+    // color: #888888;
+    color: #000000;
+    font-weight: bold;
+    font-size: 13px !important;
     margin: 0;
     margin-right: 5px;
     background-color: transparent;
     border: 1px solid transparent;
     border-radius: 30px;
-    font-size: 14px;
+    // font-size: 14px;
     padding: 11px 23px;
     line-height: 1.5;
 }
@@ -239,9 +242,11 @@ body {
 }
 
 .nav-tabs>.nav-item>.nav-link.active {
-    background-color: #444;
+    background-color: #FFFFFF;
     border-radius: 30px;
-    color: #FFFFFF;
+    color: #000000;
+    font-weight: bold;
+    font-size: 13px !important;
 }
 
 .nav-tabs>.nav-item>.nav-link i.now-ui-icons {

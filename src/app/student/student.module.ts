@@ -109,6 +109,7 @@ import { ThirdPartyToolsComponent } from './settings/third-party-tools/third-par
 import { SingpassComponent } from './settings/singpass/singpass.component';
 import { PaymentGatewayComponent } from './settings/payment-gateway/payment-gateway.component';
 import { ApprovalWorkflowComponent } from './settings/approval-workflow/approval-workflow.component';
+import { StudentDbComponent } from './settings/student-db/student-db.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -196,6 +197,7 @@ import { ApprovalWorkflowComponent } from './settings/approval-workflow/approval
     SingpassComponent,
     PaymentGatewayComponent,
     ApprovalWorkflowComponent,
+    StudentDbComponent,
     // CourseKitComponent,
     // VideoPlayerComponent,
     // CreateCourseKitComponent,

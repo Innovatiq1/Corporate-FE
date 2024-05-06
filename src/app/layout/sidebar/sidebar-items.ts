@@ -1841,6 +1841,22 @@ export const SettingsMenu: MenuItem[] = [
 
         children: [],
       },
+      {
+        iconsrc:'',
+        path: 'student/settings/dashboards',
+        title: 'Dashboards',
+        iconType: '',
+        icon: '',
+        id:'dashboards',
+        class: 'ml-menu',
+        groupTitle: false,
+        badge: '',
+        badgeClass: '',
+        role: [''],
+        open:false,
+
+        children: [],
+      },
       
     ]
   },

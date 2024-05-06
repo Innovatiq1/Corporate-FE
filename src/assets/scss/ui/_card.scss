@@ -149,7 +149,7 @@
     padding: 0px 10px;
   }
   &.card-statistic-1 .card-header,
-  &.card-statistic-2 .card-header {
+  &.card-statistic-2 .card-header, &.card-statistic-3 .card-header {
     border-color: transparent;
     padding-bottom: 0;
     height: auto;
@@ -169,18 +169,18 @@
   }
 
   &.card-statistic-1 .card-header h4,
-  &.card-statistic-2 .card-header h4 {
+  &.card-statistic-2 .card-header h4, &.card-statistic-3 .card-header h4 {
     line-height: 1.2;
     color: color(muted);
   }
 
   &.card-statistic-1 .card-body,
-  &.card-statistic-2 .card-body {
+  &.card-statistic-2 .card-body, &.card-statistic-3 .card-body {
     padding-top: 0;
   }
 
   &.card-statistic-1 .card-body,
-  &.card-statistic-2 .card-body {
+  &.card-statistic-2 .card-body, &.card-statistic-3 .card-body {
     font-size: 26px;
     font-weight: 700;
     color: color(fontdark);
@@ -193,9 +193,14 @@
     width: 235px;
     height: 170px;
   }
+  .card-statistic-3 {
+    display: inline-block;
+    width: 335px;
+    height: 170px;
+  }
 
   &.card-statistic-1 .card-icon,
-  &.card-statistic-2 .card-icon {
+  &.card-statistic-2 .card-icon, &.card-statistic-3 .card-icon {
     width: 80px;
     height: 80px;
     margin: 10px;
@@ -235,8 +240,23 @@
     margin: 20px;
   }
 
+  &.card-statistic-3 .card-icon {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 22px;
+    margin: 25px;
+    box-shadow: 5px 3px 10px 0 rgba(21, 15, 15, 0.3);
+    border-radius: 10px;
+    background: #6777ef;
+  }
+  &.card-statistic-3 .card-icon-only {
+    font-size: 35px;
+    margin: 20px;
+  }
+
   &.card-statistic-1 .card-header,
-  &.card-statistic-2 .card-header {
+  &.card-statistic-2 .card-header, &.card-statistic-3 .card-header {
     padding-bottom: 0;
     padding-top: 25px;
   }
@@ -246,8 +266,13 @@
     padding-top: 0;
   }
 
+  &.card-statistic-3 .card-header + .card-body,
+  &.card-statistic-3 .card-body + .card-header {
+    padding-top: 0;
+  }
+
   &.card-statistic-1 .card-header h4,
-  &.card-statistic-2 .card-header h4 {
+  &.card-statistic-2 .card-header h4,  &.card-statistic-3 .card-header h4 {
     font-weight: 600;
     font-size: 13px;
     letter-spacing: 0.5px;
@@ -258,6 +283,10 @@
   }
 
   &.card-statistic-2 .card-header h4 {
+    text-transform: none;
+    margin-bottom: 0;
+  }
+  &.card-statistic-3 .card-header h4 {
     text-transform: none;
     margin-bottom: 0;
   }
@@ -279,6 +308,22 @@
     .card-right {
       float: right;
       margin: -77px 15px 15px 0px;
+    
+    }
+  }
+  &.card-statistic-3 {
+    .card-chart {
+      margin-left: -10px;
+      margin-right: -1px;
+      margin-bottom: -7px;
+
+      canvas {
+        height: 70px !important;
+      }
+    }
+    .card-right {
+      float: right;
+      margin: 10px 15px 15px 0px;
     
     }
   }

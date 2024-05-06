@@ -102,6 +102,10 @@ export class DashboardComponent implements OnInit {
   subCategories!: SubCategory[];
   allSubCategories!: SubCategory[];
   classesList: any;
+  instructorCount: any;
+  adminCount: any;
+  studentCount: any;
+  count: any;
 
   constructor(
     private instructorService: InstructorService,
@@ -120,6 +124,7 @@ export class DashboardComponent implements OnInit {
     this.instructorData();
     this.getProgramList();
     this.getAllCourse();
+    this.getCount();
   }
   getClassList2() {
     let instructorId = localStorage.getItem('id');
@@ -565,5 +570,13 @@ export class DashboardComponent implements OnInit {
      
     });
   }
-
+  getCount() {
+    this.courseService.getCount().subscribe(response => {
+      this.count = response?.data;
+      this.instructorCount=this.count?.instructors;
+      this.adminCount=this.count?.admins
+      this.studentCount=this.count?.students
+    })
+       
+  }
 }

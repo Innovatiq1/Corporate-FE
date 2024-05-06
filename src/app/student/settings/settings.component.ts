@@ -75,6 +75,7 @@ export class SettingsComponent {
   financeFormsUrl: any;
   bannerFormsUrl: any;
   faUrl: any;
+  dashboardsUrl: any;
   showAccountSettings: boolean = false;
   showProfileSettings: boolean = false;
   show2FaSettings: boolean = false;
@@ -96,6 +97,7 @@ export class SettingsComponent {
   showUsersForms: boolean = false;
   showFinanceForms: boolean = false;
   showBannerForms: boolean = false;
+  showDashboards: boolean = false;
   isApprovers: boolean = false;
   selectedCreators: any = [];
   users: any;
@@ -164,6 +166,7 @@ export class SettingsComponent {
     this.usersFormsUrl = urlPath.includes('users-forms');
     this.financeFormsUrl = urlPath.includes('finance-forms');
     this.bannerFormsUrl = urlPath.includes('banner-forms');
+    this.dashboardsUrl = urlPath.includes('dashboards');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -439,6 +442,16 @@ export class SettingsComponent {
       ];
       this.isAdmin = true;
     }
+    if (this.dashboardsUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Settings',
+          items: ['Customize'],
+          active: 'Dashboards',
+        },
+      ];
+      this.isAdmin = true;
+    }
     this.patchValues(),
       //this.patchValues1()
       (this.stdForm = this.fb.group({
@@ -554,6 +567,9 @@ export class SettingsComponent {
     if(this.bannerFormsUrl){
       this.showBannerForms = true;
     }
+    if(this.dashboardsUrl){
+      this.showDashboards = true;
+    }
     this.getDepartments();
   }
   navigateToAccountSettings() {
@@ -621,6 +637,9 @@ export class SettingsComponent {
   }
   navigateToBannerFormsSettings(){
     this.router.navigate(['/student/settings/banner-forms']);
+  }
+  navigateToDashboardSettings(){
+    this.router.navigate(['/student/settings/dashboards']);
   }
   onToggleChange(event: any) {
     this.showBodyContent = event.checked;
