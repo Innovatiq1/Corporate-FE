@@ -11,7 +11,7 @@
                       <h5 class="float-end">Training Cost<br> (Actual)</h5>
                     </div>
                     <div class="col-green">
-                      <h3 class="font-weight-bold float-end mb-0">93,183</h3>
+                      <h3 class="font-weight-bold float-end mb-0">$ 93,183</h3>
                     </div>
                   </div>
                 </div>
@@ -32,7 +32,7 @@
                       <h5 class="float-end">Training Cost<br> (Budget)</h5>
                     </div>
                     <div class="col-green">
-                      <h3 class="font-weight-bold float-end mb-0">95,337</h3>
+                      <h3 class="font-weight-bold float-end mb-0">$ 95,337</h3>
                     </div>
                   </div>
                 </div>
@@ -53,7 +53,7 @@
                       <h5 class="float-end">Cost Per <br> Participant </h5>
                     </div>
                     <div class="col-green">
-                      <h3 class="font-weight-bold float-end mb-0">316</h3>
+                      <h3 class="font-weight-bold float-end mb-0">$ 316</h3>
                     </div>
                   </div>
                 </div>
@@ -74,7 +74,7 @@
                       <h5 class="float-end">Cost Per <br> Hour</h5>
                     </div>
                     <div class="col-green">
-                      <h3 class="font-weight-bold float-end mb-0">52</h3>
+                      <h3 class="font-weight-bold float-end mb-0">$ 52</h3>
                     </div>
                   </div>
                 </div>
@@ -150,8 +150,34 @@
                     </div>
                 </div>
             </div>
+            
+        
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <!-- GAUGE CHART -->
+                <div class="card">
+                    <div class="header ">
+                        <div class="d-flex justify-content-between w-100 ">
+                            <h2>Over-all Training Budget</h2>
+                            <select class="form-select w-25" aria-label="Default select example">
+                                <option selected>2023</option>
+                                <option value="1">2022</option>
+                                <option value="2">2021</option>
+                                <option value="3">2020</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <ngx-gauge [value]="gaugeValue" [size]="350" [thick]="20" [type]="guageType1"
+                            class="guage-chart-center">
+                            <ngx-gauge-value>
+                                {{gaugeValue}} %
+                            </ngx-gauge-value>
+                        </ngx-gauge>
+                    </div>
+
+                </div>
             <!-- BAR-CHART -->
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+            <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="header">
                         <div class="d-flex justify-content-between w-100 ">
@@ -172,38 +198,14 @@
                         </apx-chart>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- END BAR-CHART -->
         </div>
 
-        <div class="row clearfix">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <!-- GAUGE CHART -->
-                <div class="card">
-                    <div class="header ">
-                        <div class="d-flex justify-content-between w-100 ">
-                            <h2>Participant by Trainer Type</h2>
-                            <select class="form-select w-25" aria-label="Default select example">
-                                <option selected>2023</option>
-                                <option value="1">2022</option>
-                                <option value="2">2021</option>
-                                <option value="3">2020</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <ngx-gauge [value]="gaugeValue" [size]="250" [thick]="20" [type]="guageType1"
-                            class="guage-chart-center">
-                            <ngx-gauge-value>
-                                {{gaugeValue}} %
-                            </ngx-gauge-value>
-                        </ngx-gauge>
-                    </div>
-
-                </div>
                 <!-- END GAUGE-CHART -->
             </div>
             <!-- PROGRESS-CHART -->
+            <div class="row clearfix">
             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
                 <div class="card">
                     <div class="header">
@@ -269,9 +271,33 @@
             </div>
             <!-- END PROGRESS-CHART -->
 
-        </div>
+        <!-- </div> -->
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <div class="d-flex justify-content-between w-100 ">
+                        <h2>Actual Cost or Budget</h2>
+                        <select class="form-select w-25" aria-label="Default select example">
+                            <option selected>2023</option>
+                            <option value="1">2022</option>
+                            <option value="2">2021</option>
+                            <option value="3">2020</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="body" style="height: 273px;">
+                    <ngx-gauge [value]="gaugeValue" [size]="250" [thick]="20" [type]="guageType1"
+                        class="guage-chart-center">
+                        <ngx-gauge-value>
+                            {{gaugeValue}} %
+                        </ngx-gauge-value>
+                    </ngx-gauge>
+                </div>
 
-        <div class="row clearfix">
+            </div>
+        </div>
+    </div>
+        <!-- <div class="row clearfix">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="header ">
@@ -313,34 +339,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="row clearfix">
-            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                <div class="card">
-                    <div class="header">
-                        <div class="d-flex justify-content-between w-100 ">
-                            <h2>Actual Cost or Budget</h2>
-                            <select class="form-select w-25" aria-label="Default select example">
-                                <option selected>2023</option>
-                                <option value="1">2022</option>
-                                <option value="2">2021</option>
-                                <option value="3">2020</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="body" style="height: 333px;">
-                        <ngx-gauge [value]="gaugeValue" [size]="250" [thick]="20" [type]="guageType1"
-                            class="guage-chart-center">
-                            <ngx-gauge-value>
-                                {{gaugeValue}} %
-                            </ngx-gauge-value>
-                        </ngx-gauge>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+         
+            <!-- <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="header ">
                         <div class="d-flex justify-content-between w-100 ">
@@ -392,5 +395,5 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
         </div>

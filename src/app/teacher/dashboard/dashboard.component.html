@@ -29,7 +29,168 @@
         </div>
       </div>
     </div>
+   
     <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">
+        <div class="card">
+          <div class="header mt-3">
+            <h2>Upcoming Courses</h2>
+          </div>
+          <div class="body">
+            <div class="card-block" *ngFor="let data of upcomingCourses" style="cursor: pointer;" [routerLink]="['/admin/courses/all-courses']">
+              <div class="row m-b-20">
+                <div class="col-md-3">
+                  <img src="{{data.image_link}}" alt="user image" class="img-fluid">
+                </div>
+                <div class="col-md-8" style="margin-left: -15px;">
+                  <h6>{{data.title |truncate : 25}}</h6>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <b>{{ data?.courseCode }}</b>
+                    </div>
+                    <div class="col-md-2">
+                      <b>{{ data.training_hours}} Hours</b>
+                    </div>
+                    <div class="col-md-2">
+                      <b>{{data.course_duration_in_days}}</b>
+                    </div>
+                    <!-- <div class="col-md-3" [class]="data?.Active ? 'badge badge-solid-red' : 'badge badge-solid-green'">
+                      <b>{{ data?.classDeliveryType | titlecase }}</b>
+                    </div> -->
+                    <div class="col-md-3">
+                      <b style="color: blue;"><i class="fa fa-play-circle-o"></i> {{data.sessionStartDate | date}}</b>
+                    </div>
+                  </div>
+
+                 
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <button mat-stroked-button [routerLink]="['/admin/courses/all-courses/course']" color="primary">View More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">
+        <div class="card">
+          <div class="header mt-3">
+            <h2>Upcoming Programs</h2>
+          </div>
+          <div class="body">
+            <div class="card-block" *ngFor="let program of upcomingPrograms" style="cursor: pointer;" [routerLink]="['/admin/program/program-list']">
+              <div class="row m-b-20">
+                <div class="col-md-3">
+                  <img src="{{program?.image_link}}" alt="user image" class="img-fluid">
+                </div>
+                <div class="col-md-8" style="margin-left: -15px;">
+                  <h6>{{program?.title}}</h6>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <b>{{ program?.courseCode }}</b>
+                    </div>
+                    <div class="col-md-2">
+                      <b>{{ program?.duration }} Hours</b>
+                    </div>
+                    <div class="col-md-2">
+                      <b>{{ program?.courseFee }}$</b>
+                    </div>
+                    <div class="col-md-3" [class]="program?.Active ? 'badge badge-solid-red' : 'badge badge-solid-green'">
+                      <b>{{ program?.deliveryMode | titlecase }}</b>
+                    </div>
+                    <div class="col-md-3">
+                      <b style="color: blue;"><i class="fa fa-play-circle-o"></i> {{program?.sessionStartDate | date}}</b>
+                    </div>
+                  </div>
+
+                 
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <button mat-stroked-button [routerLink]="['/admin/program/program-list/program']" color="primary">View More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card" style="border-radius: 31px;">
+          <div class="header mt-3">
+            <h2>Classes List</h2>
+            <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>add_circle_outline</mat-icon>
+                <span>Add</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>delete_outline</mat-icon>
+                <span>Delete</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>refresh</mat-icon>
+                <span>Refresh</span>
+              </button>
+            </mat-menu> -->
+          </div>
+          <div class="tableBody">
+            <div class="table-responsive">
+              <table class="table table-hover ">
+                <thead>
+                  <tr>
+                    <!-- <th>#</th> -->
+                    <th>Course Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status </th>
+                    <!-- <th>Actions </th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor ="let class of classesList " style="cursor: pointer;" [routerLink]="['/admin/courses/view-class/',class.id]">
+                    <!-- <td class="table-img">
+                      <img src="{{class?.courseId?.image_link}}" alt="course">
+                    </td> -->
+                    <td>{{class?.courseId?.title | truncate:10}}</td>
+                    <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
+                    <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
+                    <td>
+                      <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
+                    </td>
+                    <!-- <td>
+                      <button mat-button [matMenuTriggerFor]="menu">
+                        <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                        xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
+                        <path
+                          d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                      </svg>
+  
+                      </button>
+                      
+                              <mat-menu #menu="matMenu" xPosition="before">
+                                <button mat-menu-item  class="tbl-action-btn" (click)="editClass(class.id)" >
+                                  <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  <span class="menu-text">Edit</span>
+                                </button>
+                                <button mat-menu-item class="tbl-action-btn" (click)="delete(class.id)">
+                                  <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  <span class="menu-text">Delete</span>
+                                </button>
+                              </mat-menu>
+                    
+                    </td> -->
+                  </tr>
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
         <div class="card">
           <div class="card-body">
@@ -50,7 +211,7 @@
           </div>
         </div>
       </div> -->
-      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+      <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
             <h2>Course Chart</h2>
@@ -62,7 +223,7 @@
                 [dataLabels]="pieChartOptions.dataLabels!" [legend]="pieChartOptions.legend!" class="apex-pie-center">
               </apx-chart>
             </div>
-            <ng-scrollbar style="height: 300px" visibility="hover">
+            <ng-scrollbar style="height: 200px" visibility="hover">
             <div class="table-responsive m-t-15">
               <table class="table align-items-center" *ngFor="let dataSource of dataSource1?.slice(0, 5)">
                 <tbody>
@@ -71,7 +232,7 @@
                     <td class="col-8"> ${{dataSource.instructorCost}}</td>
                     <!-- <td class="col-3" *ngIf="dataSource.duration===1">{{dataSource.duration}} Day</td>
                     <td class="col-3" *ngIf="dataSource.duration!==1">{{dataSource.duration}} Days</td> -->
-                    <!-- <td class="col-green">+32%</td> -->
+                    <!-- <td class="col-green">+32%</td> --
                   </tr>
                   <!-- <tr>
                     <td><i class="fa fa-circle col-blue msr-2"></i>Science</td>
@@ -87,15 +248,15 @@
                     <td><i class="fa fa-circle col-green msr-2"></i>Mathes</td>
                     <td>32</td>
                     <td class="col-green">+3%</td>
-                  </tr> -->
+                  </tr> --
                 </tbody>
               </table>
             </div>
             </ng-scrollbar>
           </div>
         </div>
-      </div>
-      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+      </div> -->
+      <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
             <h2>Program Chart</h2>
@@ -107,7 +268,7 @@
                 [dataLabels]="pieChartOptions1.dataLabels!" [legend]="pieChartOptions1.legend!" class="apex-pie-center">
               </apx-chart>
             </div>
-            <ng-scrollbar style="height: 300px" visibility="hover">
+            <ng-scrollbar style="height: 180px" visibility="hover">
             <div class="table-responsive m-t-15">
               <table class="table align-items-center" *ngFor="let programFilterData of programFilterData?.slice(0, 5)">
                 <tbody>
@@ -116,7 +277,7 @@
                     <td class="col-8">$ {{programFilterData?.instructorCost}}</td>
                     <!-- <td clas="col-3" *ngIf="programFilterData.duration===1">{{programFilterData.duration}} Day</td>
                     <td clas="col-3" *ngIf="programFilterData.duration!==1">{{programFilterData.duration}} Days</td> -->
-                    <!-- <td class="col-green">+32%</td> -->
+                    <!-- <td class="col-green">+32%</td> --
                   </tr>
                   <!-- <tr>
                     <td><i class="fa fa-circle col-blue msr-2"></i>Science</td>
@@ -132,7 +293,7 @@
                     <td><i class="fa fa-circle col-green msr-2"></i>Mathes</td>
                     <td>32</td>
                     <td class="col-green">+3%</td>
-                  </tr> -->
+                  </tr> --
                 </tbody>
               </table>
             </div>
@@ -140,15 +301,15 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row clearfix">
+    </div> -->
+    <!-- <div class="row clearfix">
       <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
             <h2> Course Lecture In Week</h2>
           </div>
           <div class="body">
-            <ng-scrollbar style="height: 250px" visibility="hover">
+            <ng-scrollbar style="height: 150px" visibility="hover">
             <div class="table-responsive">
               <table class="table table-borderless medicine-list" *ngFor="let items of currentWeekRecords?.slice(0, 5)">
                
@@ -185,13 +346,13 @@
                   <td class="text-end">
                     <span class="badge-outline">M - W - F S</span>
                   </td>
-                </tr> -->
+                </tr> --
               </table>
             </div>
             </ng-scrollbar>
             <!-- <div class="text-center p-t-20">
               <button mat-stroked-button color="primary">View More</button>
-            </div> -->
+            </div> --
           </div>
         </div>
       </div>
@@ -202,31 +363,31 @@
               Course Today's Lecture</h2>
           </div>
           <div class="tableBody">
-            <ng-scrollbar style="height: 280px" visibility="hover">
+            <ng-scrollbar style="height: 180px" visibility="hover">
             <div class="table-responsive">
               <table class="table table-hover ">
                 <thead>
                   <tr>
-                    <!-- <th>#</th> -->
+                    <!-- <th>#</th> --
                     <th>Subject Name</th>
-                    <!-- <th>Class</th> -->
+                    <!-- <th>Class</th> --
                     <th>Start Time</th>
                     <th>End Time</th>
-                    <!-- <th>Details </th> -->
+                    <!-- <th>Details </th> --
                   </tr>
                 </thead>
                 <tbody *ngFor="let items of currentRecords?.slice(0, 5)">
                   <tr>
-                    <!-- <td>1</td> -->
+                    <!-- <td>1</td> --
                     <td>{{items.courseName}}</td>
-                    <!-- <td>{{items.courseCode}}</td> -->
+                    <!-- <td>{{items.courseCode}}</td> --
                     <td>{{items.sessionStartTime}}</td>
                     <td>{{items.sessionEndTime}}</td>
                     <!-- <td>
                       <button mat-icon-button class="tbl-action-btn">
                         <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
                       </button>
-                    </td> -->
+                    </td> --
                   </tr>
                   <!-- <tr>
                     <td>2</td>
@@ -287,7 +448,7 @@
                         <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
                       </button>
                     </td>
-                  </tr> -->
+                  </tr> --
                 </tbody>
               </table>
             </div>
@@ -295,8 +456,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row clearfix">
+    </div> -->
+    <!-- <div class="row clearfix">
       <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
@@ -340,13 +501,13 @@
                   <td class="text-end">
                     <span class="badge-outline">M - W - F S</span>
                   </td>
-                </tr> -->
+                </tr> --
               </table>
             </div>
             </ng-scrollbar>
             <!-- <div class="text-center p-t-20">
               <button mat-stroked-button color="primary">View More</button>
-            </div> -->
+            </div> --
           </div>
         </div>
       </div>
@@ -362,26 +523,26 @@
               <table class="table table-hover ">
                 <thead>
                   <tr>
-                    <!-- <th>#</th> -->
+                    <!-- <th>#</th> --
                     <th>Subject Name</th>
-                    <!-- <th>Class</th> -->
+                    <!-- <th>Class</th> --
                     <th>Start Time</th>
                     <th>End Time</th>
-                    <!-- <th>Details </th> -->
+                    <!-- <th>Details </th> --
                   </tr>
                 </thead>
                 <tbody *ngFor="let items of currentProgramRecords?.slice(0, 5)">
                   <tr>
-                    <!-- <td>1</td> -->
+                    <!-- <td>1</td> --
                     <td>{{items.courseName}}</td>
-                    <!-- <td>{{items.courseCode}}</td> -->
+                    <!-- <td>{{items.courseCode}}</td> --
                     <td>{{items.sessionStartTime}}</td>
                     <td>{{items.sessionEndTime}}</td>
                     <!-- <td>
                       <button mat-icon-button class="tbl-action-btn">
                         <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
                       </button>
-                    </td> -->
+                    </td> --
                   </tr>
                   <!-- <tr>
                     <td>2</td>
@@ -442,7 +603,7 @@
                         <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
                       </button>
                     </td>
-                  </tr> -->
+                  </tr> --
                 </tbody>
               </table>
             </div>
@@ -450,6 +611,6 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </section>

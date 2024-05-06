@@ -48,6 +48,12 @@
                             <mat-cell *matCellDef="let row" >
                               <span class="mobile-label">Level:</span>{{row.level}}</mat-cell>
                           </ng-container>
+                          <ng-container matColumnDef="Approver">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Approver
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row" >
+                              <span class="mobile-label">Approver:</span>{{row.approver}}</mat-cell>
+                          </ng-container>
                          
                           <mat-header-row *matHeaderRowDef="displayedColumns">
                           </mat-header-row>

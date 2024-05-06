@@ -9,7 +9,9 @@ export class ApprovalWorkflowComponent {
   displayedColumns = [
     
     'Title',
+    'Approver',
     'Level',
+    
   ];
   breadscrums = [
     {
@@ -19,11 +21,11 @@ export class ApprovalWorkflowComponent {
     },
   ];
   dataSource = [
-    { title : "Student Registration", level : "1"},
-    { title : "Course Enrollment", level : "1"},
-    { title : "Program Enrollment ", level : "1"},
-    { title : "Budget Approval", level : "1"},
-    { title : "Department Budget Approval", level : "1"},
-    { title : "Traning Request Approval", level : "3"},
+    { title : "Student Registration", level : "1" , approver : "Admin"},
+    { title : "Course Enrollment", level : "1", approver : "Admin"},
+    { title : "Program Enrollment ", level : "1", approver : "Admin"},
+    { title : "Budget Approval", level : "1", approver : "Approver 2"},
+    { title : "Department Budget Approval", level : "1", approver : "Approver 2"},
+    { title : "Traning Request Approval", level : "3", approver : "Approver 1, Approver 2, Approver 3"},
   ]
 }

@@ -254,7 +254,7 @@ export class SettingsComponent {
         {
           title: 'Settings',
           items: ['Customize'],
-          active: 'Banners',
+          active: 'Advertisement Banners',
         },
       ];
       this.isAdmin = true;

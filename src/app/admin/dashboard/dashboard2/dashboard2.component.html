@@ -43,7 +43,7 @@
       </div>
     </div>
     <div class="row clearfix">
-      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
         <div class="plain-card">
           <div class="card-inner">
             <h6 class="tx-primary m-b-15">New Admission Report</h6>
@@ -67,7 +67,9 @@
             </div>
           </div>
         </div>
-        <div class="plain-card mt-4">
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="plain-card">
           <div class="card-inner">
             <h6 class="tx-primary m-b-15">Fees Collection Report</h6>
             <div class="row mb-2">
@@ -92,7 +94,7 @@
         </div>
       </div>
       <!-- area chart -->
-      <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+      <!-- <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
         <div class="card">
           <div class="header mt-3">
             <h2>Instructor Performance</h2>
@@ -112,7 +114,7 @@
                 <mat-icon>refresh</mat-icon>
                 <span>Refresh</span>
               </button>
-            </mat-menu> -->
+            </mat-menu> --
           </div>
           <div class="body">
             <apx-chart [series]="lineChartOptions.series!" [chart]="lineChartOptions.chart!"
@@ -123,7 +125,7 @@
             </apx-chart>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- area chart -->
     </div>
     <div class="row clearfix">
@@ -331,7 +333,7 @@
               </div>
             </div>
             <div class="text-center">
-              <button mat-stroked-button [routerLink]="['/admin/courses/all-courses']" color="primary">View More</button>
+              <button mat-stroked-button [routerLink]="['/admin/courses/all-courses/course']" color="primary">View More</button>
             </div>
           </div>
         </div>
@@ -372,7 +374,7 @@
               </div>
             </div>
             <div class="text-center">
-              <button mat-stroked-button [routerLink]="['/admin/program/program-list']" color="primary">View More</button>
+              <button mat-stroked-button [routerLink]="['/admin/program/program-list/program']" color="primary">View More</button>
             </div>
           </div>
         </div>

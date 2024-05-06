@@ -20,6 +20,11 @@ import {
 } from 'ng-apexcharts';
 import { LecturesService } from '../lectures/lectures.service';
 import * as moment from 'moment';
+import { CourseService } from '@core/service/course.service';
+import { CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
+import { ClassService } from 'app/admin/schedule-class/class.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 export type avgLecChartOptions = {
   series: ApexAxisChartSeries;
@@ -88,10 +93,22 @@ export class DashboardComponent implements OnInit {
   series: number[] = [];
   currentProgramRecords: any;
   currentProgramWeekRecords: any;
+  upcomingCourses: any;
+  programList: any;
+  upcomingPrograms: any;
+  courseData: any;
+  coursePaginationModel!: Partial<CoursePaginationModel>;
+  mainCategories!: MainCategory[];
+  subCategories!: SubCategory[];
+  allSubCategories!: SubCategory[];
+  classesList: any;
 
   constructor(
     private instructorService: InstructorService,
-    public lecturesService: LecturesService
+    public lecturesService: LecturesService,
+    private courseService: CourseService,
+    private classService: ClassService,
+    private router: Router,
   ) {
     //constructor
   }
@@ -101,8 +118,10 @@ export class DashboardComponent implements OnInit {
     this.chart1();
     //this.chart2();
     this.instructorData();
+    this.getProgramList();
+    this.getAllCourse();
   }
-  getClassList() {
+  getClassList2() {
     let instructorId = localStorage.getItem('id');
     this.lecturesService.getClassListWithPagination(instructorId, '').subscribe(
       (response) => {
@@ -435,4 +454,116 @@ export class DashboardComponent implements OnInit {
       ],
     };
   }
+  getProgramList(filters?: any) {
+    this.courseService.getCourseProgram({status:'active'}).subscribe(
+      (response: any) => {
+        this.programList = response.docs.slice(0,5);
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();  
+        const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+        this.upcomingPrograms = this.programList.filter((item: { sessionStartDate: string | number | Date; }) => {
+          const sessionStartDate = new Date(item.sessionStartDate);
+          return (
+            sessionStartDate >= tomorrow 
+          );
+        });
+      },
+      (error) => {
+      }
+    );
+  }
+  getAllCourse(){
+    this.courseService.getAllCourses({status:'active'}).subscribe(response =>{
+     this.courseData = response.data.docs.slice(0,5);
+     const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();  
+        const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+        this.upcomingCourses = this.courseData.filter((item: { sessionStartDate: string | number | Date; }) => {
+          const sessionStartDate = new Date(item.sessionStartDate);
+          return (
+            sessionStartDate >= tomorrow 
+          );
+        });
+    })
+  }
+  getCoursesList() {
+    this.courseService.getAllCourses({status:'active'})
+      .subscribe(response => {
+        this.dataSource = response.data.docs;
+        this.mapCategories();
+      }, (error) => {
+      }
+      )
+  }
+  private mapCategories(): void {
+    this.coursePaginationModel.docs?.forEach((item) => {
+      item.main_category_text = this.mainCategories.find((x) => x.id === item.main_category)?.category_name;
+    });
+  
+    this.coursePaginationModel.docs?.forEach((item) => {
+      item.sub_category_text = this.allSubCategories.find((x) => x.id === item.sub_category)?.category_name;
+    });
+  
+  }
+  getClassList() {
+    this.classService
+      .getClassListWithPagination()
+      .subscribe(
+        (response) => {
+          
+          if (response.data) {
+            this.classesList = response.data.docs.slice(0,5).sort();
+          }
+       
+        },
+        (error) => {
+          console.log('error', error);
+        }
+      );
+  }
+  editClass(id:string){
+    this.router.navigate(['/admin/courses/create-class'], { queryParams: {id: id}});
+  }
+  delete(id: string) {
+    
+    this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
+      const matchingClasses = classList.docs.filter((classItem: any) => {
+        return classItem.courseId && classItem.courseId.id === id;
+      });
+      if (matchingClasses.length > 0) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Class have been registered. Cannot delete.',
+          icon: 'error',
+        });
+        return;
+      }
+
+      Swal.fire({
+        title: "Confirm Deletion",
+        text: "Are you sure you want to delete?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed){
+          this.classService.deleteClass(id).subscribe(() => {
+            Swal.fire({
+              title: 'Success',
+              text: 'Class deleted successfully.',
+              icon: 'success',
+            });
+            this.getClassList();
+          });
+        }
+      });
+     
+    });
+  }
+
 }

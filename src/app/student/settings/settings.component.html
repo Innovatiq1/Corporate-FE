@@ -750,7 +750,7 @@
       </div> -->
       <div class="row">
         <div class="col-md-8">
-          <label class="py-4 px-5">Banners</label>
+          <label class="py-4 px-5">Advertisement Banners</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
           <img src="assets/images/settings/banner.png" style="width: 80px; height: 80px;">
@@ -1371,17 +1371,17 @@
             <button id="saved" [routerLink]="['/student/settings/all-questions']"> Assessment Configuration </button>
           </div>
           <div class="col-md-5">
-            <button id="no-link" > Tutorial Configuration </button>
+            <button id="saved" (click)="openDialog(currencyDialog, 'currency')"> Currency</button>
           </div>
 
         </div>
         <div class="row px-4 ">
-          <div class="col-md-6 banner">
+          <!-- <div class="col-md-6 banner">
             <button id="no-link"> Managed Access Time </button>
           </div>
           <div class="col-md-5">
             <button id="no-link"> Control Storage Usage </button>
-          </div>
+          </div> -->
           <!-- <div class="col-md-5">
             <button id="no-link"> Managed Access Time </button>
           </div> -->
@@ -1391,22 +1391,22 @@
 
           </div>
                 </div> -->
-                <div class="row px-4 py-4">
+                <div class="row px-4">
                   <div class="col-md-6 banner">
-                    <button id="saved" (click)="openDialog(currencyDialog, 'currency')"> Currency</button>
+                    <button id="saved" (click)="openDialog(timerDialog, 'timer')"> Assessment Timer </button>
                   </div>
                   <div class="col-md-5">
-                    <button id="saved" (click)="openDialog(timerDialog, 'timer')"> Assessment Timer </button>
+                    <button id="saved" (click)="openDialog(assessmentDialog, 'assessment')"> Assessment Retake </button>
                   </div>
                 </div>
         
-                <div class="row px-4">
+                <div class="row px-4 py-4">
                   <div class="col-md-6 banner">
-                    <button id="saved" (click)="openDialog(assessmentDialog, 'assessment')"> Assessment Retake </button>
-                  </div>
-                  <div class="col-md-5">
                     <button id="saved" (click)="openDialog(examAssessmentDialog, 'examAssessment')">Exam Retake </button>
                   </div>
+                  <!-- <div class="col-md-5">
+                  
+                  </div> -->
                 </div>
       </div>
     </div>
@@ -1595,7 +1595,7 @@
       <mat-form-field>
         <mat-label>Set timer</mat-label>
         <mat-select [(ngModel)]="selectedTimer">
-          <mat-option *ngFor="let code of timerValues" [value]="code">{{code}}</mat-option>
+          <mat-option *ngFor="let code of timerValues" [value]="code">{{code}} Seconds</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

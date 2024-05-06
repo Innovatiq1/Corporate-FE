@@ -211,7 +211,7 @@
                     <div class="media-title font-16">Ship Safety Officer</div>
                   </div>
                   <div class="ms-auto">
-                    <div class="media-title font-16">23-03-2022 | 28-03-2022</div>
+                    <div class="media-title font-16">23-05-2024 | 28-05-2024</div>
                   </div>
                 </li>
                 <li class="lecture-list">
@@ -219,7 +219,7 @@
                     <div class="media-title font-16">Hose Handling Cranes</div>
                   </div>
                   <div class="ms-auto">
-                    <div class="media-title font-16">10-03-2022 | 15-03-2022</div>
+                    <div class="media-title font-16">16-05-2024 | 23-05-2024</div>
                   </div>
                 </li>
                 <li class="lecture-list">
@@ -227,7 +227,7 @@
                     <div class="media-title font-16">Cargo Operations</div>
                   </div>
                   <div class="ms-auto">
-                    <div class="media-title font-16">03-04-2022 | 10-04-2022</div>
+                    <div class="media-title font-16">16-08-2024 | 23-05-2024</div>
                   </div>
                 </li>
                 <li class="lecture-list">
@@ -235,7 +235,7 @@
                     <div class="media-title font-16">Forklift Driver Refresher</div>
                   </div>
                   <div class="ms-auto">
-                    <div class="media-title font-16">11-05-2022 | 15-05-2022</div>
+                    <div class="media-title font-16">11-05-2024 | 15-05-2024</div>
                   </div>
                 </li>
                 <li class="lecture-list">
@@ -243,7 +243,7 @@
                     <div class="media-title font-16">WSQ Operate Forklift</div>
                   </div>
                   <div class="ms-auto">
-                    <div class="media-title font-16">17-05-2022 | 21-05-2022</div>
+                    <div class="media-title font-16">17-05-2024 | 21-05-2024</div>
                   </div>
                 </li>
                 <li class="lecture-list">
@@ -251,7 +251,7 @@
                     <div class="media-title font-16">Developmental Safety</div>
                   </div>
                   <div class="ms-auto">
-                    <div class="media-title font-16">23-05-2022 | 28-05-2022</div>
+                    <div class="media-title font-16">23-05-2024 | 28-05-2024</div>
                   </div>
                 </li>
                 <li class="lecture-list">
@@ -259,7 +259,7 @@
                     <div class="media-title font-16">ICAO PANS-OPS Instrument</div>
                   </div>
                   <div class="ms-auto">
-                    <div class="media-title font-16">11-06-2022 | 15-06-2022</div>
+                    <div class="media-title font-16">11-06-2024 | 15-06-2024</div>
                   </div>
                 </li>
               </ul>
@@ -337,11 +337,11 @@
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Status </th>
-                    <th>Actions </th>
+                    <!-- <th>Actions </th> -->
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor ="let class of classesList " style="cursor: pointer;" (click)="editClass(class.id)">
+                  <tr *ngFor ="let class of classesList " style="cursor: pointer;" [routerLink]="['/admin/courses/view-class/',class.id]">
                     <!-- <td class="table-img">
                       <img src="{{class?.courseId?.image_link}}" alt="course">
                     </td> -->
@@ -351,7 +351,7 @@
                     <td>
                       <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
                     </td>
-                    <td>
+                    <!-- <td>
                       <button mat-button [matMenuTriggerFor]="menu">
                         <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
                         xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -373,7 +373,7 @@
                                 </button>
                               </mat-menu>
                     
-                    </td>
+                    </td> -->
                   </tr>
                  
                 </tbody>
