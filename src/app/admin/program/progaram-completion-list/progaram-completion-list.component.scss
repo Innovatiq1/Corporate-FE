@@ -9,8 +9,9 @@ svg {
     padding-right: 3px;
 }
 #issued{
-    width: 140px;
-    padding: 5px 13px 5px 11px;
+  width: 126px;
+  padding: 8px 3px 4px 9px;
+
   }
   #submit {
     width: 140px;
@@ -19,4 +20,12 @@ svg {
   }
   .mat-column-actions {
     width: 450px;
+}
+.center-cell {
+  display: flex;
+  align-items: center;
+}
+
+.center-icon {
+  margin: auto; 
 }

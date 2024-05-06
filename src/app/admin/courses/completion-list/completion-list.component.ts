@@ -23,6 +23,7 @@ import { StudentService } from '@core/service/student.service';
 import { dA } from '@fullcalendar/core/internal-common';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-completion-list',
@@ -41,6 +42,7 @@ export class CompletionListComponent {
     'Registered Date',
     'Completed Date',
     'actions',
+    'view',
   ];
 
   breadscrums = [
@@ -67,7 +69,7 @@ export class CompletionListComponent {
     document.getElementById('input')?.click();
   }
 
-  constructor(private classService: ClassService, public router: Router) {
+  constructor(private classService: ClassService, public router: Router, public dialog: MatDialog) {
     this.studentPaginationModel = {} as StudentPaginationModel;
   }
 
@@ -207,7 +209,29 @@ export class CompletionListComponent {
       }
     });
   }
+  openCertificateInNewTab(url: string) {
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
 
+  // openDialog(event: { title: any; extendedProps: { [x: string]: any; }; }) {
+  //   console.log("event",event);
+  //   this.dialog.open(EventDetailDialogComponent, {
+  //     width: '700px',
+  //     data: {
+  //       title: event.title,
+  //       sessionStartTime: event.extendedProps['sessionStartTime'],
+  //       sessionEndTime: event.extendedProps['sessionEndTime'],
+  //       courseCode: event.extendedProps['courseCode'],
+  //       status: event.extendedProps['status'],
+  //       sessionStartDate: event.extendedProps['sessionStartDate'],
+  //       sessionEndDate: event.extendedProps['sessionEndDate'],
+  //       deliveryType: event.extendedProps['deliveryType'],
+  //       instructorCost: event.extendedProps['instructorCost']
+  //     }
+  //   });
+  // }
   getSessions(element: { classId: { sessions: any[] } }) {
     const sessions = element.classId?.sessions?.map((_: any, index: number) => {
       const session: Session = {} as Session;

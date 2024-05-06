@@ -31,6 +31,7 @@ import { VideoPlayerComponent } from './course-kit/video-player/video-player.com
 import { ViewCourseKitComponent } from './course-kit/view-course-kit/view-course-kit.component';
 import { ExamScoresComponent } from './exam-scores/exam-scores.component';
 import { StudentPendingCoursesComponent } from './student-pending-courses/student-pending-courses.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 
@@ -55,7 +56,7 @@ import { StudentPendingCoursesComponent } from './student-pending-courses/studen
     ViewCourseKitComponent,
     CreateTemplateComponent,
     ExamScoresComponent,
-    StudentPendingCoursesComponent,
+    StudentPendingCoursesComponent
     
 
   ],
@@ -71,7 +72,8 @@ import { StudentPendingCoursesComponent } from './student-pending-courses/studen
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     CKEditorModule,
-    AngularEditorModule
+    AngularEditorModule,
+    PdfViewerModule,
   ],
 })
 export class CoursesModule {}

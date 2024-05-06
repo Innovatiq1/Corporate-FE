@@ -17,14 +17,18 @@
             </mat-form-field>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-            <label>Head Of Department<span class="mandatory">&nbsp;*</span></label>
+            <label>Head of Department<span class="mandatory">&nbsp;*</span></label>
             <mat-form-field class="example-full-width mb-3" appearance="outline">
               <mat-select (selectionChange)="onSelectChange1($event)" formControlName="hod" required>
                 <mat-option *ngFor="let item of users" [value]="item.id">
                   {{item.name}} {{item.last_name}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="departmentForm.get('hod')?.hasError('required')">
+                Select HOD
+              </mat-error>
              </mat-form-field>
+            
           </div>
         </div>
         <div class="row">
@@ -45,7 +49,7 @@
               <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>email</mat-icon>
               <mat-error
                 *ngIf="departmentForm.get('email')?.hasError('required') || departmentForm.get('email')?.touched">
-                Please enter a valid email address
+                Enter Email 
               </mat-error>
             </mat-form-field>
           </div>
@@ -58,7 +62,7 @@
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
               <mat-error *ngIf="departmentForm.get('departmentStartDate')?.hasError('required')">
-                Please select date
+                Select Department Start Date
               </mat-error>
             </mat-form-field>
           </div>
@@ -85,7 +89,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
             
             <button class="btn-space" type="button" mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
-            <button *ngIf="!editUrl" [disabled]="!departmentForm.valid " mat-raised-button
+            <button *ngIf="!editUrl"  mat-raised-button
               id="submit">Create</button>
           </div>
         </div>

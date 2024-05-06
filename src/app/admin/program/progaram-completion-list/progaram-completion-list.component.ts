@@ -10,6 +10,7 @@ import { jsPDF } from 'jspdf';
 import DomToImage from 'dom-to-image';
 import * as moment from 'moment';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-progaram-completion-list',
@@ -27,6 +28,7 @@ export class ProgaramCompletionListComponent {
     'Registered Date',
     'Completed Date',
     'actions',
+    'view'
   ];
   breadscrums = [
     {
@@ -47,7 +49,7 @@ export class ProgaramCompletionListComponent {
   pdfData: any = [];
 
 
-  constructor(private classService: ClassService, private utils: UtilsService) {
+  constructor(private classService: ClassService, private utils: UtilsService, public dialog: MatDialog) {
 
 
     this.studentPaginationModel = {} as StudentPaginationModel;
@@ -125,7 +127,6 @@ export class ProgaramCompletionListComponent {
 
 
   }
-
   performSearch() {
     if (this.searchTerm) {
       this.dataSource = this.dataSource?.filter((item: any) => {
@@ -226,7 +227,12 @@ export class ProgaramCompletionListComponent {
     return result;
   }
 
-
+  openCertificateInNewTab(url: string) {
+    console.log(url);
+    if (url) {
+      window.open(url, '_blank');
+    }
+  }
   updateCertificate(objpdf: any) {
 
     Swal.fire({

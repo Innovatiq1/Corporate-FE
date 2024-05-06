@@ -12,6 +12,9 @@
             class="form-control"
             placeholder="Enter New Role"
           />
+          <mat-error *ngIf="userTypeFormGroup.get('typeName')?.hasError('required')">
+            Enter Role
+          </mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -46,7 +49,7 @@
 </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <div class="m-auto">
+  <div class="m-right">
     <button class="btn-space" type="button" mat-raised-button color="warn"  (click)="onNoClick()">Cancel</button>
     <button
       mat-button
