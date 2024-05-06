@@ -10,6 +10,7 @@ import {
 import { LeaveRequest } from "../../leave-request.model";
 import { MAT_DATE_LOCALE } from "@angular/material/core";
 import { ClassService } from "app/admin/schedule-class/class.service";
+import Swal from "sweetalert2";
 
 export interface DialogData {
   id: number;
@@ -44,12 +45,12 @@ export class FormDialogComponent {
     this.action = data.action;
     if (this.action === "edit") {
       this.isEdit = true;
-      this.dialogTitle = "Edit Leave Request";
+      this.dialogTitle = "Edit Reschedule Request";
       this.leaveRequest = data.leaveRequest;
       this.id = data.leaveRequest.id
 
     } else {
-      this.dialogTitle = "New Leave Request";
+      this.dialogTitle = "New Reschedule Request";
       const blankObject = {} as LeaveRequest;
       this.leaveRequest = new LeaveRequest(blankObject);
     }
@@ -105,9 +106,21 @@ export class FormDialogComponent {
     }
     if (this.action === "edit") {
       this.leaveRequestService.updateLeaveRequest(payload, this.id);
+                  Swal.fire({
+              title: 'Successful',
+              text: "Reschedule request edited successfully",
+              icon: 'success',
+            });
+
 
     } else {
       this.leaveRequestService.addLeaveRequest(payload);
+      Swal.fire({
+        title: 'Successful',
+        text: "Reschedule requested successfully",
+        icon: 'success',
+      });
+
     }
   }
 }

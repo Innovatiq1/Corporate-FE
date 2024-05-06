@@ -74,10 +74,16 @@ const routes: Routes = [
         canActivate: [LoginGuard],
       },
       {
-        path: 'leave-request/student-leaves',
+        path: 'reschedule/courses',
         component: LeaveRequestComponent,
         canActivate: [LoginGuard],
       },
+      {
+        path: 'reschedule/programs',
+        component: LeaveRequestComponent,
+        canActivate: [LoginGuard],
+      },
+
       {
         path: 'settings/instructor-settings',
         component: InstructorSettingsComponent,

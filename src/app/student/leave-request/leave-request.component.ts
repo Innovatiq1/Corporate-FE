@@ -26,6 +26,7 @@ import {
 import { formatDate } from '@angular/common';
 import { LeaveService } from '@core/service/leave.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-leave-request',
@@ -54,20 +55,46 @@ export class LeaveRequestComponent
 
   breadscrums = [
     {
-      title: 'Leave Request',
-      items: ['Student'],
-      active: 'Leave Request',
+      title: 'Course',
+      items: ['Reschedule'],
+      active: 'Course',
     },
   ];
+  coursesUrl: boolean;
+  programsUrl: boolean;
 
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public leaveRequestService: LeaveRequestService,
     private snackBar: MatSnackBar,
-    private leaveService: LeaveService
+    private leaveService: LeaveService,
+    private router: Router
   ) {
     super();
+    let urlPath = this.router.url.split('/')
+    this.coursesUrl = urlPath.includes('courses');
+    this.programsUrl = urlPath.includes('programs');
+    if(this.coursesUrl){
+      this.breadscrums = [
+        {
+          title: 'Course',
+          items: ['Reschedule'],
+          active: 'Course',
+        },
+      ];
+    
+    } else if(this.programsUrl){
+      this.breadscrums = [
+        {
+          title: 'Program',
+          items: ['Reschedule'],
+          active: 'Program',
+        },
+      ];
+    
+    }
+
   }
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -97,33 +124,33 @@ export class LeaveRequestComponent
       direction: tempDirection,
     });
 
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to apply leave!',
-      icon: 'warning',
-      confirmButtonText: 'Yes',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed){
-        this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-          if (result === 1) {
-            // After dialog is closed we're doing frontend updates
-            // For add we're just pushing a new row inside DataService
-            this.exampleDatabase?.dataChange.value.unshift(
-              this.leaveRequestService.getDialogData()
-            );
-            this.refreshTable();
-            Swal.fire({
-              title: 'Successful',
-              text: "Leave applied successfully",
-              icon: 'success',
-            });
+    // Swal.fire({
+    //   title: 'Are you sure?',
+    //   text: 'Do you want to apply leave!',
+    //   icon: 'warning',
+    //   confirmButtonText: 'Yes',
+    //   showCancelButton: true,
+    //   cancelButtonColor: '#d33',
+    // }).then((result) => {
+    //   if (result.isConfirmed){
+    //     this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+    //       if (result === 1) {
+    //         // After dialog is closed we're doing frontend updates
+    //         // For add we're just pushing a new row inside DataService
+    //         this.exampleDatabase?.dataChange.value.unshift(
+    //           this.leaveRequestService.getDialogData()
+    //         );
+    //         this.refreshTable();
+    //         Swal.fire({
+    //           title: 'Successful',
+    //           text: "Leave applied successfully",
+    //           icon: 'success',
+    //         });
       
-          }
-        });
-      }
-    });
+    //       }
+    //     });
+    //   }
+    // });
    
   }
   editCall(row: LeaveRequest) {
@@ -141,34 +168,34 @@ export class LeaveRequestComponent
       },
       direction: tempDirection,
     });
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to update leave!',
-      icon: 'warning',
-      confirmButtonText: 'Yes',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed){
-        this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
-          if (result === 1) {
-            const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-              (x) => x.id === this.id
-            );
-            if (foundIndex != null && this.exampleDatabase) {
-              this.exampleDatabase.dataChange.value[foundIndex] =
-                this.leaveRequestService.getDialogData();
-              this.refreshTable();
-              Swal.fire({
-                title: 'Successful',
-                text: "Leave edited successfully",
-                icon: 'success',
-              });
-            }
-          }
-        });
-      }
-    });
+    // Swal.fire({
+    //   title: 'Are you sure?',
+    //   text: 'Do you want to update leave!',
+    //   icon: 'warning',
+    //   confirmButtonText: 'Yes',
+    //   showCancelButton: true,
+    //   cancelButtonColor: '#d33',
+    // }).then((result) => {
+    //   if (result.isConfirmed){
+    //     this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
+    //       if (result === 1) {
+    //         const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
+    //           (x) => x.id === this.id
+    //         );
+    //         if (foundIndex != null && this.exampleDatabase) {
+    //           this.exampleDatabase.dataChange.value[foundIndex] =
+    //             this.leaveRequestService.getDialogData();
+    //           this.refreshTable();
+    //           Swal.fire({
+    //             title: 'Successful',
+    //             text: "Leave edited successfully",
+    //             icon: 'success',
+    //           });
+    //         }
+    //       }
+    //     });
+    //   }
+    // });
     
   }
   deleteItem(row: LeaveRequest) {
