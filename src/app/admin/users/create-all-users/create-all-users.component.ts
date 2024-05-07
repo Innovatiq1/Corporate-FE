@@ -65,7 +65,6 @@ export class CreateAllUsersComponent {
       if (this.editUrl) {
         this.updateBlog(this.userForm.value);
       } else {
-        console.log('uuuuuu', this.userForm.value);
         this.addBlog(this.userForm.value);
       }
     } else {
