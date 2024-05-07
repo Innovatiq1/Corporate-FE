@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class AddQuestionsComponent implements OnInit {
   @Input() approved: boolean = false;
-  formType: string = '';
+  formType: string = 'Create';
 
   breadscrums = [
     {
