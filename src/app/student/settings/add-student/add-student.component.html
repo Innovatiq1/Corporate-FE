@@ -34,7 +34,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Last name')">
                   <label>Last name </label>
                   <mat-form-field
                     class="example-full-width mb-3"
@@ -43,8 +43,6 @@
                     <input matInput formControlName="last_name" />
                   </mat-form-field>
                 </div>
-                <!-- </div>
-              <div class="row"> -->
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Roll No <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
@@ -64,9 +62,6 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-
-                <!-- </div>
-              <div class="row"> -->
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Email<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
@@ -86,9 +81,6 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-
-                <!-- </div>
-              <div class="row"> -->
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Password <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
@@ -141,8 +133,6 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <!-- </div>
-              <div class="row"> -->
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Gender<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
@@ -182,6 +172,51 @@
                       {{
                         utils.getErrorMessage1(stdForm.get("mobile"), "mobile")
                       }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label
+                    >Education <span class="mandatory">&nbsp;*</span></label
+                  >
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <textarea matInput formControlName="education"></textarea>
+                    <mat-error
+                    *ngIf="
+                      stdForm.get('education')?.invalid &&
+                      stdForm.get('education')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(stdForm.get("education"), "edu")
+                    }}
+                  </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label
+                    >Date Of Birth<span class="mandatory">&nbsp;*</span>
+                  </label>
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <input
+                      matInput
+                      [matDatepicker]="picker"
+                      formControlName="dob"
+                    />
+
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="stdForm.get('dob')?.hasError('required')">
+                      Please select date
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -236,9 +271,17 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <!-- </div>
-              <div class="row"> -->
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Blood Group')">
+                  <label>Blood Group</label>
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <input matInput formControlName="blood_group" />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Parents name')">
                   <label>Parents name </label>
                   <mat-form-field
                     class="example-full-width mb-3"
@@ -252,7 +295,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Parents Mobile Number')">
                   <label>Parents Mobile Number </label>
                   <mat-form-field
                     class="example-full-width mb-3"
@@ -265,67 +308,7 @@
                     />
                   </mat-form-field>
                 </div>
-                <!-- </div>
-              <div class="row"> -->
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label
-                    >Date Of Birth<span class="mandatory">&nbsp;*</span>
-                  </label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <input
-                      matInput
-                      [matDatepicker]="picker"
-                      formControlName="dob"
-                    />
-
-                    <mat-datepicker-toggle
-                      matSuffix
-                      [for]="picker"
-                    ></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="stdForm.get('dob')?.hasError('required')">
-                      Please select date
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Blood Group</label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <input matInput formControlName="blood_group" />
-                  </mat-form-field>
-                </div>
-                <!-- </div>
-              <div class="row"> -->
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label
-                    >Education <span class="mandatory">&nbsp;*</span></label
-                  >
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <textarea matInput formControlName="education"></textarea>
-                    <mat-error
-                    *ngIf="
-                      stdForm.get('education')?.invalid &&
-                      stdForm.get('education')?.touched
-                    "
-                  >
-                    {{
-                      utils.getErrorMessage1(stdForm.get("education"), "edu")
-                    }}
-                  </mat-error>
-                  </mat-form-field>
-                </div>
-                <!-- </div>
-              <div class="row"> -->
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Address')">
                   <label>Address </label>
                   <mat-form-field
                     class="example-full-width mb-3"
@@ -337,7 +320,7 @@
                 <!-- </div>
 
               <div class="row"> -->
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Upload')">
                   <label>Upload</label>
                   <div class="file-drop-area">
                     <div class="file">
@@ -357,31 +340,7 @@
                       >
                     </div>
                   </div>
-                  <!-- <app-file-upload formControlName="image_link" (change)="onFileUpload($event)"></app-file-upload> -->
                 </div>
-                <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-5">
-                  <label>Upload <span class="mandatory">&nbsp;*</span></label>
-                  <div class="file-drop-area">
-                    <div class="file">
-                      <!-- <button mat-raised-button color="primary">Choose file</button> --
-                      <img src="/assets/add-image-icon.svg" />
-                      <h5>
-                        {{ fileName ? fileName : "Drag and Drop File Here" }}
-                      </h5>
-                      <input
-                        formControlName="avatar"
-                        (change)="onFileUpload($event)"
-                        class="file-input"
-                        type="file"
-                      />
-                    </div>
-                  </div>
-                  <!-- <div class="file-drop-area">
-                    <button mat-raised-button color="primary">Choose file</button>
-                    <span>{{fileName ? fileName : ' or drag and drop file here' }}</span>
-                    <input formControlName="avatar" (change)="onFileUpload($event)" class="file-input" type="file">
-                  </div> --
-                </div> -->
               </div>
               <div class="row" style="float: right">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">

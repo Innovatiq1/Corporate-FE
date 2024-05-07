@@ -24,7 +24,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Last name')">
                   <label>Last name</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="last_name">
@@ -193,7 +193,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Address')">
                   <label>Address</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <textarea matInput formControlName="address"></textarea>
@@ -201,7 +201,7 @@
                 </div>
               <!-- </div>
               <div class="row"> -->
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Education')">
                   <label>Education</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <textarea matInput formControlName="education"></textarea>
@@ -209,7 +209,7 @@
                 </div>
               <!-- </div>
               <div class="row"> -->
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-5">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-5" *ngIf="labelStatusCheck('Upload')">
                   <label>Upload</label>
                   <div class="file-drop-area">
                     <div class="file">

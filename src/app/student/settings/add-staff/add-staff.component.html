@@ -24,8 +24,8 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Last name<span class="mandatory">&nbsp;*</span></label>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Last name')">
+                  <label>Last name</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="last_name">
                   </mat-form-field>
@@ -42,9 +42,8 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-              </div>
+        
               <!-- Second row -->
-              <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>User Type<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -75,9 +74,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-              </div>
-              <!-- Third row -->
-              <div class="row">
+            
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Mobile<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -105,9 +102,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-              </div>
-              <!-- Fourth row -->
-              <div class="row">
+              
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Date Of Birth<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -127,27 +122,28 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Salary')">
                   <label>Salary</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="salary">
                   </mat-form-field>
                 </div>
-              </div>
+
            
-              <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <div class="row">
+             
+           
+        
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Address')">
+                  
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                       <label>Address</label>
                       <mat-form-field class="example-full-width" appearance="outline">
                         <textarea matInput formControlName="address"></textarea>
                       </mat-form-field>
                     </div>
-                  </div>
+                  
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"  *ngIf="labelStatusCheck('Upload')">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                       <label>Upload</label>
                       <div class="file-drop-area">
@@ -162,7 +158,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+             
 
 
 
