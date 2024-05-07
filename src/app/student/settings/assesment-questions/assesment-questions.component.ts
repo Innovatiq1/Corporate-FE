@@ -248,6 +248,18 @@ export class AssesmentQuestionsComponent {
     }
   }
 
+  update() {
+    if (this.questionFormTab3.valid) {
+      if (this.editUrl) {
+        this.updateAssesment();
+      } else {
+        this.save();
+      }
+    } else {
+      this.questionFormTab3.markAllAsTouched(); 
+    }
+  }
+
   save() {
     if (this.questionFormTab3.valid) {
       const payload = {
@@ -291,23 +303,8 @@ export class AssesmentQuestionsComponent {
     }
   }
 
-  createAssesment(payload: any) {
-    this.questionService.createQuestion(payload).subscribe(
-      (res: any) => {
-        Swal.fire({
-          title: 'Successful',
-          text: 'Question created successfully',
-          icon: 'success',
-        });
-        this.router.navigate(['/student/settings/all-questions']);
-      },
-      (err: any) => {
-        Swal.fire('Failed to create Question', 'error');
-      }
-    );
-  }
-
-  update() {
+  updateAssesment() {
+    console.log('triggering', this.questionFormTab3)
     if (this.questionFormTab3.valid) {
       const formData = this.questionFormTab3.value;
       const isNoAnswer = formData.questions.some(
@@ -347,6 +344,24 @@ export class AssesmentQuestionsComponent {
       });
     }
   }
+
+  createAssesment(payload: any) {
+    this.questionService.createQuestion(payload).subscribe(
+      (res: any) => {
+        Swal.fire({
+          title: 'Successful',
+          text: 'Question created successfully',
+          icon: 'success',
+        });
+        this.router.navigate(['/student/settings/all-questions']);
+      },
+      (err: any) => {
+        Swal.fire('Failed to create Question', 'error');
+      }
+    );
+  }
+
+
 
   approve() {
     const payload = {

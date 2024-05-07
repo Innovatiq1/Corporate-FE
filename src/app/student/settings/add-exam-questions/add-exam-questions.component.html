@@ -8,6 +8,9 @@
               <h6>Name <span class="mandatory">&nbsp;*</span></h6>
               <mat-form-field appearance="outline" style="width: 100%">
                 <input class="form-control" matInput type="text" formControlName="name" placeholder="Name" required />
+                <mat-error *ngIf="questionFormTab2.get('name')?.hasError('required')">
+                  Name cannot be empty
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="input-container">
@@ -60,6 +63,9 @@
                       Q{{ i + 1 }}.
                       <mat-form-field appearance="outline" style="width: 100%">
                         <input matInput type="text" formControlName="questionText" placeholder="Enter question" />
+                        <mat-error *ngIf="question.get('questionText')?.hasError('required')">
+                          Question cannot be empty
+                        </mat-error>
                       </mat-form-field>
                     </div>
                   </td>
@@ -73,6 +79,9 @@
                           style="width: 35px"></mat-checkbox>
                         <mat-form-field appearance="outline" style="width: 175px">
                           <input matInput type="text" formControlName="text" placeholder="Enter option" />
+                          <mat-error *ngIf="optionCtrl.get('text')?.hasError('required')">
+                            Option cannot be empty
+                          </mat-error>
                         </mat-form-field>
                       </ng-container>
                       <button mat-icon-button class="p-1" (click)="deleteQuestion(i)" type="button">
@@ -101,20 +110,16 @@
         <div class="col-md-2">
           <div class="d-flex justify-content-between">
 
-            <button *ngIf="!editUrl" class="btn-space" mat-raised-button color="primary" type="submit" id="submit"
-              (click)="save()">
-              Save
-            </button>
 
             <button *ngIf="editUrl && approved"  mat-raised-button color="success" type="submit" id="back" style="margin-left: -80px; margin-right: 10px;"
               (click)="approve()">
               Publish
             </button>
 
-            <button *ngIf="editUrl" class="btn-space" mat-raised-button style="background-color: #6777ef;color: white;" type="submit"
-              (click)="update()">
-              Update
-            </button>
+            <button class="btn-space" id="submit" mat-raised-button color="primary"  id="submit"
+            (click)="update()">
+            {{editUrl? 'Update': 'Create'}}
+          </button>
           </div>
         </div>
       </div>

@@ -311,6 +311,18 @@ export class AddExamQuestionsComponent {
 
   update() {
     if (this.questionFormTab2.valid) {
+      if (this.editUrl) {
+        this.updateExamAssessment();
+      } else {
+        this.save();
+      }
+    } else {
+      this.questionFormTab2.markAllAsTouched(); 
+    }
+  }
+
+  updateExamAssessment() {
+    if (this.questionFormTab2.valid) {
       const formData = this.questionFormTab2.value;
       const isNoAnswer = formData.questions.some(
         (q: any) => !q.options.some((c: any) => c.correct)
