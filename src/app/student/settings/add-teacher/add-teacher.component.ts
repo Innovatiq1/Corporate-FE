@@ -14,6 +14,7 @@ import { ConfirmedValidator } from '@shared/password.validator';
 import { CourseService } from '@core/service/course.service';
 import { StudentsService } from 'app/admin/students/students.service';
 import { UtilsService } from '@core/service/utils.service';
+import { FormService } from '@core/service/customization.service';
 
 @Component({
   selector: 'app-add-teacher',
@@ -36,11 +37,17 @@ export class AddTeacherComponent {
   ];
   files: any;
   fileName: any;
+  forms!: any[];
+
   constructor(private fb: UntypedFormBuilder,
     private instructor: InstructorService,
     private StudentService: StudentsService,
-    private courseService: CourseService,  public utils: UtilsService,
-    private router:Router) {
+    private courseService: CourseService,
+    public utils: UtilsService,
+    private router:Router,
+    private formService: FormService,
+
+   ) {
     this.proForm = this.fb.group({
       name: ['', [Validators.required,Validators.pattern(/[a-zA-Z0-9]+/),...this.utils.validators.noLeadingSpace]],
       last_name: [''],
@@ -153,7 +160,30 @@ export class AddTeacherComponent {
 
   ngOnInit(){
     this.getDepartment();
+    this.getForms();
   }
+
+  getForms(): void {
+    this.formService
+      .getAllForms('Instructor Creation Form')
+      .subscribe((forms) => {
+        this.forms = forms;
+      });
+  }
+
+  labelStatusCheck(labelName: string): any {
+    if (this.forms && this.forms.length > 0) {
+      const status = this.forms[0]?.labels?.filter(
+        (v: any) => v?.name === labelName
+      );
+      if (status && status.length > 0) {
+        return status[0]?.checked;
+      }
+    }
+    return false;
+  }
+
+  
   private createInstructor(userData: Users): void {
 
 

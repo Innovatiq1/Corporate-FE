@@ -13,6 +13,7 @@ import { ConfirmedValidator } from '@shared/password.validator';
 import { CourseService } from '@core/service/course.service';
 import { StudentsService } from 'app/admin/students/students.service';
 import { UtilsService } from '@core/service/utils.service';
+import { FormService } from '@core/service/customization.service';
 @Component({
   selector: 'app-add-student',
   templateUrl: './add-student.component.html',
@@ -37,13 +38,17 @@ export class AddStudentComponent {
   uploaded: any;
   dept: any;
   thumbnail: any;
+  forms!: any[];
+
   constructor(
     private fb: UntypedFormBuilder,
     private activatedRoute: ActivatedRoute,
     private StudentService: StudentsService,
     private router: Router,
     private courseService: CourseService,
-    public utils: UtilsService
+    public utils: UtilsService,
+    private formService: FormService,
+
   ) {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       console.log('id', params);
@@ -79,6 +84,28 @@ export class AddStudentComponent {
 
   ngOnInit(){
     this.getDepartment();
+    this.getForms();
+
+  }
+
+  getForms(): void {
+    this.formService
+      .getAllForms('Student Creation Form')
+      .subscribe((forms) => {
+        this.forms = forms;
+      });
+  }
+
+  labelStatusCheck(labelName: string): any {
+    if (this.forms && this.forms.length > 0) {
+      const status = this.forms[0]?.labels?.filter(
+        (v: any) => v?.name === labelName
+      );
+      if (status && status.length > 0) {
+        return status[0]?.checked;
+      }
+    }
+    return false;
   }
 
    onFileUpload(event:any) {

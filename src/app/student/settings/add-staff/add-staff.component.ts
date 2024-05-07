@@ -11,6 +11,7 @@ import { CertificateService } from '@core/service/certificate.service';
 import { CourseService } from '@core/service/course.service';
 import { StaffService } from 'app/admin/staff/staff.service';
 import { UtilsService } from '@core/service/utils.service';
+import { FormService } from '@core/service/customization.service';
 @Component({
   selector: 'app-add-staff',
   templateUrl: './add-staff.component.html',
@@ -37,6 +38,8 @@ export class AddStaffComponent {
   uploadedImage: any;
   uploaded: any;
   avatar: any;
+  forms!: any[];
+
   constructor(
     private fb: FormBuilder,
     private courseService: CourseService,
@@ -46,7 +49,9 @@ export class AddStaffComponent {
     public active: ActivatedRoute,
     public router: Router,public utils: UtilsService,
     private studentService: StudentService,
-    private certificateService: CertificateService
+    private certificateService: CertificateService,
+    private formService: FormService,
+
   ) {
     this.staffForm = this.fb.group(
       {
@@ -84,6 +89,10 @@ export class AddStaffComponent {
     });
 
     this.getUserTypeList();
+  }
+
+  ngOnInit() {
+    this.getForms();
   }
 
   patchData(_data: any) {
@@ -357,5 +366,25 @@ export class AddStaffComponent {
   }
   cancel() {
     window.history.back();
+  }
+
+  getForms(): void {
+    this.formService
+      .getAllForms('Staff Creation Form')
+      .subscribe((forms) => {
+        this.forms = forms;
+      });
+  }
+
+  labelStatusCheck(labelName: string): any {
+    if (this.forms && this.forms.length > 0) {
+      const status = this.forms[0]?.labels?.filter(
+        (v: any) => v?.name === labelName
+      );
+      if (status && status.length > 0) {
+        return status[0]?.checked;
+      }
+    }
+    return false;
   }
 }

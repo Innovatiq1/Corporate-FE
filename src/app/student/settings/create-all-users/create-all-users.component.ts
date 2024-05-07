@@ -24,6 +24,7 @@ import { CreateRoleTypeComponent } from 'app/admin/users/create-role-type/create
 import { LogoService } from 'app/student/settings/logo.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { DepartmentModalComponent } from '../../../admin/departments/department-modal/department-modal.component';
+import { FormService } from '@core/service/customization.service';
 
 @Component({
   selector: 'app-create-all-users',
@@ -50,6 +51,8 @@ export class CreateAllUsersComponent {
   thumbnail: any;
   avatar: any;
   dept: any;
+  forms!: any[];
+
 
   breadscrums = [
     {
@@ -401,7 +404,9 @@ export class CreateAllUsersComponent {
     private activeRoute: ActivatedRoute,
     private courseService: CourseService,
     public dialog: MatDialog,
-    private logoService: LogoService
+    private logoService: LogoService,
+    private formService: FormService,
+    
   ) {
     let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit-all-users');
@@ -462,7 +467,29 @@ export class CreateAllUsersComponent {
 
   ngOnInit() {
     this.getDepartment();
+    this.getForms();
   }
+
+  getForms(): void {
+    this.formService
+      .getAllForms('User Creation Form')
+      .subscribe((forms) => {
+        this.forms = forms;
+      });
+  }
+
+  labelStatusCheck(labelName: string): any {
+    if (this.forms && this.forms.length > 0) {
+      const status = this.forms[0]?.labels?.filter(
+        (v: any) => v?.name === labelName
+      );
+      if (status && status.length > 0) {
+        return status[0]?.checked;
+      }
+    }
+    return false;
+  }
+
 
   getUserTypeList(filters?: any, typeName?: any) {
     this.adminService.getUserTypeList({ allRows: true }).subscribe(

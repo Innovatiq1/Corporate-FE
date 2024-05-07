@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class AddQuestionsComponent implements OnInit {
   @Input() approved: boolean = false;
+  formType: string = '';
 
   breadscrums = [
     {
@@ -55,6 +56,10 @@ constructor(private formBuilder: FormBuilder,private router: Router, private que
   this.activatedRoute.queryParams.subscribe(params => {
     if (params['approved'] && params['approved'] === 'true') {
       this.approved = true; 
+    }
+
+    if (params['assessmentType']) {
+      this.formType = params['assessmentType'];
     }
   });
 }
