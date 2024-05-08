@@ -86,7 +86,7 @@ export class QuestionTestComponent implements OnInit, OnDestroy {
   handleRadioChange(index: any) {
     if(!this.isExamStarted){
       this.isExamStarted = true;
-      this.startTimer();
+      // this.startTimer();
     }
     this.answers[index].questionText = this.questionList[index]?.questionText;
     // this.answers[index].selectedOptionText = this.selectedOption;
