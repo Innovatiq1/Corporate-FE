@@ -35,9 +35,16 @@
                     <ul class="header-buttons-left ms-0">
                       <li class="tbl-search-box">
                         <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                        <input placeholder="Search" type="text" #filter class="browser-default search-field"
-                          aria-label="Search box" [(ngModel)]="searchTerm" class="browser-default search-field"  (keyup)="performSearch()">
-                      </li>
+                        <input 
+                        placeholder="Search"
+                        type="text"
+                        #filter
+                        class="browser-default search-field text"
+                        aria-label="Search box"
+                        [(ngModel)]="searchTerm" (input)="performSearch()"
+    
+                      />
+                          </li>
                     </ul>
                   </li>
                      <li class="tbl-header-btn">
