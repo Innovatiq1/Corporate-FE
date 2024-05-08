@@ -2,7 +2,11 @@
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
-      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      <app-breadcrumb
+        [title]="breadscrum.title"
+        [items]="breadscrum.items"
+        [active_item]="breadscrum.active"
+      >
       </app-breadcrumb>
     </div>
     <!-- Your content goes here  -->
@@ -12,27 +16,34 @@
           <div class="m-b-20">
             <div class="contact-grid">
               <div class="profile-header bg-dark">
-                <div class="user-name">{{aboutData?.name}}</div>
-                <div class="name-center">{{aboutData?.department}} Department</div>
+                <div class="user-name">{{ aboutData?.name }}</div>
+                <div class="name-center">
+                  {{ aboutData?.department }} Department
+                </div>
               </div>
-              <img src="{{aboutData?.avatar || 'assets/profile.png'}}" class="user-img" alt="">
+              <img
+                src="{{ aboutData?.avatar || 'assets/profile.png' }}"
+                class="user-img"
+                alt=""
+              />
               <p>
-               {{aboutData?.country_name}}
+                {{ aboutData?.country_name }}
               </p>
               <div>
                 <span class="phone">
-                  <i class="material-icons">phone</i>{{aboutData?.mobile}}</span>
+                  <i class="material-icons">phone</i
+                  >{{ aboutData?.mobile }}</span
+                >
               </div>
               <div class="row">
                 <div class="col-6">
-                  <h5 class="col-green">{{studentRegisteredPrograms}}</h5>
+                  <h5 class="col-green">{{ studentRegisteredPrograms }}</h5>
                   <b>Registered Programs</b>
                 </div>
                 <div class="col-6">
-                  <h5 class="col-green">{{studentRegisteredClasses}}</h5>
+                  <h5 class="col-green">{{ studentRegisteredClasses }}</h5>
                   <b>Registered Courses</b>
                 </div>
-              
               </div>
             </div>
           </div>
@@ -46,55 +57,91 @@
                 <ul class="list-group list-group-unbordered">
                   <li class="list-group-item">
                     <b>Gender </b>
-                    <div class="profile-desc-item float-end">{{aboutData?.gender | titlecase}}</div>
+                    <div class="profile-desc-item float-end">
+                      {{ aboutData?.gender | titlecase }}
+                    </div>
                   </li>
                   <li class="list-group-item">
                     <b>Date of birth</b>
-                    <div class="profile-desc-item float-end">{{aboutData?.dob | date}}</div>
+                    <div class="profile-desc-item float-end">
+                      {{ aboutData?.dob | date }}
+                    </div>
                   </li>
                   <li class="list-group-item">
                     <b>Department</b>
-                    <div class="profile-desc-item float-end">{{aboutData?.department}}</div>
+                    <div class="profile-desc-item float-end">
+                      {{ aboutData?.department }}
+                    </div>
                   </li>
                   <li class="list-group-item">
                     <b>Education</b>
-                    <div class="profile-desc-item float-end">{{aboutData?.education}}</div>
+                    <div class="profile-desc-item float-end">
+                      {{ aboutData?.education }}
+                    </div>
                   </li>
                   <li class="list-group-item">
-                    <b>Joining Date</b>
-                    <div class="profile-desc-item float-end">{{aboutData?.joiningDate | date}}</div>
+                    <b>Registration Date</b>
+                    <div class="profile-desc-item float-end">
+                      {{ aboutData?.joiningDate | date }}
+                    </div>
                   </li>
                 </ul>
               </div>
             </mat-tab>
           </mat-tab-group>
-          <button type="button" mat-raised-button color="warn" [routerLink]="['/student/settings/all-students']">Back to all Students</button>
+          <button
+            type="button"
+            mat-raised-button
+            color="warn"
+            [routerLink]="['/student/settings/all-students']"
+          >
+            Back to all Students
+          </button>
         </div>
       </div>
 
       <div class="col-lg-8 col-md-12">
         <div class="card">
           <div class="card-container">
-            <button class="icons" alt="Edit" mat-menu-item (click)="editCall(aboutData)" >
-                <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+            <button
+              class="icons"
+              alt="Edit"
+              mat-menu-item
+              (click)="editCall(aboutData)"
+            >
+              <app-feather-icons
+                [icon]="'edit'"
+                [class]="'tbl-fav-edit'"
+              ></app-feather-icons>
             </button>
-            <button class="icons" alt="Delete" mat-menu-item (click)="deleteItem(aboutData)">
-                <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+            <button
+              class="icons"
+              alt="Delete"
+              mat-menu-item
+              (click)="deleteItem(aboutData)"
+            >
+              <app-feather-icons
+                [icon]="'trash-2'"
+                [class]="'tbl-fav-delete'"
+              ></app-feather-icons>
             </button>
-            <div  *ngIf="!aboutData?.isLogin">
-              <button mat-menu-item (click)="confirmItem(aboutData)" class="align-items-center" >
-                <img class="img-w" src="/assets/approve.svg" alt="approve">
+            <div *ngIf="!aboutData?.isLogin">
+              <button
+                mat-menu-item
+                (click)="confirmItem(aboutData)"
+                class="align-items-center"
+              >
+                <img class="img-w" src="/assets/approve.svg" alt="approve" />
 
                 <!-- <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons> -->
-               
               </button>
             </div>
-        </div>
+          </div>
           <mat-tab-group>
             <mat-tab>
               <ng-template mat-tab-label>
                 <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
-               Details
+                Details
               </ng-template>
               <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="project_widget">
@@ -105,95 +152,109 @@
                     <div class="row">
                       <div class="col-md-3 col-6 b-r">
                         <strong>Full Name</strong>
-                        <br>
-                        <h6 class="text-muted">{{aboutData?.name + aboutData?.last_name}}</h6>
+                        <br />
+                        <h6 class="text-muted">
+                          {{ aboutData?.name + aboutData?.last_name }}
+                        </h6>
                       </div>
                       <div class="col-md-3 col-6 b-r">
                         <strong>Mobile</strong>
-                        <br>
-                        <h6 class="text-muted">{{aboutData?.mobile}}</h6>
+                        <br />
+                        <h6 class="text-muted">{{ aboutData?.mobile }}</h6>
                       </div>
                       <div class="col-md-3 col-6 b-r">
                         <strong>Email</strong>
-                        <br>
-                        <h6 class="text-muted">{{aboutData?.email}}</h6>
+                        <br />
+                        <h6 class="text-muted">{{ aboutData?.email }}</h6>
                       </div>
                       <div class="col-md-3 col-6">
                         <strong>Location</strong>
-                        <br>
-                        <h6 class="text-muted">{{aboutData?.country_name}}</h6>
+                        <br />
+                        <h6 class="text-muted">
+                          {{ aboutData?.country_name }}
+                        </h6>
                       </div>
                     </div>
-                    
                   </div>
                 </div>
               </div>
               <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
                 <!-- <div class="card" style="border-radius: 31px;"> -->
-                  <div class="header mt-3">
-                    <h2>Enrolled Programs</h2>
-                  </div>
-                  <div class="table-wrapper">
-                    <div class="table-responsive">
-                      <table class="table table-hover ">
-                        <thead>
-                          <tr>
-                            <th>Program Name</th>
-                            <th>Program Code</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr style="cursor: pointer;" *ngFor="let data of studentApprovedPrograms">
-                            <!-- <td class="table-img">
+                <div class="header mt-3">
+                  <h2>Enrolled Programs</h2>
+                </div>
+                <div class="table-wrapper">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Program Name</th>
+                          <th>Program Code</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          style="cursor: pointer"
+                          *ngFor="let data of studentApprovedPrograms"
+                        >
+                          <!-- <td class="table-img">
                               <img src="{{class?.courseId?.image_link}}" alt="course">
                             </td> -->
-                            <td>{{data?.classId?.courseId?.title | truncate: 30}}</td>
-                            <td>{{data?.classId?.courseId?.courseCode |truncate : 45}} </td>
-                           
-
-
-                          </tr>
-
-                        </tbody>
-                      </table>
-                    </div>
+                          <td>
+                            {{ data?.classId?.courseId?.title | truncate : 30 }}
+                          </td>
+                          <td>
+                            {{
+                              data?.classId?.courseId?.courseCode
+                                | truncate : 45
+                            }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
+                </div>
                 <!-- </div> -->
               </div>
               <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
                 <!-- <div class="card" style="border-radius: 31px;"> -->
-                  <div class="header mt-3">
-                    <h2>Enrolled Courses</h2>
-                  </div>
-                  <div class="table-wrapper">
-                    <div class="table-responsive">
-                      <table class="table table-hover ">
-                        <thead>
-                          <tr>
-                            <th>Course Name</th>
-                            <th>Course Code</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr style="cursor: pointer;" *ngFor="let data of studentApprovedClasses">
-                            <!-- <td class="table-img">
+                <div class="header mt-3">
+                  <h2>Enrolled Courses</h2>
+                </div>
+                <div class="table-wrapper">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Course Name</th>
+                          <th>Course Code</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          style="cursor: pointer"
+                          *ngFor="let data of studentApprovedClasses"
+                        >
+                          <!-- <td class="table-img">
                               <img src="{{class?.courseId?.image_link}}" alt="course">
                             </td> -->
-                            <td>{{data?.classId?.courseId?.title |truncate : 45}}</td>
-                            <td>{{data?.classId?.courseId?.courseCode |truncate : 45}} </td>
-                           
-
-
-                          </tr>
-
-                        </tbody>
-                      </table>
-                    </div>
+                          <td>
+                            {{ data?.classId?.courseId?.title | truncate : 45 }}
+                          </td>
+                          <td>
+                            {{
+                              data?.classId?.courseId?.courseCode
+                                | truncate : 45
+                            }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
+                </div>
                 <!-- </div> -->
               </div>
-             
-              
+
               <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="project_widget">
                   <div class="body">
@@ -208,16 +269,36 @@
                           <h2>Course Certificates</h2>
                         </div>
                       </div>
-                      </div>
-                  
+                    </div>
+
                     <div class="row">
-                      <div class="col-6" *ngFor="let data of studentCompletedPrograms">
-                        <a class="px-3" href="{{data.certifiacteUrl}}" target="_blank">{{data?.classId?.courseId?.title |truncate : 45}}</a>
+                      <div
+                        class="col-6"
+                        *ngFor="let data of studentCompletedPrograms"
+                      >
+                        <a
+                          class="px-3"
+                          href="{{ data.certifiacteUrl }}"
+                          target="_blank"
+                          >{{
+                            data?.classId?.courseId?.title | truncate : 45
+                          }}</a
+                        >
                       </div>
-                      <div class="col-6"  *ngFor="let data of studentCompletedClasses">
-                        <a class="px-3" href="{{data.certifiacteUrl}}" target="_blank">{{data?.classId?.courseId?.title |truncate : 45}}</a>
+                      <div
+                        class="col-6"
+                        *ngFor="let data of studentCompletedClasses"
+                      >
+                        <a
+                          class="px-3"
+                          href="{{ data.certifiacteUrl }}"
+                          target="_blank"
+                          >{{
+                            data?.classId?.courseId?.title | truncate : 45
+                          }}</a
+                        >
                       </div>
-                    </div> 
+                    </div>
 
                     <!-- <ul>
                       <li>1st Prise in Music competition</li>
