@@ -64,8 +64,7 @@ export class EditTeacherComponent {
       gender: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
       password: ['', [Validators.required]],
-      conformPassword: ['', [Validators.required]],
-      qualification: [''],
+      // conformPassword: ['', [Validators.required]],
       department: [''],
       address: [''],
       email: [

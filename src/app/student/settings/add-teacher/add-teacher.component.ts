@@ -54,8 +54,7 @@ export class AddTeacherComponent {
       gender: ['', [Validators.required]],
       mobile: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],
       password: ['', [Validators.required]],
-      conformPassword: ['', [Validators.required]],
-      qualification: ['',[Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.designation]],
+      // conformPassword: ['', [Validators.required]],
       department: [''],
       address: [''],
       email: [
@@ -67,7 +66,7 @@ export class AddTeacherComponent {
       education: ['', [Validators.required,...this.utils.validators.designation]],
       avatar: ['',],
     },{
-      validator: ConfirmedValidator('password', 'conformPassword')
+      // validator: ConfirmedValidator('password', 'conformPassword')
     });
   }
 
