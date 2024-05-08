@@ -71,7 +71,8 @@ export class AllUsersComponent {
 @ViewChild('filter', { static: true }) filter!: ElementRef;
 
 getBlogsList(filters?:any) {
-  this.alluserService.getUserList({...this.coursePaginationModel}).subscribe((response: any) => {
+  let filterText = this.searchTerm
+  this.alluserService.getUserList({filterText,...this.coursePaginationModel}).subscribe((response: any) => {
     this.dataSource = response.data.data;
     this.isLoading = false;
     this.ref.detectChanges();
@@ -163,19 +164,7 @@ removeSelectedRows() {
   
 }
 performSearch() {
-  if(this.searchTerm){
-  this.dataSource = this.dataSource?.filter((item: any) =>{
-    const searchList = (item.type + item.qualification + item.name).toLowerCase()
-    return searchList.indexOf(this.searchTerm.toLowerCase()) !== -1
-  }
-
-
-  // item.classId.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-  );
-  } else {
-    this.getBlogsList();
-
-  }
+this.getBlogsList()
 }
 edit(row:any){
 this.router.navigate(['/admin/users/edit-all-users'], {queryParams:{row:row}})
