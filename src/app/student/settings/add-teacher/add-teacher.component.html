@@ -9,7 +9,7 @@
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
-            <h2>Add Instructor</h2>
+            <h2>Create Instructor</h2>
 
           </div>
           <div class="body">
@@ -31,17 +31,17 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Designation<span class="mandatory">&nbsp;*</span></label>
+                  <label>Education<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput formControlName="qualification">
+                    <input matInput formControlName="education">
                     <mat-error
                     *ngIf="
-                      proForm.get('qualification')?.invalid &&
-                      proForm.get('qualification')?.touched
+                      proForm.get('education')?.invalid &&
+                      proForm.get('education')?.touched
                     "
                   >
                     {{
-                      utils.getErrorMessage1(proForm.get("qualification"), "designation")
+                      utils.getErrorMessage1(proForm.get("education"), "edu")
                     }}
                   </mat-error>
                   </mat-form-field>
@@ -105,7 +105,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="proForm.get('gender')?.hasError('required')">
-                     Select Gender
+                     Select gender
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -126,7 +126,29 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Select Department <span class="mandatory">&nbsp;*</span></label>
+                  <label>Date of Birth<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput [matDatepicker]="picker" formControlName="dob" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="proForm.get('dob')?.hasError('required')">
+                      Select date
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Registration Date<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput [matDatepicker]="picker1" formControlName="joiningDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                    <mat-error *ngIf="proForm.get('joiningDate')?.hasError('required')">
+                     Select date
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Department <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline">
@@ -136,7 +158,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="proForm.get('department')?.hasError('required')">
-                      Select Any Department
+                      Select department
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -168,32 +190,12 @@
               <!-- </div>
               <div class="row"> -->
              
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Joining Date<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput [matDatepicker]="picker1" formControlName="joiningDate" required>
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                    <mat-error *ngIf="proForm.get('joiningDate')?.hasError('required')">
-                      Please select date
-                    </mat-error>
-                  </mat-form-field>
-                </div>
+                
               <!-- </div>
               <div class="row"> -->
               
+               
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Date Of Birth<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput [matDatepicker]="picker" formControlName="dob" required>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="proForm.get('dob')?.hasError('required')">
-                      Please select date
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Address')">
                   <label>Address</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <textarea matInput formControlName="address"></textarea>
@@ -201,12 +203,12 @@
                 </div>
               <!-- </div>
               <div class="row"> -->
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Education')">
+                <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Education</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <textarea matInput formControlName="education"></textarea>
                   </mat-form-field>
-                </div>
+                </div> -->
               <!-- </div>
               <div class="row"> -->
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-5" *ngIf="labelStatusCheck('Upload')">
@@ -223,9 +225,9 @@
                     
                     </div>
                   </div>
-                  <mat-error *ngIf="submitClicked && proForm.get('avatar')?.hasError('required')">
+                  <!-- <mat-error *ngIf="submitClicked && proForm.get('avatar')?.hasError('required')">
                    Upload a file
-                  </mat-error>
+                  </mat-error> -->
                   <!-- <app-file-upload formControlName="image_link" (change)="onFileUpload($event)"></app-file-upload> -->
                 </div>
                

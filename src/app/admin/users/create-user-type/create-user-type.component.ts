@@ -65,7 +65,8 @@ export class CreateUserTypeComponent {
     private route: Router,
     public utils: UtilsService,
     private formBuilder: FormBuilder,
-    private logoService: LogoService, private userService: UserService,
+    private logoService: LogoService,
+    private userService: UserService
   ) {
     this.initMenuItemsV2();
     this.router.queryParams.subscribe((params) => {
@@ -95,12 +96,10 @@ export class CreateUserTypeComponent {
       .getUserTypeList({ ...this.coursePaginationModel })
       .subscribe(
         (response: any) => {
-
           this.typesList = response.docs;
-          this. data = this.typesList.find((id: any) => id._id === this.paramId);
+          this.data = this.typesList.find((id: any) => id._id === this.paramId);
           if (this.data) {
             this.type = this.data.typeName;
-            console.log(this.type,"+++++++++");
             this.userTypeFormGroup = this.fb.group({
               typeName: [
                 { value: this.type ? this.type : null, disabled: !this.isEdit },
@@ -115,7 +114,6 @@ export class CreateUserTypeComponent {
             this.data.menuItems.map((res: { id: any; checked: any }) => {
               this.changeMenuChecked(res.checked, res.id);
             });
-            console.log('data',this. data);
           }
 
           this.cd.detectChanges();
@@ -126,23 +124,15 @@ export class CreateUserTypeComponent {
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<MenuItemModel>(
-
-
       this.dataSourceArray
     );
-    console.log('this.dataSource: ', this.dataSource)
-
-    console.log('this.dataSource: ', this.dataSourceArray)
-
 
     this.getAllUserTypes();
   }
   onSubmitForm() {
-    console.log('this.isEdit', this.isEdit)
     this.submitted = true;
     this.userTypeFormGroup.markAllAsTouched();
     let formData = this.userTypeFormGroup.getRawValue();
-    console.log("selectedMenuItems",formData)
     this.isLoading = true;
     let selectedMenuItems = [];
     selectedMenuItems = this.getCheckedItems(this.dataSourceArray).filter(
@@ -169,7 +159,6 @@ export class CreateUserTypeComponent {
             );
             this.paramId = userTypes[0].id;
 
-            console.log('obj', obj)
             // this.adminService.updateUserType(obj, this.paramId).subscribe(
             //   (response: unknown) => {
             //     Swal.fire({
@@ -192,7 +181,6 @@ export class CreateUserTypeComponent {
             // );
           });
       } else if (this.isEdit === true) {
-        console.log('obg', obj);
         this.adminService.updateUserType(obj, this.paramId).subscribe(
           (response: unknown) => {
             this.isLoading = false;
@@ -232,7 +220,6 @@ export class CreateUserTypeComponent {
     this.logoService.getSidemenu().subscribe((response: any) => {
       let MENU_LIST = response.data.docs[0].MENU_LIST;
       const items = this.convertToMenuV2(MENU_LIST, this.userType?.menuItems);
-      console.log('items: ', items);
       items?.forEach((item, index) => {
         if (!this.dataSourceArray.some((v) => v.id === item.id))
           this.dataSourceArray.push(item);
@@ -241,7 +228,7 @@ export class CreateUserTypeComponent {
         this.dataSourceArray
       );
 
-      console.log(this.dataSourceArray)
+      console.log(this.dataSourceArray);
       if (this.isEdit) {
         this.getUserTypeList();
       }
@@ -250,8 +237,8 @@ export class CreateUserTypeComponent {
     });
   }
 
-  clicked(item:any) {
-    console.log('testinggg', item)
+  clicked(item: any) {
+    console.log('testinggg', item);
   }
 
   updateMenuItem(item: { checked: any; id: any; children: any[] }) {
@@ -342,7 +329,6 @@ export class CreateUserTypeComponent {
     this.cd.detectChanges();
   }
 
-
   // changeMenuCheckedSub(checked: boolean, id: number) {
   //   // Find the submenu item with the given ID
   //   const submenu = this.subMenuItems.find(item => item.id === id);
@@ -427,83 +413,79 @@ export class CreateUserTypeComponent {
     return this.userTypeFormGroup.get('subcategories') as FormArray;
   }
   changeInActive(dataDetails: UserType): void {
-    dataDetails.status = "inactive";
+    dataDetails.status = 'inactive';
     this.userService.updateUserType(dataDetails).subscribe(
       () => {
         Swal.fire({
-          title: "Success",
-          text: "Role moved to Inactive.",
-          icon: "success",
+          title: 'Success',
+          text: 'Role moved to Inactive.',
+          icon: 'success',
         });
         this.getUserTypeList({});
         window.history.back();
       },
       (error) => {
-        console.error(error, "result_error");
+        console.error(error, 'result_error');
         Swal.fire({
-          title: "Error",
-          text: "Role attached to  User. Cannot Make Inactive.",
-          icon: "error",
+          title: 'Error',
+          text: 'Role attached to  User. Cannot Make Inactive.',
+          icon: 'error',
         });
         this.getUserTypeList({});
-
       }
     );
   }
   changeActive(dataDetails: UserType): void {
-    dataDetails.status = "active";
+    dataDetails.status = 'active';
     this.userService.updateUserType(dataDetails).subscribe(
       () => {
         Swal.fire({
-          title: "Success",
-          text: "Role moved to Active.",
-          icon: "success",
+          title: 'Success',
+          text: 'Role moved to Active.',
+          icon: 'success',
         });
         this.getUserTypeList({});
         window.history.back();
       },
       (error) => {
-        console.error(error, "result_error");
+        console.error(error, 'result_error');
       }
     );
   }
   delete(data: any) {
-    console.log('data',data)
+    console.log('data', data);
 
     Swal.fire({
-      title: "Confirm Deletion",
-      text: "Are you sure you want to delete?",
-      icon: "warning",
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete?',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Delete",
-      cancelButtonText: "Cancel",
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel',
     }).then((result) => {
-      if (result.isConfirmed){
-        this.userService.deleteUserType(data.id,data.typeName).subscribe(() => {
-          Swal.fire({
-            title: 'Success',
-            text: 'Role deleted successfully.',
-            icon: 'success',
-          });
-          this.getUserTypeList({});
-          window.history.back();
-        },
-        (error) => {
-          Swal.fire({
-            title: "Error",
-            text: "Role attached to  User. Cannot Delete.",
-            icon: "error",
-          });
-          this.getUserTypeList({});
-
-        }
-);
+      if (result.isConfirmed) {
+        this.userService.deleteUserType(data.id, data.typeName).subscribe(
+          () => {
+            Swal.fire({
+              title: 'Success',
+              text: 'Role deleted successfully.',
+              icon: 'success',
+            });
+            this.getUserTypeList({});
+            window.history.back();
+          },
+          (error) => {
+            Swal.fire({
+              title: 'Error',
+              text: 'Role attached to  User. Cannot Delete.',
+              icon: 'error',
+            });
+            this.getUserTypeList({});
+          }
+        );
       }
     });
-
   }
-
-
 }
