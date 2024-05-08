@@ -323,7 +323,7 @@ export class UtilsService {
     ],
 
     'email':[
-      {type:'required', message: 'Enter Email Id'},
+      {type:'required', message: 'Enter Email'},
       {type:'pattern', message: 'Enter a Valid email'}
     ],
     'password':[

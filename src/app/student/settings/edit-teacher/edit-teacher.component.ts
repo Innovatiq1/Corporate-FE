@@ -26,7 +26,7 @@ export class EditTeacherComponent {
   breadscrums = [
     {
       title: 'Edit Instructor',
-      items: ['Users'],
+      items: ['Instructor'],
       active: 'Edit Instructor',
     },
   ];
@@ -70,7 +70,7 @@ export class EditTeacherComponent {
       address: [''],
       email: [
         '',
-        [Validators.required, Validators.email, Validators.minLength(5)],
+        [Validators.required, Validators.email, Validators.minLength(5), ...this.utils.validators.email],
       ],
       dob: ['', [Validators.required]],
       education: [''],
@@ -230,7 +230,7 @@ export class EditTeacherComponent {
           password: response?.course?.password,
           conformPassword: response?.course?.password,
           email: response?.course?.email,
-          qualification: response?.course?.qualification,
+          qualification: response?.course?.education,
           dob: response?.course?.dob,
           address: response?.course?.address,
           department: response?.course?.department,
@@ -242,7 +242,15 @@ export class EditTeacherComponent {
   }
   onFileUpload(event: any) {
     const file = event.target.files[0];
-
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/jfif'];
+    if (!allowedTypes.includes(file.type)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Selected format doesn't support. Only JPEG, PNG, JPG, and JFIF formats are allowed.!`,
+      });
+      return;
+    }
     this.thumbnail = file;
     const formData = new FormData();
     formData.append('files', this.thumbnail);
