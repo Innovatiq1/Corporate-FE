@@ -21,7 +21,7 @@ export class ViewUsersComponent implements OnInit{
     {
       title: 'Profile',
       items: ['Users'],
-      active: 'Profile',
+      active: 'Profildde',
     },
   ];
   aboutDataId:any;
@@ -91,11 +91,8 @@ export class ViewUsersComponent implements OnInit{
    
     this.userService.getUserById(this.currentId).subscribe((response: any) => {
       this.userType = response.data.data.type
-      console.log("id",this.currentId)
-      console.log("dddd",response.data)
   
     // this.userType = localStorage.getItem("user_type")
-console.log("vvvvv", this.userType)
     if(this.userType == 'Student'){
       console.log("student", this.userType)
     this.loadData();
@@ -187,9 +184,10 @@ editCall(row: Students) {
 
 deleteItem(row: any) {
   // this.id = row.id;
+  console.log("kjkj",row);
    Swal.fire({
      title: "Confirm Deletion",
-     text: "Are you sure you want to delete this Student?",
+     text: "Are you sure you want to delete this user?",
      icon: "warning",
      showCancelButton: true,
      confirmButtonColor: "#d33",
@@ -202,12 +200,12 @@ deleteItem(row: any) {
          () => {
            Swal.fire({
              title: "Deleted",
-             text: "Student deleted successfully",
+             text: "User deleted successfully",
              icon: "success",
            });
            //this.fetchCourseKits();
            this.loadData()
-           this.router.navigate(['/admin/users/all-students'])
+           this.router.navigate(['/student/settings/all-users'])
          },
          (error: { message: any; error: any; }) => {
            Swal.fire(
