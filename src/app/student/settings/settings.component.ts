@@ -266,8 +266,8 @@ export class SettingsComponent {
       this.breadscrums = [
         {
           title: 'Settings',
-          items: ['Integration'],
-          active: 'SMTP',
+          items: ['Customize'],
+          active: 'Email Templates',
         },
       ];
       this.isAdmin = true;

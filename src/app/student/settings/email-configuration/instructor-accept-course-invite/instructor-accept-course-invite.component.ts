@@ -20,7 +20,7 @@ export class InstructorAcceptCourseInviteComponent {
   itemData: any;
   pageContent: any;
   isLoading = false;
-  assignData = [];
+  assignData :any[] = [];
   isSubmitted=false;
 
   public Editor: any = ClassicEditor;
@@ -28,7 +28,7 @@ export class InstructorAcceptCourseInviteComponent {
   breadscrums = [
     {
       title: 'Forgot Mail',
-      items: ['Email Configuration'],
+      items: ['Email Templates'],
       active: 'Course Approval ',
     },
   ];
@@ -111,9 +111,9 @@ export class InstructorAcceptCourseInviteComponent {
   createForm() {
     this.emailTemplateForm = this.fb.group(
       {
-        email_subject: ['', [Validators.required]],
-        email_top_header_text: ['', [Validators.required]],
-        email_content: ['', [Validators.required]],
+        email_subject: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name] ],
+        email_top_header_text: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name]],
+        email_content: ['', [Validators.required,  ...this.utils.validators.noLeadingSpace, ...this.utils.validators.longDescription]],
 
       },
     );
@@ -141,7 +141,26 @@ removeTagsAndSpaces(inputString: string) {
 
   return stringWithoutNbsp;
 }
-  update(){
+update(){
+  if (this.emailTemplateForm.valid) {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to update template!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.updateTemplate();
+    }
+  });
+} else {
+  this.emailTemplateForm.markAllAsTouched(); 
+  this.isSubmitted = true;
+}
+}
+updateTemplate(){
     return new Promise<void>((resolve, reject) => {
       // this.markAllTouched();
       if (this.emailTemplateForm.valid) {
