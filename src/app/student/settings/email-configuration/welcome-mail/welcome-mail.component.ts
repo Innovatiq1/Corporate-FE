@@ -28,8 +28,8 @@ export class WelcomeMailComponent {
   breadscrums = [
     {
       title: 'Forgot Mail',
-      items: ['Email Configuration'],
-      active: 'Welcome Mail',
+      items: ['Email Templates'],
+      active: 'Welcome E-mail',
     },
   ];
   config: AngularEditorConfig = {
@@ -74,7 +74,6 @@ export class WelcomeMailComponent {
   toggle(_data: any){
     this.edit =!this.edit;
     // this._id = _data._id;
-    console.log(_data)
     this.emailTemplateForm.patchValue({
       email_subject: _data.email_subject,
       email_top_welcome_text:_data.email_top_welcome_text,
@@ -118,10 +117,10 @@ export class WelcomeMailComponent {
   createForm() {
     this.emailTemplateForm = this.fb.group(
       {
-        email_subject: ['', [Validators.required]],
-        email_top_welcome_text: ['', [Validators.required]],
-        email_content1: ['', [Validators.required]],
-        bottom_button_text: ['', [Validators.required]],
+        email_subject: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name] ],
+        email_top_welcome_text: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name]],
+        email_content1: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.longDescription]],
+        bottom_button_text: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name]],
       },
     );
     this.emailTemplateForm.valueChanges.subscribe(() => {
@@ -134,9 +133,27 @@ export class WelcomeMailComponent {
 
   }
   )}
+update(){
+  if (this.emailTemplateForm.valid) {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to update template!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.updateTemplate();
+    }
+  });
+} else {
+  this.emailTemplateForm.markAllAsTouched(); 
+  this.isSubmitted = true;
+}
+}
 
-
-  update(){
+  updateTemplate(){
   return new Promise<void>((resolve, reject) => {
         const obj = this.emailTemplateForm.value;
         obj.insertaction = 'welcome_mail_template';

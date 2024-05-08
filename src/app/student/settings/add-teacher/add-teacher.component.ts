@@ -31,8 +31,8 @@ export class AddTeacherComponent {
   breadscrums = [
     {
       title: 'Add Instructor',
-      items: ['Users'],
-      active: 'Add Instructor',
+      items: ['Instructor'],
+      active: 'Create Instructor',
     },
   ];
   files: any;
@@ -64,8 +64,8 @@ export class AddTeacherComponent {
       ],
       dob: ['', [Validators.required]],
       joiningDate:['', [Validators.required]],
-      education: [''],
-      avatar: ['',[Validators.required]],
+      education: ['', [Validators.required,...this.utils.validators.designation]],
+      avatar: ['',],
     },{
       validator: ConfirmedValidator('password', 'conformPassword')
     });
@@ -74,7 +74,15 @@ export class AddTeacherComponent {
 
   onFileUpload(event:any) {
     const file = event.target.files[0];
-  
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/jfif'];
+    if (!allowedTypes.includes(file.type)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Selected format doesn't support. Only JPEG, PNG, JPG, and JFIF formats are allowed.!`,
+      });
+      return;
+    }
     this.thumbnail = file
     const formData = new FormData();
     formData.append('files', this.thumbnail);

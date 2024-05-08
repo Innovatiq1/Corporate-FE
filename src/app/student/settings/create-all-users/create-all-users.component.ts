@@ -273,7 +273,7 @@ export class CreateAllUsersComponent {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Invalid file type. Only JPEG, PNG, JPG, and JFIF formats are allowed.!',
+        text: `Selected format doesn't support. Only JPEG, PNG, JPG, and JFIF formats are allowed.!`,
       });
       return;
     }

@@ -171,7 +171,6 @@ export class AddStudentComponent {
   //   }
   // }
   onSubmit() {
-    console.log('Form Value', this.stdForm.value);
     if (!this.stdForm.invalid) {
         const userData: Student = this.stdForm.value;
         
@@ -192,8 +191,8 @@ export class AddStudentComponent {
         }).then((result) => {
           if (result.isConfirmed){
             this.createInstructor(userData);
-            this.router.navigate(['/student/settings/all-students'])
-            Swal.close();
+            // this.router.navigate(['/student/settings/all-students'])
+            // Swal.close();
           }
         });
        

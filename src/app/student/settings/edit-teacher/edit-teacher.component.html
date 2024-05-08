@@ -33,7 +33,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Designation<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput formControlName="qualification">
+                    <input matInput formControlName="education">
                   </mat-form-field>
                 </div>
               <!-- </div>
@@ -45,9 +45,16 @@
                   <label>Email<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="email" required>
-                    <mat-error *ngIf="proForm.get('email')?.hasError('email') && proForm.get('email')?.touched">
-                      Please enter a valid email address
-                    </mat-error>
+                    <mat-error
+                    *ngIf="
+                      proForm.get('email')?.invalid &&
+                      proForm.get('email')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(proForm.get("email"), "email")
+                    }}
+                  </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
@@ -85,7 +92,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="proForm.get('gender')?.hasError('required')">
-                      Enter Gender
+                      Enter gender
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -96,7 +103,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Select Department <span class="mandatory">&nbsp;*</span></label>
+                  <label>Department <span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline">
@@ -106,7 +113,7 @@
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="proForm.get('department')?.hasError('required')">
-                      Select Any Department
+                      Select Department
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -114,13 +121,13 @@
               <div class="row"> -->
              
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Joining Date<span class="mandatory">&nbsp;*</span></label>
+                  <label>Registration Date<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput [matDatepicker]="picker1" formControlName="joiningDate" required>
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                     <mat-error *ngIf="proForm.get('joiningDate')?.hasError('required')">
-                      Please select date
+                     Select date
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -128,13 +135,13 @@
               <div class="row"> -->
              
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Date Of Birth<span class="mandatory">&nbsp;*</span></label>
+                  <label>Date of Birth<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput [matDatepicker]="picker" formControlName="dob" required>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                     <mat-error *ngIf="proForm.get('dob')?.hasError('required')">
-                      Please select date
+                      Select date
                     </mat-error>
                   </mat-form-field>
                 </div>
