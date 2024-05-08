@@ -16,7 +16,7 @@
                     <div class="body" *ngIf="edit">
                         <div class="row">
                             <div class="col-5">
-                                <h3>Program Registered</h3>
+                                <!-- <h3>Welcome Mail Template</h3> -->
                             </div>
                             <!-- <div class="col-4">
                                 <div class="search-bar">
@@ -28,12 +28,12 @@
                                 </div>
                             </div> -->
                         </div>
-                        <div class="row para mt-4" *ngFor="let listdata of assignData;  let j = index;" (click)="toggle(listdata)">
+                        <div class="row para" *ngFor="let listdata of assignData;  let j = index;" (click)="toggle(listdata)">
                             <div class="col-md-11" >
-                                <p>Program Registered</p>
-                    
+                                <p>{{listdata.email_subject}}</p>
+
                             </div>
-                            <div class="col-md-1">
+                            <!-- <div class="col-md-1">
                                 <button mat-button [matMenuTriggerFor]="menu">
                                     <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
                                     xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -50,7 +50,7 @@
                                               <span class="menu-text">Edit</span>
                                             </button>
                                           </mat-menu>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <form [formGroup]="emailTemplateForm" *ngFor="let listdata of assignData;">
@@ -61,6 +61,9 @@
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                                         <input matInput type="text" id="name" 
                                             class="form-control" placeholder="Welcome" formControlName="email_subject">
+                                            <mat-error *ngIf="emailTemplateForm.get('email_subject')?.invalid ||emailTemplateForm.get('email_subject')?.touched">
+                                                {{ utils.getErrorMessage1(emailTemplateForm.get('email_subject'), 'email_subject') }}
+                                              </mat-error> 
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -70,14 +73,21 @@
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                                         <input matInput type="text" id="name" 
                                         formControlName="email_top_header_text" class="form-control" placeholder="Course Invoice Details">
+                                        <mat-error *ngIf="emailTemplateForm.get('email_top_header_text')?.invalid ||emailTemplateForm.get('email_top_header_text')?.touched">
+                                            {{ utils.getErrorMessage1(emailTemplateForm.get('email_top_header_text'), 'email_top_header_text') }}
+                                          </mat-error> 
                                     </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2 mx-auto">
                                   <label>Text<span class="mandatory">&nbsp;*</span></label>
-                                  <!-- <ckeditor [editor]="Editor" id="editor" formControlName="email_content"></ckeditor> -->
-                                  <angular-editor placeholder="Enter text..." formControlName="email_content" [config]="config"></angular-editor>
+                                  <div [class.error]="emailTemplateForm.get('email_content')?.invalid &&(emailTemplateForm.get('email_content')?.touched || emailTemplateForm.get('email_content')?.pristine)">
+                                    <angular-editor placeholder="Enter text..." formControlName="email_content" [config]="config"></angular-editor>
+                                    <mat-error class="editor" *ngIf="emailTemplateForm.get('email_content')?.invalid && emailTemplateForm.get('email_content')?.touched">
+                                        {{ utils.getErrorMessage1(emailTemplateForm.get('email_content'), 'email_content') }}
+                                    </mat-error> 
+                                </div>
                                 </div>
           
                               </div>

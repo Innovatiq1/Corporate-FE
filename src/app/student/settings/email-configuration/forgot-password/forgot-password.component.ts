@@ -3,94 +3,165 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { EmailConfigService } from '@core/service/email-config.service';
+import { UtilsService } from '@core/service/utils.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent {
-  updatePsw:FormGroup ;
+  updatePsw: FormGroup;
   edit = true;
-  _id:number | undefined;
+  _id: number | undefined;
   public Editor: any = ClassicEditor;
-
-  assignData :any[] = [];
+  isSubmitted = false;
+  assignData: any[] = [];
   breadscrums = [
     {
       title: 'Forgot Mail',
-      items: ['Email Configuration'],
+      items: ['Email Templates'],
       active: 'Forgot Password',
     },
   ];
-  constructor(private router: Router,  private emailConfigurationService: EmailConfigService,  private formBuilder: FormBuilder,
-    ) {
-
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [['bold']],
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText',
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+  };
+  constructor(
+    private router: Router,
+    private emailConfigurationService: EmailConfigService,
+    private formBuilder: FormBuilder,
+    public utils: UtilsService
+  ) {
     this.updatePsw = this.formBuilder.group({
-      email_subject: ['',[Validators.required]],
-      email_content: ['',[Validators.required]],
-      email_template_type:[''],
-      bottom_button_text: [''],
+      email_subject: [
+        '',
+        [
+          Validators.required,
+          ...this.utils.validators.noLeadingSpace,
+          ...this.utils.validators.name,
+        ],
+      ],
+      email_content: [
+        '',
+        [
+          Validators.required,
+          ...this.utils.validators.noLeadingSpace,
+          ...this.utils.validators.longDescription,
+        ],
+      ],
+      // email_template_type:['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name]],
+      bottom_button_text: [
+        '',
+        [
+          Validators.required,
+          ...this.utils.validators.noLeadingSpace,
+          ...this.utils.validators.name,
+        ],
+      ],
     });
   }
-  
-  toggle(_data: any){
-    this.edit =!this.edit;
+
+  toggle(_data: any) {
+    this.edit = !this.edit;
     this._id = _data._id;
     this.updatePsw.patchValue({
       email_subject: _data.email_subject,
-      email_content:_data.email_content,
-      email_template_type:_data.email_template_type,
-      bottom_button_text: _data.bottom_button_text
+      email_content: _data.email_content,
+      // email_template_type:_data.email_template_type,
+      bottom_button_text: _data.bottom_button_text,
     });
+  }
 
+  back() {
+    this.edit = !this.edit;
   }
-  
-  back(){
-    this.edit =!this.edit;
-  }
-  ngOnInit(){
+  ngOnInit() {
     this.getForgetPasswordTemplate();
   }
-  
 
   getForgetPasswordTemplate() {
-    this.emailConfigurationService.getForgetPasswordTemplate().subscribe( response =>{
-      this.assignData  = response?.data?.docs[0]?.forget_password_template;
-     
-    }, error => {
-      // this.isLoading = false;
-    }); 
+    this.emailConfigurationService.getForgetPasswordTemplate().subscribe(
+      (response) => {
+        this.assignData = response?.data?.docs[0]?.forget_password_template;
+      },
+      (error) => {
+        // this.isLoading = false;
+      }
+    );
+  }
+  update() {
+    if (this.updatePsw.valid) {
+      // if(!this.edit){
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to update template!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.updateTemplate();
+        }
+      });
+      // }
+    } else {
+      this.updatePsw.markAllAsTouched();
+      this.isSubmitted = true;
+    }
   }
 
-
- 
-  update() {
+  updateTemplate() {
     return new Promise<void>((resolve, reject) => {
-          const obj = this.updatePsw.value;
-          obj.insertaction = 'forget_password_template';
-          this.emailConfigurationService.updateForgetPasswordTemplate(obj, this._id).subscribe(
-            (res) => {
-              Swal.fire({
-                title: 'Successful',
-                text: 'Update data Succesfully',
-                icon: 'success',
-              });
-              this.getForgetPasswordTemplate(); 
-             this.back();
-              resolve();
-            },
-            (err) => {
-              Swal.fire(
-                'Failed to Update',
-                'error'
-              );
-              reject();
-            },
-            () => {
-              reject();
+      const obj = this.updatePsw.value;
+      obj.insertaction = 'forget_password_template';
+      this.emailConfigurationService
+        .updateForgetPasswordTemplate(obj, this._id)
+        .subscribe(
+          (res) => {
+            Swal.fire({
+              title: 'Successful',
+              text: 'Update data Succesfully',
+              icon: 'success',
             });
-        });
-      }
+            this.getForgetPasswordTemplate();
+            this.back();
+            resolve();
+          },
+          (err) => {
+            Swal.fire('Failed to Update', 'error');
+            reject();
+          },
+          () => {
+            reject();
+          }
+        );
+    });
+  }
 }

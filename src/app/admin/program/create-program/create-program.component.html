@@ -311,25 +311,25 @@
                             formControlName="image_link"
                             (change)="onFileUpload($event)"
                             accept="image/*"
-                            class="input"
+                            class="file-input"
                           />
                           Choose file
                         </button>
-                        <div class="file-msg">
-                          <h5>
+                        <span class="file-msg">
+                          <h6>
                             {{
                               uploadedImage
                                 ? uploadedImage
                                 : "Drag and Drop File Here"
                             }}
-                          </h5>
-                        </div>
-                        <input
+                          </h6>
+                        </span>
+                        <!-- <input
                           formControlName="image_link"
                           (change)="onFileUpload($event)"
                           class="file-input"
                           type="file"
-                        />
+                        /> -->
                       </div>
                     </div>
                   </div>
