@@ -441,7 +441,7 @@ export class CreateAllUsersComponent {
         Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/),
       ]),
       password: new FormControl('', [Validators.required]),
-      re_passwords: new FormControl('', [Validators.required]),
+      re_passwords: new FormControl('', []),
       education: new FormControl('', [
         Validators.required,
         Validators.minLength(2),

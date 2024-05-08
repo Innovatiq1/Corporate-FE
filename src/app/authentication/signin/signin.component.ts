@@ -110,7 +110,7 @@ export class SigninComponent
               this.router.navigate(['/admin/users/all-students']);
             } 
              else {
-              this.router.navigate(['/authentication/page404']);
+              this.router.navigate(['/dashboard/student-analytics']);
             }
 
             this.loading = false;

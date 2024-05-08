@@ -59,24 +59,6 @@
                                          </mat-error>
                                   </mat-form-field>
                               </div>
-                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                                  <label>Password <span class="mandatory">&nbsp;*</span></label>
-                                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
-                                      <mat-error *ngIf="userForm.get('password')?.hasError('required')">
-                                          Enter Password
-                                      </mat-error>
-                                  </mat-form-field>
-                              </div>
-                                  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                                      <label>Re-Enter Password <span class="mandatory">&nbsp;*</span></label>
-                                      <mat-form-field class="example-full-width mb-3" appearance="outline">
-                                          <input matInput [type]="hide ? 'password' : 'text'" formControlName="re_passwords" required>
-                                          <mat-error *ngIf="userForm.get('re_passwords')?.hasError('required')">
-                                            Re-Enter Password
-                                          </mat-error>
-                                      </mat-form-field>
-                                  </div>
                                   <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                                     <label>Qualification <span class="mandatory">&nbsp;*</span></label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -236,6 +218,25 @@
                                       </mat-error>
                                   </mat-form-field>
                               </div>
+                              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                <label>Password <span class="mandatory">&nbsp;*</span></label>
+                                <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                                    <mat-error *ngIf="userForm.get('password')?.hasError('required')">
+                                        Enter Password
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                                <!-- <div *ngIf = "!editUrl" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                    <label>Re-Enter Password <span class="mandatory">&nbsp;*</span></label>
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="re_passwords" required>
+                                        <mat-error *ngIf="userForm.get('re_passwords')?.hasError('required')">
+                                          Re-Enter Password
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div> -->
+                             
                           
                            
 
