@@ -104,7 +104,7 @@
                                   matInput
                                   formControlName="mobile"
                                   type="number"
-                                  required
+                                  
                                 />
                                 <mat-error *ngIf="userForm.get('mobile')?.invalid ||userForm.get('mobile')?.touched">
                                   {{ utils.getErrorMessage1(userForm.get('mobile'), 'mobile') }}

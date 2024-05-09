@@ -21,7 +21,7 @@ export class ViewUsersComponent implements OnInit{
     {
       title: 'Profile',
       items: ['Users'],
-      active: 'Profildde',
+      active: 'Profile',
     },
   ];
   aboutDataId:any;
@@ -204,8 +204,8 @@ deleteItem(row: any) {
              icon: "success",
            });
            //this.fetchCourseKits();
-           this.loadData()
            this.router.navigate(['/student/settings/all-users'])
+           this.loadData()
          },
          (error: { message: any; error: any; }) => {
            Swal.fire(
