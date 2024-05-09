@@ -1,9 +1,12 @@
-
 <section class="content">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
-      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      <app-breadcrumb
+        [title]="breadscrum.title"
+        [items]="breadscrum.items"
+        [active_item]="breadscrum.active"
+      >
       </app-breadcrumb>
     </div>
     <div class="row">
@@ -27,22 +30,36 @@
                 <li>
                   <ul class="header-buttons-left ms-0">
                     <li class="tbl-search-box">
-                      <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                      <input placeholder="Search" type="text" #filter class="browser-default search-field" [(ngModel)]="searchTerm" (input)="performSearch()"
-                        aria-label="Search box">
+                      <label for="search-input"
+                        ><i class="material-icons search-icon">search</i></label
+                      >
+                      <input
+                        placeholder="Search"
+                        type="text"
+                        #filter
+                        class="browser-default search-field"
+                        [(ngModel)]="searchTerm"
+                        (input)="performSearch()"
+                        aria-label="Search box"
+                      />
                     </li>
                   </ul>
                 </li>
-                 <li class="tbl-header-btn">
+                <li class="tbl-header-btn">
                   <div class="m-l-10" matTooltip="ADD">
-                    <button mat-raised-button [routerLink]="['/admin/courses/create-class']"
-                    id="submit">Create</button>
+                    <button
+                      mat-raised-button
+                      [routerLink]="['/admin/courses/create-class']"
+                      id="submit"
+                    >
+                      Create
+                    </button>
                     <!-- <button mat-mini-fab color="primary" [routerLink]="['/admin/courses/create-class']">
                       <mat-icon class="col-white">add</mat-icon>
                     </button> -->
                   </div>
                 </li>
-               <!-- <li class="tbl-header-btn">
+                <!-- <li class="tbl-header-btn">
                   <div class="m-l-10" matTooltip="REFRESH">
                     <button mat-mini-fab color="primary" >
                       <mat-icon class="col-white">refresh</mat-icon>
@@ -50,21 +67,36 @@
                   </div>
                 </li> -->
                 <li class="tbl-header-btn">
-                  <div class="m-l-10" [hidden]=!selection.hasValue() matTooltip="DELETE">
-                    <button mat-mini-fab color="warn" (click)="removeSelectedRows()">
-                      <mat-icon class="col-white">delete
-                      </mat-icon>
+                  <div
+                    class="m-l-10"
+                    [hidden]="!selection.hasValue()"
+                    matTooltip="DELETE"
+                  >
+                    <button
+                      mat-mini-fab
+                      color="warn"
+                      (click)="removeSelectedRows()"
+                    >
+                      <mat-icon class="col-white">delete </mat-icon>
                     </button>
                   </div>
                 </li>
                 <li>
-                  <div class="export-button m-l-10" matTooltip="XLSX"  (click)="exportExcel()">
+                  <div
+                    class="export-button m-l-10"
+                    matTooltip="XLSX"
+                    (click)="exportExcel()"
+                  >
                     <img src="assets/excel.svg" alt="" />
                   </div>
                 </li>
                 <li>
                   <div class="export-button m-l-10" matTooltip="PDF">
-                    <img src="assets/pdf (1).svg" alt="" (click)="generatePdf()" />
+                    <img
+                      src="assets/pdf (1).svg"
+                      alt=""
+                      (click)="generatePdf()"
+                    />
                   </div>
                 </li>
               </ul>
@@ -72,7 +104,12 @@
           </div>
           <div class="body overflow-auto">
             <div class="responsive_table">
-              <table mat-table matSort [dataSource]="dataSource" class="mat-cell advance-table">
+              <table
+                mat-table
+                matSort
+                [dataSource]="dataSource"
+                class="mat-cell advance-table"
+              >
                 <!-- Checkbox Column -->
                 <!-- Checkbox Column -->
                 <!-- <ng-container matColumnDef="select">
@@ -89,7 +126,7 @@
                   </mat-cell>
                 </ng-container> -->
                 <!-- ID Column -->
-                
+
                 <!-- <ng-container matColumnDef="Instructor">
                   <mat-header-cell mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'"> Instructor
                   </mat-header-cell>
@@ -103,48 +140,123 @@
                     <span class="mobile-label">Instructor:</span></mat-cell>
                 </ng-container> -->
                 <ng-container matColumnDef="Course">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Course</mat-header-cell>
-                  <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/courses/view-class/',row.id]">
-                    <span class="mobile-label">Course:</span> {{row.courseId?.title}}</mat-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    >Course
+                  </mat-header-cell>
+                  <mat-cell
+                    *matCellDef="let row"
+                    class="name"
+                    [routerLink]="['/admin/courses/view-class/', row.id]"
+                  >
+                    <span class="mobile-label">Course:</span>
+                    {{ row.courseId?.title }}</mat-cell
+                  >
                 </ng-container>
                 <ng-container matColumnDef="Code">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Course Code</mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-class/',row.id]">
-                    <span class="mobile-label">Course Code:</span> {{row.courseId?.courseCode}}</mat-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    >Course Code</mat-header-cell
+                  >
+                  <mat-cell
+                    *matCellDef="let row"
+                    [routerLink]="['/admin/courses/view-class/', row.id]"
+                  >
+                    <span class="mobile-label">Course Code:</span>
+                    {{ row.courseId?.courseCode }}</mat-cell
+                  >
                 </ng-container>
                 <ng-container matColumnDef="Price">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Amount</mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-class/',row.id]">
-                    <span class="mobile-label">Amount:</span>$ {{row.instructorCost}}</mat-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    >Amount</mat-header-cell
+                  >
+                  <mat-cell
+                    *matCellDef="let row"
+                    [routerLink]="['/admin/courses/view-class/', row.id]"
+                  >
+                    <span class="mobile-label">Amount:</span>$
+                    {{ row.instructorCost }}</mat-cell
+                  >
                 </ng-container>
                 <ng-container matColumnDef="Department">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-class/',row.id]">
-                    <span class="mobile-label">Department:</span> {{row.department}}</mat-cell>
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    >Department</mat-header-cell
+                  >
+                  <mat-cell
+                    *matCellDef="let row"
+                    [routerLink]="['/admin/courses/view-class/', row.id]"
+                  >
+                    <span class="mobile-label">Department:</span>
+                    {{ row.department }}</mat-cell
+                  >
                 </ng-container>
                 <!-- Start date -->
                 <ng-container matColumnDef="Start Date">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    >Start Date
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="['/admin/courses/view-class/',row.id]">
-                    <span class="mobile-label">Start:</span>{{row.sessions[0]?.sessionStartDate | date }} </mat-cell>
+                  <mat-cell
+                    *matCellDef="let row"
+                    [routerLink]="['/admin/courses/view-class/', row.id]"
+                  >
+                    <span class="mobile-label">Start:</span
+                    >{{ row.sessions[0]?.sessionStartDate | date }}
+                  </mat-cell>
                 </ng-container>
                 <!-- Enddate -->
                 <ng-container matColumnDef="End Date">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    >End Date
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row"  [routerLink]="['/admin/courses/view-class/',row.id]">
-                    <span class="mobile-label">End:</span>{{row.sessions[0]?.sessionEndDate | date }} </mat-cell>
+                  <mat-cell
+                    *matCellDef="let row"
+                    [routerLink]="['/admin/courses/view-class/', row.id]"
+                  >
+                    <span class="mobile-label">End:</span
+                    >{{ row.sessions[0]?.sessionEndDate | date }}
+                  </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="Class">
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Class</mat-header-cell>
-                  <mat-cell *matCellDef="let row" [ngClass]="getStatusClass(row.classDeliveryType)" [routerLink]="['/admin/courses/view-class/',row.id]">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    >Class</mat-header-cell
+                  >
+                  <mat-cell
+                    *matCellDef="let row"
+                    [ngClass]="getStatusClass(row.classDeliveryType)"
+                    [routerLink]="['/admin/courses/view-class/', row.id]"
+                  >
                     <span class="mobile-label">Class:</span>
                     <div class="status-container">
                       <span class="status-dot"></span>
-                      <span class="status-text">{{row.classDeliveryType | titlecase}}</span>
-                    </div> </mat-cell>
+                      <span class="status-text">{{
+                        row.classDeliveryType | titlecase
+                      }}</span>
+                    </div>
+                  </mat-cell>
                 </ng-container>
+                <ng-container matColumnDef="Minimum Students">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    >Minimum Students
+                  </mat-header-cell>
+                  <mat-cell
+                    *matCellDef="let row"
+                    [routerLink]="['/admin/courses/view-class/', row.id]"
+                  >
+                    <span class="mobile-label">Minimum:</span>
+                    {{ row.minimumEnrollment }}</mat-cell
+                  >
+                </ng-container>
+                <ng-container matColumnDef="Maximum Students">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    >Maximum Students
+                  </mat-header-cell>
+                  <mat-cell
+                    *matCellDef="let row"
+                    [routerLink]="['/admin/courses/view-class/', row.id]"
+                  >
+                    <span class="mobile-label">Maximum:</span>
+                    {{ row.maximumEnrollment }}</mat-cell
+                  >
+                </ng-container>
+
                 <!-- actions -->
                 <!-- <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
@@ -187,21 +299,35 @@
                             </mat-menu>
                   </mat-cell>
                 </ng-container> -->
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-header-row
+                  *matHeaderRowDef="displayedColumns"
+                ></mat-header-row>
                 <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
-                <mat-row *matRowDef="let row; columns: displayedColumns;"
-                  [style.cursor]="'pointer'" matRipple>
+                <mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                  [style.cursor]="'pointer'"
+                  matRipple
+                >
                 </mat-row>
               </table>
               <!-- Loading spinner -->
-              <div  class="tbl-spinner">
-                <mat-progress-spinner *ngIf="isLoading" color="primary" [diameter]="40" mode="indeterminate">
+              <div class="tbl-spinner">
+                <mat-progress-spinner
+                  *ngIf="isLoading"
+                  color="primary"
+                  [diameter]="40"
+                  mode="indeterminate"
+                >
                 </mat-progress-spinner>
               </div>
-              <mat-paginator #paginator [length]="totalItems" (page)="pageSizeChange($event)"
-              [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">
-          </mat-paginator>
-
+              <mat-paginator
+                #paginator
+                [length]="totalItems"
+                (page)="pageSizeChange($event)"
+                [pageSizeOptions]="pageSizeArr"
+                aria-label="select pagination option"
+              >
+              </mat-paginator>
             </div>
           </div>
         </div>

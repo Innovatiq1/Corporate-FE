@@ -1,19 +1,22 @@
 <section class="content">
-    <div class="content-block">
-      <!-- <div class="block-header" *ngFor="let breadscrum of breadscrums">
+  <div class="content-block">
+    <!-- <div class="block-header" *ngFor="let breadscrum of breadscrums">
         <app-breadcrumb
           [title]="breadscrum.title"
           [active_item]="breadscrum.active"
         >
         </app-breadcrumb>
       </div> -->
-      <div class="block-header" *ngFor="let breadscrum of breadscrums">
-        <!-- breadcrumb -->
-       <app-breadcrumb [items]="breadscrum.items" [active_item]="breadscrum.active">
-       </app-breadcrumb> 
-     </div>
-  
-      <!-- <div *ngIf="action !== 'edit'">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb
+        [items]="breadscrum.items"
+        [active_item]="breadscrum.active"
+      >
+      </app-breadcrumb>
+    </div>
+
+    <!-- <div *ngIf="action !== 'edit'">
         <div class="block-header" *ngFor="let breadscrum of breadscrums">
            breadcrumb
           <app-breadcrumb
@@ -23,47 +26,47 @@
           </app-breadcrumb>
         </div>
       </div> -->
-  
-      <div class="row clearfix">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div class="card">
-            <div class="header">
-              <h2 class="text-center">
-                {{ action === "edit" ? "Edit" : "New" }} Budget Notification
-              </h2>
-            </div>
-            <div class="body">
-              <form class="m-4" *ngIf="requestForm" [formGroup]="requestForm">
-                <div class="row">
-                  <!-- Budget -->
-                  <div class="col-lg-4">
-                    <label>Training Budget </label>
-                    <mat-form-field
-                      class="example-full-width mb-3"
-                      appearance="outline"
-                    >
-                      <input matInput required formControlName="trainingBudget" />
-                    </mat-form-field>
-                  </div>
-                  <div class="col-lg-4">
-                    <!-- Year -->
-                    <label>Year</label>
-                    <mat-form-field
-                      class="example-full-width mb-3"
-                      appearance="outline"
-                    >
-                      <mat-select formControlName="year" required>
-                        <mat-option [value]="'2024'"> 2024 </mat-option>
-                        <mat-option [value]="'2025'"> 2025 </mat-option>
-                        <mat-option [value]="'2026'"> 2026 </mat-option>
-                        <mat-option [value]="'2027'"> 2027 </mat-option>
-                      </mat-select>
-                      <!-- <mat-error *ngIf="courseForm.get('pName')?.hasError('required')">
+
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2 class="text-center">
+              {{ action === "edit" ? "Edit" : "New" }} Budget Notification
+            </h2>
+          </div>
+          <div class="body">
+            <form class="m-4" *ngIf="requestForm" [formGroup]="requestForm">
+              <div class="row">
+                <!-- Budget -->
+                <div class="col-lg-4">
+                  <label>Training Budget </label>
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <input matInput required formControlName="trainingBudget" />
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <!-- Year -->
+                  <label>Year</label>
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <mat-select formControlName="year" required>
+                      <mat-option [value]="'2024'"> 2024 </mat-option>
+                      <mat-option [value]="'2025'"> 2025 </mat-option>
+                      <mat-option [value]="'2026'"> 2026 </mat-option>
+                      <mat-option [value]="'2027'"> 2027 </mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="courseForm.get('pName')?.hasError('required')">
                       Select any professor
                     </mat-error> -->
-                    </mat-form-field>
-                  </div>
-                  <!-- <div class="col-lg-3">
+                  </mat-form-field>
+                </div>
+                <!-- <div class="col-lg-3">
                     
                     <label>By Percentage</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
@@ -71,72 +74,79 @@
                    
                   </mat-form-field>
                   </div> -->
-                  <div class="col-lg-4">
-                    <!-- Type -->
-                    <label>Training Type</label>
-                    <mat-form-field
-                      class="example-full-width mb-3"
-                      appearance="outline"
-                    >
-                      <mat-select formControlName="trainingType" required>
-                        <mat-option [value]="'Planned'"> Planned </mat-option>
-                        <mat-option [value]="'Unplanned'"> Unplanned </mat-option>
-                      </mat-select>
-                      <!-- <mat-error *ngIf="courseForm.get('pName')?.hasError('required')">
+                <div class="col-lg-4">
+                  <!-- Type -->
+                  <label>Training Type</label>
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <mat-select formControlName="trainingType" required>
+                      <mat-option [value]="'Planned'"> Planned </mat-option>
+                      <mat-option [value]="'Unplanned'"> Unplanned </mat-option>
+                    </mat-select>
+                    <!-- <mat-error *ngIf="courseForm.get('pName')?.hasError('required')">
                       Select any professor
                     </mat-error> -->
-                    </mat-form-field>
-                  </div>
+                  </mat-form-field>
                 </div>
-                <div class="row">
-                  <div class="col-lg-6">
-                    <label>Name</label>
-                    <mat-form-field
-                      class="example-full-width mb-3"
-                      appearance="outline"
-                    >
-                      <input matInput required formControlName="name" />
-                      <!-- <mat-error *ngIf="courseForm.get('cName')?.hasError('required')">
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <label>Name</label>
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <input matInput required formControlName="name" />
+                    <!-- <mat-error *ngIf="courseForm.get('cName')?.hasError('required')">
                           Course name is required
                         </mat-error> -->
-                    </mat-form-field>
-                  </div>
-                  <div class="col-lg-6">
-                    <label>Approval Email Id </label>
-                    <mat-form-field
-                      class="example-full-width mb-3"
-                      appearance="outline"
-                    >
-                      <input matInput required formControlName="email" />
-                      <!-- <mat-error *ngIf="courseForm.get('cName')?ss.hasError('required')">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <label>Approval Email Id </label>
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <input matInput required formControlName="email" />
+                    <!-- <mat-error *ngIf="courseForm.get('cName')?ss.hasError('required')">
                           Course name is required
                         </mat-error> -->
-                    </mat-form-field>
-                  </div>
+                  </mat-form-field>
                 </div>
-                <div class="row" style="float: right;">
-                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <button type="button"  class="btn-space" mat-raised-button color="warn" routerLink="/admin/budgets/budget">
-                      Cancel
-                    </button>
-                    <button  *ngIf="action !== 'edit'"
-                     
-                      mat-raised-button
-                      id="submit" (click)="onSubmit()"
-                    >
-                      Submit
-                    </button>
-                    <button *ngIf="action === 'edit'"
+              </div>
+              <div class="row" style="float: right">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <button
+                    type="button"
+                    class="btn-space"
                     mat-raised-button
-                   id="submit"
-                   (click)="updateRequest()"
+                    color="warn"
+                    routerLink="/admin/budgets/budget"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    *ngIf="action !== 'edit'"
+                    mat-raised-button
+                    id="submit"
+                    (click)="onSubmit()"
+                  >
+                    Submit
+                  </button>
+                  <button
+                    *ngIf="action === 'edit'"
+                    mat-raised-button
+                    id="submit"
+                    (click)="updateRequest()"
                   >
                     Update
                   </button>
-                    
-                  </div>
                 </div>
-                <!-- <div class="d-flex justify-content-between">
+              </div>
+              <!-- <div class="d-flex justify-content-between">
                   <button
                     class="btn btn-outline-primary"
                     routerLink="/admin/budgets/budget"
@@ -158,11 +168,10 @@
                     <span class="btn-txt">Update</span>
                   </button>
                 </div> -->
-              </form>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  
+  </div>
+</section>
