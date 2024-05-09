@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
@@ -67,6 +68,10 @@ row: any;
     this.getData();
   }
 
+  isDeleteVisible(subcategory: AbstractControl): boolean {
+    return subcategory.value.category_name !== '' && subcategory.valid;
+  }
+  
   addSubCategoryField(): void {
     this.subcategories.push(
       this.formBuilder.group({
@@ -128,6 +133,10 @@ row: any;
           });
         }
       });
+  }
+
+  deleteSubCategoryField(index: number): void {
+    this.subcategories.removeAt(index);
   }
   createSubCategory(): void {
     this.isSubmitted = true;

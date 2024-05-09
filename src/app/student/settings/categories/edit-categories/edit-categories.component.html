@@ -17,7 +17,7 @@
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                                     <label>Main Category <span class="mandatory">&nbsp;*</span></label>
-                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                    <mat-form-field class="example-full-width mt-2" appearance="outline">
                                         <!-- <mat-label>Course Name</mat-label> -->
 
                                         <input matInput type="text" id="category_name" formControlName="category_name"
@@ -46,8 +46,15 @@
                           <div class="row cat" formArrayName="subcategories">
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" *ngFor="let subcategory of subcategories.controls; let i = index"
                               [formGroupName]="i">
-                              <label for="subcategory_name_{{i}}">Sub Category <span class="mandatory">&nbsp;*</span></label>
-                              <mat-form-field class="example-full-width mb-3" appearance="outline">
+                              <!-- <label for="subcategory_name_{{i}}">Sub Category <span class="mandatory">&nbsp;*</span></label> -->
+                              <div class="d-flex justify-content-between align-items-start">
+                                <label for="subcategory_name_{{i}}">Sub Category <span class="mandatory">&nbsp;*</span></label>
+                                <app-feather-icons *ngIf="isDeleteVisible(subcategory)" (click)="deleteSubCategoryField(i)"
+                                [icon]="'trash-2'"
+                                [class]="'tbl-fav-delete'"
+                              ></app-feather-icons>
+                        </div>
+                              <mat-form-field class="example-full-width mt-2" appearance="outline">
                                 <input matInput type="text" id="subcategory_name_{{i}}" formControlName="category_name" required>
                                 <mat-error *ngIf="subcategory.get('category_name')?.hasError('required')">
                                   Enter Sub Category
