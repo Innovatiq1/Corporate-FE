@@ -171,9 +171,9 @@ export class CreateCategoriesComponent implements OnInit{
     });
   }
   createSubCategory(): void {
-    this.isSubmitted=true
+    this.isSubmitted=true;
+   
     // if (this.subCategoryForm.invalid) {
-    //   this.validations=true
     //   return;
     // }
 
@@ -181,31 +181,34 @@ export class CreateCategoriesComponent implements OnInit{
     this.subCategoryData.forEach(subcategory => {
       subcategory.main_category_id = this.mainCategoryId;
     });
-
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to create sub category!',
-      icon: 'warning',
-      confirmButtonText: 'Yes',
-      showCancelButton: true,
-      cancelButtonColor: '#d33',
-    }).then((result) => {
-      if (result.isConfirmed){
-        this.courseService.createSubCategory(this.subCategoryData).subscribe(
-          (response) => {
-            Swal.fire('Success', 'Subcategories created successfully!', 'success');
-            this.mainCategoryForm.reset();
-            this.subCategoryForm.reset();
-            this.initSubCategoryForm();
-            this.addSubCategoryField();
-            this.router.navigate(['/student/settings/categories'])
-          },
-          (error) => {
-            Swal.fire('Error', 'Failed to create subcategories!', 'error');
-          }
-        );
-      }
-    });
+    console.log("create",this.subCategoryData)
+    if(this.subCategoryData[0].category_name !==''){
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to create sub category!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed){
+          this.courseService.createSubCategory(this.subCategoryData).subscribe(
+            (response) => {
+              Swal.fire('Success', 'Subcategories created successfully!', 'success');
+              this.mainCategoryForm.reset();
+              this.subCategoryForm.reset();
+              this.initSubCategoryForm();
+              this.addSubCategoryField();
+              this.router.navigate(['/student/settings/categories'])
+            },
+            (error) => {
+              Swal.fire('Error', 'Failed to create subcategories!', 'error');
+            }
+          );
+        }
+      });
+    }
+  
     
    
     this.isSubmitted=false

@@ -67,14 +67,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         // close sidebar on mobile screen after menu select
         this.renderer.removeClass(this.document.body, 'overlay-open');
-        if(!event.url.includes('settings')){
+        if (!event.url.includes('settings')) {
           this.isSettings = false;
           this.menuitem = this.orgMenuItems;
-        }else {
-          this.isSettings = true;
-          this.menuitem = SettingsMenu
+        } else {
+          if (this.userType === 'Admin') {
+            this.isSettings = true;
+            this.menuitem = SettingsMenu;
+          } else {
+            this.isSettings = false;
+            this.menuitem = this.orgMenuItems;
+          }    
         }
-
       }
     });
   }
