@@ -27,8 +27,8 @@ export class AddStudentComponent {
   breadscrums = [
     {
       title: 'Add Student',
-      items: ['Users'],
-      active: 'Add Student',
+      items: ['Students'],
+      active: 'Create Student',
     },
   ];
   editData: any;
@@ -109,33 +109,30 @@ export class AddStudentComponent {
     return false;
   }
 
-   onFileUpload(event:any) {
+  onFileUpload(event: any) {
     const file = event.target.files[0];
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/jfif'];
+    if (!allowedTypes.includes(file.type)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Selected format doesn't support. Only JPEG, PNG, JPG, and JFIF formats are allowed.!`,
+      });
+      return;
+    }
   
-    this.thumbnail = file
+    this.thumbnail = file;
     const formData = new FormData();
     formData.append('files', this.thumbnail);
-   this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
-    this.avatar = data.data.thumbnail;
-    this.uploaded=this.avatar.split('/')
-    let image  = this.uploaded.pop();
-    this.uploaded= image.split('\\');
-    this.fileName = this.uploaded.pop();
-  });
-    // this.fileName = event.target.files[0].name;
-    // this.files=event.target.files[0]
-    // this.authenticationService.uploadVideo(event.target.files[0]).subscribe(
-    //   (response: any) => {
-    //             //Swal.close();
-    //             
-    //   },
-    //   (error:any) => {
-
-    //   }
-    // );
-
-
-  }
+  
+    this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) => {
+      this.avatar = data.data?.thumbnail;
+      this.uploaded = this.avatar?.split('/');
+      let image = this.uploaded?.pop();
+      this.uploaded = image?.split('\\');
+      this.fileName = this.uploaded?.pop();
+    });
+  }     
 
   // onSubmit() {
   //   console.log('Form Value', this.stdForm.value);
