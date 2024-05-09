@@ -83,7 +83,7 @@ import { StudentDbComponent } from './settings/student-db/student-db.component';
 
 const routes: Routes = [
   {
-    path: 'enrollment/assessment',
+    path: 'enrollment/course',
     component: CourseComponent,
   },
   {
@@ -113,7 +113,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'enrollment/tutorial',
+    path: 'enrollment/program',
     component: ProgramComponent,
   },
   {
