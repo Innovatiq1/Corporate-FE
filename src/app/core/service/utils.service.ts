@@ -368,10 +368,10 @@ export class UtilsService {
       {type:'required',message:'Enter Email Subject'}
     ],
     'email_top_welcome_text':[
-      {type:'required',message:'Enter Top Welcome Text'}
+      {type:'required',message:'Enter Top Header Text'}
     ],
     'email_top_header_text':[
-      {type:'required',message:'Enter Top Welcome Text'}
+      {type:'required',message:'Enter Top Header Text'}
     ],
     'email_content1':[
       {type:'required',message:'Enter Text'}

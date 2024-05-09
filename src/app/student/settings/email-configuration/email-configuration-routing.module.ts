@@ -28,7 +28,10 @@ import { DirectorBudgetReqNotifComponent } from './director-budget-req-notif/dir
 import { TaBudgetRequestComponent } from './ta-budget-request/ta-budget-request.component';
 import { DirectorBudgetReqApprovalComponent } from './director-budget-req-approval/director-budget-req-approval.component';
 import { DirectorBudgetReqRejectedComponent } from './director-budget-req-rejected/director-budget-req-rejected.component';
-import { DeptBudgetReqNotifComponent } from './dept-budget-req/dept-budget-req-notif.component';
+import { DeptBudgetReqNotifComponent } from './dept-budget-req-notif/dept-budget-req-notif.component';
+import { DeptBudgetReqComponent } from './dept-budget-req/dept-budget-req.component';
+import { DeptBudgetReqApprovalComponent } from './dept-budget-req-approval/dept-budget-req-approval.component';
+import { DeptBudgetReqRejectedComponent } from './dept-budget-req-rejected/dept-budget-req-rejected.component';
 
 
 const routes: Routes = [
@@ -111,6 +114,18 @@ const routes: Routes = [
       {
         path: 'settings/department-budget-request-notification',
         component: DeptBudgetReqNotifComponent
+      },
+      {
+        path: 'settings/department-budget-request',
+        component: DeptBudgetReqComponent
+      },
+      {
+        path: 'settings/department-budget-request-approval',
+        component: DeptBudgetReqApprovalComponent
+      },
+      {
+        path: 'settings/department-budget-request-rejected',
+        component: DeptBudgetReqRejectedComponent
       },
       {
         path: 'settings/course-referral-invite',
