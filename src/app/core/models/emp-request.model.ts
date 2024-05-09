@@ -2,6 +2,8 @@
 export class EmpRequest {
     id: number;
     reason: string;
+    employeeEmail!:string;
+    employeeName!: string;
     constructor(empRequest: EmpRequest) {
       {
         this.id = empRequest.id || this.getRandomID();

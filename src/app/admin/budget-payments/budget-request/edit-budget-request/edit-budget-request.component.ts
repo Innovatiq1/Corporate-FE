@@ -16,6 +16,7 @@ export interface DialogData {
   id: number;
   action: string;
   empRequest: EmpRequest;
+  employeeEmail:string;
 }
 @Component({
   selector: 'app-edit-budget-request',
@@ -103,6 +104,8 @@ export class EditBudgetRequestComponent {
       this.payload = {
         approval: 'Rejected',
         reason: this.empRequestForm.value.reason,
+        employeeEmail:this.data.empRequest.employeeEmail,
+        employeeName:this.data.empRequest.employeeName
       };
     }
 
@@ -126,9 +129,12 @@ export class EditBudgetRequestComponent {
 
   approveRequest() {
     if (this.director) {
+      console.log('data',this.data)
       this.payload = {
         approval: 'Approved',
         reason: this.empRequestForm.value.reason,
+        employeeEmail:this.data.empRequest.employeeEmail,
+        employeeName:this.data.empRequest.employeeName
       };
     }
 
