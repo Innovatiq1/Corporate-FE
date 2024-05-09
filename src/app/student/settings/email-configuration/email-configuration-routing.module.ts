@@ -14,6 +14,21 @@ import { ProgramRegistrationComponent } from './program-registration/program-reg
 import { ProgramApprovalComponent } from './program-approval/program-approval.component';
 import { ProgramCompletionComponent } from './program-completion/program-completion.component';
 import { DirectorCourseNotificationComponent } from './director-course-notification/director-course-notification.component';
+import { RoCourseNotificationComponent } from './ro-course-notification/ro-course-notification.component';
+import { TaCourseNotificationComponent } from './ta-course-notification/ta-course-notification.component';
+import { NewTrainingRequestComponent } from './new-training-request/new-training-request.component';
+import { TrainingReqExpiryComponent } from './training-req-expiry/training-req-expiry.component';
+import { RoCourseApprovalComponent } from './ro-course-approval/ro-course-approval.component';
+import { DirectorCourseApprovalComponent } from './director-course-approval/director-course-approval.component';
+import { TaCourseApprovalComponent } from './ta-course-approval/ta-course-approval.component';
+import { RoCourseRejectedComponent } from './ro-course-rejected/ro-course-rejected.component';
+import { DirectorCourseRejectedComponent } from './director-course-rejected/director-course-rejected.component';
+import { TaCourseRejectedComponent } from './ta-course-rejected/ta-course-rejected.component';
+import { DirectorBudgetReqNotifComponent } from './director-budget-req-notif/director-budget-req-notif.component';
+import { TaBudgetRequestComponent } from './ta-budget-request/ta-budget-request.component';
+import { DirectorBudgetReqApprovalComponent } from './director-budget-req-approval/director-budget-req-approval.component';
+import { DirectorBudgetReqRejectedComponent } from './director-budget-req-rejected/director-budget-req-rejected.component';
+import { DeptBudgetReqNotifComponent } from './dept-budget-req/dept-budget-req-notif.component';
 
 
 const routes: Routes = [
@@ -36,6 +51,66 @@ const routes: Routes = [
       {
         path: 'settings/director-course-notification',
         component: DirectorCourseNotificationComponent
+      },
+      {
+        path: 'settings/ro-course-notification',
+        component: RoCourseNotificationComponent
+      },
+      {
+        path: 'settings/trainingAdmin-course-notification',
+        component: TaCourseNotificationComponent
+      },
+      {
+        path: 'settings/new-training-request',
+        component: NewTrainingRequestComponent
+      },
+      {
+        path: 'settings/training-request-expiry',
+        component: TrainingReqExpiryComponent
+      },
+      {
+        path: 'settings/ro-training-request-approval',
+        component: RoCourseApprovalComponent
+      },
+      {
+        path: 'settings/director-training-request-approval',
+        component: DirectorCourseApprovalComponent
+      },
+      {
+        path: 'settings/training-admin-training-request-approval',
+        component: TaCourseApprovalComponent
+      },
+      {
+        path: 'settings/ro-training-request-rejected',
+        component: RoCourseRejectedComponent
+      },
+      {
+        path: 'settings/director-training-request-rejected',
+        component: DirectorCourseRejectedComponent
+      },
+      {
+        path: 'settings/training-admin-training-request-rejected',
+        component: TaCourseRejectedComponent
+      },
+      {
+        path: 'settings/director-budget-request-notification',
+        component: DirectorBudgetReqNotifComponent
+      },
+      {
+        path: 'settings/training-admin-budget-request',
+        component: TaBudgetRequestComponent
+      },
+      {
+        path: 'settings/budget-request-approval',
+        component: DirectorBudgetReqApprovalComponent
+      },
+      {
+        path: 'settings/budget-request-rejected',
+        component: DirectorBudgetReqRejectedComponent
+      },
+      {
+        path: 'settings/department-budget-request-notification',
+        component: DeptBudgetReqNotifComponent
       },
       {
         path: 'settings/course-referral-invite',

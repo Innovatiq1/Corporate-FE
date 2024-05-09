@@ -6,14 +6,13 @@ import { EmailConfigService } from '@core/service/email-config.service';
 import { UtilsService } from '@core/service/utils.service';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import Swal from 'sweetalert2';
-
 @Component({
-  selector: 'app-director-course-notification',
-  templateUrl: './director-course-notification.component.html',
-  styleUrls: ['./director-course-notification.component.scss']
+  selector: 'app-ta-budget-request',
+  templateUrl: './ta-budget-request.component.html',
+  styleUrls: ['./ta-budget-request.component.scss']
 })
-export class DirectorCourseNotificationComponent {
-  updateStudentRef:FormGroup  ;
+export class TaBudgetRequestComponent {
+  taBudgetReqForm:FormGroup  ;
   edit = true;
   welcomeUrl: any;
   trainerUrl: any;
@@ -39,7 +38,7 @@ export class DirectorCourseNotificationComponent {
     {
       title: 'Forgot Mail',
       items: ['Email Templates'],
-      active: 'Approver 2 Training Request',
+      active: ' Budget Request',
     },
   ];
   config: AngularEditorConfig = {
@@ -70,12 +69,14 @@ export class DirectorCourseNotificationComponent {
       },
     ]
   };
-  constructor(private emailConfigurationService: EmailConfigService, private router: Router,private formBuilder: FormBuilder, public utils:UtilsService, private ref: ChangeDetectorRef,){
-
-   
-
-
-    this.updateStudentRef = this.formBuilder.group({
+  constructor(
+     private emailConfigurationService: EmailConfigService,
+     private router: Router,
+     private formBuilder: FormBuilder, 
+     public utils:UtilsService, 
+     private ref: ChangeDetectorRef,)
+     {
+    this.taBudgetReqForm = this.formBuilder.group({
       email_subject: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name] ],
       email_top_header_text: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name]],
       email_content: ['', [Validators.required,  ...this.utils.validators.noLeadingSpace, ...this.utils.validators.longDescription]],
@@ -83,14 +84,14 @@ export class DirectorCourseNotificationComponent {
   }
 
   ngOnInit(){
-    this.getForgetPasswordTemplate();
+    this.getTaBudgetReq();
   }
   fetchUpdated() {
     this.patchForm(this.itemData);
   }
   patchForm(pageContent: any) {
     this.pageContent = pageContent;
-    this.updateStudentRef.patchValue({
+    this.taBudgetReqForm.patchValue({
       email_template_type: pageContent?.email_template_type,
       email_subject: pageContent?.email_subject,
       email_top_header_text: pageContent?.email_top_header_text,
@@ -99,9 +100,9 @@ export class DirectorCourseNotificationComponent {
 
   }
 
-  getForgetPasswordTemplate() {
+  getTaBudgetReq() {
     this.emailConfigurationService.getForgetPasswordTemplate().subscribe( response =>{
-      this.assignData  = response?.data?.docs[0]?.director_course_notification;
+      this.assignData  = response?.data?.docs[0]?.budget_requested_template;
       this.ref.detectChanges();
     }, error => {
       // this.isLoading = false;
@@ -109,7 +110,7 @@ export class DirectorCourseNotificationComponent {
   }
 
   update(){
-    if (this.updateStudentRef.valid) {
+    if (this.taBudgetReqForm.valid) {
     Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to update template!',
@@ -123,14 +124,14 @@ export class DirectorCourseNotificationComponent {
       }
     });
   } else {
-    this.updateStudentRef.markAllAsTouched(); 
+    this.taBudgetReqForm.markAllAsTouched(); 
     this.isSubmitted = true;
   }
   }
   updateTemplate() {
     return new Promise<void>((resolve, reject) => {
-          const obj = this.updateStudentRef.value;
-          obj.insertaction = 'director_course_notification';
+          const obj = this.taBudgetReqForm.value;
+          obj.insertaction = 'budget_requested_template';
           this.emailConfigurationService.updateForgetPasswordTemplate(obj, this.id).subscribe(
             (res) => {
               Swal.fire({
@@ -141,7 +142,7 @@ export class DirectorCourseNotificationComponent {
               
              this.back();
               resolve();
-              this.getForgetPasswordTemplate(); 
+              this.getTaBudgetReq(); 
             },
             (err) => {
               Swal.fire(
@@ -163,7 +164,7 @@ export class DirectorCourseNotificationComponent {
   toggle(_data: any){
     this.edit = !this.edit;
     // this._id = _data._id;
-    this.updateStudentRef.patchValue({
+    this.taBudgetReqForm.patchValue({
       email_subject: _data.email_subject,
       email_content:_data.email_content,
       // email_template_type:_data.email_template_type,
