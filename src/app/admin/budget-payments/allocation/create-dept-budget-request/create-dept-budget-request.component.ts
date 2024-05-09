@@ -198,6 +198,7 @@ export class CreateDeptBudgetRequestComponent {
 
   onSubmit() {
     let userName = JSON.parse(localStorage.getItem('user_data')!).user.name;
+    let email = JSON.parse(localStorage.getItem('user_data')!).user.email;
     let dirID = JSON.parse(localStorage.getItem('user_data')!).user.director;
     let payload = {
       departmentName: this.departmentForm.value.department,
@@ -208,7 +209,8 @@ export class CreateDeptBudgetRequestComponent {
       email: this.departmentForm.value.approvedEmail,
       director: dirID,
       approval: "Pending",
-      employeeName: userName
+      employeeName: userName,
+      employeeEmail:email
 
 
     }
