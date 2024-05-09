@@ -16,7 +16,7 @@
                         <div class="body">
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                                    <label>Main Category Name <span class="mandatory">&nbsp;*</span></label>
+                                    <label>Main Category <span class="mandatory">&nbsp;*</span></label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                                         <!-- <mat-label>Course Name</mat-label> -->
 
@@ -47,7 +47,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12"
                                     *ngFor="let subcategory of subcategories.controls; let i = index"
                                     [formGroupName]="i">
-                                    <label for="subcategory_name_{{i}}">Sub Category Name <span class="mandatory">&nbsp;*</span></label>
+                                    <label for="subcategory_name_{{i}}">Sub Category <span class="mandatory">&nbsp;*</span></label>
                                     <mat-form-field class="example-full-width mb-3" appearance="outline">
                                         <input matInput type="text" id="subcategory_name_{{i}}"
                                             formControlName="category_name">

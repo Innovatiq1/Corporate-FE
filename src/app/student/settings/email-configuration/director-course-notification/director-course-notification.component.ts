@@ -39,7 +39,7 @@ export class DirectorCourseNotificationComponent {
     {
       title: 'Forgot Mail',
       items: ['Email Templates'],
-      active: 'Approver 2 Course Notification',
+      active: 'Approver 2 Training Request',
     },
   ];
   config: AngularEditorConfig = {
