@@ -675,12 +675,12 @@
         </form> -->
       </div>
     </div>
-    <div class="card" style="margin: auto; height: 500px; width: 70%" *ngIf="showEmailConfig">
+    <div class="card" style="margin: auto; height: fit-content; width: 95%" *ngIf="showEmailConfig">
       <!-- <div class="header">
         <h2>Email Configuration</h2>
       </div> -->
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
           <label class="p-5">Email Templates</label>
         </div>
         <div class="col-md-2">
@@ -693,16 +693,17 @@
             <button id="saved" [routerLink]="['/student/email-configuration/settings/welcome-mail']"> Welcome E-mail </button>
 
           </div>
-          <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/program-registration-email']"> Program
-              Registered E-mail </button>
+          <div class="col-md-6">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/forgot-password']"> Forgot Password </button>
+            
           </div>
         </div>
         <div class="row py-3">
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/forgot-password']"> Forgot Password </button>
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/program-registration-email']"> Program
+              Registered E-mail </button>
           </div>
-          <div class="col-md-5">
+          <div class="col-md-6">
             <button id="saved" [routerLink]="['/student/email-configuration/settings/course-registered-email']"> Course Registered
               E-mail </button>
 
@@ -711,31 +712,119 @@
         <div class="row py-3">
 
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/course-approval-email']"> Course Approval
-            </button>
-          </div>
-
-          <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/director-course-notification']"> Approver 2
-              Course Notification </button>
-          </div>
-
-
-        </div>
-        <div class="row py-3">
-          <div class="col-md-6 email">
             <button id="saved" [routerLink]="['/student/email-configuration/settings/program-approval-email']"> Program Approval
             </button>
           </div>
-          <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/completed-course']"> Completed Course </button>
+
+          <div class="col-md-6">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/course-approval-email']"> Course Approval
+            </button>
+            
           </div>
+
+
         </div>
         <div class="row py-3">
           <div class="col-md-6 email">
             <button id="saved" [routerLink]="['/student/email-configuration/settings/program-completion-email']"> Completed Program
             </button>
           </div>
+          <div class="col-md-6">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/completed-course']"> Completed Course </button>
+          </div>
+        </div>
+        <div class="row py-3">
+          <div class="col-md-6 email">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/new-training-request']"> New Training Request</button>
+          </div>
+          <div class="col-md-6">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/training-request-expiry']"> Training Request Expiry</button>
+           
+          </div>
+        </div>
+        <div class="row py-3">
+          <div class="col-md-6 email">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/ro-course-notification']"> Approver 1
+              Training Request </button>
+          </div>
+          <div class="col-md-6">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/director-course-notification']"> Approver 2
+              Training Request </button>
+           
+          </div>
+        </div>
+        <div class="row py-3">
+
+          <div class="col-md-6 email">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/trainingAdmin-course-notification']"> Approver 3
+              Training Request </button>
+          </div>
+
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/ro-training-request-approval']">Approver 1 Training Request Approval </button>
+          </div>
+
+
+        </div>
+        <div class="row py-3">
+
+          <div class="col-md-6 email">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/director-training-request-approval']">Approver 2 Training Request Approval </button>
+          </div>
+
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/training-admin-training-request-approval']">Approver 3 Training Request Approval </button>
+          </div>
+
+
+        </div>
+        <div class="row py-3">
+
+          <div class="col-md-6 email">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/ro-training-request-rejected']">Approver 1 Training Request Rejected </button>
+          </div>
+
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/director-training-request-rejected']">Approver 2 Training Request Rejected </button>
+          </div>
+
+
+        </div>
+        <div class="row py-3">
+
+          <div class="col-md-6 email">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/training-admin-training-request-rejected']">Approver 3 Training Request Rejected </button>
+          </div>
+
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/director-budget-request-notification']"> Budget Request Notification </button>
+          </div>
+
+
+        </div>
+        <div class="row py-3">
+
+          <div class="col-md-6 email">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/training-admin-budget-request']"> Budget Request </button>
+          </div>
+
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/budget-request-approval']">Budget Request Approval </button>
+          </div>
+
+
+        </div>
+        <div class="row py-3">
+
+          <div class="col-md-6 email">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/budget-request-rejected']">Budget Request Rejected</button>
+          </div>
+
+          <div class="col-md-5">
+            <button id="saved" [routerLink]="['/student/email-configuration/settings/department-budget-request-notification']">Department Budget Request Notification </button>
+          </div>
+
+
         </div>
         <div class="col-md-12 py-3">
           <button mat-raised-button id="back" [routerLink]="['/student/settings/integration']">Back</button>
