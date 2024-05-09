@@ -34,7 +34,10 @@ import { TaBudgetRequestComponent } from './ta-budget-request/ta-budget-request.
 import { DirectorBudgetReqNotifComponent } from './director-budget-req-notif/director-budget-req-notif.component';
 import { DirectorBudgetReqApprovalComponent } from './director-budget-req-approval/director-budget-req-approval.component';
 import { DirectorBudgetReqRejectedComponent } from './director-budget-req-rejected/director-budget-req-rejected.component';
-import { DeptBudgetReqNotifComponent } from './dept-budget-req/dept-budget-req-notif.component';
+import { DeptBudgetReqNotifComponent } from './dept-budget-req-notif/dept-budget-req-notif.component';
+import { DeptBudgetReqComponent } from './dept-budget-req/dept-budget-req.component';
+import { DeptBudgetReqApprovalComponent } from './dept-budget-req-approval/dept-budget-req-approval.component';
+import { DeptBudgetReqRejectedComponent } from './dept-budget-req-rejected/dept-budget-req-rejected.component';
 
 
 
@@ -70,7 +73,10 @@ import { DeptBudgetReqNotifComponent } from './dept-budget-req/dept-budget-req-n
                  DirectorBudgetReqNotifComponent,
                  DirectorBudgetReqApprovalComponent,
                  DirectorBudgetReqRejectedComponent,
-                 DeptBudgetReqNotifComponent
+                 DeptBudgetReqNotifComponent,
+                 DeptBudgetReqComponent,
+                 DeptBudgetReqApprovalComponent,
+                 DeptBudgetReqRejectedComponent
   ],
     imports: [
         CommonModule, EmailConfigurationRoutingModule,
