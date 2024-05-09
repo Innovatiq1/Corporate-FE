@@ -2,12 +2,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ClassModel, Session, Student, StudentApproval, StudentPaginationModel } from 'app/admin/schedule-class/class.model';
+import {
+  ClassModel,
+  Session,
+  Student,
+  StudentApproval,
+  StudentPaginationModel,
+} from 'app/admin/schedule-class/class.model';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import { CoursePaginationModel } from '@core/models/course.model';
 import * as moment from 'moment';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { MatPaginator } from '@angular/material/paginator';
 // import { fromEvent } from 'rxjs';
 import { UnsubscribeOnDestroyAdapter } from '@shared/UnsubscribeOnDestroyAdapter';
@@ -23,7 +33,7 @@ import { formatDate } from '@angular/common';
   templateUrl: './class-list.component.html',
   styleUrls: ['./class-list.component.scss'],
 })
-export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
+export class ClassListComponent extends UnsubscribeOnDestroyAdapter {
   displayedColumns = [
     // 'select',
     // 'Instructor',
@@ -33,7 +43,9 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
     'Department',
     'Start Date',
     'End Date',
-    'Class'
+    'Class',
+    'Minimum Students',
+    'Maximum Students',
   ];
 
   breadscrums = [
@@ -51,8 +63,11 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
   pageSizeArr = [10, 20, 50, 100];
   searchTerm: string = '';
 
-  constructor(public _classService: ClassService, private snackBar: MatSnackBar,private _router: Router) {
-
+  constructor(
+    public _classService: ClassService,
+    private snackBar: MatSnackBar,
+    private _router: Router
+  ) {
     super();
     this.coursePaginationModel = {};
   }
@@ -68,7 +83,6 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
       .getClassListWithPagination({ ...this.coursePaginationModel })
       .subscribe(
         (response) => {
-          
           if (response.data) {
             this.isLoading = false;
             this.dataSource = response.data.docs;
@@ -94,17 +108,15 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
     return numSelected === numRows;
   }
 
-   /** Selects all rows if they are not all selected; otherwise clear selection. */
-   masterToggle() {
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.dataSource.forEach((row: any) =>
-          this.selection.select(row)
-        );
+      : this.dataSource.forEach((row: any) => this.selection.select(row));
   }
 
   pageSizeChange($event: any) {
-    console.log("event", $event)
+    console.log('event', $event);
     this.coursePaginationModel.page = $event?.pageIndex + 1;
     this.coursePaginationModel.limit = $event?.pageSize;
     this.getClassList();
@@ -154,16 +166,16 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
     const totalSelect = this.selection.selected.length;
 
     Swal.fire({
-      title: "Confirm Deletion",
-      text: "Are you sure you want to delete this course kit?",
-      icon: "warning",
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete this course kit?',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Delete",
-      cancelButtonText: "Cancel",
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel',
     }).then((result) => {
-      if (result.isConfirmed){
+      if (result.isConfirmed) {
         this.selection.selected.forEach((item) => {
           const index: number = this.dataSource.findIndex(
             (d: ClassModel) => d === item
@@ -180,94 +192,119 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
         });
       }
     });
-
-   
   }
   //edit
-  editClass(id:string){
-    this._router.navigate([`admin/courses/create-class`], { queryParams: {id: id}});
+  editClass(id: string) {
+    this._router.navigate([`admin/courses/create-class`], {
+      queryParams: { id: id },
+    });
   }
   //delete
   delete(id: string) {
-    
-    this._classService.getClassList({ courseId: id }).subscribe((classList: any) => {
-      const matchingClasses = classList.docs.filter((classItem: any) => {
-        return classItem.courseId && classItem.courseId.id === id;
-      });
+    this._classService
+      .getClassList({ courseId: id })
+      .subscribe((classList: any) => {
+        const matchingClasses = classList.docs.filter((classItem: any) => {
+          return classItem.courseId && classItem.courseId.id === id;
+        });
 
-      Swal.fire({
-        title: "Confirm Deletion",
-        text: "Are you sure you want to delete this Class?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        confirmButtonText: "Delete",
-        cancelButtonText: "Cancel",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          if (matchingClasses.length > 0) {
-            Swal.fire({
-              title: 'Error',
-              text: 'Class have been registered . Cannot delete.',
-              icon: 'error',
+        Swal.fire({
+          title: 'Confirm Deletion',
+          text: 'Are you sure you want to delete this Class?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Delete',
+          cancelButtonText: 'Cancel',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if (matchingClasses.length > 0) {
+              Swal.fire({
+                title: 'Error',
+                text: 'Class have been registered . Cannot delete.',
+                icon: 'error',
+              });
+              return;
+            }
+            this._classService.deleteClass(id).subscribe(() => {
+              Swal.fire({
+                title: 'Success',
+                text: 'Class deleted successfully.',
+                icon: 'success',
+              });
+              this.getClassList();
             });
-            return;
           }
-          this._classService.deleteClass(id).subscribe(() => {
-            Swal.fire({
-              title: 'Success',
-              text: 'Class deleted successfully.',
-              icon: 'success',
-            });
-            this.getClassList();
-          });
-    }
-    });
-
-    });
+        });
+      });
   }
   performSearch() {
-    
-    
-    if(this.searchTerm){
-    this.dataSource = this.dataSource?.filter((item: any) =>
-    // console.log(item.courseId?.title)
-    item.courseId?.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-
-    );
+    if (this.searchTerm) {
+      this.dataSource = this.dataSource?.filter((item: any) =>
+        // console.log(item.courseId?.title)
+        item.courseId?.title
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase())
+      );
     } else {
-       this.getClassList();
-
+      this.getClassList();
     }
   }
   exportExcel() {
-    
-    const exportData: Partial<TableElement>[] =
-      this.dataSource.map((user: any) => ({
-        'Course': user?.courseId?.title,
-        'Course Code':user?.courseId?.courseCode,
-        'Amount':'$ '+user?.instructorCost,
-        'Department':user?.department,
-        'StartDate': formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
-        'EndDate': formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
-        'Class':user?.classDeliveryType,
-      }));
+    const exportData: Partial<TableElement>[] = this.dataSource.map(
+      (user: any) => ({
+        Course: user?.courseId?.title,
+        'Course Code': user?.courseId?.courseCode,
+        Amount: '$ ' + user?.instructorCost,
+        Department: user?.department,
+        StartDate:
+          formatDate(
+            new Date(user?.sessions[0]?.sessionStartDate),
+            'yyyy-MM-dd',
+            'en'
+          ) || '',
+        EndDate:
+          formatDate(
+            new Date(user?.sessions[0]?.sessionEndDate),
+            'yyyy-MM-dd',
+            'en'
+          ) || '',
+        Class: user?.classDeliveryType,
+      })
+    );
     TableExportUtil.exportToExcel(exportData, 'Course Class-list');
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Course', 'Course Code','Amount','Department','Start Date', 'End Date','Class']];
-    const data = this.dataSource.map((user: any) =>
+    const headers = [
       [
-       user?.courseId?.title,
-       user?.courseId?.courseCode,
-       '$ '+user?.instructorCost,
-       user?.department,
-       formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
-       formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
-       user?.classDeliveryType,
-      ]);
+        'Course',
+        'Course Code',
+        'Amount',
+        'Department',
+        'Start Date',
+        'End Date',
+        'Class',
+      ],
+    ];
+    const data = this.dataSource.map((user: any) => [
+      user?.courseId?.title,
+      user?.courseId?.courseCode,
+      '$ ' + user?.instructorCost,
+      user?.department,
+      formatDate(
+        new Date(user?.sessions[0]?.sessionStartDate),
+        'yyyy-MM-dd',
+        'en'
+      ) || '',
+      formatDate(
+        new Date(user?.sessions[0]?.sessionEndDate),
+        'yyyy-MM-dd',
+        'en'
+      ) || '',
+      user?.classDeliveryType,
+    ]);
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
     (doc as any).autoTable({
       head: headers,
@@ -280,5 +317,4 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter{
   getStatusClass(classDeliveryType: string): string {
     return classDeliveryType === 'online' ? 'success' : 'fail';
   }
-
 }
