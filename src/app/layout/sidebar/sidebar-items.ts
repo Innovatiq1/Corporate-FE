@@ -1547,7 +1547,7 @@ export const SettingsMenu: MenuItem[] = [
     badgeClass:'',
     groupTitle:false,
     open:false,
-    role:[],
+    role:['Admin'],
     children: [
       {
         iconsrc:'',

@@ -410,6 +410,16 @@
                 <label>First Name<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="name" />
+                  <mat-error
+                  *ngIf="
+                    stdForm1.get('name')?.invalid &&
+                    stdForm1.get('name')?.touched
+                  "
+                >
+                  {{
+                    utils.getErrorMessage1(stdForm1.get("name"), "fname")
+                  }}
+                </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -422,11 +432,9 @@
                 </mat-form-field>
               </div>
             </div>
+            
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
-              <div class="button-container">
-                <label>Select Department <span class="mandatory">&nbsp;*</span></label>
-                <!-- <mat-icon class="cursor-pointer" (click)="openDialog()">add</mat-icon> -->
-              </div>
+                <label>Department <span class="mandatory">&nbsp;*</span></label>
               <mat-form-field
                 class="example-full-width mb-3"
                 appearance="outline">
@@ -436,9 +444,14 @@
                   </mat-option>
                 </mat-select>
                 <mat-error
-                  *ngIf="stdForm1.get('department')?.hasError('required')"
+                  *ngIf="
+                    stdForm1.get('department')?.invalid &&
+                    stdForm1.get('department')?.touched
+                  "
                 >
-                  Select Any Department
+                  {{
+                    utils.getErrorMessage1(stdForm1.get("department"), "deptname")
+                  }}
                 </mat-error>
               </mat-form-field>
             </div>
@@ -447,6 +460,16 @@
                 <label>Mobile Number</label>
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="mobile" />
+                  <mat-error
+                  *ngIf="
+                    stdForm1.get('mobile')?.invalid &&
+                    stdForm1.get('mobile')?.touched
+                  "
+                >
+                  {{
+                    utils.getErrorMessage1(stdForm1.get("mobile"), "mobile")
+                  }}
+                </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -518,6 +541,16 @@
                 <label>City<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="city_name" />
+                  <mat-error
+                  *ngIf="
+                    stdForm1.get('city_name')?.invalid &&
+                    stdForm1.get('city_name')?.touched
+                  "
+                >
+                  {{
+                    utils.getErrorMessage1(stdForm1.get("city_name"), "city")
+                  }}
+                </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -526,6 +559,16 @@
                 <label>Country<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="country_name" />
+                  <mat-error
+                  *ngIf="
+                    stdForm1.get('country_name')?.invalid &&
+                    stdForm1.get('country_name')?.touched
+                  "
+                >
+                  {{
+                    utils.getErrorMessage1(stdForm1.get("country_name"), "country")
+                  }}
+                </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -534,6 +577,16 @@
                 <label>Address<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field class="example-full-width" appearance="outline">
                   <textarea matInput formControlName="address"></textarea>
+                  <mat-error
+                  *ngIf="
+                    stdForm1.get('address')?.invalid &&
+                    stdForm1.get('address')?.touched
+                  "
+                >
+                  {{
+                    utils.getErrorMessage1(stdForm1.get("address"), "address")
+                  }}
+                </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -580,12 +633,32 @@
                 <label>User Name<span class="mandatory">&nbsp;*</span></label>
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="name" />
+                  <mat-error
+                  *ngIf="
+                    stdForm.get('name')?.invalid &&
+                    stdForm.get('name')?.touched
+                  "
+                >
+                  {{
+                    utils.getErrorMessage1(stdForm.get("name"), "uname")
+                  }}
+                </mat-error>
                 </mat-form-field>
               </div>
               <div class="col-lg-4 col-md-4">
                 <label>Current Password</label>
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput type="password" formControlName="currentpassword" />
+                  <mat-error
+                  *ngIf="
+                    stdForm.get('currentpassword')?.invalid &&
+                    stdForm.get('currentpassword')?.touched
+                  "
+                >
+                  {{
+                    utils.getErrorMessage1(stdForm.get("currentpassword"), "currentPsw")
+                  }}
+                </mat-error>
                 </mat-form-field>
               </div>
               <div class="col-lg-4 col-md-4">
@@ -594,6 +667,16 @@
                   <input matInput type="password" formControlName="password" [type]="hide ? 'password' : 'text'" required />
                   <mat-icon matSuffix (click)="hide = !hide">
                     {{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+                    <mat-error
+                  *ngIf="
+                    stdForm.get('password')?.invalid &&
+                    stdForm.get('password')?.touched
+                  "
+                >
+                  {{
+                    utils.getErrorMessage1(stdForm.get("password"), "password")
+                  }}
+                </mat-error>
                 </mat-form-field>
               </div>
             </div>
