@@ -170,6 +170,11 @@ export class CreateCategoriesComponent implements OnInit{
       }
     });
   }
+
+  deleteSubCategoryField(index: number): void {
+    this.subcategories.removeAt(index);
+  }
+  
   createSubCategory(): void {
     this.isSubmitted=true;
    
