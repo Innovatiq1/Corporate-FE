@@ -315,7 +315,7 @@ export class ScheduleClassComponent {
     }
   }
 
-  getStatusClass(classDeliveryType: string): string {
+   getStatusClass(classDeliveryType: string): string {
     return classDeliveryType === 'online' ? 'success' : 'fail';
   }
 

@@ -43,17 +43,20 @@ svg {
   }
   
   .success .status-text {
-    color: green; // Text color for success
+    color: #198754;; // Text color for success
+    font-weight: 400;
     background-color: #d4edda; // Background color for success text
   }
   
   .fail .status-text {
-    color: red; // Text color for failure
+    color: #f11541; // Text color for failure
+    font-weight: 400;
     background-color: #f8d7da; // Background color for failure text
   }
   
   .status-text {
     padding: 2px 5px; // Adjust padding as needed
+    font-weight: 400;
     border-radius: 8px; // Add some border radius for rounded corners
   }
   

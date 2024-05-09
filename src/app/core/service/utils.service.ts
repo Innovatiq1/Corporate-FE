@@ -347,6 +347,24 @@ export class UtilsService {
     'description':[
       {type:'required',message:'Enter Description'}
     ],
+    'email_subject':[
+      {type:'required',message:'Enter Email Subject'}
+    ],
+    'email_top_welcome_text':[
+      {type:'required',message:'Enter Top Welcome Text'}
+    ],
+    'email_top_header_text':[
+      {type:'required',message:'Enter Top Welcome Text'}
+    ],
+    'email_content1':[
+      {type:'required',message:'Enter Text'}
+    ],
+    'email_content':[
+      {type:'required',message:'Enter Text'}
+    ],
+    'bottom_button_text':[
+      {type:'required',message:'Enter Bottom Button Text'}
+    ],
     'electiveCourseCount':[
       {type: 'required',message:'Enter Elective Count'}
     ],
@@ -423,7 +441,7 @@ export class UtilsService {
     training_hours: [  Validators.min(0.5), Validators.pattern(/^\d+(\.\d+)?$/)],
     fee: [ Validators.min(0), Validators.max(99999999), Validators.pattern(/^\d+(\.\d+)?$/)],
     course: [Validators.maxLength(20)],
-    longDescription: [ Validators.maxLength(255)],
+    longDescription: [ Validators.required, Validators.min(2), Validators.max(255)],
     descripton: [ Validators.maxLength(100)],
     website: [ Validators.maxLength(255), Validators.pattern(/^(https?:\/\/)?(www\.)?[a-zA-Z0-9]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/)],
     pdu: [ Validators.min(0), Validators.max(999), Validators.pattern(/^\d+(\.\d+)?$/)],

@@ -347,25 +347,15 @@ export class CreateAllUsersComponent {
       const userData: Users = formObj;
 
       // Ensure that the avatar property contains the correct URL
-      userData.avatar = this.avatar; // Replace 'your_existing_avatar_url' with the actual avatar URL
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'Do you want to update this user!',
-        icon: 'warning',
-        confirmButtonText: 'Yes',
-        showCancelButton: true,
-        cancelButtonColor: '#d33',
-      }).then((result) => {
-        if (result.isConfirmed) {
+      userData.avatar = this.avatar; 
+     
           this.updateUser(userData);
-          Swal.close();
+          
         window.history.back();
         }
-      });
       // this.updateUser(userData);
       // Swal.close();
-    }
-  }
+      }
   updateUser(obj: any) {
     return new Promise((resolve, reject) => {
       obj['Active'] = this.status;
@@ -418,7 +408,7 @@ export class CreateAllUsersComponent {
         {
           title: 'Edit All Users',
           items: ['Users'],
-          active: 'Edit User',
+          active: 'Edit U;kser',
         },
       ];
     }
@@ -432,7 +422,7 @@ export class CreateAllUsersComponent {
       last_name: new FormControl('', []),
       rollNo: new FormControl('', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.roll_no]),
       gender: new FormControl('', [Validators.required]),
-      mobile: new FormControl('', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]),
+      mobile: new FormControl('', [Validators.required,...this.utils.validators.mobile]),
       qualification: new FormControl('', []),
       department: new FormControl('', []),
       address: new FormControl('', []),
@@ -441,7 +431,7 @@ export class CreateAllUsersComponent {
         Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/),
       ]),
       password: new FormControl('', [Validators.required]),
-      re_passwords: new FormControl('', [Validators.required]),
+      re_passwords: new FormControl('', []),
       education: new FormControl('', [
         Validators.required,
         Validators.minLength(2),

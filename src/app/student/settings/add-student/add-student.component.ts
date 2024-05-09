@@ -62,7 +62,6 @@ export class AddStudentComponent {
       gender: ['', [Validators.required]],
       mobile: ['', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],
       password: [''],
-      conformPassword: [''],
       qualification: [''],
       department: [''],
       address: [''],
@@ -77,8 +76,10 @@ export class AddStudentComponent {
       education: ['',[Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.edu]],
       avatar: [''],
       blood_group: [''],
+      conformPassword: ['', []],
+
     },{
-      validator: ConfirmedValidator('password', 'conformPassword')
+      // validator: ConfirmedValidator('password', 'conformPassword')
     });
   }
 

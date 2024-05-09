@@ -31,7 +31,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Designation<span class="mandatory">&nbsp;*</span></label>
+                  <label>Education<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="education">
                   </mat-form-field>
@@ -55,24 +55,6 @@
                       utils.getErrorMessage1(proForm.get("email"), "email")
                     }}
                   </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Password<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput formControlName="password" type="password" required>
-                    <mat-error *ngIf="proForm.get('password')?.hasError('required')">
-                      Enter Password
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Re-Enter Password<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput formControlName="conformPassword" type="password" required>
-                    <mat-error *ngIf="proForm.get('conformPassword')?.hasError('required')">
-                      Re-Enter Password
-                    </mat-error>
                   </mat-form-field>
                 </div>
               <!-- </div>
@@ -146,6 +128,25 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Password<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="password" type="password" required>
+                    <mat-error *ngIf="proForm.get('password')?.hasError('required')">
+                      Enter Password
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Re-Enter Password<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="conformPassword" type="password" required>
+                    <mat-error *ngIf="proForm.get('conformPassword')?.hasError('required')">
+                      Re-Enter Password
+                    </mat-error>
+                  </mat-form-field>
+                </div> -->
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Address</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <textarea matInput formControlName="address"></textarea>
@@ -153,12 +154,12 @@
                 </div>
               <!-- </div>
               <div class="row"> -->
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Education</label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <textarea matInput formControlName="education"></textarea>
                   </mat-form-field>
-                </div>
+                </div> -->
               <!-- </div> -->
               <!-- <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">

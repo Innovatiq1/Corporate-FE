@@ -19,15 +19,15 @@ export class ProgramCompletionComponent {
   itemData: any; 
   pageContent: any;
   isLoading = false;
-  assignData = [];
+  assignData :any[] = [];
   isSubmitted=false;
   public Editor: any = ClassicEditor;
  
   breadscrums = [
     {
       title: 'Forgot Mail',
-      items: ['Email Configuration'],
-      active: 'Completed Course',
+      items: ['Email Templates'],
+      active: 'Completed Program',
     },
   ];
   config: AngularEditorConfig = {
@@ -126,10 +126,10 @@ export class ProgramCompletionComponent {
   createForm() {
     this.emailTemplateForm = this.fb.group(
       {
-        email_subject: ['', [Validators.required]],
-        email_top_header_text: ['', [Validators.required]],
-        email_content: ['', [Validators.required]],
-        bottom_button_text:['',[Validators.required]]
+        email_subject: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name] ],
+        email_top_header_text: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name]],
+        email_content: ['', [Validators.required,  ...this.utils.validators.noLeadingSpace, ...this.utils.validators.longDescription]],
+        bottom_button_text: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name]],
 
         
       },
@@ -146,6 +146,25 @@ export class ProgramCompletionComponent {
   }
 )}
 update(){
+  if (this.emailTemplateForm.valid) {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to update template!',
+    icon: 'warning',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.updateTemplate();
+    }
+  });
+} else {
+  this.emailTemplateForm.markAllAsTouched(); 
+  this.isSubmitted = true;
+}
+}
+updateTemplate(){
 return new Promise<void>((resolve, reject) => {
   // this.markAllTouched();
   if (this.emailTemplateForm.valid) {

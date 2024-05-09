@@ -81,58 +81,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Password <span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <input
-                      matInput
-                      formControlName="password"
-                      type="password"
-                      required
-                    />
-                    <mat-error
-                      *ngIf="stdForm.get('password')?.hasError('required')"
-                    >
-                      Enter Password 
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label
-                    >Re-Enter Password
-                    <span class="mandatory">&nbsp;*</span></label
-                  >
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <input
-                      matInput
-                      formControlName="conformPassword"
-                      type="password"
-                      required
-                    />
-                    <mat-error
-                      *ngIf="
-                        stdForm.get('conformPassword')?.hasError('required')
-                      "
-                    >
-                      Re-Enter Password
-                    </mat-error>
-                    <mat-error
-                      *ngIf="
-                        stdForm
-                          .get('conformPassword')
-                          ?.hasError('confirmedValidator')
-                      "
-                    >
-                      Password and Re-Enter Password must be match
-                    </mat-error>
-                  </mat-form-field>
-                </div>
+              
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Gender<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
@@ -183,7 +132,7 @@
                     class="example-full-width mb-3"
                     appearance="outline"
                   >
-                    <textarea matInput formControlName="education"></textarea>
+                    <input matInput formControlName="education"/>
                     <mat-error
                     *ngIf="
                       stdForm.get('education')?.invalid &&
@@ -271,6 +220,58 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Password <span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <input
+                      matInput
+                      formControlName="password"
+                      type="password"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="stdForm.get('password')?.hasError('required')"
+                    >
+                      Enter Password 
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- <div *ngIf="!edit" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label
+                    >Re-Enter Password
+                    <span class="mandatory">&nbsp;*</span></label
+                  >
+                  <mat-form-field
+                    class="example-full-width mb-3"
+                    appearance="outline"
+                  >
+                    <input
+                      matInput
+                      formControlName="conformPassword"
+                      type="password"
+                      required
+                    />
+                    <mat-error
+                      *ngIf="
+                        stdForm.get('conformPassword')?.hasError('required')
+                      "
+                    >
+                      Re-Enter Password
+                    </mat-error>
+                    <mat-error
+                      *ngIf="
+                        stdForm
+                          .get('conformPassword')
+                          ?.hasError('confirmedValidator')
+                      "
+                    >
+                      Password and Re-Enter Password must be match
+                    </mat-error>
+                  </mat-form-field>
+                </div> -->
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Blood Group')">
                   <label>Blood Group</label>
                   <mat-form-field
