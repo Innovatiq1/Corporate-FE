@@ -1,0 +1,12 @@
+  .option-text{
+    --mdc-radio-disabled-selected-icon-color: #ff4081;
+    --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    --mat-radio-disabled-label-color: #414244;
+    // --mat-radio-checked-ripple-color: 
+    --mdc-radio-disabled-selected-icon-opacity: 1;
+    --mdc-radio-disabled-unselected-icon-opacity: 0.5;
+
+     .mdc-radio .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
+        border-color: rgba(0, 0, 0, 0.54);
+    }
+  }

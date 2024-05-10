@@ -13,6 +13,8 @@ import { number } from 'echarts';
 import { Subscription } from 'rxjs';
 import { StudentsService } from 'app/admin/students/students.service';
 import * as XLSX from 'xlsx';
+import { TestPreviewComponent } from '@shared/components/test-preview/test-preview.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-assesment-questions',
@@ -36,8 +38,8 @@ export class AssesmentQuestionsComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private questionService: QuestionService,
-    private studentsService: StudentsService
-
+    private studentsService: StudentsService,
+    private dialog: MatDialog
   ) {
     let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit-questions');
@@ -51,7 +53,7 @@ export class AssesmentQuestionsComponent {
     this.questionFormTab3 = this.formBuilder.group({
       name: ['', Validators.required],
       timer: [''],
-      retake:[''], 
+      retake: [''],
       questions: this.formBuilder.array([]),
     });
     if (!this.editUrl) {
@@ -64,40 +66,41 @@ export class AssesmentQuestionsComponent {
     }
   }
 
-  ngOnInit(): void { 
-    this.getTimer()
-    this.getRetakes()
-    this.loadData()
-   }
-
-   loadData(){
-    this.studentId = localStorage.getItem('id')
-    this.studentsService.getStudentById(this.studentId).subscribe(res => {
-    })
-  }
-  
-  getTimer() : any {
-    this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
-      this.configuration = configuration;
-      if (this.configuration?.length > 0) {
-        this.defaultTimer = this.configuration[1].value;
-        this.questionFormTab3.patchValue({
-          timer: this.defaultTimer,
-        })
-      }
-    });
+  ngOnInit(): void {
+    this.getTimer();
+    this.getRetakes();
+    this.loadData();
   }
 
-  getRetakes() : any {
-    this.configurationSubscription = this.studentsService.configuration$.subscribe(configuration => {
-      this.configuration = configuration;
-      if (this.configuration?.length > 0) {
-        this.defaultRetake = this.configuration[2].value;
-        this.questionFormTab3.patchValue({
-          retake: this.defaultRetake,
-        })
-      }
-    });
+  loadData() {
+    this.studentId = localStorage.getItem('id');
+    this.studentsService.getStudentById(this.studentId).subscribe((res) => {});
+  }
+
+  getTimer(): any {
+    this.configurationSubscription =
+      this.studentsService.configuration$.subscribe((configuration) => {
+        this.configuration = configuration;
+        if (this.configuration?.length > 0) {
+          this.defaultTimer = this.configuration[1].value;
+          this.questionFormTab3.patchValue({
+            timer: this.defaultTimer,
+          });
+        }
+      });
+  }
+
+  getRetakes(): any {
+    this.configurationSubscription =
+      this.studentsService.configuration$.subscribe((configuration) => {
+        this.configuration = configuration;
+        if (this.configuration?.length > 0) {
+          this.defaultRetake = this.configuration[2].value;
+          this.questionFormTab3.patchValue({
+            retake: this.defaultRetake,
+          });
+        }
+      });
   }
 
   getData() {
@@ -256,7 +259,7 @@ export class AssesmentQuestionsComponent {
         this.save();
       }
     } else {
-      this.questionFormTab3.markAllAsTouched(); 
+      this.questionFormTab3.markAllAsTouched();
     }
   }
 
@@ -295,16 +298,47 @@ export class AssesmentQuestionsComponent {
         cancelButtonColor: '#d33',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.createAssesment(payload);
+          this.openPreviewModal(payload);
         }
       });
-    }else{
+    } else {
       Swal.fire('Please fill all mandatory fields', 'error');
     }
   }
 
+  openPreviewModal(payload: any, isEdit: boolean = false) {
+    const dialogRef = this.dialog.open(TestPreviewComponent, {
+      width: '600px',
+      data: payload,
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      if(!isEdit){
+        this.createAssesment(payload);
+      }else{
+        this.updateAssementAction(payload);
+      }
+    });
+  }
+
+  updateAssementAction(payload: any){
+    this.questionService.updateQuestions(payload).subscribe(
+      (res: any) => {
+        Swal.fire({
+          title: 'Successful',
+          text: 'Question Updated successfully',
+          icon: 'success',
+        });
+        // if (this.approved) {
+        this.router.navigate(['/student/settings/all-questions']);
+        // }
+      },
+      (err: any) => {
+        Swal.fire('Failed to update Question', 'error');
+      }
+    );
+  }
+
   updateAssesment() {
-    console.log('triggering', this.questionFormTab3)
     if (this.questionFormTab3.valid) {
       const formData = this.questionFormTab3.value;
       const isNoAnswer = formData.questions.some(
@@ -325,21 +359,7 @@ export class AssesmentQuestionsComponent {
         cancelButtonColor: '#d33',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.questionService.updateQuestions(payload).subscribe(
-            (res: any) => {
-              Swal.fire({
-                title: 'Successful',
-                text: 'Question Updated successfully',
-                icon: 'success',
-              });
-              // if (this.approved) {
-                this.router.navigate(['/student/settings/all-questions']);
-              // }
-            },
-            (err: any) => {
-              Swal.fire('Failed to update Question', 'error');
-            }
-          );
+          this.openPreviewModal(payload, true);
         }
       });
     }
@@ -361,13 +381,11 @@ export class AssesmentQuestionsComponent {
     );
   }
 
-
-
   approve() {
     const payload = {
-      status : 'approved',
+      status: 'approved',
       id: this.questionId,
-    } 
+    };
     this.questionService.updateQuestions(payload).subscribe(
       (res: any) => {
         Swal.fire({
@@ -401,8 +419,10 @@ export class AssesmentQuestionsComponent {
       const workbook: XLSX.WorkBook = XLSX.read(data, { type: 'binary' });
 
       const worksheet: XLSX.WorkSheet = workbook.Sheets[workbook.SheetNames[0]];
-      
-      const excelData: any[] = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+
+      const excelData: any[] = XLSX.utils.sheet_to_json(worksheet, {
+        raw: true,
+      });
       this.processExcelData(excelData);
     };
 
@@ -412,9 +432,9 @@ export class AssesmentQuestionsComponent {
   isValidExcelFile(file: File): boolean {
     const allowedExtensions = ['.xlsx', '.xls'];
     const fileName = file.name.toLowerCase();
-    return allowedExtensions.some(ext => fileName.endsWith(ext));
+    return allowedExtensions.some((ext) => fileName.endsWith(ext));
   }
-  
+
   processExcelData(data: any[]) {
     while (this.questions.length !== 0) {
       this.questions.removeAt(0);
@@ -423,9 +443,9 @@ export class AssesmentQuestionsComponent {
     data.forEach((row: any, index: number) => {
       const question = this.addQuestion();
       question.patchValue({
-        questionText: row["Question Text"],
+        questionText: row['Question Text'],
       });
-  
+
       const optionsArray = question.get('options') as FormArray;
       while (optionsArray.length !== 0) {
         optionsArray.removeAt(0);
@@ -445,7 +465,7 @@ export class AssesmentQuestionsComponent {
           break;
         }
       }
-  
+
       this.questions.push(question);
     });
   }

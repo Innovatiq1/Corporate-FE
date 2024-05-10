@@ -79,6 +79,8 @@ import { SingpassComponent } from './settings/singpass/singpass.component';
 import { PaymentGatewayComponent } from './settings/payment-gateway/payment-gateway.component';
 import { ApprovalWorkflowComponent } from './settings/approval-workflow/approval-workflow.component';
 import { StudentDbComponent } from './settings/student-db/student-db.component';
+import { PreviewQuestionsComponent } from './settings/preview-questions/preview-questions.component';
+import { PreviewTestAnswersheetComponent } from './preview-test-answersheet/preview-test-answersheet.component';
 
 
 const routes: Routes = [
@@ -167,6 +169,10 @@ const routes: Routes = [
   {
     path: 'questions/:id/:id/:id',
     component: QuestionComponent,
+  },
+  {
+    path: 'test/preview/:id/student/:studentId',
+    component: PreviewTestAnswersheetComponent,
   },
   {
     path: 'questions/freecourse/:id/:id/:id',
@@ -327,6 +333,10 @@ const routes: Routes = [
 {
   path: 'settings/edit-questions/:id',
   component: AddQuestionsComponent,
+},
+{
+  path: 'settings/preview-questions/:id',
+  component: PreviewQuestionsComponent,
 },
 {
   path: 'settings/add-exam-questions',
