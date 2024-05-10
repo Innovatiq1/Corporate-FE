@@ -408,7 +408,7 @@ export class CreateAllUsersComponent {
         {
           title: 'Edit All Users',
           items: ['Users'],
-          active: 'Edit U;kser',
+          active: 'Edit User',
         },
       ];
     }

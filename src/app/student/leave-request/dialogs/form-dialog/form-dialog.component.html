@@ -3,37 +3,55 @@
     <div class="editRowModal">
       <div class="modalHeader clearfix">
         <div class="modal-about">
-          {{dialogTitle}}
+          {{ dialogTitle }}
         </div>
       </div>
     </div>
-    <button mat-icon-button (click)="dialogRef.close()" class="modal-close-button" aria-label="Close dialog">
+    <button
+      mat-icon-button
+      (click)="dialogRef.close()"
+      class="modal-close-button"
+      aria-label="Close dialog"
+    >
       <mat-icon>close</mat-icon>
     </button>
   </div>
   <div mat-dialog-content>
-    <form class="register-form m-4" [formGroup]="leaveRequestForm" (ngSubmit)="submit">
+    <form
+      class="register-form m-4"
+      [formGroup]="leaveRequestForm"
+      (ngSubmit)="(submit)"
+    >
       <div class="row">
-        <div  *ngIf="!isEdit"class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div *ngIf="!isEdit" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
           <label>Class Name<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-select formControlName="className" required>
-              <mat-option *ngFor="let data of studentApprovedClasses" [value]="data">
-                {{data?.classId?.courseId?.title}}
+              <mat-option
+                *ngFor="let data of studentApprovedClasses"
+                [value]="data"
+              >
+                {{ data?.classId?.courseId?.title }}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="leaveRequestForm.get('className')?.hasError('required')">
+            <mat-error
+              *ngIf="leaveRequestForm.get('className')?.hasError('required')"
+            >
               Select Class
             </mat-error>
           </mat-form-field>
         </div>
-        <div *ngIf ="isEdit" class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div *ngIf="isEdit" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
           <label>Class Name<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
-                    <input matInput formControlName="className" required readonly>
-        <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>person</mat-icon>
+            <input matInput formControlName="className" required readonly />
+            <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix
+              >person</mat-icon
+            >
 
-            <mat-error *ngIf="leaveRequestForm.get('className')?.hasError('required')">
+            <mat-error
+              *ngIf="leaveRequestForm.get('className')?.hasError('required')"
+            >
               Select Class
             </mat-error>
           </mat-form-field>
@@ -42,13 +60,44 @@
         <!-- <input matInput formControlName="className" required>
         <mat-icon class="material-icons-two-tone color-icon p-3" matSuffix>person</mat-icon> -->
 
-        <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
           <label>Apply date<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
-            <input matInput [matDatepicker]="picker1" formControlName="applyDate" required>
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <input
+              matInput
+              [matDatepicker]="picker1"
+              formControlName="applyDate"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker1"
+            ></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
-            <mat-error *ngIf="leaveRequestForm.get('applyDate')?.hasError('required')">
+            <mat-error
+              *ngIf="leaveRequestForm.get('applyDate')?.hasError('required')"
+            >
+              Please select date
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+          <label>From date<span class="mandatory">&nbsp;*</span></label>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <input
+              matInput
+              [matDatepicker]="picker2"
+              formControlName="fromDate"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker2"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            <mat-error
+              *ngIf="leaveRequestForm.get('fromDate')?.hasError('required')"
+            >
               Please select date
             </mat-error>
           </mat-form-field>
@@ -65,27 +114,53 @@
         </div> -->
       </div>
       <div class="row">
-        <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <!-- <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12 mb-2">
           <label>From date<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width" appearance="outline">
-            <input matInput [matDatepicker]="picker2" formControlName="fromDate" required>
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <input
+              matInput
+              [matDatepicker]="picker2"
+              formControlName="fromDate"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker2"
+            ></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
-            <mat-error *ngIf="leaveRequestForm.get('fromDate')?.hasError('required')">
+            <mat-error
+              *ngIf="leaveRequestForm.get('fromDate')?.hasError('required')"
+            >
+              Please select date
+            </mat-error>
+          </mat-form-field>
+        </div> -->
+
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+          <label>To date<span class="mandatory">&nbsp;*</span></label>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <input
+              matInput
+              [matDatepicker]="picker3"
+              formControlName="toDate"
+              required
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker3"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+            <mat-error
+              *ngIf="leaveRequestForm.get('toDate')?.hasError('required')"
+            >
               Please select date
             </mat-error>
           </mat-form-field>
         </div>
-
-        <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-          <label>To date<span class="mandatory">&nbsp;*</span></label>
-          <mat-form-field class="example-full-width" appearance="outline">
-            <input matInput [matDatepicker]="picker3" formControlName="toDate" required>
-            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-            <mat-datepicker #picker3></mat-datepicker>
-            <mat-error *ngIf="leaveRequestForm.get('toDate')?.hasError('required')">
-              Please select date
-            </mat-error>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
+          <label>Reason<span class="mandatory">&nbsp;*</span></label>
+          <mat-form-field class="example-full-width mb-3" appearance="outline">
+            <textarea matInput formControlName="reason"></textarea>
           </mat-form-field>
         </div>
       </div>
@@ -107,20 +182,34 @@
           </mat-form-field>
         </div> -->
       </div>
-      <div class="row">
-        <div class=" col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+      <!-- <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
           <label>Reason<span class="mandatory">&nbsp;*</span></label>
           <mat-form-field class="example-full-width mb-3" appearance="outline">
             <textarea matInput formControlName="reason"></textarea>
           </mat-form-field>
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
           <div class="example-button-row">
-            <button mat-raised-button color="primary" [disabled]="!leaveRequestForm.valid" [mat-dialog-close]="1"
-              (click)="confirmAdd()">Save</button>
-            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancel</button>
+            <button
+              mat-raised-button
+              color="primary"
+              [disabled]="!leaveRequestForm.valid"
+              [mat-dialog-close]="1"
+              (click)="confirmAdd()"
+            >
+              Save
+            </button>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="onNoClick()"
+              tabindex="-1"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>

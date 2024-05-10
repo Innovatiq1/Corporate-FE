@@ -62,7 +62,17 @@ export class ScheduleClassComponent {
   pageSizeArr = [10, 20, 50, 100];
   searchTerm: string = '';
 
-  displayedColumns = ['courseName','Code', 'Price','Department', 'startDate', 'endDate', 'Class'];
+  displayedColumns = [
+    'courseName',
+    'Code',
+    'Price',
+    'Department',
+    'startDate',
+    'endDate',
+    'Class',
+    'Minimum Students',
+    'Maximum Students',
+  ];
 
   breadscrums = [
     {
@@ -104,7 +114,7 @@ export class ScheduleClassComponent {
           this.coursePaginationModel.page = response.data.page;
           this.coursePaginationModel.limit = response.data.limit;
         },
-        () => { }
+        () => {}
       );
   }
 
@@ -127,32 +137,59 @@ export class ScheduleClassComponent {
     this.next = false;
   }
   exportExcel() {
-    
-    const exportData: Partial<TableElement>[] =
-      this.dataSource.map((user: any) => ({
-        'Program': user?.courseId?.title,
-        'Program Code':user?.courseId?.courseCode,
-        'Amount':'$ '+user?.instructorCost,
-        'Department':user?.department,
-        'StartDate': formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
-        'EndDate': formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
-        'Class':user?.classDeliveryType,
-      }));
+    const exportData: Partial<TableElement>[] = this.dataSource.map(
+      (user: any) => ({
+        Program: user?.courseId?.title,
+        'Program Code': user?.courseId?.courseCode,
+        Amount: '$ ' + user?.instructorCost,
+        Department: user?.department,
+        StartDate:
+          formatDate(
+            new Date(user?.sessions[0]?.sessionStartDate),
+            'yyyy-MM-dd',
+            'en'
+          ) || '',
+        EndDate:
+          formatDate(
+            new Date(user?.sessions[0]?.sessionEndDate),
+            'yyyy-MM-dd',
+            'en'
+          ) || '',
+        Class: user?.classDeliveryType,
+      })
+    );
     TableExportUtil.exportToExcel(exportData, 'Program Class-list');
   }
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Program', 'Program Code','Amount','Department','Start Date', 'End Date','Class']];
-    const data = this.dataSource.map((user: any) =>
+    const headers = [
       [
-       user?.courseId?.title,
-       user?.courseId?.courseCode,
-       '$ '+user?.instructorCost,
-       user?.department,
-       formatDate(new Date(user?.sessions[0]?.sessionStartDate), 'yyyy-MM-dd', 'en') || '' ,
-       formatDate(new Date(user?.sessions[0]?.sessionEndDate), 'yyyy-MM-dd', 'en') || '' ,
-       user?.classDeliveryType,
-      ]);
+        'Program',
+        'Program Code',
+        'Amount',
+        'Department',
+        'Start Date',
+        'End Date',
+        'Class',
+      ],
+    ];
+    const data = this.dataSource.map((user: any) => [
+      user?.courseId?.title,
+      user?.courseId?.courseCode,
+      '$ ' + user?.instructorCost,
+      user?.department,
+      formatDate(
+        new Date(user?.sessions[0]?.sessionStartDate),
+        'yyyy-MM-dd',
+        'en'
+      ) || '',
+      formatDate(
+        new Date(user?.sessions[0]?.sessionEndDate),
+        'yyyy-MM-dd',
+        'en'
+      ) || '',
+      user?.classDeliveryType,
+    ]);
     const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];
     (doc as any).autoTable({
       head: headers,
@@ -161,9 +198,6 @@ export class ScheduleClassComponent {
     });
     doc.save('Program Class-list.pdf');
   }
-
-
-
 
   addNewRow() {
     if (this.isInstructorFailed != 1 && this.isLabFailed != 1) {
@@ -179,7 +213,7 @@ export class ScheduleClassComponent {
     }
   }
   editRow(_id: string) {
-    console.log("id", _id)
+    console.log('id', _id);
   }
   delete(id: string) {
     this.courseService
@@ -197,14 +231,14 @@ export class ScheduleClassComponent {
           return;
         }
         Swal.fire({
-          title: "Confirm Deletion",
-          text: "Are you sure you want to delete this Class?",
-          icon: "warning",
+          title: 'Confirm Deletion',
+          text: 'Are you sure you want to delete this Class?',
+          icon: 'warning',
           showCancelButton: true,
-          confirmButtonColor: "#d33",
-          cancelButtonColor: "#3085d6",
-          confirmButtonText: "Delete",
-          cancelButtonText: "Cancel",
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Delete',
+          cancelButtonText: 'Cancel',
         }).then((result) => {
           if (result.isConfirmed) {
             this.courseService.deleteProgramClass(id).subscribe(() => {
@@ -215,8 +249,8 @@ export class ScheduleClassComponent {
               });
               this.getClassList();
             });
-      }
-      });
+          }
+        });
       });
   }
 
@@ -302,21 +336,17 @@ export class ScheduleClassComponent {
   }
 
   performSearch() {
-    if(this.searchTerm){
-    this.dataSource = this.dataSource?.filter((item: any) =>{
-      const search = (item.courseId?.title).toLowerCase()
-      return search.indexOf(this.searchTerm.toLowerCase())!== -1;
-
-    }
-    );
+    if (this.searchTerm) {
+      this.dataSource = this.dataSource?.filter((item: any) => {
+        const search = (item.courseId?.title).toLowerCase();
+        return search.indexOf(this.searchTerm.toLowerCase()) !== -1;
+      });
     } else {
-       this.getClassList();
-
+      this.getClassList();
     }
   }
 
-   getStatusClass(classDeliveryType: string): string {
+  getStatusClass(classDeliveryType: string): string {
     return classDeliveryType === 'online' ? 'success' : 'fail';
   }
-
 }

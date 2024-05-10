@@ -20,6 +20,24 @@ import { ProgramRegistrationComponent } from './program-registration/program-reg
 import { ProgramApprovalComponent } from './program-approval/program-approval.component';
 import { ProgramCompletionComponent } from './program-completion/program-completion.component';
 import { DirectorCourseNotificationComponent } from './director-course-notification/director-course-notification.component';
+import { RoCourseNotificationComponent } from './ro-course-notification/ro-course-notification.component';
+import { TaCourseNotificationComponent } from './ta-course-notification/ta-course-notification.component';
+import { NewTrainingRequestComponent } from './new-training-request/new-training-request.component';
+import { TrainingReqExpiryComponent } from './training-req-expiry/training-req-expiry.component';
+import { RoCourseApprovalComponent } from './ro-course-approval/ro-course-approval.component';
+import { DirectorCourseApprovalComponent } from './director-course-approval/director-course-approval.component';
+import { TaCourseApprovalComponent } from './ta-course-approval/ta-course-approval.component';
+import { RoCourseRejectedComponent } from './ro-course-rejected/ro-course-rejected.component';
+import { DirectorCourseRejectedComponent } from './director-course-rejected/director-course-rejected.component';
+import { TaCourseRejectedComponent } from './ta-course-rejected/ta-course-rejected.component';
+import { TaBudgetRequestComponent } from './ta-budget-request/ta-budget-request.component';
+import { DirectorBudgetReqNotifComponent } from './director-budget-req-notif/director-budget-req-notif.component';
+import { DirectorBudgetReqApprovalComponent } from './director-budget-req-approval/director-budget-req-approval.component';
+import { DirectorBudgetReqRejectedComponent } from './director-budget-req-rejected/director-budget-req-rejected.component';
+import { DeptBudgetReqNotifComponent } from './dept-budget-req-notif/dept-budget-req-notif.component';
+import { DeptBudgetReqComponent } from './dept-budget-req/dept-budget-req.component';
+import { DeptBudgetReqApprovalComponent } from './dept-budget-req-approval/dept-budget-req-approval.component';
+import { DeptBudgetReqRejectedComponent } from './dept-budget-req-rejected/dept-budget-req-rejected.component';
 
 
 
@@ -40,7 +58,25 @@ import { DirectorCourseNotificationComponent } from './director-course-notificat
                  AdminNewEmailComponent,
                  ProgramRegistrationComponent,
                  ProgramApprovalComponent,
-                 ProgramCompletionComponent
+                 ProgramCompletionComponent,
+                 RoCourseNotificationComponent,
+                 TaCourseNotificationComponent,
+                 NewTrainingRequestComponent,
+                 TrainingReqExpiryComponent,
+                 RoCourseApprovalComponent,
+                 DirectorCourseApprovalComponent,
+                 TaCourseApprovalComponent,
+                 RoCourseRejectedComponent,
+                 DirectorCourseRejectedComponent,
+                 TaCourseRejectedComponent,
+                 TaBudgetRequestComponent,
+                 DirectorBudgetReqNotifComponent,
+                 DirectorBudgetReqApprovalComponent,
+                 DirectorBudgetReqRejectedComponent,
+                 DeptBudgetReqNotifComponent,
+                 DeptBudgetReqComponent,
+                 DeptBudgetReqApprovalComponent,
+                 DeptBudgetReqRejectedComponent
   ],
     imports: [
         CommonModule, EmailConfigurationRoutingModule,

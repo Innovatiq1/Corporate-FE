@@ -102,6 +102,9 @@ export class EditDeptBudgetRequestComponent {
       this.payload = {
         approval: 'Rejected',
         reason: this.empRequestForm.value.reason,
+        employeeEmail:this.data.empRequest.employeeEmail,
+        employeeName:this.data.empRequest.employeeName
+
       };
     }
 
@@ -125,9 +128,14 @@ export class EditDeptBudgetRequestComponent {
 
   approveRequest() {
     if (this.director) {
+      console.log('data',this.data)
+
       this.payload = {
         approval: 'Approved',
         reason: this.empRequestForm.value.reason,
+        employeeEmail:this.data.empRequest.employeeEmail,
+        employeeName:this.data.empRequest.employeeName
+
       };
     }
 

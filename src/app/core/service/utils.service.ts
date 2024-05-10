@@ -23,6 +23,11 @@ export class UtilsService {
       { type: 'minlength', message: 'Enter minimum 2 characters' },
       { type: 'maxlength', message: 'Enter maximum 255 characters' },
     ],
+    deptname: [
+      { type: 'required', message: 'Select Department' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
     grant_type: [
       { type: 'required', message: 'Enter Funding Grant' },
       { type: 'minlength', message: 'Enter minimum 2 characters' },
@@ -153,8 +158,17 @@ export class UtilsService {
       { type: 'minlength', message: 'Enter minimum 2 characters' },
       { type: 'maxlength', message: 'Enter maximum 255 characters' },
     ],
+    address:[
+      { type: 'required', message: 'Enter Address' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
     mobile: [
       { type: 'required', message: 'Enter Mobile Number' },
+      
+    ],
+    city: [
+      { type: 'required', message: 'Enter City' },
       
     ],
     dob: [
@@ -329,6 +343,9 @@ export class UtilsService {
     'password':[
       {type:'required', message: 'Enter Valid Password'}
     ],
+    'currentPsw':[
+      {type:'required', message: 'Enter Current Password'}
+    ],
     'type':[
       {type: 'required', message: 'Select User Type'}
     ],
@@ -351,10 +368,10 @@ export class UtilsService {
       {type:'required',message:'Enter Email Subject'}
     ],
     'email_top_welcome_text':[
-      {type:'required',message:'Enter Top Welcome Text'}
+      {type:'required',message:'Enter Top Header Text'}
     ],
     'email_top_header_text':[
-      {type:'required',message:'Enter Top Welcome Text'}
+      {type:'required',message:'Enter Top Header Text'}
     ],
     'email_content1':[
       {type:'required',message:'Enter Text'}
@@ -396,6 +413,11 @@ export class UtilsService {
       Validators.minLength(2),
       Validators.maxLength(150),
     ],
+    deptname:[
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(150),
+    ],
     ename: [
       // Validators.required,
       Validators.minLength(2),
@@ -405,6 +427,15 @@ export class UtilsService {
       // Validators.required,
       Validators.minLength(2),
       Validators.maxLength(150),
+    ],
+    password:[
+      Validators.required,
+    ],
+    currentPsw:[
+      Validators.required,
+    ],
+    city: [
+      Validators.required,
     ],
     assessment:[Validators.required,Validators.minLength(2), Validators.maxLength(150)],
     e_assessment:[Validators.required,Validators.minLength(2), Validators.maxLength(150)],
@@ -431,7 +462,10 @@ export class UtilsService {
         return null;
       }
     }],
-    dob:[Validators.required],
+    uname:[Validators.required],
+    dob:[Validators.required,Validators.min(2)],
+    address:[Validators.required,Validators.min(5),Validators.max(250)],
+    country:[Validators.required],
     edu:[Validators.required,Validators.minLength(2), Validators.maxLength(150)],
     mobile:[Validators.required, Validators.pattern('[0-9]+')],
     roll_no:[Validators.required, Validators.minLength(2), Validators.maxLength(150)],

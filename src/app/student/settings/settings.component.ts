@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LogoService } from './logo.service';
 import { StudentsService } from 'app/admin/students/students.service';
 import { UserService } from '@core/service/user.service';
+import { UtilsService } from '@core/service/utils.service';
 
 @Component({
   selector: 'app-settings',
@@ -131,6 +132,7 @@ export class SettingsComponent {
     private fb: UntypedFormBuilder,
     private certificateService: CertificateService,
     private router: Router,
+    public utils: UtilsService,
     private authenservice: AuthenService,
     private courseService: CourseService,
     private logoService: LogoService,
@@ -455,28 +457,28 @@ export class SettingsComponent {
     this.patchValues(),
       //this.patchValues1()
       (this.stdForm = this.fb.group({
-        name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-        password: [''],
-        currentpassword: [''],
+        name: ['', [Validators.required,...this.utils.validators.uname]],
+        password: ['', [Validators.required,...this.utils.validators.password]],
+        currentpassword: ['', [Validators.required,...this.utils.validators.currentPsw]],
       }));
     this.stdForm1 = this.fb.group({
-      name: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
-
+      name: ['', [Validators.required,...this.utils.validators.fname]],
+      
       last_name: [''],
-      department: ['', Validators.required],
-      approver1: ['', Validators.required],
-      approver2: ['', Validators.required],
-      approver3: ['', Validators.required],
-      mobile: [''],
-      city_name: ['', [Validators.required]],
-      country_name: ['', [Validators.required]],
+      department: ['', [Validators.required,...this.utils.validators.deptname]],
+      approver1: [''],
+      approver2: [''],
+      approver3: [''],
+      mobile: ['',[Validators.required,...this.utils.validators.mobile]],
+      city_name: ['', [Validators.required,...this.utils.validators.city]],
+      country_name: ['', [Validators.required,...this.utils.validators.country]],
 
       email: [
         '',
         [Validators.required, Validators.email, Validators.minLength(5)],
       ],
 
-      address: [''],
+      address: ['',[Validators.required,...this.utils.validators.address]],
       avatar: [''],
     });
 
@@ -704,6 +706,7 @@ export class SettingsComponent {
     // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
     this.studentService.getStudentById(this.studentId).subscribe((res: any) => {
       this.editData = res;
+      console.log(res,"=====");
       this.avatar = this.editData.avatar;
       this.uploaded = this.avatar?.split('/');
       let image  = this.uploaded?.pop();
@@ -724,18 +727,18 @@ export class SettingsComponent {
         currentpassword: this.editData.password,
       });
       this.stdForm1.patchValue({
-        name: this.editData.name,
-        last: this.editData.last_name,
-        rollNo: this.editData.rollNo,
-        gender: this.editData.gender,
-        mobile: this.editData.mobile,
-        department:this.editData.department,
-        approver1: this.editData.ro,
-        approver2: this.editData.director,
-        approver3: this.editData.trainingAdmin,
-        email: this.editData.email,
-        country_name: this.editData.country_name,
-        city_name: this.editData.city_name,
+        name: this.editData?.name,
+        last_name: this.editData?.last_name,
+        rollNo: this.editData?.rollNo,
+        gender: this.editData?.gender,
+        mobile: this.editData?.mobile,
+        department:this.editData?.department,
+        approver1: this.editData?.ro,
+        approver2: this.editData?.director,
+        approver3: this.editData?.trainingAdmin,
+        email: this.editData?.email,
+        country_name: this.editData?.country_name,
+        city_name: this.editData?.city_name,
 
         address: this.editData.address,
         uploadedImage: this.editData.avatar,
@@ -800,6 +803,8 @@ export class SettingsComponent {
 
       Swal.close();
       // },
+    }else{
+      this.stdForm.markAllAsTouched();
     }
   }
   // onSubmit1() {
@@ -835,6 +840,8 @@ export class SettingsComponent {
   //   }
   // }
   onSubmit1() {
+console.log(this.stdForm1)
+
     if (!this.stdForm1.invalid) {
       // No need to call uploadVideo() here since it's not needed
         const userData: any = this.stdForm1.value;

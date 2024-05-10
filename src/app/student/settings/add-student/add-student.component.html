@@ -2,319 +2,198 @@
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
-      <app-breadcrumb
-        [title]="breadscrum.title"
-        [items]="breadscrum.items"
-        [active_item]="breadscrum.active"
-      >
+      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
       </app-breadcrumb>
     </div>
     <div class="row clearfix">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
-            <h2>{{ edit ? "Edit Student" : "Add Student" }}</h2>
+            <h2>{{ edit ? "Edit Student" : "Create Student" }}</h2>
           </div>
           <div class="body">
             <form class="m-4" [formGroup]="stdForm">
               <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label
-                    >First name <span class="mandatory">&nbsp;*</span></label
-                  >
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
+                  <label>First name <span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="name" required />
-                    <mat-error
-                      *ngIf="stdForm.get('name')?.hasError('required')"
-                    >
-                    Enter First Name 
+                    <mat-error *ngIf="stdForm.get('name')?.hasError('required')">
+                      Enter First Name
                     </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Last name')">
                   <label>Last name </label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="last_name" />
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Roll No <span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="rollNo" />
-                    <mat-error
-                      *ngIf="
+                    <mat-error *ngIf="
                         stdForm.get('rollNo')?.invalid &&
                         stdForm.get('rollNo')?.touched
-                      "
-                    >
+                      ">
                       {{
-                        utils.getErrorMessage1(stdForm.get("rollNo"), "roll_no")
+                      utils.getErrorMessage1(stdForm.get("rollNo"), "roll_no")
                       }}
                     </mat-error>
                   </mat-form-field>
                 </div>
+
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Email<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="email" required />
-                    <mat-error
-                      *ngIf="
+                    <mat-error *ngIf="
                         stdForm.get('email')?.invalid &&
                         stdForm.get('email')?.touched
-                      "
-                    >
+                      ">
                       {{
-                        utils.getErrorMessage1(stdForm.get("email"), "email")
+                      utils.getErrorMessage1(stdForm.get("email"), "email")
                       }}
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Gender<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <mat-select formControlName="gender" required>
-                      <mat-option [value]="'male'"> Male </mat-option>
-                      <mat-option [value]="'female'"> Female </mat-option>
-                      <mat-option [value]="'other'"> Other </mat-option>
-                    </mat-select>
-                    <mat-error
-                      *ngIf="stdForm.get('gender')?.hasError('required')"
-                    >
-                     Please Select Gender 
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Mobile<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <input
-                      matInput
-                      formControlName="mobile"
-                      type="number"
-                      required
-                    />
-                    <mat-error
-                      *ngIf="
-                        stdForm.get('mobile')?.invalid &&
-                        stdForm.get('mobile')?.touched
-                      "
-                    >
-                      {{
-                        utils.getErrorMessage1(stdForm.get("mobile"), "mobile")
-                      }}
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label
-                    >Education <span class="mandatory">&nbsp;*</span></label
-                  >
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <input matInput formControlName="education"/>
-                    <mat-error
-                    *ngIf="
-                      stdForm.get('education')?.invalid &&
-                      stdForm.get('education')?.touched
-                    "
-                  >
-                    {{
-                      utils.getErrorMessage1(stdForm.get("education"), "edu")
-                    }}
-                  </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label
-                    >Date Of Birth<span class="mandatory">&nbsp;*</span>
-                  </label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <input
-                      matInput
-                      [matDatepicker]="picker"
-                      formControlName="dob"
-                    />
-
-                    <mat-datepicker-toggle
-                      matSuffix
-                      [for]="picker"
-                    ></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="stdForm.get('dob')?.hasError('required')">
-                      Please select date
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label
-                    >Registration Date
-                    <span class="mandatory">&nbsp;*</span></label
-                  >
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <input
-                      matInput
-                      [matDatepicker]="rpicker"
-                      formControlName="joiningDate"
-                      required
-                    />
-                    <mat-datepicker-toggle
-                      matSuffix
-                      [for]="rpicker"
-                    ></mat-datepicker-toggle>
-                    <mat-datepicker #rpicker></mat-datepicker>
-                    <mat-error
-                      *ngIf="stdForm.get('joiningDate')?.hasError('required')"
-                    >
-                      Please select date
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label
-                    >Select Department
-                    <span class="mandatory">&nbsp;*</span></label
-                  >
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <mat-select formControlName="department" required>
-                      <mat-option
-                        [value]="dept.department"
-                        *ngFor="let dept of dept"
-                      >
-                        {{ dept.department }}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error
-                      *ngIf="stdForm.get('department')?.hasError('required')"
-                    >
-                      Select Any Department
                     </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
                   <label>Password <span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <input
-                      matInput
-                      formControlName="password"
-                      type="password"
-                      required
-                    />
-                    <mat-error
-                      *ngIf="stdForm.get('password')?.hasError('required')"
-                    >
-                      Enter Password 
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="password" type="password" required />
+                    <mat-error *ngIf="stdForm.get('password')?.hasError('required')">
+                      Enter Password
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <!-- <div *ngIf="!edit" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label
-                    >Re-Enter Password
-                    <span class="mandatory">&nbsp;*</span></label
-                  >
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <input
-                      matInput
-                      formControlName="conformPassword"
-                      type="password"
-                      required
-                    />
-                    <mat-error
-                      *ngIf="
+                <div *ngIf="!edit" class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Re-Enter Password
+                    <span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="conformPassword" type="password" required />
+                    <mat-error *ngIf="
                         stdForm.get('conformPassword')?.hasError('required')
-                      "
-                    >
+                      ">
                       Re-Enter Password
                     </mat-error>
-                    <mat-error
-                      *ngIf="
+                    <mat-error *ngIf="
                         stdForm
                           .get('conformPassword')
                           ?.hasError('confirmedValidator')
-                      "
-                    >
+                      ">
                       Password and Re-Enter Password must be match
                     </mat-error>
                   </mat-form-field>
-                </div> -->
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Gender<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-select formControlName="gender" required>
+                      <mat-option [value]="'male'"> Male </mat-option>
+                      <mat-option [value]="'female'"> Female </mat-option>
+                      <mat-option [value]="'other'"> Other </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="stdForm.get('gender')?.hasError('required')">
+                      Select Gender
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Mobile<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="mobile" type="number" required />
+                    <mat-error *ngIf="
+                        stdForm.get('mobile')?.invalid &&
+                        stdForm.get('mobile')?.touched
+                      ">
+                      {{
+                      utils.getErrorMessage1(stdForm.get("mobile"), "mobile")
+                      }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Education <span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="name" required />
+                    <mat-error *ngIf="
+                      stdForm.get('education')?.invalid &&
+                      stdForm.get('education')?.touched
+                    ">
+                      {{
+                      utils.getErrorMessage1(stdForm.get("education"), "edu")
+                      }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Date of Birth<span class="mandatory">&nbsp;*</span>
+                  </label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput [matDatepicker]="picker" formControlName="dob" />
+
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="stdForm.get('dob')?.hasError('required')">
+                      select date
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Registration Date
+                    <span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput [matDatepicker]="rpicker" formControlName="joiningDate" required />
+                    <mat-datepicker-toggle matSuffix [for]="rpicker"></mat-datepicker-toggle>
+                    <mat-datepicker #rpicker></mat-datepicker>
+                    <mat-error *ngIf="stdForm.get('joiningDate')?.hasError('required')">
+                      select date
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Department
+                    <span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-select formControlName="department" required>
+                      <mat-option [value]="dept.department" *ngFor="let dept of dept">
+                        {{ dept.department }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="stdForm.get('department')?.hasError('required')">
+                      Select Department
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                  
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Blood Group')">
                   <label>Blood Group</label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="blood_group" />
                   </mat-form-field>
                 </div>
 
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Parents name')">
                   <label>Parents name </label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="parentsName" />
-                    <mat-error
-                      *ngIf="stdForm.get('parentsName')?.hasError('required')"
-                    >
-                     Enter Parents Name 
+                    <mat-error *ngIf="stdForm.get('parentsName')?.hasError('required')">
+                      Enter Parents Name
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Parents Mobile Number')">
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"
+                  *ngIf="labelStatusCheck('Parents Mobile Number')">
                   <label>Parents Mobile Number </label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
-                    <input
-                      matInput
-                      formControlName="parentsPhone"
-                      type="number"
-                    />
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="parentsPhone" type="number" />
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Address')">
                   <label>Address </label>
-                  <mat-form-field
-                    class="example-full-width mb-3"
-                    appearance="outline"
-                  >
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <textarea matInput formControlName="address"></textarea>
                   </mat-form-field>
                 </div>
@@ -327,47 +206,27 @@
                     <div class="file">
                       <button mat-raised-button color="primary" class="btn">
                         Choose file
-                        <input
-                          formControlName="avatar"
-                          (change)="onFileUpload($event)"
-                          class="file-input"
-                          type="file"
-                        />
+                        <input formControlName="avatar" (change)="onFileUpload($event)" class="file-input"
+                          type="file" />
                       </button>
-                      <span class="file-msg"
-                        ><h5>
+                      <span class="file-msg">
+                        <h5>
                           {{ fileName ? fileName : "Drag and Drop File Here" }}
-                        </h5></span
-                      >
+                        </h5>
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="row" style="float: right">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                  <button
-                    type="button"
-                    class="btn-space"
-                    mat-raised-button
-                    color="warn"
-                    (click)="cancel()"
-                  >
+                  <button type="button" class="btn-space" mat-raised-button color="warn" (click)="cancel()">
                     Cancel
                   </button>
-                  <button
-                    *ngIf="!edit"
-                    mat-raised-button
-                    id="submit"
-                    (click)="onSubmit()"
-                  >
+                  <button *ngIf="!edit" mat-raised-button id="submit" (click)="onSubmit()">
                     Create
                   </button>
-                  <button
-                    *ngIf="edit"
-                    mat-raised-button
-                    id="submit"
-                    (click)="update()"
-                  >
+                  <button *ngIf="edit" mat-raised-button id="submit" (click)="update()">
                     Update
                   </button>
                 </div>
