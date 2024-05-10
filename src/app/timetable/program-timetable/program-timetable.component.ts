@@ -20,7 +20,7 @@ export class ProgramTimetableComponent implements OnInit {
     {
       title: 'Program Timetable',
       items: ['Timetable'],
-      active: 'Program Timetable',
+      active: 'All Programs',
     },
   ];
   studentApprovedClasses: any;
@@ -38,10 +38,11 @@ export class ProgramTimetableComponent implements OnInit {
     public dialog: MatDialog
   ) {
     let userType = localStorage.getItem('user_type');
-    if (userType == 'Student') {
-      this.getApprovedCourse();
-      this.getApprovedProgram();
-    } else if (userType == 'admin') {
+    // if(userType == "Student"){
+    //   this.getApprovedCourse();
+    //   this.getApprovedProgram();
+    // }
+    if (userType == 'admin' || userType == 'Student') {
       this.getClassesList();
     }
     if (userType == 'Instructor') {
