@@ -1,13 +1,13 @@
 <section *ngIf="free" class="content">
   <div class="content-block">
-    <!-- <div class="block-header" *ngFor="let breadscrum of breadscrums">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <app-breadcrumb
         [title]="breadscrum.title"
         [items]="breadscrum.items"
         [active_item]="breadscrum.active"
       >
       </app-breadcrumb>
-    </div> -->
+    </div>
     <!-- Your content goes here  -->
     <!--  -->
     <div class="row clearfix mt-5">
@@ -27,9 +27,7 @@
                 alt=""
               />
               <p
-                [innerHTML]="
-                  courseDetails?.course_description | bulletPoints
-                "
+                [innerHTML]="courseDetails?.course_description | bulletPoints"
               ></p>
 
               <div class="row">
@@ -46,9 +44,7 @@
                   <span class="dis_font">Hours</span>
                 </div>
                 <div class="col-5">
-                  <span class="day_font"
-                    >${{ courseDetails?.fee || 0 }} </span
-                  >
+                  <span class="day_font">${{ courseDetails?.fee || 0 }} </span>
                   <span class="dis_font">Fee</span>
                 </div>
               </div>
@@ -59,20 +55,19 @@
           <mat-tab-group mat-align-tabs="start">
             <mat-tab label="About">
               <div class="p-4">
-            
                 <ul class="list-group list-group-unbordered">
                   <li class="list-group-item">
                     <b>Category </b>
                     <div class="profile-desc-item float-end">
-                      {{ courseDetails?.main_category?.category_name
-                        | titlecase }}
+                      {{
+                        courseDetails?.main_category?.category_name | titlecase
+                      }}
                     </div>
                   </li>
                   <li class="list-group-item">
                     <b>Course Created </b>
                     <div class="profile-desc-item float-end">
-                      {{ courseDetails?.updatedAt
-                        | date }}
+                      {{ courseDetails?.updatedAt | date }}
                     </div>
                   </li>
                   <li class="list-group-item">
@@ -222,13 +217,11 @@
                     <span class="font-bold">Course Description:</span>
                     <p
                       [innerHTML]="
-                        courseDetails?.course_description
-                          | bulletPoints
+                        courseDetails?.course_description | bulletPoints
                       "
                     ></p>
                     <div class="row p-2 bg-light" style="border-radius: 5px">
                       <div class="col-6">
-                     
                         <span class="font-bold"
                           >Title:
                           <p class="font-">
@@ -240,7 +233,7 @@
                           <p>{{ courseDetails?.courseCode }}</p></span
                         >
                       </div>
-            
+
                       <div class="col-6">
                         <label class="font-bold">About</label>
                         <div
@@ -260,7 +253,7 @@
                           </div>
                           <div>
                             <span class="day_font"
-                              >${{ courseDetails?.fee  || 0}}</span
+                              >${{ courseDetails?.fee || 0 }}</span
                             >
                             <span class="dis_font">Fee</span>
                           </div>
@@ -268,43 +261,43 @@
                       </div>
                       <div class="col-6">
                         <span class="font-bold"
-                        >Status:
-                        <button
-                        *ngIf="
-                          !isRegistered &&
-                          !isStatus &&
-                          !isApproved &&
-                          !isCancelled &&
-                          !isCompleted
-                        "
-                        class="btn btn-primary"
-                        (click)="registerClass(courseDetails._id)"
-                      >
-                        Register
-                      </button>
-  
-                      <span
-                        class="badge badge-solid-orange mx-2"
-                        *ngIf="isRegistered || isStatus"
-                        >Registered</span
-                      >
-                      <span
-                        class="badge badge-solid-green mx-2"
-                        *ngIf="isApproved"
-                        >Approved</span
-                      >
-                      <span
-                        class="badge badge-solid-red mx-2"
-                        *ngIf="isCancelled"
-                        >Cancelled</span
-                      >
-                      <span
-                        class="badge badge-solid-green mx-2"
-                        *ngIf="isCompleted"
-                        >Completed</span
-                      >
-                      </span>
-  </div>
+                          >Status:
+                          <button
+                            *ngIf="
+                              !isRegistered &&
+                              !isStatus &&
+                              !isApproved &&
+                              !isCancelled &&
+                              !isCompleted
+                            "
+                            class="btn btn-primary"
+                            (click)="registerClass(courseDetails._id)"
+                          >
+                            Register
+                          </button>
+
+                          <span
+                            class="badge badge-solid-orange mx-2"
+                            *ngIf="isRegistered || isStatus"
+                            >Registered</span
+                          >
+                          <span
+                            class="badge badge-solid-green mx-2"
+                            *ngIf="isApproved"
+                            >Approved</span
+                          >
+                          <span
+                            class="badge badge-solid-red mx-2"
+                            *ngIf="isCancelled"
+                            >Cancelled</span
+                          >
+                          <span
+                            class="badge badge-solid-green mx-2"
+                            *ngIf="isCompleted"
+                            >Completed</span
+                          >
+                        </span>
+                      </div>
                     </div>
 
                     <ul class="m-2 list-group-unbordered">
@@ -445,27 +438,29 @@
                     role="tabpanel"
                     aria-labelledby="contact-tab"
                   >
-                  <div *ngIf="!certificateIssued">
-                    <h5 class="bg-light p-2">Certificate:
-                      <span class="badge badge-solid-green">
-                        Certificate will be available</span
-                      >
+                    <div *ngIf="!certificateIssued">
+                      <h5 class="bg-light p-2">
+                        Certificate:
+                        <span class="badge badge-solid-green">
+                          Certificate will be available</span
+                        >
                       </h5>
-                  </div>
+                    </div>
 
-                  <div *ngIf="certificateIssued">
-                    <div class="col-6">
-                      <h5 class="bg-light p-2">Certificate:
+                    <div *ngIf="certificateIssued">
+                      <div class="col-6">
+                        <h5 class="bg-light p-2">
+                          Certificate:
 
-                      <a
-                        href="{{ studentClassDetails?.certifiacteUrl }}"
-                        target="_blank"
-                      >
-                        <mat-icon>download</mat-icon></a
-                      >
-                      </h5>
+                          <a
+                            href="{{ studentClassDetails?.certifiacteUrl }}"
+                            target="_blank"
+                          >
+                            <mat-icon>download</mat-icon></a
+                          >
+                        </h5>
                       </div>
-                  </div>
+                    </div>
                   </div>
                   <div
                     class="tab-pane fade"
@@ -583,7 +578,6 @@
               <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="project_widget">
                   <div class="body">
-                
                     <p
                       class="m-t-30"
                       [innerHTML]="
@@ -613,43 +607,41 @@
                   <li class="list-group-item">
                     <b>Registration </b>
                     <div class="profile-desc-item float-end">
-                    <button
-                    *ngIf="
-                      !isRegistered &&
-                      !isStatus &&
-                      !isApproved &&
-                      !isCancelled &&
-                      !isCompleted
-                    "
-                    class="btn btn-primary"
-                    (click)="registerClass(courseDetails._id)"
-                  >
-                    Register
-                  </button>
+                      <button
+                        *ngIf="
+                          !isRegistered &&
+                          !isStatus &&
+                          !isApproved &&
+                          !isCancelled &&
+                          !isCompleted
+                        "
+                        class="btn btn-primary"
+                        (click)="registerClass(courseDetails._id)"
+                      >
+                        Register
+                      </button>
 
-                  <span
-                    class="badge badge-solid-orange mx-2"
-                    *ngIf="isRegistered || isStatus"
-                    >Registered</span
-                  >
-                  <span
-                    class="badge badge-solid-green mx-2"
-                    *ngIf="isApproved"
-                    >Approved</span
-                  >
-                  <span
-                    class="badge badge-solid-red mx-2"
-                    *ngIf="isCancelled"
-                    >Cancelled</span
-                  >
-                  <span
-                    class="badge badge-solid-green mx-2"
-                    *ngIf="isCompleted"
-                    >Completed</span
-                  >
-                </div>
-
-
+                      <span
+                        class="badge badge-solid-orange mx-2"
+                        *ngIf="isRegistered || isStatus"
+                        >Registered</span
+                      >
+                      <span
+                        class="badge badge-solid-green mx-2"
+                        *ngIf="isApproved"
+                        >Approved</span
+                      >
+                      <span
+                        class="badge badge-solid-red mx-2"
+                        *ngIf="isCancelled"
+                        >Cancelled</span
+                      >
+                      <span
+                        class="badge badge-solid-green mx-2"
+                        *ngIf="isCompleted"
+                        >Completed</span
+                      >
+                    </div>
                   </li>
                   <!-- <li class="list-group-item">
                           <b>Designation</b>
@@ -749,7 +741,7 @@
     </div> -->
     <!-- Your content goes here  -->
     <!--  -->
-    <div  class="row clearfix mt-5">
+    <div class="row clearfix mt-5">
       <div class="col-lg-4 col-md-3" *ngIf="!isCompleted && !isApproved">
         <div class="card">
           <div class="m-b-20">
@@ -1542,4 +1534,3 @@
     </div>
   </div>
 </section>
-

@@ -119,12 +119,12 @@
                         class="mat-cell advance-table"
                       >
                         <!-- Checkbox Column -->
-                        <ng-container matColumnDef="select">
+                        <!-- <ng-container matColumnDef="select">
                           <mat-header-cell
                             *matHeaderCellDef
                             [ngClass]="'tbl-col-width-per-3'"
                           >
-                            <!-- <mat-checkbox
+                            <mat-checkbox
                               (change)="$event ? masterToggle() : null"
                               [checked]="
                                 selection.hasValue() && isAllSelected()
@@ -134,21 +134,21 @@
                               "
                               [ngClass]="'tbl-checkbox'"
                             >
-                            </mat-checkbox> -->
+                            </mat-checkbox>
                           </mat-header-cell>
                           <mat-cell
                             *matCellDef="let row"
                             [ngClass]="'tbl-col-width-per-3'"
                           >
-                            <!-- <mat-checkbox
+                            <mat-checkbox
                               (click)="$event.stopPropagation()"
                               (change)="$event ? selection.toggle(row) : null"
                               [checked]="selection.isSelected(row)"
                               [ngClass]="'tbl-checkbox'"
                             >
-                            </mat-checkbox> -->
+                            </mat-checkbox>
                           </mat-cell>
-                        </ng-container>
+                        </ng-container> -->
                         <!-- ID Column -->
                         <ng-container matColumnDef="id">
                           <mat-header-cell *matHeaderCellDef mat-sort-header
