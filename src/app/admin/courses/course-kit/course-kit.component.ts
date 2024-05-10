@@ -26,7 +26,7 @@ export class CourseKitComponent implements OnInit{
     'Course',
     'Short Description',
     'Long Description',
-    'Video Link',
+    'Media Link',
     'Document Link'
   ];
 
@@ -296,7 +296,7 @@ export class CourseKitComponent implements OnInit{
        'Course Kit': user.name,
        'Short Description': user.shortDescription,
        'Long Description': user.longDescription,
-       'Video Link': user.videoLink[0].video_filename,
+       'Media Link': user.videoLink[0].video_filename,
        'Document Link': user.videoLink[0].doc_filename,
      })
    );
@@ -305,7 +305,7 @@ export class CourseKitComponent implements OnInit{
 
   generatePdf() {
     const doc = new jsPDF();
-    const headers = [['Course Kit','Short Description','Long Description','Video Link           ','Document Link']];
+    const headers = [['Course Kit','Short Description','Long Description','Media Link','Document Link']];
     const data = this.dataSource.map((user:any) =>
       [user.name,
         user.shortDescription,

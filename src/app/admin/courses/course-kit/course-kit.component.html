@@ -106,11 +106,11 @@
                     <span class="mobile-label">Long Description:</span>{{row.longDescription}}</mat-cell>
                 </ng-container>
                 <!-- Video Link -->
-                <ng-container matColumnDef="Video Link" >
-                  <mat-header-cell *matHeaderCellDef mat-sort-header>Video Link
+                <ng-container matColumnDef="Media Link" >
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Media Link
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" >
-                    <span class="mobile-label">Video Link:</span>
+                    <span class="mobile-label">Media Link:</span>
                     <a class="vl-container" *ngFor="let video of row.videoLink; let i = index"
                     href="javaScript:void(0)"
                     (click)="playVideo(video)">
