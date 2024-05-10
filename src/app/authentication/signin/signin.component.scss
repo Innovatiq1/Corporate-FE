@@ -52,10 +52,10 @@
   }
   .arrow{
     position: absolute;
-    margin-top: -12px;
-    margin-left: 45px;
+    margin-top: -10px;
+    margin-left: -95px;
     border: none;
-    border-radius: 50%;
+    background: none;
   }
   @media only screen and (max-width: 540px) and (min-width: 280px) {
     select{
