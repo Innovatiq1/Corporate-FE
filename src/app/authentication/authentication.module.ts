@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SigninComponent } from './signin/signin.component';
 //import {Ng2TelInputModule} from 'ng2-tel-input';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { SigninRoleComponent } from './signin-role/signin-role.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     SignupComponent,
     LockedComponent,
     ForgotPasswordComponent,
+    SigninRoleComponent,
   ],
   imports: [
     CommonModule,
