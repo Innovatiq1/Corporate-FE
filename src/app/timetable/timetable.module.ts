@@ -22,6 +22,8 @@ import { ViewCourseScheduleComponent } from './list/view-course-schedule/view-co
 import { ViewProgramClassComponent } from './schedule-class/view-program-class/view-program-class.component';
 import { EAttendanceComponent } from './e-attendance/e-attendance.component';
 import { EventDetailDialogComponent } from './program-timetable/event-detail-dialog/event-detail-dialog.component';
+import { MyProgramsComponent } from './my-programs/my-programs.component';
+import { MyCoursesComponent } from './my-courses/my-courses.component';
 @NgModule({
   declarations: [
     CourseTimetableComponent,
@@ -38,7 +40,9 @@ import { EventDetailDialogComponent } from './program-timetable/event-detail-dia
     ViewCourseScheduleComponent,
     ViewProgramClassComponent,
     EAttendanceComponent,
-    EventDetailDialogComponent
+    EventDetailDialogComponent,
+    MyProgramsComponent,
+    MyCoursesComponent
 
   ],
   imports: [
