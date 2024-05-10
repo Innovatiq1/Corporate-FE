@@ -1,19 +1,21 @@
-
-
-  <section class="content">
-    <div class="content-block">
-      <div class="block-header" *ngFor="let breadscrum of breadscrums">
-        <!-- breadcrumb -->
-        <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
-        </app-breadcrumb>
-      </div>
-      <div class="row clearfix">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="card">
-                <div class="materialTableHeader">
-                  <!-- <div class="left">
+<section class="content">
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb
+        [title]="breadscrum.title"
+        [items]="breadscrum.items"
+        [active_item]="breadscrum.active"
+      >
+      </app-breadcrumb>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+              <div class="materialTableHeader">
+                <!-- <div class="left">
                     <ul class="header-buttons-left ms-0">
                       <li class="tbl-title">
                         <h2>In Active Courses</h2>
@@ -25,44 +27,75 @@
                       </li>
                     </ul>
                   </div> -->
-                  <div class="right">
-                    <ul class="tbl-export-btn">
-                     <li>
+                <div class="right">
+                  <ul class="tbl-export-btn">
+                    <li>
                       <ul class="header-buttons-left ms-0">
                         <li class="tbl-search-box">
-                          <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                          <input placeholder="Search" type="text"  #filter class="browser-default search-field" [(ngModel)]="searchTerm" (input)="performSearch()"
-                            aria-label="Search box">
+                          <label for="search-input"
+                            ><i class="material-icons search-icon"
+                              >search</i
+                            ></label
+                          >
+                          <input
+                            placeholder="Search"
+                            type="text"
+                            #filter
+                            class="browser-default search-field"
+                            [(ngModel)]="searchTerm"
+                            (input)="performSearch()"
+                            aria-label="Search box"
+                          />
                         </li>
                       </ul>
-                     </li>
-                      <li class="tbl-header-btn">
-                        <div class="m-l-10" [hidden]=!selection.hasValue() matTooltip="DELETE">
-                          <button mat-mini-fab color="warn" (click)="removeSelectedRows()">
-                            <mat-icon class="col-white">delete
-                            </mat-icon>
-                          </button>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="export-button m-l-10" matTooltip="XLSX" (click)="exportExcel()">
-                          <img src="assets/excel.svg" alt="" />
-                        </div>
-                      </li>
-                      <li>
-                        <div class="export-button m-l-10" matTooltip="PDF" (click)="generatePdf()">
-                          <img src="assets/pdf (1).svg" alt="" />
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+                    </li>
+                    <li class="tbl-header-btn">
+                      <div
+                        class="m-l-10"
+                        [hidden]="!selection.hasValue()"
+                        matTooltip="DELETE"
+                      >
+                        <button
+                          mat-mini-fab
+                          color="warn"
+                          (click)="removeSelectedRows()"
+                        >
+                          <mat-icon class="col-white">delete </mat-icon>
+                        </button>
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="export-button m-l-10"
+                        matTooltip="XLSX"
+                        (click)="exportExcel()"
+                      >
+                        <img src="assets/excel.svg" alt="" />
+                      </div>
+                    </li>
+                    <li>
+                      <div
+                        class="export-button m-l-10"
+                        matTooltip="PDF"
+                        (click)="generatePdf()"
+                      >
+                        <img src="assets/pdf (1).svg" alt="" />
+                      </div>
+                    </li>
+                  </ul>
                 </div>
-                <div class="body overflow-auto">
-                  <div class="responsive_table">
-                    <table mat-table matSort [dataSource]="dataSource" class="mat-cell advance-table">
-                      <!-- Checkbox Column -->
-                      <!-- Checkbox Column -->
-                      <!-- <ng-container matColumnDef="select">
+              </div>
+              <div class="body overflow-auto">
+                <div class="responsive_table">
+                  <table
+                    mat-table
+                    matSort
+                    [dataSource]="dataSource"
+                    class="mat-cell advance-table"
+                  >
+                    <!-- Checkbox Column -->
+                    <!-- Checkbox Column -->
+                    <!-- <ng-container matColumnDef="select">
                         <mat-header-cell *matHeaderCellDef [ngClass]="'tbl-col-width-per-6'">
                           <mat-checkbox (change)="$event ? masterToggle() : null"
                             [checked]="selection.hasValue() && isAllSelected()"
@@ -75,92 +108,153 @@
                           </mat-checkbox>
                         </mat-cell>
                       </ng-container> -->
-        
-                       <!-- Course Name -->
-                      <ng-container matColumnDef="Course Name">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Course</mat-header-cell>
-                        <mat-cell *matCellDef="let row" >
-                          <span class="mobile-label">Course Name:</span> <span class="col-cyan">{{row.title}}</span></mat-cell>
-                      </ng-container>
-                      <!-- Course Code -->
-                      <ng-container matColumnDef="Course Code" >
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Code
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)>
-                          <span class="mobile-label">Course Code:</span>{{row.courseCode }} </mat-cell>
-                      </ng-container>
-                       <!-- Creator -->
-                       <!-- <ng-container matColumnDef="creator" >
+
+                    <!-- Course Name -->
+                    <ng-container matColumnDef="Course Name">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        >Course</mat-header-cell
+                      >
+                      <mat-cell *matCellDef="let row">
+                        <span class="mobile-label">Course Name:</span>
+                        <span class="col-cyan">{{ row.title }}</span></mat-cell
+                      >
+                    </ng-container>
+                    <!-- Course Code -->
+                    <ng-container matColumnDef="Course Code">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        >Code
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        (click)="viewCourse(row.id)"
+                      >
+                        <span class="mobile-label">Course Code:</span
+                        >{{ row.courseCode }}
+                      </mat-cell>
+                    </ng-container>
+                    <!-- Creator -->
+                    <!-- <ng-container matColumnDef="creator" >
                         <mat-header-cell *matHeaderCellDef mat-sort-header>Creator
                         </mat-header-cell>
                         <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)>
                           <span class="mobile-label">Creator:</span>{{row.creator }} </mat-cell>
                       </ng-container> -->
-                      <!-- Main Category -->
-                      <ng-container matColumnDef="Main Category">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Main Category
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)>
-                          <span class="mobile-label">Main Category:</span>{{row.main_category_text}}</mat-cell>
-                      </ng-container>
-                       <!-- Days -->
-                      <ng-container matColumnDef="days">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Days
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)>
-                          <span class="mobile-label">Days:</span>{{row?.course_duration_in_days}} Days</mat-cell>
-                      </ng-container>
-                      <!-- Days -->
-                      <ng-container matColumnDef="hr">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Hours
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)>
-                          <span class="mobile-label">Hours:</span>{{row?.training_hours}} Hours</mat-cell>
-                      </ng-container>
-        <!-- vendor -->
-                      <ng-container matColumnDef="vendors">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Vendor
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)>
-                          <span class="mobile-label">Vendor:</span>{{row.vendor}}</mat-cell>
-                      </ng-container>
-        
-                       <!--Fees -->
-                      <ng-container matColumnDef="Fees">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Payment
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)>
-                          <span class="mobile-label">Payment:</span>{{row.fee}}</mat-cell>
-                      </ng-container>
-                         <!--Start Date -->
-                         <ng-container matColumnDef="startDate">
-                          <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date
-                          </mat-header-cell>
-                          <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)>
-                            <span class="mobile-label">Start Date:</span>{{row.sessionStartDate | date}}</mat-cell>
-                        </ng-container>
-                          <!--End Date -->
-                          <ng-container matColumnDef="endDate">
-                            <mat-header-cell *matHeaderCellDef mat-sort-header>End Date
-                            </mat-header-cell>
-                            <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)>
-                              <span class="mobile-label">End Date:</span>{{row.sessionEndDate | date}}</mat-cell>
-                          </ng-container>
-                       <!-- status -->
-                       <ng-container matColumnDef="status">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header class="compulsory-count-header" style="width: 400px;"> <!-- Adjust the width as needed -->
-                          Status
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let row" (click)="viewCourse(row.id)" >
-                          <span class="mobile-label">Status:</span>
-                          <span class="badge badge-solid-red">
-                            <span class="status-red"></span>
-                            {{ row.status == 'active' ? 'Approved' : 'Pending'}}
-                          </span>
-                        </mat-cell>
-                      </ng-container>
-                      <!-- actions -->
-                      <!-- <ng-container matColumnDef="action">
+                    <!-- Main Category -->
+                    <ng-container matColumnDef="Main Category">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        >Main Category
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        (click)="viewCourse(row.id)"
+                      >
+                        <span class="mobile-label">Main Category:</span
+                        >{{ row.main_category_text }}</mat-cell
+                      >
+                    </ng-container>
+                    <!-- Days -->
+                    <ng-container matColumnDef="days">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        >Days
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        (click)="viewCourse(row.id)"
+                      >
+                        <span class="mobile-label">Days:</span
+                        >{{ row?.course_duration_in_days }} Days</mat-cell
+                      >
+                    </ng-container>
+                    <!-- Days -->
+                    <ng-container matColumnDef="hr">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        >Hours
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        (click)="viewCourse(row.id)"
+                      >
+                        <span class="mobile-label">Hours:</span
+                        >{{ row?.training_hours }} Hours</mat-cell
+                      >
+                    </ng-container>
+                    <!-- vendor -->
+                    <ng-container matColumnDef="vendors">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        >Vendor
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        (click)="viewCourse(row.id)"
+                      >
+                        <span class="mobile-label">Vendor:</span
+                        >{{ row.vendor }}</mat-cell
+                      >
+                    </ng-container>
+
+                    <!--Fees -->
+                    <ng-container matColumnDef="Fees">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        >Payment
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        (click)="viewCourse(row.id)"
+                      >
+                        <span class="mobile-label">Payment:</span
+                        >{{ row.fee }}</mat-cell
+                      >
+                    </ng-container>
+                    <!--Start Date -->
+                    <ng-container matColumnDef="startDate">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        >Start Date
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        (click)="viewCourse(row.id)"
+                      >
+                        <span class="mobile-label">Start Date:</span
+                        >{{ row.sessionStartDate | date }}</mat-cell
+                      >
+                    </ng-container>
+                    <!--End Date -->
+                    <ng-container matColumnDef="endDate">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header
+                        >End Date
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        (click)="viewCourse(row.id)"
+                      >
+                        <span class="mobile-label">End Date:</span
+                        >{{ row.sessionEndDate | date }}</mat-cell
+                      >
+                    </ng-container>
+                    <!-- status -->
+                    <ng-container matColumnDef="status">
+                      <mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header
+                        class="compulsory-count-header"
+                        style="width: 400px"
+                      >
+                        <!-- Adjust the width as needed -->
+                        Status
+                      </mat-header-cell>
+                      <mat-cell
+                        *matCellDef="let row"
+                        (click)="viewCourse(row.id)"
+                      >
+                        <span class="mobile-label">Status:</span>
+                        <span class="badge badge-solid-red">
+                          <span class="status-red"></span>
+                          {{ row.status == "active" ? "Approved" : "Pending" }}
+                        </span>
+                      </mat-cell>
+                    </ng-container>
+                    <!-- actions -->
+                    <!-- <ng-container matColumnDef="action">
                         <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
                         <mat-cell *matCellDef="let row" class="pr-0">
                           <button type="button" mat-raised-button id="submit" (click)="approveCourse(row)">
@@ -168,29 +262,42 @@
                           </button>
                         </mat-cell>
                       </ng-container> -->
-                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                      <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
-                      <mat-row *matRowDef="let row; columns: displayedColumns;"
-                        [style.cursor]="'pointer'" matRipple>
-                      </mat-row>
-                    </table>
-                    <!-- Loading spinner -->
-                    <div  class="tbl-spinner">
-                      <mat-progress-spinner *ngIf="isLoading" color="primary" [diameter]="40" mode="indeterminate">
-                      </mat-progress-spinner>
-                    </div>
-        
-                    <mat-paginator #paginator [length]="totalItems" (page)="pageSizeChange($event)"
-                    [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">
-                </mat-paginator>
-        
+                    <mat-header-row
+                      *matHeaderRowDef="displayedColumns"
+                    ></mat-header-row>
+                    <!-- <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> -->
+                    <mat-row
+                      *matRowDef="let row; columns: displayedColumns"
+                      [style.cursor]="'pointer'"
+                      matRipple
+                    >
+                    </mat-row>
+                  </table>
+                  <!-- Loading spinner -->
+                  <div class="tbl-spinner">
+                    <mat-progress-spinner
+                      *ngIf="isLoading"
+                      color="primary"
+                      [diameter]="40"
+                      mode="indeterminate"
+                    >
+                    </mat-progress-spinner>
                   </div>
+
+                  <mat-paginator
+                    #paginator
+                    [length]="totalItems"
+                    (page)="pageSizeChange($event)"
+                    [pageSizeOptions]="pageSizeArr"
+                    aria-label="select pagination option"
+                  >
+                  </mat-paginator>
                 </div>
               </div>
             </div>
           </div>
-        
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
