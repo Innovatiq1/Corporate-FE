@@ -1,0 +1,71 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+              <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items"  [active_item]="breadscrum.active">
+              </app-breadcrumb>
+            </div>
+        <div class="card border shadow card-height border-radius mb-5">
+            <ng-container>
+                <div class="row p-3 d-flex justify-content-between">
+                    <!-- Left side div -->
+                    <div class="text-left font-weight-bold mt-3 col-lg-5 col-md-12 col-sm-12 col-12">
+                        <div class="text-primary mb-1">{{ studentInfo?.name }}</div>
+                        <div class="text-primary">Total Questions: {{ questionList?.length }}</div>
+                        <div class="text-primary">Total Correct Answered : {{ correctAnswers(true) }} </div>
+                            <div class="text-primary">Total Wrong Answered : {{ correctAnswers(false) }} </div>
+                                <div class="text-primary">Your Score : {{ answerResult?.score }} Points </div>
+                    </div>
+                
+                </div>
+                
+                
+
+                
+                <hr>
+                <div class="row p-3 d-flex justify-content-between">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div>
+                            <div *ngFor="let question of getPaginatedQuestions().slice(0, 5); let i=index">
+                                <div class="text-black p-3 rounded bg-light mb-4">
+                                    <h6 class="ml-5">{{ i + 1 + skip }}. {{ question.questionText }}</h6>
+                                    <mat-radio-group [value]="question.selectedOption" [disabled]="true">
+                                        <div *ngFor="let option of question.options; let k=index">
+                                            <mat-radio-button class="example-margin option-text" [ngClass]="{'bg-success': question.selectedOptionText === option.text}" [value]="option.text">{{ optionsLabel[k] }} {{ option.text }}</mat-radio-button>
+                                            <span>
+                                                <i *ngIf="question.status && question.selectedOption === option.text" class="fa fa-check text-success"></i>
+                                                <i *ngIf="question.status === false && question.selectedOption === option.text" class="fa fa-times text-danger"></i>
+                                            </span>
+                                        </div>
+                                    </mat-radio-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div>
+                            <div *ngFor="let question of getPaginatedQuestions().slice(5, 10); let i=index">
+                                <div class="text-black p-3 rounded bg-light mb-4">
+                                    <h6 class="ml-5">{{ i + 6 + skip }}. {{ question.questionText }}</h6>
+                                    <mat-radio-group [(ngModel)]="question.selectedOption">
+                                        <div *ngFor="let option of question.options; let k=index">
+                                            <mat-radio-button class="example-margin option-text" [ngClass]="{'bg-success': question.selectedOptionText === option.text}" [value]="option.text">{{ optionsLabel[k] }} {{ option.text }}</mat-radio-button>
+                                            <span>
+                                                <i *ngIf="question.status && question.selectedOption === option.text" class="fa fa-check text-success"></i>
+                                                <i *ngIf="question.status === false && question.selectedOption === option.text" class="fa fa-times text-danger"></i>
+                                            </span>
+                                        </div>
+                                    </mat-radio-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-lg-12">
+                        <mat-paginator [length]="totalQuestions" [pageSize]="pageSize" (page)="onPageChange($event)"></mat-paginator>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</section>

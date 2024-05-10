@@ -12,6 +12,8 @@ import { QuestionService } from '@core/service/question.service';
 import { Subscription } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { StudentsService } from 'app/admin/students/students.service';
+import { MatDialog } from '@angular/material/dialog';
+import { TestPreviewComponent } from '@shared/components/test-preview/test-preview.component';
 
 
 @Component({
@@ -38,8 +40,8 @@ export class AddExamQuestionsComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private questionService: QuestionService,
-    private studentsService: StudentsService
-
+    private studentsService: StudentsService,
+    private dialog: MatDialog
   ) {
     let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit-questions');
@@ -285,12 +287,44 @@ export class AddExamQuestionsComponent {
         cancelButtonColor: '#d33',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.createAssesment(payload);
+          this.openPreviewModal(payload);
         }
       });
     }else{
       Swal.fire('Please fill all mandatory fields', 'error');
     }
+  }
+
+  openPreviewModal(payload: any, isEdit: boolean = false) {
+    const dialogRef = this.dialog.open(TestPreviewComponent, {
+      width: '600px',
+      data: payload,
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      if(!isEdit){
+        this.createAssesment(payload);
+      }else{
+        this.updateAssessmentAction(payload);
+      }
+    });
+  }
+
+  updateAssessmentAction(payload:any){
+    this.questionService.updateAnswerQuestions(payload).subscribe(
+      (res: any) => {
+        Swal.fire({
+          title: 'Successful',
+          text: 'Question Updated successfully',
+          icon: 'success',
+        });
+        if (!this.approved) {
+          this.router.navigate(['/student/settings/all-questions']);
+        }
+      },
+      (err: any) => {
+        Swal.fire('Failed to update Question', 'error');
+      }
+    );
   }
 
   createAssesment(payload: any) {
@@ -341,21 +375,7 @@ export class AddExamQuestionsComponent {
         cancelButtonColor: '#d33',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.questionService.updateAnswerQuestions(payload).subscribe(
-            (res: any) => {
-              Swal.fire({
-                title: 'Successful',
-                text: 'Question Updated successfully',
-                icon: 'success',
-              });
-              if (!this.approved) {
-                this.router.navigate(['/student/settings/all-questions']);
-              }
-            },
-            (err: any) => {
-              Swal.fire('Failed to update Question', 'error');
-            }
-          );
+            this.openPreviewModal(payload, true)
         }
       });
     }

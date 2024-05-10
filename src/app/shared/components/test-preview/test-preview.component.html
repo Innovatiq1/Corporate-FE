@@ -1,0 +1,62 @@
+<mat-dialog-content>
+  <div class="test-preview container">
+    <div class="row p-3 d-flex justify-content-between">
+      <div
+        class="text-left font-weight-bold mt-3 col-lg-5 col-md-12 col-sm-12 col-12"
+      >
+        <div class="text-primary mb-1">{{ data.name }}</div>
+        <div class="text-primary">
+          Total Questions: {{ questionList.length }}
+        </div>
+      </div>
+      <div
+        class="col-lg-5 col-md-12 col-sm-12 col-12 d-flex justify-content-end align-items-center"
+      >
+        <mat-icon
+          class="material-icons text-primary me-2"
+          style="font-size: 25px; margin-top: 2px"
+          >schedule</mat-icon
+        >
+        <span class="m-0 h3" [style.color]="totalTime <= 10 ? 'red' : ''">
+          {{ minutes > 9 ? minutes : "0" + minutes }} :
+          {{ seconds > 9 ? seconds : "0" + seconds }}
+        </span>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+      <div
+        class="col-xl-12 col-lg-12 col-md-12 col-sm-12"
+        *ngFor="let row of questionList; let i = index"
+      >
+        <div class="p-2">
+          <h6>{{ i + 1 }}. {{ row.questionText }}</h6>
+          <mat-radio-group>
+            <div *ngFor="let option of row.options; let k = index">
+              <mat-radio-button
+                class="example-margin option-text"
+                [value]="option.text"
+                >{{ optionsLabel[k] }} {{ option.text }}</mat-radio-button
+              >
+            </div>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="m-auto">
+    <button
+      mat-button
+      mat-dialog-close
+      cdkFocusInitial
+      mat-flat-button
+      color="primary"
+    >
+      OK
+    </button>
+  </div>
+</mat-dialog-actions>

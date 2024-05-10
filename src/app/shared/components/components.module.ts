@@ -3,9 +3,10 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { SharedModule } from '../shared.module';
 import { StudentNotificationComponent } from './student-notification/student-notification.component';
+import { TestPreviewComponent } from './test-preview/test-preview.component';
 
 @NgModule({
-  declarations: [FileUploadComponent, BreadcrumbComponent, StudentNotificationComponent],
+  declarations: [FileUploadComponent, BreadcrumbComponent, StudentNotificationComponent, TestPreviewComponent],
   imports: [SharedModule],
   exports: [FileUploadComponent, BreadcrumbComponent],
 })
