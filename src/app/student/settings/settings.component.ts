@@ -1,4 +1,4 @@
-import { Component, ViewChild, TemplateRef} from '@angular/core';
+import { Component, ViewChild, TemplateRef } from '@angular/core';
 import {
   FormGroup,
   UntypedFormBuilder,
@@ -87,7 +87,7 @@ export class SettingsComponent {
   showUsers: boolean = false;
   showAllUsers: boolean = false;
   showCustomSettings: boolean = false;
-  showCustoms:boolean = false;
+  showCustoms: boolean = false;
   showLms: boolean = false;
   showConfig: boolean = false;
   showForms: boolean = false;
@@ -106,13 +106,24 @@ export class SettingsComponent {
   toggleValue: boolean = false;
 
   currentContent: number = 1;
-  currencyCodes: string[] = ['USD', 'SGD', 'NZD', 'YEN', 'GBP', 'KWN', 'IDR', 'TWD', 'MYR', 'AUD'];
+  currencyCodes: string[] = [
+    'USD',
+    'SGD',
+    'NZD',
+    'YEN',
+    'GBP',
+    'KWN',
+    'IDR',
+    'TWD',
+    'MYR',
+    'AUD',
+  ];
   timerValues: string[] = ['15', '30', '45', '60', '90', '120', '150'];
   retakeCodesAssessment: string[] = ['1', '2', '3', '4', '5'];
-  selectedCurrency: string = "";
-  selectedTimer: string = "";
-  selectedAssessmentRetake: string = "";
-  selectedExamAssessmentRetake: string = "";
+  selectedCurrency: string = '';
+  selectedTimer: string = '';
+  selectedAssessmentRetake: string = '';
+  selectedExamAssessmentRetake: string = '';
   sidemenu: any;
   dept: any;
   ro: any;
@@ -124,8 +135,8 @@ export class SettingsComponent {
   roUsers: any;
   directorUsers: any;
   trainingAdminUsers: any;
-  showBodyContent: boolean = false; 
-  
+  showBodyContent: boolean = false;
+
   constructor(
     private studentService: StudentsService,
     private etmsService: EtmsService,
@@ -457,28 +468,40 @@ export class SettingsComponent {
     this.patchValues(),
       //this.patchValues1()
       (this.stdForm = this.fb.group({
-        name: ['', [Validators.required,...this.utils.validators.uname]],
-        password: ['', [Validators.required,...this.utils.validators.password]],
-        currentpassword: ['', [Validators.required,...this.utils.validators.currentPsw]],
+        name: ['', [Validators.required, ...this.utils.validators.uname]],
+        password: [
+          '',
+          [Validators.required, ...this.utils.validators.password],
+        ],
+        currentpassword: [
+          '',
+          [Validators.required, ...this.utils.validators.currentPsw],
+        ],
       }));
     this.stdForm1 = this.fb.group({
-      name: ['', [Validators.required,...this.utils.validators.fname]],
-      
+      name: ['', [Validators.required, ...this.utils.validators.fname]],
+
       last_name: [''],
-      department: ['', [Validators.required,...this.utils.validators.deptname]],
+      department: [
+        '',
+        [Validators.required, ...this.utils.validators.deptname],
+      ],
       approver1: [''],
       approver2: [''],
       approver3: [''],
-      mobile: ['',[Validators.required,...this.utils.validators.mobile]],
-      city_name: ['', [Validators.required,...this.utils.validators.city]],
-      country_name: ['', [Validators.required,...this.utils.validators.country]],
+      mobile: ['', [Validators.required, ...this.utils.validators.mobile]],
+      city_name: ['', [Validators.required, ...this.utils.validators.city]],
+      country_name: [
+        '',
+        [Validators.required, ...this.utils.validators.country],
+      ],
 
       email: [
         '',
         [Validators.required, Validators.email, Validators.minLength(5)],
       ],
 
-      address: ['',[Validators.required,...this.utils.validators.address]],
+      address: ['', [Validators.required, ...this.utils.validators.address]],
       avatar: [''],
     });
 
@@ -498,159 +521,156 @@ export class SettingsComponent {
     this.getUserProfile();
     this.getSidemenu();
     this.getAllUsers();
-    let role = localStorage.getItem('user_type')
-    if(role == 'admin'){
-      this.isAdmin = true
-    }else if (role == 'student'){
+    let role = localStorage.getItem('user_type');
+    if (role == 'admin') {
+      this.isAdmin = true;
+    } else if (role == 'student') {
       this.isAdmin = false;
-    }else if( !(role == 'admin' || role == 'Student' || role == 'Instructor')){
+    } else if (
+      !(role == 'admin' || role == 'Student' || role == 'Instructor')
+    ) {
       this.isApprovers = true;
     }
-    if(this.accountUrl){
+    if (this.accountUrl) {
       this.showAccountSettings = true;
     }
-    if(this.securityUrl){
+    if (this.securityUrl) {
       this.showProfileSettings = true;
     }
-    if(this.bannersUrl){
+    if (this.bannersUrl) {
       this.showBanners = true;
     }
-    if(this.usersUrl){
+    if (this.usersUrl) {
       this.showUsers = true;
     }
-    if(this.emailUrl){
+    if (this.emailUrl) {
       this.showEmailConfig = true;
     }
-    if(this.customUrl){
+    if (this.customUrl) {
       this.showCustomSettings = true;
     }
-    if(this.integrateUrl){
+    if (this.integrateUrl) {
       this.showIntegration = true;
     }
-    if(this.automateUrl){
+    if (this.automateUrl) {
       this.showAutomation = true;
     }
-    if(this.customsUrl){
+    if (this.customsUrl) {
       this.showCustoms = true;
     }
-    if(this.lmsUrl){
+    if (this.lmsUrl) {
       this.showLms = true;
     }
-    if(this.configUrl){
+    if (this.configUrl) {
       this.showConfig = true;
     }
-    if(this.formsUrl){
+    if (this.formsUrl) {
       this.showForms = true;
     }
-    if(this.sidemenuUrl){
+    if (this.sidemenuUrl) {
       this.showSidemenu = true;
     }
-    if(this.allUsersUrl){
+    if (this.allUsersUrl) {
       this.showAllUsers = true;
     }
-    if(this.customFormsUrl){
+    if (this.customFormsUrl) {
       this.showCustomForms = true;
     }
-    if(this.faUrl){
+    if (this.faUrl) {
       this.show2FaSettings = true;
     }
-    if(this.courseFormsUrl){
+    if (this.courseFormsUrl) {
       this.showCourseForms = true;
     }
-    if(this.programFormsUrl){
+    if (this.programFormsUrl) {
       this.showProgramForms = true;
     }
-    if(this.usersFormsUrl){
+    if (this.usersFormsUrl) {
       this.showUsersForms = true;
     }
-    if(this.financeFormsUrl){
+    if (this.financeFormsUrl) {
       this.showFinanceForms = true;
     }
-    if(this.bannerFormsUrl){
+    if (this.bannerFormsUrl) {
       this.showBannerForms = true;
     }
-    if(this.dashboardsUrl){
+    if (this.dashboardsUrl) {
       this.showDashboards = true;
     }
     this.getDepartments();
   }
   navigateToAccountSettings() {
-   
     this.router.navigate(['/student/settings/account-settings']);
   }
   navigateToProfileSettings() {
     this.router.navigate(['/student/settings/security-settings']);
   }
-  navigateToEmailSettings(){
+  navigateToEmailSettings() {
     this.router.navigate(['/student/settings/email-configuration']);
-   
   }
-  navigateToBannerSettings(){
+  navigateToBannerSettings() {
     this.router.navigate(['/student/settings/banners']);
-    
   }
-  navigateToUserSettings(){
+  navigateToUserSettings() {
     this.router.navigate(['/student/settings/users']);
   }
-  navigateToAllUserSettings(){
+  navigateToAllUserSettings() {
     this.router.navigate(['/student/settings/all-user']);
   }
-  navigateToIntegrateSettings(){
+  navigateToIntegrateSettings() {
     this.router.navigate(['/student/settings/integration']);
   }
-  navigateToCustomFormsSettings(){
+  navigateToCustomFormsSettings() {
     this.router.navigate(['/student/settings/customization-forms']);
   }
-  navigateToAutomateSettings(){
+  navigateToAutomateSettings() {
     this.router.navigate(['/student/settings/automation']);
   }
-  navigateToCustomsSettings(){
+  navigateToCustomsSettings() {
     this.router.navigate(['/student/settings/form-customization']);
   }
-  navigateToLmsSettings(){
+  navigateToLmsSettings() {
     this.router.navigate(['/student/LMS-TAE']);
   }
-  navigateToConfigSettings(){
+  navigateToConfigSettings() {
     this.router.navigate(['/student/configuration']);
   }
-  navigateToFormSettings(){
+  navigateToFormSettings() {
     this.router.navigate(['/student/settings/forms']);
   }
-  navigateToCustomSettings(){
+  navigateToCustomSettings() {
     this.router.navigate(['/student/customization-settings']);
-    
   }
-  navigateToSidemenuSettings(){
+  navigateToSidemenuSettings() {
     this.router.navigate(['/student/settings/sidemenu']);
-    
   }
-  navigateToCourseFormsSettings(){
-    console.log("course")
+  navigateToCourseFormsSettings() {
+    console.log('course');
     this.router.navigate(['/student/settings/course-forms']);
   }
-  navigateToProgramFormsSettings(){
+  navigateToProgramFormsSettings() {
     this.router.navigate(['/student/settings/program-forms']);
   }
-  navigateToUsersFormsSettings(){
+  navigateToUsersFormsSettings() {
     this.router.navigate(['/student/settings/users-forms']);
   }
-  navigateToFinanceFormsSettings(){
+  navigateToFinanceFormsSettings() {
     this.router.navigate(['/student/settings/finance-forms']);
   }
-  navigateToBannerFormsSettings(){
+  navigateToBannerFormsSettings() {
     this.router.navigate(['/student/settings/banner-forms']);
   }
-  navigateToDashboardSettings(){
+  navigateToDashboardSettings() {
     this.router.navigate(['/student/settings/dashboards']);
   }
   onToggleChange(event: any) {
     this.showBodyContent = event.checked;
-}
+  }
 
   showMainContent(contentId: number) {
     this.currentContent = contentId;
   }
- getSidemenu() {
+  getSidemenu() {
     /* get all logos **/
     this.logoService.getSidemenu().subscribe((response) => {
       this.sidemenu = response?.data?.docs;
@@ -662,64 +682,83 @@ export class SettingsComponent {
     });
   }
   onSelectionChange(event: any, field: any) {
-   
     if (field == 'approver1') {
       const selectedApprover1Id = event.value;
-      const selectedApprover1 = this.roUsers.find((user: { id: any; }) => user.id === selectedApprover1Id);
+      const selectedApprover1 = this.roUsers.find(
+        (user: { id: any }) => user.id === selectedApprover1Id
+      );
       if (selectedApprover1) {
         this.ro = selectedApprover1Id;
-        this.roName = selectedApprover1.name
+        this.roName = selectedApprover1.name;
       }
     }
     if (field == 'approver2') {
       const selectedApprover2Id = event.value;
-      const selectedApprover2 = this.directorUsers.find((user: { id: any; }) => user.id === selectedApprover2Id);
+      const selectedApprover2 = this.directorUsers.find(
+        (user: { id: any }) => user.id === selectedApprover2Id
+      );
       if (selectedApprover2) {
         this.director = selectedApprover2Id;
-        this.directorName = selectedApprover2.name
+        this.directorName = selectedApprover2.name;
       }
     }
     if (field == 'approver3') {
       const selectedApprover3Id = event.value;
-      const selectedApprover3 = this.trainingAdminUsers.find((user: { id: any; }) => user.id === selectedApprover3Id);
+      const selectedApprover3 = this.trainingAdminUsers.find(
+        (user: { id: any }) => user.id === selectedApprover3Id
+      );
       if (selectedApprover3) {
         this.trainingAdmin = selectedApprover3Id;
-        this.trainingAdminName = selectedApprover3.name
+        this.trainingAdminName = selectedApprover3.name;
       }
     }
-  
   }
   getAllUsers() {
     this.userService.getAllUsersByRole('RO').subscribe((response: any) => {
       this.roUsers = response?.results;
     });
-    this.userService.getAllUsersByRole('Director').subscribe((response: any) => {
-      this.directorUsers = response?.results;
-    });
-    this.userService.getAllUsersByRole('Training Administrator').subscribe((response: any) => {
-      this.trainingAdminUsers = response?.results;
-    });
-
+    this.userService
+      .getAllUsersByRole('Director')
+      .subscribe((response: any) => {
+        this.directorUsers = response?.results;
+      });
+    this.userService
+      .getAllUsersByRole('Training Administrator')
+      .subscribe((response: any) => {
+        this.trainingAdminUsers = response?.results;
+      });
   }
   patchValues() {
     this.studentId = localStorage.getItem('id');
     // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
     this.studentService.getStudentById(this.studentId).subscribe((res: any) => {
       this.editData = res;
-      console.log(res,"=====");
+      console.log(res, '=====');
       this.avatar = this.editData.avatar;
       this.uploaded = this.avatar?.split('/');
-      let image  = this.uploaded?.pop();
-      this.uploaded= image?.split('\\');
+      let image = this.uploaded?.pop();
+      this.uploaded = image?.split('\\');
       this.uploadedImage = this.uploaded?.pop();
-      const currencyConfig = this.editData.configuration.find((config: any) => config.field === 'currency');
+      const currencyConfig = this.editData.configuration.find(
+        (config: any) => config.field === 'currency'
+      );
       const selectedCurrency = currencyConfig ? currencyConfig.value : null;
-      const timerConfig = this.editData.configuration.find((config: any) => config.field === 'timer');
+      const timerConfig = this.editData.configuration.find(
+        (config: any) => config.field === 'timer'
+      );
       const selectedTimer = timerConfig ? timerConfig.value : null;
-      const assessmentConfig = this.editData.configuration.find((config: any) => config.field === 'assessment');
-      const selectedAssessmentRetake = assessmentConfig ? assessmentConfig.value : null;
-      const examassessmentConfig = this.editData.configuration.find((config: any) => config.field === 'examAssessment');
-      const selectedExamAssessmentRetake = examassessmentConfig ? examassessmentConfig.value : null;
+      const assessmentConfig = this.editData.configuration.find(
+        (config: any) => config.field === 'assessment'
+      );
+      const selectedAssessmentRetake = assessmentConfig
+        ? assessmentConfig.value
+        : null;
+      const examassessmentConfig = this.editData.configuration.find(
+        (config: any) => config.field === 'examAssessment'
+      );
+      const selectedExamAssessmentRetake = examassessmentConfig
+        ? examassessmentConfig.value
+        : null;
 
       this.stdForm.patchValue({
         name: this.editData.name,
@@ -732,7 +771,7 @@ export class SettingsComponent {
         rollNo: this.editData?.rollNo,
         gender: this.editData?.gender,
         mobile: this.editData?.mobile,
-        department:this.editData?.department,
+        department: this.editData?.department,
         approver1: this.editData?.ro,
         approver2: this.editData?.director,
         approver3: this.editData?.trainingAdmin,
@@ -745,29 +784,29 @@ export class SettingsComponent {
       });
       this.selectedCurrency = selectedCurrency;
       this.selectedTimer = selectedTimer;
-      this.selectedAssessmentRetake = selectedAssessmentRetake
-      this.selectedExamAssessmentRetake = selectedExamAssessmentRetake
-
+      this.selectedAssessmentRetake = selectedAssessmentRetake;
+      this.selectedExamAssessmentRetake = selectedExamAssessmentRetake;
     });
   }
   onFileUpload(event: any) {
     // this.fileName = event.target.files[0].name;
     // this.files = event.target.files[0];
     const file = event.target.files[0];
-  
-    this.thumbnail = file
+
+    this.thumbnail = file;
     const formData = new FormData();
     formData.append('files', this.thumbnail);
-   this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
-    this.avatar = data.data.thumbnail;
-    this.uploaded=this.avatar.split('/')
-    let image  = this.uploaded.pop();
-    this.uploaded= image.split('\\');
-    this.uploadedImage = this.uploaded.pop();
-   
-      // this.onSubmit1();
- 
-  });
+    this.courseService
+      .uploadCourseThumbnail(formData)
+      .subscribe((data: any) => {
+        this.avatar = data.data.thumbnail;
+        this.uploaded = this.avatar.split('/');
+        let image = this.uploaded.pop();
+        this.uploaded = image.split('\\');
+        this.uploadedImage = this.uploaded.pop();
+
+        // this.onSubmit1();
+      });
     // this.uploadedImage = event.target.files[0].name;
 
     // // const file = event.target.files[0];
@@ -781,7 +820,6 @@ export class SettingsComponent {
     //     this.uploadedImage = this.uploaded.pop();
     //   });
   }
-
 
   onSubmit() {
     if (this.stdForm.valid) {
@@ -803,7 +841,7 @@ export class SettingsComponent {
 
       Swal.close();
       // },
-    }else{
+    } else {
       this.stdForm.markAllAsTouched();
     }
   }
@@ -840,71 +878,70 @@ export class SettingsComponent {
   //   }
   // }
   onSubmit1() {
-console.log(this.stdForm1)
+    console.log(this.stdForm1);
 
-    if (!this.stdForm1.invalid) {
+    if (this.stdForm1.valid) {
       // No need to call uploadVideo() here since it's not needed
-        const userData: any = this.stdForm1.value;
-        userData.avatar = this.avatar; // Assuming this.avatar contains the URL of the uploaded thumbnail
-        userData.type = this.editData.type;
-        userData.role = this.editData.role;
-        userData.ro = this.ro;
-        userData.roName = this.roName;
-        userData.director = this.director;
-        userData.directorName = this.directorName;
-        userData.trainingAdmin = this.trainingAdmin;
-        userData.trainingAdminName = this.trainingAdminName
-        Swal.fire({
-          title: 'Are you sure?',
-          text: 'Do you want to update!',
-          icon: 'warning',
-          confirmButtonText: 'Yes',
-          showCancelButton: true,
-          cancelButtonColor: '#d33',
-        }).then((result) => {
-          if (result.isConfirmed){
-            
-        this.updateInstructor(userData);
-        Swal.close();
-      }
-    });
+      const userData: any = this.stdForm1.value;
+      userData.avatar = this.avatar; // Assuming this.avatar contains the URL of the uploaded thumbnail
+      userData.type = this.editData.type;
+      userData.role = this.editData.role;
+      userData.ro = this.ro;
+      userData.roName = this.roName;
+      userData.director = this.director;
+      userData.directorName = this.directorName;
+      userData.trainingAdmin = this.trainingAdmin;
+      userData.trainingAdminName = this.trainingAdminName;
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to update!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.updateInstructor(userData);
+          Swal.close();
+        }
+      });
+    } else {
+      this.stdForm1.markAllAsTouched();
     }
-   
-}
+  }
 
   private updateInstructor(userData: Student): void {
-  //   Swal.fire({
-  //   title: 'Are you sure?',
-  //   text: 'Do you want to update!',
-  //   icon: 'warning',
-  //   confirmButtonText: 'Yes',
-  //   showCancelButton: true,
-  //   cancelButtonColor: '#d33',
-  // }).then((result) => {
-  //   if (result.isConfirmed){
-      this.studentService.updateStudent(this.studentId, userData).subscribe(
-        () => {
-          Swal.fire({
-            title: 'Successful',
-            text: 'User data update successfully',
-            icon: 'success',
-          });
-          //this.fileDropEl.nativeElement.value = "";
-          //this.stdForm.reset();
-          //this.toggleList()
-          //this.router.navigateByUrl('/admin/teachers/all-teachers');
-        },
-        (error: { message: any; error: any }) => {
-          Swal.fire(
-            'Failed to update user data',
-            error.message || error.error,
-            'error'
-          );
-        }
-      );
-  //   }
-  // });
-   
+    //   Swal.fire({
+    //   title: 'Are you sure?',
+    //   text: 'Do you want to update!',
+    //   icon: 'warning',
+    //   confirmButtonText: 'Yes',
+    //   showCancelButton: true,
+    //   cancelButtonColor: '#d33',
+    // }).then((result) => {
+    //   if (result.isConfirmed){
+    this.studentService.updateStudent(this.studentId, userData).subscribe(
+      () => {
+        Swal.fire({
+          title: 'Successful',
+          text: 'User data update successfully',
+          icon: 'success',
+        });
+        //this.fileDropEl.nativeElement.value = "";
+        //this.stdForm.reset();
+        //this.toggleList()
+        //this.router.navigateByUrl('/admin/teachers/all-teachers');
+      },
+      (error: { message: any; error: any }) => {
+        Swal.fire(
+          'Failed to update user data',
+          error.message || error.error,
+          'error'
+        );
+      }
+    );
+    //   }
+    // });
   }
 
   /** Get User for profile */
@@ -912,15 +949,15 @@ console.log(this.stdForm1)
   getUserProfile() {
     const userId = localStorage.getItem('id');
     this.etmsService.getUserId(userId).subscribe((response: any) => {
-        this.roname = response.roName
-        this.profileForm.patchValue({
+      this.roname = response.roName;
+      this.profileForm.patchValue({
         empName: response.name,
         designation: response.designation,
         department: response.department,
         roName: response.roName,
         director: response.directorName,
         TA: response.trainingAdminName,
-      })
+      });
       console.log(this.profileForm.value);
     });
   }
@@ -929,15 +966,15 @@ console.log(this.stdForm1)
     if (value === 'currency') {
       const selectedCurrency = this.selectedCurrency;
       this.courseService.createCurrency({ value: selectedCurrency }).subscribe(
-        response => {
+        (response) => {
           Swal.fire({
             title: 'Successful',
             text: 'Currency Configuration Success',
-            icon: 'success'
+            icon: 'success',
           });
           dialogRef.close(selectedCurrency);
         },
-        error => {
+        (error) => {
           Swal.fire({
             icon: 'error',
             title: 'Error',
@@ -945,18 +982,18 @@ console.log(this.stdForm1)
           });
         }
       );
-    } else if (value === "timer") {
+    } else if (value === 'timer') {
       const selectedTimer = this.selectedTimer;
       this.courseService.createTimer({ value: selectedTimer }).subscribe(
-        response => {
+        (response) => {
           Swal.fire({
             title: 'Successful',
             text: 'Timer Configuration Success',
-            icon: 'success'
+            icon: 'success',
           });
           dialogRef.close(selectedTimer);
         },
-        error => {
+        (error) => {
           Swal.fire({
             icon: 'error',
             title: 'Error',
@@ -964,94 +1001,96 @@ console.log(this.stdForm1)
           });
         }
       );
-    } else if (value === "assessment") {
+    } else if (value === 'assessment') {
       const selectedAssessmentRetake = this.selectedAssessmentRetake;
-      this.courseService.createAssessment({ value: selectedAssessmentRetake }).subscribe(
-        response => {
-          Swal.fire({
-            title: 'Successful',
-            text: 'Assessment Configuration Success',
-            icon: 'success'
-          });
-          dialogRef.close(selectedAssessmentRetake);
-        },
-        error => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: error,
-          });
-        }
-      );
-    } else if (value === "examAssessment") {
+      this.courseService
+        .createAssessment({ value: selectedAssessmentRetake })
+        .subscribe(
+          (response) => {
+            Swal.fire({
+              title: 'Successful',
+              text: 'Assessment Configuration Success',
+              icon: 'success',
+            });
+            dialogRef.close(selectedAssessmentRetake);
+          },
+          (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error,
+            });
+          }
+        );
+    } else if (value === 'examAssessment') {
       const selectedExamAssessmentRetake = this.selectedExamAssessmentRetake;
-      this.courseService.createExamAssessment({ value: selectedExamAssessmentRetake }).subscribe(
-        response => {
-          Swal.fire({
-            title: 'Successful',
-            text: 'Assessment Configuration Success',
-            icon: 'success'
-          });
-          dialogRef.close(selectedExamAssessmentRetake);
-        },
-        error => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: error,
-          });
-        }
-      );
+      this.courseService
+        .createExamAssessment({ value: selectedExamAssessmentRetake })
+        .subscribe(
+          (response) => {
+            Swal.fire({
+              title: 'Successful',
+              text: 'Assessment Configuration Success',
+              icon: 'success',
+            });
+            dialogRef.close(selectedExamAssessmentRetake);
+          },
+          (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error,
+            });
+          }
+        );
     }
-   
   }
 
-
-  openDialog(templateRef: any, value:any): void {
+  openDialog(templateRef: any, value: any): void {
     if (value === 'currency') {
       const dialogRef = this.dialog.open(templateRef, {
         width: '500px',
-        data: { selectedCurrency: this.selectedCurrency }
+        data: { selectedCurrency: this.selectedCurrency },
       });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe((result) => {
         if (result) {
           this.selectedCurrency = result;
         }
       });
-    } else if(value === 'timer') {
+    } else if (value === 'timer') {
       const dialogRef = this.dialog.open(templateRef, {
         width: '500px',
-        data: { selectedTimer: this.selectedTimer }
+        data: { selectedTimer: this.selectedTimer },
       });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe((result) => {
         if (result) {
           this.selectedTimer = result;
         }
       });
-    } else if(value === 'assessment') {
+    } else if (value === 'assessment') {
       const dialogRef = this.dialog.open(templateRef, {
         width: '500px',
-        data: { selectedAssessmentRetake: this.selectedAssessmentRetake }
+        data: { selectedAssessmentRetake: this.selectedAssessmentRetake },
       });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe((result) => {
         if (result) {
           this.selectedAssessmentRetake = result;
         }
       });
-    } else if(value === 'examAssessment') {
+    } else if (value === 'examAssessment') {
       const dialogRef = this.dialog.open(templateRef, {
         width: '500px',
-        data: { selectedExamAssessmentRetake: this.selectedExamAssessmentRetake }
+        data: {
+          selectedExamAssessmentRetake: this.selectedExamAssessmentRetake,
+        },
       });
-      dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe((result) => {
         if (result) {
           this.selectedExamAssessmentRetake = result;
         }
       });
     }
-
   }
-  
 
   onSelect(currencyCode: string, dialogRef: any) {
     dialogRef.close(currencyCode);

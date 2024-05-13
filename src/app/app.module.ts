@@ -37,6 +37,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angul
 import { ComponentsModule } from '@shared/components/components.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { LeaveRequestComponent } from './student/leave-request/leave-request.component';
+import { ViewComponent } from './student/leave-request/view/view.component';
 import { LeaveRequestService as stdLeaveReqService } from './student/leave-request/leave-request.service';
 import { InstructorLeaveRequestService } from './teacher/leave-request/leave-request.service';
 import { LecturesService } from './teacher/lectures/lectures.service';
@@ -64,6 +65,7 @@ export function createTranslateLoader(http: HttpClient) {
     LeaveRequestComponent,
     ChatbotComponent,
     TicketComponent,
+    ViewComponent
     // ChangeBgDirective
 
   ],

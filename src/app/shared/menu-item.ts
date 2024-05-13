@@ -10,57 +10,57 @@ MENU_LIST = [
         icon: 'assessment',
         children:
         [
-            {
-                id: "student-analytics",
-                title: "Analytics",
-                type: "none",
-            },
             // {
-            //     id: "instructor-analytics",
-            //     title: "Instructor Analytics",
+            //     id: "student-analytics",
+            //     title: "Analytics",
             //     type: "none",
             // },
-            {
-                id: "student-dashboard",
-                title: "Student Dashboard",
-                type: "none",
-            },
-            {
-                id: "instructor-dashboard",
-                title: "Instructor Dashboard",
-                type: "none",
-            },
-            {
-                id: "coursemanager-dashboard",
-                title: "Coursemanager Dashboard",
-                type: "none",
-            },
-            {
-                id: "programmanager-dashboard",
-                title: "Programmanager Dashboard",
-                type: "none",
-            },
+            // // {
+            // //     id: "instructor-analytics",
+            // //     title: "Instructor Analytics",
+            // //     type: "none",
+            // // },
+            // {
+            //     id: "student-dashboard",
+            //     title: "Student Dashboard",
+            //     type: "none",
+            // },
+            // {
+            //     id: "instructor-dashboard",
+            //     title: "Instructor Dashboard",
+            //     type: "none",
+            // },
+            // {
+            //     id: "coursemanager-dashboard",
+            //     title: "Coursemanager Dashboard",
+            //     type: "none",
+            // },
+            // {
+            //     id: "programmanager-dashboard",
+            //     title: "Programmanager Dashboard",
+            //     type: "none",
+            // },
 
-            {
-                id: "supervisor-dashboard",
-                title: "Supervisor Dashboard",
-                type: "none",
-            },
-            {
-                id: "hod-dashboard",
-                title: "Head Of Department Dashboard",
-                type: "none",
-            },
-            {
-                id: "trainingcoordinator-dashboard",
-                title: "Training Coordinator Dashboard",
-                type: "none",
-            },
-            {
-                id: "trainingadministrator-dashboard",
-                title: "Training Administrator Dashboard",
-                type: "none",
-            }
+            // {
+            //     id: "supervisor-dashboard",
+            //     title: "Supervisor Dashboard",
+            //     type: "none",
+            // },
+            // {
+            //     id: "hod-dashboard",
+            //     title: "Head Of Department Dashboard",
+            //     type: "none",
+            // },
+            // {
+            //     id: "trainingcoordinator-dashboard",
+            //     title: "Training Coordinator Dashboard",
+            //     type: "none",
+            // },
+            // {
+            //     id: "trainingadministrator-dashboard",
+            //     title: "Training Administrator Dashboard",
+            //     type: "none",
+            // }
               ]
     },
 

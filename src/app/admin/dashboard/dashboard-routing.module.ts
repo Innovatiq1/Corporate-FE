@@ -19,7 +19,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'student-analytics',
+    path: 'dashboard',
     component: MainComponent,
   },
   {

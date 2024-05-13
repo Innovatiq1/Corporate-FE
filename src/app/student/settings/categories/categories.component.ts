@@ -210,10 +210,23 @@ edit(id:any){
   this.router.navigate(['/student/settings/edit-categories/'+ id]);
 }
 
+// performSearch() {
+//   if (this.searchTerm) {
+//     // Filter all data instead of just the current page's data
+//     this.filteredDataSource = this.allData.filter((item) => {
+//       console.log("vv", item);
+//       const search = (item.category_name + (item.subCategories[0]?.category_name || "")).toLowerCase();
+//       return search.includes(this.searchTerm.toLowerCase());
+//     });
+//   } else {
+//     // If no search term, reset the filtered data to all data
+//     this.filteredDataSource = this.allData;
+//   }
+
+
+// }
 //search functionality
 performSearch() {
-  
-  
   if(this.searchTerm){
   this.dataSource = this.dataSource?.filter((item: any) =>{   
     console.log("vv", item)
@@ -227,14 +240,40 @@ performSearch() {
 
   }
 }
+// exportExcel() {
+//   //k//ey name with space add in brackets
+//  const exportData: Partial<TableElement>[] = this.dataSource.map(
+//    (user: any) => ({
+//      'Main Category': user.category_name,
+//      'Sub Category': user?.subCategories.map((category: any) => category.category_name),
+//    })
+//  );
+//   TableExportUtil.exportToExcel(exportData, 'Categories-list');
+// }
 exportExcel() {
-  //k//ey name with space add in brackets
- const exportData: Partial<TableElement>[] = this.dataSource.map(
-   (user: any) => ({
-     'Main Category': user.category_name,
-     'Sub Category': user?.subCategories[0]?.category_name,
-   })
- );
+  // Initialize an empty array to hold the export data
+  const exportData: any[] = [];
+
+  // Iterate over each user in the data source
+  this.dataSource.forEach((user: any) => {
+    if (user?.subCategories?.length > 0) {
+      // Map each subcategory to its own row
+      user.subCategories.forEach((category: any) => {
+        exportData.push({
+          'Main Category': user.category_name,
+          'Sub Category': category.category_name
+        });
+      });
+    } else {
+      // In case there are no subcategories, still add the main category
+      exportData.push({
+        'Main Category': user.category_name,
+        'Sub Category': ''
+      });
+    }
+  });
+
+  // Utilize the utility to export data to Excel
   TableExportUtil.exportToExcel(exportData, 'Categories-list');
 }
 
@@ -244,7 +283,7 @@ generatePdf() {
   
   const data = this.dataSource.map((user:any) =>
     [user.category_name,
-      user?.subCategories[0]?.category_name,
+      user?.subCategories.map((category: any) => category.category_name),
   ] );
   //const columnWidths = [60, 80, 40];
   const columnWidths = [20, 20, 20, 20, 20, 20, 20, 20, 20, 20];

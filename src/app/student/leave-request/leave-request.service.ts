@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { LeaveRequest } from './leave-request.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
 import { environment } from 'environments/environment.development';
+import { ApiResponse } from '@core/models/response';
 @Injectable()
 export class LeaveRequestService extends UnsubscribeOnDestroyAdapter {
   private readonly API_URL = 'assets/data/stdLeaveReq.json';
@@ -39,6 +40,16 @@ export class LeaveRequestService extends UnsubscribeOnDestroyAdapter {
           console.log(error.name + ' ' + error.message);
         },
       });
+  }
+
+
+  getLeavesById(id:any): Observable<any> {
+    const apiUrl = `${this.defaultUrl}admin/leave/${id}`;
+    return this.httpClient.get<ApiResponse>(apiUrl).pipe(
+      map((response) => {
+        return response;
+      })
+    );
   }
 
   addLeaveRequest(leaveRequest: any): void {

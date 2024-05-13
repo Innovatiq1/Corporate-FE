@@ -19,9 +19,17 @@
           </li>
           <li *ngFor="let sidebarItem of menuitem"
           [ngClass]="(isSettings ? router.url.includes(sidebarItem.id):router.url.startsWith('/'+sidebarItem.id)) ? (sidebarItem.children.length > 0 ? 'active':'active-top'): ''">
-            <a
+            <a *ngIf="sidebarItem.children.length !== 0"
               (click)="callToggleMenu($event, sidebarItem.children.length)"
               class="menu-top menu-toggle">
+              <!-- <i class="material-icons-two-tone">{{sidebarItem.icon}}</i> -->
+              <img src="{{sidebarItem.icon}}" class="rounded-circle" style="height: 23px; width:23px">
+              <span class="hide-menu">{{sidebarItem.title | translate}}
+              </span>
+            </a>
+            <a *ngIf="sidebarItem.children.length === 0"
+              (click)="callToggleMenu($event, sidebarItem.children.length)"
+              class="menu-top menu-toggle"  (click)="navigateToMian(sidebarItem.id,sidebarItem.id)">
               <!-- <i class="material-icons-two-tone">{{sidebarItem.icon}}</i> -->
               <img src="{{sidebarItem.icon}}" class="rounded-circle" style="height: 23px; width:23px">
               <span class="hide-menu">{{sidebarItem.title | translate}}
@@ -40,9 +48,9 @@
                   {{sidebarSubItem.title}}
                  </a>
 
-                  <a  *ngIf=isSettings (click)="callToggleMenu($event, sidebarItem.children.length)" (click)="navigateTo(sidebarSubItem.path)" [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarSubItem.path]"
+                  <a  *ngIf=isSettings (click)="callToggleMenu($event, sidebarItem.children.length)" (click)="navigateTo(sidebarSubItem.path)"
+                   [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarSubItem.path]"
                     [ngClass]="sidebarSubItem.class">
-
                    {{sidebarSubItem.title}}
                  </a>
                  <ul class="ml-menu-2" *ngIf="sidebarSubItem.children.length > 0">
