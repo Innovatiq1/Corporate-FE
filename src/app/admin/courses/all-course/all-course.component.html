@@ -179,13 +179,13 @@
                                         class="mobile-label">Traning Hours:</span>{{row.training_hours || 0}} Hours
                                     </mat-cell>
                                   </ng-container>
-                                  <ng-container matColumnDef="Fees">
+                                  <!-- <ng-container matColumnDef="Fees">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Payment
                                     </mat-header-cell>
                                     <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)> <span
                                         class="mobile-label">Payment:</span><span >$</span> {{row.fee ||0}} .00
                                     </mat-cell>
-                                  </ng-container>
+                                  </ng-container> -->
                                   <ng-container matColumnDef="Vendor">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header class="compulsory-count-header">Vendor
                                     </mat-header-cell>
@@ -216,6 +216,13 @@
                                         <span
                                           [class]="row?.status === 'active' ? 'status-dot' : row?.status === 'inactive' ? 'status-red' : ''"></span>
                                         {{row.status ==='active'? 'Approved':' Pending' | titlecase}}</span>
+                                    </mat-cell>
+                                  </ng-container>
+                                  <ng-container matColumnDef="Fees">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Payment
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row" (click)=viewCourse(row.id)> <span
+                                        class="mobile-label">Payment:</span><span >$</span> {{row.fee ||0}} .00
                                     </mat-cell>
                                   </ng-container>
                                   <mat-header-row *matHeaderRowDef="displayedColumns">

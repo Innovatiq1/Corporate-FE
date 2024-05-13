@@ -42,9 +42,10 @@ export class InActiveCoursesComponent {
     'days',
     'hr',
     'vendors',
-    'Fees',
+    // 'Fees',
     'startDate',
     'endDate',
+    'Fees',
 
     // 'action'
   ];
