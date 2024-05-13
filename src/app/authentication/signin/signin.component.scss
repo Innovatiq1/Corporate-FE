@@ -50,6 +50,13 @@
     margin-left: 32%;
 
   }
+  .arrow{
+    position: absolute;
+    margin-top: -10px;
+    margin-left: -95px;
+    border: none;
+    background: none;
+  }
   @media only screen and (max-width: 540px) and (min-width: 280px) {
     select{
       margin-left: 73%;

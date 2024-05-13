@@ -1,0 +1,70 @@
+<div class="auth-container">
+    <div class="row auth-main">
+        <div class="col-sm-6 px-0 d-none d-sm-block">
+            <div class="left-img">
+                <div class="slideshow">
+                    <img *ngFor="let image of images; let i = index" [src]="'' + image" [alt]="'Psa-login' + (i + 1)"
+                        [class.active]="i === currentIndex">
+                </div>
+            </div>
+        </div>
+        <div class="col-6 auth-form-section">
+            <div class="section">
+                <!-- <div class="auth-wrapper"> -->
+                <h2 class="welcome-msg">Login as</h2>
+                <h6 style="text-align: center;">Tell Us About You</h6>
+                <!-- </div> -->
+                <div class="row mt-5">
+                    <div class="col-6">
+                        <div class="card login" [class.selected]="selectedUser === 'staff'"
+                            (click)="selectUser('staff')">
+                            <img src="/assets/images/login/admin.png" class="mx-auto"
+                                style="width: 150px; height: 150px; margin-top: 10px;">
+                            <h5 style="text-align: center;margin-top: 10px;">Staff</h5>
+                            <div class="selected-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card login" [class.selected]="selectedUser === 'student'"
+                            (click)="selectUser('student')">
+                            <img src="/assets/images/login/student-login.png" class="mx-auto"
+                                style="width: 150px; height: 150px; margin-top: 10px;">
+                            <h5 style="text-align: center; margin-top: 10px;">Student</h5>
+                            <div class="selected-overlay">
+                                <i class="fas fa-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button mat-raised-button id="submit" (click)="openUrl()">Next</button>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <div class="row">
+                        <div class="col-md-1 rights">
+                            <p>&copy; 2023 UGLMS. All Rights Reserved </p>
+                        </div>
+                        <div class="col-md-3 policy" style="white-space: nowrap;">
+                            <a href="https://www.globalpsa.com/termsofuse/" target="_blank" class="term">
+                                <p>Terms of Use</p>
+                            </a>
+                            |
+                            <a href="https://www.globalpsa.com/privacy-notice/" target="_blank" class="privacy">
+                                <p>Privacy Notice</p>
+                            </a>
+                        </div>
+                        <div class="col-md-1 power">
+                            <p>Powered by Innovatiq</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -152,7 +152,9 @@ updateRequest(){
     });
  
 }
-
+cancel(){
+  window.history.back();
+}
 
 onSubmit(){
   const employeeEmail = JSON.parse(localStorage.getItem('user_data')!).user.email;

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { CoursePaginationModel } from '@core/models/course.model';
 import { OverallBuget } from '@core/models/overall-budget.model';
 import { EtmsService } from '@core/service/etms.service';
 import { TableElement, TableExportUtil } from '@shared';
@@ -110,14 +111,17 @@ export class BudgetComponent {
     'overall budget',
     'type',
     'status',
-    'action',
+    // 'action',
   ];
   dataSource = ELEMENT_DATA;
   dataSource2 = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  totalItems: any;
+  pageSizeArr = [10, 25, 50, 100];
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   public barChartOptions!: Partial<chartOptions>;
   selection = new SelectionModel<OverallBuget>(true, []);
   public pieChartOptions!: Partial<pieChartOptions>;
+  coursePaginationModel!: Partial<CoursePaginationModel>;
   dataSource3 = new MatTableDataSource(ELEMENT_DATA);
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -131,6 +135,7 @@ export class BudgetComponent {
     },
   ];
   constructor(public router: Router, private etmsService: EtmsService) {
+    this.coursePaginationModel = {};
     this.pieChartOptions = {
       series: [44, 55],
       chart: {
@@ -158,13 +163,12 @@ export class BudgetComponent {
     this.getAllRequests();
   }
   getAllRequests() {
-    this.etmsService.getAllBudgets().subscribe((res) => {
+    this.etmsService.getAllBudgets({...this.coursePaginationModel}).subscribe((res) => {
       this.SourceData = res.data.docs;
-      
-      // this.totalItems = res.data.totalDocs;
-      // this.coursePaginationModel.docs = res.data.docs;
-      // this.coursePaginationModel.page = res.data.page;
-      // this.coursePaginationModel.limit = res.data.limit;
+      this.totalItems = res.data.totalDocs;
+      this.coursePaginationModel.docs = res.data.docs;
+      this.coursePaginationModel.page = res.data.page;
+      this.coursePaginationModel.limit = res.data.limit;
     });
   }
 
@@ -282,7 +286,12 @@ export class BudgetComponent {
     const numRows = this.dataSource.length;
     return numSelected === numRows;
   }
-
+  pageSizeChange($event: any) {
+    this.coursePaginationModel.page = $event?.pageIndex + 1;
+    this.coursePaginationModel.limit = $event?.pageSize;
+      this.getAllRequests();
+    
+  }
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected()

@@ -264,7 +264,9 @@ export class CreateDeptBudgetRequestComponent {
     // } else {
     // }
   }
-
+cancel(){
+  window.history.back()
+}
   
   editRequest() {
     this.etmsService.getDeptBudgetById(this._id).subscribe((res: any) => {

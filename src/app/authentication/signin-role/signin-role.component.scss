@@ -1,0 +1,124 @@
+.slideshow {
+    height: 110%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 15px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .slideshow img {
+    width: 103%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .slideshow img.active {
+    opacity: 1;
+  }
+
+  .login{
+    border: 2px solid black;
+    border-radius: 10px;
+    width:100%;
+    height: fit-content;
+    display: flex;
+    cursor: pointer;
+  }
+  .login:hover{
+    border: 2px solid #2497d1;;
+    
+  }
+  .card.selected {
+    border-color: #2497d1; 
+    box-shadow: 0 0 5px rgba(22, 164, 225, 0.5);
+  }
+  .card .selected-overlay {
+    display: none; 
+  }
+  
+  .card.selected {
+    border-color: #2497d1; 
+    box-shadow: 0 0 5px rgba(22, 164, 225, 0.5);
+  }
+  
+  .card.selected .selected-overlay {
+    display: block; 
+  }
+  
+  .selected-overlay {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  
+  .selected-overlay i {
+    color: white; 
+    font-size: 10px;
+    background-color: #2497d1; 
+    padding: 5px;
+    border-radius: 50%; 
+  }
+  
+  #submit{
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+  }
+  .section{
+    margin-top: 100px;
+  }
+
+
+
+  .rights p{
+    margin-left: -80px;
+    font-weight: bold; 
+    font-size: 12px;
+    margin-bottom: 12px;
+    white-space: nowrap;
+  }
+
+  
+  .policy a{
+    text-decoration: none;
+    color: black; 
+    font-size: 12px;
+  }
+  
+
+  .term p{
+    margin-left: 105px;
+    display: inline;
+  }
+
+  @media only screen and (max-width: 1024px) and (min-width: 768px) {
+    .policy{
+      margin-top: 15px;
+      margin-left: -45px;
+      
+    }
+  }
+ 
+ 
+  .privacy p{
+     display: inline;
+  }
+
+  .power p{
+    // margin-right: 1px; 
+    white-space: nowrap;
+    margin-left: 200px;
+    font-style: italic;
+    color: black;
+    font-size: 14px;
+  }
+

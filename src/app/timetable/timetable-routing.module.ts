@@ -14,6 +14,8 @@ import { ViewProgramScheduleComponent } from './program-exam-schedule/view-progr
 import { ViewCourseScheduleComponent } from './list/view-course-schedule/view-course-schedule.component';
 import { ViewProgramClassComponent } from './schedule-class/view-program-class/view-program-class.component';
 import { EAttendanceComponent } from './e-attendance/e-attendance.component';
+import { MyProgramsComponent } from './my-programs/my-programs.component';
+import { MyCoursesComponent } from './my-courses/my-courses.component';
 const routes: Routes = [
     {
         path: 'course-timetable',
@@ -23,6 +25,14 @@ const routes: Routes = [
         path: 'program-timetable',
         component: ProgramTimetableComponent
     },
+    {
+      path: 'my-programs',
+      component: MyProgramsComponent
+  },
+  {
+    path: 'my-courses',
+    component: MyCoursesComponent
+},
     {
         path: 'course-exam',
         component: ListComponent

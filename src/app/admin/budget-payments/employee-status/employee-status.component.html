@@ -59,19 +59,19 @@
                   <table mat-table [dataSource]="dataSource" matSort class="mat-cell advance-table">
                     <ng-container matColumnDef="ID">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>REQUEST-ID</mat-header-cell>
-                      <mat-cell *matCellDef="let row" class="name" (click)="copy(row.id)">
+                      <mat-cell *matCellDef="let row" class="name" [routerLink]="['/admin/budgets/view-training-request', row.id]">
                         <span class="mobile-label">REQUEST-ID:</span>{{row.requestId}}
                       </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="course">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Course</mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="copy(row.id)">
+                      <mat-cell *matCellDef="let row"  [routerLink]="['/admin/budgets/view-training-request', row.id]">
                         <span class="mobile-label">HOD:</span>{{row.courseName | titlecase}}
                       </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="payment">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Payment</mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="copy(row.id)">
+                      <mat-cell *matCellDef="let row"  [routerLink]="['/admin/budgets/view-training-request', row.id]">
                         <span class="mobile-label">Payment:</span>$ {{row.courseCost}}
                       </mat-cell>
                     </ng-container>
@@ -80,7 +80,7 @@
                     <ng-container matColumnDef="created at">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Created At
                       </mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="copy(row.id)">
+                      <mat-cell *matCellDef="let row"  [routerLink]="['/admin/budgets/view-training-request', row.id]">
                         <span class="mobile-label">Created At:</span>{{row?.createdAt| date }}
                       </mat-cell>
                     </ng-container>
@@ -88,21 +88,21 @@
                     <ng-container matColumnDef="ro approved on">
                       <mat-header-cell *matHeaderCellDef mat-sort-header> Approver 1
                       </mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="copy(row.id)">
+                      <mat-cell *matCellDef="let row"  [routerLink]="['/admin/budgets/view-training-request', row.id]">
                         <span class="mobile-label">Approver 1:</span>{{row?.roApprovedOn| date }}
                       </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="director approved on">
                       <mat-header-cell *matHeaderCellDef mat-sort-header> Approver 2
                       </mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="copy(row.id)">
+                      <mat-cell *matCellDef="let row"  [routerLink]="['/admin/budgets/view-training-request', row.id]">
                         <span class="mobile-label"> Approver 2:</span>{{row?.directorApprovedOn| date }}
                       </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="trainingadmin approved on">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Approver 3
                       </mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="copy(row.id)">
+                      <mat-cell *matCellDef="let row"  [routerLink]="['/admin/budgets/view-training-request', row.id]">
                         <span class="mobile-label">Approver 3:</span>{{row?.trainingadminApprovedOn| date}}
                       </mat-cell>
                     </ng-container>
@@ -110,7 +110,7 @@
                       <mat-header-cell *matHeaderCellDef mat-sort-header>
                         Approval Stages
                       </mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="copy(row.id)" class="approval-stages-cell">
+                      <mat-cell *matCellDef="let row"  [routerLink]="['/admin/budgets/view-training-request', row.id]" class="approval-stages-cell">
                         <span class="mobile-label">Approval Stages:</span>
                         <div class="approval-stage mt-3">Approver 1</div>
                         <div class="approval-stage mt-3 mb-2">Approver 2</div>
@@ -122,7 +122,7 @@
                     <ng-container matColumnDef="status">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Status
                       </mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="copy(row.id)" class="approval-stages-cell">
+                      <mat-cell *matCellDef="let row"  [routerLink]="['/admin/budgets/view-training-request', row.id]" class="approval-stages-cell">
                         <span class="mobile-label">Status:</span>
                         <div class="approval-reason mt-3" ><span
                           [class]="row?.roApproval === 'Approved' ? 'badge badge-solid-green' : row?.roApproval === 'Pending' ? 'badge badge-solid-orange' :  (row?.roApproval === 'Rejected' ? 'badge badge-solid-red' : '') ">
@@ -168,7 +168,7 @@
                       <mat-header-cell *matHeaderCellDef mat-sort-header
                         >Reason
                       </mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="copy(row.id)" class="approval-stages-cell">
+                      <mat-cell *matCellDef="let row"  [routerLink]="['/admin/budgets/view-training-request', row.id]" class="approval-stages-cell">
                         <span class="mobile-label">Reason:</span>
                         <div class="approval-reason mt-3"> {{row?.roReason}}</div>
                         <div class="approval-reason ">{{row?.directorReason}}</div>
@@ -195,7 +195,7 @@
                         </span>
                       </mat-cell>
                     </ng-container> -->
-                    <ng-container matColumnDef="actions">
+                    <!-- <ng-container matColumnDef="actions">
                       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                       <mat-cell *matCellDef="let row" class="pr-0">
                         <button mat-button [matMenuTriggerFor]="menu">
@@ -219,10 +219,10 @@
                           <!-- <button mat-menu-item [routerLink]="['/admin/courses/view-course-kit/',row.id]">
                                     <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
                                     <span class="menu-text">View</span>
-                                  </button> -->
+                                  </button> --
                         </mat-menu>
                       </mat-cell>
-                    </ng-container>
+                    </ng-container> -->
 
                     <mat-header-row *matHeaderRowDef="displayedColumns">
                     </mat-header-row>
@@ -231,10 +231,10 @@
                     </mat-row>
                   </table>
 
-                  <!-- <mat-paginator class="paginator rounded-5" #paginator [length]="totalItems"
+                  <mat-paginator class="paginator rounded-5" #paginator [length]="totalItems"
                     (page)="pageSizeChange($event)" [pageSizeOptions]="pageSizeArr"
                     aria-label="select pagination option">
-                  </mat-paginator> -->
+                  </mat-paginator>
                 </div>
               </div>
             </div>

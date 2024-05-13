@@ -2,7 +2,11 @@
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
-      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      <app-breadcrumb
+        [title]="breadscrum.title"
+        [items]="breadscrum.items"
+        [active_item]="breadscrum.active"
+      >
       </app-breadcrumb>
     </div>
     <div class="row">
@@ -12,44 +16,49 @@
             <div class="left">
               <ul class="header-buttons-left ms-0">
                 <li class="tbl-search-box">
-                  <label for="search-input"><i class="material-icons search-icon">search</i></label>
-                  <input *ngIf ="tab == 0"
+                  <label for="search-input"
+                    ><i class="material-icons search-icon">search</i></label
+                  >
+                  <input
+                    *ngIf="tab == 0"
                     placeholder="Search"
                     type="text"
                     #filter
                     class="browser-default search-field text"
                     aria-label="Search box"
-                    [(ngModel)]="filterName" (input)="performSearch()"
-
+                    [(ngModel)]="filterName"
+                    (input)="performSearch()"
                   />
-                  <input *ngIf ="tab == 1"
-                  placeholder="Search"
-                  type="text"
-                  #filter
-                  class="browser-default search-field text"
-                  aria-label="Search box"
-                  [(ngModel)]="filterRegistered" (input)="performSearch()"
-
-                />
-                <input *ngIf ="tab == 2"
-                placeholder="Search"
-                type="text"
-                #filter
-                class="browser-default search-field text"
-                aria-label="Search box"
-                [(ngModel)]="filterApproved" (input)="performSearch()"
-
-              />
-              <input *ngIf ="tab == 3"
-              placeholder="Search"
-              type="text"
-              #filter
-              class="browser-default search-field text"
-              aria-label="Search box"
-              [(ngModel)]="filterCompleted" (input)="performSearch()"
-
-            />
-
+                  <input
+                    *ngIf="tab == 1"
+                    placeholder="Search"
+                    type="text"
+                    #filter
+                    class="browser-default search-field text"
+                    aria-label="Search box"
+                    [(ngModel)]="filterRegistered"
+                    (input)="performSearch()"
+                  />
+                  <input
+                    *ngIf="tab == 2"
+                    placeholder="Search"
+                    type="text"
+                    #filter
+                    class="browser-default search-field text"
+                    aria-label="Search box"
+                    [(ngModel)]="filterApproved"
+                    (input)="performSearch()"
+                  />
+                  <input
+                    *ngIf="tab == 3"
+                    placeholder="Search"
+                    type="text"
+                    #filter
+                    class="browser-default search-field text"
+                    aria-label="Search box"
+                    [(ngModel)]="filterCompleted"
+                    (input)="performSearch()"
+                  />
                 </li>
               </ul>
             </div>
@@ -59,35 +68,62 @@
             <mat-tab>
               <ng-template mat-tab-label>
                 <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
-                                <div class="course mx-4">Free Courses</div>
-                
+                <div class="course mx-4">Free Courses</div>
               </ng-template>
 
               <!-- <h2>All Courses</h2> -->
               <!-- </div> -->
               <div class="body">
-                <div  *ngIf="totalFreeItems>0"class="row">
+                <div *ngIf="totalFreeItems > 0" class="row">
                   <div class="col-md-3" *ngFor="let data of dataSource">
                     <div class="course-card course-card-blog">
-                      <div class="course-card-image" style="cursor: pointer;" [routerLink]="['/student/view-freecourse/',data.id]">
-                        <img class="img" [src]="data?.image_link || '../../../assets/noimage.jpg'" alt="Image">
-
+                      <div
+                        class="course-card-image"
+                        style="cursor: pointer"
+                        [routerLink]="['/student/view-freecourse/', data.id]"
+                      >
+                        <img
+                          class="img"
+                          [src]="
+                            data?.image_link || '../../../assets/noimage.jpg'
+                          "
+                          alt="Image"
+                        />
                       </div>
                       <div class="blog-table">
                         <div class="post-user mt-3">
                           <!-- <span class="float-start msr-3">
                           <img class="img-circle" src="{{data.image_link}}" alt="...">
                         </span> -->
-                          <h6 class="mb-xs mt-xs title"> {{data?.title |truncate : 45}}</h6>
-                          <p class="text-muted"><time>{{data?.training_hours}} hours</time></p>
+                          <h6 class="mb-xs mt-xs title">
+                            {{ data?.title | truncate : 45 }}
+                          </h6>
+                          <p class="text-muted">
+                            <time>{{ data?.training_hours }} hours</time>
+                          </p>
                         </div>
-                        <h6>{{data?.courseCode }}</h6>
-                        <p class="course-card-description"  [innerHTML]="data?.course_detailed_description| bulletPoints |truncate :
-                          40">
+                        <h6>{{ data?.courseCode }}</h6>
+                        <p
+                          class="course-card-description"
+                          [innerHTML]="
+                            data?.course_detailed_description
+                              | bulletPoints
+                              | truncate : 40
+                          "
+                        ></p>
                         <div class="text-center mb-3">
-                          <button mat-icon-button class="tbl-action-btn"
-                            [routerLink]="['/student/view-freecourse/',data.id]">
-                            <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
+                          <button
+                            mat-icon-button
+                            class="tbl-action-btn"
+                            [routerLink]="[
+                              '/student/view-freecourse/',
+                              data.id
+                            ]"
+                          >
+                            <app-feather-icons
+                              [icon]="'eye'"
+                              [class]="'tbl-fav-view'"
+                            ></app-feather-icons>
                           </button>
                           <!-- <button mat-icon-button class="tbl-action-btn" [routerLink]="['/admin/courses/edit-course/',data.id]">
                           <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
@@ -95,7 +131,6 @@
                           <!-- <button mat-icon-button class="tbl-action-btn" (click)="delete(data.id)">
                           <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                         </button> -->
-
                         </div>
                         <!-- <div class="ftr">
                         <div class="author">
@@ -108,47 +143,78 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf ="totalFreeItems ==0">
-                  No Free Courses
-                </div>
+                <div *ngIf="totalFreeItems == 0">No Free Courses</div>
               </div>
-              <mat-paginator class="paginator rounded-5" #paginator [length]="totalFreeItems"
-                (page)="pagefreeCourseSizeChange($event)" [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">
+              <mat-paginator
+                class="paginator rounded-5"
+                #paginator
+                [length]="totalFreeItems"
+                (page)="pagefreeCourseSizeChange($event)"
+                [pageSizeOptions]="pageSizeArr"
+                aria-label="select pagination option"
+              >
               </mat-paginator>
             </mat-tab>
 
             <mat-tab>
               <ng-template mat-tab-label>
                 <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
-                                <div class="course mx-4">Paid Courses</div>
-                
+                <div class="course mx-4">Paid Courses</div>
               </ng-template>
 
               <!-- <h2>All Courses</h2> -->
               <!-- </div> -->
               <div class="body">
-                <div  *ngIf="totalItems>0"class="row">
+                <div *ngIf="totalItems > 0" class="row">
                   <div class="col-md-3" *ngFor="let data of classesData">
                     <div class="course-card course-card-blog">
-                      <div class="course-card-image" style="cursor: pointer;" [routerLink]="['/student/view-course/',data.id]">
-                        <img class="img" [src]="data?.courseId?.image_link || '../../../assets/noimage.jpg'" alt="Image">
-
+                      <div
+                        class="course-card-image"
+                        style="cursor: pointer"
+                        [routerLink]="['/student/view-course/', data.id]"
+                      >
+                        <img
+                          class="img"
+                          [src]="
+                            data?.courseId?.image_link ||
+                            '../../../assets/noimage.jpg'
+                          "
+                          alt="Image"
+                        />
                       </div>
                       <div class="blog-table">
                         <div class="post-user mt-3">
                           <!-- <span class="float-start msr-3">
                           <img class="img-circle" src="{{data.image_link}}" alt="...">
                         </span> -->
-                          <h6 class="mb-xs mt-xs title"> {{data?.courseId?.title |truncate : 45}}</h6>
-                          <p class="text-muted"><time>{{data?.courseId?.training_hours}} hours</time></p>
+                          <h6 class="mb-xs mt-xs title">
+                            {{ data?.courseId?.title | truncate : 45 }}
+                          </h6>
+                          <p class="text-muted">
+                            <time
+                              >{{ data?.courseId?.training_hours }} hours</time
+                            >
+                          </p>
                         </div>
-                        <h6>{{data?.classDeliveryType | titlecase}}</h6>
-                        <p class="course-card-description"  [innerHTML]="data?.courseId?.course_detailed_description| bulletPoints |truncate :
-                          40">
+                        <h6>{{ data?.classDeliveryType | titlecase }}</h6>
+                        <p
+                          class="course-card-description"
+                          [innerHTML]="
+                            data?.courseId?.course_detailed_description
+                              | bulletPoints
+                              | truncate : 40
+                          "
+                        ></p>
                         <div class="text-center mb-3">
-                          <button mat-icon-button class="tbl-action-btn"
-                            [routerLink]="['/student/view-course/',data.id]">
-                            <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
+                          <button
+                            mat-icon-button
+                            class="tbl-action-btn"
+                            [routerLink]="['/student/view-course/', data.id]"
+                          >
+                            <app-feather-icons
+                              [icon]="'eye'"
+                              [class]="'tbl-fav-view'"
+                            ></app-feather-icons>
                           </button>
                           <!-- <button mat-icon-button class="tbl-action-btn" [routerLink]="['/admin/courses/edit-course/',data.id]">
                           <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
@@ -156,7 +222,6 @@
                           <!-- <button mat-icon-button class="tbl-action-btn" (click)="delete(data.id)">
                           <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                         </button> -->
-
                         </div>
                         <!-- <div class="ftr">
                         <div class="author">
@@ -169,12 +234,18 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf = "totalItems ==0">
+                <div *ngIf="totalItems == 0">
                   No Courses related to your department
                 </div>
               </div>
-              <mat-paginator class="paginator rounded-5" #paginator [length]="totalItems"
-                (page)="pageSizeChange($event)" [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">
+              <mat-paginator
+                class="paginator rounded-5"
+                #paginator
+                [length]="totalItems"
+                (page)="pageSizeChange($event)"
+                [pageSizeOptions]="pageSizeArr"
+                aria-label="select pagination option"
+              >
               </mat-paginator>
             </mat-tab>
             <mat-tab>
@@ -184,13 +255,46 @@
               </ng-template>
               <div class="body">
                 <div class="row">
-                  <div class="col-md-3" *ngFor="let data of studentRegisteredClasses">
+                  <div
+                    class="col-md-3"
+                    *ngFor="let data of studentRegisteredClasses"
+                  >
                     <div class="course-card course-card-blog">
-                      <div  *ngIf="data.courseId.feeType=='paid'"class="course-card-image" style="cursor: pointer;"   [routerLink]="['/student/view-course/',data.classId.id]">
-                        <img class="img" [src]="data?.courseId?.image_link || '../../../assets/noimage.jpg'" alt="Image">
+                      <div
+                        *ngIf="data.courseId.feeType == 'paid'"
+                        class="course-card-image"
+                        style="cursor: pointer"
+                        [routerLink]="[
+                          '/student/view-course/',
+                          data.classId.id
+                        ]"
+                      >
+                        <img
+                          class="img"
+                          [src]="
+                            data?.courseId?.image_link ||
+                            '../../../assets/noimage.jpg'
+                          "
+                          alt="Image"
+                        />
                       </div>
-                      <div  *ngIf="data.courseId.feeType=='free'"class="course-card-image" style="cursor: pointer;"   [routerLink]="['/student/view-freecourse/',data.courseId.id]">
-                        <img class="img" [src]="data?.courseId?.image_link || '../../../assets/noimage.jpg'" alt="Image">
+                      <div
+                        *ngIf="data.courseId.feeType == 'free'"
+                        class="course-card-image"
+                        style="cursor: pointer"
+                        [routerLink]="[
+                          '/student/view-freecourse/',
+                          data.courseId.id
+                        ]"
+                      >
+                        <img
+                          class="img"
+                          [src]="
+                            data?.courseId?.image_link ||
+                            '../../../assets/noimage.jpg'
+                          "
+                          alt="Image"
+                        />
                       </div>
 
                       <div class="blog-table">
@@ -198,16 +302,35 @@
                           <!-- <span class="float-start msr-3">
                           <img class="img-circle" src="{{data.image_link}}" alt="...">
                         </span> -->
-                          <h6 class="mb-xs mt-xs title"> {{ data.courseId.title |truncate : 45}}</h6>
-                          <p class="text-muted"><time>{{data?.courseId?.courseCode}} </time></p>
+                          <h6 class="mb-xs mt-xs title">
+                            {{ data.courseId.title | truncate : 45 }}
+                          </h6>
+                          <p class="text-muted">
+                            <time>{{ data?.courseId?.courseCode }} </time>
+                          </p>
                         </div>
-                        <h6>{{data?.courseId?.training_hours }}Hours</h6>
-                        <p class="course-card-description" [innerHTML]="data?.courseId?.course_detailed_description| bulletPoints |truncate :
-                        40">
+                        <h6>{{ data?.courseId?.training_hours }}Hours</h6>
+                        <p
+                          class="course-card-description"
+                          [innerHTML]="
+                            data?.courseId?.course_detailed_description
+                              | bulletPoints
+                              | truncate : 40
+                          "
+                        ></p>
                         <div class="text-center mb-3">
-                          <button mat-icon-button class="tbl-action-btn"
-                            [routerLink]="['/student/view-course/',data.classId?.id]">
-                            <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
+                          <button
+                            mat-icon-button
+                            class="tbl-action-btn"
+                            [routerLink]="[
+                              '/student/view-course/',
+                              data.classId?.id
+                            ]"
+                          >
+                            <app-feather-icons
+                              [icon]="'eye'"
+                              [class]="'tbl-fav-view'"
+                            ></app-feather-icons>
                           </button>
                           <!-- <button mat-icon-button class="tbl-action-btn" [routerLink]="['/admin/courses/edit-course/',data.id]">
                           <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
@@ -215,7 +338,6 @@
                           <!-- <button mat-icon-button class="tbl-action-btn" (click)="delete(data.id)">
                           <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                         </button> -->
-
                         </div>
                         <!-- <div class="ftr">
                         <div class="author">
@@ -229,8 +351,14 @@
                   </div>
                 </div>
               </div>
-              <mat-paginator class="paginator rounded-5" #paginator [length]="totalRegisteredItems"
-                (page)="pageStudentRegisteredSizeChange($event)" [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">
+              <mat-paginator
+                class="paginator rounded-5"
+                #paginator
+                [length]="totalRegisteredItems"
+                (page)="pageStudentRegisteredSizeChange($event)"
+                [pageSizeOptions]="pageSizeArr"
+                aria-label="select pagination option"
+              >
               </mat-paginator>
             </mat-tab>
             <mat-tab>
@@ -240,13 +368,46 @@
               </ng-template>
               <div class="body">
                 <div class="row">
-                  <div class="col-md-3" *ngFor="let data of studentApprovedClasses">
+                  <div
+                    class="col-md-3"
+                    *ngFor="let data of studentApprovedClasses"
+                  >
                     <div class="course-card course-card-blog">
-                      <div  *ngIf="data.courseId.feeType=='paid'"class="course-card-image" style="cursor: pointer;"   [routerLink]="['/student/view-course/',data.classId.id]">
-                        <img class="img" [src]="data?.courseId?.image_link || '../../../assets/noimage.jpg'" alt="Image">
+                      <div
+                        *ngIf="data.courseId.feeType == 'paid'"
+                        class="course-card-image"
+                        style="cursor: pointer"
+                        [routerLink]="[
+                          '/student/view-course/',
+                          data.classId.id
+                        ]"
+                      >
+                        <img
+                          class="img"
+                          [src]="
+                            data?.courseId?.image_link ||
+                            '../../../assets/noimage.jpg'
+                          "
+                          alt="Image"
+                        />
                       </div>
-                      <div  *ngIf="data.courseId.feeType=='free'"class="course-card-image" style="cursor: pointer;"   [routerLink]="['/student/view-freecourse/',data.courseId.id]">
-                        <img class="img" [src]="data?.courseId?.image_link || '../../../assets/noimage.jpg'" alt="Image">
+                      <div
+                        *ngIf="data.courseId.feeType == 'free'"
+                        class="course-card-image"
+                        style="cursor: pointer"
+                        [routerLink]="[
+                          '/student/view-freecourse/',
+                          data.courseId.id
+                        ]"
+                      >
+                        <img
+                          class="img"
+                          [src]="
+                            data?.courseId?.image_link ||
+                            '../../../assets/noimage.jpg'
+                          "
+                          alt="Image"
+                        />
                       </div>
 
                       <div class="blog-table">
@@ -254,16 +415,35 @@
                           <!-- <span class="float-start msr-3">
                           <img class="img-circle" src="{{data.image_link}}" alt="...">
                         </span> -->
-                          <h6 class="mb-xs mt-xs title"> {{ data.courseId.title |truncate : 45}}</h6>
-                          <p class="text-muted"><time>{{data?.courseId?.courseCode}} </time></p>
+                          <h6 class="mb-xs mt-xs title">
+                            {{ data.courseId.title | truncate : 45 }}
+                          </h6>
+                          <p class="text-muted">
+                            <time>{{ data?.courseId?.courseCode }} </time>
+                          </p>
                         </div>
-                        <h6>{{data?.courseId?.training_hours }}Hours</h6>
-                        <p class="course-card-description" [innerHTML]="data?.courseId?.course_detailed_description| bulletPoints |truncate :
-                        40">
+                        <h6>{{ data?.courseId?.training_hours }}Hours</h6>
+                        <p
+                          class="course-card-description"
+                          [innerHTML]="
+                            data?.courseId?.course_detailed_description
+                              | bulletPoints
+                              | truncate : 40
+                          "
+                        ></p>
                         <div class="text-center mb-3">
-                          <button mat-icon-button class="tbl-action-btn"
-                            [routerLink]="['/student/view-course/',data.classId?.id]">
-                            <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
+                          <button
+                            mat-icon-button
+                            class="tbl-action-btn"
+                            [routerLink]="[
+                              '/student/view-course/',
+                              data.classId?.id
+                            ]"
+                          >
+                            <app-feather-icons
+                              [icon]="'eye'"
+                              [class]="'tbl-fav-view'"
+                            ></app-feather-icons>
                           </button>
                           <!-- <button mat-icon-button class="tbl-action-btn" [routerLink]="['/admin/courses/edit-course/',data.id]">
                           <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
@@ -271,7 +451,6 @@
                           <!-- <button mat-icon-button class="tbl-action-btn" (click)="delete(data.id)">
                           <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                         </button> -->
-
                         </div>
                         <!-- <div class="ftr">
                         <div class="author">
@@ -285,10 +464,15 @@
                   </div>
                 </div>
               </div>
-              <mat-paginator class="paginator rounded-5" #paginator [length]="totalApprovedItems"
-                (page)="pageStudentApprovedSizeChange($event)" [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">
+              <mat-paginator
+                class="paginator rounded-5"
+                #paginator
+                [length]="totalApprovedItems"
+                (page)="pageStudentApprovedSizeChange($event)"
+                [pageSizeOptions]="pageSizeArr"
+                aria-label="select pagination option"
+              >
               </mat-paginator>
-
             </mat-tab>
             <mat-tab>
               <ng-template mat-tab-label>
@@ -297,13 +481,46 @@
               </ng-template>
               <div class="body">
                 <div class="row">
-                  <div class="col-md-3" *ngFor="let data of studentCompletedClasses">
+                  <div
+                    class="col-md-3"
+                    *ngFor="let data of studentCompletedClasses"
+                  >
                     <div class="course-card course-card-blog">
-                      <div  *ngIf="data.courseId.feeType=='paid'"class="course-card-image" style="cursor: pointer;"   [routerLink]="['/student/view-course/',data.classId.id]">
-                        <img class="img" [src]="data?.courseId?.image_link || '../../../assets/noimage.jpg'" alt="Image">
+                      <div
+                        *ngIf="data.courseId.feeType == 'paid'"
+                        class="course-card-image"
+                        style="cursor: pointer"
+                        [routerLink]="[
+                          '/student/view-course/',
+                          data.classId.id
+                        ]"
+                      >
+                        <img
+                          class="img"
+                          [src]="
+                            data?.courseId?.image_link ||
+                            '../../../assets/noimage.jpg'
+                          "
+                          alt="Image"
+                        />
                       </div>
-                      <div  *ngIf="data.courseId.feeType=='free'"class="course-card-image" style="cursor: pointer;"   [routerLink]="['/student/view-freecourse/',data.courseId.id]">
-                        <img class="img" [src]="data?.courseId?.image_link || '../../../assets/noimage.jpg'" alt="Image">
+                      <div
+                        *ngIf="data.courseId.feeType == 'free'"
+                        class="course-card-image"
+                        style="cursor: pointer"
+                        [routerLink]="[
+                          '/student/view-freecourse/',
+                          data.courseId.id
+                        ]"
+                      >
+                        <img
+                          class="img"
+                          [src]="
+                            data?.courseId?.image_link ||
+                            '../../../assets/noimage.jpg'
+                          "
+                          alt="Image"
+                        />
                       </div>
 
                       <div class="blog-table">
@@ -311,16 +528,35 @@
                           <!-- <span class="float-start msr-3">
                           <img class="img-circle" src="{{data.image_link}}" alt="...">
                         </span> -->
-                          <h6 class="mb-xs mt-xs title"> {{ data.courseId.title |truncate : 45}}</h6>
-                          <p class="text-muted"><time>{{data?.courseId?.courseCode}} </time></p>
+                          <h6 class="mb-xs mt-xs title">
+                            {{ data.courseId.title | truncate : 45 }}
+                          </h6>
+                          <p class="text-muted">
+                            <time>{{ data?.courseId?.courseCode }} </time>
+                          </p>
                         </div>
-                        <h6>{{data?.courseId?.training_hours }}Hours</h6>
-                        <p class="course-card-description" [innerHTML]="data?.courseId?.course_detailed_description| bulletPoints |truncate :
-                        40">
+                        <h6>{{ data?.courseId?.training_hours }}Hours</h6>
+                        <p
+                          class="course-card-description"
+                          [innerHTML]="
+                            data?.courseId?.course_detailed_description
+                              | bulletPoints
+                              | truncate : 40
+                          "
+                        ></p>
                         <div class="text-center mb-3">
-                          <button mat-icon-button class="tbl-action-btn"
-                            [routerLink]="['/student/view-course/',data.classId?.id]">
-                            <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
+                          <button
+                            mat-icon-button
+                            class="tbl-action-btn"
+                            [routerLink]="[
+                              '/student/view-course/',
+                              data.classId?.id
+                            ]"
+                          >
+                            <app-feather-icons
+                              [icon]="'eye'"
+                              [class]="'tbl-fav-view'"
+                            ></app-feather-icons>
                           </button>
                           <!-- <button mat-icon-button class="tbl-action-btn" [routerLink]="['/admin/courses/edit-course/',data.id]">
                           <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
@@ -328,7 +564,6 @@
                           <!-- <button mat-icon-button class="tbl-action-btn" (click)="delete(data.id)">
                           <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
                         </button> -->
-
                         </div>
                         <!-- <div class="ftr">
                         <div class="author">
@@ -342,13 +577,16 @@
                   </div>
                 </div>
               </div>
-              <mat-paginator class="paginator rounded-5" #paginator [length]="totalCompletedItems"
-                (page)="pageStudentCompletedSizeChange($event)" [pageSizeOptions]="pageSizeArr" aria-label="select pagination option">
+              <mat-paginator
+                class="paginator rounded-5"
+                #paginator
+                [length]="totalCompletedItems"
+                (page)="pageStudentCompletedSizeChange($event)"
+                [pageSizeOptions]="pageSizeArr"
+                aria-label="select pagination option"
+              >
               </mat-paginator>
-
             </mat-tab>
-
-
           </mat-tab-group>
         </div>
       </div>

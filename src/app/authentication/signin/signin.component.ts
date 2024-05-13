@@ -182,6 +182,9 @@ export class SigninComponent
       this.currentIndex = (this.currentIndex + 1) % this.images.length;
     }, 4000);
   }
+  goBack(){
+    this.router.navigate(['/authentication/signin-role']);
+  }
   // ngOnChanges() {
   //   this.updateStrengthIndicator();
   // }
