@@ -210,10 +210,23 @@ edit(id:any){
   this.router.navigate(['/student/settings/edit-categories/'+ id]);
 }
 
+// performSearch() {
+//   if (this.searchTerm) {
+//     // Filter all data instead of just the current page's data
+//     this.filteredDataSource = this.allData.filter((item) => {
+//       console.log("vv", item);
+//       const search = (item.category_name + (item.subCategories[0]?.category_name || "")).toLowerCase();
+//       return search.includes(this.searchTerm.toLowerCase());
+//     });
+//   } else {
+//     // If no search term, reset the filtered data to all data
+//     this.filteredDataSource = this.allData;
+//   }
+
+
+// }
 //search functionality
 performSearch() {
-  
-  
   if(this.searchTerm){
   this.dataSource = this.dataSource?.filter((item: any) =>{   
     console.log("vv", item)

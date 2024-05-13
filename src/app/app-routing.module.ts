@@ -9,6 +9,7 @@ import { LeaveRequestComponent } from './student/leave-request/leave-request.com
 import { InstructorSettingsComponent } from './teacher/settings/settings.component';
 import { InstructorLeaveRequestComponent } from './teacher/leave-request/leave-request.component';
 import { LoginGuard } from '@core/guard/login.guard';
+import { ViewComponent } from './student/leave-request/view/view.component';
 const routes: Routes = [
   {
     path: '',
@@ -83,7 +84,12 @@ const routes: Routes = [
         component: LeaveRequestComponent,
         canActivate: [LoginGuard],
       },
-
+      {
+        path: 'reschedule/programs-view',
+        component: ViewComponent,
+        canActivate: [LoginGuard],
+      },
+      
       {
         path: 'settings/instructor-settings',
         component: InstructorSettingsComponent,

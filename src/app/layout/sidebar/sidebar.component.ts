@@ -124,15 +124,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
     );
   }
 
-navigateTo(menu:any,url?:any) {
+navigateTo(menu:any,url?:any,length?:any):void {
   this.menuItemClick.emit();
   let userType = localStorage.getItem('user_type')
   if(this.isSettings){
     this.router.navigateByUrl(menu);
 
-  } else {
-  this.router.navigateByUrl( menu +'/'+url);
   }
+  else{
+        this.router.navigateByUrl( menu +'/'+url);
+      }
+    
+  
+}
+navigateToMian(url:string, menu:string){
+  console.log(url);
+  this.router.navigateByUrl(url + '/' + menu);
 }
 navigateToSubItem2(menu:any,url?:any,subUrl?: any) {
   this.menuItemClick.emit();
