@@ -16,6 +16,9 @@ import { EmployeeStatusComponent } from './employee-status/employee-status.compo
 import { BudgetRequestComponent } from './budget-request/budget-request.component';
 import { DeptBudgetRequestComponent } from './dept-budget-request/dept-budget-request.component';
 import { TrainingAprovalReqComponent } from './training-aproval-req/training-aproval-req.component';
+import { ViewTrainingReqComponent } from './view-training-req/view-training-req.component';
+import { ViewBudgetComponent } from './view-budget/view-budget.component';
+import { ViewDeptBudgetComponent } from './view-dept-budget/view-dept-budget.component';
 
 
 const routes: Routes = [
@@ -78,6 +81,18 @@ const routes: Routes = [
   {
     path: 'department-budget-request',
     component: DeptBudgetRequestComponent,
+  },
+  {
+    path: 'view-training-request/:id',
+    component: ViewTrainingReqComponent,
+  },
+  {
+    path: 'view-budget/:id',
+    component: ViewBudgetComponent,
+  },
+  {
+    path: 'view-department-budget/:id',
+    component: ViewDeptBudgetComponent,
   },
 
 ];

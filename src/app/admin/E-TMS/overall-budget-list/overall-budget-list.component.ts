@@ -155,7 +155,7 @@ export class OverallBudgetListComponent implements OnInit {
     this.getAllRequests();
   }
   getAllRequests() {
-    this.etmsService.getAllBudgets().subscribe((res) => {
+    this.etmsService.getAllBudgets({}).subscribe((res) => {
       this.SourceData = res.data.docs;
       
       // this.totalItems = res.data.totalDocs;

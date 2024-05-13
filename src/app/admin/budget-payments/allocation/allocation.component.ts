@@ -27,7 +27,7 @@ export class AllocationComponent implements OnInit{
     'By Value',
     'Budget Allocated',
     'Approval',
-    'Details'
+    // 'Details'
   ];
 
   breadscrums = [

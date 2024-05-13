@@ -59,38 +59,38 @@
                   <table mat-table [dataSource]="dataSource" matSort class="mat-cell advance-table">
                     <ng-container matColumnDef="Department Name">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="edit(row.id)">
+                      <mat-cell *matCellDef="let row" [routerLink]="['/admin/budgets/view-department-budget', row.id]">
                         <span class="mobile-label">Department:</span>{{row.departmentName}}
                       </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="Percentage Allocated">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>HOD</mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="edit(row.id)">
+                      <mat-cell *matCellDef="let row" [routerLink]="['/admin/budgets/view-department-budget', row.id]">
                         <span class="mobile-label">HOD:</span>{{row.hod}}
                       </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="By Value">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Year</mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="edit(row.id)">
+                      <mat-cell *matCellDef="let row" [routerLink]="['/admin/budgets/view-department-budget', row.id]">
                         <span class="mobile-label">Year:</span>{{row.year}}
                       </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="Budget Allocated">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Budget Allocated</mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="edit(row.id)">
+                      <mat-cell *matCellDef="let row" [routerLink]="['/admin/budgets/view-department-budget', row.id]">
                         <span class="mobile-label">Budget Allocated:</span>{{row.trainingBudget}}
                       </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="Created At">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Created At</mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="edit(row.id)">
+                      <mat-cell *matCellDef="let row" [routerLink]="['/admin/budgets/view-department-budget', row.id]">
                         <span class="mobile-label">Created At:</span>{{row.createdAt | date}}
                       </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="Approval">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Status
                       </mat-header-cell>
-                      <mat-cell *matCellDef="let row" (click)="edit(row.id)"> <span
+                      <mat-cell *matCellDef="let row" [routerLink]="['/admin/budgets/view-department-budget', row.id]"> <span
                           class="mobile-label">Status:</span><span
                           [class]="row?.approval === 'Approved' ? 'badge badge-solid-green' : row?.approval === 'Pending' ? 'badge badge-solid-orange' :  (row?.approval === 'Rejected' ? 'badge badge-solid-red' : '') ">
                           <span
@@ -100,7 +100,7 @@
                         </span>
                       </mat-cell>
                     </ng-container>
-                    <ng-container matColumnDef="Details">
+                    <!-- <ng-container matColumnDef="Details">
                       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                       <mat-cell *matCellDef="let row" class="pr-0">
                         <button mat-button [matMenuTriggerFor]="menu">
@@ -124,10 +124,10 @@
                           <!-- <button mat-menu-item [routerLink]="['/admin/courses/view-course-kit/',row.id]">
                                     <app-feather-icons [icon]="'eye'" [class]="'tbl-fav-view'"></app-feather-icons>
                                     <span class="menu-text">View</span>
-                                  </button> -->
+                                  </button> --
                         </mat-menu>
                       </mat-cell>
-                    </ng-container>
+                    </ng-container> -->
 
                     <mat-header-row *matHeaderRowDef="displayedColumns">
                     </mat-header-row>
