@@ -104,9 +104,9 @@ export class MyCoursesComponent {
           return {
             html: `
             <div style=" font-size:10px; color: white
-            ; white-space: normal; word-wrap: break-word;">
+            ; white-space: normal; word-wrap: break-word;cursor:pointer">
               ${title}<br>
-               <span style ="color:white">${sessionStartTime} - ${sessionEndTime}</span>
+               <span style ="color:white;cursor:pointer">${sessionStartTime} - ${sessionEndTime}</span>
             </div>`
           };
         }  ,  
@@ -197,9 +197,9 @@ export class MyCoursesComponent {
           return {
             html: `
             <div style=" font-size:10px; color: white
-            ; white-space: normal; word-wrap: break-word;">
+            ; white-space: normal; word-wrap: break-word;cursor:pointer">
               ${title}<br>
-               <span style ="color:white">${sessionStartTime} - ${sessionEndTime}</span>
+               <span style ="color:white;cursor:pointer">${sessionStartTime} - ${sessionEndTime}</span>
             </div>`
           };
         }  ,  
