@@ -135,6 +135,9 @@ export class CreateRequestComponent {
     }
     this.getCourseList();
   }
+  cancel(){
+    window.history.back();
+  }
   getUserId() {
     
     let userId = localStorage.getItem('id');
