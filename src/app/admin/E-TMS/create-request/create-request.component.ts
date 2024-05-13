@@ -285,7 +285,7 @@ export class CreateRequestComponent implements OnInit {
                       text: 'Request created successfully',
                       icon: 'success',
                     });
-                    this.router.navigate(['/admin/e-tms/employee-status']);
+                    this.router.navigate(['/admin/budgets/training-request']);
                   });
                 }
               });
@@ -330,7 +330,7 @@ export class CreateRequestComponent implements OnInit {
                       text: 'Course request created successfully',
                       icon: 'success',
                     });
-                    this.router.navigate(['/admin/e-tms/employee-status']);
+                    this.router.navigate(['/admin/budgets/training-request']);
                   });
                 }
               });
@@ -392,7 +392,7 @@ export class CreateRequestComponent implements OnInit {
                       text: 'Request updated successfully',
                       icon: 'success',
                     });
-                    this.router.navigate(['/admin/e-tms/employee-status']);
+                    this.router.navigate(['/admin/budgets/training-request']);
                   });
                 }
               });

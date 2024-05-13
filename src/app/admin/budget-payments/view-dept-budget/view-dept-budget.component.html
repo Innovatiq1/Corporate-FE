@@ -1,0 +1,87 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+
+        <!-- <div class="card"> -->
+        <div class="row clearfix p-2">
+
+            <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card" style=" height: fit-content;">
+                    <div class="p-2">
+                        <div class="card-container">
+                            <div class="header">
+                                <h6>View Department Budget </h6>
+                            </div>
+                            <button class="icons" alt="Edit" mat-menu-item (click)="edit(response.id)">
+                                <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                            </button>
+                            <button class="icons" alt="Delete" mat-menu-item (click)="delete(response.id)">
+                                <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                            </button>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-3">
+                                <h6>Department</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.departmentName }}</p>
+                            </div>
+                            <div class="col-3">
+                                <h6>HOD</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.hod}}</p>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-3">
+                                <h6>Year</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.year }}</p>
+                            </div>
+                            <div class="col-3">
+                                <h6>Budget Allocated</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.trainingBudget}}</p>
+                            </div>
+                        </div>
+                    
+                        <div class="row m-2 pb-3">
+                            
+                            <div class="col-3">
+                                <h6>Status</h6>
+                            </div>
+                            <div class="col-3">
+                                <h6 class="value" ><span
+                                    [class]="response?.approval === 'Approved' ? 'badge badge-solid-green' : response?.approval === 'Pending' ? 'badge badge-solid-orange' :  (response?.approval === 'Rejected' ? 'badge badge-solid-red' : '') ">
+                                    <span
+                                      [class]="response?.approval === 'Approved' ? 'status-dot' : response?.approval === 'Pending' ? 'status-orange' :  (response?.approval === 'Rejected' ? 'status-red' : '') "></span>
+                                    {{response?.approval }}
+                                    <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                                  </span></h6>
+                            </div>
+                        </div>
+                       
+
+
+                        <h2 class="text-end"><span></span></h2>
+                        <p class="m-b-0"></p>
+                    </div>
+                    <div class="row mx-2">
+                        <div class="col-md-8">
+                            <button mat-raised-button id="back"
+                                [routerLink]="['/admin/budgets/allocation']">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+</section>

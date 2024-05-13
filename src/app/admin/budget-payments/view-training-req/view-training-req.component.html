@@ -1,0 +1,154 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+
+        <!-- <div class="card"> -->
+        <div class="row clearfix p-2">
+
+            <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="card" style=" height: fit-content;">
+                    <div class="p-2">
+                        <div class="card-container">
+                            <div class="header">
+                                <h6>Training Request</h6>
+                            </div>
+                            <button class="icons" alt="Edit" mat-menu-item (click)="copy(response.id)">
+                                <app-feather-icons [icon]="'copy'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                            </button>
+                            <button class="icons" alt="Delete" mat-menu-item (click)="edit(response.id)">
+                                <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                            </button>
+                        </div>
+
+                        <div class="row m-2">
+                            <div class="col-3">
+                                <h6>REQUEST-ID</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.requestId }}</p>
+                            </div>
+                            <div class="col-3">
+                                <h6>Course</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.courseName | titlecase }}</p>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-3">
+                                <h6>Payment</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.courseCost }}</p>
+                            </div>
+                            <div class="col-3">
+                                <h6>Created At</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.createdAt| date }}</p>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-3">
+                                <h6>Approver 1</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.roApprovedOn| date }}</p>
+                            </div>
+                            <div class="col-3">
+                                <h6>Approval Stage</h6>
+                            </div>
+                            <div class="col-3">
+                                <h6 class="value" ><span
+                                    [class]="response?.roApproval === 'Approved' ? 'badge badge-solid-green' : response?.roApproval === 'Pending' ? 'badge badge-solid-orange' :  (response?.roApproval === 'Rejected' ? 'badge badge-solid-red' : '') ">
+                                    <span
+                                      [class]="response?.roApproval === 'Approved' ? 'status-dot' : response?.roApproval === 'Pending' ? 'status-orange' :  (response?.roApproval === 'Rejected' ? 'status-red' : '') "></span>
+                                    {{response.roApproval }}
+                                    <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                                  </span></h6>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-3">
+                                <h6>Approver 2</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.directorApprovedOn| date }}</p>
+                            </div>
+                            <div class="col-3">
+                                <h6>Approval Stage</h6>
+                            </div>
+                            <div class="col-3">
+                                <h6 class="value"><span
+                                    [class]="response?.directorApproval === 'Approved' ? 'badge badge-solid-green' : response?.directorApproval === 'Pending' ? 'badge badge-solid-orange' :  (response?.directorApproval === 'Rejected' ? 'badge badge-solid-red' : '') ">
+                                    <span
+                                      [class]="response?.directorApproval === 'Approved' ? 'status-dot' : response?.directorApproval === 'Pending' ? 'status-orange' :  (response?.directorApproval === 'Rejected' ? 'status-red' : '') "></span>
+                                    {{response.directorApproval }}
+                                    <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                                  </span></h6>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-3">
+                                <h6>Approver 3</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.trainingadminApprovedOn| date }}</p>
+                            </div>
+                            <div class="col-3">
+                                <h6>Approval Stage</h6>
+                            </div>
+                            <div class="col-3">
+                                <h6 class="value"><span
+                                    [class]="response?.trainingAdminApproval === 'Approved' ? 'badge badge-solid-green' : response?.trainingAdminApproval === 'Pending' ? 'badge badge-solid-orange' :  (response?.trainingAdminApproval === 'Rejected' ? 'badge badge-solid-red' : '') ">
+                                    <span
+                                      [class]="response?.trainingAdminApproval === 'Approved' ? 'status-dot' : response?.trainingAdminApproval === 'Pending' ? 'status-orange' :  (response?.trainingAdminApproval === 'Rejected' ? 'status-red' : '') "></span>
+                                    {{response.trainingAdminApproval }}
+                                    <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                                  </span></h6>
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-3">
+                                <h6>Approver 1 Reason</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.roReason }}</p>
+                            </div>
+                            <div class="col-3">
+                                <h6>Approver 2 Reason</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.directorReason }}</p>
+                            </div>
+                        </div>
+                        <div class="row m-2 pb-3">
+                            <div class="col-3">
+                                <h6>Approver 3 Reason</h6>
+                            </div>
+                            <div class="col-3">
+                                <p>{{ response?.trainingAdminReason }}</p>
+                            </div>
+                            
+                        </div>
+
+
+                        <h2 class="text-end"><span></span></h2>
+                        <p class="m-b-0"></p>
+                    </div>
+                    <div class="row mx-2">
+                        <div class="col-md-8">
+                            <button mat-raised-button id="back"
+                                [routerLink]="['/admin/budgets/training-request']">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+</section>

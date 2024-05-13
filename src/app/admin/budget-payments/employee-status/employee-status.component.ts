@@ -26,7 +26,7 @@ export class EmployeeStatusComponent {
     'approval stage',
     'status',
     'reason',
-    'actions',
+    // 'actions',
   ];
   coursePaginationModel!: Partial<CoursePaginationModel>;
   totalItems: any;

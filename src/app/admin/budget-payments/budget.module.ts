@@ -26,6 +26,9 @@ import { BudgetRequestComponent } from './budget-request/budget-request.componen
 import { EditBudgetRequestComponent } from './budget-request/edit-budget-request/edit-budget-request.component';
 import { DeptBudgetRequestComponent } from './dept-budget-request/dept-budget-request.component';
 import { EditDeptBudgetRequestComponent } from './dept-budget-request/edit-dept-budget-request/edit-dept-budget-request.component';
+import { ViewTrainingReqComponent } from './view-training-req/view-training-req.component';
+import { ViewBudgetComponent } from './view-budget/view-budget.component';
+import { ViewDeptBudgetComponent } from './view-dept-budget/view-dept-budget.component';
 
 
 @NgModule({
@@ -48,6 +51,9 @@ import { EditDeptBudgetRequestComponent } from './dept-budget-request/edit-dept-
     EditBudgetRequestComponent,
     DeptBudgetRequestComponent,
     EditDeptBudgetRequestComponent,
+    ViewTrainingReqComponent,
+    ViewBudgetComponent,
+    ViewDeptBudgetComponent,
 
   ],
   imports: [
