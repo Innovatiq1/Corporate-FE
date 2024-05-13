@@ -40,9 +40,9 @@
                   {{sidebarSubItem.title}}
                  </a>
 
-                  <a  *ngIf=isSettings (click)="callToggleMenu($event, sidebarItem.children.length)" (click)="navigateTo(sidebarSubItem.path)" [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarSubItem.path]"
+                  <a  *ngIf=isSettings (click)="callToggleMenu($event, sidebarItem.children.length)" (click)="navigateTo(sidebarSubItem.path)"
+                   [routerLink]="sidebarSubItem.children.length > 0 ? null :[sidebarSubItem.path]"
                     [ngClass]="sidebarSubItem.class">
-
                    {{sidebarSubItem.title}}
                  </a>
                  <ul class="ml-menu-2" *ngIf="sidebarSubItem.children.length > 0">

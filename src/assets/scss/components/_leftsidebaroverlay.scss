@@ -215,13 +215,13 @@
 
         &:before {
           content: "+";
-          color: #ff3665;
+          color: #191293;;
           // @include transform(scale(1));
         }
 
         &:after {
           content: "\2013";
-          color: #ff3665;
+          color: #6c64f3;;
           // @include transform(scale(0));
         }
       }
@@ -412,6 +412,11 @@
         li.active .ml-menu-3 {
           display: block;
         }
+
+        li.active .ml-menu2{
+          background-color: #edecff;
+        }
+
         li.active .ml-menu2:before {
           content: "\f105";
           font-family: "Font Awesome 5 Free";
@@ -423,7 +428,7 @@
           left: 20%;
           font-weight: 900;
           top: calc(50% - 15px);
-          color: #ff3665;
+          color: #6c64f3;
         }
       }
       .ml-menu-3 {

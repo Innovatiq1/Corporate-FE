@@ -69,7 +69,7 @@ row: any;
   }
 
   isDeleteVisible(subcategory: AbstractControl): boolean {
-    return subcategory.value.category_name !== '' && subcategory.valid;
+    return subcategory.value.category_name !== '';
   }
   
   addSubCategoryField(): void {
@@ -78,8 +78,6 @@ row: any;
         category_name: [
           '',
           Validators.required,
-          ...this.utils.validators.name,
-          ...this.utils.validators.noLeadingSpace,
         ],
       })
     );
@@ -140,6 +138,7 @@ row: any;
   }
   createSubCategory(): void {
     this.isSubmitted = true;
+    console.log("createSubCategory",this.subCategoryForm)
     if (this.subCategoryForm.invalid) {
       this.validations = true;
       return;
