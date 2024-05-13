@@ -81,13 +81,31 @@
                                 <div class="col-6">
                                     <h6>Class</h6>
                                 </div>
-                                <div class="col-6" [ngClass]="getStatusClass(aboutData1.classDeliveryType)">
+                                <!-- <div class="col-6" [ngClass]="getStatusClass(aboutData1.classDeliveryType)">
                                     <div class="status-container">
                                         <span class="status-dot"></span>
                                         <span class="status-text">{{aboutData1.classDeliveryType | titlecase}}</span>
+                                        </div> -->
+                                        <div class="col-6">
+                                            <h6
+                                      [ngClass]="
+                                      aboutData1.classDeliveryType === 'online'
+                                      ? 'badge badge-solid-green'
+                                      : aboutData1?.classDeliveryType === 'offline' ? 'badge badge-solid-red' : ''
+                                      "
+                                    >
+                                      <span
+                                        [ngClass]="
+                                        aboutData1?.classDeliveryType === 'online'
+                                        ? 'status-dot' :
+                                        aboutData1?.classDeliveryType === 'offline' ? 'status-red' : ''
+                                        "
+                                      ></span
+                                      >{{ aboutData1.classDeliveryType | titlecase}}
+                                    </h6>
                                         </div>
                                    
-                                </div>
+                                <!-- </div> -->
                             </div>
                             
                         </div>

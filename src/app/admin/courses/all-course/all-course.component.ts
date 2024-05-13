@@ -38,10 +38,11 @@ export class AllCourseComponent {
     'creator',
     'Days',
     'Training Hours',
-    'Fees',
+    // 'Fees',
     'startDate',
     'endDate',
     'Vendor',
+    'Fees',
   ];
   // displayedColumns = [
   //   'name',

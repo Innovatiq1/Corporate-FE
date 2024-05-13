@@ -13,7 +13,9 @@
       <div class="col-md-12">
         <div class="card">
           <div class="materialTableHeader">
-            <div class="left">
+            <div class="right" >
+              <ul class="tbl-export-btn">
+                <li>
               <ul class="header-buttons-left ms-0">
                 <li class="tbl-search-box">
                   <label for="search-input"
@@ -61,6 +63,8 @@
                   />
                 </li>
               </ul>
+            </li>
+          </ul>
             </div>
           </div>
 
@@ -111,7 +115,7 @@
                               | truncate : 40
                           "
                         ></p>
-                        <div class="text-center mb-3">
+                        <!-- <div class="text-center mb-3">
                           <button
                             mat-icon-button
                             class="tbl-action-btn"
@@ -125,13 +129,13 @@
                               [class]="'tbl-fav-view'"
                             ></app-feather-icons>
                           </button>
-                          <!-- <button mat-icon-button class="tbl-action-btn" [routerLink]="['/admin/courses/edit-course/',data.id]">
+                          <button mat-icon-button class="tbl-action-btn" [routerLink]="['/admin/courses/edit-course/',data.id]">
                           <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                        </button> -->
-                          <!-- <button mat-icon-button class="tbl-action-btn" (click)="delete(data.id)">
+                        </button>
+                          <button mat-icon-button class="tbl-action-btn" (click)="delete(data.id)">
                           <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                        </button> -->
-                        </div>
+                        </button>
+                        </div> -->
                         <!-- <div class="ftr">
                         <div class="author">
                           <a href="#"><span class="text-danger"><i class="fa fa-heart"></i>

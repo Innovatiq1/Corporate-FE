@@ -81,9 +81,9 @@ export class ViewClassComponent {
   editClass(id:string){
     this._router.navigate([`admin/courses/create-class`], { queryParams: {id: id}});
   }
-  getStatusClass(classDeliveryType: string): string {
-    return classDeliveryType === 'online' ? 'success' : 'fail';
-  }
+  // getStatusClass(classDeliveryType: string): string {
+  //   return classDeliveryType === 'online' ? 'success' : 'fail';
+  // }
   delete(id: string) {
     
     this._classService.getClassList({ courseId: id }).subscribe((classList: any) => {

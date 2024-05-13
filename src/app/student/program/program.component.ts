@@ -13,9 +13,9 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 export class ProgramComponent {
   breadscrums = [
     {
-      title: 'Programs',
-      items: ['Program'],
-      active: 'All Programs',
+      title: 'Enrollment',
+      items: ['Enrollment'],
+      active: 'Programs',
     },
   ];
   tab: number = 0;

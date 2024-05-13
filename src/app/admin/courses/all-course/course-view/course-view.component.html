@@ -199,9 +199,25 @@
                           <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
                             <h6
                               [ngClass]="
+                              sourceData?.status === 'active'
+                                  ? 'badge badge-solid-green'
+                                  : sourceData?.status === 'inactive' ? 'badge badge-solid-red' : ''
+                              "
+                            >
+                              <span
+                                [ngClass]="
+                                sourceData?.status === 'active'
+                                    ? 'status-dot' :
+                                    sourceData?.status === 'inactive' ? 'status-red' : ''
+                                "
+                              ></span
+                              >{{ sourceData?.status | titlecase }}
+                            </h6>
+                            <!-- <h6
+                              [class]="
                                 status === 'active'
                                   ? 'badge badge-solid-green'
-                                  : 'badge badge-solid-red'
+                                  : row?.status === 'inactive' ? 'badge badge-solid-red' : ''
                               "
                             >
                               <span
@@ -212,7 +228,7 @@
                                 "
                               ></span
                               >{{ sourceData?.status | titlecase }}
-                            </h6>
+                            </h6> -->
                           </div>
                         </div>
                       </div>

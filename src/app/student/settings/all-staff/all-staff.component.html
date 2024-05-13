@@ -135,10 +135,15 @@
                     </div>
                   </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="designation">
+                <!-- <ng-container matColumnDef="designation">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Designation</mat-header-cell>
                   <mat-cell *matCellDef="let row" (click)="aboutStaff(row.id)" (contextmenu)="onContextMenu($event, row)">
                     <span class="mobile-label">Designation:</span>{{row.role}}</mat-cell>
+                </ng-container> -->
+                <ng-container matColumnDef="education">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Education</mat-header-cell>
+                  <mat-cell *matCellDef="let row" (click)="aboutStaff(row.id)" (contextmenu)="onContextMenu($event, row)">
+                    <span class="mobile-label">Designation:</span>{{row.education}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="mobile">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</mat-header-cell>

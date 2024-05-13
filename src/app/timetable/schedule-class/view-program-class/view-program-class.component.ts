@@ -42,9 +42,9 @@ export class ViewProgramClassComponent {
     this.aboutData1 = response;
   })
 }
-getStatusClass(classDeliveryType: string): string {
-  return classDeliveryType === 'online' ? 'success' : 'fail';
-}
+// getStatusClass(classDeliveryType: string): string {
+//   return classDeliveryType === 'online' ? 'success' : 'fail';
+// }
 delete(id: string) {
   this.programService
     .getProgramClassList({ courseId: id })

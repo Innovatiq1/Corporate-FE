@@ -114,10 +114,17 @@
                       <mat-header-cell *matHeaderCellDef mat-sort-header
                         >Course</mat-header-cell
                       >
-                      <mat-cell *matCellDef="let row">
+                      <mat-cell
+                            class="name"
+                            *matCellDef="let row"
+                            (click)="viewCourse(row.id)"
+                            ><span class="mobile-label">Course:</span>
+                            <span>{{ row.title | titlecase }}</span>
+                          </mat-cell>
+                      <!-- <mat-cell *matCellDef="let row">
                         <span class="mobile-label">Course Name:</span>
                         <span class="col-cyan">{{ row.title }}</span></mat-cell
-                      >
+                      > -->
                     </ng-container>
                     <!-- Course Code -->
                     <ng-container matColumnDef="Course Code">
