@@ -8,7 +8,9 @@
     border-radius: 12px;
 }
 
-
+.error{
+  padding-left: 20px;
+}
 
 // #next {
 //     margin-left: 85px;
@@ -51,18 +53,15 @@
 }
 
 
-.mandatory {
-    color: red;
-}
 
 //file-upload styling
 .file-drop-area {
     border: 1px dashed #7c7db3;
     border-radius: 15px;
     position: relative;
-    max-width: 100%;
+    // max-width: 100%;
     margin-top: 5px;
-    padding: 26px 20px 30px;
+    // padding: 26px 20px 30px;
     transition: 0.2s;
   }
   .file-drop-area button{
@@ -81,7 +80,7 @@
     opacity: 0;
   }
   .file-msg {
-    display: inline-block;
+    // display: inline-block;
     margin-left: 20px;
     vertical-align: middle;
     font-size: 12px;
@@ -98,7 +97,7 @@
   position: relative;
   max-width: 100%;
   margin-top: 0px;
-  padding: 7px 0px 9px;
+  // padding: 7px 0px 9px;
   transition: 0.2s;
 }
 .file-drop-area button{
@@ -106,6 +105,10 @@
 }
 .file1{
  text-align: center;
+}
+.btn{
+  margin-top: 6px;
+  height: 22px;
 }
 .file-input1 {
   position: absolute;
@@ -117,7 +120,7 @@
   opacity: 0;
 }
 .file-msg1 {
-  display: inline-block;
+  // display: inline-block;
   margin-left: 20px;
   vertical-align: middle;
   font-size: 12px;

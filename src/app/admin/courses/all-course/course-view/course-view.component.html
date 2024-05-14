@@ -159,7 +159,7 @@
                             <h6>Course</h6>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
-                            <h6 class="text-muted">{{ sourceData?.title }}</h6>
+                            <p>{{ sourceData?.title }}</p>
                           </div>
                         </div>
                         <div class="row mt-3 mx-auto">
@@ -167,9 +167,9 @@
                             <h6>Code</h6>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
-                            <h6 class="text-muted">
+                            <p>
                               {{ sourceData?.courseCode }}
-                            </h6>
+                            </p>
                           </div>
                         </div>
                         <div class="row mt-3 mx-auto">
@@ -177,9 +177,9 @@
                             <h6>Main Category</h6>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
-                            <h6 class="text-muted">
+                            <p>
                               {{ sourceData?.main_category?.category_name }}
-                            </h6>
+                            </p>
                           </div>
                         </div>
                         <div class="row mt-3 mx-auto">
@@ -187,9 +187,9 @@
                             <h6>Sub Category</h6>
                           </div>
                           <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
-                            <h6 class="text-muted">
+                            <p>
                               {{ sourceData?.sub_category?.category_name }}
-                            </h6>
+                            </p>
                           </div>
                         </div>
                         <div class="row mt-3 mx-auto">
@@ -239,17 +239,17 @@
                         <h6>Days</h6>
                       </div>
                       <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6 class="text-muted">
+                        <p>
                           {{ sourceData?.course_duration_in_days || 0 }}
-                        </h6>
+                        </p>
                       </div>
                       <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                         <h6>Hours</h6>
                       </div>
                       <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6 class="text-muted">
+                        <p>
                           {{ sourceData?.training_hours || 0 }}
-                        </h6>
+                        </p>
                       </div>
                     </div>
                     <div class="row mt-3 mx-auto">
@@ -257,17 +257,17 @@
                         <h6>Start Date</h6>
                       </div>
                       <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6 class="text-muted">
+                        <p>
                           {{ sourceData?.sessionStartDate | date }}
-                        </h6>
+                        </p>
                       </div>
                       <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                         <h6>End Date</h6>
                       </div>
                       <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6 class="text-muted">
+                        <p>
                           {{ sourceData?.sessionEndDate | date }}
-                        </h6>
+                        </p>
                       </div>
                     </div>
                     <div class="row mt-3 mx-auto">
@@ -275,7 +275,7 @@
                         <h6>Vendor</h6>
                       </div>
                       <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                        <h6 class="text-muted">{{ sourceData?.vendor }}</h6>
+                        <p>{{ sourceData?.vendor }}</p>
                       </div>
                     </div>
 
