@@ -21,7 +21,7 @@ export class EditStaffComponent {
   breadscrums = [
     {
       title: 'Add Staff',
-      items: ['Users'],
+      items: ['Staff'],
       active: 'Edit Staff',
     },
   ];
@@ -57,8 +57,8 @@ export class EditStaffComponent {
         last_name: [''],
         gender: ['',  [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.gender]],
         mobile: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],
-        type: [''],
-        joiningDate: [''],
+        type: ['', [Validators.required]],
+        joiningDate: ['', [Validators.required]],
         address: [''],
         email: [
           '',
@@ -67,9 +67,9 @@ export class EditStaffComponent {
         dob: ['', [Validators.required]],
         qualification: ['',[Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.edu]],
         avatar: [''],
-        salary: [''],
-        password: ['', [Validators.required]],
-        conformPassword: ['', [Validators.required]],
+        salary: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.fee]],
+        password: ['', [Validators.required,...this.utils.validators.password]],
+        conformPassword: ['', [Validators.required, ...this.utils.validators.password]],
       },
       {
         validator: ConfirmedValidator('password', 'conformPassword'),
@@ -188,6 +188,17 @@ ngOnInit(){
 
   onFileUpload(event: any) {
     const file = event.target.files[0];
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/jfif'];
+    if (!allowedTypes.includes(file.type)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Selected format doesn't support. Only JPEG, PNG, JPG, and JFIF formats are allowed.!`,
+      });
+      return;
+    }
+    
 
     this.thumbnail = file;
     const formData = new FormData();

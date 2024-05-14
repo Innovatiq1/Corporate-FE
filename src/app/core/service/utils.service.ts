@@ -167,6 +167,13 @@ export class UtilsService {
       { type: 'required', message: 'Enter Mobile Number' },
       
     ],
+    salary: [
+      { type: 'required', message: 'Enter Salary' },
+      { type: 'min', message: 'Enter Fees between 0-999999' },
+      { type: 'max', message: 'Enter Fees between 0-999999' },
+      { type: 'pattern', message: 'Enter Digits' },
+      
+    ],
     city: [
       { type: 'required', message: 'Enter City' },
       
@@ -350,10 +357,10 @@ export class UtilsService {
       {type:'pattern', message: 'Enter a Valid email'}
     ],
     'password':[
-      {type:'required', message: 'Enter Valid Password'}
+      {type:'required', message: 'Enter Password'}
     ],
-    'currentPsw':[
-      {type:'required', message: 'Enter Current Password'}
+    're-enterPsw':[
+      {type:'required', message: 'Re-Enter Password'}
     ],
     'type':[
       {type: 'required', message: 'Select User Type'}
@@ -412,6 +419,9 @@ export class UtilsService {
     ],
     'descripton':[
       {type: 'required', message:'Enter Description'}
+    ],
+    'roles':[
+      {type: 'required', message:'Select Role'}
     ]
   };
 
