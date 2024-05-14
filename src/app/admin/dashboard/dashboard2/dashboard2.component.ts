@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
 import { InstructorService } from '@core/service/instructor.service';
@@ -71,7 +72,8 @@ export class Dashboard2Component implements OnInit {
   
   constructor(private instructorService: InstructorService,
     private courseService: CourseService,
-    private classService: ClassService,) {
+    private classService: ClassService,
+    private router: Router,) {
     //constructor
   }
 
@@ -355,5 +357,10 @@ export class Dashboard2Component implements OnInit {
       item.sub_category_text = this.allSubCategories.find((x) => x.id === item.sub_category)?.category_name;
     });
   
+  }
+  aboutInstructor(id: any) {
+    this.router.navigate(['/student/settings/view-instructor'], {
+      queryParams: { data: id },
+    });
   }
 }

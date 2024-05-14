@@ -622,4 +622,9 @@ this.getClassList()
       ],
     };
   }
+  aboutStudent(id: any) {
+    this.router.navigate(['/student/settings/view-student'], {
+      queryParams: { data: id },
+    });
+  }
 }

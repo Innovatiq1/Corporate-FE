@@ -210,6 +210,9 @@ deleteItem(row: any) {
    });
 
  }
+ cancel(){
+  window.history.back();
+ }
 }
 
 
