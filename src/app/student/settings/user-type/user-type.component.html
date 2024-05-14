@@ -95,7 +95,7 @@
                         <mat-cell *matCellDef="let row" (click)="edit(row.id)">
                           <span class="mobile-label">Sub Module:</span>
                           <ng-container *ngFor="let menu of row.menuItems  let last = last">
-                            {{ menu.children[0].title | capitalizeFirstLetter }}{{ !last ? ', ' : '' }}
+                            {{ menu?.children[0]?.title | capitalizeFirstLetter }}{{ !last ? ', ' : '' }}
                           </ng-container></mat-cell>
                       </ng-container>
                       <ng-container matColumnDef="Status">

@@ -9,7 +9,7 @@
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
         <div class="card">
           <div class="header">
-            <h2> Staff Information</h2>
+            <h2>Create Staff </h2>
           </div>
           <div class="body">
             <form class="m-4" [formGroup]="staffForm">
@@ -19,8 +19,8 @@
                   <label>First name<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="name" required>
-                    <mat-error *ngIf="staffForm.get('name')?.invalid && staffForm.get('name')?.touched">
-                      <!-- Error message for first name -->
+                    <mat-error *ngIf="staffForm.get('name')?.invalid && staffForm.get('name')?.touched ">
+                      {{utils.getErrorMessage1(staffForm.get("name"), "fname") }}
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -31,66 +31,12 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Gender<span class="mandatory">&nbsp;*</span></label>
+                  <label>Education<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-select formControlName="gender" required>
-                      <mat-option [value]="'male'">Male</mat-option>
-                      <mat-option [value]="'female'">Female</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="staffForm.get('gender')?.invalid && staffForm.get('gender')?.touched">
-                      <!-- Error message for gender -->
+                    <input matInput formControlName="qualification" required>
+                    <mat-error *ngIf="staffForm.get('qualification')?.invalid && staffForm.get('qualification')?.touched ">
+                      {{utils.getErrorMessage1(staffForm.get("qualification"), "edu") }}
                     </mat-error>
-                  </mat-form-field>
-                </div>
-        
-              <!-- Second row -->
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>User Type<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <mat-select formControlName="type" required>
-                      <mat-option [value]="user.typeName" *ngFor="let user of userTypes">
-                        {{user.typeName}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="staffForm.get('type')?.hasError('required')">Select User Type</mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Password<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput formControlName="password" type="password" required>
-                    <mat-error *ngIf="staffForm.get('password')?.hasError('required')">Enter Password</mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Re-Enter Password<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput formControlName="conformPassword" type="password" required>
-                    <mat-error *ngIf="staffForm.get('conformPassword')?.hasError('required')">
-                      Re-Enter Password
-                    </mat-error>
-                    <mat-error *ngIf="staffForm.get('conformPassword')?.hasError('confirmedValidator')">
-                      Password and Re-Enter Password must be match
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-            
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Mobile<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput formControlName="mobile" type="number" required>
-                    <mat-error *ngIf="staffForm.get('mobile')?.invalid && staffForm.get('mobile')?.touched">
-                      <!-- Error message for mobile -->
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Joining Date<span class="mandatory">&nbsp;*</span></label>
-                  <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput [matDatepicker]="picker1" formControlName="joiningDate" required>
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                    <mat-error *ngIf="staffForm.get('joiningDate')?.hasError('required')">Please select date</mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
@@ -98,71 +44,121 @@
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput formControlName="email" required>
                     <mat-error *ngIf="staffForm.get('email')?.invalid && staffForm.get('email')?.touched">
-                      <!-- Error message for email -->
+                      {{utils.getErrorMessage1(staffForm.get("email"), "email") }}
                     </mat-error>
                   </mat-form-field>
                 </div>
-              
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Date Of Birth<span class="mandatory">&nbsp;*</span></label>
+                  <label>Password<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="password" type="password" required>
+                    <mat-error *ngIf="staffForm.get('password')?.hasError('required')">
+                      {{utils.getErrorMessage1(staffForm.get("password"), "password") }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Re-Enter Password<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="conformPassword" type="password" required>
+                    <mat-error *ngIf="staffForm.get('conformPassword')?.hasError('required')">
+                      {{utils.getErrorMessage1(staffForm.get("conformPassword"), "re-enterPsw") }}
+                    </mat-error>
+                    <mat-error *ngIf="staffForm.get('conformPassword')?.hasError('confirmedValidator')">
+                      Password and Re-Enter Password must be match
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Role<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-select formControlName="type" required>
+                      <mat-option [value]="user.typeName" *ngFor="let user of userTypes">
+                        {{user.typeName}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="staffForm.get('type')?.hasError('required')">
+                      {{utils.getErrorMessage1(staffForm.get("type"), "roles") }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Gender<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <mat-select formControlName="gender" required>
+                      <mat-option [value]="'male'">Male</mat-option>
+                      <mat-option [value]="'female'">Female</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="staffForm.get('gender')?.invalid && staffForm.get('gender')?.touched">
+                      {{utils.getErrorMessage1(staffForm.get("gender"), "gender") }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Mobile<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field class="example-full-width mb-3" appearance="outline">
+                    <input matInput formControlName="mobile" type="number" required>
+                    <mat-error *ngIf="staffForm.get('mobile')?.invalid && staffForm.get('mobile')?.touched">
+                      {{utils.getErrorMessage1(staffForm.get("mobile"), "mobile") }}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <label>Date of Birth<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <input matInput [matDatepicker]="picker" formControlName="dob" required>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="staffForm.get('dob')?.hasError('required')">Please select date</mat-error>
+                    <mat-error *ngIf="staffForm.get('dob')?.hasError('required')">
+                      {{utils.getErrorMessage1(staffForm.get("dob"), "dob") }}
+                    </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
-                  <label>Education<span class="mandatory">&nbsp;*</span></label>
+                  <label>Registration Date<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput formControlName="qualification" required>
-                    <mat-error
-                      *ngIf="staffForm.get('qualification')?.invalid && staffForm.get('qualification')?.touched">
-                      <!-- Error message for education -->
+                    <input matInput [matDatepicker]="picker1" formControlName="joiningDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                    <mat-error *ngIf="staffForm.get('joiningDate')?.hasError('required')">
+                      {{utils.getErrorMessage1(staffForm.get("dob"), "dob") }}
                     </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Salary')">
-                  <label>Salary</label>
+                  <label>Salary<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
-                    <input matInput formControlName="salary">
+                    <input matInput formControlName="salary" required>
+                    <mat-error *ngIf="staffForm.get('salary')?.hasError('required')">
+                      {{utils.getErrorMessage1(staffForm.get("salary"), "salary") }}
+                    </mat-error>
                   </mat-form-field>
                 </div>
-
-           
-             
-           
-        
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Address')">
-                  
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                      <label>Address</label>
-                      <mat-form-field class="example-full-width" appearance="outline">
-                        <textarea matInput formControlName="address"></textarea>
-                      </mat-form-field>
-                    </div>
-                  
+
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <label>Address</label>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <textarea matInput formControlName="address"></textarea>
+                    </mat-form-field>
+                  </div>
+
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"  *ngIf="labelStatusCheck('Upload')">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                      <label>Upload</label>
-                      <div class="file-drop-area">
-                        <div class="file">
-                          <button mat-raised-button color="primary">Choose file <input formControlName="avatar"
-                              (change)="onFileUpload($event)" class="file-input" type="file" /></button>
-                          <span class="file-msg">
-                            <h6>{{fileName ? fileName : 'Drag and Drop File Here' }}</h6>
-                          </span>
-                        </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Upload')">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <label>Upload</label>
+                    <div class="file-drop-area">
+                      <div class="file">
+                        <button mat-raised-button color="primary" class="btn">Choose file <input formControlName="avatar"
+                            (change)="onFileUpload($event)" class="file-input" type="file" /></button>
+                        <span class="file-msg">
+                          <h6>{{fileName ? fileName : 'Drag and Drop File Here' }}</h6>
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
-             
-
-
-
-              <!-- Repeat remaining rows as needed -->
+              </div>
               <div class="row" style="float: right;">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                   <button type="button" class="btn-space" mat-raised-button color="warn"
