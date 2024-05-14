@@ -43,9 +43,10 @@ export class ProgramListComponent {
     'Duration',
     'Start Date',
     'End Date',
-    'Payment',
+    // 'Payment',
     'Compulsory Count',
     'Elective Count',
+    'Payment',
     
   ];
   isLoading = false;
@@ -125,9 +126,10 @@ row: any;
       'Duration',
       'Start Date',
       'End Date',
-      'Payment',
+      // 'Payment',
       'Compulsory Count',
       'Elective Count',
+      'Payment',
       
     ];
 
@@ -149,9 +151,10 @@ row: any;
       'Duration',
       'Start Date',
       'End Date',
-      'Payment',
+      // 'Payment',
       'Compulsory Count',
       'Elective Count',
+      'Payment',
       
     ];
     this.breadscrums = [

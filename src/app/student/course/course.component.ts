@@ -13,9 +13,9 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 export class CourseComponent {
   breadscrums = [
     {
-      title: 'Courses',
-      items: ['Course'],
-      active: 'All Courses',
+      title: 'Enrollment',
+      items: ['Enrollment'],
+      active: 'Courses',
     },
   ];
 

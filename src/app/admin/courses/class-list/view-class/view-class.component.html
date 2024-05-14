@@ -81,13 +81,31 @@
                                 <div class="col-6">
                                     <h6>Class</h6>
                                 </div>
-                                <div class="col-6" [ngClass]="getStatusClass(response.classDeliveryType)">
-                                    <div class="status-container">
+                                <!-- <div class="col-6" [ngClass]="getStatusClass(response.classDeliveryType)"> -->
+                                    <!-- <div class="status-container">
                                         <span class="status-dot"></span>
                                         <span class="status-text">{{response.classDeliveryType | titlecase}}</span>
+                                        </div> -->
+                                        <div class="col-6">
+                                            <h6
+                                      [ngClass]="
+                                      response.classDeliveryType === 'online'
+                                      ? 'badge badge-solid-green'
+                                      : response?.classDeliveryType === 'offline' ? 'badge badge-solid-red' : ''
+                                      "
+                                    >
+                                      <span
+                                        [ngClass]="
+                                        response?.classDeliveryType === 'online'
+                                        ? 'status-dot' :
+                                        response?.classDeliveryType === 'offline' ? 'status-red' : ''
+                                        "
+                                      ></span
+                                      >{{ response.classDeliveryType | titlecase}}
+                                    </h6>
                                         </div>
                                    
-                                </div>
+                                <!-- </div> -->
                             </div>
                             
                         </div>
