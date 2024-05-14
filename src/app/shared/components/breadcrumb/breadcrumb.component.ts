@@ -14,7 +14,7 @@ export class BreadcrumbComponent {
   items!: string[];
   @Input()
   active_item!: string;
-  url: string = '/dashboard/student-analytics';
+  url: string = '/dashboard/dashboard';
 
 
   constructor(
@@ -33,7 +33,7 @@ export class BreadcrumbComponent {
       (role === Role.Admin &&
         (role == 'RO' || role == 'Director' || role == 'Employee'))
     ) {
-      url = '/dashboard/student-analytics';
+      url = '/dashboard/dashboard';
     } else if (
       role === Role.Instructor ||
       role === 'Trainer' ||

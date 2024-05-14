@@ -221,7 +221,7 @@
 
         &:after {
           content: "\2013";
-          color: #6c64f3;;
+          color: #6c64f3;
           // @include transform(scale(0));
         }
       }
@@ -304,7 +304,9 @@
           // font-family: 'Nunito';
         }
       }
-
+      // li.active .ml-menu{
+      //   background-color: #edecff;
+      // }
       .ml-menu {
         list-style: none;
         display: none;
@@ -315,7 +317,9 @@
           font-size: 14px;
           margin: 3px 0 1px 6px;
         }
-
+        li.active .ml-menu{
+          background-color: #edecff;
+        }
         li {
           a {
             padding-left: 45px;
@@ -428,7 +432,7 @@
           left: 20%;
           font-weight: 900;
           top: calc(50% - 15px);
-          color: #6c64f3;
+          color: #000000;
         }
       }
       .ml-menu-3 {

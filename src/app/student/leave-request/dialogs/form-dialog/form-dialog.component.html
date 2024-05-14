@@ -203,14 +203,22 @@
               >
                 Cancel
               </button>
-              <button
+              <button *ngIf="!isEdit"
               mat-raised-button
-              color="primary"
+             id="submit"
               [mat-dialog-close]="1"
               (click)="confirmAdd()"
             >
               Submit
             </button>
+            <button *ngIf="isEdit"
+            mat-raised-button
+           id="submit"
+            [mat-dialog-close]="1"
+            (click)="confirmAdd()"
+          >
+            Update
+          </button>
             </div>
           </div>
         </div>

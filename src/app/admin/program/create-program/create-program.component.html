@@ -171,7 +171,7 @@
               </div> -->
 
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="labelStatusCheck('Start Date')">
-                  <label class="form-label">Start Date</label>
+                  <label class="form-label">Start Date<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
@@ -186,10 +186,23 @@
                       [for]="startPicker"
                     ></mat-datepicker-toggle>
                     <mat-datepicker #startPicker></mat-datepicker>
+                    <mat-error
+                      *ngIf="
+                        programFormGroup.get('sessionStartDate')?.invalid &&
+                        programFormGroup.get('sessionStartDate')?.touched
+                      "
+                    >
+                      {{
+                        utils.getErrorMessage1(
+                          programFormGroup.get("sessionStartDate"),
+                          "dob"
+                        )
+                      }}
+                    </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="labelStatusCheck('End Date')">
-                  <label class="form-label">End Date</label>
+                  <label class="form-label">End Date<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
@@ -204,6 +217,19 @@
                       [for]="endPicker"
                     ></mat-datepicker-toggle>
                     <mat-datepicker #endPicker></mat-datepicker>
+                    <mat-error
+                      *ngIf="
+                        programFormGroup.get('sessionEndDate')?.invalid &&
+                        programFormGroup.get('sessionEndDate')?.touched
+                      "
+                    >
+                      {{
+                        utils.getErrorMessage1(
+                          programFormGroup.get("sessionEndDate"),
+                          "dob"
+                        )
+                      }}
+                    </mat-error>
                   </mat-form-field>
                 </div>
                 <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
@@ -279,7 +305,7 @@
 
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="labelStatusCheck('Currency')">
                   <label class="form-label"
-                    >Currency</label
+                    >Currency<span class="mandatory">&nbsp;*</span></label
                   >
                   <mat-form-field
                     class="example-full-width mb-3"
@@ -297,6 +323,19 @@
                       <mat-option value="TWD">TWD</mat-option>
                       <mat-option value="AUD">AUD</mat-option>
                     </mat-select>
+                    <mat-error
+                    *ngIf="
+                      programFormGroup.get('currency')?.invalid &&
+                      programFormGroup.get('currency')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(
+                        programFormGroup.get("currency"),
+                        "currency"
+                      )
+                    }}
+                  </mat-error>
                   </mat-form-field>
                 </div>
                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="labelStatusCheck('Thumbnail')">
@@ -337,8 +376,33 @@
               <hr class="m-4" style="width: 94%" />
               <div class="d-flex m-3 justify-content-between m-4">
                 <div class="d-flex gap-4">
-                  <label>Compulsory Count</label>
+                  <label>Compulsory Count<span class="mandatory">&nbsp;*</span></label>
+
+                  <mat-form-field
+                  class="example-full-width mb-3"
+                  appearance="outline"
+                >
                   <input
+                    matInput
+                    type="number"
+                    formControlName="coreCourseCount"
+                    class="form-control"
+                  />
+                  <mat-error
+                  *ngIf="
+                    programFormGroup.get('coreCourseCount')?.invalid &&
+                    programFormGroup.get('coreCourseCount')?.touched
+                  "
+                >
+                  {{
+                    utils.getErrorMessage1(
+                      programFormGroup.get("coreCourseCount"),
+                      "coreCourseCount"
+                    )
+                  }}
+                </mat-error>
+                </mat-form-field>
+                  <!-- <input
                     type="text"
                     class="form-control rounded-3 p-1 w-25 border-secondary"
                     formControlName="coreCourseCount"
@@ -348,7 +412,7 @@
                       (programFormGroup.get('coreCourseCount')?.invalid &&
                         programFormGroup.get('coreCourseCount')?.touched)
                     "
-                  />
+                  /> -->
                 </div>
                 <div class="d-flex gap-4">
                   <button (click)="addCoreCard()" class="btn rounded-2 px-4">
@@ -446,12 +510,32 @@
               <hr class="m-4" style="width: 94%" />
               <div class="d-flex m-3 justify-content-between m-4">
                 <div class="d-flex gap-4">
-                  <label>Elective Count</label>
+                  <label>Elective Count<span class="mandatory">&nbsp;*</span></label>
+                  <mat-form-field
+                  class="example-full-width mb-3"
+                  appearance="outline"
+                >
                   <input
-                    type="text"
-                    class="form-control rounded-3 p-1 w-25 border-secondary"
+                    matInput
+                    type="number"
                     formControlName="electiveCourseCount"
+                    class="form-control"
                   />
+                  <mat-error
+                  *ngIf="
+                    programFormGroup.get('electiveCourseCount')?.invalid &&
+                    programFormGroup.get('electiveCourseCount')?.touched
+                  "
+                >
+                  {{
+                    utils.getErrorMessage1(
+                      programFormGroup.get("electiveCourseCount"),
+                      "electiveCourseCount"
+                    )
+                  }}
+                </mat-error>
+                </mat-form-field>
+                  
                 </div>
                 <div class="d-flex gap-4">
                   <button
