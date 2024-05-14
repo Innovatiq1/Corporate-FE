@@ -112,7 +112,7 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Fees
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row" >
-                    <span class="mobile-label">Fees:</span>{{row.fee}}</mat-cell>
+                    <span class="mobile-label">Fees:</span><span>$</span> {{row.fee||0}}.00</mat-cell>
                 </ng-container>
                 <!-- actions -->
                 <ng-container matColumnDef="status">

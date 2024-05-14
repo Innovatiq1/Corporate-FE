@@ -181,7 +181,7 @@
                                 <tr style="cursor: pointer;" *ngFor="let course of response?.coreprogramCourse">
                                   <td>{{ course?.coreProgramName?.title }}</td>
                                   <td [innerHTML]="course?.coreProgramDescription | bulletPoints | truncate:150"></td>
-                                  <td>${{ course?.coreProgramName?.fee }}</td>
+                                  <td><span >$</span> {{ course?.coreProgramName?.fee }}.00</td>
                                 </tr>
                               </tbody>
                             </table>

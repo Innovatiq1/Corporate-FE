@@ -36,11 +36,12 @@ export class CompletionListComponent {
     'Student',
     'email',
     'Course',
-    'Instructorfee',
+    // 'Instructorfee',
     'Classstart',
     'Classend',
     'Registered Date',
     'Completed Date',
+    'Instructorfee',
     'actions',
     'view',
   ];

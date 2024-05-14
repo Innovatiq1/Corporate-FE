@@ -106,7 +106,7 @@
                                         <td>{{request?.requestId}}</td>
                                         <td>{{request?.employeeId?.name}}</td>
                                         <td>{{request?.courseName | titlecase}}</td>
-                                        <td>{{request?.courseCost}}$</td>
+                                        <td><span>$</span> {{request?.courseCost||0}}.00</td>
                                         <td>{{request?.vendorName | titlecase}}</td>
                                         <td>{{request?.courseTimeline}}</td>
                                         

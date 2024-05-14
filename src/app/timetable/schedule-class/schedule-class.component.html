@@ -167,8 +167,7 @@
                     *matCellDef="let row"
                     [routerLink]="['/timetable/view-schedule-class', row.id]"
                   >
-                    <span class="mobile-label">Amount:</span>$
-                    {{ row.instructorCost }}</mat-cell
+                    <span class="mobile-label">Amount:</span><span>$</span> {{ row.instructorCost||0 }}.00</mat-cell
                   >
                 </ng-container>
                 <ng-container matColumnDef="Department">
