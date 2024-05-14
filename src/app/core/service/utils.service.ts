@@ -298,6 +298,15 @@ export class UtilsService {
       { type: 'required', message: 'Enter Long Description' },
       { type: 'maxlength', message: 'Enter maximum 255 characters' },
     ],
+    'coursekitName': [
+      { type: 'required', message: 'Enter Course Kit Name' },
+    ],
+    'document': [
+      { type: 'required', message: 'Select Document' },
+    ],
+    'media': [
+      { type: 'required', message: 'Select Media' },
+    ],
     'courseId': [
       {type: 'required', message: 'Enter Course Name'},
     ],
@@ -401,7 +410,7 @@ export class UtilsService {
     'document_Link':[
       {type: 'required', message:'Enter Document Link'}
     ],
-    descripton:[
+    'descripton':[
       {type: 'required', message:'Enter Description'}
     ]
   };

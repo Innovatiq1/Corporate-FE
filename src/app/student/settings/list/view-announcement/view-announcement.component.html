@@ -70,8 +70,8 @@
                             <div class="col-4">
                                 <h6>Title</h6>
                             </div>
-                            <div class="col-6 text-muted">
-                                <h6>{{aboutData1?.subject | capitalizeFirstLetter}}</h6>
+                            <div class="col-6">
+                                <p>{{aboutData1?.subject | capitalizeFirstLetter}}</p>
                             </div>
                         </div>
                         <!-- <div class="row"> -->
@@ -87,8 +87,8 @@
                                 <div class="col-4">
                                     <h6>Role</h6>
                                 </div>
-                                <div class="col-6 text-muted">
-                                    <h6 [innerHTML]="aboutData1.announcementFor | bulletPoints"></h6>
+                                <div class="col-6">
+                                    <p [innerHTML]="aboutData1.announcementFor | bulletPoints"></p>
                                 </div>
                             </div>
                             <div class="row mt-2 mx-2">

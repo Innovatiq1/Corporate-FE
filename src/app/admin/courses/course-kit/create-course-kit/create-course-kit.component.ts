@@ -87,11 +87,12 @@ export class CreateCourseKitComponent implements OnInit {
     this.courseKitForm = this.formBuilder.group({
       name: new FormControl('', [
         Validators.required,
-        ...this.utils.validators.title,
+        ...this.utils.validators.name,
         ...this.utils.validators.noLeadingSpace,
       ]),
       documentLink: new FormControl('', [
         Validators.required,
+        ...this.utils.validators.imagePath,
         ...this.utils.validators.noLeadingSpace,
       ]),
       shortDescription: new FormControl('', [
@@ -104,7 +105,9 @@ export class CreateCourseKitComponent implements OnInit {
         ...this.utils.validators.longDescription,
         ...this.utils.validators.noLeadingSpace,
       ]),
-      videoLink: new FormControl('', []),
+      videoLink: new FormControl('', [ Validators.required,
+        ...this.utils.validators.imagePath,
+        ...this.utils.validators.noLeadingSpace,]),
       // startDate: ['', [Validators.required]],
       // endDate: ['', [Validators.required]]
       // sections: new FormControl('', [ Validators.required,...this.utils.validators.sections]),

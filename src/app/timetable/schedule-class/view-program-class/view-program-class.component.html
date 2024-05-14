@@ -58,7 +58,7 @@
                                            <h6>Program</h6>
                                         </div>
                                         <div class="col-6">
-                                            <h6 class="text-muted">{{aboutData1?.courseId?.title}}</h6>
+                                            <p>{{aboutData1?.courseId?.title}}</p>
                                         </div>
                             </div>
                             <div class="row mt-3 mx-auto">
@@ -66,7 +66,7 @@
                                     <h6>Program Code</h6>
                                 </div>
                                 <div class="col-6" style="width: 40%;display: flex;">
-                                    <h6 class="text-muted">{{aboutData1?.courseId?.courseCode}}</h6>
+                                    <p>{{aboutData1?.courseId?.courseCode}}</p>
                                 </div>
                             </div>
                             <div class="row mt-3 mx-auto">
@@ -74,7 +74,7 @@
                                     <h6>Instructor</h6>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="text-muted">{{aboutData1.sessions[0]?.instructorId?.name | titlecase}}</h6>
+                                    <p>{{aboutData1.sessions[0]?.instructorId?.name | titlecase}}</p>
                                 </div>
                             </div>
                             <div class="row mt-3 mx-auto">
@@ -120,7 +120,7 @@
                                         <h6>Class Type</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">{{aboutData1?.classType == '2'?'Private':'Public'}}</h6>
+                                        <p>{{aboutData1?.classType == '2'?'Private':'Public'}}</p>
                                     </div>
                                 </div>
                                 <div class="row pt-2">
@@ -128,7 +128,7 @@
                                         <h6>Start Date</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">{{aboutData1.sessions[0]?.sessionStartDate | date }}</h6>
+                                        <p>{{aboutData1.sessions[0]?.sessionStartDate | date }}</p>
                                     </div>
                                 </div>
                                 <div class="row pt-2">
@@ -136,7 +136,7 @@
                                         <h6>Minimum students</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">{{aboutData1?.minimumEnrollment}}</h6>
+                                        <p>{{aboutData1?.minimumEnrollment}}<p>
                                     </div>
                                    
                                 </div>
@@ -150,7 +150,7 @@
                                         <h6>Instructor Cost</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">$ {{aboutData1?.instructorCost}}</h6>
+                                        <p>$ {{aboutData1?.instructorCost}}.00</p>
                                     </div>
                                 </div>
                                 <div class="row pt-2">
@@ -158,7 +158,7 @@
                                         <h6>End Date</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">{{aboutData1.sessions[0]?.sessionEndDate | date }}</h6>
+                                        <p>{{aboutData1.sessions[0]?.sessionEndDate | date }}</p>
                                     </div>
                                 </div>
                                 <div class="row pt-2">
@@ -166,7 +166,7 @@
                                         <h6>Maximum students</h6>
                                     </div>
                                     <div class="col-6">
-                                        <h6 class="text-muted">{{aboutData1?.maximumEnrollment}}</h6>
+                                        <p>{{aboutData1?.maximumEnrollment}}</p>
                                     </div>
                                 </div>
 

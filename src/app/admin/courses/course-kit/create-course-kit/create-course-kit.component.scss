@@ -11,8 +11,9 @@ label {
     border-radius: 12px;
 }
 
-
-
+.error{
+  padding-left: 20px;
+}
 // #next {
 //     margin-left: 85px;
 //     margin-bottom: 20px;
@@ -55,9 +56,6 @@ label {
 
 
 
-.mandatory {
-    color: red;
-}
 
 //file-upload styling
 .file-drop-area {

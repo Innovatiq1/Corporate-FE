@@ -62,7 +62,7 @@
                                                                        <h6>Student</h6>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="text-muted">{{response.studentId?.name | titlecase}}</h6>
+                                                                        <p>{{response.studentId?.name | titlecase}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -74,7 +74,7 @@
                                                                         <h6>Gender</h6>
                                                                     </div>
                                                                     <div class="col-7">
-                                                                        <h6 class="text-muted">{{response.studentId?.gender | titlecase}}</h6>
+                                                                        <p>{{response.studentId?.gender | titlecase}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -88,7 +88,7 @@
                                                                        <h6>Mobile</h6>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="text-muted">{{response.studentId?.mobile}}</h6>
+                                                                        <p>{{response.studentId?.mobile}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -100,7 +100,7 @@
                                                                         <h6>Email</h6>
                                                                     </div>
                                                                     <div class="col-7">
-                                                                        <h6 class="text-muted">{{response.studentId?.email}}</h6>
+                                                                        <p>{{response.studentId?.email}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -114,7 +114,7 @@
                                                                        <h6>City</h6>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="text-muted">{{response.studentId?.city_name | titlecase}}</h6>
+                                                                        <p>{{response.studentId?.city_name | titlecase}}</p>
                                                                     </div>
                                                                 </div>
                             
@@ -128,7 +128,7 @@
                                                                         <h6>Country</h6>
                                                                     </div>
                                                                     <div class="col-7">
-                                                                        <h6 class="text-muted">{{response.studentId?.country_name | titlecase}}</h6>
+                                                                        <p>{{response.studentId?.country_name | titlecase}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -142,7 +142,7 @@
                                                                        <h6>Qualification</h6>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="text-muted">{{response.studentId?.qualification }}</h6>
+                                                                        <p>{{response.studentId?.qualification }}</p>
                                                                     </div>
                                                                 </div>
                             
@@ -156,7 +156,7 @@
                                                                         <h6>Department</h6>
                                                                     </div>
                                                                     <div class="col-7">
-                                                                        <h6 class="text-muted">{{response.studentId?.department | titlecase}}</h6>
+                                                                        <p>{{response.studentId?.department | titlecase}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -175,7 +175,7 @@
                                                                        <h6>Program</h6>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="text-muted">{{response.programId.title | titlecase}}</h6>
+                                                                        <p>{{response.programId.title | titlecase}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -187,7 +187,7 @@
                                                                         <h6>Program Code</h6>
                                                                     </div>
                                                                     <div class="col-5">
-                                                                        <h6 class="text-muted">{{response.programId?.courseCode}}</h6>
+                                                                        <p>{{response.programId?.courseCode}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -201,7 +201,7 @@
                                                                        <h6>Duration</h6>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="text-muted">{{response.programId?.duration }} Days</h6>
+                                                                        <p>{{response.programId?.duration }} Days</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -213,7 +213,7 @@
                                                                         <h6>Program Fee</h6>
                                                                     </div>
                                                                     <div class="col-5">
-                                                                        <h6 class="text-muted"> $ {{response.programId?.courseFee}}</h6>
+                                                                        <p> $ {{response.programId?.courseFee}}.00</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -227,7 +227,7 @@
                                                                        <h6>Instructor Fee</h6>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="text-muted">$ {{response.classId?.instructorCost }}</h6>
+                                                                        <p>$ {{response.classId?.instructorCost }}.00</p>
                                                                     </div>
                                                                 </div>
                             
@@ -241,7 +241,7 @@
                                                                         <h6>Registered</h6>
                                                                     </div>
                                                                     <div class="col-5">
-                                                                        <h6 class="text-muted">{{response.registeredOn | date}}</h6>
+                                                                        <p>{{response.registeredOn | date}}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -255,7 +255,7 @@
                                                                        <h6>Completed</h6>
                                                                     </div>
                                                                     <div class="col-5 ">
-                                                                        <h6 class="text-muted">{{response.updatedAt | date }}</h6>
+                                                                        <p>{{response.updatedAt | date }}</p>
                                                                     </div>
                                                                 </div>
                             
@@ -269,7 +269,7 @@
                                                                         <h6>Learning Outcomes</h6>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="text-muted" [innerHTML]="response.programId?.learningOutcomes | bulletPoints"></h6>
+                                                                        <p [innerHTML]="response.programId?.learningOutcomes | bulletPoints"></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -283,7 +283,7 @@
                                                                        <h6>Who Should Attend</h6>
                                                                     </div>
                                                                     <div class="col-5">
-                                                                        <h6 class="text-muted" [innerHTML]="response.programId?.attendees | bulletPoints"></h6>
+                                                                        <p [innerHTML]="response.programId?.attendees | bulletPoints"></p>
                                                                     </div>
                                                                 </div>
                             
@@ -297,7 +297,7 @@
                                                                         <h6>Prerequisites</h6>
                                                                     </div>
                                                                     <div class="col-6">
-                                                                        <h6 class="text-muted" [innerHTML]="response.programId?.prerequisites | bulletPoints"></h6>
+                                                                        <p [innerHTML]="response.programId?.prerequisites | bulletPoints"></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
