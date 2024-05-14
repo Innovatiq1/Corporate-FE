@@ -26,7 +26,7 @@ export class BreadcrumbComponent {
   }
 
   homeURL():string {
-    let url = '/dashboard/student-analytics';
+    let url = '/dashboard/dashboard';
     const role = this.authenticationService.currentUserValue.user.role;
     if (
       role === Role.All ||
