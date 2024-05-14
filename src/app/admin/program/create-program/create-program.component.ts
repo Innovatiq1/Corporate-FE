@@ -101,22 +101,22 @@ export class CreateProgramComponent {
     });
     this.programFormGroup = this.fb.group({
       deliveryMode: ["", []],
-      electiveCourseCount: ["", []],
+      electiveCourseCount: ["", [Validators.required, ...this.utils.validators.electiveCourseCount]],
       course: ["", [Validators.required]],
-      sessionStartDate: ["", []],
-      sessionStartTime: ["", []],
+      sessionStartDate: ["", [Validators.required, ...this.utils.validators.dob]],
+      sessionStartTime: ["", ],
       duration: ["", []],
       courseFee: ["", []],
       learningOutcomes: ["", []],
       attendees: ["", []],
       prerequisites: ["", []],
-      sessionEndDate: ["", []],
+      sessionEndDate: ["", [Validators.required, ...this.utils.validators.dob]],
       sessionEndTime: ["", []],
       programCode: ["", [Validators.required]],
-      coreCourseCount: ["", []],
+      coreCourseCount: ["", [Validators.required, ...this.utils.validators.coreCourseCount]],
       image_link: ["", []],
       programKit: ["", []],
-      currency: ["", []],
+      currency: ["USD", [Validators.required, ...this.utils.validators.currency]],
       corePrograms: this.fb.array([]),
       electivePrograms: this.fb.array([])
 
@@ -245,6 +245,16 @@ export class CreateProgramComponent {
 
   onFileUpload(event: any) {
     const file = event.target.files[0];
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/jfif'];
+    if (!allowedTypes.includes(file.type)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Selected format doesn't support. Only JPEG, PNG, JPG, and JFIF formats are allowed.!`,
+      });
+      return;
+    }
+  
     this.thumbnail = file
     const formData = new FormData();
     formData.append('files', this.thumbnail);

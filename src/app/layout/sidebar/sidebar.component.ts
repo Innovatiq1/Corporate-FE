@@ -28,7 +28,7 @@ import { StudentsService } from 'app/admin/students/students.service';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  @Input() menuitem: MenuItem[]=[];
+  @Input() menuitem: MenuItem[] = [];
   @Output() menuItemClick = new EventEmitter();
 
   public innerHeight?: number;
@@ -42,28 +42,28 @@ export class SidebarComponent implements OnInit, OnDestroy {
   currentRoute?: string;
   routerObj;
   typesList: any;
-  url:any;
+  url: any;
   userProfile: any;
   studentId: any;
-  orgMenuItems:MenuItem[] = [];
+  orgMenuItems: MenuItem[] = [];
   isSettings: boolean = false;
+  submenu :boolean = false;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     public elementRef: ElementRef,
     private authService: AuthService,
     public router: Router,
-    private authenService:AuthenService,
+    private authenService: AuthenService,
     private adminService: AdminService,
-    private studentService:StudentsService,
+    private studentService: StudentsService
   ) {
     this.elementRef.nativeElement.closest('body');
 
-    let urlPath = this.router.url.split('/')
+    let urlPath = this.router.url.split('/');
     this.isSettings = urlPath.includes('settings');
 
     this.routerObj = this.router.events.subscribe((event) => {
-
       if (event instanceof NavigationEnd) {
         // close sidebar on mobile screen after menu select
         this.renderer.removeClass(this.document.body, 'overlay-open');
@@ -77,7 +77,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
           } else {
             this.isSettings = false;
             this.menuitem = this.orgMenuItems;
-          }    
+          }
         }
       }
     });
@@ -94,59 +94,58 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
   }
   callToggleMenu(event: Event, length: number) {
-
+    
     if (length > 0) {
       const parentElement = (event.target as HTMLInputElement).closest('li');
       const activeClass = parentElement?.classList.contains('active');
       if (activeClass) {
         this.renderer.removeClass(parentElement, 'active');
+        console.log('added');
       } else {
         this.renderer.addClass(parentElement, 'active');
+        console.log('removed');
       }
     }
   }
-  getUserTypeList(filters?:any) {
-    this.adminService.getUserTypeList( {'allRows':true}).subscribe(
+  getUserTypeList(filters?: any) {
+    this.adminService.getUserTypeList({ allRows: true }).subscribe(
       (response: any) => {
-        let userType = localStorage.getItem('user_type')
-        let data = response.filter((item:any) => item.typeName === userType);
-        const items = data[0].menuItems.filter((item: any) => item.title !== 'Support');
+        let userType = localStorage.getItem('user_type');
+        let data = response.filter((item: any) => item.typeName === userType);
+        const items = data[0].menuItems.filter(
+          (item: any) => item.title !== 'Support'
+        );
         this.orgMenuItems = items;
-        if(!this.isSettings){
+        if (!this.isSettings) {
           this.menuitem = this.orgMenuItems;
         }
         let limit = filters?.limit ? filters?.limit : 10;
         if (response.totalDocs <= limit || response.totalDocs <= 0) {
         }
       },
-      (error) => {
-      }
+      (error) => {}
     );
   }
 
-navigateTo(menu:any,url?:any,length?:any):void {
-  this.menuItemClick.emit();
-  let userType = localStorage.getItem('user_type')
-  if(this.isSettings){
-    this.router.navigateByUrl(menu);
-
+  navigateTo(menu: any, url?: any, length?: any): void {
+    this.menuItemClick.emit();
+    let userType = localStorage.getItem('user_type');
+    console.log(userType,"userType");
+    if (this.isSettings) {
+      this.router.navigateByUrl(menu);
+    } else {
+      this.router.navigateByUrl(menu + '/' + url);
+    }
   }
-  else{
-        this.router.navigateByUrl( menu +'/'+url);
-      }
-    
-  
-}
-navigateToMian(url:string, menu:string){
-  console.log(url);
-  this.router.navigateByUrl(url + '/' + menu);
-}
-navigateToSubItem2(menu:any,url?:any,subUrl?: any) {
-  this.menuItemClick.emit();
-  let userType = localStorage.getItem('user_type')
-  this.router.navigateByUrl( menu +'/'+url +'/'+subUrl);
-
-}
+  navigateToMian(url: string, menu: string) {
+    console.log(url);
+    this.router.navigateByUrl(url + '/' + menu);
+  }
+  navigateToSubItem2(menu: any, url?: any, subUrl?: any) {
+    this.menuItemClick.emit();
+    let userType = localStorage.getItem('user_type');
+    this.router.navigateByUrl(menu + '/' + url + '/' + subUrl);
+  }
   ngOnInit() {
     this.userProfile = this.authenService.getUserProfile();
 
@@ -156,11 +155,10 @@ navigateToSubItem2(menu:any,url?:any,subUrl?: any) {
     });
     if (this.authenService.currentUserValue) {
       const userRole = this.authenService.currentUserValue.user.role;
-      this.userFullName =
-        this.authenService.currentUserValue.user.name
+      this.userFullName = this.authenService.currentUserValue.user.name;
       this.userImg = this.authenService.currentUserValue.user.avatar;
       this.getUserTypeList();
-      this.student()
+      this.student();
       if (userRole === Role.Admin) {
         this.userType = Role.Admin;
       } else if (userRole === Role.Instructor) {
@@ -177,13 +175,17 @@ navigateToSubItem2(menu:any,url?:any,subUrl?: any) {
         this.userType = Role.TrainingCoordinator;
       } else if (userRole === Role.CourseManager) {
         this.userType = Role.CourseManager;
-      }else if (userRole === Role.Approver) {
+      } else if (userRole === Role.Approver) {
         this.userType = Role.Approver;
-      }else if (userRole === Role.TrainingCoordinatorAdministrator) {
+      } else if (userRole === Role.TrainingCoordinatorAdministrator) {
         this.userType = Role.TrainingCoordinatorAdministrator;
       } else {
         this.userType = this.authenService.currentUserValue.user.type;
       }
+    }
+
+    if(this.userType === Role.Admin || this.userType === 'admin'){
+      this.submenu = true;
     }
 
     this.initLeftSidebar();
@@ -205,14 +207,13 @@ navigateToSubItem2(menu:any,url?:any,subUrl?: any) {
     this.listMaxHeight = height + '';
     this.listMaxWidth = '500px';
   }
-  student(){
-    this.studentId = localStorage.getItem('id')
-   // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
+  student() {
+    this.studentId = localStorage.getItem('id');
+    // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
     this.studentService.getStudentById(this.studentId).subscribe((res: any) => {
-     // this.editData = res;
+      // this.editData = res;
       this.userProfile = res?.avatar;
-    })
-
+    });
   }
   isOpen() {
     return this.bodyTag.classList.contains('overlay-open');
@@ -241,26 +242,25 @@ navigateToSubItem2(menu:any,url?:any,subUrl?: any) {
   logout() {
     interface OuterObject {
       id: any;
+    }
+    const storedDataString: string | null = localStorage.getItem('userLogs');
+    const data: OuterObject =
+      storedDataString !== null ? JSON.parse(storedDataString) : {};
+    let data1 = {
+      id: data.id,
+    };
 
-}
-const storedDataString: string | null = localStorage.getItem('userLogs');
-const data: OuterObject = storedDataString !== null ? JSON.parse(storedDataString) : {};
-let data1 ={
-id:data.id
-}
-
-
-this.authService.logout1(data1).subscribe((res) => {
-if (res) {
-}
-});
+    this.authService.logout1(data1).subscribe((res) => {
+      if (res) {
+      }
+    });
 
     this.authService.logout().subscribe((res) => {
       if (!res.success) {
         let userType = JSON.parse(localStorage.getItem('user_data')!).user.type;
-        if(userType == 'admin' || userType =='Instructor'){
-        this.router.navigate(['/authentication/TMS/signin']);
-        } else if(userType == 'Student'){
+        if (userType == 'admin' || userType == 'Instructor') {
+          this.router.navigate(['/authentication/TMS/signin']);
+        } else if (userType == 'Student') {
           this.router.navigate(['/authentication/LMS/signin']);
         } else {
           this.router.navigate(['/authentication/TMS/signin']);
