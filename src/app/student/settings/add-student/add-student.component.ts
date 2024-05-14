@@ -60,7 +60,7 @@ export class AddStudentComponent {
       last_name: [''],
       rollNo: ['', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.roll_no]],
       gender: ['', [Validators.required]],
-      mobile: ['', [Validators.required, ...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],
+      mobile: ['', [Validators.required,...this.utils.validators.mobile]],
       password: [''],
       qualification: [''],
       department: [''],
