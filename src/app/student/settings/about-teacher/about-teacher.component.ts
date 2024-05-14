@@ -135,6 +135,8 @@ deleteItem(row: any) {
  getStatusClass(classDeliveryType: string): string {
   return classDeliveryType === 'online' ? 'success' : 'fail';
 }
-
+cancel(){
+  window.history.back();
+}
  }
 

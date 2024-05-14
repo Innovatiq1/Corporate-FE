@@ -196,7 +196,7 @@
       </div>
     </div>
     <div class="row clearfix">
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
         <div class="card" style="border-radius: 31px;">
           <div class="header mt-3">
             <h2>
@@ -266,8 +266,8 @@
             </ng-scrollbar>
           </div>
         </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      </div> -->
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <div class="card" style="border-radius: 31px;">
           <div class="header mt-3">
             <h2>Average Class Attendance</h2>
@@ -286,7 +286,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <div class="card" style="border-radius: 31px;">
           <div class="header mt-3">
             <h2>Users</h2>
@@ -345,7 +345,7 @@
                     <!-- <td class="table-img">
                       <img src="{{class?.courseId?.image_link}}" alt="course">
                     </td> -->
-                    <td>{{class?.courseId?.title | truncate:10}}</td>
+                    <td>{{class?.courseId?.title | titlecase | truncate:10}}</td>
                     <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
                     <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
                     <td>
@@ -558,7 +558,7 @@
                       <img src="{{instructor.avatar}}" alt="">
                     </td>
                     <td>
-                      <div class="media-title"><a href="mailto:test@gmail.com"> {{instructor?.name}}
+                      <div class="media-title"><a href="mailto:test@gmail.com"> {{instructor?.name | titlecase}}
                         </a></div>
                       <div class="text-job font-11">({{instructor?.qualification}})</div>
                     </td>
@@ -607,22 +607,22 @@
                     <th>Qualification</th>
                     <th>Date Of Joining</th>
                     <th>Mobile</th>
-                    <th>Actions</th>
+                    <!-- <th>Actions</th> -->
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let student of students" style="cursor: pointer;" (click)="editCall(student)">
+                  <tr *ngFor="let student of students" style="cursor: pointer;" (click)="aboutStudent(student.id)">
                     <td class="table-img">
                       <img src="{{student?.avatar || 'assets/profile.png'}}" alt="">
                     </td>
-                    <td>{{student?.name}}</td>
+                    <td>{{student?.name | titlecase}}</td>
                     <td>{{student?.education}}</td>
                     <td>{{student?.createdAt | date}}</td>
                     <td>
                       {{student?.mobile}}
                       <!-- <i class="far fa-file-pdf tbl-pdf"></i> -->
                     </td>
-                    <td>
+                    <!-- <td>
                       <button mat-button [matMenuTriggerFor]="menu">
                         <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
                         xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -644,7 +644,7 @@
                                 </button>
                               </mat-menu>
                      
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>

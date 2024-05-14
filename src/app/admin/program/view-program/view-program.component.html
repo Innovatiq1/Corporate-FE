@@ -62,9 +62,17 @@
                         <h6>Status</h6>
                       </div>
                       <div class="col-xl-6 col-sm-6 col-md-5 col-lg-5">
-                        <h6 [ngClass]="status === 'active' ? 'badge badge-solid-green':'badge badge-solid-red'"><span
+                        <h6><span
+                          [class]="response?.status === 'active' ? 'badge badge-solid-green' : response?.status === 'inactive'  ? 'badge badge-solid-red' :   '' ">
+                          <span
+                            [class]="response?.status === 'active' ? 'status-dot' : response?.status === 'inactive'  ? 'status-red' : '' "></span>
+                          {{response?.status |
+                            titlecase }}
+                          <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
+                        </span></h6>
+                        <!-- <h6 [ngClass]="status === 'active' ? 'badge badge-solid-green':'badge badge-solid-red'"><span
                             [ngClass]="status === 'active' ? 'status-dot':'status-red'"></span>{{response?.status |
-                          titlecase}}</h6>
+                          titlecase}}</h6> -->
                       </div>
                     </div>
                   </div>

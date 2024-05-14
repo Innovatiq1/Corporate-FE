@@ -169,6 +169,6 @@ export class AllRequestComponent {
    * navigates to the view request page
    */
   viewReq(id: string) {
-    this.router.navigate(['/admin/e-tms/view-request'], { queryParams: {id: id} });
+    this.router.navigate(['/admin/budgets/view-request'], { queryParams: {id: id} });
   }
 }

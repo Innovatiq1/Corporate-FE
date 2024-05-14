@@ -71,12 +71,12 @@ export class ViewTrainingReqComponent {
 
 
   copy(id: string) {
-    this.router.navigate(['/admin/e-tms/copy-request'], {
+    this.router.navigate(['/admin/budgets/copy-request'], {
       queryParams: { id: id, action: 'copy' },
     });
   }
   edit(id: string) {
-    this.router.navigate(['/admin/e-tms/edit-request'], {
+    this.router.navigate(['/admin/budgets/edit-request'], {
       queryParams: { id: id, action: 'edit' },
     });
   }

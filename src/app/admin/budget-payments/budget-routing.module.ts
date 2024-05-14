@@ -19,6 +19,7 @@ import { TrainingAprovalReqComponent } from './training-aproval-req/training-apr
 import { ViewTrainingReqComponent } from './view-training-req/view-training-req.component';
 import { ViewBudgetComponent } from './view-budget/view-budget.component';
 import { ViewDeptBudgetComponent } from './view-dept-budget/view-dept-budget.component';
+import { ViewAllRequestComponent } from './all-request/view-all-request/view-all-request.component';
 
 
 const routes: Routes = [
@@ -59,8 +60,20 @@ const routes: Routes = [
     component: CreateRequestComponent
   },
   {
+    path: 'copy-request',
+    component: CreateRequestComponent
+  },
+  {
+    path: 'edit-request',
+    component: CreateRequestComponent
+  },
+  {
     path: 'create-budget',
     component: CreateBudgetComponent
+  },
+  {
+    path: 'view-request',
+    component: ViewAllRequestComponent
   },
   {
     path: 'view-course-payment',

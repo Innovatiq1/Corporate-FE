@@ -164,24 +164,24 @@
                     <th>Email</th>
                     <th>Mobile</th>
                     <th>Joining Date</th>
-                    <th>Actions</th>
+                    <!-- <th>Actions</th> -->
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let instructor of instructors" style="cursor: pointer;" [routerLink]="['/admin/instructors/edit-instructor',instructor.id]">
+                  <tr *ngFor="let instructor of instructors" style="cursor: pointer;" (click)="aboutInstructor(instructor.id)">
                     <td class="table-img">
                       <img src="{{instructor?.avatar}}" alt="">
                     </td>
-                    <td>{{instructor?.name}}</td>
+                    <td>{{instructor?.name | titlecase}}</td>
                     <td>
                       <div class="badge col-green">{{instructor?.department}}</div>
                     </td>
-                    <td>{{instructor?.gender}}</td>
+                    <td>{{instructor?.gender | titlecase}}</td>
                     <td>{{instructor?.qualification}}</td>
                     <td>{{instructor?.email}}</td>
                     <td>{{instructor?.mobile}}</td>
                     <td>{{instructor?.joiningDate | date}}</td>
-                    <td>
+                    <!-- <td>
                       <button mat-button [matMenuTriggerFor]="menu">
                         <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
                         xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -202,7 +202,7 @@
                                   <span class="menu-text">Delete</span>
                                 </button>
                               </mat-menu>
-                    </td>
+                    </td> -->
                   </tr>
                  
 
@@ -309,7 +309,7 @@
                   <img src="{{data.image_link}}" alt="user image" class="img-fluid">
                 </div>
                 <div class="col-md-8" style="margin-left: -15px;">
-                  <h6>{{data.title |truncate : 25}}</h6>
+                  <h6>{{data.title | titlecase |truncate : 25}}</h6>
                   <div class="row">
                     <div class="col-md-2">
                       <b>{{ data?.courseCode }}</b>
@@ -350,7 +350,7 @@
                   <img src="{{program?.image_link}}" alt="user image" class="img-fluid">
                 </div>
                 <div class="col-md-8" style="margin-left: -15px;">
-                  <h6>{{program?.title}}</h6>
+                  <h6>{{program?.title | titlecase}}</h6>
                   <div class="row">
                     <div class="col-md-2">
                       <b>{{ program?.courseCode }}</b>
