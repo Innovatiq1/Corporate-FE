@@ -236,7 +236,7 @@ export class UtilsService {
       { type: 'max', message: 'Enter Fees between 0-999999' },
       { type: 'pattern', message: 'Enter Digits' },
     ],
-    'currency_code': [
+    'currency': [
       { type: 'required', message: 'Select Currency ' },
     ],
     'skill_connect_code': [
@@ -432,6 +432,8 @@ export class UtilsService {
       Validators.minLength(2),
       Validators.maxLength(150),
     ],
+    coreCourseCount:[Validators.required],
+    electiveCourseCount:[Validators.required],
     deptname:[
       Validators.required,
       Validators.minLength(2),
@@ -453,6 +455,7 @@ export class UtilsService {
     currentPsw:[
       Validators.required,
     ],
+    currency:[Validators.required,],
     city: [
       Validators.required,
     ],

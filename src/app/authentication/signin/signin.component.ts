@@ -89,7 +89,8 @@ export class SigninComponent
               this.router.navigate(['/dashboard/dashboard']);
             } else if ((role === Role.Instructor && this.tmsUrl) || (role === 'Trainer' && this.tmsUrl) || (role ==='instructor' && this.tmsUrl)) {
               this.router.navigate(['/dashboard/instructor-dashboard']);
-            } else if ((role === Role.Student && this.lmsUrl)|| (role === 'student' && this.lmsUrl)) {
+            } else if ((role === Role.Student && this.lmsUrl)|| (role === 'Student' && this.lmsUrl)) {
+              console.log('student',role)
               this.router.navigate(['/dashboard/student-dashboard']);
             } 
               else if (role === Role.TrainingAdministrator || role === 'Training administrator' || role === 'training administrator') {

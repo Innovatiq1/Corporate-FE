@@ -55,6 +55,7 @@ export class ViewComponent {
   }
   });
   }
+  
 
   loadData(id: string) {
     this.leaveRequestService.getLeavesById(id).subscribe(data => {
