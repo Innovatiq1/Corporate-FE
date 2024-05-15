@@ -57,7 +57,7 @@ export class UserGroupComponent {
 
   setup() {
     this.userService.getAllUsers().subscribe((response: any) => {
-      this.users = response?.results;
+      this.users = response?.results.reverse()
     });
   }
 
