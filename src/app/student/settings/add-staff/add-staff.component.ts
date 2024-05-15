@@ -71,10 +71,10 @@ export class AddStaffComponent {
         avatar: [''],
         salary: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.fee]],
         password: ['', [Validators.required,...this.utils.validators.password]],
-        conformPassword: ['', [Validators.required, ...this.utils.validators.password]],
+        // conformPassword: ['', []],
       },
       {
-        validator: ConfirmedValidator('password', 'conformPassword'),
+        // validator: ConfirmedValidator('password', 'conformPassword'),
       }
     );
 
