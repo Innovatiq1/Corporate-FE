@@ -18,7 +18,7 @@ export class EmployeeStatusComponent {
   displayedColumns: string[] = [
     'ID',
     'course',
-    'payment',
+    // 'payment',
     'created at',
     'ro approved on',
     'director approved on',
@@ -26,6 +26,7 @@ export class EmployeeStatusComponent {
     'approval stage',
     'status',
     'reason',
+    'payment',
     // 'actions',
   ];
   coursePaginationModel!: Partial<CoursePaginationModel>;
@@ -114,7 +115,7 @@ export class EmployeeStatusComponent {
       [
         'REQUEST-ID ',
         'Course',
-        'Payment',
+        // 'Payment',
         'Created At',
         'Approver 1',
         'Approver 2',
@@ -122,6 +123,7 @@ export class EmployeeStatusComponent {
         'Approval Stage',
         'Status',
         'Reason',
+        'Payment',
       ],
     ];
     const data = this.dataSource.map((user: { requestId: any; courseName: any; courseCost: string; createdAt: string | number | Date; roApprovedOn: any; directorApprovedOn: any; trainingadminApprovedOn: any; roApproval: any; directorApproval: any; trainingAdminApproval: any;roReason: any; directorReason: any; trainingAdminReason: any; }) => [

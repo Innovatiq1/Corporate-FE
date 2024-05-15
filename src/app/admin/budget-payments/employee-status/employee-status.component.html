@@ -72,7 +72,7 @@
                     <ng-container matColumnDef="payment">
                       <mat-header-cell *matHeaderCellDef mat-sort-header>Payment</mat-header-cell>
                       <mat-cell *matCellDef="let row"  [routerLink]="['/admin/budgets/view-training-request', row.id]">
-                        <span class="mobile-label">Payment:</span>$ {{row.courseCost}}
+                        <span class="mobile-label">Payment:</span><span>$</span> {{row.courseCost||0}}.00
                       </mat-cell>
                     </ng-container>
                     <!-- approval on -->

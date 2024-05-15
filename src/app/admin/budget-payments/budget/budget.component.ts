@@ -108,8 +108,9 @@ export class BudgetComponent {
     // 'no',
     // 'training budget',
     'percentage',
-    'overall budget',
+    
     'type',
+    'overall budget',
     'status',
     // 'action',
   ];
