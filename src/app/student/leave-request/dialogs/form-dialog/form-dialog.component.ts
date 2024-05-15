@@ -111,24 +111,23 @@ export class FormDialogComponent {
       status: 'applied',
     };
     if (this.action === 'edit') {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'Do you want to update Reschedule request!',
-        icon: 'warning',
-        confirmButtonText: 'Yes',
-        showCancelButton: true,
-        cancelButtonColor: '#d33',
-      }).then((result) => {
-        if (result.isConfirmed) {
+      // Swal.fire({
+      //   title: 'Are you sure?',
+      //   text: 'Do you want to update Reschedule request!',
+      //   icon: 'warning',
+      //   confirmButtonText: 'Yes',
+      //   showCancelButton: true,
+      //   cancelButtonColor: '#d33',
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
           this.leaveRequestService.updateLeaveRequest(payload, this.id);
           Swal.fire({
             title: 'Successful',
             text: 'Reschedule request edited successfully',
             icon: 'success',
           });
-          this.router.navigate(['reschedule/programs']);
-        }
-      });
+      //   }
+      // });
     } else {
       this.leaveRequestService.addLeaveRequest(payload);
       Swal.fire({

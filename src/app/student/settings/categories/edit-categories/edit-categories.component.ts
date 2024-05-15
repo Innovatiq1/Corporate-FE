@@ -38,12 +38,9 @@ export class EditCategoriesComponent {
       active: 'Edit Categories',
     },
   ];
-row: any;
-
-
+  row: any;
   constructor(
     private router: Router,
-
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     public utils: UtilsService,
@@ -61,7 +58,7 @@ row: any;
   }
   ngOnInit(): void {
     //this.setup()
-    
+
     this.initMainCategoryForm();
     this.initSubCategoryForm();
     this.addSubCategoryField();
@@ -71,14 +68,11 @@ row: any;
   isDeleteVisible(subcategory: AbstractControl): boolean {
     return subcategory.value.category_name !== '';
   }
-  
+
   addSubCategoryField(): void {
     this.subcategories.push(
       this.formBuilder.group({
-        category_name: [
-          '',
-          Validators.required,
-        ],
+        category_name: ['', Validators.required],
       })
     );
   }
@@ -96,7 +90,7 @@ row: any;
       sub_id: [''],
       main_category_id: [''],
       subcategories: this.formBuilder.array([]),
-      category_name: ['', Validators.required]
+      category_name: ['', Validators.required],
     });
   }
   // initSubCategoryForm(): void {
@@ -133,12 +127,38 @@ row: any;
       });
   }
 
-  deleteSubCategoryField(index: number): void {
-    this.subcategories.removeAt(index);
+  deleteSubCategory(id: string) {
+    this.courseService.deleteSubCategory(id).subscribe((data) => {});
+  }
+
+  deleteSubCategoryField(index: number, sub?: any): void {
+    Swal.fire({
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete this sub category?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.subcategories.removeAt(index);
+        console.log('deleteSubCategory', sub.value.sub_id);
+        const id = sub.value.sub_id;
+        this.deleteSubCategory(id);
+        Swal.fire({
+          title: 'Success',
+          text: 'Record Deleted Successfully...!!!',
+          icon: 'success',
+          // confirmButtonColor: '#526D82',
+        });
+      }
+    });
   }
   createSubCategory(): void {
     this.isSubmitted = true;
-    console.log("createSubCategory",this.subCategoryForm)
+    console.log('createSubCategory', this.subCategoryForm);
     if (this.subCategoryForm.invalid) {
       this.validations = true;
       return;
@@ -152,7 +172,6 @@ row: any;
     this.subCategoryData.forEach((subcategory) => {
       subcategory.main_category_id = this.mainCategoryId;
     });
-
 
     Swal.fire({
       title: 'Are you sure?',
