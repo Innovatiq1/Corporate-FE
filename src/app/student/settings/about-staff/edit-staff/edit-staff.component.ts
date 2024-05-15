@@ -56,7 +56,7 @@ export class EditStaffComponent {
         name: ['',  [Validators.required, Validators.pattern(/[a-zA-Z0-9]+/),...this.utils.validators.noLeadingSpace,...this.utils.validators.fname]],
         last_name: [''],
         gender: ['',  [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.gender]],
-        mobile: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.mobile]],
+        mobile: ['', [Validators.required,...this.utils.validators.mobile]],
         type: ['', [Validators.required]],
         joiningDate: ['', [Validators.required]],
         address: [''],
@@ -69,10 +69,10 @@ export class EditStaffComponent {
         avatar: [''],
         salary: ['', [Validators.required,...this.utils.validators.noLeadingSpace,...this.utils.validators.fee]],
         password: ['', [Validators.required,...this.utils.validators.password]],
-        conformPassword: ['', [Validators.required, ...this.utils.validators.password]],
+        // conformPassword: ['', []],
       },
       {
-        validator: ConfirmedValidator('password', 'conformPassword'),
+        // validator: ConfirmedValidator('password', 'conformPassword'),
       }
     );
 
