@@ -214,6 +214,16 @@
                     role="tabpanel"
                     aria-labelledby="home-tab"
                   >
+                  <h5 class="bg-light p-2">
+                    Course Completed :
+                    <span
+                      [ngClass]="{
+                        'red-text': playBackTime < 50,
+                        'green-text': playBackTime >= 50
+                      }"
+                      >{{ playBackTime.toFixed(2) || 0 }}%</span
+                    >
+                  </h5>
                     <span class="font-bold">Course Description:</span>
                     <p
                       [innerHTML]="
@@ -325,7 +335,7 @@
                       </li>
                     </ul>
 
-                    <h5 class="bg-light p-2">
+                    <!-- <h5 class="bg-light p-2">
                       Course Completed :
                       <span
                         [ngClass]="{
@@ -334,7 +344,7 @@
                         }"
                         >{{ playBackTime.toFixed(2) || 0 }}%</span
                       >
-                    </h5>
+                    </h5> -->
                   </div>
                   <div
                     class="tab-pane fade"
@@ -961,6 +971,16 @@
                     role="tabpanel"
                     aria-labelledby="home-tab"
                   >
+                  <h5 class="py-2">
+                    Course Completed :
+                    <span
+                      [ngClass]="{
+                        'red-text': playBackTime < 50,
+                        'green-text': playBackTime >= 50
+                      }"
+                      >{{ playBackTime.toFixed(2) || 0 }}%</span
+                    >
+                    </h5>
                     <span class="font-bold">Course Description:</span>
                     <p
                       [innerHTML]="
@@ -972,7 +992,7 @@
                       <div class="col-6">
                         <span class="font-bold"
                           >Title:
-                          <p class="font-">
+                          <p>
                             {{ classDetails?.courseId?.title }}
                           </p></span
                         >
@@ -1008,20 +1028,48 @@
                       </div>
                     </div>
 
-                    <ul class="m-2 list-group-unbordered">
-                      <li class="list-group-item">
-                        <b>Delivery </b>
-                        <div class="profile-desc-item float-end">
-                          {{ classDetails?.classDeliveryType | titlecase }}
+                    <div class="my-4 mx-2" style="width: 50%;">
+                      <div class="row">
+                        <div class="col-6">
+                          <b>Delivery </b>
                         </div>
-                      </li>
-                      <li class="list-group-item">
+                        <div class="col-6">
+                        {{ classDetails?.classDeliveryType | titlecase }}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6">
+                          <b>Course Created </b>
+                        </div>
+                        <div class="col-6">
+                          {{ classDetails?.createdAt | date }}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6">
+                          <b>Course Run </b>
+                        </div>
+                        <div class="col-6">
+                          {{
+                            classDetails?.isGuaranteedToRun == true
+                              ? "Yes"
+                              : "No"
+                          }}
+                        </div>
+                      </div>
+                      <!-- <li class="list-group-item">
+                       
+                        <div class="profile-desc-item float-end">
+                          
+                        </div>
+                      </li> -->
+                      <!-- <li class="list-group-item">
                         <b>Course Created </b>
                         <div class="profile-desc-item float-end">
                           {{ classDetails?.createdAt | date }}
                         </div>
-                      </li>
-                      <li class="list-group-item">
+                      </li> -->
+                      <!-- <li class="list-group-item">
                         <b>Course Run </b>
                         <div class="profile-desc-item float-end">
                           {{
@@ -1030,10 +1078,10 @@
                               : "No"
                           }}
                         </div>
-                      </li>
-                    </ul>
+                      </li> -->
+                    </div>
 
-                    <h5 class="bg-light p-2">
+                    <!-- <h5 class="bg-light p-2">
                       Course Completed :
                       <span
                         [ngClass]="{
@@ -1042,7 +1090,7 @@
                         }"
                         >{{ playBackTime.toFixed(2) || 0 }}%</span
                       >
-                    </h5>
+                    </h5> -->
                   </div>
                   <div
                     class="tab-pane fade"
