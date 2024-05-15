@@ -73,7 +73,7 @@
                         >Overall Budget
                       </mat-header-cell>
                       <mat-cell *matCellDef="let row" [routerLink]="['/admin/budgets/view-budget', row.id]">
-                        <span class="mobile-label">Overall Budget:</span>${{row?.trainingBudget}}
+                        <span class="mobile-label">Overall Budget:</span><span>$</span> {{row?.trainingBudget||0}}.00
                       </mat-cell>
                     </ng-container>
     

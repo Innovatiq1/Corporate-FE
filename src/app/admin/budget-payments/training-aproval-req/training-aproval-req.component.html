@@ -87,12 +87,14 @@
                                         <th>Request-ID</th>
                                         <th>Name</th>
                                         <th>Course</th>
-                                        <th>Payment</th>
+                                        
                                         <th>Vendor Name</th>
                                         <th>Course Timeline</th>
+                                        
                                        
                                         <th *ngIf="!pendingCourses && approvedCourses || rejectedCourses">Status</th>
                                         <th>Created At</th>
+                                        <th>Payment</th>
                                         <th *ngIf="!pendingCourses&&approvedCourses">Approved On</th>
                                         <th *ngIf="!pendingCourses&&rejectedCourses">Rejected On</th>
                                         <th *ngIf="pendingCourses">Actions</th>
@@ -106,9 +108,10 @@
                                         <td>{{request?.requestId}}</td>
                                         <td>{{request?.employeeId?.name}}</td>
                                         <td>{{request?.courseName | titlecase}}</td>
-                                        <td>{{request?.courseCost}}$</td>
+                                       
                                         <td>{{request?.vendorName | titlecase}}</td>
                                         <td>{{request?.courseTimeline}}</td>
+                                       
                                         
                     <td *ngIf="ro && !pendingCourses">
                         <span
@@ -137,6 +140,7 @@
                           <!-- {{row?.status?.Active == true?"Active":"Inactive"}} -->
                         </span>
                       </td>
+                      
                       <td *ngIf="director && !pendingCourses">
                         <span
                           [class]="
@@ -197,6 +201,7 @@
                                         <td *ngIf ="trainingAdmin && !pendingCourses" [ngStyle]="{ 'color': request?.trainingAdminApproval === 'Approved' ? 'green' : (request?.trainingAdminApproval === 'Rejected' ? 'red' : '') }">{{request?.trainingAdminApproval  }}</td> -->
                                         
                                         <td>{{request?.createdAt | date}}</td>
+                                        <td><span>$</span> {{request?.courseCost||0}}.00</td>
                                         <td  *ngIf ="ro &&!rejectedCourses && !pendingCourses">{{request?.roApprovedOn | date}}</td>
                                         <td  *ngIf ="director &&!rejectedCourses&& !pendingCourses">{{request?.directorApprovedOn | date}}</td>
                                         <td   *ngIf ="trainingAdmin &&!rejectedCourses && !pendingCourses">{{request?.trainingadminApprovedOn | date}}</td>

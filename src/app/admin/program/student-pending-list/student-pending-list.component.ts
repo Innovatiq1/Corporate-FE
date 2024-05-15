@@ -26,11 +26,13 @@ export class StudentPendingListComponent {
     'Student Name',
     'status',
     'Program Name',
-    'Program Fee',
-    'Instructor Fee',
+    // 'Program Fee',
+    // 'Instructor Fee',
     'Class Start Date',
     'Class End Date',
     'Registered Date',
+    'Program Fee',
+    'Instructor Fee',
     
   ];
   breadscrums = [

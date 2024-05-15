@@ -101,7 +101,7 @@
                   <mat-cell *matCellDef="let row" (click)="view(row.id)">
                     <span class="mobile-label">Instructor Fee:</span>
                     <span *ngIf="row.classId?.instructorCost !== null && row.classId?.instructorCost !== undefined">
-                      ${{ row.classId?.instructorCost || 0 }}
+                      <span >$</span> {{ row.classId?.instructorCost || 0 }}.00
                     </span>
                   </mat-cell>
                 </ng-container>

@@ -65,13 +65,14 @@ export class ScheduleClassComponent {
   displayedColumns = [
     'courseName',
     'Code',
-    'Price',
+    // 'Price',
     'Department',
     'startDate',
     'endDate',
     'Class',
     'Minimum Students',
     'Maximum Students',
+    'Price',
   ];
 
   breadscrums = [
