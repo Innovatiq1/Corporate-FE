@@ -2,6 +2,25 @@
   <h1 class="text-capitalize">{{ data.title }}</h1>
   <div class="row">
     <div class="col-md-3" *ngIf="code">
+      <p class="info-text">Program Name</p>
+    </div>
+    <div class="col-md-5" *ngIf="code">
+      <p class="info-text">
+        <span class="highlight">{{ data.programName }}</span>
+      </p>
+    </div>
+
+    <div class="col-md-3" *ngIf="!code">
+      <p class="info-text">Course Name</p>
+    </div>
+    <div class="col-md-5" *ngIf="!code">
+      <p class="info-text">
+        <span class="highlight">{{ data.courseName }}</span>
+      </p>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-3" *ngIf="code">
       <p class="info-text">Program Code</p>
     </div>
     <div class="col-md-2" *ngIf="code">
@@ -24,9 +43,7 @@
     </div>
     <div class="col-md-3">
       <p class="info-text">
-        <span class="highlight"
-          >{{ data.sessionStartTime }} - {{ data.sessionEndTime }}</span
-        >
+        <span class="highlight">{{ data.sessionStartTime }} - {{ data.sessionEndTime }}</span>
       </p>
     </div>
   </div>
@@ -49,14 +66,16 @@
     </div>
   </div>
   <div class="text-right mt-4">
-    <button
-      type="button"
-      mat-raised-button
-      color="warn"
-      mat-button
-      mat-dialog-close
-    >
+    <button type="button" mat-raised-button color="warn" mat-button mat-dialog-close>
       Close
+    </button>
+    <button *ngIf="isStudent && isProgram" type="button" mat-raised-button id="submit"
+      [routerLink]="['/student/view-program/',data?.id]" mat-dialog-close style="float: right;">
+      Register
+    </button>
+    <button *ngIf="isStudent && !isProgram" type="button" mat-raised-button id="submit"
+      [routerLink]="['/student/view-course/',data?.id]" mat-dialog-close style="float: right;">
+      Register
     </button>
   </div>
 </div>

@@ -167,6 +167,15 @@ export class UtilsService {
       { type: 'required', message: 'Enter Mobile Number' },
       
     ],
+    port: [
+      { type: 'required', message: 'Enter Port' },
+      
+    ],
+    host: [
+      { type: 'required', message: 'Enter Email Host' },
+      { type: 'minlength', message: 'Enter minimum 2 characters' },
+      { type: 'maxlength', message: 'Enter maximum 255 characters' },
+    ],
     salary: [
       { type: 'required', message: 'Enter Salary' },
       { type: 'min', message: 'Enter Fees between 0-999999' },
