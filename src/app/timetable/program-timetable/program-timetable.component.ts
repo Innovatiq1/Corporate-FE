@@ -185,6 +185,8 @@ export class ProgramTimetableComponent implements OnInit {
             const status = courseClass.sessions[0].status;
             const deliveryType = courseClass.classDeliveryType;
             const instructorCost = courseClass.instructorCost;
+            const id = courseClass?.id;
+            const programName = courseClass?.programName;
             const datesArray = [];
             let currentDate = startDate;
             while (currentDate <= endDate) {
@@ -200,6 +202,8 @@ export class ProgramTimetableComponent implements OnInit {
                   sessionEndDate: endDate,
                   instructorCost: instructorCost,
                   deliveryType: deliveryType,
+                  id: id,
+                  programName: programName,
                 },
               });
               currentDate.setDate(currentDate.getDate() + 1);
@@ -258,6 +262,8 @@ export class ProgramTimetableComponent implements OnInit {
         sessionEndDate: event.extendedProps['sessionEndDate'],
         deliveryType: event.extendedProps['deliveryType'],
         instructorCost: event.extendedProps['instructorCost'],
+        id: event.extendedProps['id'],
+        programName: event.extendedProps['programName'],
       },
     });
   }
