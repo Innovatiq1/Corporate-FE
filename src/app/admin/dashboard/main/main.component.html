@@ -1,4 +1,4 @@
-<section class="content">
+<section class="content" *ngIf="isAdmin">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
@@ -671,3 +671,1175 @@
   
   </div>
 </section>
+
+
+
+<section class="content" *ngIf="isStudentDB">
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      </app-breadcrumb>
+    </div>
+    <!-- Widgets -->
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-14 col-sm-14">
+        <div class="card">
+          <div class="body">
+            <div class="row align-items-center">
+              <div class="col-md-4 mb-0">
+                <div class="recent-report__chart">
+                  <canvas baseChart height="200px" width="200px" class="chart" [data]="doughnutChartData"
+                    [labels]="doughnutChartLabels" [options]="doughnutChartOptions" [type]="doughnutChartType"></canvas>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <h4>
+                  <div class="weight-600 col-pink pt-1">Good Job, {{studentName}}. Keep Going!! </div>
+                </h4>
+                <!-- <p class="font-15 max-width-600">Keep it up and improve your
+                  result. Progress is very good!!!</p> --><br>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div><i class="fa fa-circle dot1 msr-2"></i> Registered Courses - {{registeredCourses}}</div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div><i class="fa fa-circle dot2 msr-2"></i> Registered Programs - {{registeredPrograms}}</div>
+                  </div>
+                  <br><br>
+                  <div class="col-lg-6">
+                    <div><i class="fa fa-circle dot3 msr-2"></i>  Approved Courses - {{approvedCourses}}</div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div><i class="fa fa-circle dot4 msr-2"></i> Approved Programs - {{approvedPrograms}}</div>
+                  </div>
+                  <br><br>
+                  <div class="col-lg-6">
+                    <div><i class="fa fa-circle dot5 msr-2"></i> Completed Courses - {{completedCourses}}</div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div><i class="fa fa-circle dot6 msr-2"></i> Completed Programs - {{completedPrograms}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+        <div class="card l-bg-purple p-2 px-4 text-white py-3">
+          <div class="info d-flex justify-content-between align-items-center">
+            <div class="d-flex flex-column text-white font-22"> <span>English Vocabulary Test</span>
+              <small class="mt-2"><i class="far fa-clock msr-2"></i> 25, Feb, 2020. 04:00 PM</small> </div>
+          </div>
+        </div>
+        <div class="card l-bg-green p-2 px-4 text-white py-3">
+          <div class="info d-flex justify-content-between align-items-center">
+            <div class="d-flex flex-column text-white font-22"> <span>Science Homework Submition</span>
+              <small class="mt-2"><i class="far fa-clock msr-2"></i> 28, Feb, 2020. 10:00 AM</small> </div>
+          </div>
+        </div>
+      </div> -->
+       <!-- <div class="col-md-12 col-sm-12 col-xl-4 col-lg-4">
+        <div class="card notification p-2 px-4 text-black py-3">
+          <small style="text-align: right;font-weight: bold;">
+            Mon, 10 Sep 2023
+          </small>
+          <div class="info d-flex justify-content-between align-items-center">
+        <hr class="m-3" style="color: green;" />
+            <img class="m-3" src="assets/images/banner/meghaphone.png" alt="Megaphone">
+            <div class="d-flex flex-column text-black font-18">
+              <span style="font-weight: bold;"><img class="m-3" src="assets/images/banner/announcement1.jpg" alt="announcement1">
+                STS Transfer Operation
+                </span>
+              <div class="text-black font-12"><span>Ship to Ship (STS) transfer operation online course
+                 provides guidance to participatingcrews to help them to be aware of the STS operation from start to finish.
+                </span>
+              </div>
+          </div>
+          </div>
+          <div class="d-flex justify-content-between m-1">
+            <button class="btn px-4" id="cancel">Archive</button>
+
+            <button class="btn border px-4" id="submit">View</button>
+        </div>
+        </div>
+      </div> -->
+      <!-- <div id="action-description">
+        <p>This sample demonstrates the default functionalities of the Angular Message component with different severity types and predefined styles.</p>
+    </div> -->
+    </div>
+
+
+
+    <!-- #END# Widgets -->
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-14 col-sm-14">
+        <div class="card">
+          <div class="header">
+            <h2>Latest Enrolled Courses</h2>
+          </div>
+          <div class="tableBody">
+            <ng-scrollbar style="height: 300px" visibility="hover">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Course</th>
+                    <th>Duration</th>
+                    <th>End Date</th>
+                    <th>Completed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor ="let course of studentApprovedClasses ">
+                    <td>{{course?.classId?.courseId?.title}}</td>
+                    <td>{{course?.classId?.courseId?.training_hours}} Days</td>
+                    <td>{{course?.classId?.sessions[0]?.sessionEndDate | date}}
+                    </td>
+                    <td [ngClass]="{'red-text': course?.playbackTime?.toFixed(2) < 50, 'green-text': course?.playbackTime?.toFixed(2) >= 50}">
+                      {{course?.playbackTime?.toFixed(2) || 0}}%
+                    </td>                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </ng-scrollbar>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-14 col-sm-14">
+        <div class="card">
+          <div class="header">
+            <h2>Latest Enrolled Programs</h2>
+          </div>
+          <div class="tableBody">
+            <ng-scrollbar style="height: 300px" visibility="hover">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Program</th>
+                    <th>Duration</th>
+                    <th>End Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor ="let program of studentApprovedPrograms ">
+                    <td>{{program?.classId?.courseId?.title }}</td>
+                    <td>{{program?.classId?.courseId?.duration}} Days</td>
+                    <td>{{program?.classId?.sessions[0]?.sessionEndDate | date}}
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </ng-scrollbar>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Time Spent On Learning</h2>
+          </div>
+          <div class="body">
+            <apx-chart [series]="barChartOptions.series!" [chart]="barChartOptions.chart!"
+              [dataLabels]="barChartOptions.dataLabels!" [plotOptions]="barChartOptions.plotOptions!"
+              [responsive]="barChartOptions.responsive!" [xaxis]="barChartOptions.xaxis!" [grid]="barChartOptions.grid!"
+              [legend]="barChartOptions.legend!" [fill]="barChartOptions.fill!"></apx-chart>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>
+              Upcomming Class
+            </h2>
+          </div>
+          <div class="card-body">
+            <ng-scrollbar style="height: 335px" visibility="hover">
+              <ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
+                <li class="lecture-list">
+                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig1.jpg">
+                  <div class="set-flex">
+                    <div class="media-title font-16">Cara Stevens</div>
+                    <div class="text-job text-muted mb-0">Mathematics</div>
+                  </div>
+                  <div class="ms-auto">
+                    <div class="media-title font-16">12 June '20</div>
+                    <div class="text-job text-muted mb-0">09:00-10:00</div>
+                  </div>
+                </li>
+                <li class="lecture-list">
+                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig2.jpg">
+                  <div class="set-flex">
+                    <div class="media-title font-16">Airi Satou</div>
+                    <div class="text-job text-muted mb-0">Computer Studies</div>
+                  </div>
+                  <div class="ms-auto">
+                    <div class="media-title font-16">13 June '20</div>
+                    <div class="text-job text-muted mb-0">11:00-12:00</div>
+                  </div>
+                </li>
+                <li class="lecture-list">
+                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig3.jpg">
+                  <div class="set-flex">
+                    <div class="media-title font-16">Jens Brincker</div>
+                    <div class="text-job text-muted mb-0">Geography</div>
+                  </div>
+                  <div class="ms-auto">
+                    <div class="media-title font-16">15 June '20</div>
+                    <div class="text-job text-muted mb-0">09:30-10:30</div>
+                  </div>
+                </li>
+                <li class="lecture-list">
+                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig4.jpg">
+                  <div class="set-flex">
+                    <div class="media-title font-16">Angelica Ramos</div>
+                    <div class="text-job text-muted mb-0">Chemistry</div>
+                  </div>
+                  <div class="ms-auto">
+                    <div class="media-title font-16">16 June '20</div>
+                    <div class="text-job text-muted mb-0">14:00-15:00</div>
+                  </div>
+                </li>
+                <li class="lecture-list">
+                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig5.jpg">
+                  <div class="set-flex">
+                    <div class="media-title font-16">Cara Stevens</div>
+                    <div class="text-job text-muted mb-0">Painting</div>
+                  </div>
+                  <div class="ms-auto">
+                    <div class="media-title font-16">18 June '20</div>
+                    <div class="text-job text-muted mb-0">11:00-12:30</div>
+                  </div>
+                </li>
+                <li class="lecture-list">
+                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig6.jpg">
+                  <div class="set-flex">
+                    <div class="media-title font-16">Jacob Ryan</div>
+                    <div class="text-job text-muted mb-0">Business Studies</div>
+                  </div>
+                  <div class="ms-auto">
+                    <div class="media-title font-16">22 June '20</div>
+                    <div class="text-job text-muted mb-0">13:00-14:15</div>
+                  </div>
+                </li>
+              </ul>
+            </ng-scrollbar>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-16 col-sm-16 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2>Enrollment Status</h2>
+          </div>
+          <div class="body">
+            <apx-chart [series]="areaChartOptions.series!" [chart]="areaChartOptions.chart!"
+              [xaxis]="areaChartOptions.xaxis!" [yaxis]="areaChartOptions.yaxis!" [colors]="areaChartOptions.colors!"
+              [stroke]="areaChartOptions.stroke!" [legend]="areaChartOptions.legend!" [grid]="areaChartOptions.grid!"
+              [tooltip]="areaChartOptions.tooltip!" [dataLabels]="areaChartOptions.dataLabels!"></apx-chart>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="card">
+          <div class="header">
+            <h2>Assignments</h2>
+          </div>
+          <div class="body">
+            <div class="doc-file-type">
+              <ng-scrollbar style="height: 285px" visibility="hover">
+                <ul class="list-unstyled">
+                  <li class="d-flex mb-3">
+                    <span class="msr-3 align-self-center img-icon primary-rgba text-primary"><i
+                        class="far fa-file-word"></i></span>
+                    <div class="set-flex">
+                      <h5 class="font-16 mb-1">Java Programming</h5>
+                      <p>.doc, 4.3 MB</p>
+                    </div>
+                    <div class="ms-auto">
+                      <td>
+                        <i class="far fa-trash-alt psr-3"></i>
+                        <i class="far fa-arrow-alt-circle-down"></i>
+                      </td>
+                    </div>
+                  </li>
+                  <li class="d-flex mb-3">
+                    <span class="msr-3 align-self-center img-icon success-rgba text-success"><i
+                        class="far fa-file-excel"></i></span>
+                    <div class="set-flex">
+                      <h5 class="font-16 mb-1">Angular Theory</h5>
+                      <p>.xls, 2.5 MB</p>
+                    </div>
+                    <div class="ms-auto">
+                      <td>
+                        <i class="far fa-trash-alt psr-3"></i>
+                        <i class="far fa-arrow-alt-circle-down"></i>
+                      </td>
+                    </div>
+                  </li>
+                  <li class="d-flex mb-3">
+                    <span class="msr-3 align-self-center img-icon danger-rgba text-danger"><i
+                        class="far fa-file-pdf"></i></span>
+                    <div class="set-flex">
+                      <h5 class="font-16 mb-1">Maths Sums Solution</h5>
+                      <p>.pdf, 10.5 MB</p>
+                    </div>
+                    <div class="ms-auto">
+                      <td>
+                        <i class="far fa-trash-alt psr-3"></i>
+                        <i class="far fa-arrow-alt-circle-down"></i>
+                      </td>
+                    </div>
+                  </li>
+                  <li class="d-flex mb-3">
+                    <span class="msr-3 align-self-center img-icon info-rgba text-info"><i
+                        class="far fa-file-archive"></i></span>
+                    <div class="set-flex">
+                      <h5 class="font-16 mb-1">Submit Science Journal</h5>
+                      <p>.zip, 53.2 MB</p>
+                    </div>
+                    <div class="ms-auto">
+                      <td>
+                        <i class="far fa-trash-alt psr-3"></i>
+                        <i class="far fa-arrow-alt-circle-down"></i>
+                      </td>
+                    </div>
+                  </li>
+                  <li class="d-flex mb-3">
+                    <span class="msr-3 align-self-center img-icon primary-rgba text-primary"><i
+                        class="far fa-file-word"></i></span>
+                    <div class="set-flex">
+                      <h5 class="font-16 mb-1">Marketing Instructions</h5>
+                      <p>.doc, 5.3 MB</p>
+                    </div>
+                    <div class="ms-auto">
+                      <td>
+                        <i class="far fa-trash-alt psr-3"></i>
+                        <i class="far fa-arrow-alt-circle-down"></i>
+                      </td>
+                    </div>
+                  </li>
+                </ul>
+              </ng-scrollbar>
+              <div class="text-center p-t-20">
+                <button mat-stroked-button color="primary">Report Adverse Effect</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="card">
+          <div class="header">
+            <h2>Announcement Board</h2>
+          </div>
+          <div class="body">
+            <ng-scrollbar style="height: 350px" visibility="hover">
+              <div class="recent-comment">
+                <div *ngFor ="let announcement of announcements.reverse()" class="notice-board">
+                  <div class="notice-body">
+                    <h5 class="notice-heading col-green">{{announcement?.announcementBy?.name}}</h5>
+                    <p [innerHTML]="announcement?.details | truncate:150"></p>
+                    <small class="text-muted float-end">{{announcement?.createdAt | date}}</small>
+                  </div>
+                </div>
+              </div>
+            </ng-scrollbar>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="card">
+          <div class="header">
+            <h2>Approved Leaves</h2>
+          </div>
+          <div class="tableBody">
+            <ng-scrollbar style="height: 370px" visibility="hover">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Class</th>
+                    <th>Apply Date</th>
+                    <th>From Date</th>
+                    <th>To Date</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor ="let leave of approvedLeaves">
+                    <td>{{leave?.className | titlecase}}</td>
+                    <td>{{leave?.applyDate | date}}</td>
+                    <td>{{leave?.fromDate | date}}</td>
+                    <td>{{leave?.toDate | date}}</td>
+                    <td>{{leave?.reason | titlecase}}</td>
+                    <td><span class="badge badge-solid-green">{{leave?.status | titlecase}}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-scrollbar>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-xl-6 col-lg-6 col-md-14 col-sm-14">
+        <div class="card">
+          <div class="header">
+            <h2>
+              Upcoming Course Classes
+            </h2>
+          </div>
+          <div class="card-body">
+            <ng-scrollbar style="height: 335px" visibility="hover">
+              <ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
+                <li *ngFor="let upcomingclass of upcomingCourseClasses" class="lecture-list">
+                  <div class="set-flex">
+                    <div class="media-title font-16">{{upcomingclass?.classId?.courseName}}</div>
+                    <div class="text-job text-muted mb-0">{{upcomingclass?.classId?.courseId?.courseCode}}</div>
+                  </div>
+                  <div class="ms-auto">
+                    <div class="media-title font-16">{{upcomingclass?.classId?.sessions[0]?.sessionStartDate | date}}</div>
+                    <!-- <div class="text-job text-muted mb-0">09:00-10:00</div> -->
+                  </div>
+                </li>
+              </ul>
+            </ng-scrollbar>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-14 col-sm-14">
+        <div class="card">
+          <div class="header">
+            <h2>
+              Upcoming Program Classes
+            </h2>
+          </div>
+          <div class="card-body">
+            <ng-scrollbar style="height: 335px" visibility="hover">
+              <ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
+                <li *ngFor="let upcomingclass of upcomingProgramClasses" class="lecture-list">
+                  <div class="set-flex">
+                    <div class="media-title font-16">{{upcomingclass?.classId?.courseId?.title}}</div>
+                    <div class="text-job text-muted mb-0">{{upcomingclass?.classId?.courseId?.courseCode}}</div>
+                  </div>
+                  <div class="ms-auto">
+                    <div class="media-title font-16">{{upcomingclass?.classId?.sessions[0]?.sessionStartDate | date}}</div>
+                    <!-- <div class="text-job text-muted mb-0">09:00-10:00</div> -->
+                  </div>
+                </li>
+              </ul>
+            </ng-scrollbar>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="content" *ngIf="isInstructorDB">
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      </app-breadcrumb>
+    </div>
+    <div class="row mt-5">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-statistic-3">
+          <div class="clearfix">
+            <div class="card-icon-only shadow-primary float-start">
+              <img src="assets/images/banner/New Students.jpg" alt="" style="margin-left: -21px;">
+
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">Total Students</h5>
+              </div>
+              <div class="col-green">
+                <h3 class="font-weight-bold float-end mb-0">{{count?.students}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-content msl-4 mb-3">
+            <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 10% Higher Then Last Month
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-statistic-3">
+          <div class="clearfix">
+            <div class="card-icon-only shadow-primary float-start">
+              <img src="assets/images/banner/online-course.png" alt="" >
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">All Courses</h5>
+              </div>
+              <div class="col-green">
+                <h3 class="font-weight-bold float-end mb-0">{{count?.courses}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-content msl-4 mb-3">
+            <p class="m-b-0 d-flex"><i class="material-icons col-orange psr-2">trending_down</i> 07% Less Then Last
+              Year
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-statistic-3">
+          <div class="clearfix">
+            <div class="card-icon-only shadow-primary float-start">
+              <img src="assets/images/banner/img2.png" alt="">
+            </div>
+            <div class="card-right">
+              <div>
+                <h5 class="float-end">All Programs</h5>
+              </div>
+              <div class="col-green">
+                <h3 class="font-weight-bold float-end mb-0">{{count?.programs}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-content msl-4 mb-3">
+            <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 05% Higher Then Last Month
+            </p>
+          </div>
+        </div>
+      </div>
+  
+     
+    </div>
+    <!-- <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="body">
+            <div class="row align-items-center">
+              <div class="col-md-4">
+
+                <img [src]="latestInstructor?.avatar || '../../../assets/profile.png'" alt="" class="w-100">
+              </div>
+              <div class="col-md-8">
+                <h4 class="font-20 weight-500 mb-2">
+                  <div class="weight-600 font-30 col pt-1 text-muted">New Instructor</div>
+                  <div class="weight-600 font-30 col-blue pt-1">{{latestInstructor?.name}}
+                    {{latestInstructor?.last_name}}!</div>
+                </h4>
+                <p class="font-18 max-width-600">We are welcome to you to take this opportunity. 
+                  Thank you for choosing TMS to participate as an instructor.
+                  you can enjoy work culture in TMS.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+   
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">
+        <div class="card">
+          <div class="header mt-3">
+            <h2>Upcoming Courses</h2>
+          </div>
+          <div class="body">
+            <div class="card-block" *ngFor="let data of upcomingCourses" style="cursor: pointer;" [routerLink]="['/admin/courses/all-courses']">
+              <div class="row m-b-20">
+                <div class="col-md-3">
+                  <img src="{{data.image_link}}" alt="user image" class="img-fluid">
+                </div>
+                <div class="col-md-8" style="margin-left: -15px;">
+                  <h6>{{data.title |truncate : 25}}</h6>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <b>{{ data?.courseCode }}</b>
+                    </div>
+                    <div class="col-md-2">
+                      <b>{{ data.training_hours}} Hours</b>
+                    </div>
+                    <div class="col-md-2">
+                      <b>{{data.course_duration_in_days}}</b>
+                    </div>
+                    <!-- <div class="col-md-3" [class]="data?.Active ? 'badge badge-solid-red' : 'badge badge-solid-green'">
+                      <b>{{ data?.classDeliveryType | titlecase }}</b>
+                    </div> -->
+                    <div class="col-md-3">
+                      <b style="color: blue;"><i class="fa fa-play-circle-o"></i> {{data.sessionStartDate | date}}</b>
+                    </div>
+                  </div>
+
+                 
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <button mat-stroked-button [routerLink]="['/admin/courses/all-courses/course']" color="primary">View More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">
+        <div class="card">
+          <div class="header mt-3">
+            <h2>Upcoming Programs</h2>
+          </div>
+          <div class="body">
+            <div class="card-block" *ngFor="let program of upcomingPrograms" style="cursor: pointer;" [routerLink]="['/admin/program/program-list']">
+              <div class="row m-b-20">
+                <div class="col-md-3">
+                  <img src="{{program?.image_link}}" alt="user image" class="img-fluid">
+                </div>
+                <div class="col-md-8" style="margin-left: -15px;">
+                  <h6>{{program?.title}}</h6>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <b>{{ program?.courseCode }}</b>
+                    </div>
+                    <div class="col-md-2">
+                      <b>{{ program?.duration }} Hours</b>
+                    </div>
+                    <div class="col-md-2">
+                      <b>{{ program?.courseFee }}$</b>
+                    </div>
+                    <div class="col-md-3" [class]="program?.Active ? 'badge badge-solid-red' : 'badge badge-solid-green'">
+                      <b>{{ program?.deliveryMode | titlecase }}</b>
+                    </div>
+                    <div class="col-md-3">
+                      <b style="color: blue;"><i class="fa fa-play-circle-o"></i> {{program?.sessionStartDate | date}}</b>
+                    </div>
+                  </div>
+
+                 
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <button mat-stroked-button [routerLink]="['/admin/program/program-list/program']" color="primary">View More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card" style="border-radius: 31px;">
+          <div class="header mt-3">
+            <h2>Classes List</h2>
+            <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>add_circle_outline</mat-icon>
+                <span>Add</span>
+              </button>
+              <button mat-menu-item disabled>
+                <mat-icon>delete_outline</mat-icon>
+                <span>Delete</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>refresh</mat-icon>
+                <span>Refresh</span>
+              </button>
+            </mat-menu> -->
+          </div>
+          <div class="tableBody">
+            <div class="table-responsive">
+              <table class="table table-hover ">
+                <thead>
+                  <tr>
+                    <!-- <th>#</th> -->
+                    <th>Course Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status </th>
+                    <!-- <th>Actions </th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor ="let class of classesList " style="cursor: pointer;" [routerLink]="['/admin/courses/view-class/',class.id]">
+                    <!-- <td class="table-img">
+                      <img src="{{class?.courseId?.image_link}}" alt="course">
+                    </td> -->
+                    <td>{{class?.courseId?.title | truncate:10}}</td>
+                    <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
+                    <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
+                    <td>
+                      <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
+                    </td>
+                    <!-- <td>
+                      <button mat-button [matMenuTriggerFor]="menu">
+                        <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
+                        xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
+                        <path
+                          d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                      </svg>
+  
+                      </button>
+                      
+                              <mat-menu #menu="matMenu" xPosition="before">
+                                <button mat-menu-item  class="tbl-action-btn" (click)="editClass(class.id)" >
+                                  <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                                  <span class="menu-text">Edit</span>
+                                </button>
+                                <button mat-menu-item class="tbl-action-btn" (click)="delete(class.id)">
+                                  <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
+                                  <span class="menu-text">Delete</span>
+                                </button>
+                              </mat-menu>
+                    
+                    </td> -->
+                  </tr>
+                 
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="float-start">
+              <h6 class="text-muted">Average Lecture Per Month</h6>
+              <h5>65 <span class="text-muted font-12">(Average)</span></h5>
+            </div>
+            <div class="mb-5">
+              <apx-chart [series]="avgLecChartOptions.series!" [chart]="avgLecChartOptions.chart!"
+                [xaxis]="avgLecChartOptions.xaxis!" [stroke]="avgLecChartOptions.stroke!"
+                [colors]="avgLecChartOptions.colors!" [dataLabels]="avgLecChartOptions.dataLabels!"
+                [legend]="avgLecChartOptions.legend!" [markers]="avgLecChartOptions.markers!"
+                [grid]="avgLecChartOptions.grid!" [yaxis]="avgLecChartOptions.yaxis!"
+                [tooltip]="avgLecChartOptions.tooltip!" [title]="avgLecChartOptions.title!"
+                [fill]="avgLecChartOptions.fill!">
+              </apx-chart>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Course Chart</h2>
+          </div>
+          <div class="body">
+            <div id="chart">
+              <apx-chart [series]="pieChartOptions.series!" [chart]="pieChartOptions.chart!"
+                [labels]="pieChartOptions.labels!" [responsive]="pieChartOptions.responsive!"
+                [dataLabels]="pieChartOptions.dataLabels!" [legend]="pieChartOptions.legend!" class="apex-pie-center">
+              </apx-chart>
+            </div>
+            <ng-scrollbar style="height: 200px" visibility="hover">
+            <div class="table-responsive m-t-15">
+              <table class="table align-items-center" *ngFor="let dataSource of dataSource1?.slice(0, 5)">
+                <tbody>
+                  <tr>
+                    <td class="col-8"><i class="fa fa-circle col-cyan msr-2"></i> {{dataSource.courseName}}</td>
+                    <td class="col-8"> ${{dataSource.instructorCost}}</td>
+                    <!-- <td class="col-3" *ngIf="dataSource.duration===1">{{dataSource.duration}} Day</td>
+                    <td class="col-3" *ngIf="dataSource.duration!==1">{{dataSource.duration}} Days</td> -->
+                    <!-- <td class="col-green">+32%</td> --
+                  </tr>
+                  <!-- <tr>
+                    <td><i class="fa fa-circle col-blue msr-2"></i>Science</td>
+                    <td>32</td>
+                    <td class="col-green">+12%</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa fa-circle col-orange msr-2"></i>Economics</td>
+                    <td>12</td>
+                    <td class="col-orange">-12%</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa fa-circle col-green msr-2"></i>Mathes</td>
+                    <td>32</td>
+                    <td class="col-green">+3%</td>
+                  </tr> --
+                </tbody>
+              </table>
+            </div>
+            </ng-scrollbar>
+          </div>
+        </div>
+      </div> -->
+      <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2>Program Chart</h2>
+          </div>
+          <div class="body">
+            <div id="chart">
+              <apx-chart [series]="pieChartOptions1.series!" [chart]="pieChartOptions1.chart!"
+                [labels]="pieChartOptions1.labels!" [responsive]="pieChartOptions1.responsive!"
+                [dataLabels]="pieChartOptions1.dataLabels!" [legend]="pieChartOptions1.legend!" class="apex-pie-center">
+              </apx-chart>
+            </div>
+            <ng-scrollbar style="height: 180px" visibility="hover">
+            <div class="table-responsive m-t-15">
+              <table class="table align-items-center" *ngFor="let programFilterData of programFilterData?.slice(0, 5)">
+                <tbody>
+                  <tr>
+                    <td class="text col-8"><i class="fa fa-circle col-cyan msr-2"></i> {{programFilterData.courseName}}</td>
+                    <td class="col-8">$ {{programFilterData?.instructorCost}}</td>
+                    <!-- <td clas="col-3" *ngIf="programFilterData.duration===1">{{programFilterData.duration}} Day</td>
+                    <td clas="col-3" *ngIf="programFilterData.duration!==1">{{programFilterData.duration}} Days</td> -->
+                    <!-- <td class="col-green">+32%</td> --
+                  </tr>
+                  <!-- <tr>
+                    <td><i class="fa fa-circle col-blue msr-2"></i>Science</td>
+                    <td>32</td>
+                    <td class="col-green">+12%</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa fa-circle col-orange msr-2"></i>Economics</td>
+                    <td>12</td>
+                    <td class="col-orange">-12%</td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa fa-circle col-green msr-2"></i>Mathes</td>
+                    <td>32</td>
+                    <td class="col-green">+3%</td>
+                  </tr> --
+                </tbody>
+              </table>
+            </div>
+            </ng-scrollbar>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="row clearfix">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2> Course Lecture In Week</h2>
+          </div>
+          <div class="body">
+            <ng-scrollbar style="height: 150px" visibility="hover">
+            <div class="table-responsive">
+              <table class="table table-borderless medicine-list" *ngFor="let items of currentWeekRecords?.slice(0, 5)">
+               
+                <tr>
+                  <td><i class="fa fa-circle col-cyan msr-2"></i> {{items.courseName}}</td>
+                 
+                </tr>
+                <!-- <tr>
+                  <td><i class="fas fa-palette pill-style col-indigo"></i> Painting</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - - T - S</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-business-time pill-style col-orange"></i> Business Studies</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - W T - -</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-heart pill-style col-red"></i> Biology</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - W - F -</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-laptop-code pill-style col-purple"></i> Computer Studies</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - - T - S</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-globe-asia pill-style col-cyan"></i> Geography</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - W - F S</span>
+                  </td>
+                </tr> --
+              </table>
+            </div>
+            </ng-scrollbar>
+            <!-- <div class="text-center p-t-20">
+              <button mat-stroked-button color="primary">View More</button>
+            </div> --
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="card">
+          <div class="header">
+            <h2>
+              Course Today's Lecture</h2>
+          </div>
+          <div class="tableBody">
+            <ng-scrollbar style="height: 180px" visibility="hover">
+            <div class="table-responsive">
+              <table class="table table-hover ">
+                <thead>
+                  <tr>
+                    <!-- <th>#</th> --
+                    <th>Subject Name</th>
+                    <!-- <th>Class</th> --
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <!-- <th>Details </th> --
+                  </tr>
+                </thead>
+                <tbody *ngFor="let items of currentRecords?.slice(0, 5)">
+                  <tr>
+                    <!-- <td>1</td> --
+                    <td>{{items.courseName}}</td>
+                    <!-- <td>{{items.courseCode}}</td> --
+                    <td>{{items.sessionStartTime}}</td>
+                    <td>{{items.sessionEndTime}}</td>
+                    <!-- <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td> --
+                  </tr>
+                  <!-- <tr>
+                    <td>2</td>
+                    <td>Chemistry</td>
+                    <td>Standard 11</td>
+                    <td>11:15 AM</td>
+                    <td>30 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Biology</td>
+                    <td>Standard 12</td>
+                    <td>12:00 AM</td>
+                    <td>35 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Physics</td>
+                    <td>Standard 11</td>
+                    <td>12:45 AM</td>
+                    <td>30 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Music</td>
+                    <td>Standard 8</td>
+                    <td>02:00 AM</td>
+                    <td>45 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Computer studies</td>
+                    <td>Standard 10</td>
+                    <td>03:30 AM</td>
+                    <td>35 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr> --
+                </tbody>
+              </table>
+            </div>
+            </ng-scrollbar>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="row clearfix">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="header">
+            <h2> Program Lecture In Week</h2>
+          </div>
+          <div class="body">
+            <ng-scrollbar style="height: 250px" visibility="hover">
+            <div class="table-responsive">
+              <table class="table table-borderless medicine-list" *ngFor="let items of currentProgramWeekRecords?.slice(0, 5)">
+               
+                <tr>
+                  <td><i class="fa fa-circle col-cyan msr-2"></i> {{items.courseName}}</td>
+                 
+                </tr>
+                <!-- <tr>
+                  <td><i class="fas fa-palette pill-style col-indigo"></i> Painting</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - - T - S</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-business-time pill-style col-orange"></i> Business Studies</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - W T - -</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-heart pill-style col-red"></i> Biology</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - W - F -</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-laptop-code pill-style col-purple"></i> Computer Studies</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - - T - S</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="fas fa-globe-asia pill-style col-cyan"></i> Geography</td>
+                  <td class="text-end">
+                    <span class="badge-outline">M - W - F S</span>
+                  </td>
+                </tr> --
+              </table>
+            </div>
+            </ng-scrollbar>
+            <!-- <div class="text-center p-t-20">
+              <button mat-stroked-button color="primary">View More</button>
+            </div> --
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="card">
+          <div class="header">
+            <h2>
+              Program Today's Lecture</h2>
+          </div>
+          <div class="tableBody">
+            <ng-scrollbar style="height: 280px" visibility="hover">
+            <div class="table-responsive">
+              <table class="table table-hover ">
+                <thead>
+                  <tr>
+                    <!-- <th>#</th> --
+                    <th>Subject Name</th>
+                    <!-- <th>Class</th> --
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <!-- <th>Details </th> --
+                  </tr>
+                </thead>
+                <tbody *ngFor="let items of currentProgramRecords?.slice(0, 5)">
+                  <tr>
+                    <!-- <td>1</td> --
+                    <td>{{items.courseName}}</td>
+                    <!-- <td>{{items.courseCode}}</td> --
+                    <td>{{items.sessionStartTime}}</td>
+                    <td>{{items.sessionEndTime}}</td>
+                    <!-- <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td> --
+                  </tr>
+                  <!-- <tr>
+                    <td>2</td>
+                    <td>Chemistry</td>
+                    <td>Standard 11</td>
+                    <td>11:15 AM</td>
+                    <td>30 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Biology</td>
+                    <td>Standard 12</td>
+                    <td>12:00 AM</td>
+                    <td>35 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Physics</td>
+                    <td>Standard 11</td>
+                    <td>12:45 AM</td>
+                    <td>30 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Music</td>
+                    <td>Standard 8</td>
+                    <td>02:00 AM</td>
+                    <td>45 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Computer studies</td>
+                    <td>Standard 10</td>
+                    <td>03:30 AM</td>
+                    <td>35 Min</td>
+                    <td>
+                      <button mat-icon-button class="tbl-action-btn">
+                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
+                      </button>
+                    </td>
+                  </tr> --
+                </tbody>
+              </table>
+            </div>
+            </ng-scrollbar>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</section>
+
+
+<app-training-administrator *ngIf="isTADB"></app-training-administrator>
+<app-supervisor-dashboard *ngIf="issupervisorDB"></app-supervisor-dashboard>
+<app-pm-dashboard *ngIf="isPCDB"></app-pm-dashboard>
+<app-training-coordinator-db *ngIf="isTCDB"></app-training-coordinator-db>
+<app-cm-dashboard *ngIf="isCMDB"></app-cm-dashboard>
+<app-hod-dashboard *ngIf="isHodDB"></app-hod-dashboard>

@@ -291,6 +291,11 @@ export class CourseService {
       .put<ApiResponse>(apiUrl, category)
       .pipe(map((response) => { }));
   }
+
+  deleteSubCategory(id: string): Observable<ApiResponse> {
+    const apiUrl = `${this.prefix}admin/sub-category/${id}`;
+    return this._Http.delete<ApiResponse>(apiUrl);
+  }
   getcategoryById(id: string) {
     const apiUrl = `${this.prefix}admin/main-category/${id}`;
     return this._Http.get<ApiResponse>(apiUrl).pipe(map((response) => response));

@@ -1,5 +1,14 @@
+
+import { UsersModel } from '@core/models/user.model';
+import { LecturesService } from 'app/teacher/lectures/lectures.service';
+import * as moment from 'moment';
+import { CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Role } from '@core';
+import { AuthenService } from '@core/service/authen.service';
 import { CourseService } from '@core/service/course.service';
 import { InstructorService } from '@core/service/instructor.service';
 import { StudentService } from '@core/service/student.service';
@@ -45,6 +54,74 @@ export type chartOptions = {
   theme: ApexTheme;
   series2: ApexNonAxisChartSeries;
 };
+import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { LeaveService } from '@core/service/leave.service';
+import { AnnouncementService } from '@core/service/announcement.service';
+import { StudentNotificationComponent } from '@shared/components/student-notification/student-notification.component';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+export type barChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  responsive: ApexResponsive[];
+  xaxis: ApexXAxis;
+  grid: ApexGrid;
+  legend: ApexLegend;
+  fill: ApexFill;
+};
+
+export type areaChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
+  stroke: ApexStroke;
+  tooltip: ApexTooltip;
+  dataLabels: ApexDataLabels;
+  legend: ApexLegend;
+  grid: ApexGrid;
+  colors: string[];
+};
+
+//Instructor
+export type avgLecChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  stroke: ApexStroke;
+  dataLabels: ApexDataLabels;
+  markers: ApexMarkers;
+  colors: string[];
+  yaxis: ApexYAxis;
+  grid: ApexGrid;
+  tooltip: ApexTooltip;
+  legend: ApexLegend;
+  fill: ApexFill;
+  title: ApexTitleSubtitle;
+};
+
+export type pieChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  legend: ApexLegend;
+  dataLabels: ApexDataLabels;
+  responsive: ApexResponsive[];
+  labels: string[];
+};
+export type pieChartOptions1 = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  legend: ApexLegend;
+  dataLabels: ApexDataLabels;
+  responsive: ApexResponsive[];
+  labels: string[];
+};
+//end
 
 @Component({
   selector: 'app-main',
@@ -57,6 +134,11 @@ export class MainComponent implements OnInit {
   public barChartOptions!: Partial<chartOptions>;
   public performanceRateChartOptions!: Partial<chartOptions>;
   public polarChartOptions!: Partial<chartOptions>;
+  registeredCourses: any;
+  public avgLecChartOptions!: Partial<avgLecChartOptions>;
+  public pieChartOptions!: Partial<pieChartOptions>;
+  public pieChartOptions1!: Partial<pieChartOptions>;
+  UsersModel!: Partial<UsersModel>;
   breadscrums = [
     {
       title: 'Dashboad',
@@ -64,6 +146,54 @@ export class MainComponent implements OnInit {
       active: 'Analytics',
     },
   ];
+  //Student
+  studentName!: string;
+  approvedCourses: any;
+  registeredPrograms: any;
+  approvedPrograms: any;
+  completedCourses: any;
+  completedPrograms : any;
+  studentApprovedClasses: any;
+  studentApprovedPrograms: any;
+  approvedLeaves: any;
+  announcements: any;
+  upcomingCourseClasses: any;
+  upcomingProgramClasses: any;
+  withdrawCourses: any;
+  withdrawPrograms: any;
+
+  //End Student
+
+  //instructor
+  latestInstructor: any;
+  dataSource1: any;
+  programData: any;
+  currentRecords: any;
+  currentWeekRecords: any;
+  dataSource: any[] = [];
+  programFilterData: any[] = [];
+  //series:any
+  //labels: any
+  programLabels: string[] = [];
+  programSeries: number[] = [];
+  labels: string[] = [];
+  series: number[] = [];
+  currentProgramRecords: any;
+  currentProgramWeekRecords: any;
+  upcomingCourses: any;
+  programList: any;
+  upcomingPrograms: any;
+  courseData: any;
+  coursePaginationModel!: Partial<CoursePaginationModel>;
+  mainCategories!: MainCategory[];
+  subCategories!: SubCategory[];
+  allSubCategories!: SubCategory[];
+  classesList: any;
+  instructorCount: any;
+  adminCount: any;
+  studentCount: any;
+  // count: any;
+  //instructor
   count: any;
   instructors: any;
   students: any;
@@ -84,273 +214,651 @@ export class MainComponent implements OnInit {
   tillPreviousEightMonthsStudents: any;
   tillPreviousTenMonthsStudents: any;
   tillPreviousTwelveMonthsStudents: any;
-  classesList: any;
-  instructorCount: any;
-  adminCount: any;
-  studentCount: any;
-  constructor(private courseService: CourseService,
+  // classesList: any;
+  // instructorCount: any;
+  // adminCount: any;
+  // studentCount: any;
+  isStudent: boolean = true;
+  dbForm!: FormGroup;
+  tmsUrl: boolean;
+  lmsUrl: boolean;
+  isAdmin: boolean = false;
+  isStudentDB: boolean = false;
+  isInstructorDB: boolean = false;
+  isTADB: boolean = false;
+  issupervisorDB: boolean = false;
+  isHodDB: boolean = false;
+  isTCDB: boolean = false;
+  isCMDB: boolean = false;
+  isPCDB: boolean = false;
+  constructor(
+    private courseService: CourseService,
     private userService: UserService,
     private instructorService: InstructorService,
     private classService: ClassService,
     private router: Router,
-    private studentService:StudentService) {
+    private studentService: StudentService,
+    private fb: UntypedFormBuilder,private announcementService:AnnouncementService,
+    private authenticationService:AuthenService,private leaveService: LeaveService,
+    public lecturesService: LecturesService,
+  ) {
     //constructor
+    let urlPath = this.router.url.split('/')
+    this.tmsUrl = urlPath.includes('TMS');
+    this.lmsUrl = urlPath.includes('LMS');
     this.getCount();
     this.getInstructorsList();
     this.getStudentsList();
     this.chart2();
     this.chart3();
+    this.dbForm = this.fb.group({
+      title1: ['Latest Enrolled Programs', [Validators.required]],
+      view1: ['List-view', [Validators.required]],
+      percent1: ['50', [Validators.required]],
+      title2: ['Latest Enrolled Courses', [Validators.required]],
+      view2: ['List-view', [Validators.required]],
+      percent2: ['50', [Validators.required]],
+      title3: ['Announcement Board', [Validators.required]],
+      view3: ['List-view', [Validators.required]],
+      percent3: ['30', [Validators.required]],
+      title4: ['Rescheduled List', [Validators.required]],
+      view4: ['List-view', [Validators.required]],
+      percent4: ['70', [Validators.required]],
+      title5: ['Upcoming Program Classes', [Validators.required]],
+      view5: ['List-view', [Validators.required]],
+      percent5: ['50', [Validators.required]],
+      title6: ['Upcoming Course classes', [Validators.required]],
+      view6: ['List-view', [Validators.required]],
+      percent6: ['50', [Validators.required]],
+    });
 
-  
+    //Student
+    let user=JSON.parse(localStorage.getItem('currentUser')!);
+    this.studentName = user?.user?.name;
+    this.getRegisteredAndApprovedCourses();
+    //Student End
   }
 
   getCount() {
-    this.courseService.getCount().subscribe(response => {
+    this.courseService.getCount().subscribe((response) => {
       this.count = response?.data;
-      this.instructorCount=this.count?.instructors;
-      this.adminCount=this.count?.admins
-      this.studentCount=this.count?.students
+      this.instructorCount = this.count?.instructors;
+      this.adminCount = this.count?.admins;
+      this.studentCount = this.count?.students;
       this.chart4();
-  
-    })
-       
+    });
   }
   getInstructorsList() {
     let payload = {
-      type: "Instructor"
-    }
-    this.instructorService.getInstructor(payload).subscribe((response: any) => {
-      this.instructors = response.slice(0, 5);
-    }, error => {
-    });
+      type: 'Instructor',
+    };
+    this.instructorService.getInstructor(payload).subscribe(
+      (response: any) => {
+        this.instructors = response.slice(0, 5);
+      },
+      (error) => {}
+    );
   }
 
+  //Student Information
+
+  getRegisteredAndApprovedCourses(){
+    let studentId=localStorage.getItem('id')
+    const payload = { studentId: studentId, status: 'approved' ,isAll:true};
+    this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
+      this.approvedCourses = response?.data?.docs?.length
+    })
+    const payload2 = { studentId: studentId, status: 'withdraw' ,isAll:true};
+    this.classService.getStudentRegisteredClasses(payload2).subscribe(response =>{
+      this.withdrawCourses = response?.data?.length
+    })
+
+    const payload1 = { studentId: studentId, status: 'registered' ,isAll:true};
+    this.classService.getStudentRegisteredClasses(payload1).subscribe(response =>{
+      this.registeredCourses = response?.data?.docs?.length
+      this.getRegisteredAndApprovedPrograms()
+    })
+    const payload3 = { studentId: studentId, status: 'completed' ,isAll:true};
+    this.classService.getStudentRegisteredClasses(payload3).subscribe(response =>{
+      this.completedCourses = response?.data?.docs?.length
+    })
+
+  }
+  getRegisteredAndApprovedPrograms(){
+    let studentId=localStorage.getItem('id')
+    const payload = { studentId: studentId, status: 'registered' ,isAll:true};
+    this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
+      this.registeredPrograms = response?.data?.docs?.length
+      const payload1 = { studentId: studentId, status: 'approved' ,isAll:true};
+      this.classService.getStudentRegisteredProgramClasses(payload1).subscribe(response =>{
+        this.approvedPrograms = response?.data?.docs?.length
+        const payload3 = { studentId: studentId, status: 'completed' ,isAll:true};
+      this.classService.getStudentRegisteredProgramClasses(payload3).subscribe(response =>{
+        this.completedPrograms = response?.data?.docs?.length
+        const payload2 = { studentId: studentId, status: 'withdraw' ,isAll:true};
+        this.classService.getStudentRegisteredProgramClasses(payload2).subscribe(response =>{
+          this.withdrawPrograms = response?.data?.length
+          this.chart11();
+
+        })
+        this.doughnutChartData= {
+          labels: this.doughnutChartLabels,
+          datasets: [
+            {
+              data: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms, this.completedCourses, this.completedPrograms],
+              backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8', '#73af5a', '#af5a79'],
+            },
+          ],
+        };
+      })
+    })
+    })
+  }
+  getApprovedCourse(){
+    let studentId=localStorage.getItem('id')
+    const payload = { studentId: studentId, status: 'approved' ,isAll:true};
+    this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
+     this.studentApprovedClasses = response.data.docs.slice(0,5);
+     const currentDate = new Date();
+     const currentMonth = currentDate.getMonth();
+     const currentYear = currentDate.getFullYear();
+     const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+     this.upcomingCourseClasses = this.studentApprovedClasses.filter((item:any) => {
+      const sessionStartDate = new Date(item.classId?.sessions[0]?.sessionStartDate);
+      return (
+        sessionStartDate >= tomorrow
+      );
+    });
+    })
+  }
+  getApprovedProgram(){
+    let studentId=localStorage.getItem('id')
+    const payload = { studentId: studentId, status: 'approved',isAll:true };
+    this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
+     this.studentApprovedPrograms= response.data.docs.slice(0,5);
+     const currentDate = new Date();
+     const currentMonth = currentDate.getMonth();
+     const currentYear = currentDate.getFullYear();
+     const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+     this.upcomingProgramClasses = this.studentApprovedPrograms.filter((item:any) => {
+      const sessionStartDate = new Date(item.classId.sessions[0].sessionStartDate);
+      return (
+        sessionStartDate >= tomorrow
+      );
+    });
+
+    })
+  }
+  getApprovedLeaves(){
+    let studentId=localStorage.getItem('id')
+    const payload = { studentId: studentId, status: 'approved' ,isAll:true};
+    this.leaveService.getAllLeavesByStudentId(payload).subscribe(response =>{
+     this.approvedLeaves = response.data.slice(0,5);
+    })
+  }
+  getAnnouncementForStudents(filter?: any) {
+    let payload ={
+      announcementFor:'Student'
+    }
+    this.announcementService.getAnnouncementsForStudents(payload).subscribe((res: { data: { data: any[]; }; totalRecords: number; }) => {
+      this.announcements = res.data
+    })
+  }
+
+  public doughnutChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
+  public doughnutChartLabels: string[] = [
+    'Registered Courses',
+    'Approved Courses',
+    'Registered Programs ',
+    'Approved Programs',
+    'Completed Courses' , 
+    'Completed Programs'
+  ];
+  public doughnutChartData!: ChartData<'doughnut'>
+  public doughnutChartType: ChartType = 'doughnut';
+  //End Student Information
   getStudentsList() {
     let payload = {
-      type: "Student"
-    }
-    this.instructorService.getInstructor(payload).subscribe((response: any) => {
-      this.students = response.slice(0, 5)
-      const currentDate = new Date();
-      const currentMonth = currentDate.getMonth();
-      const currentYear = currentDate.getFullYear();
+      type: 'Student',
+    };
+    this.instructorService.getInstructor(payload).subscribe(
+      (response: any) => {
+        this.students = response.slice(0, 5);
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
 
-      const twoMonthsAgoStart = new Date(currentYear, currentMonth - 2, 1);
-      const twoMonthsAgoEnd = currentDate;
+        const twoMonthsAgoStart = new Date(currentYear, currentMonth - 2, 1);
+        const twoMonthsAgoEnd = currentDate;
 
-      const fourMonthsAgoStart = new Date(currentYear, currentMonth - 4, 1);
-      const fourMonthsAgoEnd = new Date(currentYear, currentMonth - 2, 0);
+        const fourMonthsAgoStart = new Date(currentYear, currentMonth - 4, 1);
+        const fourMonthsAgoEnd = new Date(currentYear, currentMonth - 2, 0);
 
-      const sixMonthsAgoStart = new Date(currentYear, currentMonth - 6, 1);
-      const sixMonthsAgoEnd = new Date(currentYear, currentMonth - 4, 0);
+        const sixMonthsAgoStart = new Date(currentYear, currentMonth - 6, 1);
+        const sixMonthsAgoEnd = new Date(currentYear, currentMonth - 4, 0);
 
-      const eightMonthsAgoStart = new Date(currentYear, currentMonth - 8, 1);
-      const eightMonthsAgoEnd = new Date(currentYear, currentMonth - 6, 0);
+        const eightMonthsAgoStart = new Date(currentYear, currentMonth - 8, 1);
+        const eightMonthsAgoEnd = new Date(currentYear, currentMonth - 6, 0);
 
-      const tenMonthsAgoStart = new Date(currentYear, currentMonth - 10, 1);
-      const tenMonthsAgoEnd = new Date(currentYear, currentMonth - 8, 0);
+        const tenMonthsAgoStart = new Date(currentYear, currentMonth - 10, 1);
+        const tenMonthsAgoEnd = new Date(currentYear, currentMonth - 8, 0);
 
-      const twelveMonthsAgoStart = new Date(currentYear, currentMonth - 12, 1);
-      const twelveMonthsAgoEnd = new Date(currentYear, currentMonth - 10, 0);
-
-      const monthsAgo = new Date(currentYear, currentMonth - 12, 1);
-      const twoMonths = new Date(currentYear, currentMonth - 2, 0);
-      const fourMonths = new Date(currentYear, currentMonth - 4, 0);
-      const sixMonths = new Date(currentYear, currentMonth - 6, 0);
-      const eightMonths = new Date(currentYear, currentMonth - 8, 0);
-      const tenMonths = new Date(currentYear, currentMonth - 10, 0);
-      const twelveMonths = new Date(currentYear, currentMonth - 12, 0);
-
-      this.tillPreviousTwoMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= monthsAgo && createdAtDate <=twoMonths
+        const twelveMonthsAgoStart = new Date(
+          currentYear,
+          currentMonth - 12,
+          1
         );
-      });
+        const twelveMonthsAgoEnd = new Date(currentYear, currentMonth - 10, 0);
 
-      this.tillPreviousFourMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= monthsAgo && createdAtDate <=fourMonths
-        );
-      });
+        const monthsAgo = new Date(currentYear, currentMonth - 12, 1);
+        const twoMonths = new Date(currentYear, currentMonth - 2, 0);
+        const fourMonths = new Date(currentYear, currentMonth - 4, 0);
+        const sixMonths = new Date(currentYear, currentMonth - 6, 0);
+        const eightMonths = new Date(currentYear, currentMonth - 8, 0);
+        const tenMonths = new Date(currentYear, currentMonth - 10, 0);
+        const twelveMonths = new Date(currentYear, currentMonth - 12, 0);
 
-      this.tillPreviousSixMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= monthsAgo && createdAtDate <=sixMonths
+        this.tillPreviousTwoMonthsStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return createdAtDate >= monthsAgo && createdAtDate <= twoMonths;
+          }
         );
-      });
 
-      this.tillPreviousEightMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= monthsAgo && createdAtDate <=eightMonths
+        this.tillPreviousFourMonthsStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return createdAtDate >= monthsAgo && createdAtDate <= fourMonths;
+          }
         );
-      });
 
-      this.tillPreviousTenMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= monthsAgo && createdAtDate <=tenMonths
+        this.tillPreviousSixMonthsStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return createdAtDate >= monthsAgo && createdAtDate <= sixMonths;
+          }
         );
-      });
 
-      this.tillPreviousTwelveMonthsStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= monthsAgo && createdAtDate <=twelveMonths
+        this.tillPreviousEightMonthsStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return createdAtDate >= monthsAgo && createdAtDate <= eightMonths;
+          }
         );
-      });
 
-      // Filtered students who joined in the specified time periods
-      this.twoMonthsAgoStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= twoMonthsAgoStart && createdAtDate <= twoMonthsAgoEnd
+        this.tillPreviousTenMonthsStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return createdAtDate >= monthsAgo && createdAtDate <= tenMonths;
+          }
         );
-      });
 
-      this.fourMonthsAgoStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= fourMonthsAgoStart && createdAtDate <= fourMonthsAgoEnd
+        this.tillPreviousTwelveMonthsStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return createdAtDate >= monthsAgo && createdAtDate <= twelveMonths;
+          }
         );
-      });
 
-      this.sixMonthsAgoStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= sixMonthsAgoStart && createdAtDate <= sixMonthsAgoEnd
+        // Filtered students who joined in the specified time periods
+        this.twoMonthsAgoStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return (
+              createdAtDate >= twoMonthsAgoStart &&
+              createdAtDate <= twoMonthsAgoEnd
+            );
+          }
         );
-      });
-      this.eightMonthsAgoStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= eightMonthsAgoStart && createdAtDate <= eightMonthsAgoEnd
+
+        this.fourMonthsAgoStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return (
+              createdAtDate >= fourMonthsAgoStart &&
+              createdAtDate <= fourMonthsAgoEnd
+            );
+          }
         );
-      });
-      this.tenMonthsAgoStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= tenMonthsAgoStart && createdAtDate <= tenMonthsAgoEnd
+
+        this.sixMonthsAgoStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return (
+              createdAtDate >= sixMonthsAgoStart &&
+              createdAtDate <= sixMonthsAgoEnd
+            );
+          }
         );
-      });
-      this.twelveMonthsAgoStudents = response.filter((item: { createdAt: string | number | Date; }) => {
-        const createdAtDate = new Date(item.createdAt);
-        return (
-          createdAtDate >= twelveMonthsAgoStart && createdAtDate <= twelveMonthsAgoEnd
+        this.eightMonthsAgoStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return (
+              createdAtDate >= eightMonthsAgoStart &&
+              createdAtDate <= eightMonthsAgoEnd
+            );
+          }
         );
-      });
-      this.chart1();
-    }, error => {
-    });
+        this.tenMonthsAgoStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return (
+              createdAtDate >= tenMonthsAgoStart &&
+              createdAtDate <= tenMonthsAgoEnd
+            );
+          }
+        );
+        this.twelveMonthsAgoStudents = response.filter(
+          (item: { createdAt: string | number | Date }) => {
+            const createdAtDate = new Date(item.createdAt);
+            return (
+              createdAtDate >= twelveMonthsAgoStart &&
+              createdAtDate <= twelveMonthsAgoEnd
+            );
+          }
+        );
+        this.chart1();
+      },
+      (error) => {}
+    );
   }
   editCall(student: any) {
-    
-    this.router.navigate(['/admin/students/add-student'],{queryParams:{id:student.id}})
-  }
-  editClass(id:string){
-    this.router.navigate(['/admin/courses/create-class'], { queryParams: {id: id}});
-  }
-  delete(id: string) {
-    
-    this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
-      const matchingClasses = classList.docs.filter((classItem: any) => {
-        return classItem.courseId && classItem.courseId.id === id;
-      });
-      if (matchingClasses.length > 0) {
-        Swal.fire({
-          title: 'Error',
-          text: 'Class have been registered. Cannot delete.',
-          icon: 'error',
-        });
-        return;
-      }
-
-      Swal.fire({
-        title: "Confirm Deletion",
-        text: "Are you sure you want to delete?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        confirmButtonText: "Delete",
-        cancelButtonText: "Cancel",
-      }).then((result) => {
-        if (result.isConfirmed){
-          this.classService.deleteClass(id).subscribe(() => {
-            Swal.fire({
-              title: 'Success',
-              text: 'Class deleted successfully.',
-              icon: 'success',
-            });
-            this.getClassList();
-          });
-        }
-      });
-     
+    this.router.navigate(['/admin/students/add-student'], {
+      queryParams: { id: student.id },
     });
   }
+  editClass(id: string) {
+    this.router.navigate(['/admin/courses/create-class'], {
+      queryParams: { id: id },
+    });
+  }
+  delete(id: string) {
+    this.classService
+      .getClassList({ courseId: id })
+      .subscribe((classList: any) => {
+        const matchingClasses = classList.docs.filter((classItem: any) => {
+          return classItem.courseId && classItem.courseId.id === id;
+        });
+        if (matchingClasses.length > 0) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Class have been registered. Cannot delete.',
+            icon: 'error',
+          });
+          return;
+        }
 
+        Swal.fire({
+          title: 'Confirm Deletion',
+          text: 'Are you sure you want to delete?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Delete',
+          cancelButtonText: 'Cancel',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.classService.deleteClass(id).subscribe(() => {
+              Swal.fire({
+                title: 'Success',
+                text: 'Class deleted successfully.',
+                icon: 'success',
+              });
+              this.getClassList();
+            });
+          }
+        });
+      });
+  }
 
   deleteStudent(row: any) {
     // this.id = row.id;
-     Swal.fire({
-       title: "Confirm Deletion",
-       text: "Are you sure you want to delete this Student?",
-       icon: "warning",
-       showCancelButton: true,
-       confirmButtonColor: "#d33",
-       cancelButtonColor: "#3085d6",
-       confirmButtonText: "Delete",
-       cancelButtonText: "Cancel",
-     }).then((result) => {
-       if (result.isConfirmed) {
-         this.studentService.deleteUser(row.id).subscribe(
-           () => {
-             Swal.fire({
-               title: "Deleted",
-               text: "Student deleted successfully",
-               icon: "success",
-             });
-             //this.fetchCourseKits();
-             this.getStudentsList()
-           },
-           (error: { message: any; error: any; }) => {
-             Swal.fire(
-               "Failed to delete Student",
-               error.message || error.error,
-               "error"
-             );
-           }
-         );
-       }
-     });
-
-   }
-
-
+    Swal.fire({
+      title: 'Confirm Deletion',
+      text: 'Are you sure you want to delete this Student?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.studentService.deleteUser(row.id).subscribe(
+          () => {
+            Swal.fire({
+              title: 'Deleted',
+              text: 'Student deleted successfully',
+              icon: 'success',
+            });
+            //this.fetchCourseKits();
+            this.getStudentsList();
+          },
+          (error: { message: any; error: any }) => {
+            Swal.fire(
+              'Failed to delete Student',
+              error.message || error.error,
+              'error'
+            );
+          }
+        );
+      }
+    });
+  }
 
   ngOnInit() {
-this.getClassList()
-  }
-  getClassList() {
-    this.classService
-      .getClassListWithPagination()
-      .subscribe(
-        (response) => {
-          
-          if (response.data) {
-            this.classesList = response.data.docs.slice(0,5).sort();
-          }
-       
+    this.getClassList();
+    const role = this.authenticationService.currentUserValue.user.role;
+    console.log('roles', role);
+    if (role=='Admin'|| role=="RO"  || role == "Director" || role == "Employee") {
+      this.isAdmin = true;
+    }else if (role === 'Student') {
+      this.isStudentDB = true;
+      this.breadscrums = [
+        {
+          title: 'Dashboad',
+          items: ['Dashboad'],
+          active: 'Student Dashboad',
         },
-        (error) => {
-          console.log('error', error);
-        }
-      );
+      ];
+    }else if (role === 'Instructor' || role === 'Trainer' ) {
+      this.isInstructorDB = true;
+      this.breadscrums = [
+        {
+          title: 'Dashboad',
+          items: ['Dashboad'],
+          active: 'Instructor Dashboad',
+        },
+      ];
+    }
+    else if (role === 'Training administrator' || role === 'training administrator' ) {
+      this.isTADB = true;
+    }
+    else if (role === 'Supervisor' || role === 'supervisor' ) {
+      this.issupervisorDB = true;
+    }
+    else if ( role === 'hod' || role === 'HOD' || role === 'Head of Department' ) {
+      this.isHodDB = true;
+    }else if (role === 'Training Coordinator' || role === 'training coordinator' ) {
+      this.isTCDB = true;
+    }
+    else if ( role === 'coursemanager'|| role === 'Course Manager' ) {
+      this.isCMDB = true;
+    } else if ( role === 'programcoordinator'|| role === 'Program manager' ) {
+      this.isPCDB = true;
+    }
+    
+//Student
+    this.chart22();
+    this.getApprovedCourse();
+    this.getApprovedProgram();
+    this.getApprovedLeaves();
+    this.getAnnouncementForStudents();
+
+    //Instructor
+    this.getClassList();
+    this.getClassList1();
+    this.chart1Ins();
+    // this.chart2Ins();
+    this.instructorData();
+    this.getProgramList();
+    this.getAllCourse();
+    this.getCountIns();
   }
+  
+  getClassList() {
+    this.classService.getClassListWithPagination().subscribe(
+      (response) => {
+        if (response.data) {
+          this.classesList = response.data.docs.slice(0, 5).sort();
+        }
+      },
+      (error) => {
+        console.log('error', error);
+      }
+    );
+  }
+
+
+  private chart11() {
+    this.areaChartOptions = {
+      series: [
+        {
+          name: 'Registered',
+          data: [this.registeredCourses, this.registeredPrograms],
+        },
+        {
+          name: 'Approved',
+          data: [this.approvedCourses,this.approvedPrograms],
+        },
+        {
+          name: 'Completed',
+          data: [this.completedCourses,this.completedPrograms],
+        },
+        {
+          name: 'Cancelled',
+          data: [this.withdrawCourses,this.withdrawPrograms],
+        },
+
+      ],
+      chart: {
+        height: 350,
+        type: 'area',
+        toolbar: {
+          show: false,
+        },
+        foreColor: '#9aa0ac',
+      },
+      colors: ['#FFA500', '#3d3','#d33'],
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      xaxis: {
+        categories: [
+          'Courses',
+          'Programs',
+        ],
+      },
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      legend: {
+        show: true,
+        position: 'top',
+        horizontalAlign: 'center',
+        offsetX: 0,
+        offsetY: 0,
+      },
+    };
+  }
+
+  private chart22() {
+    this.barChartOptions = {
+      series: [
+        {
+          name: 'Physics',
+          data: [44, 55, 41, 67, 22, 43],
+        },
+        {
+          name: 'Computer',
+          data: [13, 23, 20, 8, 13, 27],
+        },
+        {
+          name: 'Management',
+          data: [11, 17, 15, 15, 21, 14],
+        },
+        {
+          name: 'Mathes',
+          data: [21, 7, 25, 13, 22, 8],
+        },
+      ],
+      chart: {
+        type: 'bar',
+        height: 330,
+        foreColor: '#9aa0ac',
+        stacked: true,
+        toolbar: {
+          show: false,
+        },
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+              offsetX: -10,
+              offsetY: 0,
+            },
+          },
+        },
+      ],
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: '20%',
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      xaxis: {
+        type: 'category',
+        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      },
+      legend: {
+        show: false,
+      },
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      fill: {
+        opacity: 1,
+        colors: ['#25B9C1', '#4B4BCB', '#EA9022', '#9E9E9E'],
+      },
+    };
+  }
+
+
+
+
+
   private chart1() {
     this.areaChartOptions = {
       series: [
@@ -362,7 +870,7 @@ this.getClassList()
             this.sixMonthsAgoStudents.length,
             this.eightMonthsAgoStudents.length,
             this.tenMonthsAgoStudents.length,
-            this.twelveMonthsAgoStudents.length
+            this.twelveMonthsAgoStudents.length,
           ],
         },
         {
@@ -399,7 +907,14 @@ this.getClassList()
       },
       xaxis: {
         type: 'category',
-        categories: ['2 Months', '4 Months', '6 Months', '8 Months', '10 Months', '12 Months']
+        categories: [
+          '2 Months',
+          '4 Months',
+          '6 Months',
+          '8 Months',
+          '10 Months',
+          '12 Months',
+        ],
       },
       legend: {
         show: true,
@@ -591,9 +1106,7 @@ this.getClassList()
   }
   private chart4() {
     this.polarChartOptions = {
-      series2: [      this.instructorCount,
-        this.studentCount,
-      this.adminCount  ],
+      series2: [this.instructorCount, this.studentCount, this.adminCount],
       chart: {
         type: 'pie',
         height: 400,
@@ -626,5 +1139,462 @@ this.getClassList()
     this.router.navigate(['/student/settings/view-student'], {
       queryParams: { data: id },
     });
+  }
+
+
+
+  //Instructor
+  getClassList2() {
+    let instructorId = localStorage.getItem('id');
+    this.lecturesService.getClassListWithPagination(instructorId, '').subscribe(
+      (response) => {
+        this.dataSource1 = response.data.docs;
+        //this.dataSource1 = response.data.sessions;
+        // this.totalItems = response.data.totalDocs
+        // this.coursePaginationModel.docs = response.data.docs;
+        // this.coursePaginationModel.page = response.data.page;
+        // this.coursePaginationModel.limit = response.data.limit;
+        //this.mapClassList()
+        // this.dataSource = [];
+        this.getSession();
+        this.chart2();
+      },
+      (error) => { }
+    );
+  }
+  getClassList1() {
+    let instructorId = localStorage.getItem('id');
+    this.lecturesService
+      .getClassListWithPagination1(instructorId, '')
+      .subscribe(
+        (response) => {
+          this.programData = response.data.docs;
+          //this.dataSource1 = response.data.sessions;
+          // this.totalItems = response.data.totalDocs
+          // this.coursePaginationModel.docs = response.data.docs;
+          // this.coursePaginationModel.page = response.data.page;
+          // this.coursePaginationModel.limit = response.data.limit;
+          //this.mapClassList()
+          // this.dataSource = [];
+          this.getSession1();
+          this.chart3Ins();
+        },
+        (error) => { }
+      );
+  }
+  getSession() {
+    if (this.dataSource1) {
+      this.dataSource1 &&
+        this.dataSource1?.forEach((item: any, index: any) => {
+          if (
+            item.sessions[0] &&
+            item.sessions[0]?.courseName 
+          ) {
+            let starttimeObject = moment(
+              item.sessions[0].sessionStartTime,
+              'HH:mm'
+            );
+            let endtimeObject = moment(item.sessions[0].sessionEndTime, "HH:mm");
+            const duration = moment.duration(
+              moment(item.sessions[0].sessionEndDate).diff(
+                moment(item.sessions[0].sessionStartDate)
+              )
+            );
+            let daysDifference = duration.asDays() + 1;
+            this.labels.push(item.sessions[0].courseName);
+            this.series?.push(daysDifference);
+            this.dataSource?.push({
+              courseName: item.sessions[0].courseName,
+              courseCode: item.sessions[0].courseCode,
+              sessionStartDate: moment(
+                item.sessions[0].sessionStartDate
+              ).format('YYYY-MM-DD'),
+              sessionEndDate: moment(item.sessions[0].sessionEndDate).format(
+                'YYYY-MM-DD'
+              ),
+              sessionStartTime: starttimeObject.format('hh:mm A'),
+              sessionEndTime: endtimeObject.format("hh:mm A"),
+              duration: daysDifference,
+            });
+          } else {
+          }
+          this.todayLecture();
+          this.weekLecture();
+        });
+      //this.cdr.detectChanges();
+      //this.myArray.push(newItem);
+      //this.myArray.data = this.dataSource;
+    }
+    //return sessions;
+  }
+  getSession1() {
+    if (this.programData) {
+      this.programData &&
+        this.programData?.forEach((item: any, index: any) => {
+          if (
+            item.sessions[0] &&
+            item.sessions[0]?.courseName &&
+            item.sessions[0]?.courseCode
+          ) {
+            let starttimeObject = moment(
+              item.sessions[0].sessionStartTime,
+              'HH:mm'
+            );
+        let endtimeObject = moment(item.sessions[0].sessionEndTime, "HH:mm");
+
+            const duration = moment.duration(
+              moment(item.sessions[0].sessionEndDate).diff(
+                moment(item.sessions[0].sessionStartDate)
+              )
+            );
+            let daysDifference = duration.asDays() + 1;
+            this.programLabels.push(item.sessions[0].courseName);
+            this.programSeries?.push(daysDifference);
+            this.programFilterData?.push({
+              courseName: item.sessions[0].courseName,
+              courseCode: item.sessions[0].courseCode,
+              instructorCost:item.instructorCost,
+              duration: daysDifference,
+              sessionStartDate: moment(
+                item.sessions[0].sessionStartDate
+              ).format('YYYY-MM-DD'),
+              sessionEndDate: moment(item.sessions[0].sessionEndDate).format(
+                'YYYY-MM-DD'
+              ),
+              sessionStartTime: starttimeObject.format('hh:mm A'),
+          sessionEndTime: endtimeObject.format("hh:mm A"),
+            });
+          } else {
+          }
+          this.todayProgramLecture();
+          this.weekProgramLecture();
+        });
+      //this.cdr.detectChanges();
+      //this.myArray.push(newItem);
+      //this.myArray.data = this.dataSource;
+    }
+    //return sessions;
+  }
+  todayProgramLecture() {
+    if (this.programFilterData) {
+      this.currentProgramRecords = this.filterRecordsByCurrentDate(
+        this.programFilterData
+      );
+    }
+  }
+  weekProgramLecture() {
+    if (this.programFilterData) {
+      this.currentProgramWeekRecords = this.filterRecordsForCurrentWeek(
+        this.programFilterData
+      );
+    }
+  }
+
+  todayLecture() {
+    if (this.dataSource) {
+      this.currentRecords = this.filterRecordsByCurrentDate(this.dataSource);
+    }
+  }
+  weekLecture() {
+    if (this.dataSource) {
+      this.currentWeekRecords = this.filterRecordsForCurrentWeek(
+        this.dataSource
+      );
+    }
+  }
+  filterRecordsForCurrentWeek(records: any[]) {
+    const { startOfWeek, endOfWeek } = this.getCurrentWeekDates();
+    return records.filter((record) => {
+      const recordStartDate = new Date(record.sessionStartDate);
+      const recordEndDate = new Date(record.sessionEndDate);
+      return recordStartDate <= endOfWeek && recordEndDate >= startOfWeek;
+    });
+  }
+  getCurrentWeekDates() {
+    const today = new Date();
+    const currentDay = today.getDay();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - currentDay + 1); // Assuming Monday is the start of the week
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6); // End of the week
+
+    return { startOfWeek, endOfWeek };
+  }
+
+  filterRecordsByCurrentDate(records: any[]) {
+    const currentDate = new Date(); // Get the current date
+    const filteredRecords: any[] = [];
+
+    records.forEach((record) => {
+      const startDate = new Date(record.sessionStartDate); // Replace with the field that contains the start date
+      const endDate = new Date(record.sessionEndDate); // Replace with the field that contains the end date
+
+      if (currentDate >= startDate && currentDate <= endDate) {
+        filteredRecords.push(record);
+      }
+    });
+
+    return filteredRecords;
+  }
+
+  instructorData() {
+    let payload = {
+      type: 'Instructor',
+    };
+    this.instructorService.getInstructors(payload).subscribe(
+      (response: { data: any }) => {
+        this.latestInstructor = response?.data[0];
+      },
+      (error) => { }
+    );
+  }
+
+  private chart1Ins() {
+    this.avgLecChartOptions = {
+      series: [
+        {
+          name: 'Avg. Lecture',
+          data: [65, 72, 62, 73, 66, 74, 63, 67, 88, 60, 80, 70],
+        },
+      ],
+      chart: {
+        height: 350,
+        type: 'line',
+        foreColor: '#9aa0ac',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        toolbar: {
+          show: false,
+        },
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      xaxis: {
+        categories: [
+          'Jan',
+          'Feb',
+          'March',
+          'Apr',
+          'May',
+          'Jun',
+          'July',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ],
+        title: {
+          text: 'Weekday',
+        },
+      },
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      yaxis: {},
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: 'dark',
+          gradientToColors: ['#35fdd8'],
+          shadeIntensity: 1,
+          type: 'horizontal',
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100, 100, 100],
+        },
+      },
+      markers: {
+        size: 4,
+        colors: ['#FFA41B'],
+        strokeColors: '#fff',
+        strokeWidth: 2,
+        hover: {
+          size: 7,
+        },
+      },
+      tooltip: {
+        theme: 'dark',
+        marker: {
+          show: true,
+        },
+        x: {
+          show: true,
+        },
+      },
+    };
+  }
+  private chart2Ins() {
+    this.pieChartOptions = {
+      series: this.series,
+      chart: {
+        type: 'donut',
+        width: 200,
+      },
+      legend: {
+        show: false,
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      labels: this.labels,
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {},
+        },
+      ],
+    };
+  }
+  private chart3Ins() {
+    this.pieChartOptions1 = {
+      series: this.programSeries,
+      chart: {
+        type: 'donut',
+        width: 200,
+      },
+      legend: {
+        show: false,
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      labels: this.programLabels,
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {},
+        },
+      ],
+    };
+  }
+  getProgramList(filters?: any) {
+    this.courseService.getCourseProgram({status:'active'}).subscribe(
+      (response: any) => {
+        this.programList = response.docs.slice(0,5);
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();  
+        const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+        this.upcomingPrograms = this.programList.filter((item: { sessionStartDate: string | number | Date; }) => {
+          const sessionStartDate = new Date(item.sessionStartDate);
+          return (
+            sessionStartDate >= tomorrow 
+          );
+        });
+      },
+      (error) => {
+      }
+    );
+  }
+  getAllCourse(){
+    this.courseService.getAllCourses({status:'active'}).subscribe(response =>{
+     this.courseData = response.data.docs.slice(0,5);
+     const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();  
+        const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
+        this.upcomingCourses = this.courseData.filter((item: { sessionStartDate: string | number | Date; }) => {
+          const sessionStartDate = new Date(item.sessionStartDate);
+          return (
+            sessionStartDate >= tomorrow 
+          );
+        });
+    })
+  }
+  getCoursesList() {
+    this.courseService.getAllCourses({status:'active'})
+      .subscribe(response => {
+        this.dataSource = response.data.docs;
+        this.mapCategories();
+      }, (error) => {
+      }
+      )
+  }
+  private mapCategories(): void {
+    this.coursePaginationModel.docs?.forEach((item) => {
+      item.main_category_text = this.mainCategories.find((x) => x.id === item.main_category)?.category_name;
+    });
+  
+    this.coursePaginationModel.docs?.forEach((item) => {
+      item.sub_category_text = this.allSubCategories.find((x) => x.id === item.sub_category)?.category_name;
+    });
+  
+  }
+  getClassListIns() {
+    this.classService
+      .getClassListWithPagination()
+      .subscribe(
+        (response) => {
+          
+          if (response.data) {
+            this.classesList = response.data.docs.slice(0,5).sort();
+          }
+       
+        },
+        (error) => {
+          console.log('error', error);
+        }
+      );
+  }
+  editClassIns(id:string){
+    this.router.navigate(['/admin/courses/create-class'], { queryParams: {id: id}});
+  }
+  deleteIns(id: string) {
+    
+    this.classService.getClassList({ courseId: id }).subscribe((classList: any) => {
+      const matchingClasses = classList.docs.filter((classItem: any) => {
+        return classItem.courseId && classItem.courseId.id === id;
+      });
+      if (matchingClasses.length > 0) {
+        Swal.fire({
+          title: 'Error',
+          text: 'Class have been registered. Cannot delete.',
+          icon: 'error',
+        });
+        return;
+      }
+
+      Swal.fire({
+        title: "Confirm Deletion",
+        text: "Are you sure you want to delete?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed){
+          this.classService.deleteClass(id).subscribe(() => {
+            Swal.fire({
+              title: 'Success',
+              text: 'Class deleted successfully.',
+              icon: 'success',
+            });
+            this.getClassList();
+          });
+        }
+      });
+     
+    });
+  }
+  getCountIns() {
+    this.courseService.getCount().subscribe(response => {
+      this.count = response?.data;
+      this.instructorCount=this.count?.instructors;
+      this.adminCount=this.count?.admins
+      this.studentCount=this.count?.students
+    })
+       
   }
 }

@@ -77,5 +77,11 @@ export class ViewComponent {
       },
       direction: tempDirection,
     });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        console.log('iiiiddd',this.id)
+        this.loadData(this.id);
+      }
+    });
 }
 }
