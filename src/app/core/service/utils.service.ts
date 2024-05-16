@@ -431,6 +431,12 @@ export class UtilsService {
     ],
     'roles':[
       {type: 'required', message:'Select Role'}
+    ],
+    'view':[
+      {type: 'required', message:'Select View Type'}
+    ],
+    'percent':[
+      {type: 'required', message:'Select Percentage'}
     ]
   };
 

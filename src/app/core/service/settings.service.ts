@@ -61,4 +61,30 @@ export class SettingsService {
       .put<ApiResponse>(apiUrl, data)
       .pipe(map((response) => {}));
   }
+
+  saveStudentDashboard(data: any) {
+    const apiUrl = `${this.prefix}admin/dashboard`;
+    return this._Http
+      .post<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {}));
+  }
+
+  getStudentDashboard(filter?: Partial<CoursePaginationModel>): Observable<ApiResponse> {
+    const apiUrl = this.defaultUrl + 'admin/dashboard';
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+  }
+
+  getStudentDashboardById(id: string) {
+    const apiUrl = `${this.prefix}admin/dashboard/${id}`;
+    return this._Http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
+  }
+  
+  updateStudentDashboard(data: any) {
+    const apiUrl = `${this.prefix}admin/dashboard/${data.id}`;
+    return this._Http
+      .put<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {response}));
+  }
 }

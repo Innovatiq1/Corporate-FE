@@ -58,6 +58,15 @@ export class CustomizationCurrencyComponent {
 
   updateCurrency() {
     const selectedCurrency = this.selectedCurrency;
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to update this Currency!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
     this.courseService.createCurrency({ value: selectedCurrency }).subscribe(
       response => {
         Swal.fire({
@@ -75,6 +84,8 @@ export class CustomizationCurrencyComponent {
         });
       }
     );
+      }
+    });
   }
 
   openDialog(): void {
