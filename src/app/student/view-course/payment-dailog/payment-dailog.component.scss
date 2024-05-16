@@ -1,37 +1,41 @@
-.menu{
-  text-align: start;
-    font-size: 16px;
-    font-weight: 500;
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+  width: 650px !important;
+  height: 300px !important;
+  overflow-x: hidden !important;
 }
-.sub-menu{
-  text-align: start;
-  font-size: 14px;
-  font-weight: 400;
-  margin-right: 10px;
+.card-payment{
+  border: 2px solid black;
+  width:35%;
+  height: fit-content;
+  margin-top: 10px; 
+  border-radius: 10px;
+  cursor: pointer;
 }
-.items{
-    text-align: center !important; 
-    display: flex !important;
-    white-space: nowrap;
+.card-image{
+  width:109.3%;
+  margin-left: -9px;
+  height: 155px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
-.card {
-    width: 800px;
-    height: 500px;
-    margin: 0 auto;
-    border-radius: 20px;
-    overflow-y: auto; 
-  }
-
-  .menu img {
-    margin-right: 10px;
-  }
-  .menu-wrapper {
-    display: flex;
-    flex-direction: column;
+.other-image{
+  width:109.3%;
+  margin-left: -9px;
+  height: 155px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
-
-.sub-menu-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 10px;
+.card-payment:hover{
+  border: 2px solid #23b5ed;
+}
+.card-other{
+  border: 2px solid black;
+  width: 35%; 
+  height: fit-content; 
+  margin-top: 10px; 
+  border-radius: 10px;
+  cursor: pointer;
+}
+.card-other:hover{
+  border: 2px solid #23b5ed;
 }
