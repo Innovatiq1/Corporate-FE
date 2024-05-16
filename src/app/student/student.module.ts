@@ -112,6 +112,7 @@ import { ApprovalWorkflowComponent } from './settings/approval-workflow/approval
 import { StudentDbComponent } from './settings/student-db/student-db.component';
 import { PreviewQuestionsComponent } from './settings/preview-questions/preview-questions.component';
 import { PreviewTestAnswersheetComponent } from './preview-test-answersheet/preview-test-answersheet.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -203,6 +204,7 @@ import { PreviewTestAnswersheetComponent } from './preview-test-answersheet/prev
     StudentDbComponent,
     PreviewQuestionsComponent,
     PreviewTestAnswersheetComponent,
+    CheckoutComponent,
   
     // CourseKitComponent,
     // VideoPlayerComponent,
