@@ -81,6 +81,8 @@ import { ApprovalWorkflowComponent } from './settings/approval-workflow/approval
 import { StudentDbComponent } from './settings/student-db/student-db.component';
 import { PreviewQuestionsComponent } from './settings/preview-questions/preview-questions.component';
 import { PreviewTestAnswersheetComponent } from './preview-test-answersheet/preview-test-answersheet.component';
+import { ViewApprovalWorkflowComponent } from './settings/approval-workflow/view-approval-workflow/view-approval-workflow.component';
+import { CreateApprovalWorkflowComponent } from './settings/approval-workflow/create-approval-workflow/create-approval-workflow.component';
 
 
 const routes: Routes = [
@@ -543,6 +545,18 @@ const routes: Routes = [
   {
     path: 'settings/approval-workflow',
     component: ApprovalWorkflowComponent,
+  },
+  {
+    path: 'settings/create-approval-flow',
+    component: CreateApprovalWorkflowComponent
+  },
+  {
+    path: 'settings/edit-approval-flow/:id',
+    component: CreateApprovalWorkflowComponent
+  },
+  {
+    path: 'settings/view-approval-flow/:id',
+    component: ViewApprovalWorkflowComponent
   },
   
     {

@@ -87,4 +87,36 @@ export class SettingsService {
       .put<ApiResponse>(apiUrl, data)
       .pipe(map((response) => {response}));
   }
+
+  saveApprovalFlow(data: any) {
+    const apiUrl = `${this.prefix}admin/approvalFlow`;
+    return this._Http
+      .post<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {response}));
+  }
+
+  getApprovalFlow(filter?: Partial<CoursePaginationModel>): Observable<ApiResponse> {
+    const apiUrl = this.defaultUrl + 'admin/approvalFlow';
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+  }
+
+  getApprovalFlowById(id: string) {
+    const apiUrl = `${this.prefix}admin/approvalFlow/${id}`;
+    return this._Http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
+  }
+  
+  updateApprovalFlow(data: any) {
+    const apiUrl = `${this.prefix}admin/approvalFlow/${data.id}`;
+    return this._Http
+      .put<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {response}));
+  }
+  deleteApprovalFlow(id: string) {
+    const apiUrl = `${this.prefix}admin/approvalFlow/${id}`;
+    return this._Http
+      .delete<CourseModel>(apiUrl)
+      .pipe(map((response) => response));
+  }
 }
