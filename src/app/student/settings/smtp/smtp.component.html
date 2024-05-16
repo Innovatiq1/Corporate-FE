@@ -16,7 +16,7 @@
                             <div class="example-container">
                                 <div class="row clearfix">
                                     <div class="col-4">
-                                        <label>Email</label>
+                                        <label>Email<span class="mandatory">&nbsp;*</span></label>
                                         <mat-form-field class="example-full-width" appearance="outline">
                                             <input matInput formControlName="email" required />
                                             <mat-error
@@ -26,7 +26,7 @@
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4">
-                                        <label>User Name</label>
+                                        <label>User Name<span class="mandatory">&nbsp;*</span></label>
                                         <mat-form-field class="example-full-width" appearance="outline">
                                             <input matInput formControlName="user" required />
                                             <mat-error
@@ -40,7 +40,7 @@
 
                                 <div class="row clearfix">
                                     <div class="col-4">
-                                        <label>Email Host</label>
+                                        <label>Email Host<span class="mandatory">&nbsp;*</span></label>
                                         <mat-form-field class="example-full-width" appearance="outline">
                                             <input matInput formControlName="host" required />
                                             <mat-error
@@ -50,7 +50,7 @@
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4">
-                                        <label>Port</label>
+                                        <label>Port<span class="mandatory">&nbsp;*</span></label>
                                         <mat-form-field class="example-full-width" appearance="outline">
                                             <input matInput formControlName="port" required />
                                             <mat-error
@@ -60,7 +60,7 @@
                                         </mat-form-field>
                                     </div>
                                     <div class="col-4">
-                                        <label>Password</label>
+                                        <label>Password<span class="mandatory">&nbsp;*</span></label>
                                         <mat-form-field class="example-full-width" appearance="outline">
                                             <input matInput formControlName="password" type="password" required />
                                             <mat-error *ngIf="smtpForm.get('password')?.hasError('required')">

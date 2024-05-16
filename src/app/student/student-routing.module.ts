@@ -517,6 +517,10 @@ const routes: Routes = [
   },
   {
     path: 'settings/student-dashboard',
+    component: SettingsComponent,
+  },
+  {
+    path: 'settings/student-dashboard/:id',
     component: StudentDbComponent,
   },
 

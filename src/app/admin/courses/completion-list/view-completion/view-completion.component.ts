@@ -146,7 +146,48 @@ export class ViewCompletionComponent {
     });
  
   }
+  Status(element: Student, status: string) {
+    const item: StudentApproval = {
+      approvedBy: this.getCurrentUserId(),
+      approvedOn: moment().format('YYYY-MM-DD'),
+      classId: element.classId._id,
+      status,
+      studentId: element.studentId.id,
+      session: this.getSessions(element),
+    };
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to withdraw this course!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed){
+        this._classService
+        .saveApprovedClasses(element.id, item)
+        .subscribe((response: any) => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Course Withdraw successfully.',
+            icon: 'success',
+            // confirmButtonColor: '#526D82',
+          });
+          this.getCompletedClasses();
+        }, (error) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Failed to approve course. Please try again.',
+            icon: 'error',
+            // confirmButtonColor: '#526D82',
+          });
+        });
+      }
+    });
+  
+  }
 
+  
   getSessions(element: { classId: { sessions: any[] } }) {
     const sessions = element.classId?.sessions?.map((_: any, index: number) => {
       const session: Session = {} as Session;

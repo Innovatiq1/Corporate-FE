@@ -48,12 +48,23 @@ export class FormCustomizationComponent {
 
   openModalPopup(): void {
     Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to update this Label!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+    Swal.fire({
       title: 'Success',
       text: 'Label updated successfully.',
       icon: 'success'
     }).then(() => {
       this.router.navigate(['/student/settings/forms']); // Navigate to the forms page after closing the modal
     });
+   }
+   })
   }
 
   updateLabels(): void {

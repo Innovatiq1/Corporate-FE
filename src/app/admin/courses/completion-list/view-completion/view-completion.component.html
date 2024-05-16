@@ -1,16 +1,17 @@
 <section class="content">
-    <div class="content-block">
-        <div class="block-header" *ngFor="let breadscrum of breadscrums">
-            <!-- breadcrumb -->
-            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
-            </app-breadcrumb>
-        </div>
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <!-- breadcrumb -->
+      <app-breadcrumb
+        [title]="breadscrum.title"
+        [items]="breadscrum.items"
+        [active_item]="breadscrum.active"
+      >
+      </app-breadcrumb>
+    </div>
 
-
-
-        <div class="row clearfix p-2">
-
-<!-- 
+    <div class="row clearfix p-2">
+      <!-- 
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="card">
                     <div class="header ">
@@ -30,249 +31,298 @@
                                 <h6>{{row?.title }}</h6>
                                 <!-- <small class="text-muted">
                     <i class="fa fa-play-circle-o"></i> </small> -->
-                                <!-- <span class="feedLblStyle1 lblCommentStyle">Program {{i+1}}</span> --
+      <!-- <span class="feedLblStyle1 lblCommentStyle">Program {{i+1}}</span> --
 
                             </div>
                         </div>
                     </div>
                 </div>
             </div> -->
-            <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="info-box7  order-info-box7 bg-white">
-                    <div class="info-box7-block">
-                        <div class="card-container">
-                            <div class="card">
-                                <mat-tab-group>
-                                    <mat-tab>
-                                        <ng-template mat-tab-label>
-                                            <!-- <mat-icon class="example-tab-icon msr-2">chrome_reader_mode</mat-icon> -->
-                                            Details
-                                        </ng-template>
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div class="project_widget">
-                                                <div class="header">
-                                                    <h2>Student Details</h2>
-                                                    <div class="buttons" *ngIf="this.status">
-                                                        <button  (click)="changeStatus(response,'approved')"mat-icon-button matTooltip="approve" 
-                        class="tbl-action-btn">
-                       <img class="img-w" src="/assets/approve.svg" alt="approve">
-                      </button>
-                      <button mat-icon-button matTooltip="Withdraw" 
-                        class="tbl-action-btn">
-                       <img class="img-w" src="/assets/archive.svg" alt="approve">
-                      </button>
-                                                    </div>
-                                            </div>
-                                                <div class="body">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                       <h6>Student</h6>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <p>{{response.studentId?.name | titlecase}}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-5">
-                                                                        <h6>Gender</h6>
-                                                                    </div>
-                                                                    <div class="col-7">
-                                                                        <p>{{response?.studentId?.gender | titlecase}}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                       <h6>Mobile</h6>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <p>{{response?.studentId?.mobile}}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-5">
-                                                                        <h6>Email</h6>
-                                                                    </div>
-                                                                    <div class="col-7">
-                                                                        <p>{{response.studentId?.email}}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                       <h6>City</h6>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <p>{{response.studentId?.city_name | titlecase}}</p>
-                                                                    </div>
-                                                                </div>
-                            
-                            
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-5">
-                                                                        <h6>Country</h6>
-                                                                    </div>
-                                                                    <div class="col-7">
-                                                                        <p>{{response.studentId?.country_name | titlecase}}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                       <h6>Qualification</h6>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <p>{{response.studentId?.qualification }}</p>
-                                                                    </div>
-                                                                </div>
-                            
-                            
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-5">
-                                                                        <h6>Department</h6>
-                                                                    </div>
-                                                                    <div class="col-7">
-                                                                        <p>{{response.studentId?.department | titlecase}}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="header">
-                                                    <h2>Course Details</h2>
-                                                </div>
-                                                <div class="body">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                       <h6>Course</h6>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <p>{{response.title | titlecase}}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                        <h6>Course Code</h6>
-                                                                    </div>
-                                                                    <div class="col-5">
-                                                                        <p>{{response.courseId?.courseCode}}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                       <h6>Duration</h6>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <p>{{response.courseId?.course_duration_in_days }} Days</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                        <h6>Course Fee</h6>
-                                                                    </div>
-                                                                    <div class="col-5">
-                                                                        <p> $ {{response.courseId?.fee || 0}}.00</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                       <h6>Instructor Fee</h6>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <p>$ {{response.classId?.instructorCost || 0  }}.00</p>
-                                                                    </div>
-                                                                </div>
-                            
-                            
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                        <h6>Registered</h6>
-                                                                    </div>
-                                                                    <div class="col-5">
-                                                                        <p>{{response.registeredOn | date}}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6" *ngIf="!(paramStatus === 'approved') && !(paramStatus === 'pending')">
-                                                            <div class="px-2">
-                                                                <div class="row">
-                                                                    <div class="col-6">
-                                                                       <h6>Completed</h6>
-                                                                    </div>
-                                                                    <div class="col-5">
-                                                                        <p>{{response.updatedAt | date }}</p>
-                                                                    </div>
-                                                                </div>
-                            
-                            
-                                                            </div>
-                                                        </div>
-                                                        <!-- <div class="col-6">
+      <div class="col-xl-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="info-box7 order-info-box7 bg-white">
+          <div class="info-box7-block">
+            <div class="card-container">
+              <div class="card">
+                <mat-tab-group>
+                  <mat-tab>
+                    <ng-template mat-tab-label>
+                      <!-- <mat-icon class="example-tab-icon msr-2">chrome_reader_mode</mat-icon> -->
+                      Details
+                    </ng-template>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="project_widget">
+                        <div class="header">
+                          <h2>Student Details</h2>
+                          <div class="buttons" *ngIf="this.status">
+                            <button
+                              (click)="changeStatus(response, 'approved')"
+                              mat-icon-button
+                              matTooltip="approve"
+                              class="tbl-action-btn"
+                            >
+                              <img
+                                class="img-w"
+                                src="/assets/approve.svg"
+                                alt="approve"
+                              />
+                            </button>
+                            <button
+                              mat-icon-button
+                              matTooltip="Withdraw"
+                              class="tbl-action-btn" (click)="Status(response,'cancel')"
+                            >
+                              <img
+                                class="img-w"
+                                src="/assets/archive.svg"
+                                alt="approve"
+                              />
+                            </button>
+                          </div>
+                        </div>
+                        <div class="body">
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h6>Student</h6>
+                                  </div>
+                                  <div class="col-6">
+                                    <p>
+                                      {{ response.studentId?.name | titlecase }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-5">
+                                    <h6>Gender</h6>
+                                  </div>
+                                  <div class="col-7">
+                                    <p>
+                                      {{
+                                        response?.studentId?.gender | titlecase
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h6>Mobile</h6>
+                                  </div>
+                                  <div class="col-6">
+                                    <p>{{ response?.studentId?.mobile }}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-5">
+                                    <h6>Email</h6>
+                                  </div>
+                                  <div class="col-7">
+                                    <p>{{ response.studentId?.email }}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h6>City</h6>
+                                  </div>
+                                  <div class="col-6">
+                                    <p>
+                                      {{
+                                        response.studentId?.city_name
+                                          | titlecase
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-5">
+                                    <h6>Country</h6>
+                                  </div>
+                                  <div class="col-7">
+                                    <p>
+                                      {{
+                                        response.studentId?.country_name
+                                          | titlecase
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h6>Qualification</h6>
+                                  </div>
+                                  <div class="col-6">
+                                    <p>
+                                      {{ response.studentId?.qualification }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-5">
+                                    <h6>Department</h6>
+                                  </div>
+                                  <div class="col-7">
+                                    <p>
+                                      {{
+                                        response.studentId?.department
+                                          | titlecase
+                                      }}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="header">
+                          <h2>Course Details</h2>
+                        </div>
+                        <div class="body">
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h6>Course</h6>
+                                  </div>
+                                  <div class="col-6">
+                                    <p>{{ response.title | titlecase }}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h6>Course Code</h6>
+                                  </div>
+                                  <div class="col-5">
+                                    <p>{{ response.courseId?.courseCode }}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h6>Duration</h6>
+                                  </div>
+                                  <div class="col-6">
+                                    <p>
+                                      {{
+                                        response.courseId
+                                          ?.course_duration_in_days
+                                      }}
+                                      Days
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h6>Course Fee</h6>
+                                  </div>
+                                  <div class="col-5">
+                                    <p>
+                                      $ {{ response.courseId?.fee || 0 }}.00
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h6>Instructor Fee</h6>
+                                  </div>
+                                  <div class="col-6">
+                                    <p>
+                                      $
+                                      {{
+                                        response.classId?.instructorCost || 0
+                                      }}.00
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-6">
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h6>Registered</h6>
+                                  </div>
+                                  <div class="col-5">
+                                    <p>{{ response.registeredOn | date }}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div
+                              class="col-6"
+                              *ngIf="
+                                !(paramStatus === 'approved') &&
+                                !(paramStatus === 'pending')
+                              "
+                            >
+                              <div class="px-2">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h6>Completed</h6>
+                                  </div>
+                                  <div class="col-5">
+                                    <p>{{ response.updatedAt | date }}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- <div class="col-6">
                                                             <div class="px-2">
                                                                 <div class="row">
                                                                     <div class="col-5">
@@ -284,50 +334,74 @@
                                                                 </div>
                                                             </div>
                                                         </div> -->
-                                                    </div>
-                                                    <div class="row m-t-30 px-2">
-                                                        <h6>Description</h6>
-                                                        <p  [innerHTML]="response?.courseId?.course_detailed_description | bulletPoints"></p>
-                                                        <!-- <p>[innerHTML]="
+                          </div>
+                          <div class="row m-t-30 px-2">
+                            <h6>Description</h6>
+                            <p
+                              [innerHTML]="
+                                response?.courseId?.course_detailed_description
+                                  | bulletPoints
+                              "
+                            ></p>
+                            <!-- <p>[innerHTML]="
                                                             response.courseId?.course_detailed_description | bulletPoints
                                                          "</p> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </mat-tab>
-
-                                    <mat-tab *ngIf="showTab">
-                                        <ng-template mat-tab-label>
-                                            <!-- <mat-icon class="example-tab-icon msr-2">settings</mat-icon> -->
-                                            Score Card
-                                        </ng-template>
-                                    </mat-tab>
-                                </mat-tab-group>
-                            </div>
-
+                          </div>
                         </div>
-
-
-
-                        <h2 class="text-end"><span></span></h2>
-                        <p class="m-b-0"></p>
+                      </div>
                     </div>
-                    <div class="row mx-3">
-                    <div class="col-md-10 mb-3" *ngIf="paramStatus === 'pending'">
-                        <button mat-raised-button id="back" [routerLink]="['/admin/courses/student-courses/pending-courses']">Back</button>
-                      </div>
-                      <div class="col-md-10 mb-3" *ngIf="paramStatus === 'approved'">
-                        <button mat-raised-button id="back" [routerLink]="['/admin/courses/student-courses/approved-courses']">Back</button>
-                      </div>
-                      <div class="col-md-10 mb-3" *ngIf="paramStatus === 'completed'">
-                        <button mat-raised-button id="back" [routerLink]="['/admin/courses/student-courses/completed-courses']">Back</button>
-                      </div>
-                      </div>
-                </div>
+                  </mat-tab>
+
+                  <mat-tab *ngIf="showTab">
+                    <ng-template mat-tab-label>
+                      <!-- <mat-icon class="example-tab-icon msr-2">settings</mat-icon> -->
+                      Score Card
+                    </ng-template>
+                  </mat-tab>
+                </mat-tab-group>
+              </div>
             </div>
+
+            <h2 class="text-end"><span></span></h2>
+            <p class="m-b-0"></p>
+          </div>
+          <div class="row mx-3">
+            <div class="col-md-10 mb-3" *ngIf="paramStatus === 'pending'">
+              <button
+                mat-raised-button
+                id="back"
+                [routerLink]="[
+                  '/admin/courses/student-courses/pending-courses'
+                ]"
+              >
+                Back
+              </button>
+            </div>
+            <div class="col-md-10 mb-3" *ngIf="paramStatus === 'approved'">
+              <button
+                mat-raised-button
+                id="back"
+                [routerLink]="[
+                  '/admin/courses/student-courses/approved-courses'
+                ]"
+              >
+                Back
+              </button>
+            </div>
+            <div class="col-md-10 mb-3" *ngIf="paramStatus === 'completed'">
+              <button
+                mat-raised-button
+                id="back"
+                [routerLink]="[
+                  '/admin/courses/student-courses/completed-courses'
+                ]"
+              >
+                Back
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
