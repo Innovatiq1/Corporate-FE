@@ -1,10 +1,19 @@
 import { Component } from '@angular/core';
-import { FormGroup, UntypedFormBuilder, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormGroup,
+  UntypedFormBuilder,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SettingsService } from '@core/service/settings.service';
+import { UtilsService } from '@core/service/utils.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-student-db',
   templateUrl: './student-db.component.html',
-  styleUrls: ['./student-db.component.scss']
+  styleUrls: ['./student-db.component.scss'],
 })
 export class StudentDbComponent {
   breadscrums = [
@@ -14,39 +23,104 @@ export class StudentDbComponent {
       active: 'Student Dashboard',
     },
   ];
-  isStudent: boolean = true;
   dbForm!: FormGroup;
+  id: any;
+  dashboard: any;
+  dashboardId: any;
+  data: any;
+  subscribeParams: any;
 
-    
-  constructor(private fb: UntypedFormBuilder,) {
-   
+  constructor(
+    private fb: UntypedFormBuilder,
+    private settingsService: SettingsService,
+    private activatedRoute: ActivatedRoute,
+    public utils: UtilsService,
+    private router: Router, 
+  ) {
+    this.subscribeParams = this.activatedRoute.params.subscribe(
+      (params: any) => {
+        this.dashboardId = params.id;
+      }
+    );
+  }
+
+  ngOnInit(): void {
     this.dbForm = this.fb.group({
-      title1: ['Latest Enrolled Programs', [Validators.required]],
-      view1: ['List-view', [Validators.required]],
-      percent1: ['50', [Validators.required]],
-      title2: ['Latest Enrolled Courses', [Validators.required]],
-      view2: ['List-view', [Validators.required]],
-      percent2: ['50', [Validators.required]],
-      title3: ['Announcement Board', [Validators.required]],
-      view3: ['List-view', [Validators.required]],
-      percent3: ['30', [Validators.required]],
-      title4: ['Rescheduled List', [Validators.required]],
-      view4: ['List-view', [Validators.required]],
-      percent4: ['70', [Validators.required]],
-      title5: ['Upcoming Program Classes', [Validators.required]],
-      view5: ['List-view', [Validators.required]],
-      percent5: ['50', [Validators.required]],
-      title6: ['Upcoming Course classes', [Validators.required]],
-      view6: ['List-view', [Validators.required]],
-      percent6: ['50', [Validators.required]],
-     
+      studentDb: this.fb.array([]),
+    });
+
+    this.getData();
+  }
+  get studentDb(): FormArray {
+    return this.dbForm.get('studentDb') as FormArray;
+  }
+
+  createStudentDb(): FormGroup {
+    return this.fb.group({
+      title: ['', Validators.required],
+      viewType: [''],
+      percentage: [],
     });
   }
-  studentDb(){
-      this.isStudent = false;
+
+  update() {
+    console.log('update', this.dbForm);
+    if (this.dbForm.valid) {
+      console.log('updateddddd', this.dbForm.valid);
+      const payload = {
+        content: this.dbForm.value.studentDb.map((menulist: any) => ({
+          title: menulist?.title,
+          viewType: menulist?.viewType,
+          percentage: menulist?.percentage,
+        })),
+        id: this.dashboardId,
+      };
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want to update this Student dashboard!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.settingsService
+            .updateStudentDashboard(payload)
+            .subscribe((response: any) => {
+              Swal.fire({
+                title: 'Successful',
+                text: 'Student dashboard updated successfully',
+                icon: 'success',
+              });
+              this.router.navigate(['/student/settings/student-dashboard']);
+            });
+
+        }
+      });
+    }
   }
+
+  getData() {
+    this.settingsService
+      .getStudentDashboardById(this.dashboardId)
+      .subscribe((response: any) => {
+        const studentDbArray = this.dbForm.get('studentDb') as FormArray;
+        if (response.content) {
+          response.content.forEach((menuItem: any, i: number) => {
+            const newStudentDbGroup = this.createStudentDb();
+            newStudentDbGroup.patchValue({
+              title: menuItem?.title,
+              viewType: menuItem?.viewType,
+              percentage: menuItem?.percentage,
+            });
+            studentDbArray.push(newStudentDbGroup);
+          });
+        }
+      });
+  }
+
   cancel() {
-  
     window.history.back();
   }
 }

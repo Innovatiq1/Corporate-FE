@@ -203,7 +203,15 @@ export class GenereateReportComponent {
           report:data?.data?.document,
           reportName:data?.data?.doc_filename,
         }
-
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'You want to Create this Report!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed) {
         this.courseService.saveReport(payload).subscribe((data) => {
           Swal.fire({
             title: 'Success',
@@ -213,7 +221,9 @@ export class GenereateReportComponent {
           this.router.navigate(['/admin/reports/report'])
 
         })
+      }
       })
+    });
 
   }
   toggleAllSelection() {
