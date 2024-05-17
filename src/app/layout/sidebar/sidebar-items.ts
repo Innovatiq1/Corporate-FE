@@ -1843,7 +1843,7 @@ export const SettingsMenu: MenuItem[] = [
       },
       {
         iconsrc:'',
-        path: 'student/settings/dashboards',
+        path: 'student/settings/student-dashboard',
         title: 'Dashboards',
         iconType: '',
         icon: '',

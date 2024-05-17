@@ -396,7 +396,7 @@ export class SettingsComponent {
         {
           title: 'Sidemenu',
           items: ['Customize'],
-          active: 'Student Dashboard Customization',
+          active: 'Dashboard Customization',
         },
       ];
       this.isAdmin = true;
