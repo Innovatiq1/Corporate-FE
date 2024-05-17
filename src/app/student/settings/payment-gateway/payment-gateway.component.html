@@ -43,7 +43,7 @@
                                                 </div>
                                                 <div class="row clearfix mt-3">
                                                     <div class="col-4">
-                                                        <label>Test Webhook Secret Key<span class="mandatory">&nbsp;*</span></label>
+                                                        <label>Webhook Secret Key<span class="mandatory">&nbsp;*</span></label>
                                                         <mat-form-field class="example-full-width" appearance="outline">
                                                             <input matInput formControlName="webhook" type="password" required />
                                                             <mat-error
@@ -53,12 +53,12 @@
                                                         </mat-form-field>
                                                     </div>
                                                     <div class="col-4">
-                                                        <label>Test Secret Key<span class="mandatory">&nbsp;*</span></label>
+                                                        <label>Secret Key<span class="mandatory">&nbsp;*</span></label>
                                                         <mat-form-field class="example-full-width" appearance="outline">
                                                             <input matInput formControlName="secret" type="password" required />
                                                             <mat-error
                                                             *ngIf="paymentForm.get('secret')?.invalid && paymentForm.get('secret')?.touched">
-                                                            {{utils.getErrorMessage1(paymentForm.get("secret"), "test-secret") }}
+                                                            {{utils.getErrorMessage1(paymentForm.get("secret"), "secret") }}
                                                         </mat-error>
                                                         </mat-form-field>
                                                     </div>
@@ -128,7 +128,7 @@
                                                     <div class="col-4">
                                                         <label>Public Key<span class="mandatory">&nbsp;*</span></label>
                                                         <mat-form-field class="example-full-width" appearance="outline">
-                                                            <input matInput formControlName="public" type="password" required />
+                                                            <input matInput formControlName="public" required />
                                                             <mat-error
                                                             *ngIf="razorPaymentForm.get('public')?.invalid && razorPaymentForm.get('public')?.touched">
                                                             {{utils.getErrorMessage1(razorPaymentForm.get("public"), "public") }}
