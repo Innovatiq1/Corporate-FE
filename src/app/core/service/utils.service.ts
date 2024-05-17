@@ -444,7 +444,22 @@ export class UtilsService {
     ],
     'percent':[
       {type: 'required', message:'Select Percentage'}
-    ]
+    ],
+    'public':[
+      {type:'required', message: 'Enter Public Key'}
+    ],
+    'webhook':[
+      {type:'required', message: 'Enter Test Webhook Secret Key'}
+    ],
+    'secret':[
+      {type:'required', message: 'Enter Secret Key'}
+    ],
+    'test-secret':[
+      {type:'required', message: 'Enter Test Secret Key'}
+    ],
+    'company':[
+      {type:'required', message: 'Enter Company Name'}
+    ],
   };
 
 
