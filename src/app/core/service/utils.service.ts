@@ -183,6 +183,13 @@ export class UtilsService {
       { type: 'pattern', message: 'Enter Digits' },
       
     ],
+    programfee: [
+      { type: 'required', message: 'Enter Program Fee' },
+      { type: 'min', message: 'Enter Fees between 0-999999' },
+      { type: 'max', message: 'Enter Fees between 0-999999' },
+      { type: 'pattern', message: 'Enter Digits' },
+      
+    ],
     city: [
       { type: 'required', message: 'Enter City' },
       
