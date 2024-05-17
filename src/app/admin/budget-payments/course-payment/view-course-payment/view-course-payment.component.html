@@ -44,6 +44,10 @@
                                 <div class="p-4">
                                     <ul class="list-group list-group-unbordered">
                                         <li class="list-group-item">
+                                            <b>Payment Mode</b>
+                                            <div class="profile-desc-item float-end">{{paymentMode}}</div>
+                                        </li>
+                                        <li class="list-group-item">
                                             <b>Payment Date</b>
                                             <div class="profile-desc-item float-end">{{createdAt |date}}</div>
                                         </li>
@@ -63,7 +67,7 @@
                                             <b>Payment Intent</b>
                                             <div class="profile-desc-item float-end">{{payment_intent}}</div>
                                         </li>
-                                        <li class="list-group-item">
+                                        <li class="list-group-item" *ngIf="isStripe">
                                             <div class="row">
                                                 <div class="col-6">
                                                     <b>Transaction ID</b>
@@ -72,6 +76,26 @@
                                                     <div class="profile-desc-item">{{transactionId}}</div>   
                                                 </div>
                                             </div>
+                                        </li>
+                                        <li class="list-group-item" *ngIf="isRazorpay">
+                                            <!-- <div class="row"> -->
+                                                <!-- <div class="col-6"> -->
+                                                    <b>Order ID</b>
+                                                <!-- </div> -->
+                                                <!-- <div class="col-6" style="width: 50%;"> -->
+                                                    <div class="profile-desc-item float-end">{{orderId}}</div>   
+                                                <!-- </div> -->
+                                            <!-- </div> -->
+                                        </li>
+                                        <li class="list-group-item" *ngIf="isRazorpay">
+                                            <!-- <div class="row">
+                                                <div class="col-6"> -->
+                                                    <b>Payment ID</b>
+                                                <!-- </div>
+                                                <div class="col-6" style="width: 50%;"> -->
+                                                    <div class="profile-desc-item float-end">{{paymentId}}</div>   
+                                                <!-- </div> -->
+                                            <!-- </div> -->
                                         </li>
                                     </ul>
                                 </div>
