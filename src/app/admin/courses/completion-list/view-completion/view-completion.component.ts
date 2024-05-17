@@ -174,6 +174,7 @@ export class ViewCompletionComponent {
             // confirmButtonColor: '#526D82',
           });
           this.getCompletedClasses();
+          this._router.navigate(['/admin/courses/student-courses/pending-courses'])
         }, (error) => {
           Swal.fire({
             title: 'Error',

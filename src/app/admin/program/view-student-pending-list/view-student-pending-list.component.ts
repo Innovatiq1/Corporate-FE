@@ -131,7 +131,7 @@ Status(element: Student, status:string) {
 
   Swal.fire({
     title: 'Are you sure?',
-    text: 'Do you want to approve this course!',
+    text: 'Do you want to withdraw this program!',
     icon: 'warning',
     confirmButtonText: 'Yes',
     showCancelButton: true,
@@ -141,15 +141,16 @@ Status(element: Student, status:string) {
       this.classService.saveApprovedProgramClasses(element.id, item).subscribe((response:any) => {
         Swal.fire({
           title: 'Success',
-          text: 'Course approved successfully.',
+          text: 'Program withdrawn successfully.',
           icon: 'success',
           // confirmButtonColor: '#526D82',
         });
         this.getCompletedClasses();
+        this._router.navigate(['/admin/program/student-program/pending-program'])
       }, (error) => {
         Swal.fire({
           title: 'Error',
-          text: 'Failed to approve course. Please try again.',
+          text: 'Failed to withdraw prograam. Please try again.',
           icon: 'error',
           // confirmButtonColor: '#526D82',
         });
