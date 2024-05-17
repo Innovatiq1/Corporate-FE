@@ -19,16 +19,17 @@ export class StudentDbComponent {
   breadscrums = [
     {
       title: 'Blank',
-      items: ['Dashboards'],
-      active: 'Student Dashboard',
+      items: ['Customize'],
+      active: 'Dashboards',
     },
   ];
   dbForm!: FormGroup;
   id: any;
-  dashboard: any;
+  // dashboard: any;
   dashboardId: any;
   data: any;
   subscribeParams: any;
+  dashboard: string = '';
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -42,18 +43,19 @@ export class StudentDbComponent {
         this.dashboardId = params.id;
       }
     );
+    
   }
 
   ngOnInit(): void {
     this.dbForm = this.fb.group({
       studentDb: this.fb.array([]),
     });
-
     this.getData();
   }
   get studentDb(): FormArray {
     return this.dbForm.get('studentDb') as FormArray;
   }
+
 
   createStudentDb(): FormGroup {
     return this.fb.group({
@@ -64,9 +66,7 @@ export class StudentDbComponent {
   }
 
   update() {
-    console.log('update', this.dbForm);
     if (this.dbForm.valid) {
-      console.log('updateddddd', this.dbForm.valid);
       const payload = {
         content: this.dbForm.value.studentDb.map((menulist: any) => ({
           title: menulist?.title,
@@ -78,7 +78,7 @@ export class StudentDbComponent {
 
       Swal.fire({
         title: 'Are you sure?',
-        text: 'You want to update this Student dashboard!',
+        text: 'You want to update this Dashboard!',
         icon: 'warning',
         confirmButtonText: 'Yes',
         showCancelButton: true,
@@ -90,7 +90,7 @@ export class StudentDbComponent {
             .subscribe((response: any) => {
               Swal.fire({
                 title: 'Successful',
-                text: 'Student dashboard updated successfully',
+                text: 'Dashboard updated successfully',
                 icon: 'success',
               });
               this.router.navigate(['/student/settings/student-dashboard']);

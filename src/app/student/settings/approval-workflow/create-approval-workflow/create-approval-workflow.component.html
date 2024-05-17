@@ -41,57 +41,16 @@
                                                 </button>
                                             </div>
                                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngFor="let side of approver.controls; let i = index" [formGroupName]="i">
-                                                <!-- <div [formGroupName]="i"> -->
-                                                    <div class="d-flex justify-content-between align-items-start">
-                                                        
-                                                        <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'" (click)="deleteApprover(i)" style="display: inline; margin-top: 10px;float: right;"></app-feather-icons>
-                                                    </div>
+                                                        <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'" (click)="deleteApprover(i)" class="delete-icon"></app-feather-icons>
                                                     <mat-form-field class="example-full-width" appearance="outline">
                                                         <input matInput type="text" formControlName="approvers" class="form-control" required>
                                                     </mat-form-field>
-                                                <!-- </div> -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="body">
-                            <input type="hidden" formControlName="main_category_id" [value]="mainCategoryId">
-                            <div class="row cat" formArrayName="subcategories">
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12"
-                                    *ngFor="let subcategory of subcategories.controls; let i = index"
-                                    [formGroupName]="i">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <label for="subcategory_name_{{i}}">Sub Category <span class="mandatory">&nbsp;*</span></label>
-                                        <app-feather-icons (click)="deleteSubCategoryField(i)"
-                                        [icon]="'trash-2'"
-                                        [class]="'tbl-fav-delete'"
-                                      ></app-feather-icons>
-                                </div>
-                                    <mat-form-field class="example-full-width mt-2" appearance="outline">
-                                        <input matInput type="text" id="subcategory_name_{{i}}"
-                                            formControlName="category_name">
-                                            <mat-error *ngIf="subCategoryForm.get('category_name')?.hasError('required')">
-                                                Enter Sub Category
-                                              </mat-error>
-                                              <mat-error  *ngIf="subCategoryForm.get('category_name')?.hasError('pattern') && subCategoryForm.get('category_name')?.touched">
-                                                Enter a valid Sub Category
-                                               </mat-error>
-                                        
-                                    </mat-form-field>
-                                  
-                                </div>
-                                <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                                    <button mat-button type="submit"  (click)="createSubCategory()"class="btn crt-color">Create Sub Categories</button>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-                                <button class="btn sub"  (click)="addSubCategoryField()" >
-                                    <img src="/assets/Close.svg" alt="plus" style="display: inline;margin-top: -3px;">
-                                    Add Sub Categories</button>
-                                    </div> --
-                            </div>
-                        </div> -->
                     </form>
                     <div class="row body">
                         <div class="col-md-10">
@@ -100,10 +59,10 @@
                             </button>
                         </div>
                         <div class="col-md-2">
-                            <button class="btn-space" mat-raised-button (click)="submit()" type="submit" id="submit">
+                            <button class="btn-space" *ngIf="!editUrl" mat-raised-button (click)="submit()" type="submit" id="submit">
                                 Submit
                             </button>
-                            <!-- <button *ngIf="editUrl" class="btn-space" mat-raised-button id="submit">Update</button> -->
+                            <button *ngIf="editUrl" class="btn-space" mat-raised-button id="submit" (click)="update()">Update</button>
                         </div>
                       </div>
                 </div>

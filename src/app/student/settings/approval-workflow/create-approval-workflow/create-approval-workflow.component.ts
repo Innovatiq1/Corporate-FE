@@ -17,7 +17,8 @@ export class CreateApprovalWorkflowComponent implements OnInit{
   approvalForm!: FormGroup;
   editUrl: any;
   subscribeParams: any;
-  categoryId: any;   
+  categoryId: any; 
+  approverData: any;  
 
   breadscrums = [
     {
@@ -36,7 +37,7 @@ export class CreateApprovalWorkflowComponent implements OnInit{
   ){
     let urlPath = this.router.url.split('/')
 
-    this.editUrl = urlPath.includes('edit-categories');
+    this.editUrl = urlPath.includes('edit-approval-flow');
 
 
 
@@ -44,8 +45,8 @@ export class CreateApprovalWorkflowComponent implements OnInit{
       this.breadscrums = [
         {
           title:'Edit Categories',
-          items: ['Settings'],
-          active: 'Edit Categories',
+          items: ['Approval flow'],
+          active: 'Edit Approval flow',
         },
       ];
     }
@@ -64,6 +65,9 @@ export class CreateApprovalWorkflowComponent implements OnInit{
       level: ['', Validators.required], 
     });
     this.addApprover();
+    if(this.editUrl){
+      this.getData()
+    }
   }
   get approver(): FormArray {
     return this.approvalForm.get('approver') as FormArray;
@@ -105,7 +109,7 @@ export class CreateApprovalWorkflowComponent implements OnInit{
           this.settingsService.saveApprovalFlow(payload).subscribe((response: any) => {
               Swal.fire({
                 title: 'Successful',
-                text: 'Student dashboard created successfully',
+                text: 'Approval flow created successfully',
                 icon: 'success',
               });
               this.router.navigate(['/student/settings/approval-workflow']);
@@ -131,7 +135,7 @@ export class CreateApprovalWorkflowComponent implements OnInit{
 
       Swal.fire({
         title: 'Are you sure?',
-        text: 'You want to create this Approval flow!',
+        text: 'You want to update this Approval flow!',
         icon: 'warning',
         confirmButtonText: 'Yes',
         showCancelButton: true,
@@ -141,81 +145,36 @@ export class CreateApprovalWorkflowComponent implements OnInit{
           this.settingsService.updateApprovalFlow(payload).subscribe((response: any) => {
               Swal.fire({
                 title: 'Successful',
-                text: 'Student dashboard created successfully',
+                text: 'Approval flow updated successfully',
                 icon: 'success',
               });
-              this.router.navigate(['/student/settings/approval-workflow']);
+              window.history.back();
             });
 
         }
       });
     }
   }
-  // createSubCategory(): void {
-  //   this.isSubmitted=true;
-   
-  //   this.subCategoryData = this.subcategories.value;
-  //   this.subCategoryData.forEach(subcategory => {
-  //     subcategory.main_category_id = this.mainCategoryId;
-  //   });
-  //   console.log("create",this.subCategoryData)
-  //   if(this.subCategoryData[0].category_name !==''){
-  //     Swal.fire({
-  //       title: 'Are you sure?',
-  //       text: 'Do you want to create sub category!',
-  //       icon: 'warning',
-  //       confirmButtonText: 'Yes',
-  //       showCancelButton: true,
-  //       cancelButtonColor: '#d33',
-  //     }).then((result) => {
-  //       if (result.isConfirmed){
-  //         this.courseService.createSubCategory(this.subCategoryData).subscribe(
-  //           (response) => {
-  //             Swal.fire('Success', 'Subcategories created successfully!', 'success');
-  //             this.mainCategoryForm.reset();
-  //             this.subCategoryForm.reset();
-  //             this.initSubCategoryForm();
-  //             this.addSubCategoryField();
-  //             this.router.navigate(['/student/settings/categories'])
-  //           },
-  //           (error) => {
-  //             Swal.fire('Error', 'Failed to create subcategories!', 'error');
-  //           }
-  //         );
-  //       }
-  //     });
-  //   }
-  
-    
-   
-  //   this.isSubmitted=false
-  // }
+  getData() {
+    this.settingsService.getApprovalFlowById(this.categoryId).subscribe((response: any) => {
+        this.approverData = response;
+        this.approvalForm.patchValue({
+            title: this.approverData?.title,
+            level: this.approverData?.level,
+        });
 
+        const approverControls = this.approverData?.Approver?.map((response: {
+             approvers: string;
+        }) => {
+            return this.formBuilder.group({
+                approvers: [response?.approvers],
+            });
+        });
+        if (approverControls) {
+            this.approvalForm.setControl('approver', this.formBuilder.array(approverControls));
+        }
 
-  // getData(){
-  //   this.courseService.getcategoryById(this.categoryId).subscribe((response: any) => {
-  //     if(response){
-  //       this.mainCategoryId=response?._id
-  //       this.mainCategoryForm.patchValue({
-  //         category_name: response?.category_name,
-  //             });
-        
-  //       const itemControls = response?.subCategories.map((item: {
-  //         _id: any; main_category_id: any; category_name: any; 
-  // } ) => {
-    
-  //         this.subcategoryId =item._id
-  //         return this.formBuilder.group({
-  //          sub_id:[item._id],
-  //           main_category_id: [item.main_category_id],
-  //           category_name: [item.category_name],
-  //         });
-  //       });
-  //       this.subCategoryForm = this.formBuilder.group({
-  //         subcategories: this.formBuilder.array(itemControls),
-  //       });
-  //     }
-  //   });
-  
-  // }
+    });
+}
+
 }
