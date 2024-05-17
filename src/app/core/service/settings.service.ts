@@ -119,4 +119,35 @@ export class SettingsService {
       .delete<CourseModel>(apiUrl)
       .pipe(map((response) => response));
   }
+  savePayment(data: any) {
+    const apiUrl = `${this.prefix}admin/payment`;
+    return this._Http
+      .post<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {response}));
+  }
+
+  getPayment(filter?: Partial<CoursePaginationModel>): Observable<ApiResponse> {
+    const apiUrl = this.defaultUrl + 'admin/payment';
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+  }
+
+  getPaymentById(id: string) {
+    const apiUrl = `${this.prefix}admin/payment/${id}`;
+    return this._Http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
+  }
+  
+  updatePayment(id: string, data: any) {
+    const apiUrl = `${this.prefix}admin/payment/${id}`;
+    return this._Http
+      .put<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {response}));
+  }
+  deletePayment(id: string) {
+    const apiUrl = `${this.prefix}admin/payment/${id}`;
+    return this._Http
+      .delete<CourseModel>(apiUrl)
+      .pipe(map((response) => response));
+  }
 }
