@@ -118,12 +118,15 @@ export type avgLecChartOptions = {
 };
 
 export type pieChartOptions = {
-  series: ApexNonAxisChartSeries;
+  series: ApexAxisChartSeries | ApexNonAxisChartSeries;
   chart: ApexChart;
-  legend: ApexLegend;
   dataLabels: ApexDataLabels;
+  plotOptions?: ApexPlotOptions;
   responsive: ApexResponsive[];
-  labels: string[];
+  labels?: string[];
+  legend: ApexLegend;
+  fill: ApexFill;
+  colors: string[];
 };
 export type pieChartOptions1 = {
   series: ApexNonAxisChartSeries;
@@ -160,9 +163,11 @@ export type lineChartOptions = {
 export class MainComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
   public areaChartOptions!: Partial<chartOptions>;
-  public barChartOptions!: Partial<chartOptions>;
+  public performanceBarChartOptions!: Partial<chartOptions>;
   public pieChart1Options!: Partial<pieChart1Options>;
   public lineChartOptions!: Partial<lineChartOptions>;
+  public surveyBarChartOptions!: Partial<chartOptions>;
+  public surveyPieChartOptions!: Partial<pieChart1Options>;
   public performanceRateChartOptions!: Partial<chartOptions>;
   public polarChartOptions!: Partial<chartOptions>;
   registeredCourses: any;
@@ -268,6 +273,9 @@ export class MainComponent implements OnInit {
   isPie: boolean = false;
   isLine: boolean = false;
   isList: boolean = false;
+  isArea: boolean = false;
+  isSurveyPie: boolean = false;
+  isSurveyBar: boolean = false;
 
   constructor(
     private courseService: CourseService,
@@ -377,7 +385,10 @@ export class MainComponent implements OnInit {
         const payload2 = { studentId: studentId, status: 'withdraw' ,isAll:true};
         this.classService.getStudentRegisteredProgramClasses(payload2).subscribe(response =>{
           this.withdrawPrograms = response?.data?.length
-          this.chart11();
+          // this?.surveyLineChart();
+          // this?.surveyBarChart();
+          // this?.surveyPieChart();
+          this.setSurveyChart();
 
         })
         this.doughnutChartData= {
@@ -771,7 +782,7 @@ export class MainComponent implements OnInit {
   }
 
 
-  private chart11() {
+  private surveyLineChart() {
     this.areaChartOptions = {
       series: [
         {
@@ -827,9 +838,90 @@ export class MainComponent implements OnInit {
       },
     };
   }
+  private surveyBarChart() {
+    this.surveyBarChartOptions = {
+      series: [
+        {
+          name: 'Registered',
+          data: [this.registeredCourses, this.registeredPrograms],
+        },
+        {
+          name: 'Approved',
+          data: [this.approvedCourses,this.approvedPrograms],
+        },
+        {
+          name: 'Completed',
+          data: [this.completedCourses,this.completedPrograms],
+        },
+        {
+          name: 'Cancelled',
+          data: [this.withdrawCourses,this.withdrawPrograms],
+        },
+      ],
+      chart: {
+        height: 350,
+        type: 'bar',
+        toolbar: {
+          show: false,
+        },
+        foreColor: '#9aa0ac',
+      },
+      colors: ['#FFA500', '#3d3','#d33'],
+      dataLabels: {
+        enabled: false,
+      },
+      xaxis: {
+        categories: [
+          'Courses',
+          'Programs',
+        ],
+      },
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      legend: {
+        show: true,
+        position: 'top',
+        horizontalAlign: 'center',
+        offsetX: 0,
+        offsetY: 0,
+      },
+    };
+  }
+  private surveyPieChart() {
+    this.surveyPieChartOptions = {
+      series: [this.registeredCourses, this.registeredPrograms, this.approvedCourses, this.approvedPrograms, this.completedCourses, this.completedPrograms],
+      chart: {
+        height: 350,
+        type: 'pie',
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+      labels: ['Registered Courses', 'Registered Programs', 'Approved Courses', 'Approved Programs', 'Completed Courses', 'Completed Programs'],
+      colors: ['#FFA500', '#d33', '#3d3', '#9aa0ac', '#5ac25e', '#4772e9', '#feb019', '#eb7d4b'],
+      legend: {
+        show: true,
+        position: 'bottom',
+        horizontalAlign: 'center',
+        offsetY: 10,
+      },
+    };
+  }
+  
+ 
 
   private performanceBarChart() {
-    this.barChartOptions = {
+    this.performanceBarChartOptions = {
       series: [
         {
           name: 'Physics',
@@ -1057,7 +1149,7 @@ export class MainComponent implements OnInit {
   }
 
   private chart2() {
-    this.barChartOptions = {
+    this.performanceBarChartOptions = {
       series: [
         {
           name: 'percent',
@@ -1728,9 +1820,22 @@ export class MainComponent implements OnInit {
     this.settingsService.getStudentDashboard().subscribe(response => {
       this.dashboard = response.data.docs[2];
       this.setPerformanceChart();
+      this.setSurveyChart();
     })
   }
-
+  setSurveyChart() {
+    if (this.dashboard.content[4].viewType == 'Bar Chart') {
+      this.isSurveyBar = true;
+      this.surveyBarChart();
+    } else if (this.dashboard.content[4].viewType == 'Pie Chart') {
+      this.isSurveyPie = true;
+      this.surveyPieChart();
+    }
+    else if (this.dashboard.content[4].viewType == 'Line Chart') {
+      this.isArea = true;
+      this.surveyLineChart();
+    }
+  }
   setPerformanceChart() {
     if (this.dashboard.content[5].viewType == 'Bar Chart') {
       this.isBar = true;
