@@ -86,6 +86,7 @@ export type pieChart1Options = {
   legend: ApexLegend;
   fill: ApexFill;
   colors: string[];
+  tooltip: ApexTooltip;
 };
 export type areaChartOptions = {
   series: ApexAxisChartSeries;
@@ -169,6 +170,8 @@ export class MainComponent implements OnInit {
   public surveyBarChartOptions!: Partial<chartOptions>;
   public surveyPieChartOptions!: Partial<pieChart1Options>;
   public performanceRateChartOptions!: Partial<chartOptions>;
+  public attendanceBarChartOptions!: Partial<chartOptions>;
+  public attendancePieChartOptions!: Partial<pieChart1Options>;
   public polarChartOptions!: Partial<chartOptions>;
   registeredCourses: any;
   public avgLecChartOptions!: Partial<avgLecChartOptions>;
@@ -276,6 +279,9 @@ export class MainComponent implements OnInit {
   isArea: boolean = false;
   isSurveyPie: boolean = false;
   isSurveyBar: boolean = false;
+  isAttendanceLine: boolean = false;
+  isAttendancePie: boolean = false;
+  isAttendanceBar: boolean = false;
 
   constructor(
     private courseService: CourseService,
@@ -297,7 +303,7 @@ export class MainComponent implements OnInit {
     this.getInstructorsList();
     this.getStudentsList();
     this.chart2();
-    this.chart3();
+    this.attendanceLineChart();
     this.dbForm = this.fb.group({
       title1: ['Latest Enrolled Programs', [Validators.required]],
       view1: ['List-view', [Validators.required]],
@@ -1259,7 +1265,7 @@ export class MainComponent implements OnInit {
       },
     };
   }
-  private chart3() {
+  private attendanceLineChart() {
     this.performanceRateChartOptions = {
       series: [
         {
@@ -1320,6 +1326,99 @@ export class MainComponent implements OnInit {
       },
     };
   }
+  private attendancePieChart() {
+    this.attendancePieChartOptions = {
+        series: [113, 120, 130, 120, 125, 119],
+        chart: {
+            width: 380,
+            type: 'pie',
+        },
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        colors: ['#51E298', '#FF5733', '#FFC300', '#C70039', '#900C3F', '#581845'],
+        dataLabels: {
+            enabled: true,
+        },
+        legend: {
+            position: 'bottom',
+        },
+        tooltip: {
+            theme: 'dark',
+            marker: {
+                show: true,
+            },
+            x: {
+                show: true,
+            },
+        },
+        // title: {
+        //     text: 'Students by Day',
+        // },
+    };
+}
+private attendanceBarChart() {
+  this.attendanceBarChartOptions = {
+      series: [
+          {
+              name: 'Students',
+              data: [113, 120, 130, 120, 125, 119],
+          },
+      ],
+      chart: {
+          height: 350,
+          type: 'bar',
+          dropShadow: {
+              enabled: true,
+              color: '#000',
+              top: 18,
+              left: 7,
+              blur: 10,
+              opacity: 0.2,
+          },
+          foreColor: '#9aa0ac',
+          toolbar: {
+              show: false,
+          },
+      },
+      colors: ['#51E298'],
+      dataLabels: {
+          enabled: true,
+      },
+      stroke: {
+          curve: 'smooth',
+      },
+      markers: {
+          size: 1,
+      },
+      grid: {
+          show: true,
+          borderColor: '#9aa0ac',
+          strokeDashArray: 1,
+      },
+      xaxis: {
+          categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+          title: {
+              text: 'Weekday',
+          },
+      },
+      yaxis: {
+          title: {
+              text: 'Students',
+          },
+      },
+      tooltip: {
+          theme: 'dark',
+          marker: {
+              show: true,
+          },
+          x: {
+              show: true,
+          },
+      },
+      title: {
+          text: 'Students by Day',
+      },
+  };
+}
   private chart4() {
     this.polarChartOptions = {
       series2: [this.instructorCount, this.studentCount, this.adminCount],
@@ -1821,6 +1920,7 @@ export class MainComponent implements OnInit {
       this.dashboard = response.data.docs[2];
       this.setPerformanceChart();
       this.setSurveyChart();
+      this.setAttendanceChart();
     })
   }
   setSurveyChart() {
@@ -1847,6 +1947,19 @@ export class MainComponent implements OnInit {
     else if (this.dashboard.content[5].viewType == 'Line Chart') {
       this.isLine = true;
       this.performanceLineChart();
+    }
+  }
+  setAttendanceChart() {
+    if (this.dashboard.content[6].viewType == 'Bar Chart') {
+      this.isAttendanceBar = true;
+      this.attendanceBarChart();
+    } else if (this.dashboard.content[6].viewType == 'Pie Chart') {
+      this.isAttendancePie = true;
+      this.attendancePieChart();
+    }
+    else if (this.dashboard.content[6].viewType == 'Line Chart') {
+      this.isAttendanceLine = true;
+      this.attendanceLineChart();
     }
   }
 }

@@ -280,7 +280,7 @@
               <div class="float-start ms-3 me-3">
                 <h5>129 Students <span class="text-muted font-12">(Average)</span></h5>
               </div>
-              <div class="body">
+              <div class="body" *ngIf="isAttendanceLine">
                 <apx-chart [series]="performanceRateChartOptions.series!" [chart]="performanceRateChartOptions.chart!"
                   [xaxis]="performanceRateChartOptions.xaxis!" [stroke]="performanceRateChartOptions.stroke!"
                   [colors]="performanceRateChartOptions.colors!" [dataLabels]="performanceRateChartOptions.dataLabels!"
@@ -289,6 +289,22 @@
                   [tooltip]="performanceRateChartOptions.tooltip!" [title]="performanceRateChartOptions.title!">
                 </apx-chart>
               </div>
+              <div class="body" *ngIf="isAttendancePie">
+                <apx-chart [series]="attendancePieChartOptions.series!" [chart]="attendancePieChartOptions.chart!"
+                    [labels]="attendancePieChartOptions.labels!" [colors]="attendancePieChartOptions.colors!"
+                    [dataLabels]="attendancePieChartOptions.dataLabels!" [legend]="attendancePieChartOptions.legend!"
+                    [tooltip]="attendancePieChartOptions.tooltip!">
+                </apx-chart>
+            </div>
+            <div class="body" *ngIf="isAttendanceBar">
+              <apx-chart [series]="attendanceBarChartOptions.series!" [chart]="attendanceBarChartOptions.chart!"
+                  [xaxis]="attendanceBarChartOptions.xaxis!" [stroke]="attendanceBarChartOptions.stroke!"
+                  [colors]="attendanceBarChartOptions.colors!" [dataLabels]="attendanceBarChartOptions.dataLabels!"
+                  [legend]="attendanceBarChartOptions.legend!" [markers]="attendanceBarChartOptions.markers!"
+                  [grid]="attendanceBarChartOptions.grid!" [yaxis]="attendanceBarChartOptions.yaxis!"
+                  [tooltip]="attendanceBarChartOptions.tooltip!" [title]="attendanceBarChartOptions.title!">
+              </apx-chart>
+          </div>
             </div>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
