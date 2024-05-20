@@ -851,83 +851,139 @@ export class MainComponent implements OnInit {
     };
   }
   private surveyBarChart() {
-    this.surveyBarChartOptions = {
-      series: [
-        {
-          name: 'Registered',
-          data: [this.registeredCourses, this.registeredPrograms],
-        },
-        {
-          name: 'Approved',
-          data: [this.approvedCourses,this.approvedPrograms],
-        },
-        {
-          name: 'Completed',
-          data: [this.completedCourses,this.completedPrograms],
-        },
-        {
-          name: 'Cancelled',
-          data: [this.withdrawCourses,this.withdrawPrograms],
-        },
-      ],
-      chart: {
-        height: 350,
-        type: 'bar',
-        toolbar: {
-          show: false,
-        },
-        foreColor: '#9aa0ac',
-      },
-      colors: ['#FFA500', '#3d3','#d33'],
-      dataLabels: {
-        enabled: false,
-      },
-      xaxis: {
-        categories: [
-          'Courses',
-          'Programs',
+      this.surveyBarChartOptions = {
+        series: [
+          {
+            name: 'new students',
+            data: [
+              this.twoMonthsAgoStudents.length,
+              this.fourMonthsAgoStudents.length,
+              this.sixMonthsAgoStudents.length,
+              this.eightMonthsAgoStudents.length,
+              this.tenMonthsAgoStudents.length,
+              this.twelveMonthsAgoStudents.length,
+            ],
+          },
+          {
+            name: 'old students',
+            data: [
+              this.tillPreviousTwoMonthsStudents.length,
+              this.tillPreviousFourMonthsStudents.length,
+              this.tillPreviousSixMonthsStudents.length,
+              this.tillPreviousEightMonthsStudents.length,
+              this.tillPreviousTenMonthsStudents.length,
+              this.tillPreviousTwelveMonthsStudents.length,
+            ],
+          },
         ],
-      },
-      grid: {
-        show: true,
-        borderColor: '#9aa0ac',
-        strokeDashArray: 1,
-      },
-      legend: {
-        show: true,
-        position: 'top',
-        horizontalAlign: 'center',
-        offsetX: 0,
-        offsetY: 0,
-      },
-    };
-  }
-  private surveyPieChart() {
-    this.surveyPieChartOptions = {
-      series: [this.registeredCourses, this.registeredPrograms, this.approvedCourses, this.approvedPrograms, this.completedCourses, this.completedPrograms],
-      chart: {
-        height: 350,
-        type: 'pie',
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            legend: {
-              position: 'bottom',
-            },
+        chart: {
+          height: 350,
+          type: 'bar',
+          toolbar: {
+            show: false,
+          },
+          foreColor: '#9aa0ac',
+        },
+        colors: ['#9F8DF1', '#E79A3B'],
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ['transparent'],
+        },
+        grid: {
+          show: true,
+          borderColor: '#9aa0ac',
+          strokeDashArray: 1,
+        },
+        xaxis: {
+          type: 'category',
+          categories: [
+            '2 Months',
+            '4 Months',
+            '6 Months',
+            '8 Months',
+            '10 Months',
+            '12 Months',
+          ],
+        },
+        legend: {
+          show: true,
+          position: 'top',
+          horizontalAlign: 'center',
+          offsetX: 0,
+          offsetY: 0,
+        },
+  
+        tooltip: {
+          x: {
+            format: 'MMMM',
           },
         },
-      ],
-      labels: ['Registered Courses', 'Registered Programs', 'Approved Courses', 'Approved Programs', 'Completed Courses', 'Completed Programs'],
-      colors: ['#FFA500', '#d33', '#3d3', '#9aa0ac', '#5ac25e', '#4772e9', '#feb019', '#eb7d4b'],
-      legend: {
-        show: true,
-        position: 'bottom',
-        horizontalAlign: 'center',
-        offsetY: 10,
-      },
-    };
+        yaxis: {
+          title: {
+            text: 'Number of Students',
+          },
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            // endingShape: 'rounded'
+          },
+        },
+      };
+    }
+  
+  private surveyPieChart() {
+    const newStudentsData = [
+      this.twoMonthsAgoStudents.length,
+      this.fourMonthsAgoStudents.length,
+      this.sixMonthsAgoStudents.length,
+      this.eightMonthsAgoStudents.length,
+      this.tenMonthsAgoStudents.length,
+      this.twelveMonthsAgoStudents.length,
+  ];
+
+  const oldStudentsData = [
+      this.tillPreviousTwoMonthsStudents.length,
+      this.tillPreviousFourMonthsStudents.length,
+      this.tillPreviousSixMonthsStudents.length,
+      this.tillPreviousEightMonthsStudents.length,
+      this.tillPreviousTenMonthsStudents.length,
+      this.tillPreviousTwelveMonthsStudents.length,
+  ];
+
+  const totalNewStudents = newStudentsData.reduce((a, b) => a + b, 0);
+  const totalOldStudents = oldStudentsData.reduce((a, b) => a + b, 0);
+
+  this.surveyPieChartOptions = {
+    series: [totalNewStudents, totalOldStudents],
+    chart: {
+      height: 350,
+      type: 'pie',
+    },
+    labels: ['New Students', 'Old Students'],
+    colors: ['#9F8DF1', '#E79A3B'],
+    legend: {
+      show: true,
+      position: 'top',
+      horizontalAlign: 'center',
+      offsetX: 0,
+      offsetY: 0,
+    },
+    tooltip: {
+      enabled: true,
+      y: {
+        formatter: function (val) {
+          return val + " students";
+        }
+      }
+    },
+  };
+
   }
   
  
@@ -2034,7 +2090,7 @@ private attendanceBarChart() {
     }
     else if (this.dashboard.content[4].viewType == 'Line Chart') {
       this.isArea = true;
-      this.surveyLineChart();
+      this.chart1();
     }
   }
   setPerformanceChart() {
