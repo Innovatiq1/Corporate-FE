@@ -365,7 +365,7 @@ export class MainComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
-      this.approvedCourses = response?.data?.docs?.length
+      this.approvedCourses = response?.data?.length
     })
     const payload2 = { studentId: studentId, status: 'withdraw' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload2).subscribe(response =>{
@@ -374,12 +374,12 @@ export class MainComponent implements OnInit {
 
     const payload1 = { studentId: studentId, status: 'registered' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload1).subscribe(response =>{
-      this.registeredCourses = response?.data?.docs?.length
+      this.registeredCourses = response?.data?.length
       this.getRegisteredAndApprovedPrograms()
     })
     const payload3 = { studentId: studentId, status: 'completed' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload3).subscribe(response =>{
-      this.completedCourses = response?.data?.docs?.length
+      this.completedCourses = response?.data?.length
     })
 
   }
@@ -387,13 +387,13 @@ export class MainComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'registered' ,isAll:true};
     this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
-      this.registeredPrograms = response?.data?.docs?.length
+      this.registeredPrograms = response?.data?.length
       const payload1 = { studentId: studentId, status: 'approved' ,isAll:true};
       this.classService.getStudentRegisteredProgramClasses(payload1).subscribe(response =>{
-        this.approvedPrograms = response?.data?.docs?.length
+        this.approvedPrograms = response?.data?.length
         const payload3 = { studentId: studentId, status: 'completed' ,isAll:true};
       this.classService.getStudentRegisteredProgramClasses(payload3).subscribe(response =>{
-        this.completedPrograms = response?.data?.docs?.length
+        this.completedPrograms = response?.data?.length
         const payload2 = { studentId: studentId, status: 'withdraw' ,isAll:true};
         this.classService.getStudentRegisteredProgramClasses(payload2).subscribe(response =>{
           this.withdrawPrograms = response?.data?.length
@@ -420,7 +420,7 @@ export class MainComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
-     this.studentApprovedClasses = response.data.docs.slice(0,5);
+     this.studentApprovedClasses = response.data;
      const currentDate = new Date();
      const currentMonth = currentDate.getMonth();
      const currentYear = currentDate.getFullYear();
@@ -437,7 +437,7 @@ export class MainComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved',isAll:true };
     this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
-     this.studentApprovedPrograms= response.data.docs.slice(0,5);
+     this.studentApprovedPrograms= response.data;
      const currentDate = new Date();
      const currentMonth = currentDate.getMonth();
      const currentYear = currentDate.getFullYear();
@@ -2029,6 +2029,7 @@ private attendanceBarChart() {
       this.surveyBarChart();
     } else if (this.dashboard.content[4].viewType == 'Pie Chart') {
       this.isSurveyPie = true;
+      console.log('hii')
       this.surveyPieChart();
     }
     else if (this.dashboard.content[4].viewType == 'Line Chart') {
