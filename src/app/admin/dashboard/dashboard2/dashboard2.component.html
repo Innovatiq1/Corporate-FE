@@ -42,7 +42,107 @@
         </div>
       </div>
     </div>
-    <div class="row clearfix">
+
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card">
+          <div class="header mt-3">
+            <h2>New Admission Report</h2>
+          </div>
+            <div class="body" *ngIf="isAdmissionLine">
+              <apx-chart 
+                [series]="admissionLineChartOptions.series!" 
+                [chart]="admissionLineChartOptions.chart!" 
+                [xaxis]="admissionLineChartOptions.xaxis!" 
+                [stroke]="admissionLineChartOptions.stroke!" 
+                [colors]="admissionLineChartOptions.colors!" 
+                [dataLabels]="admissionLineChartOptions.dataLabels!" 
+                [legend]="admissionLineChartOptions.legend!" 
+                [tooltip]="admissionLineChartOptions.tooltip!" 
+                [markers]="admissionLineChartOptions.markers!" 
+                [grid]="admissionLineChartOptions.grid!" 
+                [yaxis]="admissionLineChartOptions.yaxis!">
+              </apx-chart>
+            </div>
+            <div class="body" *ngIf="isAdmissionBar">
+              <apx-chart 
+                  [series]="admissionBarChartOptions.series!" 
+                  [chart]="admissionBarChartOptions.chart!" 
+                  [xaxis]="admissionBarChartOptions.xaxis!" 
+                  [stroke]="admissionBarChartOptions.stroke!" 
+                  [colors]="admissionBarChartOptions.colors!" 
+                  [dataLabels]="admissionBarChartOptions.dataLabels!" 
+                  [legend]="admissionBarChartOptions.legend!" 
+                  [tooltip]="admissionBarChartOptions.tooltip!" 
+                  [markers]="admissionBarChartOptions.markers!" 
+                  [grid]="admissionBarChartOptions.grid!" 
+                  [yaxis]="admissionBarChartOptions.yaxis!">
+              </apx-chart>
+          </div>
+          <div class="body" *ngIf="isAdmissionPie">
+            <apx-chart 
+                [series]="admissionPieChartOptions.series!" 
+                [chart]="admissionPieChartOptions.chart!" 
+                [labels]="admissionPieChartOptions.labels!" 
+                [colors]="admissionPieChartOptions.colors!" 
+                [legend]="admissionPieChartOptions.legend!" 
+                [tooltip]="admissionPieChartOptions.tooltip!" 
+                [dataLabels]="admissionPieChartOptions.dataLabels!" 
+                [responsive]="admissionPieChartOptions.responsive!">
+            </apx-chart>
+        </div>
+        </div>
+      </div>
+
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card">
+          <div class="header mt-3">
+            <h2>Fees Collection Report</h2>
+          </div>
+          <div class="body" *ngIf="isFeesLine">
+            <apx-chart 
+              [series]="feesLineChartOptions.series!" 
+              [chart]="feesLineChartOptions.chart!" 
+              [xaxis]="feesLineChartOptions.xaxis!" 
+              [stroke]="feesLineChartOptions.stroke!" 
+              [colors]="feesLineChartOptions.colors!" 
+              [dataLabels]="feesLineChartOptions.dataLabels!" 
+              [legend]="feesLineChartOptions.legend!" 
+              [tooltip]="feesLineChartOptions.tooltip!" 
+              [markers]="feesLineChartOptions.markers!" 
+              [grid]="feesLineChartOptions.grid!" 
+              [yaxis]="feesLineChartOptions.yaxis!">
+            </apx-chart>
+          </div>
+          <div class="body" *ngIf="isFeesBar">
+            <apx-chart 
+              [series]="feesBarChartOptions.series!" 
+              [chart]="feesBarChartOptions.chart!" 
+              [xaxis]="feesBarChartOptions.xaxis!" 
+              [plotOptions]="feesBarChartOptions.plotOptions!" 
+              [colors]="feesBarChartOptions.colors!" 
+              [dataLabels]="feesBarChartOptions.dataLabels!" 
+              [legend]="feesBarChartOptions.legend!" 
+              [tooltip]="feesBarChartOptions.tooltip!" 
+              [grid]="feesBarChartOptions.grid!" 
+              [yaxis]="feesBarChartOptions.yaxis!">
+            </apx-chart>
+          </div>
+          <div class="body" *ngIf="isFeesPie">
+            <apx-chart 
+              [series]="feesPieChartOptions.series!" 
+              [chart]="feesPieChartOptions.chart!" 
+              [labels]="feesPieChartOptions.labels!" 
+              [colors]="feesPieChartOptions.colors!" 
+              [legend]="feesPieChartOptions.legend!" 
+              [tooltip]="feesPieChartOptions.tooltip!">
+            </apx-chart>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <!-- <div class="row clearfix">
       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
         <div class="plain-card">
           <div class="card-inner">
@@ -126,8 +226,8 @@
           </div>
         </div>
       </div> -->
-      <!-- area chart -->
-    </div>
+      <!-- area chart --
+    </div> -->
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">

@@ -152,6 +152,7 @@ export type lineChartOptions = {
   stroke: ApexStroke;
   markers: ApexMarkers;
   colors: string[];
+  series2: ApexNonAxisChartSeries;
 };
 
 //end
@@ -173,6 +174,8 @@ export class MainComponent implements OnInit {
   public attendanceBarChartOptions!: Partial<chartOptions>;
   public attendancePieChartOptions!: Partial<pieChart1Options>;
   public polarChartOptions!: Partial<chartOptions>;
+  public usersLineChartOptions!: Partial<lineChartOptions>;
+  public usersBarChartOptions!: Partial<chartOptions>;
   registeredCourses: any;
   public avgLecChartOptions!: Partial<avgLecChartOptions>;
   public pieChartOptions!: Partial<pieChartOptions>;
@@ -282,6 +285,9 @@ export class MainComponent implements OnInit {
   isAttendanceLine: boolean = false;
   isAttendancePie: boolean = false;
   isAttendanceBar: boolean = false;
+  isUsersLine: boolean = false;
+  isUsersBar: boolean = false;
+  isUsersPie: boolean = false;
 
   constructor(
     private courseService: CourseService,
@@ -338,7 +344,7 @@ export class MainComponent implements OnInit {
       this.instructorCount = this.count?.instructors;
       this.adminCount = this.count?.admins;
       this.studentCount = this.count?.students;
-      this.chart4();
+      // this.setUsersChart();
     });
   }
   getInstructorsList() {
@@ -1419,12 +1425,12 @@ private attendanceBarChart() {
       },
   };
 }
-  private chart4() {
+  private usersPieChart() {
     this.polarChartOptions = {
       series2: [this.instructorCount, this.studentCount, this.adminCount],
       chart: {
         type: 'pie',
-        height: 400,
+        height: 350,
       },
       legend: {
         show: true,
@@ -1450,6 +1456,97 @@ private attendanceBarChart() {
       ],
     };
   }
+
+  private usersLineChart() {
+    this.usersLineChartOptions = {
+      series: [
+        {
+          name: 'Instructors',
+          data: this.instructorCount,
+        },
+        {
+          name: 'Students',
+          data: this.studentCount,
+        },
+        {
+          name: 'Admin',
+          data: this.adminCount,
+        }
+      ],
+      chart: {
+        type: 'line',
+        height: 350,
+      },
+      legend: {
+        show: true,
+        position: 'bottom',
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      colors: ['#6777ef', '#ff9800', '#B71180'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+    };
+  }
+
+  private usersBarChart() {
+    this.usersBarChartOptions = {
+      series: [
+        {
+          name: 'Instructors',
+          data: this.instructorCount,
+        },
+        {
+          name: 'Students',
+          data: this.studentCount,
+        },
+        {
+          name: 'Admin',
+          data: this.adminCount,
+        }
+      ],
+      chart: {
+        type: 'bar',
+        height: 350,
+      },
+      legend: {
+        show: true,
+        position: 'bottom',
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      colors: ['#6777ef', '#ff9800', '#B71180'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+    };
+  }
+
 
  
 
@@ -1917,10 +2014,13 @@ private attendanceBarChart() {
   }
   getStudentDashboard(){
     this.settingsService.getStudentDashboard().subscribe(response => {
+    
       this.dashboard = response.data.docs[2];
+  
       this.setPerformanceChart();
       this.setSurveyChart();
       this.setAttendanceChart();
+      this.setUsersChart();
     })
   }
   setSurveyChart() {
@@ -1960,6 +2060,22 @@ private attendanceBarChart() {
     else if (this.dashboard.content[6].viewType == 'Line Chart') {
       this.isAttendanceLine = true;
       this.attendanceLineChart();
+    }
+  }
+  setUsersChart() {
+    if (this.dashboard.content[7].viewType == 'Bar Chart') {
+      this.isUsersBar = true;
+      this.getCount();
+      this.usersBarChart();
+    } else if (this.dashboard.content[7].viewType == 'Pie Chart') {
+      this.isUsersPie = true;
+      this.getCount();
+      this.usersPieChart();
+    }
+    else if (this.dashboard.content[7].viewType == 'Line Chart') {
+      this.isUsersLine = true;
+      this.getCount();
+      this.usersLineChart();
     }
   }
 }

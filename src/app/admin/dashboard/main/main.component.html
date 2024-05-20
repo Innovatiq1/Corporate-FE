@@ -315,12 +315,24 @@
               <div class="float-start ms-3 me-3">
                 <h5>{{count?.users}} Users(All) <span class="text-muted font-12"></span></h5>
               </div>
-              <div class="body">
+              <div class="body" *ngIf="isUsersPie">
                 <apx-chart [series]="polarChartOptions.series2!" [chart]="polarChartOptions.chart!"
                   [labels]="polarChartOptions.labels!" [title]="polarChartOptions.title!"
                   [theme]="polarChartOptions.theme!" [fill]="polarChartOptions.fill!" [yaxis]="polarChartOptions.yaxis!"
                   [stroke]="polarChartOptions.stroke!" [legend]="polarChartOptions.legend!"
                   [plotOptions]="polarChartOptions.plotOptions!" [colors]="polarChartOptions.colors!"></apx-chart>
+              </div>
+              <div class="body" *ngIf="isUsersLine">
+                <apx-chart [series]="usersLineChartOptions.series!" [chart]="usersLineChartOptions.chart!"
+                  [labels]="usersLineChartOptions.labels!"  [fill]="usersLineChartOptions.fill!" [yaxis]="usersLineChartOptions.yaxis!"
+                  [stroke]="usersLineChartOptions.stroke!" [legend]="usersLineChartOptions.legend!"
+                  [plotOptions]="usersLineChartOptions.plotOptions!" [colors]="usersLineChartOptions.colors!"></apx-chart>
+              </div>
+              <div class="body" *ngIf="isUsersBar">
+                <apx-chart [series]="usersBarChartOptions.series!" [chart]="usersBarChartOptions.chart!"
+                  [labels]="usersBarChartOptions.labels!" [fill]="usersBarChartOptions.fill!" [yaxis]="usersBarChartOptions.yaxis!"
+                  [stroke]="usersBarChartOptions.stroke!" [legend]="usersBarChartOptions.legend!"
+                  [plotOptions]="usersBarChartOptions.plotOptions!" [colors]="usersBarChartOptions.colors!"></apx-chart>
               </div>
             </div>
           </div>
