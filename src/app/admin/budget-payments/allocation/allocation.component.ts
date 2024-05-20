@@ -25,7 +25,7 @@ export class AllocationComponent implements OnInit{
     'Department Name',
     'Percentage Allocated',
     'By Value',
-    'Budget Allocated',
+    'Budget-Allocated',
     'Approval',
     // 'Details'
   ];

@@ -38,11 +38,11 @@ export class AllCourseComponent {
     'creator',
     'Days',
     'Training Hours',
-    // 'Fees',
+    'Fees',
     'startDate',
     'endDate',
     'Vendor',
-    'Fees',
+    // 'Fees',
   ];
   // displayedColumns = [
   //   'name',
@@ -118,11 +118,11 @@ export class AllCourseComponent {
         'creator',
         'Days',
         'Training Hours',
-       // 'Fees',
+       'Fees',
         'startDate',
         'endDate',
         'Vendor',
-        'Fees',
+        // 'Fees',
       ];
     }
     if (this.path == 'creator') {
@@ -134,11 +134,11 @@ export class AllCourseComponent {
         'code',
         'Days',
         'Training Hours',
-        //'Fees',
+        'Fees',
         'startDate',
         'endDate',
         'Vendor',
-        'Fees',
+        // 'Fees',
       ];
     }
   }
