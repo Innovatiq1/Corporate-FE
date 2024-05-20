@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 import { CourseService } from '@core/service/course.service';
@@ -59,7 +59,7 @@ export type pieChart1Options = {
   templateUrl: './dashboard2.component.html',
   styleUrls: ['./dashboard2.component.scss'],
 })
-export class Dashboard2Component implements OnInit {
+export class Dashboard2Component implements OnInit,AfterViewInit {
   public admissionLineChartOptions!: Partial<chartOptions>;
   public admissionBarChartOptions!: Partial<chartOptions>;
   public admissionPieChartOptions!: Partial<pieChart1Options>;
@@ -111,15 +111,19 @@ export class Dashboard2Component implements OnInit {
     private courseService: CourseService,
     private classService: ClassService,
     private router: Router,
-    private settingsService: SettingsService,) {
+    private settingsService: SettingsService,
+    private cdr: ChangeDetectorRef) {
     //constructor
   }
 
   ngOnInit() {
+  }
+  ngAfterViewInit(): void {
     this.getInstructorsList();
     this.getProgramList();
     this.getAllCourse();
     this.getStudentDashboard();
+    this.cdr.detectChanges();
   }
   deleteItem(row: any) {
     // this.id = row.id;
@@ -244,7 +248,7 @@ export class Dashboard2Component implements OnInit {
           createdAtDate >= oneMonthAgoStart && createdAtDate <= oneMonthAgoEnd
         );
       });
-      this.chart1();
+      // this.chart1();
 
     }, error => {
     });

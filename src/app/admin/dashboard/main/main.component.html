@@ -324,15 +324,22 @@
               </div>
               <div class="body" *ngIf="isUsersLine">
                 <apx-chart [series]="usersLineChartOptions.series!" [chart]="usersLineChartOptions.chart!"
-                  [labels]="usersLineChartOptions.labels!"  [fill]="usersLineChartOptions.fill!" [yaxis]="usersLineChartOptions.yaxis!"
-                  [stroke]="usersLineChartOptions.stroke!" [legend]="usersLineChartOptions.legend!"
-                  [plotOptions]="usersLineChartOptions.plotOptions!" [colors]="usersLineChartOptions.colors!"></apx-chart>
+                [xaxis]="usersLineChartOptions.xaxis!" [stroke]="usersLineChartOptions.stroke!"
+                [colors]="usersLineChartOptions.colors!" [dataLabels]="usersLineChartOptions.dataLabels!"
+                [legend]="usersLineChartOptions.legend!" [markers]="usersLineChartOptions.markers!"
+                [grid]="usersLineChartOptions.grid!" [yaxis]="usersLineChartOptions.yaxis!"
+                [tooltip]="usersLineChartOptions.tooltip!" [title]="usersLineChartOptions.title!">
+              </apx-chart>
+
               </div>
               <div class="body" *ngIf="isUsersBar">
                 <apx-chart [series]="usersBarChartOptions.series!" [chart]="usersBarChartOptions.chart!"
-                  [labels]="usersBarChartOptions.labels!" [fill]="usersBarChartOptions.fill!" [yaxis]="usersBarChartOptions.yaxis!"
-                  [stroke]="usersBarChartOptions.stroke!" [legend]="usersBarChartOptions.legend!"
-                  [plotOptions]="usersBarChartOptions.plotOptions!" [colors]="usersBarChartOptions.colors!"></apx-chart>
+                [xaxis]="usersBarChartOptions.xaxis!" [stroke]="usersBarChartOptions.stroke!"
+                [colors]="usersBarChartOptions.colors!" [dataLabels]="usersBarChartOptions.dataLabels!"
+                [legend]="usersBarChartOptions.legend!" [markers]="usersBarChartOptions.markers!"
+                [grid]="usersBarChartOptions.grid!" [yaxis]="usersBarChartOptions.yaxis!"
+                [tooltip]="usersBarChartOptions.tooltip!" [title]="usersBarChartOptions.title!">
+            </apx-chart>
               </div>
             </div>
           </div>

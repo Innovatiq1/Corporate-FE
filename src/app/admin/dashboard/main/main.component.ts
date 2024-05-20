@@ -174,7 +174,7 @@ export class MainComponent implements OnInit {
   public attendanceBarChartOptions!: Partial<chartOptions>;
   public attendancePieChartOptions!: Partial<pieChart1Options>;
   public polarChartOptions!: Partial<chartOptions>;
-  public usersLineChartOptions!: Partial<lineChartOptions>;
+  public usersLineChartOptions!: Partial<chartOptions>;
   public usersBarChartOptions!: Partial<chartOptions>;
   registeredCourses: any;
   public avgLecChartOptions!: Partial<avgLecChartOptions>;
@@ -718,6 +718,7 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.getClassList();
     const role = this.authenticationService.currentUserValue.user.role;
     console.log('roles', role);
@@ -1512,96 +1513,135 @@ private attendanceBarChart() {
       ],
     };
   }
+  private usersBarChart() {
+    this.usersBarChartOptions = {
+      series: [
+        {
+            name: 'Count',
+            data: [ this.instructorCount,this.studentCount,this.adminCount],
+        },
+    ],
+    chart: {
+        height: 350,
+        type: 'bar',
+        dropShadow: {
+            enabled: true,
+            color: '#000',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 0.2,
+        },
+        foreColor: '#9aa0ac',
+        toolbar: {
+            show: false,
+        },
+    },
+    colors: ['#51E298'],
+    dataLabels: {
+        enabled: true,
+    },
+    stroke: {
+        curve: 'smooth',
+    },
+    markers: {
+        size: 1,
+    },
+    grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+    },
+    xaxis: {
+        categories: ['Instructors','Students','Admin'],
+        title: {
+            text: 'Users',
+        },
+    },
+    yaxis: {
+        title: {
+            text: 'Count',
+        },
+    },
+    tooltip: {
+        theme: 'dark',
+        marker: {
+            show: true,
+        },
+        x: {
+            show: true,
+        },
+    },
+    // title: {
+    //     text: 'Students by Day',
+    // },
+
+    };
+  }
+
 
   private usersLineChart() {
     this.usersLineChartOptions = {
       series: [
         {
-          name: 'Instructors',
-          data: this.instructorCount,
+            name: 'Count',
+            data: [ this.instructorCount,this.studentCount,this.adminCount],
         },
-        {
-          name: 'Students',
-          data: this.studentCount,
-        },
-        {
-          name: 'Admin',
-          data: this.adminCount,
-        }
-      ],
+    ],
       chart: {
-        type: 'line',
         height: 350,
-      },
-      legend: {
-        show: true,
-        position: 'bottom',
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      colors: ['#6777ef', '#ff9800', '#B71180'],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: 'bottom',
-            },
-          },
+        type: 'line',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
         },
-      ],
-    };
+        foreColor: '#9aa0ac',
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ['#51E298'],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      markers: {
+        size: 1,
+      },
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      xaxis: {
+        categories: ['Instructors','Students','Admin'],
+        title: {
+          text: 'Users',
+        },
+      },
+      yaxis: {
+        title: {
+          text: 'Count',
+        },
+      },
+      tooltip: {
+        theme: 'dark',
+        marker: {
+          show: true,
+        },
+        x: {
+          show: true,
+        },
+      },}
+
   }
 
-  private usersBarChart() {
-    this.usersBarChartOptions = {
-      series: [
-        {
-          name: 'Instructors',
-          data: this.instructorCount,
-        },
-        {
-          name: 'Students',
-          data: this.studentCount,
-        },
-        {
-          name: 'Admin',
-          data: this.adminCount,
-        }
-      ],
-      chart: {
-        type: 'bar',
-        height: 350,
-      },
-      legend: {
-        show: true,
-        position: 'bottom',
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      colors: ['#6777ef', '#ff9800', '#B71180'],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: 'bottom',
-            },
-          },
-        },
-      ],
-    };
-  }
 
 
  
@@ -2071,7 +2111,7 @@ private attendanceBarChart() {
   getStudentDashboard(){
     this.settingsService.getStudentDashboard().subscribe(response => {
     
-      this.dashboard = response.data.docs[2];
+      this.dashboard = response?.data?.docs[2];
   
       this.setPerformanceChart();
       this.setSurveyChart();
