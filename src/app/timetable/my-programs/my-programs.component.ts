@@ -124,6 +124,11 @@ export class MyProgramsComponent {
  
 
   openDialog(event: { title: any; extendedProps: { [x: string]: any; }; }) {
+    let userType = localStorage.getItem("user_type")
+    var reschedule =false;
+    if(userType == "Student"){
+      reschedule = true
+    }
     this.dialog.open(EventDetailDialogComponent, {
       width: '700px',
       data: {
@@ -135,7 +140,9 @@ export class MyProgramsComponent {
         sessionStartDate: event.extendedProps['sessionStartDate'],
         sessionEndDate: event.extendedProps['sessionEndDate'],
         deliveryType: event.extendedProps['deliveryType'],
-        instructorCost: event.extendedProps['instructorCost']
+        instructorCost: event.extendedProps['instructorCost'],
+        reschedule:reschedule
+
       }
     });
   }
@@ -145,7 +152,7 @@ export class MyProgramsComponent {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved',isAll:true };
     this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
-     this.studentApprovedPrograms= response.data.docs.slice(0,5);
+     this.studentApprovedPrograms= response.data;
      const currentDate = new Date();
      const currentMonth = currentDate.getMonth();
      const currentYear = currentDate.getFullYear();  
