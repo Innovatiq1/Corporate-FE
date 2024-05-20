@@ -145,31 +145,27 @@
               <div class="header mt-3">
                 <h2>
                   Students Survey</h2>
-                <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
-              <mat-icon>more_vert</mat-icon>
-            </button> -->
-                <!-- <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>add_circle_outline</mat-icon>
-                <span>Add</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>delete_outline</mat-icon>
-                <span>Delete</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>refresh</mat-icon>
-                <span>Refresh</span>
-              </button>
-            </mat-menu> -->
               </div>
-              <div class="body">
+              <div class="body" *ngIf="isArea">
                 <apx-chart [series]="areaChartOptions.series!" [chart]="areaChartOptions.chart!"
                   [xaxis]="areaChartOptions.xaxis!" [yaxis]="areaChartOptions.yaxis!"
                   [colors]="areaChartOptions.colors!" [stroke]="areaChartOptions.stroke!"
                   [legend]="areaChartOptions.legend!" [grid]="areaChartOptions.grid!"
                   [tooltip]="areaChartOptions.tooltip!" [dataLabels]="areaChartOptions.dataLabels!"></apx-chart>
               </div>
+              <div class="body" *ngIf="isSurveyBar">
+                <apx-chart [series]="surveyBarChartOptions.series!" [chart]="surveyBarChartOptions.chart!"
+                  [xaxis]="surveyBarChartOptions.xaxis!" [yaxis]="surveyBarChartOptions.yaxis!"
+                  [colors]="surveyBarChartOptions.colors!" [stroke]="surveyBarChartOptions.stroke!"
+                  [legend]="surveyBarChartOptions.legend!" [grid]="surveyBarChartOptions.grid!"
+                  [tooltip]="surveyBarChartOptions.tooltip!" [dataLabels]="surveyBarChartOptions.dataLabels!"></apx-chart>
+              </div>
+              <div class="body" *ngIf="isSurveyPie">
+                <apx-chart [series]="surveyPieChartOptions.series!" [chart]="surveyPieChartOptions.chart!"
+                  [labels]="surveyPieChartOptions.labels!" [legend]="surveyPieChartOptions.legend!"
+                  [colors]="surveyPieChartOptions.colors!"  [responsive]="surveyPieChartOptions.responsive!"></apx-chart>
+              </div>
+             
             </div>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -178,10 +174,10 @@
                 <h2>Student Performance Chart</h2>
               </div>
               <div class="body" *ngIf="isBar">
-                <apx-chart [series]="barChartOptions.series!" [chart]="barChartOptions.chart!"
-                  [dataLabels]="barChartOptions.dataLabels!" [labels]="barChartOptions.labels!"
-                  [legend]="barChartOptions.legend!" [fill]="barChartOptions.fill!"
-                  [responsive]="barChartOptions.responsive!">
+                <apx-chart [series]="performanceBarChartOptions.series!" [chart]="performanceBarChartOptions.chart!"
+                  [dataLabels]="performanceBarChartOptions.dataLabels!" [labels]="performanceBarChartOptions.labels!"
+                  [legend]="performanceBarChartOptions.legend!" [fill]="performanceBarChartOptions.fill!"
+                  [responsive]="performanceBarChartOptions.responsive!">
                 </apx-chart>
               </div>
               <div class="body" *ngIf="isPie">
