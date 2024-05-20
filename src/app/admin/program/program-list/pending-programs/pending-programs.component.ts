@@ -42,10 +42,10 @@ export class PendingProgramsComponent {
     'Duration',
     'Start Date',
     'End Date',
-    // 'Payment',
+    'Payment',
     'Compulsory Count',
     'Elective Count',
-    'Payment',
+    // 'Payment',
     
   ];
 

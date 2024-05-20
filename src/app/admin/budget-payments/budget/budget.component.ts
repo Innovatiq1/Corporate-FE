@@ -110,7 +110,7 @@ export class BudgetComponent {
     'percentage',
     
     'type',
-    'overall budget',
+    'overall-budget',
     'status',
     // 'action',
   ];

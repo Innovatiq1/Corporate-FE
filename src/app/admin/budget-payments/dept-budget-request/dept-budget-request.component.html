@@ -106,7 +106,7 @@
                     <td>{{ request?.departmentName }}</td>
                     <td>{{ request?.hod }}</td>
                     <td>{{ request?.year }}</td>
-                    <td>${{ request?.trainingBudget }}</td>
+                    <td style="text-align:right"><span>$</span>{{ request?.trainingBudget ||0}}.00</td>
                     <td>
                         <span
                         [class]="
