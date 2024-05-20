@@ -61,9 +61,6 @@ export class CourseService {
     return params;
   }
 
-  getRazorPayKey() {
-    return this._Http.get(this.razorpayKeyId).pipe(map((response) => response));
-  }
 
   get nativeWindow(): any {
     if (isPlatformBrowser(this.platformId)) {

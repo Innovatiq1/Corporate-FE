@@ -32,6 +32,7 @@ import {
 import { StudentsService } from 'app/admin/students/students.service';
 import { SurveyService } from 'app/admin/survey/survey.service';
 import { PaymentDailogComponent } from './payment-dailog/payment-dailog.component';
+import { SettingsService } from '@core/service/settings.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -131,6 +132,8 @@ export class ViewCourseComponent implements OnDestroy {
     private studentService: StudentsService,
     private surveyService: SurveyService,
     public dialog: MatDialog,
+    private settingsService:SettingsService,
+
 
   ) {
     let urlPath = this.router.url.split('/');
@@ -401,7 +404,8 @@ export class ViewCourseComponent implements OnDestroy {
         
                 this.courseService.createOrder(payload).subscribe((response) => {
                   if(response.status == 200){
-                      this.razorPayKey = "rzp_test_8qBZzDxmgGwhH4"        
+                    this.settingsService.getPayment().subscribe((res:any)=>{
+                      this.razorPayKey = res.data.docs[0].keyId;
                     const paymentOrderId = response.data.id;
                     const options: any = {
                       key: this.razorPayKey,
@@ -463,8 +467,7 @@ export class ViewCourseComponent implements OnDestroy {
                       const rzp = new this.courseService.nativeWindow.Razorpay(options);
                       rzp.open();
                     },100)
-                  
-        
+                  })                  
                   } else {
                     alert('Server side error')
                   }
