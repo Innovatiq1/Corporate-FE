@@ -20,6 +20,8 @@ import {
   ApexTheme,
   ApexNonAxisChartSeries,
 } from 'ng-apexcharts';
+import { SettingsService } from '@core/service/settings.service';
+
 export type chartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -40,6 +42,20 @@ export type chartOptions = {
   theme: ApexTheme;
   series2: ApexNonAxisChartSeries;
 };
+
+export type pieChart1Options = {
+  series: ApexAxisChartSeries | ApexNonAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions?: ApexPlotOptions;
+  responsive: ApexResponsive[];
+  labels?: string[];
+  legend: ApexLegend;
+  fill: ApexFill;
+  colors: string[];
+  tooltip: ApexTooltip;
+};
+
 interface GaugeValues {
   [key: number]: number;
 }
@@ -54,6 +70,13 @@ export class EtmsDashboardComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
   public barChartOptions!: Partial<chartOptions>;
   public barChart2Options!: Partial<chartOptions>;
+  public budgetLineChartOptions!: Partial<chartOptions>;
+  public budgetBarChartOptions!: Partial<chartOptions>;
+  public budgetPieChartOptions!: Partial<pieChart1Options>;
+  public actualLineChartOptions!: Partial<chartOptions>;
+  public actualBarChartOptions!: Partial<chartOptions>;
+  public actualPieChartOptions!: Partial<pieChart1Options>;
+
   breadscrums = [
     {
       title: 'Dashboard',
@@ -61,12 +84,22 @@ export class EtmsDashboardComponent implements OnInit {
       active: 'E-TMS Dashboard',
     },
   ];
-  constructor() {
+
+  isBudgetLine: boolean = false;
+  isBudgetPie: boolean = false;
+  isBudgetBar: boolean = false;
+  isActualLine: boolean = false;
+  isActualPie: boolean = false;
+  isActualBar: boolean = false;
+  dashboard: any;
+
+  constructor( private settingsService: SettingsService,) {
     this.percentageValue = function (value: number): string {
       return `${Math.round(value)}`;
     };
   }
   ngOnInit() {
+    this.getStudentDashboard()
     this.chart2();
     this.chart3();
   }
@@ -385,4 +418,344 @@ export class EtmsDashboardComponent implements OnInit {
 
   guageType1 = 'full' as NgxGaugeType;
   percentageValue: (value: number) => string;
+
+  private budgetLineChart() {
+    this.budgetLineChartOptions = {
+      series: [
+        {
+          name: 'Percentage',
+          data: [113, 120, 130, 120, 125, 119],
+        },
+      ],
+      chart: {
+        height: 350,
+        type: 'line',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        foreColor: '#9aa0ac',
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ['#51E298'],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      markers: {
+        size: 1,
+      },
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      xaxis: {
+        categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
+        title: {
+          text: 'Years',
+        },
+      },
+      yaxis: {
+        title: {
+          text: 'Percentage',
+        },
+      },
+      tooltip: {
+        theme: 'dark',
+        marker: {
+          show: true,
+        },
+        x: {
+          show: true,
+        },
+      },
+    };
+  }
+  private budgetPieChart() {
+    this.budgetPieChartOptions = {
+        series: [113, 120, 130, 120, 125, 119],
+        chart: {
+            width: 380,
+            type: 'pie',
+        },
+        labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+        colors: ['#51E298', '#FF5733', '#FFC300', '#C70039', '#900C3F', '#581845'],
+        dataLabels: {
+            enabled: true,
+        },
+        legend: {
+            position: 'bottom',
+        },
+        tooltip: {
+            theme: 'dark',
+            marker: {
+                show: true,
+            },
+            x: {
+                show: true,
+            },
+        },
+      
+    };
+}
+private budgetBarChart() {
+this.budgetBarChartOptions = {
+    series: [
+        {
+            name: 'Percentage',
+            data: [113, 120, 130, 120, 125, 119],
+        },
+    ],
+    chart: {
+        height: 350,
+        type: 'bar',
+        dropShadow: {
+            enabled: true,
+            color: '#000',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 0.2,
+        },
+        foreColor: '#9aa0ac',
+        toolbar: {
+            show: false,
+        },
+    },
+    colors: ['#51E298'],
+    dataLabels: {
+        enabled: true,
+    },
+    stroke: {
+        curve: 'smooth',
+    },
+    markers: {
+        size: 1,
+    },
+    grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+    },
+    xaxis: {
+        categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
+        title: {
+            text: 'Years',
+        },
+    },
+    yaxis: {
+        title: {
+            text: 'Percentage',
+        },
+    },
+    tooltip: {
+        theme: 'dark',
+        marker: {
+            show: true,
+        },
+        x: {
+            show: true,
+        },
+    },
+   
+};
+}
+
+private actualBarChart() {
+  this.actualBarChartOptions = {
+      series: [
+          {
+              name: 'Percentage',
+              data: [105, 110, 115, 120, 125, 130],
+          },
+      ],
+      chart: {
+          height: 350,
+          type: 'bar',
+          dropShadow: {
+              enabled: true,
+              color: '#000',
+              top: 18,
+              left: 7,
+              blur: 10,
+              opacity: 0.2,
+          },
+          foreColor: '#9aa0ac',
+          toolbar: {
+              show: false,
+          },
+      },
+      colors: ['#51E298'],
+      dataLabels: {
+          enabled: true,
+      },
+      stroke: {
+          curve: 'smooth',
+      },
+      markers: {
+          size: 1,
+      },
+      grid: {
+          show: true,
+          borderColor: '#9aa0ac',
+          strokeDashArray: 1,
+      },
+      xaxis: {
+          categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
+          title: {
+              text: 'Years',
+          },
+      },
+      yaxis: {
+          title: {
+              text: 'Percentage',
+          },
+      },
+      tooltip: {
+          theme: 'dark',
+          marker: {
+              show: true,
+          },
+          x: {
+              show: true,
+          },
+      },
+     
+  };
+}
+
+
+private actualLineChart() {
+  this.actualLineChartOptions = {
+    series: [
+      {
+        name: 'Percentage',
+        data: [105, 110, 115, 120, 125, 130],
+      },
+    ],
+    chart: {
+      height: 350,
+      type: 'line',
+      dropShadow: {
+        enabled: true,
+        color: '#000',
+        top: 18,
+        left: 7,
+        blur: 10,
+        opacity: 0.2,
+      },
+      foreColor: '#9aa0ac',
+      toolbar: {
+        show: false,
+      },
+    },
+    colors: ['#51E298'],
+    dataLabels: {
+      enabled: true,
+    },
+    stroke: {
+      curve: 'smooth',
+    },
+    markers: {
+      size: 1,
+    },
+    grid: {
+      show: true,
+      borderColor: '#9aa0ac',
+      strokeDashArray: 1,
+    },
+    xaxis: {
+      categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
+      title: {
+        text: 'Years',
+      },
+    },
+    yaxis: {
+      title: {
+        text: 'Percentage',
+      },
+    },
+    tooltip: {
+      theme: 'dark',
+      marker: {
+        show: true,
+      },
+      x: {
+        show: true,
+      },
+    },
+  };
+}
+private actualPieChart() {
+  this.actualPieChartOptions = {
+      series: [105, 110, 115, 120, 125, 130],
+      chart: {
+          width: 380,
+          type: 'pie',
+      },
+      labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+      colors: ['#51E298', '#FF5733', '#FFC300', '#C70039', '#900C3F', '#581845'],
+      dataLabels: {
+          enabled: true,
+      },
+      legend: {
+          position: 'bottom',
+      },
+      tooltip: {
+          theme: 'dark',
+          marker: {
+              show: true,
+          },
+          x: {
+              show: true,
+          },
+      },
+    
+  };
+}
+
+  getStudentDashboard(){
+    this.settingsService.getStudentDashboard().subscribe(response => {
+      this.dashboard = response.data.docs[2];
+      this.setBudgetChart();
+      this.setActualChart();
+    })
+  }
+
+  setBudgetChart() {
+    if (this.dashboard.content[27].viewType == 'Bar Chart') {
+      this.isBudgetBar = true;
+      this.budgetBarChart();
+    } else if (this.dashboard.content[27].viewType == 'Pie Chart') {
+      this.isBudgetPie = true;
+      this.budgetPieChart();
+    }
+    else if (this.dashboard.content[27].viewType == 'Line Chart') {
+      this.isBudgetLine = true;
+      this.budgetLineChart();
+    }
+  }
+
+  setActualChart() {
+    if (this.dashboard.content[29].viewType == 'Bar Chart') {
+      this.isActualBar = true;
+      this.actualBarChart();
+    } else if (this.dashboard.content[29].viewType == 'Pie Chart') {
+      this.isActualPie = true;
+      this.actualPieChart();
+    }
+    else if (this.dashboard.content[29].viewType == 'Line Chart') {
+      this.isActualLine = true;
+      this.actualLineChart();
+    }
+  }
 }
