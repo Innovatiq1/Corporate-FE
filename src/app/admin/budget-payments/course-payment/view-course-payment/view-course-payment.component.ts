@@ -30,6 +30,11 @@ export class ViewCoursePaymentComponent {
   name:any;
   payment_intent: any;
   transactionId: any;
+  paymentMode: any;
+  orderId: any;
+  paymentId: any;
+  isRazorpay: boolean = false;
+  isStripe: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -41,6 +46,7 @@ export class ViewCoursePaymentComponent {
     this.activeRoute.queryParams.subscribe(id => {
   this.paymentid = id['id'] 
 })
+
   }
 
   ngOnInit():void{
@@ -50,6 +56,11 @@ export class ViewCoursePaymentComponent {
   getAllCourse(){
     this.courseService.getAllPaymentsById(this.paymentid).subscribe(response =>{
     this.dataSource = response;
+    if(this.dataSource.paymentMode === "Razorpay"){
+      this.isRazorpay = true;
+    } else if(this.dataSource.paymentMode === "Stripe"){
+      this.isStripe = true;
+    }
     this.course = this.dataSource.course;
     this.createdAt = this.dataSource.createdAt;
     this.paymentType = this.dataSource.paymentType;
@@ -59,6 +70,9 @@ export class ViewCoursePaymentComponent {
     this.email = this.dataSource.email;
     this.payment_intent = this.dataSource.payment_intent;
     this.transactionId = this.dataSource.transactionId;
+    this.paymentMode = this.dataSource.paymentMode;
+    this.orderId = this.dataSource.orderId;
+    this.paymentId = this.dataSource.paymentId;
 
     }, (err:any) => {});
   }

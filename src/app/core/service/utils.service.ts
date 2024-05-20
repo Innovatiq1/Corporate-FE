@@ -449,7 +449,7 @@ export class UtilsService {
       {type:'required', message: 'Enter Public Key'}
     ],
     'webhook':[
-      {type:'required', message: 'Enter Test Webhook Secret Key'}
+      {type:'required', message: 'Enter Webhook Secret Key'}
     ],
     'secret':[
       {type:'required', message: 'Enter Secret Key'}
