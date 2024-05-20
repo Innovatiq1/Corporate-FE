@@ -728,28 +728,48 @@
         <div class="card">
           <div class="body">
             <div class="row align-items-center">
-              <div class="col-md-4 mb-0">
-                <div class="recent-report__chart">
-                  <canvas baseChart height="200px" width="200px" class="chart" [data]="doughnutChartData"
-                    [labels]="doughnutChartLabels" [options]="doughnutChartOptions" [type]="doughnutChartType"></canvas>
-                </div>
+              <div class="col-md-12 mb-0">
+                <h4>
+                  <div class="weight-600 col-pink pt-1">Good Job, {{studentName}}. Keep Going!! </div>
+                </h4>
+                <div class="recent-report__chart" *ngIf="isStudentPie">
+                  <apx-chart [series]="studentPieChartOptions.series!" [chart]="studentPieChartOptions.chart!"
+                  [dataLabels]="studentPieChartOptions.dataLabels!" [labels]="studentPieChartOptions.labels!"
+                  [legend]="studentPieChartOptions.legend!" [fill]="studentPieChartOptions.fill!"
+                  [responsive]="studentPieChartOptions.responsive!">
+                </apx-chart>
+                  </div>
+                  <div class="recent-report__chart" *ngIf="isStudentBar">
+                    <apx-chart [series]="studentBarChartOptions.series!" [chart]="studentBarChartOptions.chart!"
+                               [dataLabels]="studentBarChartOptions.dataLabels!" [labels]="studentBarChartOptions.labels!"
+                               [legend]="studentBarChartOptions.legend!" [fill]="studentBarChartOptions.fill!"
+                               [responsive]="studentBarChartOptions.responsive!">
+                    </apx-chart>
+                  </div>
+                  <div class="recent-report__chart" *ngIf="isStudentLine">
+                    <apx-chart [series]="studentLineChartOptions.series!" [chart]="studentLineChartOptions.chart!"
+                               [dataLabels]="studentLineChartOptions.dataLabels!" [labels]="studentLineChartOptions.labels!"
+                               [legend]="studentLineChartOptions.legend!" [fill]="studentLineChartOptions.fill!"
+                               [responsive]="studentLineChartOptions.responsive!">
+                    </apx-chart>
+                  </div>
               </div>
-              <div class="col-md-8">
+              <!-- <div class="col-md-6" *ngIf="!isStudentPie">
                 <h4>
                   <div class="weight-600 col-pink pt-1">Good Job, {{studentName}}. Keep Going!! </div>
                 </h4>
                 <!-- <p class="font-15 max-width-600">Keep it up and improve your
-                  result. Progress is very good!!!</p> --><br>
+                  result. Progress is very good!!!</p> --<br>
                 <div class="row">
                   <div class="col-lg-6">
                     <div><i class="fa fa-circle dot1 msr-2"></i> Registered Courses - {{registeredCourses}}</div>
                   </div>
                   <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot2 msr-2"></i> Registered Programs - {{registeredPrograms}}</div>
+                    <div><i class="fa fa-circle dot3 msr-2"></i> Registered Programs - {{registeredPrograms}}</div>
                   </div>
                   <br><br>
                   <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot3 msr-2"></i> Approved Courses - {{approvedCourses}}</div>
+                    <div><i class="fa fa-circle dot2 msr-2"></i> Approved Courses - {{approvedCourses}}</div>
                   </div>
                   <div class="col-lg-6">
                     <div><i class="fa fa-circle dot4 msr-2"></i> Approved Programs - {{approvedPrograms}}</div>
@@ -762,7 +782,7 @@
                     <div><i class="fa fa-circle dot6 msr-2"></i> Completed Programs - {{completedPrograms}}</div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
