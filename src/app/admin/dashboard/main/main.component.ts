@@ -176,6 +176,9 @@ export class MainComponent implements OnInit {
   public polarChartOptions!: Partial<chartOptions>;
   public usersLineChartOptions!: Partial<chartOptions>;
   public usersBarChartOptions!: Partial<chartOptions>;
+  public studentPieChartOptions!: Partial<pieChart1Options>;
+  public studentBarChartOptions!: Partial<chartOptions>;
+  public studentLineChartOptions!: Partial<lineChartOptions>;
   registeredCourses: any;
   public avgLecChartOptions!: Partial<avgLecChartOptions>;
   public pieChartOptions!: Partial<pieChartOptions>;
@@ -288,6 +291,10 @@ export class MainComponent implements OnInit {
   isUsersLine: boolean = false;
   isUsersBar: boolean = false;
   isUsersPie: boolean = false;
+  isStudentPie: boolean = false;
+  isStudentBar: boolean = false;
+  isStudentLine: boolean = false;
+  studentDashboard: any;
 
   constructor(
     private courseService: CourseService,
@@ -397,21 +404,31 @@ export class MainComponent implements OnInit {
         const payload2 = { studentId: studentId, status: 'withdraw' ,isAll:true};
         this.classService.getStudentRegisteredProgramClasses(payload2).subscribe(response =>{
           this.withdrawPrograms = response?.data?.length
-          // this?.surveyLineChart();
-          // this?.surveyBarChart();
-          // this?.surveyPieChart();
-          this.setSurveyChart();
+          this.studentPieChart();
+          this?.studentBarChart();
+          this?.studentLineChart();
+          // this.setSurveyChart();
 
         })
-        this.doughnutChartData= {
-          labels: this.doughnutChartLabels,
-          datasets: [
-            {
-              data: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms, this.completedCourses, this.completedPrograms],
-              backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8', '#73af5a', '#af5a79'],
-            },
-          ],
-        };
+        // this.pieChartData= {
+        //   labels: this.pieChartLabels,
+        //   datasets: [
+        //     {
+        //       data: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms, this.completedCourses, this.completedPrograms],
+        //       backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8', '#73af5a', '#af5a79'],
+        //     },
+        //   ],
+        // };
+
+        // this.barChartData= {
+        //   labels: this.barChartLabels,
+        //   datasets: [
+        //     {
+        //       data: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms, this.completedCourses, this.completedPrograms],
+        //       backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8', '#73af5a', '#af5a79'],
+        //     },
+        //   ],
+        // };
       })
     })
     })
@@ -467,25 +484,93 @@ export class MainComponent implements OnInit {
     })
   }
 
-  public doughnutChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  };
-  public doughnutChartLabels: string[] = [
-    'Registered Courses',
-    'Approved Courses',
-    'Registered Programs ',
-    'Approved Programs',
-    'Completed Courses' , 
-    'Completed Programs'
-  ];
-  public doughnutChartData!: ChartData<'doughnut'>
-  public doughnutChartType: ChartType = 'doughnut';
+  // public doughnutChartOptions: ChartConfiguration['options'] = {
+  //   responsive: true,
+  //   maintainAspectRatio: false,
+  //   plugins: {
+  //     legend: {
+  //       display: false,
+  //     },
+  //   },
+  // };
+//   public studentPieChartOptions: ChartConfiguration['options'] = {
+//     responsive: true,
+//     maintainAspectRatio: false,
+//     plugins: {
+//         legend: {
+//             display: false,
+//         },
+//     },
+// };
+// public pieChartLabels: string[] = [
+//   'Registered Courses',
+//   'Approved Courses',
+//   'Registered Programs',
+//   'Approved Programs',
+//   'Completed Courses',
+//   'Completed Programs'
+// ];
+// public pieChartData: ChartData<'pie'> = {
+//   labels: this.pieChartLabels,
+//   datasets: [
+//       {
+//           data: [/* Insert your data values here */],
+//           backgroundColor: [/* Add colors for each section of the pie chart */],
+//       },
+//   ],
+// };
+// public pieChartType: ChartType = 'pie';
+
+
+// public barChartOptions: ChartConfiguration['options'] = {
+//   responsive: true,
+//   maintainAspectRatio: false,
+//   plugins: {
+//       legend: {
+//           display: false,
+//       },
+//   },
+//   scales: {
+//       x: {
+//           stacked: true, // Stack bars horizontally
+//       },
+//       y: {
+//           stacked: true, // Stack bars vertically
+//       },
+//   },
+// };
+// public barChartLabels: string[] = [
+//   'Registered Courses',
+//   'Approved Courses',
+//   'Registered Programs',
+//   'Approved Programs',
+//   'Completed Courses',
+//   'Completed Programs'
+// ];
+
+// public barChartData: ChartData<'bar'> = {
+//   labels: this.barChartLabels,
+//   datasets: [
+//       {
+//           label: 'Data', // Label for the dataset
+//           data: [/* Insert your data values here */],
+//           backgroundColor: [/* Add colors for each bar in the chart */],
+//       },
+//   ],
+// };
+
+// public barChartType: ChartType = 'bar';
+
+  // public doughnutChartLabels: string[] = [
+  //   'Registered Courses',
+  //   'Approved Courses',
+  //   'Registered Programs ',
+  //   'Approved Programs',
+  //   'Completed Courses' , 
+  //   'Completed Programs'
+  // ];
+  // public doughnutChartData!: ChartData<'doughnut'>
+  // public doughnutChartType: ChartType = 'doughnut';
   //End Student Information
   getStudentsList() {
     let payload = {
@@ -760,6 +845,8 @@ export class MainComponent implements OnInit {
       this.isPCDB = true;
     }
     if (role == 'Admin') {
+      this.getAdminDashboard();
+    } else if (role === 'Student') {
       this.getStudentDashboard();
     }
     
@@ -1643,8 +1730,99 @@ private attendanceBarChart() {
   }
 
 
-
- 
+  private studentPieChart() {
+    this.studentPieChartOptions = {
+      series: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms, this.completedCourses, this.completedPrograms],
+     
+      chart: {
+        type: 'pie',
+        height: 330,
+      },
+      labels: ['Registered Courses', 'Approved Courses', 'Registered Programs', 'Approved Programs', 'Completed Courses', 'Completed Programs'],
+      // colors: ['#25B9C1', '#4B4BCB', '#EA9022', '#9E9E9E'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+    };
+  }
+  private studentBarChart() {
+    this.studentBarChartOptions = {
+      series: [{
+        name: 'Courses',
+        data: [this.registeredCourses, this.approvedCourses, this.completedCourses]
+      }, {
+        name: 'Programs',
+        data: [this.registeredPrograms, this.approvedPrograms, this.completedPrograms]
+      }],
+      chart: {
+        type: 'bar',
+        height: 330,
+      },
+      xaxis: {
+        categories: ['Registered', 'Approved', 'Completed']
+      },
+      yaxis: {
+        title: {
+          text: 'Number of Courses/Programs'
+        }
+      },
+      labels: ['Registered', 'Approved', 'Completed'],
+      colors: ['#25B9C1', '#4B4BCB'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+    };
+  }
+  private studentLineChart() {
+    this.studentLineChartOptions = {
+      series: [{
+        name: 'Courses',
+        data: [this.registeredCourses, this.approvedCourses, this.completedCourses]
+      }, {
+        name: 'Programs',
+        data: [this.registeredPrograms, this.approvedPrograms, this.completedPrograms]
+      }],
+      chart: {
+        type: 'line',
+        height: 330,
+      },
+      xaxis: {
+        categories: ['Registered', 'Approved', 'Completed']
+      },
+      yaxis: {
+        title: {
+          text: 'Number of Courses/Programs'
+        }
+      },
+      labels: ['Registered', 'Approved', 'Completed'],
+      colors: ['#25B9C1', '#4B4BCB'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+    };
+  }
+  
 
   aboutStudent(id: any) {
     this.router.navigate(['/student/settings/view-student'], {
@@ -2108,7 +2286,7 @@ private attendanceBarChart() {
     })
        
   }
-  getStudentDashboard(){
+  getAdminDashboard(){
     this.settingsService.getStudentDashboard().subscribe(response => {
     
       this.dashboard = response?.data?.docs[2];
@@ -2174,5 +2352,26 @@ private attendanceBarChart() {
       this.getCount();
       this.usersLineChart();
     }
+  }
+
+  getStudentDashboard(){
+    this.settingsService.getStudentDashboard().subscribe(response => {
+      this.studentDashboard = response.data.docs[1];
+      this.setStudentsChart();
+    })
+  }
+
+  setStudentsChart(){
+    if (this.studentDashboard.content[0].viewType == 'Pie Chart') {
+      this.isStudentPie = true;
+      this.studentPieChart();
+    } else if (this.studentDashboard.content[0].viewType == 'Bar Chart') {
+      this.isStudentBar = true;
+      this.studentBarChart();
+    } else if (this.studentDashboard.content[0].viewType == 'Line Chart') {
+      this.isStudentLine = true;
+      this.studentLineChart();
+    } 
+    
   }
 }
