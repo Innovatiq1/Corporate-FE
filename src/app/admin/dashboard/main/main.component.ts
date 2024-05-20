@@ -63,6 +63,8 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { SettingsService } from '@core/service/settings.service';
+import { BarChart } from 'angular-feather/icons';
 export type barChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -74,7 +76,17 @@ export type barChartOptions = {
   legend: ApexLegend;
   fill: ApexFill;
 };
-
+export type pieChart1Options = {
+  series: ApexAxisChartSeries | ApexNonAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions?: ApexPlotOptions;
+  responsive: ApexResponsive[];
+  labels?: string[];
+  legend: ApexLegend;
+  fill: ApexFill;
+  colors: string[];
+};
 export type areaChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -121,6 +133,23 @@ export type pieChartOptions1 = {
   responsive: ApexResponsive[];
   labels: string[];
 };
+export type lineChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions?: ApexPlotOptions;
+  responsive: ApexResponsive[];
+  labels?: string[];
+  legend: ApexLegend;
+  fill: ApexFill;
+  xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
+  grid: ApexGrid;
+  stroke: ApexStroke;
+  markers: ApexMarkers;
+  colors: string[];
+};
+
 //end
 
 @Component({
@@ -132,6 +161,8 @@ export class MainComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
   public areaChartOptions!: Partial<chartOptions>;
   public barChartOptions!: Partial<chartOptions>;
+  public pieChart1Options!: Partial<pieChart1Options>;
+  public lineChartOptions!: Partial<lineChartOptions>;
   public performanceRateChartOptions!: Partial<chartOptions>;
   public polarChartOptions!: Partial<chartOptions>;
   registeredCourses: any;
@@ -231,6 +262,13 @@ export class MainComponent implements OnInit {
   isTCDB: boolean = false;
   isCMDB: boolean = false;
   isPCDB: boolean = false;
+  dashboard: any;
+  // viewType: any;
+  isBar: boolean = false;
+  isPie: boolean = false;
+  isLine: boolean = false;
+  isList: boolean = false;
+
   constructor(
     private courseService: CourseService,
     private userService: UserService,
@@ -241,6 +279,7 @@ export class MainComponent implements OnInit {
     private fb: UntypedFormBuilder,private announcementService:AnnouncementService,
     private authenticationService:AuthenService,private leaveService: LeaveService,
     public lecturesService: LecturesService,
+    private settingsService: SettingsService,
   ) {
     //constructor
     let urlPath = this.router.url.split('/')
@@ -696,9 +735,12 @@ export class MainComponent implements OnInit {
     } else if ( role === 'programcoordinator'|| role === 'Program manager' ) {
       this.isPCDB = true;
     }
+    if (role == 'Admin') {
+      this.getStudentDashboard();
+    }
     
 //Student
-    this.chart22();
+    this.performancePieChart();
     this.getApprovedCourse();
     this.getApprovedProgram();
     this.getApprovedLeaves();
@@ -786,7 +828,7 @@ export class MainComponent implements OnInit {
     };
   }
 
-  private chart22() {
+  private performanceBarChart() {
     this.barChartOptions = {
       series: [
         {
@@ -802,7 +844,7 @@ export class MainComponent implements OnInit {
           data: [11, 17, 15, 15, 21, 14],
         },
         {
-          name: 'Mathes',
+          name: 'Maths',
           data: [21, 7, 25, 13, 22, 8],
         },
       ],
@@ -852,12 +894,94 @@ export class MainComponent implements OnInit {
         opacity: 1,
         colors: ['#25B9C1', '#4B4BCB', '#EA9022', '#9E9E9E'],
       },
+      
+    };
+  }
+  
+  private performancePieChart() {
+    const physicsData = [44, 55, 41, 67, 22, 43];
+    const computerData = [13, 23, 20, 8, 13, 27];
+    const managementData = [11, 17, 15, 15, 21, 14];
+    const mathesData = [21, 7, 25, 13, 22, 8];
+  
+    const totalPhysics = physicsData.reduce((a, b) => a + b, 0);
+    const totalComputer = computerData.reduce((a, b) => a + b, 0);
+    const totalManagement = managementData.reduce((a, b) => a + b, 0);
+    const totalMathes = mathesData.reduce((a, b) => a + b, 0);
+  
+    this.pieChart1Options = {
+      series: [totalPhysics, totalComputer, totalManagement, totalMathes],
+      chart: {
+        type: 'pie',
+        height: 330,
+      },
+      labels: ['Physics', 'Computer', 'Management', 'Maths'],
+      colors: ['#25B9C1', '#4B4BCB', '#EA9022', '#9E9E9E'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
     };
   }
 
-
-
-
+  private performanceLineChart() {
+    this.lineChartOptions = {
+      series: [
+        {
+          name: 'Physics',
+          data: [44, 55, 41, 67, 22, 43],
+        },
+        {
+          name: 'Computer',
+          data: [13, 23, 20, 8, 13, 27],
+        },
+        {
+          name: 'Management',
+          data: [11, 17, 15, 15, 21, 14],
+        },
+        {
+          name: 'Maths',
+          data: [21, 7, 25, 13, 22, 8],
+        },
+      ],
+      chart: {
+        type: 'line',
+        height: 330,
+        foreColor: '#9aa0ac',
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      xaxis: {
+        type: 'category',
+        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'right',
+        floating: true,
+        offsetY: -25,
+        offsetX: -5,
+      },
+      
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      colors: ['#25B9C1', '#4B4BCB', '#EA9022', '#9E9E9E'],
+    };
+  }
+  
 
   private chart1() {
     this.areaChartOptions = {
@@ -1135,6 +1259,9 @@ export class MainComponent implements OnInit {
       ],
     };
   }
+
+ 
+
   aboutStudent(id: any) {
     this.router.navigate(['/student/settings/view-student'], {
       queryParams: { data: id },
@@ -1596,5 +1723,25 @@ export class MainComponent implements OnInit {
       this.studentCount=this.count?.students
     })
        
+  }
+  getStudentDashboard(){
+    this.settingsService.getStudentDashboard().subscribe(response => {
+      this.dashboard = response.data.docs[2];
+      this.setPerformanceChart();
+    })
+  }
+
+  setPerformanceChart() {
+    if (this.dashboard.content[5].viewType == 'Bar Chart') {
+      this.isBar = true;
+      this.performanceBarChart();
+    } else if (this.dashboard.content[5].viewType == 'Pie Chart') {
+      this.isPie = true;
+      this.performancePieChart();
+    }
+    else if (this.dashboard.content[5].viewType == 'Line Chart') {
+      this.isLine = true;
+      this.performanceLineChart();
+    }
   }
 }
