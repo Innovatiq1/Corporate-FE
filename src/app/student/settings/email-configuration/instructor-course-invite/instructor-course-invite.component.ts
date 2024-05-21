@@ -20,6 +20,8 @@ export class InstructorCourseInviteComponent {
   isLoading = false;
   assignData :any[] = [];
   isSubmitted=false;
+  _id: number | undefined;
+
 
   public Editor: any = ClassicEditor;
 
@@ -78,7 +80,7 @@ export class InstructorCourseInviteComponent {
 
   toggle(_data: any){
     this.edit =!this.edit;
-    // this._id = _data._id;
+    this._id = _data._id;
     this.emailTemplateForm.patchValue({
       email_subject: _data.email_subject,
       email_top_header_text:_data.email_top_header_text,
@@ -160,47 +162,31 @@ update(){
   this.isSubmitted = true;
 }
 }
-updateTemplate(){
+updateTemplate() {
   return new Promise<void>((resolve, reject) => {
-    // this.markAllTouched();
-    if (this.emailTemplateForm.valid) {
-      
-        let obj = this.emailTemplateForm.value;
-        let test =obj.email_content
-        
-
-        //const stringWithoutSpaces = test.replace(/\s+/g, '');
-
-        // Remove <p> tags
-        const stringWithoutPTags = this.removeTagsAndSpaces(test)
-        obj['email_content']=stringWithoutPTags
-        console.log("stringWithoutPTags",stringWithoutPTags)
-      
-
-        obj['insertaction'] = 'new_project_add_template';
-        this.emailConfigurationService.updateForgetPasswordTemplate(obj,this.id).subscribe(
-          (res) => {
-            Swal.fire({
-              title: 'Successful',
-              text: 'Update data Succesfully',
-              icon: 'success',
-            });
-            this.back();
-            resolve();
-            this.getForgetPasswordTemplate();
-          },
-          (err) => {
-            Swal.fire(
-              'Failed to Update',
-              'error'
-            );
-            reject();
-          },
-          () => {
-            reject();
-          }
-        );
-      }
-    }
-  )};
+    const obj = this.emailTemplateForm.value;
+    obj.insertaction = 'new_project_add_template';
+    this.emailConfigurationService
+      .updateForgetPasswordTemplate(obj, this._id)
+      .subscribe(
+        (res) => {
+          Swal.fire({
+            title: 'Successful',
+            text: 'Update data Succesfully',
+            icon: 'success',
+          });
+          this.getForgetPasswordTemplate();
+          this.back();
+          resolve();
+        },
+        (err) => {
+          Swal.fire('Failed to Update', 'error');
+          reject();
+        },
+        () => {
+          reject();
+        }
+      );
+  });
+}
 }
