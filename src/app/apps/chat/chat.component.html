@@ -38,7 +38,11 @@
               <img src="assets/images/user/user2.jpg" alt="avatar">
               <div class="chat-about">
                 <div class="chat-with">{{user}}</div>
+                
               </div>
+              <button style="float: right;" mat-icon-button class="col-red" (click)="delete()" >
+                <mat-icon>delete_outline</mat-icon>
+              </button>
             </div>
             <ng-scrollbar style="height: 600px" visibility="hover">
               <div class="chat-history" id="chat-conversation">
@@ -99,10 +103,10 @@
               </div> -->
               <div class="row mt-4 chat-upload">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3">
-                  <button class="btn-space" mat-raised-button color="primary" (click)="cancel()">
-                    cancel
+                  <button class="btn-space" mat-raised-button color="warn" (click)="cancel()">
+                    Cancel 
                   </button>
-                  <button type="button" mat-raised-button color="warn" (click)="update()">
+                  <button type="button" mat-raised-button color="primary" (click)="update()">
                     Resolved
                   </button>
                 </div>
