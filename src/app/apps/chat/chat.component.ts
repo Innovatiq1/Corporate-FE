@@ -3,6 +3,7 @@ import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SupportService } from '../support/support.service';
 import { StudentsService } from 'app/admin/students/students.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -12,9 +13,9 @@ export class ChatComponent {
   hideRequiredControl = new UntypedFormControl(false);
   breadscrums = [
     {
-      title: 'Chat',
-      items: ['Apps'],
-      active: 'Chat',
+      title: ' View',
+      items: ['Support'],
+      active: ' View',
     },
   ];
   students: any;
@@ -24,6 +25,8 @@ export class ChatComponent {
 format: string|undefined;
 user!:string;
   dataToUpdate: any;
+  dataSource: any;
+  totalTickets: any;
   constructor(private studentService:StudentsService,public activeRoute: ActivatedRoute, private supportService: SupportService,public router:Router) {
     //constructor
     const today = new Date();
@@ -38,6 +41,7 @@ user!:string;
 this.getAllStudents();
 this.formatAMPM(new Date)
 this. getDetailedAboutTickets();
+this.listOfTicket();
   }
 
    formatAMPM(date: { getHours: () => any; getMinutes: () => any; }) {
@@ -73,13 +77,40 @@ console.log("res",res);
    })
   }
   cancel(){
-    this.router.navigate(['apps/support'])
+    window.history.back()
+    //this.router.navigate(['apps/support'])
   }
  update(){
   // console.log("source",this.dataToUpdate);
   this.supportService.updateChat(this.dataToUpdate).subscribe(res =>{
-    this.router.navigate(['apps/support'])
+    //this.router.navigate(['apps/support'])
+    window.history.back();
   })
 }
+listOfTicket() {
+  this.supportService.getAllTickets().subscribe((res) => {
+    this.dataSource = res.data.docs;
+    this.totalTickets = this.dataSource.length;
+  });
+}
+delete(){
 
+  Swal.fire({
+    title: "Confirm Deletion",
+    text: "Are you sure you want to delete this ticket?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Delete",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+  this.supportService.deleteTicket(this.chatId).subscribe(res =>{
+    window.history.back();
+    this.listOfTicket();
+  })
+}
+});
+}
 }
