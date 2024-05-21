@@ -33,6 +33,7 @@ import { StudentsService } from 'app/admin/students/students.service';
 import { SurveyService } from 'app/admin/survey/survey.service';
 import { PaymentDailogComponent } from './payment-dailog/payment-dailog.component';
 import { SettingsService } from '@core/service/settings.service';
+import { InvoiceComponent } from './invoice/invoice.component';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -366,117 +367,142 @@ export class ViewCourseComponent implements OnDestroy {
   registerClass(classId: string) {
     var userdata = JSON.parse(localStorage.getItem('currentUser')!);
     var studentId = localStorage.getItem('id');
+    debugger
     if(this.paid){
-      const dialogRef = this.dialog.open(PaymentDailogComponent, {
+      const today = new Date();
+      const date = today.toISOString().split('T')[0];
+      let body = {
+        email: userdata.user.email,
+        name: userdata.user.name,
+        courseTitle: this.classDetails?.courseId?.title,
+        courseFee: this.classDetails?.courseId?.fee,
+        studentId: studentId,
+        classId: this.classId,
+        title: this.title,
+        coursekit: this.courseKit,
+        date: date,
+      };
+      const invoiceDialogRef = this.dialog.open(InvoiceComponent, {
         width: '1000px',
-        data: { payment: '' } 
+        height: '600px',
+        data: body
       });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          if (result.payment === 'card') {
-            let payload = {
-              email: userdata.user.email,
-              name: userdata.user.name,
-              courseTitle: this.classDetails?.courseId?.title,
-              courseFee: this.classDetails?.courseId?.fee,
-              studentId: studentId,
-              classId: this.classId,
-              title: this.title,
-              coursekit: this.courseKit,
-            };
-        
-          this.courseService.saveRegisterClass(payload).subscribe((response) => {
-            
-            this.document.location.href = response.data.session.url;
-            this.getClassDetails();
+      invoiceDialogRef.afterClosed().subscribe(res => {
+        if (res){
+          const dialogRef = this.dialog.open(PaymentDailogComponent, {
+            width: '650px',
+            height: '300px',
+            data: { payment: '' } 
           });
-          } else if (result.payment === 'other') {
-            let payload = {
-              email: userdata.user.email,
-              name: userdata.user.name,
-              courseTitle: this.classDetails?.courseId?.title,
-              courseFee: this.classDetails?.courseId?.fee,
-              studentId: studentId,
-              classId: this.classId,
-              title: this.title,
-              coursekit: this.courseKit,
-            };
-        
-                this.courseService.createOrder(payload).subscribe((response) => {
-                  if(response.status == 200){
-                    this.settingsService.getPayment().subscribe((res:any)=>{
-                      this.razorPayKey = res.data.docs[0].keyId;
-                    const paymentOrderId = response.data.id;
-                    const options: any = {
-                      key: this.razorPayKey,
-                      amount: this.classDetails?.courseId?.fee,
-                      currency: 'INR',
-                      name: userdata.user.email,
-                      description:this.classDetails?.courseId?.title,
-                      order_id: paymentOrderId, 
-                      modal: {
-                        escape: false,
-                      },
-                      notes: {
-                      },
-                      theme: {
-                        color: '#ddcbff',
-                      },
-                    };
-                    setTimeout(()=>{
-                      options.handler = (response: any, error: any) => {
-                        options.response = response;
-                        if (error) {
-                          this.router.navigate([
-                            '/student/fail-course/',
-                            this.classId
-                          ]);
-                        } else {  
-                          this.courseService
-                            .verifyPaymentSignature(response, paymentOrderId)
-                            .subscribe((response: any) => {
-                              let payload = {
-                                email: userdata.user.email,
-                                name: userdata.user.name,
-                                courseTitle: this.classDetails?.courseId?.title,
-                                courseFee: this.classDetails?.courseId?.fee,
-                                studentId: studentId,
-                                classId: this.classId,
-                                title: this.title,
-                                coursekit: this.courseKit,
-                                orderId:response?.data?.payment?.original_order_id,
-                                paymentId:response?.data?.payment?.razorpay_payment_id,
-                                razorpay:true
-                              };
-                          
-                                  this.courseService.saveRegisterClass(payload).subscribe((res) => {
-                                    this.getClassDetails();
-                                    response.data.isPaymentVerfied
-                                    ? this.router.navigate(['/student/sucess-course/',this.classId])
-                                    : this.router.navigate(['/student/fail-course/',this.classId])
-            });
-        
-                             
-                            });
-                        }
-                      };
-                      options.modal.ondismiss = () => {
-                        alert('Transaction has been cancelled.');
-                        this.router.navigate(['/student/fail-course/',this.classId])             
-                       };
-                      const rzp = new this.courseService.nativeWindow.Razorpay(options);
-                      rzp.open();
-                    },100)
-                  })                  
-                  } else {
-                    alert('Server side error')
-                  }
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              if (result.payment === 'card') {
+                let payload = {
+                  email: userdata.user.email,
+                  name: userdata.user.name,
+                  courseTitle: this.classDetails?.courseId?.title,
+                  courseFee: this.classDetails?.courseId?.fee,
+                  studentId: studentId,
+                  classId: this.classId,
+                  title: this.title,
+                  coursekit: this.courseKit,
+                };
+            
+              this.courseService.saveRegisterClass(payload).subscribe((response) => {
                 
-                })
-          }
-          
+                this.document.location.href = response.data.session.url;
+                this.getClassDetails();
+              });
+              } else if (result.payment === 'other') {
+                let payload = {
+                  email: userdata.user.email,
+                  name: userdata.user.name,
+                  courseTitle: this.classDetails?.courseId?.title,
+                  courseFee: this.classDetails?.courseId?.fee,
+                  studentId: studentId,
+                  classId: this.classId,
+                  title: this.title,
+                  coursekit: this.courseKit,
+                };
+            
+                    this.courseService.createOrder(payload).subscribe((response) => {
+                      if(response.status == 200){
+                        this.settingsService.getPayment().subscribe((res:any)=>{
+                          this.razorPayKey = res.data.docs[0].keyId;
+                        const paymentOrderId = response.data.id;
+                        const options: any = {
+                          key: this.razorPayKey,
+                          amount: this.classDetails?.courseId?.fee,
+                          currency: 'INR',
+                          name: userdata.user.email,
+                          description:this.classDetails?.courseId?.title,
+                          order_id: paymentOrderId, 
+                          modal: {
+                            escape: false,
+                          },
+                          notes: {
+                          },
+                          theme: {
+                            color: '#ddcbff',
+                          },
+                        };
+                        setTimeout(()=>{
+                          options.handler = (response: any, error: any) => {
+                            options.response = response;
+                            if (error) {
+                              this.router.navigate([
+                                '/student/fail-course/',
+                                this.classId
+                              ]);
+                            } else {  
+                              this.courseService
+                                .verifyPaymentSignature(response, paymentOrderId)
+                                .subscribe((response: any) => {
+                                  let payload = {
+                                    email: userdata.user.email,
+                                    name: userdata.user.name,
+                                    courseTitle: this.classDetails?.courseId?.title,
+                                    courseFee: this.classDetails?.courseId?.fee,
+                                    studentId: studentId,
+                                    classId: this.classId,
+                                    title: this.title,
+                                    coursekit: this.courseKit,
+                                    orderId:response?.data?.payment?.original_order_id,
+                                    paymentId:response?.data?.payment?.razorpay_payment_id,
+                                    razorpay:true
+                                  };
+                              
+                                      this.courseService.saveRegisterClass(payload).subscribe((res) => {
+                                        this.getClassDetails();
+                                        response.data.isPaymentVerfied
+                                        ? this.router.navigate(['/student/sucess-course/',this.classId])
+                                        : this.router.navigate(['/student/fail-course/',this.classId])
+                });
+            
+                                 
+                                });
+                            }
+                          };
+                          options.modal.ondismiss = () => {
+                            alert('Transaction has been cancelled.');
+                            this.router.navigate(['/student/fail-course/',this.classId])             
+                           };
+                          const rzp = new this.courseService.nativeWindow.Razorpay(options);
+                          rzp.open();
+                        },100)
+                      })                  
+                      } else {
+                        alert('Server side error')
+                      }
+                    
+                    })
+              }
+              
+            }
+          });
         }
-      });
+      })
+     
     }
       
    
