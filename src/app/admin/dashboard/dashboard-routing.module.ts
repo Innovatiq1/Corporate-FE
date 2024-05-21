@@ -11,6 +11,7 @@ import { TrainingAdministratorComponent } from './training-administrator/trainin
 import { HodDashboardComponent } from './hod-dashboard/hod-dashboard.component';
 import { TrainingCoordinatorDbComponent } from './training-coordinator-db/training-coordinator-db.component';
 import { TrainingApprovalTabComponent } from './training-approval-tab/training-approval-tab.component';
+import { EtmsDashboardComponent } from './etms-dashboard/etms-dashboard.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'training-approval-tab',
     component: TrainingApprovalTabComponent,
+  },
+  {
+    path: 'etms-dashboard',
+    component: EtmsDashboardComponent
   },
 ];
 @NgModule({

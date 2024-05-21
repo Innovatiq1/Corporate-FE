@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EtmsDashboardComponent } from './etms-dashboard/etms-dashboard.component';
+// import { EtmsDashboardComponent } from './etms-dashboard/etms-dashboard.component';
 import { EmployeeRequestComponent } from './employee-request/employee-request.component';
 import { EmployeeStatusComponent } from './employee-status/employee-status.component';
 import { AllRequestComponent } from './all-request/all-request.component';
@@ -17,10 +17,10 @@ import { NewCourseRequestComponent } from './new-course-request/new-course-reque
 
 
 const routes: Routes = [
-  {
-    path: 'etms-dashboard',
-    component: EtmsDashboardComponent
-  },
+  // {
+  //   path: 'etms-dashboard',
+  //   component: EtmsDashboardComponent
+  // },
   {
     path: 'course-request',
     component: EmployeeRequestComponent

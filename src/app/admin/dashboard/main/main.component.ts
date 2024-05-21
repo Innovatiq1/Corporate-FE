@@ -152,6 +152,8 @@ export type lineChartOptions = {
   stroke: ApexStroke;
   markers: ApexMarkers;
   colors: string[];
+  title: ApexTitleSubtitle;
+  tooltip: ApexTooltip;
   series2: ApexNonAxisChartSeries;
 };
 
@@ -174,7 +176,7 @@ export class MainComponent implements OnInit {
   public attendanceBarChartOptions!: Partial<chartOptions>;
   public attendancePieChartOptions!: Partial<pieChart1Options>;
   public polarChartOptions!: Partial<chartOptions>;
-  public usersLineChartOptions!: Partial<chartOptions>;
+  public usersLineChartOptions!: Partial<lineChartOptions>;
   public usersBarChartOptions!: Partial<chartOptions>;
   public studentPieChartOptions!: Partial<pieChart1Options>;
   public studentBarChartOptions!: Partial<chartOptions>;
@@ -351,7 +353,7 @@ export class MainComponent implements OnInit {
       this.instructorCount = this.count?.instructors;
       this.adminCount = this.count?.admins;
       this.studentCount = this.count?.students;
-      // this.setUsersChart();
+      this.setUsersChart();
     });
   }
   getInstructorsList() {
@@ -1470,9 +1472,9 @@ export class MainComponent implements OnInit {
         marker: {
           show: true,
         },
-        x: {
-          show: true,
-        },
+        // x: {
+        //   show: true,
+        // },
       },
     };
   }
@@ -1560,9 +1562,9 @@ private attendanceBarChart() {
           marker: {
               show: true,
           },
-          x: {
-              show: true,
-          },
+          // x: {
+          //     show: true,
+          // },
       },
       title: {
           text: 'Students by Day',
@@ -1655,9 +1657,9 @@ private attendanceBarChart() {
         marker: {
             show: true,
         },
-        x: {
-            show: true,
-        },
+        // x: {
+        //     show: true,
+        // },
     },
     // title: {
     //     text: 'Students by Day',
@@ -1722,9 +1724,9 @@ private attendanceBarChart() {
         marker: {
           show: true,
         },
-        x: {
-          show: true,
-        },
+        // x: {
+        //   show: true,
+        // },
       },}
 
   }
@@ -2298,58 +2300,58 @@ private attendanceBarChart() {
     })
   }
   setSurveyChart() {
-    if (this.dashboard.content[4].viewType == 'Bar Chart') {
+    if (this.dashboard.content[0].viewType == 'Bar Chart') {
       this.isSurveyBar = true;
       this.surveyBarChart();
-    } else if (this.dashboard.content[4].viewType == 'Pie Chart') {
+    } else if (this.dashboard.content[0].viewType == 'Pie Chart') {
       this.isSurveyPie = true;
       console.log('hii')
       this.surveyPieChart();
     }
-    else if (this.dashboard.content[4].viewType == 'Line Chart') {
+    else if (this.dashboard.content[0].viewType == 'Line Chart') {
       this.isArea = true;
       this.chart1();
     }
   }
   setPerformanceChart() {
-    if (this.dashboard.content[5].viewType == 'Bar Chart') {
+    if (this.dashboard.content[1].viewType == 'Bar Chart') {
       this.isBar = true;
       this.performanceBarChart();
-    } else if (this.dashboard.content[5].viewType == 'Pie Chart') {
+    } else if (this.dashboard.content[1].viewType == 'Pie Chart') {
       this.isPie = true;
       this.performancePieChart();
     }
-    else if (this.dashboard.content[5].viewType == 'Line Chart') {
+    else if (this.dashboard.content[1].viewType == 'Line Chart') {
       this.isLine = true;
       this.performanceLineChart();
     }
   }
   setAttendanceChart() {
-    if (this.dashboard.content[6].viewType == 'Bar Chart') {
+    if (this.dashboard.content[2].viewType == 'Bar Chart') {
       this.isAttendanceBar = true;
       this.attendanceBarChart();
-    } else if (this.dashboard.content[6].viewType == 'Pie Chart') {
+    } else if (this.dashboard.content[2].viewType == 'Pie Chart') {
       this.isAttendancePie = true;
       this.attendancePieChart();
     }
-    else if (this.dashboard.content[6].viewType == 'Line Chart') {
+    else if (this.dashboard.content[2].viewType == 'Line Chart') {
       this.isAttendanceLine = true;
       this.attendanceLineChart();
     }
   }
   setUsersChart() {
-    if (this.dashboard.content[7].viewType == 'Bar Chart') {
+    if (this.dashboard.content[3].viewType == 'Bar Chart') {
       this.isUsersBar = true;
-      this.getCount();
+      // this.getCount();
       this.usersBarChart();
-    } else if (this.dashboard.content[7].viewType == 'Pie Chart') {
+    } else if (this.dashboard.content[3].viewType == 'Pie Chart') {
       this.isUsersPie = true;
-      this.getCount();
+      // this.getCount();
       this.usersPieChart();
     }
-    else if (this.dashboard.content[7].viewType == 'Line Chart') {
+    else if (this.dashboard.content[3].viewType == 'Line Chart') {
       this.isUsersLine = true;
-      this.getCount();
+      // this.getCount();
       this.usersLineChart();
     }
   }

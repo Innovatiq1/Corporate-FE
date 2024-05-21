@@ -21,6 +21,7 @@ import {
   ApexNonAxisChartSeries,
 } from 'ng-apexcharts';
 import { SettingsService } from '@core/service/settings.service';
+import { AuthenService } from '@core/service/authen.service';
 
 export type chartOptions = {
   series: ApexAxisChartSeries;
@@ -93,13 +94,17 @@ export class EtmsDashboardComponent implements OnInit {
   isActualBar: boolean = false;
   dashboard: any;
 
-  constructor( private settingsService: SettingsService,) {
+  constructor( private settingsService: SettingsService, private authenticationService:AuthenService,) {
     this.percentageValue = function (value: number): string {
       return `${Math.round(value)}`;
     };
   }
   ngOnInit() {
-    this.getStudentDashboard()
+    const role = this.authenticationService.currentUserValue.user.role;
+    console.log('roles', this.authenticationService.currentUserValue.user);
+    if (role == 'Admin') {
+      this.getStudentDashboard();
+    }
     this.chart2();
     this.chart3();
   }
@@ -474,11 +479,11 @@ export class EtmsDashboardComponent implements OnInit {
         marker: {
           show: true,
         },
-        x: {
-          show: true,
-        },
+        // x: {
+        //   show: true,
+        // },
       },
-    };
+    }
   }
   private budgetPieChart() {
     this.budgetPieChartOptions = {
@@ -500,9 +505,9 @@ export class EtmsDashboardComponent implements OnInit {
             marker: {
                 show: true,
             },
-            x: {
-                show: true,
-            },
+            // x: {
+            //     show: true,
+            // },
         },
       
     };
@@ -562,12 +567,12 @@ this.budgetBarChartOptions = {
         marker: {
             show: true,
         },
-        x: {
-            show: true,
-        },
+        // x: {
+        //     show: true,
+        // },
     },
    
-};
+}
 }
 
 private actualBarChart() {
@@ -625,12 +630,12 @@ private actualBarChart() {
           marker: {
               show: true,
           },
-          x: {
-              show: true,
-          },
+          // x: {
+          //     show: true,
+          // },
       },
      
-  };
+  }
 }
 
 
@@ -689,11 +694,11 @@ private actualLineChart() {
       marker: {
         show: true,
       },
-      x: {
-        show: true,
-      },
+      // x: {
+      //   show: true,
+      // },
     },
-  };
+  }
 }
 private actualPieChart() {
   this.actualPieChartOptions = {
@@ -715,9 +720,9 @@ private actualPieChart() {
           marker: {
               show: true,
           },
-          x: {
-              show: true,
-          },
+          // x: {
+          //     show: true,
+          // },
       },
     
   };
@@ -732,28 +737,28 @@ private actualPieChart() {
   }
 
   setBudgetChart() {
-    if (this.dashboard.content[27].viewType == 'Bar Chart') {
+    if (this.dashboard.content[6].viewType == 'Bar Chart') {
       this.isBudgetBar = true;
       this.budgetBarChart();
-    } else if (this.dashboard.content[27].viewType == 'Pie Chart') {
+    } else if (this.dashboard.content[6].viewType == 'Pie Chart') {
       this.isBudgetPie = true;
       this.budgetPieChart();
     }
-    else if (this.dashboard.content[27].viewType == 'Line Chart') {
+    else if (this.dashboard.content[6].viewType == 'Line Chart') {
       this.isBudgetLine = true;
       this.budgetLineChart();
     }
   }
 
   setActualChart() {
-    if (this.dashboard.content[29].viewType == 'Bar Chart') {
+    if (this.dashboard.content[7].viewType == 'Bar Chart') {
       this.isActualBar = true;
       this.actualBarChart();
-    } else if (this.dashboard.content[29].viewType == 'Pie Chart') {
+    } else if (this.dashboard.content[7].viewType == 'Pie Chart') {
       this.isActualPie = true;
       this.actualPieChart();
     }
-    else if (this.dashboard.content[29].viewType == 'Line Chart') {
+    else if (this.dashboard.content[7].viewType == 'Line Chart') {
       this.isActualLine = true;
       this.actualLineChart();
     }

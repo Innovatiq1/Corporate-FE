@@ -115,28 +115,7 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-lg-3 col-md-3 col-sm-12">
-        <div class="card card-statistic-2">
-          <div class="clearfix">
-            <div class="card-icon-only shadow-primary float-start">
-              <img src="assets/images/banner/img4.png" alt="">
-            </div>
-            <div class="card-right">
-              <div>
-                <h5 class="float-end">Fees Collection</h5>
-              </div>
-              <div class="col-green">
-                <h3 class="font-weight-bold float-end mb-0">$48,697</h3>
-              </div>
-            </div>
-          </div>
-          <div class="card-content msl-4 mb-3">
-            <p class="m-b-0 d-flex"><i class="material-icons col-orange psr-2">trending_down</i> 22% Less Then Last
-              Month
-            </p>
-          </div>
-        </div>
-      </div> -->
+
         </div>
         <!-- #END# Widgets -->
         <div class="row">
@@ -158,14 +137,15 @@
                   [xaxis]="surveyBarChartOptions.xaxis!" [yaxis]="surveyBarChartOptions.yaxis!"
                   [colors]="surveyBarChartOptions.colors!" [stroke]="surveyBarChartOptions.stroke!"
                   [legend]="surveyBarChartOptions.legend!" [grid]="surveyBarChartOptions.grid!"
-                  [tooltip]="surveyBarChartOptions.tooltip!" [dataLabels]="surveyBarChartOptions.dataLabels!"></apx-chart>
+                  [tooltip]="surveyBarChartOptions.tooltip!"
+                  [dataLabels]="surveyBarChartOptions.dataLabels!"></apx-chart>
               </div>
               <div class="body" *ngIf="isSurveyPie">
                 <apx-chart [series]="surveyPieChartOptions.series!" [chart]="surveyPieChartOptions.chart!"
                   [labels]="surveyPieChartOptions.labels!" [legend]="surveyPieChartOptions.legend!"
-                  [colors]="surveyPieChartOptions.colors!"  [responsive]="surveyPieChartOptions.responsive!"></apx-chart>
+                  [colors]="surveyPieChartOptions.colors!" [responsive]="surveyPieChartOptions.responsive!"></apx-chart>
               </div>
-             
+
             </div>
           </div>
           <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
@@ -196,82 +176,12 @@
                   [markers]="lineChartOptions.markers!">
                 </apx-chart>
               </div>
-           
+
             </div>
           </div>
         </div>
         <div class="row clearfix">
-          <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="card" style="border-radius: 31px;">
-          <div class="header mt-3">
-            <h2>
-              Exam Schedule
-            </h2>
-          </div>
-          <div class="card-body">
-            <ng-scrollbar style="height: 380px" visibility="hover">
-              <ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
-                <li class="lecture-list">
-                  <div class="set-flex">
-                    <div class="media-title font-16">Ship Safety Officer</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">23-05-2024 | 28-05-2024</div>
-                  </div>
-                </li>
-                <li class="lecture-list">
-                  <div class="set-flex">
-                    <div class="media-title font-16">Hose Handling Cranes</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">16-05-2024 | 23-05-2024</div>
-                  </div>
-                </li>
-                <li class="lecture-list">
-                  <div class="set-flex">
-                    <div class="media-title font-16">Cargo Operations</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">16-08-2024 | 23-05-2024</div>
-                  </div>
-                </li>
-                <li class="lecture-list">
-                  <div class="set-flex">
-                    <div class="media-title font-16">Forklift Driver Refresher</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">11-05-2024 | 15-05-2024</div>
-                  </div>
-                </li>
-                <li class="lecture-list">
-                  <div class="set-flex">
-                    <div class="media-title font-16">WSQ Operate Forklift</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">17-05-2024 | 21-05-2024</div>
-                  </div>
-                </li>
-                <li class="lecture-list">
-                  <div class="set-flex">
-                    <div class="media-title font-16">Developmental Safety</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">23-05-2024 | 28-05-2024</div>
-                  </div>
-                </li>
-                <li class="lecture-list">
-                  <div class="set-flex">
-                    <div class="media-title font-16">ICAO PANS-OPS Instrument</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">11-06-2024 | 15-06-2024</div>
-                  </div>
-                </li>
-              </ul>
-            </ng-scrollbar>
-          </div>
-        </div>
-      </div> -->
+
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="card" style="border-radius: 31px;">
               <div class="header mt-3">
@@ -291,20 +201,20 @@
               </div>
               <div class="body" *ngIf="isAttendancePie">
                 <apx-chart [series]="attendancePieChartOptions.series!" [chart]="attendancePieChartOptions.chart!"
-                    [labels]="attendancePieChartOptions.labels!" [colors]="attendancePieChartOptions.colors!"
-                    [dataLabels]="attendancePieChartOptions.dataLabels!" [legend]="attendancePieChartOptions.legend!"
-                    [tooltip]="attendancePieChartOptions.tooltip!">
+                  [labels]="attendancePieChartOptions.labels!" [colors]="attendancePieChartOptions.colors!"
+                  [dataLabels]="attendancePieChartOptions.dataLabels!" [legend]="attendancePieChartOptions.legend!"
+                  [tooltip]="attendancePieChartOptions.tooltip!">
                 </apx-chart>
-            </div>
-            <div class="body" *ngIf="isAttendanceBar">
-              <apx-chart [series]="attendanceBarChartOptions.series!" [chart]="attendanceBarChartOptions.chart!"
+              </div>
+              <div class="body" *ngIf="isAttendanceBar">
+                <apx-chart [series]="attendanceBarChartOptions.series!" [chart]="attendanceBarChartOptions.chart!"
                   [xaxis]="attendanceBarChartOptions.xaxis!" [stroke]="attendanceBarChartOptions.stroke!"
                   [colors]="attendanceBarChartOptions.colors!" [dataLabels]="attendanceBarChartOptions.dataLabels!"
                   [legend]="attendanceBarChartOptions.legend!" [markers]="attendanceBarChartOptions.markers!"
                   [grid]="attendanceBarChartOptions.grid!" [yaxis]="attendanceBarChartOptions.yaxis!"
                   [tooltip]="attendanceBarChartOptions.tooltip!" [title]="attendanceBarChartOptions.title!">
-              </apx-chart>
-          </div>
+                </apx-chart>
+              </div>
             </div>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -324,22 +234,22 @@
               </div>
               <div class="body" *ngIf="isUsersLine">
                 <apx-chart [series]="usersLineChartOptions.series!" [chart]="usersLineChartOptions.chart!"
-                [xaxis]="usersLineChartOptions.xaxis!" [stroke]="usersLineChartOptions.stroke!"
-                [colors]="usersLineChartOptions.colors!" [dataLabels]="usersLineChartOptions.dataLabels!"
-                [legend]="usersLineChartOptions.legend!" [markers]="usersLineChartOptions.markers!"
-                [grid]="usersLineChartOptions.grid!" [yaxis]="usersLineChartOptions.yaxis!"
-                [tooltip]="usersLineChartOptions.tooltip!" [title]="usersLineChartOptions.title!">
-              </apx-chart>
+                  [xaxis]="usersLineChartOptions.xaxis!" [stroke]="usersLineChartOptions.stroke!"
+                  [colors]="usersLineChartOptions.colors!" [dataLabels]="usersLineChartOptions.dataLabels!"
+                  [legend]="usersLineChartOptions.legend!" [markers]="usersLineChartOptions.markers!"
+                  [grid]="usersLineChartOptions.grid!" [yaxis]="usersLineChartOptions.yaxis!"
+                  [tooltip]="usersLineChartOptions.tooltip!" [title]="usersLineChartOptions.title!">
+                </apx-chart>
 
               </div>
               <div class="body" *ngIf="isUsersBar">
                 <apx-chart [series]="usersBarChartOptions.series!" [chart]="usersBarChartOptions.chart!"
-                [xaxis]="usersBarChartOptions.xaxis!" [stroke]="usersBarChartOptions.stroke!"
-                [colors]="usersBarChartOptions.colors!" [dataLabels]="usersBarChartOptions.dataLabels!"
-                [legend]="usersBarChartOptions.legend!" [markers]="usersBarChartOptions.markers!"
-                [grid]="usersBarChartOptions.grid!" [yaxis]="usersBarChartOptions.yaxis!"
-                [tooltip]="usersBarChartOptions.tooltip!" [title]="usersBarChartOptions.title!">
-            </apx-chart>
+                  [xaxis]="usersBarChartOptions.xaxis!" [stroke]="usersBarChartOptions.stroke!"
+                  [colors]="usersBarChartOptions.colors!" [dataLabels]="usersBarChartOptions.dataLabels!"
+                  [legend]="usersBarChartOptions.legend!" [markers]="usersBarChartOptions.markers!"
+                  [grid]="usersBarChartOptions.grid!" [yaxis]="usersBarChartOptions.yaxis!"
+                  [tooltip]="usersBarChartOptions.tooltip!" [title]="usersBarChartOptions.title!">
+                </apx-chart>
               </div>
             </div>
           </div>
@@ -349,23 +259,7 @@
             <div class="card" style="border-radius: 31px;">
               <div class="header mt-3">
                 <h2>Classes List</h2>
-                <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>add_circle_outline</mat-icon>
-                <span>Add</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>delete_outline</mat-icon>
-                <span>Delete</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>refresh</mat-icon>
-                <span>Refresh</span>
-              </button>
-            </mat-menu> -->
+
               </div>
               <div class="tableBody">
                 <div class="table-responsive">
@@ -392,29 +286,7 @@
                         <td>
                           <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
                         </td>
-                        <!-- <td>
-                      <button mat-button [matMenuTriggerFor]="menu">
-                        <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-                        xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                        class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
-                        <path
-                          d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                      </svg>
-  
-                      </button>
-                      
-                              <mat-menu #menu="matMenu" xPosition="before">
-                                <button mat-menu-item  class="tbl-action-btn" (click)="editClass(class.id)" >
-                                  <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                                  <span class="menu-text">Edit</span>
-                                </button>
-                                <button mat-menu-item class="tbl-action-btn" (click)="delete(class.id)">
-                                  <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                                  <span class="menu-text">Delete</span>
-                                </button>
-                              </mat-menu>
-                    
-                    </td> -->
+
                       </tr>
 
                     </tbody>
@@ -423,165 +295,12 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-        <div class="card" style="border-radius: 31px;">
-          <div class="header mt-3">
-            <h2>Sport Achievements</h2>
-            <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>add_circle_outline</mat-icon>
-                <span>Add</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>delete_outline</mat-icon>
-                <span>Delete</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>refresh</mat-icon>
-                <span>Refresh</span>
-              </button>
-            </mat-menu>
-          </div>
-          <div class="tableBody">
-            <div class="table-responsive">
-              <table class="table table-hover ">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Assigned Coach</th>
-                    <th>Date</th>
-                    <th>Sport Name</th>
-                    <th>Actions </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="table-img">
-                      <img src="assets/images/banner/profile-1.png" alt="">
-                    </td>
-                    <td>John Doe</td>
-                    <td><a href="mailto:test@gmail.com"> Jacob Ryan </a></td>
-                    <td>12/05/2016 </td>
-                    <td>
-                      <div class="badge col-red">Cricket</div>
-                    </td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="table-img">
-                      <img src="assets/images/profile-1.png" alt="">
-                    </td>
-                    <td>Sarah Smith</td>
-                    <td><a href="mailto:test@gmail.com"> Rajesh </a></td>
-                    <td>12/05/2016 </td>
-                    <td>
-                      <div class="badge col-green">Boxing</div>
-                    </td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="table-img">
-                      <img src="assets/images/banner/profile.jpg" alt="">
-                    </td>
-                    <td>Airi Satou</td>
-                    <td><a href="mailto:test@gmail.com"> Jay Soni </a></td>
-                    <td>12/05/2016 </td>
-                    <td>
-                      <div class="badge col-purple">Tennis</div>
-                    </td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="table-img">
-                      <img src="assets/images/banner/unnamed.png" alt="">
-                    </td>
-                    <td>Angelica Ramos</td>
-                    <td><a href="mailto:test@gmail.com"> John Deo </a></td>
-                    <td>12/05/2016 </td>
-                    <td>
-                      <div class="badge col-purple">Hockey</div>
-                    </td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
 
-                  <tr>
-                    <td class="table-img">
-                      <img src="assets/images/banner/boy-img-3.jpg" alt="">
-                    </td>
-                    <td>Cara Stevens</td>
-                    <td><a href="mailto:test@gmail.com"> Sarah Smith </a></td>
-                    <td>12/05/2016 </td>
-                    <td>
-                      <div class="badge col-cyan">Gymnastics</div>
-                    </td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div> -->
           <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
             <div class="card" style="border-radius: 31px;">
               <div class="header mt-3">
                 <h2>Instructors List</h2>
-                <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>add_circle_outline</mat-icon>
-                <span>Add</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>delete_outline</mat-icon>
-                <span>Delete</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>refresh</mat-icon>
-                <span>Refresh</span>
-              </button>
-            </mat-menu> -->
+
               </div>
               <div class="tableBody">
                 <div class="table-responsive">
@@ -620,23 +339,7 @@
             <div class="card" style="border-radius: 31px;">
               <div class="header mt-3">
                 <h2>New Student List</h2>
-                <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>add_circle_outline</mat-icon>
-                <span>Add</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>delete_outline</mat-icon>
-                <span>Delete</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>refresh</mat-icon>
-                <span>Refresh</span>
-              </button>
-            </mat-menu> -->
+
               </div>
               <div class="tableBody">
                 <div class="table-responsive">
@@ -663,29 +366,7 @@
                           {{student?.mobile}}
                           <!-- <i class="far fa-file-pdf tbl-pdf"></i> -->
                         </td>
-                        <!-- <td>
-                      <button mat-button [matMenuTriggerFor]="menu">
-                        <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-                        xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                        class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
-                        <path
-                          d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                      </svg>
-  
-                      </button>
-                      
-                              <mat-menu #menu="matMenu" xPosition="before">
-                                <button mat-menu-item  class="tbl-action-btn" (click)="editCall(student)">
-                                  <app-feather-icons [icon]="'edit'"  [class]="'tbl-fav-edit'"></app-feather-icons>
-                                  <span class="menu-text">Edit</span>
-                                </button>
-                                <button mat-menu-item class="tbl-action-btn" (click)="deleteStudent(student)">
-                                  <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                                  <span class="menu-text">Delete</span>
-                                </button>
-                              </mat-menu>
-                     
-                    </td> -->
+
                       </tr>
                     </tbody>
                   </table>
@@ -734,101 +415,32 @@
                 </h4>
                 <div class="recent-report__chart" *ngIf="isStudentPie">
                   <apx-chart [series]="studentPieChartOptions.series!" [chart]="studentPieChartOptions.chart!"
-                  [dataLabels]="studentPieChartOptions.dataLabels!" [labels]="studentPieChartOptions.labels!"
-                  [legend]="studentPieChartOptions.legend!" [fill]="studentPieChartOptions.fill!"
-                  [responsive]="studentPieChartOptions.responsive!">
-                </apx-chart>
-                  </div>
-                  <div class="recent-report__chart" *ngIf="isStudentBar">
-                    <apx-chart [series]="studentBarChartOptions.series!" [chart]="studentBarChartOptions.chart!"
-                               [dataLabels]="studentBarChartOptions.dataLabels!" [labels]="studentBarChartOptions.labels!"
-                               [legend]="studentBarChartOptions.legend!" [fill]="studentBarChartOptions.fill!"
-                               [responsive]="studentBarChartOptions.responsive!">
-                    </apx-chart>
-                  </div>
-                  <div class="recent-report__chart" *ngIf="isStudentLine">
-                    <apx-chart [series]="studentLineChartOptions.series!" [chart]="studentLineChartOptions.chart!"
-                               [dataLabels]="studentLineChartOptions.dataLabels!" [labels]="studentLineChartOptions.labels!"
-                               [legend]="studentLineChartOptions.legend!" [fill]="studentLineChartOptions.fill!"
-                               [responsive]="studentLineChartOptions.responsive!">
-                    </apx-chart>
-                  </div>
-              </div>
-              <!-- <div class="col-md-6" *ngIf="!isStudentPie">
-                <h4>
-                  <div class="weight-600 col-pink pt-1">Good Job, {{studentName}}. Keep Going!! </div>
-                </h4>
-                <!-- <p class="font-15 max-width-600">Keep it up and improve your
-                  result. Progress is very good!!!</p> --<br>
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot1 msr-2"></i> Registered Courses - {{registeredCourses}}</div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot3 msr-2"></i> Registered Programs - {{registeredPrograms}}</div>
-                  </div>
-                  <br><br>
-                  <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot2 msr-2"></i> Approved Courses - {{approvedCourses}}</div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot4 msr-2"></i> Approved Programs - {{approvedPrograms}}</div>
-                  </div>
-                  <br><br>
-                  <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot5 msr-2"></i> Completed Courses - {{completedCourses}}</div>
-                  </div>
-                  <div class="col-lg-6">
-                    <div><i class="fa fa-circle dot6 msr-2"></i> Completed Programs - {{completedPrograms}}</div>
-                  </div>
+                    [dataLabels]="studentPieChartOptions.dataLabels!" [labels]="studentPieChartOptions.labels!"
+                    [legend]="studentPieChartOptions.legend!" [fill]="studentPieChartOptions.fill!"
+                    [responsive]="studentPieChartOptions.responsive!">
+                  </apx-chart>
                 </div>
-              </div> -->
+                <div class="recent-report__chart" *ngIf="isStudentBar">
+                  <apx-chart [series]="studentBarChartOptions.series!" [chart]="studentBarChartOptions.chart!"
+                    [dataLabels]="studentBarChartOptions.dataLabels!" [labels]="studentBarChartOptions.labels!"
+                    [legend]="studentBarChartOptions.legend!" [fill]="studentBarChartOptions.fill!"
+                    [responsive]="studentBarChartOptions.responsive!">
+                  </apx-chart>
+                </div>
+                <div class="recent-report__chart" *ngIf="isStudentLine">
+                  <apx-chart [series]="studentLineChartOptions.series!" [chart]="studentLineChartOptions.chart!"
+                    [dataLabels]="studentLineChartOptions.dataLabels!" [labels]="studentLineChartOptions.labels!"
+                    [legend]="studentLineChartOptions.legend!" [fill]="studentLineChartOptions.fill!"
+                    [responsive]="studentLineChartOptions.responsive!">
+                  </apx-chart>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
       </div>
-      <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-        <div class="card l-bg-purple p-2 px-4 text-white py-3">
-          <div class="info d-flex justify-content-between align-items-center">
-            <div class="d-flex flex-column text-white font-22"> <span>English Vocabulary Test</span>
-              <small class="mt-2"><i class="far fa-clock msr-2"></i> 25, Feb, 2020. 04:00 PM</small> </div>
-          </div>
-        </div>
-        <div class="card l-bg-green p-2 px-4 text-white py-3">
-          <div class="info d-flex justify-content-between align-items-center">
-            <div class="d-flex flex-column text-white font-22"> <span>Science Homework Submition</span>
-              <small class="mt-2"><i class="far fa-clock msr-2"></i> 28, Feb, 2020. 10:00 AM</small> </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="col-md-12 col-sm-12 col-xl-4 col-lg-4">
-        <div class="card notification p-2 px-4 text-black py-3">
-          <small style="text-align: right;font-weight: bold;">
-            Mon, 10 Sep 2023
-          </small>
-          <div class="info d-flex justify-content-between align-items-center">
-        <hr class="m-3" style="color: green;" />
-            <img class="m-3" src="assets/images/banner/meghaphone.png" alt="Megaphone">
-            <div class="d-flex flex-column text-black font-18">
-              <span style="font-weight: bold;"><img class="m-3" src="assets/images/banner/announcement1.jpg" alt="announcement1">
-                STS Transfer Operation
-                </span>
-              <div class="text-black font-12"><span>Ship to Ship (STS) transfer operation online course
-                 provides guidance to participatingcrews to help them to be aware of the STS operation from start to finish.
-                </span>
-              </div>
-          </div>
-          </div>
-          <div class="d-flex justify-content-between m-1">
-            <button class="btn px-4" id="cancel">Archive</button>
 
-            <button class="btn border px-4" id="submit">View</button>
-        </div>
-        </div>
-      </div> -->
-      <!-- <div id="action-description">
-        <p>This sample demonstrates the default functionalities of the Angular Message component with different severity types and predefined styles.</p>
-    </div> -->
     </div>
 
 
@@ -900,204 +512,7 @@
         </div>
       </div>
 
-      <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-        <div class="card">
-          <div class="header">
-            <h2>Time Spent On Learning</h2>
-          </div>
-          <div class="body">
-            <apx-chart [series]="barChartOptions.series!" [chart]="barChartOptions.chart!"
-              [dataLabels]="barChartOptions.dataLabels!" [plotOptions]="barChartOptions.plotOptions!"
-              [responsive]="barChartOptions.responsive!" [xaxis]="barChartOptions.xaxis!" [grid]="barChartOptions.grid!"
-              [legend]="barChartOptions.legend!" [fill]="barChartOptions.fill!"></apx-chart>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-        <div class="card">
-          <div class="header">
-            <h2>
-              Upcomming Class
-            </h2>
-          </div>
-          <div class="card-body">
-            <ng-scrollbar style="height: 335px" visibility="hover">
-              <ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
-                <li class="lecture-list">
-                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig1.jpg">
-                  <div class="set-flex">
-                    <div class="media-title font-16">Cara Stevens</div>
-                    <div class="text-job text-muted mb-0">Mathematics</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">12 June '20</div>
-                    <div class="text-job text-muted mb-0">09:00-10:00</div>
-                  </div>
-                </li>
-                <li class="lecture-list">
-                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig2.jpg">
-                  <div class="set-flex">
-                    <div class="media-title font-16">Airi Satou</div>
-                    <div class="text-job text-muted mb-0">Computer Studies</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">13 June '20</div>
-                    <div class="text-job text-muted mb-0">11:00-12:00</div>
-                  </div>
-                </li>
-                <li class="lecture-list">
-                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig3.jpg">
-                  <div class="set-flex">
-                    <div class="media-title font-16">Jens Brincker</div>
-                    <div class="text-job text-muted mb-0">Geography</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">15 June '20</div>
-                    <div class="text-job text-muted mb-0">09:30-10:30</div>
-                  </div>
-                </li>
-                <li class="lecture-list">
-                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig4.jpg">
-                  <div class="set-flex">
-                    <div class="media-title font-16">Angelica Ramos</div>
-                    <div class="text-job text-muted mb-0">Chemistry</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">16 June '20</div>
-                    <div class="text-job text-muted mb-0">14:00-15:00</div>
-                  </div>
-                </li>
-                <li class="lecture-list">
-                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig5.jpg">
-                  <div class="set-flex">
-                    <div class="media-title font-16">Cara Stevens</div>
-                    <div class="text-job text-muted mb-0">Painting</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">18 June '20</div>
-                    <div class="text-job text-muted mb-0">11:00-12:30</div>
-                  </div>
-                </li>
-                <li class="lecture-list">
-                  <img alt="image" class="msr-3 rounded-circle" width="40" src="assets/images/user/usrbig6.jpg">
-                  <div class="set-flex">
-                    <div class="media-title font-16">Jacob Ryan</div>
-                    <div class="text-job text-muted mb-0">Business Studies</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">22 June '20</div>
-                    <div class="text-job text-muted mb-0">13:00-14:15</div>
-                  </div>
-                </li>
-              </ul>
-            </ng-scrollbar>
-          </div>
-        </div>
-      </div>
 
-    </div>
-    <div class="row clearfix">
-      <div class="col-xs-16 col-sm-16 col-md-12 col-lg-12">
-        <div class="card">
-          <div class="header">
-            <h2>Enrollment Status</h2>
-          </div>
-          <div class="body">
-            <apx-chart [series]="areaChartOptions.series!" [chart]="areaChartOptions.chart!"
-              [xaxis]="areaChartOptions.xaxis!" [yaxis]="areaChartOptions.yaxis!" [colors]="areaChartOptions.colors!"
-              [stroke]="areaChartOptions.stroke!" [legend]="areaChartOptions.legend!" [grid]="areaChartOptions.grid!"
-              [tooltip]="areaChartOptions.tooltip!" [dataLabels]="areaChartOptions.dataLabels!"></apx-chart>
-          </div>
-        </div>
-      </div>
-      <!-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-        <div class="card">
-          <div class="header">
-            <h2>Assignments</h2>
-          </div>
-          <div class="body">
-            <div class="doc-file-type">
-              <ng-scrollbar style="height: 285px" visibility="hover">
-                <ul class="list-unstyled">
-                  <li class="d-flex mb-3">
-                    <span class="msr-3 align-self-center img-icon primary-rgba text-primary"><i
-                        class="far fa-file-word"></i></span>
-                    <div class="set-flex">
-                      <h5 class="font-16 mb-1">Java Programming</h5>
-                      <p>.doc, 4.3 MB</p>
-                    </div>
-                    <div class="ms-auto">
-                      <td>
-                        <i class="far fa-trash-alt psr-3"></i>
-                        <i class="far fa-arrow-alt-circle-down"></i>
-                      </td>
-                    </div>
-                  </li>
-                  <li class="d-flex mb-3">
-                    <span class="msr-3 align-self-center img-icon success-rgba text-success"><i
-                        class="far fa-file-excel"></i></span>
-                    <div class="set-flex">
-                      <h5 class="font-16 mb-1">Angular Theory</h5>
-                      <p>.xls, 2.5 MB</p>
-                    </div>
-                    <div class="ms-auto">
-                      <td>
-                        <i class="far fa-trash-alt psr-3"></i>
-                        <i class="far fa-arrow-alt-circle-down"></i>
-                      </td>
-                    </div>
-                  </li>
-                  <li class="d-flex mb-3">
-                    <span class="msr-3 align-self-center img-icon danger-rgba text-danger"><i
-                        class="far fa-file-pdf"></i></span>
-                    <div class="set-flex">
-                      <h5 class="font-16 mb-1">Maths Sums Solution</h5>
-                      <p>.pdf, 10.5 MB</p>
-                    </div>
-                    <div class="ms-auto">
-                      <td>
-                        <i class="far fa-trash-alt psr-3"></i>
-                        <i class="far fa-arrow-alt-circle-down"></i>
-                      </td>
-                    </div>
-                  </li>
-                  <li class="d-flex mb-3">
-                    <span class="msr-3 align-self-center img-icon info-rgba text-info"><i
-                        class="far fa-file-archive"></i></span>
-                    <div class="set-flex">
-                      <h5 class="font-16 mb-1">Submit Science Journal</h5>
-                      <p>.zip, 53.2 MB</p>
-                    </div>
-                    <div class="ms-auto">
-                      <td>
-                        <i class="far fa-trash-alt psr-3"></i>
-                        <i class="far fa-arrow-alt-circle-down"></i>
-                      </td>
-                    </div>
-                  </li>
-                  <li class="d-flex mb-3">
-                    <span class="msr-3 align-self-center img-icon primary-rgba text-primary"><i
-                        class="far fa-file-word"></i></span>
-                    <div class="set-flex">
-                      <h5 class="font-16 mb-1">Marketing Instructions</h5>
-                      <p>.doc, 5.3 MB</p>
-                    </div>
-                    <div class="ms-auto">
-                      <td>
-                        <i class="far fa-trash-alt psr-3"></i>
-                        <i class="far fa-arrow-alt-circle-down"></i>
-                      </td>
-                    </div>
-                  </li>
-                </ul>
-              </ng-scrollbar>
-              <div class="text-center p-t-20">
-                <button mat-stroked-button color="primary">Report Adverse Effect</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -1291,30 +706,7 @@
 
 
     </div>
-    <!-- <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="body">
-            <div class="row align-items-center">
-              <div class="col-md-4">
 
-                <img [src]="latestInstructor?.avatar || '../../../assets/profile.png'" alt="" class="w-100">
-              </div>
-              <div class="col-md-8">
-                <h4 class="font-20 weight-500 mb-2">
-                  <div class="weight-600 font-30 col pt-1 text-muted">New Instructor</div>
-                  <div class="weight-600 font-30 col-blue pt-1">{{latestInstructor?.name}}
-                    {{latestInstructor?.last_name}}!</div>
-                </h4>
-                <p class="font-18 max-width-600">We are welcome to you to take this opportunity. 
-                  Thank you for choosing TMS to participate as an instructor.
-                  you can enjoy work culture in TMS.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
 
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">
@@ -1410,23 +802,7 @@
       <div class="card" style="border-radius: 31px;">
         <div class="header mt-3">
           <h2>Classes List</h2>
-          <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>add_circle_outline</mat-icon>
-                <span>Add</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>delete_outline</mat-icon>
-                <span>Delete</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>refresh</mat-icon>
-                <span>Refresh</span>
-              </button>
-            </mat-menu> -->
+
         </div>
         <div class="tableBody">
           <div class="table-responsive">
@@ -1453,29 +829,7 @@
                   <td>
                     <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
                   </td>
-                  <!-- <td>
-                      <button mat-button [matMenuTriggerFor]="menu">
-                        <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-                        xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                        class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
-                        <path
-                          d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                      </svg>
-  
-                      </button>
-                      
-                              <mat-menu #menu="matMenu" xPosition="before">
-                                <button mat-menu-item  class="tbl-action-btn" (click)="editClass(class.id)" >
-                                  <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                                  <span class="menu-text">Edit</span>
-                                </button>
-                                <button mat-menu-item class="tbl-action-btn" (click)="delete(class.id)">
-                                  <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                                  <span class="menu-text">Delete</span>
-                                </button>
-                              </mat-menu>
-                    
-                    </td> -->
+
                 </tr>
 
               </tbody>
@@ -1484,427 +838,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-        <div class="card">
-          <div class="card-body">
-            <div class="float-start">
-              <h6 class="text-muted">Average Lecture Per Month</h6>
-              <h5>65 <span class="text-muted font-12">(Average)</span></h5>
-            </div>
-            <div class="mb-5">
-              <apx-chart [series]="avgLecChartOptions.series!" [chart]="avgLecChartOptions.chart!"
-                [xaxis]="avgLecChartOptions.xaxis!" [stroke]="avgLecChartOptions.stroke!"
-                [colors]="avgLecChartOptions.colors!" [dataLabels]="avgLecChartOptions.dataLabels!"
-                [legend]="avgLecChartOptions.legend!" [markers]="avgLecChartOptions.markers!"
-                [grid]="avgLecChartOptions.grid!" [yaxis]="avgLecChartOptions.yaxis!"
-                [tooltip]="avgLecChartOptions.tooltip!" [title]="avgLecChartOptions.title!"
-                [fill]="avgLecChartOptions.fill!">
-              </apx-chart>
-            </div>
-          </div>
-        </div>
-      </div> -->
-    <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-        <div class="card">
-          <div class="header">
-            <h2>Course Chart</h2>
-          </div>
-          <div class="body">
-            <div id="chart">
-              <apx-chart [series]="pieChartOptions.series!" [chart]="pieChartOptions.chart!"
-                [labels]="pieChartOptions.labels!" [responsive]="pieChartOptions.responsive!"
-                [dataLabels]="pieChartOptions.dataLabels!" [legend]="pieChartOptions.legend!" class="apex-pie-center">
-              </apx-chart>
-            </div>
-            <ng-scrollbar style="height: 200px" visibility="hover">
-            <div class="table-responsive m-t-15">
-              <table class="table align-items-center" *ngFor="let dataSource of dataSource1?.slice(0, 5)">
-                <tbody>
-                  <tr>
-                    <td class="col-8"><i class="fa fa-circle col-cyan msr-2"></i> {{dataSource.courseName}}</td>
-                    <td class="col-8"> ${{dataSource.instructorCost}}</td>
-                    <!-- <td class="col-3" *ngIf="dataSource.duration===1">{{dataSource.duration}} Day</td>
-                    <td class="col-3" *ngIf="dataSource.duration!==1">{{dataSource.duration}} Days</td> -->
-    <!-- <td class="col-green">+32%</td> --
-                  </tr>
-                  <!-- <tr>
-                    <td><i class="fa fa-circle col-blue msr-2"></i>Science</td>
-                    <td>32</td>
-                    <td class="col-green">+12%</td>
-                  </tr>
-                  <tr>
-                    <td><i class="fa fa-circle col-orange msr-2"></i>Economics</td>
-                    <td>12</td>
-                    <td class="col-orange">-12%</td>
-                  </tr>
-                  <tr>
-                    <td><i class="fa fa-circle col-green msr-2"></i>Mathes</td>
-                    <td>32</td>
-                    <td class="col-green">+3%</td>
-                  </tr> --
-                </tbody>
-              </table>
-            </div>
-            </ng-scrollbar>
-          </div>
-        </div>
-      </div> -->
-    <!-- <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-        <div class="card">
-          <div class="header">
-            <h2>Program Chart</h2>
-          </div>
-          <div class="body">
-            <div id="chart">
-              <apx-chart [series]="pieChartOptions1.series!" [chart]="pieChartOptions1.chart!"
-                [labels]="pieChartOptions1.labels!" [responsive]="pieChartOptions1.responsive!"
-                [dataLabels]="pieChartOptions1.dataLabels!" [legend]="pieChartOptions1.legend!" class="apex-pie-center">
-              </apx-chart>
-            </div>
-            <ng-scrollbar style="height: 180px" visibility="hover">
-            <div class="table-responsive m-t-15">
-              <table class="table align-items-center" *ngFor="let programFilterData of programFilterData?.slice(0, 5)">
-                <tbody>
-                  <tr>
-                    <td class="text col-8"><i class="fa fa-circle col-cyan msr-2"></i> {{programFilterData.courseName}}</td>
-                    <td class="col-8">$ {{programFilterData?.instructorCost}}</td>
-                    <!-- <td clas="col-3" *ngIf="programFilterData.duration===1">{{programFilterData.duration}} Day</td>
-                    <td clas="col-3" *ngIf="programFilterData.duration!==1">{{programFilterData.duration}} Days</td> -->
-    <!-- <td class="col-green">+32%</td> --
-                  </tr>
-                  <!-- <tr>
-                    <td><i class="fa fa-circle col-blue msr-2"></i>Science</td>
-                    <td>32</td>
-                    <td class="col-green">+12%</td>
-                  </tr>
-                  <tr>
-                    <td><i class="fa fa-circle col-orange msr-2"></i>Economics</td>
-                    <td>12</td>
-                    <td class="col-orange">-12%</td>
-                  </tr>
-                  <tr>
-                    <td><i class="fa fa-circle col-green msr-2"></i>Mathes</td>
-                    <td>32</td>
-                    <td class="col-green">+3%</td>
-                  </tr> --
-                </tbody>
-              </table>
-            </div>
-            </ng-scrollbar>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- <div class="row clearfix">
-      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-        <div class="card">
-          <div class="header">
-            <h2> Course Lecture In Week</h2>
-          </div>
-          <div class="body">
-            <ng-scrollbar style="height: 150px" visibility="hover">
-            <div class="table-responsive">
-              <table class="table table-borderless medicine-list" *ngFor="let items of currentWeekRecords?.slice(0, 5)">
-               
-                <tr>
-                  <td><i class="fa fa-circle col-cyan msr-2"></i> {{items.courseName}}</td>
-                 
-                </tr>
-                <!-- <tr>
-                  <td><i class="fas fa-palette pill-style col-indigo"></i> Painting</td>
-                  <td class="text-end">
-                    <span class="badge-outline">M - - T - S</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td><i class="fas fa-business-time pill-style col-orange"></i> Business Studies</td>
-                  <td class="text-end">
-                    <span class="badge-outline">M - W T - -</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td><i class="fas fa-heart pill-style col-red"></i> Biology</td>
-                  <td class="text-end">
-                    <span class="badge-outline">M - W - F -</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td><i class="fas fa-laptop-code pill-style col-purple"></i> Computer Studies</td>
-                  <td class="text-end">
-                    <span class="badge-outline">M - - T - S</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td><i class="fas fa-globe-asia pill-style col-cyan"></i> Geography</td>
-                  <td class="text-end">
-                    <span class="badge-outline">M - W - F S</span>
-                  </td>
-                </tr> --
-              </table>
-            </div>
-            </ng-scrollbar>
-            <!-- <div class="text-center p-t-20">
-              <button mat-stroked-button color="primary">View More</button>
-            </div> --
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-        <div class="card">
-          <div class="header">
-            <h2>
-              Course Today's Lecture</h2>
-          </div>
-          <div class="tableBody">
-            <ng-scrollbar style="height: 180px" visibility="hover">
-            <div class="table-responsive">
-              <table class="table table-hover ">
-                <thead>
-                  <tr>
-                    <!-- <th>#</th> --
-                    <th>Subject Name</th>
-                    <!-- <th>Class</th> --
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <!-- <th>Details </th> --
-                  </tr>
-                </thead>
-                <tbody *ngFor="let items of currentRecords?.slice(0, 5)">
-                  <tr>
-                    <!-- <td>1</td> --
-                    <td>{{items.courseName}}</td>
-                    <!-- <td>{{items.courseCode}}</td> --
-                    <td>{{items.sessionStartTime}}</td>
-                    <td>{{items.sessionEndTime}}</td>
-                    <!-- <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td> --
-                  </tr>
-                  <!-- <tr>
-                    <td>2</td>
-                    <td>Chemistry</td>
-                    <td>Standard 11</td>
-                    <td>11:15 AM</td>
-                    <td>30 Min</td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Biology</td>
-                    <td>Standard 12</td>
-                    <td>12:00 AM</td>
-                    <td>35 Min</td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Physics</td>
-                    <td>Standard 11</td>
-                    <td>12:45 AM</td>
-                    <td>30 Min</td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Music</td>
-                    <td>Standard 8</td>
-                    <td>02:00 AM</td>
-                    <td>45 Min</td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td>Computer studies</td>
-                    <td>Standard 10</td>
-                    <td>03:30 AM</td>
-                    <td>35 Min</td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr> --
-                </tbody>
-              </table>
-            </div>
-            </ng-scrollbar>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <!-- <div class="row clearfix">
-      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12">
-        <div class="card">
-          <div class="header">
-            <h2> Program Lecture In Week</h2>
-          </div>
-          <div class="body">
-            <ng-scrollbar style="height: 250px" visibility="hover">
-            <div class="table-responsive">
-              <table class="table table-borderless medicine-list" *ngFor="let items of currentProgramWeekRecords?.slice(0, 5)">
-               
-                <tr>
-                  <td><i class="fa fa-circle col-cyan msr-2"></i> {{items.courseName}}</td>
-                 
-                </tr>
-                <!-- <tr>
-                  <td><i class="fas fa-palette pill-style col-indigo"></i> Painting</td>
-                  <td class="text-end">
-                    <span class="badge-outline">M - - T - S</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td><i class="fas fa-business-time pill-style col-orange"></i> Business Studies</td>
-                  <td class="text-end">
-                    <span class="badge-outline">M - W T - -</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td><i class="fas fa-heart pill-style col-red"></i> Biology</td>
-                  <td class="text-end">
-                    <span class="badge-outline">M - W - F -</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td><i class="fas fa-laptop-code pill-style col-purple"></i> Computer Studies</td>
-                  <td class="text-end">
-                    <span class="badge-outline">M - - T - S</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td><i class="fas fa-globe-asia pill-style col-cyan"></i> Geography</td>
-                  <td class="text-end">
-                    <span class="badge-outline">M - W - F S</span>
-                  </td>
-                </tr> --
-              </table>
-            </div>
-            </ng-scrollbar>
-            <!-- <div class="text-center p-t-20">
-              <button mat-stroked-button color="primary">View More</button>
-            </div> --
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-        <div class="card">
-          <div class="header">
-            <h2>
-              Program Today's Lecture</h2>
-          </div>
-          <div class="tableBody">
-            <ng-scrollbar style="height: 280px" visibility="hover">
-            <div class="table-responsive">
-              <table class="table table-hover ">
-                <thead>
-                  <tr>
-                    <!-- <th>#</th> --
-                    <th>Subject Name</th>
-                    <!-- <th>Class</th> --
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <!-- <th>Details </th> --
-                  </tr>
-                </thead>
-                <tbody *ngFor="let items of currentProgramRecords?.slice(0, 5)">
-                  <tr>
-                    <!-- <td>1</td> --
-                    <td>{{items.courseName}}</td>
-                    <!-- <td>{{items.courseCode}}</td> --
-                    <td>{{items.sessionStartTime}}</td>
-                    <td>{{items.sessionEndTime}}</td>
-                    <!-- <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td> --
-                  </tr>
-                  <!-- <tr>
-                    <td>2</td>
-                    <td>Chemistry</td>
-                    <td>Standard 11</td>
-                    <td>11:15 AM</td>
-                    <td>30 Min</td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Biology</td>
-                    <td>Standard 12</td>
-                    <td>12:00 AM</td>
-                    <td>35 Min</td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Physics</td>
-                    <td>Standard 11</td>
-                    <td>12:45 AM</td>
-                    <td>30 Min</td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Music</td>
-                    <td>Standard 8</td>
-                    <td>02:00 AM</td>
-                    <td>45 Min</td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td>Computer studies</td>
-                    <td>Standard 10</td>
-                    <td>03:30 AM</td>
-                    <td>35 Min</td>
-                    <td>
-                      <button mat-icon-button class="tbl-action-btn">
-                        <app-feather-icons [icon]="'file-text'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                      </button>
-                    </td>
-                  </tr> --
-                </tbody>
-              </table>
-            </div>
-            </ng-scrollbar>
-          </div>
-        </div>
-      </div>
-    </div> -->
+
   </div>
 </section>
 
