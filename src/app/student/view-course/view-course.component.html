@@ -1582,3 +1582,98 @@
     </div>
   </div>
 </section>
+
+
+
+<div class="container" style="cursor: pointer;  height:700px;
+width: 70%;
+margin: auto;
+background-color: rgb(255, 248, 238);
+border-radius: 10px;
+overflow-y: auto !important;" *ngIf="isInvoice" id="contentToConvert">
+  <!-- <div class="container"> -->
+
+      <div class="row my-3">
+          <div class="col-5  m-3">
+              <img src="/assets/images/logo/innovatiq-logo-index.png" style="height: 80px; width: 80px;">
+          </div>
+          <div class="col-6">
+              <h3 style="justify-content: end; display: flex; margin-top: 40px;">INVOICE SUMMARY</h3>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-11 mt-4">
+              <h6 style="justify-content: end; display: flex;">21 Jan 2024</h6>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-10 mx-auto">
+              <div class="table-wrapper" style=" max-height: 260px; 
+              overflow: hidden; 
+              margin-bottom: 40px;
+              margin-top: 40px;">
+                  <div class="table-responsive">
+                      <table class="table table-hover">
+                          <thead>
+                              <tr>
+                                  <th>Item</th>
+                                  <th>Quantity</th>
+                                  <th>Unit Price</th>
+                                  <th style="padding-left: 10px;">Total</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr style="cursor: pointer">
+                                  <td style="width: 45%;">Testing</td>
+                                  <td>1</td>
+                                  <td style="text-align: right !important;
+                                  padding-left: 0;
+                                  padding-right: 45px;">$100.00</td>
+                                  <td style="text-align: right !important;
+                                  padding-left: 0;
+                                  padding-right: 45px;">$100.00</td>
+                              </tr>
+                              <tr></tr>
+                              <tr>
+                                  <td colspan="3">
+                                      <h6 style="justify-content: end; display: flex;">Subtotal</h6>
+                                  </td>
+                                  <td style="text-align: right !important;
+                                  padding-left: 0;
+                                  padding-right: 45px;">
+                                      $100.00
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="3">
+                                      <h6 style="justify-content: end; display: flex;">Tax(0%)</h6>
+                                  </td>
+                                  <td style="text-align: right !important;
+                                  padding-left: 0;
+                                  padding-right: 45px;">
+                                      $0.00
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="3">
+                                      <h6 style="justify-content: end; display: flex;">Total</h6>
+                                  </td>
+                                  <td style="text-align: right !important;
+                                  padding-left: 0;
+                                  padding-right: 45px;">
+                                      $100.00
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+     
+
+  <!-- </div> -->
+</div>
