@@ -715,6 +715,8 @@ export class MainComponent implements OnInit {
           }
         );
         this.chart1();
+        this.surveyPieChart();
+        this.surveyBarChart();
       },
       (error) => {}
     );
@@ -2302,15 +2304,14 @@ private attendanceBarChart() {
   setSurveyChart() {
     if (this.dashboard.content[0].viewType == 'Bar Chart') {
       this.isSurveyBar = true;
-      this.surveyBarChart();
+      this.getStudentsList();
     } else if (this.dashboard.content[0].viewType == 'Pie Chart') {
       this.isSurveyPie = true;
-      console.log('hii')
-      this.surveyPieChart();
+      this.getStudentsList();
     }
     else if (this.dashboard.content[0].viewType == 'Line Chart') {
       this.isArea = true;
-      this.chart1();
+      this.getStudentsList();
     }
   }
   setPerformanceChart() {
