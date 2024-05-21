@@ -17,10 +17,10 @@ import { TrainingCoordinatorDbComponent } from './training-coordinator-db/traini
 import { DashboardTabsComponent } from './dashboard-tabs/dashboard-tabs.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 import { SupportComponent } from '../../apps/support/support.component';
-import { EtmsDashboardComponent } from '../E-TMS/etms-dashboard/etms-dashboard.component';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { NgChartsModule } from 'ng2-charts';
 import { TrainingApprovalTabComponent } from './training-approval-tab/training-approval-tab.component';
+import { EtmsDashboardComponent } from './etms-dashboard/etms-dashboard.component';
 
 @NgModule({
   declarations: [

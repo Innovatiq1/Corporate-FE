@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { TableElement, TableExportUtil } from '@shared';
-import { EtmsDashboardComponent } from '../etms-dashboard/etms-dashboard.component';
+// import { EtmsDashboardComponent } from '../etms-dashboard/etms-dashboard.component';
 import { EtmsService } from '@core/service/etms.service';
 
 @Component({

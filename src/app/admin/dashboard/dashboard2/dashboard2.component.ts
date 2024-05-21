@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
+import { AuthenService } from '@core/service/authen.service';
 import { CourseService } from '@core/service/course.service';
 import { InstructorService } from '@core/service/instructor.service';
 import { SettingsService } from '@core/service/settings.service';
@@ -112,17 +113,29 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
     private classService: ClassService,
     private router: Router,
     private settingsService: SettingsService,
+    private authenticationService:AuthenService,
     private cdr: ChangeDetectorRef) {
     //constructor
   }
 
   ngOnInit() {
+  //   this.getInstructorsList();
+  //   this.getProgramList();
+  //   this.getAllCourse();
+  //   const role = this.authenticationService.currentUserValue.user.role;
+  //   if (role == 'Admin') {
+  //     this.getStudentDashboard();
+  //   }
+  //   this.cdr.detectChanges();
   }
   ngAfterViewInit(): void {
     this.getInstructorsList();
     this.getProgramList();
     this.getAllCourse();
-    this.getStudentDashboard();
+    const role = this.authenticationService.currentUserValue.user.role;
+    if (role == 'Admin') {
+      this.getStudentDashboards();
+    }
     this.cdr.detectChanges();
   }
   deleteItem(row: any) {
@@ -249,6 +262,7 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
         );
       });
       // this.chart1();
+      this.setAdmissionChart();
 
     }, error => {
     });
@@ -652,7 +666,7 @@ private feesPieChart() {
     }
   };
 }
-  getStudentDashboard(){
+  getStudentDashboards(){
     this.settingsService.getStudentDashboard().subscribe(response => {
       this.dashboard = response.data.docs[2];
       this.setAdmissionChart();
@@ -660,25 +674,25 @@ private feesPieChart() {
     })
   }
   setAdmissionChart() {
-  if (this.dashboard.content[15].viewType == 'Line Chart') {
+  if (this.dashboard.content[4].viewType == 'Line Chart') {
       this.isAdmissionLine = true;
       this.admissionLineChart();
-    } else  if (this.dashboard.content[15].viewType == 'Bar Chart') {
+    } else  if (this.dashboard.content[4].viewType == 'Bar Chart') {
       this.isAdmissionBar = true;
       this.admissionBarChart();
-    } else  if (this.dashboard.content[15].viewType == 'Pie Chart') {
+    } else  if (this.dashboard.content[4].viewType == 'Pie Chart') {
       this.isAdmissionPie = true;
       this.admissionPieChart();
     }
   }
   setFeesChart() {
-    if (this.dashboard.content[16].viewType == 'Line Chart') {
+    if (this.dashboard.content[5].viewType == 'Line Chart') {
         this.isFeesLine = true;
         this.feesLineChart();
-      } else  if (this.dashboard.content[16].viewType == 'Bar Chart') {
+      } else  if (this.dashboard.content[5].viewType == 'Bar Chart') {
         this.isFeesBar = true;
         this.feesBarChart();
-      } else  if (this.dashboard.content[16].viewType == 'Pie Chart') {
+      } else  if (this.dashboard.content[5].viewType == 'Pie Chart') {
         this.isFeesPie = true;
         this.feesPieChart();
       }
