@@ -424,313 +424,574 @@ export class EtmsDashboardComponent implements OnInit {
   guageType1 = 'full' as NgxGaugeType;
   percentageValue: (value: number) => string;
 
+
+
+
   private budgetLineChart() {
     this.budgetLineChartOptions = {
-      series: [
-        {
-          name: 'Percentage',
-          data: [113, 120, 130, 120, 125, 119],
-        },
-      ],
+      series: [{
+        name: "Percentage",
+        data: [113, 120, 130, 120, 125, 119],
+      }],
       chart: {
-        height: 350,
         type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2,
-        },
+        height: 330,
         foreColor: '#9aa0ac',
+        width: '100%',
         toolbar: {
-          show: false,
+          show: true, // Show the toolbar for better control
+          tools: {
+            download: true,
+            selection: true,
+            zoom: true,
+            zoomin: true,
+            zoomout: true,
+            pan: true,
+            reset: true
+          },
+          autoSelected: 'zoom'
         },
       },
-      colors: ['#51E298'],
-      dataLabels: {
-        enabled: true,
+      xaxis: {
+        categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
       },
-      stroke: {
-        curve: 'smooth',
+      stroke: { curve: 'smooth' },
+      dataLabels: { enabled: false },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'right',
+        floating: true,
+        offsetY: -25,
+        offsetX: -5,
       },
-      markers: {
-        size: 1,
-      },
+      tooltip: { enabled: true },
       grid: {
         show: true,
         borderColor: '#9aa0ac',
         strokeDashArray: 1,
       },
-      xaxis: {
-        categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
-        title: {
-          text: 'Years',
-        },
-      },
-      yaxis: {
-        title: {
-          text: 'Percentage',
-        },
-      },
-      tooltip: {
-        theme: 'dark',
-        marker: {
-          show: true,
-        },
-        // x: {
-        //   show: true,
-        // },
-      },
-    }
-  }
-  private budgetPieChart() {
-    this.budgetPieChartOptions = {
-        series: [113, 120, 130, 120, 125, 119],
-        chart: {
-            width: 380,
-            type: 'pie',
-        },
-        labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
-        colors: ['#51E298', '#FF5733', '#FFC300', '#C70039', '#900C3F', '#581845'],
-        dataLabels: {
-            enabled: true,
-        },
-        legend: {
-            position: 'bottom',
-        },
-        tooltip: {
-            theme: 'dark',
-            marker: {
-                show: true,
-            },
-            // x: {
-            //     show: true,
-            // },
-        },
-      
+      // yaxis: { title: { text: "Number of Instructors" } },
+      colors: ['#FFA500']
     };
-}
-private budgetBarChart() {
-this.budgetBarChartOptions = {
-    series: [
-        {
-            name: 'Percentage',
-            data: [113, 120, 130, 120, 125, 119],
+  }
+  
+  private budgetBarChart() {
+    this.budgetBarChartOptions = {
+        series: [{
+            name: "Percentage",
+            data:[113, 120, 130, 120, 125, 119],
+        }],
+        chart: {
+            type: 'bar',
+            height: 330,
+            foreColor: '#9aa0ac',
+            width: '100%',
+            toolbar: {
+                show: true,
+                tools: {
+                    download: true,
+                    selection: true,
+                    zoom: true,
+                    zoomin: true,
+                    zoomout: true,
+                    pan: true,
+                    reset: true
+                },
+                autoSelected: 'zoom'
+            },
         },
-    ],
-    chart: {
-        height: 350,
-        type: 'bar',
-        dropShadow: {
-            enabled: true,
-            color: '#000',
-            top: 18,
-            left: 7,
-            blur: 10,
-            opacity: 0.2,
-        },
-        foreColor: '#9aa0ac',
-        toolbar: {
-            show: false,
-        },
-    },
-    colors: ['#51E298'],
-    dataLabels: {
-        enabled: true,
-    },
-    stroke: {
-        curve: 'smooth',
-    },
-    markers: {
-        size: 1,
-    },
-    grid: {
-        show: true,
-        borderColor: '#9aa0ac',
-        strokeDashArray: 1,
-    },
-    xaxis: {
-        categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
-        title: {
-            text: 'Years',
-        },
-    },
-    yaxis: {
-        title: {
-            text: 'Percentage',
-        },
-    },
-    tooltip: {
-        theme: 'dark',
-        marker: {
-            show: true,
-        },
-        // x: {
-        //     show: true,
-        // },
-    },
-   
-}
-}
-
-private actualBarChart() {
-  this.actualBarChartOptions = {
-      series: [
-          {
-              name: 'Percentage',
-              data: [105, 110, 115, 120, 125, 130],
-          },
-      ],
-      chart: {
-          height: 350,
-          type: 'bar',
-          dropShadow: {
-              enabled: true,
-              color: '#000',
-              top: 18,
-              left: 7,
-              blur: 10,
-              opacity: 0.2,
-          },
-          foreColor: '#9aa0ac',
-          toolbar: {
-              show: false,
-          },
-      },
-      colors: ['#51E298'],
-      dataLabels: {
-          enabled: true,
-      },
-      stroke: {
-          curve: 'smooth',
-      },
-      markers: {
-          size: 1,
-      },
-      grid: {
-          show: true,
-          borderColor: '#9aa0ac',
-          strokeDashArray: 1,
-      },
-      xaxis: {
+        xaxis: {
           categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
-          title: {
-              text: 'Years',
-          },
-      },
-      yaxis: {
-          title: {
-              text: 'Percentage',
-          },
-      },
-      tooltip: {
-          theme: 'dark',
-          marker: {
-              show: true,
-          },
-          // x: {
-          //     show: true,
-          // },
-      },
-     
+        },
+        stroke: { curve: 'smooth' },
+        dataLabels: { enabled: false },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'right',
+            floating: true,
+            offsetY: -25,
+            offsetX: -5,
+        },
+        tooltip: { enabled: true },
+        grid: {
+            show: true,
+            borderColor: '#9aa0ac',
+            strokeDashArray: 1,
+        },
+        yaxis: { title: { text: "Number of Instructors" } },
+        colors: ['#FFA500']
+    };
   }
-}
-
-
-private actualLineChart() {
-  this.actualLineChartOptions = {
-    series: [
-      {
-        name: 'Percentage',
-        data: [105, 110, 115, 120, 125, 130],
-      },
-    ],
-    chart: {
-      height: 350,
-      type: 'line',
-      dropShadow: {
-        enabled: true,
-        color: '#000',
-        top: 18,
-        left: 7,
-        blur: 10,
-        opacity: 0.2,
-      },
-      foreColor: '#9aa0ac',
-      toolbar: {
-        show: false,
-      },
-    },
-    colors: ['#51E298'],
-    dataLabels: {
-      enabled: true,
-    },
-    stroke: {
-      curve: 'smooth',
-    },
-    markers: {
-      size: 1,
-    },
-    grid: {
-      show: true,
-      borderColor: '#9aa0ac',
-      strokeDashArray: 1,
-    },
-    xaxis: {
-      categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
-      title: {
-        text: 'Years',
-      },
-    },
-    yaxis: {
-      title: {
-        text: 'Percentage',
-      },
-    },
-    tooltip: {
-      theme: 'dark',
-      marker: {
-        show: true,
-      },
-      // x: {
-      //   show: true,
-      // },
-    },
-  }
-}
-private actualPieChart() {
-  this.actualPieChartOptions = {
-      series: [105, 110, 115, 120, 125, 130],
+  
+  private budgetPieChart() {
+  this.budgetPieChartOptions = {
+      series: [113, 120, 130, 120, 125, 119],
       chart: {
-          width: 380,
           type: 'pie',
+          height: 330,
+          foreColor: '#9aa0ac',
+          width: '100%',
       },
       labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
       colors: ['#51E298', '#FF5733', '#FFC300', '#C70039', '#900C3F', '#581845'],
-      dataLabels: {
-          enabled: true,
-      },
       legend: {
-          position: 'bottom',
+          position: 'top',
+          horizontalAlign: 'right',
+          floating: true,
+          offsetY: -25,
+          offsetX: -5,
       },
-      tooltip: {
-          theme: 'dark',
-          marker: {
-              show: true,
-          },
-          // x: {
-          //     show: true,
-          // },
-      },
-    
+      tooltip: { enabled: true },
+      dataLabels: { enabled: false },
+      responsive: [{
+          breakpoint: 480,
+          options: {
+              chart: {
+                  width: 200
+              },
+              legend: {
+                  position: 'bottom'
+              }
+          }
+      }]
   };
-}
+  }
+  private actualLineChart() {
+    this.actualLineChartOptions = {
+      series: [{
+        name: "Percentage",
+        data: [105, 110, 115, 120, 125, 130],
+      }],
+      chart: {
+        type: 'line',
+        height: 330,
+        foreColor: '#9aa0ac',
+        width: '100%',
+        toolbar: {
+          show: true, // Show the toolbar for better control
+          tools: {
+            download: true,
+            selection: true,
+            zoom: true,
+            zoomin: true,
+            zoomout: true,
+            pan: true,
+            reset: true
+          },
+          autoSelected: 'zoom'
+        },
+      },
+      xaxis: {
+        categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
+      },
+      stroke: { curve: 'smooth' },
+      dataLabels: { enabled: false },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'right',
+        floating: true,
+        offsetY: -25,
+        offsetX: -5,
+      },
+      tooltip: { enabled: true },
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      // yaxis: { title: { text: "Number of Instructors" } },
+      colors: ['#FFA500']
+    };
+  }
+  
+  private actualBarChart() {
+    this.actualBarChartOptions = {
+        series: [{
+            name: "Percentage",
+            data:[105, 110, 115, 120, 125, 130],
+        }],
+        chart: {
+            type: 'bar',
+            height: 330,
+            foreColor: '#9aa0ac',
+            width: '100%',
+            toolbar: {
+                show: true,
+                tools: {
+                    download: true,
+                    selection: true,
+                    zoom: true,
+                    zoomin: true,
+                    zoomout: true,
+                    pan: true,
+                    reset: true
+                },
+                autoSelected: 'zoom'
+            },
+        },
+        xaxis: {
+          categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
+        },
+        stroke: { curve: 'smooth' },
+        dataLabels: { enabled: false },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'right',
+            floating: true,
+            offsetY: -25,
+            offsetX: -5,
+        },
+        tooltip: { enabled: true },
+        grid: {
+            show: true,
+            borderColor: '#9aa0ac',
+            strokeDashArray: 1,
+        },
+        // yaxis: { title: { text: "Number of Instructors" } },
+        colors: ['#FFA500']
+    };
+  }
+  
+  private actualPieChart() {
+  this.actualPieChartOptions = {
+      series: [105, 110, 115, 120, 125, 130],
+      chart: {
+          type: 'pie',
+          height: 330,
+          foreColor: '#9aa0ac',
+          width: '100%',
+      },
+      labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+      colors: ['#51E298', '#FF5733', '#FFC300', '#C70039', '#900C3F', '#581845'],
+      legend: {
+          position: 'top',
+          horizontalAlign: 'right',
+          floating: true,
+          offsetY: -25,
+          offsetX: -5,
+      },
+      tooltip: { enabled: true },
+      dataLabels: { enabled: false },
+      responsive: [{
+          breakpoint: 480,
+          options: {
+              chart: {
+                  width: 200
+              },
+              legend: {
+                  position: 'bottom'
+              }
+          }
+      }]
+  };
+  }
+//   private budgetLineChart() {
+//     this.budgetLineChartOptions = {
+//       series: [
+//         {
+//           name: 'Percentage',
+//           data: [113, 120, 130, 120, 125, 119],
+//         },
+//       ],
+//       chart: {
+//         height: 350,
+//         type: 'line',
+//         dropShadow: {
+//           enabled: true,
+//           color: '#000',
+//           top: 18,
+//           left: 7,
+//           blur: 10,
+//           opacity: 0.2,
+//         },
+//         foreColor: '#9aa0ac',
+//         toolbar: {
+//           show: false,
+//         },
+//       },
+//       colors: ['#51E298'],
+//       dataLabels: {
+//         enabled: true,
+//       },
+//       stroke: {
+//         curve: 'smooth',
+//       },
+//       markers: {
+//         size: 1,
+//       },
+//       grid: {
+//         show: true,
+//         borderColor: '#9aa0ac',
+//         strokeDashArray: 1,
+//       },
+//       xaxis: {
+//         categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
+//         title: {
+//           text: 'Years',
+//         },
+//       },
+//       yaxis: {
+//         title: {
+//           text: 'Percentage',
+//         },
+//       },
+//       tooltip: {
+//         theme: 'dark',
+//         marker: {
+//           show: true,
+//         },
+//         // x: {
+//         //   show: true,
+//         // },
+//       },
+//     }
+//   }
+//   private budgetPieChart() {
+//     this.budgetPieChartOptions = {
+//         series: [113, 120, 130, 120, 125, 119],
+//         chart: {
+//             width: 380,
+//             type: 'pie',
+//         },
+//         labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+//         colors: ['#51E298', '#FF5733', '#FFC300', '#C70039', '#900C3F', '#581845'],
+//         dataLabels: {
+//             enabled: true,
+//         },
+//         legend: {
+//             position: 'bottom',
+//         },
+//         tooltip: {
+//             theme: 'dark',
+//             marker: {
+//                 show: true,
+//             },
+//             // x: {
+//             //     show: true,
+//             // },
+//         },
+      
+//     };
+// }
+// private budgetBarChart() {
+// this.budgetBarChartOptions = {
+//     series: [
+//         {
+//             name: 'Percentage',
+//             data: [113, 120, 130, 120, 125, 119],
+//         },
+//     ],
+//     chart: {
+//         height: 350,
+//         type: 'bar',
+//         dropShadow: {
+//             enabled: true,
+//             color: '#000',
+//             top: 18,
+//             left: 7,
+//             blur: 10,
+//             opacity: 0.2,
+//         },
+//         foreColor: '#9aa0ac',
+//         toolbar: {
+//             show: false,
+//         },
+//     },
+//     colors: ['#51E298'],
+//     dataLabels: {
+//         enabled: true,
+//     },
+//     stroke: {
+//         curve: 'smooth',
+//     },
+//     markers: {
+//         size: 1,
+//     },
+//     grid: {
+//         show: true,
+//         borderColor: '#9aa0ac',
+//         strokeDashArray: 1,
+//     },
+//     xaxis: {
+//         categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
+//         title: {
+//             text: 'Years',
+//         },
+//     },
+//     yaxis: {
+//         title: {
+//             text: 'Percentage',
+//         },
+//     },
+//     tooltip: {
+//         theme: 'dark',
+//         marker: {
+//             show: true,
+//         },
+//         // x: {
+//         //     show: true,
+//         // },
+//     },
+   
+// }
+// }
+
+// private actualBarChart() {
+//   this.actualBarChartOptions = {
+//       series: [
+//           {
+//               name: 'Percentage',
+//               data: [105, 110, 115, 120, 125, 130],
+//           },
+//       ],
+//       chart: {
+//           height: 350,
+//           type: 'bar',
+//           dropShadow: {
+//               enabled: true,
+//               color: '#000',
+//               top: 18,
+//               left: 7,
+//               blur: 10,
+//               opacity: 0.2,
+//           },
+//           foreColor: '#9aa0ac',
+//           toolbar: {
+//               show: false,
+//           },
+//       },
+//       colors: ['#51E298'],
+//       dataLabels: {
+//           enabled: true,
+//       },
+//       stroke: {
+//           curve: 'smooth',
+//       },
+//       markers: {
+//           size: 1,
+//       },
+//       grid: {
+//           show: true,
+//           borderColor: '#9aa0ac',
+//           strokeDashArray: 1,
+//       },
+//       xaxis: {
+//           categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
+//           title: {
+//               text: 'Years',
+//           },
+//       },
+//       yaxis: {
+//           title: {
+//               text: 'Percentage',
+//           },
+//       },
+//       tooltip: {
+//           theme: 'dark',
+//           marker: {
+//               show: true,
+//           },
+//           // x: {
+//           //     show: true,
+//           // },
+//       },
+     
+//   }
+// }
+
+
+// private actualLineChart() {
+//   this.actualLineChartOptions = {
+//     series: [
+//       {
+//         name: 'Percentage',
+//         data: [105, 110, 115, 120, 125, 130],
+//       },
+//     ],
+//     chart: {
+//       height: 350,
+//       type: 'line',
+//       dropShadow: {
+//         enabled: true,
+//         color: '#000',
+//         top: 18,
+//         left: 7,
+//         blur: 10,
+//         opacity: 0.2,
+//       },
+//       foreColor: '#9aa0ac',
+//       toolbar: {
+//         show: false,
+//       },
+//     },
+//     colors: ['#51E298'],
+//     dataLabels: {
+//       enabled: true,
+//     },
+//     stroke: {
+//       curve: 'smooth',
+//     },
+//     markers: {
+//       size: 1,
+//     },
+//     grid: {
+//       show: true,
+//       borderColor: '#9aa0ac',
+//       strokeDashArray: 1,
+//     },
+//     xaxis: {
+//       categories: ['2019', '2020', '2021', '2022', '2023', '2024'],
+//       title: {
+//         text: 'Years',
+//       },
+//     },
+//     yaxis: {
+//       title: {
+//         text: 'Percentage',
+//       },
+//     },
+//     tooltip: {
+//       theme: 'dark',
+//       marker: {
+//         show: true,
+//       },
+//       // x: {
+//       //   show: true,
+//       // },
+//     },
+//   }
+// }
+// private actualPieChart() {
+//   this.actualPieChartOptions = {
+//       series: [105, 110, 115, 120, 125, 130],
+//       chart: {
+//           width: 380,
+//           type: 'pie',
+//       },
+//       labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+//       colors: ['#51E298', '#FF5733', '#FFC300', '#C70039', '#900C3F', '#581845'],
+//       dataLabels: {
+//           enabled: true,
+//       },
+//       legend: {
+//           position: 'bottom',
+//       },
+//       tooltip: {
+//           theme: 'dark',
+//           marker: {
+//               show: true,
+//           },
+//           // x: {
+//           //     show: true,
+//           // },
+//       },
+    
+//   };
+// }
 
   getStudentDashboard(){
     this.settingsService.getStudentDashboard().subscribe(response => {
-      this.dashboard = response.data.docs[2];
+      this.dashboard = response.data.docs[1];
       this.setBudgetChart();
       this.setActualChart();
     })

@@ -2291,7 +2291,7 @@ private attendanceBarChart() {
   getAdminDashboard(){
     this.settingsService.getStudentDashboard().subscribe(response => {
     
-      this.dashboard = response?.data?.docs[2];
+      this.dashboard = response?.data?.docs[1];
   
       this.setPerformanceChart();
       this.setSurveyChart();
@@ -2358,7 +2358,7 @@ private attendanceBarChart() {
 
   getStudentDashboard(){
     this.settingsService.getStudentDashboard().subscribe(response => {
-      this.studentDashboard = response.data.docs[1];
+      this.studentDashboard = response.data.docs[0];
       this.setStudentsChart();
     })
   }
