@@ -83,6 +83,7 @@ export class InstructorCourseInviteComponent {
       email_subject: _data.email_subject,
       email_top_header_text:_data.email_top_header_text,
       email_content:_data.email_content,
+      bottom_button_text:_data.bottom_button_text,
      
     });
 
@@ -104,6 +105,7 @@ export class InstructorCourseInviteComponent {
       email_subject: pageContent?.email_subject,
       email_top_header_text: pageContent?.email_top_header_text,
       email_content: pageContent?.email_content,
+      bottom_button_text: pageContent?.bottom_button_text
     });
     // this.markAllTouched();
   }
@@ -114,6 +116,7 @@ export class InstructorCourseInviteComponent {
         email_subject: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name] ],
         email_top_header_text: ['', [Validators.required, ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name]],
         email_content: ['', [Validators.required,  ...this.utils.validators.noLeadingSpace, ...this.utils.validators.longDescription]],
+        bottom_button_text: ['', [Validators.required,  ...this.utils.validators.noLeadingSpace, ...this.utils.validators.name]],
         
       },
     );

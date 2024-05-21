@@ -91,6 +91,18 @@
                                 </div>
           
                               </div>
+                              <div class="row">
+                                <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2 mx-auto">
+                                    <label>Bottom Button Text<span class="mandatory">&nbsp;*</span></label>
+                                    <mat-form-field class="example-full-width mb-3" appearance="outline">
+                                        <input matInput type="text" id="name"
+                                            class="form-control"  formControlName="bottom_button_text">
+                                            <mat-error *ngIf="emailTemplateForm.get('bottom_button_text')?.invalid ||emailTemplateForm.get('bottom_button_text')?.touched">
+                                                {{ utils.getErrorMessage1(emailTemplateForm.get('bottom_button_text'), 'bottom_button_text') }}
+                                              </mat-error> 
+                                    </mat-form-field>
+                                </div>
+                            </div>
                             
                             <div class="row body">
                                 <div class="col-md-10">
