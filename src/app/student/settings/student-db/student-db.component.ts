@@ -61,7 +61,7 @@ export class StudentDbComponent {
     return this.fb.group({
       title: ['', Validators.required],
       viewType: [''],
-      percentage: [],
+      // percentage: [],
     });
   }
 
@@ -71,7 +71,7 @@ export class StudentDbComponent {
         content: this.dbForm.value.studentDb.map((menulist: any) => ({
           title: menulist?.title,
           viewType: menulist?.viewType,
-          percentage: menulist?.percentage,
+          // percentage: menulist?.percentage,
         })),
         id: this.dashboardId,
       };
@@ -112,7 +112,7 @@ export class StudentDbComponent {
             newStudentDbGroup.patchValue({
               title: menuItem?.title,
               viewType: menuItem?.viewType,
-              percentage: menuItem?.percentage,
+              // percentage: menuItem?.percentage,
             });
             studentDbArray.push(newStudentDbGroup);
           });

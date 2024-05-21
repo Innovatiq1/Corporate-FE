@@ -574,101 +574,163 @@ private admissionPieChart() {
   };
 }
 
-  private feesLineChart() {
-    this.feesLineChartOptions = {
+private feesLineChart() {
+  this.feesLineChartOptions = {
     series: [
       {
         name: 'Fees Collection',
-        data: [107, 268, 847]
-      }
+        data: [107, 268, 847],
+      },
     ],
     chart: {
+      height: 350,
       type: 'line',
-      height: 350
+      dropShadow: {
+        enabled: true,
+        color: '#000',
+        top: 18,
+        left: 7,
+        blur: 10,
+        opacity: 0.2,
+      },
+      foreColor: '#9aa0ac',
+      toolbar: {
+        show: false,
+      },
     },
-    xaxis: {
-      categories: ['Today', 'This Week', 'This Month']
+    colors: ['#51E298'],
+    dataLabels: {
+      enabled: true,
     },
     stroke: {
-      curve: 'smooth'
+      curve: 'smooth',
     },
-    title: {
-      text: 'Fees Collection Report',
-      align: 'left'
-    },
-    colors: ['#6ab04c'],
-    responsive: [
-      {
-        breakpoint: 480,
-        options: {
-          chart: {
-            height: 300
-          }
-        }
-      }
-    ]
-  };
-}
-private feesBarChart() {
-  this.feesBarChartOptions = {
-    series: [{
-      name: 'Fees Collection',
-      data: [107, 268, 847]
-    }],
-    chart: {
-      type: 'bar',
-      height: 350
-    },
-    xaxis: {
-      categories: ['Today', 'This Week', 'This Month']
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false
-      }
-    },
-    colors: ['#6ab04c'],
-    dataLabels: {
-      enabled: false
-    },
-    legend: {
-      show: false
-    },
-    tooltip: {
-      enabled: true
+    markers: {
+      size: 1,
     },
     grid: {
-      show: true
+      show: true,
+      borderColor: '#9aa0ac',
+      strokeDashArray: 1,
+    },
+    xaxis: {
+      categories: ['Today', 'This Week', 'This Month'],
+      title: {
+        text: 'Weekday',
+      },
     },
     yaxis: {
       title: {
-        text: 'Amount'
-      }
-    }
-  };
-}
-
-private feesPieChart() {
-  this.feesPieChartOptions = {
-    series: [107, 268, 847],
-    chart: {
-      type: 'pie',
-      height: 350
-    },
-    labels: ['Today', 'This Week', 'This Month'],
-    colors: ['#6ab04c', '#2980b9', '#f39c12'],
-    legend: {
-      show: true,
-      position: 'bottom'
+        text: 'Fees Collection',
+      },
     },
     tooltip: {
-      enabled: true
-    }
+      theme: 'dark',
+      marker: {
+        show: true,
+      },
+      // x: {
+      //   show: true,
+      // },
+    },
   };
+}
+private feesPieChart() {
+  this.feesPieChartOptions = {
+      series: [107, 268, 847],
+      chart: {
+          width: 380,
+          type: 'pie',
+      },
+      labels: ['Today', 'This Week', 'This Month'],
+      colors: ['#51E298', '#FF5733', '#FFC300'],
+      dataLabels: {
+          enabled: true,
+      },
+      legend: {
+          position: 'bottom',
+      },
+      tooltip: {
+          theme: 'dark',
+          marker: {
+              show: true,
+          },
+          x: {
+              show: true,
+          },
+      },
+      // title: {
+      //     text: 'Students by Day',
+      // },
+  };
+}
+private feesBarChart() {
+this.feesBarChartOptions = {
+    series: [
+        {
+            name: 'Fees Collection',
+            data: [107, 268, 847]
+        },
+    ],
+    chart: {
+        height: 350,
+        type: 'bar',
+        dropShadow: {
+            enabled: true,
+            color: '#000',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 0.2,
+        },
+        foreColor: '#9aa0ac',
+        toolbar: {
+            show: false,
+        },
+    },
+    colors: ['#51E298'],
+    dataLabels: {
+        enabled: true,
+    },
+    stroke: {
+        curve: 'smooth',
+    },
+    markers: {
+        size: 1,
+    },
+    grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+    },
+    xaxis: {
+        categories: ['Today', 'This Week', 'This Month'],
+        title: {
+            text: 'Weekday',
+        },
+    },
+    yaxis: {
+        title: {
+            text: 'Fees Collection',
+        },
+    },
+    tooltip: {
+        theme: 'dark',
+        marker: {
+            show: true,
+        },
+        // x: {
+        //     show: true,
+        // },
+    },
+    // title: {
+    //     text: 'Students by Day',
+    // },
+};
 }
   getStudentDashboards(){
     this.settingsService.getStudentDashboard().subscribe(response => {
-      this.dashboard = response.data.docs[2];
+      this.dashboard = response.data.docs[1];
       this.setAdmissionChart();
       this.setFeesChart();
     })

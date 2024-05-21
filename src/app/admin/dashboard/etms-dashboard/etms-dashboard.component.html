@@ -167,29 +167,43 @@
                         </div>
                     </div>
                     <div class="body" *ngIf="isBudgetLine">
-                        <apx-chart [series]="budgetLineChartOptions.series!" [chart]="budgetLineChartOptions.chart!"
-                          [xaxis]="budgetLineChartOptions.xaxis!" [stroke]="budgetLineChartOptions.stroke!"
-                          [colors]="budgetLineChartOptions.colors!" [dataLabels]="budgetLineChartOptions.dataLabels!"
-                          [legend]="budgetLineChartOptions.legend!" [markers]="budgetLineChartOptions.markers!"
-                          [grid]="budgetLineChartOptions.grid!" [yaxis]="budgetLineChartOptions.yaxis!"
-                          [tooltip]="budgetLineChartOptions.tooltip!" [title]="budgetLineChartOptions.title!">
-                        </apx-chart>
+                      <apx-chart 
+              [series]="budgetLineChartOptions.series!" 
+              [chart]="budgetLineChartOptions.chart!" 
+              [xaxis]="budgetLineChartOptions.xaxis!" 
+              [stroke]="budgetLineChartOptions.stroke!" 
+              [colors]="budgetLineChartOptions.colors!" 
+              [dataLabels]="budgetLineChartOptions.dataLabels!" 
+              [legend]="budgetLineChartOptions.legend!" 
+              [tooltip]="budgetLineChartOptions.tooltip!" 
+              [markers]="budgetLineChartOptions.markers!" 
+              [grid]="budgetLineChartOptions.grid!" 
+              [yaxis]="budgetLineChartOptions.yaxis!">
+            </apx-chart>
                       </div>
                       <div class="body" *ngIf="isBudgetPie">
-                        <apx-chart [series]="budgetPieChartOptions.series!" [chart]="budgetPieChartOptions.chart!"
-                            [labels]="budgetPieChartOptions.labels!" [colors]="budgetPieChartOptions.colors!"
-                            [dataLabels]="budgetPieChartOptions.dataLabels!" [legend]="budgetPieChartOptions.legend!"
-                            [tooltip]="budgetPieChartOptions.tooltip!">
-                        </apx-chart>
+                        <apx-chart 
+              [series]="budgetPieChartOptions.series!" 
+              [chart]="budgetPieChartOptions.chart!" 
+              [labels]="budgetPieChartOptions.labels!" 
+              [colors]="budgetPieChartOptions.colors!" 
+              [legend]="budgetPieChartOptions.legend!" 
+              [tooltip]="budgetPieChartOptions.tooltip!">
+            </apx-chart>
                     </div>
                     <div class="body" *ngIf="isBudgetBar">
-                      <apx-chart [series]="budgetBarChartOptions.series!" [chart]="budgetBarChartOptions.chart!"
-                          [xaxis]="budgetBarChartOptions.xaxis!" [stroke]="budgetBarChartOptions.stroke!"
-                          [colors]="budgetBarChartOptions.colors!" [dataLabels]="budgetBarChartOptions.dataLabels!"
-                          [legend]="budgetBarChartOptions.legend!" [markers]="budgetBarChartOptions.markers!"
-                          [grid]="budgetBarChartOptions.grid!" [yaxis]="budgetBarChartOptions.yaxis!"
-                          [tooltip]="budgetBarChartOptions.tooltip!" [title]="budgetBarChartOptions.title!">
-                      </apx-chart>
+                      <apx-chart 
+                      [series]="budgetBarChartOptions.series!" 
+                      [chart]="budgetBarChartOptions.chart!" 
+                      [xaxis]="budgetBarChartOptions.xaxis!" 
+                      [plotOptions]="budgetBarChartOptions.plotOptions!" 
+                      [colors]="budgetBarChartOptions.colors!" 
+                      [dataLabels]="budgetBarChartOptions.dataLabels!" 
+                      [legend]="budgetBarChartOptions.legend!" 
+                      [tooltip]="budgetBarChartOptions.tooltip!" 
+                      [grid]="budgetBarChartOptions.grid!" 
+                      [yaxis]="budgetBarChartOptions.yaxis!">
+                    </apx-chart>
                   </div>
                     <!-- <div class="body">
                         <ngx-gauge [value]="gaugeValue" [size]="350" [thick]="20" [type]="guageType1"
@@ -311,29 +325,43 @@
                     </div>
                 </div>
                 <div class="body" *ngIf="isActualLine">
-                    <apx-chart [series]="actualLineChartOptions.series!" [chart]="actualLineChartOptions.chart!"
-                      [xaxis]="actualLineChartOptions.xaxis!" [stroke]="actualLineChartOptions.stroke!"
-                      [colors]="actualLineChartOptions.colors!" [dataLabels]="actualLineChartOptions.dataLabels!"
-                      [legend]="actualLineChartOptions.legend!" [markers]="actualLineChartOptions.markers!"
-                      [grid]="actualLineChartOptions.grid!" [yaxis]="actualLineChartOptions.yaxis!"
-                      [tooltip]="actualLineChartOptions.tooltip!" [title]="actualLineChartOptions.title!">
-                    </apx-chart>
+                  <apx-chart 
+                  [series]="actualLineChartOptions.series!" 
+                  [chart]="actualLineChartOptions.chart!" 
+                  [xaxis]="actualLineChartOptions.xaxis!" 
+                  [stroke]="actualLineChartOptions.stroke!" 
+                  [colors]="actualLineChartOptions.colors!" 
+                  [dataLabels]="actualLineChartOptions.dataLabels!" 
+                  [legend]="actualLineChartOptions.legend!" 
+                  [tooltip]="actualLineChartOptions.tooltip!" 
+                  [markers]="actualLineChartOptions.markers!" 
+                  [grid]="actualLineChartOptions.grid!" 
+                  [yaxis]="actualLineChartOptions.yaxis!">
+                </apx-chart>
                   </div>
                   <div class="body" *ngIf="isActualPie">
-                    <apx-chart [series]="actualPieChartOptions.series!" [chart]="actualPieChartOptions.chart!"
-                        [labels]="actualPieChartOptions.labels!" [colors]="actualPieChartOptions.colors!"
-                        [dataLabels]="actualPieChartOptions.dataLabels!" [legend]="actualPieChartOptions.legend!"
-                        [tooltip]="actualPieChartOptions.tooltip!">
-                    </apx-chart>
+                    <apx-chart 
+              [series]="actualPieChartOptions.series!" 
+              [chart]="actualPieChartOptions.chart!" 
+              [labels]="actualPieChartOptions.labels!" 
+              [colors]="actualPieChartOptions.colors!" 
+              [legend]="actualPieChartOptions.legend!" 
+              [tooltip]="actualPieChartOptions.tooltip!">
+            </apx-chart>
                 </div>
                 <div class="body" *ngIf="isActualBar">
-                  <apx-chart [series]="actualBarChartOptions.series!" [chart]="actualBarChartOptions.chart!"
-                      [xaxis]="actualBarChartOptions.xaxis!" [stroke]="actualBarChartOptions.stroke!"
-                      [colors]="actualBarChartOptions.colors!" [dataLabels]="actualBarChartOptions.dataLabels!"
-                      [legend]="actualBarChartOptions.legend!" [markers]="actualBarChartOptions.markers!"
-                      [grid]="actualBarChartOptions.grid!" [yaxis]="actualBarChartOptions.yaxis!"
-                      [tooltip]="actualBarChartOptions.tooltip!" [title]="actualBarChartOptions.title!">
-                  </apx-chart>
+                  <apx-chart 
+                  [series]="actualBarChartOptions.series!" 
+                  [chart]="actualBarChartOptions.chart!" 
+                  [xaxis]="actualBarChartOptions.xaxis!" 
+                  [plotOptions]="actualBarChartOptions.plotOptions!" 
+                  [colors]="actualBarChartOptions.colors!" 
+                  [dataLabels]="actualBarChartOptions.dataLabels!" 
+                  [legend]="actualBarChartOptions.legend!" 
+                  [tooltip]="actualBarChartOptions.tooltip!" 
+                  [grid]="actualBarChartOptions.grid!" 
+                  [yaxis]="actualBarChartOptions.yaxis!">
+                </apx-chart>
               </div>
                 <!-- <div class="body" style="height: 273px;">
                     <ngx-gauge [value]="gaugeValue" [size]="250" [thick]="20" [type]="guageType1"

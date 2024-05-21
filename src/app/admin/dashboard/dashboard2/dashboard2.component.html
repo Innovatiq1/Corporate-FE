@@ -100,41 +100,27 @@
             <h2>Fees Collection Report</h2>
           </div>
           <div class="body" *ngIf="isFeesLine">
-            <apx-chart 
-              [series]="feesLineChartOptions.series!" 
-              [chart]="feesLineChartOptions.chart!" 
-              [xaxis]="feesLineChartOptions.xaxis!" 
-              [stroke]="feesLineChartOptions.stroke!" 
-              [colors]="feesLineChartOptions.colors!" 
-              [dataLabels]="feesLineChartOptions.dataLabels!" 
-              [legend]="feesLineChartOptions.legend!" 
-              [tooltip]="feesLineChartOptions.tooltip!" 
-              [markers]="feesLineChartOptions.markers!" 
-              [grid]="feesLineChartOptions.grid!" 
-              [yaxis]="feesLineChartOptions.yaxis!">
+            <apx-chart [series]="feesLineChartOptions.series!" [chart]="feesLineChartOptions.chart!"
+              [xaxis]="feesLineChartOptions.xaxis!" [stroke]="feesLineChartOptions.stroke!"
+              [colors]="feesLineChartOptions.colors!" [dataLabels]="feesLineChartOptions.dataLabels!"
+              [legend]="feesLineChartOptions.legend!" [markers]="feesLineChartOptions.markers!"
+              [grid]="feesLineChartOptions.grid!" [yaxis]="feesLineChartOptions.yaxis!"
+              [tooltip]="feesLineChartOptions.tooltip!" [title]="feesLineChartOptions.title!">
             </apx-chart>
           </div>
           <div class="body" *ngIf="isFeesBar">
-            <apx-chart 
-              [series]="feesBarChartOptions.series!" 
-              [chart]="feesBarChartOptions.chart!" 
-              [xaxis]="feesBarChartOptions.xaxis!" 
-              [plotOptions]="feesBarChartOptions.plotOptions!" 
-              [colors]="feesBarChartOptions.colors!" 
-              [dataLabels]="feesBarChartOptions.dataLabels!" 
-              [legend]="feesBarChartOptions.legend!" 
-              [tooltip]="feesBarChartOptions.tooltip!" 
-              [grid]="feesBarChartOptions.grid!" 
-              [yaxis]="feesBarChartOptions.yaxis!">
-            </apx-chart>
+            <apx-chart [series]="feesBarChartOptions.series!" [chart]="feesBarChartOptions.chart!"
+            [xaxis]="feesBarChartOptions.xaxis!" [stroke]="feesBarChartOptions.stroke!"
+            [colors]="feesBarChartOptions.colors!" [dataLabels]="feesBarChartOptions.dataLabels!"
+            [legend]="feesBarChartOptions.legend!" [markers]="feesBarChartOptions.markers!"
+            [grid]="feesBarChartOptions.grid!" [yaxis]="feesBarChartOptions.yaxis!"
+            [tooltip]="feesBarChartOptions.tooltip!" [title]="feesBarChartOptions.title!">
+          </apx-chart>
           </div>
           <div class="body" *ngIf="isFeesPie">
-            <apx-chart 
-              [series]="feesPieChartOptions.series!" 
-              [chart]="feesPieChartOptions.chart!" 
-              [labels]="feesPieChartOptions.labels!" 
-              [colors]="feesPieChartOptions.colors!" 
-              [legend]="feesPieChartOptions.legend!" 
+            <apx-chart [series]="feesPieChartOptions.series!" [chart]="feesPieChartOptions.chart!"
+              [labels]="feesPieChartOptions.labels!" [colors]="feesPieChartOptions.colors!"
+              [dataLabels]="feesPieChartOptions.dataLabels!" [legend]="feesPieChartOptions.legend!"
               [tooltip]="feesPieChartOptions.tooltip!">
             </apx-chart>
           </div>
