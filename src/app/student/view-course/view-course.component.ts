@@ -121,6 +121,8 @@ export class ViewCourseComponent implements OnDestroy {
   courseDetails: any;
   courseDetailsId: any;
   razorPayKey: any;
+  isInvoice: boolean = false;
+
   constructor(
     private classService: ClassService,
     private activatedRoute: ActivatedRoute,
