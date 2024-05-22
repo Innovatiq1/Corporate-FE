@@ -299,6 +299,8 @@ export class MainComponent implements OnInit {
   isStudentLine: boolean = false;
   studentDashboard: any;
   programClassList: any;
+  totalDocs: any;
+  docs: any;
 
   constructor(
     private courseService: CourseService,
@@ -881,6 +883,7 @@ export class MainComponent implements OnInit {
       (response) => {
         if (response.data) {
           this.classesList = response.data.docs.slice(0, 5).sort();
+          this.docs = response.data.totalDocs;
         }
       },
       (error) => {
@@ -895,6 +898,8 @@ export class MainComponent implements OnInit {
       (response) => {
         if (response.data) {
           this.programClassList = response.data.docs.slice(0, 5).sort();
+          this.totalDocs = response.data.totalDocs;
+          console.log("docs", this.totalDocs)
         }
       },
       (error) => {
