@@ -173,6 +173,8 @@ student(){
       answers: this.answers,
       courseId: this.courseId,
       is_course_completed: true,
+      is_tutorial: true,
+      classId: this.classId
     };
 
     this.studentService.submitAssessment(requestBody).subscribe(
@@ -223,7 +225,6 @@ submitFeedback(){
     this.router.navigate(['/student/feedback/courses', this.classId, this.studentId, this.courseId]);
   } else if(this.isFree){
     this.router.navigate(['/student/feedback/freecourse', this.classId, this.studentId, this.courseId]);
-
   }
 }
 
@@ -233,7 +234,7 @@ submitFeedback(){
   
   calculateTotalTime() {
     this.totalTime = this.questionList.length * this.timerInSeconds;
-    this.startTimer();
+    // this.startTimer();
 
   }
 
@@ -264,6 +265,10 @@ submitFeedback(){
 
   goToPage(pageNumber: number): void {
     this.currentPage = pageNumber;
+  }
+
+  goBackToCourse(){
+    this.router.navigate(['/student/view-course/', this.classId]);
   }
   
 }

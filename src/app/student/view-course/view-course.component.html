@@ -140,7 +140,7 @@
                       aria-controls="des"
                       aria-selected="false"
                     >
-                      <!-- <i class="now-ui-icons ui-2_settings-90"></i> --
+                       <i class="now-ui-icons ui-2_settings-90"></i>
                       Description
                     </button>
                   </li> -->
@@ -482,7 +482,7 @@
                       *ngIf="questionList.length"
                       [questionList]="questionList"
                       [answersResult]="answersResult"
-                      [totalTime]="questionList.length * 60"
+                      [totalTime]="questionList.length * questionTimer"
                       (submitAnswers)="submitAnswers($event)"
                       [isAnswersSubmitted]="isAnswersSubmitted"
                     ></app-questions>
@@ -880,6 +880,7 @@
                       role="tab"
                       aria-controls="home"
                       aria-selected="true"
+                      [class]="{'active': defaultTab === 'home'}"
                     >
                       <!-- <i class="now-ui-icons shopping_shop"></i> -->
                       Course Details
@@ -896,7 +897,7 @@
                       aria-controls="des"
                       aria-selected="false"
                     >
-                      <!-- <i class="now-ui-icons ui-2_settings-90"></i> --
+                      <i class="now-ui-icons ui-2_settings-90"></i>
                       Description
                     </button>
                   </li> -->
@@ -910,6 +911,7 @@
                       role="tab"
                       aria-controls="profile"
                       aria-selected="false"
+                      [class]="{'active': defaultTab === 'profile'}"
                     >
                       <!-- <i class="now-ui-icons ui-2_settings-90"></i> -->
                       Classes
@@ -925,6 +927,7 @@
                       role="tab"
                       aria-controls="test"
                       aria-selected="false"
+                      [class]="{'active': defaultTab === 'test'}"
                     >
                       <!-- <i class="now-ui-icons ui-2_settings-90"></i> -->
                       Assessment
@@ -940,6 +943,7 @@
                       role="tab"
                       aria-controls="feedback"
                       aria-selected="false"
+                      [class]="{'active': defaultTab === 'feedback'}"
                     >
                       <!-- <i class="now-ui-icons ui-2_settings-90"></i> -->
                       Feedback
@@ -966,10 +970,11 @@
               <div class="card-body">
                 <div class="tab-content" id="myTabContent">
                   <div
-                    class="tab-pane fade show active"
+                    class="tab-pane fade"
                     id="home"
                     role="tabpanel"
                     aria-labelledby="home-tab"
+                    [ngClass]="{'show active': defaultTab === 'home'}"
                   >
                   <h5 class="py-2">
                     Course Completed :
@@ -1097,6 +1102,7 @@
                     id="des"
                     role="tabpanel"
                     aria-labelledby="des-tab"
+                    [class]="{'show active': defaultTab === 'des'}"
                   >
                     <!-- <h5 class="text">Course Completed : <span [ngClass]="{'red-text': playBackTime< 50, 'green-text': playBackTime>= 50}">{{playBackTime.toFixed(2) || 0}}%</span></h5> -->
                     {{ longDescription }}
@@ -1107,6 +1113,7 @@
                     id="profile"
                     role="tabpanel"
                     aria-labelledby="profile-tab"
+                    [class]="{'show active': defaultTab === 'profile'}"
                   >
                     <table mat-table [dataSource]="dataSource">
                       <ng-container matColumnDef="position">
@@ -1193,6 +1200,7 @@
                     id="contact"
                     role="tabpanel"
                     aria-labelledby="contact-tab"
+                    [class]="{'show active': defaultTab === 'contact'}"
                   >
                     <table mat-table [dataSource]="dataSource">
                       <!--- Note that these columns can be defined in any order.
@@ -1270,12 +1278,13 @@
                     id="test"
                     role="tabpanel"
                     aria-labelledby="test"
+                    [ngClass]="{'show active': defaultTab == 'test'}"
                   >
                     <app-questions
                       *ngIf="questionList.length"
                       [questionList]="questionList"
                       [answersResult]="answersResult"
-                      [totalTime]="questionList.length * 60"
+                      [totalTime]="questionList.length * questionTimer"
                       (submitAnswers)="submitAnswers($event)"
                       [isAnswersSubmitted]="isAnswersSubmitted"
                     ></app-questions>
@@ -1285,6 +1294,7 @@
                     id="feedback"
                     role="tabpanel"
                     aria-labelledby="feedback"
+                    [class]="{'show active': defaultTab === 'feedback'}"
                   >
                     <div>
                       <app-feedbackcommon
