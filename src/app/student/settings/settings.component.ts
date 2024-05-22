@@ -1128,7 +1128,9 @@ export class SettingsComponent {
             });
           }
         );
-    }else if(value == 'scoreAlgorithm'){
+      }
+    })
+  }else if(value == 'scoreAlgorithm'){
       const selectedAssessmentAlgorithm= this.selectedAssessmentAlgorithm;
       const selectedExamAlgorithm= this.selectedExamAlgorithm;
       forkJoin(
