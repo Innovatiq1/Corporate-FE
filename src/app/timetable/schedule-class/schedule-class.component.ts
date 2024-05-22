@@ -19,6 +19,7 @@ import {
   UnsubscribeOnDestroyAdapter,
 } from '@shared';
 import { ProgramService } from 'app/admin/program/program.service';
+import { LecturesService } from 'app/teacher/lectures/lectures.service';
 
 @Component({
   selector: 'app-schedule-class',
@@ -84,24 +85,44 @@ export class ScheduleClassComponent {
   ];
   dataSource: any;
   totalItems: any;
+  filterName='';
+  isAdmin: boolean = false;
+  isInstructor: boolean = false;
   constructor(
     public courseService: ProgramService,
     private classService: ClassService,
     private cd: ChangeDetectorRef,
     public router: Router,
-    private instructorService: InstructorService
+    private instructorService: InstructorService,
+    public lecturesService: LecturesService,
   ) {
     this.coursePaginationModel = {};
   }
 
   ngOnInit(): void {
-    this.getClassList();
+    let userType = localStorage.getItem('user_type');
+    if (userType == 'admin') {
+      this.isAdmin = true;
+      this.getClassList();
+    }
+    if (userType == 'Instructor') {
+      this.isInstructor = true;
+      this.getClassLectures();
+    }
   }
 
   pageSizeChange($event: any) {
     this.coursePaginationModel.page = $event?.pageIndex + 1;
     this.coursePaginationModel.limit = $event?.pageSize;
-    this.getClassList();
+    let userType = localStorage.getItem('user_type');
+    if (userType == 'admin') {
+      this.isAdmin = true;
+      this.getClassList();
+    }
+    if (userType == 'Instructor') {
+      this.isInstructor = true;
+      this.getClassLectures();
+    }
   }
 
   getClassList() {
@@ -117,6 +138,29 @@ export class ScheduleClassComponent {
         },
         () => {}
       );
+  }
+
+  getClassLectures() {
+    let instructorId = localStorage.getItem('id')
+    this.lecturesService.getClassListWithPagination1(instructorId, this.filterName,{ ...this.coursePaginationModel }).subscribe(
+      (response) => {
+   
+        this.dataSource = response.data.docs;
+        //this.dataSource1 = response.data.sessions;
+        this.totalItems = response.data.totalDocs
+        this.coursePaginationModel.docs = response.data.docs;
+        this.coursePaginationModel.page = response.data.page;
+        this.coursePaginationModel.limit = response.data.limit;
+        //this.mapClassList()
+        // this.dataSource = [];
+       this.getSession()
+        
+      },
+      (error) => {
+      }
+    );
+   
+    
   }
 
   toggleStatus() {

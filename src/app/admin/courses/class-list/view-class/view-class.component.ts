@@ -22,6 +22,8 @@ export class ViewClassComponent {
   coursePaginationModel!: Partial<CoursePaginationModel>;
   courseId: any;
   response: any;
+  isAdmin: boolean = false;
+  isInstructor: boolean = false;
 
   constructor(public _classService: ClassService,private _router: Router, private activatedRoute: ActivatedRoute,) {
     this.coursePaginationModel = {};
@@ -43,6 +45,13 @@ export class ViewClassComponent {
         this.courseId = params.id;
         this.getCategoryByID(this.courseId);
       });
+    }
+    let userType = localStorage.getItem('user_type');
+    if (userType == 'admin') {
+      this.isAdmin = true;
+    }
+    if (userType == 'Instructor') {
+      this.isInstructor = true;
     }
   }
 
