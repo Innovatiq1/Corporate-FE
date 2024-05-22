@@ -86,7 +86,7 @@ export class QuestionTestComponent implements OnInit, OnDestroy {
   handleRadioChange(index: any) {
     if(!this.isExamStarted){
       this.isExamStarted = true;
-      // this.startTimer();
+      this.startTimer();
     }
     this.answers[index].questionText = this.questionList[index]?.questionText;
     // this.answers[index].selectedOptionText = this.selectedOption;
@@ -119,7 +119,8 @@ export class QuestionTestComponent implements OnInit, OnDestroy {
         const submissionPayload = {
           answers: this.answers,
           courseId: this.courseId,
-          is_tutorial: true,
+          is_tutorial: false,
+          classId: this.classId
         };
         this.submitAnswers.next(submissionPayload);
         clearInterval(this.interval);

@@ -239,6 +239,7 @@ export class MainComponent implements OnInit {
   instructorCount: any;
   adminCount: any;
   studentCount: any;
+  filterName='';
   // count: any;
   //instructor
   count: any;
@@ -297,6 +298,9 @@ export class MainComponent implements OnInit {
   isStudentBar: boolean = false;
   isStudentLine: boolean = false;
   studentDashboard: any;
+  programClassList: any;
+  totalDocs: any;
+  docs: any;
 
   constructor(
     private courseService: CourseService,
@@ -863,6 +867,7 @@ export class MainComponent implements OnInit {
 
     //Instructor
     this.getClassList();
+    this.getProgramClassList();
     this.getClassList1();
     this.chart1Ins();
     // this.chart2Ins();
@@ -873,10 +878,28 @@ export class MainComponent implements OnInit {
   }
   
   getClassList() {
-    this.classService.getClassListWithPagination().subscribe(
+    let instructorId = localStorage.getItem('id')
+    this.lecturesService.getClassListWithPagination(instructorId, this.filterName,{ ...this.coursePaginationModel }).subscribe(
       (response) => {
         if (response.data) {
           this.classesList = response.data.docs.slice(0, 5).sort();
+          this.docs = response.data.totalDocs;
+        }
+      },
+      (error) => {
+        console.log('error', error);
+      }
+    );
+  }
+
+  getProgramClassList() {
+    let instructorId = localStorage.getItem('id')
+    this.lecturesService.getClassListWithPagination1(instructorId, this.filterName,{ ...this.coursePaginationModel }).subscribe(
+      (response) => {
+        if (response.data) {
+          this.programClassList = response.data.docs.slice(0, 5).sort();
+          this.totalDocs = response.data.totalDocs;
+          console.log("docs", this.totalDocs)
         }
       },
       (error) => {

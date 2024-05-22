@@ -3,7 +3,11 @@
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
-      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      <app-breadcrumb
+        [title]="breadscrum.title"
+        [items]="breadscrum.items"
+        [active_item]="breadscrum.active"
+      >
       </app-breadcrumb>
     </div>
     <div class="card">
@@ -15,7 +19,9 @@
           <div class="example-container">
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <label>Employee Name<span class="mandatory">&nbsp;*</span></label>
+                <label
+                  >Employee Name<span class="mandatory">&nbsp;*</span></label
+                >
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="empName" />
                 </mat-form-field>
@@ -44,7 +50,11 @@
                     <mat-option [value]= "roname" >{{roname}}</mat-option>
                   </mat-select> -->
                   <mat-error
-                    *ngIf="profileForm.get('director')?.hasError('required') ||profileForm.get('director')?.touched">
+                    *ngIf="
+                      profileForm.get('director')?.hasError('required') ||
+                      profileForm.get('director')?.touched
+                    "
+                  >
                     Select a training admin
                   </mat-error>
                 </mat-form-field>
@@ -53,14 +63,20 @@
 
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <label>Training Admin<span class="mandatory">&nbsp;*</span></label>
+                <label
+                  >Training Admin<span class="mandatory">&nbsp;*</span></label
+                >
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="director" readonly="true" />
                   <!-- <mat-select formControlName="director" required>
                       <mat-option value=''></mat-option>
                     </mat-select> -->
                   <mat-error
-                    *ngIf="profileForm.get('director')?.hasError('required') ||profileForm.get('director')?.touched">
+                    *ngIf="
+                      profileForm.get('director')?.hasError('required') ||
+                      profileForm.get('director')?.touched
+                    "
+                  >
                     Select a training admin
                   </mat-error>
                 </mat-form-field>
@@ -72,14 +88,21 @@
                   <!-- <mat-select formControlName="TA" required>
                     <mat-option value=''>TA</mat-option>
                   </mat-select> -->
-                  <mat-error *ngIf="profileForm.get('TA')?.hasError('required') ||profileForm.get('TA')?.touched">
+                  <mat-error
+                    *ngIf="
+                      profileForm.get('TA')?.hasError('required') ||
+                      profileForm.get('TA')?.touched
+                    "
+                  >
                     Select a training admin
                   </mat-error>
                 </mat-form-field>
               </div>
             </div>
           </div>
-          <button mat-raised-button id="submit" style="float: right;">Update</button>
+          <button mat-raised-button id="submit" style="float: right">
+            Update
+          </button>
         </form>
       </div>
     </div>
@@ -96,17 +119,30 @@
             </mat-form-field>
             <label>Current Password</label>
             <mat-form-field class="example-full-width" appearance="outline">
-              <input matInput type="password" formControlName="currentpassword" />
+              <input
+                matInput
+                type="password"
+                formControlName="currentpassword"
+              />
             </mat-form-field>
             <label>New Password<span class="mandatory">&nbsp;*</span></label>
             <mat-form-field class="example-full-width" appearance="outline">
-              <input matInput type="password" formControlName="password" [type]="hide ? 'password' : 'text'" required />
+              <input
+                matInput
+                type="password"
+                formControlName="password"
+                [type]="hide ? 'password' : 'text'"
+                required
+              />
               <mat-icon matSuffix (click)="hide = !hide">
-                {{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+                {{ hide ? "visibility_off" : "visibility" }}</mat-icon
+              >
             </mat-form-field>
           </div>
 
-          <button mat-raised-button id="submit" style="float: right;">Update</button>
+          <button mat-raised-button id="submit" style="float: right">
+            Update
+          </button>
         </form>
       </div>
     </div>
@@ -181,14 +217,19 @@
                   <div class="file">
                     <button mat-raised-button color="primary">
                       Choose file
-                      <input formControlName="avatar" (change)="onFileUpload($event)" class="file-input" type="file" />
+                      <input
+                        formControlName="avatar"
+                        (change)="onFileUpload($event)"
+                        class="file-input"
+                        type="file"
+                      />
                     </button>
                     <span class="file-msg">
                       <h5>
                         {{
-                        uploadedImage
-                        ? uploadedImage
-                        : "Drag and Drop File Here"
+                          uploadedImage
+                            ? uploadedImage
+                            : "Drag and Drop File Here"
                         }}
                       </h5>
                     </span>
@@ -200,7 +241,7 @@
               <label>Upload <span class="mandatory">&nbsp;*</span></label>
               <div class="file-drop-area">
                 <div class="file">
-                  <!-- <button mat-raised-button color="primary">Choose file</button> --
+                  <button mat-raised-button color="primary">Choose file</button> --
                   <img src="/assets/add-image-icon.svg" />
                   <h5>
                     {{uploadedImage ? uploadedImage : 'Drag and Drop File Here' }}
@@ -213,7 +254,7 @@
                   />
                 </div>
               </div>
-              <!-- <div class="file-drop-area">
+               <div class="file-drop-area">
                 <button mat-raised-button color="primary">Choose file</button>
                 <span>{{fileName ? fileName : ' or drag and drop file here' }}</span>
                 <input formControlName="avatar" (change)="onFileUpload($event)" class="file-input" type="file">
@@ -221,7 +262,9 @@
             </div> -->
             </div>
             <div class="col-md-12">
-              <button mat-raised-button id="submit" style="float: right;">Update</button>
+              <button mat-raised-button id="submit" style="float: right">
+                Update
+              </button>
             </div>
           </div>
         </form>
@@ -234,7 +277,11 @@
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
-      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      <app-breadcrumb
+        [title]="breadscrum.title"
+        [items]="breadscrum.items"
+        [active_item]="breadscrum.active"
+      >
       </app-breadcrumb>
     </div>
     <!-- </div> -->
@@ -247,61 +294,90 @@
       <div class="body">
         <div class="row">
           <div class="col-md-6">
-            <div class="card" style="background-color: rgb(214 209 209 / 63%);">
+            <div class="card" style="background-color: rgb(214 209 209 / 63%)">
               <div class="row">
                 <div class="col-md-8 m-3">
                   <label>User Management</label>
                 </div>
                 <div class="col-md-2 mt-3">
-                  <img src="assets/images/settings/User-Profile.png" style="width: 80px; height: 80px;">
+                  <img
+                    src="assets/images/settings/User-Profile.png"
+                    style="width: 80px; height: 80px"
+                  />
                 </div>
               </div>
-              <hr>
+              <hr />
               <div class="m-3">
                 <div class="row">
                   <div class="col-3">
                     <!-- <a href="admin/users/all-users">All Users</a> -->
-                    <button id="saved" [routerLink]="['/admin/settings/all-users']"> All Users </button>
+                    <button
+                      id="saved"
+                      [routerLink]="['/admin/settings/all-users']"
+                    >
+                      All Users
+                    </button>
                   </div>
                   <div class="col-3">
-                    <button id="saved" [routerLink]="['/admin/users/all-students']"> Students</button>
+                    <button
+                      id="saved"
+                      [routerLink]="['/admin/users/all-students']"
+                    >
+                      Students
+                    </button>
                   </div>
                   <div class="col-3">
-                    <button id="saved" [routerLink]="['/admin/users/all-instructors']"> Instructors </button>
+                    <button
+                      id="saved"
+                      [routerLink]="['/admin/users/all-instructors']"
+                    >
+                      Instructors
+                    </button>
                   </div>
                   <div class="col-3">
-                    <button id="saved" [routerLink]="['/admin/users/all-staff']"> Staff </button>
+                    <button
+                      id="saved"
+                      [routerLink]="['/admin/users/all-staff']"
+                    >
+                      Staff
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-6">
-            <div class="card" style="background-color: rgb(214 209 209 / 63%);">
+            <div class="card" style="background-color: rgb(214 209 209 / 63%)">
               <div class="row">
                 <div class="col-md-8 m-3">
                   <label>Security</label>
                 </div>
                 <div class="col-md-2 mt-3">
-                  <img src="assets/images/settings/security1.png" style="width: 85px; height: 85px;">
+                  <img
+                    src="assets/images/settings/security1.png"
+                    style="width: 85px; height: 85px"
+                  />
                 </div>
               </div>
-              <hr>
+              <hr />
               <div class="m-3">
                 <div class="row">
                   <div class="col-5">
                     <!-- <a href="admin/users/all-users">Account Settings</a> -->
-                    <button id="saved" (click)="navigateToAccountSettings()"> Account Settings</button>
+                    <button id="saved" (click)="navigateToAccountSettings()">
+                      Account Settings
+                    </button>
                     <!-- <button id="save"  [routerLink]="['/student/account-settings']" > Account Settings</button> -->
                   </div>
                   <!-- <div class="card" *ngIf="showAccountSettings">
-                    <!-- Content of Account Settings Card --
+                     Content of Account Settings Card --
                   </div> -->
                   <div class="col-5">
                     <!-- <a href="admin/students/all-students">Security Settings</a> -->
-                    <button id="saved" (click)="navigateToProfileSettings()"> Security Settings</button>
+                    <button id="saved" (click)="navigateToProfileSettings()">
+                      Security Settings
+                    </button>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -309,94 +385,133 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <div class="card" style="height: 240px; background-color: rgb(214 209 209 / 63%);">
+            <div
+              class="card"
+              style="height: 240px; background-color: rgb(214 209 209 / 63%)"
+            >
               <div class="row">
                 <div class="col-md-8 m-3">
                   <label>Roles</label>
                 </div>
                 <div class="col-md-2 my-3">
-                  <img src="assets/images/settings/role.png" style="width: 80px; height: 80px;">
+                  <img
+                    src="assets/images/settings/role.png"
+                    style="width: 80px; height: 80px"
+                  />
                 </div>
               </div>
-              <hr>
+              <hr />
               <div class="m-3">
                 <div class="row">
                   <div class="col-3">
-                    <button id="saved" [routerLink]="['/admin/users/user-type']"> User Types </button>
+                    <button
+                      id="saved"
+                      [routerLink]="['/admin/users/user-type']"
+                    >
+                      User Types
+                    </button>
                   </div>
-
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-6">
-            <div class="card" style="background-color: rgb(214 209 209 / 63%);">
+            <div class="card" style="background-color: rgb(214 209 209 / 63%)">
               <div class="row">
                 <div class="col-md-8 m-3">
                   <label>System Configuration</label>
                 </div>
                 <div class="col-md-2 my-3">
-                  <img src="assets/images/settings/system-configuration1.png" style="width: 80px; height: 80px;">
+                  <img
+                    src="assets/images/settings/system-configuration1.png"
+                    style="width: 80px; height: 80px"
+                  />
                 </div>
               </div>
-              <hr>
+              <hr />
               <div class="m-3">
                 <div class="row">
                   <div class="col-3">
-                    <button id="saved" [routerLink]="['/admin/departments/all-departments']"> Departments </button>
-                  </div>
-                  <div class="col-5">
-                    <button id="saved" (click)="navigateToEmailSettings()"> Email Configuration
+                    <button
+                      id="saved"
+                      [routerLink]="['/admin/departments/all-departments']"
+                    >
+                      Departments
                     </button>
                   </div>
-                  <div class="col-3" style="margin-left: -35px;">
-                    <button id="saved" (click)="navigateToBannerSettings()"> Banners </button>
+                  <div class="col-5">
+                    <button id="saved" (click)="navigateToEmailSettings()">
+                      Email Configuration
+                    </button>
                   </div>
-
+                  <div class="col-3" style="margin-left: -35px">
+                    <button id="saved" (click)="navigateToBannerSettings()">
+                      Banners
+                    </button>
+                  </div>
                 </div>
                 <div class="row py-2">
                   <div class="col-3">
-                    <button id="saved" [routerLink]="['/admin/questions/all-questions']"> Assessments </button>
+                    <button
+                      id="saved"
+                      [routerLink]="['/admin/questions/all-questions']"
+                    >
+                      Assessments
+                    </button>
                   </div>
                   <div class="col-4">
-                    <button id="saved" [routerLink]="['/admin/announcement/list']"> Announcements </button>
+                    <button
+                      id="saved"
+                      [routerLink]="['/admin/announcement/list']"
+                    >
+                      Announcements
+                    </button>
                   </div>
 
                   <div class="col-3">
-                    <button id="saved" [routerLink]="['/admin/certificate/template']"> Certificate </button>
+                    <button
+                      id="saved"
+                      [routerLink]="['/admin/certificate/template']"
+                    >
+                      Certificate
+                    </button>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <div class="card" style="height: 240px; background-color: rgb(214 209 209 / 63%);">
+            <div
+              class="card"
+              style="height: 240px; background-color: rgb(214 209 209 / 63%)"
+            >
               <div class="row">
                 <div class="col-md-8 m-3">
                   <label>Customization</label>
                 </div>
                 <div class="col-md-2 my-3">
-                  <img src="assets/images/settings/customization.png" style="width: 80px; height: 80px;">
+                  <img
+                    src="assets/images/settings/customization.png"
+                    style="width: 80px; height: 80px"
+                  />
                 </div>
               </div>
-              <hr>
+              <hr />
               <div class="m-3">
                 <div class="row">
                   <div class="col-5">
-                    <button id="saved" (click)="navigateToCustomSettings()"> Field Customization </button>
+                    <button id="saved" (click)="navigateToCustomSettings()">
+                      Field Customization
+                    </button>
                   </div>
-
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
     <div class="card" *ngIf="showAccountSettings">
       <div class="header">
@@ -411,15 +526,13 @@
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="name" />
                   <mat-error
-                  *ngIf="
-                    stdForm1.get('name')?.invalid &&
-                    stdForm1.get('name')?.touched
-                  "
-                >
-                  {{
-                    utils.getErrorMessage1(stdForm1.get("name"), "fname")
-                  }}
-                </mat-error>
+                    *ngIf="
+                      stdForm1.get('name')?.invalid &&
+                      stdForm1.get('name')?.touched
+                    "
+                  >
+                    {{ utils.getErrorMessage1(stdForm1.get("name"), "fname") }}
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -432,15 +545,19 @@
                 </mat-form-field>
               </div>
             </div>
-            
+
             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2">
-                <label>Department <span class="mandatory">&nbsp;*</span></label>
+              <label>Department <span class="mandatory">&nbsp;*</span></label>
               <mat-form-field
                 class="example-full-width mb-3"
-                appearance="outline">
-                <mat-select formControlName="department" required >
-                  <mat-option [value]="dept.department" *ngFor="let dept of dept">
-                   {{dept.department }}
+                appearance="outline"
+              >
+                <mat-select formControlName="department" required>
+                  <mat-option
+                    [value]="dept.department"
+                    *ngFor="let dept of dept"
+                  >
+                    {{ dept.department }}
                   </mat-option>
                 </mat-select>
                 <mat-error
@@ -450,7 +567,10 @@
                   "
                 >
                   {{
-                    utils.getErrorMessage1(stdForm1.get("department"), "deptname")
+                    utils.getErrorMessage1(
+                      stdForm1.get("department"),
+                      "deptname"
+                    )
                   }}
                 </mat-error>
               </mat-form-field>
@@ -461,15 +581,15 @@
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="mobile" />
                   <mat-error
-                  *ngIf="
-                    stdForm1.get('mobile')?.invalid &&
-                    stdForm1.get('mobile')?.touched
-                  "
-                >
-                  {{
-                    utils.getErrorMessage1(stdForm1.get("mobile"), "mobile")
-                  }}
-                </mat-error>
+                    *ngIf="
+                      stdForm1.get('mobile')?.invalid &&
+                      stdForm1.get('mobile')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(stdForm1.get("mobile"), "mobile")
+                    }}
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -482,16 +602,26 @@
                 </mat-form-field>
               </div>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="isApprovers">
+            <div
+              class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2"
+              *ngIf="isApprovers"
+            >
               <div class="button-container">
                 <label>Approver 1<span class="mandatory">&nbsp;*</span></label>
                 <!-- <mat-icon class="cursor-pointer" (click)="openDialog()">add</mat-icon> -->
               </div>
               <mat-form-field
                 class="example-full-width mb-3"
-                appearance="outline">
-                <mat-select (selectionChange)="onSelectionChange($event,'approver1')"  formControlName ="approver1" required >
-                  <mat-option *ngFor="let user of roUsers" [value]="user.id"> {{user.name | titlecase}} </mat-option>
+                appearance="outline"
+              >
+                <mat-select
+                  (selectionChange)="onSelectionChange($event, 'approver1')"
+                  formControlName="approver1"
+                  required
+                >
+                  <mat-option *ngFor="let user of roUsers" [value]="user.id">
+                    {{ user.name | titlecase }}
+                  </mat-option>
                 </mat-select>
                 <mat-error
                   *ngIf="stdForm1.get('approver1')?.hasError('required')"
@@ -500,16 +630,29 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="isApprovers">
+            <div
+              class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2"
+              *ngIf="isApprovers"
+            >
               <div class="button-container">
                 <label>Approver 2 <span class="mandatory">&nbsp;*</span></label>
                 <!-- <mat-icon class="cursor-pointer" (click)="openDialog()">add</mat-icon> -->
               </div>
               <mat-form-field
                 class="example-full-width mb-3"
-                appearance="outline">
-                <mat-select (selectionChange)="onSelectionChange($event,'approver2')"  formControlName ="approver2" required >
-                  <mat-option *ngFor="let user of directorUsers" [value]="user.id"> {{user.name | titlecase}} </mat-option>
+                appearance="outline"
+              >
+                <mat-select
+                  (selectionChange)="onSelectionChange($event, 'approver2')"
+                  formControlName="approver2"
+                  required
+                >
+                  <mat-option
+                    *ngFor="let user of directorUsers"
+                    [value]="user.id"
+                  >
+                    {{ user.name | titlecase }}
+                  </mat-option>
                 </mat-select>
                 <mat-error
                   *ngIf="stdForm1.get('approver2')?.hasError('required')"
@@ -518,16 +661,29 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="isApprovers">
+            <div
+              class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2"
+              *ngIf="isApprovers"
+            >
               <div class="button-container">
                 <label>Approver 3 <span class="mandatory">&nbsp;*</span></label>
                 <!-- <mat-icon class="cursor-pointer" (click)="openDialog()">add</mat-icon> -->
               </div>
               <mat-form-field
                 class="example-full-width mb-3"
-                appearance="outline">
-                <mat-select (selectionChange)="onSelectionChange($event,'approver3')"  formControlName ="approver3" required >
-                  <mat-option *ngFor="let user of trainingAdminUsers" [value]="user.id"> {{user.name | titlecase}} </mat-option>
+                appearance="outline"
+              >
+                <mat-select
+                  (selectionChange)="onSelectionChange($event, 'approver3')"
+                  formControlName="approver3"
+                  required
+                >
+                  <mat-option
+                    *ngFor="let user of trainingAdminUsers"
+                    [value]="user.id"
+                  >
+                    {{ user.name | titlecase }}
+                  </mat-option>
                 </mat-select>
                 <mat-error
                   *ngIf="stdForm1.get('approver3')?.hasError('required')"
@@ -542,15 +698,15 @@
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="city_name" />
                   <mat-error
-                  *ngIf="
-                    stdForm1.get('city_name')?.invalid &&
-                    stdForm1.get('city_name')?.touched
-                  "
-                >
-                  {{
-                    utils.getErrorMessage1(stdForm1.get("city_name"), "city")
-                  }}
-                </mat-error>
+                    *ngIf="
+                      stdForm1.get('city_name')?.invalid &&
+                      stdForm1.get('city_name')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(stdForm1.get("city_name"), "city")
+                    }}
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -560,15 +716,18 @@
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="country_name" />
                   <mat-error
-                  *ngIf="
-                    stdForm1.get('country_name')?.invalid &&
-                    stdForm1.get('country_name')?.touched
-                  "
-                >
-                  {{
-                    utils.getErrorMessage1(stdForm1.get("country_name"), "country")
-                  }}
-                </mat-error>
+                    *ngIf="
+                      stdForm1.get('country_name')?.invalid &&
+                      stdForm1.get('country_name')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(
+                        stdForm1.get("country_name"),
+                        "country"
+                      )
+                    }}
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -578,48 +737,54 @@
                 <mat-form-field class="example-full-width" appearance="outline">
                   <textarea matInput formControlName="address"></textarea>
                   <mat-error
-                  *ngIf="
-                    stdForm1.get('address')?.invalid &&
-                    stdForm1.get('address')?.touched
-                  "
-                >
-                  {{
-                    utils.getErrorMessage1(stdForm1.get("address"), "address")
-                  }}
-                </mat-error>
+                    *ngIf="
+                      stdForm1.get('address')?.invalid &&
+                      stdForm1.get('address')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(stdForm1.get("address"), "address")
+                    }}
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>
             <!-- <div class="row"> -->
-              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 mb-5">
-                <label>Upload</label>
-                <div class="file-drop-area">
-                  <div class="file">
-                    <button mat-raised-button color="primary" class="btn">
-                      Choose file
-                      <input formControlName="avatar" (change)="onFileUpload($event)" class="file-input" type="file" />
-                    </button>
-                    <span class="file-msg">
-                      <h5>
-                        {{
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 mb-5">
+              <label>Upload</label>
+              <div class="file-drop-area">
+                <div class="file">
+                  <button mat-raised-button color="primary" class="btn">
+                    Choose file
+                    <input
+                      formControlName="avatar"
+                      (change)="onFileUpload($event)"
+                      class="file-input"
+                      type="file"
+                    />
+                  </button>
+                  <span class="file-msg">
+                    <h5>
+                      {{
                         uploadedImage
-                        ? uploadedImage
-                        : "Drag and Drop File Here"
-                        }}
-                      </h5>
-                    </span>
-                  </div>
+                          ? uploadedImage
+                          : "Drag and Drop File Here"
+                      }}
+                    </h5>
+                  </span>
                 </div>
               </div>
+            </div>
 
             <!-- </div> -->
             <div class="col-md-12">
-              <button mat-raised-button id="submit" style="float: right;">Update</button>
+              <button mat-raised-button id="submit" style="float: right">
+                Update
+              </button>
             </div>
           </div>
         </form>
       </div>
-
     </div>
     <div class="card" *ngIf="showProfileSettings">
       <div class="header">
@@ -634,63 +799,85 @@
                 <mat-form-field class="example-full-width" appearance="outline">
                   <input matInput formControlName="name" />
                   <mat-error
-                  *ngIf="
-                    stdForm.get('name')?.invalid &&
-                    stdForm.get('name')?.touched
-                  "
-                >
-                  {{
-                    utils.getErrorMessage1(stdForm.get("name"), "uname")
-                  }}
-                </mat-error>
+                    *ngIf="
+                      stdForm.get('name')?.invalid &&
+                      stdForm.get('name')?.touched
+                    "
+                  >
+                    {{ utils.getErrorMessage1(stdForm.get("name"), "uname") }}
+                  </mat-error>
                 </mat-form-field>
               </div>
               <div class="col-lg-4 col-md-4">
                 <label>Current Password</label>
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <input matInput type="password" formControlName="currentpassword" />
+                  <input
+                    matInput
+                    type="password"
+                    formControlName="currentpassword"
+                  />
                   <mat-error
-                  *ngIf="
-                    stdForm.get('currentpassword')?.invalid &&
-                    stdForm.get('currentpassword')?.touched
-                  "
-                >
-                  {{
-                    utils.getErrorMessage1(stdForm.get("currentpassword"), "currentPsw")
-                  }}
-                </mat-error>
+                    *ngIf="
+                      stdForm.get('currentpassword')?.invalid &&
+                      stdForm.get('currentpassword')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(
+                        stdForm.get("currentpassword"),
+                        "currentPsw"
+                      )
+                    }}
+                  </mat-error>
                 </mat-form-field>
               </div>
               <div class="col-lg-4 col-md-4">
-                <label>New Password<span class="mandatory">&nbsp;*</span></label>
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <input matInput type="password" formControlName="password" [type]="hide ? 'password' : 'text'" required />
-                  <mat-icon matSuffix (click)="hide = !hide">
-                    {{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-                    <mat-error
-                  *ngIf="
-                    stdForm.get('password')?.invalid &&
-                    stdForm.get('password')?.touched
-                  "
+                <label
+                  >New Password<span class="mandatory">&nbsp;*</span></label
                 >
-                  {{
-                    utils.getErrorMessage1(stdForm.get("password"), "password")
-                  }}
-                </mat-error>
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <input
+                    matInput
+                    type="password"
+                    formControlName="password"
+                    [type]="hide ? 'password' : 'text'"
+                    required
+                  />
+                  <mat-icon matSuffix (click)="hide = !hide">
+                    {{ hide ? "visibility_off" : "visibility" }}</mat-icon
+                  >
+                  <mat-error
+                    *ngIf="
+                      stdForm.get('password')?.invalid &&
+                      stdForm.get('password')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(
+                        stdForm.get("password"),
+                        "password"
+                      )
+                    }}
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>
           </div>
 
-          <button mat-raised-button id="submit" style="float: right;">Update</button>
+          <button mat-raised-button id="submit" style="float: right">
+            Update
+          </button>
         </form>
       </div>
     </div>
     <div class="card" *ngIf="show2FaSettings">
-      <div class="header" style="display: flex; justify-content: space-between;">
+      <div class="header" style="display: flex; justify-content: space-between">
         <h2 class="mt-3">Two-Factor Authentication</h2>
-        <mat-slide-toggle class="mt-3" (change)="onToggleChange($event)"></mat-slide-toggle>
-    </div>
+        <mat-slide-toggle
+          class="mt-3"
+          (change)="onToggleChange($event)"
+        ></mat-slide-toggle>
+      </div>
       <div class="body" *ngIf="showBodyContent">
         <div class="row">
           <div class="col-4">
@@ -699,7 +886,7 @@
               <mat-form-field class="example-full-width" appearance="outline">
                 <input matInput required />
               </mat-form-field>
-          </mat-radio-group>
+            </mat-radio-group>
           </div>
         </div>
         <div class="row">
@@ -709,16 +896,25 @@
               <mat-form-field class="example-full-width" appearance="outline">
                 <input matInput required />
               </mat-form-field>
-          </mat-radio-group>
+            </mat-radio-group>
           </div>
         </div>
-        <hr>
+        <hr />
         <div class="row">
           <div class="col-12">
-            <img src="/assets/images/icons/2faa.png" style="width: 103.4%; height: 400px;margin-top: -17px; margin-bottom: -15px; margin-left: -15px;">
+            <img
+              src="/assets/images/icons/2faa.png"
+              style="
+                width: 103.4%;
+                height: 400px;
+                margin-top: -17px;
+                margin-bottom: -15px;
+                margin-left: -15px;
+              "
+            />
           </div>
         </div>
-       
+
         <!-- <form [formGroup]="stdForm">
           <div class="example-container">
             <div class="row clearfix justify-content-center">
@@ -758,7 +954,11 @@
         </form> -->
       </div>
     </div>
-    <div class="card" style="margin: auto; height: fit-content; width: 95%" *ngIf="showEmailConfig">
+    <div
+      class="card"
+      style="margin: auto; height: fit-content; width: 95%"
+      *ngIf="showEmailConfig"
+    >
       <!-- <div class="header">
         <h2>Email Configuration</h2>
       </div> -->
@@ -767,178 +967,335 @@
           <label class="p-5">Email Templates</label>
         </div>
         <div class="col-md-2">
-          <img src="assets/images/settings/email1.png" style="width: 150px; height: 150px;">
+          <img
+            src="assets/images/settings/email1.png"
+            style="width: 150px; height: 150px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row pb-3">
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/welcome-mail']"> Welcome E-mail </button>
-
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/welcome-mail'
+              ]"
+            >
+              Welcome E-mail
+            </button>
           </div>
           <div class="col-md-6">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/forgot-password']"> Forgot Password </button>
-            
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/forgot-password'
+              ]"
+            >
+              Forgot Password
+            </button>
           </div>
         </div>
         <div class="row py-3">
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/program-registration-email']"> Program
-              Registered E-mail </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/program-registration-email'
+              ]"
+            >
+              Program Registered E-mail
+            </button>
           </div>
           <div class="col-md-6">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/course-registered-email']"> Course Registered
-              E-mail </button>
-
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/course-registered-email'
+              ]"
+            >
+              Course Registered E-mail
+            </button>
           </div>
         </div>
         <div class="row py-3">
-
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/program-approval-email']"> Program Approval
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/program-approval-email'
+              ]"
+            >
+              Program Approval
             </button>
           </div>
 
           <div class="col-md-6">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/course-approval-email']"> Course Approval
-            </button>
-            
-          </div>
-
-
-        </div>
-        <div class="row py-3">
-          <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/program-completion-email']"> Completed Program
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/course-approval-email'
+              ]"
+            >
+              Course Approval
             </button>
           </div>
-          <div class="col-md-6">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/completed-course']"> Completed Course </button>
-          </div>
         </div>
         <div class="row py-3">
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/new-training-request']"> New Training Request</button>
-          </div>
-          <div class="col-md-6">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/training-request-expiry']"> Training Request Expiry</button>
-           
-          </div>
-        </div>
-        <div class="row py-3">
-          <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/ro-course-notification']"> Approver 1
-              Training Request </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/program-completion-email'
+              ]"
+            >
+              Completed Program
+            </button>
           </div>
           <div class="col-md-6">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/director-course-notification']"> Approver 2
-              Training Request </button>
-           
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/completed-course'
+              ]"
+            >
+              Completed Course
+            </button>
           </div>
         </div>
         <div class="row py-3">
-
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/trainingAdmin-course-notification']"> Approver 3
-              Training Request </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/new-training-request'
+              ]"
+            >
+              New Training Request
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/training-request-expiry'
+              ]"
+            >
+              Training Request Expiry
+            </button>
+          </div>
+        </div>
+        <div class="row py-3">
+          <div class="col-md-6 email">
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/ro-course-notification'
+              ]"
+            >
+              Approver 1 Training Request
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/director-course-notification'
+              ]"
+            >
+              Approver 2 Training Request
+            </button>
+          </div>
+        </div>
+        <div class="row py-3">
+          <div class="col-md-6 email">
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/trainingAdmin-course-notification'
+              ]"
+            >
+              Approver 3 Training Request
+            </button>
           </div>
 
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/ro-training-request-approval']">Approver 1 Training Request Approval </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/ro-training-request-approval'
+              ]"
+            >
+              Approver 1 Training Request Approval
+            </button>
           </div>
-
-
         </div>
         <div class="row py-3">
-
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/director-training-request-approval']">Approver 2 Training Request Approval </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/director-training-request-approval'
+              ]"
+            >
+              Approver 2 Training Request Approval
+            </button>
           </div>
 
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/training-admin-training-request-approval']">Approver 3 Training Request Approval </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/training-admin-training-request-approval'
+              ]"
+            >
+              Approver 3 Training Request Approval
+            </button>
           </div>
-
-
         </div>
         <div class="row py-3">
-
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/ro-training-request-rejected']">Approver 1 Training Request Rejected </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/ro-training-request-rejected'
+              ]"
+            >
+              Approver 1 Training Request Rejected
+            </button>
           </div>
 
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/director-training-request-rejected']">Approver 2 Training Request Rejected </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/director-training-request-rejected'
+              ]"
+            >
+              Approver 2 Training Request Rejected
+            </button>
           </div>
-
-
         </div>
         <div class="row py-3">
-
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/training-admin-training-request-rejected']">Approver 3 Training Request Rejected </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/training-admin-training-request-rejected'
+              ]"
+            >
+              Approver 3 Training Request Rejected
+            </button>
           </div>
 
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/director-budget-request-notification']"> Budget Request Notification </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/director-budget-request-notification'
+              ]"
+            >
+              Budget Request Notification
+            </button>
           </div>
-
-
         </div>
         <div class="row py-3">
-
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/training-admin-budget-request']"> Budget Request </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/training-admin-budget-request'
+              ]"
+            >
+              Budget Request
+            </button>
           </div>
 
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/budget-request-approval']">Budget Request Approval </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/budget-request-approval'
+              ]"
+            >
+              Budget Request Approval
+            </button>
           </div>
-
-
         </div>
         <div class="row py-3">
-
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/budget-request-rejected']">Budget Request Rejected</button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/budget-request-rejected'
+              ]"
+            >
+              Budget Request Rejected
+            </button>
           </div>
 
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/department-budget-request-notification']">Department Budget Request Notification </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/department-budget-request-notification'
+              ]"
+            >
+              Department Budget Request Notification
+            </button>
           </div>
-
-
         </div>
         <div class="row py-3">
-
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/department-budget-request']">Department Budget Request</button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/department-budget-request'
+              ]"
+            >
+              Department Budget Request
+            </button>
           </div>
 
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/department-budget-request-approval']">Department Budget Request Approval </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/department-budget-request-approval'
+              ]"
+            >
+              Department Budget Request Approval
+            </button>
           </div>
-
-
         </div>
         <div class="row py-3">
-
           <div class="col-md-6 email">
-            <button id="saved" [routerLink]="['/student/email-configuration/settings/department-budget-request-rejected']">Department Budget Request Rejected</button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/email-configuration/settings/department-budget-request-rejected'
+              ]"
+            >
+              Department Budget Request Rejected
+            </button>
           </div>
-
-         
-
-
         </div>
         <div class="col-md-12 py-3">
-          <button mat-raised-button id="back" [routerLink]="['/student/settings/integration']">Back</button>
+          <button
+            mat-raised-button
+            id="back"
+            [routerLink]="['/student/settings/integration']"
+          >
+            Back
+          </button>
         </div>
-
       </div>
-
     </div>
-    <div class="card" style="margin: auto; height: 300px; width: 65%;" *ngIf="showBanners">
+    <div
+      class="card"
+      style="margin: auto; height: 300px; width: 65%"
+      *ngIf="showBanners"
+    >
       <!-- <div class="header">
         <h2>Email Configuration</h2>
       </div> -->
@@ -947,51 +1304,87 @@
           <label class="py-4 px-5">Advertisement Banners</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/banner.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/banner.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/banners/settings/instructor-banner-list']">Instructor Banners </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/banners/settings/instructor-banner-list'
+              ]"
+            >
+              Instructor Banners
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/banners/settings/student-banner-list']"> Student Banners </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/banners/settings/student-banner-list']"
+            >
+              Student Banners
+            </button>
           </div>
         </div>
 
         <!-- <div class="col-md-12 px-4 py-5">
           <button mat-raised-button id="back" [routerLink]="['/student/customization']">Back</button>
         </div> -->
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showUsers">
+    <div
+      class="card"
+      style="margin: auto; height: fit-content; width: 65%"
+      *ngIf="showUsers"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Manage Users</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/role.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/role.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/user-type']"> Module Access </button>
+            <button id="saved" [routerLink]="['/student/settings/user-type']">
+              Module Access
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/create-user-role']"> Role </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/create-user-role']"
+            >
+              Role
+            </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/all-departments']"> Department Profile  </button>
-
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/all-departments']"
+            >
+              Department Profile
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/create-department']"> Department </button>
-
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/create-department']"
+            >
+              Department
+            </button>
           </div>
         </div>
 
@@ -1013,11 +1406,14 @@
         </div> -->
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" (click)="navigateToAllUserSettings()"> User Profile </button>
-
+            <button id="saved" (click)="navigateToAllUserSettings()">
+              User Profile
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/user-group']"> User Group  </button>
+            <button id="saved" [routerLink]="['/student/settings/user-group']">
+              User Group
+            </button>
 
             <!-- <button id="no-link"> Role type Name </button> -->
 
@@ -1034,33 +1430,53 @@
           </div>
 
         </div> -->
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showAllUsers">
+    <div
+      class="card"
+      style="margin: auto; height: 350px; width: 65%"
+      *ngIf="showAllUsers"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Users</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/role.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/role.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/all-users']"> All Users </button>
+            <button id="saved" [routerLink]="['/student/settings/all-users']">
+              All Users
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/all-students']"> Students</button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/all-students']"
+            >
+              Students
+            </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/all-instructors']"> Instructors </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/all-instructors']"
+            >
+              Instructors
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/all-staff']"> Staff </button>
+            <button id="saved" [routerLink]="['/student/settings/all-staff']">
+              Staff
+            </button>
           </div>
         </div>
         <!-- <div class="row px-4 py-4">
@@ -1078,33 +1494,53 @@
           </div>
 
         </div> -->
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showIntegration">
+    <div
+      class="card"
+      style="margin: auto; height: 350px; width: 65%"
+      *ngIf="showIntegration"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Integration</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/integrate.jpg" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/integrate.jpg"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/3rd-party-integrations']"> Third Party Integration </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/3rd-party-integrations']"
+            >
+              Third Party Integration
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/smtp']"> SMTP </button>
+            <button id="saved" [routerLink]="['/student/settings/smtp']">
+              SMTP
+            </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/singpass']"> SingPass </button>
+            <button id="saved" [routerLink]="['/student/settings/singpass']">
+              SingPass
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/payment-gateway']">Payment Gateway </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/payment-gateway']"
+            >
+              Payment Gateway
+            </button>
           </div>
         </div>
         <!-- <div class="row px-4">
@@ -1112,146 +1548,216 @@
             <button id="no-link"> Storage </button>
           </div>
         </div> -->
-
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showAutomation">
+    <div
+      class="card"
+      style="margin: auto; height: 350px; width: 65%"
+      *ngIf="showAutomation"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Automation</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/automate1.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/automate1.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/announcement']"> Announcement </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/announcement']"
+            >
+              Announcement
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="no-link"> Notification </button>
+            <button id="no-link">Notification</button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/approval-workflow']"> Approval Workflow </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/approval-workflow']"
+            >
+              Approval Workflow
+            </button>
           </div>
         </div>
-        
-
       </div>
-      
     </div>
-    <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showCustoms">
+    <div
+      class="card"
+      style="margin: auto; height: 350px; width: 65%"
+      *ngIf="showCustoms"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Customize</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/custom.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/custom.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/sidemenu']"> Sidemenu </button>
+            <button id="saved" [routerLink]="['/student/settings/sidemenu']">
+              Sidemenu
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" (click)="navigateToCustomFormsSettings()"> Forms </button>
+            <button id="saved" (click)="navigateToCustomFormsSettings()">
+              Forms
+            </button>
           </div>
-
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/certificate/template']"> Certificates </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/certificate/template']"
+            >
+              Certificates
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" (click)="navigateToBannerSettings()"> Banners </button>
+            <button id="saved" (click)="navigateToBannerSettings()">
+              Banners
+            </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/create-feedback']"> Survey </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/create-feedback']"
+            >
+              Survey
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" routerLink="/student/settings/logo-customization"> Logo </button>
+            <button
+              id="saved"
+              routerLink="/student/settings/logo-customization"
+            >
+              Logo
+            </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" (click)="navigateToEmailSettings()"> Email Templates </button>
+            <button id="saved" (click)="navigateToEmailSettings()">
+              Email Templates
+            </button>
           </div>
           <div class="col-md-5">
             <button id="saved" (click)="navigateToStudentDbSettings()">Dashboards</button>
           </div>
         </div>
-        
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: 350px; width: 65%;" *ngIf="showLms">
+    <div
+      class="card"
+      style="margin: auto; height: 350px; width: 65%"
+      *ngIf="showLms"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">LMS TAE</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/lms.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/lms.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="no-link"> Tutorial Configuration </button>
+            <button id="no-link">Tutorial Configuration</button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/admin/questions/add-questions']"> Assessment Configuration </button>
+            <button
+              id="saved"
+              [routerLink]="['/admin/questions/add-questions']"
+            >
+              Assessment Configuration
+            </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="no-link"> Exam Configuration </button>
+            <button id="no-link">Exam Configuration</button>
           </div>
-
         </div>
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showCustomForms">
+    <div
+      class="card"
+      style="margin: auto; height: fit-content; width: 65%"
+      *ngIf="showCustomForms"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Forms</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/form.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" (click)="navigateToCourseFormsSettings()">Course </button>
+            <button id="saved" (click)="navigateToCourseFormsSettings()">
+              Course
+            </button>
           </div>
-          <div class="col-md-5" >
-            <button id="saved" (click)="navigateToProgramFormsSettings()">Program </button>
+          <div class="col-md-5">
+            <button id="saved" (click)="navigateToProgramFormsSettings()">
+              Program
+            </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" (click)="navigateToUsersFormsSettings()">Users </button>
+            <button id="saved" (click)="navigateToUsersFormsSettings()">
+              Users
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" (click)="navigateToFinanceFormsSettings()">Finance </button>
+            <button id="saved" (click)="navigateToFinanceFormsSettings()">
+              Finance
+            </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" (click)="navigateToBannerFormsSettings()">Banners </button>
+            <button id="saved" (click)="navigateToBannerFormsSettings()">
+              Banners
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/create-announcement']">Announcement </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/create-announcement']"
+            >
+              Announcement
+            </button>
           </div>
-        
         </div>
         <!-- <div class="row px-4">
           <div class="col-md-6 banner">
@@ -1333,178 +1839,304 @@
         </div> -->
 
         <div class="col-md-12 py-3">
-          <button mat-raised-button id="back" [routerLink]="['/student/settings/configuration']">Back</button>
+          <button
+            mat-raised-button
+            id="back"
+            [routerLink]="['/student/settings/configuration']"
+          >
+            Back
+          </button>
         </div>
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showCourseForms">
+    <div
+      class="card"
+      style="margin: auto; height: fit-content; width: 65%"
+      *ngIf="showCourseForms"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Course Forms</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/form.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/admin/courses/add-course']">Course Creation </button>
+            <button id="saved" [routerLink]="['/admin/courses/add-course']">
+              Course Creation
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved"  [routerLink]="['/admin/courses/create-class']">Course Class Creation  </button>
+            <button id="saved" [routerLink]="['/admin/courses/create-class']">
+              Course Class Creation
+            </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/admin/courses/create-course-kit']">Course Kit </button>
+            <button
+              id="saved"
+              [routerLink]="['/admin/courses/create-course-kit']"
+            >
+              Course Kit
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/create-categories']">Categories </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/create-categories']"
+            >
+              Categories
+            </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/timetable/course-exam-add']">Course Exam Schedule </button>
+            <button id="saved" [routerLink]="['/timetable/course-exam-add']">
+              Course Exam Schedule
+            </button>
           </div>
         </div>
 
         <div class="col-md-12 py-3">
-          <button mat-raised-button id="back" [routerLink]="['/student/settings/customization-forms']">Back</button>
+          <button
+            mat-raised-button
+            id="back"
+            [routerLink]="['/student/settings/customization-forms']"
+          >
+            Back
+          </button>
         </div>
-
       </div>
     </div>
 
-    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showProgramForms">
+    <div
+      class="card"
+      style="margin: auto; height: fit-content; width: 65%"
+      *ngIf="showProgramForms"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Program Forms</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/form.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/admin/program/create-program']"> Program Creation </button>
+            <button id="saved" [routerLink]="['/admin/program/create-program']">
+              Program Creation
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved"  [routerLink]="['/admin/program/create-class']">Program Class Creation</button>
+            <button id="saved" [routerLink]="['/admin/program/create-class']">
+              Program Class Creation
+            </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/timetable/program-exam-add']">Program Exam Schedule </button>
+            <button id="saved" [routerLink]="['/timetable/program-exam-add']">
+              Program Exam Schedule
+            </button>
           </div>
-         
         </div>
 
         <div class="col-md-12 py-3">
-          <button mat-raised-button id="back" [routerLink]="['/student/settings/customization-forms']">Back</button>
+          <button
+            mat-raised-button
+            id="back"
+            [routerLink]="['/student/settings/customization-forms']"
+          >
+            Back
+          </button>
         </div>
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showUsersForms">
+    <div
+      class="card"
+      style="margin: auto; height: fit-content; width: 65%"
+      *ngIf="showUsersForms"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Users Forms</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/form.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/create-all-users']">User </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/create-all-users']"
+            >
+              User
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/add-student']">Student </button>
+            <button id="saved" [routerLink]="['/student/settings/add-student']">
+              Student
+            </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/add-instructor']">Instructor </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/add-instructor']"
+            >
+              Instructor
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/add-staff']">Staff </button>
+            <button id="saved" [routerLink]="['/student/settings/add-staff']">
+              Staff
+            </button>
           </div>
         </div>
 
         <div class="col-md-12 py-3">
-          <button mat-raised-button id="back" [routerLink]="['/student/settings/customization-forms']">Back</button>
+          <button
+            mat-raised-button
+            id="back"
+            [routerLink]="['/student/settings/customization-forms']"
+          >
+            Back
+          </button>
         </div>
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showFinanceForms">
+    <div
+      class="card"
+      style="margin: auto; height: fit-content; width: 65%"
+      *ngIf="showFinanceForms"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Finance Forms</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/form.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/admin/budgets/create-budget']">Budget Creation</button>
+            <button id="saved" [routerLink]="['/admin/budgets/create-budget']">
+              Budget Creation
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/admin/budgets/create-dept-budget-request']">Department Budget Creation</button>
+            <button
+              id="saved"
+              [routerLink]="['/admin/budgets/create-dept-budget-request']"
+            >
+              Department Budget Creation
+            </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/admin/budgets/create-request']">Training Request Creation</button>
+            <button id="saved" [routerLink]="['/admin/budgets/create-request']">
+              Training Request Creation
+            </button>
           </div>
-        
         </div>
 
         <div class="col-md-12 py-3">
-          <button mat-raised-button id="back" [routerLink]="['/student/settings/customization-forms']">Back</button>
+          <button
+            mat-raised-button
+            id="back"
+            [routerLink]="['/student/settings/customization-forms']"
+          >
+            Back
+          </button>
         </div>
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showBannerForms">
+    <div
+      class="card"
+      style="margin: auto; height: fit-content; width: 65%"
+      *ngIf="showBannerForms"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Banner Forms</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/form.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/banners/settings/create-instructor-banner']">Instructor Banners </button>
+            <button
+              id="saved"
+              [routerLink]="[
+                '/student/banners/settings/create-instructor-banner'
+              ]"
+            >
+              Instructor Banners
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/banners/settings/create-student-banner']">Student Banner </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/banners/settings/create-student-banner']"
+            >
+              Student Banner
+            </button>
           </div>
         </div>
-       
 
         <div class="col-md-12 py-3">
-          <button mat-raised-button id="back" [routerLink]="['/student/settings/customization-forms']">Back</button>
+          <button
+            mat-raised-button
+            id="back"
+            [routerLink]="['/student/settings/customization-forms']"
+          >
+            Back
+          </button>
         </div>
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showDashboards">
+    <div
+      class="card"
+      style="margin: auto; height: fit-content; width: 65%"
+      *ngIf="showDashboards"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Dashboards</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/dashboard.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/dashboard.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
@@ -1513,112 +2145,192 @@
             <button id="saved" (click)="navigateToStudentDbSettings()">Student Dashboard </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" >Instructor Dashboard </button>
+            <button id="saved">Instructor Dashboard</button>
           </div>
         </div>
 
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" >Admin Dashboard </button>
+            <button id="saved">Admin Dashboard</button>
           </div>
           <!-- <div class="col-md-5">
             <button id="no-link" >Admin Dashboard </button>
           </div> -->
         </div>
-       
 
         <!-- <div class="col-md-12 py-3">
           <button mat-raised-button id="back" [routerLink]="['/student/settings/dashboards']">Back</button>
         </div> -->
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showForms">
+    <div
+      class="card"
+      style="margin: auto; height: fit-content; width: 65%"
+      *ngIf="showForms"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Forms</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/form.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/form.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Course Creation Form'}">Course Creation </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/form-customization']"
+              [queryParams]="{ name: 'Course Creation Form' }"
+            >
+              Course Creation
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Program Creation Form'}"> Program Creation </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/form-customization']"
+              [queryParams]="{ name: 'Program Creation Form' }"
+            >
+              Program Creation
+            </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Course Class Creation Form'}">Course Class Creation  </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/form-customization']"
+              [queryParams]="{ name: 'Course Class Creation Form' }"
+            >
+              Course Class Creation
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Program Class Creation Form'}">Program Class Creation</button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/form-customization']"
+              [queryParams]="{ name: 'Program Class Creation Form' }"
+            >
+              Program Class Creation
+            </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'User Creation Form'}">User Creation</button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/form-customization']"
+              [queryParams]="{ name: 'User Creation Form' }"
+            >
+              User Creation
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Student Creation Form'}">Student Creation</button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/form-customization']"
+              [queryParams]="{ name: 'Student Creation Form' }"
+            >
+              Student Creation
+            </button>
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Instructor Creation Form'}">Instructor Creation</button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/form-customization']"
+              [queryParams]="{ name: 'Instructor Creation Form' }"
+            >
+              Instructor Creation
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/form-customization']" [queryParams]="{name: 'Staff Creation Form'}">Staff Creation</button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/form-customization']"
+              [queryParams]="{ name: 'Staff Creation Form' }"
+            >
+              Staff Creation
+            </button>
           </div>
         </div>
 
         <div class="col-md-12 py-3">
-          <button mat-raised-button id="back" [routerLink]="['/student/settings/configuration']">Back</button>
+          <button
+            mat-raised-button
+            id="back"
+            [routerLink]="['/student/settings/configuration']"
+          >
+            Back
+          </button>
         </div>
-
       </div>
     </div>
-    <div class="card" style="margin: auto; height: fit-content; width: 65%;" *ngIf="showConfig">
+    <div
+      class="card"
+      style="margin: auto; height: fit-content; width: 65%"
+      *ngIf="showConfig"
+    >
       <div class="row">
         <div class="col-md-8">
           <label class="py-4 px-5">Configuration</label>
         </div>
         <div class="col-md-2 my-3 mx-auto">
-          <img src="assets/images/settings/system-configuration1.png" style="width: 80px; height: 80px;">
+          <img
+            src="assets/images/settings/system-configuration1.png"
+            style="width: 80px; height: 80px"
+          />
         </div>
       </div>
       <div class="body">
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button  id="saved" [routerLink]="['/student/settings/categories']"> Categories </button>
+            <button id="saved" [routerLink]="['/student/settings/categories']">
+              Categories
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" (click)="navigateToFormSettings()"> Forms </button>
+            <button id="saved" (click)="navigateToFormSettings()">Forms</button>
             <!-- <button id="saved" [routerLink]="['/student/settings/form-customization']"> Forms </button> -->
           </div>
         </div>
         <div class="row px-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/vendor']"> Vendor </button>
+            <button id="saved" [routerLink]="['/student/settings/vendor']">
+              Vendor
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" [routerLink]="['/student/settings/funding-grant']"> Funding/Grant </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/funding-grant']"
+            >
+              Funding/Grant
+            </button>
           </div>
         </div>
         <div class="row px-4 py-4">
           <div class="col-md-6 banner">
-            <button id="saved" [routerLink]="['/student/settings/all-questions']"> Assessment Configuration </button>
+            <button
+              id="saved"
+              [routerLink]="['/student/settings/all-questions']"
+            >
+              Assessment Configuration
+            </button>
           </div>
           <div class="col-md-5">
-            <button id="saved" (click)="openDialog(currencyDialog, 'currency')"> Currency</button>
+            <button id="saved" (click)="openDialog(currencyDialog, 'currency')">
+              Currency
+            </button>
           </div>
-
         </div>
-        <div class="row px-4 ">
+        <div class="row px-4">
           <!-- <div class="col-md-6 banner">
             <button id="no-link"> Managed Access Time </button>
           </div>
@@ -1647,9 +2359,14 @@
                   <div class="col-md-6 banner">
                     <button id="saved" (click)="openDialog(examAssessmentDialog, 'examAssessment')">Exam Retake </button>
                   </div>
-                  <!-- <div class="col-md-5">
-                  
-                  </div> -->
+                  <div class="col-md-5">
+                    <button
+                      id="saved"
+                      (click)="openDialog(scoreAlgoDialog, 'scoreAlgorithm')"
+                    >
+                      Score Algorithm
+                    </button>
+                  </div>
                 </div>
       </div>
     </div>
@@ -1742,13 +2459,22 @@
           <!-- Sidebar -->
           <div class="sidenav">
             <label>Custom Fields</label>
-            <button [class.active]="currentContent === 1" (click)="showMainContent(1)">
+            <button
+              [class.active]="currentContent === 1"
+              (click)="showMainContent(1)"
+            >
               <p>Course Name</p>
             </button>
-            <button [class.active]="currentContent === 2" (click)="showMainContent(2)">
+            <button
+              [class.active]="currentContent === 2"
+              (click)="showMainContent(2)"
+            >
               <p>Course Code</p>
             </button>
-            <button [class.active]="currentContent === 3" (click)="showMainContent(3)">
+            <button
+              [class.active]="currentContent === 3"
+              (click)="showMainContent(3)"
+            >
               <p>Email Id</p>
             </button>
             <!-- <a [class.active]="currentContent === 1" (click)="showMainContent(1)">Course Name</a>
@@ -1763,15 +2489,26 @@
                 <label>Edit Course Name Field</label>
                 <div class="col-lg-6 col-md-12 m-3">
                   <div class="form-group">
-                    <label>Label Name<span class="mandatory">&nbsp;*</span></label>
-                    <mat-form-field class="example-full-width" appearance="outline">
+                    <label
+                      >Label Name<span class="mandatory">&nbsp;*</span></label
+                    >
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
+                    >
                       <input matInput />
                     </mat-form-field>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-8">
-                    <button mat-raised-button id="back" [routerLink]="['/student/customization']">Back</button>
+                    <button
+                      mat-raised-button
+                      id="back"
+                      [routerLink]="['/student/customization']"
+                    >
+                      Back
+                    </button>
                   </div>
                   <div class="col-md-4">
                     <button mat-raised-button id="submit">Update</button>
@@ -1787,15 +2524,26 @@
                 <label>Edit Course Code Field</label>
                 <div class="col-lg-6 col-md-12 m-3">
                   <div class="form-group">
-                    <label>Label Name<span class="mandatory">&nbsp;*</span></label>
-                    <mat-form-field class="example-full-width" appearance="outline">
+                    <label
+                      >Label Name<span class="mandatory">&nbsp;*</span></label
+                    >
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
+                    >
                       <input matInput />
                     </mat-form-field>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-8">
-                    <button mat-raised-button id="back" [routerLink]="['/student/customization']">Back</button>
+                    <button
+                      mat-raised-button
+                      id="back"
+                      [routerLink]="['/student/customization']"
+                    >
+                      Back
+                    </button>
                   </div>
                   <div class="col-md-4">
                     <button mat-raised-button id="submit">Update</button>
@@ -1810,15 +2558,26 @@
                 <label>Edit Email Id Field</label>
                 <div class="col-lg-6 col-md-12 m-3">
                   <div class="form-group">
-                    <label>Label Name<span class="mandatory">&nbsp;*</span></label>
-                    <mat-form-field class="example-full-width" appearance="outline">
+                    <label
+                      >Label Name<span class="mandatory">&nbsp;*</span></label
+                    >
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
+                    >
                       <input matInput />
                     </mat-form-field>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-8">
-                    <button mat-raised-button id="back" [routerLink]="['/student/customization']">Back</button>
+                    <button
+                      mat-raised-button
+                      id="back"
+                      [routerLink]="['/student/customization']"
+                    >
+                      Back
+                    </button>
                   </div>
                   <div class="col-md-4">
                     <button mat-raised-button id="submit">Update</button>
@@ -1828,7 +2587,6 @@
             </form>
           </div>
         </div>
-
 
         <!-- <form [formGroup]="stdForm1">
           <div class="row clearfix">
@@ -1851,10 +2609,7 @@
           </div>
         </form> -->
       </div>
-
     </div>
-
- 
   </div>
   <ng-template #currencyDialog let-dialogRef="dialogRef" let-data>
     <h2 mat-dialog-title>Select Currency</h2>
@@ -1862,13 +2617,17 @@
       <mat-form-field>
         <mat-label>Currency</mat-label>
         <mat-select [(ngModel)]="selectedCurrency">
-          <mat-option *ngFor="let code of currencyCodes" [value]="code">{{code}}</mat-option>
+          <mat-option *ngFor="let code of currencyCodes" [value]="code">{{
+            code
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="dialogRef.close()">Cancel</button>
-      <button mat-button (click)="updateCurrency(dialogRef, 'currency')">Update Currency</button>
+      <button mat-button (click)="updateCurrency(dialogRef, 'currency')">
+        Update Currency
+      </button>
     </div>
   </ng-template>
 
@@ -1878,13 +2637,17 @@
       <mat-form-field>
         <mat-label>Set timer</mat-label>
         <mat-select [(ngModel)]="selectedTimer">
-          <mat-option *ngFor="let code of timerValues" [value]="code">{{code}} Seconds</mat-option>
+          <mat-option *ngFor="let code of timerValues" [value]="code"
+            >{{ code }} Seconds</mat-option
+          >
         </mat-select>
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="dialogRef.close()">Cancel</button>
-      <button mat-button (click)="updateCurrency(dialogRef, 'timer')">Update Timer</button>
+      <button mat-button (click)="updateCurrency(dialogRef, 'timer')">
+        Update Timer
+      </button>
     </div>
   </ng-template>
 
@@ -1894,13 +2657,19 @@
       <mat-form-field>
         <mat-label>Set Retakes</mat-label>
         <mat-select [(ngModel)]="selectedAssessmentRetake">
-          <mat-option *ngFor="let code of retakeCodesAssessment" [value]="code">{{code}}</mat-option>
+          <mat-option
+            *ngFor="let code of retakeCodesAssessment"
+            [value]="code"
+            >{{ code }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="dialogRef.close()">Cancel</button>
-      <button mat-button (click)="updateCurrency(dialogRef, 'assessment')">Update Retake</button>
+      <button mat-button (click)="updateCurrency(dialogRef, 'assessment')">
+        Update Retake
+      </button>
     </div>
   </ng-template>
 
@@ -1910,13 +2679,61 @@
       <mat-form-field>
         <mat-label>Set Retakes</mat-label>
         <mat-select [(ngModel)]="selectedExamAssessmentRetake">
-          <mat-option *ngFor="let code of retakeCodesAssessment" [value]="code">{{code}}</mat-option>
+          <mat-option
+            *ngFor="let code of retakeCodesAssessment"
+            [value]="code"
+            >{{ code }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="dialogRef.close()">Cancel</button>
-      <button mat-button (click)="updateCurrency(dialogRef, 'examAssessment')">Update Retake</button>
+      <button mat-button (click)="updateCurrency(dialogRef, 'examAssessment')">
+        Update Retake
+      </button>
+    </div>
+  </ng-template>
+
+  <ng-template #scoreAlgoDialog let-dialogRef="dialogRef" let-data>
+    <h2 mat-dialog-title>Select Score Algorithm</h2>
+    <div mat-dialog-content>
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+            <label>Assessment <span class="mandatory">&nbsp;*</span></label>
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-select [(ngModel)]="selectedAssessmentAlgorithm">
+                <mat-option
+                  *ngFor="let code of scoreAlgo"
+                  [value]="code"
+                  >{{ code }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group">
+            <label>Exam <span class="mandatory">&nbsp;*</span></label>
+            <mat-form-field class="example-full-width mb-3" appearance="outline">
+              <mat-select [(ngModel)]="selectedExamAlgorithm">
+                <mat-option
+                  *ngFor="let code of scoreAlgo"
+                  [value]="code"
+                  >{{ code }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="dialogRef.close()">Cancel</button>
+      <button mat-button (click)="updateCurrency(dialogRef, 'scoreAlgorithm')">
+        Update Score Algorithm
+      </button>
     </div>
   </ng-template>
 </section>

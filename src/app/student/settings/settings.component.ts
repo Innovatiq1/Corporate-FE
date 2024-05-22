@@ -19,6 +19,7 @@ import { StudentsService } from 'app/admin/students/students.service';
 import { UserService } from '@core/service/user.service';
 import { UtilsService } from '@core/service/utils.service';
 import { SettingsService } from '@core/service/settings.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
@@ -123,10 +124,13 @@ export class SettingsComponent {
   ];
   timerValues: string[] = ['15', '30', '45', '60', '90', '120', '150'];
   retakeCodesAssessment: string[] = ['1', '2', '3', '4', '5'];
+  scoreAlgo: number[] = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
   selectedCurrency: string = '';
   selectedTimer: string = '';
   selectedAssessmentRetake: string = '';
   selectedExamAssessmentRetake: string = '';
+  selectedAssessmentAlgorithm: number = 1;
+  selectedExamAlgorithm: number = 1;
   sidemenu: any;
   studentDb: any;
   dept: any;
@@ -668,7 +672,6 @@ export class SettingsComponent {
     this.router.navigate(['/student/settings/student-dashboard']);
   }
   navigateToCourseFormsSettings() {
-    console.log('course');
     this.router.navigate(['/student/settings/course-forms']);
   }
   navigateToProgramFormsSettings() {
@@ -761,7 +764,6 @@ export class SettingsComponent {
     // let studentId = localStorage.getItem('id')?localStorage.getItem('id'):null
     this.studentService.getStudentById(this.studentId).subscribe((res: any) => {
       this.editData = res;
-      console.log(res, '=====');
       this.avatar = this.editData.avatar;
       this.uploaded = this.avatar?.split('/');
       let image = this.uploaded?.pop();
@@ -786,6 +788,18 @@ export class SettingsComponent {
       );
       const selectedExamAssessmentRetake = examassessmentConfig
         ? examassessmentConfig.value
+        : null;
+      const assessmentAlgoConfig = this.editData.configuration.find(
+          (config: any) => config.field === 'assessmentAlgorithm'
+        );
+      const selectedAssessmentAlgorithm = assessmentAlgoConfig
+        ? assessmentAlgoConfig.value
+        : null;
+      const examAlgoConfig = this.editData.configuration.find(
+          (config: any) => config.field === 'examAlgorithm'
+        );
+      const selectedExamAlgorithm = examAlgoConfig
+        ? examAlgoConfig.value
         : null;
 
       this.stdForm.patchValue({
@@ -814,6 +828,9 @@ export class SettingsComponent {
       this.selectedTimer = selectedTimer;
       this.selectedAssessmentRetake = selectedAssessmentRetake;
       this.selectedExamAssessmentRetake = selectedExamAssessmentRetake;
+      this.selectedAssessmentAlgorithm = Number(selectedAssessmentAlgorithm);
+      this.selectedExamAlgorithm = Number(selectedExamAlgorithm);
+      
     });
   }
   onFileUpload(event: any) {
@@ -906,7 +923,6 @@ export class SettingsComponent {
   //   }
   // }
   onSubmit1() {
-    console.log(this.stdForm1);
 
     if (this.stdForm1.valid) {
       // No need to call uploadVideo() here since it's not needed
@@ -986,7 +1002,6 @@ export class SettingsComponent {
         director: response.directorName,
         TA: response.trainingAdminName,
       });
-      console.log(this.profileForm.value);
     });
   }
 
@@ -1113,8 +1128,33 @@ export class SettingsComponent {
             });
           }
         );
-        }
-      });
+      }
+    })
+  }else if(value == 'scoreAlgorithm'){
+      const selectedAssessmentAlgorithm= this.selectedAssessmentAlgorithm;
+      const selectedExamAlgorithm= this.selectedExamAlgorithm;
+      forkJoin(
+        this.courseService
+        .createAssessmentAlgorithm({ value: selectedAssessmentAlgorithm }),
+        this.courseService
+        .createExamAlgorithm({ value: selectedExamAlgorithm })
+      ).subscribe(
+          (response) => {
+            Swal.fire({
+              title: 'Successful',
+              text: 'Score Algorithm Configuration Success',
+              icon: 'success',
+            });
+            dialogRef.close(selectedAssessmentAlgorithm);
+          },
+          (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error,
+            });
+          }
+        );
     }
   }
 
@@ -1154,6 +1194,19 @@ export class SettingsComponent {
         width: '500px',
         data: {
           selectedExamAssessmentRetake: this.selectedExamAssessmentRetake,
+        },
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.selectedExamAssessmentRetake = result;
+        }
+      });
+    } else if(value === 'scoreAlgorithm'){
+      const dialogRef = this.dialog.open(templateRef, {
+        width: '500px',
+        data: {
+          selectedAssessmentAlgorithm: this.selectedAssessmentAlgorithm,
+          selectedExamAlgorithm: this.selectedExamAlgorithm,
         },
       });
       dialogRef.afterClosed().subscribe((result) => {

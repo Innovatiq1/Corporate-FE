@@ -75,7 +75,7 @@ export class CourseTimetableComponent implements OnInit {
     this.lecturesService
       .getClassListWithPagination(instructorId, this.filterName)
       .subscribe((response: { data: { docs: string | any[] } }) => {
-        this.studentApprovedClasses = response.data.docs.slice(0, 5);
+        this.studentApprovedClasses = response.data.docs;
         const currentDate = new Date();
         const currentMonth = currentDate.getMonth();
         const currentYear = currentDate.getFullYear();
@@ -84,7 +84,7 @@ export class CourseTimetableComponent implements OnInit {
           currentMonth,
           currentDate.getDate() + 1
         );
-
+  
         const events = this.studentApprovedClasses.flatMap(
           (courseClass: any, classId: any) => {
             const startDate = new Date(
@@ -93,8 +93,8 @@ export class CourseTimetableComponent implements OnInit {
             const endDate = new Date(courseClass?.sessions[0]?.sessionEndDate);
             const sessionStartTime = courseClass?.sessions[0]?.sessionStartTime;
             const sessionEndTime = courseClass?.sessions[0]?.sessionEndTime;
-            const title = courseClass?.sessions[0]?.courseName;
-
+            const title = courseClass?.courseName;
+  
             const datesArray = [];
             let currentDate = startDate;
             while (currentDate <= endDate) {
@@ -104,6 +104,14 @@ export class CourseTimetableComponent implements OnInit {
                 extendedProps: {
                   sessionStartTime: sessionStartTime,
                   sessionEndTime: sessionEndTime,
+                  courseCode: courseClass?.courseCode,
+                  deliveryType: courseClass?.classDeliveryType,
+                  instructorCost: courseClass?.instructorCost,
+                  sessionStartDate: startDate,
+                  sessionEndDate: endDate,
+                  id: courseClass?.id,
+                  courseName: courseClass?.courseName,
+                  status: courseClass?.status,
                 },
               });
               currentDate.setDate(currentDate.getDate() + 1);
@@ -117,7 +125,7 @@ export class CourseTimetableComponent implements OnInit {
             return eventDate.getDay() !== 0; // Filter out events on Sundays
           }
         );
-
+  
         this.courseCalendarOptions = {
           initialView: 'dayGridMonth',
           plugins: [dayGridPlugin],
@@ -126,7 +134,8 @@ export class CourseTimetableComponent implements OnInit {
             const title = arg.event.title;
             const sessionStartTime =
               arg.event.extendedProps['sessionStartTime'];
-            const sessionEndTime = arg.event.extendedProps['sessionEndTime'];
+            const sessionEndTime =
+              arg.event.extendedProps['sessionEndTime'];
             return {
               html: `
             <div style=" font-size:10px; color: white
@@ -141,6 +150,7 @@ export class CourseTimetableComponent implements OnInit {
         };
       });
   }
+  
   openDialog(event: { title: any; extendedProps: { [x: string]: any } }) {
     this.dialog.open(EventDetailDialogComponent, {
       width: '700px',
@@ -159,6 +169,98 @@ export class CourseTimetableComponent implements OnInit {
       },
     });
   }
+  
+  // getInstructorApprovedCourse() {
+  //   let studentId = localStorage.getItem('id');
+  //   const payload = { studentId: studentId, isAll: true, type: 'Instructor' };
+  //   let instructorId = localStorage.getItem('id');
+  //   this.lecturesService
+  //     .getClassListWithPagination(instructorId, this.filterName)
+  //     .subscribe((response: { data: { docs: string | any[] } }) => {
+  //       this.studentApprovedClasses = response.data.docs;
+  //       const currentDate = new Date();
+  //       const currentMonth = currentDate.getMonth();
+  //       const currentYear = currentDate.getFullYear();
+  //       const tomorrow = new Date(
+  //         currentYear,
+  //         currentMonth,
+  //         currentDate.getDate() + 1
+  //       );
+
+  //       const events = this.studentApprovedClasses.flatMap(
+  //         (courseClass: any, classId: any) => {
+  //           const startDate = new Date(
+  //             courseClass?.sessions[0].sessionStartDate
+  //           );
+  //           const endDate = new Date(courseClass?.sessions[0]?.sessionEndDate);
+  //           const sessionStartTime = courseClass?.sessions[0]?.sessionStartTime;
+  //           const sessionEndTime = courseClass?.sessions[0]?.sessionEndTime;
+  //           const title = courseClass?.courseName;
+
+  //           const datesArray = [];
+  //           let currentDate = startDate;
+  //           while (currentDate <= endDate) {
+  //             datesArray.push({
+  //               title: title,
+  //               date: new Date(currentDate),
+  //               extendedProps: {
+  //                 sessionStartTime: sessionStartTime,
+  //                 sessionEndTime: sessionEndTime,
+  //               },
+  //             });
+  //             currentDate.setDate(currentDate.getDate() + 1);
+  //           }
+  //           return datesArray;
+  //         }
+  //       );
+  //       const filteredEvents = events.filter(
+  //         (event: { date: string | number | Date }) => {
+  //           const eventDate = new Date(event.date);
+  //           return eventDate.getDay() !== 0; // Filter out events on Sundays
+  //         }
+  //       );
+
+  //       this.courseCalendarOptions = {
+  //         initialView: 'dayGridMonth',
+  //         plugins: [dayGridPlugin],
+  //         events: filteredEvents,
+  //         eventContent: function (arg, createElement) {
+  //           const title = arg.event.title;
+  //           const sessionStartTime =
+  //             arg.event.extendedProps['sessionStartTime'];
+  //           const sessionEndTime = arg.event.extendedProps['sessionEndTime'];
+  //           return {
+  //             html: `
+  //           <div style=" font-size:10px; color: white
+  //           ; white-space: normal; word-wrap: break-word;cursor: pointer;">
+  //             ${title}<br>
+  //              <span style ="color:white;cursor: pointer;">${sessionStartTime} - ${sessionEndTime}</span>
+  //           </div>`,
+  //           };
+  //         },
+  //         eventDisplay: 'block',
+  //         eventClick: (clickInfo) => this.openDialog(clickInfo.event),
+  //       };
+  //     });
+  // }
+  // openDialog(event: { title: any; extendedProps: { [x: string]: any } }) {
+  //   this.dialog.open(EventDetailDialogComponent, {
+  //     width: '700px',
+  //     data: {
+  //       title: event.title,
+  //       sessionStartTime: event.extendedProps['sessionStartTime'],
+  //       sessionEndTime: event.extendedProps['sessionEndTime'],
+  //       courseCode: event.extendedProps['courseCode'],
+  //       status: event.extendedProps['status'],
+  //       sessionStartDate: event.extendedProps['sessionStartDate'],
+  //       sessionEndDate: event.extendedProps['sessionEndDate'],
+  //       deliveryType: event.extendedProps['deliveryType'],
+  //       instructorCost: event.extendedProps['instructorCost'],
+  //       id: event.extendedProps['id'],
+  //       courseName: event.extendedProps['courseName'],
+  //     },
+  //   });
+  // }
 
   getClassList() {
     // let studentId=localStorage.getItem('id')

@@ -131,7 +131,7 @@
                       class="mobile-label">Image:</span> <img [src]="row.courseId?.image_link" />
                   </mat-cell>
                 </ng-container> -->
-                <ng-container matColumnDef="courseName">
+                <ng-container matColumnDef="courseName" *ngIf="isAdmin">
                   <mat-header-cell *matHeaderCellDef mat-sort-header
                     >Program</mat-header-cell
                   >
@@ -144,10 +144,23 @@
                     {{ row.courseId?.title }}</mat-cell
                   >
                 </ng-container>
+                <ng-container matColumnDef="courseName" *ngIf="isInstructor">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    >Program</mat-header-cell
+                  >
+                  <mat-cell
+                    *matCellDef="let row"
+                    class="name"
+                    [routerLink]="['/timetable/view-schedule-class', row.id]"
+                  >
+                    <span class="mobile-label">Program:</span>
+                    {{ row.programName }}</mat-cell
+                  >
+                </ng-container>
                 <!-- student name  -->
 
                 <!-- Class start date -->
-                <ng-container matColumnDef="Code">
+                <ng-container matColumnDef="Code" *ngIf="isAdmin">
                   <mat-header-cell *matHeaderCellDef mat-sort-header
                     >Program Code</mat-header-cell
                   >
@@ -157,6 +170,18 @@
                   >
                     <span class="mobile-label">Program Code:</span>
                     {{ row.courseId?.courseCode }}</mat-cell
+                  >
+                </ng-container>
+                <ng-container matColumnDef="Code" *ngIf="isInstructor">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header
+                    >Program Code</mat-header-cell
+                  >
+                  <mat-cell
+                    *matCellDef="let row"
+                    [routerLink]="['/timetable/view-schedule-class', row.id]"
+                  >
+                    <span class="mobile-label">Program Code:</span>
+                    {{ row.sessions[0]?.courseCode }}</mat-cell
                   >
                 </ng-container>
                 <ng-container matColumnDef="Price">

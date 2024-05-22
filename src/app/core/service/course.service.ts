@@ -581,6 +581,14 @@ export class CourseService {
         const apiUrl = `${this.prefix}admin/configuration/examAssessment`;
         return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
       }
+      createAssessmentAlgorithm(currencyData: any): Observable<any> {
+        const apiUrl = `${this.prefix}admin/configuration/assessmentAlgorithm`;
+        return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
+      }
+      createExamAlgorithm(currencyData: any): Observable<any> {
+        const apiUrl = `${this.prefix}admin/configuration/examAlgorithm`;
+        return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
+      }
       getStudentClassById(id?: string) {
         const apiUrl = `${this.prefix}admin/studentClasses/${id}`;
         return this._Http.get<any>(apiUrl).pipe(map((response) => response));

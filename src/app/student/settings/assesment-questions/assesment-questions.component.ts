@@ -54,6 +54,7 @@ export class AssesmentQuestionsComponent {
       name: ['', Validators.required],
       timer: [''],
       retake: [''],
+      scoreAlgorithm:[1, [Validators.required, Validators.min(0.1)]],
       questions: this.formBuilder.array([]),
     });
     if (!this.editUrl) {
@@ -70,6 +71,9 @@ export class AssesmentQuestionsComponent {
     this.getTimer();
     this.getRetakes();
     this.loadData();
+    if(!this.editUrl){
+      this.getAlgorithm()
+    }
   }
 
   loadData() {
@@ -103,6 +107,20 @@ export class AssesmentQuestionsComponent {
       });
   }
 
+  getAlgorithm(): any {
+    this.configurationSubscription =
+      this.studentsService.configuration$.subscribe((configuration) => {
+        this.configuration = configuration;
+        const config = this.configuration.find((v:any)=> v.field === 'assessmentAlgorithm');
+        if (config) {
+          const assessmentAlgo = config.value;
+          this.questionFormTab3.patchValue({
+            scoreAlgorithm: assessmentAlgo,
+          });
+        }
+      });
+  }
+
   getData() {
     if (this.questionId) {
       this.questionService
@@ -111,6 +129,7 @@ export class AssesmentQuestionsComponent {
           if (response && response.questions) {
             this.questionFormTab3.patchValue({
               name: response.name,
+              scoreAlgorithm: response.scoreAlgorithm
             });
 
             const questionsArray = this.questionFormTab3.get(
@@ -269,6 +288,7 @@ export class AssesmentQuestionsComponent {
         name: this.questionFormTab3.value.name,
         timer: this.questionFormTab3.value.timer,
         retake: this.questionFormTab3.value.retake,
+        scoreAlgorithm: this.questionFormTab3.value.scoreAlgorithm,
         status: 'open',
         questions: this.questionFormTab3.value.questions.map((v: any) => ({
           options: v.options,
