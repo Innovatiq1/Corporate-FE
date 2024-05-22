@@ -61,4 +61,93 @@ export class SettingsService {
       .put<ApiResponse>(apiUrl, data)
       .pipe(map((response) => {}));
   }
+
+  saveStudentDashboard(data: any) {
+    const apiUrl = `${this.prefix}admin/dashboard`;
+    return this._Http
+      .post<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {}));
+  }
+
+  getStudentDashboard(filter?: Partial<CoursePaginationModel>): Observable<ApiResponse> {
+    const apiUrl = this.defaultUrl + 'admin/dashboard';
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+  }
+
+  getStudentDashboardById(id: string) {
+    const apiUrl = `${this.prefix}admin/dashboard/${id}`;
+    return this._Http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
+  }
+  
+  updateStudentDashboard(data: any) {
+    const apiUrl = `${this.prefix}admin/dashboard/${data.id}`;
+    return this._Http
+      .put<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {response}));
+  }
+
+  saveApprovalFlow(data: any) {
+    const apiUrl = `${this.prefix}admin/approvalFlow`;
+    return this._Http
+      .post<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {response}));
+  }
+
+  getApprovalFlow(filter?: Partial<CoursePaginationModel>): Observable<ApiResponse> {
+    const apiUrl = this.defaultUrl + 'admin/approvalFlow';
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+  }
+
+  getApprovalFlowById(id: string) {
+    const apiUrl = `${this.prefix}admin/approvalFlow/${id}`;
+    return this._Http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
+  }
+  
+  updateApprovalFlow(data: any) {
+    const apiUrl = `${this.prefix}admin/approvalFlow/${data.id}`;
+    return this._Http
+      .put<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {response}));
+  }
+  deleteApprovalFlow(id: string) {
+    const apiUrl = `${this.prefix}admin/approvalFlow/${id}`;
+    return this._Http
+      .delete<CourseModel>(apiUrl)
+      .pipe(map((response) => response));
+  }
+  savePayment(data: any) {
+    const apiUrl = `${this.prefix}admin/payment`;
+    return this._Http
+      .post<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {response}));
+  }
+
+  getPayment(filter?: Partial<CoursePaginationModel>): Observable<ApiResponse> {
+    const apiUrl = this.defaultUrl + 'admin/payment';
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+  }
+
+  getPaymentById(id: string) {
+    const apiUrl = `${this.prefix}admin/payment/${id}`;
+    return this._Http.get<ApiResponse>(apiUrl).pipe(map((response) => response));
+  }
+  
+  updatePayment(id: string, data: any) {
+    const apiUrl = `${this.prefix}admin/payment/${id}`;
+    return this._Http
+      .put<ApiResponse>(apiUrl, data)
+      .pipe(map((response) => {response}));
+  }
+  deletePayment(id: string) {
+    const apiUrl = `${this.prefix}admin/payment/${id}`;
+    return this._Http
+      .delete<CourseModel>(apiUrl)
+      .pipe(map((response) => response));
+  }
 }

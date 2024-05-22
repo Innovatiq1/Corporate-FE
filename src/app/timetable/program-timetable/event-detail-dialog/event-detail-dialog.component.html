@@ -1,7 +1,7 @@
 <div class="container fade-in">
   <h1 class="text-capitalize">{{ data.title }}</h1>
   <div class="row">
-    <div class="col-md-3" *ngIf="code">
+    <!-- <div class="col-md-3" *ngIf="code">
       <p class="info-text">Program Name</p>
     </div>
     <div class="col-md-5" *ngIf="code">
@@ -9,15 +9,15 @@
         <span class="highlight">{{ data.programName }}</span>
       </p>
     </div>
-
-    <div class="col-md-3" *ngIf="!code">
+ -->
+    <!-- <div class="col-md-3" *ngIf="!code">
       <p class="info-text">Course Name</p>
-    </div>
-    <div class="col-md-5" *ngIf="!code">
+    </div> -->
+    <!-- <div class="col-md-5" *ngIf="!code">
       <p class="info-text">
         <span class="highlight">{{ data.courseName }}</span>
       </p>
-    </div>
+    </div> -->
   </div>
   <div class="row mt-2">
     <div class="col-md-3" *ngIf="code">
@@ -69,13 +69,22 @@
     <button type="button" mat-raised-button color="warn" mat-button mat-dialog-close>
       Close
     </button>
-    <button *ngIf="isStudent && isProgram" type="button" mat-raised-button id="submit"
+    <button *ngIf="isStudent && isProgram && !data.reschedule" type="button" mat-raised-button id="submit"
       [routerLink]="['/student/view-program/',data?.id]" mat-dialog-close style="float: right;">
       Register
     </button>
-    <button *ngIf="isStudent && !isProgram" type="button" mat-raised-button id="submit"
-      [routerLink]="['/student/view-course/',data?.id]" mat-dialog-close style="float: right;">
-      Register
+    <button *ngIf="isStudent  && code && data.reschedule" type="button" mat-raised-button id="submit"
+    [routerLink]="['/reschedule/programs']" mat-dialog-close style="float: right;">
+    Reschedule
+  </button>
+    <button *ngIf="isStudent  && !code && data.reschedule" type="button" mat-raised-button id="submit"
+      [routerLink]="['/reschedule/courses']" mat-dialog-close style="float: right;">
+      Reschedule
     </button>
+    <button *ngIf="isStudent && !isProgram && !data.reschedule" type="button" mat-raised-button id="submit"
+    [routerLink]="['/student/view-course/',data?.id]" mat-dialog-close style="float: right;">
+    Register
+  </button>
+
   </div>
 </div>

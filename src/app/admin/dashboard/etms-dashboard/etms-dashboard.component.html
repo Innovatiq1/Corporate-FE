@@ -158,22 +158,61 @@
                     <div class="header ">
                         <div class="d-flex justify-content-between w-100 ">
                             <h2>Over-all Training Budget</h2>
-                            <select class="form-select w-25" aria-label="Default select example">
+                            <!-- <select class="form-select w-25" aria-label="Default select example">
                                 <option selected>2023</option>
                                 <option value="1">2022</option>
                                 <option value="2">2021</option>
                                 <option value="3">2020</option>
-                            </select>
+                            </select> -->
                         </div>
                     </div>
-                    <div class="body">
+                    <div class="body" *ngIf="isBudgetLine">
+                      <apx-chart 
+              [series]="budgetLineChartOptions.series!" 
+              [chart]="budgetLineChartOptions.chart!" 
+              [xaxis]="budgetLineChartOptions.xaxis!" 
+              [stroke]="budgetLineChartOptions.stroke!" 
+              [colors]="budgetLineChartOptions.colors!" 
+              [dataLabels]="budgetLineChartOptions.dataLabels!" 
+              [legend]="budgetLineChartOptions.legend!" 
+              [tooltip]="budgetLineChartOptions.tooltip!" 
+              [markers]="budgetLineChartOptions.markers!" 
+              [grid]="budgetLineChartOptions.grid!" 
+              [yaxis]="budgetLineChartOptions.yaxis!">
+            </apx-chart>
+                      </div>
+                      <div class="body" *ngIf="isBudgetPie">
+                        <apx-chart 
+              [series]="budgetPieChartOptions.series!" 
+              [chart]="budgetPieChartOptions.chart!" 
+              [labels]="budgetPieChartOptions.labels!" 
+              [colors]="budgetPieChartOptions.colors!" 
+              [legend]="budgetPieChartOptions.legend!" 
+              [tooltip]="budgetPieChartOptions.tooltip!">
+            </apx-chart>
+                    </div>
+                    <div class="body" *ngIf="isBudgetBar">
+                      <apx-chart 
+                      [series]="budgetBarChartOptions.series!" 
+                      [chart]="budgetBarChartOptions.chart!" 
+                      [xaxis]="budgetBarChartOptions.xaxis!" 
+                      [plotOptions]="budgetBarChartOptions.plotOptions!" 
+                      [colors]="budgetBarChartOptions.colors!" 
+                      [dataLabels]="budgetBarChartOptions.dataLabels!" 
+                      [legend]="budgetBarChartOptions.legend!" 
+                      [tooltip]="budgetBarChartOptions.tooltip!" 
+                      [grid]="budgetBarChartOptions.grid!" 
+                      [yaxis]="budgetBarChartOptions.yaxis!">
+                    </apx-chart>
+                  </div>
+                    <!-- <div class="body">
                         <ngx-gauge [value]="gaugeValue" [size]="350" [thick]="20" [type]="guageType1"
                             class="guage-chart-center">
                             <ngx-gauge-value>
                                 {{gaugeValue}} %
                             </ngx-gauge-value>
                         </ngx-gauge>
-                    </div>
+                    </div> -->
 
                 </div>
             <!-- BAR-CHART -->
@@ -277,123 +316,65 @@
                 <div class="header">
                     <div class="d-flex justify-content-between w-100 ">
                         <h2>Actual Cost or Budget</h2>
-                        <select class="form-select w-25" aria-label="Default select example">
+                        <!-- <select class="form-select w-25" aria-label="Default select example">
                             <option selected>2023</option>
                             <option value="1">2022</option>
                             <option value="2">2021</option>
                             <option value="3">2020</option>
-                        </select>
+                        </select> -->
                     </div>
                 </div>
-                <div class="body" style="height: 273px;">
+                <div class="body" *ngIf="isActualLine">
+                  <apx-chart 
+                  [series]="actualLineChartOptions.series!" 
+                  [chart]="actualLineChartOptions.chart!" 
+                  [xaxis]="actualLineChartOptions.xaxis!" 
+                  [stroke]="actualLineChartOptions.stroke!" 
+                  [colors]="actualLineChartOptions.colors!" 
+                  [dataLabels]="actualLineChartOptions.dataLabels!" 
+                  [legend]="actualLineChartOptions.legend!" 
+                  [tooltip]="actualLineChartOptions.tooltip!" 
+                  [markers]="actualLineChartOptions.markers!" 
+                  [grid]="actualLineChartOptions.grid!" 
+                  [yaxis]="actualLineChartOptions.yaxis!">
+                </apx-chart>
+                  </div>
+                  <div class="body" *ngIf="isActualPie">
+                    <apx-chart 
+              [series]="actualPieChartOptions.series!" 
+              [chart]="actualPieChartOptions.chart!" 
+              [labels]="actualPieChartOptions.labels!" 
+              [colors]="actualPieChartOptions.colors!" 
+              [legend]="actualPieChartOptions.legend!" 
+              [tooltip]="actualPieChartOptions.tooltip!">
+            </apx-chart>
+                </div>
+                <div class="body" *ngIf="isActualBar">
+                  <apx-chart 
+                  [series]="actualBarChartOptions.series!" 
+                  [chart]="actualBarChartOptions.chart!" 
+                  [xaxis]="actualBarChartOptions.xaxis!" 
+                  [plotOptions]="actualBarChartOptions.plotOptions!" 
+                  [colors]="actualBarChartOptions.colors!" 
+                  [dataLabels]="actualBarChartOptions.dataLabels!" 
+                  [legend]="actualBarChartOptions.legend!" 
+                  [tooltip]="actualBarChartOptions.tooltip!" 
+                  [grid]="actualBarChartOptions.grid!" 
+                  [yaxis]="actualBarChartOptions.yaxis!">
+                </apx-chart>
+              </div>
+                <!-- <div class="body" style="height: 273px;">
                     <ngx-gauge [value]="gaugeValue" [size]="250" [thick]="20" [type]="guageType1"
                         class="guage-chart-center">
                         <ngx-gauge-value>
                             {{gaugeValue}} %
                         </ngx-gauge-value>
                     </ngx-gauge>
-                </div>
+                </div> -->
 
             </div>
         </div>
     </div>
-        <!-- <div class="row clearfix">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="card">
-                    <div class="header ">
-                        <div class="d-flex justify-content-between w-100 ">
-                            <h2>Over-all Training Budget</h2>
-                            <select class="form-select w-25" aria-label="Default select example">
-                                <option selected>2023</option>
-                                <option value="1">2022</option>
-                                <option value="2">2021</option>
-                                <option value="3">2020</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <div echarts [options]="line_chart" class="echart-height"></div>
-                    </div>
+       
 
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="card">
-                    <div class="header">
-                        <div class="d-flex justify-content-between w-100 ">
-                            <h2>Number of Participants</h2>
-                            <select class="form-select w-25" aria-label="Default select example">
-                                <option selected>2023</option>
-                                <option value="1">2022</option>
-                                <option value="2">2021</option>
-                                <option value="3">2020</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="body" style="height: 425px;">
-                        <apx-chart [series]="barChart2Options.series!" [chart]="barChart2Options.chart!"
-                            [dataLabels]="barChart2Options.dataLabels!" [plotOptions]="barChart2Options.plotOptions!"
-                            [grid]="barChart2Options.grid!" [yaxis]="barChart2Options.yaxis!"
-                            [xaxis]="barChart2Options.xaxis!" [fill]="barChart2Options.fill!">
-                        </apx-chart>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <div class="row clearfix">
-         
-            <!-- <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-                <div class="card">
-                    <div class="header ">
-                        <div class="d-flex justify-content-between w-100 ">
-                            <h2>Training Functionality</h2>
-                            <select class="form-select w-50 mx-3" aria-label="Default select example">
-                                <option selected>Sales vs Finance</option>
-                            </select>
-                            <select class="form-select w-25" aria-label="Default select example">
-                                <option selected>2023</option>
-                                <option value="1">2022</option>
-                                <option value="2">2021</option>
-                                <option value="3">2020</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <ngx-gauge [value]="gaugeValue1" [size]="250" [thick]="20" [type]="guageType1"
-                                    foregroundColor="#2773AE" backgroundColor="#ecf0f1">
-                                    <ngx-gauge-value>
-                                        {{gaugeValue1}} %
-                                    </ngx-gauge-value>
-
-                                </ngx-gauge>
-
-                            </div>
-                            <div class="col-lg-4">
-                                <ngx-gauge [value]="gaugeValue2" [size]="250" [thick]="20" [type]="guageType1"
-                                    foregroundColor="#579BB1" backgroundColor="#ecf0f1" style="margin-left: 70px;">
-                                    <ngx-gauge-value>
-                                        {{gaugeValue2}} %
-                                    </ngx-gauge-value>
-
-                                </ngx-gauge>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <h6 class="text-center" style="margin-left: 50px;"> Sales</h6>
-                                </div>
-                                <div class="col-lg-6">
-                                    <h6 class="text-center" style="padding-left: 50px;">Finance</h6>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                </div>
-            </div> -->
-        </div>
+       

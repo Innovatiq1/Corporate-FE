@@ -9,9 +9,11 @@
     color: deepskyblue;
     font-weight: 500;
 }
-
-
-
+::ng-deep .mat-column-Fees {
+  display: flex !important;
+  justify-content: flex-end !important;
+  margin-left: -50px;
+}
 // tabs for under video section
 
 // button,

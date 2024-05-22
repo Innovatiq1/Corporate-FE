@@ -167,13 +167,60 @@ export class CreateUserTypeComponent {
               (item: { typeName: any }) => item.typeName === typeName
             );
             this.paramId = userTypes[0].id;
+
+            Swal.fire({
+              title: 'Are you sure?',
+              text: 'You want to update this Module!',
+              icon: 'warning',
+              confirmButtonText: 'Yes',
+              showCancelButton: true,
+              cancelButtonColor: '#d33',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.adminService.updateUserType(obj, this.paramId).subscribe(
+                  (response: unknown) => {
+                    Swal.fire({
+                      title: 'Successful',
+                      text: 'Module added succesfully',
+                      icon: 'success',
+                    });
+                    resolve(response);
+                    this.route.navigate(['/student/settings/user-type']);
+                  },
+
+                  (error: { message: any; error: any }) => {
+                    this.isLoading = false;
+                    Swal.fire(
+                      'Failed to update Role',
+                      error.message || error.error,
+                      'error'
+                    );
+                    reject(error);
+                  }
+                );
+              }
+            });
+          });
+      } else if (this.isEdit === true) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: 'You want to update this Module!',
+          icon: 'warning',
+          confirmButtonText: 'Yes',
+          showCancelButton: true,
+          cancelButtonColor: '#d33',
+        }).then((result) => {
+          if (result.isConfirmed) {
             this.adminService.updateUserType(obj, this.paramId).subscribe(
               (response: unknown) => {
-                Swal.fire({
-                  title: 'Successful',
-                  text: 'Module added succesfully',
-                  icon: 'success',
-                });
+                this.isLoading = false;
+                if (this.isEdit === true) {
+                  Swal.fire({
+                    title: 'Successful',
+                    text: 'Module updated succesfully',
+                    icon: 'success',
+                  });
+                }
                 resolve(response);
                 this.route.navigate(['/student/settings/user-type']);
               },
@@ -187,31 +234,8 @@ export class CreateUserTypeComponent {
                 reject(error);
               }
             );
-          });
-      } else if (this.isEdit === true) {
-        this.adminService.updateUserType(obj, this.paramId).subscribe(
-          (response: unknown) => {
-            this.isLoading = false;
-            if (this.isEdit === true) {
-              Swal.fire({
-                title: 'Successful',
-                text: 'Module updated succesfully',
-                icon: 'success',
-              });
-            }
-            resolve(response);
-            this.route.navigate(['/student/settings/user-type']);
-          },
-          (error: { message: any; error: any }) => {
-            this.isLoading = false;
-            Swal.fire(
-              'Failed to update Role',
-              error.message || error.error,
-              'error'
-            );
-            reject(error);
           }
-        );
+        });
       }
     });
   }

@@ -113,6 +113,9 @@ import { StudentDbComponent } from './settings/student-db/student-db.component';
 import { PreviewQuestionsComponent } from './settings/preview-questions/preview-questions.component';
 import { PreviewTestAnswersheetComponent } from './preview-test-answersheet/preview-test-answersheet.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CreateApprovalWorkflowComponent } from './settings/approval-workflow/create-approval-workflow/create-approval-workflow.component';
+import { ViewApprovalWorkflowComponent } from './settings/approval-workflow/view-approval-workflow/view-approval-workflow.component';
+import { InvoiceComponent } from './view-course/invoice/invoice.component';
 
 @NgModule({
   declarations: [
@@ -205,6 +208,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
     PreviewQuestionsComponent,
     PreviewTestAnswersheetComponent,
     CheckoutComponent,
+    CreateApprovalWorkflowComponent,
+    ViewApprovalWorkflowComponent,
+    InvoiceComponent,
   
     // CourseKitComponent,
     // VideoPlayerComponent,

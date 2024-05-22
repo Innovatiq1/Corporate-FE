@@ -56,6 +56,15 @@ export class CustomizationExamAssessmentRetakeComponent {
 
   updateRetake() {
     const selectedRetake = this.selectedRetake;
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to update this Exam Retake!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
     this.courseService.createExamAssessment({ value: selectedRetake }).subscribe(
       response => {
         Swal.fire({
@@ -73,6 +82,8 @@ export class CustomizationExamAssessmentRetakeComponent {
         });
       }
     );
+  }
+});
   }
 
   openDialog(): void {

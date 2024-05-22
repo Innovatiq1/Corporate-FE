@@ -118,6 +118,13 @@ export class MyCoursesComponent {
         
   }
   openDialog(event: { title: any; extendedProps: { [x: string]: any; }; }) {
+    let userType = localStorage.getItem("user_type")
+    var reschedule =false;
+
+    if(userType == "Student"){
+      reschedule = true
+    }
+
     this.dialog.open(EventDetailDialogComponent, {
       width: '700px',
       data: {
@@ -129,7 +136,8 @@ export class MyCoursesComponent {
         sessionStartDate: event.extendedProps['sessionStartDate'],
         sessionEndDate: event.extendedProps['sessionEndDate'],
         deliveryType: event.extendedProps['deliveryType'],
-        instructorCost: event.extendedProps['instructorCost']
+        instructorCost: event.extendedProps['instructorCost'],
+        reschedule:reschedule
       }
     });
   }
@@ -140,13 +148,13 @@ export class MyCoursesComponent {
     const payload = { studentId: studentId, status: 'approved' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload).subscribe(response => {
 
-      this.studentApprovedClasses = response.data.docs.slice(0, 5);
+      this.studentApprovedClasses = response?.data;
       const currentDate = new Date();
       const currentMonth = currentDate.getMonth();
       const currentYear = currentDate.getFullYear();
       const tomorrow = new Date(currentYear, currentMonth, currentDate.getDate() + 1);
           this.upcomingCourseClasses = this.studentApprovedClasses.filter((item: any) => {
-        const sessionEndDate = new Date(item.classId.sessions[0].sessionEndDate);
+        const sessionEndDate = new Date(item?.classId?.sessions[0]?.sessionEndDate);
         return sessionEndDate >= tomorrow;
       });
       //     this.studentApprovedClasses.sort((a: any, b: any) => {
@@ -155,14 +163,14 @@ export class MyCoursesComponent {
       //   return startDateA > startDateB ? 1 : startDateA < startDateB ? -1 : 0;
       // });
           const events = this.studentApprovedClasses.flatMap((courseClass: any,classId:any) => {
-        const startDate = new Date(courseClass.classId.sessions[0].sessionStartDate);
+        const startDate = new Date(courseClass?.classId?.sessions[0]?.sessionStartDate);
         const endDate = new Date(courseClass?.classId?.sessions[0]?.sessionEndDate);
         const sessionStartTime = courseClass?.classId?.sessions[0]?.sessionStartTime;
         const sessionEndTime = courseClass?.classId?.sessions[0]?.sessionEndTime;
         const title = courseClass?.classId?.courseId?.title;
-        const courseCode = courseClass.courseId.courseCode;
-        const deliveryType = courseClass.classId?.classDeliveryType;
-        const instructorCost = courseClass.classId?.instructorCost;
+        const courseCode = courseClass?.courseId?.courseCode;
+        const deliveryType = courseClass?.classId?.classDeliveryType;
+        const instructorCost = courseClass?.classId?.instructorCost;
         const datesArray = [];
         let currentDate = startDate;
             while (currentDate <= endDate) {

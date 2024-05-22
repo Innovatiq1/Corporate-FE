@@ -18,6 +18,7 @@ import { LogoService } from './logo.service';
 import { StudentsService } from 'app/admin/students/students.service';
 import { UserService } from '@core/service/user.service';
 import { UtilsService } from '@core/service/utils.service';
+import { SettingsService } from '@core/service/settings.service';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -69,6 +70,7 @@ export class SettingsComponent {
   configUrl: any;
   formsUrl: any;
   sidemenuUrl: any;
+  studentDbUrl: any;
   allUsersUrl: any;
   customFormsUrl: any;
   courseFormsUrl: any;
@@ -101,6 +103,7 @@ export class SettingsComponent {
   showBannerForms: boolean = false;
   showDashboards: boolean = false;
   isApprovers: boolean = false;
+  showStudentDb: boolean = false;
   selectedCreators: any = [];
   users: any;
   vendors: any;
@@ -129,6 +132,7 @@ export class SettingsComponent {
   selectedAssessmentAlgorithm: number = 1;
   selectedExamAlgorithm: number = 1;
   sidemenu: any;
+  studentDb: any;
   dept: any;
   ro: any;
   roName: any;
@@ -152,6 +156,7 @@ export class SettingsComponent {
     private courseService: CourseService,
     private logoService: LogoService,
     private userService: UserService,
+    private settingsService: SettingsService,
     public dialog: MatDialog
   ) {
     let urlPath = this.router.url.split('/');
@@ -184,6 +189,7 @@ export class SettingsComponent {
     this.financeFormsUrl = urlPath.includes('finance-forms');
     this.bannerFormsUrl = urlPath.includes('banner-forms');
     this.dashboardsUrl = urlPath.includes('dashboards');
+    this.studentDbUrl = urlPath.includes('student-dashboard');
 
     if (this.cmUrl === true) {
       this.breadscrums = [
@@ -389,6 +395,16 @@ export class SettingsComponent {
       ];
       this.isAdmin = true;
     }
+    if (this.studentDbUrl === true) {
+      this.breadscrums = [
+        {
+          title: 'Sidemenu',
+          items: ['Customize'],
+          active: 'Dashboard Customization',
+        },
+      ];
+      this.isAdmin = true;
+    }
     if (this.allUsersUrl === true) {
       this.breadscrums = [
         {
@@ -524,6 +540,7 @@ export class SettingsComponent {
   ngOnInit() {
     this.getUserProfile();
     this.getSidemenu();
+    this.getStudentDb();
     this.getAllUsers();
     let role = localStorage.getItem('user_type');
     if (role == 'admin') {
@@ -573,6 +590,9 @@ export class SettingsComponent {
     }
     if (this.sidemenuUrl) {
       this.showSidemenu = true;
+    }
+    if (this.studentDbUrl) {
+      this.showStudentDb = true;
     }
     if (this.allUsersUrl) {
       this.showAllUsers = true;
@@ -648,6 +668,9 @@ export class SettingsComponent {
   navigateToSidemenuSettings() {
     this.router.navigate(['/student/settings/sidemenu']);
   }
+  navigateToStudentDbSettings() {
+    this.router.navigate(['/student/settings/student-dashboard']);
+  }
   navigateToCourseFormsSettings() {
     this.router.navigate(['/student/settings/course-forms']);
   }
@@ -677,6 +700,11 @@ export class SettingsComponent {
     /* get all logos **/
     this.logoService.getSidemenu().subscribe((response) => {
       this.sidemenu = response?.data?.docs;
+    });
+  }
+  getStudentDb() {
+    this.settingsService.getStudentDashboard().subscribe((response) => {
+      this.studentDb = response?.data?.docs;
     });
   }
   getDepartments() {
@@ -980,6 +1008,15 @@ export class SettingsComponent {
   updateCurrency(dialogRef: any, value: any) {
     if (value === 'currency') {
       const selectedCurrency = this.selectedCurrency;
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want to update this Currency!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
       this.courseService.createCurrency({ value: selectedCurrency }).subscribe(
         (response) => {
           Swal.fire({
@@ -997,8 +1034,19 @@ export class SettingsComponent {
           });
         }
       );
+        }
+      });
     } else if (value === 'timer') {
       const selectedTimer = this.selectedTimer;
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want to update this Timer!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
       this.courseService.createTimer({ value: selectedTimer }).subscribe(
         (response) => {
           Swal.fire({
@@ -1016,8 +1064,19 @@ export class SettingsComponent {
           });
         }
       );
+        }
+      });
     } else if (value === 'assessment') {
       const selectedAssessmentRetake = this.selectedAssessmentRetake;
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want to update this Assessment Retake!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
       this.courseService
         .createAssessment({ value: selectedAssessmentRetake })
         .subscribe(
@@ -1037,15 +1096,26 @@ export class SettingsComponent {
             });
           }
         );
+        }
+      });
     } else if (value === 'examAssessment') {
       const selectedExamAssessmentRetake = this.selectedExamAssessmentRetake;
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want to update this Exam Retake!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
       this.courseService
         .createExamAssessment({ value: selectedExamAssessmentRetake })
         .subscribe(
           (response) => {
             Swal.fire({
               title: 'Successful',
-              text: 'Assessment Configuration Success',
+              text: 'Exam Configuration Success',
               icon: 'success',
             });
             dialogRef.close(selectedExamAssessmentRetake);

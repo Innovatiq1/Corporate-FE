@@ -40,3 +40,8 @@ svg {
     align-items: center !important;
     white-space: nowrap;
 }
+::ng-deep .mat-column-Amount {
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin-left: -20px;
+  }

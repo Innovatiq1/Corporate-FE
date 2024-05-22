@@ -25,6 +25,7 @@ export class CoursePaymentComponent {
     'Student Name',
     'email',
     'Course Name',
+    'Payment Mode',
     'Payment Date',
     'Amount',
     'Payment Status',

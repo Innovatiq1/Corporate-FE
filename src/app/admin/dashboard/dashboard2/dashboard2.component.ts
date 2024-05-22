@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
+import { AuthenService } from '@core/service/authen.service';
 import { CourseService } from '@core/service/course.service';
 import { InstructorService } from '@core/service/instructor.service';
+import { SettingsService } from '@core/service/settings.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
 import {
   ApexAxisChartSeries,
@@ -15,19 +17,42 @@ import {
   ApexGrid,
   ApexTooltip,
   ApexLegend,
+  ApexFill,
+  ApexPlotOptions,
+  ApexResponsive,
+  ApexTitleSubtitle,
+  ApexNonAxisChartSeries,
 } from 'ng-apexcharts';
 import Swal from 'sweetalert2';
-export type ChartOptions = {
+export type chartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;
-  stroke: ApexStroke;
-  dataLabels: ApexDataLabels;
-  markers: ApexMarkers;
-  colors: string[];
   yaxis: ApexYAxis;
-  grid: ApexGrid;
+  stroke: ApexStroke;
+  tooltip: ApexTooltip;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  fill: ApexFill;
   legend: ApexLegend;
+  markers: ApexMarkers;
+  grid: ApexGrid;
+  title: ApexTitleSubtitle;
+  colors: string[];
+  responsive: ApexResponsive[];
+  labels: string[];
+};
+
+export type pieChart1Options = {
+  series: ApexAxisChartSeries | ApexNonAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions?: ApexPlotOptions;
+  responsive: ApexResponsive[];
+  labels?: string[];
+  legend: ApexLegend;
+  fill: ApexFill;
+  colors: string[];
   tooltip: ApexTooltip;
 };
 @Component({
@@ -35,8 +60,14 @@ export type ChartOptions = {
   templateUrl: './dashboard2.component.html',
   styleUrls: ['./dashboard2.component.scss'],
 })
-export class Dashboard2Component implements OnInit {
-  public lineChartOptions!: Partial<ChartOptions>;
+export class Dashboard2Component implements OnInit,AfterViewInit {
+  public admissionLineChartOptions!: Partial<chartOptions>;
+  public admissionBarChartOptions!: Partial<chartOptions>;
+  public admissionPieChartOptions!: Partial<pieChart1Options>;
+  public feesLineChartOptions!: Partial<chartOptions>;
+  public feesBarChartOptions!: Partial<chartOptions>;
+  public feesPieChartOptions!: Partial<pieChart1Options>;
+
   breadscrums = [
     {
       title: 'Dashboad',
@@ -69,18 +100,43 @@ export class Dashboard2Component implements OnInit {
   dataSource: any;
   coursePaginationModel!: Partial<CoursePaginationModel>;
   upcomingCourses: any;
+  isAdmissionLine: boolean = false;
+  isAdmissionBar: boolean = false;
+  isAdmissionPie: boolean = false;
+  isFeesLine: boolean = false;
+  isFeesBar: boolean = false;
+  isFeesPie: boolean = false;
+  dashboard: any;
   
   constructor(private instructorService: InstructorService,
     private courseService: CourseService,
     private classService: ClassService,
-    private router: Router,) {
+    private router: Router,
+    private settingsService: SettingsService,
+    private authenticationService:AuthenService,
+    private cdr: ChangeDetectorRef) {
     //constructor
   }
 
   ngOnInit() {
+  //   this.getInstructorsList();
+  //   this.getProgramList();
+  //   this.getAllCourse();
+  //   const role = this.authenticationService.currentUserValue.user.role;
+  //   if (role == 'Admin') {
+  //     this.getStudentDashboard();
+  //   }
+  //   this.cdr.detectChanges();
+  }
+  ngAfterViewInit(): void {
     this.getInstructorsList();
     this.getProgramList();
     this.getAllCourse();
+    const role = this.authenticationService.currentUserValue.user.role;
+    if (role == 'Admin') {
+      this.getStudentDashboards();
+    }
+    this.cdr.detectChanges();
   }
   deleteItem(row: any) {
     // this.id = row.id;
@@ -205,13 +261,14 @@ export class Dashboard2Component implements OnInit {
           createdAtDate >= oneMonthAgoStart && createdAtDate <= oneMonthAgoEnd
         );
       });
-      this.chart1();
+      // this.chart1();
+      this.setAdmissionChart();
 
     }, error => {
     });
   }
   private chart1() {
-    this.lineChartOptions = {
+    this.admissionLineChartOptions = {
       series: [
         {
           name: 'Instructors',
@@ -363,4 +420,343 @@ export class Dashboard2Component implements OnInit {
       queryParams: { data: id },
     });
   }
+
+  private admissionLineChart() {
+    this.admissionLineChartOptions = {
+      series: [{
+        name: "Instructors",
+        data: [
+          this.twelveMonthsAgoInstructors.length,
+          this.tenMonthsAgoInstructors.length,
+          this.eightMonthsAgoInstructors.length,
+          this.sixMonthsAgoInstructors.length,
+          this.fourMonthsAgoInstructors.length,
+          this.twoMonthsAgoInstructors.length,
+          this.oneMonthAgoInstructors.length,
+          this.weekInstructors.length,
+          this.todayInstructors.length
+        ]
+      }],
+      chart: {
+        type: 'line',
+        height: 330,
+        foreColor: '#9aa0ac',
+        width: '100%',
+        toolbar: {
+          show: true, // Show the toolbar for better control
+          tools: {
+            download: true,
+            selection: true,
+            zoom: true,
+            zoomin: true,
+            zoomout: true,
+            pan: true,
+            reset: true
+          },
+          autoSelected: 'zoom'
+        },
+      },
+      xaxis: {
+        categories: ["12 Months Ago", "10 Months Ago", "8 Months Ago", "6 Months Ago", "4 Months Ago", "2 Months Ago", "1 Month Ago", "This Week", "Today"]
+      },
+      stroke: { curve: 'smooth' },
+      dataLabels: { enabled: false },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'right',
+        floating: true,
+        offsetY: -25,
+        offsetX: -5,
+      },
+      tooltip: { enabled: true },
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      yaxis: { title: { text: "Number of Instructors" } },
+      colors: ['#FFA500']
+    };
+  }
+
+  private admissionBarChart() {
+    this.admissionBarChartOptions = {
+        series: [{
+            name: "Instructors",
+            data: [
+                this.twelveMonthsAgoInstructors.length,
+                this.tenMonthsAgoInstructors.length,
+                this.eightMonthsAgoInstructors.length,
+                this.sixMonthsAgoInstructors.length,
+                this.fourMonthsAgoInstructors.length,
+                this.twoMonthsAgoInstructors.length,
+                this.oneMonthAgoInstructors.length,
+                this.weekInstructors.length,
+                this.todayInstructors.length
+            ]
+        }],
+        chart: {
+            type: 'bar',
+            height: 330,
+            foreColor: '#9aa0ac',
+            width: '100%',
+            toolbar: {
+                show: true,
+                tools: {
+                    download: true,
+                    selection: true,
+                    zoom: true,
+                    zoomin: true,
+                    zoomout: true,
+                    pan: true,
+                    reset: true
+                },
+                autoSelected: 'zoom'
+            },
+        },
+        xaxis: {
+            categories: ["12 Months Ago", "10 Months Ago", "8 Months Ago", "6 Months Ago", "4 Months Ago", "2 Months Ago", "1 Month Ago", "This Week", "Today"]
+        },
+        stroke: { curve: 'smooth' },
+        dataLabels: { enabled: false },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'right',
+            floating: true,
+            offsetY: -25,
+            offsetX: -5,
+        },
+        tooltip: { enabled: true },
+        grid: {
+            show: true,
+            borderColor: '#9aa0ac',
+            strokeDashArray: 1,
+        },
+        yaxis: { title: { text: "Number of Instructors" } },
+        colors: ['#FFA500']
+    };
+}
+
+private admissionPieChart() {
+  this.admissionPieChartOptions = {
+      series: [
+        this.oneMonthAgoInstructors.length,
+        this.weekInstructors.length,
+        this.todayInstructors.length],
+      chart: {
+          type: 'pie',
+          height: 330,
+          foreColor: '#9aa0ac',
+          width: '100%',
+      },
+      labels: [ "1 Month Ago", "This Week", "Today"],
+      colors: ['#25B9C1', '#4B4BCB', '#9E9E9E'],
+      legend: {
+          position: 'top',
+          horizontalAlign: 'right',
+          floating: true,
+          offsetY: -25,
+          offsetX: -5,
+      },
+      tooltip: { enabled: true },
+      dataLabels: { enabled: false },
+      responsive: [{
+          breakpoint: 480,
+          options: {
+              chart: {
+                  width: 200
+              },
+              legend: {
+                  position: 'bottom'
+              }
+          }
+      }]
+  };
+}
+
+private feesLineChart() {
+  this.feesLineChartOptions = {
+    series: [
+      {
+        name: 'Fees Collection',
+        data: [107, 268, 847],
+      },
+    ],
+    chart: {
+      height: 350,
+      type: 'line',
+      dropShadow: {
+        enabled: true,
+        color: '#000',
+        top: 18,
+        left: 7,
+        blur: 10,
+        opacity: 0.2,
+      },
+      foreColor: '#9aa0ac',
+      toolbar: {
+        show: false,
+      },
+    },
+    colors: ['#51E298'],
+    dataLabels: {
+      enabled: true,
+    },
+    stroke: {
+      curve: 'smooth',
+    },
+    markers: {
+      size: 1,
+    },
+    grid: {
+      show: true,
+      borderColor: '#9aa0ac',
+      strokeDashArray: 1,
+    },
+    xaxis: {
+      categories: ['Today', 'This Week', 'This Month'],
+      title: {
+        text: 'Weekday',
+      },
+    },
+    yaxis: {
+      title: {
+        text: 'Fees Collection',
+      },
+    },
+    tooltip: {
+      theme: 'dark',
+      marker: {
+        show: true,
+      },
+      // x: {
+      //   show: true,
+      // },
+    },
+  };
+}
+private feesPieChart() {
+  this.feesPieChartOptions = {
+      series: [107, 268, 847],
+      chart: {
+          width: 380,
+          type: 'pie',
+      },
+      labels: ['Today', 'This Week', 'This Month'],
+      colors: ['#51E298', '#FF5733', '#FFC300'],
+      dataLabels: {
+          enabled: true,
+      },
+      legend: {
+          position: 'bottom',
+      },
+      tooltip: {
+          theme: 'dark',
+          marker: {
+              show: true,
+          },
+          x: {
+              show: true,
+          },
+      },
+      // title: {
+      //     text: 'Students by Day',
+      // },
+  };
+}
+private feesBarChart() {
+this.feesBarChartOptions = {
+    series: [
+        {
+            name: 'Fees Collection',
+            data: [107, 268, 847]
+        },
+    ],
+    chart: {
+        height: 350,
+        type: 'bar',
+        dropShadow: {
+            enabled: true,
+            color: '#000',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 0.2,
+        },
+        foreColor: '#9aa0ac',
+        toolbar: {
+            show: false,
+        },
+    },
+    colors: ['#51E298'],
+    dataLabels: {
+        enabled: true,
+    },
+    stroke: {
+        curve: 'smooth',
+    },
+    markers: {
+        size: 1,
+    },
+    grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+    },
+    xaxis: {
+        categories: ['Today', 'This Week', 'This Month'],
+        title: {
+            text: 'Weekday',
+        },
+    },
+    yaxis: {
+        title: {
+            text: 'Fees Collection',
+        },
+    },
+    tooltip: {
+        theme: 'dark',
+        marker: {
+            show: true,
+        },
+        // x: {
+        //     show: true,
+        // },
+    },
+    // title: {
+    //     text: 'Students by Day',
+    // },
+};
+}
+  getStudentDashboards(){
+    this.settingsService.getStudentDashboard().subscribe(response => {
+      this.dashboard = response.data.docs[1];
+      this.setAdmissionChart();
+      this.setFeesChart();
+    })
+  }
+  setAdmissionChart() {
+  if (this.dashboard.content[4].viewType == 'Line Chart') {
+      this.isAdmissionLine = true;
+      this.admissionLineChart();
+    } else  if (this.dashboard.content[4].viewType == 'Bar Chart') {
+      this.isAdmissionBar = true;
+      this.admissionBarChart();
+    } else  if (this.dashboard.content[4].viewType == 'Pie Chart') {
+      this.isAdmissionPie = true;
+      this.admissionPieChart();
+    }
+  }
+  setFeesChart() {
+    if (this.dashboard.content[5].viewType == 'Line Chart') {
+        this.isFeesLine = true;
+        this.feesLineChart();
+      } else  if (this.dashboard.content[5].viewType == 'Bar Chart') {
+        this.isFeesBar = true;
+        this.feesBarChart();
+      } else  if (this.dashboard.content[5].viewType == 'Pie Chart') {
+        this.isFeesPie = true;
+        this.feesPieChart();
+      }
+    }
 }

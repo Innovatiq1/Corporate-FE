@@ -58,6 +58,15 @@ export class CustomizationTimerComponent {
 
   updateCurrency() {
     const selectedTimer = this.selectedTimer;
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to update this Timer!',
+      icon: 'warning',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
     this.courseService.createTimer({ value: selectedTimer }).subscribe(
       response => {
         Swal.fire({
@@ -75,6 +84,8 @@ export class CustomizationTimerComponent {
         });
       }
     );
+  }
+});
   }
 
   openDialog(): void {

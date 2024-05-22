@@ -106,7 +106,7 @@ export class CreateProgramComponent {
       sessionStartDate: ["", [Validators.required, ...this.utils.validators.dob]],
       sessionStartTime: ["", ],
       duration: ["", []],
-      courseFee: ["", []],
+      courseFee: ["", [Validators.required, ...this.utils.validators.fee]],
       learningOutcomes: ["", []],
       attendees: ["", []],
       prerequisites: ["", []],

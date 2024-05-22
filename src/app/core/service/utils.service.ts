@@ -183,6 +183,13 @@ export class UtilsService {
       { type: 'pattern', message: 'Enter Digits' },
       
     ],
+    programfee: [
+      { type: 'required', message: 'Enter Program Fee' },
+      { type: 'min', message: 'Enter Fees between 0-999999' },
+      { type: 'max', message: 'Enter Fees between 0-999999' },
+      { type: 'pattern', message: 'Enter Digits' },
+      
+    ],
     city: [
       { type: 'required', message: 'Enter City' },
       
@@ -431,7 +438,28 @@ export class UtilsService {
     ],
     'roles':[
       {type: 'required', message:'Select Role'}
-    ]
+    ],
+    'view':[
+      {type: 'required', message:'Select View Type'}
+    ],
+    'percent':[
+      {type: 'required', message:'Select Percentage'}
+    ],
+    'public':[
+      {type:'required', message: 'Enter Public Key'}
+    ],
+    'webhook':[
+      {type:'required', message: 'Enter Webhook Secret Key'}
+    ],
+    'secret':[
+      {type:'required', message: 'Enter Secret Key'}
+    ],
+    'test-secret':[
+      {type:'required', message: 'Enter Test Secret Key'}
+    ],
+    'company':[
+      {type:'required', message: 'Enter Company Name'}
+    ],
   };
 
 

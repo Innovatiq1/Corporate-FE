@@ -1,11 +1,12 @@
 
-import { Injectable } from "@angular/core";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { BehaviorSubject, Observable, map } from "rxjs";
 import { ApiResponse } from "@core/models/response";
 import { environment } from "environments/environment";
 import { CourseKit, CourseModel, CoursePaginationModel, Program, Vendor } from "@core/models/course.model";
 import { FundingGrant, Instructor, MainCategory, SubCategory, Survey } from "@core/models/course.model";
+import { isPlatformBrowser } from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,14 @@ export class CourseService {
   
   private apiUrl = 'http://localhost:3000/api/';
   private prefix: string = environment.apiUrl;
+  private razorpayKeyId :string= "rzp_test_8qBZzDxmgGwhH4";
+  // private razorpaySecretKey :string= environment.RAZORPAY_SECRET_KEY
+
   defaultUrl = environment['apiUrl'];
   dataChange: BehaviorSubject<CourseModel[]> = new BehaviorSubject<CourseModel[]>([]);
 
-  constructor(private _Http : HttpClient) {
+  constructor(private _Http : HttpClient,    @Inject(PLATFORM_ID) private platformId: object
+) {
 
   }
   private buildParams(filter?: Partial<CoursePaginationModel>): HttpParams {
@@ -56,6 +61,39 @@ export class CourseService {
     return params;
   }
 
+
+  get nativeWindow(): any {
+    if (isPlatformBrowser(this.platformId)) {
+      return this._window();
+    }
+  }
+
+  _window(): any {
+    return window;
+  }
+
+  
+  createOrder(payload:any) {
+    const apiUrl = `${this.prefix}admin/studentClasses/order/createPaymentOrder`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+
+
+  verifyPaymentSignature(checkoutResponse: any, original_order_id: string) {
+    const payload = {
+      razorpay_signature: checkoutResponse.razorpay_signature,
+      original_order_id: original_order_id,
+      razorpay_payment_id: checkoutResponse.razorpay_payment_id,
+    };
+
+    return this._Http.post(`${this.prefix}admin/studentClasses/payment/validatePayment`, {
+      payload,
+    });
+  }
+
+
+
+
   saveVideoPlayTime(payload:any) {
     const apiUrl = `${this.prefix}admin/video-played`;
     return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
@@ -75,6 +113,7 @@ export class CourseService {
     const apiUrl = `${this.prefix}admin/studentClasses`;
     return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
   }
+
   registerProgramClass(payload:any) {
     const apiUrl = `${this.prefix}admin/studentClasses/registerProgram`;
     return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));

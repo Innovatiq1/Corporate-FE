@@ -289,7 +289,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-2" *ngIf="labelStatusCheck('Program Fees')">
-                  <label class="form-label">Program Fees</label>
+                  <label class="form-label">Program Fees<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                     class="example-full-width mb-3"
                     appearance="outline"
@@ -298,8 +298,21 @@
                       matInput
                       type="text"
                       formControlName="courseFee"
-                      class="form-control"
+                      class="form-control" required
                     />
+                    <mat-error
+                    *ngIf="
+                      programFormGroup.get('courseFee')?.invalid &&
+                      programFormGroup.get('courseFee')?.touched
+                    "
+                  >
+                    {{
+                      utils.getErrorMessage1(
+                        programFormGroup.get("courseFee"),
+                        "programfee"
+                      )
+                    }}
+                  </mat-error>
                   </mat-form-field>
                 </div>
 
@@ -376,7 +389,7 @@
               <hr class="m-4" style="width: 94%" />
               <div class="d-flex m-3 justify-content-between m-4">
                 <div class="d-flex gap-4">
-                  <label>Compulsory Count<span class="mandatory">&nbsp;*</span></label>
+                  <label style="width: 70%;">Compulsory Count<span class="mandatory">&nbsp;*</span></label>
 
                   <mat-form-field
                   class="example-full-width mb-3"
@@ -510,7 +523,7 @@
               <hr class="m-4" style="width: 94%" />
               <div class="d-flex m-3 justify-content-between m-4">
                 <div class="d-flex gap-4">
-                  <label>Elective Count<span class="mandatory">&nbsp;*</span></label>
+                  <label style="width: 70%;">Elective Count<span class="mandatory">&nbsp;*</span></label>
                   <mat-form-field
                   class="example-full-width mb-3"
                   appearance="outline"

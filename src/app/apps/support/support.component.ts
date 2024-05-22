@@ -33,7 +33,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./support.component.scss'],
 })
 export class SupportComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'ticket', 'status', 'date', 'action'];
+  displayedColumns: string[] = ['name', 'ticket', 'status', 'date'];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   dataSource: any;
   totalTickets:any;

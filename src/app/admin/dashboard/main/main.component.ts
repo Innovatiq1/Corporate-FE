@@ -63,6 +63,8 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { SettingsService } from '@core/service/settings.service';
+import { BarChart } from 'angular-feather/icons';
 export type barChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -74,7 +76,18 @@ export type barChartOptions = {
   legend: ApexLegend;
   fill: ApexFill;
 };
-
+export type pieChart1Options = {
+  series: ApexAxisChartSeries | ApexNonAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions?: ApexPlotOptions;
+  responsive: ApexResponsive[];
+  labels?: string[];
+  legend: ApexLegend;
+  fill: ApexFill;
+  colors: string[];
+  tooltip: ApexTooltip;
+};
 export type areaChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -106,12 +119,15 @@ export type avgLecChartOptions = {
 };
 
 export type pieChartOptions = {
-  series: ApexNonAxisChartSeries;
+  series: ApexAxisChartSeries | ApexNonAxisChartSeries;
   chart: ApexChart;
-  legend: ApexLegend;
   dataLabels: ApexDataLabels;
+  plotOptions?: ApexPlotOptions;
   responsive: ApexResponsive[];
-  labels: string[];
+  labels?: string[];
+  legend: ApexLegend;
+  fill: ApexFill;
+  colors: string[];
 };
 export type pieChartOptions1 = {
   series: ApexNonAxisChartSeries;
@@ -121,6 +137,26 @@ export type pieChartOptions1 = {
   responsive: ApexResponsive[];
   labels: string[];
 };
+export type lineChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions?: ApexPlotOptions;
+  responsive: ApexResponsive[];
+  labels?: string[];
+  legend: ApexLegend;
+  fill: ApexFill;
+  xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
+  grid: ApexGrid;
+  stroke: ApexStroke;
+  markers: ApexMarkers;
+  colors: string[];
+  title: ApexTitleSubtitle;
+  tooltip: ApexTooltip;
+  series2: ApexNonAxisChartSeries;
+};
+
 //end
 
 @Component({
@@ -131,9 +167,20 @@ export type pieChartOptions1 = {
 export class MainComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
   public areaChartOptions!: Partial<chartOptions>;
-  public barChartOptions!: Partial<chartOptions>;
+  public performanceBarChartOptions!: Partial<chartOptions>;
+  public pieChart1Options!: Partial<pieChart1Options>;
+  public lineChartOptions!: Partial<lineChartOptions>;
+  public surveyBarChartOptions!: Partial<chartOptions>;
+  public surveyPieChartOptions!: Partial<pieChart1Options>;
   public performanceRateChartOptions!: Partial<chartOptions>;
+  public attendanceBarChartOptions!: Partial<chartOptions>;
+  public attendancePieChartOptions!: Partial<pieChart1Options>;
   public polarChartOptions!: Partial<chartOptions>;
+  public usersLineChartOptions!: Partial<lineChartOptions>;
+  public usersBarChartOptions!: Partial<chartOptions>;
+  public studentPieChartOptions!: Partial<pieChart1Options>;
+  public studentBarChartOptions!: Partial<chartOptions>;
+  public studentLineChartOptions!: Partial<lineChartOptions>;
   registeredCourses: any;
   public avgLecChartOptions!: Partial<avgLecChartOptions>;
   public pieChartOptions!: Partial<pieChartOptions>;
@@ -231,6 +278,26 @@ export class MainComponent implements OnInit {
   isTCDB: boolean = false;
   isCMDB: boolean = false;
   isPCDB: boolean = false;
+  dashboard: any;
+  // viewType: any;
+  isBar: boolean = false;
+  isPie: boolean = false;
+  isLine: boolean = false;
+  isList: boolean = false;
+  isArea: boolean = false;
+  isSurveyPie: boolean = false;
+  isSurveyBar: boolean = false;
+  isAttendanceLine: boolean = false;
+  isAttendancePie: boolean = false;
+  isAttendanceBar: boolean = false;
+  isUsersLine: boolean = false;
+  isUsersBar: boolean = false;
+  isUsersPie: boolean = false;
+  isStudentPie: boolean = false;
+  isStudentBar: boolean = false;
+  isStudentLine: boolean = false;
+  studentDashboard: any;
+
   constructor(
     private courseService: CourseService,
     private userService: UserService,
@@ -241,6 +308,7 @@ export class MainComponent implements OnInit {
     private fb: UntypedFormBuilder,private announcementService:AnnouncementService,
     private authenticationService:AuthenService,private leaveService: LeaveService,
     public lecturesService: LecturesService,
+    private settingsService: SettingsService,
   ) {
     //constructor
     let urlPath = this.router.url.split('/')
@@ -250,7 +318,7 @@ export class MainComponent implements OnInit {
     this.getInstructorsList();
     this.getStudentsList();
     this.chart2();
-    this.chart3();
+    this.attendanceLineChart();
     this.dbForm = this.fb.group({
       title1: ['Latest Enrolled Programs', [Validators.required]],
       view1: ['List-view', [Validators.required]],
@@ -285,7 +353,7 @@ export class MainComponent implements OnInit {
       this.instructorCount = this.count?.instructors;
       this.adminCount = this.count?.admins;
       this.studentCount = this.count?.students;
-      this.chart4();
+      this.setUsersChart();
     });
   }
   getInstructorsList() {
@@ -306,7 +374,7 @@ export class MainComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
-      this.approvedCourses = response?.data?.docs?.length
+      this.approvedCourses = response?.data?.length
     })
     const payload2 = { studentId: studentId, status: 'withdraw' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload2).subscribe(response =>{
@@ -315,12 +383,12 @@ export class MainComponent implements OnInit {
 
     const payload1 = { studentId: studentId, status: 'registered' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload1).subscribe(response =>{
-      this.registeredCourses = response?.data?.docs?.length
+      this.registeredCourses = response?.data?.length
       this.getRegisteredAndApprovedPrograms()
     })
     const payload3 = { studentId: studentId, status: 'completed' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload3).subscribe(response =>{
-      this.completedCourses = response?.data?.docs?.length
+      this.completedCourses = response?.data?.length
     })
 
   }
@@ -328,28 +396,41 @@ export class MainComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'registered' ,isAll:true};
     this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
-      this.registeredPrograms = response?.data?.docs?.length
+      this.registeredPrograms = response?.data?.length
       const payload1 = { studentId: studentId, status: 'approved' ,isAll:true};
       this.classService.getStudentRegisteredProgramClasses(payload1).subscribe(response =>{
-        this.approvedPrograms = response?.data?.docs?.length
+        this.approvedPrograms = response?.data?.length
         const payload3 = { studentId: studentId, status: 'completed' ,isAll:true};
       this.classService.getStudentRegisteredProgramClasses(payload3).subscribe(response =>{
-        this.completedPrograms = response?.data?.docs?.length
+        this.completedPrograms = response?.data?.length
         const payload2 = { studentId: studentId, status: 'withdraw' ,isAll:true};
         this.classService.getStudentRegisteredProgramClasses(payload2).subscribe(response =>{
           this.withdrawPrograms = response?.data?.length
-          this.chart11();
+          this.studentPieChart();
+          this?.studentBarChart();
+          this?.studentLineChart();
+          // this.setSurveyChart();
 
         })
-        this.doughnutChartData= {
-          labels: this.doughnutChartLabels,
-          datasets: [
-            {
-              data: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms, this.completedCourses, this.completedPrograms],
-              backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8', '#73af5a', '#af5a79'],
-            },
-          ],
-        };
+        // this.pieChartData= {
+        //   labels: this.pieChartLabels,
+        //   datasets: [
+        //     {
+        //       data: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms, this.completedCourses, this.completedPrograms],
+        //       backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8', '#73af5a', '#af5a79'],
+        //     },
+        //   ],
+        // };
+
+        // this.barChartData= {
+        //   labels: this.barChartLabels,
+        //   datasets: [
+        //     {
+        //       data: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms, this.completedCourses, this.completedPrograms],
+        //       backgroundColor: ['#5A5FAF', '#F7BF31', '#EA6E6C', '#28BDB8', '#73af5a', '#af5a79'],
+        //     },
+        //   ],
+        // };
       })
     })
     })
@@ -358,7 +439,7 @@ export class MainComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved' ,isAll:true};
     this.classService.getStudentRegisteredClasses(payload).subscribe(response =>{
-     this.studentApprovedClasses = response.data.docs.slice(0,5);
+     this.studentApprovedClasses = response.data;
      const currentDate = new Date();
      const currentMonth = currentDate.getMonth();
      const currentYear = currentDate.getFullYear();
@@ -375,7 +456,7 @@ export class MainComponent implements OnInit {
     let studentId=localStorage.getItem('id')
     const payload = { studentId: studentId, status: 'approved',isAll:true };
     this.classService.getStudentRegisteredProgramClasses(payload).subscribe(response =>{
-     this.studentApprovedPrograms= response.data.docs.slice(0,5);
+     this.studentApprovedPrograms= response.data;
      const currentDate = new Date();
      const currentMonth = currentDate.getMonth();
      const currentYear = currentDate.getFullYear();
@@ -405,25 +486,93 @@ export class MainComponent implements OnInit {
     })
   }
 
-  public doughnutChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  };
-  public doughnutChartLabels: string[] = [
-    'Registered Courses',
-    'Approved Courses',
-    'Registered Programs ',
-    'Approved Programs',
-    'Completed Courses' , 
-    'Completed Programs'
-  ];
-  public doughnutChartData!: ChartData<'doughnut'>
-  public doughnutChartType: ChartType = 'doughnut';
+  // public doughnutChartOptions: ChartConfiguration['options'] = {
+  //   responsive: true,
+  //   maintainAspectRatio: false,
+  //   plugins: {
+  //     legend: {
+  //       display: false,
+  //     },
+  //   },
+  // };
+//   public studentPieChartOptions: ChartConfiguration['options'] = {
+//     responsive: true,
+//     maintainAspectRatio: false,
+//     plugins: {
+//         legend: {
+//             display: false,
+//         },
+//     },
+// };
+// public pieChartLabels: string[] = [
+//   'Registered Courses',
+//   'Approved Courses',
+//   'Registered Programs',
+//   'Approved Programs',
+//   'Completed Courses',
+//   'Completed Programs'
+// ];
+// public pieChartData: ChartData<'pie'> = {
+//   labels: this.pieChartLabels,
+//   datasets: [
+//       {
+//           data: [/* Insert your data values here */],
+//           backgroundColor: [/* Add colors for each section of the pie chart */],
+//       },
+//   ],
+// };
+// public pieChartType: ChartType = 'pie';
+
+
+// public barChartOptions: ChartConfiguration['options'] = {
+//   responsive: true,
+//   maintainAspectRatio: false,
+//   plugins: {
+//       legend: {
+//           display: false,
+//       },
+//   },
+//   scales: {
+//       x: {
+//           stacked: true, // Stack bars horizontally
+//       },
+//       y: {
+//           stacked: true, // Stack bars vertically
+//       },
+//   },
+// };
+// public barChartLabels: string[] = [
+//   'Registered Courses',
+//   'Approved Courses',
+//   'Registered Programs',
+//   'Approved Programs',
+//   'Completed Courses',
+//   'Completed Programs'
+// ];
+
+// public barChartData: ChartData<'bar'> = {
+//   labels: this.barChartLabels,
+//   datasets: [
+//       {
+//           label: 'Data', // Label for the dataset
+//           data: [/* Insert your data values here */],
+//           backgroundColor: [/* Add colors for each bar in the chart */],
+//       },
+//   ],
+// };
+
+// public barChartType: ChartType = 'bar';
+
+  // public doughnutChartLabels: string[] = [
+  //   'Registered Courses',
+  //   'Approved Courses',
+  //   'Registered Programs ',
+  //   'Approved Programs',
+  //   'Completed Courses' , 
+  //   'Completed Programs'
+  // ];
+  // public doughnutChartData!: ChartData<'doughnut'>
+  // public doughnutChartType: ChartType = 'doughnut';
   //End Student Information
   getStudentsList() {
     let payload = {
@@ -566,6 +715,8 @@ export class MainComponent implements OnInit {
           }
         );
         this.chart1();
+        this.surveyPieChart();
+        this.surveyBarChart();
       },
       (error) => {}
     );
@@ -656,6 +807,7 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.getClassList();
     const role = this.authenticationService.currentUserValue.user.role;
     console.log('roles', role);
@@ -696,9 +848,14 @@ export class MainComponent implements OnInit {
     } else if ( role === 'programcoordinator'|| role === 'Program manager' ) {
       this.isPCDB = true;
     }
+    if (role == 'Admin') {
+      this.getAdminDashboard();
+    } else if (role === 'Student') {
+      this.getStudentDashboard();
+    }
     
 //Student
-    this.chart22();
+    this.performancePieChart();
     this.getApprovedCourse();
     this.getApprovedProgram();
     this.getApprovedLeaves();
@@ -729,7 +886,7 @@ export class MainComponent implements OnInit {
   }
 
 
-  private chart11() {
+  private surveyLineChart() {
     this.areaChartOptions = {
       series: [
         {
@@ -785,9 +942,146 @@ export class MainComponent implements OnInit {
       },
     };
   }
+  private surveyBarChart() {
+      this.surveyBarChartOptions = {
+        series: [
+          {
+            name: 'new students',
+            data: [
+              this.twoMonthsAgoStudents.length,
+              this.fourMonthsAgoStudents.length,
+              this.sixMonthsAgoStudents.length,
+              this.eightMonthsAgoStudents.length,
+              this.tenMonthsAgoStudents.length,
+              this.twelveMonthsAgoStudents.length,
+            ],
+          },
+          {
+            name: 'old students',
+            data: [
+              this.tillPreviousTwoMonthsStudents.length,
+              this.tillPreviousFourMonthsStudents.length,
+              this.tillPreviousSixMonthsStudents.length,
+              this.tillPreviousEightMonthsStudents.length,
+              this.tillPreviousTenMonthsStudents.length,
+              this.tillPreviousTwelveMonthsStudents.length,
+            ],
+          },
+        ],
+        chart: {
+          height: 350,
+          type: 'bar',
+          toolbar: {
+            show: false,
+          },
+          foreColor: '#9aa0ac',
+        },
+        colors: ['#9F8DF1', '#E79A3B'],
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ['transparent'],
+        },
+        grid: {
+          show: true,
+          borderColor: '#9aa0ac',
+          strokeDashArray: 1,
+        },
+        xaxis: {
+          type: 'category',
+          categories: [
+            '2 Months',
+            '4 Months',
+            '6 Months',
+            '8 Months',
+            '10 Months',
+            '12 Months',
+          ],
+        },
+        legend: {
+          show: true,
+          position: 'top',
+          horizontalAlign: 'center',
+          offsetX: 0,
+          offsetY: 0,
+        },
+  
+        tooltip: {
+          x: {
+            format: 'MMMM',
+          },
+        },
+        yaxis: {
+          title: {
+            text: 'Number of Students',
+          },
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            // endingShape: 'rounded'
+          },
+        },
+      };
+    }
+  
+  private surveyPieChart() {
+    const newStudentsData = [
+      this.twoMonthsAgoStudents.length,
+      this.fourMonthsAgoStudents.length,
+      this.sixMonthsAgoStudents.length,
+      this.eightMonthsAgoStudents.length,
+      this.tenMonthsAgoStudents.length,
+      this.twelveMonthsAgoStudents.length,
+  ];
 
-  private chart22() {
-    this.barChartOptions = {
+  const oldStudentsData = [
+      this.tillPreviousTwoMonthsStudents.length,
+      this.tillPreviousFourMonthsStudents.length,
+      this.tillPreviousSixMonthsStudents.length,
+      this.tillPreviousEightMonthsStudents.length,
+      this.tillPreviousTenMonthsStudents.length,
+      this.tillPreviousTwelveMonthsStudents.length,
+  ];
+
+  const totalNewStudents = newStudentsData.reduce((a, b) => a + b, 0);
+  const totalOldStudents = oldStudentsData.reduce((a, b) => a + b, 0);
+
+  this.surveyPieChartOptions = {
+    series: [totalNewStudents, totalOldStudents],
+    chart: {
+      height: 350,
+      type: 'pie',
+    },
+    labels: ['New Students', 'Old Students'],
+    colors: ['#9F8DF1', '#E79A3B'],
+    legend: {
+      show: true,
+      position: 'top',
+      horizontalAlign: 'center',
+      offsetX: 0,
+      offsetY: 0,
+    },
+    tooltip: {
+      enabled: true,
+      y: {
+        formatter: function (val) {
+          return val + " students";
+        }
+      }
+    },
+  };
+
+  }
+  
+ 
+
+  private performanceBarChart() {
+    this.performanceBarChartOptions = {
       series: [
         {
           name: 'Physics',
@@ -802,7 +1096,7 @@ export class MainComponent implements OnInit {
           data: [11, 17, 15, 15, 21, 14],
         },
         {
-          name: 'Mathes',
+          name: 'Maths',
           data: [21, 7, 25, 13, 22, 8],
         },
       ],
@@ -852,12 +1146,94 @@ export class MainComponent implements OnInit {
         opacity: 1,
         colors: ['#25B9C1', '#4B4BCB', '#EA9022', '#9E9E9E'],
       },
+      
+    };
+  }
+  
+  private performancePieChart() {
+    const physicsData = [44, 55, 41, 67, 22, 43];
+    const computerData = [13, 23, 20, 8, 13, 27];
+    const managementData = [11, 17, 15, 15, 21, 14];
+    const mathesData = [21, 7, 25, 13, 22, 8];
+  
+    const totalPhysics = physicsData.reduce((a, b) => a + b, 0);
+    const totalComputer = computerData.reduce((a, b) => a + b, 0);
+    const totalManagement = managementData.reduce((a, b) => a + b, 0);
+    const totalMathes = mathesData.reduce((a, b) => a + b, 0);
+  
+    this.pieChart1Options = {
+      series: [totalPhysics, totalComputer, totalManagement, totalMathes],
+      chart: {
+        type: 'pie',
+        height: 330,
+      },
+      labels: ['Physics', 'Computer', 'Management', 'Maths'],
+      colors: ['#25B9C1', '#4B4BCB', '#EA9022', '#9E9E9E'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
     };
   }
 
-
-
-
+  private performanceLineChart() {
+    this.lineChartOptions = {
+      series: [
+        {
+          name: 'Physics',
+          data: [44, 55, 41, 67, 22, 43],
+        },
+        {
+          name: 'Computer',
+          data: [13, 23, 20, 8, 13, 27],
+        },
+        {
+          name: 'Management',
+          data: [11, 17, 15, 15, 21, 14],
+        },
+        {
+          name: 'Maths',
+          data: [21, 7, 25, 13, 22, 8],
+        },
+      ],
+      chart: {
+        type: 'line',
+        height: 330,
+        foreColor: '#9aa0ac',
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      xaxis: {
+        type: 'category',
+        categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'right',
+        floating: true,
+        offsetY: -25,
+        offsetX: -5,
+      },
+      
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      colors: ['#25B9C1', '#4B4BCB', '#EA9022', '#9E9E9E'],
+    };
+  }
+  
 
   private chart1() {
     this.areaChartOptions = {
@@ -933,7 +1309,7 @@ export class MainComponent implements OnInit {
   }
 
   private chart2() {
-    this.barChartOptions = {
+    this.performanceBarChartOptions = {
       series: [
         {
           name: 'percent',
@@ -1043,7 +1419,7 @@ export class MainComponent implements OnInit {
       },
     };
   }
-  private chart3() {
+  private attendanceLineChart() {
     this.performanceRateChartOptions = {
       series: [
         {
@@ -1098,18 +1474,111 @@ export class MainComponent implements OnInit {
         marker: {
           show: true,
         },
-        x: {
-          show: true,
-        },
+        // x: {
+        //   show: true,
+        // },
       },
     };
   }
-  private chart4() {
+  private attendancePieChart() {
+    this.attendancePieChartOptions = {
+        series: [113, 120, 130, 120, 125, 119],
+        chart: {
+            width: 380,
+            type: 'pie',
+        },
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        colors: ['#51E298', '#FF5733', '#FFC300', '#C70039', '#900C3F', '#581845'],
+        dataLabels: {
+            enabled: true,
+        },
+        legend: {
+            position: 'bottom',
+        },
+        tooltip: {
+            theme: 'dark',
+            marker: {
+                show: true,
+            },
+            x: {
+                show: true,
+            },
+        },
+        // title: {
+        //     text: 'Students by Day',
+        // },
+    };
+}
+private attendanceBarChart() {
+  this.attendanceBarChartOptions = {
+      series: [
+          {
+              name: 'Students',
+              data: [113, 120, 130, 120, 125, 119],
+          },
+      ],
+      chart: {
+          height: 350,
+          type: 'bar',
+          dropShadow: {
+              enabled: true,
+              color: '#000',
+              top: 18,
+              left: 7,
+              blur: 10,
+              opacity: 0.2,
+          },
+          foreColor: '#9aa0ac',
+          toolbar: {
+              show: false,
+          },
+      },
+      colors: ['#51E298'],
+      dataLabels: {
+          enabled: true,
+      },
+      stroke: {
+          curve: 'smooth',
+      },
+      markers: {
+          size: 1,
+      },
+      grid: {
+          show: true,
+          borderColor: '#9aa0ac',
+          strokeDashArray: 1,
+      },
+      xaxis: {
+          categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+          title: {
+              text: 'Weekday',
+          },
+      },
+      yaxis: {
+          title: {
+              text: 'Students',
+          },
+      },
+      tooltip: {
+          theme: 'dark',
+          marker: {
+              show: true,
+          },
+          // x: {
+          //     show: true,
+          // },
+      },
+      title: {
+          text: 'Students by Day',
+      },
+  };
+}
+  private usersPieChart() {
     this.polarChartOptions = {
       series2: [this.instructorCount, this.studentCount, this.adminCount],
       chart: {
         type: 'pie',
-        height: 400,
+        height: 350,
       },
       legend: {
         show: true,
@@ -1135,6 +1604,230 @@ export class MainComponent implements OnInit {
       ],
     };
   }
+  private usersBarChart() {
+    this.usersBarChartOptions = {
+      series: [
+        {
+            name: 'Count',
+            data: [ this.instructorCount,this.studentCount,this.adminCount],
+        },
+    ],
+    chart: {
+        height: 350,
+        type: 'bar',
+        dropShadow: {
+            enabled: true,
+            color: '#000',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 0.2,
+        },
+        foreColor: '#9aa0ac',
+        toolbar: {
+            show: false,
+        },
+    },
+    colors: ['#51E298'],
+    dataLabels: {
+        enabled: true,
+    },
+    stroke: {
+        curve: 'smooth',
+    },
+    markers: {
+        size: 1,
+    },
+    grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+    },
+    xaxis: {
+        categories: ['Instructors','Students','Admin'],
+        title: {
+            text: 'Users',
+        },
+    },
+    yaxis: {
+        title: {
+            text: 'Count',
+        },
+    },
+    tooltip: {
+        theme: 'dark',
+        marker: {
+            show: true,
+        },
+        // x: {
+        //     show: true,
+        // },
+    },
+    // title: {
+    //     text: 'Students by Day',
+    // },
+
+    };
+  }
+
+
+  private usersLineChart() {
+    this.usersLineChartOptions = {
+      series: [
+        {
+            name: 'Count',
+            data: [ this.instructorCount,this.studentCount,this.adminCount],
+        },
+    ],
+      chart: {
+        height: 350,
+        type: 'line',
+        dropShadow: {
+          enabled: true,
+          color: '#000',
+          top: 18,
+          left: 7,
+          blur: 10,
+          opacity: 0.2,
+        },
+        foreColor: '#9aa0ac',
+        toolbar: {
+          show: false,
+        },
+      },
+      colors: ['#51E298'],
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      markers: {
+        size: 1,
+      },
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      xaxis: {
+        categories: ['Instructors','Students','Admin'],
+        title: {
+          text: 'Users',
+        },
+      },
+      yaxis: {
+        title: {
+          text: 'Count',
+        },
+      },
+      tooltip: {
+        theme: 'dark',
+        marker: {
+          show: true,
+        },
+        // x: {
+        //   show: true,
+        // },
+      },}
+
+  }
+
+
+  private studentPieChart() {
+    this.studentPieChartOptions = {
+      series: [this.registeredCourses, this.approvedCourses, this.registeredPrograms, this.approvedPrograms, this.completedCourses, this.completedPrograms],
+     
+      chart: {
+        type: 'pie',
+        height: 330,
+      },
+      labels: ['Registered Courses', 'Approved Courses', 'Registered Programs', 'Approved Programs', 'Completed Courses', 'Completed Programs'],
+      // colors: ['#25B9C1', '#4B4BCB', '#EA9022', '#9E9E9E'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+    };
+  }
+  private studentBarChart() {
+    this.studentBarChartOptions = {
+      series: [{
+        name: 'Courses',
+        data: [this.registeredCourses, this.approvedCourses, this.completedCourses]
+      }, {
+        name: 'Programs',
+        data: [this.registeredPrograms, this.approvedPrograms, this.completedPrograms]
+      }],
+      chart: {
+        type: 'bar',
+        height: 330,
+      },
+      xaxis: {
+        categories: ['Registered', 'Approved', 'Completed']
+      },
+      yaxis: {
+        title: {
+          text: 'Number of Courses/Programs'
+        }
+      },
+      labels: ['Registered', 'Approved', 'Completed'],
+      colors: ['#25B9C1', '#4B4BCB'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+    };
+  }
+  private studentLineChart() {
+    this.studentLineChartOptions = {
+      series: [{
+        name: 'Courses',
+        data: [this.registeredCourses, this.approvedCourses, this.completedCourses]
+      }, {
+        name: 'Programs',
+        data: [this.registeredPrograms, this.approvedPrograms, this.completedPrograms]
+      }],
+      chart: {
+        type: 'line',
+        height: 330,
+      },
+      xaxis: {
+        categories: ['Registered', 'Approved', 'Completed']
+      },
+      yaxis: {
+        title: {
+          text: 'Number of Courses/Programs'
+        }
+      },
+      labels: ['Registered', 'Approved', 'Completed'],
+      colors: ['#25B9C1', '#4B4BCB'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+    };
+  }
+  
+
   aboutStudent(id: any) {
     this.router.navigate(['/student/settings/view-student'], {
       queryParams: { data: id },
@@ -1596,5 +2289,92 @@ export class MainComponent implements OnInit {
       this.studentCount=this.count?.students
     })
        
+  }
+  getAdminDashboard(){
+    this.settingsService.getStudentDashboard().subscribe(response => {
+    
+      this.dashboard = response?.data?.docs[1];
+  
+      this.setPerformanceChart();
+      this.setSurveyChart();
+      this.setAttendanceChart();
+      this.setUsersChart();
+    })
+  }
+  setSurveyChart() {
+    if (this.dashboard.content[0].viewType == 'Bar Chart') {
+      this.isSurveyBar = true;
+      this.getStudentsList();
+    } else if (this.dashboard.content[0].viewType == 'Pie Chart') {
+      this.isSurveyPie = true;
+      this.getStudentsList();
+    }
+    else if (this.dashboard.content[0].viewType == 'Line Chart') {
+      this.isArea = true;
+      this.getStudentsList();
+    }
+  }
+  setPerformanceChart() {
+    if (this.dashboard.content[1].viewType == 'Bar Chart') {
+      this.isBar = true;
+      this.performanceBarChart();
+    } else if (this.dashboard.content[1].viewType == 'Pie Chart') {
+      this.isPie = true;
+      this.performancePieChart();
+    }
+    else if (this.dashboard.content[1].viewType == 'Line Chart') {
+      this.isLine = true;
+      this.performanceLineChart();
+    }
+  }
+  setAttendanceChart() {
+    if (this.dashboard.content[2].viewType == 'Bar Chart') {
+      this.isAttendanceBar = true;
+      this.attendanceBarChart();
+    } else if (this.dashboard.content[2].viewType == 'Pie Chart') {
+      this.isAttendancePie = true;
+      this.attendancePieChart();
+    }
+    else if (this.dashboard.content[2].viewType == 'Line Chart') {
+      this.isAttendanceLine = true;
+      this.attendanceLineChart();
+    }
+  }
+  setUsersChart() {
+    if (this.dashboard.content[3].viewType == 'Bar Chart') {
+      this.isUsersBar = true;
+      // this.getCount();
+      this.usersBarChart();
+    } else if (this.dashboard.content[3].viewType == 'Pie Chart') {
+      this.isUsersPie = true;
+      // this.getCount();
+      this.usersPieChart();
+    }
+    else if (this.dashboard.content[3].viewType == 'Line Chart') {
+      this.isUsersLine = true;
+      // this.getCount();
+      this.usersLineChart();
+    }
+  }
+
+  getStudentDashboard(){
+    this.settingsService.getStudentDashboard().subscribe(response => {
+      this.studentDashboard = response.data.docs[0];
+      this.setStudentsChart();
+    })
+  }
+
+  setStudentsChart(){
+    if (this.studentDashboard.content[0].viewType == 'Pie Chart') {
+      this.isStudentPie = true;
+      this.studentPieChart();
+    } else if (this.studentDashboard.content[0].viewType == 'Bar Chart') {
+      this.isStudentBar = true;
+      this.studentBarChart();
+    } else if (this.studentDashboard.content[0].viewType == 'Line Chart') {
+      this.isStudentLine = true;
+      this.studentLineChart();
+    } 
+    
   }
 }

@@ -42,114 +42,99 @@
         </div>
       </div>
     </div>
-    <div class="row clearfix">
+
+    <div class="row">
       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-        <div class="plain-card">
-          <div class="card-inner">
-            <h6 class="tx-primary m-b-15">New Admission Report</h6>
-            <div class="row mb-2">
-              <div class="col-4">
-                <label class="font-14">Today</label>
-                <h5>{{todayInstructors?.length}}<i class="material-icons col-orange">trending_down</i></h5>
-              </div>
-              <div class="col-4">
-                <label class="font-14">This Week</label>
-                <h5>{{weekInstructors?.length}}<i class="material-icons col-green">trending_up</i></h5>
-              </div>
-              <div class="col-4">
-                <label class="font-14">This Month</label>
-                <h5>{{oneMonthAgoInstructors?.length}}<i class="material-icons col-green">trending_up</i></h5>
-              </div>
-            </div>
-            <div class="progress shadow-style mb-2 mt-3">
-              <div class="progress-bar l-bg-green width-per-70" role="progressbar" aria-valuenow="70" aria-valuemin="0"
-                aria-valuemax="100">70%</div>
-            </div>
-          </div>
-        </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-        <div class="plain-card">
-          <div class="card-inner">
-            <h6 class="tx-primary m-b-15">Fees Collection Report</h6>
-            <div class="row mb-2">
-              <div class="col-4">
-                <label class="font-14">Today</label>
-                <h5>$107<i class="material-icons col-orange">trending_down</i></h5>
-              </div>
-              <div class="col-4">
-                <label class="font-14">This Week</label>
-                <h5>$268<i class="material-icons col-green">trending_up</i></h5>
-              </div>
-              <div class="col-4">
-                <label class="font-14">This Month</label>
-                <h5>$847<i class="material-icons col-orange">trending_down</i></h5>
-              </div>
-            </div>
-            <div class="progress shadow-style mb-2 mt-3">
-              <div class="progress-bar l-bg-red width-per-50" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-                aria-valuemax="100">50%</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- area chart -->
-      <!-- <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
         <div class="card">
           <div class="header mt-3">
-            <h2>Instructor Performance</h2>
-            <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>add_circle_outline</mat-icon>
-                <span>Add</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>delete_outline</mat-icon>
-                <span>Delete</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>refresh</mat-icon>
-                <span>Refresh</span>
-              </button>
-            </mat-menu> --
+            <h2>New Admission Report</h2>
           </div>
-          <div class="body">
-            <apx-chart [series]="lineChartOptions.series!" [chart]="lineChartOptions.chart!"
-              [xaxis]="lineChartOptions.xaxis!" [stroke]="lineChartOptions.stroke!" [colors]="lineChartOptions.colors!"
-              [dataLabels]="lineChartOptions.dataLabels!" [legend]="lineChartOptions.legend!"
-              [tooltip]="lineChartOptions.tooltip!" [markers]="lineChartOptions.markers!"
-              [grid]="lineChartOptions.grid!" [yaxis]="lineChartOptions.yaxis!">
+            <div class="body" *ngIf="isAdmissionLine">
+              <apx-chart 
+                [series]="admissionLineChartOptions.series!" 
+                [chart]="admissionLineChartOptions.chart!" 
+                [xaxis]="admissionLineChartOptions.xaxis!" 
+                [stroke]="admissionLineChartOptions.stroke!" 
+                [colors]="admissionLineChartOptions.colors!" 
+                [dataLabels]="admissionLineChartOptions.dataLabels!" 
+                [legend]="admissionLineChartOptions.legend!" 
+                [tooltip]="admissionLineChartOptions.tooltip!" 
+                [markers]="admissionLineChartOptions.markers!" 
+                [grid]="admissionLineChartOptions.grid!" 
+                [yaxis]="admissionLineChartOptions.yaxis!">
+              </apx-chart>
+            </div>
+            <div class="body" *ngIf="isAdmissionBar">
+              <apx-chart 
+                  [series]="admissionBarChartOptions.series!" 
+                  [chart]="admissionBarChartOptions.chart!" 
+                  [xaxis]="admissionBarChartOptions.xaxis!" 
+                  [stroke]="admissionBarChartOptions.stroke!" 
+                  [colors]="admissionBarChartOptions.colors!" 
+                  [dataLabels]="admissionBarChartOptions.dataLabels!" 
+                  [legend]="admissionBarChartOptions.legend!" 
+                  [tooltip]="admissionBarChartOptions.tooltip!" 
+                  [markers]="admissionBarChartOptions.markers!" 
+                  [grid]="admissionBarChartOptions.grid!" 
+                  [yaxis]="admissionBarChartOptions.yaxis!">
+              </apx-chart>
+          </div>
+          <div class="body" *ngIf="isAdmissionPie">
+            <apx-chart 
+                [series]="admissionPieChartOptions.series!" 
+                [chart]="admissionPieChartOptions.chart!" 
+                [labels]="admissionPieChartOptions.labels!" 
+                [colors]="admissionPieChartOptions.colors!" 
+                [legend]="admissionPieChartOptions.legend!" 
+                [tooltip]="admissionPieChartOptions.tooltip!" 
+                [dataLabels]="admissionPieChartOptions.dataLabels!" 
+                [responsive]="admissionPieChartOptions.responsive!">
+            </apx-chart>
+        </div>
+        </div>
+      </div>
+
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="card">
+          <div class="header mt-3">
+            <h2>Fees Collection Report</h2>
+          </div>
+          <div class="body" *ngIf="isFeesLine">
+            <apx-chart [series]="feesLineChartOptions.series!" [chart]="feesLineChartOptions.chart!"
+              [xaxis]="feesLineChartOptions.xaxis!" [stroke]="feesLineChartOptions.stroke!"
+              [colors]="feesLineChartOptions.colors!" [dataLabels]="feesLineChartOptions.dataLabels!"
+              [legend]="feesLineChartOptions.legend!" [markers]="feesLineChartOptions.markers!"
+              [grid]="feesLineChartOptions.grid!" [yaxis]="feesLineChartOptions.yaxis!"
+              [tooltip]="feesLineChartOptions.tooltip!" [title]="feesLineChartOptions.title!">
+            </apx-chart>
+          </div>
+          <div class="body" *ngIf="isFeesBar">
+            <apx-chart [series]="feesBarChartOptions.series!" [chart]="feesBarChartOptions.chart!"
+            [xaxis]="feesBarChartOptions.xaxis!" [stroke]="feesBarChartOptions.stroke!"
+            [colors]="feesBarChartOptions.colors!" [dataLabels]="feesBarChartOptions.dataLabels!"
+            [legend]="feesBarChartOptions.legend!" [markers]="feesBarChartOptions.markers!"
+            [grid]="feesBarChartOptions.grid!" [yaxis]="feesBarChartOptions.yaxis!"
+            [tooltip]="feesBarChartOptions.tooltip!" [title]="feesBarChartOptions.title!">
+          </apx-chart>
+          </div>
+          <div class="body" *ngIf="isFeesPie">
+            <apx-chart [series]="feesPieChartOptions.series!" [chart]="feesPieChartOptions.chart!"
+              [labels]="feesPieChartOptions.labels!" [colors]="feesPieChartOptions.colors!"
+              [dataLabels]="feesPieChartOptions.dataLabels!" [legend]="feesPieChartOptions.legend!"
+              [tooltip]="feesPieChartOptions.tooltip!">
             </apx-chart>
           </div>
         </div>
-      </div> -->
-      <!-- area chart -->
+      </div>
+      
     </div>
+ 
     <div class="row clearfix">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="card">
           <div class="header mt-3">
             <h2>Instructors List</h2>
-            <!-- <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>add_circle_outline</mat-icon>
-                <span>Add</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>delete_outline</mat-icon>
-                <span>Delete</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>refresh</mat-icon>
-                <span>Refresh</span>
-              </button>
-            </mat-menu> -->
+          
           </div>
           <div class="tableBody">
             <div class="table-responsive">
@@ -181,28 +166,7 @@
                     <td>{{instructor?.email}}</td>
                     <td>{{instructor?.mobile}}</td>
                     <td>{{instructor?.joiningDate | date}}</td>
-                    <!-- <td>
-                      <button mat-button [matMenuTriggerFor]="menu">
-                        <svg class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"
-                        xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                        class="bi bi-three-dots rounded-circle" viewBox="0 0 16 16">
-                        <path
-                          d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                      </svg>
-  
-                      </button>
-                      
-                              <mat-menu #menu="matMenu" xPosition="before">
-                                <button mat-menu-item  class="tbl-action-btn" [routerLink]="['/admin/instructors/edit-instructor',instructor.id]">
-                                  <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
-                                  <span class="menu-text">Edit</span>
-                                </button>
-                                <button mat-menu-item class="tbl-action-btn" (click)="deleteItem(instructor)">
-                                  <app-feather-icons [icon]="'trash-2'" [class]="'tbl-fav-delete'"></app-feather-icons>
-                                  <span class="menu-text">Delete</span>
-                                </button>
-                              </mat-menu>
-                    </td> -->
+                 
                   </tr>
                  
 
@@ -214,89 +178,7 @@
       </div>
     </div>
     <div class="row">
-      <!-- <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-        <div class="card">
-          <div class="header">
-            <h2>Parents Review</h2>
-            <button mat-icon-button [matMenuTriggerFor]="menu" class="header-dropdown">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                <mat-icon>add_circle_outline</mat-icon>
-                <span>Add</span>
-              </button>
-              <button mat-menu-item disabled>
-                <mat-icon>delete_outline</mat-icon>
-                <span>Delete</span>
-              </button>
-              <button mat-menu-item>
-                <mat-icon>refresh</mat-icon>
-                <span>Refresh</span>
-              </button>
-            </mat-menu>
-          </div>
-          <div class="body">
-            <div class="review-block">
-              <div class="row">
-                <div class="review-img">
-                  <img src="assets/images/user/user1.jpg" alt="">
-                </div>
-                <div class="col">
-                  <h6 class="m-b-5">Alis Smith
-                    <span class="float-end m-r-10 text-muted"> a week ago</span>
-                  </h6>
-                  <i class="material-icons">star</i>
-                  <i class="material-icons">star</i>
-                  <i class="material-icons">star</i>
-                  <i class="material-icons">star_half</i>
-                  <i class="material-icons">star_border</i>
-                  <p class="m-t-15 m-b-15">Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Etiam vel rutrum ex, at
-                    ornare mi. In quis scelerisque dui, eget rhoncus orci. Fusce et sodales
-                    ipsum.
-                    Nam id nunc euismod, aliquet arcu quis, mattis nisi.</p>
-                  <button mat-icon-button class="m-r-10 col-blue">
-                    <mat-icon>thumb_up</mat-icon>
-                  </button>
-                  <button mat-icon-button class="m-r-10 col-red">
-                    <mat-icon>thumb_down</mat-icon>
-                  </button>
-                </div>
-              </div>
-              <div class="row mt-3">
-                <div class="review-img">
-                  <img src="assets/images/user/user2.jpg" alt="">
-                </div>
-                <div class="col">
-                  <h6 class="m-b-5">John Dio
-                    <span class="float-end m-r-10 text-muted"> a week ago</span>
-                  </h6>
-                  <i class="material-icons">star</i>
-                  <i class="material-icons">star_half</i>
-                  <i class="material-icons">star_border</i>
-                  <i class="material-icons">star_border</i>
-                  <i class="material-icons">star_border</i>
-                  <p class="m-t-15 m-b-15">Nam quis ligula est. Nunc sed risus non
-                    turpis tristique tempor. Ut sollicitudin
-                    faucibus magna nec gravida. Suspendisse ullamcorper justo vel porta
-                    imperdiet.
-                    Nunc nec ipsum vel augue placerat faucibus. </p>
-                  <button mat-icon-button class="m-r-10 col-blue">
-                    <mat-icon>thumb_up</mat-icon>
-                  </button>
-                  <button mat-icon-button class="m-r-10 col-red">
-                    <mat-icon>thumb_down</mat-icon>
-                  </button>
-                </div>
-              </div>
-              <div class="text-center  m-b-5">
-                <button mat-stroked-button color="primary">View all Customer Reviews</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
+     
       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">
         <div class="card">
           <div class="header mt-3">
