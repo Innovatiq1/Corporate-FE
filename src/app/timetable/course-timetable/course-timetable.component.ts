@@ -75,7 +75,7 @@ export class CourseTimetableComponent implements OnInit {
     this.lecturesService
       .getClassListWithPagination(instructorId, this.filterName)
       .subscribe((response: { data: { docs: string | any[] } }) => {
-        this.studentApprovedClasses = response.data.docs.slice(0, 5);
+        this.studentApprovedClasses = response.data.docs;
         const currentDate = new Date();
         const currentMonth = currentDate.getMonth();
         const currentYear = currentDate.getFullYear();
@@ -93,7 +93,7 @@ export class CourseTimetableComponent implements OnInit {
             const endDate = new Date(courseClass?.sessions[0]?.sessionEndDate);
             const sessionStartTime = courseClass?.sessions[0]?.sessionStartTime;
             const sessionEndTime = courseClass?.sessions[0]?.sessionEndTime;
-            const title = courseClass?.sessions[0]?.courseName;
+            const title = courseClass?.courseName;
 
             const datesArray = [];
             let currentDate = startDate;
