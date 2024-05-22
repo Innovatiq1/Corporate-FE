@@ -55,7 +55,8 @@ export class AddExamQuestionsComponent {
     this.questionFormTab2 = this.formBuilder.group({
       name: ['', Validators.required],
       timer: [''],
-      retake:[''], 
+      retake:[''],
+      scoreAlgorithm:[1, [Validators.required,Validators.min(0.1)]],
       questions: this.formBuilder.array([]),
     });
     if (!this.editUrl) {
@@ -71,6 +72,9 @@ export class AddExamQuestionsComponent {
   ngOnInit(): void { 
     this.getTimer()
     this.getRetakes()
+    if(!this.editUrl){
+      this.getAlgorithm()
+    }
     this.loadData()
    }
 
@@ -104,6 +108,20 @@ export class AddExamQuestionsComponent {
     });
   }
 
+  getAlgorithm(): any {
+    this.configurationSubscription =
+      this.studentsService.configuration$.subscribe((configuration) => {
+        this.configuration = configuration;
+        const config = this.configuration.find((v:any)=> v.field === 'examAlgorithm');
+        if (config) {
+          const assessmentAlgo = config.value;
+          this.questionFormTab2.patchValue({
+            scoreAlgorithm: assessmentAlgo,
+          });
+        }
+      });
+  }
+
   getData() {
     if (this.questionId) {
       this.questionService
@@ -112,6 +130,7 @@ export class AddExamQuestionsComponent {
           if (response && response.questions) {
             this.questionFormTab2.patchValue({
               name: response.name,
+              scoreAlgorithm: response.scoreAlgorithm
             });
 
             const questionsArray = this.questionFormTab2.get(
@@ -258,6 +277,7 @@ export class AddExamQuestionsComponent {
         name: this.questionFormTab2.value.name,
         timer: this.questionFormTab2.value.timer,
         retake: this.questionFormTab2.value.retake,
+        scoreAlgorithm: this.questionFormTab2.value.scoreAlgorithm,
         status: 'open',
         questions: this.questionFormTab2.value.questions.map((v: any) => ({
           options: v.options,

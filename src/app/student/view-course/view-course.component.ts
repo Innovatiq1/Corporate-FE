@@ -115,6 +115,8 @@ export class ViewCourseComponent implements OnDestroy {
   paid = false;
   courseDetails: any;
   courseDetailsId: any;
+  questionTimer: number = 60;
+  defaultTab:string = 'home';
   constructor(
     private classService: ClassService,
     private activatedRoute: ActivatedRoute,
@@ -130,15 +132,15 @@ export class ViewCourseComponent implements OnDestroy {
     let urlPath = this.router.url.split('/');
     this.paidCourse = urlPath.includes('view-course');
     this.freeCourse = urlPath.includes('view-freecourse');
-    if(this.freeCourse){
+    if (this.freeCourse) {
       this.free = true;
       this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
         this.courseDetailsId = params['id'];
       });
-      this.getRegisteredFreeCourseDetails()
+      this.getRegisteredFreeCourseDetails();
 
       this.getCourseKitDetails(this.courseDetailsId);
-    } else if(this.paidCourse){
+    } else if (this.paidCourse) {
       this.paid = true;
       this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
         this.classId = params['id'];
@@ -146,16 +148,21 @@ export class ViewCourseComponent implements OnDestroy {
       localStorage.setItem('classId', this.classId);
       this.getClassDetails();
       this.commonService.notifyVideoObservable$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(() => {
-        this.getRegisteredClassDetails();
-      });
-    this.getRegisteredClassDetails();
-
-  
+        .pipe(takeUntil(this.unsubscribe$))
+        .subscribe(() => {
+          this.getRegisteredClassDetails();
+        });
+      this.getRegisteredClassDetails();
     }
-
   }
+  ngOnInit() {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (params['tab'] === 'assessment') {
+        this.defaultTab = "test";
+      }
+    });
+  }
+
   getClassDetails() {
     this.classService.getClassById(this.classId).subscribe((response) => {
       this.classDetails = response;
@@ -181,7 +188,7 @@ export class ViewCourseComponent implements OnDestroy {
 
       this.videoPlayer.nativeElement.currentTime = initialPlaybackPosition;
     });
-    if(this.paid){
+    if (this.paid) {
       this.videoPlayer.nativeElement.addEventListener('ended', () => {
         let classId = localStorage.getItem('classId');
         let studentId = localStorage.getItem('id');
@@ -197,7 +204,7 @@ export class ViewCourseComponent implements OnDestroy {
                 classId: classId,
                 videoId: videoDetails.id,
               };
-  
+
               this.courseService.saveVideoPlayTime(payload).subscribe(() => {
                 this.courseService
                   .getStudentClass(studentId, classId)
@@ -208,9 +215,11 @@ export class ViewCourseComponent implements OnDestroy {
                       this.studentClassDetails.playbackTime !== 100 ||
                       !this.studentClassDetails.playbackTime
                     ) {
-                      const unmatchedDocuments = this.studentClassDetails.filter(
-                        (doc: { videoId: any }) => doc.videoId !== videoDetails.id
-                      );
+                      const unmatchedDocuments =
+                        this.studentClassDetails.filter(
+                          (doc: { videoId: any }) =>
+                            doc.videoId !== videoDetails.id
+                        );
                       const allUnmatchedCompleted = unmatchedDocuments.every(
                         (doc: { playbackTime: number }) =>
                           doc.playbackTime === 100
@@ -223,22 +232,20 @@ export class ViewCourseComponent implements OnDestroy {
                             this.studentClassDetails = response.data.docs[0];
                             // console.log("enterd", this.studentClassDetails);
                             if (this.studentClassDetails.status == 'approved') {
-                              if(this.paid){
+                              if (this.paid) {
                                 this.router.navigate([
                                   '/student/questions/',
                                   classId,
                                   studentId,
                                   this.courseId,
                                 ]);
-  
-                              } else if(this.free){
+                              } else if (this.free) {
                                 this.router.navigate([
                                   '/student/questions/freecourse/',
                                   classId,
                                   studentId,
                                   this.courseId,
                                 ]);
-  
                               }
                             } else {
                             }
@@ -259,75 +266,76 @@ export class ViewCourseComponent implements OnDestroy {
             }
           });
       });
-    } else if(this.free){
+    } else if (this.free) {
+      this.videoPlayer.nativeElement.addEventListener('ended', () => {
+        let courseId = this.courseDetailsId;
+        let studentId = localStorage.getItem('id');
+        const videoDetails = this.commonService.getVideoDetails();
+        this.courseService
+          .getVideoPlayedById(studentId, courseId, videoDetails.id)
+          .subscribe((response) => {
+            if (response) {
+            } else {
+              let payload = {
+                status: 'ended',
+                studentId: studentId,
+                courseId: courseId,
+                videoId: videoDetails.id,
+              };
 
-    this.videoPlayer.nativeElement.addEventListener('ended', () => {
-      let courseId = this.courseDetailsId;
-      let studentId = localStorage.getItem('id');
-      const videoDetails = this.commonService.getVideoDetails();
-      this.courseService
-        .getVideoPlayedById(studentId, courseId, videoDetails.id)
-        .subscribe((response) => {
-          if (response) {
-          } else {
-            let payload = {
-              status: 'ended',
-              studentId: studentId,
-              courseId: courseId,
-              videoId: videoDetails.id,
-            };
-
-            this.courseService.saveVideoPlayTime(payload).subscribe(() => {
-              this.courseService
-                .getStudentFreeCourse(studentId, courseId)
-                .subscribe((response) => {
-                  this.studentClassDetails = response.data.docs[0].coursekit;
-                  // console.log("payload",response)
-                  if (
-                    this.studentClassDetails.playbackTime !== 100 ||
-                    !this.studentClassDetails.playbackTime
-                  ) {
-                    const unmatchedDocuments = this.studentClassDetails.filter(
-                      (doc: { videoId: any }) => doc.videoId !== videoDetails.id
-                    );
-                    const allUnmatchedCompleted = unmatchedDocuments.every(
-                      (doc: { playbackTime: number }) =>
-                        doc.playbackTime === 100
-                    );
-                    // console.log("reached",allUnmatchedCompleted);
-                    if (allUnmatchedCompleted) {
-                      this.courseService
-                        .getStudentFreeCourse(studentId, this.courseDetailsId)
-                        .subscribe((response) => {
-                          this.studentClassDetails = response.data.docs[0];
-                          // console.log("enterd", this.studentClassDetails);
-                          if (this.studentClassDetails.status == 'approved') {
-                            this.router.navigate([
-                              '/student/questions/freecourse/',
-                              this.courseDetailsId,
-                              studentId,
-                              this.courseDetailsId
-                            ]);
-                          } else {
-                          }
-                        });
+              this.courseService.saveVideoPlayTime(payload).subscribe(() => {
+                this.courseService
+                  .getStudentFreeCourse(studentId, courseId)
+                  .subscribe((response) => {
+                    this.studentClassDetails = response.data.docs[0].coursekit;
+                    // console.log("payload",response)
+                    if (
+                      this.studentClassDetails.playbackTime !== 100 ||
+                      !this.studentClassDetails.playbackTime
+                    ) {
+                      const unmatchedDocuments =
+                        this.studentClassDetails.filter(
+                          (doc: { videoId: any }) =>
+                            doc.videoId !== videoDetails.id
+                        );
+                      const allUnmatchedCompleted = unmatchedDocuments.every(
+                        (doc: { playbackTime: number }) =>
+                          doc.playbackTime === 100
+                      );
+                      // console.log("reached",allUnmatchedCompleted);
+                      if (allUnmatchedCompleted) {
+                        this.courseService
+                          .getStudentFreeCourse(studentId, this.courseDetailsId)
+                          .subscribe((response) => {
+                            this.studentClassDetails = response.data.docs[0];
+                            // console.log("enterd", this.studentClassDetails);
+                            if (this.studentClassDetails.status == 'approved') {
+                              this.router.navigate([
+                                '/student/questions/freecourse/',
+                                this.courseDetailsId,
+                                studentId,
+                                this.courseDetailsId,
+                              ]);
+                            } else {
+                            }
+                          });
+                      } else {
+                        let payload = {
+                          status: 'notCompleted',
+                          studentId: studentId,
+                        };
+                        this.classService
+                          .saveApprovedClasses(this.courseDetailsId, payload)
+                          .subscribe((response) => {});
+                      }
                     } else {
-                      let payload = {
-                        status: 'notCompleted',
-                        studentId: studentId,
-                      };
-                      this.classService
-                        .saveApprovedClasses(this.courseDetailsId, payload)
-                        .subscribe((response) => {});
                     }
-                  } else {
-                  }
-                });
-            });
-          }
-        });
-    });
-  }
+                  });
+              });
+            }
+          });
+      });
+    }
 
     // this.destroyModal(event.target.currentTime);
   }
@@ -357,49 +365,48 @@ export class ViewCourseComponent implements OnDestroy {
   registerClass(classId: string) {
     let userdata = JSON.parse(localStorage.getItem('currentUser')!);
     let studentId = localStorage.getItem('id');
-    if(this.paid){
-    let payload = {
-      email: userdata.user.email,
-      name: userdata.user.name,
-      courseTitle: this.classDetails?.courseId?.title,
-      courseFee: this.classDetails?.courseId?.fee,
-      studentId: studentId,
-      classId: this.classId,
-      title: this.title,
-      coursekit: this.courseKit,
-    };
-    this.courseService.saveRegisterClass(payload).subscribe((response) => {
-      this.document.location.href = response.data.session.url;
-      this.getClassDetails();
-    });
-  } else if(this.free){
-    let payload = {
-      email: userdata.user.email,
-      name: userdata.user.name,
-      courseTitle: this.courseDetails?.title,
-      courseFee: 0,
-      studentId: studentId,
-      classId: null,
-      title: this.title,
-      coursekit: this.courseKit,
-      feeType:'free',
-      courseId:this.courseDetails.id,
-    };
-    this.courseService.saveRegisterClass(payload).subscribe((response) => {
-      Swal.fire({
-        title: 'Thank you',
-        text: 'We will approve once verified',
-        icon: 'success',
+    if (this.paid) {
+      let payload = {
+        email: userdata.user.email,
+        name: userdata.user.name,
+        courseTitle: this.classDetails?.courseId?.title,
+        courseFee: this.classDetails?.courseId?.fee,
+        studentId: studentId,
+        classId: this.classId,
+        title: this.title,
+        coursekit: this.courseKit,
+      };
+      this.courseService.saveRegisterClass(payload).subscribe((response) => {
+        this.document.location.href = response.data.session.url;
+        this.getClassDetails();
       });
+    } else if (this.free) {
+      let payload = {
+        email: userdata.user.email,
+        name: userdata.user.name,
+        courseTitle: this.courseDetails?.title,
+        courseFee: 0,
+        studentId: studentId,
+        classId: null,
+        title: this.title,
+        coursekit: this.courseKit,
+        feeType: 'free',
+        courseId: this.courseDetails.id,
+      };
+      this.courseService.saveRegisterClass(payload).subscribe((response) => {
+        Swal.fire({
+          title: 'Thank you',
+          text: 'We will approve once verified',
+          icon: 'success',
+        });
         this.isRegistered = true;
-    });
-
+      });
+    }
   }
-  }
-  getCourseKitDetails(id:string) {
+  getCourseKitDetails(id: string) {
     this.courseService.getCourseById(id).subscribe((response) => {
       this.courseKitDetails = response?.course_kit;
-      this.courseDetails = response
+      this.courseDetails = response;
       // if (Array.isArray(this.courseKitDetails)) {
 
       this.courseKitDetails.map((item: any) => {
@@ -424,6 +431,7 @@ export class ViewCourseComponent implements OnDestroy {
       this.title = response?.title;
       this.assessmentInfo = response?.assessment;
       this.questionList = response?.assessment?.questions || [];
+      this.questionTimer = this.assessmentInfo.timer;
       const survey = response?.survey;
       this.feedbackInfo = survey
         ? {
@@ -608,98 +616,97 @@ export class ViewCourseComponent implements OnDestroy {
     let courseId = this.courseDetailsId;
     let studentId = localStorage.getItem('id');
 
-if(this.paid){
-  let payload = {
-    studentId: studentId,
-    classId: classId,
-    playbackTime: lastButOneValue,
-    videoId: videoDetails.id,
-  };
-  let time = this.commonService.getPlayBackTime();
-  if (lastButOneValue < time) {
-  } else {
-    this.classService
-      .saveApprovedClasses(classId, payload)
-      .subscribe((response) => {
-        this.courseService
-          .getStudentClass(studentId, classId)
+    if (this.paid) {
+      let payload = {
+        studentId: studentId,
+        classId: classId,
+        playbackTime: lastButOneValue,
+        videoId: videoDetails.id,
+      };
+      let time = this.commonService.getPlayBackTime();
+      if (lastButOneValue < time) {
+      } else {
+        this.classService
+          .saveApprovedClasses(classId, payload)
           .subscribe((response) => {
-            this.studentClassDetails = response.data.docs[0];
-            this.coursekitDetails = response.data.docs[0].coursekit;
-            let totalPlaybackTime = 0;
-            let documentCount = 0;
-            this.coursekitDetails.forEach(
-              (doc: { playbackTime: any }, index: number) => {
-                const playbackTime = doc.playbackTime;
-                totalPlaybackTime += playbackTime;
-                documentCount++;
-              }
-            );
-            let time = totalPlaybackTime / documentCount;
-            this.playBackTime = time;
-            this.commonService.setCompletedPercentage(this.playBackTime);
-            let percentage = this.commonService.getCompletedPercentage();
-            let body = {
-              studentId: studentId,
-              playBackTime: percentage,
-              classId:classId
-
-            };
-            this.classService
-              .saveApprovedClasses(classId, body)
-              .pipe(takeUntil(this.unsubscribe$))
+            this.courseService
+              .getStudentClass(studentId, classId)
               .subscribe((response) => {
-                this.commonService.notifyVideoMethod();
+                this.studentClassDetails = response.data.docs[0];
+                this.coursekitDetails = response.data.docs[0].coursekit;
+                let totalPlaybackTime = 0;
+                let documentCount = 0;
+                this.coursekitDetails.forEach(
+                  (doc: { playbackTime: any }, index: number) => {
+                    const playbackTime = doc.playbackTime;
+                    totalPlaybackTime += playbackTime;
+                    documentCount++;
+                  }
+                );
+                let time = totalPlaybackTime / documentCount;
+                this.playBackTime = time;
+                this.commonService.setCompletedPercentage(this.playBackTime);
+                let percentage = this.commonService.getCompletedPercentage();
+                let body = {
+                  studentId: studentId,
+                  playBackTime: percentage,
+                  classId: classId,
+                };
+                this.classService
+                  .saveApprovedClasses(classId, body)
+                  .pipe(takeUntil(this.unsubscribe$))
+                  .subscribe((response) => {
+                    this.commonService.notifyVideoMethod();
+                  });
               });
           });
-      });
-  }
-} else if(this.free){
-    let payload = {
-      studentId: studentId,
-      courseId: courseId,
-      playbackTime: lastButOneValue,
-      videoId: videoDetails.id,
-    };
-    let time = this.commonService.getPlayBackTime();
-    if (lastButOneValue < time) {
-    } else {
-      this.classService
-        .saveApprovedClasses(courseId, payload)
-        .subscribe((response) => {
-          this.courseService
-            .getStudentFreeCourse(studentId, courseId)
-            .subscribe((response) => {
-              this.studentClassDetails = response.data.docs[0];
-              this.coursekitDetails = response.data.docs[0].coursekit;
-              let totalPlaybackTime = 0;
-              let documentCount = 0;
-              this.coursekitDetails.forEach(
-                (doc: { playbackTime: any }, index: number) => {
-                  const playbackTime = doc.playbackTime;
-                  totalPlaybackTime += playbackTime;
-                  documentCount++;
-                }
-              );
-              let time = totalPlaybackTime / documentCount;
-              this.playBackTime = time;
-              this.commonService.setCompletedPercentage(this.playBackTime);
-              let percentage = this.commonService.getCompletedPercentage();
-              let body = {
-                studentId: studentId,
-                playBackTime: percentage,
-                courseId:this.courseDetailsId
-              };
-              this.classService
-                .saveApprovedClasses(courseId, body)
-                .pipe(takeUntil(this.unsubscribe$))
-                .subscribe((response) => {
-                  this.commonService.notifyVideoMethod();
-                });
-            });
-        });
+      }
+    } else if (this.free) {
+      let payload = {
+        studentId: studentId,
+        courseId: courseId,
+        playbackTime: lastButOneValue,
+        videoId: videoDetails.id,
+      };
+      let time = this.commonService.getPlayBackTime();
+      if (lastButOneValue < time) {
+      } else {
+        this.classService
+          .saveApprovedClasses(courseId, payload)
+          .subscribe((response) => {
+            this.courseService
+              .getStudentFreeCourse(studentId, courseId)
+              .subscribe((response) => {
+                this.studentClassDetails = response.data.docs[0];
+                this.coursekitDetails = response.data.docs[0].coursekit;
+                let totalPlaybackTime = 0;
+                let documentCount = 0;
+                this.coursekitDetails.forEach(
+                  (doc: { playbackTime: any }, index: number) => {
+                    const playbackTime = doc.playbackTime;
+                    totalPlaybackTime += playbackTime;
+                    documentCount++;
+                  }
+                );
+                let time = totalPlaybackTime / documentCount;
+                this.playBackTime = time;
+                this.commonService.setCompletedPercentage(this.playBackTime);
+                let percentage = this.commonService.getCompletedPercentage();
+                let body = {
+                  studentId: studentId,
+                  playBackTime: percentage,
+                  courseId: this.courseDetailsId,
+                };
+                this.classService
+                  .saveApprovedClasses(courseId, body)
+                  .pipe(takeUntil(this.unsubscribe$))
+                  .subscribe((response) => {
+                    this.commonService.notifyVideoMethod();
+                  });
+              });
+          });
+      }
     }
-  }
   }
   // feedback(){
   //   let classId = localStorage.getItem('classId');
@@ -720,8 +727,7 @@ if(this.paid){
       assessmentId: assesmentId,
       courseId: payload.courseId,
       answers: payload.answers,
-      is_tutorial : payload.is_tutorial   
-
+      is_tutorial: payload.is_tutorial,
     };
 
     this.studentService.submitAssessment(requestBody).subscribe(
@@ -773,7 +779,7 @@ if(this.paid){
 
   submitFeedback(event: any) {
     const studentId = localStorage.getItem('id');
-    const userData = JSON.parse(localStorage.getItem('user_data')||"");
+    const userData = JSON.parse(localStorage.getItem('user_data') || '');
     const studentFirstName = userData?.user?.name;
     const studentLastName = userData?.user?.last_name;
     const payload = {
@@ -782,7 +788,7 @@ if(this.paid){
       courseId: this.courseId,
       studentFirstName,
       studentLastName,
-      courseName:this.title
+      courseName: this.title,
     };
     this.surveyService.addSurveyBuilder(payload).subscribe(
       (response) => {
