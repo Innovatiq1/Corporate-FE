@@ -23,6 +23,8 @@ export class ViewProgramClassComponent {
   classId: any;
   aboutData1: any;
   id?: number;
+  isAdmin: boolean = false;
+  isInstructor: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
     private _classService:ClassService,
@@ -35,6 +37,13 @@ export class ViewProgramClassComponent {
   }
   ngOnInit() {
     this.loadData()
+    let userType = localStorage.getItem('user_type');
+    if (userType == 'admin') {
+      this.isAdmin = true;
+    }
+    if (userType == 'Instructor') {
+      this.isInstructor = true;
+    }
   }
 
   loadData(){

@@ -1,7 +1,7 @@
 // import { CourseId } from './../../../core/models/class.model';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   ClassModel,
   Session,
@@ -27,13 +27,14 @@ import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { formatDate } from '@angular/common';
+import { LecturesService } from 'app/teacher/lectures/lectures.service';
 
 @Component({
   selector: 'app-class-list',
   templateUrl: './class-list.component.html',
   styleUrls: ['./class-list.component.scss'],
 })
-export class ClassListComponent extends UnsubscribeOnDestroyAdapter {
+export class ClassListComponent extends UnsubscribeOnDestroyAdapter implements OnInit{
   displayedColumns = [
     // 'select',
     // 'Instructor',
@@ -63,20 +64,46 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter {
   isLoading = true;
   pageSizeArr = [10, 20, 50, 100];
   searchTerm: string = '';
+  filterName='';
+  isAdmin: boolean = false;
+  isInstructor: boolean = false;
 
   constructor(
     public _classService: ClassService,
     private snackBar: MatSnackBar,
-    private _router: Router
+    private _router: Router,
+    public lecturesService: LecturesService,
+    private cdr: ChangeDetectorRef
   ) {
     super();
     this.coursePaginationModel = {};
+    // let userType = localStorage.getItem('user_type');
+    // // if(userType == "Student"){
+    // //   this.getApprovedCourse();
+    // //   this.getApprovedProgram();
+    // // }
+    // if (userType == 'admin') {
+    //   this.getClassList();
+    // }
+    // if (userType == 'Instructor') {
+    //   this.getClassLectures();
+    // }
   }
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild('filter', { static: true }) filter!: ElementRef;
 
   ngOnInit(): void {
-    this.getClassList();
+    let userType = localStorage.getItem('user_type');
+    if (userType == 'admin') {
+      this.isAdmin = true;
+      this.getClassList();
+    }
+    if (userType == 'Instructor') {
+      this.isInstructor = true;
+      this.getClassLectures();
+    }
+    // this.getClassList();
+    // this.getClassLectures();
   }
 
   getClassList() {
@@ -99,6 +126,70 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter {
         }
       );
   }
+
+
+  getClassLectures() {
+    let instructorId = localStorage.getItem('id')
+    this.lecturesService.getClassListWithPagination(instructorId, this.filterName,{ ...this.coursePaginationModel }).subscribe(
+      (response) => {
+        this.dataSource = response.data.docs;
+        this.totalItems = response.data.totalDocs
+        this.coursePaginationModel.docs = response.data.docs;
+        this.coursePaginationModel.page = response.data.page;
+        this.coursePaginationModel.limit = response.data.limit;
+        console.log("PV", this.dataSource)
+        this.mapClassList();
+        
+      },
+      (error) => {
+      }
+    );
+   
+    
+  }
+  // getSession() {
+  //   if(this.dataSource1){
+  //   this.dataSource1&&this.dataSource1?.forEach((item: any, index: any) => {
+  //     if (item.sessions[0]&& item.sessions[0]?.courseName&&item.sessions[0]?.courseCode) {
+  //       let starttimeObject = moment(item.sessions[0].sessionStartTime, "HH:mm");
+        
+  //       const duration = moment.duration(moment(item.sessions[0].sessionEndDate).diff(moment(item.sessions[0].sessionStartDate)));
+  //       let daysDifference = duration.asDays()+1
+        
+
+        
+  //       this.dataSource.push({
+  //         //sessionNumber: index + 1,
+  //         classId:item._id,
+  //         sessionStartDate: moment(item.sessions[0].sessionStartDate).format("YYYY-MM-DD"),
+  //         sessionEndDate: moment(item.sessions[0].sessionEndDate).format("YYYY-MM-DD"),
+  //         sessionStartTime: starttimeObject.format("hh:mm A"),
+  //         sessionEndTime: moment(item.sessions[0].end).format("hh:mm A"),
+  //         //instructorId: item.instructor,
+  //         laboratoryId: item.sessions[0].laboratoryId,
+  //         courseName: item.sessions[0].courseName,
+  //         courseCode: item.sessions[0].courseCode,
+  //         status: item.sessions[0].status,
+  //         _id:item.sessions[0]._id,
+  //         duration:daysDifference,
+
+  //         sessionNumber: 0,
+  //         instructorId: ''
+  //       });
+  //     } else {
+        
+  //     }
+      
+  //   });
+  //   this.cdr.detectChanges();
+  //   //console.log("ssssssssssss",this.dataSource)
+  //   //this.myArray.push(newItem);
+  //   // this.myArray.data = this.dataSource1;
+  // }
+  //   //return sessions;
+    
+  // }
+
   private refreshTable() {
     this.paginator._changePageSize(this.paginator.pageSize);
   }
@@ -120,7 +211,13 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter {
     console.log('event', $event);
     this.coursePaginationModel.page = $event?.pageIndex + 1;
     this.coursePaginationModel.limit = $event?.pageSize;
-    this.getClassList();
+    let userType = localStorage.getItem('user_type');
+    if (userType == 'admin') {
+      this.getClassList();
+    }
+    if (userType == 'Instructor') {
+      this.getClassLectures();
+    }
   }
 
   mapClassList() {

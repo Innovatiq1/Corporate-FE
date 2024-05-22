@@ -1188,7 +1188,47 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="card" style="border-radius: 31px;">
         <div class="header mt-3">
-          <h2>Classes List</h2>
+          <h2>Program Classes List</h2>
+
+        </div>
+        <div class="tableBody">
+          <div class="table-responsive">
+            <table class="table table-hover ">
+              <thead>
+                <tr>
+                  <!-- <th>#</th> -->
+                  <th>Program Name</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Status </th>
+                  <!-- <th>Actions </th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let class of programClassList " style="cursor: pointer;"
+                  [routerLink]="['/admin/courses/view-class/',class.id]">
+                  <!-- <td class="table-img">
+                      <img src="{{class?.courseId?.image_link}}" alt="course">
+                    </td> -->
+                  <td>{{class?.programName | truncate:10}}</td>
+                  <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
+                  <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
+                  <td>
+                    <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
+                  </td>
+
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card" style="border-radius: 31px;">
+        <div class="header mt-3">
+          <h2>Course Classes List</h2>
 
         </div>
         <div class="tableBody">
@@ -1210,7 +1250,7 @@
                   <!-- <td class="table-img">
                       <img src="{{class?.courseId?.image_link}}" alt="course">
                     </td> -->
-                  <td>{{class?.courseId?.title | truncate:10}}</td>
+                  <td>{{class?.courseName | truncate:10}}</td>
                   <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
                   <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
                   <td>
