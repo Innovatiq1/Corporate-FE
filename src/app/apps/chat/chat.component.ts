@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SupportService } from '../support/support.service';
 import { StudentsService } from 'app/admin/students/students.service';
 import Swal from 'sweetalert2';
+import { CoursePaginationModel } from '@core/models/course.model';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -23,12 +24,14 @@ export class ChatComponent {
  currentTime:any;
  source:any;
 format: string|undefined;
+coursePaginationModel: Partial<CoursePaginationModel>;
 user!:string;
   dataToUpdate: any;
   dataSource: any;
   totalTickets: any;
   constructor(private studentService:StudentsService,public activeRoute: ActivatedRoute, private supportService: SupportService,public router:Router) {
     //constructor
+    this.coursePaginationModel = {};
     const today = new Date();
      this.currentTime = today.getHours() + ":" + today.getMinutes() ;
 
@@ -88,7 +91,7 @@ console.log("res",res);
   })
 }
 listOfTicket() {
-  this.supportService.getAllTickets().subscribe((res) => {
+  this.supportService.getAllTickets({ ...this.coursePaginationModel }).subscribe((res) => {
     this.dataSource = res.data.docs;
     this.totalTickets = this.dataSource.length;
   });

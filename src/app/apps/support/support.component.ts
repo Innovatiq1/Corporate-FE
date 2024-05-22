@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SupportService } from './support.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CourseModel, CoursePaginationModel, MainCategory, SubCategory } from '@core/models/course.model';
 // export interface PeriodicElement {
 //   checked: boolean;
 //   name: string;
@@ -36,7 +37,16 @@ export class SupportComponent implements OnInit {
   displayedColumns: string[] = ['name', 'ticket', 'status', 'date'];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   dataSource: any;
+  mainCategories!: MainCategory[];
+  subCategories!: SubCategory[];
+  allSubCategories!: SubCategory[];
+  coursePaginationModel: Partial<CoursePaginationModel>;
+  totalItems: any;
+  // coursePaginationModel: Partial<CoursePaginationModel>;
+  // dataSource: any;
   totalTickets:any;
+  pageSizeArr = [10, 2, 50, 100];
+  
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   // 'status',
   // 'assignTo',
@@ -50,16 +60,28 @@ export class SupportComponent implements OnInit {
   ];
   constructor(private ticketService: SupportService, public router: Router) {
     //constructor
+    this.coursePaginationModel = {};
+    // this.coursePaginationModel.main_category = '0';
+    // this.coursePaginationModel.sub_category = '0';
   }
   ngOnInit() {
     this.listOfTicket();
     // this.dataSource.paginator = this.paginator;
   }
-
+  pageSizeChange($event: any) {
+    this.coursePaginationModel.page= $event?.pageIndex + 1;
+    this.coursePaginationModel.limit= $event?.pageSize;
+    this.listOfTicket();
+   }
   listOfTicket() {
-    this.ticketService.getAllTickets().subscribe((res) => {
+    this.ticketService.getAllTickets({ ...this.coursePaginationModel }).subscribe((res) => {
       this.dataSource = res.data.docs;
       this.totalTickets = this.dataSource.length;
+      this.totalItems = res.data.totalDocs;
+      this.coursePaginationModel.docs = res.data.docs;
+      this.coursePaginationModel.page = res.data.page;
+      this.coursePaginationModel.limit = res.data.limit;
+      this.coursePaginationModel.totalDocs = res.data.totalDocs;
     });
   }
 
