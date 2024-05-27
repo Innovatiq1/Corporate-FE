@@ -214,16 +214,16 @@
                     role="tabpanel"
                     aria-labelledby="home-tab"
                   >
-                  <h5 class="bg-light p-2">
-                    Course Completed :
-                    <span
-                      [ngClass]="{
-                        'red-text': playBackTime < 50,
-                        'green-text': playBackTime >= 50
-                      }"
-                      >{{ playBackTime.toFixed(2) || 0 }}%</span
-                    >
-                  </h5>
+                    <h5 class="bg-light p-2">
+                      Course Completed :
+                      <span
+                        [ngClass]="{
+                          'red-text': playBackTime < 50,
+                          'green-text': playBackTime >= 50
+                        }"
+                        >{{ playBackTime.toFixed(2) || 0 }}%</span
+                      >
+                    </h5>
                     <span class="font-bold">Course Description:</span>
                     <p
                       [innerHTML]="
@@ -880,7 +880,7 @@
                       role="tab"
                       aria-controls="home"
                       aria-selected="true"
-                      [class]="{'active': defaultTab === 'home'}"
+                      [class]="{ active: defaultTab === 'home' }"
                     >
                       <!-- <i class="now-ui-icons shopping_shop"></i> -->
                       Course Details
@@ -911,7 +911,7 @@
                       role="tab"
                       aria-controls="profile"
                       aria-selected="false"
-                      [class]="{'active': defaultTab === 'profile'}"
+                      [class]="{ active: defaultTab === 'profile' }"
                     >
                       <!-- <i class="now-ui-icons ui-2_settings-90"></i> -->
                       Classes
@@ -927,7 +927,7 @@
                       role="tab"
                       aria-controls="test"
                       aria-selected="false"
-                      [class]="{'active': defaultTab === 'test'}"
+                      [class]="{ active: defaultTab === 'test' }"
                     >
                       <!-- <i class="now-ui-icons ui-2_settings-90"></i> -->
                       Assessment
@@ -943,10 +943,28 @@
                       role="tab"
                       aria-controls="feedback"
                       aria-selected="false"
-                      [class]="{'active': defaultTab === 'feedback'}"
+                      [class]="{ active: defaultTab === 'feedback' }"
                     >
                       <!-- <i class="now-ui-icons ui-2_settings-90"></i> -->
                       Feedback
+                    </button>
+                  </li>
+                  <li
+                    class="nav-item"
+                    role="presentation"
+                    *ngIf="isCompleted && (enableExam||free)"
+                  >
+                    <button
+                      class="nav-link"
+                      id="exam-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#examTab"
+                      type="button"
+                      role="tab"
+                      aria-controls="examTab"
+                      aria-selected="false"
+                    >
+                      Exam
                     </button>
                   </li>
                   <li class="nav-item" role="presentation" *ngIf="isCompleted">
@@ -974,17 +992,17 @@
                     id="home"
                     role="tabpanel"
                     aria-labelledby="home-tab"
-                    [ngClass]="{'show active': defaultTab === 'home'}"
+                    [ngClass]="{ 'show active': defaultTab === 'home' }"
                   >
-                  <h5 class="py-2">
-                    Course Completed :
-                    <span
-                      [ngClass]="{
-                        'red-text': playBackTime < 50,
-                        'green-text': playBackTime >= 50
-                      }"
-                      >{{ playBackTime.toFixed(2) || 0 }}%</span
-                    >
+                    <h5 class="py-2">
+                      Course Completed :
+                      <span
+                        [ngClass]="{
+                          'red-text': playBackTime < 50,
+                          'green-text': playBackTime >= 50
+                        }"
+                        >{{ playBackTime.toFixed(2) || 0 }}%</span
+                      >
                     </h5>
                     <span class="font-bold">Course Description:</span>
                     <p
@@ -1033,13 +1051,13 @@
                       </div>
                     </div>
 
-                    <div class="my-4 mx-2" style="width: 50%;">
+                    <div class="my-4 mx-2" style="width: 50%">
                       <div class="row">
                         <div class="col-6">
                           <b>Delivery </b>
                         </div>
                         <div class="col-6">
-                        {{ classDetails?.classDeliveryType | titlecase }}
+                          {{ classDetails?.classDeliveryType | titlecase }}
                         </div>
                       </div>
                       <div class="row">
@@ -1102,7 +1120,7 @@
                     id="des"
                     role="tabpanel"
                     aria-labelledby="des-tab"
-                    [class]="{'show active': defaultTab === 'des'}"
+                    [class]="{ 'show active': defaultTab === 'des' }"
                   >
                     <!-- <h5 class="text">Course Completed : <span [ngClass]="{'red-text': playBackTime< 50, 'green-text': playBackTime>= 50}">{{playBackTime.toFixed(2) || 0}}%</span></h5> -->
                     {{ longDescription }}
@@ -1113,7 +1131,7 @@
                     id="profile"
                     role="tabpanel"
                     aria-labelledby="profile-tab"
-                    [class]="{'show active': defaultTab === 'profile'}"
+                    [class]="{ 'show active': defaultTab === 'profile' }"
                   >
                     <table mat-table [dataSource]="dataSource">
                       <ng-container matColumnDef="position">
@@ -1200,7 +1218,7 @@
                     id="contact"
                     role="tabpanel"
                     aria-labelledby="contact-tab"
-                    [class]="{'show active': defaultTab === 'contact'}"
+                    [class]="{ 'show active': defaultTab === 'contact' }"
                   >
                     <table mat-table [dataSource]="dataSource">
                       <!--- Note that these columns can be defined in any order.
@@ -1274,27 +1292,95 @@
                     </table>
                   </div>
                   <div
+                    class="tab-pane fade text-center"
+                    id="examTab"
+                    role="tabpanel"
+                    aria-labelledby="Exam"
+                  >
+                    <button *ngIf="!(examAssessmentTaken != undefined &&
+                    examAssessmentTaken >= examAssessmentInfo.retake)"
+                    mat-flat-button color="primary"
+                      [routerLink]="[
+                        '/student/exam-questions/',
+                        assessmentAnswerLatest?.id,
+                        studentClassDetails?.studentId?.id,
+                        studentClassDetails?.courseId?._id,
+                        studentClassDetails?.courseId?.exam_assessment
+                      ]"
+                    >
+                      Start Exam
+                    </button>
+                    <p
+                      class="text-center text-muted"
+                      *ngIf="
+                        examAssessmentTaken != undefined &&
+                        examAssessmentTaken >= examAssessmentInfo?.retake
+                      "
+                    >
+                      Max No. of Retake Reached
+                    </p>
+                  </div>
+                  <div
                     class="tab-pane fade"
                     id="test"
                     role="tabpanel"
                     aria-labelledby="test"
-                    [ngClass]="{'show active': defaultTab == 'test'}"
+                    [ngClass]="{ 'show active': defaultTab == 'test' }"
                   >
-                    <app-questions
-                      *ngIf="questionList.length"
-                      [questionList]="questionList"
-                      [answersResult]="answersResult"
-                      [totalTime]="questionList.length * questionTimer"
-                      (submitAnswers)="submitAnswers($event)"
-                      [isAnswersSubmitted]="isAnswersSubmitted"
-                    ></app-questions>
+                    <p
+                      class="text-center text-muted"
+                      *ngIf="
+                        assessmentTaken != undefined &&
+                        assessmentTaken >= assessmentInfo?.retake
+                      "
+                    >
+                      Max No. of Retake Reached
+                    </p>
+                    <ng-container
+                      *ngIf="
+                        assessmentTaken != undefined &&
+                        assessmentTaken <= assessmentInfo.retake &&
+                        (assessmentInfo.resultAfterFeedback &&
+                        isAnswersSubmitted
+                          ? isAnswersSubmitted && isFeedBackSubmitted
+                          : true)
+                      "
+                    >
+                      <app-questions
+                        *ngIf="questionList.length"
+                        [questionList]="questionList"
+                        [answersResult]="answersResult"
+                        [totalTime]="questionList.length * questionTimer"
+                        (submitAnswers)="submitAnswers($event)"
+                        [isAnswersSubmitted]="isAnswersSubmitted"
+                      ></app-questions>
+                    </ng-container>
+                    <ng-container
+                      *ngIf="
+                        questionList.length &&
+                        isAnswersSubmitted &&
+                        assessmentInfo.resultAfterFeedback &&
+                        !isFeedBackSubmitted
+                      "
+                    >
+                      <p class="text-danger">
+                        Please Submit the Feedback to view the result
+                      </p>
+                      <app-feedbackcommon
+                        [feedbackInfo]="feedbackInfo"
+                        [isPreview]="false"
+                        [showSkip]="!courseDetails.isFeedbackRequired"
+                        (submitAnswers)="submitFeedback($event)"
+                        (skip)="skipFeedback()"
+                      ></app-feedbackcommon>
+                    </ng-container>
                   </div>
                   <div
                     class="tab-pane fade"
                     id="feedback"
                     role="tabpanel"
                     aria-labelledby="feedback"
-                    [class]="{'show active': defaultTab === 'feedback'}"
+                    [class]="{ 'show active': defaultTab === 'feedback' }"
                   >
                     <div>
                       <app-feedbackcommon
@@ -1593,98 +1679,139 @@
   </div>
 </section>
 
-
-
-<div class="container" style="cursor: pointer;  height:700px;
-width: 70%;
-margin: auto;
-background-color: rgb(255, 248, 238);
-border-radius: 10px;
-overflow-y: auto !important;"  *ngFor="let listpdfData of pdfData; let i=index">
+<div
+  class="container"
+  style="
+    cursor: pointer;
+    height: 700px;
+    width: 70%;
+    margin: auto;
+    background-color: rgb(255, 248, 238);
+    border-radius: 10px;
+    overflow-y: auto !important;
+  "
+  *ngFor="let listpdfData of pdfData; let i = index"
+>
   <!-- <div class="container"> -->
-    <div *ngIf="isInvoice" id="contentToConvert">
-
-      <div class="row my-3">
-          <div class="col-5  m-3">
-              <img src="/assets/images/logo/innovatiq-logo-index.png" style="height: 80px; width: 80px;">
-          </div>
-          <div class="col-6">
-              <h3 style="justify-content: end; display: flex; margin-top: 40px;">INVOICE SUMMARY</h3>
-          </div>
+  <div *ngIf="isInvoice" id="contentToConvert">
+    <div class="row my-3">
+      <div class="col-5 m-3">
+        <img
+          src="/assets/images/logo/innovatiq-logo-index.png"
+          style="height: 80px; width: 80px"
+        />
       </div>
-
-      <div class="row">
-          <div class="col-11 mt-4">
-              <h6 style="justify-content: end; display: flex;"> {{listpdfData?.invoiceDate}}</h6>
-          </div>
+      <div class="col-6">
+        <h3 style="justify-content: end; display: flex; margin-top: 40px">
+          INVOICE SUMMARY
+        </h3>
       </div>
-
-      <div class="row">
-          <div class="col-10 mx-auto">
-              <div class="table-wrapper" style=" max-height: 260px; 
-              overflow: hidden; 
-              margin-bottom: 40px;
-              margin-top: 40px;">
-                  <div class="table-responsive">
-                      <table class="table table-hover">
-                          <thead>
-                              <tr>
-                                  <th>Item</th>
-                                  <th>Quantity</th>
-                                  <th>Unit Price</th>
-                                  <th style="padding-left: 10px;">Total</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr style="cursor: pointer">
-                                  <td style="width: 45%;"> {{listpdfData?.title}}</td>
-                                  <td>1</td>
-                                  <td style="text-align: right !important;
-                                  padding-left: 0;
-                                  padding-right: 45px;">${{listpdfData?.courseFee}}.00</td>
-                                  <td style="text-align: right !important;
-                                  padding-left: 0;
-                                  padding-right: 45px;">${{listpdfData?.courseFee}}.00</td>
-                              </tr>
-                              <tr></tr>
-                              <tr>
-                                  <td colspan="3">
-                                      <h6 style="justify-content: end; display: flex;">Subtotal</h6>
-                                  </td>
-                                  <td style="text-align: right !important;
-                                  padding-left: 0;
-                                  padding-right: 45px;">
-                                      ${{listpdfData?.courseFee}}.00
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td colspan="3">
-                                      <h6 style="justify-content: end; display: flex;">Tax(0%)</h6>
-                                  </td>
-                                  <td style="text-align: right !important;
-                                  padding-left: 0;
-                                  padding-right: 45px;">
-                                      $0.00
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td colspan="3">
-                                      <h6 style="justify-content: end; display: flex;">Total</h6>
-                                  </td>
-                                  <td style="text-align: right !important;
-                                  padding-left: 0;
-                                  padding-right: 45px;">
-                                      ${{listpdfData?.courseFee}}.00
-                                  </td>
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
-              </div>
-          </div>
-      </div>
-
     </div>
+
+    <div class="row">
+      <div class="col-11 mt-4">
+        <h6 style="justify-content: end; display: flex">
+          {{ listpdfData?.invoiceDate }}
+        </h6>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-10 mx-auto">
+        <div
+          class="table-wrapper"
+          style="
+            max-height: 260px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            margin-top: 40px;
+          "
+        >
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th style="padding-left: 10px">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="cursor: pointer">
+                  <td style="width: 45%">{{ listpdfData?.title }}</td>
+                  <td>1</td>
+                  <td
+                    style="
+                      text-align: right !important;
+                      padding-left: 0;
+                      padding-right: 45px;
+                    "
+                  >
+                    ${{ listpdfData?.courseFee }}.00
+                  </td>
+                  <td
+                    style="
+                      text-align: right !important;
+                      padding-left: 0;
+                      padding-right: 45px;
+                    "
+                  >
+                    ${{ listpdfData?.courseFee }}.00
+                  </td>
+                </tr>
+                <tr></tr>
+                <tr>
+                  <td colspan="3">
+                    <h6 style="justify-content: end; display: flex">
+                      Subtotal
+                    </h6>
+                  </td>
+                  <td
+                    style="
+                      text-align: right !important;
+                      padding-left: 0;
+                      padding-right: 45px;
+                    "
+                  >
+                    ${{ listpdfData?.courseFee }}.00
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <h6 style="justify-content: end; display: flex">Tax(0%)</h6>
+                  </td>
+                  <td
+                    style="
+                      text-align: right !important;
+                      padding-left: 0;
+                      padding-right: 45px;
+                    "
+                  >
+                    $0.00
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <h6 style="justify-content: end; display: flex">Total</h6>
+                  </td>
+                  <td
+                    style="
+                      text-align: right !important;
+                      padding-left: 0;
+                      padding-right: 45px;
+                    "
+                  >
+                    ${{ listpdfData?.courseFee }}.00
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- </div> -->
 </div>

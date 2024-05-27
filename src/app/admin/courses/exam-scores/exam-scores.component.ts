@@ -51,7 +51,7 @@ export class ExamScoresComponent {
 
 
    getAllAnswers() {
-    this.assessmentService.getExamAnswers({ ...this.assessmentPaginationModel})
+    this.assessmentService.getExamAnswersV2({ ...this.assessmentPaginationModel})
       .subscribe(res => {
         this.dataSource = res.data.docs;
         this.totalItems = res.data.totalDocs;

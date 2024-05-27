@@ -244,4 +244,12 @@ performSearch() {
     this.getCompletedCourse();
 }
 
+checkExpiry(dateString:string){
+  const date = new Date(dateString);
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0);
+  date.setHours(0, 0, 0, 0);
+  return date < currentDate;
+}
+
 }

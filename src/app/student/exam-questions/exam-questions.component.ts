@@ -4,6 +4,8 @@ import { AssessmentService } from '@core/service/assessment.service';
 import { StudentsService } from '../../admin/students/students.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import Swal from 'sweetalert2';
+import { CourseService } from '@core/service/course.service';
+import { ClassService } from 'app/admin/schedule-class/class.service';
 
 
 
@@ -47,6 +49,8 @@ export class ExamQuestionsComponent {
   skip: number = 0;
   retake: boolean = false;
   retakeNo: number = 0;
+  courseDetails:any;
+  classDetails:any;
   public examAssessmentId!: any;
   public answerAssessmentId!: any;
 
@@ -56,15 +60,48 @@ export class ExamQuestionsComponent {
     private route: ActivatedRoute,
     private router: Router,
     private studentService : StudentsService,
+    private courseService:CourseService,
+    private classService: ClassService
       ) { }
 
       ngOnInit(): void {
           this.fetchAssessmentDetails();
+          this.getCourseDetails();
+          this.getClassDetails();
           this.student();
           this.route.queryParams.subscribe(params => {
             this.retake = params['retake'] === 'true'; 
           });                          
       }
+
+      getClassDetails():void{
+        let urlPath = this.router.url.split('/');
+        const examId = urlPath[urlPath.length - 1];
+        this.examAssessmentId = examId.split('?')[0]; 
+        this.courseId = urlPath[urlPath.length - 2];
+        this.studentId = urlPath[urlPath.length - 3];
+        this.answerAssessmentId = urlPath[urlPath.length - 4];
+
+
+        this.classService.getClassesByCourseId(this.courseId).subscribe((response) => {
+          this.classDetails = response.data[0];
+        });
+      }
+
+      getCourseDetails(): void {
+        let urlPath = this.router.url.split('/');
+        const examId = urlPath[urlPath.length - 1];
+        this.examAssessmentId = examId.split('?')[0]; 
+        this.courseId = urlPath[urlPath.length - 2];
+        this.studentId = urlPath[urlPath.length - 3];
+        this.answerAssessmentId = urlPath[urlPath.length - 4];
+
+
+        this.courseService.getCourseById(this.courseId).subscribe((response) => {          
+          this.courseDetails = response;
+        });
+      }
+      
 
       onPageChange(event: PageEvent): void {
         const pageCount = event.pageIndex
@@ -320,6 +357,24 @@ export class ExamQuestionsComponent {
             return 'Results'
           } else {
             return 'Continue'
+          }
+        }
+
+        submitFeedback(){
+
+          let urlPath = this.router.url.split('/');
+          const examId = urlPath[urlPath.length - 1];
+          this.examAssessmentId = examId.split('?')[0]; 
+          this.courseId = urlPath[urlPath.length - 2];
+          this.studentId = urlPath[urlPath.length - 3];
+          this.answerAssessmentId = urlPath[urlPath.length - 4];
+          this.classId = this.classDetails.id;
+
+          const isPaid =  this.courseDetails?.feeType === 'paid';
+          if(isPaid){
+            this.router.navigate(['/student/feedback/courses', this.classId, this.studentId, this.courseId]);
+          } else{
+            this.router.navigate(['/student/feedback/freecourse', this.classId, this.studentId, this.courseId]);
           }
         }
 

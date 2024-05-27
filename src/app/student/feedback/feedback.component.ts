@@ -80,6 +80,7 @@ export class FeedbackComponent {
   isPaid = false;
   path: string;
   feedbackInfo!: any;
+  isFeedbackRequired:boolean = false;
   constructor(
     private _classService: ClassService,
     private courseService: CourseService,
@@ -318,7 +319,7 @@ skipCallback(){
     this.classId = urlPath[urlPath.length - 3];
 
     this.courseService.getCourseById(this.courseId).subscribe((response) => {
-
+      this.isFeedbackRequired =response.isFeedbackRequired;
     this.questionList = response?.survey?.questions;
     const survey = response?.survey;
       this.feedbackInfo = survey
