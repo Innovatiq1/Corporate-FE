@@ -193,8 +193,6 @@ export class FeedbackComponent {
                 studentId: this.studentId,
                 playbackTime: 100,
                 classId:this.path
-
-
               };
               this.classService
                 .saveApprovedClasses(this.classId, payload)

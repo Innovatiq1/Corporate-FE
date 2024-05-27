@@ -156,11 +156,11 @@
                     <div *ngIf="row.certificate">
                       <span class="label l-bg-green shadow-style" mat-raised-button id="issued" >Certificate issued</span>
                   </div>
-                  <div *ngIf="!row.certificate && row.enableExam">
+                  <div *ngIf="!row.certificate">
                     <span class="label shadow-style" mat-raised-button id="submit" (click)="generateCertificate(row)">Issue Certificate</span>
                   </div> 
                   <div *ngIf="!row.certificate && !row.enableExam">
-                    <span class="label shadow-style" mat-raised-button id="submit" (click)="enableExam(row)">Enable Exam</span>
+                    <span class="label shadow-style" mat-raised-button id="enableExam" (click)="enableExam(row)">Enable Exam</span>
                   </div>                 
                   </mat-cell>
                 </ng-container>
