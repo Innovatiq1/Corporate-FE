@@ -35,6 +35,7 @@ import { CourseModel, CoursePaginationModel, MainCategory, SubCategory } from '@
 })
 export class SupportComponent implements OnInit {
   displayedColumns: string[] = ['name', 'ticket', 'status', 'date'];
+  count: any;
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   dataSource: any;
   mainCategories!: MainCategory[];
@@ -58,21 +59,37 @@ export class SupportComponent implements OnInit {
       active: 'Support',
     },
   ];
+  resolved: any;
+  pending: any;
   constructor(private ticketService: SupportService, public router: Router) {
     //constructor
     this.coursePaginationModel = {};
+    this.getCount();
     // this.coursePaginationModel.main_category = '0';
     // this.coursePaginationModel.sub_category = '0';
   }
   ngOnInit() {
     this.listOfTicket();
+    this.getCount();
     // this.dataSource.paginator = this.paginator;
   }
+
   pageSizeChange($event: any) {
     this.coursePaginationModel.page= $event?.pageIndex + 1;
     this.coursePaginationModel.limit= $event?.pageSize;
     this.listOfTicket();
    }
+   getCount() {
+    this.ticketService.getCount().subscribe(response => {
+      this.count = response?.data;
+      this.resolved=this.count?.resolved;
+      this.pending=this.count?.pending;
+      // this.studentCount=this.count?.students
+      // this.chart4();
+  
+    })
+       
+  }
   listOfTicket() {
     this.ticketService.getAllTickets({ ...this.coursePaginationModel }).subscribe((res) => {
       this.dataSource = res.data.docs;
