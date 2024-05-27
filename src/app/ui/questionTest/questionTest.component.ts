@@ -124,7 +124,6 @@ export class QuestionTestComponent implements OnInit, OnDestroy {
         };
         this.submitAnswers.next(submissionPayload);
         clearInterval(this.interval);
-
       }
     });
   }

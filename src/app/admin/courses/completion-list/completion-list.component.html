@@ -132,6 +132,23 @@
                   <mat-cell *matCellDef="let row" (click)="view(row.id)">
                     <span class="mobile-label">Completed Date:</span>{{row.updatedAt | date}} </mat-cell>
                 </ng-container>
+
+                <!-- exam-score -->
+                <ng-container matColumnDef="Exam Score">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Exam Score
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (click)="view(row.id)">
+                    <span class="mobile-label">Exam Score:</span><span *ngIf="row.examassessmentanswers">{{row.examassessmentanswers?.score}} / {{row.examassessmentanswers?.totalScore}}</span> </mat-cell>
+                </ng-container>
+
+                <!-- assessment-score -->
+                <ng-container matColumnDef="Assessment Score">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Assessment Score
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let row" (click)="view(row.id)">
+                    <span class="mobile-label">Assessment Score:</span><span *ngIf="row.assessmentanswers">{{row.assessmentanswers?.score}} / {{row.assessmentanswers?.totalScore}}</span> </mat-cell>
+                </ng-container>
+
                 <!-- actions -->
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef class="pr-0">Actions</mat-header-cell>
@@ -139,8 +156,11 @@
                     <div *ngIf="row.certificate">
                       <span class="label l-bg-green shadow-style" mat-raised-button id="issued" >Certificate issued</span>
                   </div>
-                  <div *ngIf="!row.certificate">
+                  <div *ngIf="!row.certificate && row.enableExam">
                     <span class="label shadow-style" mat-raised-button id="submit" (click)="generateCertificate(row)">Issue Certificate</span>
+                  </div> 
+                  <div *ngIf="!row.certificate && !row.enableExam">
+                    <span class="label shadow-style" mat-raised-button id="submit" (click)="enableExam(row)">Enable Exam</span>
                   </div>                 
                   </mat-cell>
                 </ng-container>

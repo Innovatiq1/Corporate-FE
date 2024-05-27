@@ -57,7 +57,7 @@
                   >
                     <span class="mobile-label">Image:</span
                     ><img
-                      [src]="row.studentId.avatar || 'assets/profile.png'"
+                      [src]="row.studentInfo.avatar || 'assets/profile.png'"
                     />
                   </mat-cell>
                 </ng-container>
@@ -67,8 +67,8 @@
                   >
                   <mat-cell *matCellDef="let row" class="name">
                     <span class="mobile-label">Name:</span
-                    >{{ row?.studentId.name | capitalizeFirstLetter }}
-                    {{ row?.studentId?.last_name | capitalizeFirstLetter }}
+                    >{{ row?.studentInfo.name | capitalizeFirstLetter }}
+                    {{ row?.studentInfo?.last_name | capitalizeFirstLetter }}
                   </mat-cell>
                 </ng-container>
 
@@ -84,7 +84,7 @@
                       class="email-icon"
                     />
                     <span class="email-address">
-                      {{ row?.studentId?.email }}</span
+                      {{ row?.studentInfo?.email }}</span
                     >
                   </mat-cell>
                 </ng-container>
@@ -95,7 +95,7 @@
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row">
                     <span class="mobile-label">Course Title:</span
-                    >{{ row?.courseId?.title | titlecase }}</mat-cell
+                    >{{ row?.courseInfo?.title | titlecase }}</mat-cell
                   >
                 </ng-container>
 
@@ -105,7 +105,7 @@
                   </mat-header-cell>
                   <mat-cell *matCellDef="let row">
                     <span class="mobile-label">Exam Name:</span
-                    >{{ row?.examAssessmentId?.name | capitalizeFirstLetter }}
+                    >{{ row?.examAssessmentAnswer?.examAssessmentQuestionInfo?.name | capitalizeFirstLetter }}
                   </mat-cell>
                 </ng-container>
 
@@ -113,11 +113,11 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header>
                     Assessment Score
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="row.assessmentAnswerId?.id ? ['/student/test/preview', row.assessmentAnswerId?.id, 'student', row.studentId.id]:null" [queryParams]="{ assessmentType: 'assessment' }">
+                  <mat-cell *matCellDef="let row" [routerLink]="row.assessmentAnswer?._id ? ['/student/test/preview', row.assessmentAnswer?._id, 'student', row.studentInfo._id]:null" [queryParams]="{ assessmentType: 'assessment' }">
                     <span class="mobile-label">Assessment Score:</span
-                    >{{ row?.assessmentAnswerId?.score }} /
+                    >{{ row?.assessmentAnswer?.score }} <span *ngIf="row?.assessmentAnswer?._id">/</span>
                     {{
-                      row?.assessmentAnswerId?.assessmentId?.questions?.length
+                      row?.assessmentAnswer?.totalScore
                     }}
                   </mat-cell>
                 </ng-container>
@@ -126,10 +126,10 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header
                     >Exam Assessment Score
                   </mat-header-cell>
-                  <mat-cell *matCellDef="let row" [routerLink]="row.id ? ['/student/test/preview', row.id, 'student', row.studentId.id]:null" [queryParams]="{ assessmentType: 'exam' }">
+                  <mat-cell *matCellDef="let row" [routerLink]="row?.examAssessmentAnswer?._id ? ['/student/test/preview', row.examAssessmentAnswer?._id, 'student', row.studentInfo._id]:null" [queryParams]="{ assessmentType: 'exam' }">
                     <span class="mobile-label">Exam Assessment Score:</span
-                    >{{ row?.score }} /
-                    {{ row?.examAssessmentId?.questions?.length }}
+                    >{{ row?.examAssessmentAnswer?.score }} <span *ngIf="row?.examAssessmentAnswer?._id">/</span>
+                    {{ row?.examAssessmentAnswer?.totalScore }}
                   </mat-cell>
                 </ng-container>
 
