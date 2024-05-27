@@ -39,6 +39,7 @@ import { SettingsService } from '@core/service/settings.service';
 import { InvoiceComponent } from './invoice/invoice.component';
 import * as moment from 'moment';
 import jsPDF from 'jspdf';
+import { AssessmentService } from '@core/service/assessment.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -115,7 +116,9 @@ export class ViewCourseComponent implements OnDestroy {
   url: any;
   longDescription: any;
   assessmentInfo!: any;
+  examAssessmentInfo!: any;
   isAnswersSubmitted: boolean = false;
+  isFeedBackSubmitted: boolean = false;
   questionList: any = [];
   answersResult!: any;
   feedbackInfo!: any;
@@ -135,6 +138,10 @@ export class ViewCourseComponent implements OnDestroy {
 
   questionTimer: number = 60;
   defaultTab:string = 'home';
+  assessmentTaken! : number;
+  examAssessmentTaken!: number;
+  enableExam: boolean = false;
+  assessmentAnswerLatest: any;
   constructor(
     private classService: ClassService,
     private activatedRoute: ActivatedRoute,
@@ -148,9 +155,8 @@ export class ViewCourseComponent implements OnDestroy {
     private surveyService: SurveyService,
     public dialog: MatDialog,
     private settingsService:SettingsService,
+    private assessmentService:AssessmentService,
     private changeDetectorRef: ChangeDetectorRef
-
-
   ) {
     let urlPath = this.router.url.split('/');
     this.paidCourse = urlPath.includes('view-course');
@@ -159,10 +165,10 @@ export class ViewCourseComponent implements OnDestroy {
       this.free = true;
       this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
         this.courseDetailsId = params['id'];
+        this.getAssessmentAnswerCount(this.courseDetailsId);
+        this.getExamAssessmentAnswerCount(this.courseDetailsId);
       });
       this.getRegisteredFreeCourseDetails();
-
-      this.getCourseKitDetails(this.courseDetailsId);
     } else if (this.paidCourse) {
       this.paid = true;
       this.subscribeParams = this.activatedRoute.params.subscribe((params) => {
@@ -192,6 +198,8 @@ export class ViewCourseComponent implements OnDestroy {
       this.courseId = this.classDetails.courseId.id;
       this.dataSource = this.classDetails.sessions;
       this.getCourseKitDetails(this.courseId);
+      this.getAssessmentAnswerCount(this.courseId);
+      this.getExamAssessmentAnswerCount(this.courseId);
     });
   }
   onTimeUpdate(event: any) {
@@ -312,6 +320,7 @@ export class ViewCourseComponent implements OnDestroy {
                   .subscribe((response) => {
                     this.studentClassDetails = response.data.docs[0].coursekit;
                     // console.log("payload",response)
+                    this.enableExam = response.data.docs[0].enableExam;
                     if (
                       this.studentClassDetails.playbackTime !== 100 ||
                       !this.studentClassDetails.playbackTime
@@ -695,6 +704,7 @@ export class ViewCourseComponent implements OnDestroy {
       this.assessmentInfo = response?.assessment;
       this.questionList = response?.assessment?.questions || [];
       this.questionTimer = this.assessmentInfo.timer;
+      this.examAssessmentInfo = response?.exam_assessment;
       const survey = response?.survey;
       this.feedbackInfo = survey
         ? {
@@ -719,6 +729,7 @@ export class ViewCourseComponent implements OnDestroy {
       .getStudentClass(studentId, this.classId)
       .subscribe((response) => {
         this.studentClassDetails = response?.data?.docs[0];
+        this.enableExam = response?.data?.docs[0]?.enableExam;
         this.coursekitDetails = response?.data?.docs[0]?.coursekit;
         this.longDescription = this?.coursekitDetails[0]?.longDescription;
         let totalPlaybackTime = 0;
@@ -760,6 +771,42 @@ export class ViewCourseComponent implements OnDestroy {
           this.isRegistered == true;
           this.isCancelled = true;
         }
+      });
+  }
+
+  getAssessmentAnswerCount(courseId:string){
+    const studentId = localStorage.getItem('id') || '';
+    this.assessmentService
+      .getAssessmentAnswerCount(studentId, courseId)
+      .subscribe((response:any) => {
+        this.assessmentTaken = response['count'];
+        this.assessmentAnswerLatest = response['latestRecord'];
+        if(this.assessmentTaken >= 1){
+          this.updateCompletionStatus();
+        }
+      });
+  }
+
+  updateCompletionStatus() {
+    const studentId = localStorage.getItem('id') || '';
+    let payload = {
+      status: 'completed',
+      studentId: studentId,
+      playbackTime: 100,
+      classId:this.classId
+    };
+    this.classService
+      .saveApprovedClasses(this.classId, payload)
+      .subscribe((response) => {
+      });
+  }
+
+  getExamAssessmentAnswerCount(courseId:string){
+    const studentId = localStorage.getItem('id') || '';
+    this.assessmentService
+      .getExamAssessmentAnswerCount(studentId, courseId)
+      .subscribe((response:any) => {
+        this.examAssessmentTaken = response['count'];
       });
   }
 
@@ -1000,6 +1047,7 @@ export class ViewCourseComponent implements OnDestroy {
           text: 'Your answers were submitted.',
           icon: 'success',
         });
+        this.getAssessmentAnswerCount(payload.courseId);
         this.getAnswerById(response.response);
       },
       (error: any) => {
@@ -1009,6 +1057,7 @@ export class ViewCourseComponent implements OnDestroy {
   }
 
   getAnswerById(answerId: string) {
+    this.isFeedBackSubmitted = false;
     this.studentService.getAnswerById(answerId).subscribe((res: any) => {
       this.isAnswersSubmitted = true;
       this.answersResult = res.assessmentAnswer;
@@ -1041,6 +1090,7 @@ export class ViewCourseComponent implements OnDestroy {
   }
 
   submitFeedback(event: any) {
+    this.isFeedBackSubmitted= false;
     const studentId = localStorage.getItem('id');
     const userData = JSON.parse(localStorage.getItem('user_data') || '');
     const studentFirstName = userData?.user?.name;
@@ -1055,6 +1105,7 @@ export class ViewCourseComponent implements OnDestroy {
     };
     this.surveyService.addSurveyBuilder(payload).subscribe(
       (response) => {
+        this.isFeedBackSubmitted= true;
         Swal.fire({
           title: 'Successful',
           text: 'Feedback submitted successfully',
@@ -1071,5 +1122,8 @@ export class ViewCourseComponent implements OnDestroy {
         });
       }
     );
+  }
+  skipFeedback(){
+    this.isFeedBackSubmitted = true;
   }
 }

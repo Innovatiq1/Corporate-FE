@@ -296,7 +296,10 @@ updateProgramCertificateUser(data:any){
   return this.http.put<ApiResponse>(apiUrl, data);
 }
 
-
+enableExamStudentClass(id: any, item: any): Observable<ApiResponse> {
+  const apiUrl = `${this.prefix}admin/studentClasses/${id}`;
+  return this.http.put<ApiResponse>(apiUrl, item);
+}
 
 }
 

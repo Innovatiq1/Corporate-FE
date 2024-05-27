@@ -1,57 +1,104 @@
 <div class="row clearfix">
   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
     <div class="card mt-4">
-      <div class="table-container">
+      <div class="p-3">
         <form [formGroup]="questionFormTab3">
-          <div class="name-container">
-            <div class="input-container">
-              <h6>Name <span class="mandatory">&nbsp;*</span></h6>
-              <mat-form-field appearance="outline" style="width: 100%">
-                <input class="form-control" matInput type="text" formControlName="name" placeholder="Name" required />
-                <mat-error *ngIf="questionFormTab3.get('name')?.hasError('required')">
-                  Name cannot be empty
-                </mat-error>
-              </mat-form-field>
-            </div>
-            
-            <div class="input-container">
-              <h6 style="margin-left: 20px;">Time (Seconds per question) <span class="mandatory">&nbsp;*</span></h6>
-              <mat-form-field appearance="outline" style="width: 100%; margin-left: 20px;">
-                <input matInput formControlName="timer" type="number" placeholder="Enter time in seconds"
-                [readonly]="true">
-              </mat-form-field>
-              <div class="bupload">
-                <label>Bulk Upload</label>
-                <div class="file-drop-area">
-                  <div class="file">
-                    <button mat-raised-button color="primary" class="btn">Choose file <input
-                        formControlName="image_link" (change)="onFileSelected($event)" accept=".xlsx, .xls"
-                        class="file-input" type="file"></button>
-                    <span class="file-msg">
-                      <h6>Drag and Drop File Here</h6>
-                    </span>
-  
-                  </div>
-                </div>
+          <div class="w-100">
+            <div class="row">
+              <div class="col-md-4">
+                <h6>Name <span class="mandatory">&nbsp;*</span></h6>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input
+                    class="form-control"
+                    matInput
+                    type="text"
+                    formControlName="name"
+                    placeholder="Name"
+                    required
+                  />
+                  <mat-error
+                    *ngIf="questionFormTab3.get('name')?.hasError('required')"
+                  >
+                    Name cannot be empty
+                  </mat-error>
+                </mat-form-field>
               </div>
-              <!-- <h6>Bulk Upload</h6>
-              <input type="file" (change)="onFileSelected($event)" accept=".xlsx, .xls"> -->
-            </div>
-            <div class="input-container">
-              <h6 style="margin-left: 25px;">No of Retake's <span class="mandatory">&nbsp;*</span></h6>
-              <mat-form-field appearance="outline" style="width: 100%; margin-left: 30px;">
-                <input matInput formControlName="retake" type="number" placeholder="Enter No of Retakes"
-                [readonly]="true">
-              </mat-form-field>
-              <div class="question-alogo">
-                <h6 style="margin-left: 25px;">Score (per question) <span class="mandatory">&nbsp;*</span></h6>
-                <mat-form-field appearance="outline" style="width: 100%; margin-left: 25px;">
-                  <input matInput formControlName="scoreAlgorithm" type="number" placeholder="Enter Score" min="0.5" step="0.5">
+              <div class="col-md-4">
+                <h6>
+                  Time (Seconds per question)
+                  <span class="mandatory">&nbsp;*</span>
+                </h6>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input
+                    matInput
+                    formControlName="timer"
+                    type="number"
+                    placeholder="Enter time in seconds"
+                    [readonly]="true"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <h6>No of Retake's <span class="mandatory">&nbsp;*</span></h6>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input
+                    matInput
+                    formControlName="retake"
+                    type="number"
+                    placeholder="Enter No of Retakes"
+                    [readonly]="true"
+                  />
                 </mat-form-field>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label>Bulk Upload</label>
+                <div class="file-drop-area">
+                  <div class="file">
+                    <button mat-raised-button color="primary" class="btn">
+                      Choose file
+                      <input
+                        formControlName="image_link"
+                        (change)="onFileSelected($event)"
+                        accept=".xlsx, .xls"
+                        class="file-input"
+                        type="file"
+                      />
+                    </button>
+                    <span class="file-msg">
+                      <h6>Drag and Drop File Here</h6>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <h6>
+                  Score (per question) <span class="mandatory">&nbsp;*</span>
+                </h6>
+                <mat-form-field appearance="outline" class="w-100">
+                  <input
+                    matInput
+                    formControlName="scoreAlgorithm"
+                    type="number"
+                    placeholder="Enter Score"
+                    min="0.5"
+                    step="0.5"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <h6>
+                  Display Result <span class="mandatory">&nbsp;*</span>
+                </h6>
+                <mat-radio-group formControlName="resultAfterFeedback">
+                  <mat-radio-button [value]="false">Immediately</mat-radio-button>
+                  <mat-radio-button [value]="true">After Feedback</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
           </div>
-  
+
           <div class="table-responsive">
             <table class="table">
               <thead>
@@ -61,14 +108,30 @@
                 </tr>
               </thead>
               <tbody formArrayName="questions">
-                <tr *ngFor="let question of questions.controls; let i = index" class="test" [formGroupName]="i">
+                <tr
+                  *ngFor="let question of questions.controls; let i = index"
+                  class="test"
+                  [formGroupName]="i"
+                >
                   <td>
                     <div class="d-flex align-items-baseline">
-                      <mat-checkbox formControlName="isSelected" style="width: 35px"></mat-checkbox>
+                      <mat-checkbox
+                        formControlName="isSelected"
+                        style="width: 35px"
+                      ></mat-checkbox>
                       Q{{ i + 1 }}.
                       <mat-form-field appearance="outline" style="width: 100%">
-                        <input matInput type="text" formControlName="questionText" placeholder="Enter question" />
-                        <mat-error *ngIf="question.get('questionText')?.hasError('required')">
+                        <input
+                          matInput
+                          type="text"
+                          formControlName="questionText"
+                          placeholder="Enter question"
+                        />
+                        <mat-error
+                          *ngIf="
+                            question.get('questionText')?.hasError('required')
+                          "
+                        >
                           Question cannot be empty
                         </mat-error>
                       </mat-form-field>
@@ -76,21 +139,45 @@
                   </td>
                   <td formArrayName="options">
                     <div class="d-flex align-items-baseline">
-                      <ng-container *ngFor="
+                      <ng-container
+                        *ngFor="
                           let optionCtrl of getAnswers(i).controls;
                           let j = index
-                        " [formGroupName]="j">
-                        <mat-checkbox formControlName="correct" (change)="checkboxChange(i, j)"
-                          style="width: 35px"></mat-checkbox>
-                        <mat-form-field appearance="outline" style="width: 175px">
-                          <input matInput type="text" formControlName="text" placeholder="Enter option" />
-                          <mat-error *ngIf="optionCtrl.get('text')?.hasError('required')">
+                        "
+                        [formGroupName]="j"
+                      >
+                        <mat-checkbox
+                          formControlName="correct"
+                          (change)="checkboxChange(i, j)"
+                          style="width: 35px"
+                        ></mat-checkbox>
+                        <mat-form-field
+                          appearance="outline"
+                          style="width: 175px"
+                        >
+                          <input
+                            matInput
+                            type="text"
+                            formControlName="text"
+                            placeholder="Enter option"
+                          />
+                          <mat-error
+                            *ngIf="optionCtrl.get('text')?.hasError('required')"
+                          >
                             Option cannot be empty
                           </mat-error>
                         </mat-form-field>
                       </ng-container>
-                      <button mat-icon-button class="p-1" (click)="deleteQuestion(i)" type="button">
-                        <mat-icon style="color: black; font-size: 24px; width: 25px">delete</mat-icon>
+                      <button
+                        mat-icon-button
+                        class="p-1"
+                        (click)="deleteQuestion(i)"
+                        type="button"
+                      >
+                        <mat-icon
+                          style="color: black; font-size: 24px; width: 25px"
+                          >delete</mat-icon
+                        >
                       </button>
                     </div>
                   </td>
@@ -99,7 +186,11 @@
             </table>
           </div>
           <div style="text-align: center; margin-top: 20px">
-            <button mat-icon-button (click)="addAdditionalQuestion()" type="button">
+            <button
+              mat-icon-button
+              (click)="addAdditionalQuestion()"
+              type="button"
+            >
               <mat-icon style="color: black; font-size: 24px">add</mat-icon>
             </button>
           </div>
@@ -107,25 +198,39 @@
       </div>
       <div class="row body">
         <div class="col-md-10">
-          <button mat-raised-button id="back" [routerLink]="['/student/settings/all-questions']">
+          <button
+            mat-raised-button
+            id="back"
+            [routerLink]="['/student/settings/all-questions']"
+          >
             Back
           </button>
         </div>
 
         <div class="col-md-2">
           <div class="d-flex justify-content-between">
-
-
-
-            <button *ngIf="editUrl && approved"  mat-raised-button color="success" type="submit" id="back" style="margin-left: -80px; margin-right: 10px;"
-              (click)="approve()">
+            <button
+              *ngIf="editUrl && approved"
+              mat-raised-button
+              color="success"
+              type="submit"
+              id="back"
+              style="margin-left: -80px; margin-right: 10px"
+              (click)="approve()"
+            >
               Publish
             </button>
 
-            <button class="btn-space" id="submit" mat-raised-button color="primary"  id="submit"
-            (click)="update()">
-            {{editUrl? 'Update': 'Create'}}
-          </button>
+            <button
+              class="btn-space"
+              id="submit"
+              mat-raised-button
+              color="primary"
+              id="submit"
+              (click)="update()"
+            >
+              {{ editUrl ? "Update" : "Create" }}
+            </button>
 
             <!-- <button *ngIf="editUrl" id="submit" class="btn-space" mat-raised-button style="background-color: #6777ef; color: white;"
               (click)="update()">

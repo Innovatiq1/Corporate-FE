@@ -54,7 +54,8 @@ export class AssesmentQuestionsComponent {
       name: ['', Validators.required],
       timer: [''],
       retake: [''],
-      scoreAlgorithm:[1, [Validators.required, Validators.min(0.1)]],
+      scoreAlgorithm: [1, [Validators.required, Validators.min(0.1)]],
+      resultAfterFeedback: [null, [Validators.required]],
       questions: this.formBuilder.array([]),
     });
     if (!this.editUrl) {
@@ -71,8 +72,8 @@ export class AssesmentQuestionsComponent {
     this.getTimer();
     this.getRetakes();
     this.loadData();
-    if(!this.editUrl){
-      this.getAlgorithm()
+    if (!this.editUrl) {
+      this.getAlgorithm();
     }
   }
 
@@ -111,7 +112,9 @@ export class AssesmentQuestionsComponent {
     this.configurationSubscription =
       this.studentsService.configuration$.subscribe((configuration) => {
         this.configuration = configuration;
-        const config = this.configuration.find((v:any)=> v.field === 'assessmentAlgorithm');
+        const config = this.configuration.find(
+          (v: any) => v.field === 'assessmentAlgorithm'
+        );
         if (config) {
           const assessmentAlgo = config.value;
           this.questionFormTab3.patchValue({
@@ -129,7 +132,8 @@ export class AssesmentQuestionsComponent {
           if (response && response.questions) {
             this.questionFormTab3.patchValue({
               name: response.name,
-              scoreAlgorithm: response.scoreAlgorithm
+              scoreAlgorithm: response.scoreAlgorithm,
+              resultAfterFeedback: response.resultAfterFeedback
             });
 
             const questionsArray = this.questionFormTab3.get(
@@ -289,6 +293,7 @@ export class AssesmentQuestionsComponent {
         timer: this.questionFormTab3.value.timer,
         retake: this.questionFormTab3.value.retake,
         scoreAlgorithm: this.questionFormTab3.value.scoreAlgorithm,
+        resultAfterFeedback: this.questionFormTab3.value.resultAfterFeedback,
         status: 'open',
         questions: this.questionFormTab3.value.questions.map((v: any) => ({
           options: v.options,
@@ -332,15 +337,15 @@ export class AssesmentQuestionsComponent {
       data: payload,
     });
     dialogRef.afterClosed().subscribe(() => {
-      if(!isEdit){
+      if (!isEdit) {
         this.createAssesment(payload);
-      }else{
+      } else {
         this.updateAssementAction(payload);
       }
     });
   }
 
-  updateAssementAction(payload: any){
+  updateAssementAction(payload: any) {
     this.questionService.updateQuestions(payload).subscribe(
       (res: any) => {
         Swal.fire({

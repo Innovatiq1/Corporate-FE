@@ -16,7 +16,7 @@
             <app-feedbackcommon
               [feedbackInfo]="feedbackInfo"
               [isPreview]="false"
-              [showSkip]="true"
+              [showSkip]="!isFeedbackRequired"
               (submitAnswers)="submitFeedback($event)"
               (skip)="skipCallback()"
             ></app-feedbackcommon>

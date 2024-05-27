@@ -56,6 +56,16 @@ import { ApiResponse } from '@core/models/general.response';
       }
       return params;
     }
+
+    private buildParamsAny(filter?: any): HttpParams {
+      let params = new HttpParams();
+      if (filter) {
+        Object.keys(filter).forEach(key => {
+          params = params.set(key, filter[key]?.toString());
+        });
+      }
+      return params;
+    }
   
 
   
@@ -66,8 +76,29 @@ import { ApiResponse } from '@core/models/general.response';
       });
     }
 
+    getAssessmentAnswerCount(studentId:string, courseId:string): Observable<ApiResponse> {
+      const apiUrl = `${this.defaultUrl}admin/assesment-answers/count`;
+      return this.http.get<any>(apiUrl, {
+        params: this.buildParamsAny({studentId, courseId})
+      })
+    }
+
+    getExamAssessmentAnswerCount(studentId:string, courseId:string): Observable<ApiResponse> {
+      const apiUrl = `${this.defaultUrl}admin/exam-assesment-answers/count`;
+      return this.http.get<any>(apiUrl, {
+        params: this.buildParamsAny({studentId, courseId})
+      })
+    }
+
     getExamAnswers( filter?: Partial<AssessmentQuestionsPaginationModel>): Observable<ApiResponse> {
       const apiUrl = `${this.defaultUrl}admin/exam-assesment-answers`;
+      return this.http.get<any>(apiUrl, {
+        params: this.buildParams(filter),
+      });
+    }
+
+    getExamAnswersV2( filter?: Partial<AssessmentQuestionsPaginationModel>): Observable<ApiResponse> {
+      const apiUrl = `${this.defaultUrl}admin/exam-assesment-answers/v2`;
       return this.http.get<any>(apiUrl, {
         params: this.buildParams(filter),
       });

@@ -44,7 +44,7 @@
                             </ng-container>
                             <ng-container matColumnDef="Score">
                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Score</mat-header-cell>
-                                <mat-cell *matCellDef="let row"><span class="mobile-label">Score:</span>{{row.score}} / {{row?.assessmentId?.questions?.length }}
+                                <mat-cell *matCellDef="let row"><span class="mobile-label">Score:</span>{{row.score}} / {{row.totalScore}}
                                 </mat-cell>
                               </ng-container>
                               <ng-container matColumnDef="Exam Type">
@@ -59,21 +59,21 @@
                                   (click)="onDelete(row.id)" 
                                   mat-flat-button 
                                   color="warn">
-                                  Delete Tutorial
+                                  Delete
                                   </button>
                                   <button *ngIf="row.is_tutorial && !row.isEnableDeleteTutorial"
                                   [disabled]="row.is_exam_completed"
                                   (click)="openTest(row, false)"
                                   mat-flat-button 
                                   color="primary">
-                                   Take Exam Test
+                                   Retake
                                   </button>
                                   <button *ngIf="!row.is_tutorial"
                                   [disabled]="row.is_exam_completed" 
                                   (click)="openTest(row, true)" 
                                   mat-flat-button 
                                   color="primary">
-                                   Take Exam Test
+                                   Retake
                                   </button>
                                 </mat-cell>
                               </ng-container>
