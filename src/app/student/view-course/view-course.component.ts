@@ -781,6 +781,23 @@ export class ViewCourseComponent implements OnDestroy {
       .subscribe((response:any) => {
         this.assessmentTaken = response['count'];
         this.assessmentAnswerLatest = response['latestRecord'];
+        if(this.assessmentTaken >= 1){
+          this.updateCompletionStatus();
+        }
+      });
+  }
+
+  updateCompletionStatus() {
+    const studentId = localStorage.getItem('id') || '';
+    let payload = {
+      status: 'completed',
+      studentId: studentId,
+      playbackTime: 100,
+      classId:this.classId
+    };
+    this.classService
+      .saveApprovedClasses(this.classId, payload)
+      .subscribe((response) => {
       });
   }
 
@@ -1030,6 +1047,7 @@ export class ViewCourseComponent implements OnDestroy {
           text: 'Your answers were submitted.',
           icon: 'success',
         });
+        this.getAssessmentAnswerCount(payload.courseId);
         this.getAnswerById(response.response);
       },
       (error: any) => {
