@@ -24,7 +24,7 @@ export class TeachersService extends UnsubscribeOnDestroyAdapter {
     return this.dialogData;
   }
   /** CRUD METHODS */
-  getAllTeacherss(payload:any): void {
+  getAllTeacherss(payload:any): any {
     const apiUrl = `${this.prefix}auth/instructorList/`;
     this.subs.sink = this.httpClient.post<Teachers>(apiUrl,payload).subscribe({
       next: (response) => {
@@ -37,6 +37,19 @@ export class TeachersService extends UnsubscribeOnDestroyAdapter {
       },
     });
   }
+  getInstructors(payload:any): Observable<ApiResponse> {
+    const apiUrl = `${this.prefix}auth/instructorList/`;
+    return this.httpClient
+      .post<ApiResponse>(apiUrl, payload)
+      .pipe(
+        map((response:any) => {
+          return response;
+          //this.isTblLoading = false;
+        })
+      );
+  }
+
+
   getInstructor(filter?: Partial<UsersPaginationModel>): Observable<ApiResponse> {
     const apiUrl = `${this.prefix}auth/instructorList/`;
     return this.httpClient
@@ -48,6 +61,7 @@ export class TeachersService extends UnsubscribeOnDestroyAdapter {
         })
       );
   }
+  
   private buildParams(filter?: Partial<UsersPaginationModel>): HttpParams {
     let params = new HttpParams();
     if (filter) {
