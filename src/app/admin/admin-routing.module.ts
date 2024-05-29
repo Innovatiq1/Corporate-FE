@@ -49,6 +49,11 @@ const routes: Routes = [
       import('./users/users.module').then((m) => m.UsersModule),
   },
   {
+    path: 'user-profile',
+    loadChildren: () =>
+      import('./user-profile/user-profile.module').then((m) => m.UserProfileModule),
+  },
+  {
     path: 'survey',
     loadChildren: () =>
       import('./survey/survey.module').then((m) => m.SurveyModule),
