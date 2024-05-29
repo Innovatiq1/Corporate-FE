@@ -212,7 +212,7 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter implements O
     this.coursePaginationModel.page = $event?.pageIndex + 1;
     this.coursePaginationModel.limit = $event?.pageSize;
     let userType = localStorage.getItem('user_type');
-    if (userType == 'admin') {
+    if (userType == 'admin' || userType == 'IT Manager') {
       this.getClassList();
     }
     if (userType == 'Instructor') {

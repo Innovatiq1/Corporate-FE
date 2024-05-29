@@ -42,15 +42,7 @@ export class ProgramTimetableComponent implements OnInit {
     //   this.getApprovedCourse();
     //   this.getApprovedProgram();
     // }
-    if (userType == 'admin' || userType == 'Student') {
       this.getClassesList();
-    }
-    if (userType == 'Instructor') {
-      console.log('test');
-      //this.getApprovedCourse();
-      // this.getInstructorApprovedProgram();
-      this.getClassesList();
-    }
   }
 
   ngOnInit() {

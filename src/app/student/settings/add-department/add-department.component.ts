@@ -9,6 +9,7 @@ import { CoursePaginationModel } from '@core/models/course.model';
 import { Users } from '@core/models/user.model';
 import { DeptService } from '@core/service/dept.service';
 import { UserService } from '@core/service/user.service';
+import { TeachersService } from 'app/admin/teachers/teachers.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -36,7 +37,7 @@ export class AddDepartmentComponent  implements OnInit {
   deptName: any;
 
   constructor(private fb: UntypedFormBuilder,private deptService: DeptService,private router:Router,private userService: UserService,
-    private activatedRoute:ActivatedRoute) {
+    private activatedRoute:ActivatedRoute,private teacherService:TeachersService) {
     let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-department'); 
     if(this.editUrl===true){
@@ -77,7 +78,6 @@ export class AddDepartmentComponent  implements OnInit {
      if(this.editUrl){
       this.getDepartmentById();
     }
-     console.log("pv", this.depts)
     })
     
   }
@@ -102,24 +102,13 @@ export class AddDepartmentComponent  implements OnInit {
   }
   
   userList(){
-  this.userService.getUserList1().subscribe((response: any) => {
-    this.users=response.data
-    //response.data.data;
+    let payload = {
+      roles: ['IT Manager','Finance Manager','HR Manager','Admin Manager'],
+    };
+
     
-    // let data=this.blogsList.find((id:any)=>id._id === this.currentId);
-    // console.log('data',data)
-    // this.fileName = data.filename
-    // if(data){
-    //   this.userForm.patchValue({
-    //     name: data?.name,
-    //     email:data?.email,
-    //     password: data?.password,
-    //     qualification: data?.qualification,
-    //     type:data?.type,
-    //     avatar:data?.avatar,
-    //   });
-    // }
-  }, error => {
+  this.teacherService.getInstructors(payload).subscribe((response: any) => {
+    this.users=response.data
   });
   }
   getDepartmentById(){

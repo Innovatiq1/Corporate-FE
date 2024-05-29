@@ -101,13 +101,12 @@ export class ScheduleClassComponent {
 
   ngOnInit(): void {
     let userType = localStorage.getItem('user_type');
-    if (userType == 'admin') {
-      this.isAdmin = true;
-      this.getClassList();
-    }
-    if (userType == 'Instructor') {
+    if (userType == 'Instructor' || userType == 'IT Manager') {
       this.isInstructor = true;
       this.getClassLectures();
+    } else {
+      this.getClassList();
+
     }
   }
 
@@ -115,7 +114,7 @@ export class ScheduleClassComponent {
     this.coursePaginationModel.page = $event?.pageIndex + 1;
     this.coursePaginationModel.limit = $event?.pageSize;
     let userType = localStorage.getItem('user_type');
-    if (userType == 'admin') {
+    if (userType == 'admin' || userType == 'IT Manager') {
       this.isAdmin = true;
       this.getClassList();
     }
