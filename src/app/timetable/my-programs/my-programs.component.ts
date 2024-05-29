@@ -28,7 +28,7 @@ export class MyProgramsComponent {
 
   constructor(private classService: ClassService, private router: Router,public lecturesService: LecturesService,public dialog: MatDialog) {
     let userType = localStorage.getItem("user_type")
-    if(userType == "Student"){
+    if(userType == "Staff"){
       this.getApprovedProgram();
     }
 
@@ -126,7 +126,7 @@ export class MyProgramsComponent {
   openDialog(event: { title: any; extendedProps: { [x: string]: any; }; }) {
     let userType = localStorage.getItem("user_type")
     var reschedule =false;
-    if(userType == "Student"){
+    if(userType == "Staff"){
       reschedule = true
     }
     this.dialog.open(EventDetailDialogComponent, {

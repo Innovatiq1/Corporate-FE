@@ -23,7 +23,7 @@ export class EventDetailDialogComponent implements OnInit {
     'programCode' in data ? (this.code = true) : (this.code = false);
 
     let userType = localStorage.getItem('user_type');
-    if (userType == 'Student') {
+    if (userType == 'Staff') {
       this.isStudent = true;
     }
     if(data.programName){
