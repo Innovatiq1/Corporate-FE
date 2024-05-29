@@ -621,6 +621,11 @@ export class CourseService {
         });
       }
   
+      getStudentsByCourseId(courseId: any) {
+        const apiUrl = `${this.prefix}admin/studentClasses/studentcourses/${courseId}`;
+        return this._Http.get<any>(apiUrl).pipe(map((response) => response));
+      }
+    
     
 }
 
