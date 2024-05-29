@@ -371,7 +371,7 @@ export class ExampleDataSource extends DataSource<Teachers> {
       this.paginator.page,
     ];
     let payload = {
-      type: 'Instructor',
+      roles: ['IT Manager','Finance Manager','HR Manager','Admin Manager'],
     };
     this.exampleDatabase.getAllTeacherss(payload);
     this.rowData = this.exampleDatabase.data;

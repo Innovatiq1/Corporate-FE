@@ -396,7 +396,7 @@ export class ExampleDataSource extends DataSource<Students> {
       this.paginator.page,
     ];
     let payload = {
-      type: 'Student',
+      type: 'Staff',
     };
     this.exampleDatabase.getAllStudentss(payload);
 

@@ -71,7 +71,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
           this.isSettings = false;
           this.menuitem = this.orgMenuItems;
         } else {
-          if (this.userType === 'Admin' || this.userType === 'CEO') {
+          if (this.userType !== 'Staff' ) {
             this.isSettings = true;
             this.menuitem = SettingsMenu;
           } else {
