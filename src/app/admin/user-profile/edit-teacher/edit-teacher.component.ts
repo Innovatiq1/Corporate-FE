@@ -179,7 +179,7 @@ export class EditTeacherComponent {
         //this.fileDropEl.nativeElement.value = "";
         this.proForm.reset();
         //this.toggleList()
-        this.router.navigateByUrl('/student/settings/all-instructors');
+        this.router.navigateByUrl('/admin/user-profile/all-instructors');
       },
       (error: { message: any; error: any }) => {
         Swal.fire(

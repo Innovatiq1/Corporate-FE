@@ -220,7 +220,7 @@ export class CreateAllUsersComponent {
         //this.fileDropEl.nativeElement.value = "";
         this.userForm.reset();
         //this.toggleList()
-        this.router.navigateByUrl('/student/settings/all-users');
+        this.router.navigateByUrl('/admin/user-profile/all-users');
       },
       (error) => {
         Swal.fire(
@@ -369,7 +369,7 @@ export class CreateAllUsersComponent {
           }).then(() => {
             resolve(response);
           });
-          this.router.navigate(['/student/settings/all-users']);
+          this.router.navigate(['/admin/user-profile/all-users']);
         },
         (error) => {
           this.isLoading = false;

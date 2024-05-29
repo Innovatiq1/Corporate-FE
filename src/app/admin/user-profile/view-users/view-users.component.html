@@ -93,7 +93,7 @@
             type="button"
             mat-raised-button
             color="warn"
-            [routerLink]="['/student/settings/all-users']"
+            [routerLink]="['/admin/user-profile/all-users']"
           >
             Back to all users
           </button>
@@ -107,7 +107,7 @@
               class="icons"
               alt="Edit"
               mat-menu-item
-              [routerLink]="['/student/settings/edit-all-users', aboutData1.id]"
+              [routerLink]="['/admin/user-profile/edit-all-users', aboutData1.id]"
             >
               <app-feather-icons
                 [icon]="'edit'"
@@ -413,7 +413,7 @@
             type="button"
             mat-raised-button
             color="warn"
-            [routerLink]="['/student/settings/all-users']"
+            [routerLink]="['/admin/user-profile/all-users']"
           >
             Back to all users
           </button>
@@ -426,7 +426,7 @@
             <button
               class="icons"
               alt="Edit"
-              [routerLink]="['/student/settings/edit-all-users', aboutData1.id]"
+              [routerLink]="['/admin/user-profile/edit-all-users', aboutData1.id]"
             >
               <app-feather-icons
                 [icon]="'edit'"
@@ -635,7 +635,7 @@
             type="button"
             mat-raised-button
             color="warn"
-            [routerLink]="['/student/settings/all-users']"
+            [routerLink]="['/admin/user-profile/all-users']"
           >
             Back to all users
           </button>
@@ -678,7 +678,7 @@
         <div class="col-lg-8 col-md-12">
           <div class="card">
             <div class="card-container">
-              <button class="icons" alt="Edit" [routerLink]="['/student/settings/edit-all-users',aboutData1.id]" >
+              <button class="icons" alt="Edit" [routerLink]="['/admin/user-profile/edit-all-users',aboutData1.id]" >
                   <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
               </button>
               <button class="icons" alt="Delete" mat-menu-item (click)="deleteItem(aboutData1)">

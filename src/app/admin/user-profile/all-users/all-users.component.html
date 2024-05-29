@@ -59,7 +59,7 @@
                           <button
                             mat-raised-button
                             [routerLink]="[
-                              '/student/settings/create-all-users'
+                              '/admin/user-profile/create-all-users'
                             ]"
                             id="submit"
                           >
@@ -155,7 +155,7 @@
                           ><img
                             [src]="row.avatar || 'assets/profile.png'"
                             [routerLink]="[
-                              '/student/settings/view-all-users',
+                              '/admin/user-profile/view-all-users',
                               row.id
                             ]"
                           />
@@ -169,7 +169,7 @@
                           *matCellDef="let row"
                           class="name"
                           [routerLink]="[
-                            '/student/settings/view-all-users',
+                            '/admin/user-profile/view-all-users',
                             row.id
                           ]"
                         >
@@ -198,7 +198,7 @@
                           mat-cell
                           *matCellDef="let row"
                           [routerLink]="[
-                            '/student/settings/view-all-users',
+                            '/admin/user-profile/view-all-users',
                             row.id
                           ]"
                         >
@@ -228,7 +228,7 @@
                         <mat-cell
                           *matCellDef="let row"
                           [routerLink]="[
-                            '/student/settings/view-all-users',
+                            '/admin/user-profile/view-all-users',
                             row.id
                           ]"
                         >
@@ -243,7 +243,7 @@
                         <mat-cell
                           *matCellDef="let row"
                           [routerLink]="[
-                            '/student/settings/view-all-users',
+                            '/admin/user-profile/view-all-users',
                             row.id
                           ]"
                         >
@@ -259,7 +259,7 @@
                         <mat-cell
                           *matCellDef="let row"
                           [routerLink]="[
-                            '/student/settings/view-all-users',
+                            '/admin/user-profile/view-all-users',
                             row.id
                           ]"
                         >
@@ -287,7 +287,7 @@
                         <mat-cell
                           *matCellDef="let row"
                           [routerLink]="[
-                            '/student/settings/view-all-users',
+                            '/admin/user-profile/view-all-users',
                             row.id
                           ]"
                         >
@@ -384,7 +384,7 @@
               <div
                 class="card border-apply"
                 style="height: 220px; margin-top: 20px; cursor: pointer"
-                [routerLink]="['/student/settings/view-all-users', row.id]"
+                [routerLink]="['/admin/user-profile/view-all-users', row.id]"
               >
                 <!-- <div class="m-b-20"> -->
                 <div class="contact-grid">

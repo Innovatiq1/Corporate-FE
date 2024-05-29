@@ -204,7 +204,7 @@ deleteItem(row: any) {
              icon: "success",
            });
            //this.fetchCourseKits();
-           this.router.navigate(['/student/settings/all-users'])
+           this.router.navigate(['/admin/user-profile/all-users'])
            this.loadData()
          },
          (error: { message: any; error: any; }) => {

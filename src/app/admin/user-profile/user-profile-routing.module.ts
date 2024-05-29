@@ -37,7 +37,7 @@ const routes: Routes = [
     component: AllStudentsComponent,
   },
   {
-    path: 'add-staff',
+    path: 'add-student',
     component: AddStudentComponent,
   },
   {
@@ -49,15 +49,15 @@ const routes: Routes = [
     component: AllTeachersComponent,
   },
   {
-    path: 'view-manager',
+    path: 'view-instructor',
     component: AboutTeacherComponent,
   },
   {
-    path: 'edit-manager/:id',
+    path: 'edit-instructor/:id',
     component: EditTeacherComponent,
   },
   {
-    path: 'add-manager',
+    path: 'add-instructor',
     component: AddTeacherComponent,
   },
 

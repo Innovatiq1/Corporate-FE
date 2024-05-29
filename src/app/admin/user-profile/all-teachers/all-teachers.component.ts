@@ -103,10 +103,10 @@ export class AllTeachersComponent
     //this.location.re
   }
   addNew() {
-    this.route.navigateByUrl('/student/settings/add-instructor');
+    this.route.navigateByUrl('/admin/user-profile/add-instructor');
   }
   aboutInstructor(id: any) {
-    this.route.navigate(['/student/settings/view-instructor'], {
+    this.route.navigate(['/admin/user-profile/view-instructor'], {
       queryParams: { data: id },
     });
   }

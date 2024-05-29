@@ -132,7 +132,7 @@ this.studentCompletedPrograms = response.data.docs;
 
 editCall(row: Students) {
   console.log("edit",row)
-  this.router.navigate(['/student/settings/add-student'],{queryParams:{id:row.id}})
+  this.router.navigate(['/admin/user-profile/add-student'],{queryParams:{id:row.id}})
 }
 
 deleteItem(row: any) {
