@@ -20,6 +20,7 @@ import { ExamScoresComponent } from './exam-scores/exam-scores.component';
 import { ActiveCoursesComponent } from './active-courses/active-courses.component';
 import { InActiveCoursesComponent } from './in-active-courses/in-active-courses.component';
 import { StudentPendingCoursesComponent } from './student-pending-courses/student-pending-courses.component';
+import { StudentCourseComponent } from './all-course/student-course/student-course.component';
 const routes: Routes = [
   {
     path: 'all-courses/course',
@@ -118,7 +119,11 @@ const routes: Routes = [
   {
     path:'student-courses/pending-courses',
     component: StudentPendingCoursesComponent,
-  }
+  },
+  {
+    path: 'student-courses/:coursename/:id',
+    component: StudentCourseComponent,
+  },
  
 ];
 

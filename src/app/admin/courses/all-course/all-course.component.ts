@@ -42,6 +42,7 @@ export class AllCourseComponent {
     'startDate',
     'endDate',
     'Vendor',
+    'Staff'
     // 'Fees',
   ];
   // displayedColumns = [
@@ -122,6 +123,7 @@ export class AllCourseComponent {
         'startDate',
         'endDate',
         'Vendor',
+        'Staff'
         // 'Fees',
       ];
     }
@@ -138,6 +140,7 @@ export class AllCourseComponent {
         'startDate',
         'endDate',
         'Vendor',
+        'Staff'
         // 'Fees',
       ];
     }

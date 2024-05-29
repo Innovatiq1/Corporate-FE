@@ -1,0 +1,39 @@
+<section class="content">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header mt-3" style="padding-left: 30px;">
+                        <h2>Course Name: <span class="col-green">{{title | titlecase}}</span></h2>
+                    </div>
+                    <hr style="width: 92.7%; margin-left: 20px;">
+                    <div class="table-wrapper">
+                        <div class="table-responsive">
+                            <table class="table table-hover mt-3" style="max-width: 95%; margin-left: 20px;">
+                                <thead>
+                                    <tr>
+                                        <th>Staff</th>
+                                        <th>Department</th>
+                                        <th>Enrollment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="cursor: pointer;" *ngFor="let row of dataSource">
+                                        <td>{{ row.studentId.name | titlecase}}</td>
+                                        <td>{{ row.studentId.department | titlecase}}</td>
+                                        <td>{{ row.status | titlecase}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
