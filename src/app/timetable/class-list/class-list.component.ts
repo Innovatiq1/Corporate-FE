@@ -97,10 +97,13 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter implements O
     if (userType == 'admin' || userType == "IT Manager") {
       this.isAdmin = true;
       this.getClassList();
-    }
-    if (userType == 'Instructor') {
+    } else if (userType == 'Instructor') {
       this.isInstructor = true;
       this.getClassLectures();
+    } else {
+      this.isAdmin = true;
+      this.getClassList();
+  
     }
     // this.getClassList();
     // this.getClassLectures();
@@ -214,9 +217,11 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter implements O
     let userType = localStorage.getItem('user_type');
     if (userType == 'admin' || userType == 'IT Manager') {
       this.getClassList();
-    }
-    if (userType == 'Instructor') {
+    } else if (userType == 'Instructor') {
       this.getClassLectures();
+    } else {
+      this.getClassList();
+
     }
   }
 

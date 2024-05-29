@@ -106,6 +106,8 @@ export class ScheduleClassComponent {
       this.getClassLectures();
     } else {
       this.getClassList();
+      this.isAdmin = true;
+      
 
     }
   }
@@ -117,10 +119,13 @@ export class ScheduleClassComponent {
     if (userType == 'admin' || userType == 'IT Manager') {
       this.isAdmin = true;
       this.getClassList();
-    }
-    if (userType == 'Instructor') {
+    } else if (userType == 'Instructor') {
       this.isInstructor = true;
       this.getClassLectures();
+    } else {
+      this.isAdmin = true;
+      this.getClassList();
+
     }
   }
 
