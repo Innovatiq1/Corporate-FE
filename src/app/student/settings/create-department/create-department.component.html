@@ -87,7 +87,7 @@
                               <tr style="cursor: pointer;" *ngFor="let row of dataSource">
                                 <td (click)="update(row.id)">{{row.department | capitalizeFirstLetter}}</td>
                                 <td (click)="update(row.id)">
-                                    {{row?.description | titlecase}}
+                                    {{row?.description | capitalizeFirstLetter}}
                                 </td>
                               </tr>
                             </tbody>

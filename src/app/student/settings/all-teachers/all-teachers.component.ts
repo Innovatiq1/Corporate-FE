@@ -66,7 +66,7 @@ export class AllTeachersComponent
     {
       title: 'Instructors',
       items: ['User Profile'],
-      active: 'Instructors',
+      active: 'Managers',
     },
   ];
   totalItems: any;

@@ -1653,7 +1653,7 @@ export const SettingsMenu: MenuItem[] = [
           {
             iconsrc:'',
             path: 'student/settings/all-students',
-            title: 'Students',
+            title: 'Staff',
             iconType: '',
             icon: '',
             id:'all-students',
@@ -1669,7 +1669,7 @@ export const SettingsMenu: MenuItem[] = [
           {
             iconsrc:'',
             path: 'student/settings/all-instructors',
-            title: 'Instructors',
+            title: 'Managers',
             iconType: '',
             icon: '',
             id:'all-instructors',
@@ -1682,22 +1682,7 @@ export const SettingsMenu: MenuItem[] = [
     
             children: [],
           },
-          {
-            iconsrc:'',
-            path: 'student/settings/all-staff',
-            title: 'Staff',
-            iconType: '',
-            icon: '',
-            id:'all-staff',
-            class: 'ml-menu2',
-            groupTitle: false,
-            badge: '',
-            badgeClass: '',
-            role: [''],
-            open:false,
-    
-            children: [],
-          },
+         
         ],
       },
       {

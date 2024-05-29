@@ -58,7 +58,7 @@ export class AllStudentsComponent
     {
       title: 'Students',
       items: ['User Profile'],
-      active: 'Students',
+      active: 'Staff',
     },
   ];
   constructor(

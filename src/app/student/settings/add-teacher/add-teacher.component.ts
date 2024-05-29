@@ -31,8 +31,8 @@ export class AddTeacherComponent {
   breadscrums = [
     {
       title: 'Add Instructor',
-      items: ['Instructor'],
-      active: 'Create Instructor',
+      items: ['Manager'],
+      active: 'Create Manager',
     },
   ];
   files: any;

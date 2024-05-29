@@ -85,9 +85,9 @@
                             </thead>
                             <tbody>
                               <tr style="cursor: pointer;" *ngFor="let type of userTypeNames" (click)="edit(type.id)">
-                                <td>{{ type?.typeName | titlecase }}</td>
+                                <td>{{ type?.typeName | capitalizeFirstLetter }}</td>
                                 <td>
-                                    {{type?.description | titlecase}}
+                                    {{type?.description | capitalizeFirstLetter}}
 
                                 </td>
                                

@@ -27,8 +27,8 @@ export class AddStudentComponent {
   breadscrums = [
     {
       title: 'Add Student',
-      items: ['Students'],
-      active: 'Create Student',
+      items: ['Staff'],
+      active: 'Create Staff',
     },
   ];
   editData: any;

@@ -16,7 +16,7 @@ export class AboutStudentComponent {
   breadscrums = [
     {
       title: 'Profile',
-      items: ['Student'],
+      items: ['Staff'],
       active: 'Profile',
     },
   ];
