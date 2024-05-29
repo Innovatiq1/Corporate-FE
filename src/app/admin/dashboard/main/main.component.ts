@@ -815,25 +815,24 @@ export class MainComponent implements OnInit {
 
     this.getClassList();
     const role = this.authenticationService.currentUserValue.user.role;
-    console.log('roles', role);
-    if (role=='Admin'|| role=="RO"  || role == "Director" || role == "Employee") {
+    if (role=='Admin'|| role=="RO"  || role == "Director" || role == "Employee" || role =='CEO') {
       this.isAdmin = true;
-    }else if (role === 'Student') {
+    }else if (role === 'Staff' || role === 'Student') {
       this.isStudentDB = true;
       this.breadscrums = [
         {
           title: 'Dashboad',
           items: ['Dashboad'],
-          active: 'Student Dashboad',
+          active: 'Staff Dashboad',
         },
       ];
-    }else if (role === 'Instructor' || role === 'Trainer' ) {
+    }else if (role === 'Instructor' || role === 'Trainer' || role ==="IT Manager" ) {
       this.isInstructorDB = true;
       this.breadscrums = [
         {
           title: 'Dashboad',
           items: ['Dashboad'],
-          active: 'Instructor Dashboad',
+          active: 'Manager Dashboad',
         },
       ];
     }
@@ -852,10 +851,12 @@ export class MainComponent implements OnInit {
       this.isCMDB = true;
     } else if ( role === 'programcoordinator'|| role === 'Program manager' ) {
       this.isPCDB = true;
+    } else {
+      this.isAdmin = true;
     }
-    if (role == 'Admin') {
+    if (role == 'Admin' || role == 'CEO') {
       this.getAdminDashboard();
-    } else if (role === 'Student') {
+    } else if (role === 'Student' || role === 'Staff') {
       this.getStudentDashboard();
     }
     

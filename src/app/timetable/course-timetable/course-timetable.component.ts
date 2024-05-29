@@ -39,16 +39,11 @@ export class CourseTimetableComponent implements OnInit {
     public dialog: MatDialog
   ) {
     let userType = localStorage.getItem('user_type');
-    // if(userType == "Student"){
-    //   this.getApprovedCourse();
-    //   this.getApprovedProgram();
-    // }
-    if (userType == 'admin' || userType == 'Student') {
-      this.getClassList();
-    }
-    if (userType == 'Instructor') {
+    if (userType == 'IT Manager') {
       this.getInstructorApprovedCourse();
-      //this.getApprovedProgram();
+    } else {
+      this.getClassList();
+
     }
   }
 
@@ -69,8 +64,6 @@ export class CourseTimetableComponent implements OnInit {
     };
   }
   getInstructorApprovedCourse() {
-    let studentId = localStorage.getItem('id');
-    const payload = { studentId: studentId, isAll: true, type: 'Instructor' };
     let instructorId = localStorage.getItem('id');
     this.lecturesService
       .getClassListWithPagination(instructorId, this.filterName)

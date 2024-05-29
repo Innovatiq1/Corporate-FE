@@ -185,7 +185,7 @@ export class CreateClassComponent {
           status: 'active',
         }),
         instructors: this.instructorService.getInstructor({
-          type: 'Instructor',
+          type: 'IT Manager',
         }),
         // labs: this._classService.getAllLaboratory(),
       }).subscribe((response) => {
@@ -205,7 +205,7 @@ export class CreateClassComponent {
           status: 'active',
         }),
         instructors: this.instructorService.getInstructor({
-          type: 'Instructor',
+          type: 'IT Manager',
         }),
         // labs: this._classService.getAllLaboratory(),
         class: this._classService.getProgramClassById(this.classId),

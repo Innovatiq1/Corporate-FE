@@ -156,7 +156,7 @@ export class CreateClassComponent {
     }
     this.loadForm();
     let payload = {
-      type: 'Instructor',
+      type: 'IT Manager',
     };
 
     this.instructorService.getInstructor(payload).subscribe((res) => {

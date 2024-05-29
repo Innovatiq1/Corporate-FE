@@ -94,7 +94,7 @@ export class ClassListComponent extends UnsubscribeOnDestroyAdapter implements O
 
   ngOnInit(): void {
     let userType = localStorage.getItem('user_type');
-    if (userType == 'admin') {
+    if (userType == 'admin' || userType == "IT Manager") {
       this.isAdmin = true;
       this.getClassList();
     }

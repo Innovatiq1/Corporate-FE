@@ -195,7 +195,7 @@ export class HeaderComponent
       this.homePage = 'admin/dashboard/main';
     } else if (userRole === Role.Instructor) {
       this.homePage = 'teacher/dashboard';
-    } else if (userRole === Role.Student) {
+    } else if (userRole === Role.Student || userRole === Role.Staff) {
       this.homePage = 'student/dashboard';
     } else {
       this.homePage = 'admin/dashboard/main';
@@ -248,7 +248,7 @@ export class HeaderComponent
 
   getAnnouncementForStudents(filter?: any) {
     let payload = {
-      announcementFor: 'Student',
+      announcementFor: 'Staff',
     };
     this.announcementService
       .getAnnouncementsForStudents(payload)
