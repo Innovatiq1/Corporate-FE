@@ -23,7 +23,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {CourseKitModel, CourseModel, CoursePaginationModel } from '@core/models/course.model';
-import { CourseService } from '@core/service/course.service';
+//import { CourseService } from '@core/service/course.service';
+import { CertificateService } from 'app/core/service/certificate.service';
 import { UtilsService } from '@core/service/utils.service';
 import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
@@ -65,7 +66,7 @@ export class CertificateTemplateComponent {
  
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-    public utils: UtilsService, private courseService: CourseService,
+    public utils: UtilsService, private courseService: CertificateService,
     private snackBar: MatSnackBar,private ref: ChangeDetectorRef,
   ) {
     this.coursePaginationModel = {};
@@ -146,46 +147,46 @@ this.router.navigate(['/admin/budgets/view-course-payment/'], {queryParams:{id:i
       panelClass: colorName,
     });
   }
-  removeSelectedRows() {
-    const totalSelect = this.selection.selected.length;
+  // removeSelectedRows() {
+  //   const totalSelect = this.selection.selected.length;
 
 
-    Swal.fire({
-      title: "Confirm Deletion",
-      text: "Are you sure you want to delete?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Delete",
-      cancelButtonText: "Cancel",
-    }).then((result) => {
-      if (result.isConfirmed){
-        this.selection.selected.forEach((item) => {
-          const index: number = this.dataSource.findIndex(
-            (d: CourseModel) => d === item
-          );
+  //   Swal.fire({
+  //     title: "Confirm Deletion",
+  //     text: "Are you sure you want to delete?",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#d33",
+  //     cancelButtonColor: "#3085d6",
+  //     confirmButtonText: "Delete",
+  //     cancelButtonText: "Cancel",
+  //   }).then((result) => {
+  //     if (result.isConfirmed){
+  //       this.selection.selected.forEach((item) => {
+  //         const index: number = this.dataSource.findIndex(
+  //           (d: CourseModel) => d === item
+  //         );
           
-          this.courseService?.dataChange.value.splice(index, 1);
-          this.refreshTable();
-          this.selection = new SelectionModel<CourseModel>(true, []);
-        });
-        Swal.fire({
-          title: 'Success',
-          text: 'Record Deleted Successfully...!!!',
-          icon: 'success',
-          // confirmButtonColor: '#526D82',
-        });
-      }
-    });
+  //         this.courseService?.dataChange.value.splice(index, 1);
+  //         this.refreshTable();
+  //         this.selection = new SelectionModel<CourseModel>(true, []);
+  //       });
+  //       Swal.fire({
+  //         title: 'Success',
+  //         text: 'Record Deleted Successfully...!!!',
+  //         icon: 'success',
+  //         // confirmButtonColor: '#526D82',
+  //       });
+  //     }
+  //   });
    
-    // this.showNotification(
-    //   'snackbar-danger',
-    //   totalSelect + ' Record Delete Successfully...!!!',
-    //   'top',
-    //   'right'
-    // );
-  }
+  //   // this.showNotification(
+  //   //   'snackbar-danger',
+  //   //   totalSelect + ' Record Delete Successfully...!!!',
+  //   //   'top',
+  //   //   'right'
+  //   // );
+  // }
    //search functinality
    performSearch() {
     

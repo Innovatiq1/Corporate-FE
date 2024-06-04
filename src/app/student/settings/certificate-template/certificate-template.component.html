@@ -103,7 +103,8 @@
                  <!-- Course Name -->
                  <ng-container matColumnDef="Title">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
-                  <mat-cell *matCellDef="let row" class="name" (click)="view(row._id)">
+                  <!-- (click)="view(row._id)"add to see the view in mat-cell -->
+                  <mat-cell *matCellDef="let row" class="name" >
                     <span class="mobile-label">Student Name:</span>{{row.title}}</mat-cell>
                 </ng-container>
               
@@ -112,8 +113,9 @@
                 
                 <!-- Short Description -->
                 <ng-container matColumnDef="Creation Date">
+                  <!-- (click)="view(row._id)"add to see the view in mat-cell -->
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Creation Date</mat-header-cell>
-                  <mat-cell *matCellDef="let row" (click)="view(row._id)">
+                  <mat-cell *matCellDef="let row" >
                     <span class="mobile-label">Payment Date:</span>{{row.createdAt | date}}</mat-cell>
                 </ng-container>
                 
