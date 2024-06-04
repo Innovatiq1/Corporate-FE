@@ -60,6 +60,9 @@ export class CertificateService {
       })
       .pipe(map((response) => response));
   }
-
+  createCertificate(payload:any) {
+    const apiUrl = this.defaultUrl + `admin/certificate-builder`;
+    return this.http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
 
 }
