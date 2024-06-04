@@ -7,13 +7,19 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Student, Users } from '@core/models/user.model';
+import { MenuItemModel, Student, UserType, Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
 import { ConfirmedValidator } from '@shared/password.validator';
 import { CourseService } from '@core/service/course.service';
 import { StudentsService } from 'app/admin/students/students.service';
 import { UtilsService } from '@core/service/utils.service';
 import { FormService } from '@core/service/customization.service';
+import { UserService } from '@core/service/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminService } from '@core/service/admin.service';
+import { InstructorService } from '@core/service/instructor.service';
+import { CreateRoleTypeComponent } from 'app/admin/users/create-role-type/create-role-type.component';
+import { LogoService } from 'app/student/settings/logo.service';
 @Component({
   selector: 'app-add-student',
   templateUrl: './add-student.component.html',
@@ -24,6 +30,12 @@ export class AddStudentComponent {
   files: any;
   fileName: any;
   avatar: any;
+  userTypes: UserType[] | undefined;
+  head: UserType[] | undefined;
+  isHead: boolean = false;
+  headUsers: any;
+  status = true;
+  
   breadscrums = [
     {
       title: 'Add Student',
@@ -39,6 +51,7 @@ export class AddStudentComponent {
   dept: any;
   thumbnail: any;
   forms!: any[];
+  student: Student | undefined;
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -48,6 +61,11 @@ export class AddStudentComponent {
     private courseService: CourseService,
     public utils: UtilsService,
     private formService: FormService,
+    private userService: UserService,
+    private adminService: AdminService,
+    private instructor: InstructorService,
+    public dialog: MatDialog,
+    private logoService: LogoService,
 
   ) {
     this.activatedRoute.queryParams.subscribe((params: any) => {
@@ -77,6 +95,9 @@ export class AddStudentComponent {
       avatar: [''],
       blood_group: [''],
       conformPassword: ['', []],
+      type: ['', [Validators.required]],
+      headrole: ['', [Validators.required]],
+      head: ['', [Validators.required]],
 
     },{
       // validator: ConfirmedValidator('password', 'conformPassword')
@@ -86,12 +107,12 @@ export class AddStudentComponent {
   ngOnInit(){
     this.getDepartment();
     this.getForms();
-
+    this.getUserTypeList();
   }
 
   getForms(): void {
     this.formService
-      .getAllForms('Student Creation Form')
+      .getAllForms('Staff Creation Form')
       .subscribe((forms) => {
         this.forms = forms;
       });
@@ -134,87 +155,43 @@ export class AddStudentComponent {
     });
   }     
 
-  // onSubmit() {
-  //   console.log('Form Value', this.stdForm.value);
-  //   if (!this.stdForm.invalid) {
-  //     this.StudentService.uploadVideo(this.files).subscribe(
-  //       (response: any) => {
-  //         const inputUrl = response.inputUrl;
+ 
+onSubmit(formObj: any) {
+  console.log('Form Value', formObj);
 
-  //         const userData: Student = this.stdForm.value;
-  //         //this.commonService.setVideoId(videoId)
 
-  //         userData.avatar = inputUrl;
-  //         userData.filename = response.filename;
-  //         userData.type = 'Student';
-  //         userData.role = 'Student';
-  //         userData.isLogin = true;
+  if (!formObj.invalid) {
+    
+    console.log('======', formObj.type);
+    formObj['Active'] = this.status;
+    formObj['role'] = formObj.type;
+    formObj['isLogin'] = true;
 
-  //         //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-  //         // this.currentVideoIds.push(videoId);
-  //         this.createInstructor(userData);
-
-  //         Swal.close();
-  //       },
-  //       (error) => {
-  //         Swal.fire({
-  //           icon: 'error',
-  //           title: 'Upload Failed',
-  //           text: 'An error occurred while uploading the video',
-  //         });
-  //         Swal.close();
-  //       }
-  //     );
-  //   }
-  // }
-  onSubmit() {
-    if (!this.stdForm.invalid) {
-        const userData: Student = this.stdForm.value;
-        
-        // Set the avatar path to the URL received during file upload
-        userData.avatar = this.avatar;
-        
-        userData.type = 'Student';
-        userData.role = 'Student';
-        userData.isLogin = true;
-
-        Swal.fire({
-          title: 'Are you sure?',
-          text: 'Do You want to create a student profile!',
-          icon: 'warning',
-          confirmButtonText: 'Yes',
-          showCancelButton: true,
-          cancelButtonColor: '#d33',
-        }).then((result) => {
-          if (result.isConfirmed){
-            this.createInstructor(userData);
-            // this.router.navigate(['/student/settings/all-students'])
-            // Swal.close();
-          }
-        });
-       
-    }else{
-      this.stdForm.markAllAsTouched();
-    }
+    const userData: Users = formObj;
+    userData.avatar = this.avatar;
+    
+    this.createInstructor(userData);
+   
+  }
 }
 
 
-  private createInstructor(userData: Student): void {
-    this.StudentService.CreateStudent(userData).subscribe(
+  private createInstructor(userData: Users): void {
+    this.StudentService.saveStudent(userData).subscribe(
       () => {
         Swal.fire({
           title: 'Successful',
-          text: 'Student created successfully',
+          text: 'Staff created successfully',
           icon: 'success',
         });
         //this.fileDropEl.nativeElement.value = "";
         this.stdForm.reset();
         //this.toggleList()
-        this.router.navigateByUrl('/admin/user-profile/all-students');
+        this.router.navigateByUrl('/admin/user-profile/all-staff');
       },
       (error) => {
         Swal.fire(
-          'Failed to create student',
+          'Failed to create staff',
           error.message || error.error,
           'error'
         );
@@ -227,6 +204,105 @@ getDepartment(){
     this.dept = response.data.docs;
    })
 
+}
+getUserTypeList(filters?: any, typeName?: any) {
+  this.adminService.getUserTypeList({ allRows: true }).subscribe(
+    (response: any) => {
+      this.userTypes = response;
+      if (typeName) {
+        this.stdForm.patchValue({
+          type: typeName,
+        });
+      }
+    },
+    (error) => {}
+  );
+}
+onSelectionChange(event: any, field: any) {
+  this.isHead = true;
+  this.getHeadList();
+}
+
+getHeadList() {
+  this.userService.getAllUsersByRole(this.stdForm.value.headrole).subscribe((response: any) => {
+    this.headUsers = response?.results;
+  });
+}
+
+openRoleModal() {
+  this.logoService.getSidemenu().subscribe((response: any) => {
+    let MENU_LIST = response.data.docs[0].MENU_LIST;
+    const items = this.convertToMenuV2(MENU_LIST, null);
+    const dataSourceArray: MenuItemModel[] = [];
+    items?.forEach((item, index) => {
+      if (!dataSourceArray.some((v) => v.id === item.id))
+        dataSourceArray.push(item);
+    });
+
+    const dialogRef = this.dialog.open(CreateRoleTypeComponent, {
+      data: dataSourceArray,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result?.typeName) {
+        this.getUserTypeList(null, result?.typeName);
+      }
+    });
+  });
+}
+convertToMenuV2(obj: any[], value: any): MenuItemModel[] {
+  return obj.map((v) => {
+    const menu_item = this.checkChecked(value, v?.id);
+    const children =
+      v?.children && v?.children.length
+        ? this.convertToMenuV2(v.children, menu_item?.children)
+        : [];
+    const defaultCheck = this.checkChecked(value, v.id);
+    let res: any = {
+      title: v?.title,
+      id: v?.id,
+      children: [],
+      checked: false,
+      indeterminate: defaultCheck?.indeterminate || false,
+      icon: v?.iconsrc,
+    };
+    if (children && children.length) {
+      res = {
+        ...res,
+        children,
+      };
+      res.children = res.children.map((c: any) => ({
+        ...c,
+        isLeaf: true,
+      }));
+    }
+    if (v?.actions && v?.actions?.length) {
+      const actionChild = v?.actions.map((action: any) => {
+        const actionChecked = this.checkChecked(
+          menu_item?.children,
+          `${v.id}__${action}`
+        );
+        return {
+          title: action,
+          id: `${v.id}__${action}`,
+          isAction: true,
+          _id: action,
+          isLeaf: true,
+          checked: actionChecked?.checked || false,
+          indeterminate: actionChecked?.indeterminate || false,
+          icon: actionChecked?.iconsrc,
+        };
+      });
+      res = {
+        ...res,
+        children: actionChild,
+      };
+    }
+    return res;
+  });
+}
+
+checkChecked(items: any[], id: string) {
+  return items?.find((v) => v.id === id);
 }
 // onSelectChange(event :any) {
 //   console.log("ibstList",this.dept)
@@ -269,6 +345,9 @@ getDepartment(){
           blood_group: this.editData.blood_group,
           address: this.editData.address,
           fileName: this.fileName,
+          type: this.editData?.type,
+          head: this.editData?.head,
+          headrole: this.editData?.headrole,
         },
         );
       });
@@ -279,124 +358,66 @@ getDepartment(){
     window.history.back();
   }
 
-  // update() {
-  //   console.log('Form Value', this.stdForm);
-  //   if (this.stdForm.valid) {
-  //     this.StudentService.uploadVideo(this.files).subscribe((response: any) => {
-  //       const inputUrl = response.inputUrl;
-
-  //       const userData: Student = this.stdForm.value;
-  //       //this.commonService.setVideoId(videoId)
-
-  //       userData.avatar = inputUrl;
-  //       userData.filename = this.fileName;
-  //       userData.type = 'Student';
-  //       userData.role = 'Student';
-
-  //       //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-  //       // this.currentVideoIds.push(videoId);
-  //       this.updateInstructor(userData);
-
-  //       Swal.close();
-  //     });
-  //   }
-  // }
-
-  // update() {
-  //   console.log('Form Value', this.stdForm);
-  //   if (this.stdForm.valid) {
-  //     this.StudentService.uploadVideo(this.files).subscribe((response: any) => {
-  //       const inputUrl = response.inputUrl;
-
-  //       const userData: Student = this.stdForm.value;
-  //       //this.commonService.setVideoId(videoId)
-
-  //       userData.avatar = inputUrl;
-  //       userData.filename = this.fileName;
-  //       userData.type = 'Student';
-  //       userData.role = 'Student';
-
-  //       //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-  //       // this.currentVideoIds.push(videoId);
-  //       this.updateInstructor(userData);
-
-  //       Swal.close();
-  //     });
-  //   }
-  // }
-
-  // update() {
-  //   console.log('Form Value', this.stdForm.value);
   
-  //   // Check if the form is valid
-  //   if (this.stdForm.valid) {
-  //     if (this.files) {
-  //       // If files are present, upload the video
-  //       this.StudentService.uploadVideo(this.files).subscribe(
-  //         (response: any) => {
-  //           const inputUrl = response.inputUrl;
-  
-  //           const userData: Student = this.stdForm.value;
-  //           userData.avatar = inputUrl;
-  //           userData.filename = this.fileName;
-  //           userData.type = "Student";
-  //           userData.role = "Student";
-  
-  //           this.updateInstructor(userData);
-  
-  //           Swal.close();
-  //         },
-  //         (error: any) => {
-  //           // Handle the error during file upload
-  //           console.error('File upload failed:', error);
-  //         }
-  //       );
-  //     } else {
-  //       // If no files are present, update the user directly
-  //       const userData: Student = this.stdForm.value;
-  //       userData.type = "Student";
-  //       userData.role = "Student";
-  
-  //       this.updateInstructor(userData);
-  //     }
-  //   }
-  // }
-  update() {
-    console.log('Form Value', this.stdForm.value);
+update() {
 
-    // Check if the form is valid
-    if (this.stdForm.valid) {
-      // Create userData object with form values
-      const userData: Student = this.stdForm.value;
-
-      // Set the avatar path to the existing avatar URL
-      userData.avatar = this.avatar;
-
-      userData.type = "Student";
-      userData.role = "Student";
-
-      // Call the updateInstructor function with userData
-
+  if (this.stdForm.valid) {
+    if (this.edit) {
       Swal.fire({
         title: 'Are you sure?',
-        text: 'Do You want to update this student profile!',
+        text: 'Do you want to update staff!',
         icon: 'warning',
         confirmButtonText: 'Yes',
         showCancelButton: true,
         cancelButtonColor: '#d33',
       }).then((result) => {
-        if (result.isConfirmed){
-          this.updateInstructor(userData);
-          Swal.close();
-          // window.history.back();
+        if (result.isConfirmed) {
+          this.updateBlog(this.stdForm.value);
         }
       });
-     
+      
+    } else {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to create staff!',
+        icon: 'warning',
+        confirmButtonText: 'Yes',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.onSubmit(this.stdForm.value);
+        }
+      });
+      
     }
+  } else {
+    this.stdForm.markAllAsTouched(); 
+  }
 }
+updateBlog(formObj: any) {
+  console.log('Form Value', formObj);
+  if (!formObj.invalid) {
+    // Prepare user data for update
+    formObj['Active'] = this.status;
+    formObj['role'] = formObj.type;
+    formObj['isLogin'] = true;
 
-  private updateInstructor(userData: Student): void {
-    this.StudentService.updateStudent(this.StudentId, userData).subscribe(
+    const userData: Users = formObj;
+
+    // Ensure that the avatar property contains the correct URL
+    userData.avatar = this.avatar; 
+   
+        this.updateInstructor(userData);
+        
+      window.history.back();
+      }
+    // this.updateUser(userData);
+    // Swal.close();
+    }
+
+  private updateInstructor(obj: any): void {
+    this.StudentService.updateStudent(this.StudentId, obj).subscribe(
       () => {
         Swal.fire({
           title: 'Successful',

@@ -12,16 +12,16 @@ import { TableElement, TableExportUtil } from '@shared';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import Swal from 'sweetalert2';
-import { RoleDailogComponent } from './role-dailog/role-dailog.component';
+import { RoleDailogComponent } from '../all-users/role-dailog/role-dailog.component';
 import { Direction } from '@angular/cdk/bidi';
 import { MatDialog } from '@angular/material/dialog';
-@Component({
-  selector: 'app-all-users',
-  templateUrl: './all-users.component.html',
-  styleUrls: ['./all-users.component.scss']
-})
-export class AllUsersComponent {
 
+@Component({
+  selector: 'app-staff-list',
+  templateUrl: './staff-list.component.html',
+  styleUrls: ['./staff-list.component.scss']
+})
+export class StaffListComponent {
   displayedColumns: string[] = [
     // 'select',
     'img',
@@ -38,7 +38,7 @@ export class AllUsersComponent {
     {
       title: 'All User',
       items: ['User Profile'],
-      active: 'Officers',
+      active: 'Staff',
     },
   ];
   create = true;
@@ -52,6 +52,7 @@ export class AllUsersComponent {
   searchTerm:string = '';
   pageSizeArr = this.utils.pageSizeArr;
   typeName?: any;
+  headId: any;
 
   constructor(private router: Router,
     public utils: UtilsService,
@@ -61,10 +62,13 @@ export class AllUsersComponent {
     private courseService: CourseService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
-
   ) {
 
     this.coursePaginationModel = {};
+
+    let urlPath = this.router.url.split('/');
+    // this.editUrl = urlPath.includes('edit-program');
+    this.headId = urlPath[urlPath.length - 1];
 }
 
 @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -72,8 +76,8 @@ export class AllUsersComponent {
 
 getBlogsList(filters?:any) {
   let filterText = this.searchTerm;
-  let headId = localStorage.getItem('id');
-  this.alluserService.getUsersById( {filterText,...this.coursePaginationModel, headId}).subscribe((response: any) => {
+  // let headId = localStorage.getItem('id');
+  this.alluserService.getUsersById( {filterText,...this.coursePaginationModel, headId: this.headId}).subscribe((response: any) => {
     this.dataSource = response.data.docs;
     this.isLoading = false;
     this.ref.detectChanges();

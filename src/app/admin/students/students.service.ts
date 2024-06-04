@@ -4,7 +4,7 @@ import { Students } from './students.model';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
 import { environment } from 'environments/environment.development';
-import { Student, UsersPaginationModel } from '@core/models/user.model';
+import { Student, Users, UsersPaginationModel } from '@core/models/user.model';
 import { ApiResponse } from '@core/models/general.response';
 @Injectable()
 export class StudentsService extends UnsubscribeOnDestroyAdapter {
@@ -157,6 +157,11 @@ export class StudentsService extends UnsubscribeOnDestroyAdapter {
   }
 
   CreateStudent(user: Student): Observable<ApiResponse> {
+    //const apiUrl = `${this.prefix}admin/course-kit/`;
+    const loginUrl =this.defaultUrl + 'auth/instructorCreate';
+    return this.httpClient.post<ApiResponse>(loginUrl, user);
+  }
+  saveStudent(user: Users): Observable<ApiResponse> {
     //const apiUrl = `${this.prefix}admin/course-kit/`;
     const loginUrl =this.defaultUrl + 'auth/instructorCreate';
     return this.httpClient.post<ApiResponse>(loginUrl, user);

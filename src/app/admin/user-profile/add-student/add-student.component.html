@@ -167,6 +167,53 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <div class="button-container">
+                    <label class="self-end">Role<span class="mandatory">&nbsp;*</span></label>
+                    <!-- <button type="button" mat-flat-button color="primary" class="px-4 py-2">+</button> -->
+                    <mat-icon class="cursor-pointer" (click)="openRoleModal()">add</mat-icon>
+                  </div>
+                  <mat-form-field class="example-full-width mb-3 test" appearance="outline">
+                    <mat-select required formControlName="type">
+                      <mat-option> Choose User Type... </mat-option>
+                      <mat-option *ngFor="let userType of userTypes" [value]="userType.typeName">{{userType.typeName}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="stdForm.get('type')?.hasError('required')">
+                      Select role
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                  <div class="button-container">
+                    <label class="self-end">Head Role<span class="mandatory">&nbsp;*</span></label>
+                  </div>
+                  <mat-form-field class="example-full-width mb-3 test" appearance="outline">
+                    <mat-select required formControlName="headrole"  (selectionChange)="onSelectionChange($event, 'headrole')">
+                      <mat-option> Choose User Type... </mat-option>
+                      <mat-option *ngFor="let userType of userTypes" [value]="userType.typeName">{{userType.typeName}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="stdForm.get('headrole')?.hasError('required')">
+                      Select Head Role
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="isHead">
+                  <div class="button-container">
+                    <label class="self-end">Head<span class="mandatory">&nbsp;*</span></label>
+                  </div>
+                  <mat-form-field class="example-full-width mb-3 test" appearance="outline">
+                    <mat-select required formControlName="head">
+                      <mat-option> Choose Head... </mat-option>
+                      <mat-option *ngFor="let userType of headUsers" [value]="userType.id">{{userType.name}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="stdForm.get('head')?.hasError('required')">
+                      Select Head
+                    </mat-error>
+                  </mat-form-field>
+                </div>
                   
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2" *ngIf="labelStatusCheck('Blood Group')">
                   <label>Blood Group</label>
@@ -223,7 +270,7 @@
                   <button type="button" class="btn-space" mat-raised-button color="warn" (click)="cancel()">
                     Cancel
                   </button>
-                  <button *ngIf="!edit" mat-raised-button id="submit" (click)="onSubmit()">
+                  <button *ngIf="!edit" mat-raised-button id="submit" (click)="update()">
                     Create
                   </button>
                   <button *ngIf="edit" mat-raised-button id="submit" (click)="update()">

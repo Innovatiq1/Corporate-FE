@@ -21,6 +21,8 @@ import { EditTeacherComponent } from './edit-teacher/edit-teacher.component';
 import { AddTeacherComponent } from './add-teacher/add-teacher.component';
 import { RoleDailogComponent } from './all-users/role-dailog/role-dailog.component';
 import { TeachersService } from '../teachers/teachers.service';
+import { ManagersListComponent } from './managers-list/managers-list.component';
+import { StaffListComponent } from './staff-list/staff-list.component';
 
 
 
@@ -37,7 +39,9 @@ import { TeachersService } from '../teachers/teachers.service';
     AddTeacherComponent,
     AboutTeacherComponent,
     EditTeacherComponent,
-    RoleDailogComponent
+    RoleDailogComponent,
+    ManagersListComponent,
+    StaffListComponent
 
   ],
   imports: [

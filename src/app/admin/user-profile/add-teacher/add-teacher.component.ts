@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { InstructorService } from '@core/service/instructor.service';
 //import { Users } from ""
-import { Users } from '@core/models/user.model';
+import { MenuItemModel, UserType, Users } from '@core/models/user.model';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { ConfirmedValidator } from '@shared/password.validator';
@@ -15,6 +15,11 @@ import { CourseService } from '@core/service/course.service';
 import { StudentsService } from 'app/admin/students/students.service';
 import { UtilsService } from '@core/service/utils.service';
 import { FormService } from '@core/service/customization.service';
+import { UserService } from '@core/service/user.service';
+import { AdminService } from '@core/service/admin.service';
+import { CreateRoleTypeComponent } from 'app/admin/users/create-role-type/create-role-type.component';
+import { MatDialog } from '@angular/material/dialog';
+import { LogoService } from 'app/student/settings/logo.service';
 
 @Component({
   selector: 'app-add-teacher',
@@ -28,6 +33,7 @@ export class AddTeacherComponent {
   thumbnail: any;
   avatar: any;
   submitClicked: boolean = false;
+  status = true;
   breadscrums = [
     {
       title: 'Add Instructor',
@@ -38,14 +44,22 @@ export class AddTeacherComponent {
   files: any;
   fileName: any;
   forms!: any[];
+  userTypes: UserType[] | undefined;
+  head: UserType[] | undefined;
+  isHead: boolean = false;
+  headUsers: any;
 
   constructor(private fb: UntypedFormBuilder,
     private instructor: InstructorService,
     private StudentService: StudentsService,
     private courseService: CourseService,
+    private userService: UserService,
+    private adminService: AdminService,
     public utils: UtilsService,
     private router:Router,
     private formService: FormService,
+    public dialog: MatDialog,
+    private logoService: LogoService,
 
    ) {
     this.proForm = this.fb.group({
@@ -65,6 +79,9 @@ export class AddTeacherComponent {
       joiningDate:['', [Validators.required]],
       education: ['', [Validators.required,...this.utils.validators.designation]],
       avatar: ['',],
+      type: ['', [Validators.required]],
+      headrole: ['', [Validators.required]],
+      head: ['', [Validators.required]],
     },{
       // validator: ConfirmedValidator('password', 'conformPassword')
     });
@@ -92,18 +109,7 @@ export class AddTeacherComponent {
     this.uploaded= image.split('\\');
     this.fileName = this.uploaded.pop();
   });
-    // this.fileName = event.target.files[0].name;
-    // this.files=event.target.files[0]
-    // this.authenticationService.uploadVideo(event.target.files[0]).subscribe(
-    //   (response: any) => {
-    //             //Swal.close();
-    //             
-    //   },
-    //   (error:any) => {
-
-    //   }
-    // );
-
+ 
 
   }
   getDepartment(){
@@ -113,66 +119,156 @@ export class AddTeacherComponent {
      })
 
   }
-  // onSubmit() {
-  //   console.log('Form Value', this.proForm.value);
-  //   if(!this.proForm.invalid){
-  //   this.instructor.uploadVideo(this.files).subscribe(
-  //     (response: any) => {
-  //       const inputUrl = response.inputUrl;
+  getUserTypeList(filters?: any, typeName?: any) {
+    this.adminService.getUserTypeList({ allRows: true }).subscribe(
+      (response: any) => {
+        this.userTypes = response;
+        if (typeName) {
+          this.proForm.patchValue({
+            type: typeName,
+          });
+        }
+      },
+      (error) => {}
+    );
+  }
+  onSelectionChange(event: any, field: any) {
+    this.isHead = true;
+    this.getHeadList();
+  }
 
-  //       const userData: Users = this.proForm.value;
-  //       //this.commonService.setVideoId(videoId)
+  getHeadList() {
+    this.userService.getAllUsersByRole(this.proForm.value.headrole).subscribe((response: any) => {
+      this.headUsers = response?.results;
+    });
+  }
 
-  //       userData.avatar = inputUrl;
-  //       userData.filename= response.filename
-  //       userData.type = "Instructor";
-  //       userData.role = "Instructor";
-  //       userData.isLogin = true;
+  
+  openRoleModal() {
+    this.logoService.getSidemenu().subscribe((response: any) => {
+      let MENU_LIST = response.data.docs[0].MENU_LIST;
+      const items = this.convertToMenuV2(MENU_LIST, null);
+      const dataSourceArray: MenuItemModel[] = [];
+      items?.forEach((item, index) => {
+        if (!dataSourceArray.some((v) => v.id === item.id))
+          dataSourceArray.push(item);
+      });
 
-  //       //this.currentVideoIds = [...this.currentVideoIds, ...videoId]
-  //       // this.currentVideoIds.push(videoId);
-  //       this.createInstructor(userData);
+      const dialogRef = this.dialog.open(CreateRoleTypeComponent, {
+        data: dataSourceArray,
+      });
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result?.typeName) {
+          this.getUserTypeList(null, result?.typeName);
+        }
+      });
+    });
+  }
 
-  //       Swal.close();
-  //     },
-  //     (error) => {
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Upload Failed',
-  //         text: 'An error occurred while uploading the video',
-  //       });
-  //       Swal.close();
-  //     }
-  //   );
-  //   }
-  // }
-  onSubmit() {
-    console.log('Form Value', this.proForm.value);
-    if (!this.proForm.invalid) {
-        const userData: Users = this.proForm.value;
-        
-        // Set the avatar path to the URL received during file upload
-        userData.avatar = this.avatar;
-        
-        userData.type = 'Instructor';
-        userData.role = 'Instructor';
-        userData.isLogin = true;
+  convertToMenuV2(obj: any[], value: any): MenuItemModel[] {
+    return obj.map((v) => {
+      const menu_item = this.checkChecked(value, v?.id);
+      const children =
+        v?.children && v?.children.length
+          ? this.convertToMenuV2(v.children, menu_item?.children)
+          : [];
+      const defaultCheck = this.checkChecked(value, v.id);
+      let res: any = {
+        title: v?.title,
+        id: v?.id,
+        children: [],
+        checked: false,
+        indeterminate: defaultCheck?.indeterminate || false,
+        icon: v?.iconsrc,
+      };
+      if (children && children.length) {
+        res = {
+          ...res,
+          children,
+        };
+        res.children = res.children.map((c: any) => ({
+          ...c,
+          isLeaf: true,
+        }));
+      }
+      if (v?.actions && v?.actions?.length) {
+        const actionChild = v?.actions.map((action: any) => {
+          const actionChecked = this.checkChecked(
+            menu_item?.children,
+            `${v.id}__${action}`
+          );
+          return {
+            title: action,
+            id: `${v.id}__${action}`,
+            isAction: true,
+            _id: action,
+            isLeaf: true,
+            checked: actionChecked?.checked || false,
+            indeterminate: actionChecked?.indeterminate || false,
+            icon: actionChecked?.iconsrc,
+          };
+        });
+        res = {
+          ...res,
+          children: actionChild,
+        };
+      }
+      return res;
+    });
+  }
 
-        this.createInstructor(userData);
-    }else{
-      this.proForm.markAllAsTouched(); 
-      this.submitClicked = true;
-    }
+  checkChecked(items: any[], id: string) {
+    return items?.find((v) => v.id === id);
+  }
+update(){
+ 
+    this.onSubmit(this.proForm.value);
 }
+  onSubmit(formObj: any) {
+    console.log('Form Value', formObj);
+
+
+    if (!formObj.invalid) {
+      console.log('======', formObj.type);
+      formObj['Active'] = this.status;
+      formObj['role'] = formObj.type;
+      formObj['isLogin'] = true;
+
+      const userData: Users = formObj;
+      userData.avatar = this.avatar;
+     
+      this.createInstructor(userData);
+     
+    }
+  }
+//   onSubmit() {
+//     console.log('Form Value', this.proForm.value);
+//     if (!this.proForm.invalid) {
+//         const userData: Users = this.proForm.value;
+        
+//         // Set the avatar path to the URL received during file upload
+//         userData.avatar = this.avatar;
+        
+//         // userData.type = 'Manager';
+//         // userData.role = 'Manager';
+//         userData.isLogin = true;
+
+//         this.createInstructor(userData);
+//     }else{
+//       this.proForm.markAllAsTouched(); 
+//       this.submitClicked = true;
+//     }
+// }
 
   ngOnInit(){
     this.getDepartment();
     this.getForms();
+    this.getUserTypeList();
   }
 
   getForms(): void {
     this.formService
-      .getAllForms('Instructor Creation Form')
+      .getAllForms('Manager Creation Form')
       .subscribe((forms) => {
         this.forms = forms;
       });
@@ -196,7 +292,7 @@ export class AddTeacherComponent {
 
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Do You want to create a instructor!',
+      text: 'Do You want to create a Manager!',
       icon: 'warning',
       confirmButtonText: 'Yes',
       showCancelButton: true,
@@ -207,17 +303,17 @@ export class AddTeacherComponent {
           () => {
             Swal.fire({
               title: "Successful",
-              text: "Instructor created successfully",
+              text: "Manager created successfully",
               icon: "success",
             });
             //this.fileDropEl.nativeElement.value = "";
           this.proForm.reset();
           //this.toggleList()
-          this.router.navigateByUrl('/admin/user-profile/all-instructors');
+          this.router.navigateByUrl('/admin/user-profile/managers');
           },
           (error) => {
             Swal.fire(
-              "Failed to create instructor",
+              "Failed to create manager",
               error.message || error.error,
               "error"
             );

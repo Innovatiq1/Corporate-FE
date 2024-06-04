@@ -91,7 +91,7 @@ export class AddStudentComponent {
 
   getForms(): void {
     this.formService
-      .getAllForms('Student Creation Form')
+      .getAllForms('Staff Creation Form')
       .subscribe((forms) => {
         this.forms = forms;
       });

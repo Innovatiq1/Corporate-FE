@@ -172,7 +172,7 @@ export class AddTeacherComponent {
 
   getForms(): void {
     this.formService
-      .getAllForms('Instructor Creation Form')
+      .getAllForms('Manager Creation Form')
       .subscribe((forms) => {
         this.forms = forms;
       });

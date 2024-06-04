@@ -264,7 +264,14 @@ export class UserService {
       })
       .pipe(map((response) => response));
   }
- 
+ getUsersById(head: any){
+  const apiUrl = `${this.defaultUrl}admin/user/headId?head=${head.headId}`;
+    return this.http
+      .get<ApiResponse>(apiUrl, {
+        params: this.buildParams(head),
+      })
+      .pipe(map((response) => response));
+ }
 }
 
 

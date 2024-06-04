@@ -45,6 +45,7 @@ export class CreateAllUsersComponent {
   uploadedImage: any;
   user: Users | undefined;
   userTypes: UserType[] | undefined;
+  head: UserType[] | undefined;
   blogsList: any;
   currentId: string;
   hide = true;
@@ -52,16 +53,19 @@ export class CreateAllUsersComponent {
   avatar: any;
   dept: any;
   forms!: any[];
+  isHead: boolean = false;
 
 
   breadscrums = [
     {
       title: 'Create All Users',
-      items: ['Users'],
-      active: 'Create User',
+      items: ['Officer'],
+      active: 'Create Officer',
     },
   ];
   data: any;
+  type: any;
+  headUsers: any;
 
   update() {
   
@@ -407,8 +411,8 @@ export class CreateAllUsersComponent {
       this.breadscrums = [
         {
           title: 'Edit All Users',
-          items: ['Users'],
-          active: 'Edit User',
+          items: ['Officer'],
+          active: 'Edit Officer',
         },
       ];
     }
@@ -437,6 +441,8 @@ export class CreateAllUsersComponent {
         Validators.minLength(2),
       ]),
       type: new FormControl('', [Validators.required]),
+      headrole: new FormControl('', [Validators.required]),
+      head: new FormControl('', [Validators.required]),
       parentsName: new FormControl('', []),
       parentsPhone: new FormControl('', []),
       dob: new FormControl('', [Validators.required,...this.utils.validators.dob]),
@@ -449,7 +455,6 @@ export class CreateAllUsersComponent {
           : null,
       ],
     });
-
     this.activeRoute.queryParams.subscribe((params) => {
       console.log('params', params['id']);
     });
@@ -462,7 +467,7 @@ export class CreateAllUsersComponent {
 
   getForms(): void {
     this.formService
-      .getAllForms('User Creation Form')
+      .getAllForms('Officer Creation Form')
       .subscribe((forms) => {
         this.forms = forms;
       });
@@ -494,7 +499,17 @@ export class CreateAllUsersComponent {
       (error) => {}
     );
   }
+  onSelectionChange(event: any, field: any) {
+    this.isHead = true;
+    this.getHeadList();
+  }
 
+  getHeadList() {
+    this.userService.getAllUsersByRole(this.userForm.value.headrole).subscribe((response: any) => {
+      this.headUsers = response?.results;
+    });
+  }
+ 
   getDepartment() {
     this.StudentService.getAllDepartments().subscribe((response: any) => {
       this.dept = response.data.docs;
@@ -531,6 +546,7 @@ export class CreateAllUsersComponent {
         let image = this.uploaded?.pop();
         this.uploaded = image?.split('\\');
         this.fileName = this.uploaded?.pop();
+        this.isHead = true;
         if (this.data) {
           this.userForm.patchValue({
             name: this.data?.name,
@@ -539,6 +555,8 @@ export class CreateAllUsersComponent {
             re_passwords: this.data.conformPassword,
             education: this.data?.education,
             type: this.data?.type,
+            head: this.data?.head,
+            headrole: this.data?.headrole,
             fileName: this.data?.avatar,
             last_name: this.data?.last_name,
             rollNo: this.data?.rollNo,

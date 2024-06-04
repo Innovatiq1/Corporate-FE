@@ -10,6 +10,8 @@ import { AllTeachersComponent } from './all-teachers/all-teachers.component';
 import { AboutTeacherComponent } from './about-teacher/about-teacher.component';
 import { EditTeacherComponent } from './edit-teacher/edit-teacher.component';
 import { AddTeacherComponent } from './add-teacher/add-teacher.component';
+import { ManagersListComponent } from './managers-list/managers-list.component';
+import { StaffListComponent } from './staff-list/staff-list.component';
 
 const routes: Routes = [
   {
@@ -30,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'edit-all-users/:id',
-    component: ViewUsersComponent,
+    component: CreateAllUsersComponent,
   },
   {
     path: 'staff',
@@ -59,6 +61,14 @@ const routes: Routes = [
   {
     path: 'add-instructor',
     component: AddTeacherComponent,
+  },
+  {
+    path: 'all-managers/:id',
+    component: ManagersListComponent,
+  },
+  {
+    path: 'all-staff/:id',
+    component: StaffListComponent,
   },
 
 
