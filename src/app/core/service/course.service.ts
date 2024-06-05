@@ -128,6 +128,15 @@ export class CourseService {
     });
   }
 
+  // getAllCertificate(
+  //   filter?: Partial<CoursePaginationModel>
+  // ): Observable<ApiResponse> {
+  //   const apiUrl = this.defaultUrl+'admin/certificate-builder';
+  //   return this._Http.get<ApiResponse>(apiUrl, {
+  //     params: this.buildParams(filter),
+  //   });
+  // }
+
   getFilteredCourseData(payload:any, filter:any
     ):Observable<any> {
     const apiUrl = `${this.prefix}admin/courses-new/filter?limit=${filter.limit}&page=${filter.page}`;
