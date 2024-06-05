@@ -12,6 +12,7 @@ import { HodDashboardComponent } from './hod-dashboard/hod-dashboard.component';
 import { TrainingCoordinatorDbComponent } from './training-coordinator-db/training-coordinator-db.component';
 import { TrainingApprovalTabComponent } from './training-approval-tab/training-approval-tab.component';
 import { EtmsDashboardComponent } from './etms-dashboard/etms-dashboard.component';
+import { CeoDashboardComponent } from './ceo-dashboard/ceo-dashboard.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path: 'training-approval-tab',
     component: TrainingApprovalTabComponent,
+  },
+  {
+    path: 'ceo-dashboard',
+    component: CeoDashboardComponent,
   },
   {
     path: 'etms-dashboard',

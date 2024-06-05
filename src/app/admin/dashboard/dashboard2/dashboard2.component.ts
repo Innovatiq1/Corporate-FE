@@ -6,6 +6,7 @@ import { CourseService } from '@core/service/course.service';
 import { InstructorService } from '@core/service/instructor.service';
 import { SettingsService } from '@core/service/settings.service';
 import { ClassService } from 'app/admin/schedule-class/class.service';
+import { TeachersService } from 'app/admin/teachers/teachers.service';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -114,6 +115,7 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
     private router: Router,
     private settingsService: SettingsService,
     private authenticationService:AuthenService,
+    private teacherService:TeachersService,
     private cdr: ChangeDetectorRef) {
     //constructor
   }
@@ -133,7 +135,7 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
     this.getProgramList();
     this.getAllCourse();
     const role = this.authenticationService.currentUserValue.user.role;
-    if (role == 'Admin') {
+    if (role == 'Admin'  || role == 'CEO') {
       this.getStudentDashboards();
     }
     this.cdr.detectChanges();
@@ -175,10 +177,11 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
 
   getInstructorsList() {
     let payload = {
-      type: "Instructor"
+      roles: ['IT Manager','Finance Manager','HR Manager','Admin Manager'],
     }
-    this.instructorService.getInstructor(payload).subscribe((response: any) => {
-      this.instructors = response.slice(0, 8);
+    this.teacherService.getInstructors(payload).subscribe((response: any) => {
+      console.log("PVV", response)
+      this.instructors = response.data.slice(0, 8);
       const currentDate = new Date();
       const currentMonth = currentDate.getMonth();
       const currentYear = currentDate.getFullYear();
@@ -202,46 +205,46 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
 
       const twelveMonthsAgoStart = new Date(currentYear, currentMonth - 12, 1);
       const twelveMonthsAgoEnd = new Date(currentYear, currentMonth - 10, 0);
-      this.twoMonthsAgoInstructors = response.filter((item: { createdAt: string | number | Date; }) => {
+      this.twoMonthsAgoInstructors = response.data.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
           createdAtDate >= twoMonthsAgoStart && createdAtDate <= twoMonthsAgoEnd
         );
       });
 
-      this.fourMonthsAgoInstructors = response.filter((item: { createdAt: string | number | Date; }) => {
+      this.fourMonthsAgoInstructors = response.data.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
           createdAtDate >= fourMonthsAgoStart && createdAtDate <= fourMonthsAgoEnd
         );
       });
 
-      this.sixMonthsAgoInstructors = response.filter((item: { createdAt: string | number | Date; }) => {
+      this.sixMonthsAgoInstructors = response.data.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
           createdAtDate >= sixMonthsAgoStart && createdAtDate <= sixMonthsAgoEnd
         );
       });
-      this.eightMonthsAgoInstructors = response.filter((item: { createdAt: string | number | Date; }) => {
+      this.eightMonthsAgoInstructors = response.data.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
           createdAtDate >= eightMonthsAgoStart && createdAtDate <= eightMonthsAgoEnd
         );
       });
-      this.tenMonthsAgoInstructors = response.filter((item: { createdAt: string | number | Date; }) => {
+      this.tenMonthsAgoInstructors = response.data.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
           createdAtDate >= tenMonthsAgoStart && createdAtDate <= tenMonthsAgoEnd
         );
       });
-      this.twelveMonthsAgoInstructors = response.filter((item: { createdAt: string | number | Date; }) => {
+      this.twelveMonthsAgoInstructors = response.data.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
           createdAtDate >= twelveMonthsAgoStart && createdAtDate <= twelveMonthsAgoEnd
         );
       });
 
-      this.todayInstructors = response.filter((item: { createdAt: string | number | Date; }) => {
+      this.todayInstructors = response.data.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
           createdAtDate == currentDate
@@ -249,13 +252,13 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
       });
       const sevenDaysAgoDate = new Date(currentYear, currentMonth, currentDate.getDate() - 7);
 
-      this.weekInstructors = response.filter((item: { createdAt: string | number | Date; }) => {
+      this.weekInstructors = response.data.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
           createdAtDate >= sevenDaysAgoDate && createdAtDate <= currentDate );
       });
 
-      this.oneMonthAgoInstructors = response.filter((item: { createdAt: string | number | Date; }) => {
+      this.oneMonthAgoInstructors = response.data.filter((item: { createdAt: string | number | Date; }) => {
         const createdAtDate = new Date(item.createdAt);
         return (
           createdAtDate >= oneMonthAgoStart && createdAtDate <= oneMonthAgoEnd
@@ -271,7 +274,7 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
     this.admissionLineChartOptions = {
       series: [
         {
-          name: 'Instructors',
+          name: 'Managers',
           data: [ this.twoMonthsAgoInstructors.length,
             this.fourMonthsAgoInstructors.length,
             this.sixMonthsAgoInstructors.length,
@@ -424,7 +427,7 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
   private admissionLineChart() {
     this.admissionLineChartOptions = {
       series: [{
-        name: "Instructors",
+        name: "Managers",
         data: [
           this.twelveMonthsAgoInstructors.length,
           this.tenMonthsAgoInstructors.length,
@@ -474,7 +477,7 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
         borderColor: '#9aa0ac',
         strokeDashArray: 1,
       },
-      yaxis: { title: { text: "Number of Instructors" } },
+      yaxis: { title: { text: "Number of Managers" } },
       colors: ['#FFA500']
     };
   }
@@ -482,7 +485,7 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
   private admissionBarChart() {
     this.admissionBarChartOptions = {
         series: [{
-            name: "Instructors",
+            name: "Managers",
             data: [
                 this.twelveMonthsAgoInstructors.length,
                 this.tenMonthsAgoInstructors.length,
@@ -532,7 +535,7 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
             borderColor: '#9aa0ac',
             strokeDashArray: 1,
         },
-        yaxis: { title: { text: "Number of Instructors" } },
+        yaxis: { title: { text: "Number of Managers" } },
         colors: ['#FFA500']
     };
 }

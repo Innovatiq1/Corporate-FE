@@ -15,14 +15,15 @@
         </div>
       </div>
       <div class="col-lg-3 col-sm-6">
-        <div class="info-box7 l-bg-blue order-info-box7">
+        <div class="info-box7 l-bg-green order-info-box7">
           <div class="info-box7-block">
-            <h6 class="m-b-20">Program Payments</h6>
-            <h2 class="text-end"><i class="fas fa-bookmark float-start"></i><span>$865</span></h2>
-            <p class="m-b-0">21% Higher Then Last Month</p>
+            <h6 class="m-b-20">Successful Payments</h6>
+            <h2 class="text-end"><i class="fas fa-cart-plus float-start"></i><span>$1351</span></h2>
+            <p class="m-b-0">10% Higher Then Last Month</p>
           </div>
         </div>
       </div>
+     
       <div class="col-lg-3 col-sm-6">
         <div class="info-box7 l-bg-orange order-info-box7">
           <div class="info-box7-block">
@@ -33,14 +34,15 @@
         </div>
       </div>
       <div class="col-lg-3 col-sm-6">
-        <div class="info-box7 l-bg-green order-info-box7">
+        <div class="info-box7 l-bg-red order-info-box7">
           <div class="info-box7-block">
-            <h6 class="m-b-20">Successful Payments</h6>
-            <h2 class="text-end"><i class="fas fa-cart-plus float-start"></i><span>$1351</span></h2>
-            <p class="m-b-0">10% Higher Then Last Month</p>
+            <h6 class="m-b-20">Cancelled Payments</h6>
+            <h2 class="text-end"><i class="fas fa-bookmark float-start"></i><span>$865</span></h2>
+            <p class="m-b-0">21% Higher Then Last Month</p>
           </div>
         </div>
       </div>
+      
     </div>
 
     <div class="row">
@@ -129,139 +131,6 @@
       
     </div>
  
-    <div class="row clearfix">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card">
-          <div class="header mt-3">
-            <h2>Managers List</h2>
-          
-          </div>
-          <div class="tableBody">
-            <div class="table-responsive">
-              <table class="table display product-overview mb-30" id="support_table">
-                <thead>
-                  <tr>
-                    <th>Img</th>
-                    <th>Manager Name</th>
-                    <th>Department</th>
-                    <th>Gender</th>
-                    <th>Degree</th>
-                    <th>Email</th>
-                    <th>Mobile</th>
-                    <th>Joining Date</th>
-                    <!-- <th>Actions</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let instructor of instructors" style="cursor: pointer;" (click)="aboutInstructor(instructor.id)">
-                    <td class="table-img">
-                      <img src="{{instructor?.avatar}}" alt="">
-                    </td>
-                    <td>{{instructor?.name | titlecase}}</td>
-                    <td>
-                      <div class="badge col-green">{{instructor?.department}}</div>
-                    </td>
-                    <td>{{instructor?.gender | titlecase}}</td>
-                    <td>{{instructor?.qualification}}</td>
-                    <td>{{instructor?.email}}</td>
-                    <td>{{instructor?.mobile}}</td>
-                    <td>{{instructor?.joiningDate | date}}</td>
-                 
-                  </tr>
-                 
-
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-     
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">
-        <div class="card">
-          <div class="header mt-3">
-            <h2>Upcoming Courses</h2>
-          </div>
-          <div class="body">
-            <div class="card-block" *ngFor="let data of upcomingCourses" style="cursor: pointer;" [routerLink]="['/admin/courses/all-courses']">
-              <div class="row m-b-20">
-                <div class="col-md-3">
-                  <img src="{{data.image_link}}" alt="user image" class="img-fluid">
-                </div>
-                <div class="col-md-8" style="margin-left: -15px;">
-                  <h6>{{data.title | titlecase |truncate : 25}}</h6>
-                  <div class="row">
-                    <div class="col-md-2">
-                      <b>{{ data?.courseCode }}</b>
-                    </div>
-                    <div class="col-md-2">
-                      <b>{{ data.training_hours}} Hours</b>
-                    </div>
-                    <div class="col-md-2">
-                      <b>{{data.course_duration_in_days}}</b>
-                    </div>
-                    <!-- <div class="col-md-3" [class]="data?.Active ? 'badge badge-solid-red' : 'badge badge-solid-green'">
-                      <b>{{ data?.classDeliveryType | titlecase }}</b>
-                    </div> -->
-                    <div class="col-md-3">
-                      <b style="color: blue;"><i class="fa fa-play-circle-o"></i> {{data.sessionStartDate | date}}</b>
-                    </div>
-                  </div>
-
-                 
-                </div>
-              </div>
-            </div>
-            <div class="text-center">
-              <button mat-stroked-button [routerLink]="['/admin/courses/all-courses/course']" color="primary">View More</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">
-        <div class="card">
-          <div class="header mt-3">
-            <h2>Upcoming Programs</h2>
-          </div>
-          <div class="body">
-            <div class="card-block" *ngFor="let program of upcomingPrograms" style="cursor: pointer;" [routerLink]="['/admin/program/program-list']">
-              <div class="row m-b-20">
-                <div class="col-md-3">
-                  <img src="{{program?.image_link}}" alt="user image" class="img-fluid">
-                </div>
-                <div class="col-md-8" style="margin-left: -15px;">
-                  <h6>{{program?.title | titlecase}}</h6>
-                  <div class="row">
-                    <div class="col-md-2">
-                      <b>{{ program?.courseCode }}</b>
-                    </div>
-                    <div class="col-md-2">
-                      <b>{{ program?.duration }} Hours</b>
-                    </div>
-                    <div class="col-md-2">
-                      <b>{{ program?.courseFee }}$</b>
-                    </div>
-                    <div class="col-md-3" [class]="program?.Active ? 'badge badge-solid-red' : 'badge badge-solid-green'">
-                      <b>{{ program?.deliveryMode | titlecase }}</b>
-                    </div>
-                    <div class="col-md-3">
-                      <b style="color: blue;"><i class="fa fa-play-circle-o"></i> {{program?.sessionStartDate | date}}</b>
-                    </div>
-                  </div>
-
-                 
-                </div>
-              </div>
-            </div>
-            <div class="text-center">
-              <button mat-stroked-button [routerLink]="['/admin/program/program-list/program']" color="primary">View More</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-    </div>
+   
   <!-- </div>
 </section> -->

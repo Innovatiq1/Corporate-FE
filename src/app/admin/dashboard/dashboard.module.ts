@@ -21,6 +21,8 @@ import { NgxGaugeModule } from 'ngx-gauge';
 import { NgChartsModule } from 'ng2-charts';
 import { TrainingApprovalTabComponent } from './training-approval-tab/training-approval-tab.component';
 import { EtmsDashboardComponent } from './etms-dashboard/etms-dashboard.component';
+import { CeoDashboardComponent } from './ceo-dashboard/ceo-dashboard.component';
+import { TeachersService } from '../teachers/teachers.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { EtmsDashboardComponent } from './etms-dashboard/etms-dashboard.componen
     SupportComponent,
     EtmsDashboardComponent,
     TrainingApprovalTabComponent,
+    CeoDashboardComponent,
   ],
   imports: [
     CommonModule,
@@ -51,5 +54,8 @@ import { EtmsDashboardComponent } from './etms-dashboard/etms-dashboard.componen
     NgxGaugeModule,
     NgChartsModule,
   ],
+  providers: [
+    TeachersService
+  ]
 })
 export class DashboardModule {}

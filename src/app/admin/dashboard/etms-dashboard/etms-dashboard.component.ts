@@ -102,7 +102,7 @@ export class EtmsDashboardComponent implements OnInit {
   ngOnInit() {
     const role = this.authenticationService.currentUserValue.user.role;
     console.log('roles', this.authenticationService.currentUserValue.user);
-    if (role == 'Admin') {
+    if (role == 'Admin' || role == 'CEO') {
       this.getStudentDashboard();
     }
     this.chart2();
