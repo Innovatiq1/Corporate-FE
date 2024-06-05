@@ -12,105 +12,117 @@
                 <div style="display: flex; width: 100%; gap: 20px;">
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Title</mat-label>
-                    <input matInput formControlName="title" required>
-                    <mat-error *ngIf="certificateForm.get('title')?.hasError('required')">
+                    <input matInput formControlName="title">
+                    <!-- <mat-error *ngIf="certificateForm.get('title')?.hasError('required')">
                       Enter title
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Text1</mat-label>
-                    <input matInput formControlName="text1" required>
-                    <mat-error *ngIf="certificateForm.get('text1')?.hasError('required')">
+                    <input matInput formControlName="text1" >
+                    <!-- required add into input -->
+                    <!-- <mat-error *ngIf="certificateForm.get('text1')?.hasError('required')">
                       Enter text1
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
   
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Text2</mat-label>
-                    <input matInput formControlName="text2" required>
-                    <mat-error *ngIf="certificateForm.get('text2')?.hasError('required')">
+                    <input matInput formControlName="text2" >
+                     <!-- required add into input -->
+                    <!-- <mat-error *ngIf="certificateForm.get('text2')?.hasError('required')">
                       Enter Text 2
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
   
-                  <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
-                    <mat-label>Text3</mat-label>
-                    <input matInput formControlName="text3" required>
-                    <mat-error *ngIf="certificateForm.get('text3')?.hasError('required')">
-                      Enter Text3
-                    </mat-error>
-                  </mat-form-field>
+                  
                 </div>
   
                 <div style="display: flex; width: 100%; gap: 20px;">
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
+                    <mat-label>Text3</mat-label>
+                    <input matInput formControlName="text3" >
+                    <!-- <mat-error *ngIf="certificateForm.get('text3')?.hasError('required')">
+                      Enter Text3
+                    </mat-error> -->
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Text4</mat-label>
-                    <input matInput formControlName="text4" required>
-                    <mat-error *ngIf="certificateForm.get('text4')?.hasError('required')">
+                    <input matInput formControlName="text4" >
+                    <!-- <mat-error *ngIf="certificateForm.get('text4')?.hasError('required')">
                       Enter Text4
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
   
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Text5</mat-label>
-                    <input matInput formControlName="text5" required>
-                    <mat-error *ngIf="certificateForm.get('text5')?.hasError('required')">
+                    <input matInput formControlName="text5" >
+                    <!-- <mat-error *ngIf="certificateForm.get('text5')?.hasError('required')">
                       Enter Completion Text
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
   
-                  <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
-                    <mat-label>Text6</mat-label>
-                    <input matInput formControlName="text6" required>
-                    <mat-error *ngIf="certificateForm.get('text6')?.hasError('required')">
-                      Enter Text6
-                    </mat-error>
-                  </mat-form-field>
+                  
                 </div>
                 <div style="display: flex; width: 100%; gap: 20px;">
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
+                    <mat-label>Text6</mat-label>
+                    <input matInput formControlName="text6" >
+                    <!-- <mat-error *ngIf="certificateForm.get('text6')?.hasError('required')">
+                      Enter Text6
+                    </mat-error> -->
+                  </mat-form-field>
+                  <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Text7</mat-label>
-                    <input matInput formControlName="text7" required>
-                    <mat-error *ngIf="certificateForm.get('text7')?.hasError('required')">
+                    <input matInput formControlName="text7" >
+                    <!-- <mat-error *ngIf="certificateForm.get('text7')?.hasError('required')">
                       Enter Text7
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
   
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Text8</mat-label>
-                    <input matInput formControlName="text8" required>
-                    <mat-error *ngIf="certificateForm.get('text8')?.hasError('required')">
+                    <input matInput formControlName="text8" >
+                    <!-- <mat-error *ngIf="certificateForm.get('text8')?.hasError('required')">
                       Enter Text8
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
   
-                  <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
-                    <mat-label>User</mat-label>
-                    <input matInput formControlName="user" required>
-                    <mat-error *ngIf="certificateForm.get('user')?.hasError('required')">
-                      Enter Student Name
-                    </mat-error>
-                  </mat-form-field>
+                 
                 </div>
   
   
                 <div style="display: flex; width: 100%; gap: 20px;">
-                  
+                  <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
+                    <mat-label>User</mat-label>
+                    <input matInput formControlName="user" >
+                    <!-- <mat-error *ngIf="certificateForm.get('user')?.hasError('required')">
+                      Enter Student Name
+                    </mat-error> -->
+                  </mat-form-field>
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Course Name</mat-label>
-                    <input matInput formControlName="course" required>
-                    <mat-error *ngIf="certificateForm.get('course')?.hasError('required')">
+                    <input matInput formControlName="course" >
+                    <!-- <mat-error *ngIf="certificateForm.get('course')?.hasError('required')">
                       Enter Course Name
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Completion Date</mat-label>
-                    <input matInput formControlName="completionDate" type="date" required>
-                    <mat-error *ngIf="certificateForm.get('completionDate')?.hasError('required')">
+                    <input matInput formControlName="completionDate" type="date" >
+                    <!-- <mat-error *ngIf="certificateForm.get('completionDate')?.hasError('required')">
                       Enter Completion Date
-                    </mat-error>
+                    </mat-error> -->
                   </mat-form-field>
 
+               
+                  
+
+  
+                  
+                </div>
+                <div style="display: flex; width: 100%; gap: 20px;">
+                
                   <div
                   class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"
                   
@@ -148,7 +160,7 @@
                 </div>
               </form>
   
-              <table width="800px" style="
+              <table width="800px"  style="
                 margin: 0 auto;
                 background-image: url({{image_link}});
                 background-repeat: no-repeat;
@@ -272,6 +284,14 @@
                   </tr>
                 </tbody>
               </table>
+              <!-- <table width="800px" [style.background-image]="'url(' + this.image_link + ')'" style="
+              margin: 0 auto;
+              background-repeat: no-repeat;
+              background-position: center right;
+              background-size: 100% 100%;
+              border: 0.5px solid lightgray;
+              height: 700px;
+            "> </table> -->
             </div>
             <button mat-raised-button id="submit"  *ngIf="!editUrl"  style="margin-left: 900px; margin-top: 10px;" (click)="saveCertificate()">
                 Submit

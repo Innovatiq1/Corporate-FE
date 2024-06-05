@@ -64,23 +64,38 @@ if(this.editUrl==true)
 
   // let urlPath = this.router.url.split('/');
   // this.editUrl = urlPath.includes('edit-class');
-
   ngOnInit(){
     this.certificateForm = this.fb.group({
-      title: ['', Validators.required],
-      user: ['', Validators.required],
-      course: ['', Validators.required],
-      completionDate: ['', Validators.required],
-      text1: ['', Validators.required],
-      text2: ['', Validators.required],
-      text3: ['TMS Inc.', Validators.required],
-      text4: ['', Validators.required],
-      text5: ['', Validators.required],
-      text6: ['', Validators.required],
-      text7: ['', Validators.required],
-      text8: ['', Validators.required],
+      title: [''],
+      user: [''],
+      course: [''],
+      completionDate: [''],
+      text1: [''],
+      text2: [''],
+      text3: [''],
+      text4: [''],
+      text5: [''],
+      text6: [''],
+      text7: [''],
+      text8: [''],
      
     });  }
+  // ngOnInit(){
+  //   this.certificateForm = this.fb.group({
+  //     title: ['', Validators.required],
+  //     user: ['', Validators.required],
+  //     course: ['', Validators.required],
+  //     completionDate: ['', Validators.required],
+  //     text1: [''],
+  //     text2: ['', Validators.required],
+  //     text3: ['TMS Inc.', Validators.required],
+  //     text4: ['', Validators.required],
+  //     text5: ['', Validators.required],
+  //     text6: ['', Validators.required],
+  //     text7: ['', Validators.required],
+  //     text8: ['', Validators.required],
+     
+  //   });  }
    
   
     onFileUpload(event:any) {
