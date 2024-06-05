@@ -86,8 +86,8 @@
   
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>User</mat-label>
-                    <input matInput formControlName="studentName" required>
-                    <mat-error *ngIf="certificateForm.get('studentName')?.hasError('required')">
+                    <input matInput formControlName="user" required>
+                    <mat-error *ngIf="certificateForm.get('user')?.hasError('required')">
                       Enter Student Name
                     </mat-error>
                   </mat-form-field>
@@ -98,8 +98,8 @@
                   
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Course Name</mat-label>
-                    <input matInput formControlName="courseName" required>
-                    <mat-error *ngIf="certificateForm.get('courseName')?.hasError('required')">
+                    <input matInput formControlName="course" required>
+                    <mat-error *ngIf="certificateForm.get('course')?.hasError('required')">
                       Enter Course Name
                     </mat-error>
                   </mat-form-field>
@@ -111,6 +111,38 @@
                     </mat-error>
                   </mat-form-field>
 
+                  <div
+                  class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"
+                  
+                >
+                  <label>Thumbnail</label>
+                  <div class="file-drop-area">
+                    <div class="file">
+                      <button mat-raised-button color="primary" class="btn">
+                        Choose file
+                        <input
+                          formControlName="image_link"
+                          (change)="onFileUpload($event)"
+                        
+                          class="file-input"
+                          type="file"
+                        />
+                      </button>
+                      <span class="file-msg">
+                        <h6>
+                          {{
+                            uploadedImage
+                              ? uploadedImage
+                              : "Drag and Drop File Here"
+                          }}
+                        </h6>
+                      </span>
+                    </div>
+                  </div>
+                 
+                </div>
+                  
+
   
                   
                 </div>
@@ -118,7 +150,7 @@
   
               <table width="800px" style="
                 margin: 0 auto;
-                background-image: url(/assets/certificates/pdf-bg.jpeg);
+                background-image: url({{image_link}});
                 background-repeat: no-repeat;
                 background-position: center right;
                 background-size: 100% 100%;
@@ -179,7 +211,7 @@
                               line-height: 1.2;
                               font-style: italic;
                             ">
-                              {{ certificateForm.get('studentName')?.value || 'XYZ' }}
+                              {{ certificateForm.get('user')?.value || 'XYZ' }}
                             </p>
   
                             <p style="
@@ -190,7 +222,7 @@
                               font-style: italic;
                             ">
                               {{ certificateForm.get('text5')?.value || 'has successfully completed the' }} <b>
-                                {{ certificateForm.get('courseName')?.value || 'XYZ' }}
+                                {{ certificateForm.get('course')?.value || 'XYZ' }}
                               </b> course
                               on <b>
                                 {{ certificateForm.get('completionDate')?.value | date: 'dd/MM/yyyy' || 'DD/MM/YYYY' }}
@@ -241,8 +273,11 @@
                 </tbody>
               </table>
             </div>
-            <button mat-raised-button id="submit"  style="margin-left: 900px; margin-top: 10px;" (click)="saveCertificate()">
+            <button mat-raised-button id="submit"  *ngIf="!editUrl"  style="margin-left: 900px; margin-top: 10px;" (click)="saveCertificate()">
                 Submit
+              </button>
+              <button mat-raised-button id="submit" *ngIf="editUrl"  style="margin-left: 900px; margin-top: 10px;" (click)="saveCertificate()">
+                Update
               </button>
               <br>
                   

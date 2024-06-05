@@ -109,5 +109,15 @@ export class CertificateService {
     const apiUrl = this.defaultUrl + `admin/certificate-builder`;
     return this.http.post<any>(apiUrl, payload).pipe(map((response) => response));
   }
+  getCertificateById(id: string) {
+    const apiUrl = this.defaultUrl + `admin/certificate-builder/${id}`
+   // const apiUrl = `${this.prefix}admin/program-class/${id}`;
+    return this.http.get<any>(apiUrl).pipe(map((response) => response.data));
+  }
+  updateCertificate(id:string,payload:any) {
+    const apiUrl = this.defaultUrl + `admin/certificate-builder/${id}`
+   // const apiUrl = `${this.prefix}admin/funding-grant/${id}`;
+    return this.http.put<any>(apiUrl, payload).pipe(map((response) => response));
+  }
 
 }

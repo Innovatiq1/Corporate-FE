@@ -130,7 +130,7 @@ export class CertificateTemplateComponent {
 
 view(id:any){
 
-this.router.navigate(['/admin/budgets/view-course-payment/'], {queryParams:{id:id}})
+this.router.navigate(['/student/settings/certificate/edit/:id'], {queryParams:{id:id}})
 // [routerLink]="['/admin/payment/view-payments/']"
 }
 
