@@ -28,7 +28,7 @@ export class CreateBudgetComponent {
     },
   ];
   directorName!: string;
-  directorId!: string;
+  headId!: string;
   employeName!:string;
   dataSource: object | undefined;
   private _id: any;
@@ -81,26 +81,29 @@ export class CreateBudgetComponent {
 getUserId() {
   let userId = localStorage.getItem('id');
   this.etmsService.getUserId(userId).subscribe((response: any) => {
+    this.etmsService.getUserId(response.head).subscribe((data: any) => {
+
     
-    this.directorId = response.director,
+    this.headId = data.id,
     this.employeName=response?.name +
               ' ' +
               (response.last_name ? response.last_name : ''),
-    this.etmsService.getUserId(this.directorId).subscribe((res: any) => {
       
         
       this.directorName = response?.directorName,
+      console.log('daa',data.name)
       
       this.requestForm.patchValue({
         trainingBudget:"",
         year: "",
         trainingType:"",
-        name: this.directorName,
-        email: res?.email,
+        name: data?.name,
+        email: data?.email,
        
         
       });
-    });
+    })
+    
   
  
 });
@@ -162,7 +165,7 @@ onSubmit(){
     const requestData = this.requestForm.value;
     requestData['employeeName']=this.employeName;
     requestData['approval']='Pending';
-    requestData['director']=this.directorId
+    requestData['head']=this.headId
     requestData['employeeEmail'] = employeeEmail;
 
     Swal.fire({

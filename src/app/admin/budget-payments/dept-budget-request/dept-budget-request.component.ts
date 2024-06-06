@@ -69,7 +69,7 @@ constructor(
   let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
   if (user.user.type == 'RO') {
     this.ro = true;
-  } else if (user.user.type == 'Director') {
+  } else if (user.user.type == 'CEO') {
     this.director = true;
   } else if (user.user.type == 'Training Administrator') {
     
@@ -81,9 +81,7 @@ constructor(
 
 ngOnInit() {
   this.pendingCourses =true;
-  if (this.director) {
     this.getAllRequestsByDirector();
-  }
  
   this.getCount();
 }
@@ -92,32 +90,25 @@ onPendingClick(){
   this.pendingCourses = true;
   this.approvedCourses = false;
   this.rejectedCourses = false;
-  if (this.director) {
       this.getAllRequestsByDirector();
-    }
 }
 onApprovedClick(){
   this.pendingCourses = false;
   this.approvedCourses = true;
   this.rejectedCourses = false;
-  if (this.director) {
       this.getAllApprovedRequestsByDirector();
-    }
 }
 onRejectedClick(){
   this.pendingCourses = false;
   this.approvedCourses = false;
   this.rejectedCourses = true;
-  if (this.director) {
       this.getAllRejectedRequestsByDirector();
-    }
 
 }
 
 pageSizeChange($event: any) {
   this.coursePaginationModel.page = $event?.pageIndex + 1;
   this.coursePaginationModel.limit = $event?.pageSize;
-  if(this.director){
       if(this.pendingCourses){
         this.getAllRequestsByDirector();
       } else if(this.approvedCourses){
@@ -125,15 +116,14 @@ pageSizeChange($event: any) {
       } else if(this.rejectedCourses){
         this.getAllRejectedRequestsByDirector()
       }
-    }
   
   console.log("pagination", this.coursePaginationModel.page)
 }
 
 
 getAllRequestsByDirector() {
-  let directorId = localStorage.getItem('id');
-  this.etmsService.getDeptBudgetRequestsByDirector({...this.coursePaginationModel,directorId,directorApproval:"Pending"}).subscribe(
+  let head = localStorage.getItem('id');
+  this.etmsService.getDeptBudgetRequestsByDirector({...this.coursePaginationModel,head,directorApproval:"Pending"}).subscribe(
     (response) => {
       this.dataSource = response.docs;
       this.totalItems = response.totalDocs;
@@ -146,8 +136,8 @@ getAllRequestsByDirector() {
 }
 
 getAllApprovedRequestsByDirector() {
-  let directorId = localStorage.getItem('id');
-  this.etmsService.getDeptBudgetRequestsByDirector({...this.coursePaginationModel,directorId,directorApproval:"Approved"}).subscribe(
+  let head = localStorage.getItem('id');
+  this.etmsService.getDeptBudgetRequestsByDirector({...this.coursePaginationModel,head,directorApproval:"Approved"}).subscribe(
     (response) => {
       this.dataSource = response.docs;
       this.totalItems = response.totalDocs;
@@ -160,8 +150,8 @@ getAllApprovedRequestsByDirector() {
 }
 
 getAllRejectedRequestsByDirector() {
-  let directorId = localStorage.getItem('id');
-  this.etmsService.getDeptBudgetRequestsByDirector({...this.coursePaginationModel,directorId,directorApproval:"Rejected"}).subscribe(
+  let head = localStorage.getItem('id');
+  this.etmsService.getDeptBudgetRequestsByDirector({...this.coursePaginationModel,head,directorApproval:"Rejected"}).subscribe(
     (response) => {
       this.dataSource = response.docs;
       this.totalItems = response.totalDocs;
@@ -174,8 +164,7 @@ getAllRejectedRequestsByDirector() {
 }
 
 approve(req: any) {
-  console.log("id",req.director.id);
-  this.id = req.director.id;
+  this.id = req.id;
   let tempDirection: Direction;
   if (localStorage.getItem('isRtl') === 'true') {
     tempDirection = 'rtl';
@@ -210,7 +199,7 @@ approve(req: any) {
 
 
 reject(row: any) {
-  this.id = row.director.id;
+  this.id = row.id;
   let tempDirection: Direction;
   if (localStorage.getItem('isRtl') === 'true') {
     tempDirection = 'rtl';
@@ -235,9 +224,7 @@ reject(row: any) {
         this.exampleDatabase.dataChange.value[foundIndex] =
           this.etmsService.getDialogData();
       }
-      if (this.director) {
         this.getAllRequestsByDirector();
-      }
       this.getCount();
      
     }
@@ -249,14 +236,12 @@ getCount(){
   let userRole = localStorage.getItem('user_type');
 
 
-if(userRole == "Director"){
   this.etmsService.getDeptBudgetRequestDirectorCount(userId).subscribe(res =>{
     this.approved = res.data.docs.budgetRequestApproved;
     this.rejected = res.data.docs.budgetRequestRejected;
     this.pending = res.data.docs.budgetRequestPending;
   
   })
-  }
 
  
 }

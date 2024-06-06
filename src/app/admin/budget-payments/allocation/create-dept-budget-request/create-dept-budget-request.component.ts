@@ -39,6 +39,7 @@ export class CreateDeptBudgetRequestComponent {
   directorName: any;
   private _id: any;
   action: any;
+  head: any;
   constructor(
     private fb: UntypedFormBuilder,
     private courseService: CourseService,
@@ -114,7 +115,6 @@ export class CreateDeptBudgetRequestComponent {
   }
   ngOnInit(): void {
     // this.loadUsers();
-    this.editRequest();
     this.getAllDepartment();
 
     this.getUserId();
@@ -176,15 +176,15 @@ export class CreateDeptBudgetRequestComponent {
         this.employeName = response?.name +
         ' ' +
         (response.last_name ? response.last_name : ''),
-        this.etmsService.getUserId(this.directorId).subscribe((res: any) => {
+        this.etmsService.getUserId(response.head).subscribe((res: any) => {
 
 
-          this.directorName = response?.directorName,
+          this.head = res?.id,
 
             this.departmentForm.patchValue({
               // trainingBudget: "",
               // year: "",
-              name: this.directorName,
+              name: res.name,
               approvedEmail: res?.email,
 
             });
@@ -199,7 +199,7 @@ export class CreateDeptBudgetRequestComponent {
   onSubmit() {
     let userName = JSON.parse(localStorage.getItem('user_data')!).user.name;
     let email = JSON.parse(localStorage.getItem('user_data')!).user.email;
-    let dirID = JSON.parse(localStorage.getItem('user_data')!).user.director;
+    console.log('head',this.head)
     let payload = {
       departmentName: this.departmentForm.value.department,
       hod: this.departmentForm.value.hod,
@@ -207,7 +207,7 @@ export class CreateDeptBudgetRequestComponent {
       trainingBudget: this.departmentForm.value.trainingBudget,
       name: this.departmentForm.value.name,
       email: this.departmentForm.value.approvedEmail,
-      director: dirID,
+      head: this.head,
       approval: "Pending",
       employeeName: userName,
       employeeEmail:email
@@ -218,7 +218,7 @@ export class CreateDeptBudgetRequestComponent {
     
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Do you want to create department!',
+      text: 'Do you want to create Department Budget!',
       icon: 'warning',
       confirmButtonText: 'Yes',
       showCancelButton: true,
@@ -230,7 +230,7 @@ export class CreateDeptBudgetRequestComponent {
           if (data) {
             Swal.fire({
               icon: 'success',
-              title: 'Department Created Successfully',
+              title: 'Department Budget Created Successfully',
               showConfirmButton: false,
               timer: 1500,
             });

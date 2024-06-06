@@ -56,7 +56,7 @@ export class EditBudgetRequestComponent {
     let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
     if (user.user.type == 'RO') {
       this.ro = true;
-    } else if (user.user.type == 'Director') {
+    } else if (user.user.type == 'CEO') {
       this.director = true;
     } else if (user.user.type == 'Training Administrator') {
       this.trainingAdmin = true;
@@ -90,8 +90,8 @@ export class EditBudgetRequestComponent {
   }
 
   getAllRequestsByDirector() {
-    let directorId = localStorage.getItem('id');
-    this.etmsService.getBudgetRequestsByDirector({ directorId }).subscribe(
+    let head = localStorage.getItem('id');
+    this.etmsService.getBudgetRequestsByDirector({ head }).subscribe(
       (response) => {
         this.dataSource = response.docs;
       },
@@ -100,14 +100,12 @@ export class EditBudgetRequestComponent {
   }
 
   public confirmAdd(): void {
-    if (this.director) {
       this.payload = {
         approval: 'Rejected',
         reason: this.empRequestForm.value.reason,
         employeeEmail:this.data.empRequest.employeeEmail,
         employeeName:this.data.empRequest.employeeName
       };
-    }
 
     if (this.empRequestForm.valid) {
       this.etmsService
@@ -116,7 +114,7 @@ export class EditBudgetRequestComponent {
           if (this.director) {
             Swal.fire({
               title: 'Success',
-              text: 'Rejected by Director',
+              text: 'Rejected by Head',
               icon: 'success',
             });
             this.getAllRequestsByDirector();
@@ -128,15 +126,12 @@ export class EditBudgetRequestComponent {
   /** To approve  */
 
   approveRequest() {
-    if (this.director) {
-      console.log('data',this.data)
       this.payload = {
         approval: 'Approved',
         reason: this.empRequestForm.value.reason,
         employeeEmail:this.data.empRequest.employeeEmail,
         employeeName:this.data.empRequest.employeeName
       };
-    }
 
     if (this.empRequestForm.valid) {
 

@@ -163,13 +163,13 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter {
   }
 
   getBudgetRequestsByDirector(director: any): Observable<ApiResponse> {
-    const apiUrl = `${this.prefix}admin/budget/budg/director?director=${director.directorId}&approval=${director.directorApproval}`;
+    const apiUrl = `${this.prefix}admin/budget/budg/director?head=${director.head}&approval=${director.directorApproval}`;
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(director),
     });
   }
   getBudgetRequestDirectorCount(id: any) {
-    const apiUrl = `${this.prefix}admin/budget/budg/count?director=${id}`;
+    const apiUrl = `${this.prefix}admin/budget/budg/count?head=${id}`;
     return this._Http.get<any>(apiUrl).pipe(map((response) => response));
   }
   updateBudgetStatus(data: any, id: any) {
@@ -178,13 +178,13 @@ export class EtmsService extends UnsubscribeOnDestroyAdapter {
   }
 
   getDeptBudgetRequestsByDirector(director: any): Observable<ApiResponse> {
-    const apiUrl = `${this.prefix}admin/budget/department-budget/budg/director?director=${director.directorId}&approval=${director.directorApproval}`;
+    const apiUrl = `${this.prefix}admin/budget/department-budget/budg/director?head=${director.head}&approval=${director.directorApproval}`;
     return this._Http.get<ApiResponse>(apiUrl, {
       params: this.buildParams(director),
     });
   }
   getDeptBudgetRequestDirectorCount(id: any) {
-    const apiUrl = `${this.prefix}admin/budget/department-budget/budg/count?director=${id}`;
+    const apiUrl = `${this.prefix}admin/budget/department-budget/budg/count?head=${id}`;
     return this._Http.get<any>(apiUrl).pipe(map((response) => response));
   }
   updateDeptBudgetStatus(data: any, id: any) {

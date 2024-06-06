@@ -54,7 +54,7 @@ export class EditDeptBudgetRequestComponent {
     let user = JSON.parse(localStorage.getItem('currentUser') || '{}');
     if (user.user.type == 'RO') {
       this.ro = true;
-    } else if (user.user.type == 'Director') {
+    } else if (user.user.type == 'CEO') {
       this.director = true;
     } else if (user.user.type == 'Training Administrator') {
       this.trainingAdmin = true;
@@ -70,9 +70,7 @@ export class EditDeptBudgetRequestComponent {
   }
 
   ngOnInit(): void {
-    if (this.director) {
       this.getAllRequestsByDirector();
-    }
   }
   createContactForm(): UntypedFormGroup {
     return this.fb.group({
@@ -88,8 +86,8 @@ export class EditDeptBudgetRequestComponent {
   }
 
   getAllRequestsByDirector() {
-    let directorId = localStorage.getItem('id');
-    this.etmsService.getDeptBudgetRequestsByDirector({ directorId }).subscribe(
+    let head = localStorage.getItem('id');
+    this.etmsService.getDeptBudgetRequestsByDirector({ head }).subscribe(
       (response) => {
         this.dataSource = response.docs;
       },
@@ -98,7 +96,6 @@ export class EditDeptBudgetRequestComponent {
   }
 
   public confirmAdd(): void {
-    if (this.director) {
       this.payload = {
         approval: 'Rejected',
         reason: this.empRequestForm.value.reason,
@@ -106,7 +103,6 @@ export class EditDeptBudgetRequestComponent {
         employeeName:this.data.empRequest.employeeName
 
       };
-    }
 
     if (this.empRequestForm.valid) {
       this.etmsService
@@ -115,7 +111,7 @@ export class EditDeptBudgetRequestComponent {
           if (this.director) {
             Swal.fire({
               title: 'Success',
-              text: 'Rejected by Director',
+              text: 'Rejected by Head',
               icon: 'success',
             });
             this.getAllRequestsByDirector();
@@ -127,8 +123,6 @@ export class EditDeptBudgetRequestComponent {
   /** To approve  */
 
   approveRequest() {
-    if (this.director) {
-      console.log('data',this.data)
 
       this.payload = {
         approval: 'Approved',
@@ -136,7 +130,6 @@ export class EditDeptBudgetRequestComponent {
         employeeEmail:this.data.empRequest.employeeEmail,
         employeeName:this.data.empRequest.employeeName
 
-      };
     }
 
     if (this.empRequestForm.valid) {

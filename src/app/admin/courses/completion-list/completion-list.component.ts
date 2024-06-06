@@ -1,7 +1,7 @@
 import { MatTableDataSource } from '@angular/material/table';
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import {
   ClassModel,
   Session,
@@ -32,6 +32,9 @@ import { CertificateService } from '@core/service/certificate.service';
   styleUrls: ['./completion-list.component.scss'],
 })
 export class CompletionListComponent {
+  @ViewChild('backgroundTable') backgroundTable!: ElementRef;
+
+
   displayedColumns = [
     // 'select',
     'Student',
@@ -315,6 +318,11 @@ export class CompletionListComponent {
     if(element){
     this.certificateService.getCertificateById(element.courseId.certificate_template_id).subscribe((response: any) => {
     this.certificateDetails = response;
+    let imageUrl;
+    imageUrl = response.image.replace(/\\/g, '/');
+    imageUrl = encodeURI(imageUrl);
+    this.setBackgroundImage(imageUrl);
+
   })
     }
        
@@ -338,6 +346,16 @@ export class CompletionListComponent {
     );
   }
 
+  private setBackgroundImage(imageUrl: string) {  
+    this.backgroundTable.nativeElement.style.backgroundImage = `url("${imageUrl}")`;
+    setTimeout(() => {
+      const computedStyle = window.getComputedStyle(this.backgroundTable.nativeElement);
+    }, 1000);
+  }
+
+
+
+
   enableExam(element: Student){
     Swal.fire({
       title: 'Are you sure?',
@@ -347,9 +365,7 @@ export class CompletionListComponent {
       showCancelButton: true,
       cancelButtonColor: '#d33',
     }).then((result) => {
-      if (result.isConfirmed) {
-        console.log(element);
-        
+      if (result.isConfirmed) {        
         const payload = {
           classId: element.classId._id,
           session: element.session,
@@ -452,7 +468,7 @@ export class CompletionListComponent {
   updateCertificte(objpdf: any) {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Do you want to create certificate!',
+      text: 'Do you want to Issue Certificate!',
       icon: 'warning',
       confirmButtonText: 'Yes',
       showCancelButton: true,
@@ -469,7 +485,7 @@ export class CompletionListComponent {
             //let certifiacteUrl =response.data.certifiacteUrl
             Swal.fire({
               title: 'Updated',
-              text: 'Certificate Created successfully',
+              text: 'Certificate Issued successfully',
               icon: 'success',
             });
           },

@@ -43,8 +43,8 @@ export class BreadcrumbComponent {
       url = '/dashboard/hr-manager-dashboard';
     } else if (role === 'Admin Manager') {
       url = '/dashboard/admin-dashboard';
-    } else if (role === 'Finance') {
-      url = '/dashboard/finance-dashboard';
+    } else if (role === 'Finance Manager') {
+      url = '/dashboard/finance-manager-dashboard';
     }  else if (role === 'Staff') {
       url = '/dashboard/staff-dashboard';
     } 

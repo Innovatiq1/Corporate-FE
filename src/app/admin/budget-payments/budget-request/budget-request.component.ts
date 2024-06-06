@@ -78,9 +78,9 @@ export class BudgetRequestComponent
 
   ngOnInit() {
     this.pendingCourses = true;
-    if (this.director) {
+    // if (this.director) {
       this.getAllRequestsByDirector();
-    }
+    // }
 
     this.getCount();
   }
@@ -125,11 +125,11 @@ export class BudgetRequestComponent
   }
 
   getAllRequestsByDirector() {
-    let directorId = localStorage.getItem('id');
+    let head = localStorage.getItem('id');
     this.etmsService
       .getBudgetRequestsByDirector({
         ...this.coursePaginationModel,
-        directorId,
+        head,
         directorApproval: 'Pending',
       })
       .subscribe(
@@ -145,11 +145,11 @@ export class BudgetRequestComponent
   }
 
   getAllApprovedRequestsByDirector() {
-    let directorId = localStorage.getItem('id');
+    let head = localStorage.getItem('id');
     this.etmsService
       .getBudgetRequestsByDirector({
         ...this.coursePaginationModel,
-        directorId,
+        head,
         directorApproval: 'Approved',
       })
       .subscribe(
@@ -165,11 +165,11 @@ export class BudgetRequestComponent
   }
 
   getAllRejectedRequestsByDirector() {
-    let directorId = localStorage.getItem('id');
+    let head = localStorage.getItem('id');
     this.etmsService
       .getBudgetRequestsByDirector({
         ...this.coursePaginationModel,
-        directorId,
+        head,
         directorApproval: 'Rejected',
       })
       .subscribe(
@@ -185,7 +185,7 @@ export class BudgetRequestComponent
   }
 
   approve(req: any) {
-    this.id = req.director.id;
+    this.id = req.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
       tempDirection = 'rtl';
@@ -210,18 +210,15 @@ export class BudgetRequestComponent
           this.exampleDatabase.dataChange.value[foundIndex] =
             this.etmsService.getDialogData();
         }
-        if (this.director) {
           this.getAllRequestsByDirector();
           this.getCount();
           
-        }
-      this.getCount();
       }
     });
   }
 
   reject(row: any) {
-    this.id = row.director.id;
+    this.id = row.id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
       tempDirection = 'rtl';
@@ -246,11 +243,8 @@ export class BudgetRequestComponent
           this.exampleDatabase.dataChange.value[foundIndex] =
             this.etmsService.getDialogData();
         }
-        if (this.director) {
           this.getAllRequestsByDirector();
           this.getCount();
-        }
-        this.getCount();
       }
     });
   }
@@ -258,7 +252,6 @@ export class BudgetRequestComponent
   getCount() {
     let userId = localStorage.getItem('id');
     let userRole = localStorage.getItem('user_type');
-    if (userRole == 'Director') {
       this.etmsService
         .getBudgetRequestDirectorCount(userId)
         .subscribe((res) => {
@@ -266,6 +259,5 @@ export class BudgetRequestComponent
           this.rejected = res.data.docs.budgetRequestRejected;
           this.pending = res.data.docs.budgetRequestPending;
         });
-    }
   }
 }

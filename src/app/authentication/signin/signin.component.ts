@@ -134,8 +134,8 @@ export class SigninComponent
               this.router.navigate(['/dashboard/hr-manager-dashboard']);
             } else if (role === 'Admin Manager') {
               this.router.navigate(['/dashboard/admin-dashboard']);
-            } else if (role === 'Finance') {
-              this.router.navigate(['/dashboard/finance-dashboard']);
+            } else if (role === 'Finance Manager') {
+              this.router.navigate(['/dashboard/finance-manager-dashboard']);
             }  else if (role === 'Staff') {
               this.router.navigate(['/dashboard/staff-dashboard']);
             } 
@@ -290,8 +290,8 @@ export class SigninComponent
               this.router.navigate(['/dashboard/hr-manager-dashboard']);
             } else if (role === 'Admin Manager') {
               this.router.navigate(['/dashboard/admin-dashboard']);
-            } else if (role === 'Finance') {
-              this.router.navigate(['/dashboard/finance-dashboard']);
+            } else if (role === 'Finance Manager') {
+              this.router.navigate(['/dashboard/finance-manager-dashboard']);
             }  else if (role === 'Staff') {
               this.router.navigate(['/dashboard/staff-dashboard']);
             } 
