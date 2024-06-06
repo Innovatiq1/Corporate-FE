@@ -128,9 +128,15 @@ export class CertificateTemplateComponent {
         );
   }
 
+  // edit(id:any)
+  // {
+  //   this.router.navigate(['/student/settings/certificate/edit/:id'], {queryParams:{id:id}})
+  // }
+
 view(id:any){
 
-this.router.navigate(['/student/settings/certificate/edit/:id'], {queryParams:{id:id}})
+this.router.navigate(['/student/settings/certificate/view/:id'], {queryParams:{id:id}})
+
 // [routerLink]="['/admin/payment/view-payments/']"
 }
 

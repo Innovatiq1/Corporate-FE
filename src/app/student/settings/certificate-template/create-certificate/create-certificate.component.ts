@@ -23,7 +23,10 @@ export class CreateCertificateComponent implements OnInit {
   certificateForm!: FormGroup;
   isSubmitted = false;
   editUrl!: boolean;
-  classId!: string;
+  
+  classId!: any;
+  viewUrl: boolean;
+
   title: boolean = false;
   submitted : boolean = false;
   course: any;
@@ -46,6 +49,8 @@ export class CreateCertificateComponent implements OnInit {
     });
     let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit');
+    this.viewUrl = urlPath.includes('view');
+
 if(this.editUrl==true)
   {
     this.breadscrums = [
@@ -56,12 +61,29 @@ if(this.editUrl==true)
       },
     ];
   }
-   if(this.editUrl){
+  if(this.viewUrl==true)
+    {
+      this.breadscrums = [
+        {
+          title: 'Certificate',
+          items: ['Certificate'],
+          active: 'View Certificate',
+        },
+      ];
+    }
+   if(this.editUrl || this.viewUrl){
     this.getData();
    } 
 
+  
+
    
   }
+
+  edit(){
+    this.router.navigate(['/student/settings/certificate/edit/:id'], {queryParams:{id:this.classId}})
+    }
+
 
   // let urlPath = this.router.url.split('/');
   // this.editUrl = urlPath.includes('edit-class');

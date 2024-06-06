@@ -310,6 +310,10 @@ const routes: Routes = [
     component: CreateCertificateComponent
   },
   {
+    path: 'settings/certificate/view/:id',
+    component: CreateCertificateComponent
+  },
+  {
     path: 'settings/certificate/create',
     component: CreateCertificateComponent
   },
