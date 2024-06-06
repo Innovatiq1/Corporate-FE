@@ -43,6 +43,14 @@ import { ApiResponse } from '@core/models/general.response';
         if (filter.filterText) {
           params = params.set('title', filter.filterText?.toString());
         }
+
+        if(filter.studentId) {
+          params = params.set('studentId', filter.studentId?.toString());
+        }
+
+        if(filter.studentName) {
+          params = params.set('studentName', filter.studentName?.toString());
+        }
         // if (filter.status && filter.status === 'active') {
         //   params = params.set('status', 'active');
         // }else if (filter.status && filter.status === 'approved')  {
@@ -76,6 +84,13 @@ import { ApiResponse } from '@core/models/general.response';
       });
     }
 
+    getExamQuestionJsonV2( filter?: Partial<AssessmentQuestionsPaginationModel>): Observable<ApiResponse> {
+      const apiUrl = `${this.defaultUrl}admin/assesment-answers/v2`;
+      return this.http.get<any>(apiUrl, {
+        params: this.buildParams(filter),
+      });
+    }
+
     getAssessmentAnswerCount(studentId:string, courseId:string): Observable<ApiResponse> {
       const apiUrl = `${this.defaultUrl}admin/assesment-answers/count`;
       return this.http.get<any>(apiUrl, {
@@ -97,8 +112,29 @@ import { ApiResponse } from '@core/models/general.response';
       });
     }
 
+    getAssignedExamAnswers( filter?: Partial<AssessmentQuestionsPaginationModel>): Observable<ApiResponse> {
+      const apiUrl = `${this.defaultUrl}admin/exam-assesment-answers/assignedExams`;
+      return this.http.get<any>(apiUrl, {
+        params: this.buildParams(filter),
+      });
+    }
+
+    assignExamAssessment(data: any): Observable<ApiResponse> {
+      const apiUrl = this.defaultUrl + 'admin/exam-assesment-answers/assignedExams';
+      return this.http.post<ApiResponse>(apiUrl, data).pipe(
+        map(response => response)
+      );
+    }
+
     getExamAnswersV2( filter?: Partial<AssessmentQuestionsPaginationModel>): Observable<ApiResponse> {
       const apiUrl = `${this.defaultUrl}admin/exam-assesment-answers/v2`;
+      return this.http.get<any>(apiUrl, {
+        params: this.buildParams(filter),
+      });
+    }
+
+    getLatestExamAnswers( filter?: Partial<AssessmentQuestionsPaginationModel>): Observable<ApiResponse> {
+      const apiUrl = `${this.defaultUrl}admin/exam-assesment-answers/latest`;
       return this.http.get<any>(apiUrl, {
         params: this.buildParams(filter),
       });
@@ -129,6 +165,13 @@ import { ApiResponse } from '@core/models/general.response';
 
     updateAssessment(data: any): Observable<any> {
       const apiUrl = `${this.defaultUrl}admin/exam-assesment-answers/${data.id}`;
+      return this.http.put<ApiResponse>(apiUrl, data).pipe(
+        map(response => response)
+      );
+    }
+
+    updateAssessmentStudentView(data: any): Observable<any> {
+      const apiUrl = `${this.defaultUrl}admin/exam-assesment-answers/${data.id}/student-view`;
       return this.http.put<ApiResponse>(apiUrl, data).pipe(
         map(response => response)
       );

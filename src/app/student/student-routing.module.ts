@@ -85,6 +85,7 @@ import { ViewApprovalWorkflowComponent } from './settings/approval-workflow/view
 import { CreateApprovalWorkflowComponent } from './settings/approval-workflow/create-approval-workflow/create-approval-workflow.component';
 //import { CreateCertificateComponent } from './settings/certificate-template/create-certificate/create-certificate.component';
 import { CreateCertificateComponent } from './settings/certificate-template/create-certificate/create-certificate.component';
+import { ExamTestListComponent } from './exam-test-list/exam-test-list.component';
 
 const routes: Routes = [
   {
@@ -162,12 +163,12 @@ const routes: Routes = [
     component: FeedbackComponent,
   },
   {
-    path: 'exams/courses',
-    component: ExamsSheduleComponent
+    path: 'exams/exam-results',
+    component: ExamResultsComponent,
   },
   {
-    path: 'exams/programs',
-    component: ProgramSheduleComponent
+    path: 'exams/exam',
+    component: ExamTestListComponent,
   },
   {
     path: 'questions/:id/:id/:id',

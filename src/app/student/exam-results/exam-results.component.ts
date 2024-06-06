@@ -16,6 +16,7 @@ export class ExamResultsComponent {
     'Course Title',
     'Exam Name',
     'Exam Assessment Score',
+    'Submitted At',
     'Retakes left',
     'Exam'
   ];
@@ -46,7 +47,8 @@ export class ExamResultsComponent {
    }
 
    getAllAnswers() {
-    this.assessmentService.getExamAnswers({ ...this.assessmentPaginationModel})
+    let studentId = localStorage.getItem('id')||'';
+    this.assessmentService.getLatestExamAnswers({ ...this.assessmentPaginationModel, studentId})
       .subscribe(res => {
         this.dataSource = res.data.docs;
         this.totalItems = res.data.totalDocs;
