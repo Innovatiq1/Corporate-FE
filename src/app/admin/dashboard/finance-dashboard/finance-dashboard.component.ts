@@ -65,6 +65,8 @@ import {
 } from '@angular/material/snack-bar';
 import { SettingsService } from '@core/service/settings.service';
 import { BarChart } from 'angular-feather/icons';
+import { forkJoin } from 'rxjs';
+import { StudentPaginationModel } from 'app/admin/schedule-class/class.model';
 export type barChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -157,14 +159,12 @@ export type lineChartOptions = {
   series2: ApexNonAxisChartSeries;
 };
 
-//end
-
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
+  selector: 'app-finance-dashboard',
+  templateUrl: './finance-dashboard.component.html',
+  styleUrls: ['./finance-dashboard.component.scss']
 })
-export class MainComponent implements OnInit {
+export class FinanceDashboardComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
   public areaChartOptions!: Partial<chartOptions>;
   public performanceBarChartOptions!: Partial<chartOptions>;
@@ -190,7 +190,7 @@ export class MainComponent implements OnInit {
     {
       title: 'Dashboad',
       items: ['Dashboad'],
-      active: 'Staff Dashboard',
+      active: 'Finance Manager Dashboard',
     },
   ];
   //Student
@@ -302,6 +302,17 @@ export class MainComponent implements OnInit {
   totalDocs: any;
   docs: any;
   classList: any;
+  officersCount: any;
+  managersCount: any;
+  officers: any;
+  managers: any;
+  paymentsCount: any;
+  payments: any;
+  courseList: any;
+  staff: any;
+  studentPaginationModel: StudentPaginationModel;
+  staffOverview: any;
+  staffOverviewCounts: any;
 
   constructor(
     private courseService: CourseService,
@@ -350,6 +361,8 @@ export class MainComponent implements OnInit {
     this.studentName = user?.user?.name;
     this.getRegisteredAndApprovedCourses();
     //Student End
+
+    this.studentPaginationModel = {} as StudentPaginationModel;
   }
 
   getCount() {
@@ -581,7 +594,7 @@ export class MainComponent implements OnInit {
   //End Student Information
   getStudentsList() {
     let payload = {
-      type: 'Student',
+      type: 'Staff',
     };
     this.instructorService.getInstructor(payload).subscribe(
       (response: any) => {
@@ -854,13 +867,17 @@ export class MainComponent implements OnInit {
     } else {
       this.isAdmin = true;
     }
-    if (role == 'Admin' || role == 'CEO') {
+    if (role == 'Admin' || role == 'Finance Manager') {
       this.getAdminDashboard();
     } else if (role === 'Student' || role === 'Staff') {
       this.getStudentDashboard();
     }
     
 //Student
+    this.getStaffList();
+    this.getAllPayments();
+    this.getCourseOverviewList();
+    this.getStaffOverviewList();
     this.performancePieChart();
     this.getApprovedCourse();
     this.getApprovedProgram();
@@ -985,7 +1002,7 @@ export class MainComponent implements OnInit {
       this.surveyBarChartOptions = {
         series: [
           {
-            name: 'new students',
+            name: 'new staff',
             data: [
               this.twoMonthsAgoStudents.length,
               this.fourMonthsAgoStudents.length,
@@ -996,7 +1013,7 @@ export class MainComponent implements OnInit {
             ],
           },
           {
-            name: 'old students',
+            name: 'old staff',
             data: [
               this.tillPreviousTwoMonthsStudents.length,
               this.tillPreviousFourMonthsStudents.length,
@@ -1055,7 +1072,7 @@ export class MainComponent implements OnInit {
         },
         yaxis: {
           title: {
-            text: 'Number of Students',
+            text: 'Number of Staff',
           },
         },
         plotOptions: {
@@ -1096,7 +1113,7 @@ export class MainComponent implements OnInit {
       height: 350,
       type: 'pie',
     },
-    labels: ['New Students', 'Old Students'],
+    labels: ['New Staff', 'Old Staff'],
     colors: ['#9F8DF1', '#E79A3B'],
     legend: {
       show: true,
@@ -1278,7 +1295,7 @@ export class MainComponent implements OnInit {
     this.areaChartOptions = {
       series: [
         {
-          name: 'new students',
+          name: 'new staff',
           data: [
             this.twoMonthsAgoStudents.length,
             this.fourMonthsAgoStudents.length,
@@ -1289,7 +1306,7 @@ export class MainComponent implements OnInit {
           ],
         },
         {
-          name: 'old students',
+          name: 'old staff',
           data: [
             this.tillPreviousTwoMonthsStudents.length,
             this.tillPreviousFourMonthsStudents.length,
@@ -1626,7 +1643,7 @@ private attendanceBarChart() {
       dataLabels: {
         enabled: false,
       },
-      labels: ['Instructors', 'Students', 'Admin'],
+      labels: ['Officers', 'Managers', 'Staff'],
       colors: ['#6777ef', '#ff9800', '#B71180'],
       responsive: [
         {
@@ -1683,7 +1700,7 @@ private attendanceBarChart() {
         strokeDashArray: 1,
     },
     xaxis: {
-        categories: ['Instructors','Students','Admin'],
+        categories: ['Officers','Managers','Staff'],
         title: {
             text: 'Users',
         },
@@ -1750,7 +1767,7 @@ private attendanceBarChart() {
         strokeDashArray: 1,
       },
       xaxis: {
-        categories: ['Instructors','Students','Admin'],
+        categories: ['Officers','Managers','Staff'],
         title: {
           text: 'Users',
         },
@@ -2416,4 +2433,43 @@ private attendanceBarChart() {
     } 
     
   }
+
+ 
+  getStaffList(filters?:any) {
+    let headId = localStorage.getItem('id');
+    this.userService.getUsersById( {...this.coursePaginationModel, headId}).subscribe((response: any) => {
+      this.staff = response.data.docs;
+  
+    }, error => {
+    });
+  }
+  getAllPayments(){
+    this.courseService.getAllPayments({ ...this.coursePaginationModel}).subscribe(response =>{
+     this.paymentsCount = response.data.docs.length;
+     this.payments = response.data.docs;
+    }, error => {
+    });
+  }
+
+  getCourseOverviewList(filters?: any) {
+    forkJoin({
+      courses: this.classService.getAllCoursesTitle('active'),
+    }).subscribe((response) => {
+      this.courseList = response.courses.reverse();
+    });
+
+}
+getStaffOverviewList() {
+  this.classService
+    .getApprovedClasses(
+      this.studentPaginationModel.page,
+      this.studentPaginationModel.limit,
+      this.studentPaginationModel.filterText
+    )
+    .subscribe((response: { data: StudentPaginationModel }) => {
+      this.staffOverview = response.data.docs;
+      this.staffOverviewCounts = response.data.docs.length;
+    });
+}
+
 }

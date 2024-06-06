@@ -28,69 +28,28 @@ export class BreadcrumbComponent {
   homeURL():string {
     let url = '/dashboard/dashboard';
     const role = this.authenticationService.currentUserValue.user.role;
-    if (
-      role === Role.All ||
-      (role === Role.Admin &&
-        (role == 'RO' || role == 'Director' || role == 'Employee'))
-    ) {
+    if (role === 'CEO')  {
+      url = '/dashboard/ceo-dashboard';
+    } else if (role === 'CTO') {
+      url = '/dashboard/cto-dashboard';
+    } else if (role === 'CFO') {
+      url = '/dashboard/cfo-dashboard';
+    }
+      else if (role === 'COO') {
+      url = '/dashboard/coo-dashboard';
+    } else if (role === 'IT Manager') {
+      url = '/dashboard/it-manager-dashboard';
+    } else if (role === 'HR Manager') {
+      url = '/dashboard/hr-manager-dashboard';
+    } else if (role === 'Admin Manager') {
+      url = '/dashboard/admin-dashboard';
+    } else if (role === 'Finance') {
+      url = '/dashboard/finance-dashboard';
+    }  else if (role === 'Staff') {
+      url = '/dashboard/staff-dashboard';
+    } 
+     else {
       url = '/dashboard/dashboard';
-    } else if (
-      role === Role.Instructor ||
-      role === 'Trainer' ||
-      role === 'instructor'
-    ) {
-      url = '/dashboard/instructor-dashboard';
-    } else if (role === Role.Student || role === 'student') {
-      url = '/dashboard/student-dashboard';
-    } else if (
-      role === Role.TrainingAdministrator ||
-      role === 'Training administrator' ||
-      role === 'training administrator'
-    ) {
-      url = '/dashboard/trainingadministrator-dashboard';
-    } else if (
-      role === Role.Supervisor ||
-      role === 'Supervisor' ||
-      role === 'supervisor'
-    ) {
-      url = '/dashboard/supervisor-dashboard';
-    } else if (
-      role === Role.HOD ||
-      role === 'hod' ||
-      role === 'HOD' ||
-      role === 'head of department'
-    ) {
-      url = '/dashboard/hod-dashboard';
-    } else if (
-      role === Role.TrainingCoordinator ||
-      role === 'Training Coordinator' ||
-      role === 'training coordinator'
-    ) {
-      url = '/dashboard/trainingcoordinator-dashboard';
-    } else if (
-      role === Role.CourseManager ||
-      role === 'coursemanager' ||
-      role === 'Course Manager'
-    ) {
-      url = '/dashboard/coursemanager-dashboard';
-    } else if (
-      role === Role.ProgramManager ||
-      role === 'programcoordinator' ||
-      role === 'Program manager'
-    ) {
-      url = '/dashboard/programmanager-dashboard';
-    } else if (
-      role === Role.Approver ||
-      role === 'approver' ||
-      role === 'approver'
-    ) {
-      url = '/admin/courses/all-courses';
-    } else if (
-      role === Role.TrainingCoordinatorAdministrator ||
-      role === 'Training Coordinator Administrator' ||
-      role === 'Training Coordinator Administrator'
-    ) {
-      url = '/admin/users/all-students';
     }
     return url;
   }

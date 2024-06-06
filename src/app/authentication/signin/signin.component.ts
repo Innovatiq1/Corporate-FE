@@ -118,7 +118,30 @@ export class SigninComponent
 
         if(user){
           setTimeout(() => {
-            this.router.navigate(['/dashboard/dashboard']);
+            const role = this.authenticationService.currentUserValue.user.role;
+            if (role === 'CEO')  {
+              this.router.navigate(['/dashboard/ceo-dashboard']);
+            } else if (role === 'CTO') {
+              this.router.navigate(['/dashboard/cto-dashboard']);
+            } else if (role === 'CFO') {
+              this.router.navigate(['/dashboard/cfo-dashboard']);
+            }
+              else if (role === 'COO') {
+              this.router.navigate(['/dashboard/coo-dashboard']);
+            } else if (role === 'IT Manager') {
+              this.router.navigate(['/dashboard/it-manager-dashboard']);
+            } else if (role === 'HR Manager') {
+              this.router.navigate(['/dashboard/hr-manager-dashboard']);
+            } else if (role === 'Admin Manager') {
+              this.router.navigate(['/dashboard/admin-dashboard']);
+            } else if (role === 'Finance') {
+              this.router.navigate(['/dashboard/finance-dashboard']);
+            }  else if (role === 'Staff') {
+              this.router.navigate(['/dashboard/staff-dashboard']);
+            } 
+             else {
+              this.router.navigate(['/dashboard/dashboard']);
+            }
             this.loading = false;
           }, 100);
           this.authenticationService.saveUserInfo(user);
@@ -252,35 +275,29 @@ export class SigninComponent
         (user) => {
           setTimeout(() => {
             const role = this.authenticationService.currentUserValue.user.role;
-            this.router.navigate(['/dashboard/dashboard']);
-            // if ((role === Role.All && this.tmsUrl) || (role === Role.Admin && this.tmsUrl || role=="RO"  || role == "Director" || role == "Employee")) {
-            //   this.router.navigate(['/dashboard/dashboard']);
-            // } else if ((role === Role.Instructor && this.tmsUrl) || (role === 'Trainer' && this.tmsUrl) || (role ==='instructor' && this.tmsUrl)) {
-            //   this.router.navigate(['/dashboard/instructor-dashboard']);
-            // } else if ((role === Role.Student && this.lmsUrl)|| (role === 'Student' && this.lmsUrl)) {
-            //   console.log('student',role)
-            //   this.router.navigate(['/dashboard/student-dashboard']);
-            // }
-            //   else if (role === Role.TrainingAdministrator || role === 'Training administrator' || role === 'training administrator') {
-            //   this.router.navigate(['/dashboard/trainingadministrator-dashboard']);
-            // } else if (role === Role.Supervisor || role === 'Supervisor' || role === 'supervisor') {
-            //   this.router.navigate(['/dashboard/supervisor-dashboard']);
-            // } else if (role === Role.HOD || role === 'hod' || role === 'HOD' || role === 'head of department') {
-            //   this.router.navigate(['/dashboard/hod-dashboard']);
-            // } else if (role === Role.TrainingCoordinator || role === 'Training Coordinator' || role === 'training coordinator') {
-            //   this.router.navigate(['/dashboard/trainingcoordinator-dashboard']);
-            // } else if (role === Role.CourseManager || role === 'coursemanager'|| role === 'Course Manager') {
-            //   this.router.navigate(['/dashboard/coursemanager-dashboard']);
-            // }  else if (role === Role.ProgramManager || role === 'programcoordinator'|| role === 'Program manager') {
-            //   this.router.navigate(['/dashboard/programmanager-dashboard']);
-            // } else if (role === Role.Approver || role === 'approver'|| role === 'approver') {
-            //   this.router.navigate(['/admin/courses/all-courses']);
-            // } else if (role === Role.TrainingCoordinatorAdministrator || role === 'Training Coordinator Administrator'|| role === 'Training Coordinator Administrator') {
-            //   this.router.navigate(['/admin/users/all-students']);
-            // }
-            //  else {
-            //   this.router.navigate(['/dashboard/dashboard']);
-            // }
+            if (role === 'CEO')  {
+              this.router.navigate(['/dashboard/ceo-dashboard']);
+            } else if (role === 'CTO') {
+              this.router.navigate(['/dashboard/cto-dashboard']);
+            } else if (role === 'CFO') {
+              this.router.navigate(['/dashboard/cfo-dashboard']);
+            }
+              else if (role === 'COO') {
+              this.router.navigate(['/dashboard/coo-dashboard']);
+            } else if (role === 'IT Manager') {
+              this.router.navigate(['/dashboard/it-manager-dashboard']);
+            } else if (role === 'HR Manager') {
+              this.router.navigate(['/dashboard/hr-manager-dashboard']);
+            } else if (role === 'Admin Manager') {
+              this.router.navigate(['/dashboard/admin-dashboard']);
+            } else if (role === 'Finance') {
+              this.router.navigate(['/dashboard/finance-dashboard']);
+            }  else if (role === 'Staff') {
+              this.router.navigate(['/dashboard/staff-dashboard']);
+            } 
+             else {
+              this.router.navigate(['/dashboard/dashboard']);
+            }
 
             this.loading = false;
           }, 100);

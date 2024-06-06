@@ -157,14 +157,13 @@ export type lineChartOptions = {
   series2: ApexNonAxisChartSeries;
 };
 
-//end
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
+  selector: 'app-it-dashboard',
+  templateUrl: './it-dashboard.component.html',
+  styleUrls: ['./it-dashboard.component.scss']
 })
-export class MainComponent implements OnInit {
+export class ItDashboardComponent implements OnInit {
   @ViewChild('chart') chart!: ChartComponent;
   public areaChartOptions!: Partial<chartOptions>;
   public performanceBarChartOptions!: Partial<chartOptions>;
@@ -190,7 +189,7 @@ export class MainComponent implements OnInit {
     {
       title: 'Dashboad',
       items: ['Dashboad'],
-      active: 'Staff Dashboard',
+      active: 'IT Manager Dashboard',
     },
   ];
   //Student
@@ -302,6 +301,13 @@ export class MainComponent implements OnInit {
   totalDocs: any;
   docs: any;
   classList: any;
+  officersCount: any;
+  managersCount: any;
+  officers: any;
+  managers: any;
+  feedbackCount: any;
+  feedbacks: any;
+  staff: any;
 
   constructor(
     private courseService: CourseService,
@@ -320,7 +326,7 @@ export class MainComponent implements OnInit {
     this.tmsUrl = urlPath.includes('TMS');
     this.lmsUrl = urlPath.includes('LMS');
     this.getCount();
-    this.getInstructorsList();
+    // this.getInstructorsList();
     this.getStudentsList();
     this.chart2();
     this.attendanceLineChart();
@@ -358,20 +364,20 @@ export class MainComponent implements OnInit {
       this.instructorCount = this.count?.instructors;
       this.adminCount = this.count?.admins;
       this.studentCount = this.count?.students;
-      this.setUsersChart();
+      // this.setUsersChart();
     });
   }
-  getInstructorsList() {
-    let payload = {
-      type: 'Instructor',
-    };
-    this.instructorService.getInstructor(payload).subscribe(
-      (response: any) => {
-        this.instructors = response.slice(0, 5);
-      },
-      (error) => {}
-    );
-  }
+  // getInstructorsList() {
+  //   let payload = {
+  //     type: 'Instructor',
+  //   };
+  //   this.instructorService.getInstructor(payload).subscribe(
+  //     (response: any) => {
+  //       this.instructors = response.slice(0, 5);
+  //     },
+  //     (error) => {}
+  //   );
+  // }
 
   //Student Information
 
@@ -414,7 +420,7 @@ export class MainComponent implements OnInit {
           this.studentPieChart();
           this?.studentBarChart();
           this?.studentLineChart();
-          // this.setSurveyChart();
+          this.setSurveyChart();
 
         })
         // this.pieChartData= {
@@ -490,98 +496,9 @@ export class MainComponent implements OnInit {
       this.announcements = res.data
     })
   }
-
-  // public doughnutChartOptions: ChartConfiguration['options'] = {
-  //   responsive: true,
-  //   maintainAspectRatio: false,
-  //   plugins: {
-  //     legend: {
-  //       display: false,
-  //     },
-  //   },
-  // };
-//   public studentPieChartOptions: ChartConfiguration['options'] = {
-//     responsive: true,
-//     maintainAspectRatio: false,
-//     plugins: {
-//         legend: {
-//             display: false,
-//         },
-//     },
-// };
-// public pieChartLabels: string[] = [
-//   'Registered Courses',
-//   'Approved Courses',
-//   'Registered Programs',
-//   'Approved Programs',
-//   'Completed Courses',
-//   'Completed Programs'
-// ];
-// public pieChartData: ChartData<'pie'> = {
-//   labels: this.pieChartLabels,
-//   datasets: [
-//       {
-//           data: [/* Insert your data values here */],
-//           backgroundColor: [/* Add colors for each section of the pie chart */],
-//       },
-//   ],
-// };
-// public pieChartType: ChartType = 'pie';
-
-
-// public barChartOptions: ChartConfiguration['options'] = {
-//   responsive: true,
-//   maintainAspectRatio: false,
-//   plugins: {
-//       legend: {
-//           display: false,
-//       },
-//   },
-//   scales: {
-//       x: {
-//           stacked: true, // Stack bars horizontally
-//       },
-//       y: {
-//           stacked: true, // Stack bars vertically
-//       },
-//   },
-// };
-// public barChartLabels: string[] = [
-//   'Registered Courses',
-//   'Approved Courses',
-//   'Registered Programs',
-//   'Approved Programs',
-//   'Completed Courses',
-//   'Completed Programs'
-// ];
-
-// public barChartData: ChartData<'bar'> = {
-//   labels: this.barChartLabels,
-//   datasets: [
-//       {
-//           label: 'Data', // Label for the dataset
-//           data: [/* Insert your data values here */],
-//           backgroundColor: [/* Add colors for each bar in the chart */],
-//       },
-//   ],
-// };
-
-// public barChartType: ChartType = 'bar';
-
-  // public doughnutChartLabels: string[] = [
-  //   'Registered Courses',
-  //   'Approved Courses',
-  //   'Registered Programs ',
-  //   'Approved Programs',
-  //   'Completed Courses' , 
-  //   'Completed Programs'
-  // ];
-  // public doughnutChartData!: ChartData<'doughnut'>
-  // public doughnutChartType: ChartType = 'doughnut';
-  //End Student Information
   getStudentsList() {
     let payload = {
-      type: 'Student',
+      type: 'Staff',
     };
     this.instructorService.getInstructor(payload).subscribe(
       (response: any) => {
@@ -826,8 +743,8 @@ export class MainComponent implements OnInit {
           active: 'Staff Dashboad',
         },
       ];
-    }else if (role === 'Instructor' || role === 'Trainer' || role ==="IT Manager" ) {
-      this.isInstructorDB = true;
+    }else if (role === 'Instructor' || role === 'Trainer' ) {
+      // this.isInstructorDB = true;
       this.breadscrums = [
         {
           title: 'Dashboad',
@@ -854,13 +771,15 @@ export class MainComponent implements OnInit {
     } else {
       this.isAdmin = true;
     }
-    if (role == 'Admin' || role == 'CEO') {
+    if (role == 'Admin' || role === 'IT Manager' || role === 'Finance Manager' || role === 'HR Manager' || role === 'Admin Manager') {
       this.getAdminDashboard();
     } else if (role === 'Student' || role === 'Staff') {
       this.getStudentDashboard();
     }
     
 //Student
+    this.getStaffList();
+    this.getSurveyList();
     this.performancePieChart();
     this.getApprovedCourse();
     this.getApprovedProgram();
@@ -985,7 +904,7 @@ export class MainComponent implements OnInit {
       this.surveyBarChartOptions = {
         series: [
           {
-            name: 'new students',
+            name: 'new staff',
             data: [
               this.twoMonthsAgoStudents.length,
               this.fourMonthsAgoStudents.length,
@@ -996,7 +915,7 @@ export class MainComponent implements OnInit {
             ],
           },
           {
-            name: 'old students',
+            name: 'old staff',
             data: [
               this.tillPreviousTwoMonthsStudents.length,
               this.tillPreviousFourMonthsStudents.length,
@@ -1055,7 +974,7 @@ export class MainComponent implements OnInit {
         },
         yaxis: {
           title: {
-            text: 'Number of Students',
+            text: 'Number of Staff',
           },
         },
         plotOptions: {
@@ -1096,7 +1015,7 @@ export class MainComponent implements OnInit {
       height: 350,
       type: 'pie',
     },
-    labels: ['New Students', 'Old Students'],
+    labels: ['New Staff', 'Old Staff'],
     colors: ['#9F8DF1', '#E79A3B'],
     legend: {
       show: true,
@@ -1278,7 +1197,7 @@ export class MainComponent implements OnInit {
     this.areaChartOptions = {
       series: [
         {
-          name: 'new students',
+          name: 'new staff',
           data: [
             this.twoMonthsAgoStudents.length,
             this.fourMonthsAgoStudents.length,
@@ -1289,7 +1208,7 @@ export class MainComponent implements OnInit {
           ],
         },
         {
-          name: 'old students',
+          name: 'old staff',
           data: [
             this.tillPreviousTwoMonthsStudents.length,
             this.tillPreviousFourMonthsStudents.length,
@@ -1462,7 +1381,7 @@ export class MainComponent implements OnInit {
     this.performanceRateChartOptions = {
       series: [
         {
-          name: 'Students',
+          name: 'Staff',
           data: [113, 120, 130, 120, 125, 119],
         },
       ],
@@ -1505,7 +1424,7 @@ export class MainComponent implements OnInit {
       },
       yaxis: {
         title: {
-          text: 'Students',
+          text: 'Staff',
         },
       },
       tooltip: {
@@ -1552,7 +1471,7 @@ private attendanceBarChart() {
   this.attendanceBarChartOptions = {
       series: [
           {
-              name: 'Students',
+              name: 'Staff',
               data: [113, 120, 130, 120, 125, 119],
           },
       ],
@@ -1595,7 +1514,7 @@ private attendanceBarChart() {
       },
       yaxis: {
           title: {
-              text: 'Students',
+              text: 'Staff',
           },
       },
       tooltip: {
@@ -1608,7 +1527,7 @@ private attendanceBarChart() {
           // },
       },
       title: {
-          text: 'Students by Day',
+          text: 'Staff by Day',
       },
   };
 }
@@ -1626,7 +1545,7 @@ private attendanceBarChart() {
       dataLabels: {
         enabled: false,
       },
-      labels: ['Instructors', 'Students', 'Admin'],
+      labels: ['Officers', 'Managers', 'Staff'],
       colors: ['#6777ef', '#ff9800', '#B71180'],
       responsive: [
         {
@@ -1683,7 +1602,7 @@ private attendanceBarChart() {
         strokeDashArray: 1,
     },
     xaxis: {
-        categories: ['Instructors','Students','Admin'],
+        categories: ['Officers','Managers','Staff'],
         title: {
             text: 'Users',
         },
@@ -1750,7 +1669,7 @@ private attendanceBarChart() {
         strokeDashArray: 1,
       },
       xaxis: {
-        categories: ['Instructors','Students','Admin'],
+        categories: ['Officers','Managers','Staff'],
         title: {
           text: 'Users',
         },
@@ -2337,7 +2256,7 @@ private attendanceBarChart() {
       this.setPerformanceChart();
       this.setSurveyChart();
       this.setAttendanceChart();
-      this.setUsersChart();
+      // this.setUsersChart();
     })
   }
   setSurveyChart() {
@@ -2379,22 +2298,22 @@ private attendanceBarChart() {
       this.attendanceLineChart();
     }
   }
-  setUsersChart() {
-    if (this.dashboard.content[3].viewType == 'Bar Chart') {
-      this.isUsersBar = true;
-      // this.getCount();
-      this.usersBarChart();
-    } else if (this.dashboard.content[3].viewType == 'Pie Chart') {
-      this.isUsersPie = true;
-      // this.getCount();
-      this.usersPieChart();
-    }
-    else if (this.dashboard.content[3].viewType == 'Line Chart') {
-      this.isUsersLine = true;
-      // this.getCount();
-      this.usersLineChart();
-    }
-  }
+  // setUsersChart() {
+  //   if (this.dashboard.content[3].viewType == 'Bar Chart') {
+  //     this.isUsersBar = true;
+  //     // this.getCount();
+  //     this.usersBarChart();
+  //   } else if (this.dashboard.content[3].viewType == 'Pie Chart') {
+  //     this.isUsersPie = true;
+  //     // this.getCount();
+  //     this.usersPieChart();
+  //   }
+  //   else if (this.dashboard.content[3].viewType == 'Line Chart') {
+  //     this.isUsersLine = true;
+  //     // this.getCount();
+  //     this.usersLineChart();
+  //   }
+  // }
 
   getStudentDashboard(){
     this.settingsService.getStudentDashboard().subscribe(response => {
@@ -2416,4 +2335,20 @@ private attendanceBarChart() {
     } 
     
   }
+
+  getStaffList(filters?:any) {
+    let headId = localStorage.getItem('id');
+    this.userService.getUsersById( {...this.coursePaginationModel, headId}).subscribe((response: any) => {
+      this.staff = response.data.docs;
+  
+    }, error => {
+    });
+  }
+  getSurveyList(filters?:any){
+    this.courseService.getAllSurvey().subscribe(response => {
+      this.feedbackCount = response.data.docs.length;
+      this.feedbacks = response.data.docs;
+    })
+  }
+
 }

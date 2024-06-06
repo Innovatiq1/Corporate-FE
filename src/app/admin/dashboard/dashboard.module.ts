@@ -23,6 +23,13 @@ import { TrainingApprovalTabComponent } from './training-approval-tab/training-a
 import { EtmsDashboardComponent } from './etms-dashboard/etms-dashboard.component';
 import { CeoDashboardComponent } from './ceo-dashboard/ceo-dashboard.component';
 import { TeachersService } from '../teachers/teachers.service';
+import { CtoDashboardComponent } from './cto-dashboard/cto-dashboard.component';
+import { CfoDashboardComponent } from './cfo-dashboard/cfo-dashboard.component';
+import { ItDashboardComponent } from './it-dashboard/it-dashboard.component';
+import { ClassService } from '../schedule-class/class.service';
+import { FinanceDashboardComponent } from './finance-dashboard/finance-dashboard.component';
+import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +47,12 @@ import { TeachersService } from '../teachers/teachers.service';
     EtmsDashboardComponent,
     TrainingApprovalTabComponent,
     CeoDashboardComponent,
+    CtoDashboardComponent,
+    CfoDashboardComponent,
+    ItDashboardComponent,
+    FinanceDashboardComponent,
+    HrDashboardComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     CommonModule,
@@ -55,7 +68,7 @@ import { TeachersService } from '../teachers/teachers.service';
     NgChartsModule,
   ],
   providers: [
-    TeachersService
+    TeachersService, ClassService
   ]
 })
 export class DashboardModule {}

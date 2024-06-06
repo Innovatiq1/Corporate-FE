@@ -127,7 +127,13 @@ export class CourseService {
       params: this.buildParams(filter),
     });
   }
-
+  getAllSurvey(filter?: Partial<CoursePaginationModel>
+    ): Observable<ApiResponse> {
+      const apiUrl = this.defaultUrl+'admin/survey-builder';
+      return this._Http.get<ApiResponse>(apiUrl, {
+        params: this.buildParams(filter),
+      });
+  }
   // getAllCertificate(
   //   filter?: Partial<CoursePaginationModel>
   // ): Observable<ApiResponse> {

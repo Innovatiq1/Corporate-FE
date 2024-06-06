@@ -13,6 +13,12 @@ import { TrainingCoordinatorDbComponent } from './training-coordinator-db/traini
 import { TrainingApprovalTabComponent } from './training-approval-tab/training-approval-tab.component';
 import { EtmsDashboardComponent } from './etms-dashboard/etms-dashboard.component';
 import { CeoDashboardComponent } from './ceo-dashboard/ceo-dashboard.component';
+import { CtoDashboardComponent } from './cto-dashboard/cto-dashboard.component';
+import { CfoDashboardComponent } from './cfo-dashboard/cfo-dashboard.component';
+import { ItDashboardComponent } from './it-dashboard/it-dashboard.component';
+import { FinanceDashboardComponent } from './finance-dashboard/finance-dashboard.component';
+import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   {
@@ -21,7 +27,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'dashboard',
+    path: 'staff-dashboard',
     component: MainComponent,
   },
   {
@@ -67,6 +73,30 @@ const routes: Routes = [
   {
     path: 'ceo-dashboard',
     component: CeoDashboardComponent,
+  },
+  {
+    path: 'cto-dashboard',
+    component: CtoDashboardComponent,
+  },
+  {
+    path: 'cfo-dashboard',
+    component: CfoDashboardComponent,
+  },
+  {
+    path: 'it-manager-dashboard',
+    component: ItDashboardComponent,
+  },
+  {
+    path: 'finance-manager-dashboard',
+    component: FinanceDashboardComponent,
+  },
+  {
+    path: 'hr-manager-dashboard',
+    component: HrDashboardComponent,
+  },
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
   },
   {
     path: 'etms-dashboard',

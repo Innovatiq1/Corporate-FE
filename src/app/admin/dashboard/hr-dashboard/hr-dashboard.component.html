@@ -1,0 +1,725 @@
+<section class="content" *ngIf="isAdmin">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+
+
+        <!-- <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+            role="tab" aria-controls="nav-home" aria-selected="true">Student Analytics</button>
+          <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
+            role="tab" aria-controls="nav-profile" aria-selected="false">Instructor Analytics</button>
+          <button class="nav-link" id="nav-support-tab" data-bs-toggle="tab" data-bs-target="#nav-support" type="button"
+            role="tab" aria-controls="nav-support" aria-selected="false">Support</button>
+          <button class="nav-link" id="nav-budget-tab" data-bs-toggle="tab" data-bs-target="#nav-budget" type="button"
+            role="tab" aria-controls="nav-budget" aria-selected="false">Finance</button>
+          <button class="nav-link" id="nav-training-tab" data-bs-toggle="tab" data-bs-target="#nav-training" type="button"
+            role="tab" aria-controls="nav-training" aria-selected="false">Training Approval</button>
+  
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+          <!-- Widgets --
+          <div class="row mt-5">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="clearfix">
+                  <div class="card-icon-only shadow-primary float-start">
+                    <img src="assets/images/banner/New Students.jpg" alt="" style="margin-left: -21px;">
+  
+                  </div>
+                  <div class="card-right">
+                    <div>
+                      <h5 class="float-end">Total Students</h5>
+                    </div>
+                    <div class="col-green">
+                      <h3 class="font-weight-bold float-end mb-0">{{count?.students}}</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-content msl-4 mb-3">
+                  <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 10% Higher Then Last
+                    Month
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="clearfix">
+                  <div class="card-icon-only shadow-primary float-start">
+                    <img src="assets/images/banner/online-course.png" alt="">
+                  </div>
+                  <div class="card-right">
+                    <div>
+                      <h5 class="float-end" style="margin-top: 100px;">All Courses</h5>
+                    </div>
+                    <div class="col-green">
+                      <h3 class="font-weight-bold float-end mb-0">{{count?.courses}}</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-content msl-4 mb-3">
+                  <p class="m-b-0 d-flex"><i class="material-icons col-orange psr-2">trending_down</i> 07% Less Then Last
+                    Year
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="clearfix">
+                  <div class="card-icon-only shadow-primary float-start">
+                    <img src="assets/images/banner/img2.png" alt="">
+                  </div>
+                  <div class="card-right">
+                    <div>
+                      <h5 class="float-end">All Programs</h5>
+                    </div>
+                    <div class="col-green">
+                      <h3 class="font-weight-bold float-end mb-0">{{count?.programs}}</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-content msl-4 mb-3">
+                  <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 05% Higher Then Last
+                    Month
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+              <div class="card card-statistic-2">
+                <div class="clearfix">
+                  <div class="card-icon-only shadow-primary float-start">
+                    <img src="assets/images/banner/img3.png" alt="">
+                  </div>
+                  <div class="card-right">
+                    <div>
+                      <h5 class="float-end">Total Instructors</h5>
+                    </div>
+                    <div class="col-green">
+                      <h3 class="font-weight-bold float-end mb-0">{{count?.instructors}}</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-content msl-4 mb-3">
+                  <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 08% Higher Then Last
+                    Month
+                  </p>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+          <!-- #END# Widgets --
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+              <div class="card" style="border-radius: 31px;">
+                <div class="header mt-3">
+                  <h2>
+                    Students Survey</h2>
+                </div>
+                <div class="body" *ngIf="isArea">
+                  <apx-chart [series]="areaChartOptions.series!" [chart]="areaChartOptions.chart!"
+                    [xaxis]="areaChartOptions.xaxis!" [yaxis]="areaChartOptions.yaxis!"
+                    [colors]="areaChartOptions.colors!" [stroke]="areaChartOptions.stroke!"
+                    [legend]="areaChartOptions.legend!" [grid]="areaChartOptions.grid!"
+                    [tooltip]="areaChartOptions.tooltip!" [dataLabels]="areaChartOptions.dataLabels!"></apx-chart>
+                </div>
+                <div class="body" *ngIf="isSurveyBar">
+                  <apx-chart [series]="surveyBarChartOptions.series!" [chart]="surveyBarChartOptions.chart!"
+                    [xaxis]="surveyBarChartOptions.xaxis!" [yaxis]="surveyBarChartOptions.yaxis!"
+                    [colors]="surveyBarChartOptions.colors!" [stroke]="surveyBarChartOptions.stroke!"
+                    [legend]="surveyBarChartOptions.legend!" [grid]="surveyBarChartOptions.grid!"
+                    [tooltip]="surveyBarChartOptions.tooltip!"
+                    [dataLabels]="surveyBarChartOptions.dataLabels!"></apx-chart>
+                </div>
+                <div class="body" *ngIf="isSurveyPie">
+                  <apx-chart [series]="surveyPieChartOptions.series!" [chart]="surveyPieChartOptions.chart!"
+                    [labels]="surveyPieChartOptions.labels!" [legend]="surveyPieChartOptions.legend!"
+                    [colors]="surveyPieChartOptions.colors!" [responsive]="surveyPieChartOptions.responsive!"></apx-chart>
+                </div>
+  
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+              <div class="card" style="border-radius: 31px;">
+                <div class="header mt-3">
+                  <h2>Student Performance Chart</h2>
+                </div>
+                <div class="body" *ngIf="isBar">
+                  <apx-chart [series]="performanceBarChartOptions.series!" [chart]="performanceBarChartOptions.chart!"
+                    [dataLabels]="performanceBarChartOptions.dataLabels!" [labels]="performanceBarChartOptions.labels!"
+                    [legend]="performanceBarChartOptions.legend!" [fill]="performanceBarChartOptions.fill!"
+                    [responsive]="performanceBarChartOptions.responsive!">
+                  </apx-chart>
+                </div>
+                <div class="body" *ngIf="isPie">
+                  <apx-chart [series]="pieChart1Options.series!" [chart]="pieChart1Options.chart!"
+                    [dataLabels]="pieChart1Options.dataLabels!" [labels]="pieChart1Options.labels!"
+                    [legend]="pieChart1Options.legend!" [fill]="pieChart1Options.fill!"
+                    [responsive]="pieChart1Options.responsive!">
+                  </apx-chart>
+                </div>
+                <div class="body" *ngIf="isLine">
+                  <apx-chart [series]="lineChartOptions.series!" [chart]="lineChartOptions.chart!"
+                    [dataLabels]="lineChartOptions.dataLabels!" [labels]="lineChartOptions.labels!"
+                    [legend]="lineChartOptions.legend!" [fill]="lineChartOptions.fill!"
+                    [responsive]="lineChartOptions.responsive!" [xaxis]="lineChartOptions.xaxis!"
+                    [yaxis]="lineChartOptions.yaxis!" [grid]="lineChartOptions.grid!" [stroke]="lineChartOptions.stroke!"
+                    [markers]="lineChartOptions.markers!">
+                  </apx-chart>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+  
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="card" style="border-radius: 31px;">
+                <div class="header mt-3">
+                  <h2>Average Class Attendance</h2>
+                </div>
+                <div class="float-start ms-3 me-3">
+                  <h5>129 Students <span class="text-muted font-12">(Average)</span></h5>
+                </div>
+                <div class="body" *ngIf="isAttendanceLine">
+                  <apx-chart [series]="performanceRateChartOptions.series!" [chart]="performanceRateChartOptions.chart!"
+                    [xaxis]="performanceRateChartOptions.xaxis!" [stroke]="performanceRateChartOptions.stroke!"
+                    [colors]="performanceRateChartOptions.colors!" [dataLabels]="performanceRateChartOptions.dataLabels!"
+                    [legend]="performanceRateChartOptions.legend!" [markers]="performanceRateChartOptions.markers!"
+                    [grid]="performanceRateChartOptions.grid!" [yaxis]="performanceRateChartOptions.yaxis!"
+                    [tooltip]="performanceRateChartOptions.tooltip!" [title]="performanceRateChartOptions.title!">
+                  </apx-chart>
+                </div>
+                <div class="body" *ngIf="isAttendancePie">
+                  <apx-chart [series]="attendancePieChartOptions.series!" [chart]="attendancePieChartOptions.chart!"
+                    [labels]="attendancePieChartOptions.labels!" [colors]="attendancePieChartOptions.colors!"
+                    [dataLabels]="attendancePieChartOptions.dataLabels!" [legend]="attendancePieChartOptions.legend!"
+                    [tooltip]="attendancePieChartOptions.tooltip!">
+                  </apx-chart>
+                </div>
+                <div class="body" *ngIf="isAttendanceBar">
+                  <apx-chart [series]="attendanceBarChartOptions.series!" [chart]="attendanceBarChartOptions.chart!"
+                    [xaxis]="attendanceBarChartOptions.xaxis!" [stroke]="attendanceBarChartOptions.stroke!"
+                    [colors]="attendanceBarChartOptions.colors!" [dataLabels]="attendanceBarChartOptions.dataLabels!"
+                    [legend]="attendanceBarChartOptions.legend!" [markers]="attendanceBarChartOptions.markers!"
+                    [grid]="attendanceBarChartOptions.grid!" [yaxis]="attendanceBarChartOptions.yaxis!"
+                    [tooltip]="attendanceBarChartOptions.tooltip!" [title]="attendanceBarChartOptions.title!">
+                  </apx-chart>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="card" style="border-radius: 31px;">
+                <div class="header mt-3">
+                  <h2>Users</h2>
+                </div>
+                <div class="float-start ms-3 me-3">
+                  <h5>{{count?.users}} Users(All) <span class="text-muted font-12"></span></h5>
+                </div>
+                <div class="body" *ngIf="isUsersPie">
+                  <apx-chart [series]="polarChartOptions.series2!" [chart]="polarChartOptions.chart!"
+                    [labels]="polarChartOptions.labels!" [title]="polarChartOptions.title!"
+                    [theme]="polarChartOptions.theme!" [fill]="polarChartOptions.fill!" [yaxis]="polarChartOptions.yaxis!"
+                    [stroke]="polarChartOptions.stroke!" [legend]="polarChartOptions.legend!"
+                    [plotOptions]="polarChartOptions.plotOptions!" [colors]="polarChartOptions.colors!"></apx-chart>
+                </div>
+                <div class="body" *ngIf="isUsersLine">
+                  <apx-chart [series]="usersLineChartOptions.series!" [chart]="usersLineChartOptions.chart!"
+                    [xaxis]="usersLineChartOptions.xaxis!" [stroke]="usersLineChartOptions.stroke!"
+                    [colors]="usersLineChartOptions.colors!" [dataLabels]="usersLineChartOptions.dataLabels!"
+                    [legend]="usersLineChartOptions.legend!" [markers]="usersLineChartOptions.markers!"
+                    [grid]="usersLineChartOptions.grid!" [yaxis]="usersLineChartOptions.yaxis!"
+                    [tooltip]="usersLineChartOptions.tooltip!" [title]="usersLineChartOptions.title!">
+                  </apx-chart>
+  
+                </div>
+                <div class="body" *ngIf="isUsersBar">
+                  <apx-chart [series]="usersBarChartOptions.series!" [chart]="usersBarChartOptions.chart!"
+                    [xaxis]="usersBarChartOptions.xaxis!" [stroke]="usersBarChartOptions.stroke!"
+                    [colors]="usersBarChartOptions.colors!" [dataLabels]="usersBarChartOptions.dataLabels!"
+                    [legend]="usersBarChartOptions.legend!" [markers]="usersBarChartOptions.markers!"
+                    [grid]="usersBarChartOptions.grid!" [yaxis]="usersBarChartOptions.yaxis!"
+                    [tooltip]="usersBarChartOptions.tooltip!" [title]="usersBarChartOptions.title!">
+                  </apx-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+              <div class="card" style="border-radius: 31px;">
+                <div class="header mt-3">
+                  <h2>Classes List</h2>
+  
+                </div>
+                <div class="tableBody">
+                  <div class="table-responsive">
+                    <table class="table table-hover ">
+                      <thead>
+                        <tr>
+                          <!-- <th>#</th> --
+                          <th>Course Name</th>
+                          <th>Start Date</th>
+                          <th>End Date</th>
+                          <th>Status </th>
+                          <!-- <th>Actions </th> --
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let class of classesList " style="cursor: pointer;"
+                          [routerLink]="['/admin/courses/view-class/',class.id]">
+                          <!-- <td class="table-img">
+                        <img src="{{class?.courseId?.image_link}}" alt="course">
+                      </td> --
+                          <td>{{class?.courseId?.title | titlecase | truncate:10}}</td>
+                          <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
+                          <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
+                          <td>
+                            <div class="badge col-green">{{class?.status == 'open'?'Active':'Inactive'}}</div>
+                          </td>
+  
+                        </tr>
+  
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+              <div class="card" style="border-radius: 31px;">
+                <div class="header mt-3">
+                  <h2>Instructors List</h2>
+  
+                </div>
+                <div class="tableBody">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Instructor Name</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let instructor of instructors">
+                          <td class="table-img">
+                            <img src="{{instructor.avatar}}" alt="">
+                          </td>
+                          <td>
+                            <div class="media-title"><a href="mailto:test@gmail.com"> {{instructor?.name | titlecase}}
+                              </a></div>
+                            <div class="text-job font-11">({{instructor?.qualification}})</div>
+                          </td>
+                          <td>
+                            <div [class]="instructor?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
+                              {{instructor?.Active == true?"Active":"Inactive"}}</div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="card" style="border-radius: 31px;">
+                <div class="header mt-3">
+                  <h2>New Student List</h2>
+  
+                </div>
+                <div class="tableBody">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Student Name</th>
+                          <th>Qualification</th>
+                          <th>Date Of Joining</th>
+                          <th>Mobile</th>
+                          <!-- <th>Actions</th> --
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let student of students" style="cursor: pointer;" (click)="aboutStudent(student.id)">
+                          <td class="table-img">
+                            <img src="{{student?.avatar || 'assets/profile.png'}}" alt="">
+                          </td>
+                          <td>{{student?.name | titlecase}}</td>
+                          <td>{{student?.education}}</td>
+                          <td>{{student?.createdAt | date}}</td>
+                          <td>
+                            {{student?.mobile}}
+                            <!-- <i class="far fa-file-pdf tbl-pdf"></i> --
+                          </td>
+  
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <app-dashboard2></app-dashboard2>
+        </div>
+        <div class="tab-pane fade" id="nav-support" role="tabpanel" aria-labelledby="nav-support-tab">
+          <app-support></app-support>
+        </div>
+        <div class="tab-pane fade" id="nav-budget" role="tabpanel" aria-labelledby="nav-budget-tab">
+          <app-etms-dashboard></app-etms-dashboard>
+        </div>
+        <div class="tab-pane fade" id="nav-training" role="tabpanel" aria-labelledby="nav-training-tab">
+          <app-training-approval-tab></app-training-approval-tab>
+        </div>
+      </div> -->
+
+        <mat-tab-group>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
+                    Users Analytics
+                </ng-template>
+                <div class="row mt-5">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="card card-statistic-2">
+                            <div class="clearfix">
+                                <div class="card-icon-only shadow-primary float-start">
+                                    <img src="assets/images/banner/New Students.jpg" alt="" style="margin-left: -21px;">
+
+                                </div>
+                                <div class="card-right">
+                                    <div>
+                                        <h5 class="float-end" style="padding-top: 100px;">Total Staff</h5>
+                                    </div>
+                                    <div class="col-green">
+                                        <h3 class="font-weight-bold float-end mb-0">{{count?.students}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content msl-4 mb-3">
+                                <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 10%
+                                    Higher Then Last
+                                    Month
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="card card-statistic-2">
+                            <div class="clearfix">
+                                <div class="card-icon-only shadow-primary float-start">
+                                    <img src="assets/images/banner/img2.png" alt="">
+                                </div>
+                                <div class="card-right">
+                                    <div>
+                                        <h5 class="float-end" style="padding-top: 100px;">All Feedbacks</h5>
+                                    </div>
+                                    <div class="col-green">
+                                        <h3 class="font-weight-bold float-end mb-0">{{feedbackCount}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content msl-4 mb-3">
+                                <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 05%
+                                    Higher Then Last
+                                    Month
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="card card-statistic-2">
+                            <div class="clearfix">
+                                <div class="card-icon-only shadow-primary float-start">
+                                    <img src="assets/images/banner/img2.png" alt="">
+                                </div>
+                                <div class="card-right">
+                                    <div>
+                                        <h5 class="float-end" style="padding-top: 100px;">Enquiries</h5>
+                                    </div>
+                                    <div class="col-green">
+                                        <h3 class="font-weight-bold float-end mb-0">5</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content msl-4 mb-3">
+                                <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 05%
+                                    Higher Then Last
+                                    Month
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- #END# Widgets -->
+
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>Feedbacks List</h2>
+
+                            </div>
+                            <div class="tableBody">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th>Staff</th>
+                                                <th>Course</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let feedback of feedbacks" style="cursor: pointer;">
+                                               
+                                                <td [routerLink]="[ '/admin/user-profile/all-staff',feedback.id]">
+                                                    <div class="media-title"> {{feedback?.studentFirstName | titlecase}}
+                                                    </div>
+                                                </td>
+                                                <td [routerLink]="['/admin/user-profile/all-staff',feedback.id]">
+                                                    <div>{{feedback?.courseName}}
+                                                        </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>Salary Cost by Roles</h2>
+                            </div>
+                         
+                            <div class="body" *ngIf="isSalaryLine">
+                                <apx-chart [series]="salaryLineChartOptions.series!"
+                                    [chart]="salaryLineChartOptions.chart!"
+                                    [xaxis]="salaryLineChartOptions.xaxis!"
+                                    [stroke]="salaryLineChartOptions.stroke!"
+                                    [colors]="salaryLineChartOptions.colors!"
+                                    [dataLabels]="salaryLineChartOptions.dataLabels!"
+                                    [legend]="salaryLineChartOptions.legend!"
+                                    [markers]="salaryLineChartOptions.markers!"
+                                    [grid]="salaryLineChartOptions.grid!"
+                                    [yaxis]="salaryLineChartOptions.yaxis!"
+                                    [tooltip]="salaryLineChartOptions.tooltip!"
+                                    [title]="salaryLineChartOptions.title!">
+                                </apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isSalaryPie">
+                                <apx-chart [series]="salaryPieChartOptions.series!"
+                                    [chart]="salaryPieChartOptions.chart!"
+                                    [labels]="salaryPieChartOptions.labels!"
+                                    [colors]="salaryPieChartOptions.colors!"
+                                    [dataLabels]="salaryPieChartOptions.dataLabels!"
+                                    [legend]="salaryPieChartOptions.legend!"
+                                    [tooltip]="salaryPieChartOptions.tooltip!">
+                                </apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isSalaryBar">
+                                <apx-chart [series]="salaryBarChartOptions.series!"
+                                    [chart]="salaryBarChartOptions.chart!"
+                                    [xaxis]="salaryBarChartOptions.xaxis!"
+                                    [stroke]="salaryBarChartOptions.stroke!"
+                                    [colors]="salaryBarChartOptions.colors!"
+                                    [dataLabels]="salaryBarChartOptions.dataLabels!"
+                                    [legend]="salaryBarChartOptions.legend!"
+                                    [markers]="salaryBarChartOptions.markers!"
+                                    [grid]="salaryBarChartOptions.grid!" 
+                                    [yaxis]="salaryBarChartOptions.yaxis!"
+                                    [tooltip]="salaryBarChartOptions.tooltip!"
+                                    [title]="salaryBarChartOptions.title!">
+                                </apx-chart>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>Staff Availability</h2>
+                            </div>
+                          
+                            <div class="body" *ngIf="isStaffOnlineLine">
+                                <apx-chart [series]="staffAvailabilityLineChartOptions.series!"
+                                    [chart]="staffAvailabilityLineChartOptions.chart!"
+                                    [xaxis]="staffAvailabilityLineChartOptions.xaxis!"
+                                    [stroke]="staffAvailabilityLineChartOptions.stroke!"
+                                    [colors]="staffAvailabilityLineChartOptions.colors!"
+                                    [dataLabels]="staffAvailabilityLineChartOptions.dataLabels!"
+                                    [legend]="staffAvailabilityLineChartOptions.legend!"
+                                    [markers]="staffAvailabilityLineChartOptions.markers!"
+                                    [grid]="staffAvailabilityLineChartOptions.grid!"
+                                    [yaxis]="staffAvailabilityLineChartOptions.yaxis!"
+                                    [tooltip]="staffAvailabilityLineChartOptions.tooltip!"
+                                    [title]="staffAvailabilityLineChartOptions.title!">
+                                </apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isStaffOnlinePie">
+                                <apx-chart [series]="staffAvailabilityPieChartOptions.series!"
+                                    [chart]="staffAvailabilityPieChartOptions.chart!"
+                                    [labels]="staffAvailabilityPieChartOptions.labels!"
+                                    [colors]="staffAvailabilityPieChartOptions.colors!"
+                                    [dataLabels]="staffAvailabilityPieChartOptions.dataLabels!"
+                                    [legend]="staffAvailabilityPieChartOptions.legend!"
+                                    [tooltip]="staffAvailabilityPieChartOptions.tooltip!">
+                                </apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isStaffOnlineBar">
+                                <apx-chart [series]="staffAvailabilityBarChartOptions.series!"
+                                    [chart]="staffAvailabilityBarChartOptions.chart!"
+                                    [xaxis]="staffAvailabilityBarChartOptions.xaxis!"
+                                    [stroke]="staffAvailabilityBarChartOptions.stroke!"
+                                    [colors]="staffAvailabilityBarChartOptions.colors!"
+                                    [dataLabels]="staffAvailabilityBarChartOptions.dataLabels!"
+                                    [legend]="staffAvailabilityBarChartOptions.legend!"
+                                    [markers]="staffAvailabilityBarChartOptions.markers!"
+                                    [grid]="staffAvailabilityBarChartOptions.grid!" 
+                                    [yaxis]="staffAvailabilityBarChartOptions.yaxis!"
+                                    [tooltip]="staffAvailabilityBarChartOptions.tooltip!"
+                                    [title]="staffAvailabilityBarChartOptions.title!">
+                                </apx-chart>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>Staff by Gender</h2>
+                            </div>
+                         
+                            <div class="body" *ngIf="isGenderLine">
+                                <apx-chart [series]="genderLineChartOptions.series!"
+                                    [chart]="genderLineChartOptions.chart!"
+                                    [xaxis]="genderLineChartOptions.xaxis!"
+                                    [stroke]="genderLineChartOptions.stroke!"
+                                    [colors]="genderLineChartOptions.colors!"
+                                    [dataLabels]="genderLineChartOptions.dataLabels!"
+                                    [legend]="genderLineChartOptions.legend!"
+                                    [markers]="genderLineChartOptions.markers!"
+                                    [grid]="genderLineChartOptions.grid!"
+                                    [yaxis]="genderLineChartOptions.yaxis!"
+                                    [tooltip]="genderLineChartOptions.tooltip!"
+                                    [title]="genderLineChartOptions.title!">
+                                </apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isGenderPie">
+                                <apx-chart [series]="genderPieChartOptions.series!"
+                                    [chart]="genderPieChartOptions.chart!"
+                                    [labels]="genderPieChartOptions.labels!"
+                                    [colors]="genderPieChartOptions.colors!"
+                                    [dataLabels]="genderPieChartOptions.dataLabels!"
+                                    [legend]="genderPieChartOptions.legend!"
+                                    [tooltip]="genderPieChartOptions.tooltip!">
+                                </apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isGenderBar">
+                                <apx-chart [series]="genderBarChartOptions.series!"
+                                    [chart]="genderBarChartOptions.chart!"
+                                    [xaxis]="genderBarChartOptions.xaxis!"
+                                    [stroke]="genderBarChartOptions.stroke!"
+                                    [colors]="genderBarChartOptions.colors!"
+                                    [dataLabels]="genderBarChartOptions.dataLabels!"
+                                    [legend]="genderBarChartOptions.legend!"
+                                    [markers]="genderBarChartOptions.markers!"
+                                    [grid]="genderBarChartOptions.grid!" 
+                                    [yaxis]="genderBarChartOptions.yaxis!"
+                                    [tooltip]="genderBarChartOptions.tooltip!"
+                                    [title]="genderBarChartOptions.title!">
+                                </apx-chart>
+                            </div>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>Average Class Attendance</h2>
+                            </div>
+                            <div class="float-start ms-3 me-3">
+                                <h5>129 Students <span class="text-muted font-12">(Average)</span></h5>
+                            </div>
+                            <div class="body" *ngIf="isAttendanceLine">
+                                <apx-chart [series]="performanceRateChartOptions.series!"
+                                    [chart]="performanceRateChartOptions.chart!"
+                                    [xaxis]="performanceRateChartOptions.xaxis!"
+                                    [stroke]="performanceRateChartOptions.stroke!"
+                                    [colors]="performanceRateChartOptions.colors!"
+                                    [dataLabels]="performanceRateChartOptions.dataLabels!"
+                                    [legend]="performanceRateChartOptions.legend!"
+                                    [markers]="performanceRateChartOptions.markers!"
+                                    [grid]="performanceRateChartOptions.grid!"
+                                    [yaxis]="performanceRateChartOptions.yaxis!"
+                                    [tooltip]="performanceRateChartOptions.tooltip!"
+                                    [title]="performanceRateChartOptions.title!">
+                                </apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isAttendancePie">
+                                <apx-chart [series]="attendancePieChartOptions.series!"
+                                    [chart]="attendancePieChartOptions.chart!"
+                                    [labels]="attendancePieChartOptions.labels!"
+                                    [colors]="attendancePieChartOptions.colors!"
+                                    [dataLabels]="attendancePieChartOptions.dataLabels!"
+                                    [legend]="attendancePieChartOptions.legend!"
+                                    [tooltip]="attendancePieChartOptions.tooltip!">
+                                </apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isAttendanceBar">
+                                <apx-chart [series]="attendanceBarChartOptions.series!"
+                                    [chart]="attendanceBarChartOptions.chart!"
+                                    [xaxis]="attendanceBarChartOptions.xaxis!"
+                                    [stroke]="attendanceBarChartOptions.stroke!"
+                                    [colors]="attendanceBarChartOptions.colors!"
+                                    [dataLabels]="attendanceBarChartOptions.dataLabels!"
+                                    [legend]="attendanceBarChartOptions.legend!"
+                                    [markers]="attendanceBarChartOptions.markers!"
+                                    [grid]="attendanceBarChartOptions.grid!" [yaxis]="attendanceBarChartOptions.yaxis!"
+                                    [tooltip]="attendanceBarChartOptions.tooltip!"
+                                    [title]="attendanceBarChartOptions.title!">
+                                </apx-chart>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </mat-tab>
+
+
+        </mat-tab-group>
+
+    </div>
+</section>

@@ -1,0 +1,301 @@
+<section class="content" *ngIf="isAdmin">
+    <div class="content-block">
+        <div class="block-header" *ngFor="let breadscrum of breadscrums">
+            <!-- breadcrumb -->
+            <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+            </app-breadcrumb>
+        </div>
+
+        <mat-tab-group>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
+                    Users Analytics
+                </ng-template>
+                <div class="row mt-5">
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="card card-statistic-2">
+                            <div class="clearfix">
+                                <div class="card-icon-only shadow-primary float-start">
+                                    <img src="assets/images/banner/New Students.jpg" alt="" style="margin-left: -21px;">
+
+                                </div>
+                                <div class="card-right">
+                                    <div>
+                                        <h5 class="float-end" style="padding-top: 100px;">Total Staff</h5>
+                                    </div>
+                                    <div class="col-green">
+                                        <h3 class="font-weight-bold float-end mb-0">{{count?.students}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content msl-4 mb-3">
+                                <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 10%
+                                    Higher Then Last
+                                    Month
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="card card-statistic-2">
+                            <div class="clearfix">
+                                <div class="card-icon-only shadow-primary float-start">
+                                    <img src="assets/images/banner/online-course.png" alt="">
+                                </div>
+                                <div class="card-right">
+                                    <div>
+                                        <h5 class="float-end" style="margin-top: 100px;">All Transactions</h5>
+                                    </div>
+                                    <div class="col-green">
+                                        <h3 class="font-weight-bold float-end mb-0">{{paymentsCount}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content msl-4 mb-3">
+                                <p class="m-b-0 d-flex"><i class="material-icons col-orange psr-2">trending_down</i> 07%
+                                    Less Then Last
+                                    Year
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="card card-statistic-2">
+                            <div class="clearfix">
+                                <div class="card-icon-only shadow-primary float-start">
+                                    <img src="assets/images/banner/img3.png" alt="">
+                                </div>
+                                <div class="card-right">
+                                    <div>
+                                        <h5 class="float-end" style="margin-top: 100px;">Enrolled Courses</h5>
+                                    </div>
+                                    <div class="col-green">
+                                        <h3 class="font-weight-bold float-end mb-0">{{staffOverviewCounts || 0}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content msl-4 mb-3">
+                                <p class="m-b-0 d-flex"><i class="material-icons col-green psr-2">trending_up</i> 08%
+                                    Higher Then Last
+                                    Month
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- #END# Widgets -->
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>Transaction List</h2>
+
+                            </div>
+                            <div class="tableBody">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Student</th>
+                                                <th>Course Name</th>
+                                                <th>Payment Mode</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let payment of payments" style="cursor: pointer;">
+                                                <td >{{payment.name}} </td>
+                                                <td >
+                                                    <div class="media-title"> {{payment?.course | titlecase}}
+                                                    </div>
+                                                </td>
+                                                <td >{{payment.paymentMode}} </td>
+                                                <td >${{payment.price||0}}.00</td>
+                                                
+                                            </tr>
+                                            <div class="button-container">
+                                                <button mat-stroked-button [routerLink]="['/admin/budgets/course-payment']" color="primary">View More</button>
+                                              </div>
+                                        </tbody>
+                                       
+                                      
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>Course Price overview</h2>
+
+                            </div>
+                            <div class="tableBody">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Course Name</th>
+                                                <th>Course Cost</th>
+                                                <th>End Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let courses of courseList" style="cursor: pointer;height: 130px;">
+                                                <td class="table-img">
+                                                   {{courses.title}}
+                                                </td>
+                                                <td >
+                                                   ${{courses.fee || 0}}.00
+                                                </td>
+                                                <td >
+                                                    {{courses.sessionEndDate | date}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>Staff Overview</h2>
+
+                            </div>
+                            <div class="tableBody">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Staff</th>
+                                                <th>Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let staff of staffOverview" style="cursor: pointer;">
+                                                <td >{{staff.studentId?.last_name?staff.studentId?.name + " " + staff.studentId?.last_name:staff.studentId?.name}} </td>
+                                                
+                                                <td >${{staff?.classId?.courseId?.fee || 0}}.00</td>
+                                                
+                                            </tr>
+                                           
+                                        </tbody>
+                                       
+                                      
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>Staff List</h2>
+
+                            </div>
+                            <div class="tableBody">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Staff Name</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let user of staff" style="cursor: pointer;">
+                                                <td class="table-img">
+                                                    <img src="{{user.avatar || 'assets/profile.png'}}" alt="">
+                                                </td>
+                                                <td [routerLink]="[ '/admin/user-profile/view-student',user.id]">
+                                                    <div class="media-title"> {{user?.name | titlecase}}
+                                                    </div>
+                                                </td>
+                                                <td [routerLink]="['/admin/user-profile/view-student',user.id]">
+                                                    <div
+                                                        [class]="user?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
+                                                        {{user?.Active == true?"Active":"Inactive"}}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>
+                                    Staff Survey</h2>
+                            </div>
+                            <div class="body" *ngIf="isArea">
+                                <apx-chart [series]="areaChartOptions.series!" [chart]="areaChartOptions.chart!"
+                                    [xaxis]="areaChartOptions.xaxis!" [yaxis]="areaChartOptions.yaxis!"
+                                    [colors]="areaChartOptions.colors!" [stroke]="areaChartOptions.stroke!"
+                                    [legend]="areaChartOptions.legend!" [grid]="areaChartOptions.grid!"
+                                    [tooltip]="areaChartOptions.tooltip!"
+                                    [dataLabels]="areaChartOptions.dataLabels!"></apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isSurveyBar">
+                                <apx-chart [series]="surveyBarChartOptions.series!"
+                                    [chart]="surveyBarChartOptions.chart!" [xaxis]="surveyBarChartOptions.xaxis!"
+                                    [yaxis]="surveyBarChartOptions.yaxis!" [colors]="surveyBarChartOptions.colors!"
+                                    [stroke]="surveyBarChartOptions.stroke!" [legend]="surveyBarChartOptions.legend!"
+                                    [grid]="surveyBarChartOptions.grid!" [tooltip]="surveyBarChartOptions.tooltip!"
+                                    [dataLabels]="surveyBarChartOptions.dataLabels!"></apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isSurveyPie">
+                                <apx-chart [series]="surveyPieChartOptions.series!"
+                                    [chart]="surveyPieChartOptions.chart!" [labels]="surveyPieChartOptions.labels!"
+                                    [legend]="surveyPieChartOptions.legend!" [colors]="surveyPieChartOptions.colors!"
+                                    [responsive]="surveyPieChartOptions.responsive!"></apx-chart>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
+                    Transaction Analytics
+                </ng-template>
+                <app-dashboard2></app-dashboard2>
+            </mat-tab>
+
+            
+
+        </mat-tab-group>
+
+    </div>
+
+    
+</section>
+
