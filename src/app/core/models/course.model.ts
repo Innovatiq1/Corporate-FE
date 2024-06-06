@@ -66,6 +66,7 @@ export interface CourseUploadData {
     id: string;
 }
 export interface CourseModel {
+  certificate_template_id:any;
   category_name: string ;
 	status: string;
 	slug: string;

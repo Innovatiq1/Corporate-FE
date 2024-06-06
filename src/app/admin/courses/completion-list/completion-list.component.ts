@@ -24,6 +24,7 @@ import { dA } from '@fullcalendar/core/internal-common';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
+import { CertificateService } from '@core/service/certificate.service';
 
 @Component({
   selector: 'app-completion-list',
@@ -68,11 +69,14 @@ export class CompletionListComponent {
   searchTerm: string = '';
   // @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) matSort!: MatSort;
+  certificateDetails: any;
   upload() {
     document.getElementById('input')?.click();
   }
 
-  constructor(private classService: ClassService, public router: Router, public dialog: MatDialog) {
+  constructor(private classService: ClassService, public router: Router, public dialog: MatDialog,
+    private certificateService:CertificateService
+  ) {
     this.studentPaginationModel = {} as StudentPaginationModel;
   }
 
@@ -308,6 +312,13 @@ export class CompletionListComponent {
       timer: 24000,
       timerProgressBar: true,
     });
+    if(element){
+    this.certificateService.getCertificateById(element.courseId.certificate_template_id).subscribe((response: any) => {
+    this.certificateDetails = response;
+  })
+    }
+       
+    
     this.dafaultGenratepdf = true;
     this.pdfData = [];
     let pdfObj = {

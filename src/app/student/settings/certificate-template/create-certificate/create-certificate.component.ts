@@ -130,6 +130,7 @@ if(this.editUrl==true)
 
       this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) => {
         let imageUrl = data.data.thumbnail;
+        this.image_link = data.data.thumbnail
         imageUrl = imageUrl.replace(/\\/g, '/');
         imageUrl = encodeURI(imageUrl);
         this.setBackgroundImage(imageUrl);

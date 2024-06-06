@@ -109,7 +109,7 @@ export class CertificateService {
     const apiUrl = this.defaultUrl + `admin/certificate-builder`;
     return this.http.post<any>(apiUrl, payload).pipe(map((response) => response));
   }
-  getCertificateById(id: string) {
+  getCertificateById(id: any) {
     const apiUrl = this.defaultUrl + `admin/certificate-builder/${id}`
    // const apiUrl = `${this.prefix}admin/program-class/${id}`;
     return this.http.get<any>(apiUrl).pipe(map((response) => response.data));
