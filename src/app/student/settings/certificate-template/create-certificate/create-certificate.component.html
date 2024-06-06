@@ -9,7 +9,7 @@
             <div style="padding: 30px 10px">
   
               <form [formGroup]="certificateForm" style="display: flex; flex-wrap: wrap; gap: 20px;">
-                <div style="display: flex; width: 100%; gap: 20px;">
+                <div *ngIf="!viewUrl" style="display: flex; width: 100%; gap: 20px;">
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Title</mat-label>
                     <input matInput formControlName="title">
@@ -38,7 +38,7 @@
                   
                 </div>
   
-                <div style="display: flex; width: 100%; gap: 20px;">
+                <div *ngIf="!viewUrl" style="display: flex; width: 100%; gap: 20px;">
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Text3</mat-label>
                     <input matInput formControlName="text3" >
@@ -64,7 +64,7 @@
   
                   
                 </div>
-                <div style="display: flex; width: 100%; gap: 20px;">
+                <div *ngIf="!viewUrl" style="display: flex; width: 100%; gap: 20px;">
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>Text6</mat-label>
                     <input matInput formControlName="text6" >
@@ -92,7 +92,7 @@
                 </div>
   
   
-                <div style="display: flex; width: 100%; gap: 20px;">
+                <div *ngIf="!viewUrl" style="display: flex; width: 100%; gap: 20px;">
                   <mat-form-field class="example-full-width" appearance="outline" style="flex: 1;">
                     <mat-label>User</mat-label>
                     <input matInput formControlName="user" >
@@ -121,7 +121,7 @@
   
                   
                 </div>
-                <div style="display: flex; width: 100%; gap: 20px;">
+                <div *ngIf="!viewUrl" style="display: flex; width: 100%; gap: 20px;">
                 
                   <div
                   class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"
@@ -159,7 +159,9 @@
                   
                 </div>
               </form>
-  
+              <button class="icons" *ngIf="viewUrl" (click)="edit()" >
+                <app-feather-icons [icon]="'edit'" [class]="'tbl-fav-edit'"></app-feather-icons>
+            </button>
               <table width="800px"  style="
                 margin: 0 auto;
                 background-image: url({{image_link}});
@@ -293,10 +295,10 @@
               height: 700px;
             "> </table> -->
             </div>
-            <button mat-raised-button id="submit"  *ngIf="!editUrl"  style="margin-left: 900px; margin-top: 10px;" (click)="saveCertificate()">
+            <button mat-raised-button id="submit"  *ngIf="!editUrl && !viewUrl"  style="margin-left: 900px; margin-top: 10px;" (click)="saveCertificate()">
                 Submit
               </button>
-              <button mat-raised-button id="submit" *ngIf="editUrl"  style="margin-left: 900px; margin-top: 10px;" (click)="saveCertificate()">
+              <button mat-raised-button id="submit" *ngIf="editUrl && !viewUrl"  style="margin-left: 900px; margin-top: 10px;" (click)="saveCertificate()">
                 Update
               </button>
               <br>

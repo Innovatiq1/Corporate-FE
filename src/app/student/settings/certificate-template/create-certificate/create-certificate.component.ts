@@ -22,7 +22,7 @@ export class CreateCertificateComponent implements OnInit {
   certificateForm!: FormGroup;
   isSubmitted = false;
   editUrl!: boolean;
-  classId!: string;
+  classId!: any;
   title: boolean = false;
   submitted : boolean = false;
   course: any;
@@ -30,6 +30,7 @@ export class CreateCertificateComponent implements OnInit {
   image_link: any;
   uploaded: any;
   uploadedImage: any;
+  viewUrl: boolean;
   constructor(private fb:FormBuilder,
     private router: Router,
     private _activeRoute: ActivatedRoute,
@@ -39,12 +40,15 @@ export class CreateCertificateComponent implements OnInit {
   ){
     this._activeRoute.queryParams.subscribe((params) => {
       this.classId = params['id'];
+      console.log("Params",params)
       if (this.classId) {
         this.title = true;
       }
     });
     let urlPath = this.router.url.split('/');
     this.editUrl = urlPath.includes('edit');
+    this.viewUrl = urlPath.includes('view');
+
 if(this.editUrl==true)
   {
     this.breadscrums = [
@@ -55,7 +59,17 @@ if(this.editUrl==true)
       },
     ];
   }
-   if(this.editUrl){
+  if(this.viewUrl==true)
+    {
+      this.breadscrums = [
+        {
+          title: 'Certificate',
+          items: ['Certificate'],
+          active: 'View Certificate',
+        },
+      ];
+    }
+   if(this.editUrl || this.viewUrl){
     this.getData();
    } 
 
@@ -97,7 +111,9 @@ if(this.editUrl==true)
      
   //   });  }
    
-  
+  edit(){
+    this.router.navigate(['/student/settings/certificate/edit/:id'], {queryParams:{id:this.classId}})
+    }
     onFileUpload(event:any) {
       const file = event.target.files[0];
     
