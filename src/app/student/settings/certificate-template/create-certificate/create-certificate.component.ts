@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -19,6 +19,7 @@ export class CreateCertificateComponent implements OnInit {
       active: 'Create Certificate',
     },
   ];
+  @ViewChild('backgroundTable') backgroundTable!: ElementRef;
   certificateForm!: FormGroup;
   isSubmitted = false;
   editUrl!: boolean;
@@ -34,7 +35,7 @@ export class CreateCertificateComponent implements OnInit {
     private router: Router,
     private _activeRoute: ActivatedRoute,
     private certificateService: CertificateService,
-    private courseService:CourseService
+    private courseService:CourseService, private renderer: Renderer2
 
   ){
     this._activeRoute.queryParams.subscribe((params) => {
@@ -97,34 +98,65 @@ if(this.editUrl==true)
      
   //   });  }
    
-  
-    onFileUpload(event:any) {
-      const file = event.target.files[0];
-    
-      this.thumbnail = file
+  onFileUpload(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      this.thumbnail = file;
       const formData = new FormData();
       formData.append('files', this.thumbnail);
-    this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
-      this.image_link = data.data.thumbnail;
-      this.uploaded=this.image_link?.split('/')
+
+      this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) => {
+        let imageUrl = data.data.thumbnail;
+        imageUrl = imageUrl.replace(/\\/g, '/');
+        imageUrl = encodeURI(imageUrl);
+        this.setBackgroundImage(imageUrl);
+        this.uploaded=imageUrl?.split('/')
       let image  = this.uploaded?.pop();
       this.uploaded= image?.split('\\');
       this.uploadedImage = this.uploaded?.pop();
-    
-    })
-      // this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
-      //   this.image_link = response.image_link;
-      //   console.log("imagesss",this.image_link)
-      //   this.uploaded=this.image_link.split('/')
-      //   this.uploadedImage = this.uploaded.pop();
-      //   console.log("uploaded",this.uploadedImage)
-      //   this.firstFormGroup.patchValue({
-      //     // image_link: response,
-      //   });
-      // });
+      }, (error) => {
+        console.error('Upload error:', error);
+      });
     }
+  }
+  
+    // onFileUpload(event:any) {
+    //   const file = event.target.files[0];
     
-
+    //   this.thumbnail = file
+    //   const formData = new FormData();
+    //   formData.append('files', this.thumbnail);
+    // this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
+    //   this.image_link = data.data.thumbnail.replace(/\//g, '\\');
+    //   this.setBackgroundImage(this.image_link);
+    //   this.uploaded=this.image_link?.split('/')
+    //   let image  = this.uploaded?.pop();
+    //   this.uploaded= image?.split('\\');
+    //   this.uploadedImage = this.uploaded?.pop();
+    
+    // })
+    //   // this.certificateService.uploadCourseThumbnail(formData).subscribe((response:any) => {
+    //   //   this.image_link = response.image_link;
+    //   //   console.log("imagesss",this.image_link)
+    //   //   this.uploaded=this.image_link.split('/')
+    //   //   this.uploadedImage = this.uploaded.pop();
+    //   //   console.log("uploaded",this.uploadedImage)
+    //   //   this.firstFormGroup.patchValue({
+    //   //     // image_link: response,
+    //   //   });
+    //   // });
+    // }
+    
+    private setBackgroundImage(imageUrl: string) {
+  
+      this.backgroundTable.nativeElement.style.backgroundImage = `url("${imageUrl}")`;
+      setTimeout(() => {
+        const computedStyle = window.getComputedStyle(this.backgroundTable.nativeElement);
+        console.log('Computed background image:', computedStyle.backgroundImage);
+      }, 1000);
+    }
+  
 
 
 
