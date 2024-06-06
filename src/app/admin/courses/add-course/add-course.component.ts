@@ -121,6 +121,7 @@ export class AddCourseComponent implements OnInit {
     ]
   };
   vendors: any;
+  certificates: any;
 
   constructor(private router: Router,private fb: FormBuilder, private _formBuilder: FormBuilder,
     private courseService: CourseService,
@@ -132,7 +133,7 @@ export class AddCourseComponent implements OnInit {
     public surveyService: SurveyService,
     private formService: FormService,
     private studentsService: StudentsService,
-    public utils: UtilsService
+    public utils: UtilsService,
     ) {
       let urlPath = this.router.url.split('/')
     this.editUrl = urlPath.includes('edit-course');
@@ -191,6 +192,7 @@ export class AddCourseComponent implements OnInit {
         course_kit: new FormControl('', [Validators.required]),
         vendor: new FormControl('',[ Validators.maxLength(100)]),
         isFeedbackRequired: new FormControl(null, [Validators.required]),
+        certificate_temp: new FormControl(null, [Validators.required]),
       });
       // this.secondFormGroup = this._formBuilder.group({
 
@@ -212,7 +214,17 @@ export class AddCourseComponent implements OnInit {
     })
   }
 
+  getAllCertificates(){
+    this.certificateService.getAllCertificate().subscribe((response: { data: { docs: any; }; }) =>{
+     this.certificates = response.data.docs;
+     console.log("ertificate",this.certificates.title)
+   
+    }, () => {
+    });
+  }
+
   ngOnInit(): void {
+    this.getAllCertificates();
     this.getCurrency();
     this. getAllVendors();
     this.mainCategoryControl = this.firstFormGroup.get('main_category') as FormControl;
@@ -554,6 +566,11 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
     fileReader.readAsArrayBuffer(file);
   }
   save() {
+
+    let certicate_temp_id = this.certificates.filter((certificate: any) => 
+    certificate.title === this.firstFormGroup.value.certificate_temp 
+  );
+    // console.log(certicate_temp_id,"temp");
     if(this.firstFormGroup.valid){
     const courseData = this.firstFormGroup.value;
     let creator = JSON.parse(localStorage.getItem('user_data')!).user.name;
@@ -589,7 +606,9 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       image_link:this.image_link,
       creator:creator,
       id:this.courseId,
-      isFeedbackRequired: courseData?.isFeedbackRequired
+      isFeedbackRequired: courseData?.isFeedbackRequired,
+      certificate_template:courseData?.certificate_temp,
+        certificate_template_id:certicate_temp_id[0].id,
     }
         this.firstFormGroup.value?.course_kit?.map((item:any) => item.id);
     this.firstFormGroup.value?.assessment
@@ -664,7 +683,10 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
 
 
   submit() {
-
+   let certicate_temp_id = this.certificates.filter((certificate: any) => 
+    certificate.title === this.firstFormGroup.value.certificate_temp 
+  );
+  
     if(this.firstFormGroup.valid){
       const courseData = this.firstFormGroup.value;
       let creator = JSON.parse(localStorage.getItem('user_data')!).user.name;
@@ -701,7 +723,9 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
         creator:creator,
         website_link:courseData?.website_link,
         feeType:courseData?.feeType,
-        isFeedbackRequired: courseData?.isFeedbackRequired
+        isFeedbackRequired: courseData?.isFeedbackRequired,
+        certificate_template:courseData?.certificate_temp,
+        certificate_template_id:certicate_temp_id[0].id,
       }
 
       Swal.fire({
@@ -772,6 +796,8 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
       if(this.course?.feeType == 'paid'){
         this.isPaid = true;
       }
+
+      console.log("coursessss",this.course)
       this.firstFormGroup.patchValue({
         currency_code: this.course.currency_code ? this.course.currency_code: null,
         training_hours: this.course?.training_hours?.toString(),
@@ -805,7 +831,8 @@ this.courseService.uploadCourseThumbnail(formData).subscribe((data: any) =>{
         survey: feedbackId,
         uploadedImage:this.course?.image_link,
         vendor: this.course?.vendor,
-        isFeedbackRequired: this.course?.isFeedbackRequired
+        isFeedbackRequired: this.course?.isFeedbackRequired,
+        certificate_temp:this.course?.certificate_template ,
       });
       this.mainCategoryChange();
       this.cd.detectChanges();
