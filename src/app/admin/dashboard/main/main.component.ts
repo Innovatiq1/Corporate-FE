@@ -484,7 +484,7 @@ export class MainComponent implements OnInit {
   }
   getAnnouncementForStudents(filter?: any) {
     let payload ={
-      announcementFor:'Student'
+      announcementFor:'Staff'
     }
     this.announcementService.getAnnouncementsForStudents(payload).subscribe((res: { data: { data: any[]; }; totalRecords: number; }) => {
       this.announcements = res.data
