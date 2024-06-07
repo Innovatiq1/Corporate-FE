@@ -135,7 +135,7 @@ export class Dashboard2Component implements OnInit,AfterViewInit {
     this.getProgramList();
     this.getAllCourse();
     const role = this.authenticationService.currentUserValue.user.role;
-    if (role == 'Admin'  || role == 'CEO'  || role == 'CFO') {
+    if (role == 'Admin'  || role == 'CEO'  || role == 'CFO' || role == 'Finance Manager') {
       this.getStudentDashboards();
     }
     this.cdr.detectChanges();
