@@ -30,6 +30,7 @@ import { ClassService } from '../schedule-class/class.service';
 import { FinanceDashboardComponent } from './finance-dashboard/finance-dashboard.component';
 import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { CooDashboardComponent } from './coo-dashboard/coo-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     FinanceDashboardComponent,
     HrDashboardComponent,
     AdminDashboardComponent,
+    CooDashboardComponent,
   ],
   imports: [
     CommonModule,

@@ -228,7 +228,7 @@ export class CreateCertificateComponent implements OnInit {
         //   this.classForm.value.programName = this.courseTitle;
         Swal.fire({
           title: 'Are you sure?',
-          text: 'You want to update this class!',
+          text: 'You want to update this certificate!',
           icon: 'warning',
           confirmButtonText: 'Yes',
           showCancelButton: true,

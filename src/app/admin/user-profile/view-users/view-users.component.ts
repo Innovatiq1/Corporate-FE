@@ -93,7 +93,7 @@ export class ViewUsersComponent implements OnInit{
       this.userType = response.data.data.type
   
     // this.userType = localStorage.getItem("user_type")
-    if(this.userType == 'Student'){
+    if(this.userType == 'Staff'){
       console.log("student", this.userType)
     this.loadData();
     this.getRegisteredCourse();
@@ -104,7 +104,7 @@ export class ViewUsersComponent implements OnInit{
     this.getCompletedProgram();
     this.isStudent = true;
     }
-    if(this.userType == "Instructor"){
+    if(this.userType == "IT Manager" || this.userType == "HR Manager" || this.userType == "Admin Manager" || this.userType == "Finance Manager"){
     this.loadData1();
     this.getClassList1();
     this.getProgramList1();
@@ -341,5 +341,9 @@ Swal.fire({
 }
 getStatusClass(classDeliveryType: string): string {
 return classDeliveryType === 'online' ? 'success' : 'fail';
+}
+
+cancel(){
+  window.history.back();
 }
 }

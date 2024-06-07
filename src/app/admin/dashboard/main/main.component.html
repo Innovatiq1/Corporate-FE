@@ -469,7 +469,7 @@
         <div class="card card-statistic-2">
           <div class="clearfix">
             <div class="card-icon-only shadow-primary float-start">
-              <img src="assets/images/banner/img3.png" alt="">
+              <img src="assets/images/banner/manager.png" alt="">
             </div>
             <div class="card-right">
               <div>
@@ -869,36 +869,33 @@
           </div>
         </div>
       </div>
+     
       <div class="col-xl-6 col-lg-6 col-md-14 col-sm-14">
         <div class="card">
           <div class="header">
-            <h2>Latest Enrolled Programs</h2>
+            <h2>
+              Upcoming Course Classes
+            </h2>
           </div>
-          <div class="tableBody">
-            <ng-scrollbar style="height: 300px" visibility="hover">
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>Program</th>
-                      <th>Duration</th>
-                      <th>End Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let program of studentApprovedPrograms ">
-                      <td>{{program?.classId?.courseId?.title }}</td>
-                      <td>{{program?.classId?.courseId?.duration}} Days</td>
-                      <td>{{program?.classId?.sessions[0]?.sessionEndDate | date}}
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+          <div class="card-body">
+            <ng-scrollbar style="height: 270px"  visibility="hover">
+              <ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
+                <li *ngFor="let upcomingclass of upcomingCourseClasses" class="lecture-list">
+                  <div class="set-flex">
+                    <div class="media-title font-16">{{upcomingclass?.classId?.courseName}}</div>
+                    <div class="text-job text-muted mb-0">{{upcomingclass?.classId?.courseId?.courseCode}}</div>
+                  </div>
+                  <div class="ms-auto">
+                    <div class="media-title font-16">{{upcomingclass?.classId?.sessions[0]?.sessionStartDate | date}}
+                    </div>
+                    <!-- <div class="text-job text-muted mb-0">09:00-10:00</div> -->
+                  </div>
+                </li>
+              </ul>
             </ng-scrollbar>
           </div>
         </div>
       </div>
-
 
     </div>
     <div class="row clearfix">
@@ -959,60 +956,7 @@
         </div>
       </div>
     </div>
-    <div class="row clearfix">
-      <div class="col-xl-6 col-lg-6 col-md-14 col-sm-14">
-        <div class="card">
-          <div class="header">
-            <h2>
-              Upcoming Course Classes
-            </h2>
-          </div>
-          <div class="card-body">
-            <ng-scrollbar style="height: 335px" visibility="hover">
-              <ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
-                <li *ngFor="let upcomingclass of upcomingCourseClasses" class="lecture-list">
-                  <div class="set-flex">
-                    <div class="media-title font-16">{{upcomingclass?.classId?.courseName}}</div>
-                    <div class="text-job text-muted mb-0">{{upcomingclass?.classId?.courseId?.courseCode}}</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">{{upcomingclass?.classId?.sessions[0]?.sessionStartDate | date}}
-                    </div>
-                    <!-- <div class="text-job text-muted mb-0">09:00-10:00</div> -->
-                  </div>
-                </li>
-              </ul>
-            </ng-scrollbar>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-6 col-lg-6 col-md-14 col-sm-14">
-        <div class="card">
-          <div class="header">
-            <h2>
-              Upcoming Program Classes
-            </h2>
-          </div>
-          <div class="card-body">
-            <ng-scrollbar style="height: 335px" visibility="hover">
-              <ul class="list-unstyled user-progress list-unstyled-border list-unstyled-noborder">
-                <li *ngFor="let upcomingclass of upcomingProgramClasses" class="lecture-list">
-                  <div class="set-flex">
-                    <div class="media-title font-16">{{upcomingclass?.classId?.courseId?.title}}</div>
-                    <div class="text-job text-muted mb-0">{{upcomingclass?.classId?.courseId?.courseCode}}</div>
-                  </div>
-                  <div class="ms-auto">
-                    <div class="media-title font-16">{{upcomingclass?.classId?.sessions[0]?.sessionStartDate | date}}
-                    </div>
-                    <!-- <div class="text-job text-muted mb-0">09:00-10:00</div> -->
-                  </div>
-                </li>
-              </ul>
-            </ng-scrollbar>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
   </div>
 </section>

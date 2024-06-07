@@ -426,7 +426,7 @@
                         <div class="card card-statistic-2">
                             <div class="clearfix">
                                 <div class="card-icon-only shadow-primary float-start">
-                                    <img src="assets/images/banner/img2.png" alt="">
+                                    <img src="assets/images/banner/survey.png" alt="">
                                 </div>
                                 <div class="card-right">
                                     <div>
@@ -449,7 +449,7 @@
                         <div class="card card-statistic-2">
                             <div class="clearfix">
                                 <div class="card-icon-only shadow-primary float-start">
-                                    <img src="assets/images/banner/img2.png" alt="">
+                                    <img src="assets/images/banner/enquiry.png" alt="">
                                 </div>
                                 <div class="card-right">
                                     <div>
@@ -475,40 +475,56 @@
 
 
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="card" style="border-radius: 31px;">
-                            <div class="header mt-3">
-                                <h2>Feedbacks List</h2>
-
-                            </div>
-                            <div class="tableBody">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                
-                                                <th>Staff</th>
-                                                <th>Course</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let feedback of feedbacks" style="cursor: pointer;">
-                                               
-                                                <td [routerLink]="[ '/admin/user-profile/all-staff',feedback.id]">
-                                                    <div class="media-title"> {{feedback?.studentFirstName | titlecase}}
-                                                    </div>
-                                                </td>
-                                                <td [routerLink]="['/admin/user-profile/all-staff',feedback.id]">
-                                                    <div>{{feedback?.courseName}}
-                                                        </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="card" style="border-radius: 31px;">
+                        <div class="header mt-3">
+                            <h2>Staff by Gender</h2>
+                        </div>
+                     
+                        <div class="body" *ngIf="isGenderLine">
+                            <apx-chart [series]="genderLineChartOptions.series!"
+                                [chart]="genderLineChartOptions.chart!"
+                                [xaxis]="genderLineChartOptions.xaxis!"
+                                [stroke]="genderLineChartOptions.stroke!"
+                                [colors]="genderLineChartOptions.colors!"
+                                [dataLabels]="genderLineChartOptions.dataLabels!"
+                                [legend]="genderLineChartOptions.legend!"
+                                [markers]="genderLineChartOptions.markers!"
+                                [grid]="genderLineChartOptions.grid!"
+                                [yaxis]="genderLineChartOptions.yaxis!"
+                                [tooltip]="genderLineChartOptions.tooltip!"
+                                [title]="genderLineChartOptions.title!">
+                            </apx-chart>
+                        </div>
+                        <div class="body" *ngIf="isGenderPie">
+                            <apx-chart [series]="genderPieChartOptions.series!"
+                                [chart]="genderPieChartOptions.chart!"
+                                [labels]="genderPieChartOptions.labels!"
+                                [colors]="genderPieChartOptions.colors!"
+                                [dataLabels]="genderPieChartOptions.dataLabels!"
+                                [legend]="genderPieChartOptions.legend!"
+                                [tooltip]="genderPieChartOptions.tooltip!">
+                            </apx-chart>
+                        </div>
+                        <div class="body" *ngIf="isGenderBar">
+                            <apx-chart [series]="genderBarChartOptions.series!"
+                                [chart]="genderBarChartOptions.chart!"
+                                [xaxis]="genderBarChartOptions.xaxis!"
+                                [stroke]="genderBarChartOptions.stroke!"
+                                [colors]="genderBarChartOptions.colors!"
+                                [dataLabels]="genderBarChartOptions.dataLabels!"
+                                [legend]="genderBarChartOptions.legend!"
+                                [markers]="genderBarChartOptions.markers!"
+                                [grid]="genderBarChartOptions.grid!" 
+                                [yaxis]="genderBarChartOptions.yaxis!"
+                                [tooltip]="genderBarChartOptions.tooltip!"
+                                [title]="genderBarChartOptions.title!">
+                            </apx-chart>
                         </div>
                     </div>
+                    
+                </div>
+                  
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="card" style="border-radius: 31px;">
                             <div class="header mt-3">
@@ -610,54 +626,40 @@
                         
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="card" style="border-radius: 31px;">
-                            <div class="header mt-3">
-                                <h2>Staff by Gender</h2>
-                            </div>
-                         
-                            <div class="body" *ngIf="isGenderLine">
-                                <apx-chart [series]="genderLineChartOptions.series!"
-                                    [chart]="genderLineChartOptions.chart!"
-                                    [xaxis]="genderLineChartOptions.xaxis!"
-                                    [stroke]="genderLineChartOptions.stroke!"
-                                    [colors]="genderLineChartOptions.colors!"
-                                    [dataLabels]="genderLineChartOptions.dataLabels!"
-                                    [legend]="genderLineChartOptions.legend!"
-                                    [markers]="genderLineChartOptions.markers!"
-                                    [grid]="genderLineChartOptions.grid!"
-                                    [yaxis]="genderLineChartOptions.yaxis!"
-                                    [tooltip]="genderLineChartOptions.tooltip!"
-                                    [title]="genderLineChartOptions.title!">
-                                </apx-chart>
-                            </div>
-                            <div class="body" *ngIf="isGenderPie">
-                                <apx-chart [series]="genderPieChartOptions.series!"
-                                    [chart]="genderPieChartOptions.chart!"
-                                    [labels]="genderPieChartOptions.labels!"
-                                    [colors]="genderPieChartOptions.colors!"
-                                    [dataLabels]="genderPieChartOptions.dataLabels!"
-                                    [legend]="genderPieChartOptions.legend!"
-                                    [tooltip]="genderPieChartOptions.tooltip!">
-                                </apx-chart>
-                            </div>
-                            <div class="body" *ngIf="isGenderBar">
-                                <apx-chart [series]="genderBarChartOptions.series!"
-                                    [chart]="genderBarChartOptions.chart!"
-                                    [xaxis]="genderBarChartOptions.xaxis!"
-                                    [stroke]="genderBarChartOptions.stroke!"
-                                    [colors]="genderBarChartOptions.colors!"
-                                    [dataLabels]="genderBarChartOptions.dataLabels!"
-                                    [legend]="genderBarChartOptions.legend!"
-                                    [markers]="genderBarChartOptions.markers!"
-                                    [grid]="genderBarChartOptions.grid!" 
-                                    [yaxis]="genderBarChartOptions.yaxis!"
-                                    [tooltip]="genderBarChartOptions.tooltip!"
-                                    [title]="genderBarChartOptions.title!">
-                                </apx-chart>
-                            </div>
-                        </div>
-                        
-                    </div>
+                      <div class="card" style="border-radius: 31px;">
+                          <div class="header mt-3">
+                              <h2>Feedbacks List</h2>
+
+                          </div>
+                          <div class="tableBody">
+                              <div class="table-responsive">
+                                  <table class="table table-hover">
+                                      <thead>
+                                          <tr>
+                                              
+                                              <th>Staff</th>
+                                              <th>Course</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr *ngFor="let feedback of feedbacks" style="cursor: pointer;">
+                                             
+                                              <td [routerLink]="[ '/admin/user-profile/all-staff',feedback.id]">
+                                                  <div class="media-title"> {{feedback?.studentFirstName | titlecase}}
+                                                  </div>
+                                              </td>
+                                              <td [routerLink]="['/admin/user-profile/all-staff',feedback.id]">
+                                                  <div>{{feedback?.courseName}}
+                                                      </div>
+                                              </td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                
                 
                 </div>
 

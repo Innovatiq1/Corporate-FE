@@ -19,6 +19,7 @@ import { ItDashboardComponent } from './it-dashboard/it-dashboard.component';
 import { FinanceDashboardComponent } from './finance-dashboard/finance-dashboard.component';
 import { HrDashboardComponent } from './hr-dashboard/hr-dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { CooDashboardComponent } from './coo-dashboard/coo-dashboard.component';
 
 const routes: Routes = [
   {
@@ -81,6 +82,10 @@ const routes: Routes = [
   {
     path: 'cfo-dashboard',
     component: CfoDashboardComponent,
+  },
+  {
+    path: 'coo-dashboard',
+    component: CooDashboardComponent,
   },
   {
     path: 'it-manager-dashboard',

@@ -1,4 +1,4 @@
-<section class="content" *ngIf="userType == 'Student'">
+<section class="content" *ngIf="userType == 'Staff'">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
@@ -93,9 +93,9 @@
             type="button"
             mat-raised-button
             color="warn"
-            [routerLink]="['/admin/user-profile/all-users']"
+            (click)="cancel()"
           >
-            Back to all users
+            Back to all staff
           </button>
         </div>
       </div>
@@ -316,7 +316,7 @@
   </div>
 </section>
 
-<section class="content" *ngIf="userType == 'Instructor'">
+<section class="content" *ngIf="userType == 'IT Manager' || userType == 'HR Manager' || userType == 'Admin Manager' || userType == 'Finance Manager'">
   <div class="content-block">
     <div class="block-header" *ngFor="let breadscrum of breadscrums">
       <!-- breadcrumb -->
@@ -413,9 +413,9 @@
             type="button"
             mat-raised-button
             color="warn"
-            [routerLink]="['/admin/user-profile/all-users']"
+            (click)="cancel()"
           >
-            Back to all users
+            Back to all managers
           </button>
         </div>
       </div>

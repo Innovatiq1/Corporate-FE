@@ -65,7 +65,7 @@
                         <div class="card card-statistic-2">
                             <div class="clearfix">
                                 <div class="card-icon-only shadow-primary float-start">
-                                    <img src="assets/images/banner/img2.png" alt="">
+                                    <img src="assets/images/banner/survey.png" alt="">
                                 </div>
                                 <div class="card-right">
                                     <div>
@@ -87,84 +87,7 @@
 
                 </div>
                 <!-- #END# Widgets -->
-                <div class="row">
-
-
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="card" style="border-radius: 31px;">
-                            <div class="header mt-3">
-                                <h2>Staff List</h2>
-
-                            </div>
-                            <div class="tableBody">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Staff Name</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let user of staff" style="cursor: pointer;">
-                                                <td class="table-img">
-                                                    <img src="{{user.avatar || 'assets/profile.png'}}" alt="">
-                                                </td>
-                                                <td [routerLink]="[ '/admin/user-profile/view-student',user.id]">
-                                                    <div class="media-title"> {{user?.name | titlecase}}
-                                                    </div>
-                                                </td>
-                                                <td [routerLink]="['/admin/user-profile/view-student',user.id]">
-                                                    <div
-                                                        [class]="user?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
-                                                        {{user?.Active == true?"Active":"Inactive"}}</div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="card" style="border-radius: 31px;">
-                            <div class="header mt-3">
-                                <h2>Feedbacks List</h2>
-
-                            </div>
-                            <div class="tableBody">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                
-                                                <th>Staff</th>
-                                                <th>Course</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let feedback of feedbacks" style="cursor: pointer;">
-                                               
-                                                <td [routerLink]="[ '/admin/user-profile/all-staff',feedback.id]">
-                                                    <div class="media-title"> {{feedback?.studentFirstName | titlecase}}
-                                                    </div>
-                                                </td>
-                                                <td [routerLink]="['/admin/user-profile/all-staff',feedback.id]">
-                                                    <div>{{feedback?.courseName}}
-                                                        </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+               
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                         <div class="card" style="border-radius: 31px;">
@@ -267,6 +190,84 @@
                         </div>
                       </div>
                 </div>
+                <div class="row">
+
+
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                      <div class="card" style="border-radius: 31px;">
+                          <div class="header mt-3">
+                              <h2>Staff List</h2>
+
+                          </div>
+                          <div class="tableBody">
+                              <div class="table-responsive">
+                                  <table class="table table-hover">
+                                      <thead>
+                                          <tr>
+                                              <th>#</th>
+                                              <th>Staff Name</th>
+                                              <th>Status</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr *ngFor="let user of staff" style="cursor: pointer;">
+                                              <td class="table-img">
+                                                  <img src="{{user.avatar || 'assets/profile.png'}}" alt="">
+                                              </td>
+                                              <td [routerLink]="[ '/admin/user-profile/view-student',user.id]">
+                                                  <div class="media-title"> {{user?.name | titlecase}}
+                                                  </div>
+                                              </td>
+                                              <td [routerLink]="['/admin/user-profile/view-student',user.id]">
+                                                  <div
+                                                      [class]="user?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
+                                                      {{user?.Active == true?"Active":"Inactive"}}</div>
+                                              </td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                      <div class="card" style="border-radius: 31px;">
+                          <div class="header mt-3">
+                              <h2>Feedbacks List</h2>
+
+                          </div>
+                          <div class="tableBody">
+                              <div class="table-responsive">
+                                  <table class="table table-hover">
+                                      <thead>
+                                          <tr>
+                                              
+                                              <th>Staff</th>
+                                              <th>Course</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          <tr *ngFor="let feedback of feedbacks" style="cursor: pointer;">
+                                             
+                                              <td [routerLink]="[ '/admin/user-profile/all-staff',feedback.id]">
+                                                  <div class="media-title"> {{feedback?.studentFirstName | titlecase}}
+                                                  </div>
+                                              </td>
+                                              <td [routerLink]="['/admin/user-profile/all-staff',feedback.id]">
+                                                  <div>{{feedback?.courseName}}
+                                                      </div>
+                                              </td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
                 <div class="row">
      
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">

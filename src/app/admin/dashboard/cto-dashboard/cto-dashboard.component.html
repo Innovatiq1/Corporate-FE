@@ -18,7 +18,7 @@
                         <div class="card card-statistic-2">
                             <div class="clearfix">
                                 <div class="card-icon-only shadow-primary float-start">
-                                    <img src="assets/images/banner/img3.png" alt="">
+                                    <img src="assets/images/banner/manager.png" alt="">
                                 </div>
                                 <div class="card-right">
                                     <div>
@@ -88,7 +88,7 @@
                         <div class="card card-statistic-2">
                             <div class="clearfix">
                                 <div class="card-icon-only shadow-primary float-start">
-                                    <img src="assets/images/banner/img2.png" alt="">
+                                    <img src="assets/images/banner/survey.png" alt="">
                                 </div>
                                 <div class="card-right">
                                     <div>
@@ -110,6 +110,42 @@
 
                 </div>
                 <!-- #END# Widgets -->
+               
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>
+                                    Staff Survey</h2>
+                            </div>
+                            <div class="body" *ngIf="isArea">
+                                <apx-chart [series]="areaChartOptions.series!" [chart]="areaChartOptions.chart!"
+                                    [xaxis]="areaChartOptions.xaxis!" [yaxis]="areaChartOptions.yaxis!"
+                                    [colors]="areaChartOptions.colors!" [stroke]="areaChartOptions.stroke!"
+                                    [legend]="areaChartOptions.legend!" [grid]="areaChartOptions.grid!"
+                                    [tooltip]="areaChartOptions.tooltip!"
+                                    [dataLabels]="areaChartOptions.dataLabels!"></apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isSurveyBar">
+                                <apx-chart [series]="surveyBarChartOptions.series!"
+                                    [chart]="surveyBarChartOptions.chart!" [xaxis]="surveyBarChartOptions.xaxis!"
+                                    [yaxis]="surveyBarChartOptions.yaxis!" [colors]="surveyBarChartOptions.colors!"
+                                    [stroke]="surveyBarChartOptions.stroke!" [legend]="surveyBarChartOptions.legend!"
+                                    [grid]="surveyBarChartOptions.grid!" [tooltip]="surveyBarChartOptions.tooltip!"
+                                    [dataLabels]="surveyBarChartOptions.dataLabels!"></apx-chart>
+                            </div>
+                            <div class="body" *ngIf="isSurveyPie">
+                                <apx-chart [series]="surveyPieChartOptions.series!"
+                                    [chart]="surveyPieChartOptions.chart!" [labels]="surveyPieChartOptions.labels!"
+                                    [legend]="surveyPieChartOptions.legend!" [colors]="surveyPieChartOptions.colors!"
+                                    [responsive]="surveyPieChartOptions.responsive!"></apx-chart>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
                 <div class="row">
 
 
@@ -187,41 +223,6 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                        <div class="card" style="border-radius: 31px;">
-                            <div class="header mt-3">
-                                <h2>
-                                    Staff Survey</h2>
-                            </div>
-                            <div class="body" *ngIf="isArea">
-                                <apx-chart [series]="areaChartOptions.series!" [chart]="areaChartOptions.chart!"
-                                    [xaxis]="areaChartOptions.xaxis!" [yaxis]="areaChartOptions.yaxis!"
-                                    [colors]="areaChartOptions.colors!" [stroke]="areaChartOptions.stroke!"
-                                    [legend]="areaChartOptions.legend!" [grid]="areaChartOptions.grid!"
-                                    [tooltip]="areaChartOptions.tooltip!"
-                                    [dataLabels]="areaChartOptions.dataLabels!"></apx-chart>
-                            </div>
-                            <div class="body" *ngIf="isSurveyBar">
-                                <apx-chart [series]="surveyBarChartOptions.series!"
-                                    [chart]="surveyBarChartOptions.chart!" [xaxis]="surveyBarChartOptions.xaxis!"
-                                    [yaxis]="surveyBarChartOptions.yaxis!" [colors]="surveyBarChartOptions.colors!"
-                                    [stroke]="surveyBarChartOptions.stroke!" [legend]="surveyBarChartOptions.legend!"
-                                    [grid]="surveyBarChartOptions.grid!" [tooltip]="surveyBarChartOptions.tooltip!"
-                                    [dataLabels]="surveyBarChartOptions.dataLabels!"></apx-chart>
-                            </div>
-                            <div class="body" *ngIf="isSurveyPie">
-                                <apx-chart [series]="surveyPieChartOptions.series!"
-                                    [chart]="surveyPieChartOptions.chart!" [labels]="surveyPieChartOptions.labels!"
-                                    [legend]="surveyPieChartOptions.legend!" [colors]="surveyPieChartOptions.colors!"
-                                    [responsive]="surveyPieChartOptions.responsive!"></apx-chart>
-                            </div>
-
-                        </div>
-                    </div>
-
 
                 </div>
                 <div class="row">

@@ -343,7 +343,7 @@ export class HrDashboardComponent implements OnInit {
         },
       },
       xaxis: {
-        categories: [  "Online", "Offline"]
+        categories: [  "Active", "In-Active"]
       },
       stroke: { curve: 'smooth' },
       dataLabels: { enabled: false },
@@ -521,7 +521,7 @@ export class HrDashboardComponent implements OnInit {
             },
         },
         xaxis: {
-            categories: [  "Online", "Offline"]
+            categories: [  "Active", "In-Active"]
         },
         stroke: { curve: 'smooth' },
         dataLabels: { enabled: false },
@@ -551,7 +551,7 @@ export class HrDashboardComponent implements OnInit {
             foreColor: '#9aa0ac',
             width: '100%',
         },
-        labels: [ "Online", "Offline"],
+        labels: ["Active", "In-Active"],
         colors: ['#25B9C1', '#4B4BCB'],
         legend: {
             position: 'top',

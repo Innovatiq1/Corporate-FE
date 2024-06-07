@@ -184,6 +184,9 @@ export class CeoDashboardComponent implements OnInit {
   public avgLecChartOptions!: Partial<avgLecChartOptions>;
   public pieChartOptions!: Partial<pieChartOptions>;
   public pieChartOptions1!: Partial<pieChartOptions>;
+  public staffAvailabilityPieChartOptions!: Partial<pieChart1Options>;
+  public staffAvailabilityBarChartOptions!: Partial<chartOptions>;
+  public staffAvailabilityLineChartOptions!: Partial<chartOptions>;
   UsersModel!: Partial<UsersModel>;
   breadscrums = [
     {
@@ -296,6 +299,9 @@ export class CeoDashboardComponent implements OnInit {
   isStudentPie: boolean = false;
   isStudentBar: boolean = false;
   isStudentLine: boolean = false;
+  isStaffOnlineLine: boolean = false;
+  isStaffOnlinePie: boolean = false;
+  isStaffOnlineBar: boolean = false;
   studentDashboard: any;
   programClassList: any;
   totalDocs: any;
@@ -2212,6 +2218,130 @@ private attendanceBarChart() {
       ],
     };
   }
+  private staffAvailabilityLineChart() {
+    this.staffAvailabilityLineChartOptions = {
+      series: [{
+        name: "Officers",
+        data: [1,2]
+      }],
+      chart: {
+        type: 'line',
+        height: 330,
+        foreColor: '#9aa0ac',
+        width: '100%',
+        toolbar: {
+          show: true, // Show the toolbar for better control
+          tools: {
+            download: true,
+            selection: true,
+            zoom: true,
+            zoomin: true,
+            zoomout: true,
+            pan: true,
+            reset: true
+          },
+          autoSelected: 'zoom'
+        },
+      },
+      xaxis: {
+        categories: [  "Active", "In-Active"]
+      },
+      stroke: { curve: 'smooth' },
+      dataLabels: { enabled: false },
+      legend: {
+        position: 'top',
+        horizontalAlign: 'right',
+        floating: true,
+        offsetY: -25,
+        offsetX: -5,
+      },
+      tooltip: { enabled: true },
+      grid: {
+        show: true,
+        borderColor: '#9aa0ac',
+        strokeDashArray: 1,
+      },
+      yaxis: { title: { text: "Number of Officers" } },
+      colors: ['#FFA500']
+    };
+  }
+  private staffAvailabilityBarChart() {
+    this.staffAvailabilityBarChartOptions = {
+        series: [{
+            name: "Officers",
+            data: [1,2 ]
+        }],
+        chart: {
+            type: 'bar',
+            height: 330,
+            foreColor: '#9aa0ac',
+            width: '100%',
+            toolbar: {
+                show: true,
+                tools: {
+                    download: true,
+                    selection: true,
+                    zoom: true,
+                    zoomin: true,
+                    zoomout: true,
+                    pan: true,
+                    reset: true
+                },
+                autoSelected: 'zoom'
+            },
+        },
+        xaxis: {
+            categories: [  "Active", "In-Active"]
+        },
+        stroke: { curve: 'smooth' },
+        dataLabels: { enabled: false },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'right',
+            floating: true,
+            offsetY: -25,
+            offsetX: -5,
+        },
+        tooltip: { enabled: true },
+        grid: {
+            show: true,
+            borderColor: '#9aa0ac',
+            strokeDashArray: 1,
+        },
+        yaxis: { title: { text: "Number of Officers" } },
+        colors: ['#FFA500']
+    };
+}
+  private staffAvailabilityPieChart() {
+    this.staffAvailabilityPieChartOptions = {
+        series: [1,2],
+        chart: {
+            type: 'pie',
+            height: 350,
+            foreColor: '#9aa0ac',
+            width: '100%',
+        },
+        labels: ["Active", "In-Active"],
+        colors: ['#25B9C1', '#4B4BCB'],
+        legend: {
+          show: true,
+          position: 'bottom',
+        },
+        tooltip: { enabled: true },
+        dataLabels: { enabled: false },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+  }
   getProgramList(filters?: any) {
     this.courseService.getCourseProgram({status:'active'}).subscribe(
       (response: any) => {
@@ -2341,6 +2471,7 @@ private attendanceBarChart() {
       this.setSurveyChart();
       this.setAttendanceChart();
       this.setUsersChart();
+      this.setStudentAvailabilityChart();
     })
   }
   setSurveyChart() {
@@ -2380,6 +2511,18 @@ private attendanceBarChart() {
     else if (this.dashboard.content[2].viewType == 'Line Chart') {
       this.isAttendanceLine = true;
       this.attendanceLineChart();
+    }
+  }
+  setStudentAvailabilityChart() {
+    if (this.dashboard.content[5].viewType == 'Bar Chart') {
+      this.isStaffOnlineBar = true;
+      this.staffAvailabilityBarChart();
+    } else if (this.dashboard.content[5].viewType == 'Pie Chart') {
+      this.isStaffOnlinePie = true;
+      this.staffAvailabilityPieChart();
+    } else if (this.dashboard.content[5].viewType == 'Line Chart') {
+      this.isStaffOnlineLine = true;
+      this.staffAvailabilityLineChart();
     }
   }
   setUsersChart() {
