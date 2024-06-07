@@ -98,6 +98,7 @@
 
                             </div>
                             <div class="tableBody">
+                                <ng-scrollbar style="height: 350px" visibility="hover">
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -108,7 +109,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let instructor of managers" style="cursor: pointer;height: 130px;">
+                                            <tr *ngFor="let instructor of managers" style="cursor: pointer;">
                                                 <td class="table-img">
                                                     <img src="{{instructor.avatar || 'assets/profile.png'}}" alt="">
                                                 </td>
@@ -126,6 +127,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                </ng-scrollbar>
                             </div>
                         </div>
                     </div>
@@ -172,7 +174,7 @@
 
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
 
 
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -244,8 +246,8 @@
 
 
 
-                </div>
-                <div class="row">
+                </div> -->
+                <!-- <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                         <div class="card" style="border-radius: 31px;">
                             <div class="header mt-3">
@@ -279,7 +281,7 @@
                     </div>
 
 
-                </div>
+                </div> -->
 
 
             </mat-tab>

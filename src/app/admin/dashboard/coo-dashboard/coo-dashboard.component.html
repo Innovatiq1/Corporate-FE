@@ -114,55 +114,7 @@
                 <!-- #END# Widgets -->
 
                 <div class="row clearfix">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="card" style="border-radius: 31px;">
-                            <div class="header mt-3">
-                                <h2>Staff Availability</h2>
-                            </div>
-                          
-                            <div class="body" *ngIf="isStaffOnlineLine">
-                                <apx-chart [series]="staffAvailabilityLineChartOptions.series!"
-                                    [chart]="staffAvailabilityLineChartOptions.chart!"
-                                    [xaxis]="staffAvailabilityLineChartOptions.xaxis!"
-                                    [stroke]="staffAvailabilityLineChartOptions.stroke!"
-                                    [colors]="staffAvailabilityLineChartOptions.colors!"
-                                    [dataLabels]="staffAvailabilityLineChartOptions.dataLabels!"
-                                    [legend]="staffAvailabilityLineChartOptions.legend!"
-                                    [markers]="staffAvailabilityLineChartOptions.markers!"
-                                    [grid]="staffAvailabilityLineChartOptions.grid!"
-                                    [yaxis]="staffAvailabilityLineChartOptions.yaxis!"
-                                    [tooltip]="staffAvailabilityLineChartOptions.tooltip!"
-                                    [title]="staffAvailabilityLineChartOptions.title!">
-                                </apx-chart>
-                            </div>
-                            <div class="body" *ngIf="isStaffOnlinePie">
-                                <apx-chart [series]="staffAvailabilityPieChartOptions.series!"
-                                    [chart]="staffAvailabilityPieChartOptions.chart!"
-                                    [labels]="staffAvailabilityPieChartOptions.labels!"
-                                    [colors]="staffAvailabilityPieChartOptions.colors!"
-                                    [dataLabels]="staffAvailabilityPieChartOptions.dataLabels!"
-                                    [legend]="staffAvailabilityPieChartOptions.legend!"
-                                    [tooltip]="staffAvailabilityPieChartOptions.tooltip!">
-                                </apx-chart>
-                            </div>
-                            <div class="body" *ngIf="isStaffOnlineBar">
-                                <apx-chart [series]="staffAvailabilityBarChartOptions.series!"
-                                    [chart]="staffAvailabilityBarChartOptions.chart!"
-                                    [xaxis]="staffAvailabilityBarChartOptions.xaxis!"
-                                    [stroke]="staffAvailabilityBarChartOptions.stroke!"
-                                    [colors]="staffAvailabilityBarChartOptions.colors!"
-                                    [dataLabels]="staffAvailabilityBarChartOptions.dataLabels!"
-                                    [legend]="staffAvailabilityBarChartOptions.legend!"
-                                    [markers]="staffAvailabilityBarChartOptions.markers!"
-                                    [grid]="staffAvailabilityBarChartOptions.grid!" 
-                                    [yaxis]="staffAvailabilityBarChartOptions.yaxis!"
-                                    [tooltip]="staffAvailabilityBarChartOptions.tooltip!"
-                                    [title]="staffAvailabilityBarChartOptions.title!">
-                                </apx-chart>
-                            </div>
-                        </div>
-                        
-                    </div>
+                   
                    
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="card" style="border-radius: 31px;">
@@ -213,7 +165,46 @@
                         </div>
                         
                     </div>
-                
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="card" style="border-radius: 31px;">
+                            <div class="header mt-3">
+                                <h2>Managers List</h2>
+
+                            </div>
+                            <div class="tableBody">
+                                <ng-scrollbar style="height: 300px" visibility="hover">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Manager Name</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let instructor of managers" style="cursor: pointer;">
+                                                <td class="table-img">
+                                                    <img src="{{instructor.avatar || 'assets/profile.png'}}" alt="">
+                                                </td>
+                                                <td [routerLink]="[ '/admin/user-profile/all-staff',instructor.id]">
+                                                    <div class="media-title"> {{instructor?.name | titlecase}}
+                                                    </div>
+                                                    <div class="text-job font-11">({{instructor?.type}})</div>
+                                                </td>
+                                                <td [routerLink]="['/admin/user-profile/all-staff',instructor.id]">
+                                                    <div
+                                                        [class]="instructor?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
+                                                        {{instructor?.Active == true?"Active":"Inactive"}}</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </ng-scrollbar>
+                            </div>
+                        </div>
+                    </div>
                 </div>
               
                
@@ -253,80 +244,7 @@
     
                     </div>
                
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <div class="card" style="border-radius: 31px;">
-                                <div class="header mt-3">
-                                    <h2>Managers List</h2>
-    
-                                </div>
-                                <div class="tableBody">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Manager Name</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let instructor of managers" style="cursor: pointer;">
-                                                    <td class="table-img">
-                                                        <img src="{{instructor.avatar || 'assets/profile.png'}}" alt="">
-                                                    </td>
-                                                    <td [routerLink]="[ '/admin/user-profile/all-staff',instructor.id]">
-                                                        <div class="media-title"> {{instructor?.name | titlecase}}
-                                                        </div>
-                                                        <div class="text-job font-11">({{instructor?.type}})</div>
-                                                    </td>
-                                                    <td [routerLink]="['/admin/user-profile/all-staff',instructor.id]">
-                                                        <div
-                                                            [class]="instructor?.Active ? 'badge badge-solid-green' : 'badge badge-solid-red'">
-                                                            {{instructor?.Active == true?"Active":"Inactive"}}</div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <div class="card" style="border-radius: 31px;">
-                                <div class="header mt-3">
-                                    <h2>Feedbacks List</h2>
-    
-                                </div>
-                                <div class="tableBody">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    
-                                                    <th>Staff</th>
-                                                    <th>Course</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr *ngFor="let feedback of feedbacks" style="cursor: pointer;">
-                                                   
-                                                    <td [routerLink]="[ '/admin/user-profile/all-staff',feedback.id]">
-                                                        <div class="media-title"> {{feedback?.studentFirstName | titlecase}}
-                                                        </div>
-                                                    </td>
-                                                    <td [routerLink]="['/admin/user-profile/all-staff',feedback.id]">
-                                                        <div>{{feedback?.courseName}}
-                                                            </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
             </mat-tab>
         </mat-tab-group>
 

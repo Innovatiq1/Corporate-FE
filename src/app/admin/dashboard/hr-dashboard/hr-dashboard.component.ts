@@ -769,7 +769,7 @@ export class HrDashboardComponent implements OnInit {
   getSurveyList(filters?: any) {
     this.courseService.getAllSurvey().subscribe((response) => {
       this.feedbackCount = response.data.docs.length;
-      this.feedbacks = response.data.docs;
+      this.feedbacks = response.data.docs.slice(0,5);
     });
   }
 }

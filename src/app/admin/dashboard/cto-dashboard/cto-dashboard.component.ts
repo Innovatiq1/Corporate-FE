@@ -903,7 +903,7 @@ export class CtoDashboardComponent implements OnInit {
       this.surveyBarChartOptions = {
         series: [
           {
-            name: 'new staff',
+            name: 'Staff',
             data: [
               this.twoMonthsAgoStudents.length,
               this.fourMonthsAgoStudents.length,
@@ -913,17 +913,17 @@ export class CtoDashboardComponent implements OnInit {
               this.twelveMonthsAgoStudents.length,
             ],
           },
-          {
-            name: 'old staff',
-            data: [
-              this.tillPreviousTwoMonthsStudents.length,
-              this.tillPreviousFourMonthsStudents.length,
-              this.tillPreviousSixMonthsStudents.length,
-              this.tillPreviousEightMonthsStudents.length,
-              this.tillPreviousTenMonthsStudents.length,
-              this.tillPreviousTwelveMonthsStudents.length,
-            ],
-          },
+          // {
+          //   name: 'old staff',
+          //   data: [
+          //     this.tillPreviousTwoMonthsStudents.length,
+          //     this.tillPreviousFourMonthsStudents.length,
+          //     this.tillPreviousSixMonthsStudents.length,
+          //     this.tillPreviousEightMonthsStudents.length,
+          //     this.tillPreviousTenMonthsStudents.length,
+          //     this.tillPreviousTwelveMonthsStudents.length,
+          //   ],
+          // },
         ],
         chart: {
           height: 350,
@@ -996,25 +996,25 @@ export class CtoDashboardComponent implements OnInit {
       this.twelveMonthsAgoStudents.length,
   ];
 
-  const oldStudentsData = [
-      this.tillPreviousTwoMonthsStudents.length,
-      this.tillPreviousFourMonthsStudents.length,
-      this.tillPreviousSixMonthsStudents.length,
-      this.tillPreviousEightMonthsStudents.length,
-      this.tillPreviousTenMonthsStudents.length,
-      this.tillPreviousTwelveMonthsStudents.length,
-  ];
+  // const oldStudentsData = [
+  //     this.tillPreviousTwoMonthsStudents.length,
+  //     this.tillPreviousFourMonthsStudents.length,
+  //     this.tillPreviousSixMonthsStudents.length,
+  //     this.tillPreviousEightMonthsStudents.length,
+  //     this.tillPreviousTenMonthsStudents.length,
+  //     this.tillPreviousTwelveMonthsStudents.length,
+  // ];
 
   const totalNewStudents = newStudentsData.reduce((a, b) => a + b, 0);
-  const totalOldStudents = oldStudentsData.reduce((a, b) => a + b, 0);
+  // const totalOldStudents = oldStudentsData.reduce((a, b) => a + b, 0);
 
   this.surveyPieChartOptions = {
-    series: [totalNewStudents, totalOldStudents],
+    series: [totalNewStudents],
     chart: {
       height: 350,
       type: 'pie',
     },
-    labels: ['New Staff', 'Old Staff'],
+    labels: ['Staff'],
     colors: ['#9F8DF1', '#E79A3B'],
     legend: {
       show: true,
@@ -1196,7 +1196,7 @@ export class CtoDashboardComponent implements OnInit {
     this.areaChartOptions = {
       series: [
         {
-          name: 'new staff',
+          name: 'Staff',
           data: [
             this.twoMonthsAgoStudents.length,
             this.fourMonthsAgoStudents.length,
@@ -1206,17 +1206,17 @@ export class CtoDashboardComponent implements OnInit {
             this.twelveMonthsAgoStudents.length,
           ],
         },
-        {
-          name: 'old staff',
-          data: [
-            this.tillPreviousTwoMonthsStudents.length,
-            this.tillPreviousFourMonthsStudents.length,
-            this.tillPreviousSixMonthsStudents.length,
-            this.tillPreviousEightMonthsStudents.length,
-            this.tillPreviousTenMonthsStudents.length,
-            this.tillPreviousTwelveMonthsStudents.length,
-          ],
-        },
+        // {
+        //   name: 'old staff',
+        //   data: [
+        //     this.tillPreviousTwoMonthsStudents.length,
+        //     this.tillPreviousFourMonthsStudents.length,
+        //     this.tillPreviousSixMonthsStudents.length,
+        //     this.tillPreviousEightMonthsStudents.length,
+        //     this.tillPreviousTenMonthsStudents.length,
+        //     this.tillPreviousTwelveMonthsStudents.length,
+        //   ],
+        // },
       ],
       chart: {
         height: 350,
@@ -2350,7 +2350,7 @@ private attendanceBarChart() {
   getSurveyList(filters?:any){
     this.courseService.getAllSurvey().subscribe(response => {
       this.feedbackCount = response.data.docs.length;
-      this.feedbacks = response.data.docs;
+      this.feedbacks = response.data.docs.slice(0,5);;
     })
   }
 }

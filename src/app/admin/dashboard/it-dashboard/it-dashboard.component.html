@@ -120,7 +120,42 @@
 
                         </div>
                     </div>
-
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                      <div class="card" style="border-radius: 31px;">
+                        <div class="header mt-3">
+                          <h2>Average Class Attendance</h2>
+                        </div>
+                        <div class="float-start ms-3 me-3">
+                          <h5>129 Staff <span class="text-muted font-12">(Average)</span></h5>
+                        </div>
+                        <div class="body" *ngIf="isAttendanceLine">
+                          <apx-chart [series]="performanceRateChartOptions.series!" [chart]="performanceRateChartOptions.chart!"
+                            [xaxis]="performanceRateChartOptions.xaxis!" [stroke]="performanceRateChartOptions.stroke!"
+                            [colors]="performanceRateChartOptions.colors!" [dataLabels]="performanceRateChartOptions.dataLabels!"
+                            [legend]="performanceRateChartOptions.legend!" [markers]="performanceRateChartOptions.markers!"
+                            [grid]="performanceRateChartOptions.grid!" [yaxis]="performanceRateChartOptions.yaxis!"
+                            [tooltip]="performanceRateChartOptions.tooltip!" [title]="performanceRateChartOptions.title!">
+                          </apx-chart>
+                        </div>
+                        <div class="body" *ngIf="isAttendancePie">
+                          <apx-chart [series]="attendancePieChartOptions.series!" [chart]="attendancePieChartOptions.chart!"
+                            [labels]="attendancePieChartOptions.labels!" [colors]="attendancePieChartOptions.colors!"
+                            [dataLabels]="attendancePieChartOptions.dataLabels!" [legend]="attendancePieChartOptions.legend!"
+                            [tooltip]="attendancePieChartOptions.tooltip!">
+                          </apx-chart>
+                        </div>
+                        <div class="body" *ngIf="isAttendanceBar">
+                          <apx-chart [series]="attendanceBarChartOptions.series!" [chart]="attendanceBarChartOptions.chart!"
+                            [xaxis]="attendanceBarChartOptions.xaxis!" [stroke]="attendanceBarChartOptions.stroke!"
+                            [colors]="attendanceBarChartOptions.colors!" [dataLabels]="attendanceBarChartOptions.dataLabels!"
+                            [legend]="attendanceBarChartOptions.legend!" [markers]="attendanceBarChartOptions.markers!"
+                            [grid]="attendanceBarChartOptions.grid!" [yaxis]="attendanceBarChartOptions.yaxis!"
+                            [tooltip]="attendanceBarChartOptions.tooltip!" [title]="attendanceBarChartOptions.title!">
+                          </apx-chart>
+                        </div>
+                      </div>
+                    </div>
+<!-- 
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                         <div class="card" style="border-radius: 31px;">
                           <div class="header mt-3">
@@ -151,45 +186,11 @@
                           </div>
                 
                         </div>
-                      </div>
+                      </div> -->
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="card" style="border-radius: 31px;">
-                          <div class="header mt-3">
-                            <h2>Average Class Attendance</h2>
-                          </div>
-                          <div class="float-start ms-3 me-3">
-                            <h5>129 Staff <span class="text-muted font-12">(Average)</span></h5>
-                          </div>
-                          <div class="body" *ngIf="isAttendanceLine">
-                            <apx-chart [series]="performanceRateChartOptions.series!" [chart]="performanceRateChartOptions.chart!"
-                              [xaxis]="performanceRateChartOptions.xaxis!" [stroke]="performanceRateChartOptions.stroke!"
-                              [colors]="performanceRateChartOptions.colors!" [dataLabels]="performanceRateChartOptions.dataLabels!"
-                              [legend]="performanceRateChartOptions.legend!" [markers]="performanceRateChartOptions.markers!"
-                              [grid]="performanceRateChartOptions.grid!" [yaxis]="performanceRateChartOptions.yaxis!"
-                              [tooltip]="performanceRateChartOptions.tooltip!" [title]="performanceRateChartOptions.title!">
-                            </apx-chart>
-                          </div>
-                          <div class="body" *ngIf="isAttendancePie">
-                            <apx-chart [series]="attendancePieChartOptions.series!" [chart]="attendancePieChartOptions.chart!"
-                              [labels]="attendancePieChartOptions.labels!" [colors]="attendancePieChartOptions.colors!"
-                              [dataLabels]="attendancePieChartOptions.dataLabels!" [legend]="attendancePieChartOptions.legend!"
-                              [tooltip]="attendancePieChartOptions.tooltip!">
-                            </apx-chart>
-                          </div>
-                          <div class="body" *ngIf="isAttendanceBar">
-                            <apx-chart [series]="attendanceBarChartOptions.series!" [chart]="attendanceBarChartOptions.chart!"
-                              [xaxis]="attendanceBarChartOptions.xaxis!" [stroke]="attendanceBarChartOptions.stroke!"
-                              [colors]="attendanceBarChartOptions.colors!" [dataLabels]="attendanceBarChartOptions.dataLabels!"
-                              [legend]="attendanceBarChartOptions.legend!" [markers]="attendanceBarChartOptions.markers!"
-                              [grid]="attendanceBarChartOptions.grid!" [yaxis]="attendanceBarChartOptions.yaxis!"
-                              [tooltip]="attendanceBarChartOptions.tooltip!" [title]="attendanceBarChartOptions.title!">
-                            </apx-chart>
-                          </div>
-                        </div>
-                      </div>
-                </div>
+                <!-- <div class="row">
+                    
+                </div> -->
                 <div class="row">
 
 
@@ -200,6 +201,7 @@
 
                           </div>
                           <div class="tableBody">
+                            <ng-scrollbar style="height: 280px" visibility="hover">
                               <div class="table-responsive">
                                   <table class="table table-hover">
                                       <thead>
@@ -227,6 +229,7 @@
                                       </tbody>
                                   </table>
                               </div>
+                              </ng-scrollbar>
                           </div>
                       </div>
                   </div>

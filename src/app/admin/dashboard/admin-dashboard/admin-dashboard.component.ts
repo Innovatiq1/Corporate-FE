@@ -312,14 +312,14 @@ export class AdminDashboardComponent implements OnInit {
   getAllPayments(){
     this.courseService.getAllPayments({ ...this.coursePaginationModel}).subscribe(response =>{
      this.paymentsCount = response.data.docs.length;
-     this.payments = response.data.docs;
+     this.payments = response.data.docs.slice(0,5);;
     }, error => {
     });
   }
   getSurveyList(filters?: any) {
     this.courseService.getAllSurvey().subscribe((response) => {
       this.feedbackCount = response.data.docs.length;
-      this.feedbacks = response.data.docs;
+      this.feedbacks = response.data.docs.slice(0,5);;
     });
   }
 

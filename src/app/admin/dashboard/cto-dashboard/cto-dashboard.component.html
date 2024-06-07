@@ -156,6 +156,7 @@
 
                             </div>
                             <div class="tableBody">
+                                <ng-scrollbar style="height: 270px" visibility="hover">
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -184,6 +185,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                </ng-scrollbar>
                             </div>
                         </div>
                     </div>
@@ -225,7 +227,7 @@
                     </div>
 
                 </div>
-                <div class="row">
+                <!-- <div class="row">
      
                     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="width: 100%;">
                       <div class="card">
@@ -252,7 +254,7 @@
                                   </div>
                                   <!-- <div class="col-md-3" [class]="data?.Active ? 'badge badge-solid-red' : 'badge badge-solid-green'">
                                     <b>{{ data?.classDeliveryType | titlecase }}</b>
-                                  </div> -->
+                                  </div> --
                                   <div class="col-md-3">
                                     <b style="color: blue;"><i class="fa fa-play-circle-o"></i> {{data.sessionStartDate | date}}</b>
                                   </div>
@@ -268,8 +270,8 @@
                         </div>
                       </div>
                     </div>
-                    </div>
-                <div class="row">
+                    </div> -->
+                <!-- <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="card" style="border-radius: 31px;">
                           <div class="header mt-3">
@@ -281,12 +283,12 @@
                               <table class="table table-hover ">
                                 <thead>
                                   <tr>
-                                    <!-- <th>#</th> -->
+                                    <!-- <th>#</th> --
                                     <th>Course Name</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Status </th>
-                                    <!-- <th>Actions </th> -->
+                                    <!-- <th>Actions </th> --
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -294,7 +296,7 @@
                                     [routerLink]="['/admin/courses/view-class/',class.id]">
                                     <!-- <td class="table-img">
                                 <img src="{{class?.courseId?.image_link}}" alt="course">
-                              </td> -->
+                              </td> --
                                     <td>{{class?.courseId?.title | titlecase | truncate:10}}</td>
                                     <td> {{class?.sessions[0]?.sessionStartDate | date}} </td>
                                     <td> {{class?.sessions[0]?.sessionEndDate | date}}</td>
@@ -310,7 +312,7 @@
                           </div>
                         </div>
                       </div>
-                </div>
+                </div> -->
 
 
             </mat-tab>
