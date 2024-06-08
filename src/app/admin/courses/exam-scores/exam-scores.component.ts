@@ -4,6 +4,7 @@ import { UtilsService } from '@core/service/utils.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { AssessmentService } from '@core/service/assessment.service';
+import { Subject, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-exam-scores',
@@ -21,7 +22,7 @@ export class ExamScoresComponent {
     'Exam Name',
     'Assessment Score',
     'Exam Assessment Score',
-    // 'Actions'
+    'Action'
   ];
 
   breadscrums = [
@@ -38,11 +39,18 @@ export class ExamScoresComponent {
   id: any;
   selection = new SelectionModel<any>(true, []);
   dataSource :any;
+  examScores: any;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild('filter', { static: true }) filter!: ElementRef;
+  private keyupSubject: Subject<Event> = new Subject<Event>();
 
   constructor(public utils: UtilsService, private assessmentService: AssessmentService){
     this.assessmentPaginationModel = {};
+    this.keyupSubject.pipe(
+      debounceTime(300)  // Adjust the debounce time as needed
+    ).subscribe(event => {
+      this.applyFilter(event);
+    });
   }
 
   ngOnInit() {
@@ -54,6 +62,7 @@ export class ExamScoresComponent {
     this.assessmentService.getExamAnswersV2({ ...this.assessmentPaginationModel})
       .subscribe(res => {
         this.dataSource = res.data.docs;
+        this.examScores = res.data.docs;
         this.totalItems = res.data.totalDocs;
         this.assessmentPaginationModel.docs = res.docs;
         this.assessmentPaginationModel.page = res.page;
@@ -80,6 +89,35 @@ export class ExamScoresComponent {
       : this.dataSource.forEach((row: any) =>
           this.selection.select(row)
         );
+  }
+
+  
+  onKeyup(event: Event) {
+    this.keyupSubject.next(event);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value?.trim()?.toLowerCase();
+    
+    if(filterValue){
+      this.assessmentPaginationModel.studentName = filterValue;
+    }else {
+      delete this.assessmentPaginationModel.studentName;
+    }
+    this.getAllAnswers();
+  }
+
+  ngOnDestroy() {
+    this.keyupSubject.unsubscribe();
+  }
+
+  enableStudentView(data: any){
+    if(data.examAssessmentAnswer){
+      const payload = {id: data.examAssessmentAnswer._id, studentView: true}
+      this.assessmentService.updateAssessmentStudentView(payload).subscribe(res=> {
+        this.getAllAnswers();
+      })
+    }
   }
 
 }
