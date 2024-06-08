@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { BehaviorSubject, Observable, map } from "rxjs";
 import { ApiResponse } from "@core/models/response";
 import { environment } from "environments/environment";
-import { CourseKit, CourseModel, CoursePaginationModel, Program, Vendor } from "@core/models/course.model";
+import { CourseKit, CourseModel, CoursePaginationModel, Discount, Program, Vendor } from "@core/models/course.model";
 import { FundingGrant, Instructor, MainCategory, SubCategory, Survey } from "@core/models/course.model";
 import { isPlatformBrowser } from "@angular/common";
 
@@ -128,20 +128,13 @@ export class CourseService {
     });
   }
   getAllSurvey(filter?: Partial<CoursePaginationModel>
-    ): Observable<ApiResponse> {
-      const apiUrl = this.defaultUrl+'admin/survey-builder';
-      return this._Http.get<ApiResponse>(apiUrl, {
-        params: this.buildParams(filter),
-      });
-  }
-  // getAllCertificate(
-  //   filter?: Partial<CoursePaginationModel>
-  // ): Observable<ApiResponse> {
-  //   const apiUrl = this.defaultUrl+'admin/certificate-builder';
-  //   return this._Http.get<ApiResponse>(apiUrl, {
-  //     params: this.buildParams(filter),
-  //   });
-  // }
+  ): Observable<ApiResponse> {
+    const apiUrl = this.defaultUrl+'admin/survey-builder';
+    return this._Http.get<ApiResponse>(apiUrl, {
+      params: this.buildParams(filter),
+    });
+}
+
 
   getFilteredCourseData(payload:any, filter:any
     ):Observable<any> {
@@ -267,6 +260,30 @@ export class CourseService {
       .delete<Vendor>(apiUrl)
       .pipe(map((response) => response));
   }
+
+  createDiscount(payload:any) {
+    const apiUrl = `${this.prefix}admin/discount`;
+    return this._Http.post<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+  updateDiscount(id:string, payload:any) {
+    const apiUrl = `${this.prefix}admin/discount/${id}`;
+    return this._Http.put<any>(apiUrl, payload).pipe(map((response) => response));
+  }
+  getDiscount(): Observable<Discount[]> {
+    const apiUrl = `${this.prefix}admin/discount/`;
+    return this._Http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }
+  getDiscountById(id:string): Observable<Discount> {
+    const apiUrl = `${this.prefix}admin/discount/${id}`;
+    return this._Http.get<any>(apiUrl).pipe(map((response:any) => response.data));
+  }
+  deleteDiscount(id: string) {
+    const apiUrl = `${this.prefix}admin/discount/${id}`;
+    return this._Http
+      .delete<Discount>(apiUrl)
+      .pipe(map((response) => response));
+  }
+
 
   getSurvey(): Observable<Survey[]> {
     const apiUrl = `${this.prefix}admin/survey/`;
@@ -588,6 +605,10 @@ export class CourseService {
         const apiUrl = `${this.prefix}admin/configuration/timer`;
         return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
       }
+      createExamTimer(currencyData: any): Observable<any> {
+        const apiUrl = `${this.prefix}admin/configuration/examTimer`;
+        return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
+      }
       createAssessment(currencyData: any): Observable<any> {
         const apiUrl = `${this.prefix}admin/configuration/assessment`;
         return this._Http.put<any>(apiUrl, currencyData).pipe(map((response) => response));
@@ -635,12 +656,11 @@ export class CourseService {
           params: this.buildParams(filter),
         });
       }
-  
       getStudentsByCourseId(courseId: any) {
         const apiUrl = `${this.prefix}admin/studentClasses/studentcourses/${courseId}`;
         return this._Http.get<any>(apiUrl).pipe(map((response) => response));
       }
-    
+  
     
 }
 

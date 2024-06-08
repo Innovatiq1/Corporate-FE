@@ -64,6 +64,7 @@ import { EditTeacherComponent } from './settings/edit-teacher/edit-teacher.compo
 import { AddStaffComponent } from './settings/add-staff/add-staff.component';
 import { AboutStaffComponent } from './settings/about-staff/about-staff.component';
 import { ExamResultsComponent } from './exam-results/exam-results.component';
+import { ExamTestListComponent } from './exam-test-list/exam-test-list.component';
 import { VendorComponent } from './settings/vendor/vendor.component';
 import { UpdateFundingComponent } from './settings/funding/update-funding/update-funding.component';
 import { UpdateDeptComponent } from './settings/create-department/update-dept/update-dept.component';
@@ -83,9 +84,12 @@ import { PreviewQuestionsComponent } from './settings/preview-questions/preview-
 import { PreviewTestAnswersheetComponent } from './preview-test-answersheet/preview-test-answersheet.component';
 import { ViewApprovalWorkflowComponent } from './settings/approval-workflow/view-approval-workflow/view-approval-workflow.component';
 import { CreateApprovalWorkflowComponent } from './settings/approval-workflow/create-approval-workflow/create-approval-workflow.component';
-//import { CreateCertificateComponent } from './settings/certificate-template/create-certificate/create-certificate.component';
 import { CreateCertificateComponent } from './settings/certificate-template/create-certificate/create-certificate.component';
-import { ExamTestListComponent } from './exam-test-list/exam-test-list.component';
+import { CustomizationExamAssessmentAlgorithmComponent } from './settings/customization-exam-assessment-algorithm/customization-exam-assessment-algorithm.component';
+import { CustomizationExamTimerComponent } from './settings/customization-exam-timer/customization-exam-timer.component';
+import { DiscountComponent } from './settings/discount/discount.component';
+import { UpdateDiscountComponent } from './settings/discount/update-discount/update-discount.component';
+
 
 const routes: Routes = [
   {
@@ -184,7 +188,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'exam-questions/:id/:id/:id/:id',
+    path: 'exam-questions/:id/:id/:id/:id', // 1.assessmentAnswerId, 2.studentId, 3.courseId, 4.examAssessmentId
     component: ExamQuestionsComponent,
   },
   {
@@ -254,12 +258,20 @@ const routes: Routes = [
     component: CustomizationTimerComponent
   },
   {
+    path: 'settings/exam-timer',
+    component: CustomizationExamTimerComponent
+  },
+  {
     path: 'settings/assessment-retake',
     component: CustomizationAssessmentRetakeComponent
   },
   {
     path: 'settings/exam-assessment-retake',
     component: CustomizationExamAssessmentRetakeComponent
+  },
+  {
+    path: 'settings/exam-assessment-algorithm',
+    component: CustomizationExamAssessmentAlgorithmComponent
   },
   {
     path: 'settings/customization-forms',
@@ -303,6 +315,12 @@ const routes: Routes = [
   },
 
   {
+    path: 'settings/discount',
+    component: DiscountComponent
+  },
+
+
+  {
     path: 'settings/certificate/template',
     component: CertificateTemplateComponent
   },
@@ -323,7 +341,7 @@ const routes: Routes = [
     component: ListComponent,
   },
   {
-    path: 'settings/create-announcement',
+    path: 'settings/customization-forms/create-announcement',
     component: CreatAnnouncementComponent,
   },
   {
@@ -508,23 +526,23 @@ const routes: Routes = [
     component: EditStaffComponent
   },
   {
-    path: 'settings/course-forms',
+    path: 'settings/customization-forms/course-forms',
     component: SettingsComponent,
   },
   {
-    path: 'settings/program-forms',
+    path: 'settings/customization-forms/program-forms',
     component: SettingsComponent,
   },
   {
-    path: 'settings/users-forms',
+    path: 'settings/customization-forms/users-forms',
     component: SettingsComponent,
   },
   {
-    path: 'settings/finance-forms',
+    path: 'settings/customization-forms/finance-forms',
     component: SettingsComponent,
   },
   {
-    path: 'settings/banner-forms',
+    path: 'settings/customization-forms/banner-forms',
     component: SettingsComponent,
   },
   {
@@ -600,6 +618,12 @@ const routes: Routes = [
     path: 'settings/update-vendor',
     component: UpdateVendorComponent
   },
+
+  {
+    path: 'settings/update-discount',
+    component: UpdateDiscountComponent
+  },
+
   
 
   { path: '**', component: Page404Component },

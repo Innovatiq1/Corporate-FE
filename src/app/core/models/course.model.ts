@@ -136,6 +136,18 @@ export interface Vendor {
 	__v: number;
 	id: string;
 }
+
+export interface Discount {
+	_id: string;
+	discountTitle: string;
+	discountType: string;
+	value: number;
+	createdAt: string;
+	updatedAt: string;
+	__v: number;
+	id: string;
+}
+
 export interface Assessment {
 	_id: string;
 	docs: Assessment[];
@@ -263,8 +275,9 @@ export interface CoursePaginationModel extends Pagination {
 	studentId: any;
 	department:string;
 	feeType:string;
-  userGroupId:string;
-  isAll:boolean;
+  	userGroupId:string;
+  	isAll:boolean;
+	filterName: string;
 }
 
 export interface ProgramCourse {
