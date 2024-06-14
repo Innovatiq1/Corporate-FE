@@ -1,7 +1,288 @@
-<section class="content" *ngIf="isAdmin">
+
+<section class="content">
+  <div class="content-block">
+    <div class="block-header" *ngFor="let breadscrum of breadscrums">
+      <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
+      </app-breadcrumb>
+    </div>
+
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          Users Analytics
+        </ng-template>
+
+        <div class="row mt-5">
+          <div class="col-lg-6 col-sm-6">
+            <div class="info-box7 l-bg-purple order-info-box7">
+              <div class="info-box7-block">
+                <div class="row">
+                  <div class="col-9">
+                    <h5 class=" mt-3">HR & Admin</h5>
+                  </div>
+                  <div class="col-3">
+                    <img src="assets/images/banner/hr.png" alt="">
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <h6>No.of Courses</h6>
+                  </div>
+                  <div class="col-4">
+                    <h6>No.of Managers</h6>
+                  </div>
+                  <div class="col-4">
+                    <h6>No.of Staff</h6>
+                  </div>
+                  </div>
+                  <div class="row" >
+                    <div class="col-4">
+                      <h6>4</h6>
+                    </div>
+                    <div class="col-4">
+                      <h6>1</h6>
+                    </div>
+                    <div class="col-4">
+                      <h6>1</h6>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-sm-6">
+            <div class="info-box7 l-bg-orange order-info-box7">
+              <div class="info-box7-block">
+                <div class="row">
+                  <div class="col-9">
+                    <h5 class=" mt-3">Technical</h5>
+                  </div>
+                  <div class="col-3">
+                    <img src="assets/images/banner/technical.png" alt="">
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <h6>No.of Courses</h6>
+                  </div>
+                  <div class="col-4">
+                    <h6>No.of Managers</h6>
+                  </div>
+                  <div class="col-4">
+                    <h6>No.of Staff</h6>
+                  </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <h6>4</h6>
+                    </div>
+                    <div class="col-4">
+                      <h6>1</h6>
+                    </div>
+                    <div class="col-4">
+                      <h6>1</h6>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+          <div class="col-lg-6 col-sm-6">
+            <div class="info-box7 l-bg-green order-info-box7">
+              <div class="info-box7-block">
+                <div class="row">
+                  <div class="col-9">
+                    <h5 class=" mt-3">Finance</h5>
+                  </div>
+                  <div class="col-3">
+                    <img src="assets/images/banner/finance.png" alt="">
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <h6>No.of Courses</h6>
+                  </div>
+                  <div class="col-4">
+                    <h6>No.of Managers</h6>
+                  </div>
+                  <div class="col-4">
+                    <h6>No.of Staff</h6>
+                  </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <h6>4</h6>
+                    </div>
+                    <div class="col-4">
+                      <h6>1</h6>
+                    </div>
+                    <div class="col-4">
+                      <h6>1</h6>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-sm-6">
+            <div class="info-box7 l-bg-red order-info-box7">
+              <div class="info-box7-block">
+                <div class="row">
+                  <div class="col-9">
+                    <h5 class=" mt-3">Sales</h5>
+                  </div>
+                  <div class="col-3">
+                    <img src="assets/images/banner/sales.png" alt="">
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-4">
+                    <h6>No.of Courses</h6>
+                  </div>
+                  <div class="col-4">
+                    <h6>No.of Managers</h6>
+                  </div>
+                  <div class="col-4">
+                    <h6>No.of Staff</h6>
+                  </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">
+                      <h6>4</h6>
+                    </div>
+                    <div class="col-4">
+                      <h6>1</h6>
+                    </div>
+                    <div class="col-4">
+                      <h6>1</h6>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+        
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="card" style="border-radius: 31px;">
+              <div class="header mt-3">
+                <h2>Current Course Status</h2>
+              </div>
+              <div class="float-start ms-3 me-3">
+                <h5>HR & Admin Department</h5>
+                
+              </div>
+              <div class="float-start ms-3 me-3">
+                <h6>Total Staff</h6>
+              </div>
+        
+              <div class="body" *ngIf="isHrPie">
+                <apx-chart [series]="hrPieChartOptions.series2!" [chart]="hrPieChartOptions.chart!"
+                  [labels]="hrPieChartOptions.labels!" [title]="hrPieChartOptions.title!" [theme]="hrPieChartOptions.theme!"
+                  [fill]="hrPieChartOptions.fill!" [yaxis]="hrPieChartOptions.yaxis!" [stroke]="hrPieChartOptions.stroke!"
+                  [legend]="hrPieChartOptions.legend!" [plotOptions]="hrPieChartOptions.plotOptions!"
+                  [colors]="hrPieChartOptions.colors!"></apx-chart>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="card" style="border-radius: 31px;">
+              <div class="header mt-3">
+                <h2>Current Course Status</h2>
+              </div>
+              <div class="float-start ms-3 me-3">
+                <h5>Technical Department</h5>
+                
+              </div>
+              <div class="float-start ms-3 me-3">
+                <h6>Total Staff</h6>
+              </div>
+        
+              <div class="body" *ngIf="isTechnicalPie">
+                <apx-chart [series]="techincalPieChartOptions.series2!" [chart]="techincalPieChartOptions.chart!"
+                  [labels]="techincalPieChartOptions.labels!" [title]="techincalPieChartOptions.title!" [theme]="techincalPieChartOptions.theme!"
+                  [fill]="techincalPieChartOptions.fill!" [yaxis]="techincalPieChartOptions.yaxis!" [stroke]="techincalPieChartOptions.stroke!"
+                  [legend]="techincalPieChartOptions.legend!" [plotOptions]="techincalPieChartOptions.plotOptions!"
+                  [colors]="techincalPieChartOptions.colors!"></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+        
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="card" style="border-radius: 31px;">
+              <div class="header mt-3">
+                <h2>Current Course Status</h2>
+              </div>
+              <div class="float-start ms-3 me-3">
+                <h5>Finance Department</h5>
+                
+              </div>
+              <div class="float-start ms-3 me-3">
+                <h6>Total Staff</h6>
+              </div>
+        
+              <div class="body" *ngIf="isFinancePie">
+                <apx-chart [series]="financePieChartOptions.series2!" [chart]="financePieChartOptions.chart!"
+                  [labels]="financePieChartOptions.labels!" [title]="financePieChartOptions.title!" [theme]="financePieChartOptions.theme!"
+                  [fill]="financePieChartOptions.fill!" [yaxis]="financePieChartOptions.yaxis!" [stroke]="financePieChartOptions.stroke!"
+                  [legend]="financePieChartOptions.legend!" [plotOptions]="financePieChartOptions.plotOptions!"
+                  [colors]="financePieChartOptions.colors!"></apx-chart>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="card" style="border-radius: 31px;">
+              <div class="header mt-3">
+                <h2>Current Course Status</h2>
+              </div>
+              <div class="float-start ms-3 me-3">
+                <h5>Sales Department</h5>
+                
+              </div>
+              <div class="float-start ms-3 me-3">
+                <h6>Total Staff</h6>
+              </div>
+        
+              <div class="body" *ngIf="isSalesPie">
+                <apx-chart [series]="salesPieChartOptions.series2!" [chart]="salesPieChartOptions.chart!"
+                  [labels]="salesPieChartOptions.labels!" [title]="salesPieChartOptions.title!" [theme]="salesPieChartOptions.theme!"
+                  [fill]="salesPieChartOptions.fill!" [yaxis]="salesPieChartOptions.yaxis!" [stroke]="salesPieChartOptions.stroke!"
+                  [legend]="salesPieChartOptions.legend!" [plotOptions]="salesPieChartOptions.plotOptions!"
+                  [colors]="salesPieChartOptions.colors!"></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="card" style="border-radius: 31px;">
+              <div class="header mt-3">
+                <h2>
+                  Overall Training Course</h2>
+              </div>
+            
+              <div class="body" *ngIf="isCourseBar">
+                <apx-chart [series]="courseBarChartOptions.series!" [chart]="courseBarChartOptions.chart!"
+                  [xaxis]="courseBarChartOptions.xaxis!" [yaxis]="courseBarChartOptions.yaxis!"
+                  [colors]="courseBarChartOptions.colors!" [stroke]="courseBarChartOptions.stroke!"
+                  [legend]="courseBarChartOptions.legend!" [grid]="courseBarChartOptions.grid!"
+                  [tooltip]="courseBarChartOptions.tooltip!" [dataLabels]="courseBarChartOptions.dataLabels!"></apx-chart>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</section>
+
+
+
+<!-- <section class="content" *ngIf="isAdmin">
     <div class="content-block">
       <div class="block-header" *ngFor="let breadscrum of breadscrums">
-        <!-- breadcrumb -->
         <app-breadcrumb [title]="breadscrum.title" [items]="breadscrum.items" [active_item]="breadscrum.active">
         </app-breadcrumb>
       </div>
@@ -9,7 +290,6 @@
   <mat-tab-group>
     <mat-tab>
       <ng-template mat-tab-label>
-        <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
         Users Analytics
       </ng-template>
       <div class="row mt-5">
@@ -105,7 +385,6 @@
        
   
       </div>
-      <!-- #END# Widgets -->
       <div class="row">
         
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -274,14 +553,12 @@
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
         Budget
       </ng-template>
       <app-etms-dashboard></app-etms-dashboard>
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
-        <!-- <mat-icon class="example-tab-icon msr-2">face</mat-icon> -->
         Transaction Analytics
       </ng-template>
       <app-dashboard2></app-dashboard2>
@@ -294,4 +571,5 @@
     </div>
   </section>
   
- 
+  -->
+
